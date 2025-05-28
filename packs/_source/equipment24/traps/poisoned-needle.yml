@@ -1,0 +1,381 @@
+_id: dmgPoisonedNeedl
+name: Poisoned Needle
+type: equipment
+img: icons/magic/acid/dissolve-drip-droplet-smoke.webp
+system:
+  activities:
+    cClVGymHxg8fqkCu:
+      type: save
+      name: Trigger (1-4)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        value: ''
+      effects:
+        - _id: waWQ0QcVncE6pU5B
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 10
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '11'
+      _id: cClVGymHxg8fqkCu
+    sCOyeTxHTLXgFU70:
+      type: save
+      name: Trigger (5-10)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        value: ''
+      effects:
+        - _id: waWQ0QcVncE6pU5B
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 10
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '13'
+      _id: sCOyeTxHTLXgFU70
+    P2SZTZG5uTqSmZKn:
+      type: save
+      name: Trigger (11-16)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        value: ''
+      effects:
+        - _id: waWQ0QcVncE6pU5B
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 10
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      _id: P2SZTZG5uTqSmZKn
+    75RnwBhPYT8xU06M:
+      type: save
+      name: Trigger (17-20)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        value: ''
+      effects:
+        - _id: waWQ0QcVncE6pU5B
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 10
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '17'
+      _id: 75RnwBhPYT8xU06M
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Nuisance Trap (Levels
+      1–4)</em></p><p><strong>Trigger:</strong> A creature opens the trap's lock
+      improperly or fails to disarm the trap</p><p><strong>Duration:</strong>
+      Instantaneous</p><p>A poisoned needle is hidden in a lock. When a creature
+      opens the lock with any object other than the proper key, the needle
+      springs out and stabs the creature. The creature makes a DC 11
+      Constitution saving throw. On a failed save, the creature takes 5 (1d10)
+      Poison damage and has the &amp;Reference[Poisoned apply=false] condition
+      for 1 hour. On a successful save, the creature takes half as much damage
+      only.</p><p><em><strong>Avoid.</strong></em> The trap doesn't trigger if
+      the lock is opened using a <em>Knock</em> spell or similar
+      magic.</p><p><em><strong>Detect and Disarm.</strong></em> As a Search
+      action, a creature can examine the trapped lock and make a [[/check prc
+      15]] check, detecting the needle on a successful check. Once the trap is
+      detected, a character can take an action to try to disarm the trap, doing
+      so with a successful [[/check slt 15]] check. On a failed check, the
+      creature triggers the trap.</p><p><em><strong>At Higher
+      Levels.</strong></em> You can scale the trap for higher levels by
+      increasing the damage and the save DC, as shown in the following
+      table.</p><table><thead><tr><th><p>Levels</p></th><th><p>Poison
+      Damage</p></th><th><p>Save
+      DC</p></th><th></th></tr></thead><tbody><tr><td><p>5–10</p></td><td><p>11
+      (2d10)</p></td><td><p>13</p></td><td></td></tr><tr><td><p>11–16</p></td><td><p>22
+      (4d10)</p></td><td><p>15</p></td><td></td></tr><tr><td><p>17–20</p></td><td><p>55
+      (10d10)</p></td><td><p>17</p></td><td></td></tr></tbody></table></div>
+    chat: ''
+  identifier: poisoned-needle
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  properties: []
+  strength: null
+  proficient: null
+effects:
+  - name: Poisoned Needle
+    img: systems/dnd5e/icons/svg/statuses/poisoned.svg
+    origin: Item.dmgPoisonedNeedl
+    transfer: false
+    _id: waWQ0QcVncE6pU5B
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!dmgPoisonedNeedl.waWQ0QcVncE6pU5B'
+folder: 8wnVMAA0qwPzQVxS
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730831452785
+  modifiedTime: 1745256807092
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgPoisonedNeedl'

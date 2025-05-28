@@ -1,0 +1,152 @@
+name: Chromatic Orb
+system:
+  description:
+    value: >-
+      <p>You hurl an orb of energy at a target within range. Choose Acid, Cold,
+      Fire, Lightning, Poison, or Thunder for the type of orb you create, and
+      then make a ranged spell attack against the target. On a hit, the target
+      takes 3d8 damage of the chosen type.</p><p>If you roll the same number on
+      two or more of the d8s, the orb leaps to a different target of your choice
+      within 30 feet of the target. Make an attack roll against the new target,
+      and make a new damage roll. The orb can't leap again unless you cast the
+      spell with a level 2+ spell slot. [[@item.level]]{Number of
+      leaps}</p><p><strong>Using a Higher-Level Spell Slot.</strong> The damage
+      increases by 1d8 for each spell slot level above 1. The orb can leap a
+      maximum number of times equal to the level of the slot expended, and a
+      creature can be targeted only once by each casting of this spell.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '90'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a diamond worth 50+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: spell
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: '8'
+            bonus: ''
+            types:
+              - acid
+              - cold
+              - fire
+              - lightning
+              - poison
+              - thunder
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: chromatic-orb
+_id: phbsplChromaticO
+type: spell
+img: icons/magic/light/explosion-star-small-teal-purple.webp
+effects: []
+folder: pBaAAtXBCq9FVEnL
+sort: 4900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425944829
+  modifiedTime: 1745256787845
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplChromaticO'

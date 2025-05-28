@@ -1,0 +1,55 @@
+_id: phbwzdSculptSpel
+name: Sculpt Spells
+type: feat
+folder: ZHJ6ibjd1J4CSyNw
+img: icons/creatures/slimes/slime-movement-dripping-pseudopods-green.webp
+system:
+  description:
+    value: >-
+      <p>You can create pockets of relative safety within the effects of your
+      evocations. When you cast an Evocation spell that affects other creatures
+      that you can see, you can choose a number of them equal to 1 plus the
+      spell's level. The chosen creatures automatically succeed on their saving
+      throws against the spell, and they take no damage if they would normally
+      take half damage on a successful save.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 6
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: sculpt-spells
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866546265
+  modifiedTime: 1745256769851
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwzdSculptSpel'

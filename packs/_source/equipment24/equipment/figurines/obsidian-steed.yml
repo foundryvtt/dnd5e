@@ -1,0 +1,165 @@
+name: Obsidian Steed
+system:
+  description:
+    value: >-
+      <p><em>See
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgFigurineOfWon]{Figurine of
+      Wondrous Power}</em></p><p>This polished obsidian horse can become a
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmNightmare00000]{Nightmare}</strong>
+      for up to 24 hours. The nightmare fights only to defend itself. Once it
+      has been used, it can't be used again until 5 days have passed.</p><p>The
+      figurine has a [[/r 1d10cs1]]{10 percent chance} each time you use it to
+      ignore your orders, including a command to revert to figurine form. If you
+      mount the nightmare while it is ignoring your orders, you and the
+      nightmare are instantly transported to a random location on the plane of
+      Hades, where the nightmare reverts to figurine form.</p><section
+      class="secret" id="secret-OH9v7OxKinHyCnIQ"><p><strong>Foundry
+      Note</strong></p><p>This item's limited uses represent the 5 days required
+      before the figurine can be used again.</p></section>
+    chat: ''
+  price:
+    value: 40000
+    denomination: gp
+  activities:
+    ZJRIEbHTFlc0XIHv:
+      type: summon
+      _id: ZJRIEbHTFlc0XIHv
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '@item.uses.max'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ' [[/r 1d10cs1]]{10 percent chance} of ignoring your orders.'
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '24'
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: unoccupied space
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: LW2oFsJxrujNmv6Q
+          uuid: Compendium.dnd5e.actors24.Actor.5SgVGhQBswgWRwsF
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: day
+        type: formula
+        formula: '1'
+    max: '5'
+  identifier: obsidian-steed-very-rare
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+_id: dmgFwpObsidianSt
+type: equipment
+img: icons/commodities/bones/hooves-cloven-brown.webp
+effects: []
+folder: EK3hCTgvAmjsKlfl
+sort: 106250
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729781735095
+  modifiedTime: 1745712700212
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgFwpObsidianSt'

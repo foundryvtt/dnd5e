@@ -1,0 +1,158 @@
+name: Fly
+system:
+  description:
+    value: >-
+      <p>You touch a willing creature. For the duration, the target gains a Fly
+      Speed of 60 feet and can hover. When the spell ends, the target falls if
+      it is still aloft unless it can stop the fall.</p><p><strong>Using a
+      Higher-Level Spell Slot.</strong> You can target one additional creature
+      for each spell slot level above 3.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: willing
+      count: '@item.level - 2'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a feather
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: EHFLuTHqI6cXn1zb
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: fly
+_id: phbsplFly0000000
+type: spell
+img: icons/creatures/birds/songbird-yellow-flying.webp
+effects:
+  - name: Flight
+    origin: Compendium.dnd5e.spells24.Item.phbsplFly0000000
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/creatures/abilities/wings-birdlike-blue.webp
+    _id: EHFLuTHqI6cXn1zb
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.fly
+        mode: 4
+        value: '60'
+        priority: null
+      - key: system.attributes.movement.hover
+        mode: 5
+        value: 'true'
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplFly0000000.EHFLuTHqI6cXn1zb'
+folder: HCovEE4VoPGlIbKi
+sort: 2000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425954637
+  modifiedTime: 1745256793318
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFly0000000'

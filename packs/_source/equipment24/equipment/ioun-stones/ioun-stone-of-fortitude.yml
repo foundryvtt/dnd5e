@@ -1,0 +1,121 @@
+_id: dmgFortitudeIoun
+name: Ioun Stone of Fortitude
+type: equipment
+folder: vl17N1arOkN66aMi
+img: icons/commodities/gems/gem-rough-cushion-purple-pink.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>See: @UUID[Compendium.dnd5e.equipment24.Item.dmgIounStone0000]{Ioun
+      Stone}</em></p><p>When you take a Magic action to toss an <em>Ioun
+      Stone</em> into the air, the stone orbits your head at a distance of 1d3
+      feet, conferring its benefit to you while doing so. You can have up to
+      three <em>Ioun Stones</em> orbiting your head at the same time.</p><p>As a
+      Utilize action, you can seize and stow any number of <em>Ioun Stones</em>
+      orbiting your head. If your Attunement to an <em>Ioun Stone</em> ends
+      while it's orbiting your head, the stone falls as though you had dropped
+      it.</p><p>Your Constitution increases by 2, to a maximum of 20, while this
+      pink rhomboid orbits your head.</p>
+    chat: ''
+  identifier: fortitude-ioun-stone
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: 'Enhance Fortitude: Constitution Bonus'
+    img: systems/dnd5e/icons/svg/abilities/constitution.svg
+    _id: hOigjfupZtZR2cy9
+    type: base
+    system: {}
+    changes:
+      - key: system.abilities.str.value
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.abilities.str.value
+        mode: 3
+        value: '20'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Your Constitution increases by 2, to a maximum of 20, while this pink
+      rhomboid orbits your head.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730481137248
+      modifiedTime: 1730481200635
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgFortitudeIoun.hOigjfupZtZR2cy9'
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712699996
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 28125
+ownership:
+  default: 0
+_key: '!items!dmgFortitudeIoun'

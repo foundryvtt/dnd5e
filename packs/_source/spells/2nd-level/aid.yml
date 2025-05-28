@@ -1,0 +1,121 @@
+_id: Opwh2PdX4runSBlm
+name: Aid
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Your spell bolsters your allies with toughness and resolve. Choose up
+      to three creatures within range. Each target's hit point maximum and
+      current hit points increase by 5 for the duration.</p><p><strong>At Higher
+      Levels.</strong> When you cast this spell using a spell slot of 3rd level
+      or higher, a target's hit points increase by an additional 5 for each slot
+      level above 2nd.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '3'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: abj
+  materials:
+    value: A tiny strip of white cloth.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: null
+        denomination: null
+        bonus: ''
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: '5'
+        scaling:
+          mode: whole
+          number: null
+          formula: (@item.level - 2) * 5
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: aid
+sort: 0
+flags: {}
+img: icons/magic/life/heart-cross-blue.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037355372
+  modifiedTime: 1725992719593
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Opwh2PdX4runSBlm'

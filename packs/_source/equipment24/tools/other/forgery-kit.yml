@@ -1,0 +1,179 @@
+name: Forgery Kit
+system:
+  description:
+    value: >-
+      <p class="phb-meta"><strong>Ability:</strong> Dexterity</p><p
+      class="phb-meta"><strong>Utilize:</strong> Mimic 10 or fewer words of
+      someone else's handwriting (DC 15), or duplicate a wax seal (DC 20)</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 15
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: ''
+    baseItem: forg
+  ability: dex
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    rIanv5IgN2QhpKSK:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: rIanv5IgN2QhpKSK
+      name: Mimic Handwriting
+      img: ''
+      appliedEffects: []
+    HcOxYMy4gmRHLJiF:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '20'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Duplicate Wax Seal
+      _id: HcOxYMy4gmRHLJiF
+      img: ''
+      appliedEffects: []
+  identifier: forgery-kit
+_id: phbtulForgeryKit
+type: tool
+folder: GdxYMawvxybALCny
+img: icons/sundries/documents/envelope-sealed-red-tan.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425916832
+  modifiedTime: 1745256814111
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbtulForgeryKit'

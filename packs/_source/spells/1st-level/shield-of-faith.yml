@@ -1,0 +1,148 @@
+_id: jZ6JNykRtdQ90MOo
+name: Shield of Faith
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A shimmering field appears and surrounds a creature of your choice
+      within range, granting it a +2 bonus to AC for the duration.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: bonus
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: abj
+  materials:
+    value: A small parchment with a bit of holy text written on it.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: FKDbXBUs6VJlf8ZY
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: shield-of-faith
+sort: 0
+flags: {}
+img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
+effects:
+  - name: Shield of Faith
+    origin: Compendium.dnd5e.spells.Item.jZ6JNykRtdQ90MOo
+    duration:
+      startTime: null
+      seconds: 600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: FKDbXBUs6VJlf8ZY
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    description: <p>The target gains it a +2 bonus to AC for the duration.</p>
+    transfer: false
+    statuses: []
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!jZ6JNykRtdQ90MOo.FKDbXBUs6VJlf8ZY'
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037363559
+  modifiedTime: 1725992722266
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!jZ6JNykRtdQ90MOo'

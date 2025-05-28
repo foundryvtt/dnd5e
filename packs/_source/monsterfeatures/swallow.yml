@@ -1,0 +1,118 @@
+_id: aH5ncM30tP8tPQ24
+name: Swallow
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] makes one bite attack against a
+      <strong>Medium or smaller target it is grappling</strong>. If the attack
+      hits, the target is also swallowed, and the grapple ends. While swallowed,
+      the target is blinded and restrained, it has total cover against attacks
+      and other effects outside the [[lookup @name lowercase]], and it takes
+      <strong>21 (6d6) <em>acid damage</em></strong> at the start of each of the
+      [[lookup @name lowercase]]'s turns. A [[lookup @name lowercase]] can have
+      only one creature swallowed at a time.</p><p>If the [[lookup @name
+      lowercase]] takes 30 damage or more on a single turn from the swallowed
+      creature, the [[lookup @name lowercase]] must succeed on a  <strong>DC 14
+      Constitution</strong> saving throw at the end of that turn or regurgitate
+      the creature, which falls prone in a space within 10 ft. of the [[lookup
+      @name lowercase]]. If the [[lookup @name lowercase]] dies, a swallowed
+      creature is no longer restrained by it and can escape from the corpse by
+      using 15 ft. of movement, exiting prone.</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] attacks with its Swallow.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: swallow
+flags: {}
+img: icons/creatures/abilities/mouth-teeth-tongue-purple.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304972972
+  modifiedTime: 1725992573307
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!aH5ncM30tP8tPQ24'

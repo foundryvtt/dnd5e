@@ -1,0 +1,110 @@
+_id: phbclcBlessedHea
+name: Blessed Healer
+type: feat
+folder: jWzqOsH9e7IW7WO7
+img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
+system:
+  description:
+    value: >-
+      <p>The healing spells you cast on others heal you as well. Immediately
+      after you cast a spell with a spell slot that restores Hit Points to one
+      or more creatures other than yourself, you regain Hit Points equal to 2
+      plus the spell slot's level.</p><section class="secret"
+      id="secret-B3oOPhBUFT9dOwUQ"><p><strong>Foundry Note</strong></p><p>This
+      feature includes a healing activity. Set the scale to the spell slot level
+      you cast and it will provide a healing roll for you.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 6
+    repeatable: false
+  properties: []
+  requirements: Life Domain
+  activities:
+    65RBpJDqkywCR90I:
+      type: heal
+      _id: 65RBpJDqkywCR90I
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: true
+          max: '9'
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: '@scaling * 2'
+        scaling:
+          number: 1
+        bonus: ''
+      name: ''
+  enchant: {}
+  identifier: blessed-healer
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866589552
+  modifiedTime: 1745256760626
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+_key: '!items!phbclcBlessedHea'

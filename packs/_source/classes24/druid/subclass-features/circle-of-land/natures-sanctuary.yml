@@ -1,0 +1,330 @@
+_id: phbdrdNaturesSan
+name: Nature's Sanctuary
+type: feat
+folder: WJ4IXskgADlprLEA
+img: icons/magic/nature/vines-thorned-curled-glow-green.webp
+system:
+  description:
+    value: >-
+      <p>As a Magic action, you can expend a use of your Wild Shape and cause
+      spectral trees and vines to appear in a 15-foot Cube on the ground within
+      120 feet of yourself. They last there for 1 minute or until you have the
+      Incapacitated condition or die. You and your allies have Half Cover while
+      in that area, and your allies gain the current Resistance of your Nature's
+      Ward while there.</p><p>As a Bonus Action, you can move the Cube up to 60
+      feet to ground within 120 feet of yourself.</p><section class="secret"
+      id="secret-OyXlvV2zR9s0WXyn"><p><strong>Foundry Note</strong></p><p>This
+      feature includes Active Effects for each Nature's Ward land type and adds
+      the Half Cover status effect which automatically applies the relevant
+      bonuses. Apply the relevant effect to your allies.</p><p>These Active
+      Effects are not automatically added/removed to/from Actors in the
+      designated area however.</p><p>It also includes an activity which can be
+      used for tracking your Bonus Action usage when moving the spectral trees
+      and vines.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 14
+    repeatable: false
+  properties: []
+  requirements: Circle of Land
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+        concentration: false
+      effects:
+        - _id: h0xW0mOYF8frKgHf
+        - _id: 7YVMASgXswIFXNs2
+        - _id: Gqgjm2NswU6f7qVL
+        - _id: LKxwXqkEIXJR2XAa
+      range:
+        value: '120'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: cube
+          size: '15'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ally
+          choice: true
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Spectral Trees and Vines
+    oV51RLBkYFH4MPrS:
+      type: utility
+      _id: oV51RLBkYFH4MPrS
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Move
+  enchant: {}
+  identifier: natures-sanctuary
+effects:
+  - name: 'Nature''s Ward: Arid'
+    origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesSan
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/nature/vines-thorned-curled-glow-green.webp
+    _id: h0xW0mOYF8frKgHf
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - coverHalf
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classes24.Item.phbdrdNaturesWar.ActiveEffect.J6hYOcVvZlLKuWab
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbdrdNaturesSan.h0xW0mOYF8frKgHf'
+  - name: 'Nature''s Ward: Polar'
+    origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesSan
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/nature/vines-thorned-curled-glow-green.webp
+    _id: 7YVMASgXswIFXNs2
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - coverHalf
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classes24.Item.phbdrdNaturesWar.ActiveEffect.XLIRgAYPO1ARo5pb
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbdrdNaturesSan.7YVMASgXswIFXNs2'
+  - name: 'Nature''s Ward: Temperate'
+    origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesSan
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/nature/vines-thorned-curled-glow-green.webp
+    _id: Gqgjm2NswU6f7qVL
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: lightning
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - coverHalf
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classes24.Item.phbdrdNaturesWar.ActiveEffect.yruAlaBCduO8AcnU
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbdrdNaturesSan.Gqgjm2NswU6f7qVL'
+  - name: 'Nature''s Ward: Tropical'
+    origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesSan
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/nature/vines-thorned-curled-glow-green.webp
+    _id: LKxwXqkEIXJR2XAa
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - coverHalf
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classes24.Item.phbdrdNaturesWar.ActiveEffect.lDVYGRNqqw3HwcKM
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbdrdNaturesSan.LKxwXqkEIXJR2XAa'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866583501
+  modifiedTime: 1745256761250
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!phbdrdNaturesSan'

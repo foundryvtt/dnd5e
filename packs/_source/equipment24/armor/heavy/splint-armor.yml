@@ -1,0 +1,75 @@
+name: Splint Armor
+system:
+  description:
+    value: ''
+    chat: ''
+  price:
+    value: 200
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 60
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 17
+    magicalBonus: null
+    dex: 0
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: heavy
+    baseItem: splint
+  properties:
+    - stealthDisadvantage
+  speed:
+    value: null
+    conditions: ''
+  strength: 15
+  proficient: null
+  activities: {}
+  identifier: splint-armor
+_id: phbarmSplintArmo
+type: equipment
+folder: zqXSu2wOJljt7AsS
+img: icons/equipment/chest/breastplate-layered-steel.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425914364
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbarmSplintArmo'

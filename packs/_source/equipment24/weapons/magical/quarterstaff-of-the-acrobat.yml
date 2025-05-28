@@ -1,0 +1,216 @@
+_id: dmgQuarterstaffO
+name: Quarterstaff of the Acrobat
+type: weapon
+img: icons/weapons/staves/staff-simple-wrapped.webp
+system:
+  activities:
+    BnEnq9qMA5GTF4Rr:
+      _id: BnEnq9qMA5GTF4Rr
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+    uGF83fO9tijt8I01:
+      type: utility
+      name: Attack Deflection
+      _id: uGF83fO9tijt8I01
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: sr
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepQuartersta]{Quarterstaff}),
+      Very Rare (Requires Attunement)</em></p><p>You have a +2 bonus to attack
+      rolls and damage rolls made with this magic weapon.</p><p>While holding
+      this weapon, you can cause it to emit green Dim Light out to 10 feet,
+      either as a Bonus Action or after you roll Initiative, or you can
+      extinguish the light as a Bonus Action.</p><p>While holding this weapon,
+      you can take a Bonus Action to alter its form, turning it into a 6-inch
+      rod (for ease of storage) or a 10-foot pole, or reverting it a
+      Quarterstaff; the weapon will elongate only as far as the surrounding
+      space allows.</p><p>In certain forms, the weapon has the following
+      additional properties.</p><p><em><strong>Acrobatic Assist (Quarterstaff or
+      10-Foot Pole Forms Only).</strong></em> While holding this weapon, you
+      have Advantage on Dexterity (Acrobatics) checks.</p><p><em><strong>Attack
+      Deflection (Quarterstaff Form Only).</strong></em> When you are hit by an
+      attack while holding the weapon, you can take a Reaction to twirl the
+      weapon around you, gaining a +5 bonus to your Armor Class against the
+      triggering attack, potentially causing the attack to miss you. You can't
+      use this property again until you finish a Short or Long
+      Rest.</p><p><em><strong>Ranged Weapon (Quarterstaff Form
+      Only).</strong></em> This weapon has the Thrown property with a normal
+      range of 30 feet and a long range of 120 feet. Immediately after you make
+      a ranged attack with the weapon, it flies back to your hand.</p>
+    chat: ''
+  identifier: quarterstaff-of-the-acrobat
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: quarterstaff
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  magicalBonus: 2
+  properties:
+    - mgc
+    - ret
+    - thr
+    - ver
+  proficient: null
+  range:
+    value: 30
+    long: 120
+    reach: null
+    units: ft
+  mastery: topple
+effects: []
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745611710194
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgQuarterstaffO'

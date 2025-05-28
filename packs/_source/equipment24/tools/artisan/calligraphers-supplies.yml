@@ -1,0 +1,125 @@
+name: Calligrapher's Supplies
+system:
+  description:
+    value: >-
+      <p class="phb-meta"><strong>Ability:</strong> Dexterity</p><p
+      class="phb-meta"><strong>Utilize:</strong> Write text with impressive
+      flourishes that guard against forgery (DC 15)</p><p
+      class="phb-meta"><strong>Craft:</strong>
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagInk00000000]{Ink}, <em>Spell
+      Scroll</em></p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 10
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: art
+    baseItem: calligrapher
+  ability: dex
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    PVMIlNQvLAyrF4kP:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: PVMIlNQvLAyrF4kP
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: calligraphers-supplies
+_id: phbtulCalligraph
+type: tool
+folder: V8KHbNkEWoXQP3Pj
+img: icons/tools/scribal/pen-steel-grey-brown.webp
+effects: []
+sort: 150000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425916416
+  modifiedTime: 1740680141119
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbtulCalligraph'

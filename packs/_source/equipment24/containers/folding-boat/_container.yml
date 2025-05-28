@@ -1,0 +1,62 @@
+_id: dmgFoldingBoat00
+name: Folding Boat
+type: container
+folder: CXJsbhXV9uLcWcfH
+img: icons/environment/settlement/ship.webp
+system:
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Rare</em></p></div><p>This object appears as a
+      wooden box that measures 12 inches long, 6 inches wide, and 6 inches deep.
+      It weighs 4 pounds and floats. It can be opened to store items inside.
+      This item also has three command words, each requiring a Magic action to
+      use:</p><p>@Embed[Compendium.dnd5e.equipment24.Item.dmgBoatUtility00
+      caption=false]</p>
+    chat: ''
+  identifier: folding-boat
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 7000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties:
+    - mgc
+  capacity:
+    type: weight
+    value: null
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712699968
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!dmgFoldingBoat00'

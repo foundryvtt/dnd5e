@@ -1,0 +1,131 @@
+name: Dissonant Whispers
+system:
+  description:
+    value: >-
+      <p>One creature of your choice that you can see within range hears a
+      discordant melody in its mind. The target makes a Wisdom saving throw. On
+      a failed save, it takes 3d6 Psychic damage and must immediately use its
+      Reaction, if available, to move as far away from you as it can, using the
+      safest route. On a successful save, the target takes half as much damage
+      only.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The damage
+      increases by 1d6 for each spell slot level above 1.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: enc
+  properties:
+    - vocal
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 3
+            denomination: 6
+            bonus: ''
+            types:
+              - psychic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: dissonant-whispers
+_id: phbsplDissonantW
+type: spell
+img: icons/magic/sonic/projectile-sound-rings-wave.webp
+effects: []
+folder: pBaAAtXBCq9FVEnL
+sort: 3800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425950267
+  modifiedTime: 1745256790947
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDissonantW'

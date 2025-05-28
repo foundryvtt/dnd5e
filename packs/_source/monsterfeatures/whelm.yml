@@ -1,0 +1,132 @@
+_id: sMgKJtbCLNSX7V80
+name: Whelm
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>Each creature in the [[lookup
+      @details.type.config.label lowercase]]'s space must make a  <strong>DC 15
+      Strength</strong> saving throw. On a failure, a target takes <strong>13
+      (2d8 + 4) <em>bludgeoning damage</em></strong>. If it is Large or smaller,
+      it is also grappled (escape DC 14). Until this grapple ends, the target is
+      restrained and unable to breathe unless it can breathe water. </p><p>If
+      the saving throw is successful, the target is pushed out of the [[lookup
+      @details.type.config.label lowercase]]'s space.The [[lookup
+      @details.type.config.label lowercase]] can grapple one Large creature or
+      up to two Medium or smaller creatures at one time. At the start of each of
+      the [[lookup @details.type.config.label lowercase]]'s turns, each target
+      grappled by it takes <strong>13 (2d8 + 4) <em>bludgeoning
+      damage</em></strong>. A creature within 5 feet of the [[lookup
+      @details.type.config.label lowercase]] can pull a creature or object out
+      of it by taking an action to make a DC 14 Strength check and
+      succeeding.</p></section><p>Each creature in the [[lookup
+      @details.type.config.label lowercase]]'s space must make a
+      <strong>Strength</strong> saving throw. If it is Large or smaller, it is
+      also grappled. Until this grapple ends, the target is restrained and
+      unable to breathe unless it can breathe water. A creature within 5 feet of
+      the [[lookup @details.type.config.label lowercase]] can pull a creature or
+      object out of it by taking an action to make a Strength check and
+      succeeding.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: recharge
+        formula: '4'
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: str
+        dc:
+          calculation: ''
+          formula: '14'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: whelm
+flags: {}
+img: icons/magic/water/vortex-water-whirlpool.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304977657
+  modifiedTime: 1725992574783
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!sMgKJtbCLNSX7V80'

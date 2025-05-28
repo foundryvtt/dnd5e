@@ -1,0 +1,152 @@
+name: Torch
+system:
+  description:
+    value: >-
+      <p>A Torch burns for 1 hour, casting Bright Light in a 20-foot radius and
+      Dim Light for an additional 20 feet. When you take the Attack action, you
+      can attack with the Torch, using it as a Simple Melee weapon. On a hit,
+      the target takes 1 Fire damage.</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: cp
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagExplorersPa
+  quantity: 10
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    autoDestroy: false
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    SouNhSdWdnznKCam:
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '40'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      attack:
+        ability: str
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: true
+              formula: '1'
+            number: null
+            denomination: null
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              number: 1
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: SouNhSdWdnznKCam
+      name: ''
+  identifier: torch
+_id: PKHfz87DirOHUBHn
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/lights/torch-brown-lit.webp
+effects: []
+sort: 63478
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726532771051
+  modifiedTime: 1740680113462
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!PKHfz87DirOHUBHn'

@@ -1,0 +1,161 @@
+_id: dmgBracersOfArch
+name: Bracers of Archery
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/wrist/bracer-banded-leather.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Uncommon (Requires
+      Attunement)</em></p></div><p>While wearing these bracers, you have
+      proficiency with the Longbow and Shortbow, and you gain a +2 bonus to
+      damage rolls made with such weapons.</p><section class="secret"
+      id="secret-l1W6lw8WR2ku4qP2"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Bonus Damage: Bows</strong> passive effect applies the damage
+      bonus to <em>all</em> ranged weapon damage rolls and should be disabled
+      before rolling damage for weapons other than a Longbow or
+      Shortbow.</p></section>
+    chat: ''
+  identifier: bracers-of-archery
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Bow Proficiencies
+    img: icons/weapons/bows/shortbow-recurve-yellow-blue.webp
+    _id: qoOJIw0gTdN8DBKB
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.weaponProf.value
+        mode: 2
+        value: longbow
+        priority: null
+      - key: system.traits.weaponProf.value
+        mode: 2
+        value: shortbow
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1728922300626
+      modifiedTime: 1728922664705
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgBracersOfArch.qoOJIw0gTdN8DBKB'
+  - name: 'Bonus Damage: Bows'
+    img: icons/weapons/ammunition/arrow-broadhead-glowing-orange.webp
+    _id: PSGGfFEy4CjBVzyX
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.rwak.damage
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>you gain a +2 bonus to damage rolls on ranged attacks made with a
+      Longbow or Shortbow</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1728922797477
+      modifiedTime: 1728922955677
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgBracersOfArch.PSGGfFEy4CjBVzyX'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 4400000
+ownership:
+  default: 0
+_key: '!items!dmgBracersOfArch'

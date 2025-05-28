@@ -1,0 +1,150 @@
+name: Arcane Hand
+system:
+  description:
+    value: >-
+      <p>You create a Large hand of shimmering magical energy in an unoccupied
+      space that you can see within range. The hand lasts for the duration, and
+      it moves at your command, mimicking the movements of your own
+      hand.</p><p>The hand is an object that has AC 20 and Hit Points equal to
+      your Hit Point maximum. If it drops to 0 Hit Points, the spell ends. The
+      hand doesn't occupy its space.</p><p>When you cast the spell and as a
+      Bonus Action on your later turns, you can move the hand up to 60 feet and
+      then cause one of the following effects:</p><p><strong>Clenched Fist
+      </strong>@Embed[Compendium.dnd5e.actors24.Actor.phbsplBigbysHand.Item.phbaoiClenchedFi
+      inline]</p><p><strong>Forceful Hand</strong>
+      @Embed[Compendium.dnd5e.actors24.Actor.phbsplBigbysHand.Item.phbaoiForcefulHa
+      inline]</p><p><strong>Grasping Hand</strong>
+      @Embed[Compendium.dnd5e.actors24.Actor.phbsplBigbysHand.Item.phbaoiGraspingHa
+      inline classes="no-secrets"]</p><p><strong>Interposing Hand
+      </strong>@Embed[Compendium.dnd5e.actors24.Actor.phbsplBigbysHand.Item.phbaoiInterposin
+      inline]</p><p><strong>Using a Higher-Level Spell Slot.</strong> The damage
+      of the Clenched Fist increases by 2d8 and the damage of the Grasping Hand
+      increases by 2d6 for each spell slot level above 5.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '120'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: an eggshell and a glove
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: '@attributes.hp.effectiveMax'
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        proficiency: true
+        attacks: true
+        saves: true
+      profiles:
+        - count: ''
+          name: ''
+          _id: vQGgSbSWhF45U93e
+          uuid: Compendium.dnd5e.actors24.Actor.phbsplBigbysHand
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: bigbys-hand
+_id: phbsplBigbysHand
+type: spell
+img: icons/magic/earth/strike-fist-stone.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 3500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425943329
+  modifiedTime: 1745256786861
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplBigbysHand'

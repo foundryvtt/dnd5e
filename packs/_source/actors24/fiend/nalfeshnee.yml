@@ -1,0 +1,1332 @@
+_id: mmNalfeshnee0000
+name: Nalfeshnee
+type: npc
+img: null
+system:
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  abilities:
+    str:
+      value: 21
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    dex:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    con:
+      value: 22
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    int:
+      value: 19
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    wis:
+      value: 12
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    cha:
+      value: 15
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  skills:
+    acr:
+      ability: dex
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ani:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    arc:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ath:
+      ability: str
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    dec:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    his:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ins:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    itm:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    inv:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    med:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    nat:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    prc:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    prf:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    per:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    rel:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    slt:
+      ability: dex
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ste:
+      ability: dex
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    sur:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+  tools: {}
+  spells:
+    spell1:
+      value: 0
+      override: null
+    spell2:
+      value: 0
+      override: null
+    spell3:
+      value: 0
+      override: null
+    spell4:
+      value: 0
+      override: null
+    spell5:
+      value: 0
+      override: null
+    spell6:
+      value: 0
+      override: null
+    spell7:
+      value: 0
+      override: null
+    spell8:
+      value: 0
+      override: null
+    spell9:
+      value: 0
+      override: null
+    pact:
+      value: 0
+      override: null
+  attributes:
+    init:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonus: '@prof'
+    movement:
+      burrow: null
+      climb: null
+      fly: 30
+      swim: null
+      walk: 20
+      units: null
+      hover: false
+    attunement:
+      max: 3
+    senses:
+      darkvision: null
+      blindsight: null
+      tremorsense: null
+      truesight: 120
+      units: null
+      special: ''
+    spellcasting: str
+    exhaustion: 0
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+    ac:
+      flat: 18
+      calc: natural
+    hd:
+      spent: 0
+    hp:
+      value: 184
+      max: 184
+      temp: null
+      tempmax: null
+      formula: 16d10 + 96
+    death:
+      roll:
+        min: null
+        max: null
+        mode: 0
+      success: 0
+      failure: 0
+      bonuses:
+        save: ''
+    spell:
+      level: 0
+    loyalty:
+      value: null
+  details:
+    biography:
+      value: >-
+        <h1>Nalfeshnee</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.bG2lzFCLqlpghJF8
+        caption=false cite=false classes="no-embed mm free-rules-embed"]</p>
+      public: ''
+    alignment: Chaotic Evil
+    ideal: ''
+    bond: ''
+    flaw: ''
+    race: null
+    type:
+      value: fiend
+      custom: ''
+      subtype: Demon
+      swarm: ''
+    cr: 13
+    habitat:
+      value:
+        - type: planar
+          subtype: abyss
+      custom: ''
+    treasure:
+      value:
+        - relics
+  resources:
+    legact:
+      value: 0
+      max: 0
+    legres:
+      value: 0
+      max: 0
+    lair:
+      value: false
+      initiative: null
+      inside: false
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  traits:
+    size: lg
+    di:
+      bypasses: []
+      value:
+        - poison
+      custom: ''
+    dr:
+      bypasses: []
+      value:
+        - cold
+        - fire
+        - lightning
+      custom: ''
+    dv:
+      bypasses: []
+      value: []
+      custom: ''
+    dm:
+      amount: {}
+      bypasses: []
+    ci:
+      value:
+        - frightened
+        - poisoned
+      custom: ''
+    languages:
+      value:
+        - abyssal
+      custom: ''
+      communication:
+        telepathy:
+          value: 120
+          units: ft
+    important: false
+prototypeToken:
+  name: Nalfeshnee
+  displayName: 0
+  actorLink: false
+  appendNumber: false
+  prependAdjective: false
+  width: 2
+  height: 2
+  texture:
+    src: null
+    anchorX: 0.5
+    anchorY: 0.5
+    offsetX: 0
+    offsetY: 0
+    fit: contain
+    scaleX: 2
+    scaleY: 2
+    rotation: 0
+    tint: '#ffffff'
+    alphaThreshold: 0.75
+  lockRotation: false
+  rotation: 0
+  alpha: 1
+  disposition: -1
+  displayBars: 0
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  light:
+    negative: false
+    priority: 0
+    alpha: 0.5
+    angle: 360
+    bright: 0
+    color: null
+    coloration: 1
+    dim: 0
+    attenuation: 0.5
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      type: null
+      speed: 5
+      intensity: 5
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+  sight:
+    enabled: false
+    range: 0
+    angle: 360
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    brightness: 0
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 2
+      texture: null
+  flags: {}
+  randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
+items:
+  - _id: mmDemonicRestora
+    name: Demonic Restoration
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p>If the [[lookup @name lowercase]] dies outside the Abyss, its body
+          dissolves into ichor, and it gains a new body instantly, reviving with
+          all its Hit Points somewhere in the Abyss.</p>
+        chat: ''
+      identifier: demonic-restoration
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: Dies outside the Abyss
+      advancement: []
+      cover: null
+      crewed: false
+    folder: L9Zgr8qAPc3ngKhb
+    img: icons/creatures/slimes/bubbling-purple.webp
+    effects: []
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDemonicRestora
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712723855
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 0
+    _key: '!actors.items!mmNalfeshnee0000.mmDemonicRestora'
+  - _id: mmMagicResistanc
+    name: Magic Resistance
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          against spells and other magical effects.</p>
+        chat: ''
+      identifier: magic-resistance
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties:
+        - trait
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: L9Zgr8qAPc3ngKhb
+    img: icons/magic/light/orbs-hand-gray.webp
+    effects: []
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMagicResistanc
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712723855
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 1
+    _key: '!actors.items!mmNalfeshnee0000.mmMagicResistanc'
+  - _id: mmMultiattack000
+    name: Multiattack
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities:
+        Ms63W7e3Mv2Margn:
+          type: utility
+          name: Expend Use
+          _id: Ms63W7e3Mv2Margn
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          img: systems/dnd5e/icons/svg/monster.svg
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]] makes three [[/item
+          .mmRend0000000000]] attacks.</p>
+        chat: ''
+      identifier: multiattack
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: 4T18pEvubPMQLzvD
+    img: icons/skills/melee/strike-weapons-orange.webp
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712723855
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 100000
+    _key: '!actors.items!mmNalfeshnee0000.mmMultiattack000'
+  - _id: mmTeleport000000
+    name: Teleport
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities:
+        dnoRMdFzhUUku26D:
+          type: utility
+          _id: dnoRMdFzhUUku26D
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: ft
+            special: ''
+            value: '120'
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+              size: '30'
+              width: ''
+              count: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Expend Use
+          img: systems/dnd5e/icons/svg/monster.svg
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p class="feature">The [[lookup @name lowercase]] teleports up to
+          [[lookup @range.value activity=dnoRMdFzhUUku26D]] feet to an
+          unoccupied space it can see.</p>
+        chat: ''
+      identifier: teleport
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: 4T18pEvubPMQLzvD
+    img: icons/magic/control/debuff-energy-hold-levitate-blue-yellow.webp
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmTeleport000000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712723855
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 300000
+    _key: '!actors.items!mmNalfeshnee0000.mmTeleport000000'
+  - _id: mmRend0000000000
+    name: Rend
+    type: weapon
+    system:
+      type:
+        value: natural
+        baseItem: ''
+      activities:
+        VP3t6lmmuXKGCRwX:
+          _id: VP3t6lmmuXKGCRwX
+          type: attack
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          attack:
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
+            ability: ''
+            bonus: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: 10
+                bonus: ''
+                types:
+                  - force
+                scaling:
+                  number: 1
+          name: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: <p>[[/attack extended]]. [[/damage average extended]].</p>
+        chat: ''
+      identifier: rend
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: true
+      armor:
+        value: null
+      cover: null
+      crewed: false
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      ammunition: {}
+      damage:
+        base:
+          number: 2
+          denomination: 10
+          types:
+            - slashing
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+          bonus: ''
+        versatile:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+      magicalBonus: null
+      properties: []
+      proficient: null
+      range:
+        value: null
+        long: null
+        reach: 10
+        units: ft
+      mastery: ''
+    folder: pSCWWdqMX9eUATRJ
+    img: icons/skills/melee/shield-damaged-broken-orange.webp
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRend0000000000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712723855
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 200000
+    _key: '!actors.items!mmNalfeshnee0000.mmRend0000000000'
+  - _id: mmHorrorNimbus00
+    name: Horror Nimbus
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities:
+        GP5MnIyXCVZ4ZMTQ:
+          type: save
+          _id: GP5MnIyXCVZ4ZMTQ
+          sort: 0
+          activation:
+            type: bonus
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: minute
+            concentration: false
+            override: false
+            value: '1'
+          effects:
+            - _id: ahNNQZ2FHPsRpYbH
+              onSave: false
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: radius
+              size: '15'
+              count: ''
+            affects:
+              choice: false
+              type: creature
+              count: ''
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 8
+                denomination: 6
+                bonus: ''
+                types:
+                  - psychic
+                scaling:
+                  number: 1
+            onSave: none
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: cha
+              formula: '15'
+          name: Save
+      uses:
+        spent: 0
+        recovery:
+          - period: recharge
+            formula: '5'
+            type: recoverAll
+        max: '1'
+      description:
+        value: >-
+          <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
+          @save.dc.value activity=GP5MnIyXCVZ4ZMTQ]], each [[lookup
+          @target.affects.type activity=GP5MnIyXCVZ4ZMTQ]] in a [[lookup
+          @target.template.size activity=GP5MnIyXCVZ4ZMTQ]]-<span
+          style="font-family:'Roboto Condensed', sans-serif">foot</span>
+          Emanation originating from the [[lookup @name lowercase]].</p><p
+          class="feature"><em>Failure:</em> [[/damage average]] damage, and the
+          target has the &amp;Reference[Frightened apply=false] condition for
+          [[lookup @duration.value activity=GP5MnIyXCVZ4ZMTQ]] [[lookup
+          @duration.units activity=GP5MnIyXCVZ4ZMTQ]], until it takes damage, or
+          until it ends its turn with the [[lookup @name lowercase]] out of line
+          of sight.</p><p class="feature"><em>Success:</em> The target is immune
+          to this [[lookup @name lowercase]]'s Horror Nimbus for 24 hours.</p>
+        chat: ''
+      identifier: horror-nimbus
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: 4T18pEvubPMQLzvD
+    img: icons/magic/unholy/hand-claw-fire-blue.webp
+    effects:
+      - name: Frightened
+        img: systems/dnd5e/icons/svg/statuses/frightened.svg
+        origin: Item.mmHorrorNimbus00
+        _id: ahNNQZ2FHPsRpYbH
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: 60
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: >-
+          <p>The target has the &amp;Reference[Frightened apply=false] condition
+          for 1 minute, until it takes damage, or until it ends its turn with
+          the attacking creature out of line of sight.</p>
+        tint: '#ffffff'
+        transfer: false
+        statuses:
+          - frightened
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmNalfeshnee0000.mmHorrorNimbus00.ahNNQZ2FHPsRpYbH
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmHorrorNimbus00
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712723855
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 5
+    _key: '!actors.items!mmNalfeshnee0000.mmHorrorNimbus00'
+  - _id: mmPursuit0000000
+    name: Pursuit
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities:
+        blUXkjLhs9kD2ofo:
+          type: utility
+          _id: blUXkjLhs9kD2ofo
+          sort: 0
+          activation:
+            type: reaction
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: ft
+            special: ''
+            value: '120'
+          target:
+            template:
+              contiguous: false
+              units: ''
+              type: ''
+              size: ''
+              width: ''
+              count: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: within 10 feet of the triggering creature
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Expend Use
+          img: systems/dnd5e/icons/svg/monster.svg
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p class="feature"><em>Trigger:</em> Another creature the [[lookup
+          @name lowercase]] can see ends its move within [[lookup @range.value
+          activity=blUXkjLhs9kD2ofo]] feet of the [[lookup @name lowercase]].
+          <em>Response:</em> The [[lookup @name lowercase]] uses Teleport, but
+          its destination space must be [[lookup @target.affects.special
+          activity=blUXkjLhs9kD2ofo]].</p>
+        chat: ''
+      identifier: pursuit
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: 4T18pEvubPMQLzvD
+    img: icons/skills/movement/figure-running-gray.webp
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPursuit0000000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712723855
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 6
+    _key: '!actors.items!mmNalfeshnee0000.mmPursuit0000000'
+effects: []
+folder: 3893ZA5FlQZHzMBd
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745415564135
+  modifiedTime: 1745712723883
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 126563
+ownership:
+  default: 0
+_key: '!actors!mmNalfeshnee0000'

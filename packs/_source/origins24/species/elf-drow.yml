@@ -1,0 +1,193 @@
+_id: phbspDrow0000000
+name: Elf, Drow
+type: race
+img: icons/magic/nature/beam-hand-leaves-green.webp
+system:
+  description:
+    value: >-
+      <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspElf00000000
+      inline classes="free-rules-embed"]</p><h3
+      data-anchor="drow">Drow</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspDrow0000000
+      inline classes="free-rules-embed"]</p><h3 data-anchor="elf-traits">Elf
+      Traits</h3><p><strong>Creature Type:</strong> Humanoid</p><p><strong>Size:
+      </strong>Medium (about 5–6 feet tall)</p><p><strong>Speed:</strong> 30
+      feet</p><p>As an Elf, you have these special
+      traits.</p><p><strong>Darkvision. </strong>You have Darkvision with a
+      range of 60 feet.</p><p><strong>Elven Lineage. </strong>You are part of a
+      lineage that grants you supernatural abilities.</p><p>When you reach
+      character levels 3 and 5, you learn a higher-level spell, as shown on the
+      table. You always have that spell prepared. You can cast it once without a
+      spell slot, and you regain the ability to cast it in that way when you
+      finish a Long Rest. You can also cast the spell using any spell slots you
+      have of the appropriate level. Intelligence, Wisdom, or Charisma is your
+      spellcasting ability for the spells you cast with this trait (choose the
+      ability when you select the lineage).</p><table><caption>Drow Lineage
+      Features</caption><thead><tr><td>Level 1</td><td>Level 3</td><td>Level
+      5</td></tr></thead><tbody><tr><td>The range of your Darkvision increases
+      to 120 feet. You also know the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplDancingLig]{Dancing Lights}
+      cantrip.</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplFaerieFire]{Faerie
+      Fire}</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplDarkness00]{Darkness}</td></tr></tbody></table><p><strong>Fey
+      Ancestry.</strong> You have Advantage on saving throws you make to avoid
+      or end the &amp;Reference[Charmed] condition.</p><p><strong>Keen
+      Senses.</strong> You have proficiency in the Insight, Perception, or
+      Survival skill.</p><p><strong>Trance.</strong> You don't need to sleep,
+      and magic can't put you to sleep. You can finish a Long Rest in 4 hours if
+      you spend those hours in a trancelike meditation, during which you retain
+      consciousness.</p>
+    chat: ''
+  source:
+    revision: 2
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  advancement:
+    - _id: 5w2FaHXRKiN7v1rE
+      type: Size
+      configuration:
+        sizes:
+          - med
+      level: 0
+      title: ''
+      hint: Medium (about 5–6 feet tall)
+      value: {}
+    - _id: boHzoT53gYPvJ9o2
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.origins24.Item.phbsptFeyAncestr
+          - optional: false
+            uuid: Compendium.dnd5e.origins24.Item.phbsptKeenSenses
+          - optional: false
+            uuid: Compendium.dnd5e.origins24.Item.phbsptTrance0000
+          - optional: false
+            uuid: Compendium.dnd5e.origins24.Item.phbsptDrowElfLin
+        optional: false
+        spell: null
+      value: {}
+      level: 0
+      title: Elf Traits
+      hint: ''
+    - _id: nccRK77cXNtEHCHX
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - skills:ins
+              - skills:prc
+              - skills:sur
+      value:
+        chosen: []
+      level: 0
+      title: Keen Senses
+      hint: You have proficiency in the Insight, Perception, or Survival skill.
+    - _id: LWGXpgeZc3PwUgTg
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplDancingLig
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 1
+      title: Drow Traits
+      hint: >-
+        Intelligence, Wisdom, or Charisma can be chosen for your spellcasting
+        ability.
+    - _id: hIn6cR8fRweVWhTp
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplFaerieFire
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          preparation: always
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+      value: {}
+      level: 3
+      title: Drow Traits
+      hint: >-
+        Intelligence, Wisdom, or Charisma can be chosen for your spellcasting
+        ability.
+    - _id: 18x2qczDE0MerZfa
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplDarkness00
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          preparation: always
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+      value: {}
+      level: 5
+      title: Drow Traits
+      hint: >-
+        Intelligence, Wisdom, or Charisma can be chosen for your spellcasting
+        ability.
+  movement:
+    burrow: null
+    climb: null
+    fly: null
+    swim: null
+    walk: 30
+    units: null
+    hover: false
+  senses:
+    darkvision: 120
+    blindsight: null
+    tremorsense: null
+    truesight: null
+    units: null
+    special: ''
+  type:
+    value: humanoid
+    custom: ''
+    subtype: Elf
+  identifier: elf-drow
+effects: []
+folder: Ulvo8nbygUegLa59
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866714835
+  modifiedTime: 1745686895308
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbspDrow0000000'

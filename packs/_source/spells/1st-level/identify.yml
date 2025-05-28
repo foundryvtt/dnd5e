@@ -1,0 +1,115 @@
+_id: 3OZnNhunvRtPOQmH
+name: Identify
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You choose one object that you must touch throughout the casting of the
+      spell. If it is a magic item or some other magic-imbued object, you learn
+      its properties and how to use them, whether it requires attunement to use,
+      and how many charges it has, if any. You learn whether any spells are
+      affecting the item and what they are. If the item was created by a spell,
+      you learn which spell created it.</p><p>If you instead touch a creature
+      throughout the casting, you learn what spells, if any, are currently
+      affecting it.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: object
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: div
+  materials:
+    value: A pearl worth at least 100gp and an owl feather
+    consumed: false
+    cost: 100
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: identify
+sort: 0
+flags: {}
+img: icons/magic/light/explosion-star-small-teal-purple.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037346705
+  modifiedTime: 1725992716801
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!3OZnNhunvRtPOQmH'

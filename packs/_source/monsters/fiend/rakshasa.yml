@@ -1,0 +1,2644 @@
+_id: qXzMsRTHEodqO8l2
+name: Rakshasa
+type: npc
+img: null
+system:
+  abilities:
+    str:
+      value: 14
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    dex:
+      value: 17
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    con:
+      value: 18
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    int:
+      value: 13
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    wis:
+      value: 16
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    cha:
+      value: 20
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+  attributes:
+    ac:
+      flat: 16
+      calc: natural
+      formula: ''
+    hp:
+      value: 110
+      max: 110
+      temp: null
+      tempmax: 0
+      formula: 13d8 + 52
+    init:
+      ability: ''
+      bonus: '0'
+      roll:
+        min: null
+        max: null
+        mode: 0
+    movement:
+      burrow: 0
+      climb: 0
+      fly: 0
+      swim: 0
+      walk: 40
+      units: ft
+      hover: false
+    attunement:
+      max: 3
+    senses:
+      darkvision: 60
+      blindsight: 0
+      tremorsense: 0
+      truesight: 0
+      units: ft
+      special: ''
+    spellcasting: cha
+    exhaustion: 0
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+    hd:
+      spent: 0
+    death:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      success: 0
+      failure: 0
+  details:
+    biography:
+      value: ''
+      public: ''
+    alignment: Lawful Evil
+    race: null
+    type:
+      value: fiend
+      subtype: ''
+      swarm: ''
+      custom: ''
+    environment: Urban
+    cr: 13
+    spellLevel: 0
+    ideal: ''
+    bond: ''
+    flaw: ''
+  traits:
+    size: med
+    di:
+      value:
+        - bludgeoning
+        - piercing
+        - slashing
+      bypasses:
+        - mgc
+      custom: ''
+    dr:
+      value: []
+      bypasses: []
+      custom: ''
+    dv:
+      value: []
+      bypasses: []
+      custom: Piercing from magic weapons wielded by good creatures
+    ci:
+      value: []
+      custom: ''
+    languages:
+      value:
+        - common
+        - infernal
+      custom: ''
+    dm:
+      amount: {}
+      bypasses: []
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  skills:
+    acr:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ani:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    arc:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ath:
+      value: 0
+      ability: str
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    dec:
+      value: 1
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    his:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ins:
+      value: 1
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    itm:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    inv:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    med:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    nat:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prc:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prf:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    per:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    rel:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    slt:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ste:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    sur:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+  spells:
+    spell1:
+      value: 0
+      override: null
+    spell2:
+      value: 0
+      override: null
+    spell3:
+      value: 0
+      override: null
+    spell4:
+      value: 0
+      override: null
+    spell5:
+      value: 0
+      override: null
+    spell6:
+      value: 0
+      override: null
+    spell7:
+      value: 0
+      override: null
+    spell8:
+      value: 0
+      override: null
+    spell9:
+      value: 0
+      override: null
+    pact:
+      value: 0
+      override: null
+    spell0:
+      value: 0
+      override: null
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  resources:
+    legact:
+      value: 0
+      max: 0
+    legres:
+      value: 0
+      max: 0
+    lair:
+      value: false
+      initiative: null
+  tools: {}
+  source:
+    custom: ''
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 1
+    rules: '2014'
+prototypeToken:
+  name: Rakshasa
+  displayName: 20
+  actorLink: false
+  width: 1
+  height: 1
+  lockRotation: false
+  rotation: 0
+  disposition: -1
+  displayBars: 40
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  flags: {}
+  randomImg: false
+  alpha: 1
+  light:
+    alpha: 1
+    angle: 360
+    bright: 0
+    coloration: 1
+    dim: 0
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      speed: 5
+      intensity: 5
+      type: null
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+    attenuation: 0.5
+    color: null
+    negative: false
+    priority: 0
+  texture:
+    src: null
+    tint: '#ffffff'
+    scaleX: 1
+    scaleY: 1
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    alphaThreshold: 0.75
+  sight:
+    angle: 360
+    enabled: false
+    range: 60
+    brightness: 0
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  appendNumber: false
+  prependAdjective: false
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
+items:
+  - _id: ChSnKd7pSLoN1Jeu
+    name: Limited Magic Immunity
+    type: feat
+    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The rakshasa can't be affected or detected by spells of 6th level
+          or lower unless it wishes to be. It has advantage on saving throws
+          against all other spells and magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: limited-magic-immunity
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.MBOiQSnMr02wUpEN
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 5.1.0
+      createdTime: null
+      modifiedTime: 1747957375754
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.ChSnKd7pSLoN1Jeu'
+  - _id: NYUeQsYqRhROcVMQ
+    name: Innate Spellcasting
+    type: feat
+    img: icons/magic/light/projectiles-star-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The rakshasa's innate spellcasting ability is Charisma (spell save
+          DC 18, +10 to hit with spell attacks). The rakshasa can innately cast
+          the following spells, requiring no material components:</p>
+
+          <p>At will: [[/item .ppWAAEul0QHtm4er]]{detect thoughts}, [[/item
+          .A3q2gTNqG6fvNGrv]]{disguise self}, [[/item .Utk1OQRwYkMkFRD3]]{mage
+          hand}, [[/item .oIzA2MEHwxhtQneU]]{minor illusion}</p>
+
+          <p>3/day each: [[/item .eS7XnnApoxRxYXPs]]{charm person}, [[/item
+          .ghXTfe7sgCbgf1Q8]]{detect magic}, [[/item
+          .1N8dDMMgZ1h1YJ3B]]{invisibility}, [[/item .nslx2nT3p4lNkmdp]]{major
+          image}, [[/item .zMAWdyc8UVb37BK4]]{suggestion}</p>
+
+          <p>1/day each: [[/item .91Sw6vOIaO7U8DvM]]{dominate person}, [[/item
+          .yfbK8gZqESlaoY5t]]{fly}, [[/item .J6Jpw5XzB5aTeqnz]]{plane shift},
+          [[/item .XzkJpE6XpZfKjODD]]{true seeing}</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: innate-spellcasting
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745447015959
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.NYUeQsYqRhROcVMQ'
+  - _id: 18NEVoD84KHDcWoG
+    name: Multiattack
+    type: feat
+    img: icons/skills/melee/blade-tips-triple-steel.webp
+    system:
+      description:
+        value: >-
+          <p>The rakshasa makes two [[/item .pHBLWUN5VKEjSBh6]]{claw}
+          attacks.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: multiattack
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745273657271
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.18NEVoD84KHDcWoG'
+  - _id: pHBLWUN5VKEjSBh6
+    name: Claw
+    type: weapon
+    img: icons/skills/melee/strike-slashes-red.webp
+    system:
+      description:
+        value: >-
+          <p>[[/attack extended]]. [[/damage extended]], and the target is
+          cursed if it is a creature. </p><p>The magical curse takes effect
+          whenever the target takes a short or long rest, filling the target's
+          thoughts with horrible images and dreams. The cursed target gains no
+          benefit from finishing a short or long rest. The curse lasts until it
+          is lifted by a remove curse spell or similar magic.</p>
+        chat: <p>The Rakshasa attacks with its Claw.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: null
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 2
+          denomination: 6
+          bonus: ''
+          types:
+            - slashing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties: []
+      proficient: 1
+      unidentified:
+        description: ''
+      type:
+        value: natural
+        baseItem: ''
+      container: null
+      crewed: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: str
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 0
+      attuned: false
+      ammunition: {}
+      magicalBonus: null
+      identifier: claw
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745173385709
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.pHBLWUN5VKEjSBh6'
+  - _id: ppWAAEul0QHtm4er
+    name: Detect Thoughts
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>For the duration, you can read the thoughts of certain creatures.
+          When you cast the spell and as your action on each turn until the
+          spell ends, you can focus your mind on any one creature that you can
+          see within 30 feet of you. If the creature you choose has an
+          Intelligence of 3 or lower or doesn't speak any language, the creature
+          is unaffected.</p><p>You initially learn the surface thoughts of the
+          creature—what is most on its mind in that moment. As an action, you
+          can either shift your attention to another creature's thoughts or
+          attempt to probe deeper into the same creature's mind. If you probe
+          deeper, the target must make a Wisdom saving throw. If it fails, you
+          gain insight into its reasoning (if any), its emotional state, and
+          something that looms large in its mind (such as something it worries
+          over, loves, or hates). If it succeeds, the spell ends. Either way,
+          the target knows that you are probing into its mind, and unless you
+          shift your attention to another creature's thoughts, the creature can
+          use its action on its turn to make an Intelligence check contested by
+          your Intelligence check; if it succeeds, the spell
+          ends.</p><p>Questions verbally directed at the target creature
+          naturally shape the course of its thoughts, so this spell is
+          particularly effective as part of an interrogation.</p><p>You can also
+          use this spell to detect the presence of thinking creatures you can't
+          see. When you cast the spell or as your action during the duration,
+          you can search for thoughts within 30 feet of you. The spell can
+          penetrate barriers, but 2 feet of rock, 2 inches of any metal other
+          than lead, or a thin sheet of lead blocks you. You can't detect a
+          creature with an Intelligence of 3 or lower or one that doesn't speak
+          any language.</p><p>Once you detect the presence of a creature in this
+          way, you can read its thoughts for the rest of the duration as
+          described above, even if you can't see it, but it must still be within
+          range.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 2
+      school: div
+      materials:
+        value: A copper piece
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: wis
+            dc:
+              calculation: spellcasting
+              formula: '18'
+          sort: 0
+      identifier: detect-thoughts
+    sort: 0
+    flags: {}
+    img: icons/magic/light/explosion-star-teal-purple.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.ppWAAEul0QHtm4er
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.ppWAAEul0QHtm4er'
+  - _id: A3q2gTNqG6fvNGrv
+    name: Disguise Self
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You make yourself—including your clothing, armor, weapons, and
+          other belongings on your person—look different until the spell ends or
+          until you use your action to dismiss it. You can seem 1 foot shorter
+          or taller and can appear thin, fat, or in between. You can't change
+          your body type, so you must adopt a form that has the same basic
+          arrangement of limbs. Otherwise, the extent of the illusion is up to
+          you.</p><p>The changes wrought by this spell fail to hold up to
+          physical inspection. For example, if you use this spell to add a hat
+          to your outfit, objects pass through the hat, and anyone who touches
+          it would feel nothing or would feel your head and hair. If you use
+          this spell to appear thinner than you are, the hand of someone who
+          reaches out to touch you would bump into you while it was seemingly
+          still in midair.</p><p>To discern that you are disguised, a creature
+          can use its action to inspect your appearance and must succeed on an
+          Intelligence (Investigation) check against your spell save DC.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: self
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: ill
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: disguise-self
+    sort: 0
+    flags: {}
+    img: icons/magic/control/debuff-energy-hold-teal-blue.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.A3q2gTNqG6fvNGrv'
+  - _id: Utk1OQRwYkMkFRD3
+    name: Mage Hand
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>A spectral, floating hand appears at a point you choose within
+          range. The hand lasts for the duration or until you dismiss it as an
+          action. The hand vanishes if it is ever more than 30 feet away from
+          you or if you cast this spell again.</p><p>You can use your action to
+          control the hand. You can use the hand to manipulate an object, open
+          an unlocked door or container, stow or retrieve an item from an open
+          container, or pour the contents out of a vial. You can move the hand
+          up to 30 feet each time you use it.</p><p>The hand can't attack,
+          activate magic items, or carry more than 10 pounds.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: space
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 0
+      school: con
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: mage-hand
+    sort: 0
+    flags: {}
+    img: icons/magic/water/water-hand.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.Utk1OQRwYkMkFRD3'
+  - _id: oIzA2MEHwxhtQneU
+    name: Minor Illusion
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You create a sound or an image of an object within range that lasts
+          for the duration. The illusion also ends if you dismiss it as an
+          action or cast this spell again.</p><p>If you create a sound, its
+          volume can range from a whisper to a scream. It can be your voice,
+          someone else's voice, a lion's roar, a beating of drums, or any other
+          sound you choose. The sound continues unabated throughout the
+          duration, or you can make discrete sounds at different times before
+          the spell ends.</p><p>If you create an image of an object—such as a
+          chair, muddy footprints, or a small chest—it must be no larger than a
+          5-foot cube. The image can't create sound, light, smell, or any other
+          sensory effect. Physical interaction with the image reveals it to be
+          an illusion, because things can pass through it.</p><p>If a creature
+          uses its action to examine the sound or image, the creature can
+          determine that it is an illusion with a successful Intelligence
+          (Investigation) check against your spell save DC. If a creature
+          discerns the illusion for what it is, the illusion becomes faint to
+          the creature.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: cube
+          size: '5'
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 0
+      school: ill
+      materials:
+        value: A bit of fleece.
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - somatic
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: minor-illusion
+    sort: 0
+    flags: {}
+    img: icons/magic/control/hypnosis-mesmerism-eye.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.oIzA2MEHwxhtQneU
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.oIzA2MEHwxhtQneU'
+  - _id: eS7XnnApoxRxYXPs
+    name: Charm Person
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You attempt to charm a humanoid you can see within range. It must
+          make a Wisdom saving throw, and does so with advantage if you or your
+          companions are fighting it. If it fails the saving throw, it is
+          charmed by you until the spell ends or until you or your companions do
+          anything harmful to it. The charmed creature regards you as a friendly
+          acquaintance. When the spell ends, the creature knows it was charmed
+          by you.</p>
+                  <p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: '3'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 1
+      school: enc
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: wis
+            dc:
+              calculation: spellcasting
+              formula: '18'
+          sort: 0
+      identifier: charm-person
+    sort: 0
+    flags: {}
+    img: icons/magic/fire/explosion-fireball-medium-purple-pink.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.eS7XnnApoxRxYXPs
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.eS7XnnApoxRxYXPs'
+  - _id: ghXTfe7sgCbgf1Q8
+    name: Detect Magic
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>For the duration, you sense the presence of magic within 30 feet of
+          you. If you sense magic in this way, you can use your action to see a
+          faint aura around any visible creature or object in the area that
+          bears magic, and you learn its school of magic, if any.</p><p>The
+          spell can penetrate most barriers, but it is blocked by 1 foot of
+          stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood
+          or dirt.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: radius
+          size: '30'
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: '3'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 1
+      school: div
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - ritual
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: detect-magic
+    sort: 0
+    flags: {}
+    img: icons/magic/light/explosion-star-blue.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.ghXTfe7sgCbgf1Q8'
+  - _id: 1N8dDMMgZ1h1YJ3B
+    name: Invisibility
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>A creature you touch becomes invisible until the spell ends.
+          Anything the target is wearing or carrying is invisible as long as it
+          is on the target's person. The spell ends for a target that attacks or
+          casts a spell.</p><p><strong>At Higher Levels.</strong> When you cast
+          this spell using a spell slot of 3rd level or higher, you can target
+          one additional creature for each slot level above 2nd.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: '3'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 2
+      school: ill
+      materials:
+        value: An eyelash encased in gum arabic
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: invisibility
+    sort: 0
+    flags: {}
+    img: icons/magic/air/fog-gas-smoke-dense-gray.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.1N8dDMMgZ1h1YJ3B'
+  - _id: nslx2nT3p4lNkmdp
+    name: Major Image
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You create the image of an object, a creature, or some other
+          visible phenomenon that is no larger than a 20-foot cube. The image
+          appears at a spot that you can see within range and lasts for the
+          duration. It seems completely real, including sounds, smells, and
+          temperature appropriate to the thing depicted. You can't create
+          sufficient heat or cold to cause damage, a sound loud enough to deal
+          thunder damage or deafen a creature, or a smell that might sicken a
+          creature (like a troglodyte's stench).</p><p>As long as you are within
+          range of the illusion, you can use your action to cause the image to
+          move to any other spot within range. As the image changes location,
+          you can alter its appearance so that its movements appear natural for
+          the image. For example, if you create an image of a creature and move
+          it, you can alter the image so that it appears to be walking.
+          Similarly, you can cause the illusion to make different sounds at
+          different times, even making it carry on a conversation, for
+          example.</p><p>Physical interaction with the image reveals it to be an
+          illusion, because things can pass through it. A creature that uses its
+          action to examine the image can determine that it is an illusion with
+          a successful Intelligence (Investigation) check against your spell
+          save DC. If a creature discerns the illusion for what it is, the
+          creature can see through the image, and its other sensory qualities
+          become faint to the creature.</p><p><strong>At Higher Levels.</strong>
+          When you cast this spell using a spell slot of 6th level or higher,
+          the spell lasts until dispelled, without requiring your
+          concentration.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: cube
+          size: '20'
+          contiguous: false
+      range:
+        value: '120'
+        units: ft
+      uses:
+        max: '3'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 3
+      school: ill
+      materials:
+        value: A bit of fleece
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: major-image
+    sort: 0
+    flags: {}
+    img: icons/magic/control/debuff-energy-hold-levitate-pink.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.nslx2nT3p4lNkmdp
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.nslx2nT3p4lNkmdp'
+  - _id: zMAWdyc8UVb37BK4
+    name: Suggestion
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You suggest a course of activity (limited to a sentence or two) and
+          magically influence a creature you can see within range that can hear
+          and understand you. Creatures that can't be charmed are immune to this
+          effect. The suggestion must be worded in such a manner as to make the
+          course of action sound reasonable. Asking the creature to stab itself,
+          throw itself onto a spear, immolate itself, or do some other obviously
+          harmful act ends the spell.</p><p>The target must make a Wisdom saving
+          throw. On a failed save, it pursues the course of action you described
+          to the best of its ability. The suggested course of action can
+          continue for the entire duration. If the suggested activity can be
+          completed in a shorter time, the spell ends when the subject finishes
+          what it was asked to do.</p><p>You can also specify conditions that
+          will trigger a special activity during the duration. For example, you
+          might suggest that a knight give her warhorse to the first beggar she
+          meets. If the condition isn't met before the spell expires, the
+          activity isn't performed.</p><p>If you or any of your companions
+          damage the target, the spell ends.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '8'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: '3'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 2
+      school: enc
+      materials:
+        value: A snake's tongue and either a bit of honeycomb or a drop of sweet oil
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: wis
+            dc:
+              calculation: spellcasting
+              formula: '18'
+          sort: 0
+      identifier: suggestion
+    sort: 0
+    flags: {}
+    img: icons/magic/air/air-burst-spiral-pink.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.zMAWdyc8UVb37BK4
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.zMAWdyc8UVb37BK4'
+  - _id: 91Sw6vOIaO7U8DvM
+    name: Dominate Person
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You attempt to beguile a humanoid that you can see within range. It
+          must succeed on a Wisdom saving throw or be charmed by you for the
+          duration. If you or creatures that are friendly to you are fighting
+          it, it has advantage on the saving throw.</p><p>While the target is
+          charmed, you have a telepathic link with it as long as the two of you
+          are on the same plane of existence. You can use this telepathic link
+          to issue commands to the creature while you are conscious (no action
+          required), which it does its best to obey. You can specify a simple
+          and general course of action, such as "Attack that creature," "Run
+          over there," or "Fetch that object." If the creature completes the
+          order and doesn't receive further direction from you, it defends and
+          preserves itself to the best of its ability.</p><p>You can use your
+          action to take total and precise control of the target. Until the end
+          of your next turn, the creature takes only the actions you choose, and
+          doesn't do anything that you don't allow it to do. During this time
+          you can also cause the creature to use a reaction, but this requires
+          you to use your own reaction as well.</p><p>Each time the target takes
+          damage, it makes a new Wisdom saving throw against the spell. If the
+          saving throw succeeds, the spell ends.</p><p><strong>At Higher
+          Levels.</strong> When you cast this spell using a 6th-level spell
+          slot, the duration is concentration, up to 10 minutes. When you use a
+          7th-level spell slot, the duration is concentration, up to 1 hour.
+          When you use a spell slot of 8th level or higher, the duration is
+          concentration, up to 8 hours.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: '1'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 5
+      school: enc
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: wis
+            dc:
+              calculation: spellcasting
+              formula: '18'
+          sort: 0
+      identifier: dominate-person
+    sort: 0
+    flags: {}
+    img: icons/magic/air/air-burst-spiral-large-pink.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.91Sw6vOIaO7U8DvM
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.91Sw6vOIaO7U8DvM'
+  - _id: yfbK8gZqESlaoY5t
+    name: Fly
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You touch a willing creature. The target gains a flying speed of 60
+          feet for the Duration. When the spell ends, the target falls if it is
+          still aloft, unless it can stop the fall.</p><p><strong>At Higher
+          Levels.</strong> When you cast this spell using a spell slot of 4th
+          level or higher, you can target one additional creature for each slot
+          level above 3rd.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: '1'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 3
+      school: trs
+      materials:
+        value: A wing feather from any bird
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: fly
+    sort: 0
+    flags: {}
+    img: icons/magic/control/energy-stream-link-white.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.yfbK8gZqESlaoY5t
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.yfbK8gZqESlaoY5t'
+  - _id: J6Jpw5XzB5aTeqnz
+    name: Plane Shift
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You and up to eight willing creatures who link hands in a circle
+          are transported to a different plane of existence. You can specify a
+          target destination in general terms, such as the City of Brass on the
+          Elemental Plane of Fire or the palace of Dispater on the second level
+          of the Nine Hells, and you appear in or near that destination. If you
+          are trying to reach the City of Brass, for example, you might arrive
+          in its Street of Steel, before its Gate of Ashes, or looking at the
+          city from across the Sea of Fire, at the DM's
+          discretion.</p><p>Alternatively, if you know the sigil sequence of a
+          teleportation circle on another plane of existence, this spell can
+          take you to that circle. If the teleportation circle is too small to
+          hold all the creatures you transported, they appear in the closest
+          unoccupied spaces next to the circle.</p><p>You can use this spell to
+          banish an unwilling creature to another plane. Choose a creature
+          within your reach and make a melee spell attack against it. On a hit,
+          the creature must make a Charisma saving throw. If the creature fails
+          this save, it is transported to a random location on the plane of
+          existence you specify. A creature so transported must find its own way
+          back to your current plane of existence.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '8'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: '1'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 7
+      school: con
+      materials:
+        value: >-
+          A forked, metal rod worth at least 250 gp, attuned to a particular
+          plane of existence
+        consumed: false
+        cost: 250
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: spell
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 0
+        dnd5eactivity100:
+          _id: dnd5eactivity100
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: cha
+            dc:
+              calculation: spellcasting
+              formula: '18'
+          sort: 0
+      identifier: plane-shift
+    sort: 0
+    flags: {}
+    img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.J6Jpw5XzB5aTeqnz'
+  - _id: XzkJpE6XpZfKjODD
+    name: True Seeing
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>This spell gives the willing creature you touch the ability to see
+          things as they actually are. For the duration, the creature has
+          truesight, notices secret doors hidden by magic, and can see into the
+          Ethereal Plane, all out to a range of 120 feet.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: '1'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 6
+      school: div
+      materials:
+        value: >-
+          An ointment for the eyes that costs 25gp; is made from mushroom
+          powder, saffron, and fat; and is consumed by the spell
+        consumed: true
+        cost: 25
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: true-seeing
+    sort: 0
+    flags: {}
+    img: icons/magic/perception/eye-ringed-glow-angry-large-teal.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.XzkJpE6XpZfKjODD
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!qXzMsRTHEodqO8l2.XzkJpE6XpZfKjODD'
+effects: []
+folder: P1YKVDd1IN7XXWWy
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1726171259963
+  modifiedTime: 1726171450470
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!actors!qXzMsRTHEodqO8l2'

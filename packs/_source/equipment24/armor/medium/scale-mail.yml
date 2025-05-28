@@ -1,0 +1,75 @@
+name: Scale Mail
+system:
+  description:
+    value: ''
+    chat: ''
+  price:
+    value: 50
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 45
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 14
+    magicalBonus: null
+    dex: 2
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: medium
+    baseItem: scalemail
+  properties:
+    - stealthDisadvantage
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities: {}
+  identifier: scale-mail
+_id: phbarmScaleMail0
+type: equipment
+folder: tNySLDnz2qPVahU7
+img: icons/equipment/chest/breastplate-banded-steel.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425914234
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbarmScaleMail0'

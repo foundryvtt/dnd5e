@@ -1,0 +1,126 @@
+_id: phbspRockGnome00
+name: Gnome, Rock
+type: race
+img: icons/environment/wilderness/terrain-rocks-brown.webp
+system:
+  description:
+    value: >-
+      <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspGnome000000
+      inline classes="free-rules-embed"]</p><h3 data-anchor="gnome-traits">Gnome
+      Traits</h3><p><strong>Creature Type: </strong>Humanoid</p><p><strong>Size:
+      </strong>Small (about 3–4 feet tall)</p><p><strong>Speed:</strong> 30
+      feet</p><p>As a Gnome, you have these special
+      traits.</p><p><strong>Darkvision. </strong>You have Darkvision with a
+      range of 60 feet.</p><p><strong>Gnomish Cunning.</strong> You have
+      Advantage on Intelligence, Wisdom, and Charisma saving
+      throws.</p><p><strong>Gnomish Lineage.</strong> You are part of a lineage
+      that grants you supernatural abilities. Whichever lineage you choose,
+      Intelligence, Wisdom, or Charisma is your spellcasting ability for the
+      spells you cast with this trait (choose the ability when you select the
+      lineage):</p><p><strong>Rock Gnome.</strong> You know the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplMending000]{Mending} and
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplPrestidigi]{Prestidigitation}
+      cantrips. In addition, you can spend 10 minutes casting
+      <em>Prestidigitation</em> to create a Tiny clockwork device (AC 5, 1 HP),
+      such as a toy, fire starter, or music box. When you create the device, you
+      determine its function by choosing one effect from
+      <em>Prestidigitation</em>; the device produces that effect whenever you or
+      another creature takes a Bonus Action to activate it with a touch. If the
+      chosen effect has options within it, you choose one of those options for
+      the device when you create it. For example, if you choose the spell's
+      ignite-extinguish effect, you determine whether the device ignites or
+      extinguishes fire; the device doesn't do both. You can have three such
+      devices in existence at a time, and each falls apart 8 hours after its
+      creation or when you dismantle it with a touch as a Utilize action.</p>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    custom: ''
+    book: SRD 5.2
+    license: CC-BY-4.0
+  advancement:
+    - _id: O7gYRGMSW3atQ2Yc
+      type: Size
+      configuration:
+        sizes:
+          - sm
+      level: 0
+      title: ''
+      hint: Small (about 3-4 feet tall)
+      value: {}
+    - _id: LcGnqnqKYFw0PcE9
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.origins24.Item.phbsptGnomishCun
+          - optional: false
+            uuid: Compendium.dnd5e.origins24.Item.phbsptRockGnomeL
+        optional: false
+        spell: null
+      value: {}
+      level: 0
+      title: Gnome Traits
+      hint: ''
+    - _id: RNvJhB97kaJrZTfU
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplMending000
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplPrestidigi
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          preparation: always
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 0
+      title: Rock Gnome Traits
+      hint: >-
+        Intelligence, Wisdom, or Charisma can be chosen for your spellcasting
+        ability.
+  movement:
+    burrow: null
+    climb: null
+    fly: null
+    swim: null
+    walk: 30
+    units: null
+    hover: false
+  senses:
+    darkvision: 60
+    blindsight: null
+    tremorsense: null
+    truesight: null
+    units: null
+    special: ''
+  type:
+    value: humanoid
+    subtype: Gnome
+    custom: ''
+  identifier: gnome-rock
+effects: []
+folder: Ulvo8nbygUegLa59
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745340837858
+  modifiedTime: 1745687023440
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbspRockGnome00'

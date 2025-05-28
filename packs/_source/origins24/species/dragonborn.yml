@@ -1,0 +1,132 @@
+name: Dragonborn
+system:
+  description:
+    value: "<p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspDragonborn0 inline classes=\"free-rules-embed\"]</p><h3 data-anchor=\"dragonborn-traits\">Dragonborn Traits</h3><p><strong>Creature Type: </strong>Humanoid</p><p><strong>Size: </strong>Medium (about 5–7 feet tall)</p><p><strong>Speed:</strong> 30 feet</p><p>As a Dragonborn, you have these special traits.</p><p><strong>Draconic Ancestry.</strong> Your lineage stems from a dragon progenitor. Choose the kind of dragon from the Draconic Ancestors table. Your choice affects your Breath Weapon and Damage Resistance traits as well as your appearance.</p><table><caption>Draconic Ancestors</caption><thead><tr><td>Dragon</td><td>Damage Type</td><td>Dragon</td><td>Damage Type</td></tr></thead><tbody><tr><td>Black</td><td>Acid</td><td>Gold</td><td>Fire</td></tr><tr><td>Blue</td><td>Lightning</td><td>Green</td><td>Poison</td></tr><tr><td>Brass</td><td>Fire</td><td>Red</td><td>Fire</td></tr><tr><td>Bronze</td><td>Lightning</td><td>Silver</td><td>Cold</td></tr><tr><td>Copper</td><td>Acid</td><td>White</td><td>Cold</td></tr></tbody></table><p><strong>Breath Weapon.</strong> When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in either a 15-foot Cone or a 30-foot Line that is 5 feet wide (choose the shape each time). Each creature in that area must make a Dexterity saving throw (DC 8 plus your Constitution modifier and Proficiency Bonus). On a failed save, a creature takes 1d10 damage of the type determined by your Draconic Ancestry trait. On a successful save, a creature takes half as much damage. This damage increases by 1d10 when you reach character levels 5 (2d10), 11 (3d10), and 17\_(4d10).You can use this Breath Weapon a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.</p><p><strong>Damage Resistance. </strong>You have Resistance to the damage type determined by your Draconic Ancestry trait.</p><p><strong>Darkvision. </strong>You have Darkvision with a range of 60 feet.</p><p><strong>Draconic Flight.</strong> When you reach character level 5, you can channel draconic magic to give yourself temporary flight. As a Bonus Action, you sprout spectral wings on your back that last for 10 minutes or until you retract the wings (no action required) or have the Incapacitated condition. During that time, you have a Fly Speed equal to your Speed. Your wings appear to be made of the same energy as your Breath Weapon. Once you use this trait, you can't use it again until you finish a Long Rest.</p>"
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    book: SRD 5.2
+    license: CC-BY-4.0
+  advancement:
+    - _id: 65BqBxGcj6z4S803
+      type: Size
+      configuration:
+        sizes:
+          - med
+      level: 0
+      title: ''
+      hint: Medium (about 5–7 feet tall)
+      value: {}
+    - _id: XA1fKbmfBiCHnVzs
+      type: ScaleValue
+      configuration:
+        identifier: breath
+        type: dice
+        distance:
+          units: ''
+        scale:
+          '0':
+            number: 1
+            faces: 10
+            modifiers: []
+          '5':
+            number: 2
+            faces: 10
+            modifiers: []
+          '11':
+            number: 3
+            faces: 10
+            modifiers: []
+          '17':
+            number: 4
+            faces: 10
+            modifiers: []
+      value: {}
+      title: Breath Weapon
+      hint: ''
+    - _id: raWgGHnxSicEwTb9
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.origins24.Item.phbsptBreathWeap
+        optional: false
+        spell: null
+      value: {}
+      level: 0
+      title: Draconic Ancestry
+      hint: ''
+    - _id: 8maGZKJ9TOIgNR80
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - dr:acid
+              - dr:cold
+              - dr:fire
+              - dr:lightning
+              - dr:poison
+      value:
+        chosen: []
+      level: 0
+      title: Damage Resistance
+      hint: >-
+        You have Resistance to the damage type determined by your Draconic
+        Ancestry trait.
+    - _id: jOGAWKkPIAbshOpo
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptDraconicFl
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 5
+      title: Draconic Flight
+      hint: ''
+  movement:
+    burrow: null
+    climb: null
+    fly: null
+    swim: null
+    walk: 30
+    units: null
+    hover: false
+  senses:
+    darkvision: 60
+    blindsight: null
+    tremorsense: null
+    truesight: null
+    units: null
+    special: ''
+  type:
+    value: humanoid
+    custom: ''
+    subtype: Dragonborn
+  identifier: dragonborn
+_id: phbspDragonborn0
+type: race
+img: icons/creatures/eyes/lizard-single-slit-green.webp
+effects: []
+folder: Ulvo8nbygUegLa59
+sort: 200000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745340795949
+  modifiedTime: 1745686504926
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbspDragonborn0'

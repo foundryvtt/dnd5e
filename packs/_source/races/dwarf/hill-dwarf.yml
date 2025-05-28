@@ -1,0 +1,195 @@
+_id: UQiRQUTBcsz8gZU1
+name: Hill Dwarf
+type: race
+img: icons/environment/wilderness/cave-entrance-rocky.webp
+system:
+  description:
+    value: >-
+      <p><em>Your dwarf character has an assortment of inborn abilities, part
+      and parcel of dwarven nature.</em></p><p><strong>Ability Score
+      Increase.</strong> Your Constitution score increases by
+      2.</p><p><strong>Age.</strong> Dwarves mature at the same rate as humans,
+      but they're considered young until they reach the age of 50. On average,
+      they live about 350 years.</p><p><strong>Alignment.</strong> Most dwarves
+      are lawful, believing firmly in the benefits of a well-ordered society.
+      They tend toward good as well, with a strong sense of fair play and a
+      belief that everyone deserves to share in the benefits of a just
+      order.</p><p><strong>Size.</strong> Dwarves stand between 4 and 5 feet
+      tall and average about 150 pounds. Your size is
+      Medium.</p><p><strong>Speed.</strong> Your base walking speed is 25 feet.
+      Your speed is not reduced by wearing heavy
+      armor.</p><p><strong>Darkvision.</strong> Accustomed to life underground,
+      you have superior vision in dark and dim conditions. You can see in dim
+      light within 60 feet of you as if it were bright light, and in darkness as
+      if it were dim light. You can't discern color in darkness, only shades of
+      gray.</p><p><strong>Dwarven Resilience.</strong> You have advantage on
+      saving throws against poison, and you have resistance against poison
+      damage.</p><p><strong>Dwarven Combat Training.</strong> You have
+      proficiency with the battleaxe, handaxe, light hammer, and
+      warhammer.</p><p><strong>Tool Proficiency.</strong> You gain proficiency
+      with the artisan's tools of your choice: smith's tools, brewer's supplies,
+      or mason's tools.</p><p><strong>Stonecunning.</strong> Whenever you make
+      an Intelligence (History) check related to the origin of stonework, you
+      are considered proficient in the History skill and add double your
+      proficiency bonus to the check, instead of your normal proficiency
+      bonus.</p><p><strong>Languages.</strong> You can speak, read, and write
+      Common and Dwarvish. Dwarvish is full of hard consonants and guttural
+      sounds, and those characteristics spill over into whatever other language
+      a dwarf might speak.</p><h5>Hill Dwarf</h5><p>As a hill dwarf, you have
+      keen senses, deep intuition, and remarkable
+      resilience.</p><p><strong>Ability Score Increase.</strong> Your Wisdom
+      score increases by 1.</p><p><strong>Dwarven Toughness.</strong> Your hit
+      point maximum increases by 1, and it increases by 1 every time you gain a
+      level.</p><section class="secret"
+      id="secret-bkbaaEWqAGbU8ZgK"><p><strong>Foundry
+      Note</strong></p><p>Dwarven Toughness should be configured by adding 1 to
+      the "Per Level" bonus in HP configuration on your character sheet
+      (accessible using the cog next to your character's hit
+      points).</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: hill-dwarf
+  advancement:
+    - _id: tNfLTuoHfvAxg2FC
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.races.ufysTkqet2Ctmtyi
+            optional: false
+          - uuid: Compendium.dnd5e.races.mQPZDRbUhgYTbXKa
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 0
+      title: ''
+    - _id: Z9hvZFkWUNvowbQX
+      type: AbilityScoreImprovement
+      configuration:
+        points: 0
+        fixed:
+          str: 0
+          dex: 0
+          con: 2
+          int: 0
+          wis: 1
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 0
+      title: ''
+    - _id: kdMPoRp3j1uOHQom
+      type: Size
+      configuration:
+        sizes:
+          - med
+      value:
+        size: ''
+      level: 1
+      title: ''
+      hint: >-
+        Dwarves stand between 4 and 5 feet tall and average about 150 pounds.
+        Your size is Medium.
+    - _id: rmcKuRQ2Laloq1xp
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - languages:standard:common
+          - languages:standard:dwarvish
+        choices: []
+      level: 0
+      title: ''
+      value:
+        chosen: []
+    - _id: 5zWGcz9uAerx3Dh5
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - dr:poison
+        choices: []
+      level: 0
+      title: Dwarven Resilience
+      value:
+        chosen: []
+    - _id: J0UGmCyMy6thWDeU
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - weapon:sim:handaxe
+          - weapon:sim:lighthammer
+          - weapon:mar:battleaxe
+          - weapon:mar:warhammer
+        choices: []
+      level: 0
+      title: Dwarven Combat Training
+      value:
+        chosen: []
+    - _id: 9CYW7Bj53L9G8Zsw
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - tool:art:brewer
+              - tool:art:mason
+              - tool:art:smith
+      level: 0
+      title: ''
+      value:
+        chosen: []
+  senses:
+    darkvision: 60
+    blindsight: null
+    tremorsense: null
+    truesight: null
+    units: ft
+    special: ''
+  movement:
+    walk: 25
+    burrow: null
+    climb: null
+    fly: null
+    swim: null
+    units: ft
+    hover: false
+  type:
+    subtype: dwarf
+    value: humanoid
+    custom: ''
+effects: []
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037392950
+  modifiedTime: 1725992703517
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+folder: H2wvPtn11yEFSd64
+_key: '!items!UQiRQUTBcsz8gZU1'

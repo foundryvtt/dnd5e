@@ -1,0 +1,104 @@
+_id: fXa0DMhoVLtbBu9l
+name: Subtle Spell
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>When you cast a spell, you can spend 1 sorcery point to cast it without
+      any somatic or verbal components.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: metamagic
+  requirements: Sorcerer 3
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: Compendium.dnd5e.classfeatures.Item.LBKChJY5n02Afhnq
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: subtle-spell
+flags: {}
+img: icons/creatures/slimes/slime-movement-swirling-blue.webp
+effects: []
+folder: dVi2pGadvf6tlWzq
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037386510
+  modifiedTime: 1725992289175
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!fXa0DMhoVLtbBu9l'

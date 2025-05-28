@@ -1,0 +1,258 @@
+_id: phbdrdNaturesWar
+name: Nature's Ward
+type: feat
+folder: WJ4IXskgADlprLEA
+img: icons/magic/nature/root-vine-caduceus-healing.webp
+system:
+  description:
+    value: >-
+      <p>You are immune to the Poisoned condition, and you have Resistance to a
+      damage type associated with your current land choice in the Circle Spells
+      feature, as shown in the Nature's Ward table.</p><table><caption>Nature's
+      Ward</caption><thead><tr><td>Land
+      Type</td><td>Resistance</td></tr></thead><tbody><tr><td>Arid</td><td>Fire</td></tr><tr><td>Polar</td><td>Cold</td></tr><tr><td>Temperate</td><td>Lightning</td></tr><tr><td>Tropical</td><td>Poison</td></tr></tbody></table><section
+      class="secret" id="secret-0muLLDjt1zqXptme"><p><strong>Foundry
+      Note</strong></p><p>This feature includes an Active Effect for the Poison
+      condition immunity and an Active Effect for each land type. You can
+      activate the Active Effect for your chosen land type.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 2
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 10
+    repeatable: false
+  properties: []
+  requirements: Circle of Land
+  activities: {}
+  enchant: {}
+  identifier: natures-ward
+effects:
+  - name: Nature's Ward
+    origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesWar
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    img: icons/magic/nature/root-vine-caduceus-healing.webp
+    _id: WWAuOh7qyAZgchmL
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.ci.value
+        mode: 2
+        value: '"poison"'
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbdrdNaturesWar.WWAuOh7qyAZgchmL'
+  - name: 'Nature''s Ward: Arid'
+    origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesWar
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    img: icons/magic/nature/root-vine-caduceus-healing.webp
+    _id: J6hYOcVvZlLKuWab
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbdrdNaturesWar.J6hYOcVvZlLKuWab'
+  - name: 'Nature''s Ward: Polar'
+    origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesWar
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    img: icons/magic/nature/root-vine-caduceus-healing.webp
+    _id: XLIRgAYPO1ARo5pb
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbdrdNaturesWar.XLIRgAYPO1ARo5pb'
+  - name: 'Nature''s Ward: Temperate'
+    origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesWar
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    img: icons/magic/nature/root-vine-caduceus-healing.webp
+    _id: yruAlaBCduO8AcnU
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: lightning
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbdrdNaturesWar.yruAlaBCduO8AcnU'
+  - name: 'Nature''s Ward: Tropical'
+    origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesWar
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    img: icons/magic/nature/root-vine-caduceus-healing.webp
+    _id: lDVYGRNqqw3HwcKM
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbdrdNaturesWar.lDVYGRNqqw3HwcKM'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866583501
+  modifiedTime: 1745256761264
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 500000
+ownership:
+  default: 0
+_key: '!items!phbdrdNaturesWar'

@@ -1,0 +1,165 @@
+name: Dominate Person
+system:
+  description:
+    value: >-
+      <p>One Humanoid you can see within range must succeed on a Wisdom saving
+      throw or have the &amp;Reference[Charmed apply=false] condition for the
+      duration. The target has Advantage on the save if you or your allies are
+      fighting it. Whenever the target takes damage, it repeats the save, ending
+      the spell on itself on a success.</p><p>You have a telepathic link with
+      the Charmed target while the two of you are on the same plane of
+      existence. On your turn, you can use this link to issue commands to the
+      target (no action required), such as "Attack that creature," "Move over
+      there," or "Fetch that object." The target does its best to obey on its
+      turn. If it completes an order and doesn't receive further direction from
+      you, it acts and moves as it likes, focusing on protecting
+      itself.</p><p>You can command the target to take a Reaction but must take
+      your own Reaction to do so.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> Your Concentration can last longer with a spell slot of
+      level 6 (up to 10 minutes), 7 (up to 1 hour), or 8+ (up to 8 hours).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: enc
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: Edq07kTLIVkuDjtn
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: dominate-person
+_id: phbsplDominatePe
+type: spell
+img: icons/magic/control/control-influence-puppet.webp
+effects:
+  - name: Dominated
+    origin: Compendium.dnd5e.spells24.Item.phbsplDominatePe
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/control/control-influence-puppet.webp
+    _id: Edq07kTLIVkuDjtn
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>Whenever the &amp;Reference[charmed apply=false] target takes damage,
+      it repeats the [[/save ability=wis]] save, ending the spell on itself on a
+      success.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - charmed
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplDominatePe.Edq07kTLIVkuDjtn'
+folder: beZ8MTpWY2cMEUlp
+sort: 2200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425951030
+  modifiedTime: 1745256791587
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDominatePe'

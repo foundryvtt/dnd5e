@@ -1,0 +1,104 @@
+_id: WtQHjfWuFrsYEns3
+name: Third Roar
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Each creature makes a  <strong>DC 18 Constitution</strong> saving
+      throw. On a failed save, a creature takes 44 (8d10) thunder damage and is
+      knocked prone. On a successful save, the creature takes half as much
+      damage and isn't knocked prone.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '18'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: third-roar
+flags: {}
+img: icons/magic/sonic/scream-wail-shout-teal.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304972343
+  modifiedTime: 1725992573123
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!WtQHjfWuFrsYEns3'

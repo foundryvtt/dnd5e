@@ -1,0 +1,260 @@
+_id: dmgMaceOfDisrupt
+name: Mace of Disruption
+type: weapon
+img: icons/weapons/maces/shortmace-ornate-gold.webp
+system:
+  activities:
+    sAaZZvhBiwjWHNXL:
+      _id: sAaZZvhBiwjWHNXL
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: 'Bonus Damage: 2d6 Radiant vs Fiend/Undead'
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: '0'
+            types:
+              - radiant
+            scaling:
+              number: 1
+      name: ''
+      img: ''
+      appliedEffects: []
+    sUoIpd68kJWIxRaU:
+      type: save
+      _id: sUoIpd68kJWIxRaU
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Z49QSPjltZ1NT28K
+          onSave: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Fiend or Undead
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '15'
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepMace000000]{Mace}), Rare
+      (Requires Attunement)</p><p>When you hit a Fiend or an Undead with this
+      magic weapon, that creature takes an extra 2d6 Radiant damage. If the
+      target has 25 Hit Points or fewer after taking this damage, it must
+      succeed on a DC 15 Wisdom saving throw or be destroyed. On a successful
+      save, the creature has the &amp;Reference[Frightened apply=false]
+      condition until the end of your next
+      turn.</p><p><em><strong>Light.</strong></em> While you hold this weapon,
+      it sheds Bright Light in a 20-foot radius and Dim Light for an additional
+      20 feet.</p>
+    chat: ''
+  identifier: mace-of-disruption
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: mace
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: sap
+effects:
+  - name: Frightened
+    img: systems/dnd5e/icons/svg/statuses/frightened.svg
+    origin: Compendium.dnd5e.equipment24.Item.dmgMaceOfDisrupt
+    transfer: false
+    _id: Z49QSPjltZ1NT28K
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>On a successful save, the creature has the &amp;Reference[Frightened
+      apply=false] condition until the end of your next turn.</p>
+    tint: '#ffffff'
+    statuses:
+      - frightened
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1731082154282
+      modifiedTime: 1731082338693
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgMaceOfDisrupt.Z49QSPjltZ1NT28K'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgMaceOfDisrupt'

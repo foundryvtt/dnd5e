@@ -1,0 +1,140 @@
+_id: r3243JU4AyQJyfX4
+name: Modify Memory
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You attempt to reshape another creature's memories. One creature that
+      you can see must make a Wisdom saving throw. If you are fighting the
+      creature, it has advantage on the saving throw. On a failed save, the
+      target becomes Charmed by you for the Duration. The charmed target is
+      Incapacitated and unaware of its surroundings, though it can still hear
+      you. If it takes any damage or is targeted by another spell, this spell
+      ends, and none of the target's memories are modified.</p><p>While this
+      charm lasts, you can affect the target's memory of an event that it
+      experienced within the last 24 hours and that lasted no more than 10
+      minutes. You can permanently eliminate all memory of the event, allow the
+      target to recall the event with perfect clarity and exacting detail,
+      change its memory of the details of the event, or create a memory of some
+      other event.</p><p>You must speak to the target to describe how its
+      memories are affected, and it must be able to understand your language for
+      the modified memories to take root. Its mind fills in any gaps in the
+      details of your description. If the spell ends before you have finished
+      describing the modified memories, the creature's memory isn't altered.
+      Otherwise, the modified memories take hold when the spell ends.</p><p>A
+      modified memory doesn't necessarily affect how a creature behaves,
+      particularly if the memory contradicts the creature's natural
+      inclinations, Alignment, or beliefs. An illogical modified memory, such as
+      implanting a memory of how much the creature enjoyed dousing itself in
+      acid, is dismissed, perhaps as a bad dream. The DM might deem a modified
+      memory too nonsensical to affect a creature in a significant
+      manner.</p><p>A Remove Curse or Greater Restoration spell cast on the
+      target restores the creature's true memory.</p><p><strong>At Higher
+      Levels</strong>. If you cast this spell using a spell slot of 6th level or
+      higher, you can alter the target's memories of an event that took place up
+      to 7 days ago (6th level), 30 days ago (7th level), 1 year ago (8th
+      level), or any time in the creature's past (9th level).</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: enc
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: modify-memory
+sort: 0
+flags: {}
+img: icons/magic/air/air-burst-spiral-large-teal-green.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037365838
+  modifiedTime: 1725992723039
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!r3243JU4AyQJyfX4'

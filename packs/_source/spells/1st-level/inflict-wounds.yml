@@ -1,0 +1,130 @@
+_id: ksaaTxIbKx2sJfia
+name: Inflict Wounds
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Make a melee spell Attack against a creature you can reach. On a hit,
+      the target takes 3d10 necrotic damage.</p><p><strong>At Higher
+      Levels.</strong> When you cast this spell using a spell slot of 2nd level
+      or higher, the damage increases by 1d10 for each slot level above 1st.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: nec
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: spell
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - number: 3
+            denomination: 10
+            bonus: ''
+            types:
+              - necrotic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: inflict-wounds
+sort: 0
+flags: {}
+img: icons/magic/unholy/strike-beam-blood-red-teal.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037364098
+  modifiedTime: 1725992722416
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ksaaTxIbKx2sJfia'

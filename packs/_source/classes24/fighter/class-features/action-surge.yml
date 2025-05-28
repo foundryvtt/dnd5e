@@ -1,0 +1,117 @@
+_id: phbftrActionSurg
+name: Action Surge
+type: feat
+folder: xggTDaiQq26ZrVzJ
+img: icons/magic/control/buff-strength-muscle-damage-orange.webp
+system:
+  description:
+    value: >-
+      <p>You can push yourself beyond your normal limits for a moment. On your
+      turn, you can take one additional action, except the Magic
+      action.</p><p>Once you use this feature, you can't do so again until you
+      finish a Short or Long Rest. Starting at level 17, you can use it twice
+      before a rest but only once on a turn.</p><section
+      id="secret-nYOY8k3V38g8mZIS" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature includes a limited use that increases
+      automatically at level 17.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '@scale.fighter.action-surge'
+    spent: 0
+    recovery:
+      - period: sr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    jtpVG47zPBUI0CZ5:
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+      _id: jtpVG47zPBUI0CZ5
+  enchant: {}
+  identifier: action-surge
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866361253
+  modifiedTime: 1745256761397
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftrActionSurg'

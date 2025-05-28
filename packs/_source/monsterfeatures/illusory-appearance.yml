@@ -1,0 +1,107 @@
+_id: s7kqggp9VLDb39nu
+name: Illusory Appearance
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>the [[lookup @name lowercase]] covers herself and anything she is
+      wearing or carrying with a magical illusion that makes her look like
+      another creature of her general size and humanoid shape. The illusion ends
+      if the [[lookup @name lowercase]] takes a bonus action to end it or if she
+      dies.</p><p>The changes wrought by this effect fail to hold up to physical
+      inspection. For example, the [[lookup @name lowercase]] could appear to
+      have smooth skin, but someone touching her would feel her rough flesh.
+      Otherwise, a creature must take an action to visually inspect the illusion
+      and succeed on a DC 20 Intelligence (Investigation) check to discern that
+      the [[lookup @name lowercase]] is disguised.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: illusory-appearance
+flags: {}
+img: icons/creatures/mammals/humanoid-cat-skulking-teal.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304977588
+  modifiedTime: 1725992574766
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!s7kqggp9VLDb39nu'

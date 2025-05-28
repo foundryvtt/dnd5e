@@ -1,0 +1,314 @@
+_id: dmgStaffOfHealin
+name: Staff of Healing
+type: weapon
+img: icons/weapons/staves/staff-ornate-cross.webp
+system:
+  activities:
+    UNShiMCgYX6q4CUB:
+      _id: UNShiMCgYX6q4CUB
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+    mkIIFw98V1d8uABu:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplCureWounds
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: mkIIFw98V1d8uABu
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: true
+          max: '4'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    MjiU3c8lzUOQk8sk:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplLesserRest
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: MjiU3c8lzUOQk8sk
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    tfGfEtth3JKF7BXQ:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplMassCureWo
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: tfGfEtth3JKF7BXQ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d6 + 4
+    max: '10'
+  description:
+    value: >-
+      <p><em>@UUID[Compendium.dnd5e.equipment24.Item.phbafcStaffalsoa]{Staff},
+      Rare (Requires Attunement by a Bard, Cleric, or Druid)</em></p><p>This
+      staff has 10 charges. While holding the staff, you can cast one of the
+      spells on the following table from it, using your spellcasting ability
+      modifier. The table indicates how many charges you must expend to cast the
+      spell.</p><table><thead><tr><th><p>Spell</p></th><th><p>Charge
+      Cost</p></th><th></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure
+      Wounds}</p></td><td><p>1 charge per spell level (maximum 4 for a
+      <span>level 4</span>
+      spell)</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser
+      Restoration}</p></td><td><p>2</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplMassCureWo]{Mass
+      Cure
+      Wounds}</p></td><td><p>5</p></td><td></td></tr></tbody></table><p><em><strong>Regaining
+      Charges.</strong></em> The staff regains 1d6 + 4 expended charges daily at
+      dawn. If you expend the last charge, roll [[/r 1d20]]. On a 1, the staff
+      vanishes in a flash of light, lost forever.</p>
+    chat: ''
+  identifier: staff-of-healing
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: quarterstaff
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  magicalBonus: null
+  properties:
+    - mgc
+    - ver
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: topple
+effects: []
+folder: 5p9KrkF39e6vFO4g
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703654
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100391
+ownership:
+  default: 0
+_key: '!items!dmgStaffOfHealin'

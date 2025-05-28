@@ -1,0 +1,265 @@
+_id: phbwzdSignatureS
+name: Signature Spells
+type: feat
+folder: plFztoZhqP7fLHPl
+img: icons/magic/fire/projectile-wave-arrow.webp
+system:
+  description:
+    value: >-
+      <p>Choose two level 3 spells in your spellbook as your signature spells.
+      You always have these spells prepared, and you can cast each of them once
+      at level 3 without expending a spell slot. When you do so, you can't cast
+      them in this way again until you finish a Short or Long Rest. To cast
+      either spell at a higher level, you must expend a spell slot.</p><section
+      class="secret" id="secret-fzEf6z2A0SKM0qHw"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Make Signature</strong> activity can be
+      used to enchant two spells which marks them as "Always Prepared" and adds
+      ", Signature" to their title for easy identification.</p><p>The
+      <strong>Expend First Spell</strong> and <strong>Expend Second
+      Spell</strong> activities can be used for tracking your free use of each
+      spell and refresh on a Short and Long Rest.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 20
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    XFWgZtgTNIvimlWz:
+      type: enchant
+      name: Make Signature
+      _id: XFWgZtgTNIvimlWz
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: FTQVlTQlkrgD3rwq
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: true
+        categories: []
+        properties: []
+        type: ''
+    wdegZibcbQM4SzRI:
+      type: utility
+      name: Expend First Spell
+      _id: wdegZibcbQM4SzRI
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery:
+          - period: sr
+            type: recoverAll
+        max: '1'
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    LKpjpqgxudgXOIIZ:
+      type: utility
+      name: Expend Second Spell
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery:
+          - period: sr
+            type: recoverAll
+        max: '1'
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: LKpjpqgxudgXOIIZ
+  enchant: {}
+  identifier: signature-spells
+effects:
+  - type: enchantment
+    name: Signature
+    img: icons/magic/fire/projectile-wave-arrow.webp
+    disabled: true
+    _id: FTQVlTQlkrgD3rwq
+    system: {}
+    changes:
+      - key: name
+        mode: 2
+        value: ', Signature'
+        priority: null
+      - key: system.preparation.mode
+        mode: 5
+        value: always
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Choose two level 3 spells in your spellbook as your signature spells.
+      You always have these spells prepared, and you can cast each of them once
+      at level 3 without expending a spell slot. When you do so, you can’t cast
+      them in this way again until you finish a Short or Long Rest. To cast
+      either spell at a higher level, you must expend a spell slot.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbwzdSignatureS.FTQVlTQlkrgD3rwq'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866273692
+  modifiedTime: 1745256770147
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwzdSignatureS'

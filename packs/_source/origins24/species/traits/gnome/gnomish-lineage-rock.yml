@@ -1,0 +1,62 @@
+_id: phbsptRockGnomeL
+name: Gnomish Lineage, Rock
+type: feat
+img: icons/environment/wilderness/terrain-rocks-brown.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>You know the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplMending000]{Mending} and
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplPrestidigi]{Prestidigitation}
+      cantrips. In addition, you can spend 10 minutes casting
+      <em>Prestidigitation</em> to create a Tiny clockwork device (AC 5, 1 HP),
+      such as a toy, fire starter, or music box. When you create the device, you
+      determine its function by choosing one effect from
+      <em>Prestidigitation</em>; the device produces that effect whenever you or
+      another creature takes a Bonus Action to activate it with a touch. If the
+      chosen effect has options within it, you choose one of those options for
+      the device when you create it. For example, if you choose the spell's
+      ignite-extinguish effect, you determine whether the device ignites or
+      extinguishes fire; the device doesn't do both. You can have three such
+      devices in existence at a time, and each falls apart 8 hours after its
+      creation or when you dismantle it with a touch as a Utilize action.</p>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Gnome (Rock)
+  identifier: gnomish-lineage-rock
+  advancement: []
+  cover: null
+  crewed: false
+effects: []
+folder: e9Bx86LUj7rJMszu
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745340837858
+  modifiedTime: 1745687030511
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptRockGnomeL'

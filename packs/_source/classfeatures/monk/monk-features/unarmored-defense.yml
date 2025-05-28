@@ -1,0 +1,84 @@
+_id: UAvV7N7T4zJhxdfI
+name: Unarmored Defense
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 1st Level, while you are wearing no armor and not wielding
+      a Shield, your AC equals 10 + your Dexterity modifier + your Wisdom
+      modifier.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: Monk 1
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: unarmored-defense
+flags: {}
+img: icons/magic/control/silhouette-hold-change-blue.webp
+effects:
+  - _id: R5ro4AuNjcdWD56O
+    changes:
+      - key: system.attributes.ac.calc
+        mode: 5
+        value: unarmoredMonk
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.cOdcNWy4hII029DT
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Unarmored Defense
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/control/silhouette-hold-change-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!UAvV7N7T4zJhxdfI.R5ro4AuNjcdWD56O'
+folder: TMmNG8ujFDBEWXRe
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037384543
+  modifiedTime: 1725992288536
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!UAvV7N7T4zJhxdfI'

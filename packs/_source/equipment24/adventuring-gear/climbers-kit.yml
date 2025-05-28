@@ -1,0 +1,79 @@
+name: Climber's Kit
+system:
+  description:
+    value: >-
+      <p>A Climber's Kit includes boot tips, gloves, pitons, and a harness. As a
+      Utilize action, you can use the Climber's Kit to anchor yourself; when you
+      do, you can't fall more than 25 feet from the anchor point, and you can't
+      move more than 25 feet from there without undoing the anchor as a Bonus
+      Action.</p>
+    chat: ''
+  price:
+    value: 25
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 12
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities: {}
+  identifier: climbers-kit
+_id: phbagClimbersKit
+type: equipment
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/survival/climbing-anchor-steel-grey.webp
+effects: []
+sort: 1100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425907660
+  modifiedTime: 1745256811527
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagClimbersKit'

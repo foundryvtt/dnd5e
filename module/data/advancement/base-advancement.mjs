@@ -1,4 +1,4 @@
-import { SparseDataModel } from "../abstract.mjs";
+import SparseDataModel from "../abstract/sparse-data-model.mjs";
 import AdvancementDataField from "../fields/advancement-data-field.mjs";
 
 const { DocumentIdField, FilePathField, NumberField, StringField } = foundry.data.fields;
@@ -46,7 +46,7 @@ export default class BaseAdvancement extends SparseDataModel {
       title: new StringField({initial: undefined, label: "DND5E.AdvancementCustomTitle"}),
       hint: new StringField({label: "DND5E.AdvancementHint"}),
       icon: new FilePathField({
-        initial: undefined, categories: ["IMAGE"], label: "DND5E.AdvancementCustomIcon"
+        initial: undefined, categories: ["IMAGE"], label: "DND5E.AdvancementCustomIcon", base64: true
       }),
       classRestriction: new StringField({
         initial: undefined, choices: ["primary", "secondary"], label: "DND5E.AdvancementClassRestriction"

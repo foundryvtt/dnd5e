@@ -1,0 +1,134 @@
+name: Cloudkill
+system:
+  description:
+    value: >-
+      <p>You create a 20-foot-radius Sphere of yellow-green fog centered on a
+      point within range. The fog lasts for the duration or until strong wind
+      (such as the one created by <em>Gust of Wind</em>) disperses it, ending
+      the spell. Its area is Heavily Obscured.</p><p>Each creature in the Sphere
+      makes a Constitution saving throw, taking 5d8 Poison damage on a failed
+      save or half as much damage on a successful one. A creature must also make
+      this save when the Sphere moves into its space and when it enters the
+      Sphere or ends its turn there. A creature makes this save only once per
+      turn.</p><p>The Sphere moves 10 feet away from you at the start of each of
+      your turns.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The
+      damage increases by 1d8 for each spell slot level above 5.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '20'
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 5
+            denomination: 8
+            bonus: ''
+            types:
+              - poison
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: cloudkill
+_id: phbsplCloudkill0
+type: spell
+img: icons/magic/acid/dissolve-pool-bubbles.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 3300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425945303
+  modifiedTime: 1745256788131
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplCloudkill0'

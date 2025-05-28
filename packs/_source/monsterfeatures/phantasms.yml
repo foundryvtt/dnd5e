@@ -1,0 +1,119 @@
+_id: t0ojYPOlKEbPpYNc
+name: Phantasms
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>the [[lookup @name lowercase]] magically creates three illusory
+      duplicates of itself if it isn't in bright light. The duplicates move with
+      it and mimic its actions, shifting position so as to make it impossible to
+      track which [[lookup @name lowercase]] is the real one. If the [[lookup
+      @name lowercase]] is ever in an area of bright light, the duplicates
+      disappear.</p><p>Whenever any creature targets the [[lookup @name
+      lowercase]] with an attack or a harmful spell while a duplicate remains,
+      that creature rolls randomly to determine whether it targets the [[lookup
+      @name lowercase]] or one of the duplicates. A creature is unaffected by
+      this magical effect if it can't see or if it relies on senses other than
+      sight.</p><p>A duplicate has the [[lookup @name lowercase]]'s AC and uses
+      its saving throws. If an attack hits a duplicate, or if a duplicate fails
+      a saving throw against an effect that deals damage, the duplicate
+      disappears.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: phantasms
+flags: {}
+img: icons/magic/defensive/illusion-evasion-echo-purple.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304977712
+  modifiedTime: 1725992574800
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!t0ojYPOlKEbPpYNc'

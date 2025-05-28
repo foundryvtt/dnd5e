@@ -1,0 +1,298 @@
+_id: dmgBroomOfFlying
+name: Broom of Flying
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/tools/hand/broom-straw-brown.webp
+system:
+  activities:
+    2wrq53BtZk3dUEuW:
+      type: utility
+      _id: 2wrq53BtZk3dUEuW
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: perm
+        concentration: false
+        override: false
+      effects:
+        - _id: HT7JLnMCpfGKFxI2
+        - _id: UzcvESI8ovNwhIPz
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Activate Broom
+      img: ''
+      appliedEffects:
+        - HT7JLnMCpfGKFxI2
+        - UzcvESI8ovNwhIPz
+    LvSkgvxIXSxWdGHa:
+      type: utility
+      _id: LvSkgvxIXSxWdGHa
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: mi
+        special: a familiar destination you have named
+        value: '1'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: the Broom of Flying
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Send Alone or Recall
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Uncommon (Requires
+      Attunement)</em></p></div><p>This wooden broom functions like a mundane
+      broom until you stand astride it and take a Magic action to make it hover
+      beneath you, at which time it can be ridden in the air. It has a Fly Speed
+      of 50 feet. It can carry up to 400 pounds, but its Fly Speed becomes 30
+      feet while carrying over 200 pounds. The broom stops hovering when you
+      land or when you're no longer riding it.</p><p>As a Magic action, you can
+      send the broom to travel alone to a destination within 1 mile of you if
+      you name the location and are familiar with it. The broom comes back to
+      you when you take a Magic action and use a command word if the broom is
+      still within 1 mile of you.</p>
+    chat: ''
+  identifier: broom-of-flying
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Riding Broom (Low Weight)
+    img: icons/tools/hand/broom-straw-brown.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgBroomOfFlying
+    transfer: true
+    _id: HT7JLnMCpfGKFxI2
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.fly
+        mode: 5
+        value: '50'
+        priority: null
+      - key: system.attributes.movement.walk
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.burrow
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 5
+        value: '0'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The broom can carry up to 400 pounds, but its Fly Speed becomes 30 feet
+      while carrying over 200 pounds.</p>
+    tint: '#ffffff'
+    statuses:
+      - flying
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1728925762986
+      modifiedTime: 1728926319433
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgBroomOfFlying.HT7JLnMCpfGKFxI2'
+  - name: Riding Broom (High Weight)
+    img: icons/tools/hand/broom-straw-brown.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgBroomOfFlying
+    transfer: true
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.fly
+        mode: 5
+        value: '30'
+        priority: null
+      - key: system.attributes.movement.walk
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.burrow
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 5
+        value: '0'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The broom can carry up to 400 pounds, but its Fly Speed becomes 30 feet
+      while carrying over 200 pounds.</p>
+    tint: '#ffffff'
+    statuses:
+      - flying
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.equipment24.Item.dmgBroomOfFlying.ActiveEffect.HT7JLnMCpfGKFxI2
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1728926324520
+      modifiedTime: 1728926351272
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: UzcvESI8ovNwhIPz
+    _key: '!items.effects!dmgBroomOfFlying.UzcvESI8ovNwhIPz'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5100000
+ownership:
+  default: 0
+_key: '!items!dmgBroomOfFlying'

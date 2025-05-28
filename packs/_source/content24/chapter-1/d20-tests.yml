@@ -1,0 +1,441 @@
+_id: phbD20Tests00000
+name: D20 Tests
+pages:
+  - sort: 100000
+    name: Overview
+    type: text
+    _id: cpCaIOAmJIyrHlKu
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>When the outcome of an action is uncertain, the game uses a d20 roll
+        to determine success or failure. These rolls are called
+        &amp;Reference[d20test]{D20 Tests}, and they come in three kinds:
+        ability checks, saving throws, and attack rolls. They follow these
+        steps:</p><ol><li><strong>Roll 1d20.</strong> You always want to roll
+        high. If the roll has &amp;Reference[advantage] or
+        &amp;Reference[disadvantage], you roll two d20s, but you use the number
+        from only one of them—the higher one if you have Advantage or the lower
+        one if you have Disadvantage.</li><li><p><strong>Add Modifiers.</strong>
+        Add these modifiers to the number rolled on the d20:</p><ul><li
+        class="Core-Styles_Core-Bulleted ParaOverride-2"><strong>The Relevant
+        Ability Modifier.</strong> This chapter and the rules glossary explain
+        which ability modifiers to use for various D20 Tests.</li><li
+        class="Core-Styles_Core-Bulleted ParaOverride-2"><strong>Your
+        Proficiency Bonus If Relevant. </strong>Each creature has a Proficiency
+        Bonus, a number added when making a D20 Test that uses something, such
+        as a skill, in which the creature has proficiency. See
+        @UUID[.zU9fgQbLaVbJvPRX]{Proficiency} later in this chapter.</li><li
+        class="Core-Styles_Core-Bulleted ParaOverride-2"><strong>Circumstantial
+        Bonuses and Penalties.</strong> A class feature, a spell, or another
+        rule might give a bonus or penalty to the die
+        roll.</li></ul></li><li><strong>Compare the Total to a Target
+        Number.</strong> If the total of the d20 and its modifiers equals or
+        exceeds the target number, the D20 Test succeeds. Otherwise, it fails.
+        The Game Master determines target numbers and tells players whether
+        their rolls are successful. The target number for an ability check or a
+        saving throw is called a &amp;Reference[difficultyclass] (DC). The
+        target number for an attack roll is called an &amp;Reference[armorclass]
+        (AC), which appears on a character sheet or in a stat block.</li></ol>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745435131792
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbD20Tests00000.cpCaIOAmJIyrHlKu'
+  - sort: 200000
+    name: Ability Checks
+    type: text
+    _id: EbGnSXpG5SdKusf9
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: "<p>An ability check represents a creature using talent and training to try to overcome a challenge, such as forcing open a stuck door, picking a lock, entertaining a crowd, or deciphering a cipher. The GM and the rules often call for an ability check when a creature attempts something other than an attack that has a chance of meaningful failure. When the outcome is uncertain and narratively interesting, the dice determine the result.</p><h2>Ability Modifier</h2><p>An &amp;Reference[abilitycheck] is named for the ability modifier it uses: a Strength check, an Intelligence check, and so on. Different ability checks are called for in different situations, depending on which ability is most relevant. See the Ability Check Examples table for examples of each check’s use.</p><table><caption>Ability Check Examples</caption><thead><tr><th><p>Ability</p></th><th><p>Make a Check To …</p></th></tr></thead><tbody><tr><td><p>Strength</p></td><td><p>Lift, push, pull, or break something</p></td></tr><tr><td><p>Dexterity</p></td><td><p>Move nimbly, quickly, or quietly</p></td></tr><tr><td><p>Constitution</p></td><td><p>Push your body beyond normal limits</p></td></tr><tr><td><p>Intelligence</p></td><td><p>Reason or remember</p></td></tr><tr><td><p>Wisdom</p></td><td><p>Notice things in the environment or in creatures’ behavior</p></td></tr><tr><td><p>Charisma</p></td><td><p>Influence, entertain, or deceive</p></td></tr></tbody></table><h2>Proficiency Bonus</h2><p>Add your Proficiency Bonus to an ability check when the GM determines that a skill or tool proficiency is relevant to the check and you have that proficiency. For example, if a rule refers to a Strength (Acrobatics or Athletics) check, you can add your Proficiency Bonus to the check if you have proficiency in the Acrobatics or Athletics skill. See @UUID[.zU9fgQbLaVbJvPRX]{Proficiency} later in this chapter for more information about skill and tool proficiencies.</p><section class=\"fvtt advice\"><figure class=\"icon\"><img src=\"icons/vtt-512.png\" /></figure><article><h3>Inline Ability Checks</h3><p>Ability checks in Foundry can be handled with a click. For example, here's an Acrobatics check with a DC of 10: [[/check 10 acr]].</p><p>If you have a Token selected you can click on the link to roll the check or you can send the check to chat by clicking on the <span class=\"reference fa-solid fa-comment-dots\">\_</span> icon so everyone can roll for themselves.</p></article></section><h2>Difficulty Class</h2><p>The &amp;Reference[difficultyclass] of an ability check represents the task’s difficulty. The more difficult the task, the higher its DC. The rules provide DCs for certain checks, but the GM ultimately sets them. The Typical Difficulty Classes table presents a range of possible DCs for ability checks.</p><table><caption>Typical Difficulty Classes</caption><thead><tr><th><p>Task Difficulty</p></th><th><p>DC</p></th></tr></thead><tbody><tr><td><p>Very easy</p></td><td><p>5</p></td></tr><tr><td><p>Easy</p></td><td><p>10</p></td></tr><tr><td><p>Medium</p></td><td><p>15</p></td></tr><tr><td><p>Hard</p></td><td><p>20</p></td></tr><tr><td><p>Very hard</p></td><td><p>25</p></td></tr><tr><td><p>Nearly impossible</p></td><td><p>30</p></td></tr></tbody></table>"
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1735933828859
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbD20Tests00000.EbGnSXpG5SdKusf9'
+  - sort: 300000
+    name: Saving Throws
+    type: text
+    _id: 6zGMb84U7IQkPCmn
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: "<p>A &amp;Reference[savingthrow]—also called a save—represents an attempt to evade or resist a threat, such as a fiery explosion, a blast of poisonous gas, or a spell trying to invade your mind. You don’t normally choose to make a save; you must make one because your character or a monster (if you’re the DM) is at risk. A save’s result is detailed in the effect that caused it.</p><p>If you don’t want to resist the effect, you can choose to fail the save without rolling.</p><h2>Ability Modifier</h2><p>Saving throws are named for the ability modifiers they use: a Constitution saving throw, a Wisdom saving throw, and so on. Different saving throws are used to resist different kinds of effects, as shown on the Saving Throw Examples table.</p><table><caption>Saving Throw Examples</caption><thead><tr><th><p>Ability</p></th><th><p>Make a Save To …</p></th></tr></thead><tbody><tr><td><p>Strength</p></td><td><p>Physically resist direct force</p></td></tr><tr><td><p>Dexterity</p></td><td><p>Dodge out of harm’s way</p></td></tr><tr><td><p>Constitution</p></td><td><p>Endure a toxic hazard</p></td></tr><tr><td><p>Intelligence</p></td><td><p>Recognize an illusion as fake</p></td></tr><tr><td><p>Wisdom</p></td><td><p>Resist a mental assault</p></td></tr><tr><td><p>Charisma</p></td><td><p>Assert your identity</p></td></tr></tbody></table><section class=\"fvtt advice\"><figure class=\"icon\"><img src=\"icons/vtt-512.png\" /></figure><article><h3>Inline Saving Throws</h3><p>Just like ability checks, saving throws in Foundry can be handled with a click. For example, here's a constitution saving throw with a DC of 10: [[/save 10 con]].</p><p>If you have a Token selected you can click on the link to roll the save or you can send the check to chat by clicking on the <span class=\"reference fa-solid fa-comment-dots\">\_</span> icon so everyone can roll for themselves.</p></article></section><h2>Proficiency Bonus</h2><p>You add your Proficiency Bonus to your saving throw if you have proficiency in that kind of save. See @UUID[.zU9fgQbLaVbJvPRX]{Proficiency} later in this chapter.</p><h2>Difficulty Class</h2><p>The &amp;Reference[difficultyclass] for a saving throw is determined by the effect that causes it or by the DM. For example, if a spell forces you to make a save, the DC is determined by the caster’s spellcasting ability and Proficiency Bonus. Monster abilities that call for saves specify the DC.</p>"
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726021330618
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbD20Tests00000.6zGMb84U7IQkPCmn'
+  - sort: 400000
+    name: Attack Rolls
+    type: text
+    _id: URxmJwlkoRnD517f
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>An attack roll determines whether an attack hits a target. An attack
+        roll hits if the roll equals or exceeds the target’s
+        &amp;Reference[armorclass]. Attack rolls usually occur in battle,
+        described in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCombat0000000]{Combat}
+        later in this chapter, but the GM might also ask for an attack roll in
+        other situations, such as an archery competition.</p><h2>Ability
+        Modifier</h2><p>The &amp;Reference[attackrolls] Abilities table shows
+        which ability modifier to use for different types of attack
+        rolls.</p><table><caption>Attack Roll
+        Abilities</caption><thead><tr><th><p>Ability</p></th><th><p>Attack
+        Type</p></th></tr></thead><tbody><tr><td><p>Strength</p></td><td><p>Melee
+        attack with a weapon or an Unarmed Strike (see the rules
+        glossary)</p></td></tr><tr><td><p>Dexterity</p></td><td><p>Ranged attack
+        with a weapon</p></td></tr><tr><td><p>Varies</p></td><td><p>Spell attack
+        (the ability used is determined by the spellcaster’s spellcasting
+        feature, as explained in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.ujhsaI8nVkjXwMHD#attack-rolls]{chapter
+        7})</p></td></tr></tbody></table><p>Some features let you use different
+        ability modifiers from those listed. For example, the
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbEquipment0000.JournalEntryPage.7qSj8lqMAP0FBNKK#finesse]{Finesse
+        property} (see
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbEquipment0000.JournalEntryPage.7qSj8lqMAP0FBNKK#finesse]{Equipment})
+        lets you use Strength or Dexterity with a weapon that has that
+        property.</p><h2>Proficiency Bonus</h2><p>You add your Proficiency Bonus
+        to your attack roll when you attack using a weapon you have proficiency
+        with, as well as when you attack with a spell. See
+        @UUID[.zU9fgQbLaVbJvPRX]{Proficiency} later in this chapter for more
+        information about weapon proficiencies.</p><h2>Armor Class</h2><p>A
+        creature’s Armor Class represents how well the creature avoids being
+        wounded in combat. The AC of a character is determined at
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCreatingAChar.JournalEntryPage.l4eqkEUGLVS2jBhO]{character
+        creation}, whereas the AC of a monster appears in its stat
+        block.</p><p><em><strong>Calculating AC.</strong></em> All creatures
+        start with the same base AC calculation:</p><p
+        style="text-align:center"><strong>Base AC</strong> = 10 + the creature’s
+        Dexterity modifier</p><p>A creature’s AC can then be modified by armor,
+        magic items, spells, and more.</p><p><em><strong>Only One Base
+        AC.</strong></em> Some spells and class features give characters a
+        different way to calculate their AC. A character with multiple features
+        that give different ways to calculate AC must choose which one to use;
+        only one base calculation can be in effect for a
+        creature.</p><h2>Rolling 20 or 1</h2><p>If you roll a 20 on the d20
+        (called a “natural 20”) for an attack roll, the attack hits regardless
+        of any modifiers or the target’s AC. This is called a
+        &amp;Reference[Critical Hits]{Critical Hit} (see
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCombat0000000]{Combat}
+        later in this chapter).</p><p>If you roll a 1 on the d20 (a “natural 1”)
+        for an attack roll, the attack misses regardless of any modifiers or the
+        target’s AC.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745435303464
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbD20Tests00000.URxmJwlkoRnD517f'
+  - sort: 500000
+    name: Advantage/Disadvantage
+    type: text
+    _id: hVbvqQwDSShAl7hM
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Sometimes a D20 Test is modified by Advantage or Disadvantage.
+        Advantage reflects the positive circumstances surrounding a d20 roll,
+        while Disadvantage reflects negative circumstances.</p><p>You usually
+        acquire Advantage or Disadvantage through the use of special abilities
+        and actions. The GM can also decide that circumstances grant Advantage
+        or impose Disadvantage.</p><h2>Roll Two D20s</h2><p>When a roll has
+        either Advantage or Disadvantage, roll a second d20 when you make the
+        roll. Use the higher of the two rolls if you have Advantage, and use the
+        lower roll if you have Disadvantage. For example, if you have
+        Disadvantage and roll an 18 and a 3, use the 3. If you instead have
+        Advantage and roll those numbers, use the 18.</p><h2>They Don’t
+        Stack</h2><p>If multiple situations affect a roll and they all grant
+        Advantage on it, you still roll only two d20s. Similarly, if multiple
+        situations impose Disadvantage on a roll, you roll only two
+        d20s.</p><p>If circumstances cause a roll to have both Advantage and
+        Disadvantage, the roll has neither of them, and you roll one d20. This
+        is true even if multiple circumstances impose Disadvantage and only one
+        grants Advantage or vice versa. In such a situation, you have neither
+        Advantage nor Disadvantage.</p><h2>Interactions with Rerolls</h2><p>When
+        you have Advantage or Disadvantage and something in the game lets you
+        reroll or replace the d20, you can reroll or replace only one die, not
+        both. You choose which one.</p><p>For example, if you have
+        &amp;Reference[inspiration]{Heroic Inspiration} (see below) and roll a 3
+        and an 18 on an ability check that has Advantage or Disadvantage, you
+        could expend your Heroic Inspiration to reroll one of those dice, not
+        both of them.</p><aside class="notable"><h3>Heroic
+        Inspiration</h3><p>Sometimes the GM or a rule gives you Heroic
+        Inspiration. If you have Heroic Inspiration, you can expend it to reroll
+        any die immediately after rolling it, and you must use the new
+        roll.</p><p><em><strong>Only One at a Time.</strong></em> You can never
+        have more than one instance of Heroic Inspiration. If something gives
+        you Heroic Inspiration and you already have it, you can give it to a
+        player character in your group who lacks it.</p><p><em><strong>Gaining
+        Heroic Inspiration.</strong></em> Your GM can give you Heroic
+        Inspiration for a variety of reasons. Typically, DMs award it when you
+        do something particularly heroic, in character, or entertaining. It’s a
+        reward for making the game more fun for everyone playing.</p><p>Other
+        rules might allow your character to gain Heroic Inspiration independent
+        of the DM’s decision. For example, Human characters start each day with
+        Heroic Inspiration.</p></aside><section class="fvtt advice"><figure
+        class="icon"><img src="icons/vtt-512.png" /></figure><article><h3>Heroic
+        Inspiration on Your Foundry Character Sheet</h3><p>You can track whether
+        you have Heroic Inspiration or not with the inspiration button in the
+        top-right of your character sheet to the left of your level and to the
+        right of you Short and Long Rest buttons.</p></article></section>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1735933839995
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbD20Tests00000.hVbvqQwDSShAl7hM'
+  - sort: 600000
+    name: Proficiency
+    type: text
+    _id: zU9fgQbLaVbJvPRX
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Characters and monsters are good at various things. Some are skilled
+        with many weapons, while others can use only a few. Some are better at
+        understanding people’s motives, and others are better at unlocking the
+        secrets of the multiverse. All creatures have a Proficiency Bonus, which
+        reflects the impact that training has on the creature’s capabilities. A
+        character’s Proficiency Bonus increases as the character gains levels
+        (described in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCreatingAChar.JournalEntryPage.iHbj5aJvc1T7i5YI]{chapter
+        2}). A monster’s Proficiency Bonus is based on its
+        &amp;Reference[challengerating]. The Proficiency Bonus table shows how
+        the bonus is determined.</p><p>This bonus is applied to a
+        &amp;Reference[d20test] when the creature has proficiency in a skill, in
+        a saving throw, or with an item that the creature uses to make the D20
+        Test. The bonus is also used for spell attacks and for calculating the
+        DC of saving throws for spells.</p><table><caption>Proficiency
+        Bonus</caption><thead><tr><th><p>Level or
+        CR</p></th><th><p>Bonus</p></th></tr></thead><tbody><tr><td><p>Up to
+        4</p></td><td><p>+2</p></td></tr><tr><td><p>5–8</p></td><td><p>+3</p></td></tr><tr><td><p>9–12</p></td><td><p>+4</p></td></tr><tr><td><p>13–16</p></td><td><p>+5</p></td></tr><tr><td><p>17–20</p></td><td><p>+6</p></td></tr><tr><td><p>21–24</p></td><td><p>+7</p></td></tr><tr><td><p>25–28</p></td><td><p>+8</p></td></tr><tr><td><p>29–30</p></td><td><p>+9</p></td></tr></tbody></table><h2>The
+        Bonus Doesn’t Stack</h2><p>Your Proficiency Bonus can’t be added to a
+        die roll or another number more than once. For example, if a rule allows
+        you to make a Charisma (Deception or Persuasion) check, you add your
+        Proficiency Bonus if you’re proficient in either skill, but you don’t
+        add it twice if you’re proficient in both skills.</p><p>Occasionally, a
+        Proficiency Bonus might be multiplied or divided (doubled or halved, for
+        example) before being added. For example, the &amp;Reference[expertise]
+        feature doubles the Proficiency Bonus for certain ability checks.
+        Whenever the bonus is used, it can be multiplied only once and divided
+        only once.</p><h2>Skill Proficiencies</h2><p>Most ability checks involve
+        using a skill, which represents a category of things creatures try to do
+        with an ability check. The descriptions of the actions you take (see
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbActions000000]{Actions}
+        later in this chapter) specify which skill applies if you make an
+        ability check for that action, and many other rules note when a skill is
+        relevant. The GM has the ultimate say on whether a skill is relevant in
+        a situation.</p><p>If a creature is proficient in a skill, the creature
+        applies its Proficiency Bonus to ability checks involving that skill.
+        Without proficiency in a skill, a creature can still make ability checks
+        involving that skill but doesn’t add its Proficiency Bonus. For example,
+        if a character tries to climb a cliff, the GM might ask for a Strength
+        (Athletics) check. If the character has Athletics proficiency, the
+        character adds their Proficiency Bonus to the Strength check. If the
+        character lacks that proficiency, they make the check without adding
+        their Proficiency
+        Bonus.</p><table><caption>Skills</caption><thead><tr><th><p>Skill</p></th><th><p>Ability</p></th><th><p>Example
+        Uses</p></th></tr></thead><tbody><tr><td><p>Acrobatics</p></td><td><p>Dexterity</p></td><td><p>Stay
+        on your feet in a tricky situation, or perform an acrobatic
+        stunt.</p></td></tr><tr><td><p>Animal
+        Handling</p></td><td><p>Wisdom</p></td><td><p>Calm or train an animal,
+        or get an animal to behave in a certain
+        way.</p></td></tr><tr><td><p>Arcana</p></td><td><p>Intelligence</p></td><td><p>Recall
+        lore about spells, magic items, and the planes of
+        existence.</p></td></tr><tr><td><p>Athletics</p></td><td><p>Strength</p></td><td><p>Jump
+        farther than normal, stay afloat in rough water, or break
+        something.</p></td></tr><tr><td><p>Deception</p></td><td><p>Charisma</p></td><td><p>Tell
+        a convincing lie, or wear a disguise
+        convincingly.</p></td></tr><tr><td><p>History</p></td><td><p>Intelligence</p></td><td><p>Recall
+        lore about historical events, people, nations, and
+        cultures.</p></td></tr><tr><td><p>Insight</p></td><td><p>Wisdom</p></td><td><p>Discern
+        a person’s mood and
+        intentions.</p></td></tr><tr><td><p>Intimidation</p></td><td><p>Charisma</p></td><td><p>Awe
+        or threaten someone into doing what you
+        want.</p></td></tr><tr><td><p>Investigation</p></td><td><p>Intelligence</p></td><td><p>Find
+        obscure information in books, or deduce how something
+        works.</p></td></tr><tr><td><p>Medicine</p></td><td><p>Wisdom</p></td><td><p>Diagnose
+        an illness, or determine what killed the recently
+        slain.</p></td></tr><tr><td><p>Nature</p></td><td><p>Intelligence</p></td><td><p>Recall
+        lore about terrain, plants, animals, and
+        weather.</p></td></tr><tr><td><p>Perception</p></td><td><p>Wisdom</p></td><td><p>Using
+        a combination of senses, notice something that’s easy to
+        miss.</p></td></tr><tr><td><p>Performance</p></td><td><p>Charisma</p></td><td><p>Act,
+        tell a story, perform music, or
+        dance.</p></td></tr><tr><td><p>Persuasion</p></td><td><p>Charisma</p></td><td><p>Honestly
+        and graciously convince someone of
+        something.</p></td></tr><tr><td><p>Religion</p></td><td><p>Intelligence</p></td><td><p>Recall
+        lore about gods, religious rituals, and holy
+        symbols.</p></td></tr><tr><td><p>Sleight of
+        Hand</p></td><td><p>Dexterity</p></td><td><p>Pick a pocket, conceal a
+        handheld object, or perform
+        legerdemain.</p></td></tr><tr><td><p>Stealth</p></td><td><p>Dexterity</p></td><td><p>Escape
+        notice by moving quietly and hiding behind
+        things.</p></td></tr><tr><td><p>Survival</p></td><td><p>Wisdom</p></td><td><p>Follow
+        tracks, forage, find a trail, or avoid natural
+        hazards.</p></td></tr></tbody></table><h3>Skill List</h3><p>The skills
+        are shown on the Skills table, which notes example uses for each skill
+        proficiency as well as the ability check the skill most often applies
+        to.</p><h3>Determining Skills</h3><p>A character’s starting skill
+        proficiencies are determined at character creation, and a monster’s
+        skill proficiencies appear in its stat block.</p><h2>Saving Throw
+        Proficiencies</h2><p>Proficiency in a &amp;Reference[savingthrow] lets a
+        character add their Proficiency Bonus to saves that use a particular
+        ability. For example, proficiency in Wisdom saves lets you add your
+        Proficiency Bonus to your Wisdom saves. Some monsters also have saving
+        throw proficiencies, as noted in their stat blocks.</p><p>Each class
+        gives proficiency in at least two saving throws, representing that
+        class’s training in evading or resisting certain threats. Wizards, for
+        example, are proficient in Intelligence and Wisdom saves; they train to
+        resist mental assault.</p><h2>Equipment Proficiencies</h2><p>A character
+        gains proficiency with various weapons and tools from their class and
+        background. There are two categories of equipment
+        proficiency:</p><p><strong>Weapons.</strong> Anyone can wield a weapon,
+        but proficiency makes you better at wielding it. If you have proficiency
+        with a weapon, you add your Proficiency Bonus to attack rolls you make
+        with it.</p><p><strong>Tools.</strong> If you have proficiency with a
+        tool, you can add your Proficiency Bonus to any ability check you make
+        that uses the tool. If you have Proficiency in the skill that’s also
+        used with that check, you have &amp;Reference[advantage] on the check
+        too. This means you can benefit from both skill proficiency and tool
+        proficiency on the same ability check.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745435684584
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbD20Tests00000.zU9fgQbLaVbJvPRX'
+folder: DEIORpZoUWPUBTPh
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 1
+    order: 101000
+    navigation:
+      previous: phbIntroduction0
+      next: phbActions000000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425888790
+  modifiedTime: 1745677864937
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 75000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbD20Tests00000'

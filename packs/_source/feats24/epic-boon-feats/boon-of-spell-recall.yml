@@ -1,0 +1,126 @@
+name: Boon of Spell Recall
+system:
+  description:
+    value: >-
+      <p>You gain the following benefits.</p><p><strong>Ability Score
+      Increase.</strong> Increase your Intelligence, Wisdom, or Charisma score
+      by 1, to a maximum of 30.</p><p><strong>Free Casting.</strong> Whenever
+      you cast a spell with a level 1–4 spell slot, roll [[/r 1d4]]. If the
+      number you roll is the same as the slot's level, the slot isn't
+      expended.</p><section class="secret"
+      id="secret-KMAFFZCOzi6Cuemh"><p><strong>Foundry Note</strong></p><p>If the
+      number is the same, uncheck the Consumption option when using the
+      spell.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    book: SRD 5.2
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: feat
+    subtype: epicBoon
+  prerequisites:
+    level: 19
+    repeatable: false
+  properties: []
+  requirements: Level 19
+  activities:
+    mN72GMXgdNXQJhJN:
+      type: utility
+      name: Free Cast Roll
+      _id: mN72GMXgdNXQJhJN
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Whenever you cast a spell with a level 1-4 spell slot
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: Roll
+        formula: 1d4
+      img: systems/dnd5e/icons/svg/dice/d4.svg
+  enchant: {}
+  identifier: boon-of-spell-recall
+  advancement:
+    - _id: zNqJRAI2ON8SRu40
+      type: AbilityScoreImprovement
+      configuration:
+        cap: 1
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked:
+          - str
+          - dex
+          - con
+        points: 1
+      value:
+        type: asi
+      level: 0
+      title: ''
+      hint: ''
+  cover: null
+  crewed: false
+_id: phbBoonofSpellRe
+type: feat
+img: icons/sundries/gaming/dice-runed-brown.webp
+effects: []
+folder: 7zo2bljGLQY3uwXI
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745522919901
+  modifiedTime: 1745712692794
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbBoonofSpellRe'

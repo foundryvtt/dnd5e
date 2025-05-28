@@ -1,0 +1,127 @@
+_id: phbCleric0000000
+name: Cleric
+pages:
+  - sort: 100000
+    name: Cleric
+    type: class
+    _id: acPyA6A4DQBSnuZB
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbclcCleric0000
+      description:
+        value: >-
+          <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbclcCleric0000
+          inline classes="free-rules-embed"]</p> <h2>Becoming a Cleric
+          …</h2><h3>As a Level 1 Character</h3><p>Gain all the traits in the
+          Core Cleric Traits table.</p><ul><li><p>Gain the Cleric's level 1
+          features, which are listed in the Cleric Features
+          table.</p></li></ul><h3>As a Multiclass Character</h3><ul><li><p>Gain
+          the following traits from the Core Cleric Traits table: Hit Point Die
+          and training with Light and Medium armor and
+          Shields.</p></li><li><p>Gain the Cleric's level 1 features, which are
+          listed in the Cleric Features table. See the multiclassing rules in
+          chapter 2 to determine your available spell slots.</p></li></ul>
+        additionalHitPoints: ''
+        additionalTraits: ''
+        additionalEquipment: ''
+        subclass: >-
+          <p>A Cleric subclass is a specialization that grants you features at
+          certain levels, as specified in the subclass. The next page presents
+          the
+          @UUID[Compendium.dnd5e.content24.JournalEntry.phbCleric0000000.JournalEntryPage.aGYpgynZ3nkBCPaT]{Life
+          Domain} subclass.</p>
+      subclassItems: []
+      subclassHeader: ''
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745512236367
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCleric0000000.acPyA6A4DQBSnuZB'
+  - sort: 200000
+    name: Life Domain
+    type: subclass
+    _id: aGYpgynZ3nkBCPaT
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbclcLifeDomain
+      description:
+        value: >-
+          <blockquote><p>Soothe the Hurts of the World</p></blockquote><p>The
+          @UUID[Compendium.dnd5e.classes24.Item.phbclcLifeDomain]{Life Domain}
+          focuses on the positive energy that helps sustain all life in the
+          multiverse. Clerics who tap into this domain are masters of healing,
+          using that life force to cure many hurts.</p><p>Existence itself
+          relies on the positive energy associated with this domain, so a Cleric
+          of almost any religious tradition might choose it. This domain is
+          particularly associated with agricultural deities, gods of healing or
+          endurance, and gods of home and community. Religious orders of healing
+          also seek the magic of this domain.</p>
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1735934485376
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCleric0000000.aGYpgynZ3nkBCPaT'
+folder: 1A8WFP1GVZkKdxii
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 3
+    order: 500300
+    navigation:
+      previous: phbBard000000000
+      next: phbDruid00000000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1724425888588
+  modifiedTime: 1745677864652
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbCleric0000000'

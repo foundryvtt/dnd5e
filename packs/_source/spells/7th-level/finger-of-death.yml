@@ -1,0 +1,127 @@
+_id: HPvZm8YJO91k6Qdg
+name: Finger of Death
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You send negative energy coursing through a creature that you can see
+      within range, causing it searing pain. The target must make a Constitution
+      saving throw. It takes 7d8 + 30 necrotic damage on a failed save, or half
+      as much damage on a successful one.</p><p>A humanoid killed by this spell
+      rises at the start of your next turn as a Zombie that is permanently under
+      your command, following your verbal orders to the best of its ability.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 7
+  school: nec
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 7
+            denomination: 8
+            bonus: '30'
+            types:
+              - necrotic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: finger-of-death
+sort: 0
+flags: {}
+img: icons/magic/unholy/strike-beam-blood-large-red-purple.webp
+effects: []
+folder: irCSpQWIMtp978TA
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037352214
+  modifiedTime: 1725992718525
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!HPvZm8YJO91k6Qdg'

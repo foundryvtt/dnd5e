@@ -1,0 +1,146 @@
+_id: 9eOZDBImVKxbeOyZ
+name: Enhance Ability
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch a creature and bestow upon it a magical enhancement. Choose
+      one of the following effects; the target gains that effect until the spell
+      ends.</p>
+
+      <ul>
+
+      <li><strong>Bear's Endurance</strong>. The target has advantage on
+      Constitution Checks. It also gains 2d6 Temporary Hit Points, which are
+      lost when the spell ends.</li>
+
+      <li><strong>Bull's Strength</strong>. The target has advantage on Strength
+      Checks, and his or her carrying capacity doubles.</li>
+
+      <li><strong>Cat's Grace</strong>. The target has advantage on Dexterity
+      Checks. It also doesn't take damage from Falling 20 feet or less if it
+      isn't Incapacitated.</li>
+
+      <li><strong>Eagle's Splendor</strong>. The target has advantage on
+      Charisma Checks.</li>
+
+      <li><strong>Fox's Cunning</strong>. The target has advantage on
+      Intelligence Checks.</li>
+
+      <li><strong>Owl's Wisdom</strong>. The target has advantage on Wisdom
+      Checks.</li>
+
+      </ul>
+
+      <p><strong>At Higher Levels.</strong> When you cast this spell using a
+      spell slot of 3rd level or higher, you can target one additional creature
+      for each slot level above 2nd.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  materials:
+    value: Fur or a feather from a beast
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: 2
+        denomination: 6
+        bonus: ''
+        types:
+          - temphp
+        custom:
+          enabled: false
+          formula: ''
+        scaling:
+          mode: whole
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: enhance-ability
+sort: 0
+flags: {}
+img: icons/magic/control/buff-flight-wings-runes-purple.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037349410
+  modifiedTime: 1725992717633
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!9eOZDBImVKxbeOyZ'

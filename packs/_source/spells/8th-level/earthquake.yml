@@ -1,0 +1,142 @@
+_id: x5JNBSyIBBZsjcGT
+name: Earthquake
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create a seismic disturbance at a point on the ground that you can
+      see within range. For the Duration, an intense tremor rips through the
+      ground in a 100-foot-radius circle centered on that point and shakes
+      creatures and structures in contact with the ground in that
+      area.</p><p>The ground in the area becomes difficult terrain. Each
+      creature on the ground that is concentrating must make a Constitution
+      saving throw. On a failed save, the creature's Concentration is
+      broken.</p><p>When you cast this spell and at the end of each turn you
+      spend concentrating on it, each creature on the ground in the area must
+      make a Dexterity saving throw. On a failed save, the creature is knocked
+      prone.</p><p>This spell can have additional Effects depending on the
+      terrain in the area, as determined by the
+      DM.</p><p><strong>Fissures</strong>. Fissures open throughout the spell's
+      area at the start of your next turn after you cast the spell. A total of
+      1d6 such fissures open in locations chosen by the DM. Each is 1d10 × 10
+      feet deep, 10 feet wide, and extends from one edge of the spell's area to
+      the opposite side. A creature standing on a spot where a fissure opens
+      must succeed on a Dexterity saving throw or fall in. A creature that
+      successfully saves moves with the fissure's edge as it opens.</p><p>A
+      fissure that opens beneath a structure causes it to automatically collapse
+      (see below).</p><p><strong>Structures</strong>. The tremor deals 50
+      bludgeoning damage to any structure in contact with the ground in the area
+      when you cast the spell and at the start of each of your turns until the
+      spell ends. If a structure drops to 0 Hit Points, it collapses and
+      potentially damages nearby creatures. A creature within half the distance
+      of a structure's height must make a Dexterity saving throw. On a failed
+      save, the creature takes 5d6 bludgeoning damage, is knocked prone, and is
+      buried in the rubble, requiring a DC 20 Strength (Athletics) check as an
+      action to escape. The DM can adjust the DC higher or lower, depending on
+      the Nature of the rubble. On a successful save, the creature takes half as
+      much damage and doesn't fall prone or become buried.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: radius
+      size: '100'
+      contiguous: false
+  range:
+    value: '500'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 8
+  school: evo
+  materials:
+    value: A pinch of dirt, a piece of rock, and a lump of clay
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: earthquake
+sort: 0
+flags: {}
+img: icons/magic/earth/projectile-spiked-stone-boulder-orange.webp
+effects: []
+folder: x1XTiOgx4DJ34wc5
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037366644
+  modifiedTime: 1725992723440
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!x5JNBSyIBBZsjcGT'

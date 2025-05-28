@@ -1,0 +1,163 @@
+_id: phbEvilAndGoodPr
+name: Protection from Evil and Good
+type: spell
+img: icons/magic/symbols/fleur-de-lis-yellow.webp
+system:
+  description:
+    value: >-
+      <div><p>Until the spell ends, one willing creature you touch is protected
+      against creatures that are Aberrations, Celestials, Elementals, Fey,
+      Fiends, or Undead. The protection grants several benefits. Creatures of
+      those types have Disadvantage on attack rolls against the target. The
+      target also can't be possessed by or gain the &amp;Reference[Charmed
+      apply=false] or &amp;Reference[Frightened apply=false] conditions from
+      them. If the target is already possessed, Charmed, or Frightened by such a
+      creature, the target has Advantage on any new saving throw against the
+      relevant effect.</p></div>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: willing
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 1
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a flask of Holy Water worth 25+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    zFTMr0vFdY214UIY:
+      type: utility
+      _id: zFTMr0vFdY214UIY
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 0WW6DMPuabIZh1Tv
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: protection-from-evil-and-good
+effects:
+  - name: Protected
+    img: icons/magic/holy/yin-yang-balance-symbol.webp
+    origin: Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr
+    transfer: false
+    _id: 0WW6DMPuabIZh1Tv
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Creatures of those types have Disadvantage on attack rolls against the
+      target. The target also can’t be possessed by or gain the
+      &amp;Reference[Charmed apply=false] or &amp;Reference[Frightened
+      apply=false] conditions from them. </p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725635400711
+      modifiedTime: 1725636519933
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbEvilAndGoodPr.0WW6DMPuabIZh1Tv'
+folder: pBaAAtXBCq9FVEnL
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425939311
+  modifiedTime: 1745256784462
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100782
+ownership:
+  default: 0
+_key: '!items!phbEvilAndGoodPr'

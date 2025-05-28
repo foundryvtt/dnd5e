@@ -1,0 +1,335 @@
+_id: dmgCollapsingRoo
+name: Collapsing Roof
+type: equipment
+img: icons/environment/settlement/building-rubble.webp
+system:
+  activities:
+    oNEESoDpuiCqNDGe:
+      type: save
+      name: Trigger (1-4)
+      _id: oNEESoDpuiCqNDGe
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 10
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '13'
+    5tvvSAOcSKfMlj3Q:
+      type: save
+      name: Trigger (5-10)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 10
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      _id: 5tvvSAOcSKfMlj3Q
+    r2gpuz4Sm0Fu6MWf:
+      type: save
+      name: Trigger (11-16)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 10
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '17'
+      _id: r2gpuz4Sm0Fu6MWf
+    aCNzKv94dibiZHeS:
+      type: save
+      name: Trigger (17-20)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 18
+            denomination: 10
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '19'
+      _id: aCNzKv94dibiZHeS
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Deadly Trap (Levels 1–4)</em></p><p><strong>Trigger:</strong>
+      A creature crosses a trip wire</p><p><strong>Duration:</strong>
+      Instantaneous</p><p>This trap uses a trip wire to collapse an unstable
+      section of ceiling. The trip wire is 3 inches off the ground and stretches
+      between two weak supports that topple when the trip wire is
+      pulled.</p><p>The first creature that crosses the trip wire causes the
+      supports to topple and the unstable section of ceiling to collapse. Each
+      creature beneath the unstable section of ceiling must succeed on a DC 13
+      Dexterity saving throw, taking 11 (2d10) Bludgeoning damage on a failed
+      save or half as much damage on a successful one. Rubble from the collapse
+      turns the trapped area into &amp;Reference[Difficult
+      Terrain].</p><p><em><strong>Detect and Disarm.</strong></em> As a Search
+      action, a creature can examine the trapped area and make a [[/check prc
+      11]] check, detecting the trip wire and the unstable section of ceiling on
+      a successful check. Once detected, the trip wire can be easily cut or
+      avoided (no ability check required).</p><p><em><strong>At Higher
+      Levels.</strong></em> You can scale the trap for higher levels by
+      increasing the damage and the save DC, as shown in the following
+      table.</p><table><thead><tr><th><p>Levels</p></th><th><p>Bludgeoning
+      Damage</p></th><th><p>Save
+      DC</p></th></tr></thead><tbody><tr><td><p>5–10</p></td><td><p>22
+      (4d10)</p></td><td><p>15</p></td></tr><tr><td><p>11–16</p></td><td><p>55
+      (10d10)</p></td><td><p>17</p></td></tr><tr><td><p>17–20</p></td><td><p>99
+      (18d10)</p></td><td><p>19</p></td></tr></tbody></table></div>
+    chat: ''
+  identifier: collapsing-roof
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  properties: []
+  strength: null
+  proficient: null
+effects: []
+folder: 8wnVMAA0qwPzQVxS
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730831452785
+  modifiedTime: 1740680118022
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgCollapsingRoo'

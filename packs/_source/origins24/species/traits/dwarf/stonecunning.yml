@@ -1,0 +1,151 @@
+name: Stonecunning
+system:
+  description:
+    value: >-
+      <p>As a Bonus Action, you gain &amp;Reference[Tremorsense] with a range of
+      60 feet for 10 minutes. You must be on a stone surface or touching a stone
+      surface to use this Tremorsense. The stone can be natural or worked. You
+      can use this Bonus Action a number of times equal to your Proficiency
+      Bonus, and you regain all expended uses when you finish a Long
+      Rest.</p><section class="secret"
+      id="secret-7BtT80083mC3Eavg"><p><strong>Foundry Note</strong></p><p>This
+      feature includes the limited uses and an Active Effect that grants you the
+      60 feet of Tremorsense. It does not automatically update your Token's
+      vision settings.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '@prof'
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Dwarf
+  activities:
+    NTjnXm1AYqdOUJOB:
+      type: utility
+      name: Stonecunning
+      _id: NTjnXm1AYqdOUJOB
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '10'
+      effects:
+        - _id: SAbuNo2AO3XXtkdv
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/items/tool.svg
+  enchant: {}
+  identifier: stonecunning
+_id: phbsptStonecunni
+type: feat
+folder: R0KprZdOrRDNsTBv
+img: icons/skills/trades/construction-mason-stonecutter-sculpture.webp
+effects:
+  - name: Stonecunning
+    img: icons/skills/trades/construction-mason-stonecutter-sculpture.webp
+    origin: Compendium.dnd5e.origins24.Item.phbsptStonecunni
+    transfer: false
+    _id: SAbuNo2AO3XXtkdv
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.senses.tremorsense
+        mode: 2
+        value: '60'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsptStonecunni.SAbuNo2AO3XXtkdv'
+sort: 100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866718338
+  modifiedTime: 1745256777763
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsptStonecunni'

@@ -1,0 +1,125 @@
+_id: dmgCircletOfBlas
+name: Circlet of Blasting
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/finger/ring-cabochon-notched-gold-green.webp
+system:
+  activities:
+    r0b4ZTxnsPibvfE1:
+      type: cast
+      _id: r0b4ZTxnsPibvfE1
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: 5
+          save: null
+          override: true
+        level: '2'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplScorchingR
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Uncommon</em></p></div><p>While wearing this
+      circlet, you can cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScorchingR]{Scorching
+      Ray}</em> with it (+5 to hit). The circlet can't cast this spell again
+      until the next dawn.</p>
+    chat: ''
+  identifier: circlet-of-blasting
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.2
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7400000
+ownership:
+  default: 0
+_key: '!items!dmgCircletOfBlas'

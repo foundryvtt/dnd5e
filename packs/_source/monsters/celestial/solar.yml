@@ -1,0 +1,2932 @@
+_id: lOYt73eaJojBDxAV
+name: Solar
+type: npc
+img: null
+system:
+  abilities:
+    str:
+      value: 26
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    dex:
+      value: 22
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    con:
+      value: 26
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    int:
+      value: 25
+      proficient: 1
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    wis:
+      value: 25
+      proficient: 1
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    cha:
+      value: 30
+      proficient: 1
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+  attributes:
+    ac:
+      flat: 21
+      calc: natural
+      formula: ''
+    hp:
+      value: 243
+      max: 243
+      temp: null
+      tempmax: null
+      formula: 18d10 + 144
+    init:
+      ability: ''
+      bonus: '0'
+      roll:
+        min: null
+        max: null
+        mode: 0
+    movement:
+      burrow: 0
+      climb: 0
+      fly: 150
+      swim: 0
+      walk: 50
+      units: ft
+      hover: false
+    attunement:
+      max: 3
+    senses:
+      darkvision: 0
+      blindsight: 0
+      tremorsense: 0
+      truesight: 120
+      units: ft
+      special: ''
+    spellcasting: cha
+    exhaustion: 0
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+    hd:
+      spent: 0
+    death:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      success: 0
+      failure: 0
+  details:
+    biography:
+      value: ''
+      public: ''
+    alignment: Lawful Good
+    race: null
+    type:
+      value: celestial
+      subtype: ''
+      swarm: ''
+      custom: ''
+    environment: ''
+    cr: 21
+    spellLevel: 0
+    ideal: ''
+    bond: ''
+    flaw: ''
+  traits:
+    size: lg
+    di:
+      value:
+        - necrotic
+        - poison
+      bypasses: []
+      custom: ''
+    dr:
+      value:
+        - bludgeoning
+        - piercing
+        - radiant
+        - slashing
+      bypasses:
+        - mgc
+      custom: ''
+    dv:
+      value: []
+      bypasses: []
+      custom: ''
+    ci:
+      value:
+        - charmed
+        - exhaustion
+        - frightened
+        - poisoned
+      custom: ''
+    languages:
+      value:
+        - ALL
+      custom: ''
+      communication:
+        telepathy:
+          value: 120
+          units: ft
+    dm:
+      amount: {}
+      bypasses: []
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  skills:
+    acr:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ani:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    arc:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ath:
+      value: 0
+      ability: str
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    dec:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    his:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ins:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    itm:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    inv:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    med:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    nat:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prc:
+      value: 1
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prf:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    per:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    rel:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    slt:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ste:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    sur:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+  spells:
+    spell1:
+      value: 0
+      override: null
+    spell2:
+      value: 0
+      override: null
+    spell3:
+      value: 0
+      override: null
+    spell4:
+      value: 0
+      override: null
+    spell5:
+      value: 0
+      override: null
+    spell6:
+      value: 0
+      override: null
+    spell7:
+      value: 0
+      override: null
+    spell8:
+      value: 0
+      override: null
+    spell9:
+      value: 0
+      override: null
+    pact:
+      value: 0
+      override: null
+    spell0:
+      value: 0
+      override: null
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  resources:
+    legact:
+      value: 3
+      max: 3
+    legres:
+      value: 0
+      max: 0
+    lair:
+      value: false
+      initiative: null
+  tools: {}
+  source:
+    custom: ''
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 1
+    rules: '2014'
+prototypeToken:
+  name: Solar
+  displayName: 0
+  actorLink: false
+  width: 2
+  height: 2
+  lockRotation: false
+  rotation: 0
+  disposition: -1
+  displayBars: 0
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  flags: {}
+  randomImg: false
+  alpha: 1
+  light:
+    alpha: 1
+    angle: 360
+    bright: 0
+    coloration: 1
+    dim: 0
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      speed: 5
+      intensity: 5
+      type: null
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+    attenuation: 0.5
+    color: null
+    negative: false
+    priority: 0
+  texture:
+    src: null
+    tint: '#ffffff'
+    scaleX: 2
+    scaleY: 2
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    alphaThreshold: 0.75
+  sight:
+    angle: 360
+    enabled: false
+    range: 120
+    brightness: 1
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  appendNumber: false
+  prependAdjective: false
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 0
+    subject:
+      scale: 1
+      texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
+items:
+  - _id: zkNT86Xasjyzk8Df
+    name: Angelic Weapons
+    type: feat
+    img: icons/magic/fire/dagger-rune-enchant-flame-strong-blue-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>The solar's weapon attacks are magical. When the solar hits with
+          any weapon, the weapon deals an extra 6d8 radiant damage (included in
+          the attack).</p>
+        chat: >-
+          <p>The solar's weapon attacks are magical. When the solar hits with
+          any weapon, the weapon deals extra <em>radiant damage</em> (included
+          in the attack).</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: angelic-weapons
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.cz1LUaiXG8GshgU9
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745445299931
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.zkNT86Xasjyzk8Df'
+  - _id: T8xqterWWFewCoot
+    name: Divine Awareness
+    type: feat
+    img: icons/magic/perception/third-eye-blue-red.webp
+    system:
+      description:
+        value: <p>The solar knows if it hears a lie.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: divine-awareness
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.lOJK48AtlIcfYPPB
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.T8xqterWWFewCoot'
+  - _id: N5YFwsrzGuUFrblp
+    name: Flying Sword
+    type: feat
+    img: icons/weapons/swords/sword-runed-glowing.webp
+    system:
+      description:
+        value: >-
+          <p>The solar releases its greatsword to hover magically in an
+          unoccupied space within 5 ft. of it. If the solar can see the sword,
+          the solar can mentally command it as a bonus action to fly up to 50
+          ft. and either make one attack against a target or return to the
+          solar's hands. If the hovering sword is targeted by any effect, the
+          solar is considered to be holding it. The hovering sword falls if the
+          solar dies.</p>
+        chat: >-
+          <p>The solar releases its greatsword to hover magically in an
+          unoccupied space within <strong>5 ft.</strong> of it. If the hovering
+          sword is targeted by any effect, the solar is considered to be holding
+          it. </p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: flying-sword
+    effects: []
+    folder: null
+    sort: 400000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Ouvju0Y3SoYb5EMR
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745445386450
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.N5YFwsrzGuUFrblp'
+  - _id: BqJjoHBgnTDTcLbB
+    name: Healing Touch
+    type: feat
+    img: icons/magic/light/explosion-star-glow-blue-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The solar touches another creature. The target magically regains 40
+          ([[/heal]]{8d8 + 4}) hit points and is freed from any curse, disease,
+          poison, blindness, or deafness.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: '4'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: heal
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: '1'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          healing:
+            number: 8
+            denomination: 8
+            bonus: '4'
+            types:
+              - healing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: healing-touch
+    effects: []
+    folder: null
+    sort: 500000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.r3Ugp8f5Ckw2EUHL
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745445386450
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.BqJjoHBgnTDTcLbB'
+  - _id: hWnnOw9zwmvWvFT7
+    name: Innate Spellcasting
+    type: feat
+    img: icons/magic/light/projectiles-star-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The solar's spell casting ability is Charisma (spell save DC 25).
+          It can innately cast the following spells, requiring no material
+          components:</p>
+
+          <p><strong>At will:</strong> [[/item .Mzh95utKDPIrjiH8]]{detect evil
+          and good}, [[/item .1N8dDMMgZ1h1YJ3B]]{invisibility} (self only)</p>
+
+          <p><strong>3/day each:</strong> [[/item .dLJhxDfeyOsc3zsY]]{blade
+          barrier}, [[/item .TkJ8Wtg1L7TZtspm]]{dispel evil and good}, [[/item
+          .jhhT9PsHy5A7EojO]]{resurrection}</p>
+
+          <p><strong>1/day each:</strong> [[/item .d54VDyFulD9xxY7J]]{commune},
+          [[/item .ZPd73HtKF3At11jh]]{control weather}</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: innate-spellcasting
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745447015892
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.hWnnOw9zwmvWvFT7'
+  - _id: WYt9oaIl8PZrMDNl
+    name: Magic Resistance
+    type: feat
+    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The solar has advantage on saving throws against spells and other
+          magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: magic-resistance
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745445309586
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.WYt9oaIl8PZrMDNl'
+  - _id: H0o9gjKN8xSdBHdB
+    name: Multiattack
+    type: feat
+    img: icons/skills/melee/blade-tips-triple-steel.webp
+    system:
+      description:
+        value: >-
+          <p>The solar makes two [[/item .QssrfCioglFdfd8I]]{greatsword}
+          attacks.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: multiattack
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745445387393
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.H0o9gjKN8xSdBHdB'
+  - _id: QssrfCioglFdfd8I
+    name: Greatsword
+    type: weapon
+    img: icons/weapons/swords/greatsword-guard-gem-blue.webp
+    system:
+      description:
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
+        chat: <p>The Solar attacks with its Greatsword.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 6
+        units: lb
+      price:
+        value: 50
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: null
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 4
+          denomination: 6
+          bonus: ''
+          types:
+            - slashing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties:
+        - hvy
+        - two
+      proficient: 1
+      unidentified:
+        description: ''
+      type:
+        value: martialM
+        baseItem: greatsword
+      container: null
+      crewed: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: str
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - number: 6
+                denomination: 8
+                bonus: ''
+                types:
+                  - radiant
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: null
+                  formula: ''
+          sort: 0
+      attuned: false
+      ammunition: {}
+      magicalBonus: null
+      identifier: greatsword
+    effects: []
+    folder: null
+    sort: 100000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.items.xMkP8BmFzElcsMaR
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745445386450
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.QssrfCioglFdfd8I'
+  - _id: BSLTe0yfltAnguOT
+    name: Slaying Longbow
+    type: weapon
+    img: icons/weapons/bows/longbow-leather-green.webp
+    system:
+      description:
+        value: >-
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature that has 100 hit points or fewer, it must succeed on a
+          [[/save]] saving throw or die.</p>
+        chat: >-
+          <p>The Solar attacks with its Slaying Longbow. If the target is a
+          creature that has 190 hit points or fewer, it must make a
+          <strong>Constitution</strong> saving throw.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 2
+        units: lb
+      price:
+        value: 350
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: 150
+        long: 600
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 2
+          denomination: 8
+          bonus: ''
+          types:
+            - piercing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties:
+        - amm
+        - hvy
+        - two
+      proficient: 1
+      unidentified:
+        description: ''
+      type:
+        value: martialR
+        baseItem: ''
+      container: null
+      crewed: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '150'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: dex
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ranged
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - number: 6
+                denomination: 8
+                bonus: ''
+                types:
+                  - radiant
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: null
+                  formula: ''
+          sort: 0
+        dnd5eactivity100:
+          _id: dnd5eactivity100
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '150'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: con
+            dc:
+              calculation: ''
+              formula: '15'
+          sort: 0
+      attuned: false
+      ammunition:
+        type: ''
+      magicalBonus: null
+      identifier: slaying-longbow
+      mastery: ''
+    effects: []
+    folder: null
+    sort: 300000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745445386450
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.BSLTe0yfltAnguOT'
+  - _id: sZjcCRCNcf6m4VoK
+    name: Legendary Actions
+    type: feat
+    img: icons/magic/light/hand-sparks-glow-yellow.webp
+    system:
+      description:
+        value: <p>[[lookup @resources.legact.label]]</p>
+        chat: <p>The solar can take 3 legendary actions.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: legendary-actions
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745445290948
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.sZjcCRCNcf6m4VoK'
+  - _id: H4Qnl5aNwIuOiKvm
+    name: Teleport
+    type: feat
+    img: icons/magic/symbols/runes-star-pentagon-magenta.webp
+    system:
+      description:
+        value: >-
+          <p>The solar magically teleports, along with any equipment it is
+          wearing or carrying, up to 120 feet to an unoccupied space it can
+          see.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: legendary
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '120'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: teleport
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745445585072
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.H4Qnl5aNwIuOiKvm'
+  - _id: hvLibxV3shPORnBB
+    name: Searing Burst
+    type: feat
+    img: icons/magic/light/explosion-star-glow-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>The solar emits magical, divine energy. Each creature of its choice
+          in a 10-foot radius must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
+        chat: >-
+          <p>The solar emits magical, divine energy. Each creature of its choice
+          in a 10-foot radius must make a <strong>Dexterity</strong> saving
+          throw.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity100:
+          _id: dnd5eactivity100
+          type: save
+          activation:
+            type: legendary
+            value: 2
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: radius
+              size: '10'
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts:
+              - number: 4
+                denomination: 6
+                bonus: ''
+                types:
+                  - fire
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: null
+                  formula: ''
+              - number: 4
+                denomination: 6
+                bonus: ''
+                types:
+                  - radiant
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: null
+                  formula: ''
+          save:
+            ability: dex
+            dc:
+              calculation: ''
+              formula: '23'
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: searing-burst
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.5OYruoI92fxTOLts
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745445607675
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.hvLibxV3shPORnBB'
+  - _id: iXcyU8grGuxZbkYJ
+    name: Blinding Gaze
+    type: feat
+    img: icons/magic/perception/third-eye-blue-red.webp
+    system:
+      description:
+        value: >-
+          <p>The solar targets one creature it can see within 30 feet of it. If
+          the target can see it, the target must succeed on a [[/save]] saving
+          throw or be &amp;Reference[blinded apply=false] until magic such as
+          <em>lesser restoration</em> spell removes the blindness.</p>
+        chat: >-
+          <p>The solar targets one creature it can see within 30 feet of it. If
+          the target can see it, the target must succeed on a Constitution
+          saving throw or be blinded.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity100:
+          _id: dnd5eactivity100
+          type: save
+          activation:
+            type: legendary
+            value: 3
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects:
+            - _id: CPMieBYNggqmHRra
+          range:
+            value: '30'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: '1'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: con
+            dc:
+              calculation: ''
+              formula: '15'
+          sort: 0
+          name: ''
+          img: ''
+          appliedEffects:
+            - CPMieBYNggqmHRra
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: blinding-gaze
+    effects:
+      - name: Blinded
+        img: icons/magic/perception/third-eye-blue-red.webp
+        origin: Compendium.dnd5e.monsters.Actor.lOYt73eaJojBDxAV.Item.iXcyU8grGuxZbkYJ
+        _id: CPMieBYNggqmHRra
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: >-
+          <p>The target is blinded until magic such as the <em>lesser
+          restoration</em> spell removes the blindness.</p>
+        tint: '#ffffff'
+        transfer: true
+        statuses:
+          - blinded
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: 1745445499978
+          modifiedTime: 1745445558454
+          lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
+        _key: >-
+          !actors.items.effects!lOYt73eaJojBDxAV.iXcyU8grGuxZbkYJ.CPMieBYNggqmHRra
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.8C6hkMXWLeymmJ5C
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745445566448
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.iXcyU8grGuxZbkYJ'
+  - _id: Mzh95utKDPIrjiH8
+    name: Detect Evil and Good
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>For the duration, you know if there is an aberration, celestial,
+          elemental, fey, fiend, or undead within 30 feet of you, as well as
+          where the creature is located. Similarly, you know if there is a place
+          or object within 30 feet of you that has been magically consecrated or
+          desecrated.</p><p>The spell can penetrate most barriers, but it is
+          blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of
+          lead, or 3 feet of wood or dirt.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: radius
+          size: '30'
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: div
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: detect-evil-and-good
+    sort: 0
+    flags: {}
+    img: icons/magic/air/air-burst-spiral-blue-gray.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.Mzh95utKDPIrjiH8
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.Mzh95utKDPIrjiH8'
+  - _id: 1N8dDMMgZ1h1YJ3B
+    name: Invisibility
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>A creature you touch becomes invisible until the spell ends.
+          Anything the target is wearing or carrying is invisible as long as it
+          is on the target's person. The spell ends for a target that attacks or
+          casts a spell.</p><p><strong>At Higher Levels.</strong> When you cast
+          this spell using a spell slot of 3rd level or higher, you can target
+          one additional creature for each slot level above 2nd.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 2
+      school: ill
+      materials:
+        value: An eyelash encased in gum arabic
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: invisibility
+    sort: 0
+    flags: {}
+    img: icons/magic/air/fog-gas-smoke-dense-gray.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.1N8dDMMgZ1h1YJ3B'
+  - _id: dLJhxDfeyOsc3zsY
+    name: Blade Barrier
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You create a vertical wall of whirling, razor-sharp blades made of
+          magical energy. The wall appears within range and lasts for the
+          duration. You can make a straight wall up to 100 feet long, 20 feet
+          high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20
+          feet high, and 5 feet thick. The wall provides three-quarters cover to
+          creatures behind it, and its space is difficult terrain.</p><p>When a
+          creature enters the wall's area for the first time on a turn or starts
+          its turn there, the creature must make a Dexterity saving throw. On a
+          failed save, the creature takes 6d10 slashing damage. On a successful
+          save, the creature takes half as much damage.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: wall
+          size: '100'
+          contiguous: false
+      range:
+        value: '90'
+        units: ft
+      uses:
+        max: '3'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 6
+      school: evo
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts:
+              - number: 6
+                denomination: 10
+                bonus: ''
+                types:
+                  - slashing
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: ''
+                  number: null
+                  formula: ''
+          save:
+            ability: dex
+            dc:
+              calculation: spellcasting
+              formula: '25'
+          sort: 0
+      identifier: blade-barrier
+    sort: 0
+    flags: {}
+    img: icons/magic/light/projectile-beams-salvo-white.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.dLJhxDfeyOsc3zsY
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.dLJhxDfeyOsc3zsY'
+  - _id: TkJ8Wtg1L7TZtspm
+    name: Dispel Evil and Good
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>Shimmering energy surrounds and protects you from fey, Undead, and
+          creatures originating from Beyond the Material Plane. For the
+          Duration, Celestials, Elementals, fey, Fiends, and undead have
+          disadvantage on Attack rolls against you.</p><p>You can end the spell
+          early by using either of the following special
+          functions.</p><p><strong>Break Enchantment</strong>. As your action,
+          you touch a creature you can reach that is Charmed, Frightened, or
+          possessed by a Celestial, an elemental, a fey, a fiend, or an Undead.
+          The creature you touch is no longer charmed, frightened, or possessed
+          by such creatures.</p><p><strong>Dismissal</strong>. As your action,
+          make a melee spell Attack against a Celestial, an elemental, a fey, a
+          fiend, or an Undead you can reach. On a hit, you attempt to drive the
+          creature back to its home plane. The creature must succeed on a
+          Charisma saving throw or be sent back to its home plane (if it isn't
+          there already). If they aren't on their home plane, undead are sent to
+          the Shadowfell, and fey are sent to the Feywild.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: self
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: '3'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 5
+      school: abj
+      materials:
+        value: Holy water or powdered silver and iron
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: spell
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 0
+        dnd5eactivity100:
+          _id: dnd5eactivity100
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: cha
+            dc:
+              calculation: spellcasting
+              formula: '25'
+          sort: 0
+      identifier: dispel-evil-and-good
+    sort: 0
+    flags: {}
+    img: icons/magic/air/air-burst-spiral-large-blue.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.TkJ8Wtg1L7TZtspm
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.TkJ8Wtg1L7TZtspm'
+  - _id: jhhT9PsHy5A7EojO
+    name: Resurrection
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You touch a dead creature that has been dead for no more than a
+          century, that didn't die of old age, and that isn't undead. If its
+          soul is free and willing, the target returns to life with all its hit
+          points.</p><p>This spell neutralizes any poisons and cures normal
+          diseases afflicting the creature when it died. It doesn't, however,
+          remove magical diseases, curses, and the like; if such effects aren't
+          removed prior to casting the spell, they afflict the target on its
+          return to life.</p><p>This spell closes all mortal wounds and restores
+          any missing body parts.</p><p>Coming back from the dead is an ordeal.
+          The target takes a −4 penalty to all attack rolls, saving throws, and
+          ability checks. Every time the target finishes a long rest, the
+          penalty is reduced by 1 until it disappears.</p><p>Casting this spell
+          to restore life to a creature that has been dead for one year or
+          longer taxes you greatly. Until you finish a long rest, you can't cast
+          spells again, and you have disadvantage on all attack rolls, ability
+          checks, and saving throws.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: hour
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: spec
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: '3'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 7
+      school: nec
+      materials:
+        value: A diamond worth at least 1,000 gp, which the spell consumes
+        consumed: true
+        cost: 1000
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: resurrection
+    sort: 0
+    flags: {}
+    img: icons/magic/life/heart-cross-strong-flame-blue.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.jhhT9PsHy5A7EojO
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.jhhT9PsHy5A7EojO'
+  - _id: d54VDyFulD9xxY7J
+    name: Commune
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You contact your deity or a divine proxy and ask up to three
+          questions that can be answered with a yes or no. You must ask your
+          questions before the spell ends. You receive a correct answer for each
+          question.</p><p>Divine beings aren't necessarily omniscient, so you
+          might receive "unclear" as an answer if a question pertains to
+          information that lies beyond the deity's knowledge. In a case where a
+          one-word answer could be misleading or contrary to the deity's
+          interests, the DM might offer a short phrase as an answer
+          instead.</p><p>If you cast the spell two or more times before
+          finishing your next long rest, there is a cumulative 25 percent chance
+          for each casting after the first that you get no answer. The DM makes
+          this roll in secret.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: minute
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: self
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: '1'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 5
+      school: div
+      materials:
+        value: Incense and a vial of holy or unholy water
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - ritual
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: commune
+    sort: 0
+    flags: {}
+    img: icons/magic/control/debuff-energy-hold-levitate-blue-yellow.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.d54VDyFulD9xxY7J
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.d54VDyFulD9xxY7J'
+  - _id: ZPd73HtKF3At11jh
+    name: Control Weather
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You take control of the weather within 5 miles of you for the
+          duration. You must be outdoors to cast this spell. Moving to a place
+          where you don't have a clear path to the sky ends the spell
+          early.</p><p>When you cast the spell, you change the current weather
+          conditions, which are determined by the DM based on the climate and
+          season. You can change precipitation, temperature, and wind. It takes
+          1d4 x 10 minutes for the new conditions to take effect. Once they do
+          so, you can change the conditions again. When the spell ends, the
+          weather gradually returns to normal.</p><p>When you change the weather
+          conditions, find a current condition on the following tables and
+          change its stage by one, up or down. When changing the wind, you can
+          change its direction.</p><p><strong>Conditions</strong></p>
+
+          <ol>
+
+          <li>Clear</li>
+
+          <li>Light clouds</li>
+
+          <li>Overcast or ground fog</li>
+
+          <li>Rain, hail, or snow</li>
+
+          <li>Torrential rain, driving hail, or blizzard</li>
+
+          </ol>
+
+          <p><strong>Temperature</strong></p>
+
+          <ol>
+
+          <li>Unbearable heat</li>
+
+          <li>Hot</li>
+
+          <li>Warm</li>
+
+          <li>Cool</li>
+
+          <li>Cold</li>
+
+          <li>Arctic cold</li>
+
+          </ol>
+
+          <p><strong>Wind</strong></p>
+
+          <ol>
+
+          <li>Calm</li>
+
+          <li>Moderate wind</li>
+
+          <li>Strong wind</li>
+
+          <li>Gale</li>
+
+          <li>Storm</li>
+
+          </ol>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: minute
+        condition: ''
+        value: 10
+      duration:
+        value: '8'
+        units: hour
+      target:
+        affects:
+          choice: false
+        template:
+          units: mi
+          type: radius
+          size: '5'
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: '1'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 8
+      school: trs
+      materials:
+        value: Burning incense and bits of earth and wood mixed in water.
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: control-weather
+    sort: 0
+    flags: {}
+    img: icons/magic/air/wind-tornado-cyclone-white.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.ZPd73HtKF3At11jh
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!lOYt73eaJojBDxAV.ZPd73HtKF3At11jh'
+effects: []
+folder: pCy5ieJezFRCg9A0
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726171253472
+  modifiedTime: 1744916056968
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!actors!lOYt73eaJojBDxAV'

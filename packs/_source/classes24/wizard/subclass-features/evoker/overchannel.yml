@@ -1,0 +1,192 @@
+_id: phbwzdOverchanne
+name: Overchannel
+type: feat
+folder: ZHJ6ibjd1J4CSyNw
+img: icons/magic/acid/projectile-faceted-glob.webp
+system:
+  description:
+    value: >-
+      <p>You can increase the power of your spells. When you cast a Wizard spell
+      with a spell slot of levels 1–5 that deals damage, you can deal maximum
+      damage with that spell on the turn you cast it.</p><p>The first time you
+      do so, you suffer no adverse effect. If you use this feature again before
+      you finish a Long Rest, you take 2d12 Necrotic damage for each level of
+      the spell slot immediately after you cast it. This damage ignores
+      Resistance and Immunity.</p><p>Each time you use this feature again before
+      finishing a Long Rest, the Necrotic damage per spell level increases by
+      1d12.</p><section class="secret"
+      id="secret-Uh2cD0di8YB1gKPG"><p><strong>Foundry Note</strong></p><p>This
+      feature has Limited Uses to track how many times it has been used to
+      automate the damage.</p><p>The <strong>First Use</strong> activity
+      includes one free activity use and restores all uses of the
+      feature.</p><p>The <strong>Second+ Use</strong> activity consumes a use
+      and increases the damage automatically and should be used for all
+      subsequent uses until you finish a Long Rest.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '20'
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 14
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    yPyi96Y94w5DannJ:
+      type: damage
+      _id: yPyi96Y94w5DannJ
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: >-
+          When you cast a Wizard spell with a spell slot of levels 1-5 that
+          deals damage
+      consumption:
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: -200000
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: true
+              formula: (2 + @item.uses.spent - 1)d12
+            number: 2
+            denomination: 12
+            bonus: ''
+            types:
+              - necrotic
+            scaling:
+              number: 1
+      name: Second+ Use
+    w09009Qtx2IuGeS9:
+      type: damage
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: >-
+          When you cast a Wizard spell with a spell slot of levels 1-5 that
+          deals damage
+      consumption:
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-20'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: -300000
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: ''
+            types: []
+            scaling:
+              number: 1
+      name: First Use
+      _id: w09009Qtx2IuGeS9
+  enchant: {}
+  identifier: overchannel
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866546265
+  modifiedTime: 1745256769214
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwzdOverchanne'

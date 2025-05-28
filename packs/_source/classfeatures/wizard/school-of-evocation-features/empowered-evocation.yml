@@ -1,0 +1,110 @@
+_id: 7O85kj6uDEG5NzUE
+name: Empowered Evocation
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 10th level, you can add your Intelligence modifier to one
+      damage roll of any wizard evocation spell you
+      cast.</p><blockquote></blockquote>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: School of Evocation 10
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: 'The bonus to one damage roll:'
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: null
+            denomination: null
+            bonus: ''
+            types: []
+            custom:
+              enabled: true
+              formula: '@mod'
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: empowered-evocation
+flags: {}
+img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+effects: []
+folder: YLWTEANVPKOUJNbs
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037380546
+  modifiedTime: 1725992287284
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!7O85kj6uDEG5NzUE'

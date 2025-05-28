@@ -1,0 +1,255 @@
+name: Chain
+system:
+  description:
+    value: >-
+      <p>As a Utilize action, you can wrap a Chain around an unwilling creature
+      within 5 feet of yourself that has the &amp;Reference[Grappled],
+      &amp;Reference[Incapacitated], or &amp;Reference[Restrained] condition if
+      you succeed on a DC 13 Strength (Athletics) check. If the creature's legs
+      are bound, the creature has the Restrained condition until it escapes.
+      Escaping the Chain requires the creature to make a successful DC 18
+      Dexterity (Acrobatics) check as an action. Bursting the Chain requires a
+      successful DC 20 Strength (Athletics) check as an action.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    autoDestroy: false
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    nkqvEiPdXCyiJ9ub:
+      type: check
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ft
+        special: ''
+        override: false
+        value: '5'
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: Has the Grappled, Incapacitated, or Restrained condition
+        prompt: false
+        override: false
+      check:
+        ability: ''
+        dc:
+          calculation: ''
+          formula: '13'
+        associated:
+          - ath
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: nkqvEiPdXCyiJ9ub
+      name: Wrap Chain Check
+      img: ''
+      appliedEffects: []
+    9eioXCinYhuRDmOd:
+      type: check
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+        value: ''
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: ''
+        dc:
+          calculation: ''
+          formula: '18'
+        associated:
+          - acr
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Escape Check
+      _id: 9eioXCinYhuRDmOd
+      img: ''
+      appliedEffects: []
+    Jg400eyFy9mMETQa:
+      type: check
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+        value: ''
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: ''
+        dc:
+          calculation: ''
+          formula: '20'
+        associated:
+          - ath
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Burst Chain Check
+      _id: Jg400eyFy9mMETQa
+      img: ''
+      appliedEffects: []
+  identifier: chain
+_id: phbagChain000000
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/tools/fasteners/chain-steel-grey.webp
+effects: []
+sort: 900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425907531
+  modifiedTime: 1745256811467
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagChain000000'

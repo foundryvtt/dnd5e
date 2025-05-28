@@ -1,0 +1,288 @@
+name: Heat Metal
+system:
+  description:
+    value: >-
+      <p>Choose a manufactured metal object, such as a metal weapon or a suit of
+      Heavy or Medium metal armor, that you can see within range. You cause the
+      object to glow red-hot. Any creature in physical contact with the object
+      takes 2d8 Fire damage when you cast the spell. Until the spell ends, you
+      can take a Bonus Action on each of your later turns to deal this damage
+      again if the object is within range.</p><p>If a creature is holding or
+      wearing the object and takes the damage from it, the creature must succeed
+      on a Constitution saving throw or drop the object if it can. If it doesn't
+      drop the object, it has Disadvantage on attack rolls and ability checks
+      until the start of your next turn.</p><p><strong>Using a Higher-Level
+      Spell Slot.</strong> The damage increases by 1d8 for each spell slot level
+      above 2.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: object
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a piece of iron and a flame
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: true
+      effects:
+        - _id: VVQbCUE5W44bF4QU
+          onSave: false
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: On Damage Save
+      img: ''
+      appliedEffects:
+        - VVQbCUE5W44bF4QU
+    2jWlvr2titPfBMEm:
+      type: damage
+      _id: 2jWlvr2titPfBMEm
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 8
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      name: Cast and Heat
+      img: ''
+      appliedEffects: []
+    YPEmwJHX7g68307N:
+      type: damage
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 8
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      name: Reheat
+      _id: YPEmwJHX7g68307N
+      img: systems/dnd5e/icons/svg/statuses/concentrating.svg
+      appliedEffects: []
+  identifier: heat-metal
+_id: phbsplHeatMetal0
+type: spell
+img: icons/magic/fire/flame-burning-chain.webp
+effects:
+  - name: Heated Metal
+    img: icons/magic/fire/flame-burning-chain.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplHeatMetal0
+    transfer: false
+    _id: VVQbCUE5W44bF4QU
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>If a creature is holding or wearing the object and takes the damage
+      from it, The creature must succeed on a [[/save ability=con format=long]]
+      or drop the object if it can. If it doesn’t drop the object, it has
+      Disadvantage on attack rolls and ability checks until the start of your
+      next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725651192762
+      modifiedTime: 1725651285907
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplHeatMetal0.VVQbCUE5W44bF4QU'
+folder: 3SjcO2acsFnWegp4
+sort: 2900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425958340
+  modifiedTime: 1745256794514
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplHeatMetal0'

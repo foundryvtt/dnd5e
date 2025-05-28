@@ -1,11 +1,12 @@
 <form id="{{ appId }}" data-level="{{ level }}" data-id="{{ advancement.id }}" data-type="{{ type }}">
-    <h3>{{{ this.title }}}</h3>
+    <h3>{{{ title }}}</h3>
     {{#if advancement.hint}}<p>{{ advancement.hint }}</p>{{/if}}
 
-    <ul class="ability-scores {{#if feat}}disabled{{/if}}">
+    {{#if showImprovement}}
+    <ul class="ability-scores {{#if lockImprovement}}disabled{{/if}}">
         {{#unless staticIncrease}}
         <label>
-            {{#if feat}}
+            {{#if lockImprovement}}
             {{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.LockedHint" }}
             {{else}}
             {{ pointsRemaining }}
@@ -17,23 +18,41 @@
         {{> "dnd5e.advancement-ability-score-control" this canAdjust=(not @root.staticIncrease) }}
         {{/each}}
     </ul>
+    {{/if}}
 
     {{#if advancement.allowFeat}}
-        <h3>{{ localize "DND5E.Feature.Feat.Label" }}</h3>
+    <div class="feat-section flexcol">
+        {{#if showImprovement}}<h3>{{ localize "DND5E.Feature.Feat.Label" }}</h3>{{/if}}
 
-        <div class="item-name flexrow drop-area {{#unless feat}}empty{{/unless}}">
+        {{#if showASIFeat}}
+        <div class="pill-lg {{#if lockImprovement}}locked{{/if}}">
+            <img class="gold-icon" src="icons/skills/melee/weapons-crossed-swords-white-blue.webp"
+                 alt="{{ localize 'DND5E.ADVANCEMENT.AbilityScoreImprovement.Feat.ASIName' }}">
+            <div class="name-stacked">
+                <div class="title">{{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.Feat.ASIName" }}</div>
+            </div>
+            <dnd5e-checkbox class="item-control" name="asi-selected" {{ checked feat.isASI }}
+                            {{ disabled lockImprovement }}></dnd5e-checkbox>
+        </div>
+        {{/if}}
+
+        {{#unless feat.isASI}}
+        <div class="pill-lg {{#unless feat}}roboto-upper empty{{/unless}}"
+             {{~#if feat}} data-uuid="{{ feat.uuid }}"{{else}} data-action="browse"{{/if}}>
             {{#if feat}}
-            <div class="item-image" style="background-image: url('{{ feat.img }}');"></div>
-            <h4>
-                <a data-uuid="{{ feat.uuid }}">{{ feat.name }}</a>
-            </h4>
-            <a class="item-control" data-action="delete" data-tooltip="DND5E.ItemDelete"
-               aria-label="{{ localize 'DND5E.ItemDelete' }}">
+            <img class="gold-icon" data-action="viewItem" src="{{ feat.img }}" alt="{{ feat.name }}">
+            <div class="name-stacked">
+                <div class="title">{{ feat.name }}</div>
+            </div>
+            <button type="button" class="unbutton control-button item-control" data-action="delete"
+                    data-tooltip aria-label="{{ localize 'DND5E.ItemDelete' }}">
                 <i class="fas fa-trash" inert></i>
-            </a>
+            </button>
             {{else}}
-            {{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.Feat.Hint" }}
+            {{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.Action.Select" }}
             {{/if}}
         </div>
+        {{/unless}}
+    </div>
     {{/if}}
 </form>

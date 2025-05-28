@@ -1,0 +1,132 @@
+_id: dLJhxDfeyOsc3zsY
+name: Blade Barrier
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create a vertical wall of whirling, razor-sharp blades made of
+      magical energy. The wall appears within range and lasts for the duration.
+      You can make a straight wall up to 100 feet long, 20 feet high, and 5 feet
+      thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5
+      feet thick. The wall provides three-quarters cover to creatures behind it,
+      and its space is difficult terrain.</p><p>When a creature enters the
+      wall's area for the first time on a turn or starts its turn there, the
+      creature must make a Dexterity saving throw. On a failed save, the
+      creature takes 6d10 slashing damage. On a successful save, the creature
+      takes half as much damage.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: wall
+      size: '100'
+      contiguous: false
+  range:
+    value: '90'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 6
+            denomination: 10
+            bonus: ''
+            types:
+              - slashing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: blade-barrier
+sort: 0
+flags: {}
+img: icons/magic/light/projectile-beams-salvo-white.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037361045
+  modifiedTime: 1725992721438
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dLJhxDfeyOsc3zsY'

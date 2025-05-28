@@ -1,0 +1,69 @@
+_id: phbpdnDevotionSp
+name: Oath of Devotion Spells
+type: feat
+folder: pDo2UCh4t1Z03F5z
+img: icons/magic/symbols/circled-gem-pink.webp
+system:
+  description:
+    value: >-
+      <p>The magic of your oath ensures you always have certain spells ready;
+      when you reach a Paladin level specified in the Oath of Devotion Spells
+      table, you thereafter always have the listed spells
+      prepared.</p><table><caption>Oath of Devotion
+      Spells</caption><thead><tr><td>Paladin
+      Level</td><td>Spells</td></tr></thead><tbody><tr><td>3</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr]{Protection
+      from Evil and Good},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplShieldofFa]{Shield of
+      Faith}</td></tr><tr><td>5</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplAid0000000]{Aid},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplZoneofTrut]{Zone of
+      Truth}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplBeaconofHo]{Beacon
+      of Hope}, @UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
+      Magic}</td></tr><tr><td>13</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplFreedomofM]{Freedom
+      of Movement},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplGuardianof]{Guardian of
+      Faith}</td></tr><tr><td>17</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommune000]{Commune},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFlameStrik]{Flame
+      Strike}</td></tr></tbody></table><section class="secret"
+      id="secret-BJb1nvUMxSS77zuz"><p><strong>Foundry Note</strong></p><p>The
+      spells will be automatically granted as you level up.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: oath-of-devotion-spells
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866569467
+  modifiedTime: 1745256763679
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbpdnDevotionSp'

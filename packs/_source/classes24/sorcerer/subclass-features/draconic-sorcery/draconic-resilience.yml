@@ -1,0 +1,135 @@
+_id: phbscrDraconicRe
+name: Draconic Resilience
+type: feat
+folder: wwMlXikGly63a6go
+img: icons/creatures/claws/claw-scaled-red.webp
+system:
+  description:
+    value: >-
+      <p>The magic in your body manifests physical traits of your draconic gift.
+      Your Hit Point maximum increases by 3, and it increases by 1 whenever you
+      gain another Sorcerer level.</p><p>Parts of you are also covered by
+      dragon-like scales. While you aren't wearing armor, your base Armor Class
+      equals 10 plus your Dexterity and Charisma modifiers.</p><section
+      class="secret" id="secret-uBlQVhOqmjWWiLc4"><p><strong>Foundry
+      Note</strong></p><p>This feature includes an Active Effect that
+      automatically increases your Hit Point maximum and sets up your Unarmored
+      Defense which can be disabled if you would prefer to use
+      armor.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: draconic-resilience
+effects:
+  - _id: ZoJYjZ3KGM30khz3
+    changes:
+      - key: system.attributes.ac.calc
+        mode: 5
+        value: unarmoredBard
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.classes24.Item.phbscrDraconicRe
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: 'Draconic Resilience: Armor'
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classfeatures.Item.SZbsNbaxFFGwBpNK.ActiveEffect.hEgUnQNVxtBo2zkK
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/creatures/claws/claw-scaled-red.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbscrDraconicRe.ZoJYjZ3KGM30khz3'
+  - changes:
+      - key: system.attributes.hp.bonuses.overall
+        mode: 2
+        value: '@classes.sorcerer.levels'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.classes24.Item.phbscrDraconicRe
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: 'Draconic Resilience: HP'
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classfeatures.Item.SZbsNbaxFFGwBpNK.ActiveEffect.hEgUnQNVxtBo2zkK
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/life/cross-area-circle-green-white.webp
+    type: base
+    system: {}
+    sort: 0
+    _id: vMrqtNbCcIgCcl1Q
+    _key: '!items.effects!phbscrDraconicRe.vMrqtNbCcIgCcl1Q'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866556244
+  modifiedTime: 1745256765328
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbscrDraconicRe'

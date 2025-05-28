@@ -1,0 +1,272 @@
+name: Manacles
+system:
+  description:
+    value: >-
+      <p>As a Utilize action, you can use Manacles to bind an unwilling Small or
+      Medium creature within 5 feet of yourself that has the
+      &amp;Reference[Grappled], &amp;Reference[Incapacitated], or
+      &amp;Reference[Restrained] condition if you succeed on a DC 13 Dexterity
+      (Sleight of Hand) check. While bound, a creature has Disadvantage on
+      attack rolls, and the creature is Restrained if the Manacles are attached
+      to a chain or hook that is fixed in place. Escaping the Manacles requires
+      a successful DC 20 Dexterity (Sleight of Hand) check as an action.
+      Bursting them requires a successful DC 25 Strength (Athletics) check as an
+      action.</p><p>Each set of Manacles comes with a key. Without the key, a
+      creature can use Thieves' Tools to pick the Manacles' lock with a
+      successful [[/tool thief dex 15]] check.</p>
+    chat: ''
+  price:
+    value: 2
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: false
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    LPW3NsIFCn3pYMjY:
+      type: check
+      name: Bind
+      _id: LPW3NsIFCn3pYMjY
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: hKJK8c3uwhFNdn5m
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Grappled, Incapacitated, or Restrained
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - slt
+        dc:
+          calculation: ''
+          formula: '13'
+        ability: ''
+      img: ''
+      appliedEffects: []
+    IpcLYRMUOUk7dKpE:
+      type: check
+      name: Escape Check
+      _id: IpcLYRMUOUk7dKpE
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - slt
+        dc:
+          calculation: ''
+          formula: '20'
+        ability: ''
+      img: ''
+      appliedEffects: []
+    HStudlka63uekHM2:
+      type: check
+      name: Burst Check
+      _id: HStudlka63uekHM2
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '25'
+        ability: ''
+      img: ''
+      appliedEffects: []
+  identifier: manacles
+_id: phbagManacles000
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/survival/cuffs-shackles-steel.webp
+effects:
+  - name: Manacled
+    img: icons/sundries/survival/cuffs-shackles-steel.webp
+    origin: Compendium.dnd5e.equipment24.Item.phbagManacles000
+    transfer: false
+    _id: hKJK8c3uwhFNdn5m
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725852629542
+      modifiedTime: 1725852641762
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbagManacles000.hKJK8c3uwhFNdn5m'
+sort: 3700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425910000
+  modifiedTime: 1745256812284
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagManacles000'

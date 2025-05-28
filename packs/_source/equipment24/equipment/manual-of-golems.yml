@@ -1,0 +1,367 @@
+_id: dmgManualOfGolem
+name: Manual of Golems
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/sundries/books/book-eye-purple.webp
+system:
+  activities:
+    bcY3CJP3x0AUCeOA:
+      type: summon
+      name: Create Clay Golem
+      _id: bcY3CJP3x0AUCeOA
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: 02seCdd609kzWADN
+          uuid: Compendium.dnd5e.actors24.Actor.YOqhbf8WsX0jH9Fu
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      img: ''
+      appliedEffects: []
+    kWkeCTNqj3VxG7DH:
+      type: summon
+      name: Create Flesh Golem
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: mqZqBR4oeL2gJwSW
+          uuid: Compendium.dnd5e.actors24.Actor.Hm4o2FgPZsdbXjLq
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      _id: kWkeCTNqj3VxG7DH
+      img: ''
+      appliedEffects: []
+    1u0lZDf7ImwcvI21:
+      type: summon
+      name: Create Iron Golem
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: usdRctz9EFtrCuJA
+          uuid: Compendium.dnd5e.actors24.Actor.h98AuPfomEPcCibP
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      _id: 1u0lZDf7ImwcvI21
+      img: ''
+      appliedEffects: []
+    FTlFHEoPqr1bkBmz:
+      type: summon
+      name: Create Stone Golem
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: 26XyK7IMRuMDfVuH
+          uuid: Compendium.dnd5e.actors24.Actor.z3gSIXHHWYaHjfBT
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      _id: FTlFHEoPqr1bkBmz
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Very Rare</em></p><p>This tome contains information
+      and incantations necessary to make a particular type of golem. The DM
+      chooses the type or determines it randomly by rolling on the accompanying
+      table. To decipher and use the manual, you must be a spellcaster with at
+      least two level 5 spell slots. A creature that can't use a <em>Manual of
+      Golems</em> and attempts to read it takes [[/damage 6d6 type=psychic]]
+      damage.</p><p>To create a golem, you must spend the time shown on the
+      table, working without interruption with the manual at hand and resting no
+      more than 8 hours per day. You must also pay the specified cost to
+      purchase supplies.</p><p>Once you finish creating the golem, the book is
+      consumed in eldritch flames. The golem becomes animate when the ashes of
+      the manual are sprinkled on it. See the <em>Monster Manual</em> for the
+      golem's stat block. The golem is under your control, and it understands
+      and obeys your
+      commands.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgManualOfGolem
+      rollable]</p><section class="secret"
+      id="secret-8T2YtEsnAW7JZ5Bp"><p><strong>Foundry Note</strong></p><p>After
+      determining the type of golem this manual creates, you may delete the
+      other unneeded activities.</p></section>
+    chat: ''
+  identifier: manual-of-golems
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 21500000
+ownership:
+  default: 0
+_key: '!items!dmgManualOfGolem'

@@ -1,0 +1,47 @@
+_id: 0npeEcwmiVMdwGMV
+name: Damage Transfer
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>While attached to a creature, the [[lookup @name lowercase]] takes only
+      half the damage dealt to it (rounded down) and that creature takes the
+      other half.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: damage-transfer
+flags: {}
+img: icons/magic/water/strike-ice-blades.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304965049
+  modifiedTime: 1725992570853
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!0npeEcwmiVMdwGMV'

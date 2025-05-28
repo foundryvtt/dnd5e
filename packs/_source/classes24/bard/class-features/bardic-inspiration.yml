@@ -1,0 +1,172 @@
+_id: phbbrdBardicInsp
+name: Bardic Inspiration
+type: feat
+folder: nP3HNXn7rem24IST
+img: icons/magic/light/orbs-firefly-hand-yellow.webp
+system:
+  description:
+    value: >-
+      <p>You can supernaturally inspire others through words, music, or dance.
+      This inspiration is represented by your Bardic Inspiration die, which
+      starts as a d6 (currently, [[lookup
+      @scale.bard.inspiration.die]]).</p><p><strong>Using Bardic
+      Inspiration.</strong> As a Bonus Action, you can inspire another creature
+      within 60 feet of yourself who can see or hear you. That creature gains
+      one of your Bardic Inspiration dice. A creature can have only one Bardic
+      Inspiration die at a time.</p><p>Once within the next hour when the
+      creature fails a D20 Test, the creature can roll the Bardic Inspiration
+      die and add the number rolled to the d20, potentially turning the failure
+      into a success. A Bardic Inspiration die is expended when it's
+      rolled.</p><p><strong>Number of Uses.</strong> You can confer a Bardic
+      Inspiration die a number of times equal to your Charisma modifier (minimum
+      of once), and you regain all expended uses when you finish a Long
+      Rest.</p><p><strong>At Higher Levels. </strong>Your Bardic Inspiration die
+      changes when you reach certain Bard levels, as shown in the Bardic Die
+      column of the Bard Features table. The die becomes a d8 at level 5, a d10
+      at level 10, and a d12 at level 15.</p><section class="secret"
+      id="secret-PtUXhUXS84HSdaew"><p><strong>Foundry Note</strong></p><p>This
+      feature includes an Active Effect for tracking when a character has Bardic
+      Inspiration to use.</p><p>Recovery is set to long rest (for levels before
+      @UUID[Compendium.dnd5e.classes24.Item.phbbrdFontOfInsp]{Font of
+      Inspiration} is gained). Please manually adjust as required.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: max(1, @abilities.cha.mod)
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: Bard
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: bonus
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: '1'
+        units: hour
+        special: ''
+        override: false
+        concentration: false
+      effects:
+        - _id: WIHaOwkGqnX71mK1
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      roll:
+        formula: '@scale.bard.inspiration'
+        name: Bardic Inspiration
+        prompt: false
+        visible: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Inspire
+      img: systems/dnd5e/icons/svg/damage/psychic.svg
+  enchant: {}
+  identifier: bardic-inspiration
+effects:
+  - name: Inspired
+    origin: Compendium.dnd5e.classes24.Item.phbbrdBardicInsp
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/light/hand-sparks-smoke-green.webp
+    _id: WIHaOwkGqnX71mK1
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>You have received Bardic Inspiration. Once within the next hour when
+      you fail a D20 Test, you can roll the Bardic Inspiration die and add the
+      number rolled to the d20, potentially turning the failure into a success.
+      A Bardic Inspiration die is expended when it's rolled.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbbrdBardicInsp.WIHaOwkGqnX71mK1'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866377962
+  modifiedTime: 1745256760271
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrdBardicInsp'

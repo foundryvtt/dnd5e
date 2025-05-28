@@ -69,7 +69,6 @@
     "no-obj-calls": "warn",
     "no-octal": "warn",
     "no-octal-escape": "warn",
-    "no-promise-executor-return": "warn",
     "no-proto": "warn",
     "no-regex-spaces": "warn",
     "no-script-url": "warn",
@@ -96,7 +95,7 @@
     "no-useless-rename": "warn",
     "no-useless-return": "warn",
     "no-var": "warn",
-    "no-void": "warn",
+    "no-void": ["warn", { "allowAsStatement": true }],
     "no-whitespace-before-property": "warn",
     "prefer-numeric-literals": "warn",
     "prefer-object-spread": "warn",
@@ -161,7 +160,10 @@
     "jsdoc/check-param-names": "warn",
     "jsdoc/check-property-names": "warn",
     "jsdoc/check-syntax": "off",
-    "jsdoc/check-tag-names": "warn",
+    "jsdoc/check-tag-names": [
+      "warn",
+      { "definedTags": ["import"] }
+    ],
     "jsdoc/check-types": "warn",
     "jsdoc/check-values": "warn",
     "jsdoc/empty-tags": "warn",

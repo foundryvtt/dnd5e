@@ -1,0 +1,115 @@
+name: Fog Cloud
+system:
+  description:
+    value: >-
+      <p>You create a 20-foot-radius Sphere of fog centered on a point within
+      range. The Sphere is &amp;Reference[heavilyobscured]. It lasts for the
+      duration or until a strong wind (such as one created by
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGustofWind]{Gust of
+      Wind}</em>) disperses it.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> The fog's radius increases by 20 feet for each spell slot
+      level above 1.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: 20 * @item.level
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: fog-cloud
+_id: phbsplFogCloud00
+type: spell
+img: icons/magic/air/fog-gas-smoke-dense-white.webp
+effects: []
+folder: pBaAAtXBCq9FVEnL
+sort: 2800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425954737
+  modifiedTime: 1745256793364
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFogCloud00'

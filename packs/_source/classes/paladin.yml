@@ -1,0 +1,569 @@
+_id: gZiUvbXWLs0pOp0c
+name: Paladin
+type: class
+img: icons/commodities/treasure/token-gold-gem-purple.webp
+system:
+  description:
+    value: >-
+      <p>As a paladin, you gain the following class features.</p><h3>Hit
+      Points</h3><p><strong>Hit Dice:</strong> 1d10 per paladin level<br
+      /><strong>Hit Points at 1st Level:</strong> 10 + your Constitution
+      modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d10 (or 6) +
+      your Constitution modifier per paladin level after
+      1st</p><h3>Proficiencies</h3><p><strong>Armor:</strong> All armor,
+      shields<br /><strong>Weapons:</strong> Simple weapons, martial weapons<br
+      /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong>
+      Wisdom, Charisma<br /><strong>Skills:</strong> Choose two from Athletics,
+      Insight, Intimidation, Medicine, Persuasion, and Religion</p><h1>Paladin
+      Advancement</h1><table><thead><tr><td>Level</td><td>Proficiency
+      Bonus</td><td>Features</td></tr></thead><tbody><tr><td>1st</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.E8ozg8avUVOX9N7u]{Divine
+      Sense}, @UUID[Compendium.dnd5e.classfeatures.Item.OdrvL3afwLOPeuYZ]{Lay on
+      Hands}</td></tr><tr><td>2nd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.Ho7dVxBlOYFlfBHk]{Fighting
+      Style},
+      @UUID[Compendium.dnd5e.classfeatures.Item.ihoQHsmVZlyDbPhX]{Spellcasting},
+      @UUID[Compendium.dnd5e.classfeatures.Item.ySMPQ6zNSlvkrl2f]{Divine
+      Smite}</td></tr><tr><td>3rd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.dY9yrqkyEDuF0CG2]{Divine
+      Health},
+      @UUID[Compendium.dnd5e.classfeatures.Item.olAqNsUTIef9x8xC]{Sacred Oath},
+      @UUID[Compendium.dnd5e.classfeatures.Item.8M7uOPhbTxoxxJSo]{Channel
+      Divinity}</td></tr><tr><td>4th</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>5th</td><td>+3</td><td>2nd Level Spell
+      Slot, @UUID[Compendium.dnd5e.classfeatures.Item.XogoBnFWmCAHXppo]{Extra
+      Attack}</td></tr><tr><td>6th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.carGDhkIdoduTC0I]{Aura
+      of Protection}</td></tr><tr><td>7th</td><td>+3</td><td>Sacred Oath
+      feature</td></tr><tr><td>8th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>9th</td><td>+4</td><td>3rd Level Spell
+      Slot</td></tr><tr><td>10th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.nahSkBO6LH4HkpaT]{Aura
+      of
+      Courage}</td></tr><tr><td>11th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.FAk41RPCTcvCk6KI]{Improved
+      Divine
+      Smite}</td></tr><tr><td>12th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>13th</td><td>+5</td><td>4th Level
+      Spell
+      Slot</td></tr><tr><td>14th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.U7BIPVPsptBmwsnV]{Cleansing
+      Touch}</td></tr><tr><td>15th</td><td>+5</td><td>Sacred Oath
+      feature</td></tr><tr><td>16th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>17th</td><td>+6</td><td>5th Level
+      Spell Slot</td></tr><tr><td>18th</td><td>+6</td><td>Aura
+      improvements</td></tr><tr><td>19th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>20th</td><td>+6</td><td>Sacred Oath
+      feature</td></tr></tbody></table><h1>Sacred Oaths</h1><p>Becoming a
+      paladin involves taking vows that commit the paladin to the cause of
+      righteousness, an active path of fighting wickedness. The final oath,
+      taken when he or she reaches 3rd level, is the culmination of all the
+      paladin's training. Some characters with this class don't consider
+      themselves true paladins until they have reached 3rd level and made this
+      oath. For others, the actual swearing of the oath is a formality, an
+      official stamp on what has always been true in the paladin's
+      heart.</p><p>@UUID[Compendium.dnd5e.subclasses.Item.sZ86mbX8D5PfYuhl]{Oath
+      of Devotion}</p><div class="sidebar-block"><h4>Breaking Your Oath</h4><p>A
+      paladin tries to hold to the highest standards of conduct, but even the
+      most virtuous paladin is fallible. Sometimes the right path proves too
+      demanding, sometimes a situation calls for the lesser of two evils, and
+      sometimes the heat of emotion causes a paladin to transgress his or her
+      oath.</p><p>A paladin who has broken a vow typically seeks absolution from
+      a cleric who shares his or her faith or from another paladin of the same
+      order. The paladin might spend an allnight vigil in prayer as a sign of
+      penitence, or undertake a fast or similar act of self-denial. After a rite
+      of confession and forgiveness, the paladin starts fresh.</p><p>If a
+      paladin willfully violates his or her oath and shows no sign of
+      repentance, the consequences can be more serious. At the GM's discretion,
+      an impenitent paladin might be forced to abandon this class and adopt
+      another.</p></div>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: paladin
+  levels: 1
+  hitDice: d10
+  hitDiceUsed: 0
+  advancement:
+    - type: HitPoints
+      configuration: {}
+      value: {}
+      title: Hit Points
+      icon: systems/dnd5e/icons/svg/hit-points.svg
+      _id: N4T7S8KXXZKskROj
+    - _id: qfbfR422hrwjwWyd
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - armor:lgt
+          - armor:med
+          - armor:hvy
+          - armor:shl
+        choices: []
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - _id: 2pEp37GeIGCBdiqU
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - weapon:sim
+          - weapon:mar
+        choices: []
+      level: 1
+      title: ''
+      value:
+        chosen: []
+    - _id: aIeuTIJdiKMaChi8
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - saves:wis
+          - saves:cha
+        choices: []
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - _id: ZZIWxV7EaHl6GVcu
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:ath
+              - skills:ins
+              - skills:itm
+              - skills:med
+              - skills:per
+              - skills:rel
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - armor:lgt
+          - armor:med
+          - armor:shl
+        choices: []
+      level: 1
+      title: ''
+      _id: qd6RxOGs50LR5Lea
+      classRestriction: secondary
+      value:
+        chosen: []
+    - _id: LYiiMtwvVVXZs8yE
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - ci:diseased
+        choices: []
+      level: 3
+      title: Divine Health
+      value:
+        chosen: []
+      hint: The divine magic flowing through you makes you immune to disease.
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.E8ozg8avUVOX9N7u
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.OdrvL3afwLOPeuYZ
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 1
+      title: Features
+      _id: HL6Kwpmrsz5yqmBK
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.Ho7dVxBlOYFlfBHk
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.ihoQHsmVZlyDbPhX
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.ySMPQ6zNSlvkrl2f
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 2
+      title: Features
+      _id: RwqEtAP5aJqHIW5J
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.dY9yrqkyEDuF0CG2
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.olAqNsUTIef9x8xC
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.8M7uOPhbTxoxxJSo
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 3
+      title: Features
+      _id: ki8eEksoSjfOHDcF
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 5
+      title: Features
+      _id: WaoJQunO9O2pdC1g
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.carGDhkIdoduTC0I
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 6
+      title: Features
+      _id: Gs5c5ciErsG3NDyW
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.nahSkBO6LH4HkpaT
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 10
+      title: Features
+      _id: teLWeatpgzXs5uCc
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.FAk41RPCTcvCk6KI
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 11
+      title: Features
+      _id: BWhYgjLNVypoHyqZ
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.U7BIPVPsptBmwsnV
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 14
+      title: Features
+      _id: 63s9ja0RR4UkfHCN
+    - type: ItemChoice
+      configuration:
+        choices:
+          '2':
+            count: 1
+            replacement: false
+        allowDrops: true
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB
+          - uuid: Compendium.dnd5e.classfeatures.hCop9uJrWhF1QPb4
+          - uuid: Compendium.dnd5e.classfeatures.3Nc6u9pyStByuJsm
+          - uuid: Compendium.dnd5e.classfeatures.06NVMYf58Z76O85O
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+        restriction:
+          type: class
+          subtype: fightingStyle
+          level: ''
+      value:
+        added: {}
+        replaced: {}
+      title: Fighting Style
+      _id: GPzUDRFo5bfrhU1K
+      hint: >-
+        Choose one of the following options. You can’t take a Fighting Style
+        option more than once, even if you later get to choose again.
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 4
+      title: Ability Score Improvement
+      _id: ASKyHbSBAKRIU6i3
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 8
+      title: Ability Score Improvement
+      _id: iBK2dJf2hwv9vOBI
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 12
+      title: Ability Score Improvement
+      _id: BI8DBqJZY8O9orOX
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 16
+      title: Ability Score Improvement
+      _id: hKEbRRkEEfvA3ydq
+    - _id: puDaUsYrlks0z5gm
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 19
+      title: ''
+    - _id: J6UYtKD0wkJQ9CHT
+      type: ScaleValue
+      configuration:
+        identifier: aura-radius
+        type: distance
+        distance:
+          units: ft
+        scale:
+          '6':
+            value: 10
+          '18':
+            value: 30
+      value: {}
+      title: Aura Radius
+    - _id: n22j60yn24fqr3sy
+      type: Subclass
+      configuration: {}
+      value: {}
+      level: 3
+      title: Sacred Oath
+  spellcasting:
+    progression: half
+    ability: cha
+    preparation:
+      formula: '@abilities.cha.mod + floor(@classes.paladin.levels / 2)'
+  startingEquipment:
+    - type: OR
+      _id: mNW3DhRGE7hORMia
+      group: ''
+      sort: 100000
+      requiresProficiency: false
+    - type: AND
+      _id: qtoUTXznLIdqzLDC
+      group: mNW3DhRGE7hORMia
+      sort: 600000
+      requiresProficiency: false
+    - type: weapon
+      count: null
+      key: mar
+      _id: sMUMbtr7U7orGlw1
+      group: qtoUTXznLIdqzLDC
+      sort: 650000
+      requiresProficiency: false
+    - type: armor
+      count: null
+      key: shield
+      _id: RCUC6iX1bx8RbdYi
+      group: qtoUTXznLIdqzLDC
+      sort: 700000
+      requiresProficiency: false
+    - type: weapon
+      count: 2
+      key: mar
+      _id: qpxs0rk4lOYOveVf
+      group: mNW3DhRGE7hORMia
+      sort: 800000
+      requiresProficiency: false
+    - type: OR
+      _id: KU6igyNLG0PRlFkl
+      group: ''
+      sort: 200000
+      requiresProficiency: false
+    - type: linked
+      count: 5
+      key: Compendium.dnd5e.items.Item.DWLMnODrnHn8IbAG
+      _id: PJ66eV1adKQqkHvZ
+      group: KU6igyNLG0PRlFkl
+      sort: 900000
+      requiresProficiency: false
+    - type: weapon
+      count: null
+      key: simpleM
+      _id: qbjwGvxDVuBdPxjg
+      group: KU6igyNLG0PRlFkl
+      sort: 1000000
+      requiresProficiency: false
+    - type: OR
+      _id: WpRsbaUbRDpHYmTY
+      group: ''
+      sort: 300000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.6BybWxK5GcEzqcOV
+      _id: jeQyetu8yEeSivyL
+      group: WpRsbaUbRDpHYmTY
+      sort: 1100000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.8KWz5DJbWUpNWniP
+      _id: GWGVhytRaKQXNUna
+      group: WpRsbaUbRDpHYmTY
+      sort: 1200000
+      requiresProficiency: false
+    - type: AND
+      _id: lYcSORTIlg5LwdX7
+      group: ''
+      sort: 400000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.rLMflzmxpe8JGTOA
+      _id: REA8qwWfZCpl5ZqP
+      group: lYcSORTIlg5LwdX7
+      sort: 1300000
+      requiresProficiency: false
+    - type: focus
+      count: null
+      key: holy
+      _id: 9ELn1dIN7WY1YJb8
+      group: lYcSORTIlg5LwdX7
+      sort: 1400000
+      requiresProficiency: false
+  wealth: 5d4 * 10
+  primaryAbility:
+    value: []
+    all: true
+effects: []
+folder: HwOKB9LPw4dA10L8
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037371154
+  modifiedTime: 1725992280692
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!gZiUvbXWLs0pOp0c'

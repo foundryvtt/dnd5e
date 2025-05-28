@@ -1,0 +1,88 @@
+_id: dmgPotionofGiant
+name: Potion of Giant Strength
+type: consumable
+img: icons/consumables/potions/bottle-round-corked-blue.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Potion, Rarity Varies</em></p><p>When you drink this potion, your
+      Strength score changes for 1 hour. The type of giant determines the score
+      (see the table below). The potion has no effect on you if your Strength is
+      equal to or greater than that score.</p><p>This potion's transparent
+      liquid has floating in it a sliver of light resembling a giant's
+      fingernail.</p><table><thead><tr><td>Potion</td><td>Str.</td><td>Rarity</td></tr></thead><tbody><tr><td><em>Potion
+      of Giant Strength</em>
+      (@UUID[Compendium.dnd5e.equipment24.Item.dmgHillPotionOfG]{hill})</td><td>21</td><td>Uncommon</td></tr><tr><td><em>Potion
+      of Giant Strength</em>
+      (@UUID[Compendium.dnd5e.equipment24.Item.dmgFrostPotionOf]{frost} or
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgStonePotionOf]{stone})</td><td>23</td><td>Rare</td></tr><tr><td><em>Potion
+      of Giant Strength</em>
+      (@UUID[Compendium.dnd5e.equipment24.Item.dmgFirePotionOfG]{fire})</td><td>25</td><td>Rare</td></tr><tr><td><em>Potion
+      of Giant Strength</em>
+      (@UUID[Compendium.dnd5e.equipment24.Item.dmgCloudPotionOf]{cloud})</td><td>27</td><td>Very
+      Rare</td></tr><tr><td><em>Potion of Giant Strength</em>
+      (@UUID[Compendium.dnd5e.equipment24.Item.dmgStormPotionOf]{storm})</td><td>29</td><td>Legendary</td></tr></tbody></table>
+    chat: ''
+  identifier: potion-of-giant-strength
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: potion
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects: []
+folder: 4NjJfCbRAVhw8ESv
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730751926980
+  modifiedTime: 1745432524912
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1000000
+ownership:
+  default: 0
+_key: '!items!dmgPotionofGiant'

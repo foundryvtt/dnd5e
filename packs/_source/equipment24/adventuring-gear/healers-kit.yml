@@ -1,0 +1,126 @@
+name: Healer's Kit
+system:
+  description:
+    value: >-
+      <p>A Healer's Kit has ten uses. As a Utilize action, you can expend one of
+      its uses to stabilize an Unconscious creature that has 0 Hit Points
+      without needing to make a Wisdom (Medicine) check.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '10'
+    autoDestroy: true
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    bsWqOT06BB3Vb2hg:
+      type: utility
+      _id: bsWqOT06BB3Vb2hg
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Unconscious
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Stabilize
+      img: ''
+      appliedEffects: []
+  identifier: healers-kit
+_id: phbagHealersKit0
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/containers/bags/sack-leather-brown-green.webp
+effects: []
+sort: 2400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425908974
+  modifiedTime: 1745256811953
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagHealersKit0'

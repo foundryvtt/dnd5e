@@ -1,0 +1,147 @@
+name: College of Lore
+type: subclass
+img: icons/sundries/books/book-open-brown-black.webp
+system:
+  description:
+    value: >-
+      <p>Bards of the College of Lore know something about most things,
+      collecting bits of knowledge from sources as diverse as scholarly tomes
+      and peasant tales. Whether singing folk ballads in taverns or elaborate
+      compositions in royal courts, these bards use their gifts to hold
+      audiences spellbound. When the applause dies down, the audience members
+      might find themselves questioning everything they held to be true, from
+      their faith in the priesthood of the local temple to their loyalty to the
+      king.</p>
+
+      <p>The loyalty of these bards lies in the pursuit of beauty and truth, not
+      in fealty to a monarch or following the tenets of a deity. A noble who
+      keeps such a bard as a herald or advisor knows that the bard would rather
+      be honest than politic.</p>
+
+      <p>The college's members gather in libraries and sometimes in actual
+      colleges, complete with classrooms and dormitories, to share their lore
+      with one another. They also meet at festivals or affairs of state, where
+      they can expose corruption, unravel lies, and poke fun at self-important
+      figures of authority.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: college-of-lore
+  classIdentifier: bard
+  advancement:
+    - _id: GgjL1Z4CKIkVLcyz
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 3
+            pool:
+              - skills:*
+      level: 3
+      title: ''
+      value:
+        chosen: []
+    - _id: pxolz5oyrvbez6aj
+      type: ItemGrant
+      level: 3
+      title: Features
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.e9ytGikyLFgwZ5wi
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.5zPmHPQUne7RDfaU
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+    - _id: pfjv7s5yjgoi3i1w
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.myBu3zi5eYvQIcuy
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 6
+      title: Features
+    - _id: 6seg1bfvuexp0gh9
+      type: ItemGrant
+      level: 14
+      title: Features
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.pquwueEMweRhiWaq
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+    - _id: zmBtra2UDx5BYyR7
+      type: ItemChoice
+      configuration:
+        choices:
+          '6':
+            count: 2
+            replacement: false
+        allowDrops: true
+        type: spell
+        pool: []
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+        restriction:
+          type: ''
+          subtype: ''
+          level: available
+      value:
+        added: {}
+        replaced: {}
+      title: Additional Magical Secrets
+      hint: >-
+        Learn two spells of your choice from any class. A spell you choose must
+        be of a level you can cast, as shown on the Bard table, or a cantrip.
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation: {}
+effects: []
+folder: T6msdzH93deRLFQg
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: MNvsEc4D2ccX7dQT
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037372893
+  modifiedTime: 1725992730613
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!MNvsEc4D2ccX7dQT'

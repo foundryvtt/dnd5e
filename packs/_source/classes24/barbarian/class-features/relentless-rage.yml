@@ -1,0 +1,176 @@
+_id: phbbrbRelentless
+name: Relentless Rage
+type: feat
+img: icons/skills/wounds/injury-pain-body-orange.webp
+system:
+  description:
+    value: >-
+      <p>Your Rage can keep you fighting despite grievous wounds. If you drop to
+      0 Hit Points while your Rage is active and don't die outright, you can
+      make a DC 10 Constitution saving throw. If you succeed, your Hit Points
+      instead change to a number equal to twice your Barbarian level.</p><p>Each
+      time you use this feature after the first, the DC increases by 5. When you
+      finish a Short or Long Rest, the DC resets to 10.</p><section
+      class="secret" id="secret-GTpuSHXh1ZobcQYd"><p><strong>Foundry
+      Note</strong></p><p>This feature will automatically increase the DC by 5
+      if you consume the resource when activating it. It will also automatically
+      reset to 10 after a Short or Long Rest.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '20'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 11
+    repeatable: false
+  properties: []
+  requirements: Barbarian
+  activities:
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: ''
+        units: inst
+        special: ''
+        override: false
+        concentration: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability:
+          - con
+        dc:
+          calculation: ''
+          formula: 10 + (@item.uses.spent * 5)
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+    Y2xWUsWmpklWLtVT:
+      type: heal
+      name: ''
+      _id: Y2xWUsWmpklWLtVT
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: '@classes.barbarian.levels * 2'
+        scaling:
+          number: 1
+        bonus: ''
+  enchant: {}
+  identifier: relentless-rage
+effects: []
+folder: p6WDpW0gzmKfhGad
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940469
+  modifiedTime: 1740680080815
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbRelentless'

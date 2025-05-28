@@ -1,0 +1,98 @@
+name: Alert
+system:
+  description:
+    value: >-
+      <p>You gain the following benefits.</p><p><strong>Initiative
+      Proficiency.</strong> When you roll Initiative, you can add your
+      Proficiency Bonus to the roll.</p><p><strong>Initiative Swap.</strong>
+      Immediately after you roll Initiative, you can swap your Initiative with
+      the Initiative of one willing ally in the same combat. You can't make this
+      swap if you or the ally has the &amp;Reference[Incapacitated]
+      condition.</p><section id="secret-yzfXk3D5M1jv9ixH"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      automatically includes the bonus to your Initiative.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 2
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: feat
+    subtype: origin
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: alert
+_id: phbftAlert000000
+type: feat
+img: icons/creatures/eyes/human-single-brown.webp
+effects:
+  - name: Alert
+    img: icons/creatures/eyes/human-single-brown.webp
+    _id: uvZy4Zzi0oPd54qs
+    type: base
+    system: {}
+    changes:
+      - key: flags.dnd5e.initiativeAlert
+        mode: 2
+        value: 'true'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbftAlert000000.uvZy4Zzi0oPd54qs'
+folder: d5jrO8A6QpjEV9rn
+sort: 100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866666366
+  modifiedTime: 1745256780460
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbftAlert000000'

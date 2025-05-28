@@ -1,4 +1,4 @@
-import SystemDataModel from "../../abstract.mjs";
+import SystemDataModel from "../../abstract/system-data-model.mjs";
 
 const { BooleanField, StringField } = foundry.data.fields;
 
@@ -83,6 +83,7 @@ export default class EquippableItemTemplate extends SystemDataModel {
    * Ensure items that cannot be attuned are not marked as attuned.
    */
   prepareFinalEquippableData() {
+    if ( this.validProperties.has("mgc") && !this.properties.has("mgc") ) this.attunement = "";
     if ( !this.attunement ) this.attuned = false;
   }
 
@@ -111,5 +112,22 @@ export default class EquippableItemTemplate extends SystemDataModel {
   get magicAvailable() {
     const attunement = this.attuned || (this.attunement !== "required");
     return attunement && this.properties.has("mgc") && this.validProperties.has("mgc");
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Set as equipped for NPCs, and unequipped for PCs.
+   * @param {object} data     The initial data object provided to the document creation request.
+   * @param {object} options  Additional options which modify the creation request.
+   * @param {User} user       The User requesting the document creation.
+   */
+  preCreateEquipped(data, options, user) {
+    if ( ["character", "npc"].includes(this.parent.actor?.type)
+      && !foundry.utils.hasProperty(data, "system.equipped") ) {
+      this.updateSource({ equipped: this.parent.actor.type === "npc" });
+    }
   }
 }

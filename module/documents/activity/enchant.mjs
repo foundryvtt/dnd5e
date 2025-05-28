@@ -30,14 +30,6 @@ export default class EnchantActivity extends ActivityMixin(EnchantActivityData) 
   );
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static localize() {
-    super.localize();
-    this._localizeSchema(this.schema.fields.effects.element, ["DND5E.ENCHANT.FIELDS.effects"]);
-  }
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -60,23 +52,6 @@ export default class EnchantActivity extends ActivityMixin(EnchantActivityData) 
    * @typedef {ActivityUseConfiguration} EnchantUseConfiguration
    * @property {string} enchantmentProfile
    */
-
-  /** @inheritDoc */
-  _createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig) {
-    const config = super._createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig);
-    config.enchantmentProfile = usageConfig.enchantmentProfile ?? null;
-    return config;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options) {
-    super._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options);
-    if ( config.enchantmentProfile ) usageConfig.enchantmentProfile = config.enchantmentProfile;
-  }
-
-  /* -------------------------------------------- */
 
   /** @inheritDoc */
   _prepareUsageConfig(config) {

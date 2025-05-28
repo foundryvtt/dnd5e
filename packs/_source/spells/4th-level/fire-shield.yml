@@ -1,0 +1,204 @@
+_id: avD5XUtkBPQQR97c
+name: Fire Shield
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Thin and wispy flames wreathe your body for the Duration, shedding
+      bright light in a 10-foot radius and dim light for an additional 10 feet.
+      You can end the spell early by using an action to dismiss it.</p>
+
+      <p>The flames provide you with a warm shield or a chill shield, as you
+      choose. The warm shield grants you Resistance to cold damage, and the
+      chill shield grants you resistance to fire damage.</p>
+
+      <p>In addition, whenever a creature within 5 feet of you hits you with a
+      melee Attack, the shield erupts with flame. The attacker takes 2d8 fire
+      damage from a warm shield, or 2d8 cold damage from a cold shield.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: evo
+  materials:
+    value: A bit of phosphorus or a firefly
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: lVKx8swB08jm6IFE
+        - _id: UUXwEKSPX4nYfDzo
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: 2
+            denomination: 8
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: fire-shield
+sort: 0
+flags: {}
+img: icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp
+effects:
+  - _id: lVKx8swB08jm6IFE
+    flags: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: 600
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+      combat: null
+    origin: Item.OtcTsffCQaOFkr9K
+    tint: '#ffffff'
+    transfer: false
+    name: Warm Shield
+    description: <p>The warm shield grants you Resistance to cold damage.</p>
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/defensive/shield-barrier-flaming-pentagon-red.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!avD5XUtkBPQQR97c.lVKx8swB08jm6IFE'
+  - _id: UUXwEKSPX4nYfDzo
+    flags: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: 600
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+      combat: null
+    origin: Item.OtcTsffCQaOFkr9K
+    tint: '#ffffff'
+    transfer: false
+    name: Chill Shield
+    description: <p>The chill shield grants you resistance to fire damage.</p>
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!avD5XUtkBPQQR97c.UUXwEKSPX4nYfDzo'
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037359955
+  modifiedTime: 1725992721055
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!avD5XUtkBPQQR97c'

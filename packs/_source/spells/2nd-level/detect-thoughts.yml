@@ -1,0 +1,139 @@
+_id: ppWAAEul0QHtm4er
+name: Detect Thoughts
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>For the duration, you can read the thoughts of certain creatures. When
+      you cast the spell and as your action on each turn until the spell ends,
+      you can focus your mind on any one creature that you can see within 30
+      feet of you. If the creature you choose has an Intelligence of 3 or lower
+      or doesn't speak any language, the creature is unaffected.</p><p>You
+      initially learn the surface thoughts of the creature—what is most on its
+      mind in that moment. As an action, you can either shift your attention to
+      another creature's thoughts or attempt to probe deeper into the same
+      creature's mind. If you probe deeper, the target must make a Wisdom saving
+      throw. If it fails, you gain insight into its reasoning (if any), its
+      emotional state, and something that looms large in its mind (such as
+      something it worries over, loves, or hates). If it succeeds, the spell
+      ends. Either way, the target knows that you are probing into its mind, and
+      unless you shift your attention to another creature's thoughts, the
+      creature can use its action on its turn to make an Intelligence check
+      contested by your Intelligence check; if it succeeds, the spell
+      ends.</p><p>Questions verbally directed at the target creature naturally
+      shape the course of its thoughts, so this spell is particularly effective
+      as part of an interrogation.</p><p>You can also use this spell to detect
+      the presence of thinking creatures you can't see. When you cast the spell
+      or as your action during the duration, you can search for thoughts within
+      30 feet of you. The spell can penetrate barriers, but 2 feet of rock, 2
+      inches of any metal other than lead, or a thin sheet of lead blocks you.
+      You can't detect a creature with an Intelligence of 3 or lower or one that
+      doesn't speak any language.</p><p>Once you detect the presence of a
+      creature in this way, you can read its thoughts for the rest of the
+      duration as described above, even if you can't see it, but it must still
+      be within range.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: div
+  materials:
+    value: A copper piece
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: detect-thoughts
+sort: 0
+flags: {}
+img: icons/magic/light/explosion-star-teal-purple.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037365515
+  modifiedTime: 1725992722911
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ppWAAEul0QHtm4er'

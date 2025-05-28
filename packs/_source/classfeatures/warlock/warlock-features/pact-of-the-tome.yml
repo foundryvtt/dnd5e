@@ -1,0 +1,53 @@
+_id: MYM908WLZ1lVvA1u
+name: Pact of the Tome
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Your patron gives you a grimoire called a Book of Shadows. When you
+      gain this feature, choose three cantrips from any class's spell list (the
+      three needn't be from the same list). While the book is on your person,
+      you can cast those cantrips at will. They don't count against your number
+      of cantrips known. If they don't appear on the warlock spell list, they
+      are nonetheless warlock spells for you.</p><p>If you lose your Book of
+      Shadows, you can perform a 1-hour ceremony to receive a replacement from
+      your patron. This ceremony can be performed during a short or long rest,
+      and it destroys the previous book. The book turns to ash when you die.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: pact
+  requirements: Warlock 3
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: pact-of-the-tome
+flags: {}
+img: icons/sundries/books/book-embossed-jewel-gold-purple.webp
+effects: []
+folder: 5vh3H3BfNi3v9LeS
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037383223
+  modifiedTime: 1725992288116
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!MYM908WLZ1lVvA1u'

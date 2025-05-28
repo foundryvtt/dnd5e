@@ -1,0 +1,140 @@
+_id: NJgxf7pmSsBArIG7
+name: Private Sanctum
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You make an area within range magically secure. The area is a cube that
+      can be as small as 5 feet to as large as 100 feet on each side. The spell
+      lasts for the Duration or until you use an action to dismiss
+      it.</p><p>When you cast the spell, you decide what sort of security the
+      spell provides, choosing any or all of the following properties:</p>
+
+      <ul>
+
+      <li>Sound can't pass through the barrier at the edge of the warded
+      area.</li>
+
+      <li>The barrier of the warded area appears dark and foggy, preventing
+      vision (including darkvision) through it.</li>
+
+      <li>Sensors created by Divination spells can't appear inside the protected
+      area or pass through the barrier at its perimeter.</li>
+
+      <li>Creatures in the area can't be targeted by divination spells.</li>
+
+      <li>Nothing can Teleport into or out of the warded area.</li>
+
+      <li>Planar Travel is blocked within the warded area.</li>
+
+      </ul>
+
+      <p>Casting this spell on the same spot every day for a year makes this
+      effect permanent.</p><p><strong>At Higher Levels</strong>. When you cast
+      this spell using a spell slot of 5th level or higher, you can increase the
+      size of the cube by 100 feet for each slot level beyond 4th. Thus you
+      could protect a cube that can be up to 200 feet on one side by using a
+      spell slot of 5th level.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cube
+      size: '100'
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: abj
+  materials:
+    value: >-
+      A thin sheet of lead, a piece of opaque glass, a wad of cotton or cloth,
+      and a powdered chrysolite
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: private-sanctum
+sort: 0
+flags: {}
+img: icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp
+effects: []
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037355005
+  modifiedTime: 1725992719463
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!NJgxf7pmSsBArIG7'

@@ -1,0 +1,160 @@
+name: Arcanist's Magic Aura
+system:
+  description:
+    value: >-
+      <p>With a touch, you place an illusion on a willing creature or an object
+      that isn't being worn or carried. A creature gains the Mask effect below,
+      and an object gains the False Aura effect below. The effect lasts for the
+      duration. If you cast the spell on the same target every day for 30 days,
+      the illusion lasts until dispelled.</p><p><strong>Mask (Creature).
+      </strong>Choose a creature type other than the target's actual type.
+      Spells and other magical effects treat the target as if it were a creature
+      of the chosen type.</p><p><strong>False Aura (Object). </strong>You change
+      the way the target appears to spells and magical effects that detect
+      magical auras, such as <em>Detect Magic</em>. You can make a nonmagical
+      object appear magical, make a magic item appear nonmagical, or change the
+      object's aura so that it appears to belong to a school of magic you
+      choose.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      type: creatureOrObject
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: ill
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a small square of silk
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: 8MLxwX6ZeAIdhDj9
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: nystuls-magic-aura
+_id: phbsplNystulsMag
+type: spell
+img: icons/commodities/cloth/cloth-rolls-cmy.webp
+effects:
+  - name: Masked
+    origin: Compendium.dnd5e.spells24.Item.phbsplNystulsMag
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 86400
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/equipment/head/mask-horned-brown.webp
+    _id: 8MLxwX6ZeAIdhDj9
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>Choose a creature type other than the target’s actual type. Spells and
+      other magical effects treat the target as if it were a creature of the
+      chosen type.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplNystulsMag.8MLxwX6ZeAIdhDj9'
+folder: 3SjcO2acsFnWegp4
+sort: 1500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425965082
+  modifiedTime: 1745256796509
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplNystulsMag'

@@ -1,0 +1,286 @@
+_id: phbmnkOpenHandTe
+name: Open Hand Technique
+type: feat
+folder: 8keksVDATj5D9vYl
+img: icons/magic/unholy/strike-hand-glow-pink.webp
+system:
+  description:
+    value: >-
+      <p>Whenever you hit a creature with an attack granted by your Flurry of
+      Blows, you can impose one of the following effects on that
+      target.</p><p><strong>Addle.</strong> The target can't make Opportunity
+      Attacks until the start of its next turn.</p><p><strong>Push.</strong> The
+      target must succeed on a Strength saving throw or be pushed up to 15 feet
+      away from you.</p><p><strong>Topple.</strong> The target must succeed on a
+      Dexterity saving throw or have the Prone condition.</p><section
+      id="secret-4BkgU26V2trst09S" class="secret"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Addle</strong> activity includes an Active
+      Effect for tracking the addled target.</p><p>The <strong>Topple</strong>
+      activity includes an Active Effect that applies the Prone
+      status.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    1jdSaWanuRrdkVs3:
+      type: utility
+      name: Addle
+      _id: 1jdSaWanuRrdkVs3
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: >-
+          Whenever you hit a creature with an attack granted by your Flurry of
+          Blows
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: uQ474o5Wsv3sEAJK
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    XoaS0RtDCGAqrQsf:
+      type: save
+      name: Push
+      _id: XoaS0RtDCGAqrQsf
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: >-
+          Whenever you hit a creature with an attack granted by your Flurry of
+          Blows
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability:
+          - str
+        dc:
+          calculation: wis
+          formula: ''
+    5Qgc0K3TfuonkPIG:
+      type: save
+      name: Topple
+      _id: 5Qgc0K3TfuonkPIG
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: >-
+          Whenever you hit a creature with an attack granted by your Flurry of
+          Blows
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: E1A8QE6kPsLgqTAP
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: wis
+          formula: ''
+  enchant: {}
+  identifier: open-hand-technique
+effects:
+  - name: Addled
+    img: systems/dnd5e/icons/svg/items/feature.svg
+    origin: Compendium.dnd5e.classes24.Item.phbmnkOpenHandTe
+    transfer: false
+    _id: uQ474o5Wsv3sEAJK
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbmnkOpenHandTe.uQ474o5Wsv3sEAJK'
+  - name: Toppled
+    img: systems/dnd5e/icons/svg/items/feature.svg
+    origin: Compendium.dnd5e.classes24.Item.phbmnkOpenHandTe
+    transfer: false
+    _id: E1A8QE6kPsLgqTAP
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - prone
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbmnkOpenHandTe.E1A8QE6kPsLgqTAP'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866574822
+  modifiedTime: 1745256763235
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbmnkOpenHandTe'

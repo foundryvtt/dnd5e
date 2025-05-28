@@ -1,0 +1,193 @@
+_id: dmgRobeOfStars00
+name: Robe of Stars
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/back/cloak-plain-blue.webp
+system:
+  activities:
+    8RstC93WBiFEF5ya:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplMagicMissi
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: 8RstC93WBiFEF5ya
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    s1lUHgJWF8CUIedO:
+      type: utility
+      name: Enter/Exit Astral Plane
+      _id: s1lUHgJWF8CUIedO
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: square
+          size: '5'
+          count: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dusk
+        type: formula
+        formula: 1d6
+    max: '6'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Very Rare (Requires Attunement)</em></p><p>This
+      black or dark-blue robe is embroidered with small white or silver stars.
+      You gain a +1 bonus to saving throws while you wear it.</p><p>Six stars,
+      located on the robe's upper-front portion, are particularly large. While
+      wearing this robe, you can take a Magic action to remove one of the stars
+      and expend it to cast the level 5 version of
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplMagicMissi]{Magic Missile}.
+      Daily at dusk, 1d6 removed stars reappear on the robe.</p><p>While you
+      wear the robe, you can take a Magic action to enter the Astral Plane along
+      with everything you are wearing and carrying. You remain there until you
+      take a Magic action to return to the plane you were on. You reappear in
+      the last space you occupied or, if that space is occupied, the nearest
+      unoccupied space.</p><section class="secret"
+      id="secret-a1r37HVL7VTqMrwu"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Enter/Exit Astral Plane</strong> activity includes a 5 foot
+      measured template that can be used to mark where you exited the Astral
+      Plane for tracking.</p></section>
+    chat: ''
+  identifier: robe-of-stars
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712702971
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 32500000
+ownership:
+  default: 0
+_key: '!items!dmgRobeOfStars00'

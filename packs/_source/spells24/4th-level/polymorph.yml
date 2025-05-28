@@ -1,0 +1,130 @@
+name: Polymorph
+system:
+  description:
+    value: >-
+      <p>You attempt to transform a creature that you can see within range into
+      a Beast. The target must succeed on a Wisdom saving throw or shape-shift
+      into a Beast form for the duration. That form can be any Beast you choose
+      that has a Challenge Rating equal to or less than the target's (or the
+      target's level if it doesn't have a Challenge Rating). The target's game
+      statistics are replaced by the stat block of the chosen Beast, but the
+      target retains its alignment, personality, creature type, Hit Points, and
+      Hit Point Dice. See appendix B for a sample of Beast stat
+      blocks.</p><p>The target gains a number of Temporary Hit Points equal to
+      the Hit Points of the Beast form. These Temporary Hit Points vanish if any
+      remain when the spell ends. The spell ends early on the target if it has
+      no Temporary Hit Points left.</p><p>The target is limited in the actions
+      it can perform by the anatomy of its new form, and it can't speak or cast
+      spells.</p><p>The target's gear melds into the new form. The creature
+      can't use or otherwise benefit from any of that equipment.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a caterpillar cocoon
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: polymorph
+_id: phbsplPolymorph0
+type: spell
+img: icons/creatures/amphibians/frog-confused-green-blue.webp
+effects: []
+folder: qi3IbnEwap7mRw4b
+sort: 1000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.2
+  createdTime: 1724425966419
+  modifiedTime: 1746119719866
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplPolymorph0'

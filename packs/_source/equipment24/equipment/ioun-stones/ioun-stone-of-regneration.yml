@@ -1,0 +1,136 @@
+_id: dmgRegnerationIo
+name: Ioun Stone of Regneration
+type: equipment
+folder: vl17N1arOkN66aMi
+img: icons/commodities/stone/rock-chunk-pumice-white.webp
+system:
+  activities:
+    dyC1DdLvQHXMgRaL:
+      type: heal
+      name: Regeneration
+      _id: dyC1DdLvQHXMgRaL
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: once per hour if you have at least 1 Hit Point
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: null
+        denomination: ''
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: '15'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>See: @UUID[Compendium.dnd5e.equipment24.Item.dmgIounStone0000]{Ioun
+      Stone}</em></p><p>When you take a Magic action to toss an <em>Ioun
+      Stone</em> into the air, the stone orbits your head at a distance of 1d3
+      feet, conferring its benefit to you while doing so. You can have up to
+      three <em>Ioun Stones</em> orbiting your head at the same time.</p><p>As a
+      Utilize action, you can seize and stow any number of <em>Ioun Stones</em>
+      orbiting your head. If your Attunement to an <em>Ioun Stone</em> ends
+      while it's orbiting your head, the stone falls as though you had dropped
+      it.</p><p>You regain [[/healing 15 type=healing]]{15 Hit Points} at the
+      end of each hour this pearly white spindle orbits your head if you have at
+      least 1 Hit Point.</p>
+    chat: ''
+  identifier: regneration-ioun-stone
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712702395
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -100000
+ownership:
+  default: 0
+_key: '!items!dmgRegnerationIo'

@@ -1,0 +1,64 @@
+_id: dvSoAF3bOeUeIrxf
+name: Multiple Heads
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] has five heads. While it has more than
+      one head, the [[lookup @name lowercase]] has<strong> advantage </strong>on
+      saving throws <strong>against being blinded, charmed, deafened,
+      frightened, stunned, and knocked unconscious</strong><strong>.
+      </strong></p><p>Whenever the [[lookup @name lowercase]] takes 25 or more
+      damage in a single turn, one of its heads dies. If all its heads die, the
+      [[lookup @name lowercase]] dies.</p><p>At the end of its turn, it grows
+      two heads for each of its heads that died since its last turn, unless it
+      has taken <em>fire damage</em> since its last turn. the [[lookup @name
+      lowercase]] regains <strong>10 hit points</strong> for each head regrown
+      in this way.</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] has five heads. While it has more than
+      one head, the [[lookup @name lowercase]] has<strong> advantage </strong>on
+      saving throws <strong>against being blinded, charmed, deafened,
+      frightened, stunned, and knocked unconscious</strong>.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: multiple-heads
+flags: {}
+img: icons/skills/melee/strike-sword-stabbed-brown.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304973950
+  modifiedTime: 1725992573593
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dvSoAF3bOeUeIrxf'

@@ -1,0 +1,281 @@
+name: Divine Word
+system:
+  description:
+    value: >-
+      <p>You utter a word imbued with power from the Upper Planes. Each creature
+      of your choice in range makes a Charisma saving throw. On a failed save, a
+      target that has 50 Hit Points or fewer suffers an effect based on its
+      current Hit Points, as shown in the Divine Word Effects table. Regardless
+      of its Hit Points, a Celestial, an Elemental, a Fey, or a Fiend target
+      that fails its save is forced back to its plane of origin (if it isn't
+      there already) and can't return to the current plane for 24 hours by any
+      means short of a
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish}</em>
+      spell.</p><table><thead><tr><td>Hit Points</td><td>Divine Word
+      Effect</td></tr></thead><tbody><tr><td>0–20</td><td>The target
+      dies.</td></tr><tr><td>21–30</td><td>The target has the
+      &amp;Reference[Blinded apply=false], &amp;Reference[Deafened apply=false],
+      and &amp;Reference[Stunned apply=false] conditions for 1
+      hour.</td></tr><tr><td>31–40</td><td>The target has the Blinded and
+      Deafened conditions for 10 minutes.</td></tr><tr><td>41–50</td><td>The
+      target has the Deafened condition for 1 minute.</td></tr></tbody></table>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: bonus
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: each creature of your choice within range
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: evo
+  properties:
+    - vocal
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    jImdta87M9XcUBkn:
+      type: save
+      _id: jImdta87M9XcUBkn
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: poB090Yp3gKXXcMH
+          onSave: false
+        - _id: grWj3oo8iH8egvi1
+          onSave: false
+        - _id: 8O8KymREuOZFi45g
+          onSave: false
+        - _id: qZvAfjU2H6Fg6y6M
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects:
+        - poB090Yp3gKXXcMH
+        - grWj3oo8iH8egvi1
+        - 8O8KymREuOZFi45g
+        - qZvAfjU2H6Fg6y6M
+  identifier: divine-word
+_id: phbsplDivineWord
+type: spell
+img: icons/magic/holy/projectiles-blades-salvo-yellow.webp
+effects:
+  - name: Death
+    img: systems/dnd5e/icons/svg/statuses/dead.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplDivineWord
+    transfer: false
+    _id: poB090Yp3gKXXcMH
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - dead
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724883132817
+      modifiedTime: 1724883224416
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplDivineWord.poB090Yp3gKXXcMH'
+  - name: Blinded, Deafened, Stunned
+    img: systems/dnd5e/icons/svg/statuses/stunned.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplDivineWord
+    transfer: false
+    _id: grWj3oo8iH8egvi1
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - blinded
+      - deafened
+      - stunned
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724883228265
+      modifiedTime: 1724883335681
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplDivineWord.grWj3oo8iH8egvi1'
+  - name: Blinded, Deafened
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplDivineWord
+    transfer: false
+    _id: 8O8KymREuOZFi45g
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724883338160
+      modifiedTime: 1724883369318
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplDivineWord.8O8KymREuOZFi45g'
+  - name: Deafened
+    img: systems/dnd5e/icons/svg/statuses/deafened.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplDivineWord
+    transfer: false
+    _id: qZvAfjU2H6Fg6y6M
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724883371355
+      modifiedTime: 1724883402185
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplDivineWord.qZvAfjU2H6Fg6y6M'
+folder: EdAGMG8IF26PLkD3
+sort: 1900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425950635
+  modifiedTime: 1745256791274
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDivineWord'

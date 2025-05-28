@@ -1,0 +1,58 @@
+_id: phbrgeThievesCan
+name: Thieves' Cant
+type: feat
+folder: ymTkGscp5QEOwDlv
+img: icons/sundries/documents/document-symbol-eye.webp
+system:
+  description:
+    value: >-
+      <p>You picked up various languages in the communities where you plied your
+      roguish talents. You know Thieves' Cant and one other language of your
+      choice, which you choose from the language tables in
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbCreatingAChar.JournalEntryPage.t1WP9VEevo4TOTXw#choose-languages]{Character
+      Creation}.</p><section class="secret"
+      id="secret-xG1Y223QZRsrOTCZ"><p><strong>Foundry
+      Note</strong></p><p>Thieves' Cant will be added to your sheet
+      automatically and you will be prompted to choose the additional
+      language.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: thieves-cant
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866292069
+  modifiedTime: 1745514630350
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeThievesCan'

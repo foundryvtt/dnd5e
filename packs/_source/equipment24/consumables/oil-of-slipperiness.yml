@@ -1,0 +1,179 @@
+_id: dmgOilOfSlipperi
+name: Oil of Slipperiness
+type: consumable
+folder: guHYjt0gjPLU2wCs
+img: icons/consumables/potions/bottle-circular-corked-labeled-green.webp
+system:
+  description:
+    value: >-
+      <p><em>Potion, Uncommon</em></p><p>One vial of this oil can cover one
+      Medium or smaller creature, along with the equipment it's wearing and
+      carrying (one additional vial is required for each size category above
+      Medium). Applying the oil takes 10 minutes. The affected creature then
+      gains the effect of the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFreedomofM]{Freedom of
+      Movement} spell for 8 hours.</p><p>Alternatively, the oil can be poured on
+      the ground as a Magic action, where it covers a 10-foot square,
+      duplicating the effect of the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplGrease0000]{Grease} spell in
+      that area for 8 hours.</p><p>This sticky, black unguent is thick and
+      heavy, but it flows quickly when poured.</p>
+    chat: ''
+  identifier: oil-of-slipperiness
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties:
+    - mgc
+  capacity:
+    type: weight
+    value: null
+  uses:
+    max: '1'
+    autoDestroy: true
+  type:
+    value: potion
+  activities:
+    dgp4czAiBiwgDJ2X:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFreedomofM
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: false
+      _id: dgp4czAiBiwgDJ2X
+      sort: 0
+      activation:
+        type: minute
+        value: 10
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: true
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Cover Creature
+      img: ''
+    IQsAg45adQPcbS86:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplGrease0000
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: false
+      _id: IQsAg45adQPcbS86
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Pour on Ground
+      img: ''
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712701707
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1250000
+ownership:
+  default: 0
+_key: '!items!dmgOilOfSlipperi'

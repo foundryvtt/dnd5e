@@ -1,0 +1,179 @@
+name: Sunburst
+system:
+  description:
+    value: >-
+      <p>Brilliant sunlight flashes in a 60-foot-radius Sphere centered on a
+      point you choose within range. Each creature in the Sphere makes a
+      Constitution saving throw. On a failed save, a creature takes 12d6 Radiant
+      damage and has the &amp;Reference[Blinded apply=false] condition for 1
+      minute. On a successful save, it takes half as much damage only.</p><p>A
+      creature Blinded by this spell makes another [[/save ability=con
+      dc=@attributes.spell.dc format=long]] at the end of each of its turns,
+      ending the effect on itself on a success.</p><p>This spell dispels
+      &amp;Reference[Darkness] in its area that was created by any spell.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: sphere
+      size: '60'
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '150'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 8
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a piece of sunstone
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    GunsbnehgeyBUMUX:
+      type: save
+      _id: GunsbnehgeyBUMUX
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: G813GhbtXMeZfUHe
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 12
+            denomination: '6'
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: sunburst
+_id: phbsplSunburst00
+type: spell
+img: icons/magic/nature/symbol-sun-yellow.webp
+effects:
+  - name: Blinded
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplSunburst00
+    transfer: false
+    _id: G813GhbtXMeZfUHe
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>A creature &amp;Reference[Blinded apply=false] by this spell makes
+      another [[/save ability=con format=long]] at the end of each of its turns,
+      ending the effect on itself on a success.</p>
+    tint: '#ffffff'
+    statuses:
+      - blinded
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725310020925
+      modifiedTime: 1725310153859
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplSunburst00.G813GhbtXMeZfUHe'
+folder: M5CvwK9zVtzx6Dnn
+sort: 100007
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425974212
+  modifiedTime: 1745256798971
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSunburst00'

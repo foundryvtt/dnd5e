@@ -1,0 +1,136 @@
+_id: eCPQuQkIabFKTl9u
+name: Produce Flame
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A flickering flame appears in your hand. The flame remains there for
+      the Duration and harms neither you nor your Equipment. The flame sheds
+      bright light in a 10-foot radius and dim light for an additional 10 feet.
+      The spell ends if you dismiss it as an action or if you cast it
+      again.</p><p>You can also Attack with the flame, although doing so ends
+      the spell. When you cast this spell, or as an action on a later turn, you
+      can hurl the flame at a creature within 30 feet of you. Make a ranged
+      spell Attack. On a hit, the target takes 1d8 fire damage.</p><p>This
+      spell's damage increases by 1d8 when you reach 5th level (2d8), 11th level
+      (3d8), and 17th level (4d8).</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: spell
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - number: 1
+            denomination: 8
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: produce-flame
+sort: 0
+flags: {}
+img: icons/magic/fire/explosion-fireball-medium-orange.webp
+effects: []
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037361524
+  modifiedTime: 1725992721594
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!eCPQuQkIabFKTl9u'

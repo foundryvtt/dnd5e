@@ -1,0 +1,114 @@
+_id: e0uTcFPpgxjIyUW9
+name: Arcane Recovery
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You have learned to regain some of your magical energy by studying your
+      spellbook. Once per day when you finish a short rest, you can choose
+      expended spell slots to recover. The spell slots can have a combined level
+      that is equal to or less than half your wizard level (rounded up), and
+      none of the slots can be 6th level or higher.</p><p>For example, if you're
+      a 4th-level wizard, you can recover up to two levels worth of spell slots.
+      You can recover either a 2nd-level spell slot or two 1st-level spell
+      slots.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Wizard 1
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: >-
+          The wizard can recover [[ceil(@classes.wizard.levels/2)]] levels worth
+          of spell slots (of 5th-level or lower).
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: arcane-recovery
+flags: {}
+img: icons/magic/earth/explosion-lava-stone-green.webp
+effects: []
+folder: ikBx14Cn4XoCg0QY
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037386175
+  modifiedTime: 1725992289042
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!e0uTcFPpgxjIyUW9'

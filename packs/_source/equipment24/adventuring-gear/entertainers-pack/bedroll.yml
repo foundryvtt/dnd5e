@@ -1,0 +1,51 @@
+name: Bedroll
+system:
+  description:
+    value: >-
+      <p>A Bedroll sleeps one Small or Medium creature. While in a Bedroll, you
+      automatically succeed on saving throws against extreme cold (see
+      @UUID[Compendium.dnd5e.content24.JournalEntry.dmgDmsToolbox000.JournalEntryPage.xgLA30rErlkjIPAK]{Gameplay
+      Toolbox}).</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagEntertainer
+  quantity: 1
+  weight:
+    value: 7
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: bedroll
+_id: KH8g5hD7Q6ZX1YqV
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/survival/bedroll-grey.webp
+effects: []
+sort: 64844
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726532560188
+  modifiedTime: 1745256801479
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!KH8g5hD7Q6ZX1YqV'

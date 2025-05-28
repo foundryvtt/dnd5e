@@ -1,0 +1,236 @@
+_id: phbinvLifedrinke
+name: Lifedrinker
+type: feat
+img: icons/skills/melee/strike-sword-blood-red.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 9+ Warlock,
+      @UUID[Compendium.dnd5e.classes24.Item.phbinvPactBlade0]{Pact of the Blade}
+      Invocation</p></blockquote><p>Once per turn when you hit a creature with
+      your pact weapon, you can deal an extra 1d6 Necrotic, Psychic, or Radiant
+      damage (your choice) to the creature, and you can expend one of your Hit
+      Point Dice to roll it and regain a number of Hit Points equal to the roll
+      plus your Constitution modifier (minimum of 1 Hit Point).</p><section
+      class="secret" id="secret-1Hta9I4donszrwIQ"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Damage</strong> activity allows you to
+      choose the type of damage in the roll's dialog. It will remember your
+      choice going forward.</p><p>The <strong>Heal (Largest Hit Die)</strong>
+      and <strong>Smallest Hit Die</strong> activities expends the relevant Hit
+      Die and provides a healing roll with your Constitution modifier included.
+      Which you choose only matters if you are multi-classed with multiple hit
+      die types.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 9
+    repeatable: false
+  properties: []
+  requirements: Pact of the Blade Invocation
+  activities:
+    LDIKT3JVs25qBVuL:
+      type: damage
+      name: ''
+      _id: LDIKT3JVs25qBVuL
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Once per turn when you hit a creature with your pact weapon
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - necrotic
+              - psychic
+              - radiant
+            scaling:
+              number: 1
+    emx17h6kO4xmSqC6:
+      type: heal
+      name: Heal (Largest Hit Die)
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Once per turn when you hit a creature with your pact weapon
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: hitDice
+            value: '1'
+            target: largest
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: '@attributes.hd.largestAvailable + (max(1,@abilities.con.mod))'
+        scaling:
+          number: 1
+        bonus: ''
+      _id: emx17h6kO4xmSqC6
+    oMHxbcnQh38wZEKU:
+      type: heal
+      name: Heal (Smallest Hit Die)
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Once per turn when you hit a creature with your pact weapon
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: hitDice
+            value: '1'
+            target: smallest
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: '@attributes.hd.smallestAvailable + (max(1,@abilities.con.mod))'
+        scaling:
+          number: 1
+        bonus: ''
+      _id: oMHxbcnQh38wZEKU
+  enchant: {}
+  identifier: lifedrinker
+effects: []
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1740680084120
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvLifedrinke'

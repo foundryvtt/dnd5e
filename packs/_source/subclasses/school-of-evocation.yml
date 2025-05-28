@@ -1,0 +1,109 @@
+name: School of Evocation
+type: subclass
+img: icons/magic/fire/beam-strike-whip-red.webp
+system:
+  description:
+    value: >-
+      <p>You focus your study on magic that creates powerful elemental effects
+      such as bitter cold, searing flame, rolling thunder, crackling lightning,
+      and burning acid. Some evokers find employment in military forces, serving
+      as artillery to blast enemy armies from afar. Others use their spectacular
+      power to protect the weak, while some seek their own gain as bandits,
+      adventurers, or aspiring tyrants.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: school-of-evocation
+  classIdentifier: wizard
+  advancement:
+    - _id: qgi9q6koa7jabbc5
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.7uzJ2JkmsdRGLra3
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.6VBXkjjBgjSpNElh
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 2
+      title: Features
+    - _id: j1twu5y6jafoeupk
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.evEWCpE5MYgr5RRW
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 6
+      title: Features
+    - _id: vlybc408acscngpd
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.7O85kj6uDEG5NzUE
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 10
+      title: Features
+    - _id: s82u4bepkgu04upt
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.VUtSLeCzFubGXmGx
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 14
+      title: Features
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation: {}
+effects: []
+folder: 3qVfhjOhDkOVvfoG
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: Ye5f3FReEnuXfi0y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037372944
+  modifiedTime: 1725992730647
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Ye5f3FReEnuXfi0y'

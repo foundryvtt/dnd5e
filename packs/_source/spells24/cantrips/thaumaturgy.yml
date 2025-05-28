@@ -1,0 +1,128 @@
+name: Thaumaturgy
+system:
+  description:
+    value: >-
+      <p>You manifest a minor wonder within range. You create one of the effects
+      below within range. If you cast this spell multiple times, you can have up
+      to three of its 1-minute effects active at a time.</p><p><strong>Altered
+      Eyes.</strong> You alter the appearance of your eyes for 1
+      minute.</p><p><strong>Booming Voice.</strong> Your voice booms up to three
+      times as loud as normal for 1 minute. For the duration, you have Advantage
+      on [[/check ability=cha skill=itm]] checks.</p><p><strong>Fire
+      Play.</strong> You cause flames to flicker, brighten, dim, or change color
+      for 1 minute.</p><p><strong>Invisible Hand.</strong> You instantaneously
+      cause an unlocked door or window to fly open or slam
+      shut.</p><p><strong>Phantom Sound.</strong> You create an instantaneous
+      sound that originates from a point of your choice within range, such as a
+      rumble of thunder, the cry of a raven, or ominous
+      whispers.</p><p><strong>Tremors.</strong> You cause harmless tremors in
+      the ground for 1 minute.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: trs
+  properties:
+    - vocal
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    q83milmNAKF9cymI:
+      type: utility
+      _id: q83milmNAKF9cymI
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: thaumaturgy
+_id: phbsplThaumaturg
+type: spell
+img: icons/environment/people/cleric-orange.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+sort: 100391
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425975220
+  modifiedTime: 1745256799199
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplThaumaturg'

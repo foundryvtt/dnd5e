@@ -1,0 +1,77 @@
+name: Costume
+system:
+  description:
+    value: >-
+      <p>While wearing a Costume, you have Advantage on any ability check you
+      make to impersonate the person or type of person it represents.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagEntertainer
+  quantity: 3
+  weight:
+    value: 4
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: clothing
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities: {}
+  identifier: costume
+_id: oQRUfRQQjsMMXJhD
+type: equipment
+folder: uDk4FBYfcP2JnX6t
+img: icons/equipment/head/hood-purple-mask.webp
+effects: []
+sort: 65430
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726532569521
+  modifiedTime: 1745256810474
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!oQRUfRQQjsMMXJhD'

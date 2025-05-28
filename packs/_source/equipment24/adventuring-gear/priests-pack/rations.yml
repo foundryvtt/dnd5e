@@ -1,0 +1,74 @@
+name: Rations
+system:
+  description:
+    value: >-
+      <p>Rations consist of travel-ready food, including jerky, dried fruit,
+      hardtack, and nuts. See &amp;Reference[Malnutrition] in the rules glossary
+      for the risks of not eating.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: sp
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagPriestsPack
+  quantity: 7
+  weight:
+    value: 2
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: true
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: food
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities: {}
+  identifier: rations
+_id: 6SKwUOHlYMst7M2z
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/consumables/food/berries-ration-round-red.webp
+effects: []
+sort: 65553
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726532889721
+  modifiedTime: 1745256801184
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!6SKwUOHlYMst7M2z'

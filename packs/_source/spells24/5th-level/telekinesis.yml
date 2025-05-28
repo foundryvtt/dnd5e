@@ -1,0 +1,140 @@
+name: Telekinesis
+system:
+  description:
+    value: >-
+      <p>You gain the ability to move or manipulate creatures or objects by
+      thought. When you cast the spell and as a Magic action on your later turns
+      before the spell ends, you can exert your will on one creature or object
+      that you can see within range, causing the appropriate effect below. You
+      can affect the same target round after round or choose a new one at any
+      time. If you switch targets, the prior target is no longer affected by the
+      spell.</p><p><strong>Creature.</strong> You can try to move a Huge or
+      smaller creature. The target must succeed on a Strength saving throw, or
+      you move it up to 30 feet in any direction within the spell's range. Until
+      the end of your next turn, the creature has the &amp;Reference[Restrained]
+      condition, and if you lift it into the air, it is suspended there. It
+      falls at the end of your next turn unless you use this option on it again
+      and it fails the save.</p><p><strong>Object.</strong> You can try to move
+      a Huge or smaller object. If the object isn't being worn or carried, you
+      automatically move it up to 30 feet in any direction within the spell's
+      range.</p><p>If the object is worn or carried by a creature, that creature
+      must succeed on a Strength saving throw, or you pull the object away and
+      move it up to 30 feet in any direction within the spell's range.</p><p>You
+      can exert fine control on objects with your telekinetic grip, such as
+      manipulating a simple tool, opening a door or a container, stowing or
+      retrieving an item from an open container, or pouring the contents from a
+      vial.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creatureOrObject
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 5
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    ntGShpXYlBqLMZmK:
+      type: save
+      _id: ntGShpXYlBqLMZmK
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: str
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: telekinesis
+_id: phbsplTelekinesi
+type: spell
+img: icons/magic/unholy/hand-grasping-green.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 103125
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425974756
+  modifiedTime: 1745256799073
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplTelekinesi'

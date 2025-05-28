@@ -1,0 +1,165 @@
+_id: dmgPotionOfWater
+name: Potion of Water Breathing
+type: consumable
+folder: 4NjJfCbRAVhw8ESv
+img: icons/consumables/potions/potion-bottle-corked-labeled-green.webp
+system:
+  activities:
+    21kmAfoqMj4fSwrH:
+      type: utility
+      name: Drink
+      _id: 21kmAfoqMj4fSwrH
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: FuzyfcWOcC3IXsDB
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects:
+        - FuzyfcWOcC3IXsDB
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Potion, Uncommon</em></p><p>You can breathe underwater for 24 hours
+      after drinking this potion.</p><p>This potion's cloudy green fluid smells
+      of the sea and has a jellyfish-like bubble floating in it.</p><section
+      class="secret" id="secret-Hak8pdfo1Rbwhrgv"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Water Breather</strong> Active Effect can
+      be used for tracking.</p></section>
+    chat: ''
+  identifier: potion-of-water-breathing
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  price:
+    value: 200
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: potion
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects:
+  - name: Water Breather
+    img: systems/dnd5e/icons/items/potion-of-water-breathing.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgPotionOfWater
+    transfer: false
+    _id: FuzyfcWOcC3IXsDB
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 86400
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.equipment24.Item.dmgPotionOfVital.ActiveEffect.GxutU47JS0FNfeoM
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730864676000
+      modifiedTime: 1730864693798
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgPotionOfWater.FuzyfcWOcC3IXsDB'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgPotionOfWater'

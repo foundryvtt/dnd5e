@@ -1,0 +1,184 @@
+_id: dmgPotionOfPoiso
+name: Potion of Poison
+type: consumable
+folder: 4NjJfCbRAVhw8ESv
+img: icons/consumables/potions/potion-bottle-skull-label-poison-teal.webp
+system:
+  activities:
+    zlmOWbfYFIcJlBuN:
+      type: save
+      name: Drink
+      _id: zlmOWbfYFIcJlBuN
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: lZOgSICPuR1fKxTL
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 6
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+        onSave: full
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '13'
+      img: ''
+      appliedEffects:
+        - lZOgSICPuR1fKxTL
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Potion, Uncommon</em></p><p>This concoction looks, smells, and
+      tastes like a Potion of Healing or another beneficial potion. However, it
+      is actually poison masked by illusion magic. <em>Identify</em> reveals its
+      true nature.</p><p>If you drink this potion, you take 4d6 Poison damage
+      and must succeed on a DC 13 Constitution saving throw or have the Poisoned
+      condition for 1 hour.</p>
+    chat: ''
+  identifier: potion-of-poison
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: >-
+      <p><em>Potion, Common</em></p><p>You regain 2d4 + 2 Hit Points when you
+      drink this potion.</p><p>Whatever its potency, the potion’s red liquid
+      glimmers when agitated.</p>
+    name: Unidentified Consumable
+  container: null
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  price:
+    value: 200
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: potion
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects:
+  - name: Poisoned
+    img: systems/dnd5e/icons/items/potion-of-healing.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgPotionOfPoiso
+    transfer: false
+    _id: lZOgSICPuR1fKxTL
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - poisoned
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730864211372
+      modifiedTime: 1730864224228
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgPotionOfPoiso.lZOgSICPuR1fKxTL'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgPotionOfPoiso'

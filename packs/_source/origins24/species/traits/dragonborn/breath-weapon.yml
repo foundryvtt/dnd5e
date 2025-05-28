@@ -1,0 +1,198 @@
+_id: phbsptBreathWeap
+name: Breath Weapon
+type: feat
+img: icons/creatures/reptiles/lizard-mouth-glowing-red.webp
+system:
+  activities:
+    dxCRYmNSSGp6L2yh:
+      type: save
+      name: Breath Weapon (Cone)
+      _id: dxCRYmNSSGp6L2yh
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '15'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: true
+              formula: '@scale.dragonborn.breath'
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - acid
+              - cold
+              - fire
+              - poison
+              - lightning
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: con
+          formula: ''
+    iyK44COq6gbdbkc2:
+      type: save
+      name: Breath Weapon (Line)
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: line
+          size: '30'
+          width: '5'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: true
+              formula: '@scale.dragonborn.breath'
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - acid
+              - cold
+              - fire
+              - poison
+              - lightning
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: con
+          formula: ''
+      _id: iyK44COq6gbdbkc2
+  uses:
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+    max: '@prof'
+  description:
+    value: "<p>When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in either a 15-foot Cone or a 30-foot Line that is 5 feet wide (choose the shape each time). Each creature in that area must make a Dexterity saving throw (DC 8 plus your Constitution modifier and Proficiency Bonus). On a failed save, a creature takes 1d10 damage of the type determined by your Draconic Ancestry trait. On a successful save, a creature takes half as much damage. This damage increases by 1d10 when you reach character levels 5 (2d10), 11 (3d10), and 17\_(4d10).You can use this Breath Weapon a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.</p><section class=\"secret\" id=\"secret-iuhfGfxgl8GeYWBf\"><p><strong>Foundry Note</strong></p><p>The <strong>Breath Weapon (Cone)</strong> and <strong>Breath Weapon (Line)</strong> activities are both configured for their template type and include each type of damage. The damage also scales as you level up.</p><p>You can select the damage type in the damage roll's dialog box. It will remember your damage choice afterwards. You can edit the activities to remove the other damage types to skip this.</p></section>"
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties:
+    - mgc
+  requirements: Dragonborn
+  identifier: breath-weapon
+  advancement: []
+  cover: null
+  crewed: false
+effects: []
+folder: 2Bw096HjE0HyGMwM
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745340795949
+  modifiedTime: 1745341995010
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 700000
+ownership:
+  default: 0
+_key: '!items!phbsptBreathWeap'

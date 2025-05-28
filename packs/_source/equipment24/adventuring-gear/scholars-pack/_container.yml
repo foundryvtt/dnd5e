@@ -1,0 +1,65 @@
+name: Scholar's Pack
+system:
+  description:
+    value: >-
+      <p>A Scholar's Pack contains the following items:
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBackpack000]{Backpack},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBook0000000]{Book},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagInk00000000]{Ink},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagInkPen00000]{Ink Pen},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagLamp0000000]{Lamp}, 10 flasks
+      of @UUID[Compendium.dnd5e.equipment24.Item.phbagOil00000000]{Oil}, 10
+      sheets of
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagParchment00]{Parchment}, and
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagTinderbox00]{Tinderbox}.</p>
+    chat: ''
+  price:
+    value: 40
+    denomination: gp
+  quantity: 1
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  weight:
+    value: 5
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties: []
+  capacity:
+    type: weight
+    value: 30
+  identifier: scholars-pack
+_id: phbagScholarsPac
+type: container
+folder: uDk4FBYfcP2JnX6t
+img: icons/containers/bags/pack-leather-strapped-tan.webp
+effects: []
+sort: 5700000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425911882
+  modifiedTime: 1745256812865
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagScholarsPac'

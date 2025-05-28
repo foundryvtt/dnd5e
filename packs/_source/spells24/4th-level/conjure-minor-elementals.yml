@@ -1,0 +1,192 @@
+name: Conjure Minor Elementals
+system:
+  description:
+    value: >-
+      <p>You conjure spirits from the Elemental Planes that flit around you in a
+      15-foot Emanation for the duration. Until the spell ends, any attack you
+      make deals an extra 2d8 damage when you hit a creature in the Emanation.
+      This damage is Acid, Cold, Fire, or Lightning (your choice when you make
+      the attack).</p><p>In addition, the ground in the Emanation is
+      &amp;Reference[DifficultTerrain] for your enemies.</p><p><strong>Using a
+      Higher-Level Spell Slot.</strong> The damage increases by 1d8 for each
+      spell slot level above 4.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    page: ''
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ft
+      type: radius
+      size: '15'
+      contiguous: false
+      count: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: true
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '15'
+      target:
+        prompt: false
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: any
+          special: ''
+        override: true
+      damage:
+        critical:
+          allow: true
+          bonus: ''
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: '8'
+            bonus: ''
+            types:
+              - acid
+              - cold
+              - fire
+              - lightning
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Bonus Attack Damage
+      img: ''
+      appliedEffects: []
+    VSwMJFQoi3KU3Ais:
+      type: utility
+      _id: VSwMJFQoi3KU3Ais
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Cast
+      img: ''
+      appliedEffects: []
+  identifier: conjure-minor-elementals
+_id: phbsplConjureMin
+type: spell
+img: icons/creatures/magical/spirit-fire-orange.webp
+effects: []
+folder: qi3IbnEwap7mRw4b
+sort: 3100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.2
+  createdTime: 1724425947075
+  modifiedTime: 1746119620226
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplConjureMin'

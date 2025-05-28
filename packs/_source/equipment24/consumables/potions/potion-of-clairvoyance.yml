@@ -1,0 +1,129 @@
+_id: dmgPotionOfClair
+name: Potion of Clairvoyance
+type: consumable
+folder: 4NjJfCbRAVhw8ESv
+img: icons/consumables/potions/bottle-conical-corked-yellow.webp
+system:
+  activities:
+    BL6iuIjSZz5RVXCS:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplClairvoyan
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+          - concentration
+        spellbook: true
+      _id: BL6iuIjSZz5RVXCS
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Potion, Rare</em></p><p>When you drink this potion, you gain the
+      effect of the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplClairvoyan]{Clairvoyance} spell
+      (no Concentration required).</p><p>An eyeball bobs in this potion's
+      yellowish liquid but vanishes when the potion is opened.</p>
+    chat: ''
+  identifier: potion-of-clairvoyance
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: potion
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256807176
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgPotionOfClair'

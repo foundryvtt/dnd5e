@@ -1,0 +1,131 @@
+_id: 5OGFdJw35QXp6mh6
+name: Mass Suggestion
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You suggest a course of activity (limited to a sentence or two) and
+      magically influence up to twelve creatures of your choice that you can see
+      within range and that can hear and understand you. Creatures that can't be
+      charmed are immune to this effect. The suggestion must be worded in such a
+      manner as to make the course of action sound reasonable. Asking the
+      creature to stab itself, throw itself onto a spear, immolate itself, or do
+      some other obviously harmful act automatically negates the effect of the
+      spell.</p><p>Each target must make a Wisdom saving throw. On a failed
+      save, it pursues the course of action you described to the best of its
+      ability. The suggested course of action can continue for the entire
+      duration. If the suggested activity can be completed in a shorter time,
+      the spell ends when the subject finishes what it was asked to
+      do.</p><p>You can also specify conditions that will trigger a special
+      activity during the duration. For example, you might suggest that a group
+      of soldiers give all their money to the first beggar they meet. If the
+      condition isn't met before the spell ends, the activity isn't
+      performed.</p><p>If you or any of your companions damage a creature
+      affected by this spell, the spell ends for that creature.</p><p><strong>At
+      Higher Levels.</strong> When you cast this spell using a 7th-level spell
+      slot, the duration is 10 days. When you use an 8th-level spell slot, the
+      duration is 30 days. When you use a 9th-level spell slot, the duration is
+      a year and a day.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '12'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: enc
+  materials:
+    value: A snake's tongue and either a bit of honeycomb or a drop of sweet oil
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: mass-suggestion
+sort: 0
+flags: {}
+img: icons/magic/air/air-burst-spiral-large-pink.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037347284
+  modifiedTime: 1725992716955
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!5OGFdJw35QXp6mh6'

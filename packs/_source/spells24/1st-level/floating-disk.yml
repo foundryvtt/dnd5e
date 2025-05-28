@@ -1,0 +1,146 @@
+name: Floating Disk
+system:
+  description:
+    value: >-
+      <p>This spell creates a circular, horizontal plane of force, 3 feet in
+      diameter and 1 inch thick, that floats 3 feet above the ground in an
+      unoccupied space of your choice that you can see within range. The disk
+      remains for the duration and can hold up to 500 pounds. If more weight is
+      placed on it, the spell ends, and everything on the disk falls to the
+      ground.</p><p>The disk is immobile while you are within 20 feet of it. If
+      you move more than 20 feet away from it, the disk follows you so that it
+      remains within 20 feet of you. It can move across uneven terrain, up or
+      down stairs, slopes and the like, but it can't cross an elevation change
+      of 10 feet or more. For example, the disk can't move across a 10-foot-deep
+      pit, nor could it leave such a pit if it was created at the
+      bottom.</p><p>If you move more than 100 feet from the disk (typically
+      because it can't move around an obstacle to follow you), the spell
+      ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '30'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  materials:
+    value: a drop of mercury
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        proficiency: false
+        attacks: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: TmBxKaIdzvU6HtTC
+          uuid: Compendium.dnd5e.actors24.Actor.phbsplFloatingDi
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: tensers-floating-disk
+_id: phbsplTensersFlo
+type: spell
+img: icons/magic/light/circle-window-clock-blue.webp
+effects: []
+folder: pBaAAtXBCq9FVEnL
+sort: 150000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425975130
+  modifiedTime: 1745256799170
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplTensersFlo'

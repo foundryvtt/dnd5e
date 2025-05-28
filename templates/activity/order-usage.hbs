@@ -1,0 +1,140 @@
+<section>
+
+    {{!-- Description --}}
+    {{#if description}}
+    <div class="description">{{{ description }}}</div>
+    {{/if}}
+
+    {{!-- Building --}}
+    {{#if build}}
+    {{#with build}}
+    <fieldset>
+        <legend>{{ localize "DND5E.FACILITY.Orders.build.inf" }}</legend>
+
+        {{!-- Size --}}
+        {{ formField field name=name value=value choices=choices labelAttr="label" blank=false localize=true }}
+    </fieldset>
+    {{/with}}
+    {{/if}}
+
+    {{!-- Crafting --}}
+    {{#if craft}}
+    {{#with craft}}
+    <fieldset {{#if isHarvesting}}class="harvesting"{{/if}}>
+        <legend>{{ legend }}</legend>
+        <ul class="separated-list single-item">
+            <li>
+                {{#if value}}
+                <div class="details flexrow">
+                    <img class="gold-icon" src="{{ value.img }}" alt="{{ value.name }}">
+                    {{{ value.contentLink }}}
+                    <div class="list-controls flexrow">
+                        <button type="button" class="unbutton control-button" data-action="removeCraft"
+                                data-tooltip aria-label="{{ localize "DND5E.FACILITY.Action.RemoveCraft" }}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
+                {{else}}
+                {{ formInput item.field name=item.name }}
+                {{/if}}
+            </li>
+        </ul>
+        {{#if quantity}}
+        <div class="quantity">
+            <span class="separator">&times;</span>
+            {{ formInput quantity.field name=quantity.name value=quantity.value }}
+        </div>
+        {{/if}}
+        {{#if baseItem}}
+        {{ formField baseItem.field name=baseItem.name value=baseItem.value localize=true
+                     input=@root.inputs.createCheckboxInput }}
+        {{/if}}
+    </fieldset>
+    {{/with}}
+    {{/if}}
+
+    {{!-- Trade --}}
+    {{#if trade}}
+    {{#with trade}}
+    <fieldset>
+        <legend>{{ localize "DND5E.FACILITY.Orders.trade.inf" }}</legend>
+
+        {{#if stocked}}
+
+        {{!-- Stocked --}}
+        {{ formField stocked.field name=stocked.name value=stocked.value input=@root.inputs.createCheckboxInput
+                     localize=true }}
+
+        {{else}}
+
+        {{!-- Sell --}}
+        {{ formField sell.field name=sell.name value=sell.value input=@root.inputs.createCheckboxInput localize=true }}
+
+        {{!-- Goods --}}
+        {{#if stock}}
+        {{ formField stock.field name=stock.name value=stock.value localize=true }}
+        {{/if}}
+
+        {{!-- Animals --}}
+        {{#if creatures}}
+
+        {{#if sell.value}}
+        <ul class="animals unlist">
+            {{#each creatures.sell}}
+            <li class="animal">
+                {{{ contentLink }}}
+                {{ formInput field name=name value=value input=@root.inputs.createCheckboxInput }}
+            </li>
+            {{/each}}
+        </ul>
+        {{ formField creatures.price.field name=creatures.price.name value=creatures.price.value localize=true }}
+        {{else}}
+        <div class="slots facility-occupants creatures">
+            {{#each creatures.buy}}
+            <div class="slot occupant-slot creature {{#if empty}}empty{{/if}}" data-index="{{ @key }}"
+                 {{#if uuid}}data-actor-uuid="{{ uuid }}"{{/if}} {{#if name}}data-tooltip="{{ name }}"{{/if}}>
+                {{#unless empty}}
+                <img src="{{ img }}" alt="{{ name }}">
+                {{#if removable}}
+                <a class="deletion-control" data-action="deleteOccupant"
+                   data-tooltip aria-label="{{ localize "DND5E.FACILITY.Action.DeleteOccupant" }}">
+                    <i class="fas fa-circle-xmark"></i>
+                </a>
+                <input type="hidden" name="trade.creatures.buy.{{ @key }}" value="{{ uuid }}">
+                {{/if}}
+                {{/unless}}
+            </div>
+            {{/each}}
+        </div>
+        <div class="form-group">
+            <p class="hint">{{ localize creatures.hint }}</p>
+        </div>
+        {{/if}}
+
+        {{/if}}
+
+        {{/if}}
+
+    </fieldset>
+    {{/with}}
+    {{/if}}
+
+    {{!-- Costs --}}
+    {{#if costs}}
+    {{#with costs}}
+    <fieldset>
+        <legend>{{ localize "DND5E.FACILITY.Costs.Label" }}</legend>
+
+        {{!-- Days --}}
+        {{ formField days.field name=days.name value=days.value localize=true }}
+
+        {{!-- Gold --}}
+        {{#unless @root.trade.sell.value}}
+        {{ formField gold.field name=gold.name value=gold.value localize=true }}
+        {{/unless}}
+    </fieldset>
+    {{/with}}
+    {{/if}}
+</section>

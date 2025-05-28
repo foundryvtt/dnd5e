@@ -1,0 +1,123 @@
+_id: phbDruid00000000
+name: Druid
+pages:
+  - sort: 100000
+    name: Druid
+    type: class
+    _id: UCOh3zlvGxyk5jLr
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbdrdDruid00000
+      description:
+        value: >-
+          <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbdrdDruid00000
+          inline classes="free-rules-embed"]</p> <h2>Becoming a Druid
+          …</h2><h3>As a Level 1 Character</h3><ul><li><p>Gain all the traits in
+          the Core Druid Traits table.</p></li><li><p>Gain the Druid's level 1
+          features, which are listed in the Druid Features
+          table.</p></li></ul><h3>As a Multiclass Character</h3><ul><li><p>Gain
+          the following traits from the Core Druid Traits table: Hit Point Die
+          and training with Light armor and Shields.</p></li><li><p>Gain the
+          Druid's level 1 features, which are listed in the Druid Features
+          table. See the multiclassing rules in chapter 2 to determine your
+          available spell slots.</p></li></ul>
+        additionalHitPoints: ''
+        additionalTraits: ''
+        additionalEquipment: ''
+        subclass: >-
+          <p>A Druid subclass is a specialization that grants you features at
+          certain levels, as specified in the subclass. The next page presents
+          the @UUID[Compendium.dnd5e.classes24.Item.phbdrdCirland000]{Circle of
+          the Land} subclass.</p>
+      subclassItems: []
+      subclassHeader: ''
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745512291741
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbDruid00000000.UCOh3zlvGxyk5jLr'
+  - sort: 200000
+    name: Circle of Land
+    type: subclass
+    _id: Ysgeru1iCA7CCe3x
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbdrdCirland000
+      description:
+        value: >-
+          <blockquote><p>Celebrate Connection to the Natural
+          World</p></blockquote><p>The
+          @UUID[Compendium.dnd5e.classes24.Item.phbdrdCirland000]{Circle of the
+          Land} comprises mystics and sages who safeguard ancient knowledge and
+          rites. These Druids meet within sacred circles of trees or standing
+          stones to whisper primal secrets in Druidic. The circle's wisest
+          members preside as the chief priests of their communities.</p>
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1735934525587
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbDruid00000000.Ysgeru1iCA7CCe3x'
+folder: 1A8WFP1GVZkKdxii
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 3
+    order: 500400
+    navigation:
+      previous: phbCleric0000000
+      next: phbFighter000000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1724425888900
+  modifiedTime: 1745677865034
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 500000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbDruid00000000'

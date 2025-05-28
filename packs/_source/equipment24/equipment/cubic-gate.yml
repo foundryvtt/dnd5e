@@ -1,0 +1,182 @@
+_id: dmgCubicGate0000
+name: Cubic Gate
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/treasure/puzzle-box-glowing-blue.webp
+system:
+  activities:
+    KJbx4Fu7A0VNaI3w:
+      type: cast
+      _id: KJbx4Fu7A0VNaI3w
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '9'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplGate000000
+      name: ''
+      img: ''
+    4xkx3c93IMfNXg9x:
+      type: cast
+      _id: 4xkx3c93IMfNXg9x
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '7'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplPlaneShift
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d3
+    max: '3'
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Legendary</em></p></div><p>This cube is 3
+      inches across and radiates palpable magical energy. The six sides of the
+      cube are each keyed to a different plane of existence, one of which is the
+      Material Plane. The other sides are linked to planes determined by the
+      DM.</p><p>The cube has 3 charges and regains 1d3 expended charges daily at
+      dawn. As a Magic action, you can expend 1 of the cube's charges to cast
+      one of the following spells using the cube.</p><p><strong>Gate.</strong>
+      Pressing one side of the cube, you cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGate000000]{Gate}</em>,
+      opening a portal to the plane of existence keyed to that
+      side.</p><p><strong>Plane Shift.</strong> Pressing one side of the cube
+      twice, you cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplPlaneShift]{Plane
+      Shift}</em>, transporting the targets to the plane of existence keyed to
+      that side.</p>
+    chat: ''
+  identifier: cubic-gate
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712698853
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 10100000
+ownership:
+  default: 0
+_key: '!items!dmgCubicGate0000'

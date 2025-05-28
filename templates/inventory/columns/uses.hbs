@@ -1,0 +1,31 @@
+{{#if ctx.uses.isOnCooldown}}
+<div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip
+     aria-label="{{ entry.labels.recharge }}" data-column-id="{{ id }}">
+    <a class="item-action" data-action="recharge"><i class="fa-solid fa-arrows-rotate" inert></i></a>
+</div>
+{{else if ctx.uses.hasRecharge}}
+<div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip
+     aria-label="{{ entry.labels.recharge }}" data-column-id="{{ id }}">
+    <i class="fa-solid fa-bolt" inert></i>
+</div>
+{{else if ctx.uses.hasUses}}
+<div class="item-detail item-uses" data-column-id="{{ id }}">
+    {{#if @root.locked}}
+    <span class="value">{{ ctx.uses.value }}</span>
+    {{else}}
+    <input type="text" value="{{ ctx.uses.value }}" placeholder="0" data-dtype="Number"
+           data-name="{{ ctx.uses.prop }}" inputmode="numeric" pattern="[+=\-]?\d*"
+           aria-label="{{ localize "DND5E.Remaining" }}">
+    {{/if}}
+    <span class="separator">&sol;</span>
+    <span class="max">{{ ctx.uses.max }}</span>
+</div>
+{{else if ctx.linkedUses}}
+<div class="item-detail item-uses" data-column-id="{{ id }}">
+    <span class="value">{{ ctx.linkedUses.value }}</span>
+    <span class="separator">&sol;</span>
+    <span class="max">{{ ctx.linkedUses.max }}</span>
+</div>
+{{else}}
+<div class="item-detail item-uses empty" data-column-id="{{ id }}"></div>
+{{/if}}

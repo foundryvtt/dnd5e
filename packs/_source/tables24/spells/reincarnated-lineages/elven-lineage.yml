@@ -1,0 +1,92 @@
+_id: phbElvenLineage0
+name: Elven Lineage
+img: systems/dnd5e/icons/svg/items/race.svg
+description: <p>You are part of a lineage that grants you supernatural abilities.</p>
+results:
+  - type: document
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    img: systems/dnd5e/icons/species/drow.webp
+    _id: BnLtNGVLIwk3q6Hf
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Elf, Drow
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspDrow0000000
+    description: ''
+    _key: '!tables.results!phbElvenLineage0.BnLtNGVLIwk3q6Hf'
+  - type: document
+    weight: 1
+    range:
+      - 2
+      - 2
+    drawn: false
+    img: systems/dnd5e/icons/species/elf-high.webp
+    _id: fRp61b2M2UirSn1B
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Elf, High
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspHighElf0000
+    description: ''
+    _key: '!tables.results!phbElvenLineage0.fRp61b2M2UirSn1B'
+  - type: document
+    weight: 1
+    range:
+      - 3
+      - 3
+    drawn: false
+    img: systems/dnd5e/icons/species/elf-wood.webp
+    _id: A4xbZelWo8bO7tfV
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Elf, Wood
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspWoodElf0000
+    description: ''
+    _key: '!tables.results!phbElvenLineage0.A4xbZelWo8bO7tfV'
+replacement: true
+displayRoll: true
+folder: H6GuZ74gUlcOEuC5
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1726504214289
+  modifiedTime: 1740685862686
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+formula: 1d3
+sort: 100000
+ownership:
+  default: 0
+_key: '!tables!phbElvenLineage0'

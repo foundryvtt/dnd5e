@@ -1,0 +1,70 @@
+_id: dmgSpellScroll00
+name: Spell Scroll
+type: consumable
+img: icons/sundries/scrolls/scroll-bound-black-tan.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: false
+    max: ''
+  description:
+    value: "<section class=\"fvtt advice\"><figure class=\"icon\"><img src=\"icons/vtt-512.png\" /></figure><article><h3>Create Scrolls from Spells</h3><p>You can easily create a Scroll for a Spell by right clicking on the spell and selecting the <span class=\"reference\"><em class=\"fa-solid fa-scroll fa-fw\">\_</em> Create Scroll</span> option.</p></article></section><p>A Spell Scroll bears the words of a single spell, written in a mystical cipher. If the spell is on your spell list, you can read the scroll and cast its spell without Material components. Otherwise, the scroll is unintelligible. Casting the spell by reading the scroll requires the spell's normal casting time. Once the spell is cast, the scroll crumbles to dust. If the casting is interrupted, the scroll isn't lost.</p><p>If the spell is on your spell list but of a higher level than you can normally cast, you make an ability check using your spellcasting ability to determine whether you cast the spell. The DC equals 10 plus the spell's level. On a failed check, the spell disappears from the scroll with no other effect.</p><p>The level of the spell on the scroll determines the spell's saving throw DC and attack bonus, as well as the scroll's rarity, as shown in the following table.</p><table><thead><tr><th><p>Spell Level</p></th><th><p>Rarity</p></th><th><p>Save DC</p></th><th><p>Attack Bonus</p></th></tr></thead><tbody><tr><td><p>Cantrip</p></td><td><p>Common</p></td><td><p>13</p></td><td><p>+5</p></td></tr><tr><td><p>1</p></td><td><p>Common</p></td><td><p>13</p></td><td><p>+5</p></td></tr><tr><td><p>2</p></td><td><p>Uncommon</p></td><td><p>13</p></td><td><p>+5</p></td></tr><tr><td><p>3</p></td><td><p>Uncommon</p></td><td><p>15</p></td><td><p>+7</p></td></tr><tr><td><p>4</p></td><td><p>Rare</p></td><td><p>15</p></td><td><p>+7</p></td></tr><tr><td><p>5</p></td><td><p>Rare</p></td><td><p>17</p></td><td><p>+9</p></td></tr><tr><td><p>6</p></td><td><p>Very Rare</p></td><td><p>17</p></td><td><p>+9</p></td></tr><tr><td><p>7</p></td><td><p>Very Rare</p></td><td><p>18</p></td><td><p>+10</p></td></tr><tr><td><p>8</p></td><td><p>Very Rare</p></td><td><p>18</p></td><td><p>+10</p></td></tr><tr><td><p>9</p></td><td><p>Legendary</p></td><td><p>19</p></td><td><p>+11</p></td></tr></tbody></table><p><em><strong>Copying a Scroll into a Spellbook.</strong></em> A Wizard spell on a Spell Scroll can be copied into a spellbook. When a spell is copied in this way, the copier must succeed on an Intelligence (Arcana) check with a DC equal to 10 plus the spell's level. On a successful check, the spell is copied. Whether the check succeeds or fails, the Spell Scroll is destroyed.</p>"
+    chat: ''
+  identifier: spell-scroll
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: scroll
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties: []
+effects: []
+folder: StCYZZaUbkrW50KU
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730836272740
+  modifiedTime: 1745432619096
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 150000
+ownership:
+  default: 0
+_key: '!items!dmgSpellScroll00'

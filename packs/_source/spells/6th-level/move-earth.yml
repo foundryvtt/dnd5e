@@ -1,0 +1,127 @@
+_id: yI0XWIgI0IGGsR3R
+name: Move Earth
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Choose an area of terrain no larger than 40 feet on a side within
+      range. You can reshape dirt, sand, or clay in the area in any manner you
+      choose for the Duration. You can raise or lower the area's elevation,
+      create or fill in a trench, erect or flatten a wall, or form a pillar. The
+      extent of any such changes can't exceed half the area's largest dimension.
+      So, if you affect a 40-foot square, you can create a pillar up to 20 feet
+      high, raise or lower the square's elevation by up to 20 feet, dig a trench
+      up to 20 feet deep, and so on. It takes 10 minutes for these changes to
+      complete.</p><p>At the end of every 10 minutes you spend concentrating on
+      the spell, you can choose a new area of terrain to affect.</p><p>Because
+      the terrain's transformation occurs slowly, creatures in the area can't
+      usually be trapped or injured by the ground's Movement.</p><p>This spell
+      can't manipulate natural stone or stone construction. Rocks and structures
+      shift to accommodate the new terrain. If the way you shape the terrain
+      would make a structure unstable, it might collapse.</p><p>Similarly, this
+      spell doesn't directly affect Plant Growth. The moved earth carries any
+      Plants along with it.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '2'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: square
+      size: '40'
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: trs
+  materials:
+    value: >-
+      An iron blade and a small bag containing a mixture of soils- clay, loam,
+      and sand
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: move-earth
+sort: 0
+flags: {}
+img: icons/magic/earth/projectile-spiked-stone-boulder-orange.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037366853
+  modifiedTime: 1725992723535
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!yI0XWIgI0IGGsR3R'

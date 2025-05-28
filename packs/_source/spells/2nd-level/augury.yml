@@ -1,0 +1,130 @@
+_id: 4v2H3hHb3Ph9XLNd
+name: Augury
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>By casting gem-inlaid sticks, rolling dragon bones, laying out ornate
+      cards, or employing some other divining tool, you receive an omen from an
+      otherworldly entity about the results of a specific course of action that
+      you plan to take within the next 30 minutes. The DM chooses from the
+      following possible omens:</p>
+
+      <ul>
+
+      <li>Weal, for good results</li>
+
+      <li>Woe, for bad results</li>
+
+      <li>Weal and woe, for both good and bad results</li>
+
+      <li>Nothing, for results that aren't especially good or bad</li>
+
+      </ul>
+
+      <p>The spell doesn't take into account any possible circumstances that
+      might change the outcome, such as the casting of additional spells or the
+      loss or gain of a companion.</p><p>If you cast the spell two or more times
+      before completing your next long rest, there is a cumulative 25 percent
+      chance for each casting after the first that you get a random reading. The
+      DM makes this roll in secret.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: div
+  materials:
+    value: Specially marked sticks, bones, or similar tokens worth at least 25 gp
+    consumed: false
+    cost: 25
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: 1d4
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: augury
+sort: 0
+flags: {}
+img: icons/magic/perception/eye-ringed-glow-angry-teal.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037347219
+  modifiedTime: 1725992716939
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!4v2H3hHb3Ph9XLNd'

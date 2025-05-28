@@ -1,0 +1,179 @@
+name: Dragonchess
+system:
+  description:
+    value: >-
+      <p><strong>Ability:</strong> Wisdom</p><p
+      class="phb-meta"><strong>Utilize:</strong> Discern whether someone is
+      cheating (DC 10), or win the game (DC 20)</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: game
+    baseItem: chess
+  ability: wis
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    NDaV33ElahCIeFGJ:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '10'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Catch Cheating
+      _id: NDaV33ElahCIeFGJ
+      img: ''
+      appliedEffects: []
+    HVVXAdVmahZwMWmn:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '20'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Play to Win
+      _id: HVVXAdVmahZwMWmn
+      img: ''
+      appliedEffects: []
+  identifier: dragonchess
+_id: phbgstDragonches
+type: tool
+folder: oYxcxfKSDOdUdaaN
+img: icons/sundries/gaming/chess-knight-white.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425914886
+  modifiedTime: 1740680139633
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbgstDragonches'

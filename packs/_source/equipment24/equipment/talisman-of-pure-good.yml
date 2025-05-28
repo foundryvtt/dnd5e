@@ -1,0 +1,257 @@
+_id: dmgTalismanOfPur
+name: Talisman of Pure Good
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/neck/amulet-geometric-blue-yellow.webp
+system:
+  activities:
+    9gI5PQ9mJnjH2ron:
+      type: damage
+      name: Fiend and Undead Damage
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 8
+            denomination: 6
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              number: 1
+      _id: 9gI5PQ9mJnjH2ron
+      img: ''
+      appliedEffects: []
+    aXBr8uIgXMNnZdfy:
+      type: save
+      name: Pure Rebuke
+      sort: -100000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        value: '120'
+        units: ft
+        special: you can see
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 6
+            bonus: ''
+            types:
+              - psychic
+            scaling:
+              number: 1
+        onSave: full
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '20'
+      _id: aXBr8uIgXMNnZdfy
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '7'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Legendary (Requires Attunement by a Cleric or
+      Paladin)</em></p><p>This talisman is a mighty symbol of goodness. A Fiend
+      or an Undead that touches the talisman takes 8d6 Radiant damage and takes
+      the damage again each time it ends its turn holding or carrying the
+      talisman.</p><p><em><strong>Holy Symbol.</strong></em> You can use the
+      talisman as a Holy Symbol. You gain a +2 bonus to spell attack rolls while
+      you wear or hold it.</p><p><em><strong>Pure Rebuke.</strong></em> The
+      talisman has 7 charges. While wearing or holding the talisman, you can
+      take a Magic action to expend 1 charge and target one creature you can see
+      on the ground within 120 feet of yourself. A flaming fissure opens under
+      the target, and the target makes a DC 20 Dexterity saving throw. If the
+      target is a Fiend or an Undead, it has Disadvantage on the save. On a
+      failed save, the target falls into the fissure and is destroyed, leaving
+      no remains. On a successful save, the target isn't cast into the fissure
+      but takes 4d6 Psychic damage from the ordeal. In either case, the fissure
+      then closes, leaving no trace of its existence. When you expend the last
+      charge, the talisman disperses into motes of golden light and is
+      destroyed.</p>
+    chat: ''
+  identifier: talisman-of-pure-good
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Holy Symbol
+    img: icons/equipment/neck/amulet-geometric-blue-yellow.webp
+    _id: GokN8sbCQOAIBrCV
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: Compendium.dnd5e.equipment24.Item.dmgTalismanOfPur
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.equipment24.Item.dmgTalismanOfUlt.ActiveEffect.tBqJ9VbBK1VpE2JD
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730664859128
+      modifiedTime: 1730664976478
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgTalismanOfPur.GokN8sbCQOAIBrCV'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712704192
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 35300000
+ownership:
+  default: 0
+_key: '!items!dmgTalismanOfPur'

@@ -1,0 +1,130 @@
+_id: phbftrChampion00
+name: Champion
+type: subclass
+folder: FCphxnvdYmavFNkr
+img: systems/dnd5e/icons/classes/champion.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Pursue Physical Excellence in Combat</p></blockquote><p>A
+      Champion focuses on the development of martial prowess in a relentless
+      pursuit of victory. Champions combine rigorous training with physical
+      excellence to deal devastating blows, withstand peril, and garner glory.
+      Whether in athletic contests or bloody battle, Champions strive for the
+      crown of the victor.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identifier: champion
+  classIdentifier: fighter
+  advancement:
+    - _id: 1uBHnM7yyltYiGYr
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbftrImprovedCr
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbftrRemarkable
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Subclass Features
+    - _id: WS2baKDHOKdTHvn4
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbftrAdditional
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 7
+      title: Subclass Features
+    - _id: ifmHcVXF9ZqyVhXa
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbftrHeroicWarr
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 10
+      title: Subclass Features
+    - _id: DNwHuSG5CFe5o94z
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbftrSuperiorCr
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 15
+      title: Subclass Features
+    - _id: nAg9H5fvgytySqaf
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbftrSurvivor00
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 18
+      title: Subclass Features
+    - _id: F4BJnjlTZ7nAuzjg
+      type: ItemChoice
+      configuration:
+        choices:
+          '7':
+            count: 1
+            replacement: false
+        allowDrops: true
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstArchery000
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstBlindFight
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstDefense000
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstDueling000
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstGreatWeapo
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstIntercepti
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstProtection
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstThrownWeap
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstTwoWeaponF
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstUnarmedFig
+        spell: null
+        restriction:
+          type: class
+          subtype: fightingStyle
+      value:
+        added: {}
+        replaced: {}
+      title: Fighting Style
+      hint: ''
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation:
+      formula: ''
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866578955
+  modifiedTime: 1745256761455
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 300000
+ownership:
+  default: 0
+_key: '!items!phbftrChampion00'

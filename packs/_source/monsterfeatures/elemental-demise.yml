@@ -1,0 +1,47 @@
+_id: WbaKH3NLA3mvylfM
+name: Elemental Demise
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>If the [[lookup @name lowercase]] dies, its body disintegrates into a
+      warm breeze, leaving behind only equipment the [[lookup @name lowercase]]
+      was wearing or carrying.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: elemental-demise
+flags: {}
+img: icons/magic/air/air-wave-gust-smoke-yellow.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304972075
+  modifiedTime: 1725992573020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!WbaKH3NLA3mvylfM'

@@ -1,0 +1,117 @@
+name: Grease
+system:
+  description:
+    value: >-
+      <p>Nonflammable grease covers the ground in a 10-foot square centered on a
+      point within range and turns it into &amp;Reference[difficultterrain] for
+      the duration.</p><p>When the grease appears, each creature standing in its
+      area must succeed on a Dexterity saving throw or have the
+      &amp;Reference[prone] condition. A creature that enters the area or ends
+      its turn there must also succeed on that save or fall Prone.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: square
+      size: '10'
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a bit of pork rind or butter
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: grease
+_id: phbsplGrease0000
+type: spell
+img: icons/commodities/materials/liquid-purple.webp
+effects: []
+folder: pBaAAtXBCq9FVEnL
+sort: 2600000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425956945
+  modifiedTime: 1745256793931
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplGrease0000'

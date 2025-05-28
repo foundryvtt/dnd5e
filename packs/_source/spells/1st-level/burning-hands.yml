@@ -1,0 +1,128 @@
+_id: 5SuJewoa1CRWaj1F
+name: Burning Hands
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>As you hold your hands with thumbs touching and fingers spread, a thin
+      sheet of flames shoots forth from your outstretched fingertips. Each
+      creature in a 15-foot cone must make a Dexterity saving throw. A creature
+      takes 3d6 fire damage on a failed save, or half as much damage on a
+      successful one.</p><p>The fire ignites any flammable objects in the area
+      that aren't being worn or carried.</p><p><strong>At Higher
+      Levels.</strong> When you cast this spell using a spell slot of 2nd level
+      or higher, the damage increases by 1d6 for each slot level above 1st.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cone
+      size: '15'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 3
+            denomination: 6
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: burning-hands
+sort: 0
+flags: {}
+img: icons/magic/air/fog-gas-smoke-dense-orange.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037347369
+  modifiedTime: 1725992716983
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!5SuJewoa1CRWaj1F'

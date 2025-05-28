@@ -1,0 +1,573 @@
+_id: VkRQ7glQvTWWiOCS
+name: Ranger
+type: class
+img: icons/weapons/bows/shortbow-recurve-yellow.webp
+system:
+  description:
+    value: >-
+      <p>As a ranger, you gain the following class features.</p><h3>Hit
+      Points</h3><p><strong>Hit Dice:</strong> 1d10 per ranger level<br
+      /><strong>Hit Points at 1st Level:</strong> 10 + your Constitution
+      modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d10 (or 6) +
+      your Constitution modifier per ranger level after
+      1st</p><h3>Proficiencies</h3><p><strong>Armor:</strong> Light armor,
+      medium armor, shields<br /><strong>Weapons:</strong> Simple weapons,
+      martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving
+      Throws:</strong> Strength, Dexterity<br /><strong>Skills:</strong> Choose
+      three from Animal Handling, Athletics, Insight, Investigation, Nature,
+      Perception, Stealth, and Survival</p><h1>Ranger
+      Advancement</h1><table><thead><tr><td>Level</td><td>Proficiency
+      Bonus</td><td>Features</td></tr></thead><tbody><tr><td>1st</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.4Vpj9vCOB37GtXk6]{Favored
+      Enemy},
+      @UUID[Compendium.dnd5e.classfeatures.Item.8fbZt2Qh7ZttwIan]{Natural
+      Explorer}</td></tr><tr><td>2nd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.nJA3ISVmyj3uPRVM]{Fighting
+      Style},
+      @UUID[Compendium.dnd5e.classfeatures.Item.u6xV3Ki3TXRrD7zg]{Spellcasting}</td></tr><tr><td>3rd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.1dJHU48yNqn3lcfx]{Ranger
+      Archetype},
+      @UUID[Compendium.dnd5e.classfeatures.Item.kaHcUGiwi8AtfZIm]{Primeval
+      Awareness}</td></tr><tr><td>4th</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>5th</td><td>+3</td><td>2nd Level Spell
+      Slot, @UUID[Compendium.dnd5e.classfeatures.Item.XogoBnFWmCAHXppo]{Extra
+      Attack}</td></tr><tr><td>6th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.4Vpj9vCOB37GtXk6]{Favored
+      Enemy +1},
+      @UUID[Compendium.dnd5e.classfeatures.Item.8fbZt2Qh7ZttwIan]{Natural
+      Explorer improvements}</td></tr><tr><td>7th</td><td>+3</td><td>Ranger
+      Archetype
+      feature</td></tr><tr><td>8th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement},
+      @UUID[Compendium.dnd5e.classfeatures.Item.C5fzaOBc6HxyOWRn]{Land's
+      Stride}</td></tr><tr><td>9th</td><td>+4</td><td>3rd Level Spell
+      Slot</td></tr><tr><td>10th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.8fbZt2Qh7ZttwIan]{Natural
+      Explorer improvement},
+      @UUID[Compendium.dnd5e.classfeatures.Item.r0unvWK0lPsDthDx]{Hide in Plain
+      Sight}</td></tr><tr><td>11th</td><td>+4</td><td>Ranger Archetype
+      feature</td></tr><tr><td>12th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>13th</td><td>+5</td><td>4th Level
+      Spell
+      Slot</td></tr><tr><td>14th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.4Vpj9vCOB37GtXk6]{Favored
+      Enemy +1},
+      @UUID[Compendium.dnd5e.classfeatures.Item.DhU2dWCNnX78TstR]{Vanish}</td></tr><tr><td>15th</td><td>+5</td><td>Ranger
+      Archetype
+      feature</td></tr><tr><td>16th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>17th</td><td>+6</td><td>5th Level
+      Spell
+      Slot</td></tr><tr><td>18th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.QBVmY56RMQuh6C8h]{Feral
+      Senses}</td></tr><tr><td>19th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score
+      Improvement}</td></tr><tr><td>20th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.3CaP1vFHVR8LgHjx]{Foe
+      Slayer}</td></tr></tbody></table><h1>Ranger Archetypes</h1><p>A classic
+      expression of the ranger ideal is the
+      Hunter.</p><p>@UUID[Compendium.dnd5e.subclasses.Item.uqd2q6WjVfcsaaGb]{Hunter}</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: ranger
+  levels: 1
+  hitDice: d10
+  hitDiceUsed: 0
+  advancement:
+    - type: HitPoints
+      configuration: {}
+      value: {}
+      title: Hit Points
+      icon: systems/dnd5e/icons/svg/hit-points.svg
+      _id: xBohtOEv3ukqmso2
+    - _id: TYXdkZvuFRIksnaN
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - armor:lgt
+          - armor:med
+          - armor:shl
+        choices: []
+      level: 1
+      title: ''
+      value:
+        chosen: []
+    - _id: MPQe2gl78EIkJp4B
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - weapon:sim
+          - weapon:mar
+        choices: []
+      level: 1
+      title: ''
+      value:
+        chosen: []
+    - _id: mfYrk9GETHcNXCqs
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - saves:str
+          - saves:dex
+        choices: []
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - _id: ICgRpBmX0g8Y0ZzD
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 3
+            pool:
+              - skills:ani
+              - skills:ath
+              - skills:ins
+              - skills:inv
+              - skills:nat
+              - skills:prc
+              - skills:ste
+              - skills:sur
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - skills:ani
+              - skills:ath
+              - skills:ins
+              - skills:inv
+              - skills:nat
+              - skills:prc
+              - skills:ste
+              - skills:sur
+      level: 1
+      title: ''
+      _id: 04X0Kohr5hwmeErb
+      classRestriction: secondary
+      value:
+        chosen: []
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.4Vpj9vCOB37GtXk6
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.8fbZt2Qh7ZttwIan
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 1
+      title: Features
+      _id: L0DHAlnRhNlttHtT
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.nJA3ISVmyj3uPRVM
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.u6xV3Ki3TXRrD7zg
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 2
+      title: Features
+      _id: yCF7xTPbbbLvy1oi
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.1dJHU48yNqn3lcfx
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.kaHcUGiwi8AtfZIm
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 3
+      title: Features
+      _id: uBfO0VT74Ubkb3Vq
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 5
+      title: Features
+      _id: tkm2YSp7v7CsyAv5
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.C5fzaOBc6HxyOWRn
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 8
+      title: Features
+      _id: J2W7bBur77wnP4aC
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.r0unvWK0lPsDthDx
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 10
+      title: Features
+      _id: DpZ2KsGzNrxyFJEQ
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.DhU2dWCNnX78TstR
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 14
+      title: Features
+      _id: 9bNIObxgYslup65I
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.QBVmY56RMQuh6C8h
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 18
+      title: Features
+      _id: GOpw3X1MmQnMB4Xb
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.3CaP1vFHVR8LgHjx
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 20
+      title: Features
+      _id: CjPcaL8V6MErHufh
+    - type: ItemChoice
+      configuration:
+        choices:
+          '2':
+            count: 1
+            replacement: false
+        allowDrops: true
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.classfeatures.8YwPFv3UAPjWVDNf
+          - uuid: Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB
+          - uuid: Compendium.dnd5e.classfeatures.hCop9uJrWhF1QPb4
+          - uuid: Compendium.dnd5e.classfeatures.mHcSjcHJ8oZu3hkb
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+        restriction:
+          type: class
+          subtype: fightingStyle
+          level: ''
+      value:
+        added: {}
+        replaced: {}
+      title: Fighting Style
+      _id: ih8WlydEZdg3rCPh
+      hint: >-
+        Choose one of the following options. You can’t take a Fighting Style
+        option more than once, even if you later get to choose again.
+    - type: ScaleValue
+      configuration:
+        identifier: spells-known
+        type: number
+        distance:
+          units: ''
+        scale:
+          '2':
+            value: 2
+          '3':
+            value: 3
+          '5':
+            value: 4
+          '7':
+            value: 5
+          '9':
+            value: 6
+          '11':
+            value: 7
+          '13':
+            value: 8
+          '15':
+            value: 9
+          '17':
+            value: 10
+          '19':
+            value: 11
+      value: {}
+      title: Spells Known
+      _id: FYvhuTSScSJTfYBM
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 4
+      title: Ability Score Improvement
+      _id: bWqpb3Malvjjk8a6
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 8
+      title: Ability Score Improvement
+      _id: Dr4RKCdMxlKWoHHV
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 12
+      title: Ability Score Improvement
+      _id: zDIECkwBeV96xABF
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 16
+      title: Ability Score Improvement
+      _id: 5VCLK1OCRzEZxMy3
+    - _id: puDaUsYrlks0z5gm
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 19
+      title: ''
+    - _id: gb53865sgbtx8xr2
+      type: Subclass
+      configuration: {}
+      value: {}
+      level: 3
+      title: Ranger Archetype
+  spellcasting:
+    progression: half
+    ability: wis
+    preparation: {}
+  startingEquipment:
+    - type: OR
+      _id: SKWwJKXtN0SP0LTf
+      group: ''
+      sort: 100000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.XmnlF5fgIO3tg6TG
+      _id: lt1tBNtZQm8UAQJ5
+      group: SKWwJKXtN0SP0LTf
+      sort: 500000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.WwdpHLXGX5r8uZu5
+      _id: wG7rfvsrVqgGBQNP
+      group: SKWwJKXtN0SP0LTf
+      sort: 600000
+      requiresProficiency: false
+    - type: OR
+      _id: KzpVb71iSm9pbDQw
+      group: ''
+      sort: 200000
+      requiresProficiency: false
+    - type: linked
+      count: 2
+      key: Compendium.dnd5e.items.Item.osLzOwQdPtrK3rQH
+      _id: 1pEA8KtqnoVgjrIt
+      group: KzpVb71iSm9pbDQw
+      sort: 700000
+      requiresProficiency: false
+    - type: weapon
+      count: 2
+      key: simpleM
+      _id: kuDqClbc9Akl2Osf
+      group: KzpVb71iSm9pbDQw
+      sort: 800000
+      requiresProficiency: false
+    - type: OR
+      _id: JOy46rwuQEOhpo0M
+      group: ''
+      sort: 300000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.XY8b594Dn7plACLL
+      _id: rKvrSit3E9ulmzUN
+      group: JOy46rwuQEOhpo0M
+      sort: 900000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.8KWz5DJbWUpNWniP
+      _id: wJWGIeUbscZclso0
+      group: JOy46rwuQEOhpo0M
+      sort: 1000000
+      requiresProficiency: false
+    - type: AND
+      _id: eAUv8E8Z3sYWa3um
+      group: ''
+      sort: 400000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.3cymOVja8jXbzrdT
+      _id: qXCILVTyZ4eOhKBx
+      group: eAUv8E8Z3sYWa3um
+      sort: 1100000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.4MtQKPn9qMWCFjDA
+      _id: NGW7ihnrhncyZVAl
+      group: eAUv8E8Z3sYWa3um
+      sort: 1200000
+      requiresProficiency: false
+    - type: linked
+      count: 20
+      key: Compendium.dnd5e.items.Item.3c7JXOzsv55gqJS5
+      _id: DZi4NNZnted9gqRd
+      group: eAUv8E8Z3sYWa3um
+      sort: 1300000
+      requiresProficiency: false
+  wealth: 5d4 * 10
+  primaryAbility:
+    value: []
+    all: true
+effects: []
+folder: cUrFrlt9GX9LRf4k
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037371061
+  modifiedTime: 1725992280635
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!VkRQ7glQvTWWiOCS'

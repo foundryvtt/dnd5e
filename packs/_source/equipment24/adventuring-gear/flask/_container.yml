@@ -1,0 +1,55 @@
+name: Flask
+system:
+  description:
+    value: <p>A Flask holds up to 1 pint.</p>
+    chat: ''
+  price:
+    value: 2
+    denomination: cp
+  quantity: 1
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties: []
+  capacity:
+    type: weight
+    value: null
+  identifier: flask
+_id: phbagFlask000000
+type: container
+folder: uDk4FBYfcP2JnX6t
+img: icons/consumables/drinks/tea-jug-gourd-brown.webp
+effects: []
+sort: 2200000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425908667
+  modifiedTime: 1745256811922
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagFlask000000'

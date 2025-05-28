@@ -1,0 +1,118 @@
+_id: hEymt45rICi4f9eL
+name: 'Channel Divinity: Preserve Life'
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Starting at 2nd level, you can use your Channel Divinity to heal the
+      badly injured.</p><p>As an action, you present your holy symbol and evoke
+      healing energy that can restore a number of hit points equal to five times
+      your cleric level.</p><p>Choose any creatures within 30 feet of you, and
+      divide those hit points among them. This feature can restore a creature to
+      no more than half of its hit point maximum. You can't use this feature on
+      an undead or a construct.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: channelDivinity
+  requirements: Life Domain 2
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: 1
+        condition: The target cannot be Undead or a Construct
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: Compendium.dnd5e.classfeatures.Item.YpiLQEKGalROn7iJ
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      healing:
+        number: null
+        denomination: null
+        bonus: ''
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: 5* @classes.cleric.levels
+        scaling:
+          mode: whole
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: channel-divinity-preserve-life
+flags: {}
+img: icons/magic/light/explosion-star-glow-blue-purple.webp
+effects: []
+folder: CTZ7zZ8ESNtr2IKz
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037386930
+  modifiedTime: 1725992289326
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!hEymt45rICi4f9eL'

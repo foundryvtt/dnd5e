@@ -1,0 +1,87 @@
+_id: phbsptLuck000000
+name: Luck
+type: feat
+img: icons/commodities/flowers/clover.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>When you roll a 1 on the d20 of a D20 Test, you can reroll the die, and
+      you must use the new roll.</p>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Halfling
+  identifier: luck
+effects:
+  - name: Luck
+    img: icons/commodities/flowers/clover.webp
+    origin: Compendium.dnd5e.origins24.Item.phbsptLuck000000
+    _id: k1FDpZEBCHzRsFSA
+    type: base
+    system: {}
+    changes:
+      - key: flags.dnd5e.halflingLucky
+        mode: 5
+        value: 'true'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsptLuck000000.k1FDpZEBCHzRsFSA'
+folder: zVLJosGQ7viZqH14
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866704040
+  modifiedTime: 1745256777445
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptLuck000000'

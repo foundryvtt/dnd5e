@@ -1,0 +1,189 @@
+_id: phbmnkDeflectAtt
+name: Deflect Attacks
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/skills/ranged/arrow-flying-white-blue.webp
+system:
+  description:
+    value: >-
+      <p>When an attack roll hits you and its damage includes Bludgeoning,
+      Piercing, or Slashing damage, you can take a Reaction to reduce the
+      attack's total damage against you. The reduction equals 1d10 plus your
+      Dexterity modifier and Monk level.</p><p>If you reduce the damage to 0,
+      you can expend 1 Focus Point to redirect some of the attack's force. If
+      you do so, choose a creature you can see within 5 feet of yourself if the
+      attack was a melee attack or a creature you can see within 60 feet of
+      yourself that isn't behind Total Cover if the attack was a ranged attack.
+      That creature must succeed on a Dexterity saving throw or take damage
+      equal to two rolls of your Martial Arts die plus your Dexterity modifier.
+      The damage is the same type dealt by the attack.</p><section
+      class="secret" id="secret-zWGu1AEB09UqQ21D"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Reduce</strong> activity can be used to
+      heal yourself to reduce the total damage if it's not enough to reduce it
+      to 0.</p><p>The <strong>Redirect</strong> activity can be used to roll
+      damage and consume a use of your Focus Points if you can reduce it to 0.
+      You can select the type of damage in the roll dialog. The dice increase
+      automatically as you level up.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    rQwRKkuZ7WhnB7v7:
+      type: heal
+      _id: rQwRKkuZ7WhnB7v7
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: >-
+          When an attack roll hits you and its damage includes Bludgeoning,
+          Piercing, or Slashing damage
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: 1
+        denomination: 10
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: ''
+        scaling:
+          number: 1
+        bonus: '@abilities.dex.mod + @classes.monk.levels'
+      name: Reduce
+    dJv36KHyIVsbD00p:
+      type: save
+      name: Redirect
+      _id: dJv36KHyIVsbD00p
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: If you reduce the damage to 0
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: 5 feet for melee attacks or 60 feet for ranged attacks
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Isn't behind Total Cover
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: true
+              formula: 2@scale.monk.die + @abilities.dex.mod
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - bludgeoning
+              - piercing
+              - slashing
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: wis
+          formula: ''
+  enchant: {}
+  identifier: deflect-attacks
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1740680085009
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 300000
+ownership:
+  default: 0
+_key: '!items!phbmnkDeflectAtt'

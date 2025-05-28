@@ -1,0 +1,132 @@
+_id: dmgSuperiorPotio
+name: Potion of Healing (Superior)
+type: consumable
+folder: s6eOjIBtoMiA5Usw
+img: icons/consumables/potions/bottle-round-corked-red.webp
+system:
+  activities:
+    eT46ucSUynLRTs6N:
+      type: heal
+      name: Consume
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: 8
+        denomination: '4'
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: '8'
+      _id: eT46ucSUynLRTs6N
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Potion, Rare</em></p><p>You regain 8d4 + 8 Hit Points when you
+      drink this potion.</p><p>Whatever its potency, the potion's red liquid
+      glimmers when agitated.</p>
+    chat: ''
+  identifier: superior-potion-of-healing
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  price:
+    value: 2050
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: potion
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1746464476370
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 150000
+ownership:
+  default: 0
+_key: '!items!dmgSuperiorPotio'

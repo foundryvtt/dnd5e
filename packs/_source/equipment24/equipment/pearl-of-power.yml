@@ -1,0 +1,138 @@
+_id: dmgPearlOfPower0
+name: Pearl of Power
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/gems/pearl-blue-gold.webp
+system:
+  activities:
+    FUQeRJkGx21tdCMI:
+      type: utility
+      name: Regain Spell Slot
+      _id: FUQeRJkGx21tdCMI
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '3'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: ''
+          - type: spellSlots
+            value: '-1'
+            target: '1'
+            scaling:
+              mode: level
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon (Requires Attunement by a
+      Spellcaster)</em></p><p>While this pearl is on your person, you can take a
+      Magic action to regain one expended spell slot of level 3 or lower. Once
+      you use the pearl, it can't be used again until the next dawn.</p>
+    chat: ''
+  identifier: pearl-of-power
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712701790
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 24500000
+ownership:
+  default: 0
+_key: '!items!dmgPearlOfPower0'

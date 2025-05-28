@@ -1,0 +1,110 @@
+_id: JsAys4RSGi4lN5Jy
+name: Change Shape
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>The [[lookup @details.type.config.label lowercase]] magically
+      <strong>polymorphs</strong> into a <strong>humanoid</strong> or
+      <strong>beast</strong> that has a challenge rating no higher than its own,
+      or back into its true form. It reverts to its true form if it dies. Any
+      equipment it is wearing or carrying is absorbed or borne by the new form
+      (the [[lookup @details.type.config.label lowercase]]'s choice).</p><p>In a
+      new form, the [[lookup @details.type.config.label lowercase]]
+      <strong>retains its alignment, hit points, Hit Dice, ability to speak,
+      proficiencies, Legendary Resistance, lair actions, and Intelligence,
+      Wisdom, and Charisma scores, as well as this action. </strong>Its
+      statistics and capabilities are otherwise replaced by those of the new
+      form, <strong>except any class features or legendary actions of that
+      form.</strong></p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: change-shape
+flags: {}
+img: icons/magic/control/silhouette-hold-change-blue.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304969038
+  modifiedTime: 1725992572078
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!JsAys4RSGi4lN5Jy'

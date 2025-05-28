@@ -1,0 +1,124 @@
+name: Candle
+system:
+  description:
+    value: >-
+      <p>For 1 hour, a lit Candle sheds Bright Light in a 5-foot radius and Dim
+      Light for an additional 5 feet.</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: cp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: true
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    8kldn9CuzuAz7dVb:
+      type: utility
+      _id: 8kldn9CuzuAz7dVb
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Light
+      img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+      appliedEffects: []
+  identifier: candle
+_id: phbagCandle00000
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/lights/candle-unlit-tan.webp
+effects: []
+sort: 6550000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425907147
+  modifiedTime: 1740680133416
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagCandle00000'

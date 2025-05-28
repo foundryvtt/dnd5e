@@ -1,0 +1,2223 @@
+_id: mmPriestAcolyte0
+name: Priest Acolyte
+type: npc
+img: null
+system:
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  abilities:
+    str:
+      value: 14
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    dex:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    con:
+      value: 12
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    int:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    wis:
+      value: 14
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    cha:
+      value: 11
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  skills:
+    acr:
+      ability: dex
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ani:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    arc:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ath:
+      ability: str
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    dec:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    his:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ins:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    itm:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    inv:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    med:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 1
+      bonuses:
+        check: ''
+        passive: ''
+    nat:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    prc:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    prf:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    per:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    rel:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 1
+      bonuses:
+        check: ''
+        passive: ''
+    slt:
+      ability: dex
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ste:
+      ability: dex
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    sur:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+  tools: {}
+  spells:
+    spell1:
+      value: 0
+      override: null
+    spell2:
+      value: 0
+      override: null
+    spell3:
+      value: 0
+      override: null
+    spell4:
+      value: 0
+      override: null
+    spell5:
+      value: 0
+      override: null
+    spell6:
+      value: 0
+      override: null
+    spell7:
+      value: 0
+      override: null
+    spell8:
+      value: 0
+      override: null
+    spell9:
+      value: 0
+      override: null
+    pact:
+      value: 0
+      override: null
+  attributes:
+    init:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonus: ''
+    movement:
+      burrow: null
+      climb: null
+      fly: null
+      swim: null
+      walk: 30
+      units: null
+      hover: false
+    attunement:
+      max: 3
+    senses:
+      darkvision: null
+      blindsight: null
+      tremorsense: null
+      truesight: null
+      units: null
+      special: ''
+    spellcasting: wis
+    exhaustion: 0
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+    ac:
+      flat: 13
+      calc: natural
+    hd:
+      spent: 0
+    hp:
+      value: 11
+      max: 11
+      temp: null
+      tempmax: null
+      formula: 2d8 + 2
+    death:
+      roll:
+        min: null
+        max: null
+        mode: 0
+      success: 0
+      failure: 0
+      bonuses:
+        save: ''
+    spell:
+      level: 0
+    loyalty:
+      value: null
+  details:
+    biography:
+      value: >-
+        <div class="gear"><p><strong>Gear:</strong>
+        @UUID[Compendium.dnd5e.equipment24.Item.phbarmChainShirt]{Chain Shirt},
+        @UUID[Compendium.dnd5e.equipment24.Item.phbwepMace000000]{Mace}</p></div>
+      public: ''
+    alignment: Neutral
+    ideal: ''
+    bond: ''
+    flaw: ''
+    race: null
+    type:
+      value: humanoid
+      subtype: Cleric
+      swarm: ''
+      custom: ''
+    cr: 0.25
+    habitat:
+      value:
+        - type: any
+      custom: ''
+    treasure:
+      value:
+        - individual
+        - relics
+  resources:
+    legact:
+      value: 0
+      max: 0
+    legres:
+      value: 0
+      max: 0
+    lair:
+      value: false
+      initiative: null
+      inside: false
+  source:
+    revision: 2
+    rules: '2024'
+    book: SRD 5.2
+    page: ''
+    custom: ''
+    license: CC-BY-4.0
+  traits:
+    size: med
+    di:
+      bypasses: []
+      value: []
+      custom: ''
+    dr:
+      bypasses: []
+      value: []
+      custom: ''
+    dv:
+      bypasses: []
+      value: []
+      custom: ''
+    dm:
+      amount: {}
+      bypasses: []
+    ci:
+      value: []
+      custom: ''
+    languages:
+      value:
+        - common
+      custom: ''
+      communication: {}
+    important: false
+prototypeToken:
+  name: Priest Acolyte
+  displayName: 0
+  actorLink: false
+  appendNumber: false
+  prependAdjective: false
+  width: 1
+  height: 1
+  texture:
+    src: modules/dnd-monster-manual/assets/tokens/priest-acolyte-*.webp
+    anchorX: 0.5
+    anchorY: 0.5
+    offsetX: 0
+    offsetY: 0
+    fit: contain
+    scaleX: 1
+    scaleY: 1
+    rotation: 0
+    tint: '#ffffff'
+    alphaThreshold: 0.75
+  lockRotation: false
+  rotation: 0
+  alpha: 1
+  disposition: -1
+  displayBars: 0
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  light:
+    negative: false
+    priority: 0
+    alpha: 0.5
+    angle: 360
+    bright: 0
+    color: null
+    coloration: 1
+    dim: 0
+    attenuation: 0.5
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      type: null
+      speed: 5
+      intensity: 5
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+  sight:
+    enabled: false
+    range: 0
+    angle: 360
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    brightness: 0
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
+  flags: {}
+  randomImg: true
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
+items:
+  - name: Mace
+    system:
+      description:
+        value: <p>[[/attack extended]]. [[/damage average extended]].</p>
+        chat: ''
+      price:
+        value: 5
+        denomination: gp
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 2
+        book: SRD 5.2
+        page: ''
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 4
+        units: lb
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: true
+      cover: null
+      crewed: false
+      range:
+        value: null
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: true
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 6
+          types:
+            - bludgeoning
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+          bonus: ''
+      armor:
+        value: null
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      type:
+        value: simpleM
+        baseItem: mace
+      magicalBonus: null
+      properties: []
+      proficient: null
+      activities:
+        KiHlb6kIDAvWmnhv:
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: false
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 4
+                bonus: ''
+                types:
+                  - radiant
+                scaling:
+                  number: 1
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          _id: KiHlb6kIDAvWmnhv
+          name: ''
+      ammunition: {}
+      mastery: sap
+      identifier: mace
+    _id: epMbuSm8Mv8vsbsu
+    type: weapon
+    folder: FL1Jee9DzStc7vM3
+    img: icons/weapons/maces/mace-flanged-steel.webp
+    effects: []
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd5e.equipment24.phbwepMace000000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712725310
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!mmPriestAcolyte0.epMbuSm8Mv8vsbsu'
+  - _id: mmRadiantFlame00
+    name: Radiant Flame
+    type: weapon
+    system:
+      type:
+        value: natural
+        baseItem: ''
+      activities:
+        DrH0dYeZLpW1dvVV:
+          _id: DrH0dYeZLpW1dvVV
+          type: attack
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          attack:
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ranged
+              classification: ''
+            ability: wis
+            bonus: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: 6
+                bonus: ''
+                types:
+                  - radiant
+                scaling:
+                  number: 1
+          name: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p class="feature">[[/attack extended]]. [[/damage average
+          extended]].</p>
+        chat: ''
+      identifier: radiant-flame
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: true
+      armor:
+        value: null
+      cover: null
+      crewed: false
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      ammunition: {}
+      damage:
+        base:
+          number: 2
+          denomination: 6
+          types:
+            - radiant
+          custom:
+            enabled: false
+            formula: 2d6
+          scaling:
+            number: 1
+          bonus: ''
+        versatile:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+      magicalBonus: null
+      properties: []
+      proficient: null
+      range:
+        value: 60
+        long: null
+        reach: null
+        units: ft
+      mastery: ''
+    folder: pSCWWdqMX9eUATRJ
+    img: icons/magic/fire/blast-jet-stream-embers-red.webp
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRadiantFlame00
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712725310
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 0
+    _key: '!actors.items!mmPriestAcolyte0.mmRadiantFlame00'
+  - _id: mmSpellcasting00
+    name: Spellcasting
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities:
+        3MkhXZwZstyLUC3q:
+          type: cast
+          _id: 3MkhXZwZstyLUC3q
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          spell:
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: null
+            properties: []
+            spellbook: true
+            uuid: Compendium.dnd5e.spells24.Item.phbsplLight00000
+            ability: ''
+          name: ''
+        o8YMf9MB4UV7Oze6:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: null
+            properties: []
+            spellbook: true
+            ability: ''
+          _id: o8YMf9MB4UV7Oze6
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          following spells, using Wisdom as the spellcasting ability:</p><p
+          class="feature-trait"><strong>At Will:</strong>
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLight00000]{Light}</em>,
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplThaumaturg]{Thaumaturgy}</em></p>
+        chat: ''
+      identifier: spellcasting
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: 4T18pEvubPMQLzvD
+    img: icons/magic/symbols/circled-gem-pink.webp
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712725310
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 1
+    _key: '!actors.items!mmPriestAcolyte0.mmSpellcasting00'
+  - _id: mmDivineAid00000
+    name: Divine Aid
+    type: feat
+    img: icons/magic/life/cross-beam-green.webp
+    system:
+      activities:
+        V0Qrt1uTAqiU9SCm:
+          type: cast
+          _id: V0Qrt1uTAqiU9SCm
+          sort: 0
+          activation:
+            type: bonus
+            value: null
+            override: true
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          spell:
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 1
+            properties: []
+            spellbook: true
+            uuid: Compendium.dnd5e.spells24.Item.phbsplBless00000
+            ability: ''
+          name: ''
+        xlmEmICWCOXh1DRs:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplHealingWor
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 1
+            properties: []
+            spellbook: true
+            ability: ''
+          _id: xlmEmICWCOXh1DRs
+          sort: 0
+          activation:
+            type: bonus
+            value: null
+            override: true
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: ''
+        CNGV8z0AGMkv8u8E:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbSanctuary0000
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 1
+            properties: []
+            spellbook: true
+            ability: ''
+          _id: CNGV8z0AGMkv8u8E
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: ''
+      uses:
+        spent: 0
+        recovery:
+          - period: day
+            type: recoverAll
+        max: '1'
+      description:
+        value: >-
+          <p class="feature">The [[lookup @name lowercase]] casts
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplBless00000]{Bless}</em>,
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
+          Magic}</em>,
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplHealingWor]{Healing
+          Word}</em>, or
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser
+          Restoration}</em>, using the same spellcasting ability as
+          Spellcasting.</p>
+        chat: ''
+      identifier: divine-aid
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      advancement: []
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: ''
+      type:
+        value: ''
+        subtype: ''
+      cover: null
+      crewed: false
+    effects: []
+    folder: 4T18pEvubPMQLzvD
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDivineAid00000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712725310
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 2
+    _key: '!actors.items!mmPriestAcolyte0.mmDivineAid00000'
+  - name: Bless
+    system:
+      description:
+        value: >-
+          <p>You bless up to three creatures within range. Whenever a target
+          makes an attack roll or a saving throw before the spell ends, the
+          target adds 1d4 to the attack roll or save.</p><p><strong>Using a
+          Higher-Level Spell Slot.</strong> You can target one additional
+          creature for each spell slot level above 1.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: 2 + @item.level
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: enc
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      materials:
+        value: a Holy Symbol worth 5+ GP
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: 1dzvDffEh8wZ0oQy
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: bless
+    type: spell
+    img: icons/magic/holy/prayer-hands-glowing-yellow-white.webp
+    effects:
+      - _id: 1dzvDffEh8wZ0oQy
+        flags: {}
+        changes:
+          - key: system.bonuses.abilities.save
+            mode: 2
+            value: 1d4
+            priority: null
+          - key: system.bonuses.mwak.attack
+            mode: 2
+            value: 1d4
+            priority: null
+          - key: system.bonuses.msak.attack
+            mode: 2
+            value: 1d4
+            priority: null
+          - key: system.bonuses.rsak.attack
+            mode: 2
+            value: 1d4
+            priority: null
+          - key: system.bonuses.rwak.attack
+            mode: 2
+            value: 1d4
+            priority: null
+        disabled: false
+        duration:
+          startTime: null
+          seconds: 60
+          rounds: 10
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        origin: Compendium.dnd5e.spells24.Item.phbsplBless00000
+        tint: '#ffffff'
+        transfer: false
+        name: Blessed
+        description: >-
+          <p>Whenever a target makes an attack roll or a saving throw before the
+          spell ends, the target adds 1d4 to the attack roll or save.</p>
+        statuses: []
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr.ActiveEffect.8rP3gwmXVTgZqYZE
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        img: icons/magic/holy/chalice-glowing-gold-water.webp
+        type: base
+        system: {}
+        sort: 0
+        _key: >-
+          !actors.items.effects!mmPriestAcolyte0.RTN8hls1FRHQEPQh.1dzvDffEh8wZ0oQy
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmDivineAid00000.Activity.V0Qrt1uTAqiU9SCm
+        changes:
+          - key: system.activation
+            mode: 5
+            value: '{"type":"bonus","value":null,"condition":""}'
+            priority: null
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmPriestAcolyte0.RTN8hls1FRHQEPQh.dnd5espellchange
+    folder: pBaAAtXBCq9FVEnL
+    sort: 5200000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        cachedFor: .Item.mmDivineAid00000.Activity.V0Qrt1uTAqiU9SCm
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplBless00000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712725310
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: RTN8hls1FRHQEPQh
+    _key: '!actors.items!mmPriestAcolyte0.RTN8hls1FRHQEPQh'
+  - name: Healing Word
+    system:
+      description:
+        value: >-
+          <p>A creature of your choice that you can see within range regains Hit
+          Points equal to 2d4 plus your spellcasting ability
+          modifier.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The
+          healing increases by 2d4 for each spell slot level above 1.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: bonus
+        condition: ''
+        value: null
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: abj
+      properties:
+        - vocal
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: heal
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          healing:
+            number: 2
+            denomination: 4
+            bonus: '@mod'
+            types:
+              - healing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 2
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: healing-word
+    type: spell
+    img: icons/magic/life/cross-beam-green.webp
+    effects:
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmDivineAid00000.Activity.xlmEmICWCOXh1DRs
+        changes:
+          - key: system.activation
+            mode: 5
+            value: '{"type":"bonus","value":null,"condition":""}'
+            priority: null
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmPriestAcolyte0.9Qq8TeGKvHTiEfBc.dnd5espellchange
+    folder: pBaAAtXBCq9FVEnL
+    sort: 2300000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        cachedFor: .Item.mmDivineAid00000.Activity.xlmEmICWCOXh1DRs
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHealingWor
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712725310
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: 9Qq8TeGKvHTiEfBc
+    _key: '!actors.items!mmPriestAcolyte0.9Qq8TeGKvHTiEfBc'
+  - name: Sanctuary
+    type: spell
+    img: icons/magic/defensive/shield-barrier-deflect-gold.webp
+    system:
+      description:
+        value: >-
+          <div><p>You ward a creature within range. Until the spell ends, any
+          creature who targets the warded creature with an attack roll or a
+          damaging spell must succeed on a [[/save ability=wis
+          dc=@attributes.spell.dc format=long]] or either choose a new target or
+          lose the attack or spell. This spell doesn't protect the warded
+          creature from areas of effect. The spell ends if the warded creature
+          makes an attack roll, casts a spell, or deals damage.</p></div>
+        chat: ''
+      source:
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: bonus
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        template:
+          units: ''
+          contiguous: false
+          type: ''
+      range:
+        units: ft
+        special: ''
+        value: '30'
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 1
+      school: abj
+      properties:
+        - vocal
+        - somatic
+        - material
+      materials:
+        value: a shard of glass from a mirror
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      activities:
+        2iUeoKysfdtmK0kZ:
+          type: utility
+          _id: 2iUeoKysfdtmK0kZ
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: OuM8iKhckcDKavOx
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Cast
+        6TdVnZPI3lxQrycI:
+          type: save
+          name: Save on Target
+          _id: 6TdVnZPI3lxQrycI
+          sort: 0
+          activation:
+            type: ''
+            value: null
+            override: true
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: false
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: true
+          effects: []
+          range:
+            override: true
+            units: any
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            parts: []
+            onSave: none
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: spellcasting
+              formula: ''
+      identifier: sanctuary
+    effects:
+      - name: Warded
+        img: icons/skills/social/peace-luck-insult.webp
+        origin: Compendium.dnd5e.spells24.Item.phbSanctuary0000
+        transfer: false
+        _id: OuM8iKhckcDKavOx
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: 60
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: >-
+          <p>Until the spell ends, any creature who targets the warded creature
+          with an attack roll or a damaging spell must succeed on a [[/save
+          ability=wis format=long]] or either choose a new target or lose the
+          attack or spell.</p><p> The spell ends if the warded creature makes an
+          attack roll, casts a spell, or deals damage.</p>
+        tint: '#ffffff'
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmPriestAcolyte0.Xuc1V3JdoGcGkuam.OuM8iKhckcDKavOx
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmDivineAid00000.Activity.CNGV8z0AGMkv8u8E
+        changes: []
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmPriestAcolyte0.Xuc1V3JdoGcGkuam.dnd5espellchange
+    folder: pBaAAtXBCq9FVEnL
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.mmDivineAid00000.Activity.CNGV8z0AGMkv8u8E
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbSanctuary0000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712725310
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    sort: 100391
+    ownership:
+      default: 0
+    _id: Xuc1V3JdoGcGkuam
+    _key: '!actors.items!mmPriestAcolyte0.Xuc1V3JdoGcGkuam'
+  - name: Light
+    system:
+      description:
+        value: >-
+          <p>You touch one Large or smaller object that isn't being worn or
+          carried by someone else. Until the spell ends, the object sheds Bright
+          Light in a 20-foot radius and Dim Light for an additional 20 feet. The
+          light can be colored as you like.</p><p>Covering the object with
+          something opaque blocks the light. The spell ends if you cast it
+          again.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        template:
+          units: ''
+          contiguous: false
+          type: ''
+      range:
+        units: touch
+        special: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 0
+      school: evo
+      properties:
+        - vocal
+        - material
+      materials:
+        value: a firefly or phosphorescent moss
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: always
+        prepared: false
+      activities:
+        EnaiVH67oUJzyHsF:
+          type: summon
+          _id: EnaiVH67oUJzyHsF
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes:
+            - sm
+            - med
+            - lg
+            - tiny
+          creatureTypes: []
+          match:
+            attacks: false
+            proficiency: false
+            saves: false
+          profiles:
+            - count: ''
+              name: ''
+              _id: QD99a4WC0JUMMDH7
+              uuid: Compendium.dnd5e.actors24.Actor.phbsplLight00000
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: false
+            mode: ''
+            identifier: ''
+          name: Cast
+          effects: []
+      identifier: light
+    type: spell
+    img: icons/sundries/lights/candle-pillar-lit-yellow.webp
+    effects:
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmSpellcasting00.Activity.3MkhXZwZstyLUC3q
+        changes: []
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmPriestAcolyte0.BVG2rVWSQCWE2lc2.dnd5espellchange
+    folder: 4FhsY9FJQd7h7MZb
+    sort: 1100000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        cachedFor: .Item.mmSpellcasting00.Activity.3MkhXZwZstyLUC3q
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLight00000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712725310
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: BVG2rVWSQCWE2lc2
+    _key: '!actors.items!mmPriestAcolyte0.BVG2rVWSQCWE2lc2'
+  - name: Thaumaturgy
+    system:
+      description:
+        value: >-
+          <p>You manifest a minor wonder within range. You create one of the
+          effects below within range. If you cast this spell multiple times, you
+          can have up to three of its 1-minute effects active at a
+          time.</p><p><strong>Altered Eyes.</strong> You alter the appearance of
+          your eyes for 1 minute.</p><p><strong>Booming Voice.</strong> Your
+          voice booms up to three times as loud as normal for 1 minute. For the
+          duration, you have Advantage on [[/check ability=cha skill=itm]]
+          checks.</p><p><strong>Fire Play.</strong> You cause flames to flicker,
+          brighten, dim, or change color for 1 minute.</p><p><strong>Invisible
+          Hand.</strong> You instantaneously cause an unlocked door or window to
+          fly open or slam shut.</p><p><strong>Phantom Sound.</strong> You
+          create an instantaneous sound that originates from a point of your
+          choice within range, such as a rumble of thunder, the cry of a raven,
+          or ominous whispers.</p><p><strong>Tremors.</strong> You cause
+          harmless tremors in the ground for 1 minute.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        template:
+          units: ''
+          contiguous: false
+          type: ''
+      range:
+        units: ft
+        special: ''
+        value: '30'
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 0
+      school: trs
+      properties:
+        - vocal
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: always
+        prepared: false
+      activities:
+        q83milmNAKF9cymI:
+          type: utility
+          _id: q83milmNAKF9cymI
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Cast
+      identifier: thaumaturgy
+    type: spell
+    img: icons/environment/people/cleric-orange.webp
+    effects:
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmSpellcasting00.Activity.o8YMf9MB4UV7Oze6
+        changes: []
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmPriestAcolyte0.UVhj7TP2lTUg0CEC.dnd5espellchange
+    folder: 4FhsY9FJQd7h7MZb
+    sort: 100391
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.mmSpellcasting00.Activity.o8YMf9MB4UV7Oze6
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712725310
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: UVhj7TP2lTUg0CEC
+    _key: '!actors.items!mmPriestAcolyte0.UVhj7TP2lTUg0CEC'
+effects: []
+folder: oq65o5ZsauMtb1JY
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745415931803
+  modifiedTime: 1745712725345
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!actors!mmPriestAcolyte0'

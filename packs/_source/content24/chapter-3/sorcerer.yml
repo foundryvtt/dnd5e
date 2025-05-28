@@ -1,0 +1,186 @@
+_id: phbSorcerer00000
+name: Sorcerer
+pages:
+  - sort: 100000
+    name: Sorcerer
+    type: class
+    _id: fsqRUA4acVXH4I3O
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbscrSorcerer00
+      description:
+        value: >-
+          <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbscrSorcerer00
+          inline classes="free-rules-embed"]</p> <h2>Becoming a Sorcerer
+          …</h2><h3>As a Level 1 Character</h3><ul><li><p>Gain all the traits in
+          the Core Sorcerer Traits table.</p></li><li><p>Gain the Sorcerer's
+          level 1 features, which are listed in the Sorcerer Features
+          table.</p></li></ul><h3>As a Multiclass Character</h3><ul><li><p>Gain
+          the Hit Point Die from the Core Sorcerer Traits
+          table.</p></li><li><p>Gain the Sorcerer's level 1 features, which are
+          listed in the Sorcerer Features table. See the multiclassing rules in
+          chapter 2 to determine your available spell slots.</p></li></ul>
+        additionalHitPoints: ''
+        additionalTraits: ''
+        additionalEquipment: ''
+        subclass: >-
+          <p>A Sorcerer subclass is a specialization that grants you features at
+          certain levels, as specified in the subclass. The next page presents
+          the @UUID[Compendium.dnd5e.classes24.Item.phbscrDraconicSo]{Draconic
+          Sorcery} subclass.</p>
+      subclassItems: []
+      subclassHeader: ''
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745514685600
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbSorcerer00000.fsqRUA4acVXH4I3O'
+  - sort: 400000
+    name: Draconic Sorcery
+    type: subclass
+    _id: h9Qhn4HyJyAnK5b9
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbscrDraconicSo
+      description:
+        value: >-
+          <blockquote><p>Breathe the Magic of Dragons</p></blockquote><p>Your
+          innate magic comes from the gift of a dragon. Perhaps an ancient
+          dragon facing death bequeathed some of its magical power to you or
+          your ancestor. You might have absorbed magic from a site infused with
+          dragons' power. Or perhaps you handled a treasure taken from a
+          dragon's hoard that was steeped in draconic power. Or you might have a
+          dragon for an ancestor
+          (@UUID[Compendium.dnd5e.classes24.Item.phbscrDraconicSo]{Draconic
+          Sorcery} subclass).</p>
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1735934824431
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbSorcerer00000.h9Qhn4HyJyAnK5b9'
+  - sort: 600000
+    name: Metamagic Options
+    type: text
+    _id: XSkwrMRz9FDvovd1
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>The following options are available to your Metamagic feature. The
+        options are presented in alphabetical order.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.classes24.Item.phbmmoCarefulSpe]{Careful
+        Spell}</h3><p>@Embed[Compendium.dnd5e.classes24.Item.phbmmoCarefulSpe
+        inline]</p><hr
+        /><h3>@UUID[Compendium.dnd5e.classes24.Item.phbmmoDistantSpe]{Distant
+        Spell}</h3><p>@Embed[Compendium.dnd5e.classes24.Item.phbmmoDistantSpe
+        inline]</p><hr
+        /><h3>@UUID[Compendium.dnd5e.classes24.Item.phbmmoEmpoweredS]{Empowered
+        Spell}</h3><p>@Embed[Compendium.dnd5e.classes24.Item.phbmmoEmpoweredS
+        inline]</p><hr
+        /><h3>@UUID[Compendium.dnd5e.classes24.Item.phbmmoExtendedSp]{Extended
+        Spell}</h3><p>@Embed[Compendium.dnd5e.classes24.Item.phbmmoExtendedSp
+        inline]</p><hr
+        /><h3>@UUID[Compendium.dnd5e.classes24.Item.phbmmoHeightened]{Heightened
+        Spell}</h3><p>@Embed[Compendium.dnd5e.classes24.Item.phbmmoHeightened
+        inline]</p><hr
+        /><h3>@UUID[Compendium.dnd5e.classes24.Item.phbmmoQuickenedS]{Quickened
+        Spell}</h3><p>@Embed[Compendium.dnd5e.classes24.Item.phbmmoQuickenedS
+        inline]</p><hr
+        /><h3>@UUID[Compendium.dnd5e.classes24.Item.phbmmoSeekingSpe]{Seeking
+        Spell}</h3><p>@Embed[Compendium.dnd5e.classes24.Item.phbmmoSeekingSpe
+        inline]</p><hr
+        /><h3>@UUID[Compendium.dnd5e.classes24.Item.phbmmoSubtleSpel]{Subtle
+        Spell}</h3><p>@Embed[Compendium.dnd5e.classes24.Item.phbmmoSubtleSpel
+        inline]</p><hr
+        /><h3>@UUID[Compendium.dnd5e.classes24.Item.phbmmoTransmuted]{Transmuted
+        Spell}</h3><p>@Embed[Compendium.dnd5e.classes24.Item.phbmmoTransmuted
+        inline]</p><hr
+        /><h3>@UUID[Compendium.dnd5e.classes24.Item.phbmmoTwinnedSpe]{Twinned
+        Spell}</h3><p>@Embed[Compendium.dnd5e.classes24.Item.phbmmoTwinnedSpe
+        inline]</p><hr />
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.1
+      createdTime: 1726768321600
+      modifiedTime: 1726768478698
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbSorcerer00000.XSkwrMRz9FDvovd1'
+folder: 1A8WFP1GVZkKdxii
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 3
+    order: 501000
+    navigation:
+      previous: phbRogue00000000
+      next: phbWarlock000000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1724425889394
+  modifiedTime: 1745677865645
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1100000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbSorcerer00000'

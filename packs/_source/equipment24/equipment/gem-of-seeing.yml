@@ -1,0 +1,173 @@
+_id: dmgGemOfSeeing00
+name: Gem of Seeing
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/gems/gem-rough-rose-teal.webp
+system:
+  activities:
+    V8TgfBF0TyhZDshW:
+      type: utility
+      name: Gain Truesight
+      _id: V8TgfBF0TyhZDshW
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '10'
+      effects:
+        - _id: z8fm5PbP5qz4iJuP
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/damage/psychic.svg
+      appliedEffects:
+        - z8fm5PbP5qz4iJuP
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d3
+    max: '3'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare (Requires Attunement)</em></p><p>This gem has 3
+      charges. As a Magic action, you can expend 1 charge. For the next 10
+      minutes, you have &amp;Reference[Truesight] out to 120 feet when you peer
+      through the gem.</p><p>The gem regains 1d3 expended charges daily at
+      dawn.</p>
+    chat: ''
+  identifier: gem-of-seeing
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Seeing
+    img: icons/commodities/gems/gem-rough-rose-teal.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgGemOfSeeing00
+    transfer: false
+    _id: z8fm5PbP5qz4iJuP
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.senses.trueseight
+        mode: 4
+        value: '120'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730729417597
+      modifiedTime: 1730729469489
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgGemOfSeeing00.z8fm5PbP5qz4iJuP'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712700384
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 15500000
+ownership:
+  default: 0
+_key: '!items!dmgGemOfSeeing00'

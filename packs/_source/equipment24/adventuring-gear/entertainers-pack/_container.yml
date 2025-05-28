@@ -1,0 +1,67 @@
+name: Entertainer's Pack
+system:
+  description:
+    value: >-
+      <p>An Entertainer's Pack contains the following items:
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBackpack000]{Backpack},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBedroll0000]{Bedroll},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBell0000000]{Bell},
+      @UUID[Compendium.dnd5e.items.Item.UkWdyJYQTfVX2cJW]{Bullseye Lantern}, 3
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagCostume0000]{Costumes},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagMirror00000]{Mirror}, 8
+      flasks of @UUID[Compendium.dnd5e.equipment24.Item.phbagOil00000000]{Oil},
+      9 days of
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagRations0000]{Rations},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagTinderbox00]{Tinderbox}, and
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagWaterskin00]{Waterskin}.</p>
+    chat: ''
+  price:
+    value: 40
+    denomination: gp
+  quantity: 1
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  weight:
+    value: 5
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties: []
+  capacity:
+    type: weight
+    value: 30
+  identifier: entertainers-pack
+_id: phbagEntertainer
+type: container
+folder: uDk4FBYfcP2JnX6t
+img: icons/containers/bags/pack-leather-gold-pink.webp
+effects: []
+sort: 2000000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425908475
+  modifiedTime: 1745256811837
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagEntertainer'

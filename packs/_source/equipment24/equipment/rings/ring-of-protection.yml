@@ -1,0 +1,119 @@
+_id: dmgRingOfProtect
+name: Ring of Protection
+type: equipment
+folder: DC1x1wAm0NLFudA6
+img: icons/equipment/finger/ring-cabochon-silver-gold-red.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Ring, Rare (Requires Attunement)</em></p><p>You gain a +1 bonus to
+      Armor Class and saving throws while wearing this ring.</p>
+    chat: ''
+  identifier: ring-of-protection
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ring
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - _id: vKSASCidlRLgY3lA
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '+1'
+        priority: null
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '+1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.equipment24.Item.dmgRingOfProtect
+    transfer: true
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    tint: '#ffffff'
+    name: Ring of Protection
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.QtmVEreNIWEVOoLR.ActiveEffect.q1wbe9ru251bfnhg
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: 1730683236644
+      modifiedTime: 1745610436026
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/magic/defensive/shield-barrier-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!dmgRingOfProtect.vKSASCidlRLgY3lA'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1100000
+ownership:
+  default: 0
+_key: '!items!dmgRingOfProtect'

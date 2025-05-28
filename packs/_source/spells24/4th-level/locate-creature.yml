@@ -1,0 +1,122 @@
+name: Locate Creature
+system:
+  description:
+    value: >-
+      <p>Describe or name a creature that is familiar to you. You sense the
+      direction to the creature's location if that creature is within 1,000 feet
+      of you. If the creature is moving, you know the direction of its
+      movement.</p><p>The spell can locate a specific creature known to you or
+      the nearest creature of a specific kind (such as a human or a unicorn) if
+      you have seen such a creature up close—within 30 feet—at least once. If
+      the creature you described or named is in a different form, such as under
+      the effects of a
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFleshtoSto]{Flesh to
+      Stone}</em> or
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplPolymorph0]{Polymorph}</em>
+      spell, this spell doesn't locate the creature.</p><p>This spell can't
+      locate a creature if any thickness of lead blocks a direct path between
+      you and the creature.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: div
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: fur from a bloodhound
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: locate-creature
+_id: phbsplLocateCrea
+type: spell
+img: icons/tools/navigation/map-marked-green.webp
+effects: []
+folder: qi3IbnEwap7mRw4b
+sort: 1200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425961729
+  modifiedTime: 1745256795575
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplLocateCrea'

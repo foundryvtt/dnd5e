@@ -1,5 +1,5 @@
-import { filteredKeys } from "../../utils.mjs";
-import { ItemDataModel } from "../abstract.mjs";
+import { convertLength, defaultUnits, filteredKeys, formatLength } from "../../utils.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
@@ -14,6 +14,10 @@ import MountableTemplate from "./templates/mountable.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ */
+
+/**
  * Data definition for Weapon items.
  * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
@@ -24,19 +28,22 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes MountableTemplate
  *
  * @property {object} ammunition
- * @property {string} ammunition.type       Type of ammunition fired by this weapon.
+ * @property {string} ammunition.type              Type of ammunition fired by this weapon.
+ * @property {object} armor
+ * @property {number} armor.value                  Siege or vehicle weapon's armor class.
  * @property {object} damage
- * @property {DamageData} damage.base       Weapon's base damage.
- * @property {DamageData} damage.versatile  Weapon's versatile damage.
- * @property {number} magicalBonus          Magical bonus added to attack & damage rolls.
- * @property {string} mastery               Mastery Property usable with this weapon.
- * @property {Set<string>} properties       Weapon's properties.
- * @property {number} proficient            Does the weapon's owner have proficiency?
+ * @property {DamageData} damage.base              Weapon's base damage.
+ * @property {DamageData} damage.versatile         Weapon's versatile damage.
+ * @property {number} magicalBonus                 Magical bonus added to attack & damage rolls.
+ * @property {string} mastery                      Mastery Property usable with this weapon.
+ * @property {Set<string>} properties              Weapon's properties.
+ * @property {number} proficient                   Does the weapon's owner have proficiency?
  * @property {object} range
- * @property {number} range.value           Short range of the weapon.
- * @property {number} range.long            Long range of the weapon.
- * @property {number|null} range.reach      Reach of the weapon.
- * @property {string} range.units           Units used to measure the weapon's range and reach.
+ * @property {number} range.value                  Short range of the weapon.
+ * @property {number} range.long                   Long range of the weapon.
+ * @property {number|null} range.reach             Reach of the weapon.
+ * @property {string} range.units                  Units used to measure the weapon's range and reach.
+ * @property {Omit<ItemTypeData, "subtype">} type  Weapon type and base item.
  */
 export default class WeaponData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
@@ -48,16 +55,18 @@ export default class WeaponData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.WEAPON", "DND5E.RANGE", "DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.WEAPON", "DND5E.VEHICLE.MOUNTABLE", "DND5E.RANGE", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"}),
       ammunition: new SchemaField({
         type: new StringField()
+      }),
+      armor: new SchemaField({
+        value: new NumberField({ integer: true, min: 0 })
       }),
       damage: new SchemaField({
         base: new DamageField(),
@@ -74,7 +83,8 @@ export default class WeaponData extends ItemDataModel.mixin(
         long: new NumberField({ min: 0 }),
         reach: new NumberField({ min: 0 }),
         units: new StringField()
-      })
+      }),
+      type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"})
     });
   }
 
@@ -82,9 +92,8 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-    enchantable: true,
-    inventoryItem: true,
-    inventoryOrder: 100
+    hasEffects: true,
+    enchantable: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
@@ -115,6 +124,22 @@ export default class WeaponData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Default configuration for this item type's inventory section.
+   * @returns {InventorySectionDescriptor}
+   */
+  static get inventorySection() {
+    return {
+      id: "weapons",
+      order: 100,
+      label: "TYPES.Item.weaponPl",
+      groups: { type: "weapon" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    };
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
@@ -138,9 +163,8 @@ export default class WeaponData extends ItemDataModel.mixin(
     if ( "base" in (source.damage ?? {}) ) return;
     const systemData = { system: { scaling: { mode: "none" } } };
     if ( source.damage?.parts?.[0] ) {
-      source.damage.base = BaseActivityData.transformDamagePartData(systemData, source.damage.parts?.[0]);
+      source.damage.base = BaseActivityData.transformDamagePartData(systemData, source.damage.parts.shift());
       if ( source.damage.base.bonus === "@mod" ) source.damage.base.bonus = "";
-      delete source.damage.parts;
     }
     if ( foundry.utils.getType(source.damage?.versatile) === "string" ) {
       source.damage.versatile = BaseActivityData.transformDamagePartData(systemData, [source.damage?.versatile, ""]);
@@ -176,7 +200,8 @@ export default class WeaponData extends ItemDataModel.mixin(
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateReach(source) {
-    if ( !source.properties || !source.range?.value || !source.type?.value || source.range?.reach ) return;
+    if ( !source.properties || !source.range?.value || !source.type?.value
+      || (source.range?.reach !== undefined) ) return;
     if ( (CONFIG.DND5E.weaponTypeMap[source.type.value] !== "melee") || source.properties.includes("thr") ) return;
     // Range of `0` or greater than `10` is always included, and so is range longer than `5` without reach property
     if ( (source.range.value === 0) || (source.range.value > 10)
@@ -192,10 +217,12 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
-    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.prepareIdentifiable();
+    this.preparePhysicalData();
     this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
+    this.type.identifier = CONFIG.DND5E.weaponIds[this.type.baseItem];
 
     const labels = this.parent.labels ??= {};
     labels.armor = this.armor.value ? `${this.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
@@ -205,7 +232,9 @@ export default class WeaponData extends ItemDataModel.mixin(
     );
 
     if ( this.attackType === "ranged" ) this.range.reach = null;
-    else if ( this.range.reach === null ) this.range.reach = this.properties.has("rch") ? 10 : 5;
+    else if ( this.range.reach === null ) {
+      this.range.reach = convertLength(this.properties.has("rch") ? 10 : 5, "ft", this.range.units, { strict: false });
+    }
   }
 
   /* -------------------------------------------- */
@@ -216,15 +245,15 @@ export default class WeaponData extends ItemDataModel.mixin(
     this.prepareFinalEquippableData();
 
     const labels = this.parent.labels ??= {};
+    const units = this.range.units ?? defaultUnits("length");
     if ( this.hasRange ) {
-      const parts = [
-        this.range.value,
-        this.range.long ? `/ ${this.range.long}` : null,
-        (this.range.units in CONFIG.DND5E.movementUnits)
-          ? game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`) : null
-      ];
-      labels.range = parts.filterJoin(" ");
-    } else labels.range = game.i18n.localize("DND5E.None");
+      const parts = [this.range.value, this.range.long !== this.range.value ? this.range.long : null].filter(_ => _);
+      parts.push(formatLength(parts.pop(), units));
+      labels.range = parts.filterJoin("/");
+    }
+    if ( this.range.reach ) {
+      labels.reach = game.i18n.format("DND5E.RANGE.Formatted.Reach", { reach: formatLength(this.range.reach, units) });
+    }
   }
 
   /* -------------------------------------------- */
@@ -243,10 +272,11 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async getSheetData(context) {
     context.subtitles = [
-      { label: context.itemType },
+      { label: game.i18n.localize(CONFIG.Item.typeLabels.weapon) },
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+
     context.info = [{
       label: "DND5E.ToHit",
       classes: "info-lg",
@@ -258,17 +288,19 @@ export default class WeaponData extends ItemDataModel.mixin(
         const type = config[damageType];
         return `${str}
           <span class="formula">${formula}</span>
-          ${type ? `<span class="damage-type" data-tooltip="${type.label}" aria-label="${type.label}">
+          ${type ? `<span class="damage-type" data-tooltip aria-label="${type.label}">
             <dnd5e-icon src="${type.icon}"></dnd5e-icon>
           </span>` : ""}
         `;
       }, ""), classes: "info-grid damage" });
     }
-    context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
 
-    // Damage
+    context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
     context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
-      return { value, label, selected: context.source.damage.base.types.includes(value) };
+      return {
+        value, label,
+        selected: context.source.damage.base.types.includes?.(value) ?? context.source.damage.base.types.has(value)
+      };
     });
     const makeDenominationOptions = placeholder => [
       { value: "", label: placeholder ? `d${placeholder}` : "" },
@@ -283,6 +315,26 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Ammunition that can be used with this weapon.
+   * @type {FormSelectOption[]}
+   */
+  get ammunitionOptions() {
+    if ( !this.parent.actor || !this.properties.has("amm") ) return [];
+    return this.parent.actor.itemTypes.consumable
+      .filter(i => (i.system.type.value === "ammo")
+        && (!this.ammunition?.type || (i.system.type.subtype === this.ammunition.type)))
+      .map(item => ({
+        item,
+        value: item.id,
+        label: `${item.name} (${item.system.quantity})`,
+        disabled: !item.system.quantity
+      }))
+      .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -303,12 +355,12 @@ export default class WeaponData extends ItemDataModel.mixin(
     if ( !(this.properties.has("thr") && (this.attackType === "ranged")) ) {
       // Weapons without the "Two-Handed" property or with the "Versatile" property will have One-Handed attack
       if ( this.isVersatile || !this.properties.has("two") ) modes.push({
-        value: "oneHanded", label: game.i18n.localize("DND5E.ATTACK.Mode.OneHanded")
+        value: "oneHanded", label: CONFIG.DND5E.attackModes.oneHanded.label
       });
 
       // Weapons with the "Two-Handed" property or with the "Versatile" property will have Two-Handed attack
       if ( this.isVersatile || this.properties.has("two") ) modes.push({
-        value: "twoHanded", label: game.i18n.localize("DND5E.ATTACK.Mode.TwoHanded")
+        value: "twoHanded", label: CONFIG.DND5E.attackModes.twoHanded.label
       });
     }
 
@@ -318,18 +370,23 @@ export default class WeaponData extends ItemDataModel.mixin(
     // Weapons with the "Light" property will have Offhand attack
     // If player has the "Enhanced Dual Wielding" flag, then allow any melee weapon without the "Two-Handed" property
     if ( isLight ) modes.push({
-      value: "offhand", label: game.i18n.localize("DND5E.ATTACK.Mode.Offhand")
+      value: "offhand", label: CONFIG.DND5E.attackModes.offhand.label
     });
 
     // Weapons with the "Thrown" property will have Thrown attack
     if ( this.properties.has("thr") ) {
       if ( modes.length ) modes.push({ rule: true });
-      modes.push({ value: "thrown", label: game.i18n.localize("DND5E.ATTACK.Mode.Thrown") });
+      modes.push({ value: "thrown", label: CONFIG.DND5E.attackModes.thrown.label });
 
       // Weapons with the "Thrown" & "Light" properties will have an Offhand Throw attack
       if ( isLight ) modes.push({
-        value: "thrown-offhand", label: game.i18n.localize("DND5E.ATTACK.Mode.ThrownOffhand")
+        value: "thrown-offhand", label: CONFIG.DND5E.attackModes["thrown-offhand"].label
       });
+    }
+
+    else if ( !this.attackType && ((this.range.value ?? 0) > (this.range.reach ?? 0)) ) {
+      if ( modes.length ) modes.push({ rule: true });
+      modes.push({ value: "ranged", label: CONFIG.DND5E.attackModes.ranged.label });
     }
 
     return modes;
@@ -352,6 +409,7 @@ export default class WeaponData extends ItemDataModel.mixin(
     const melee = CONFIG.DND5E.defaultAbilities.meleeAttack;
     const ranged = CONFIG.DND5E.defaultAbilities.rangedAttack;
     if ( this.properties.has("fin") ) return new Set([melee, ranged]);
+    if ( !this.attackType ) return null;
     return new Set([this.attackType === "melee" ? melee : ranged]);
   }
 
@@ -385,6 +443,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   get _typeAbilityMod() {
     const availableAbilities = this.availableAbilities;
+    if ( !availableAbilities ) return null;
     if ( availableAbilities.size === 1 ) return availableAbilities.first();
     const abilities = this.parent?.actor?.system.abilities ?? {};
     return availableAbilities.reduce((largest, ability) =>
@@ -444,19 +503,19 @@ export default class WeaponData extends ItemDataModel.mixin(
    * @type {FormSelectOption[]|null}
    */
   get masteryOptions() {
-    if ( !this.parent.actor?.system.traits?.weaponProf?.mastery?.value.has(this.type.baseItem) || !this.mastery ) {
+    if ( !this.parent.actor?.system.traits?.weaponProf?.mastery?.value?.has?.(this.type.baseItem) || !this.mastery ) {
       return null;
     }
     const extras = [];
     for ( const mastery of this.parent.actor.system.traits.weaponProf.mastery.bonus ?? [] ) {
       if ( mastery === this.mastery ) continue;
-      if ( !extras.length ) extras.push({ rule: true });
       extras.push({ value: mastery, label: CONFIG.DND5E.weaponMasteries[mastery]?.label ?? mastery });
     }
-    return [
-      { value: this.mastery, label: CONFIG.DND5E.weaponMasteries[this.mastery]?.label ?? this.mastery },
-      ...extras
-    ];
+    return [{
+      value: this.mastery,
+      label: CONFIG.DND5E.weaponMasteries[this.mastery]?.label ?? this.mastery,
+      rule: !!extras.length
+    }, ...extras];
   }
 
   /* -------------------------------------------- */
@@ -490,14 +549,39 @@ export default class WeaponData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Attack types that can be used with this item by default.
+   * @type {Set<string>}
+   */
+  get validAttackTypes() {
+    const types = new Set();
+    const attackType = this.attackType;
+    if ( (attackType === "melee") || (attackType === null) ) types.add("melee");
+    if ( (attackType === "ranged") || this.properties.has("thr")
+      || ((attackType === null) && this.range.value) ) types.add("ranged");
+    return types;
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _preCreate(data, options, user) {
-    if ( super._preCreate(data, options, user) === false ) return false;
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    await this.preCreateEquipped(data, options, user);
     if ( this.activities.size ) return;
+
     const activityData = new CONFIG.DND5E.activityTypes.attack.documentClass({}, { parent: this.parent }).toObject();
     this.parent.updateSource({ [`system.activities.${activityData._id}`]: activityData });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+    await this.preUpdateIdentifiable(changed, options, user);
   }
 }

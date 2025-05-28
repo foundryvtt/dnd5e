@@ -1,0 +1,105 @@
+_id: phbPrimalOrderMa
+name: 'Primal Order: Magician'
+type: feat
+img: icons/magic/nature/leaf-hand-green.webp
+system:
+  description:
+    value: >-
+      <p>You know one extra cantrip from the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.LhvuDQEyrCdg5EfU#cantrip]{Druid
+      spell list}. In addition, your mystical connection to nature gives you a
+      bonus to your Intelligence (Arcana or Nature) checks. The bonus equals
+      your Wisdom modifier (minimum bonus of +1, currently [[lookup
+      @abilities.wis.mod]]).</p><section class="secret"
+      id="secret-adiIB9wCX5zZdZ9F"><p><strong>Foundry Note</strong></p><p>This
+      feature includes an Active Effect which automates the increase to your
+      known cantrips and the bonus to your Arcane and Nature
+      checks.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: Druid
+  activities: {}
+  enchant: {}
+  identifier: primal-order-magician
+effects:
+  - name: Magician
+    origin: Item.phbPrimalOrderMa
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/nature/leaf-hand-green.webp
+    _id: IqjrvuQ2ORv65hxB
+    type: base
+    system: {}
+    changes:
+      - key: system.scale.druid.cantrips-known
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.skills.arc.bonuses.check
+        mode: 2
+        value: (max(1,@abilities.wis.mod))
+        priority: null
+      - key: system.skills.nat.bonuses.check
+        mode: 2
+        value: (max(1,@abilities.wis.mod))
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classes24.Item.phbdrdPrimalOrde.ActiveEffect.zxFq5nqzLiznWTeu
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbPrimalOrderMa.IqjrvuQ2ORv65hxB'
+folder: EXYmwRGoNyMbByN1
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866366918
+  modifiedTime: 1745256759572
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1100000
+ownership:
+  default: 0
+_key: '!items!phbPrimalOrderMa'

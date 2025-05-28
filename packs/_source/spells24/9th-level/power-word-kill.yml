@@ -1,0 +1,126 @@
+name: Power Word Kill
+system:
+  description:
+    value: >-
+      <p>You compel one creature you can see within range to die. If the target
+      has 100 Hit Points or fewer, it dies. Otherwise, it takes 12d12 Psychic
+      damage.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 9
+  school: enc
+  properties:
+    - vocal
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    rf6TC1mN2miOf1Pc:
+      type: damage
+      name: Compel to Die
+      _id: rf6TC1mN2miOf1Pc
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 12
+            denomination: '12'
+            bonus: ''
+            types:
+              - psychic
+            scaling:
+              mode: ''
+      img: systems/dnd5e/icons/svg/damage/necrotic.svg
+      appliedEffects: []
+  identifier: power-word-kill
+_id: phbsplPowerWordK
+type: spell
+img: icons/magic/death/projectile-skull-flaming-yellow.webp
+effects: []
+folder: iG0Zia8jh6uK39TB
+sort: 101563
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425966712
+  modifiedTime: 1745256796998
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplPowerWordK'

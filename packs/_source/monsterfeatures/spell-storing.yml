@@ -1,0 +1,53 @@
+_id: kSgBb9r1TCfDIMY0
+name: Spell Storing
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>A spellcaster who wears the [[lookup @name lowercase]]'s amulet can
+      cause the [[lookup @name lowercase]] to store one spell of 4th level or
+      lower. To do so, the wearer must cast the spell on the [[lookup @name
+      lowercase]]. The spell has no effect but is stored within the [[lookup
+      @name lowercase]]. When commanded to do so by the wearer or when a
+      situation arises that was predefined by the spellcaster, the [[lookup
+      @name lowercase]] casts the stored spell with any parameters set by the
+      original caster, requiring no components. When the spell is cast or a new
+      spell is stored, any previously stored spell is lost.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: spell-storing
+flags: {}
+img: icons/magic/defensive/shield-barrier-blades-teal.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304975858
+  modifiedTime: 1725992574161
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!kSgBb9r1TCfDIMY0'

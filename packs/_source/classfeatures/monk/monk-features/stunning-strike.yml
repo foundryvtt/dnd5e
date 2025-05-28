@@ -1,0 +1,146 @@
+_id: pvRc6GAu1ok6zihC
+name: Stunning Strike
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Starting at 5th level, you can interfere with the flow of ki in an
+      opponent's body. When you hit another creature with a melee weapon attack,
+      you can spend 1 ki point to attempt a stunning strike. The target must
+      succeed on a Constitution saving throw or be stunned until the end of your
+      next turn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ki
+  requirements: Monk 5
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: Compendium.dnd5e.classfeatures.Item.10b6z2W1txNkrGP7
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects:
+        - _id: ydyOZkp3pCtwM0Xb
+          onSave: false
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: wis
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: stunning-strike
+flags: {}
+img: icons/skills/melee/unarmed-punch-fist-blue.webp
+effects:
+  - name: Stunning Strike
+    origin: Compendium.dnd5e.classfeatures.Item.pvRc6GAu1ok6zihC
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: ydyOZkp3pCtwM0Xb
+    changes: []
+    description: ''
+    transfer: false
+    statuses:
+      - stunned
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/skills/melee/unarmed-punch-fist-blue.webp
+    type: base
+    system: {}
+    tint: '#ffffff'
+    sort: 0
+    _key: '!items.effects!pvRc6GAu1ok6zihC.ydyOZkp3pCtwM0Xb'
+folder: TMmNG8ujFDBEWXRe
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037388762
+  modifiedTime: 1725992290024
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!pvRc6GAu1ok6zihC'

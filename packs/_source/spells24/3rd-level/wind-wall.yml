@@ -1,0 +1,219 @@
+name: Wind Wall
+system:
+  description:
+    value: >-
+      <p>A wall of strong wind rises from the ground at a point you choose
+      within range. You can make the wall up to 50 feet long, 15 feet high, and
+      1 foot thick. You can shape the wall in any way you choose so long as it
+      makes one continuous path along the ground. The wall lasts for the
+      duration.</p><p>When the wall appears, each creature in its area makes a
+      Strength saving throw, taking 4d8 Bludgeoning damage on a failed save or
+      half as much damage on a successful one.</p><p>The strong wind keeps fog,
+      smoke, and other gases at bay. Small or smaller flying creatures or
+      objects can't pass through the wall. Loose, lightweight materials brought
+      into the wall fly upward. Arrows, bolts, and other ordinary projectiles
+      launched at targets behind the wall are deflected upward and miss
+      automatically. Boulders hurled by Giants or siege engines, and similar
+      projectiles, are unaffected. Creatures in gaseous form can't pass through
+      it.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: space
+      special: ''
+    template:
+      units: ft
+      width: '1'
+      type: ''
+      size: '50'
+      contiguous: false
+      count: ''
+      height: '15'
+  range:
+    value: '120'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a fan and a feather
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: false
+        template:
+          contiguous: false
+          units: ft
+          type: wall
+          size: '50'
+          width: '1'
+          height: '15'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: '8'
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+      save:
+        ability: str
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Create Single Wall
+      img: ''
+      appliedEffects: []
+    H2KvnEEAgoE3YeK5:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+        concentration: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: false
+        template:
+          contiguous: true
+          units: ft
+          type: wall
+          size: '10'
+          width: '1'
+          height: '15'
+          count: '5'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: '8'
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+      save:
+        ability: str
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Create Segmented Wall
+      _id: H2KvnEEAgoE3YeK5
+      img: ''
+      appliedEffects: []
+  identifier: wind-wall
+_id: phbsplWindWall00
+type: spell
+img: icons/magic/air/wind-tornado-funnel-damage-blue.webp
+effects: []
+folder: HCovEE4VoPGlIbKi
+sort: 100007
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425978168
+  modifiedTime: 1745256800170
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplWindWall00'

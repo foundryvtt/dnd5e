@@ -1,0 +1,207 @@
+name: Oil
+system:
+  description:
+    value: >-
+      <p>You can douse a creature, object, or space with Oil or use it as fuel,
+      as detailed below.</p><p><strong>Dousing a Creature or an Object.</strong>
+      When you take the Attack action, you can replace one of your attacks with
+      throwing an Oil flask. Target one creature or object within 20 feet of
+      yourself. The target must succeed on a Dexterity saving throw (DC 8 plus
+      your Dexterity modifier and Proficiency Bonus) or be covered in oil. If
+      the target takes Fire damage before the oil dries (after 1 minute), the
+      target takes an extra [[/damage 5 type=fire]] damage from burning
+      oil.</p><p><strong>Dousing a Space.</strong> You can take the Utilize
+      action to pour an Oil flask on level ground to cover a 5-foot-square area
+      within 5 feet of yourself. If lit, the oil burns until the end of the turn
+      2 rounds from when the oil was lit (or 12 seconds) and deals 5 Fire damage
+      to any creature that enters the area or ends its turn there. A creature
+      can take this damage only once per turn.</p><p><strong>Fuel.</strong> Oil
+      serves as fuel for Lamps and Lanterns. Once lit, a flask of Oil burns for
+      6 hours in a Lamp or Lantern. That duration doesn't need to be
+      consecutive; you can extinguish the burning Oil (as a Utilize action) and
+      rekindle it again until it has burned for a total of 6 hours.</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: sp
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagBurglarsPac
+  quantity: 7
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: true
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: potion
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    FoeoumkYcnAsGCRo:
+      type: save
+      name: Throw
+      _id: FoeoumkYcnAsGCRo
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '20'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: dex
+          formula: ''
+    mDj3jtAY6ICmi1ZL:
+      type: damage
+      name: Douse Space
+      _id: mDj3jtAY6ICmi1ZL
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: square
+          size: '5'
+          count: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: '5'
+            types:
+              - fire
+            scaling:
+              number: 1
+  identifier: oil
+_id: JpE7eqjwXw95Sai5
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/consumables/potions/bottle-bulb-empty-glass.webp
+effects: []
+sort: 65625
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726532234333
+  modifiedTime: 1745256801446
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!JpE7eqjwXw95Sai5'

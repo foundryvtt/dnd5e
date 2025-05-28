@@ -121,7 +121,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       const { label, pressed } = this.getChangeSourceOptions(type, change, targetOptions);
       acc += `
         <button class="change-source unbutton" type="button" data-type="${type}" data-change="${change}"
-                data-tooltip="${label}" aria-label="${label}" aria-pressed="${pressed}">
+                data-tooltip aria-label="${label}" aria-pressed="${pressed}">
           <dnd5e-icon src="${icon}" inert></dnd5e-icon>
           <i class="fa-solid fa-slash" inert></i>
           <i class="fa-solid fa-arrow-turn-down" inert></i>
@@ -134,9 +134,9 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     li.classList.add("target");
     li.dataset.targetUuid = uuid;
     li.innerHTML = `
-      <img class="gold-icon" alt="${name}" src="${actor.img}">
+      <img class="gold-icon">
       <div class="name-stacked">
-        <span class="title">${name}</span>
+        <span class="title"></span>
         ${changeSources ? `<span class="subtitle">${changeSources}</span>` : ""}
       </div>
       <div class="calculated damage">
@@ -147,7 +147,8 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       </div>
       <menu class="damage-multipliers unlist"></menu>
     `;
-
+    Object.assign(li.querySelector(".gold-icon"), { alt: name, src: actor.img });
+    li.querySelector(".name-stacked .title").append(name);
     const menu = li.querySelector("menu");
     for ( const [value, display] of MULTIPLIERS ) {
       const entry = document.createElement("li");

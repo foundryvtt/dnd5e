@@ -1,0 +1,120 @@
+_id: dmgTrueSeeingCry
+name: Crystal Ball of True Seeing
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/tools/laboratory/alembic-glass-ball-blue.webp
+system:
+  activities:
+    EsEZwTpUoGAXQskP:
+      type: cast
+      _id: EsEZwTpUoGAXQskP
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplScrying000
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Legendary (Requires
+      Attunement)</em></p></div><p>While touching this crystal orb, you can cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScrying000]{Scrying}</em>
+      (save DC 17) with it. In addition, you have Truesight with a range of 120
+      feet centered on the spell's sensor.</p>
+    chat: ''
+  identifier: true-seeing-crystal-ball-of
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256809728
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 37600000
+ownership:
+  default: 0
+_key: '!items!dmgTrueSeeingCry'

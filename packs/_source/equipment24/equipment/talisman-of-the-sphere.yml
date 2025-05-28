@@ -1,0 +1,76 @@
+_id: dmgTalismanOfThe
+name: Talisman of the Sphere
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/treasure/broach-jeweled-pink.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Legendary (Requires Attunement)</em></p><p>While
+      holding or wearing this talisman, you have Advantage on any [[/skill
+      arc]]  check you make to control a
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgSphereOfAnnih]{Sphere of
+      Annihilation}. In addition, when you start your turn in control of a
+      <em>Sphere of Annihilation</em>, you can take a Magic action to move it 10
+      feet plus a number of additional feet equal to 10 times your Intelligence
+      modifier. This movement doesn't have to be in a straight line.</p>
+    chat: ''
+  identifier: talisman-of-the-sphere
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712704221
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 35400000
+ownership:
+  default: 0
+_key: '!items!dmgTalismanOfThe'

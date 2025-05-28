@@ -4,18 +4,22 @@
                placeholder="{{ localize 'Name' }}">
         {{#if hasFolders}}
         <select class="unselect" name="folder" form="document-create">
-            {{ selectOptions folders selected=folder labelAttr="name" nameAttr="id"
+            {{ selectOptions folders selected=folder labelAttr="name" valueAttr="id"
                              blank=(localize "DOCUMENT.Folder") }}
         </select>
         {{/if}}
     </header>
     <ol class="unlist card">
         {{#each types}}
-        <li>
+        <li {{~#if hint}} data-tooltip="{{ hint }}"{{/if}}>
             <label>
+                {{#if svg}}
+                <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                {{else}}
                 <img src="{{ icon }}" alt="{{ label }}">
+                {{/if}}
                 <span>{{ label }}</span>
-                <input type="radio" name="type" value="{{ type }}" required>
+                <input type="radio" name="type" value="{{ type }}" required {{ disabled disabled }}>
             </label>
         </li>
         {{/each}}

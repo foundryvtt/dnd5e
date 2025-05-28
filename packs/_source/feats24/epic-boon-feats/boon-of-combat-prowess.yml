@@ -1,0 +1,73 @@
+name: Boon of Combat Prowess
+system:
+  description:
+    value: >-
+      <p>You gain the following benefits.</p><p><strong>Ability Score
+      Increase.</strong> Increase one ability score of your choice by 1, to a
+      maximum of 30.</p><p><strong>Peerless Aim.</strong> When you miss with an
+      attack roll, you can hit instead. Once you use this benefit, you can't use
+      it again until the start of your next turn.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 2
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: feat
+    subtype: epicBoon
+  prerequisites:
+    level: 19
+    repeatable: false
+  properties: []
+  requirements: Level 19
+  activities: {}
+  enchant: {}
+  identifier: boon-of-combat-prowess
+  advancement:
+    - _id: zNqJRAI2ON8SRu40
+      type: AbilityScoreImprovement
+      configuration:
+        cap: 1
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked: []
+        points: 1
+      value:
+        type: asi
+      level: 0
+      title: ''
+      hint: ''
+_id: phbBoonofCombatP
+type: feat
+img: icons/skills/ranged/target-bullseye-arrow-glowing.webp
+effects: []
+folder: 7zo2bljGLQY3uwXI
+sort: 100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940774
+  modifiedTime: 1745256779807
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbBoonofCombatP'

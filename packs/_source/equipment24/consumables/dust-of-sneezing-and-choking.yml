@@ -1,0 +1,190 @@
+_id: dmgDustOfSneezin
+name: Dust of Sneezing and Choking
+type: consumable
+folder: guHYjt0gjPLU2wCs
+img: icons/magic/water/bubbles-air-water-light.webp
+system:
+  activities:
+    GDzbsjaVxNM7nnBu:
+      type: save
+      _id: GDzbsjaVxNM7nnBu
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: AZcO17cLsTHbb0P9
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      name: ''
+      img: ''
+      appliedEffects:
+        - AZcO17cLsTHbb0P9
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon</em></p><p>Found in a small container, this
+      powder resembles
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgDustOfDisappe]{Dust of
+      Disappearance}, and <em>Identify</em> reveals it to be such. There is
+      enough of it for one use.</p><p>As a Utilize action, you can throw the
+      dust into the air, forcing yourself and every creature in a 30-foot
+      Emanation originating from you to make a DC 15 Constitution saving throw.
+      Constructs, Elementals, Oozes, Plants, and Undead succeed on the save
+      automatically.</p><p>On a failed save, a creature begins sneezing
+      uncontrollably; it has the Incapacitated condition and is suffocating. The
+      creature [[/save ability=con dc=15]]{repeats the save} at the end of each
+      of its turns, ending the effect on itself on a success. The effect also
+      ends on any creature targeted by a
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser
+      Restoration}</em> spell.</p>
+    chat: ''
+  identifier: dust-of-sneezing-and-choking
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: ''
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects:
+  - name: Incapacitated and Suffocating (Sneezing)
+    img: systems/dnd5e/icons/svg/statuses/suffocation.svg
+    origin: Compendium.dnd5e.equipment24.Item.dmgDustOfSneezin
+    transfer: false
+    _id: AZcO17cLsTHbb0P9
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p><em>Source:
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgDustOfSneezin]<br /></em>The
+      creature has the Incapacitated condition and is suffocating. The creature
+      [[/save ability=con dc=15]]{repeats the save} at the end of each of its
+      turns, ending the effect on itself on a success. The effect also ends on
+      any creature targeted by a
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser
+      Restoration}</em> spell.</p>
+    tint: '#ffffff'
+    statuses:
+      - incapacitated
+      - suffocation
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729285520227
+      modifiedTime: 1729285803498
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDustOfSneezin.AZcO17cLsTHbb0P9'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712699512
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 700000
+ownership:
+  default: 0
+_key: '!items!dmgDustOfSneezin'

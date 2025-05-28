@@ -1,0 +1,122 @@
+_id: bnjXlk13ZRJuf5d0
+name: Floating Disk
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell creates a circular, horizontal plane of force, 3 feet in
+      diameter and 1 inch thick, that floats 3 feet above the ground in an
+      unoccupied space of your choice that you can see within range. The disk
+      remains for the Duration, and can hold up to 500 pounds. If more weight is
+      placed on it, the spell ends, and everything on the disk falls to the
+      ground.</p><p>The disk is immobile while you are within 20 feet of it. If
+      you move more than 20 feet away from it, the disk follows you so that it
+      remains within 20 feet of you. It can move across uneven terrain, up or
+      down stairs, slopes and the like, but it can't cross an elevation change
+      of 10 feet or more. For example, the disk can't move across a 10-foot-deep
+      pit, nor could it leave such a pit if it was created at the
+      bottom.</p><p>If you move more than 100 feet from the disk (typically
+      because it can't move around an obstacle to follow you), the spell
+      ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: con
+  materials:
+    value: A drop of mercury
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: floating-disk
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-triangle-blue.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037360237
+  modifiedTime: 1725992721146
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!bnjXlk13ZRJuf5d0'

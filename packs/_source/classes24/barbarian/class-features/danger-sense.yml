@@ -1,0 +1,53 @@
+_id: phbbrbDangerSens
+name: Danger Sense
+type: feat
+img: icons/skills/wounds/injury-face-impact-orange.webp
+system:
+  description:
+    value: >-
+      <p>You gain an uncanny sense of when things aren't as they should be,
+      giving you an edge when you dodge perils. You have Advantage on Dexterity
+      saving throws unless you have the &amp;Reference[Incapacitated]
+      condition.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: Barbarian
+  activities: {}
+  enchant: {}
+  identifier: danger-sense
+effects: []
+folder: p6WDpW0gzmKfhGad
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940469
+  modifiedTime: 1745256759733
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbDangerSens'

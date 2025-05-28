@@ -1,0 +1,93 @@
+_id: hqVKZie7x9w3Kqds
+name: Spell Scroll 3rd Level
+type: consumable
+img: icons/sundries/scrolls/scroll-bound-orange-tan.webp
+system:
+  description:
+    value: >-
+      <p>A spell scroll bears the words of a single spell, written in a mystical
+      cipher. If the spell is on your class's spell list, you can read the
+      scroll and cast its spell without providing any material components.
+      Otherwise, the scroll is unintelligible. Casting the spell by reading the
+      scroll requires the spell's normal casting time. Once the spell is cast,
+      the words on the scroll fade, and it crumbles to dust. If the casting is
+      interrupted, the scroll is not lost.</p>
+
+      <p>If the spell is on your class's spell list but of a higher level than
+      you can normally cast, you must make a DC 13 ability check using your
+      spellcasting ability to determine whether you cast it successfully. On a
+      failed check, the spell disappears from the scroll with no other
+      effect.</p>
+
+      <p>The level of the spell on the scroll determines the spell's saving
+      throw DC and attack bonus, as well as the scroll's rarity.</p>
+
+      <p><strong>Save DC</strong>: 15<br /><strong>Attack Bonus</strong>:
+      +7.</p>
+
+      <p>A wizard spell on a spell scroll can be copied just as spells in
+      spellbooks can be copied. When a spell is copied from a spell scroll, the
+      copier must succeed on a DC 13 Intelligence (Arcana) check. If the check
+      succeeds, the spell is successfully copied. Whether the check succeeds or
+      fails, the spell scroll is destroyed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: scroll
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities: {}
+  attuned: false
+  identifier: spell-scroll-3rd-level
+effects: []
+folder: epDf8I2SD3cS6ctz
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037258142
+  modifiedTime: 1725992536511
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!hqVKZie7x9w3Kqds'

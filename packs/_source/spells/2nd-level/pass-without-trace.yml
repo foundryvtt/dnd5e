@@ -1,0 +1,113 @@
+_id: pRMvmknwLf2tdMTj
+name: Pass without Trace
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A veil of shadows and Silence radiates from you, masking you and your
+      companions from detection. For the Duration, each creature you choose
+      within 30 feet of you (including you) has a +10 bonus to Dexterity
+      (Stealth) checks and can't be tracked except by magical means. A creature
+      that receives this bonus leaves behind no tracks or other traces of its
+      passage.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: radius
+      size: '30'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: abj
+  materials:
+    value: Ashes from a burned leaf of mistletoe and a sprig of spruce
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: pass-without-trace
+sort: 0
+flags: {}
+img: icons/magic/air/fog-gas-smoke-brown.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037365353
+  modifiedTime: 1725992722839
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!pRMvmknwLf2tdMTj'

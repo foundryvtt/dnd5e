@@ -1,0 +1,179 @@
+_id: phbdrdNaturalRec
+name: Natural Recovery
+type: feat
+folder: WJ4IXskgADlprLEA
+img: icons/magic/control/sihouette-hold-beam-green.webp
+system:
+  description:
+    value: >-
+      <p>You can cast one of the level 1+ spells that you have prepared from
+      your Circle Spells feature without expending a spell slot, and you must
+      finish a Long Rest before you do so again.</p><p>In addition, when you
+      finish a Short Rest, you can choose expended spell slots to recover. The
+      spell slots can have a combined level that is equal to or less than half
+      your Druid level (round up, currently [[lookup @classes.druid.levels]]),
+      and none of them can be level 6+. For example, if you're a level 6 Druid,
+      you can recover up to three levels' worth of spell slots. You can recover
+      a level 3 spell slot, a level 2 and a level 1 spell slot, or three level 1
+      spell slots. Once you recover spell slots with this feature, you can't do
+      so again until you finish a Long Rest.</p><section class="secret"
+      id="secret-xLFXthYlJ7wwFlSS"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Cast Spell</strong> activity can be used to track its single free
+      use.</p><p>The <strong>Recover Spell Slot</strong> activity does not
+      automate the restoration of spell slots but can be used for tracking its
+      own single use.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 6
+    repeatable: false
+  properties: []
+  requirements: Circle of Land
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: ''
+        units: inst
+        special: ''
+        override: false
+        concentration: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery:
+          - period: lr
+            type: recoverAll
+        max: '1'
+      sort: 0
+      name: Cast Spell
+    u0UF6WePUutyp6e6:
+      type: utility
+      name: Recover Spell Slots
+      _id: u0UF6WePUutyp6e6
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you finish a Short Rest
+      consumption:
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery:
+          - period: lr
+            type: recoverAll
+        max: '1'
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: natural-recovery
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866583501
+  modifiedTime: 1745256761226
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 300000
+ownership:
+  default: 0
+_key: '!items!phbdrdNaturalRec'

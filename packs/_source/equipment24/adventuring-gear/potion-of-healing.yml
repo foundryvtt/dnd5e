@@ -1,0 +1,143 @@
+name: Potion of Healing
+system:
+  description:
+    value: >-
+      <p>This potion is a magic item. As a Bonus Action, you can drink it or
+      administer it to another creature within 5 feet of yourself. The creature
+      that drinks the magical red fluid in this vial regains 2d4 + 2 Hit
+      Points.</p>
+    chat: ''
+  price:
+    value: 50
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: true
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: potion
+    subtype: ''
+  magicalBonus: null
+  properties:
+    - mgc
+  activities:
+    cNvH4obx5XJ2myYr:
+      type: heal
+      activation:
+        type: bonus
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: touch
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      healing:
+        number: 2
+        denomination: '4'
+        bonus: '2'
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: ''
+        scaling:
+          mode: whole
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: cNvH4obx5XJ2myYr
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: potion-of-healing
+_id: phbagPotionofHea
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/consumables/potions/potion-tube-corked-red.webp
+effects: []
+sort: 4800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425911020
+  modifiedTime: 1740680136756
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagPotionofHea'

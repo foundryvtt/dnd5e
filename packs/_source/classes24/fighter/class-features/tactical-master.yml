@@ -1,0 +1,97 @@
+_id: phbftrTacticalMa
+name: Tactical Master
+type: feat
+folder: xggTDaiQq26ZrVzJ
+img: icons/sundries/documents/blueprint-axe.webp
+system:
+  description:
+    value: >-
+      <p>When you attack with a weapon whose mastery property you can use, you
+      can replace that property with the Push, Sap, or Slow property for that
+      attack.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 2
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 9
+    repeatable: false
+  properties: []
+  requirements: Fighter
+  activities: {}
+  enchant: {}
+  identifier: tactical-master
+effects:
+  - name: Tactial Master
+    img: icons/sundries/documents/blueprint-axe.webp
+    _id: 9Dwnc4r39iE997j0
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.weaponProf.mastery.bonus
+        mode: 2
+        value: push
+        priority: null
+      - key: system.traits.weaponProf.mastery.bonus
+        mode: 2
+        value: sap
+        priority: null
+      - key: system.traits.weaponProf.mastery.bonus
+        mode: 2
+        value: slow
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbftrTacticalMa.9Dwnc4r39iE997j0'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866361253
+  modifiedTime: 1745256761811
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftrTacticalMa'

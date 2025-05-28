@@ -1,0 +1,132 @@
+_id: 2RC0EyvBLPH88PZF
+name: Sunbeam
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A beam of brilliant light flashes out from your hand in a 5-foot-wide,
+      60-foot-long line. Each creature in the line must make a Constitution
+      saving throw. On a failed save, a creature takes 6d8 radiant damage and is
+      Blinded until your next turn. On a successful save, it takes half as much
+      damage and isn't blinded by this spell. Undead and oozes have disadvantage
+      on this saving throw.</p><p>You can create a new line of radiance as your
+      action on any turn until the spell ends.</p><p>For the Duration, a mote of
+      brilliant radiance shines in your hand. It sheds bright light in a 30-foot
+      radius and dim light for an additional 30 feet. This light is
+      sunlight.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: line
+      size: '60'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: evo
+  materials:
+    value: A magnifying glass
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 6
+            denomination: 8
+            bonus: ''
+            types:
+              - radiant
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: sunbeam
+sort: 0
+flags: {}
+img: icons/magic/light/beams-rays-orange-purple-large.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037346050
+  modifiedTime: 1725992716605
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!2RC0EyvBLPH88PZF'

@@ -1,0 +1,133 @@
+_id: phbrgrHuntersPre
+name: Hunter's Prey
+type: feat
+folder: GWWL7NqfCEyqwfhZ
+img: icons/creatures/magical/construct-iron-stomping-yellow.webp
+system:
+  description:
+    value: >-
+      <p>You gain one of the following feature options of your choice. Whenever
+      you finish a Short or Long Rest, you can replace the chosen option with
+      the other one.</p><p><strong>Colossus Slayer.</strong> Your tenacity can
+      wear down even the most resilient foes. When you hit a creature with a
+      weapon, the weapon deals an extra 1d8 damage to the target if it's missing
+      any of its Hit Points. You can deal this extra damage only once per
+      turn.</p><p><strong>Horde Breaker.</strong> Once on each of your turns
+      when you make an attack with a weapon, you can make another attack with
+      the same weapon against a different creature that is within 5 feet of the
+      original target, that is within the weapon's range, and that you haven't
+      attacked this turn.</p><section class="secret"
+      id="secret-I2q5Nm7g6mkLjH5Y"><p><strong>Foundry Note</strong></p><p>This
+      feature includes a <strong>Colossus Slayer</strong> activity for the
+      additional damage. You can select the correct damage type in the roll
+      dialog.</p><p>For the <strong>Horde Breaker</strong> option simply make
+      another attack.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    Ek6m8ZY5Df7Mp6DO:
+      type: damage
+      _id: Ek6m8ZY5Df7Mp6DO
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Once per turn when you hit a creature with a weapon
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 8
+            bonus: ''
+            types:
+              - acid
+              - bludgeoning
+              - cold
+              - fire
+              - force
+              - lightning
+              - necrotic
+              - piercing
+              - poison
+              - psychic
+              - radiant
+              - slashing
+              - thunder
+            scaling:
+              number: 1
+      name: ''
+  enchant: {}
+  identifier: hunters-prey
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866564824
+  modifiedTime: 1745256764985
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!phbrgrHuntersPre'

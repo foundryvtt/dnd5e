@@ -1,0 +1,52 @@
+_id: phbmnkAcrobaticM
+name: Acrobatic Movement
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/skills/movement/arrow-upward-yellow.webp
+system:
+  description:
+    value: >-
+      <p>While you aren't wearing armor or wielding a Shield, you gain the
+      ability to move along vertical surfaces and across liquids on your turn
+      without falling during the movement.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 9
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: acrobatic-movement
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1745256762902
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+_key: '!items!phbmnkAcrobaticM'

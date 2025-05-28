@@ -1,0 +1,206 @@
+_id: phbspInfernalTie
+name: Tiefling, Infernal
+type: race
+img: icons/creatures/unholy/demon-horned-winged-laughing.webp
+system:
+  description:
+    value: >-
+      <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspTiefling000
+      inline classes="free-rules-embed"]</p><h3
+      data-anchor="infernal">Infernal</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspInfernalTie
+      inline classes="free-rules-embed"]</p><h3
+      data-anchor="tiefling-traits">Tiefling Traits</h3><p><strong>Creature
+      Type:</strong> Humanoid</p><p><strong>Size: </strong>Medium (about 4–7
+      feet tall) or Small (about 3–4 feet tall), chosen when you select this
+      species</p><p><strong>Speed:</strong> 30 feet</p><p>As a Tiefling, you
+      have the following special traits.</p><p><strong>Darkvision. </strong>You
+      have Darkvision with a range of 60 feet.</p><p><strong>Fiendish
+      Legacy.</strong> You are the recipient of a legacy that grants you
+      supernatural abilities.</p><p>When you reach character levels 3 and 5, you
+      learn a higher-level spell, as shown on the table. You always have that
+      spell prepared. You can cast it once without a spell slot, and you regain
+      the ability to cast it in that way when you finish a Long Rest. You can
+      also cast the spell using any spell slots you have of the appropriate
+      level. Intelligence, Wisdom, or Charisma is your spellcasting ability for
+      the spells you cast with this trait (choose the ability when you select
+      the legacy).</p><p><strong>Otherworldly Presence.</strong> You know the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplThaumaturg]{Thaumaturgy}
+      cantrip. When you cast it with this trait, the spell uses the same
+      spellcasting ability you use for your Fiendish Legacy
+      trait.</p><table><caption>Fiendish Legacies</caption><thead><tr><td>Level
+      1</td><td>Level 3</td><td>Level 5</td></tr></thead><tbody><tr><td>You have
+      Resistance to Fire damage. You also know the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFireBolt00]{Fire Bolt}
+      cantrip.</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplHellishReb]{Hellish
+      Rebuke}</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplDarkness00]{Darkness}</td></tr></tbody></table>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    custom: ''
+    book: SRD 5.2
+    license: CC-BY-4.0
+  advancement:
+    - _id: lskxIeib6rIreZ1h
+      type: Size
+      configuration:
+        sizes:
+          - sm
+          - med
+      level: 0
+      title: ''
+      hint: Meidum (about 4-7 feet tall) or Small (about 3-4 feet tall)
+      value: {}
+    - _id: T8T6H9TudTleafUL
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptOtherworld
+            optional: false
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptInfernalLe
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 0
+      title: Tiefling Traits
+      hint: ''
+    - _id: bD2XFMWGPkFJLr2w
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 0
+      title: Otherworldly Presence
+      hint: ''
+    - _id: 9V9xGP0Fsqh3NDsB
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - dr:fire
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Infernal Tiefling Traits
+      hint: You have Resistance to Fire damage.
+    - _id: gMovXMwHeD9cCL99
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplFireBolt00
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 1
+      title: Infernal Tiefling Traits
+      hint: >-
+        Intelligence, Wisdom, or Charisma is your spellcasting ability for the
+        spells you cast with this trait.
+    - _id: ol3SWLw2FTNEiXrb
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplHellishReb
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          preparation: always
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+      value: {}
+      level: 3
+      title: Infernal Tiefling Traits
+      hint: >-
+        Intelligence, Wisdom, or Charisma is your spellcasting ability for the
+        spells you cast with this trait.
+    - _id: cj8h25IH0Zvdy3Bm
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplDarkness00
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          preparation: always
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+      value: {}
+      level: 5
+      title: Infernal Tiefling Traits
+      hint: >-
+        Intelligence, Wisdom, or Charisma is your spellcasting ability for the
+        spells you cast with this trait.
+  movement:
+    burrow: null
+    climb: null
+    fly: null
+    swim: null
+    walk: 30
+    units: null
+    hover: false
+  senses:
+    darkvision: 60
+    blindsight: null
+    tremorsense: null
+    truesight: null
+    units: null
+    special: ''
+  type:
+    value: humanoid
+    subtype: Tiefling
+    custom: ''
+  identifier: tiefling-infernal
+effects: []
+folder: Ulvo8nbygUegLa59
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745340871134
+  modifiedTime: 1745687564746
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbspInfernalTie'

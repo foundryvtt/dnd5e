@@ -1,0 +1,150 @@
+name: Staff
+system:
+  description:
+    value: >-
+      <p>An @UUID[Compendium.dnd5e.equipment24.Item.phbagArcaneFocus]{Arcane
+      Focus} is bejeweled or carved to channel arcane magic. A Sorcerer,
+      Warlock, or Wizard can use such an item as a Spellcasting
+      Focus.</p><p>This item also functions as a
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepQuartersta]{Quarterstaff}</p><section
+      class="secret" id="secret-wJ4SJVg9unbYSBJb"><p><strong>Foundry
+      Note</strong></p><p>This item has been configured with the additional
+      properties of a Quarterstaff.</p></section>
+    chat: ''
+  price:
+    value: 5
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  range:
+    value: null
+    long: null
+    units: ''
+    reach: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  damage:
+    versatile:
+      number: null
+      denomination: 0
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  armor:
+    value: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: quarterstaff
+  magicalBonus: null
+  properties:
+    - foc
+    - ver
+  proficient: null
+  activities:
+    5c4fPKVW51b3Ri3j:
+      type: attack
+      _id: 5c4fPKVW51b3Ri3j
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+  ammunition: {}
+  mastery: topple
+  identifier: staff
+_id: phbafcStaffalsoa
+type: weapon
+folder: 5qvlWBbvYXzxqIa1
+img: icons/weapons/staves/staff-ornate-jeweled-blue.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425904833
+  modifiedTime: 1740680132082
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbafcStaffalsoa'

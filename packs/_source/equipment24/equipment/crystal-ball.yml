@@ -1,0 +1,123 @@
+_id: dmgCrystalBall00
+name: Crystal Ball
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/materials/glass-orb.webp
+system:
+  activities:
+    2e2o9P9Kr0NgHi4B:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplScrying000
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: 2e2o9P9Kr0NgHi4B
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Very Rare (Requires Attunement)</em></p><p>While
+      touching this crystal orb, you can cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplScrying000]{Scrying} (save DC
+      17) with it.</p>
+    chat: ''
+  identifier: crystal-ball
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1740680118118
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgCrystalBall00'

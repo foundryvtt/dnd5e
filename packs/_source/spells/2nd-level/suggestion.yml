@@ -1,0 +1,126 @@
+_id: zMAWdyc8UVb37BK4
+name: Suggestion
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You suggest a course of activity (limited to a sentence or two) and
+      magically influence a creature you can see within range that can hear and
+      understand you. Creatures that can't be charmed are immune to this effect.
+      The suggestion must be worded in such a manner as to make the course of
+      action sound reasonable. Asking the creature to stab itself, throw itself
+      onto a spear, immolate itself, or do some other obviously harmful act ends
+      the spell.</p><p>The target must make a Wisdom saving throw. On a failed
+      save, it pursues the course of action you described to the best of its
+      ability. The suggested course of action can continue for the entire
+      duration. If the suggested activity can be completed in a shorter time,
+      the spell ends when the subject finishes what it was asked to
+      do.</p><p>You can also specify conditions that will trigger a special
+      activity during the duration. For example, you might suggest that a knight
+      give her warhorse to the first beggar she meets. If the condition isn't
+      met before the spell expires, the activity isn't performed.</p><p>If you
+      or any of your companions damage the target, the spell ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: enc
+  materials:
+    value: A snake's tongue and either a bit of honeycomb or a drop of sweet oil
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: suggestion
+sort: 0
+flags: {}
+img: icons/magic/air/air-burst-spiral-pink.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037367183
+  modifiedTime: 1725992723670
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!zMAWdyc8UVb37BK4'

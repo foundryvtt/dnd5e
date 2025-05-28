@@ -1,0 +1,176 @@
+name: Conjure Elemental
+system:
+  description:
+    value: >-
+      <p>You conjure a Large, intangible spirit from the Elemental Planes that
+      appears in an unoccupied space within range. Choose the spirit's element,
+      which determines its damage type:
+      @UUID[Compendium.dnd5e.actors24.Actor.phbsplConjuredEl]{air (Lightning)},
+      @UUID[Compendium.dnd5e.actors24.Actor.phbConjuredEarth]{earth (Thunder)},
+      @UUID[Compendium.dnd5e.actors24.Actor.phbConjuredFireE]{fire (Fire)}, or
+      @UUID[Compendium.dnd5e.actors24.Actor.phbConjuredWater]{water (Cold)}. The
+      spirit lasts for the duration.</p><p>Whenever a creature you can see
+      enters the spirit's space or starts its turn within 5 feet of the spirit,
+      you can force that creature to make a Dexterity saving throw if the spirit
+      has no creature Restrained. On failed save, the target takes 8d8 damage of
+      the spirit's type, and the target has the &amp;Reference[Restrained
+      apply=false] condition until the spell ends. At the start of each of its
+      turns, the Restrained target repeats the save. On a failed save, the
+      target takes 4d8 damage of the spirit's type. On a successful save, the
+      target isn't Restrained by the spirit.</p><p><strong>Using a Higher-Level
+      Spell Slot.</strong> The damage increases by 1d8 for each spell slot level
+      above 5.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    page: ''
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: (@scaling)d8
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        saves: true
+        attacks: false
+        proficiency: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: xvb2BTZQi942QVyI
+          uuid: Compendium.dnd5e.actors24.Actor.phbsplConjuredEl
+          level:
+            min: null
+            max: null
+        - count: ''
+          name: ''
+          _id: rLsUbfInq7CCYy7G
+          uuid: Compendium.dnd5e.actors24.Actor.phbConjuredEarth
+          level:
+            min: null
+            max: null
+        - count: ''
+          name: ''
+          _id: TDLfZ4CncKEEYZaq
+          uuid: Compendium.dnd5e.actors24.Actor.phbConjuredFireE
+          level:
+            min: null
+            max: null
+        - count: ''
+          name: ''
+          _id: 40IDS6d0353u3Dv4
+          uuid: Compendium.dnd5e.actors24.Actor.phbConjuredWater
+          level:
+            min: null
+            max: null
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Conjure
+      img: ''
+      appliedEffects: []
+  identifier: conjure-elemental
+_id: phbsplConjureEle
+type: spell
+img: icons/creatures/magical/spirit-mischief-fire-ice-blue.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 2900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.2
+  createdTime: 1724425946689
+  modifiedTime: 1746119578088
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplConjureEle'

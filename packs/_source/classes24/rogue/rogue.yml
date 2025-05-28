@@ -1,0 +1,650 @@
+_id: phbrgeRogue00000
+name: Rogue
+type: class
+folder: JBKpeqLQWPp9Wt59
+img: systems/dnd5e/icons/classes/rogue.webp
+system:
+  description:
+    value: >-
+      <h3>Core Rogue Traits</h3><table class="core-class-traits"><tbody><tr><th
+      scope="row"><p>Primary
+      Ability</p></th><td><p>Dexterity</p></td></tr><tr><th scope="row"><p>Hit
+      Point Die</p></th><td><p>D8 per Rogue level</p></td></tr><tr><th
+      scope="row"><p>Saving Throw Proficiencies</p></th><td><p>Dexterity and
+      Intelligence</p></td></tr><tr><th scope="row"><p>Skill
+      Proficiencies</p></th><td><p><em>Choose 4: </em>Acrobatics, Athletics,
+      Deception, Insight, Intimidation, Investigation, Perception, Persuasion,
+      Sleight of Hand, or Stealth</p></td></tr><tr><th scope="row"><p>Weapon
+      Proficiencies</p></th><td><p>Simple weapons and Martial weapons that have
+      the Finesse or Light property</p></td></tr><tr><th scope="row"><p>Tool
+      Proficiencies</p></th><td><p>Thieves' Tools</p></td></tr><tr><th
+      scope="row"><p>Armor Training</p></th><td><p>Light
+      armor</p></td></tr><tr><th scope="row"><p>Starting
+      Equipment</p></th><td><p><em>Choose A or B:</em> (A)
+      @UUID[Compendium.dnd5e.equipment24.Item.phbarmLeatherArm]{Leather Armor},
+      2 @UUID[Compendium.dnd5e.equipment24.Item.phbwepDagger0000]{Daggers},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortsword]{Short­sword},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortbow00]{Shortbow}, 20
+      @UUID[Compendium.dnd5e.equipment24.Item.phbamoArrows0000]{Arrows},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagQuiver00000]{Quiver},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbtulThievesToo]{Thieves' Tools},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBurglarsPac]{Burglar's Pack},
+      and [[/award 8GP]]; or (B) [[/award
+      100GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbrgeRogue00000
+      inline classes="free-rules-embed"]</p><h2>Becoming a Rogue …</h2><h3>As a
+      Level 1 Character</h3><ul><li>Gain all the traits in the Core Rogue Traits
+      table.</li><li>Gain the Rogue's level 1 features, which are listed in the
+      Rogue Features table.</li></ul><h3>As a Multiclass
+      Character</h3><ul><li>Gain the following traits from the Core Rogue Traits
+      table: Hit Point Die, proficiency in one skill of your choice from the
+      Rogue's skill list, proficiency with Thieves' Tools, and training with
+      Light armor.</li><li>Gain the Rogue's level 1 features, which are listed
+      in the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbRogue00000000.JournalEntryPage.gJV8iDqdNhRMLi5r#class-features]{Rogue
+      Features table}.</li></ul>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  startingEquipment:
+    - type: AND
+      requiresProficiency: false
+      _id: H3jVZpWr5rfZX6BH
+      group: ''
+      sort: 100000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbarmLeatherArm
+      requiresProficiency: false
+      _id: a5uNZ5i3Wkr3ArSg
+      group: H3jVZpWr5rfZX6BH
+      sort: 200000
+    - type: linked
+      count: 2
+      key: Compendium.dnd5e.equipment24.Item.phbwepDagger0000
+      requiresProficiency: false
+      _id: uguY1ICYVysI5FNd
+      group: H3jVZpWr5rfZX6BH
+      sort: 300000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbwepShortsword
+      requiresProficiency: false
+      _id: 0fHs18tKJmqxQtqv
+      group: H3jVZpWr5rfZX6BH
+      sort: 400000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbwepShortbow00
+      requiresProficiency: false
+      _id: G09ulNZRrt29qgTU
+      group: H3jVZpWr5rfZX6BH
+      sort: 500000
+    - type: linked
+      count: 20
+      key: Compendium.dnd5e.equipment24.Item.phbamoArrows0000
+      requiresProficiency: false
+      _id: 6xP9mFhLJOLLE9xt
+      group: H3jVZpWr5rfZX6BH
+      sort: 600000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbagQuiver00000
+      requiresProficiency: false
+      _id: xHDA0B0GHJuDOF4f
+      group: H3jVZpWr5rfZX6BH
+      sort: 700000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbtulThievesToo
+      requiresProficiency: false
+      _id: gczRNKxoXd20eUTQ
+      group: H3jVZpWr5rfZX6BH
+      sort: 800000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbagBurglarsPac
+      requiresProficiency: false
+      _id: 4tEh3PUpH9nhT646
+      group: H3jVZpWr5rfZX6BH
+      sort: 900000
+  identifier: rogue
+  levels: 1
+  advancement:
+    - _id: 6zkx7K1uPW2IQ5JA
+      type: HitPoints
+      configuration: {}
+      value: {}
+    - _id: 4lvoA3fvGLv15lyc
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeExpertise0
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeSneakAttac
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeThievesCan
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeWeaponMast
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 1
+      title: Class Features
+    - _id: MWgIb29krlDy6YW6
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeCunningAct
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 2
+      title: Class Features
+    - _id: py3wJiuRo9A5PlZb
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeSteadyAim0
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Class Features
+    - _id: hsOIIBWwSrWJvTuc
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeCunningStr
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeUncannyDod
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 5
+      title: Class Features
+    - _id: 6lgPpApxgrLKsNdH
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeEvasion000
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeReliableTa
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 7
+      title: Class Features
+    - _id: G8gk2pfQ2FIn6lX9
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeImprovedCu
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 11
+      title: Class Features
+    - _id: bUBIV36rJZHw5GKr
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeDeviousStr
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 14
+      title: Class Features
+    - _id: mC2Y1MpLlQ7uSnvk
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeSlipperyMi
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 15
+      title: Class Features
+    - _id: n1IVdZzKh3PPG915
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeElusive000
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 18
+      title: Class Features
+    - _id: 8BW4fd41hGwXeQ7S
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.classes24.Item.phbrgeEpicBoon00
+        optional: false
+        spell: null
+      value: {}
+      level: 19
+      title: Class Features
+    - _id: Rb7qWhNRuua2brG0
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeStrokeOfLu
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 20
+      title: Class Features
+    - _id: bwCLOdauuzoHofil
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 4
+      title: ''
+    - _id: mRSh9oUVjLU33e7p
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 8
+      title: ''
+    - _id: mhZh3LfLMa15tXee
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 12
+      title: ''
+    - _id: FOf5CkGnSs0OlppY
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 16
+      title: ''
+    - _id: PbZFa8JfPdQcvr1Q
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 10
+      title: ''
+    - _id: 4doj2kFD8sIYiX8X
+      type: Trait
+      configuration:
+        mode: expertise
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 1
+      title: Expertise
+      hint: >-
+        You gain Expertise in two of your skill proficiencies of your choice.
+        Sleight of Hand and Stealth are recommended if you have proficiency in
+        them.
+    - _id: sqWH6tnUg7jiGaEj
+      type: Trait
+      configuration:
+        mode: expertise
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 6
+      title: Expertise
+      hint: ''
+    - _id: 4uOxepnMxb2TYDY4
+      type: ScaleValue
+      configuration:
+        identifier: ''
+        type: dice
+        distance:
+          units: ''
+        scale:
+          '1':
+            number: 1
+            faces: 6
+            modifiers: []
+          '3':
+            number: 2
+            faces: 6
+            modifiers: []
+          '5':
+            number: 3
+            faces: 6
+            modifiers: []
+          '7':
+            number: 4
+            faces: 6
+            modifiers: []
+          '9':
+            number: 5
+            faces: 6
+            modifiers: []
+          '11':
+            number: 6
+            faces: 6
+            modifiers: []
+          '13':
+            number: 7
+            faces: 6
+            modifiers: []
+          '15':
+            number: 8
+            faces: 6
+            modifiers: []
+          '17':
+            number: 9
+            faces: 6
+            modifiers: []
+          '19':
+            number: 10
+            faces: 6
+            modifiers: []
+      value: {}
+      title: Sneak Attack
+      hint: ''
+    - _id: IHbn6EXoBfxHdj7c
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - languages:exotic:cant
+        choices:
+          - count: 1
+            pool:
+              - languages:*
+      value:
+        chosen: []
+      level: 1
+      title: Thieves' Cant
+      hint: >-
+        You picked up various languages in the communities where you plied your
+        roguish talents. You know Thieves’ Cant and one other language of your
+        choice, which you can choose from the languages below.
+    - _id: FiaNLovfP6tnY4tD
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - saves:wis
+          - saves:cha
+        choices: []
+      value:
+        chosen: []
+      level: 15
+      title: ''
+      hint: >-
+        Your cunning mind is exceptionally difficult to control. You gain
+        proficiency in Wisdom and Charisma saving throws.
+    - _id: 1a9Y0H0W3MznIlYw
+      type: ItemChoice
+      configuration:
+        choices:
+          '19':
+            count: 1
+            replacement: false
+        allowDrops: true
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofCombatP
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofEnergyR
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFate000
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFortitu
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofIrresis
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofRecover
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSkill00
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpeed00
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpellRe
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonoftheNigh
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofTruesig
+        spell: null
+        restriction:
+          type: feat
+          subtype: ''
+      value:
+        added: {}
+        replaced: {}
+      title: Epic Boon
+      hint: >-
+        You gain an Epic Boon feat or another feat of your choice for which you
+        qualify. Boon of the Night Spirit is recommended.
+    - _id: YW6yxOO45ACMgnJT
+      type: Subclass
+      configuration: {}
+      value:
+        document: null
+        uuid: null
+      level: 3
+      title: ''
+      hint: ''
+    - _id: yp6ZCsT10nGs4J4q
+      type: Trait
+      configuration:
+        mode: mastery
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - weapon:*
+      value:
+        chosen: []
+      level: 1
+      title: Weapon Mastery
+      hint: ''
+    - _id: OJXVOKQhi05P672u
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - saves:dex
+          - saves:int
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Saving Throw Proficiencies
+      hint: ''
+      classRestriction: primary
+    - _id: xE00qAIjMdw63Kja
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 4
+            pool:
+              - skills:acr
+              - skills:ath
+              - skills:dec
+              - skills:ins
+              - skills:itm
+              - skills:inv
+              - skills:prc
+              - skills:per
+              - skills:slt
+              - skills:ste
+      value:
+        chosen: []
+      level: 1
+      title: Skill Proficiencies
+      hint: ''
+      classRestriction: primary
+    - _id: q22sm4VsezAltuqE
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - weapon:sim
+          - weapon:mar:handcrossbow
+          - weapon:mar:rapier
+          - weapon:mar:scimitar
+          - weapon:mar:shortsword
+          - weapon:mar:whip
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Weapon Proficiencies
+      hint: ''
+      classRestriction: primary
+    - _id: N5TGZDRu7NwVSaq6
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - tool:thief
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Tool Proficiencies
+      hint: ''
+    - _id: UH1CrcBv6JRJJxsQ
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - armor:lgt
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Armor Training
+      hint: ''
+    - _id: tSxdQdTxlNVE1kdD
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - skills:acr
+              - skills:ath
+              - skills:dec
+              - skills:ins
+              - skills:itm
+              - skills:prc
+              - skills:per
+              - skills:slt
+              - skills:ste
+      value:
+        chosen: []
+      level: 1
+      title: Skill Proficiencies
+      hint: ''
+      classRestriction: secondary
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation:
+      formula: ''
+  wealth: '100'
+  primaryAbility:
+    value:
+      - dex
+    all: true
+  hd:
+    denomination: d8
+    spent: 0
+    additional: ''
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866292069
+  modifiedTime: 1745517431994
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeRogue00000'

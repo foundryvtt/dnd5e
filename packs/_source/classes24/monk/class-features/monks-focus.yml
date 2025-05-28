@@ -1,0 +1,374 @@
+_id: phbmnkMonksFocus
+name: Monk's Focus
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/creatures/eyes/human-single-brown.webp
+system:
+  description:
+    value: >-
+      <p>Your focus and martial training allow you to harness a well of
+      extraordinary energy within yourself. This energy is represented by Focus
+      Points. Your Monk level determines the number of points you have, as shown
+      in the Focus Points column of the Monk Features table.</p><p>You can
+      expend these points to enhance or fuel certain Monk features. You start
+      knowing three such features: Flurry of Blows, Patient Defense, and Step of
+      the Wind, each of which is detailed below.</p><p>When you expend a Focus
+      Point, it is unavailable until you finish a Short or Long Rest, at the end
+      of which you regain all your expended points.</p><p>Some features that use
+      Focus Points require your target to make a saving throw. The save DC
+      equals 8 plus your Wisdom modifier and Proficiency
+      Bonus.</p><p><strong>Flurry of Blows.</strong> You can expend 1 Focus
+      Point to make two Unarmed Strikes as a Bonus Action.</p><p><strong>Patient
+      Defense.</strong> You can take the Disengage action as a Bonus Action.
+      Alternatively, you can expend 1 Focus Point to take both the Disengage and
+      the Dodge actions as a Bonus Action.</p><p><strong>Step of the
+      Wind.</strong> You can take the Dash action as a Bonus Action.
+      Alternatively, you can expend 1 Focus Point to take both the Disengage and
+      Dash actions as a Bonus Action, and your jump distance is doubled for the
+      turn.</p><section class="secret"
+      id="secret-Kb8gEVefEUz6IHer"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Flurry of Blows</strong> activity is a Bonus Action which expends
+      a Focus Point and includes the Attack Roll and Damage for an Unarmored
+      Strike using your Martial Arts Die which automatically scales as you level
+      up.</p><p>The <strong>Patient Defense</strong> Bonus Action activity
+      includes an Active Effect for tracking that you're Disengaged. The
+      <strong>Patient Defense (Focus Point)</strong> activity expends a Focus
+      Point and includes an Active Effect that adds the Dodging
+      status.</p><p>The <strong>Step of the Wind</strong> Bonus Action activity
+      expends 1 Focus Point and includes an Active Effect for tracking that
+      you're Disengaged.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '@scale.monk.focus'
+    spent: 0
+    recovery:
+      - period: sr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: Monk
+  activities:
+    2ghJTBhilLrFn9xT:
+      type: attack
+      name: Flurry of Blows
+      _id: 2ghJTBhilLrFn9xT
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: unarmed
+        ability: dex
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: true
+              formula: '@scale.monk.die + @mod'
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              number: 1
+    7xj7b6e8tDznDSrE:
+      type: utility
+      name: Patient Defense (Focus Point)
+      _id: 7xj7b6e8tDznDSrE
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: UYHRNxrU74xiUJAy
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 300000
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/trait-damage-resistances.svg
+    EFzidO6yAapw8d60:
+      type: utility
+      name: Patient Defense
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 92bFICMzRpJmnO56
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 200000
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: EFzidO6yAapw8d60
+      img: systems/dnd5e/icons/svg/trait-damage-resistances.svg
+    0MuRZ0Ur95xQTKFq:
+      type: utility
+      name: Step of the Wind
+      _id: 0MuRZ0Ur95xQTKFq
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 92bFICMzRpJmnO56
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/trait-saves.svg
+  enchant: {}
+  identifier: monks-focus
+effects:
+  - name: Patient Defense (Focus Point)
+    img: systems/dnd5e/icons/svg/items/feature.svg
+    origin: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+    transfer: false
+    _id: UYHRNxrU74xiUJAy
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - dodging
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbmnkMonksFocus.UYHRNxrU74xiUJAy'
+  - name: Disengaged
+    img: systems/dnd5e/icons/svg/items/feature.svg
+    origin: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+    transfer: false
+    _id: 92bFICMzRpJmnO56
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbmnkMonksFocus.92bFICMzRpJmnO56'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1745256763198
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1200000
+ownership:
+  default: 0
+_key: '!items!phbmnkMonksFocus'

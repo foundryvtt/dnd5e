@@ -1,0 +1,71 @@
+_id: dmgRingOfFeather
+name: Ring of Feather Falling
+type: equipment
+folder: DC1x1wAm0NLFudA6
+img: icons/equipment/finger/ring-cabochon-silver-gold-red.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Ring, Rare (Requires Attunement)</em></p><p>When you fall while
+      wearing this ring, you descend 60 feet per round and take no damage from
+      falling.</p>
+    chat: ''
+  identifier: ring-of-feather-falling
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ring
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 600000
+ownership:
+  default: 0
+_key: '!items!dmgRingOfFeather'

@@ -14,6 +14,8 @@
     mask-image: linear-gradient(to bottom, black, transparent);
   }
 
+  .window-header .header-control { border-color: var(--dnd5e-color-blue-gray-1); }
+
   .sheet-header {
     background: none;
     position: relative;
@@ -43,6 +45,9 @@
     }
 
     .pills-group.empty > h3 > a { color: var(--color-text-light-0); }
+
+    .facility .slot { border-color: var(--dnd5e-color-blue-gray-3); }
+    .facility .order-slot.empty::before { filter: unset; }
   }
 
   .ability-score {

@@ -1,4 +1,3 @@
-import { SummonsData } from "../data/item/fields/summons-field.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
 /**
@@ -24,6 +23,8 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /** @inheritDoc */
   _initializeSource(data, options={}) {
+    if ( data instanceof foundry.abstract.DataModel ) data = data.toObject();
+
     // Migrate backpack -> container.
     for ( const item of data.delta?.items ?? [] ) {
       // This will be correctly flagged as needing a source migration when the synthetic actor is created, but we need
@@ -71,32 +72,21 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /** @inheritDoc */
   static getTrackedAttributeChoices(attributes) {
     const groups = super.getTrackedAttributeChoices(attributes);
-    const abilities = [];
-    const movement = [];
-    const senses = [];
-    const skills = [];
-    const slots = [];
-
-    // Regroup existing attributes based on their path.
-    for ( const group of Object.values(groups) ) {
-      for ( let i = 0; i < group.length; i++ ) {
-        const attribute = group[i];
-        if ( attribute.startsWith("abilities.") ) abilities.push(attribute);
-        else if ( attribute.startsWith("attributes.movement.") ) movement.push(attribute);
-        else if ( attribute.startsWith("attributes.senses.") ) senses.push(attribute);
-        else if ( attribute.startsWith("skills.") ) skills.push(attribute);
-        else if ( attribute.startsWith("spells.") ) slots.push(attribute);
-        else continue;
-        group.splice(i--, 1);
-      }
+    const i18n = {
+      abilities: game.i18n.localize("DND5E.AbilityScorePl"),
+      movement: game.i18n.localize("DND5E.MovementSpeeds"),
+      senses: game.i18n.localize("DND5E.Senses"),
+      skills: game.i18n.localize("DND5E.SkillPassives"),
+      slots: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots")
+    };
+    for ( const entry of groups ) {
+      const { value } = entry;
+      if ( value.startsWith("abilities.") ) entry.group = i18n.abilities;
+      else if ( value.startsWith("attributes.movement.") ) entry.group = i18n.movement;
+      else if ( value.startsWith("attributes.senses.") ) entry.group = i18n.senses;
+      else if ( value.startsWith("skills.") ) entry.group = i18n.skills;
+      else if ( value.startsWith("spells.") ) entry.group = i18n.slots;
     }
-
-    // Add new groups to choices.
-    if ( abilities.length ) groups[game.i18n.localize("DND5E.AbilityScorePl")] = abilities;
-    if ( movement.length ) groups[game.i18n.localize("DND5E.MovementSpeeds")] = movement;
-    if ( senses.length ) groups[game.i18n.localize("DND5E.Senses")] = senses;
-    if ( skills.length ) groups[game.i18n.localize("DND5E.SkillPassives")] = skills;
-    if ( slots.length ) groups[game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots")] = slots;
     return groups;
   }
 
@@ -140,7 +130,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @returns {string[]}
    */
   getRingEffects() {
-    const e = foundry.canvas.tokens.TokenRing.effects;
+    const e = foundry.canvas.placeables.tokens.TokenRing.effects;
     const effects = [];
     if ( this.hasStatusEffect(CONFIG.specialStatusEffects.INVISIBLE) ) effects.push(e.INVISIBILITY);
     else if ( this === game.combat?.combatant?.token ) effects.push(e.RING_GRADIENT);
@@ -160,9 +150,31 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const options = {};
     if ( type === "damage" ) {
       options.duration = 500;
-      options.easing = foundry.canvas.tokens.TokenRing.easeTwoPeaks;
+      options.easing = foundry.canvas.placeables.tokens.TokenRing.easeTwoPeaks;
     }
     this.object.ring?.flashColor(Color.from(color), options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Handlers                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+
+    if ( (this.actor?.type === "npc") && !this.actorLink
+      && foundry.utils.getProperty(this.actor, "system.attributes.hp.formula")?.trim().length ) {
+      const autoRoll = game.settings.get("dnd5e", "autoRollNPCHP");
+      if ( autoRoll === "no" ) return;
+      const roll = await this.actor.rollNPCHitPoints({ chatMessage: autoRoll === "yes" });
+      this.delta.updateSource({
+        "system.attributes.hp": {
+          max: roll.total,
+          value: roll.total
+        }
+      });
+    }
   }
 
   /* -------------------------------------------- */

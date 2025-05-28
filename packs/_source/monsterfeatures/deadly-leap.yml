@@ -1,0 +1,176 @@
+_id: bG5Z45jj4wz0N3T6
+name: Deadly leap
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>If the [[lookup @name lowercase]] jumps at least 15 ft. as part of its
+      movement, it can then use this action to land on its feet in a space that
+      contains one or more other creatures.</p><p>Each of those creatures must
+      succeed on a DC 16 Strength or Dexterity saving throw (target's choice) or
+      be knocked prone and take <strong>14 (3d6 + 4) <em>bludgeoning
+      damage</em></strong> plus <strong>14 (3d6 + 4) <em>slashing
+      damage</em></strong>. On a successful save, the creature takes only half
+      the damage, isn't knocked prone, and is pushed 5 ft. out of the [[lookup
+      @name lowercase]]'s space into an unoccupied space of the creature's
+      choice. If no unoccupied space is within range, the creature instead falls
+      prone in the [[lookup @name lowercase]]'s space.</p>
+
+      </section>
+
+      <p>If the [[lookup @name lowercase]] jumps at least 15 ft. as part of its
+      movement, it can then use this action to land on its feet in a space that
+      contains one or more other creatures. Each of those creatures must make a
+      Strength or Dexterity saving throw (target's choice) or be knocked
+      prone.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '15'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '15'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: str
+        dc:
+          calculation: ''
+          formula: '16'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: deadly-leap
+flags: {}
+img: icons/magic/fire/projectile-wave-arrow.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304973083
+  modifiedTime: 1725992573334
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!bG5Z45jj4wz0N3T6'

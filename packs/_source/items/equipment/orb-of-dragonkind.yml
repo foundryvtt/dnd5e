@@ -1,0 +1,284 @@
+_id: 1RwJWOAeyoideLKe
+name: Orb of Dragonkind
+type: equipment
+img: icons/commodities/gems/pearl-storm.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>Ages past, elves and humans waged a terrible war against evil dragons.
+      When the world seemed doomed, powerful wizards came together and worked
+      their greatest magic, forging five Orbs of Dragonkind (or Dragon Orbs) to
+      help them defeat the dragons. One orb was taken to each of the five wizard
+      towers, and there they were used to speed the war toward a victorious end.
+      The wizards used the orbs to lure dragons to them, then destroyed the
+      dragons with powerful magic.</p>
+
+      <p>As the wizard towers fell in later ages, the orbs were destroyed or
+      faded into legend, and only three are thought to survive. Their magic has
+      been warped and twisted over the centuries, so although their primary
+      purpose of calling dragons still functions, they also allow some measure
+      of control over dragons.</p>
+
+      <p>Each orb contains the essence of an evil dragon, a presence that
+      resents any attempt to coax magic from it. Those lacking in force of
+      personality might find themselves enslaved to an orb.</p>
+
+      <p>An orb is an etched crystal globe about 10 inches in diameter. When
+      used, it grows to about 20 inches in diameter, and mist swirls inside
+      it.</p>
+
+      <p>While attuned to an orb, you can use an action to peer into the orb's
+      depths and speak its command word. You must then make a DC 15 Charisma
+      check. On a successful check, you control the orb for as long as you
+      remain attuned to it. On a failed check, you become charmed by the orb for
+      as long as you remain attuned to it.</p>
+
+      <p>While you are charmed by the orb, you can't voluntarily end your
+      attunement to it, and the orb casts
+      @UUID[Compendium.dnd5e.spells.Item.zMAWdyc8UVb37BK4]{Suggestion} on you at
+      will (save DC 18), urging you to work toward the evil ends it desires. The
+      dragon essence within the orb might want many things: the annihilation of
+      a particular people, freedom from the orb, to spread suffering in the
+      world, to advance the worship of Tiamat, or something else the GM
+      decides.</p>
+
+      <h3 id="random-properties"><strong>Random Properties</strong>. An Orb of
+      Dragonkind has the following random properties (see DMG pg. 219-21): </h3>
+
+      <ul>
+
+      <li>2 minor beneficial properties </li>
+
+      <li>1 minor detrimental property</li>
+
+      <li>1 major detrimental property</li>
+
+      </ul>
+
+      <h3 id="spells"><strong>Spells</strong>. The orb has 7 charges and regains
+      1d4 + 3 expended charges daily at dawn. If you control the orb, you can
+      use an action and expend 1 or more charges to cast one of the following
+      spells (save DC 18) from it: </h3>
+
+      <ul>
+
+      <li>@UUID[Compendium.dnd5e.spells.Item.uUWb1wZgtMou0TVP]{Cure Wounds}
+      (5th-level version, 3 charges)</li>
+
+      <li>@UUID[Compendium.dnd5e.spells.Item.BP3GCwa66IAw1yTG]{Daylight} (1
+      charge)</li>
+
+      <li>@UUID[Compendium.dnd5e.spells.Item.VtCXMdyM6mAdIJZb]{Death Ward} (2
+      charges)</li>
+
+      <li>@UUID[Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20]{Scrying} (3
+      charges).</li>
+
+      <li>You can also use an action to cast the
+      @UUID[Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8]{Detect Magic} spell
+      from the orb without using any charges.</li>
+
+      </ul>
+
+      <p><strong>Call Dragons</strong>. While you control the orb, you can use
+      an action to cause the artifact to issue a telepathic call that extends in
+      all directions for 40 miles. Evil dragons in range feel compelled to come
+      to the orb as soon as possible by the most direct route. Dragon deities
+      such as Tiamat are unaffected by this call. Dragons drawn to the orb might
+      be hostile toward you for compelling them against their will. Once you
+      have used this property, it can't be used again for 1 hour.</p>
+
+      <p><strong>Destroying an Orb</strong>. An Orb of Dragonkind appears
+      fragile but is impervious to most damage, including the attacks and breath
+      weapons of dragons. A
+      @UUID[Compendium.dnd5e.spells.Item.HBHbOGKNVVprSlwn]{Disintegrate} spell
+      or one good hit from a +3 magic weapon is sufficient to destroy an orb,
+      however.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 500000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: artifact
+  identified: true
+  cover: null
+  uses:
+    max: '7'
+    recovery:
+      - period: day
+        type: recoverAll
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '18'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: orb-of-dragonkind
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037086532
+  modifiedTime: 1725992479268
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!1RwJWOAeyoideLKe'

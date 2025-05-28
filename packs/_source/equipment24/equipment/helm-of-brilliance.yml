@@ -1,0 +1,558 @@
+_id: dmgHelmOfBrillia
+name: Helm of Brilliance
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/head/helm-norman-engraved.webp
+system:
+  activities:
+    IFscsoX8eRdhxP5s:
+      type: damage
+      name: Diamond Light
+      _id: IFscsoX8eRdhxP5s
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: Undead
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              number: 1
+      img: ''
+      appliedEffects: []
+    xQ4EJKRTUkDJyIus:
+      type: enchant
+      name: Fire Opal Flames
+      _id: xQ4EJKRTUkDJyIus
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: oZBFpi117yOXca3k
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: true
+        categories: []
+        properties: []
+        type: weapon
+      img: ''
+      appliedEffects:
+        - oZBFpi117yOXca3k
+    m8aK98SDuts6egnq:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDaylight00
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: m8aK98SDuts6egnq
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    ePzoCWNEAI8dymbs:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFireball00
+        challenge:
+          attack: null
+          save: 18
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: ePzoCWNEAI8dymbs
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    cyHTGkuJ0EfnTyR3:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplPrismaticS
+        challenge:
+          attack: null
+          save: 18
+          override: true
+        level: '7'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: cyHTGkuJ0EfnTyR3
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    jOM1L4QpJZo0dPr3:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplWallofFire
+        challenge:
+          attack: null
+          save: 18
+          override: true
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: jOM1L4QpJZo0dPr3
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    yCKpY8iNj7IoLdHN:
+      type: save
+      name: Explosive Emanation
+      _id: yCKpY8iNj7IoLdHN
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: Take Fire damage from failing a saving throw
+      consumption:
+        scaling:
+          allowed: true
+          max: '100'
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '60'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: '@scaling'
+            types:
+              - radiant
+            scaling:
+              mode: ''
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '17'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Very Rare (Requires Attunement)</em></p><p>This helm
+      is set with [[/r 1d10 # Diamonds]] diamonds, [[/r 2d10 # Rubies]] rubies,
+      [[/r 3d10 # Fire Opals]] fire opals, and [[/r 4d10 # Opals]] opals. Any
+      gem pried from the helm crumbles to dust. When all the gems are removed or
+      destroyed, the helm loses its magic.</p><p>You gain the following benefits
+      while wearing the helm.</p><p><em><strong>Diamond Light.</strong></em> As
+      long as it has at least one diamond, the helm emits a 30-foot Emanation.
+      When at least one Undead is within that area, the Emanation is filled with
+      Dim Light. Any Undead that starts its turn in that area takes 1d6 Radiant
+      damage.</p><p><em><strong>Fire Opal Flames.</strong></em> As long as the
+      helm has at least one fire opal, you can take a Magic action to cause one
+      weapon you are holding to burst into flames. The flames emit Bright Light
+      in a 10-foot radius and Dim Light for an additional 10 feet. The flames
+      are harmless to you and the weapon. When you hit with an attack using the
+      blazing weapon, the target takes an extra 1d6 Fire damage. The flames last
+      until you take a Bonus Action to extinguish them or until you drop or stow
+      the weapon.</p><p><em><strong>Ruby Resistance.</strong></em> As long as
+      the helm has at least one ruby, you have Resistance to Fire
+      damage.</p><p><em><strong>Spells.</strong></em> You can cast one of the
+      following spells (save DC 18), using one of the helm's gems of the
+      specified type as a component:
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplDaylight00]{Daylight} (opal),
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFireball00]{Fireball} (fire
+      opal), @UUID[Compendium.dnd5e.spells24.Item.phbsplPrismaticS]{Prismatic
+      Spray} (diamond), or
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplWallofFire]{Wall of Fire}
+      (ruby). The gem is destroyed when the spell is cast and disappears from
+      the helm.</p><p><em><strong>Taking Fire Damage.</strong></em> Roll [[/r
+      1d20]] if you are wearing the helm and take Fire damage as a result of
+      failing a saving throw against a spell. On a roll of 1, the helm emits
+      beams of light from its remaining gems and is then destroyed. Each
+      creature within a 60-foot Emanation originating from you must succeed on a
+      DC 17 Dexterity saving throw or be struck by a beam, taking Radiant damage
+      equal to the number of gems in the
+      helm.</p><p><strong>Diamonds:</strong></p><p><strong>Rubies:</strong></p><p><strong>Fire
+      Opals:</strong></p><p><strong>Opals:</strong></p><section class="secret"
+      id="secret-WLySYxWw3x7ifRjR"><p><strong>Foundry Note</strong></p><p>You
+      can track the number of each gem in the description.</p><p>If you roll a 1
+      as part of the <em><strong>Taking Fire Damage</strong></em> property use
+      the <strong>Explosive Emanation</strong> activity. It will allow you to
+      enter the number of gems remaining in the helm and increase the damage
+      automatically.</p></section>
+    chat: ''
+  identifier: helm-of-brilliance
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: light
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - type: enchantment
+    name: Burst Into Flames
+    img: icons/magic/fire/blast-jet-stream-splash.webp
+    disabled: true
+    _id: oZBFpi117yOXca3k
+    system: {}
+    changes:
+      - key: ''
+        mode: 2
+        value: ''
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730696745413
+      modifiedTime: 1730696974775
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgHelmOfBrillia.oZBFpi117yOXca3k'
+  - name: Ruby Resistance
+    img: icons/commodities/gems/gem-faceted-radiant-red.webp
+    _id: MxOB3as0nJAw2AVI
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730697009876
+      modifiedTime: 1730697052686
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgHelmOfBrillia.MxOB3as0nJAw2AVI'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712700596
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 18200000
+ownership:
+  default: 0
+_key: '!items!dmgHelmOfBrillia'

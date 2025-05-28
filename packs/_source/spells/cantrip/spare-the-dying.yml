@@ -1,0 +1,114 @@
+_id: 8zT7njvqbpXs4Cel
+name: Spare the Dying
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch a living creature that has 0 hit points. The creature becomes
+      stable. This spell has no effect on undead or constructs.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: nec
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: null
+        denomination: null
+        bonus: ''
+        types: []
+        custom:
+          enabled: false
+          formula: ''
+        scaling:
+          mode: ''
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: spare-the-dying
+sort: 0
+flags: {}
+img: icons/magic/life/heart-cross-blue.webp
+effects: []
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037349188
+  modifiedTime: 1725992717556
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!8zT7njvqbpXs4Cel'

@@ -1,0 +1,192 @@
+_id: fzZnVKLmBMo2f5up
+name: Wall of Ice
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create a wall of ice on a solid surface within range. You can form
+      it into a hemispherical dome or a sphere with a radius of up to 10 feet,
+      or you can shape a flat surface made up of ten 10-foot-square panels. Each
+      panel must be contiguous with another panel. In any form, the wall is 1
+      foot thick and lasts for the Duration.</p><p>If the wall cuts through a
+      creature's space when it appears, the creature within its area is pushed
+      to one side of the wall and must make a Dexterity saving throw. On a
+      failed save, the creature takes 10d6 cold damage, or half as much damage
+      on a successful save.</p><p>The wall is an object that can be damaged and
+      thus breached. It has AC 12 and 30 hit points per 10-foot section, and it
+      is vulnerable to fire damage. Reducing a 10-foot section of wall to 0 hit
+      points destroys it and leaves behind a sheet of frigid air in the space
+      the wall occupied. A creature moving through the sheet of frigid air for
+      the first time on a turn must make a Constitution saving throw. That
+      creature takes 5d6 cold damage on a failed save, or half as much damage on
+      a successful one.</p><p>At Higher Levels. When you cast this spell using a
+      spell slot of 7th level or higher, the damage the wall deals when it
+      appears increases by 2d6, and the damage from passing through the sheet of
+      frigid air increases by 1d6, for each slot level above 6th.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: wall
+      size: '100'
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: evo
+  materials:
+    value: A small piece of quartz
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - cold
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 2
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    dnd5eactivity200:
+      _id: dnd5eactivity200
+      type: damage
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: 5
+            denomination: 6
+            bonus: ''
+            types: []
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 2
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: wall-of-ice
+sort: 0
+flags: {}
+img: icons/magic/light/beam-rays-blue-large.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037362399
+  modifiedTime: 1725992721895
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!fzZnVKLmBMo2f5up'

@@ -1,0 +1,226 @@
+_id: dmgJavelinOfLigh
+name: Javelin of Lightning
+type: weapon
+img: icons/weapons/polearms/spear-barbed-silver.webp
+system:
+  activities:
+    i20Sq0KrXu1Cu54H:
+      _id: i20Sq0KrXu1Cu54H
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+    mfPMOlnJzaaNBdd2:
+      type: save
+      name: Lightning Bolt
+      _id: mfPMOlnJzaaNBdd2
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: line
+          size: '120'
+          width: '5'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 6
+            bonus: ''
+            types:
+              - lightning
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '13'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>Each time you make an attack roll with this magic weapon and hit, you
+      can have it deal Lightning damage instead of Piercing
+      damage.</p><p><em><strong>Lightning Bolt.</strong></em> When you throw
+      this weapon at a target no farther than 120 feet from you, you can forgo
+      making a ranged attack roll and instead turn the weapon into a bolt of
+      lightning. This bolt forms a 5-foot-wide Line between you and the target.
+      The target and each other creature in the Line (excluding you) makes a DC
+      13 Dexterity saving throw, taking 4d6 Lightning damage on a failed save or
+      half as much damage on a successful one. Immediately after dealing this
+      damage, the weapon reappears in your hand. This property can't be used
+      again until the next dawn.</p><section id="secret-606LeZVVMHWwmeln"
+      class="secret"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Attack</strong> activity allows you to choose between Lightning
+      and Piercing when rolling damage and will remember your last
+      choice.</p></section>
+    chat: ''
+  identifier: javelin-of-lightning
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: javelin
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - lightning
+        - piercing
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - mgc
+    - ret
+    - thr
+  proficient: null
+  range:
+    value: 30
+    long: 120
+    reach: null
+    units: ft
+  mastery: slow
+effects: []
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712701112
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgJavelinOfLigh'

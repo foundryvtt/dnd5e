@@ -1,0 +1,109 @@
+_id: XmLuhZYd9WnCWBlU
+name: Hellish Rejuvenation
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>A [[lookup @name lowercase]] that dies in the Nine Hells sometimes
+      comes back to comes back to life with all its<strong> hit points</strong>
+      in 1d10 days unless it is killed by a good-aligned creature with a bless
+      spell cast on that creature or its remains are sprinkled with holy
+      water.</p>
+
+      </section>
+
+      <p>A [[lookup @name lowercase]] that dies in the Nine Hells sometimes
+      comes back to life.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: Lemure
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: 1d10
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: hellish-rejuvenation
+flags: {}
+img: icons/skills/wounds/anatomy-organ-heart-red.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304972516
+  modifiedTime: 1725992573164
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!XmLuhZYd9WnCWBlU'

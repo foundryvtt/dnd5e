@@ -1,0 +1,182 @@
+name: Meld into Stone
+system:
+  description:
+    value: >-
+      <p>You step into a stone object or surface large enough to fully contain
+      your body, merging yourself and your equipment with the stone for the
+      duration. You must touch the stone to do so. Nothing of your presence
+      remains visible or otherwise detectable by nonmagical senses.</p><p>While
+      merged with the stone, you can't see what occurs outside it, and any
+      [[/check ability=wis skill=prc]] checks you make to hear sounds outside it
+      are made with Disadvantage. You remain aware of the passage of time and
+      can cast spells on yourself while merged in the stone. You can use 5 feet
+      of movement to leave the stone where you entered it, which ends the spell.
+      You otherwise can't move.</p><p>Minor physical damage to the stone doesn't
+      harm you, but its partial destruction or a change in its shape (to the
+      extent that you no longer fit within it) expels you and deals [[/damage
+      6d6 type=force]] damage to you. The stone's complete destruction (or
+      transmutation into a different substance) expels you and deals [[/damage
+      50 type=force]] damage to you. If expelled, you move into an unoccupied
+      space closest to where you first entered and have the
+      &amp;Reference[prone] condition.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - ritual
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: 6
+            denomination: 6
+            bonus: ''
+            types:
+              - force
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    dnd5eactivity200:
+      _id: dnd5eactivity200
+      type: damage
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: null
+            denomination: null
+            bonus: ''
+            types: []
+            custom:
+              enabled: true
+              formula: '50'
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: meld-into-stone
+_id: phbsplMeldintoSt
+type: spell
+img: icons/magic/earth/barrier-stone-pillar-purple.webp
+effects: []
+folder: HCovEE4VoPGlIbKi
+sort: 800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425963239
+  modifiedTime: 1745256796031
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMeldintoSt'

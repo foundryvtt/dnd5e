@@ -1,0 +1,174 @@
+_id: dmgArrowcatching
+name: Arrow-Catching Shield
+type: equipment
+folder: 1kn4uV4dTVVduLjA
+img: icons/skills/melee/shield-block-fire-orange.webp
+system:
+  activities:
+    KZLj6yQjI7Ps1KkW:
+      type: utility
+      name: Intercept Attack
+      _id: KZLj6yQjI7Ps1KkW
+      sort: 100000
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: >-
+          an attacker makes a ranged attack roll against a target within 5 feet
+          of you
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: You become the target of the ranged attack.
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: any
+          special: attack roll made against target
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Armor (Shield), Rare (Requires Attunement)</em></p><p>You gain a +2
+      bonus to Armor Class against ranged attack rolls while you wield this
+      Shield. This bonus is in addition to the Shield's normal bonus to
+      AC.</p><p>Whenever an attacker makes a ranged attack roll against a target
+      within 5 feet of you, you can take a Reaction to become the target of the
+      attack instead.</p><section class="secret"
+      id="secret-n4z3GTIVyxRRS17N"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Ranged Attack AC Bonus</strong> effect is provided for optional
+      use and may be toggled active before a ranged attack roll is made against
+      the wearer.</p></section>
+    chat: ''
+  identifier: arrow-catching-shield
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: 2
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: shield
+    baseItem: shield
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Ranged Attack AC Bonus
+    img: icons/skills/melee/shield-block-fire-orange.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgArrowcatching
+    transfer: true
+    _id: nds83KSHN6L236jW
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>You gain a +2 bonus to Armor Class against ranged attack rolls while
+      you wield this Shield. This bonus is in addition to the Shield’s normal
+      bonus to AC.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: 1728510480139
+      modifiedTime: 1728510907902
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgArrowcatching.nds83KSHN6L236jW'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256802523
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -193750
+ownership:
+  default: 0
+_key: '!items!dmgArrowcatching'

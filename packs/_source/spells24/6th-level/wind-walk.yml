@@ -1,0 +1,195 @@
+name: Wind Walk
+system:
+  description:
+    value: >-
+      <p>You and up to ten willing creatures of your choice within range assume
+      gaseous forms for the duration, appearing as wisps of cloud. While in this
+      cloud form, a target has a Fly Speed of 300 feet and can hover; it has
+      Immunity to the Prone condition; and it has Resistance to Bludgeoning,
+      Piercing, and Slashing damage. The only actions a target can take in this
+      form are the &amp;Reference[Dash] action or a Magic action to begin
+      reverting to its normal form. Reverting takes 1 minute, during which the
+      target has the &amp;Reference[Stunned apply=false] condition. Until the
+      spell ends, the target can revert to cloud form, which also requires a
+      Magic action followed by a 1-minute transformation.</p><p>If a target is
+      in cloud form and flying when the effect ends, the target descends 60 feet
+      per round for 1 minute until it lands, which it does safely. If it can't
+      land after 1 minute, it falls the remaining distance.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: '11'
+      type: willing
+      special: you and up to ten other creatures
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a candle
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    V8nQQ2Hc6WMnd62Q:
+      type: utility
+      name: Transform to Cloud
+      _id: V8nQQ2Hc6WMnd62Q
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: yuAiVeSve8sEy6JQ
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: true
+        name: ''
+        formula: ''
+      img: icons/magic/air/air-smoke-casting.webp
+      appliedEffects:
+        - yuAiVeSve8sEy6JQ
+  identifier: wind-walk
+_id: phbsplWindWalk00
+type: spell
+img: icons/magic/air/wind-weather-snow-gusts.webp
+effects:
+  - name: Cloud Form
+    img: icons/magic/air/weather-clouds.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplWindWalk00
+    transfer: false
+    _id: yuAiVeSve8sEy6JQ
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.fly
+        mode: 4
+        value: '300'
+        priority: null
+      - key: system.attributes.movement.hover
+        mode: 5
+        value: 'true'
+        priority: null
+      - key: system.traits.ci.value
+        mode: 2
+        value: prone
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: bludgeoning
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: piercing
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: slashing
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 28800
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The only actions a target can take in this form are the
+      &amp;Reference[Dash] action or a Magic action to begin reverting to its
+      normal form. Reverting takes 1 minute, during which the target has the
+      &amp;Reference[Stunned apply=false] condition. Until the spell ends, the
+      target can revert to cloud form, which also requires a Magic action
+      followed by a 1-minute transformation.</p>
+    tint: '#ffffff'
+    statuses:
+      - transformed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724859609679
+      modifiedTime: 1724861948154
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplWindWalk00.yuAiVeSve8sEy6JQ'
+folder: 8WmlLARx1Df3Ii9v
+sort: 100013
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425978077
+  modifiedTime: 1745256800133
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplWindWalk00'

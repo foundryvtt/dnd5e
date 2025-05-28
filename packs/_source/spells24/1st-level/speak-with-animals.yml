@@ -1,0 +1,153 @@
+name: Speak with Animals
+system:
+  description:
+    value: >-
+      <p>For the duration, you can comprehend and verbally communicate with
+      Beasts, and you can use any of the Influence action's skill options with
+      them.</p><p>Most Beasts have little to say about topics that don't pertain
+      to survival or companionship, but at minimum, a Beast can give you
+      information about nearby locations and monsters, including whatever it has
+      perceived within the past day.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: div
+  properties:
+    - vocal
+    - somatic
+    - ritual
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: lHx55SIuimKR3ALR
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: speak-with-animals
+_id: phbsplSpeakwithA
+type: spell
+img: icons/creatures/mammals/dog-husky-white-blue.webp
+effects:
+  - name: Bestial Communication
+    origin: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: 600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/creatures/mammals/dog-husky-white-blue.webp
+    _id: lHx55SIuimKR3ALR
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.languages.custom
+        mode: 2
+        value: ;comprehend and verbally communicate with Beasts
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplSpeakwithA.lHx55SIuimKR3ALR'
+folder: pBaAAtXBCq9FVEnL
+sort: 300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425971690
+  modifiedTime: 1745256798506
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSpeakwithA'

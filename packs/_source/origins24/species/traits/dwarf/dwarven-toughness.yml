@@ -1,0 +1,90 @@
+_id: phbsptDwarvenTou
+name: Dwarven Toughness
+type: feat
+img: icons/magic/life/heart-cross-strong-purple-orange.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>Your Hit Point maximum increases by 1, and it increases by 1 again
+      whenever you gain a level.</p><section class="secret"
+      id="secret-FK9DFLudP5EzEss9"><p><strong>Foundry Note</strong></p><p>The
+      Hit Point maximum increase is handled automatically each
+      level.</p></section>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Dwarf
+  identifier: dwarven-toughness
+effects:
+  - name: Dwarven Toughness
+    img: icons/magic/life/heart-cross-strong-purple-orange.webp
+    _id: Na7W3p67eT9YqW87
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.hp.bonuses.level
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsptDwarvenTou.Na7W3p67eT9YqW87'
+folder: R0KprZdOrRDNsTBv
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866718338
+  modifiedTime: 1745256776733
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptDwarvenTou'

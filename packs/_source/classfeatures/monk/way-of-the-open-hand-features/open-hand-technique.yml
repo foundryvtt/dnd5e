@@ -1,0 +1,105 @@
+_id: iQxLNydNLlCHNKbp
+name: Open Hand Technique
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Starting when you choose this tradition at 3rd level, you can
+      manipulate your enemy's ki when you harness your own.</p><p>Whenever you
+      hit a creature with one of the attacks granted by your
+      @UUID[Compendium.dnd5e.classfeatures.Item.5MwNlVZK7m6VolOH]{Flurry of
+      Blows}, you can impose one of the following effects on that
+      target:</p><ul><li>It must succeed on a Dexterity saving throw or be
+      knocked prone.</li><li>It must make a Strength saving throw. If it fails,
+      you can push it up to 15 feet away from you.</li><li>It can't take
+      reactions until the end of your next turn.</li></ul>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Way of the Open Hand 3
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: open-hand-technique
+flags: {}
+img: icons/magic/unholy/strike-hand-glow-pink.webp
+effects: []
+folder: MXzsbYUTe9IwCyHP
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037387127
+  modifiedTime: 1725992289373
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!iQxLNydNLlCHNKbp'

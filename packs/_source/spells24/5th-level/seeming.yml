@@ -1,0 +1,209 @@
+name: Seeming
+system:
+  description:
+    value: >-
+      <p>You give an illusory appearance to each creature of your choice that
+      you can see within range. An unwilling target can make a Charisma saving
+      throw, and if it succeeds, it is unaffected by this spell.</p><p>You can
+      give the same appearance or different ones to the targets. The spell can
+      change the appearance of the targets' bodies and equipment. You can make
+      each creature seem 1 foot shorter or taller and appear heavier or lighter.
+      A target's new appearance must have the same basic arrangement of limbs as
+      the target, but the extent of the illusion is otherwise up to you. The
+      spell lasts for the duration.</p><p>The changes wrought by this spell fail
+      to hold up to physical inspection. For example, if you use this spell to
+      add a hat to a creature's outfit, objects pass through the hat.</p><p>A
+      creature that takes the Study action to examine a target can make an
+      [[/check ability=int skill=inv dc=@attributes.spell.dc]] check against
+      your spell save DC. If it succeeds, it becomes aware that the target is
+      disguised.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: visible creature
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 5
+  school: ill
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    1efMIDdQ8pGH6Es8:
+      type: save
+      name: Unwilling Save
+      _id: 1efMIDdQ8pGH6Es8
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: ''
+      appliedEffects: []
+    Kj4uSe5OC1nTcoyZ:
+      type: utility
+      _id: Kj4uSe5OC1nTcoyZ
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: WY574kvdnuPlNGfU
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: true
+        name: ''
+        formula: ''
+      name: Change Appearance
+      img: ''
+      appliedEffects: []
+  identifier: seeming
+_id: phbsplSeeming000
+type: spell
+img: icons/equipment/head/mask-wooden-feathered-blue.webp
+effects:
+  - name: Changed Appearance
+    img: icons/equipment/head/mask-carved-face-orange.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplSeeming000
+    transfer: false
+    _id: WY574kvdnuPlNGfU
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 28800
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>A creature that takes the Study action to examine a target can make an
+      [[/check ability=int skill=inv]] check against your spell save DC. If it
+      succeeds, it becomes aware that the target is disguised.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724436996987
+      modifiedTime: 1724438648039
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplSeeming000.WY574kvdnuPlNGfU'
+folder: beZ8MTpWY2cMEUlp
+sort: 300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425970014
+  modifiedTime: 1745256797933
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSeeming000'

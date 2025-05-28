@@ -1,0 +1,109 @@
+_id: 5zPmHPQUne7RDfaU
+name: Cutting Words
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Also at 3rd level, you learn how to use your wit to distract, confuse,
+      and otherwise sap the confidence and competence of others.</p><p>When a
+      creature that you can see within 60 feet of you makes an attack roll, an
+      ability check, or a damage roll, you can use your reaction to expend one
+      of your uses of
+      @UUID[Compendium.dnd5e.classfeatures.Item.hpLNiGq7y67d2EHA]{Bardic
+      Inspiraton}, rolling a Bardic Inspiration die and subtracting the number
+      rolled from the creature's roll.</p><p>You can choose to use this feature
+      after the creature makes its roll, but before the GM determines whether
+      the attack roll or ability check succeeds or fails, or before the creature
+      deals its damage. The creature is immune if it can't hear you or if it's
+      immune to being charmed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: College of Lore 3
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: reaction
+        value: 1
+        condition: Target must be able to hear you and not be immune to being Charmed.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: cutting-words
+flags: {}
+img: icons/skills/wounds/injury-face-impact-orange.webp
+effects: []
+folder: UNxdvZabPWevUTYI
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037380158
+  modifiedTime: 1725992287147
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!5zPmHPQUne7RDfaU'

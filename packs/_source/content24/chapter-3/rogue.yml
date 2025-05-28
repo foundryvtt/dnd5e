@@ -1,0 +1,123 @@
+_id: phbRogue00000000
+name: Rogue
+pages:
+  - sort: 100000
+    name: Rogue
+    type: class
+    _id: gJV8iDqdNhRMLi5r
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbrgeRogue00000
+      description:
+        value: >-
+          <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbrgeRogue00000
+          inline classes="free-rules-embed"]</p> <h2>Becoming a Rogue
+          …</h2><h3>As a Level 1 Character</h3><ul><li><p>Gain all the traits in
+          the Core Rogue Traits table.</p></li><li><p>Gain the Rogue's level 1
+          features, which are listed in the Rogue Features
+          table.</p></li></ul><h3>As a Multiclass Character</h3><ul><li><p>Gain
+          the following traits from the Core Rogue Traits table: Hit Point Die,
+          proficiency in one skill of your choice from the Rogue's skill list,
+          proficiency with Thieves' Tools, and training with Light
+          armor.</p></li><li><p>Gain the Rogue's level 1 features, which are
+          listed in the Rogue Features table.</p></li></ul>
+        additionalHitPoints: ''
+        additionalTraits: ''
+        additionalEquipment: ''
+        subclass: >-
+          <p>A Rogue subclass is a specialization that grants you features at
+          certain levels, as specified in the subclass. The next page presents
+          the @UUID[Compendium.dnd5e.classes24.Item.phbrgeThief00000]{Thief}
+          subclass.</p>
+      subclassItems: []
+      subclassHeader: ''
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745514580126
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbRogue00000000.gJV8iDqdNhRMLi5r'
+  - sort: 500000
+    name: Thief
+    type: subclass
+    _id: BiqRuwpBfYi32N2p
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbrgeThief00000
+      description:
+        value: >-
+          <blockquote><p>Hunt for Treasure as a Classic
+          Adventurer</p></blockquote><p>A mix of burglar, treasure hunter, and
+          explorer, you are the epitome of an adventurer
+          (@UUID[Compendium.dnd5e.classes24.Item.phbrgeThief00000]{Thief
+          subclass}). In addition to improving your agility and stealth, you
+          gain abilities useful for delving into ruins and getting maximum
+          benefit from the magic items you find there.</p>
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1735934791128
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbRogue00000000.BiqRuwpBfYi32N2p'
+folder: 1A8WFP1GVZkKdxii
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 3
+    order: 500900
+    navigation:
+      previous: phbRanger0000000
+      next: phbSorcerer00000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1724425889304
+  modifiedTime: 1745677865517
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1000000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbRogue00000000'

@@ -1,0 +1,183 @@
+_id: 64uo4fHriHLjRUrX
+name: Meld into Stone
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You step into a stone object or surface large enough to fully contain
+      your body, melding yourself and all the Equipment you carry with the stone
+      for the Duration. Using your Movement, you step into the stone at a point
+      you can touch. Nothing of your presence remains visible or otherwise
+      detectable by nonmagical Senses.</p><p>While merged with the stone, you
+      can't see what occurs outside it, and any Wisdom (Perception) checks you
+      make to hear sounds outside it are made with disadvantage. You remain
+      aware of the passage of time and can cast Spells on yourself while merged
+      in the stone. You can use your Movement to leave the stone where you
+      entered it, which ends the spell. You otherwise can't move.</p><p>Minor
+      physical damage to the stone doesn't harm you, but its partial destruction
+      or a change in its shape (to the extent that you no longer fit within it)
+      expels you and deals 6d6 bludgeoning damage to you. The stone's complete
+      destruction (or Transmutation into a different substance) expels you and
+      deals 50 bludgeoning damage to you. If expelled, you fall prone in an
+      unoccupied space closest to where you first entered.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: trs
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - ritual
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: 6
+            denomination: 6
+            bonus: ''
+            types:
+              - bludgeoning
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    dnd5eactivity200:
+      _id: dnd5eactivity200
+      type: damage
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: null
+            denomination: null
+            bonus: ''
+            types: []
+            custom:
+              enabled: true
+              formula: '50'
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: meld-into-stone
+sort: 0
+flags: {}
+img: icons/magic/earth/projectile-spiked-stone-boulder-blue.webp
+effects: []
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037347728
+  modifiedTime: 1725992717094
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!64uo4fHriHLjRUrX'

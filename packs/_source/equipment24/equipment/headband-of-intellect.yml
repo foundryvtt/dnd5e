@@ -1,0 +1,112 @@
+_id: dmgHeadbandOfInt
+name: Headband of Intellect
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/finger/ring-cabochon-silver-gold-red.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon (Requires Attunement)</em></p><p>Your
+      Intelligence is 19 while you wear this headband. It has no effect on you
+      if your Intelligence is 19 or higher without it.</p>
+    chat: ''
+  identifier: headband-of-intellect
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Intelligent
+    img: icons/commodities/biological/organ-brain-red.webp
+    _id: qxfUe2eJtY0VBF7x
+    type: base
+    system: {}
+    changes:
+      - key: system.abilities.int.value
+        mode: 4
+        value: '19'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730697636358
+      modifiedTime: 1730697665954
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgHeadbandOfInt.qxfUe2eJtY0VBF7x'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 18000000
+ownership:
+  default: 0
+_key: '!items!dmgHeadbandOfInt'

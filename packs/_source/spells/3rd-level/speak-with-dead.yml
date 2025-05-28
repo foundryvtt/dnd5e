@@ -1,0 +1,117 @@
+_id: I2LUSF5ogc7Bj62e
+name: Speak with Dead
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You grant the semblance of life and intelligence to a corpse of your
+      choice within range, allowing it to answer the questions you pose. The
+      corpse must still have a mouth and can't be undead. The spell fails if the
+      corpse was the target of this spell within the last 10 days.</p><p>Until
+      the spell ends, you can ask the corpse up to five questions. The corpse
+      knows only what it knew in life, including the languages it knew. Answers
+      are usually brief, cryptic, or repetitive, and the corpse is under no
+      compulsion to offer a truthful answer if you are hostile to it or it
+      recognizes you as an enemy. This spell doesn't return the creature's soul
+      to its body, only its animating spirit. Thus, the corpse can't learn new
+      information, doesn't comprehend anything that has happened since it died,
+      and can't speculate about future events.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '10'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: nec
+  materials:
+    value: Burning incense
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: speak-with-dead
+sort: 0
+flags: {}
+img: icons/magic/control/fear-fright-shadow-monster-green.webp
+effects: []
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037352362
+  modifiedTime: 1725992718579
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!I2LUSF5ogc7Bj62e'

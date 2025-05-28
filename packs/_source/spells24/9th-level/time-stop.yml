@@ -1,0 +1,120 @@
+name: Time Stop
+system:
+  description:
+    value: >-
+      <p>You briefly stop the flow of time for everyone but yourself. No time
+      passes for other creatures, while you take 1d4 + 1 turns in a row, during
+      which you can use actions and move as normal.</p><p>This spell ends if one
+      of the actions you use during this period, or any effects that you create
+      during it, affects a creature other than you or an object being worn or
+      carried by someone other than you. In addition, the spell ends if you move
+      to a place more than 1,000 feet from the location where you cast it.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: all creatures but yourself
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 9
+  school: trs
+  properties:
+    - vocal
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    BaGWtc5WIsLgDasY:
+      type: utility
+      _id: BaGWtc5WIsLgDasY
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: Consecutive Turns
+        formula: 1d4 + 1
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: time-stop
+_id: phbsplTimeStop00
+type: spell
+img: icons/magic/time/hourglass-yellow-green.webp
+effects: []
+folder: iG0Zia8jh6uK39TB
+sort: 100098
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425975666
+  modifiedTime: 1745256799259
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplTimeStop00'

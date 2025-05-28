@@ -1,0 +1,114 @@
+_id: 6HJpLJxctQdMLeuB
+name: Antennae
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>the [[lookup @name lowercase]] corrodes a
+      nonmagical ferrous metal object it can see within 5 feet of it. If the
+      object isn't being worn or carried, the touch destroys a 1-foot cube of
+      it. </p><p>If the object is being worn or carried by a creature, the
+      creature can make a  <strong>DC 11 Dexterity</strong> saving throw to
+      avoid the [[lookup @name lowercase]]'s touch.If the object touched is
+      either metal armor or a metal shield being worn or carried, its takes a
+      permanent and cumulative -1 penalty to the AC it offers. Armor reduced to
+      an AC of 10 or a shield that drops to a +0 bonus is destroyed. If the
+      object touched is a held metal weapon, it rusts as described in the Rust
+      Metal trait.</p></section><p>the [[lookup @name lowercase]] corrodes a
+      ferrous metal object it can see within 5 feet of it. If the object isn't
+      being worn or carried, the touch destroys a 1-foot cube of it. </p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: dex
+          formula: ''
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: antennae
+flags: {}
+img: icons/magic/nature/tree-bare-glow-yellow.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304966139
+  modifiedTime: 1725992571187
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!6HJpLJxctQdMLeuB'

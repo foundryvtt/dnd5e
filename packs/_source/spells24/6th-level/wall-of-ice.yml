@@ -1,0 +1,283 @@
+name: Wall of Ice
+system:
+  description:
+    value: >-
+      <p>You create a wall of ice on a solid surface within range. You can form
+      it into a hemispherical dome or a globe with a radius of up to 10 feet, or
+      you can shape a flat surface made up of ten 10-foot-square panels. Each
+      panel must be contiguous with another panel. In any form, the wall is 1
+      foot thick and lasts for the duration.</p><p>If the wall cuts through a
+      creature's space when it appears, the creature is pushed to one side of
+      the wall (you choose which side) and makes a Dexterity saving throw,
+      taking 10d6 Cold damage on a failed save or half as much damage on a
+      successful one.</p><p>The wall is an object that can be damaged and thus
+      breached. It has AC 12 and 30 Hit Points per 10-foot section, and it has
+      Immunity to Cold, Poison, and Psychic damage and Vulnerability to Fire
+      damage. Reducing a 10-foot section of wall to 0 Hit Points destroys it and
+      leaves behind a sheet of frigid air in the space the wall
+      occupied.</p><p>A creature moving through the sheet of frigid air for the
+      first time on a turn makes a Constitution saving throw, taking 5d6 Cold
+      damage on a failed save or half as much damage on a successful
+      one.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The damage
+      the wall deals when it appears increases by 2d6 and the damage from
+      passing through the sheet of frigid air increases by 1d6 for each spell
+      slot level above 6.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: solid surface
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '120'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a piece of quartz
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    c4ttlpiIpyf3dFdf:
+      type: save
+      _id: c4ttlpiIpyf3dFdf
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '10'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: '6'
+            bonus: ''
+            types:
+              - cold
+            scaling:
+              mode: whole
+              number: 2
+              formula: ''
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Create Globe
+      img: icons/magic/water/barrier-ice-shield.webp
+      appliedEffects: []
+    zjpb29Tww0iuv1P3:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: true
+          units: ft
+          count: '10'
+          type: wall
+          size: '10'
+          width: '1'
+          height: '10'
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: '6'
+            bonus: ''
+            types:
+              - cold
+            scaling:
+              mode: whole
+              number: 2
+              formula: ''
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Create Panels
+      _id: zjpb29Tww0iuv1P3
+      img: icons/magic/water/barrier-ice-wall-snow.webp
+      appliedEffects: []
+    D8Q85bjeZgiFky5j:
+      type: save
+      _id: D8Q85bjeZgiFky5j
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: creature moves through the wall for the first time on a turn
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: spec
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: '6'
+            bonus: ''
+            types:
+              - cold
+            scaling:
+              mode: whole
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Frigid Air
+      img: icons/magic/water/snowflake-ice-blue-white.webp
+      appliedEffects: []
+  identifier: wall-of-ice
+_id: phbsplWallofIce0
+type: spell
+img: icons/magic/water/barrier-ice-wall-snow.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 100049
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425977139
+  modifiedTime: 1745256799779
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplWallofIce0'

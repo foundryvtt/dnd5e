@@ -1,0 +1,114 @@
+_id: 76C0FdcxlU8F9Rl2
+name: Word of Recall
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You and up to five willing creatures within 5 feet of you instantly
+      teleport to a previously designated sanctuary. You and any creatures that
+      teleport with you appear in the nearest unoccupied space to the spot you
+      designated when you prepared your sanctuary (see below). If you cast this
+      spell without first preparing a sanctuary, the spell has no
+      effect.</p><p>You must designate a sanctuary by casting this spell within
+      a location, such as a temple, dedicated to or strongly linked to your
+      deity. If you attempt to cast the spell in this manner in an area that
+      isn't dedicated to your deity, the spell has no effect.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '6'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '5'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: word-of-recall
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037347937
+  modifiedTime: 1725992717170
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!76C0FdcxlU8F9Rl2'

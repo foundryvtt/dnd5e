@@ -1,0 +1,114 @@
+_id: IBJmWjzbQGu7M4UX
+name: Fog Cloud
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create a 20-foot-radius Sphere of fog centered on a point within
+      range. The sphere spreads around corners, and its area is heavily
+      obscured. It lasts for the Duration or until a wind of moderate or greater
+      speed (at least 10 miles per hour) disperses it.</p><p><strong>At Higher
+      Levels.</strong> When you cast this spell using a spell slot of 2nd level
+      or higher, the radius of the fog increases by 20 feet for each slot level
+      above 1st.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '20'
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: fog-cloud
+sort: 0
+flags: {}
+img: icons/magic/air/fog-gas-smoke-dense-gray.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037352432
+  modifiedTime: 1725992718601
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!IBJmWjzbQGu7M4UX'

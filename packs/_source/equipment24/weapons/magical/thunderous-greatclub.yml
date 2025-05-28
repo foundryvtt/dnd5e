@@ -1,0 +1,546 @@
+_id: dmgThunderousGre
+name: Thunderous Greatclub
+type: weapon
+img: icons/weapons/clubs/club-spiked-glowing.webp
+system:
+  activities:
+    uLBFDoBMkuXKTafj:
+      _id: uLBFDoBMkuXKTafj
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: 'Bonus Damage: 2d8 Thunder vs loose object'
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 8
+            bonus: ''
+            types:
+              - thunder
+            scaling:
+              number: 1
+      name: ''
+      img: ''
+      appliedEffects: []
+    hNFnYyOWBXKE6KAm:
+      type: save
+      name: Clap of Thunder
+      _id: hNFnYyOWBXKE6KAm
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Rg9qnmIespepasJN
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: str
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects: []
+    qBF3OnmfMzdXgxM8:
+      type: save
+      name: 'Earthquake: Save'
+      _id: qBF3OnmfMzdXgxM8
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Rg9qnmIespepasJN
+          onSave: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '50'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '20'
+      img: ''
+      appliedEffects:
+        - Rg9qnmIespepasJN
+    4bCa4M3YWvFBx4Hz:
+      type: damage
+      name: 'Earthquake: Object Damage'
+      _id: 4bCa4M3YWvFBx4Hz
+      sort: 100000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+        value: ''
+      target:
+        template:
+          contiguous: false
+          units: ''
+          type: ''
+          size: ''
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: object
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: true
+              formula: '50'
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              number: 1
+      img: ''
+      appliedEffects: []
+    hCBV3X0BsH2JPEJr:
+      type: save
+      name: 'Earthquake: Fissure'
+      _id: hCBV3X0BsH2JPEJr
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Rg9qnmIespepasJN
+          onSave: false
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '50'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '10'
+          width: ''
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '20'
+      img: ''
+      appliedEffects:
+        - Rg9qnmIespepasJN
+    yLcHX3mcjhGVnbPj:
+      type: save
+      name: 'Earthquake: Concentration Save'
+      _id: yLcHX3mcjhGVnbPj
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '20'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatclub0]{Greatclub}),
+      Very Rare (Requires Attunement)</em></p><p>While you are attuned to this
+      magic weapon, your Strength is 20 unless your Strength is already equal to
+      or greater than that score. The weapon deals an extra 1d8 Thunder damage
+      to any creature it hits and an extra 3d8 Thunder damage to objects it hits
+      that aren't being worn or carried.</p><p>The weapon has the following
+      additional properties.</p><p><em><strong>Clap of Thunder.</strong></em> As
+      a Magic action, you can strike the weapon against a hard surface to create
+      a loud clap of thunder audible out to 300 feet. You also create a 30-foot
+      Cone of thunderous energy. Each creature in the Cone must succeed on a DC
+      15 Strength saving throw or have the Prone condition. Nonmagical objects
+      in the Cone that aren't being worn or carried take [[/damage 3d8
+      type=thunder]] damage.</p><p><em><strong>Earthquake.</strong></em> As a
+      Magic action, you can strike the weapon against the ground to create an
+      intense seismic disturbance in a 50-foot-radius circle centered on the
+      point of impact. Structures in contact with the ground in that area take
+      50 Bludgeoning damage, and each creature on the ground in that area must
+      succeed on a DC 20 Dexterity saving throw or have the Prone condition. If
+      that creature is also concentrating, it must succeed on a [[/save con 20]]
+      saving throw or its Concentration is broken. In addition, you can cause a
+      30-foot-deep, 10-foot-wide fissure to open up on the ground anywhere in
+      the area. Any creature on a spot where the fissure opens must succeed on a
+      DC 20 Dexterity saving throw, falling into the fissure on a failed save or
+      moving with the fissure's edge on a successful one. Any structure on a
+      spot where the fissure opens collapses into the fissure. Once you use this
+      property, it can't be used again until the next dawn.</p>
+    chat: ''
+  identifier: thunderous-greatclub
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 10
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: greatclub
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 8
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - mgc
+    - two
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ft
+  mastery: push
+effects:
+  - name: Thunderous Strength
+    img: icons/magic/control/buff-strength-muscle-damage.webp
+    _id: c8qf2gTNGwdg4hTP
+    type: base
+    system: {}
+    changes:
+      - key: system.abilities.str.value
+        mode: 4
+        value: '20'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729880382268
+      modifiedTime: 1729882427373
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgThunderousGre.c8qf2gTNGwdg4hTP'
+  - name: Prone
+    img: icons/magic/lightning/bolt-cloud-sky-green.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgThunderousGre
+    transfer: false
+    _id: Rg9qnmIespepasJN
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - prone
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729880727744
+      modifiedTime: 1729880809003
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgThunderousGre.Rg9qnmIespepasJN'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745611687561
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgThunderousGre'

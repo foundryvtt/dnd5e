@@ -1,0 +1,93 @@
+_id: dmgSenCommunicat
+name: Communication
+img: icons/magic/sonic/scream-wail-shout-teal.webp
+description: ''
+results:
+  - type: text
+    drawn: false
+    range:
+      - 1
+      - 6
+    _id: 81Hqjkrnbx1sSwOJ
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      The item communicates by transmitting emotion to the creature carrying or
+      wielding it&lt;.
+    name: ''
+    _key: '!tables.results!dmgSenCommunicat.81Hqjkrnbx1sSwOJ'
+  - type: text
+    drawn: false
+    range:
+      - 7
+      - 9
+    _id: mO16jIRjET7lrS3e
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: The item speaks one or more languages.
+    name: ''
+    _key: '!tables.results!dmgSenCommunicat.mO16jIRjET7lrS3e'
+  - type: text
+    drawn: false
+    range:
+      - 10
+      - 10
+    _id: CZz643QK97uhNWCX
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      The item speaks one or more languages. In addition, the item can
+      communicate telepathically with any creature that carries or wields it.
+    name: ''
+    _key: '!tables.results!dmgSenCommunicat.CZz643QK97uhNWCX'
+replacement: true
+displayRoll: true
+folder: An3ZWDU7HLgF24f1
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745549017709
+  modifiedTime: 1745549032498
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+formula: 1d10
+sort: 200000
+ownership:
+  default: 0
+_key: '!tables!dmgSenCommunicat'

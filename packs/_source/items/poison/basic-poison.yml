@@ -1,0 +1,150 @@
+_id: eVbPkYjpl29RE2uW
+name: Basic Poison
+type: consumable
+img: icons/consumables/potions/potion-bottle-skull-label-poison-teal.webp
+system:
+  description:
+    value: >-
+      <p>You can use the poison in this vial to coat one slashing or piercing
+      weapon or up to three pieces of ammunition. Applying the poison takes an
+      action. A creature hit by the poisoned weapon or ammunition must make a
+      [[/save]] saving throw or take [[/damage]] damage. Once applied, the
+      poison retains potency for 1 minute before drying.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 100
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  uses:
+    max: '3'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: 1
+      denomination: 4
+      bonus: ''
+      types:
+        - poison
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: poison
+    subtype: injury
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: one slashing or piercing weapon, or up to three pieces of ammunition
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: touch
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 1
+            denomination: 4
+            bonus: ''
+            types:
+              - poison
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '10'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: basic-poison
+effects: []
+folder: ZzUfnm1OuSL02nLG
+sort: 200000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1725037241703
+  modifiedTime: 1725992531189
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!eVbPkYjpl29RE2uW'

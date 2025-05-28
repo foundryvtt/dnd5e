@@ -1,0 +1,394 @@
+_id: dmgOathbow000000
+name: Oathbow
+type: weapon
+img: icons/weapons/bows/longbow-recurve-leather-red.webp
+system:
+  activities:
+    wBvt7GZJkhTta6By:
+      _id: wBvt7GZJkhTta6By
+      type: attack
+      sort: 250000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: Advantage on Attack
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: 6
+            bonus: ''
+            types:
+              - piercing
+            scaling:
+              number: 1
+      name: Attack Sworn Enemy
+      img: ''
+      appliedEffects: []
+    hQyhQEtRT1J0ks2q:
+      type: enchant
+      name: Oathbow
+      _id: hQyhQEtRT1J0ks2q
+      sort: 200000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: L4ylYIFxr0vdht6M
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - wBvt7GZJkhTta6By
+              - kq0kzDyPVPzx5iXr
+            effect: []
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      img: ''
+      appliedEffects:
+        - L4ylYIFxr0vdht6M
+    kq0kzDyPVPzx5iXr:
+      type: utility
+      name: Swear Oath
+      _id: kq0kzDyPVPzx5iXr
+      sort: 300000
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: when you make a ranged attack with this weapon
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: EWoLqkPJeK9dwYhn
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/trait-languages.svg
+      appliedEffects:
+        - EWoLqkPJeK9dwYhn
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepLongbow000]{Longbow} or
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortbow00]{Shortbow}), Very
+      Rare (Requires Attunement)</em></p><p>When you nock an arrow on this bow,
+      it whispers in Elvish, "Swift defeat to my enemies." When you use this
+      weapon to make a ranged attack, you can utter or sign the following
+      command words: "Swift death to you who have wronged me." The target of
+      your attack becomes your sworn enemy until it dies or until dawn 7 days
+      later. You can have only one such sworn enemy at a time. When your sworn
+      enemy dies, you can choose a new one after the next dawn.</p><p>When you
+      make a ranged attack roll with this weapon against your sworn enemy, you
+      have Advantage on the roll. In addition, your target gains no benefit from
+      Half Cover or Three-Quarters Cover, and you suffer no Disadvantage due to
+      long range. If the attack hits, your sworn enemy takes an extra 3d6
+      Piercing damage.</p><p>While your sworn enemy lives, you have Disadvantage
+      on attack rolls with all other
+      weapons.</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: oathbow
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: ''
+effects:
+  - type: enchantment
+    name: Oathbow
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    _id: L4ylYIFxr0vdht6M
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Oathbow ({})
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: veryRare
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgOathbow000000
+          caption=false]</p>
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/weapons/bows/longbow-recurve-leather-red.webp
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '40000'
+        priority: null
+      - key: system.price.denomination
+        mode: 5
+        value: gp
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730745712869
+      modifiedTime: 1745438836755
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgOathbow000000.L4ylYIFxr0vdht6M'
+  - name: Sworn Enemy
+    img: icons/skills/targeting/crosshair-bars-yellow.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgOathbow000000
+    transfer: false
+    _id: EWoLqkPJeK9dwYhn
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>When you make a ranged attack roll with this weapon against your sworn
+      enemy, you have Advantage on the roll. In addition, your target gains no
+      benefit from Half Cover or Three-Quarters Cover, and you suffer no
+      Disadvantage due to long range. If the attack hits, your sworn enemy takes
+      an extra 3d6 Piercing damage.</p><p>While your sworn enemy lives, you have
+      Disadvantage on attack rolls with all other weapons.</p>
+    tint: '#ffffff'
+    statuses:
+      - marked
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730745760894
+      modifiedTime: 1730747206387
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgOathbow000000.EWoLqkPJeK9dwYhn'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - wBvt7GZJkhTta6By
+        - kq0kzDyPVPzx5iXr
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9400000
+ownership:
+  default: 0
+_key: '!items!dmgOathbow000000'

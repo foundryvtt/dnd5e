@@ -1,0 +1,162 @@
+name: Heroism
+system:
+  description:
+    value: >-
+      <p>A willing creature you touch is imbued with bravery. Until the spell
+      ends, the creature is immune to the Frightened condition and gains
+      Temporary Hit Points equal to your spellcasting ability modifier at the
+      start of each of its turns.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> You can target one additional creature for each spell slot
+      level above 1.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: willing
+      count: '@item.level'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: enc
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: zCpsdUyNz8bL3LF5
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: null
+        denomination: null
+        bonus: ''
+        types:
+          - temphp
+        custom:
+          enabled: true
+          formula: '@mod'
+        scaling:
+          mode: ''
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: heroism
+_id: phbsplHeroism000
+type: spell
+img: icons/magic/holy/saint-glass-portrait-halo.webp
+effects:
+  - name: Bravery
+    origin: Compendium.dnd5e.spells24.Item.phbsplHeroism000
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/control/control-influence-crown-yellow.webp
+    _id: zCpsdUyNz8bL3LF5
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.ci.value
+        mode: 2
+        value: frightened
+        priority: null
+    description: >-
+      <p>The creature is immune to the Frightened condition and gains Temporary
+      Hit Points equal to your spellcasting ability modifier at the start of
+      each of its turns.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplHeroism000.zCpsdUyNz8bL3LF5'
+folder: pBaAAtXBCq9FVEnL
+sort: 2100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425958612
+  modifiedTime: 1745256794652
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplHeroism000'

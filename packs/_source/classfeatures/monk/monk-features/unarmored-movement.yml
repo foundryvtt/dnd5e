@@ -1,0 +1,87 @@
+_id: zCeqyQ8uIPNdYJSW
+name: Unarmored Movement
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Starting at 2nd level, your speed increases by 10 feet while you are
+      not wearing armor or wielding a shield. This bonus increases when you
+      reach certain monk levels, as shown in the Monk table.</p>
+
+      <p>At 9th level, you gain the ability to move along vertical surfaces and
+      across liquids on your turn without falling during the move.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: Monk 2
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: unarmored-movement
+flags: {}
+img: icons/magic/nature/root-vine-entangle-foot-green.webp
+effects:
+  - _id: Veg0vXI93A0qlxZn
+    flags: {}
+    changes:
+      - key: system.attributes.movement.walk
+        value: '10'
+        mode: 2
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+      combat: null
+    origin: Item.zCeqyQ8uIPNdYJSW
+    tint: '#ffffff'
+    transfer: true
+    name: Unarmored Movement
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/nature/root-vine-entangle-foot-green.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!zCeqyQ8uIPNdYJSW.Veg0vXI93A0qlxZn'
+folder: TMmNG8ujFDBEWXRe
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037390558
+  modifiedTime: 1725992290624
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!zCeqyQ8uIPNdYJSW'

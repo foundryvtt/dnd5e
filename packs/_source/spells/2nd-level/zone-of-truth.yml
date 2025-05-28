@@ -1,0 +1,117 @@
+_id: CylBa7jR8DSbo8Z3
+name: Zone of Truth
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create a magical zone that guards against deception in a
+      15-foot-radius sphere centered on a point of your choice within range.
+      Until the spell ends, a creature that enters the spell's area for the
+      first time on a turn or starts its turn there must make a Charisma saving
+      throw. On a failed save, a creature can't speak a deliberate lie while in
+      the radius. You know whether each creature succeeds or fails on its saving
+      throw.</p>
+              <p>An affected creature is aware of the spell and can thus avoid answering questions to which it would normally respond with a lie. Such a creature can be evasive in its answers as long as it remains within the boundaries of the truth.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '15'
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: enc
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: zone-of-truth
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-star-magenta.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037351086
+  modifiedTime: 1725992718140
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!CylBa7jR8DSbo8Z3'

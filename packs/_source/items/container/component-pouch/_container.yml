@@ -1,0 +1,60 @@
+_id: eZGmdOhaTWMicXPW
+name: Component Pouch
+type: container
+img: icons/containers/bags/pack-leather-brown.webp
+system:
+  description:
+    value: >-
+      <p>A component pouch is a small, watertight leather belt pouch that has
+      compartments to hold all the material components and other special items
+      you need to cast your spells, except for those components that have a
+      specific cost (as indicated in a spell's description).</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 25
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  capacity:
+    type: weight
+    value: null
+  properties: []
+  attuned: false
+  identifier: component-pouch
+effects: []
+folder: PgtyWdfkDTDbc0ov
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037242022
+  modifiedTime: 1725992531282
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!eZGmdOhaTWMicXPW'

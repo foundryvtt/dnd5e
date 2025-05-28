@@ -1,0 +1,130 @@
+name: Woodcarver's Tools
+system:
+  description:
+    value: >-
+      <p class="phb-meta"><strong>Ability:</strong> Dexterity</p><p
+      class="phb-meta"><strong>Utilize:</strong> Carve a pattern in wood (DC
+      10)</p><p class="phb-meta"><strong>Craft:</strong>
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepClub000000]{Club},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatclub0]{Greatclub},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepQuartersta]{Quarterstaff},
+      Ranged weapons (except Pistol, Musket, and Sling), Arcane Focus,
+      @UUID[Compendium.dnd5e.equipment24.Item.phbamoArrows0000]{Arrows},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbamoBolts00000]{Bolts}, Druidic
+      Focus, @UUID[Compendium.dnd5e.equipment24.Item.phbagInkPen00000]{Ink Pen},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbamoNeedles000]{Needles}</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 1
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: art
+    baseItem: woodcarver
+  ability: dex
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    BUtZN2MAxVTxHX0S:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '10'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: BUtZN2MAxVTxHX0S
+      name: Carve Pattern
+      img: ''
+      appliedEffects: []
+  identifier: woodcarvers-tools
+_id: phbtulWoodcarver
+type: tool
+folder: V8KHbNkEWoXQP3Pj
+img: icons/tools/hand/chisel-steel-brown.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425918104
+  modifiedTime: 1740680143044
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbtulWoodcarver'

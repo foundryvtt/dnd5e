@@ -1,0 +1,153 @@
+_id: E4NXux0RHvME1XgP
+name: Create Undead
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: "<p>You can cast this spell only at night. Choose up to three corpses of Medium or Small humanoids within range. Each corpse becomes a ghoul under your control. (The DM has game statistics for these creatures.)</p><p>As a bonus action on each of your turns, you can mentally command any creature you animated with this spell if the creature is within 120 feet of you (if you control multiple creatures, you can command any or all of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move during its next turn, or you can issue a general command, such as to guard a particular chamber or corridor. If you issue no commands, the creature only defends itself against hostile creatures. Once given an order, the creature continues to follow it until its task is complete.</p><p>The creature is under your control for 24 hours, after which it stops obeying any command you have given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature before the current 24-hour period ends. This use of the spell reasserts your control over up to three creatures you have animated with this spell, rather than animating new ones.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a 7th-level spell slot, you can animate or reassert control over four ghouls. When you cast this spell using an 8th-level spell slot, you can animate or reassert control over five ghouls or two ghasts or wights. When you cast this spell using a 9th-level spell slot, you can animate or reassert control over six ghouls, three ghasts or wights, or two mummies.</p>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: You can cast this spell only at night.
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '3'
+      choice: false
+    template:
+      units: spec
+      contiguous: false
+  range:
+    value: '10'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: nec
+  materials:
+    value: >-
+      One clay pot filled with grave dirt, one clay pot filled with brackish
+      water, and one 150 gp black onyx stone for each corpse.
+    consumed: false
+    cost: 150
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: '@item.level - 6'
+          name: ''
+          _id: GGQa2fXx4sJFOhCv
+          uuid: Compendium.dnd5e.monsters.Actor.IyIybE5t2adMEVUM
+          level:
+            min: 8
+            max: null
+          types: []
+        - count: '@item.level - 3'
+          name: ''
+          _id: 439tNP7qngefOmVd
+          uuid: Compendium.dnd5e.monsters.Actor.OBujQLLPSmlJiZnL
+          level:
+            min: null
+            max: null
+          types: []
+        - count: '@item.level - 7'
+          name: ''
+          _id: 8377f4szK4aEYLqD
+          uuid: Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8
+          level:
+            min: 9
+            max: null
+          types: []
+        - count: '@item.level - 6'
+          name: ''
+          _id: 1wXs9fpxffiMlT1j
+          uuid: Compendium.dnd5e.monsters.Actor.rbyp54px2D0ql4QK
+          level:
+            min: 8
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: create-undead
+sort: 0
+flags: {}
+img: icons/magic/control/fear-fright-monster-grin-red-orange.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037351363
+  modifiedTime: 1725992718229
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!E4NXux0RHvME1XgP'

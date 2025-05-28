@@ -1,0 +1,199 @@
+name: Wall of Stone
+system:
+  description:
+    value: >-
+      <p>A nonmagical wall of solid stone springs into existence at a point you
+      choose within range. The wall is 6 inches thick and is composed of ten
+      10-foot-by-10-foot panels. Each panel must be contiguous with another
+      panel. Alternatively, you can create 10-foot-by-20-foot panels that are
+      only 3 inches thick.</p><p>If the wall cuts through a creature's space
+      when it appears, the creature is pushed to one side of the wall (you
+      choose which side). If a creature would be surrounded on all sides by the
+      wall (or the wall and another solid surface), that creature can make a
+      Dexterity saving throw. On a success, it can use its Reaction to move up
+      to its Speed so that it is no longer enclosed by the wall.</p><p>The wall
+      can have any shape you desire, though it can't occupy the same space as a
+      creature or object. The wall doesn't need to be vertical or rest on a firm
+      foundation. It must, however, merge with and be solidly supported by
+      existing stone. Thus, you can use this spell to bridge a chasm or create a
+      ramp.</p><p>If you create a span greater than 20 feet in length, you must
+      halve the size of each panel to create supports. You can crudely shape the
+      wall to create battlements and the like.</p><p>The wall is an object made
+      of stone that can be damaged and thus breached. Each panel has AC 15 and
+      30 Hit Points per inch of thickness, and it has Immunity to Poison and
+      Psychic damage. Reducing a panel to 0 Hit Points destroys it and might
+      cause connected panels to collapse at the DM's discretion.</p><p>If you
+      maintain your Concentration on this spell for its full duration, the wall
+      becomes permanent and can't be dispelled. Otherwise, the wall disappears
+      when the spell ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: space
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+      size: ''
+      width: ''
+      height: ''
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '120'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 5
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a cube of granite
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    8GZK7DivdBjael8n:
+      type: utility
+      _id: 8GZK7DivdBjael8n
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: true
+          units: ft
+          type: wall
+          size: '10'
+          count: '10'
+          width: 1/2
+          height: '10'
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Square Panels
+      img: ''
+      appliedEffects: []
+    44JI57djAchqMJrU:
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: true
+          units: ft
+          count: '10'
+          type: wall
+          size: '20'
+          width: 1/4
+          height: '10'
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Long Panels
+      _id: 44JI57djAchqMJrU
+      img: ''
+      appliedEffects: []
+  identifier: wall-of-stone
+_id: phbsplWallofSton
+type: spell
+img: icons/environment/settlement/city-wall.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 100196
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425977226
+  modifiedTime: 1745256799820
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplWallofSton'

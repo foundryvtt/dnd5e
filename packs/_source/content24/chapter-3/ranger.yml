@@ -1,0 +1,124 @@
+_id: phbRanger0000000
+name: Ranger
+pages:
+  - sort: 100000
+    name: Ranger
+    type: class
+    _id: fgzoeAJE4EEUSOYQ
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbrgrRanger0000
+      description:
+        value: >-
+          <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbwzdWizard0000
+          inline classes="free-rules-embed"]</p> <h2>Becoming a Ranger
+          …</h2><h3>As a Level 1 Character</h3><ul><li><p>Gain all the traits in
+          the Core Ranger Traits table.</p></li><li><p>Gain the Ranger's level 1
+          features, which are listed in the Ranger Features
+          table.</p></li></ul><h3>As a Multiclass Character</h3><ul><li><p>Gain
+          the following traits from the Core Ranger Traits table: Hit Point Die,
+          proficiency with Martial weapons, proficiency in one skill of your
+          choice from the Ranger's skill list, and training with Light and
+          Medium armor and Shields.</p></li><li><p>Gain the Ranger's level 1
+          features, which are listed in the Ranger Features table. See the
+          multiclassing rules in chapter 2 to determine your available spell
+          slots.</p></li></ul>
+        additionalHitPoints: ''
+        additionalTraits: ''
+        additionalEquipment: ''
+        subclass: >-
+          <p>A Ranger subclass is a specialization that grants you features at
+          certain levels, as specified in the subclass. The next page presents
+          the @UUID[Compendium.dnd5e.classes24.Item.phbrgrHunter0000]{Hunter}
+          subclass.</p>
+      subclassItems: []
+      subclassHeader: ''
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745513052783
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbRanger0000000.fgzoeAJE4EEUSOYQ'
+  - sort: 500000
+    name: Hunter
+    type: subclass
+    _id: 80h94evzbL3MwLk1
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbrgrHunter0000
+      description:
+        value: >-
+          <blockquote><p>Protect Nature and People from
+          Destruction</p></blockquote><p>You stalk prey in the wilds and
+          elsewhere, using your abilities as a
+          @UUID[Compendium.dnd5e.classes24.Item.phbrgrHunter0000]{Hunter} to
+          protect nature and people everywhere from forces that would destroy
+          them.</p>
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1735934747940
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbRanger0000000.80h94evzbL3MwLk1'
+folder: 1A8WFP1GVZkKdxii
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 3
+    order: 500800
+    navigation:
+      previous: phbPaladin000000
+      next: phbRogue00000000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1724425889281
+  modifiedTime: 1745677865471
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 900000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbRanger0000000'

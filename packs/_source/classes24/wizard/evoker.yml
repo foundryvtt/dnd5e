@@ -1,0 +1,90 @@
+_id: phbwzdEvoker0000
+name: Evoker
+type: subclass
+folder: 5UciSMNOwLY83syr
+img: systems/dnd5e/icons/classes/evoker.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Create Explosive Elemental Effects</p></blockquote><p>Your
+      studies focus on magic that creates powerful elemental effects such as
+      bitter cold, searing flame, rolling thunder, crackling lightning, and
+      burning acid. Some Evokers find employment in military forces, serving as
+      artillery to blast armies from afar. Others use their power to protect
+      others, while some seek their own gain.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identifier: evoker
+  classIdentifier: wizard
+  advancement:
+    - _id: NElqwo5qeP2KjewN
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbwzdEvocationS
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbwzdPotentCant
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Subclass Features
+    - _id: MnGUHDUfl1pqbwJK
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbwzdSculptSpel
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 6
+      title: Subclass Features
+    - _id: vyrvNKiCAYyJcR9l
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbwzdEmpoweredE
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 10
+      title: Subclass Features
+    - _id: GeBj8GgEaEGUkxxL
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbwzdOverchanne
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 14
+      title: Subclass Features
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation:
+      formula: ''
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866546265
+  modifiedTime: 1745256768923
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!phbwzdEvoker0000'

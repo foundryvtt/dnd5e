@@ -1,0 +1,52 @@
+_id: phbftrHeroicWarr
+name: Heroic Warrior
+type: feat
+folder: Amxh67Wqon1bSaHg
+img: icons/skills/melee/unarmed-punch-fist.webp
+system:
+  description:
+    value: >-
+      <p>The thrill of battle drives you toward victory. During combat, you can
+      give yourself Heroic Inspiration whenever you start your turn without
+      it.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 10
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: heroic-warrior
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866578955
+  modifiedTime: 1745256761620
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftrHeroicWarr'

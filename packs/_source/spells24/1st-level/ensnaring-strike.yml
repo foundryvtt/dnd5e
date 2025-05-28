@@ -1,0 +1,240 @@
+name: Ensnaring Strike
+system:
+  description:
+    value: >-
+      <p>As you hit the target, grasping vines appear on it, and it makes a
+      Strength saving throw. A Large or larger creature has Advantage on this
+      save. On a failed save, the target has the <span
+      style="font-family:Signika, sans-serif">&amp;Reference[restrained
+      apply=false] </span>condition until the spell ends. On a successful save,
+      the vines shrivel away, and the spell ends.</p><p>While Restrained, the
+      target takes 1d6 Piercing damage at the start of each of its turns. The
+      target or a creature within reach of it can take an action to make a
+      [[/check ability=str skill=ath dc=@attributes.spell.dc]] check against
+      your spell save DC. On a success, the spell ends.</p><p><strong>Using a
+      Higher-Level Spell Slot.</strong> The damage increases by 1d6 for each
+      spell slot level above 1.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: bonus
+    condition: Immediately after hitting a creature with a weapon
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: con
+  properties:
+    - vocal
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: tFGMG3cjQTEeAhv2
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - piercing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: str
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    ZWId9mbOE9zFnP6f:
+      type: damage
+      _id: ZWId9mbOE9zFnP6f
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '6'
+            bonus: ''
+            types:
+              - piercing
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      name: Start of Turn Damage
+      img: ''
+      appliedEffects: []
+  identifier: ensnaring-strike
+_id: phbsplEnsnaringS
+type: spell
+img: icons/magic/nature/root-vines-grow-brown.webp
+effects:
+  - name: Ensnared
+    origin: Compendium.dnd5e.spells24.Item.phbsplEnsnaringS
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/nature/root-vine-entangled-hand.webp
+    _id: tFGMG3cjQTEeAhv2
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p><span style="font-family:Signika, sans-serif">The target has the
+      &amp;Reference[restrained apply=false] condition until the spell
+      ends.</span></p><p><span style="font-family:Signika, sans-serif">While
+      Restrained, the target takes [[/damage 1d6 type=piercing]] (plus 1d6 per
+      spell slot level above 1) damage at the start of each of its turns. The
+      target or a creature within reach of it can take an action to make a
+      [[/check ability=str skill=ath]] check against your spell save DC. On a
+      success, the spell ends.</span></p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - restrained
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1725050339054
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplEnsnaringS.tFGMG3cjQTEeAhv2'
+folder: pBaAAtXBCq9FVEnL
+sort: 3500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425952139
+  modifiedTime: 1745256792301
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplEnsnaringS'

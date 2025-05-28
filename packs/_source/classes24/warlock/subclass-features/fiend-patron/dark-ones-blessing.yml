@@ -1,0 +1,108 @@
+_id: phbwlkDarkOnesBl
+name: Dark One's Blessing
+type: feat
+folder: fP1LEFkoKLotitj0
+img: icons/magic/life/heart-cross-strong-purple-orange.webp
+system:
+  description:
+    value: >-
+      <p>When you reduce an enemy to 0 Hit Points, you gain Temporary Hit Points
+      equal to your Charisma modifier plus your Warlock level (minimum of 1
+      Temporary Hit Point). You also gain this benefit if someone else reduces
+      an enemy within 10 feet of you to 0 Hit Points.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    p3YSnjGDlLIbiLpC:
+      type: heal
+      _id: p3YSnjGDlLIbiLpC
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: >-
+          When you reduce an enemy to 0 Hit Points or  an enemy within 10 feet
+          of you is reduced to 0 Hit Points
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '10'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - temphp
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: '@classes.warlock.levels + @abilities.cha.mod'
+      name: ''
+  enchant: {}
+  identifier: dark-ones-blessing
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866551616
+  modifiedTime: 1745256765981
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwlkDarkOnesBl'

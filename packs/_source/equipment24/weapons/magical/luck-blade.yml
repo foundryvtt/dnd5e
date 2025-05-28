@@ -1,0 +1,396 @@
+_id: dmgLuckBlade0000
+name: Luck Blade
+type: weapon
+img: icons/weapons/swords/sword-guard-worn-gold.webp
+system:
+  activities:
+    DaNUq4SqI2KRLYa6:
+      type: enchant
+      name: Luck Blade
+      _id: DaNUq4SqI2KRLYa6
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 3hRQ0o8Q1nmj5WwB
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - tXkbUpFL8jBRLpjM
+              - 9qgEdXDrdcn9Hw9W
+            effect:
+              - bDZufQP0jaHOUY6j
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      img: ''
+      appliedEffects:
+        - 3hRQ0o8Q1nmj5WwB
+    tXkbUpFL8jBRLpjM:
+      type: utility
+      name: Luck
+      _id: tXkbUpFL8jBRLpjM
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: failed D20 Test
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      roll:
+        prompt: false
+        visible: false
+        name: Roll D20
+        formula: 1d20
+      img: systems/dnd5e/icons/svg/scale-value.svg
+      appliedEffects: []
+    9qgEdXDrdcn9Hw9W:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplWish000000
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '9'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: 9qgEdXDrdcn9Hw9W
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: '3'
+  description:
+    value: >-
+      <p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepGlaive0000]{Glaive},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatsword]{Greatsword},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepLongsword0]{Longsword},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepRapier0000]{Rapier},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepScimitar00]{Scimitar},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepSickle0000]{Sickle}, or
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortsword]{Shortsword}),
+      Legendary (Requires Attunement)</em></p><p>You gain a +1 bonus to attack
+      rolls and damage rolls made with this magic weapon. While the weapon is on
+      your person, you also gain a +1 bonus to saving
+      throws.</p><p><strong>Luck.</strong> If the weapon is on your person, you
+      can call on its luck (no action required) to reroll one failed D20 Test if
+      you don't have the Incapacitated condition. You must use the second roll.
+      Once used, this property can't be used again until the next
+      dawn.</p><p><strong>Wish.</strong> The weapon has [[/r 1d3#Initial
+      Charges]] charges. While holding it, you can expend 1 charge and cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish}</em> from
+      it. Once used, this property can't be used again until the next dawn. The
+      weapon loses this property if it has no
+      charges.</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: luck-blade
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: 1
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: ''
+effects:
+  - type: enchantment
+    name: Luck Blade
+    img: systems/dnd5e/icons/spell-tiers/spell5.webp
+    disabled: true
+    _id: 3hRQ0o8Q1nmj5WwB
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Luck Blade ({})
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: legendary
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgLuckBlade0000
+          caption=false]</p>
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: system.magicalBonus
+        mode: 4
+        value: '1'
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '200000'
+        priority: null
+      - key: system.price.denomination
+        mode: 5
+        value: gp
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730492541932
+      modifiedTime: 1731079884800
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgLuckBlade0000.3hRQ0o8Q1nmj5WwB'
+  - name: Saving Throw Bonus
+    img: icons/magic/control/buff-luck-fortune-green-gold.webp
+    _id: bDZufQP0jaHOUY6j
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>While the weapon is on your person, you also gain a +1 bonus to saving
+      throws.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730492875228
+      modifiedTime: 1730493351051
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgLuckBlade0000.bDZufQP0jaHOUY6j'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - tXkbUpFL8jBRLpjM
+        - 9qgEdXDrdcn9Hw9W
+      effect:
+        - bDZufQP0jaHOUY6j
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712701219
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 8600000
+ownership:
+  default: 0
+_key: '!items!dmgLuckBlade0000'

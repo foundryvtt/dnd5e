@@ -1,0 +1,124 @@
+name: Moon
+system:
+  description:
+    value: >-
+      <p>You gain the ability to cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish}</em> 1d3
+      times.</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    ZctXl2SbiClervmM:
+      type: cast
+      _id: ZctXl2SbiClervmM
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '9'
+        properties:
+          - vocal
+          - somatic
+          - material
+        uuid: Compendium.dnd5e.spells24.Item.phbsplWish000000
+      name: 'Card Effect: Wish'
+      img: icons/svg/card-joker.svg
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '3'
+  identifier: moon
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+_id: dmgDmtMoon000000
+type: consumable
+folder: XVXuU21XyvevGap7
+img: icons/magic/nature/symbol-moon-stars-white.webp
+effects: []
+sort: 500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729202089541
+  modifiedTime: 1740680119060
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgDmtMoon000000'

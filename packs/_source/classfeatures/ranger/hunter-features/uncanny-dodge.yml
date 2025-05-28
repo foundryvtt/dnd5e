@@ -1,0 +1,98 @@
+_id: 7pyZjz5vlUWV01qQ
+name: Uncanny Dodge
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>When an attacker that you can see hits you with an attack, you can use
+      your reaction to halve the attack's damage against you.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: superiorHuntersDefense
+  requirements: Hunter 15
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: reaction
+        value: 1
+        condition: Attacker must be visible.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: uncanny-dodge
+flags: {}
+img: icons/magic/air/air-wave-gust-blue.webp
+effects: []
+folder: UYfImiULTmGD1AvR
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037380654
+  modifiedTime: 1725992287315
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!7pyZjz5vlUWV01qQ'

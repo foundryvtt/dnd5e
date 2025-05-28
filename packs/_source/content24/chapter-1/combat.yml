@@ -1,0 +1,625 @@
+_id: phbCombat0000000
+name: Combat
+pages:
+  - sort: 100000
+    name: Overview
+    type: text
+    _id: zmtZPm175BzTf1uT
+    system: {}
+    title:
+      show: false
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Adventurers encounter many dangerous monsters and nefarious villains.
+        In those moments, combat often breaks out.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745622798654
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCombat0000000.zmtZPm175BzTf1uT'
+  - sort: 200000
+    name: The Order of Combat
+    type: text
+    _id: ctUkLYO5q6VwPx1s
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A typical combat encounter is a clash between two sides: a flurry of
+        weapon swings, feints, parries, footwork, and spellcasting. The game
+        organizes combat into a cycle of rounds and turns. A round represents
+        about 6 seconds in the game world. During a round, each participant in a
+        battle takes a turn. The order of turns is determined at the beginning
+        of combat when everyone rolls Initiative. Once everyone has taken a
+        turn, the fight continues to the next round if neither side is
+        defeated.</p><h2>Combat Step by Step</h2><p>Combat unfolds in these
+        steps:</p><ol><li><strong>Establish Positions.</strong> The Dungeon
+        Master determines where all the characters and monsters are located.
+        Given the adventurers’ marching order or their stated positions in the
+        room or other location, the GM figures out where the adversaries are—how
+        far away and in what direction.</li><li><strong>Roll
+        Initiative.</strong> Everyone involved in the combat encounter rolls
+        Initiative, determining the order of combatants’
+        turns.</li><li><strong>Take Turns.</strong> Each participant in the
+        battle takes a turn in Initiative order. When everyone involved in the
+        combat has had a turn, the round ends. Repeat this step until the
+        fighting stops.</li></ol>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCombat0000000.ctUkLYO5q6VwPx1s'
+  - sort: 300000
+    name: Initiative
+    type: text
+    _id: FUH9AHeKlTFzC1L9
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Initiative determines the order of turns during combat. When combat
+        starts, every participant rolls Initiative; they make a Dexterity check
+        that determines their place in the Initiative order. The GM rolls for
+        monsters. For a group of identical creatures, the GM makes a single
+        roll, so each member of the group has the same
+        Initiative.</p><p><em><strong>Surprise.</strong></em> If a combatant is
+        surprised by combat starting, that combatant has
+        &amp;Reference[Disadvantage] on their Initiative roll. For example, if
+        an ambusher starts combat while hidden from a foe who is unaware that
+        combat is starting, that foe is surprised.</p><p><em><strong>Initiative
+        Order.</strong></em> A combatant’s check total is called their
+        Initiative count, or Initiative for short. The GM ranks the combatants,
+        from highest to lowest Initiative. This is the order in which they act
+        during each round. The Initiative order remains the same from round to
+        round.</p><p><em><strong>Ties.</strong></em> If a tie occurs, the DM
+        decides the order among tied monsters, and the players decide the order
+        among tied characters. The GM decides the order if the tie is between a
+        monster and a player character.</p><section class="fvtt advice"><figure
+        class="icon"><img src="icons/vtt-512.png"
+        /></figure><article><h3>Rolling Initiative</h3><p>When the Dungeon
+        Master adds all combatants to the Combat Tracker they can roll for
+        everyone or allow the player combatants to roll for themselves. The
+        Combat Tracker will automatically place them in order and tracks whose
+        turn it is as the rounds progress.</p></article></section>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCombat0000000.FUH9AHeKlTFzC1L9'
+  - sort: 400000
+    name: Your Turn
+    type: text
+    _id: 7mCbWff8VVEzpG2D
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.iP1hYT7zzOyrzS7j
+        inline]</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCombat0000000.7mCbWff8VVEzpG2D'
+  - sort: 500000
+    name: Ending Combat
+    type: text
+    _id: DuWeRS7go1xB5h9h
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Combat ends when one side or the other is defeated, which can mean
+        the creatures are killed or knocked out or have surrendered or fled.
+        Combat can also end when both sides agree to end it.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCombat0000000.DuWeRS7go1xB5h9h'
+  - sort: 600000
+    name: Movement and Position
+    type: text
+    _id: E9fzdKGx4UxrtOG7
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>On your turn, you can move a distance equal to your
+        &amp;Reference[Speed] or less. Or you can decide not to move.</p><p>Your
+        movement can include
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.a4CjDIEMeSbRaEjA]{climbing},
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.zRZl7vdjzjqpazxn]{crawling},
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.aaJOlRhI1H6vAxt9]{jumping},
+        and
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.53c9JMqckHagYYB5]{swimming}.
+        These different modes of movement can be combined with your regular
+        movement, or they can constitute your entire move.</p><p>However you’re
+        moving with your
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.NSU7TjeJbJ0vVQaZ]{Speed},
+        you deduct the distance of each part of your move from it until it is
+        used up or until you are done moving, whichever comes first.</p><p>A
+        character’s Speed is determined during character creation. A monster’s
+        Speed is noted in the monster’s stat block. See the rules glossary for
+        more about Speed as well as about special speeds, such as a
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.xoQXfwUFahXBoiur]{Climb
+        Speed},
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.pBcRxpYx5FCVGThO]{Fly
+        Speed}, or
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.wDGTuzKQunNrnkC8]{Swim
+        Speed}.</p><aside class="notable"><h3>Playing on a Grid</h3><p>If you
+        play using a square grid and miniatures or other tokens, follow these
+        rules.</p><p><span><em><strong>Squares.</strong></em></span> Each square
+        represents 5 feet.</p><p><span><em><strong>Speed.</strong></em></span>
+        Rather than moving foot by foot, move square by square on the grid,
+        using your Speed in 5-foot segments. You can translate your Speed into
+        squares by dividing it by 5. For example, a Speed of 30 feet translates
+        into 6 squares. If you use a grid often, consider writing your Speed in
+        squares on your character sheet.</p><p><span><em><strong>Entering a
+        Square.</strong></em></span> To enter a square, you must have enough
+        movement left to pay for entering. It costs 1 square of movement to
+        enter an unoccupied square that’s adjacent to your space (orthogonally
+        or diagonally adjacent). A square of Difficult Terrain costs 2 squares
+        to enter. Other effects might make a square cost even
+        more.</p><p><span><em><strong>Corners.</strong></em></span> Diagonal
+        movement can’t cross the corner of a wall, a large tree, or another
+        terrain feature that fills its
+        space.</p><p><span><em><strong>Ranges.</strong></em></span> To determine
+        the range on a grid between two things—whether creatures or
+        objects—count squares from a square adjacent to one of them and stop
+        counting in the space of the other one. Count by the shortest
+        route.</p></aside><h2>Difficult
+        Terrain</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.6tqz947qO8vPyxvD
+        inline]</p><h2>Breaking Up Your Move</h2><p>You can break up your move,
+        using some of its movement before and after any action, Bonus Action, or
+        Reaction you take on the same turn. For example, if you have a Speed of
+        30 feet, you could go 10 feet, take an action, and then go 20
+        feet.</p><h2>Dropping Prone</h2><section class="fvtt advice"><figure
+        class="icon"><img src="icons/vtt-512.png" /></figure><article><h3>Apply
+        Conditions Quickly</h3><p>Inline Conditions allow you to apply the
+        effect to the currently selected Token. You can also click on the link
+        to open the page and then share it with your players with the "Show
+        Players" link at the top of the window.</p></article></section><p>On
+        your turn, you can give yourself the &amp;Reference[Prone] condition
+        without using an action or any of your Speed, but you can’t do so if
+        your Speed is 0.</p><h2>Creature Size</h2><p>A creature belongs to a
+        size category, which determines the width of the square space the
+        creature occupies on a map, as shown on the Creature Size and Space
+        table. That table lists the sizes from smallest (Tiny) to largest
+        (Gargantuan). A creature’s space is the area that it effectively
+        controls in combat and the area it needs to fight effectively.</p><p>A
+        character’s size is determined by species, and a monster’s size is
+        specified in the monster’s stat block.</p><table><caption>Creature Size
+        and Space</caption><thead><tr><th><p>Size</p></th><th><p>Space
+        (Feet)</p></th><th><p>Space
+        (Squares)</p></th></tr></thead><tbody><tr><td><p>Tiny</p></td><td><p>2½
+        by 2½ feet</p></td><td><p>4 per
+        square</p></td></tr><tr><td><p>Small</p></td><td><p>5 by 5
+        feet</p></td><td><p>1
+        square</p></td></tr><tr><td><p>Medium</p></td><td><p>5 by 5
+        feet</p></td><td><p>1
+        square</p></td></tr><tr><td><p>Large</p></td><td><p>10 by 10
+        feet</p></td><td><p>4 squares (2 by
+        2)</p></td></tr><tr><td><p>Huge</p></td><td><p>15 by 15
+        feet</p></td><td><p>9 squares (3 by
+        3)</p></td></tr><tr><td><p>Gargantuan</p></td><td><p>20 by 20
+        feet</p></td><td><p>16 squares (4 by
+        4)</p></td></tr></tbody></table><h2>Moving Around Other
+        Creatures</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.9ZWCknaXCOdhyOrX
+        inline]</p>
+      markdown: ''
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745502349361
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCombat0000000.E9fzdKGx4UxrtOG7'
+  - sort: 700000
+    name: Making an Attack
+    type: text
+    _id: gOLiYqsAJ4E2JpDK
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>When you take the &amp;Reference[Attack] action, you make an attack.
+        Some other actions, &amp;Reference[Bonus Action]{Bonus Actions}, and
+        &amp;Reference[Reaction]{Reactions} also let you make an attack. Whether
+        you strike with a Melee weapon, fire a Ranged weapon, or make an attack
+        roll as part of a spell, an attack has the following
+        structure:</p><ol><li><strong>Choose a Target.</strong> Pick a target
+        within your attack’s range: a creature, an object, or a
+        location.</li><li><strong>Determine Modifiers. </strong>The DM
+        determines whether the target has &amp;Reference[Cover] and whether you
+        have &amp;Reference[Advantage] or &amp;Reference[Disadvantage] against
+        the target. In addition, spells, special abilities, and other effects
+        can apply penalties or bonuses to your attack
+        roll.</li><li><strong>Resolve the Attack. </strong>Make the attack roll,
+        as detailed earlier in this chapter. On a hit, you roll damage unless
+        the particular attack has rules that specify otherwise. Some attacks
+        cause special effects in addition to or instead of damage.</li></ol>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCombat0000000.gOLiYqsAJ4E2JpDK'
+  - sort: 800000
+    name: Cover
+    type: text
+    _id: 12ZJOcieI7vPpryj
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Walls, trees, creatures, and other obstacles can provide cover,
+        making a target more difficult to harm. As detailed in the Cover table,
+        there are three degrees of cover, each of which gives a different
+        benefit to a target.</p><p>A target can benefit from cover only when an
+        attack or other effect originates on the opposite side of the cover. If
+        a target is behind multiple sources of cover, only the most protective
+        degree of cover applies; the degrees aren’t added together. For example,
+        if a target is behind a creature that gives Half Cover and a tree trunk
+        that gives Three-Quarters Cover, the target has Three-Quarters
+        Cover.</p><aside class="notable"><h3>Unseen Attackers and
+        Targets</h3><p>When you make an attack roll against a target you can’t
+        see, you have &amp;reference[Disadvantage] on the roll. This is true
+        whether you’re guessing the target’s location or targeting a creature
+        you can hear but not see. If the target isn’t in the location you
+        targeted, you miss.</p><p>When a creature can’t see you, you have
+        &amp;Reference[Advantage] on attack rolls against it.</p><p>If you are
+        hidden when you make an attack roll, you give away your location when
+        the attack hits or
+        misses.</p></aside><table><caption>Cover</caption><thead><tr><th><p>Degree</p></th><th><p>Benefit
+        to Target</p></th><th><p>Offered By
+        …</p></th></tr></thead><tbody><tr><td><p>Half</p></td><td><p>+2 bonus to
+        AC and Dexterity saving throws</p></td><td><p>Another creature or an
+        object that covers at least half of the
+        target</p></td></tr><tr><td><p>Three-<br />Quarters</p></td><td><p>+5
+        bonus to AC and Dexterity saving throws</p></td><td><p>An object that
+        covers at least three-quarters of the
+        target</p></td></tr><tr><td><p>Total</p></td><td><p>Can’t be targeted
+        directly</p></td><td><p>An object that covers the whole
+        target</p></td></tr></tbody></table>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745503361250
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCombat0000000.12ZJOcieI7vPpryj'
+  - sort: 900000
+    name: Ranged Attacks
+    type: text
+    _id: aAQul39LLxv4sSUm
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>When you make a ranged attack, you fire a bow, hurl an axe, or
+        otherwise send projectiles to strike a foe at a distance. Many spells
+        also involve making a ranged
+        attack.</p><h2>Range</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.HjKXuB8ndjcqOds7
+        inline]</p><h2>Ranged Attacks in Close
+        Combat</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.qEZvxW0NM7ixSQP5
+        inline]</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCombat0000000.aAQul39LLxv4sSUm'
+  - sort: 1000000
+    name: Melee Attacks
+    type: text
+    _id: 2g3T7ee3yYp1XSl8
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A melee attack allows you to attack a target within your reach. A
+        melee attack typically uses a handheld weapon or an
+        &amp;Reference[Unarmed Strike]. Many monsters make melee attacks with
+        claws, teeth, or other body parts. A few spells also involve melee
+        attacks.</p><h2>Reach</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.hgZ5ZN4B3y7tmFlt
+        inline]</p><h2>Opportunity Attacks</h2><p>Combatants watch for enemies
+        to drop their guard. If you move heedlessly past your foes, you put
+        yourself in danger by provoking an Opportunity
+        Attack.</p><p><em><strong>Avoiding Opportunity Attacks.</strong></em>
+        You can avoid provoking an Opportunity Attack by taking the Disengage
+        action. You also don’t provoke an Opportunity Attack when you Teleport
+        or when you are moved without using your movement, action, Bonus Action,
+        or Reaction. For example, you don’t provoke an Opportunity Attack if an
+        explosion hurls you out of a foe’s reach or if you fall past an
+        enemy.</p><p><em><strong>Making an Opportunity Attack.</strong></em> You
+        can make an Opportunity Attack when a creature that you can see leaves
+        your reach. To make the attack, take a Reaction to make one melee attack
+        with a weapon or an Unarmed Strike against that creature. The attack
+        occurs right before it leaves your reach.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCombat0000000.2g3T7ee3yYp1XSl8'
+  - sort: 1100000
+    name: Mounted Combat
+    type: text
+    _id: 0t4AB2dun7hpADVS
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A willing creature that is at least one size larger than a rider and
+        that has an appropriate anatomy can serve as a mount, using the
+        following rules.</p><h2>Mounting and
+        Dismounting</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.MFpyvUIdcBpC9kIE
+        inline]</p><h2>Controlling a
+        Mount</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.khmR2xFk1NxoQUgZ
+        inline]</p><h2>Falling Off</h2><p>If an effect is about to move your
+        mount against its will while you’re on it, you must succeed on a [[/save
+        10 dex]] saving throw or fall off, landing with the
+        &amp;Reference[Prone] condition in an unoccupied space within 5 feet of
+        the mount.</p><p>While mounted, you must make the same save if you’re
+        knocked Prone or the mount is.</p>
+      markdown: ''
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCombat0000000.0t4AB2dun7hpADVS'
+  - sort: 1200000
+    name: Underwater Combat
+    type: text
+    _id: 9GYj3Sr9FWtCb6SC
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A fight underwater follows these rules.</p><h2>Impeded
+        Weapons</h2><p>When making a melee attack roll with a weapon underwater,
+        a creature that lacks a Swim Speed has &amp;Reference[Disadvantage] on
+        the attack roll unless the weapon deals Piercing damage.</p><p>A ranged
+        attack roll with a weapon underwater automatically misses a target
+        beyond the weapon’s normal range, and the attack roll has Disadvantage
+        against a target within normal range.</p><h2>Fire
+        Resistance</h2><p>Anything underwater has &amp;Reference[Damage
+        Resistance]{Resistance} to Fire damage (explained in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbDamageAndHeal]{Damage
+        and Healing}).</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1735933918771
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCombat0000000.9GYj3Sr9FWtCb6SC'
+folder: DEIORpZoUWPUBTPh
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 1
+    order: 106000
+    navigation:
+      previous: phbExploration00
+      next: phbDamageAndHeal
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425888610
+  modifiedTime: 1745677864702
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 300000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbCombat0000000'

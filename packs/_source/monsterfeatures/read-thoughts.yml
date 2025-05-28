@@ -1,0 +1,114 @@
+_id: w5mFTTFsdKC7TXgg
+name: Read Thoughts
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] magically reads the surface thoughts of
+      one creature within 60 ft. of it. The effect can penetrate barriers, but 3
+      ft. of wood or dirt, 2 ft. of stone, 2 inches of metal, or a thin sheet of
+      lead blocks it.</p><p>While the target is in range, the [[lookup @name
+      lowercase]] can continue reading its thoughts, as long as the [[lookup
+      @name lowercase]]'s concentration isn't broken (as if concentrating on a
+      spell). While reading the target's mind, the [[lookup @name lowercase]]
+      has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation,
+      and Persuasion) checks against the target.</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] magically reads the surface thoughts of
+      one creature within 60 ft. of it.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: read-thoughts
+flags: {}
+img: icons/magic/control/hypnosis-mesmerism-watch.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304978315
+  modifiedTime: 1725992574962
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!w5mFTTFsdKC7TXgg'

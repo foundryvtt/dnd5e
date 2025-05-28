@@ -1,0 +1,123 @@
+name: Cartographer's Tools
+system:
+  description:
+    value: >-
+      <p class="phb-meta"><strong>Ability:</strong> Wisdom</p><p
+      class="phb-meta"><strong>Utilize:</strong> Draft a map of a small area (DC
+      15)</p><p class="phb-meta"><strong>Craft:</strong>
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagMap00000000]{Map}</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  price:
+    value: 15
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: art
+    baseItem: cartographer
+  ability: wis
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    Q3W6zdSkQt4HEpX8:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '15'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: Q3W6zdSkQt4HEpX8
+      name: Draft a Map
+      img: ''
+      appliedEffects: []
+  identifier: cartographers-tools
+_id: phbtulCartograph
+type: tool
+folder: V8KHbNkEWoXQP3Pj
+img: icons/tools/navigation/map-chart-tan.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425916562
+  modifiedTime: 1740680141344
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbtulCartograph'

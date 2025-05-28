@@ -1,0 +1,75 @@
+_id: p2zChy24ZJdVqMSH
+name: Chain Shirt
+type: equipment
+img: icons/equipment/chest/breastplate-scale-grey.webp
+system:
+  description:
+    value: >-
+      <p>Made of interlocking metal rings, a chain shirt is worn between layers
+      of clothing or leather. This armor offers modest protection to the
+      wearer's upper body and allows the sound of the rings rubbing against one
+      another to be muffled by outer layers.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 20
+    units: lb
+  price:
+    value: 50
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 13
+    dex: 2
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: medium
+    baseItem: chainshirt
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  activities: {}
+  attuned: false
+  identifier: chain-shirt
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037289779
+  modifiedTime: 1725992547468
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!p2zChy24ZJdVqMSH'

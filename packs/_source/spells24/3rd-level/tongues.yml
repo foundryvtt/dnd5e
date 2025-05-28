@@ -1,0 +1,149 @@
+name: Tongues
+system:
+  description:
+    value: >-
+      <p>This spell grants the creature you touch the ability to understand any
+      spoken or signed language that it hears or sees. Moreover, when the target
+      communicates by speaking or signing, any creature that knows at least one
+      language can understand it if that creature can hear the speech or see the
+      signing.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: enemy
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: div
+  properties:
+    - vocal
+    - material
+  materials:
+    value: a miniature ziggurat
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: bmESvtHHL0Su7gn4
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: tongues
+_id: phbsplTongues000
+type: spell
+img: icons/environment/settlement/pyramid.webp
+effects:
+  - name: Universal Communication
+    origin: Compendium.dnd5e.spells24.Item.phbsplTongues000
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/environment/settlement/pyramid.webp
+    _id: bmESvtHHL0Su7gn4
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.languages.custom
+        mode: 2
+        value: ;all spoken or signed languages
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplTongues000.bmESvtHHL0Su7gn4'
+folder: HCovEE4VoPGlIbKi
+sort: 100098
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425975847
+  modifiedTime: 1745256799290
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplTongues000'

@@ -1,0 +1,117 @@
+_id: dmgAwarenessIoun
+name: Ioun Stone of Awareness
+type: equipment
+folder: vl17N1arOkN66aMi
+img: icons/commodities/gems/gem-rough-cushion-blue.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>See: @UUID[Compendium.dnd5e.equipment24.Item.dmgIounStone0000]{Ioun
+      Stone}</em></p><p>When you take a Magic action to toss an <em>Ioun
+      Stone</em> into the air, the stone orbits your head at a distance of 1d3
+      feet, conferring its benefit to you while doing so. You can have up to
+      three <em>Ioun Stones</em> orbiting your head at the same time.</p><p>As a
+      Utilize action, you can seize and stow any number of <em>Ioun Stones</em>
+      orbiting your head. If your Attunement to an <em>Ioun Stone</em> ends
+      while it's orbiting your head, the stone falls as though you had dropped
+      it.</p><p>While this dark-blue rhomboid orbits your head, you have
+      Advantage on Initiative rolls and Wisdom (Perception) checks.</p>
+    chat: ''
+  identifier: awareness-ioun-stone
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: 'Enhanced Awareness: Initiative and Perception'
+    img: systems/dnd5e/icons/svg/activity/check.svg
+    _id: P2rx8Fq56YpwQfSm
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.init.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>While this dark-blue rhomboid orbits your head, you have Advantage on
+      Initiative rolls and Wisdom (Perception) checks.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730480937418
+      modifiedTime: 1730481077119
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgAwarenessIoun.P2rx8Fq56YpwQfSm'
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712697931
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 29688
+ownership:
+  default: 0
+_key: '!items!dmgAwarenessIoun'

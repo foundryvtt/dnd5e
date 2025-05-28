@@ -1,0 +1,121 @@
+name: Mending
+system:
+  description:
+    value: >-
+      <p>This spell repairs a single break or tear in an object you touch, such
+      as a broken chain link, two halves of a broken key, a torn cloak, or a
+      leaking wineskin. As long as the break or tear is no larger than 1 foot in
+      any dimension, you mend it, leaving no trace of the former
+      damage.</p><p>This spell can physically repair a magic item, but it can't
+      restore magic to such an object.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: object
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: two lodestones
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    KWnXo7varYgjCDuk:
+      type: utility
+      _id: KWnXo7varYgjCDuk
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: mending
+_id: phbsplMending000
+type: spell
+img: icons/commodities/metal/barstock-broken-steel.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+sort: 900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425963431
+  modifiedTime: 1745256796103
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMending000'

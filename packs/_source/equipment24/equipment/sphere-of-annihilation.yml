@@ -1,0 +1,271 @@
+_id: dmgSphereOfAnnih
+name: Sphere of Annihilation
+type: equipment
+img: icons/magic/unholy/orb-beam-pink.webp
+system:
+  activities:
+    zDwHatTZuDTnAu17:
+      type: damage
+      name: Engulfed
+      _id: zDwHatTZuDTnAu17
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: any
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 8
+            denomination: 10
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+      img: ''
+      appliedEffects: []
+    9dTRH8Pj9QqzCbTC:
+      type: check
+      name: Control the Sphere
+      _id: 9dTRH8Pj9QqzCbTC
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated: []
+        dc:
+          calculation: ''
+          formula: '25'
+        ability: int
+      img: ''
+      appliedEffects: []
+    eA2EcW8p6IoxeM4n:
+      type: save
+      _id: eA2EcW8p6IoxeM4n
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 8
+            denomination: 10
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '19'
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Legendary</em></p><p>This 2-foot-diameter black
+      sphere is a hole in the multiverse, hovering in space and stabilized by a
+      magical field surrounding it.</p><p>The sphere obliterates all matter it
+      passes through and all matter that passes through it. Artifacts are the
+      exception. Unless an Artifact is susceptible to damage from a <em>Sphere
+      of Annihilation</em>, it passes through the sphere unscathed. Anything
+      else that touches the sphere but isn't wholly engulfed and obliterated by
+      it takes 8d10 Force damage.</p><p><em><strong>Controlling the
+      Sphere.</strong></em> A <em>Sphere of Annihilation</em> is stationary
+      until someone takes control of it. If you are within 60 feet of a sphere,
+      you can take a Magic action to make a DC 25 Intelligence (Arcana) check.
+      On a successful check, you control the sphere until the start of your next
+      turn, and if it was under another creature's control, that creature loses
+      control of the sphere. On a failed check, the sphere moves 10 feet toward
+      you in a straight line.</p><p>While in control of the sphere, you can take
+      a Bonus Action to cause it to move in one direction of your choice, up to
+      a number of feet equal to 5 times your Intelligence modifier (minimum 5
+      feet). Any creature whose space the sphere enters must succeed on a DC 19
+      Dexterity saving throw or be touched by it, taking 8d10 Force damage. A
+      creature reduced to 0 Hit Points by this damage is obliterated, leaving
+      its possessions behind but no other physical
+      remains.</p><p><em><strong>Sphere Interactions.</strong></em> If the
+      sphere comes into contact with a planar portal (such as that created by
+      the @UUID[Compendium.dnd5e.spells24.Item.phbsplGate000000]{Gate} spell) or
+      an extradimensional space (such as that within a
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgPortableHole0]{Portable Hole}),
+      the GM determines randomly what happens using the following
+      table.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgSphereOfAnnih]</p>
+    chat: ''
+  identifier: sphere-of-annihilation
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+folder: U4xmShLy19Ry54zl
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730664060452
+  modifiedTime: 1745712703512
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 35450000
+ownership:
+  default: 0
+_key: '!items!dmgSphereOfAnnih'

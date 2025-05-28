@@ -1,0 +1,135 @@
+name: Insect Plague
+system:
+  description:
+    value: >-
+      <p>Swarming locusts fill a 20-foot-radius Sphere centered on a point you
+      choose within range. The Sphere remains for the duration, and its area is
+      &amp;Reference[LightlyObscured] and
+      &amp;Reference[DifficultTerrain].</p><p>When the swarm appears, each
+      creature in it makes a Constitution saving throw, taking 4d10 Piercing
+      damage on a failed save or half as much damage on a successful one. A
+      creature also makes this save when it enters the spell's area for the
+      first time on a turn or ends its turn there. A creature makes this save
+      only once per turn.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong>The damage increases by 1d10 for each spell slot level above
+      5.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '20'
+      contiguous: false
+  range:
+    value: '300'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a locust
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 4
+            denomination: 10
+            bonus: ''
+            types:
+              - piercing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: insect-plague
+_id: phbsplInsectPlag
+type: spell
+img: icons/creatures/invertebrates/wasp-swarm-attack.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 1500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425960098
+  modifiedTime: 1745256795207
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplInsectPlag'

@@ -1,0 +1,171 @@
+name: Dominate Monster
+system:
+  description:
+    value: >-
+      <p>One creature you can see within range must succeed on a Wisdom saving
+      throw or have the &amp;Reference[Charmed apply=false] condition for the
+      duration. The target has Advantage on the save if you or your allies are
+      fighting it. Whenever the target takes damage, it repeats the save, ending
+      the spell on itself on a success.</p><p>You have a telepathic link with
+      the Charmed target while the two of you are on the same plane of
+      existence. On your turn, you can use this link to issue commands to the
+      target (no action required), such as "Attack that creature," "Move over
+      there," or "Fetch that object." The target does its best to obey on its
+      turn. If it completes an order and doesn't receive further direction from
+      you, it acts and moves as it likes, focusing on protecting
+      itself.</p><p>You can command the target to take a Reaction but must take
+      your own Reaction to do so.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> Your Concentration can last longer with a level 9 spell
+      slot (up to 8 hours).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: 1 + (@item.level - 8) * 7
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 8
+  school: enc
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    b1s2oESIl76fHcqA:
+      type: save
+      _id: b1s2oESIl76fHcqA
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: aAbTb2vkRQiBp9Oz
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: dominate-monster
+_id: phbsplDominateMo
+type: spell
+img: icons/magic/control/hypnosis-mesmerism-watch.webp
+effects:
+  - name: Dominated
+    img: systems/dnd5e/icons/svg/statuses/charmed.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplDominateMo
+    transfer: false
+    _id: aAbTb2vkRQiBp9Oz
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Whenever the target takes damage, it repeats the [[/save ability=wis]]
+      save, ending the spell on itself on a success.</p>
+    tint: '#ffffff'
+    statuses:
+      - charmed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725297126094
+      modifiedTime: 1725297791681
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplDominateMo.aAbTb2vkRQiBp9Oz'
+folder: M5CvwK9zVtzx6Dnn
+sort: 101563
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425950820
+  modifiedTime: 1745256791502
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDominateMo'

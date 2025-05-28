@@ -1,0 +1,189 @@
+_id: phbmnkStunningSt
+name: Stunning Strike
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/skills/melee/unarmed-punch-fist-blue.webp
+system:
+  description:
+    value: >-
+      <p>Once per turn when you hit a creature with a Monk weapon or an Unarmed
+      Strike, you can expend 1 Focus Point to attempt a stunning strike. The
+      target must make a Constitution saving throw. On a failed save, the target
+      has the Stunned condition until the start of your next turn. On a
+      successful save, the target's Speed is halved until the start of your next
+      turn, and the next attack roll made against the target before then has
+      Advantage.</p><section class="secret"
+      id="secret-bfJBOqZfcoIiBtoP"><p><strong>Foundry Note</strong></p><p>This
+      feature includes the Saving Throw and a Stunned Active Effect which
+      applies the Stunned status if they fail and a Slowed Active Effect for
+      tracking that their Speed is halved and that the next attack roll made
+      against them has Advantage if they succeed.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ki
+  prerequisites:
+    level: 5
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    Xto99a8Zt46VLwaR:
+      type: save
+      _id: Xto99a8Zt46VLwaR
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: >-
+          Once per turn when you hit a creature with a Monk weapon or an Unarmed
+          Strike
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: vofnieSTB0l8rpRg
+          onSave: false
+        - _id: cj9HhBNKtF6iOsH4
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability:
+          - con
+        dc:
+          calculation: wis
+          formula: ''
+      name: ''
+  enchant: {}
+  identifier: stunning-strike
+effects:
+  - name: Stunned
+    img: icons/skills/melee/unarmed-punch-fist-blue.webp
+    origin: Compendium.dnd5e.classes24.Item.phbmnkStunningSt
+    transfer: false
+    _id: vofnieSTB0l8rpRg
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - stunned
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbmnkStunningSt.vofnieSTB0l8rpRg'
+  - name: Slowed
+    img: icons/magic/control/debuff-energy-snare-purple-pink.webp
+    origin: Compendium.dnd5e.classes24.Item.phbmnkStunningSt
+    transfer: false
+    _id: cj9HhBNKtF6iOsH4
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbmnkStunningSt.cj9HhBNKtF6iOsH4'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1745256763368
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1600000
+ownership:
+  default: 0
+_key: '!items!phbmnkStunningSt'

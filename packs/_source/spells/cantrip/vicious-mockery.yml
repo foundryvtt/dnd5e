@@ -1,0 +1,127 @@
+_id: cdrYKaFi98YWaBMw
+name: Vicious Mockery
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You unleash a string of insults laced with subtle enchantments at a
+      creature you can see within range. If the target can hear you (though it
+      need not understand you), it must succeed on a Wisdom saving throw or take
+      1d4 psychic damage and have disadvantage on the next attack roll it makes
+      before the end of its next turn.</p><p>This spell's damage increases by
+      1d4 when you reach 5th level (2d4), 11th level (3d4), and 17th level
+      (4d4).</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: enc
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: none
+        parts:
+          - number: 1
+            denomination: 4
+            bonus: ''
+            types:
+              - psychic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: vicious-mockery
+sort: 0
+flags: {}
+img: icons/skills/toxins/cup-goblet-poisoned-spilled.webp
+effects: []
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037360458
+  modifiedTime: 1725992721211
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!cdrYKaFi98YWaBMw'

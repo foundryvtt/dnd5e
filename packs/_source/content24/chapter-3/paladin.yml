@@ -1,0 +1,141 @@
+_id: phbPaladin000000
+name: Paladin
+pages:
+  - sort: 100000
+    name: Paladin
+    type: class
+    _id: A34CXe4HdzXHoBEl
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbpdnPaladin000
+      description:
+        value: >-
+          <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbpdnPaladin000
+          inline classes="free-rules-embed"]</p> <aside
+          class="notable"><h3>Breaking Your Oath</h3><p>A Paladin tries to hold
+          to the highest standards of conduct, but even the most dedicated are
+          fallible. Sometimes a Paladin transgresses their oath.</p><p>A Paladin
+          who has broken a vow typically seeks absolution, spending an all-night
+          vigil as a sign of penitence or undertaking a fast. After a rite of
+          forgiveness, the Paladin starts fresh.</p><p>If your Paladin
+          unrepentantly violates their oath, talk to your GM. Your Paladin
+          should probably take a more appropriate subclass or even abandon the
+          class and adopt another one.</p></aside><h2>Becoming a Paladin
+          …</h2><h3>As a Level 1 Character</h3><ul><li><p>Gain all the traits in
+          the Core Paladin Traits table.</p></li><li><p>Gain the Paladin's level
+          1 features, which are listed in the Paladin Features
+          table.</p></li></ul><h3>As a Multiclass Character</h3><ul><li><p>Gain
+          the following traits from the Core Paladin Traits table: Hit Point
+          Die, proficiency with Martial weapons, and training with Light and
+          Medium armor and Shields.</p></li><li><p>Gain the Paladin's level 1
+          features, which are listed in the Paladin Features table. See the
+          multiclassing rules in chapter 2 to determine your available spell
+          slots.</p></li></ul>
+        additionalHitPoints: ''
+        additionalTraits: ''
+        additionalEquipment: ''
+        subclass: >-
+          <p>A Paladin subclass is a specialization that grants you features at
+          certain levels, as specified in the subclass. The next page presents
+          the @UUID[Compendium.dnd5e.classes24.Item.phbpdnOathOfDevo]{Oath of
+          Devotion} subclass.</p>
+      subclassItems: []
+      subclassHeader: ''
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745512562813
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbPaladin000000.A34CXe4HdzXHoBEl'
+  - sort: 200000
+    name: Oath of Devotion
+    type: subclass
+    _id: dw8zIx4aur7rRtx3
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbpdnOathOfDevo
+      description:
+        value: >-
+          <blockquote><p>Uphold the Ideals of Justice and
+          Order</p></blockquote><p>The
+          @UUID[Compendium.dnd5e.classes24.Item.phbpdnOathOfDevo]{Oath of
+          Devotion} binds Paladins to the ideals of justice and order. These
+          Paladins meet the archetype of the knight in shining armor. They hold
+          themselves to the highest standards of conduct, and some—for better or
+          worse—hold the rest of the world to the same standards.</p><p>Many who
+          swear this oath are devoted to gods of law and good and use their
+          gods' tenets as the measure of personal devotion. Others hold angels
+          as their ideals and incorporate images of angelic wings into their
+          helmets or coats of arms.</p><p>These paladins share the following
+          tenets:</p><ul><li><p>Let your word be your
+          promise.</p></li><li><p>Protect the weak and never fear to
+          act.</p></li><li><p>Let your honorable deeds be an
+          example.</p></li></ul>
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1735934694286
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbPaladin000000.dw8zIx4aur7rRtx3'
+folder: 1A8WFP1GVZkKdxii
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 3
+    order: 500700
+    navigation:
+      previous: phbMonk000000000
+      next: phbRanger0000000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1724425889197
+  modifiedTime: 1745677865410
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 800000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbPaladin000000'

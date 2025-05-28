@@ -1,0 +1,128 @@
+name: Ruin
+system:
+  description:
+    value: >-
+      <p>All forms of wealth that you carry or own, other than magic items, are
+      lost to you. Portable property vanishes. Businesses, buildings, and land
+      you own are lost in a way that alters reality the least. Any documentation
+      that proves you should own something lost to this card also
+      disappears.</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    iwSN3oTWgLX5FWvb:
+      type: utility
+      name: Card Effect
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Card's effect occurs immediately upon draw
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: icons/svg/card-joker.svg
+      _id: iwSN3oTWgLX5FWvb
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  identifier: ruin
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+_id: dmgDmtRuin000000
+type: consumable
+folder: XVXuU21XyvevGap7
+img: icons/environment/settlement/building-rubble.webp
+effects: []
+sort: 800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729202872469
+  modifiedTime: 1745606998079
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgDmtRuin000000'

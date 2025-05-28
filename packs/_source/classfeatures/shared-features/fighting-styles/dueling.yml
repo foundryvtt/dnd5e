@@ -1,0 +1,83 @@
+_id: hCop9uJrWhF1QPb4
+name: Dueling
+type: feat
+img: icons/skills/melee/hand-grip-sword-orange.webp
+system:
+  description:
+    value: >-
+      <p>When you are wielding a melee weapon in one hand and no other weapons,
+      you gain a +2 bonus to damage rolls with that weapon.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: fightingStyle
+  requirements: Fighter 1, Champion 10, Paladin 2, Ranger 2
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: dueling
+effects:
+  - _id: B5KM6oYsKC7vRMgG
+    flags: {}
+    changes:
+      - key: system.bonuses.mwak.damage
+        mode: 2
+        value: '+2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.UOgk9fNed1qugAqH
+    tint: '#ffffff'
+    transfer: true
+    name: 'Fighting Style: Dueling'
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/skills/melee/hand-grip-sword-orange.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!hCop9uJrWhF1QPb4.B5KM6oYsKC7vRMgG'
+folder: 159EPyqZTcus1HNJ
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037386883
+  modifiedTime: 1725992289318
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!hCop9uJrWhF1QPb4'

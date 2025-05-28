@@ -1,0 +1,77 @@
+name: Robe
+system:
+  description:
+    value: >-
+      <p>A Robe has vocational or ceremonial significance. Some events and
+      locations admit only people wearing a Robe bearing certain colors or
+      symbols.</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: clothing
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities: {}
+  identifier: robe
+_id: phbagRobe0000000
+type: equipment
+folder: uDk4FBYfcP2JnX6t
+img: icons/equipment/back/mantle-collared-black.webp
+effects: []
+sort: 5400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425911597
+  modifiedTime: 1745256812762
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagRobe0000000'

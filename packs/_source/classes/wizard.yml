@@ -1,0 +1,449 @@
+_id: wZK2Q0rXB0AQo8h3
+name: Wizard
+type: class
+img: icons/magic/air/wind-tornado-wall-blue.webp
+system:
+  description:
+    value: >-
+      <p>As a wizard, you gain the following class features.</p><h3>Hit
+      Points</h3><p><strong>Hit Dice:</strong> 1d6 per wizard level<br
+      /><strong>Hit Points at 1st Level:</strong> 6 + your Constitution
+      modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d6 (or 4) +
+      your Constitution modifier per wizard level after
+      1st</p><h3>Proficiencies</h3><p><strong>Armor:</strong> None<br
+      /><strong>Weapons:</strong> Daggers, darts, slings, quarterstaffs, light
+      crossbows<br /><strong>Tools:</strong> None<br /><strong>Saving
+      Throws:</strong> Intelligence, Wisdom<br /><strong>Skills:</strong> Choose
+      two from Arcana, History, Insight, Investigation, Medicine, and
+      Religion</p><h1>Wizard
+      Advancement</h1><table><thead><tr><td>Level</td><td>Proficiency
+      Bonus</td><td>Features</td></tr></thead><tbody><tr><td>1st</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.gbNo5eVPaqr8IVKL]{Spellcasting},
+      @UUID[Compendium.dnd5e.classfeatures.Item.e0uTcFPpgxjIyUW9]{Arcane
+      Recovery}</td></tr><tr><td>2nd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.AEWr9EMxy5gj4ZFT]{Arcane
+      Tradition}</td></tr><tr><td>3rd</td><td>+2</td><td>2nd Level Spell
+      Slot</td></tr><tr><td>4th</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>5th</td><td>+3</td><td>3rd Level Spell
+      Slot</td></tr><tr><td>6th</td><td>+3</td><td>Arcane Tradition
+      feature</td></tr><tr><td>7th</td><td>+3</td><td>4th Level Spell
+      Slot</td></tr><tr><td>8th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>9th</td><td>+4</td><td>5th Level Spell
+      Slot</td></tr><tr><td>10th</td><td>+4</td><td>Arcane Tradition
+      feature</td></tr><tr><td>11th</td><td>+4</td><td>6 Level Spell
+      Slot</td></tr><tr><td>12th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>13th</td><td>+5</td><td>7th Level
+      Spell Slot</td></tr><tr><td>14th</td><td>+5</td><td>Arcane Tradition
+      feature</td></tr><tr><td>15th</td><td>+5</td><td>8th Level Spell
+      Slot</td></tr><tr><td>16th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>17th</td><td>+6</td><td>9 Level Spell
+      Slot</td></tr><tr><td>18th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.JfFfHTeIszx1hNRx]{Spell
+      Mastery}</td></tr><tr><td>19th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score
+      Improvement}</td></tr><tr><td>20th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.nUrZDi6QN1YjwAr6]{Signature
+      Spells}</td></tr></tbody></table><div class="sidebar-block"><h3>Your
+      Spellbook</h3><p>The spells that you add to your spellbook as you gain
+      levels reflect the arcane research you conduct on your own, as well as
+      intellectual breakthroughs you have had about the nature of the
+      multiverse. You might find other spells during your adventures. You could
+      discover a spell recorded on a scroll in an evil wizard's chest, for
+      example, or in a dusty tome in an ancient
+      library.</p><p><em><strong>Copying a Spell into the Book.</strong></em>
+      When you find a wizard spell of 1st level or higher, you can add it to
+      your spellbook if it is of a spell level you can prepare and if you can
+      spare the time to decipher and copy it.</p><p>Copying that spell into your
+      spellbook involves reproducing the basic form of the spell, then
+      deciphering the unique system of notation used by the wizard who wrote it.
+      You must practice the spell until you understand the sounds or gestures
+      required, then transcribe it into your spellbook using your own
+      notation.</p><p>For each level of the spell, the process takes 2 hours and
+      costs 50 gp. The cost represents material components you expend as you
+      experiment with the spell to master it, as well as the fine inks you need
+      to record it. Once you have spent this time and money, you can prepare the
+      spell just like your other spells.</p><p><em><strong>Replacing the
+      Book.</strong></em> You can copy a spell from your own spellbook into
+      another book—for example, if you want to make a backup copy of your
+      spellbook. This is just like copying a new spell into your spellbook, but
+      faster and easier, since you understand your own notation and already know
+      how to cast the spell. You need spend only 1 hour and 10 gp for each level
+      of the copied spell.</p><p>If you lose your spellbook, you can use the
+      same procedure to transcribe the spells that you have prepared into a new
+      spellbook. Filling out the remainder of your spellbook requires you to
+      find new spells to do so, as normal. For this reason, many wizards keep
+      backup spellbooks in a safe place.</p><p><em><strong>The Book's
+      Appearance.</strong></em> Your spellbook is a unique compilation of
+      spells, with its own decorative flourishes and margin notes. It might be a
+      plain, functional leather volume that you received as a gift from your
+      master, a finely bound gilt-edged tome you found in an ancient library, or
+      even a loose collection of notes scrounged together after you lost your
+      previous spellbook in a mishap.</p></div><h1>Arcane Traditions</h1><p>The
+      study of wizardry is ancient, stretching back to the earliest mortal
+      discoveries of magic. It is firmly established in fantasy gaming worlds,
+      with various traditions dedicated to its complex study.</p><p>The most
+      common arcane traditions in the multiverse revolve around the schools of
+      magic. Wizards through the ages have cataloged thousands of spells,
+      grouping them into eight categories called schools. In some places, these
+      traditions are literally schools. In other institutions, the schools are
+      more like academic departments, with rival faculties competing for
+      students and funding. Even wizards who train apprentices in the solitude
+      of their own towers use the division of magic into schools as a learning
+      device, since the spells of each school require mastery of different
+      techniques.</p><p>@UUID[Compendium.dnd5e.subclasses.Item.Ye5f3FReEnuXfi0y]{School
+      of Evocation}</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: wizard
+  levels: 1
+  hitDice: d6
+  hitDiceUsed: 0
+  advancement:
+    - type: HitPoints
+      configuration: {}
+      value: {}
+      title: Hit Points
+      icon: systems/dnd5e/icons/svg/hit-points.svg
+      _id: J94h5oqcZsaxhaqz
+    - _id: JXcSQmjdfaJeSjZ7
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - weapon:sim:dagger
+          - weapon:sim:dart
+          - weapon:sim:lightcrossbow
+          - weapon:sim:quarterstaff
+          - weapon:sim:sling
+        choices: []
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - _id: r1DG0GF8L6SkLNvq
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - saves:int
+          - saves:wis
+        choices: []
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - _id: 6blzmKC4EON0KM2e
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:arc
+              - skills:his
+              - skills:ins
+              - skills:inv
+              - skills:med
+              - skills:rel
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.gbNo5eVPaqr8IVKL
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.e0uTcFPpgxjIyUW9
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 1
+      title: Features
+      _id: CTmwzlFgOyeE1L6K
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.AEWr9EMxy5gj4ZFT
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 2
+      title: Features
+      _id: AC4kN3RjttskWHUJ
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.JfFfHTeIszx1hNRx
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 18
+      title: Features
+      _id: 0jnLhoNlk5qFB4QM
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.nUrZDi6QN1YjwAr6
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 20
+      title: Features
+      _id: ftN4NxMNvbBwYA0p
+    - type: ItemChoice
+      configuration:
+        choices:
+          '20':
+            count: 2
+            replacement: false
+        allowDrops: true
+        type: spell
+        pool: []
+        spell:
+          ability: []
+          preparation: atwill
+          uses:
+            max: '1'
+            per: sr
+        restriction:
+          type: ''
+          subtype: ''
+          level: '3'
+      value:
+        added: {}
+        replaced: {}
+      title: Signature Spells
+      _id: jvTZfjedDhMCVGEn
+      hint: >-
+        Choose two 3rd-level wizard spells in your spellbook as your signature
+        spells.
+    - type: ScaleValue
+      configuration:
+        identifier: cantrips-known
+        type: number
+        distance:
+          units: ''
+        scale:
+          '1':
+            value: 3
+          '4':
+            value: 4
+          '10':
+            value: 5
+      value: {}
+      title: Cantrips Known
+      _id: r4NBaBhA20gUjJ56
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 4
+      title: Ability Score Improvement
+      _id: cqHTAJF9gyolaBBq
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 8
+      title: Ability Score Improvement
+      _id: lQO8njk1wKmUwP1N
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 12
+      title: Ability Score Improvement
+      _id: cyEtKa5tG1NFuknx
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 16
+      title: Ability Score Improvement
+      _id: ZSeVTprbNjLOwWzX
+    - _id: puDaUsYrlks0z5gm
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 19
+      title: ''
+    - _id: yfvhv74yw5zdz640
+      type: Subclass
+      configuration: {}
+      value: {}
+      level: 2
+      title: Arcane Tradition
+  spellcasting:
+    progression: full
+    ability: int
+    preparation:
+      formula: '@abilities.int.mod + @classes.wizard.levels'
+  startingEquipment:
+    - type: OR
+      _id: Aj1qzubu2w9EwySy
+      group: ''
+      sort: 100000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.g2dWN7PQiMRYWzyk
+      _id: 2F4M1RbYS0Y5VSzH
+      group: Aj1qzubu2w9EwySy
+      sort: 500000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.0E565kQUBmndJ1a2
+      _id: 5xnYEKKSQm7EsyZ5
+      group: Aj1qzubu2w9EwySy
+      sort: 600000
+      requiresProficiency: false
+    - type: OR
+      _id: N1a4JG2AYEDyh7nU
+      group: ''
+      sort: 200000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.eZGmdOhaTWMicXPW
+      _id: sBs3Qp7dmO7eLVpJ
+      group: N1a4JG2AYEDyh7nU
+      sort: 700000
+      requiresProficiency: false
+    - type: focus
+      count: null
+      key: arcane
+      _id: oRSo3Ko1VcqLLNwf
+      group: N1a4JG2AYEDyh7nU
+      sort: 800000
+      requiresProficiency: false
+    - type: OR
+      _id: 5qAK3PT3xNBKe6ak
+      group: ''
+      sort: 300000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.UOE8RGOpgv2oWIvM
+      _id: aWtirMXfzcZCxDOE
+      group: 5qAK3PT3xNBKe6ak
+      sort: 900000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.8KWz5DJbWUpNWniP
+      _id: rD7fOao7HRj9FKp4
+      group: 5qAK3PT3xNBKe6ak
+      sort: 1000000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.LBajgahniRJbAgDr
+      _id: aAtMAxLvrItU0XUe
+      group: ''
+      sort: 400000
+      requiresProficiency: false
+  wealth: 4d4 * 10
+  primaryAbility:
+    value: []
+    all: true
+effects: []
+folder: 3qVfhjOhDkOVvfoG
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037371419
+  modifiedTime: 1725992280866
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!wZK2Q0rXB0AQo8h3'

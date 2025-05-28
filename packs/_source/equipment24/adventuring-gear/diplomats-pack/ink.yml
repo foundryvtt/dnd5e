@@ -1,0 +1,73 @@
+name: Ink
+system:
+  description:
+    value: >-
+      <p>Ink comes in a 1-ounce bottle, which provides enough ink to write about
+      500 pages.</p>
+    chat: ''
+  price:
+    value: 10
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagDiplomatsPa
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: false
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities: {}
+  identifier: ink
+_id: vi0j4PYnO596a2L1
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/tools/scribal/ink-quill-red.webp
+effects: []
+sort: 65603
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726533137410
+  modifiedTime: 1745256815004
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!vi0j4PYnO596a2L1'

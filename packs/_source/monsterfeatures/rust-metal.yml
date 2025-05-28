@@ -1,0 +1,53 @@
+_id: GSgfXL9DyDA3GD0n
+name: Rust Metal
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>Any nonmagical weapon made of metal that hits
+      the [[lookup @name lowercase]] corrodes. After <strong>dealing
+      damage</strong>, the weapon takes a permanent and cumulative -1 penalty to
+      damage rolls. If its penalty drops to -5, the weapon is destroyed. Non
+      magical ammunition made of metal that hits the [[lookup @name lowercase]]
+      is destroyed after dealing damage.</p></section><p>Any nonmagical weapon
+      made of metal that hits the [[lookup @name lowercase]] corrodes. After
+      <strong>dealing damage</strong>, the weapon takes a permanent and
+      cumulative -1 penalty to damage rolls.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: rust-metal
+flags: {}
+img: icons/skills/melee/blade-tip-chipped-blood-red.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304968191
+  modifiedTime: 1725992571802
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!GSgfXL9DyDA3GD0n'

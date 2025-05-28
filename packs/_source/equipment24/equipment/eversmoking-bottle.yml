@@ -1,0 +1,137 @@
+_id: dmgEversmokingBo
+name: Eversmoking Bottle
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/tech/smoke-bomb-purple.webp
+system:
+  activities:
+    wdjQ3jmtTZwzS7mu:
+      type: utility
+      name: Open Bottle
+      _id: wdjQ3jmtTZwzS7mu
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '7'
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: 50 + @scaling * 10
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/ink-pot.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Uncommon</em></p></div><p>As a Magic action,
+      you can open or close this bottle.</p><p>Opening the bottle causes thick
+      smoke to billow out, forming a cloud that fills a 60-foot Emanation
+      originating from the bottle. The area within the smoke is
+      &amp;Reference[HeavilyObscured].</p><p>Each minute the bottle remains
+      open, the size of the Emanation increases by 10 feet until it reaches its
+      maximum size of 120 feet.</p><p>Closing the bottle causes the cloud to
+      become fixed in place until it disperses after 10 minutes. A strong wind
+      (such as that created by the <em>Gust of Wind</em> spell) disperses the
+      cloud after 1 minute.</p><section class="secret"
+      id="secret-O7B8LCiiU4CnDjQw"><p><strong>Foundry Note</strong></p><p>The
+      scaling slider of the <strong>Open Bottle</strong> activity controls the
+      size of the created Emanation from 60 feet at scaling value 1 to 120 feet
+      at scaling value 7 (increments of 10 feet).</p></section>
+    chat: ''
+  identifier: eversmoking-bottle
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712699718
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12100000
+ownership:
+  default: 0
+_key: '!items!dmgEversmokingBo'

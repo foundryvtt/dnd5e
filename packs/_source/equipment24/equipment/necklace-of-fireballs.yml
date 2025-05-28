@@ -1,0 +1,198 @@
+_id: dmgNecklaceOfFir
+name: Necklace of Fireballs
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/neck/pendant-faceted-red.webp
+system:
+  activities:
+    EhXO2nrkALoZagWG:
+      type: utility
+      name: Determine Number of Beads
+      _id: EhXO2nrkALoZagWG
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-1d6 - 3'
+            target: ''
+            scaling: {}
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    v2sP2OkYkHfhR8hu:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFireball00
+        challenge:
+          attack: null
+          save: 15
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: v2sP2OkYkHfhR8hu
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: true
+          max: min(5, @item.uses.value)
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Throw Bead
+      img: ''
+  uses:
+    spent: 9
+    recovery: []
+    max: '9'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare</em></p><p>This necklace has 1d6 + 3 beads
+      hanging from it. You can take a Magic action to detach a bead and throw it
+      up to 60 feet away. When it reaches the end of its trajectory, the bead
+      detonates as a level 3
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFireball00]{Fireball} (save DC
+      15).</p><p>You can hurl multiple beads, or even the whole necklace, at one
+      time. When you do so, increase the damage of the <em>Fireball</em> by 1d6
+      for each bead after the first (maximum 12d6).</p><section class="secret"
+      id="secret-sVvONZCjIbxSR0Xs"><p><strong>Foundry Note</strong></p><p>This
+      item includes 9 limited uses. The <strong>Determine Number of
+      Beads</strong> activity can be used to determine how many beads
+      (equivalent to 1d6 + 3) are on the necklace.</p><p>The <strong>Throw
+      Bead</strong> activity allows you to scale the Fireball up to a max of
+      12d6.</p></section>
+    chat: ''
+  identifier: necklace-of-fireballs
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712701541
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 22700000
+ownership:
+  default: 0
+_key: '!items!dmgNecklaceOfFir'

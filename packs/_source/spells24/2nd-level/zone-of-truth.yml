@@ -1,0 +1,159 @@
+name: Zone of Truth
+system:
+  description:
+    value: >-
+      <p>You create a magical zone that guards against deception in a
+      15-foot-radius Sphere centered on a point within range. Until the spell
+      ends, a creature that enters the spell's area for the first time on a turn
+      or starts its turn there makes a Charisma saving throw. On a failed save,
+      a creature can't speak a deliberate lie while in the radius. You know
+      whether a creature succeeds or fails on this save.</p><p>An affected
+      creature is aware of the spell and can avoid answering questions to which
+      it would normally respond with a lie. Such a creature can be evasive yet
+      must be truthful.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '15'
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: enc
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: BgkyT4A5qyArRveO
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: zone-of-truth
+_id: phbsplZoneofTrut
+type: spell
+img: icons/skills/social/diplomacy-unity-alliance.webp
+effects:
+  - name: Cannot Lie
+    origin: Compendium.dnd5e.spells24.Item.phbsplZoneofTrut
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/skills/social/wave-halt-stop.webp
+    _id: BgkyT4A5qyArRveO
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>On a failed save, a creature can’t speak a deliberate lie while in the
+      radius. You know whether a creature succeeds or fails on this
+      save.</p><p>An affected creature is aware of the spell and can avoid
+      answering questions to which it would normally respond with a lie. Such a
+      creature can be evasive yet must be truthful.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplZoneofTrut.BgkyT4A5qyArRveO'
+folder: 3SjcO2acsFnWegp4
+sort: 103125
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425978807
+  modifiedTime: 1745256800310
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplZoneofTrut'

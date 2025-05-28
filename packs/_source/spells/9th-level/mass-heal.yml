@@ -1,0 +1,117 @@
+_id: Y6oItIuhOJZ0i0FC
+name: Mass Heal
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A flood of Healing energy flows from you into injured creatures around
+      you. You restore up to 700 Hit Points, divided as you choose among any
+      number of creatures that you can see within range. Creatures healed by
+      this spell are also cured of all Diseases and any effect making them
+      Blinded or Deafened. This spell has no effect on Undead or constructs.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 9
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: null
+        denomination: null
+        bonus: ''
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: '700'
+        scaling:
+          mode: ''
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: mass-heal
+sort: 0
+flags: {}
+img: icons/magic/life/heart-cross-strong-flame-green.webp
+effects: []
+folder: KL6ZY4VRMjojGrL4
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037358834
+  modifiedTime: 1725992720699
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Y6oItIuhOJZ0i0FC'

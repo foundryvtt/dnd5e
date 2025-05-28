@@ -1,0 +1,21 @@
+<section class="tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset class="card">
+        <legend>{{ localize "TYPES.Item.class" }}</legend>
+        <div class="form-group">
+            <label>{{ localize "DND5E.ClassMakeOriginal" }}</label>
+            <select name="system.details.originalClass" {{ disabled flags.disabled }}>
+                {{ selectOptions flags.classes selected=system.details.originalClass }}
+            </select>
+            <p class="hint">{{ localize "DND5E.ClassMakeOriginalHint" }}</p>
+        </div>
+    </fieldset>
+
+    {{#each flags.sections}}
+    <fieldset class="card">
+        <legend>{{ label }}</legend>
+        {{#each fields}}
+        {{ formField field name=name value=value choices=choices input=input disabled=@root.flags.disabled }}
+        {{/each}}
+    </fieldset>
+    {{/each}}
+</section>

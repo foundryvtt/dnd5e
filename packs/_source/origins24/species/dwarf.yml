@@ -1,0 +1,106 @@
+name: Dwarf
+system:
+  description:
+    value: >-
+      <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspDwarf000000
+      inline classes="free-rules-embed"]</p><h3 data-anchor="dwarf-traits">Dwarf
+      Traits</h3><p><strong>Creature Type: </strong>Humanoid</p><p><strong>Size:
+      </strong>Medium (about 4–5 feet tall)</p><p><strong>Speed:</strong> 30
+      feet</p><p>As a Dwarf, you have these special
+      traits.</p><p><strong>Darkvision. </strong>You have Darkvision with a
+      range of 120 feet.</p><p><strong>Dwarven Resilience.</strong> You have
+      Resistance to Poison damage. You also have Advantage on saving throws you
+      make to avoid or end the Poisoned condition.</p><p><strong>Dwarven
+      Toughness.</strong> Your Hit Point maximum increases by 1, and it
+      increases by 1 again whenever you gain a
+      level.</p><p><strong>Stonecunning.</strong> As a Bonus Action, you gain
+      Tremorsense with a range of 60 feet for 10 minutes. You must be on a stone
+      surface or touching a stone surface to use this Tremorsense. The stone can
+      be natural or worked.You can use this Bonus Action a number of times equal
+      to your Proficiency Bonus, and you regain all expended uses when you
+      finish a Long Rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  advancement:
+    - _id: 6HdONjMD4UozXSfC
+      type: Size
+      configuration:
+        sizes:
+          - med
+      level: 0
+      title: ''
+      hint: Medium (about 4–5 feet tall)
+      value: {}
+    - _id: PphNMhWLl5mEgAZf
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.origins24.Item.phbsptDwarvenRes
+          - optional: false
+            uuid: Compendium.dnd5e.origins24.Item.phbsptDwarvenTou
+          - optional: false
+            uuid: Compendium.dnd5e.origins24.Item.phbsptStonecunni
+        optional: false
+        spell: null
+      value: {}
+      level: 0
+      title: Dwarf Traits
+      hint: ''
+    - _id: S3kro3b0bq0Ks6Y8
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - dr:poison
+        choices: []
+      value:
+        chosen: []
+      level: 0
+      title: Dwarven Resilience
+      hint: You have Resistance to Poison damage.
+  movement:
+    burrow: null
+    climb: null
+    fly: null
+    swim: null
+    walk: 30
+    units: null
+    hover: false
+  senses:
+    darkvision: 120
+    blindsight: null
+    tremorsense: null
+    truesight: null
+    units: null
+    special: ''
+  type:
+    value: humanoid
+    custom: ''
+    subtype: Dwarf
+  identifier: dwarf
+_id: phbspDwarf000000
+type: race
+folder: Ulvo8nbygUegLa59
+img: icons/environment/wilderness/mine-interior-dungeon-door.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866718338
+  modifiedTime: 1745686484010
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbspDwarf000000'

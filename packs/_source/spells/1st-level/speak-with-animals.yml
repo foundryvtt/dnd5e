@@ -1,0 +1,111 @@
+_id: aL1F8fvYLtNzUbKu
+name: Speak with Animals
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You gain the ability to comprehend and verbally communicate with beasts
+      for the duration. The knowledge and awareness of many beasts is limited by
+      their intelligence, but at minimum, beasts can give you information about
+      nearby locations and monsters, including whatever they can perceive or
+      have perceived within the past day. You might be able to persuade a beast
+      to perform a small favor for you, at the DM's discretion.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: div
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - ritual
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: speak-with-animals
+sort: 0
+flags: {}
+img: icons/magic/nature/wolf-paw-glow-small-teal-blue.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037359665
+  modifiedTime: 1725992720956
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!aL1F8fvYLtNzUbKu'

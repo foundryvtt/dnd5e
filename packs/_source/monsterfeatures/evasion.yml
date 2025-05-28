@@ -1,0 +1,48 @@
+_id: xOgrn5QXzSP4QN6V
+name: Evasion
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>If the [[lookup @name lowercase]] is subjected to an effect that allows
+      it to make a <strong>Dexterity</strong> saving throw to take only half
+      damage, the [[lookup @name lowercase]] instead takes no damage if it
+      succeeds on the saving throw, and only half damage if it fails.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: evasion
+flags: {}
+img: icons/magic/water/pseudopod-teal.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304978513
+  modifiedTime: 1725992574998
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!xOgrn5QXzSP4QN6V'

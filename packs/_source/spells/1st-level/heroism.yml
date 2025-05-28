@@ -1,0 +1,121 @@
+_id: ge3Saet9zPTDyaoL
+name: Heroism
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A willing creature you touch is imbued with bravery. Until the spell
+      ends, the creature is immune to being Frightened and gains Temporary Hit
+      Points equal to your Spellcasting ability modifier at the start of each of
+      its turns. When the spell ends, the target loses any remaining temporary
+      hit points from this spell.</p><p><strong>At Higher Levels.</strong> When
+      you cast this spell using a spell slot of 2nd level or higher, you can
+      target one additional creature for each slot level above 1st.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: enc
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: null
+        denomination: null
+        bonus: ''
+        types:
+          - temphp
+        custom:
+          enabled: true
+          formula: '@mod'
+        scaling:
+          mode: whole
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: heroism
+sort: 0
+flags: {}
+img: icons/magic/life/heart-cross-strong-blue.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037362699
+  modifiedTime: 1725992721988
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ge3Saet9zPTDyaoL'

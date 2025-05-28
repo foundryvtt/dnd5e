@@ -1,0 +1,155 @@
+name: Spare the Dying
+system:
+  description:
+    value: >-
+      <p>Choose a creature within range that has 0 Hit Points and isn't dead.
+      The creature becomes Stable.</p><p><strong>Cantrip Upgrade.</strong> The
+      range doubles when you reach levels 5 (30 feet), 11 (60 feet), and 17 (120
+      feet).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: 0 Hit Points and isn't dead
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: 15 * pow(2, @scaling.increase)
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: nec
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    8i1RYhFvUQJXnnNj:
+      type: utility
+      _id: 8i1RYhFvUQJXnnNj
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 4werkFeLTqFwHRIa
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: ''
+      appliedEffects:
+        - 4werkFeLTqFwHRIa
+  identifier: spare-the-dying
+_id: phbsplSparetheDy
+type: spell
+img: icons/magic/death/hand-undead-skeleton-fire-pink.webp
+effects:
+  - name: Stabilized
+    img: systems/dnd5e/icons/svg/trait-damage-vulnerabilities.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplSparetheDy
+    transfer: false
+    _id: 4werkFeLTqFwHRIa
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - stable
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725559720779
+      modifiedTime: 1725559894119
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplSparetheDy.4werkFeLTqFwHRIa'
+folder: 4FhsY9FJQd7h7MZb
+sort: 101563
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425971599
+  modifiedTime: 1745256798474
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSparetheDy'

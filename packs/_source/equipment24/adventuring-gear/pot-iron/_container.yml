@@ -1,0 +1,55 @@
+name: Pot, Iron
+system:
+  description:
+    value: <p>An Iron Pot holds up to 1 gallon.</p>
+    chat: ''
+  price:
+    value: 2
+    denomination: gp
+  quantity: 1
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  weight:
+    value: 10
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties: []
+  capacity:
+    type: weight
+    value: 8.4
+  identifier: pot-iron
+_id: phbagPotIron0000
+type: container
+folder: uDk4FBYfcP2JnX6t
+img: icons/tools/laboratory/cauldron-filled-gold.webp
+effects: []
+sort: 4700000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425910928
+  modifiedTime: 1745256812558
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagPotIron0000'

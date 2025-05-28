@@ -1,0 +1,138 @@
+name: Circle of Death
+system:
+  description:
+    value: >-
+      <p>Negative energy ripples out in a 60-foot-radius Sphere from a point you
+      choose within range. Each creature in that area makes a Constitution
+      saving throw, taking 8d8 Necrotic damage on a failed save or half as much
+      damage on a successful one.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> The damage increases by 2d8 for each spell slot level above
+      6.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: sphere
+      size: '60'
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '150'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: nec
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: the powder of a crushed black pearl worth 500+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    pgoDU7b0pl63pTw1:
+      type: save
+      _id: pgoDU7b0pl63pTw1
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 8
+            denomination: '8'
+            bonus: ''
+            types:
+              - necrotic
+            scaling:
+              mode: whole
+              number: 2
+              formula: ''
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: circle-of-death
+_id: phbsplCircleofDe
+type: spell
+img: icons/magic/death/skull-horned-goat-pentagram-red.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 1900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425944926
+  modifiedTime: 1745256787926
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplCircleofDe'

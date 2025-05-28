@@ -1,0 +1,345 @@
+_id: dmgRingOfShootin
+name: Ring of Shooting Stars
+type: equipment
+folder: DC1x1wAm0NLFudA6
+img: icons/equipment/finger/ring-cabochon-gold-orange.webp
+system:
+  activities:
+    745v4uo4m3ghldT9:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFaerieFire
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: 745v4uo4m3ghldT9
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    sZwpvVE0OpUNXe2B:
+      type: utility
+      name: Create Lightning Spheres
+      _id: sZwpvVE0OpUNXe2B
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '4'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling:
+              mode: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: true
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: square
+          size: '5'
+          count: '@scaling'
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    GLyk6XaqTk5JOVQ8:
+      type: save
+      name: Lightning Sphere Save
+      _id: GLyk6XaqTk5JOVQ8
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects: []
+    4ZI0cvhpjWiYg9i4:
+      type: save
+      name: Shooting Stars
+      _id: 4ZI0cvhpjWiYg9i4
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '3'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cube
+          size: '15'
+          count: '@scaling'
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: 4
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              mode: ''
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d6
+    max: '6'
+  description:
+    value: >-
+      <p><em>Ring, Very Rare (Requires Attunement)</em></p><p>You can cast
+      <em>Dancing Lights</em> or <em>Light</em> from the ring.</p><p>The ring
+      has 6 charges and regains 1d6 expended charges daily at dawn. You can
+      expend its charges to use the properties below.</p><p><em><strong>Faerie
+      Fire.</strong></em> You can expend 1 charge to cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFaerieFire]{Faerie Fire} from
+      the ring.</p><p><em><strong>Lightning Spheres.</strong></em> You can
+      expend 2 charges as a Magic action to create up to four 3-foot-diameter
+      spheres of lightning.</p><p>Each sphere appears in an unoccupied space you
+      can see within 120 feet of yourself. The spheres last as long as you
+      maintain Concentration, up to 1 minute. Each sphere sheds Dim Light in a
+      30-foot radius.</p><p>As a Bonus Action, you can move each sphere up to 30
+      feet, but no farther than 120 feet away from yourself. The first time the
+      sphere comes within 5 feet of a creature other than you that isn't behind
+      &amp;Reference[Total Cover apply=false], the sphere discharges lightning
+      at that creature and disappears. That creature makes a DC 15 Dexterity
+      saving throw. On a failed save, the creature takes Lightning damage based
+      on the number of spheres you created, as shown in the following table. On
+      a successful save, the creature takes half as much
+      damage.</p><table><thead><tr><th><p>Number of
+      Spheres</p></th><th>Lightning
+      Damage</th></tr></thead><tbody><tr><td>1</td><td>[[/damage 4d12
+      lightning]]</td></tr><tr><td>3</td><td>[[/damage 2d6
+      lightning]]</td></tr><tr><td>2</td><td>[[/damage 5d4
+      lightning]]</td></tr><tr><td>4</td><td>[[/damage 2d4
+      lightning]]</td></tr></tbody></table><p><em><strong>Shooting
+      Stars.</strong></em> You can expend 1 to 3 charges as a Magic action. For
+      every charge you expend, you launch a glowing mote of light from the ring
+      at a point you can see within 60 feet of yourself. Each creature in a
+      15-foot Cube originating from that point is showered in sparks and makes a
+      DC 15 Dexterity saving throw, taking 5d4 Radiant damage on a failed save
+      or half as much damage on a successful one.</p><section class="secret"
+      id="secret-XF5IRzp6nYDnMZyl"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Create Lightning Spheres</strong> and <strong>Shooting
+      Stars</strong> activities allow you to select the number of spheres/motes
+      you would like to create and places a measured template for each
+      one.</p></section>
+    chat: ''
+  identifier: ring-of-shooting-stars
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ring
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712702692
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1300000
+ownership:
+  default: 0
+_key: '!items!dmgRingOfShootin'

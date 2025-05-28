@@ -1,0 +1,132 @@
+_id: j2ZGEwx8MhHZXds4
+name: Belt of Dwarvenkind
+type: equipment
+img: icons/equipment/waist/belt-armored-steel.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item (requires attunement)</em></p><p>While wearing this
+      belt, you gain the following benefits:</p><ul><li>Your Constitution score
+      increases by 2, to a maximum of 20.</li><li>You have advantage on Charisma
+      (Persuasion) checks made to interact with dwarves.</li></ul><p>In
+      addition, while attuned to the belt, you have a 50 percent chance each day
+      at dawn of growing a full beard if you're capable of growing one, or a
+      visibly thicker beard if you already have one.<br />If you aren't a dwarf,
+      you gain the following additional benefits while wearing the
+      belt:</p><ul><li>You have advantage on saving throws against poison, and
+      you have resistance against poison damage.</li><li>You have darkvision out
+      to a range of 60 feet.</li><li>You can speak, read, and write
+      Dwarvish.</li></ul>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 6000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: wondrous
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: belt-of-dwarvenkind
+effects:
+  - name: Belt of Dwarvenkind
+    img: icons/equipment/waist/belt-armored-steel.webp
+    origin: Compendium.dnd5e.items.Item.j2ZGEwx8MhHZXds4
+    _id: uuh2qSmWVNoHcqTc
+    type: base
+    system: {}
+    changes:
+      - key: system.abilities.con.value
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.attributes.senses.darkvision
+        mode: 4
+        value: '60'
+        priority: null
+      - key: system.traits.languages.value
+        mode: 2
+        value: dwarvish
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 5.0.0
+      createdTime: 1745428424759
+      modifiedTime: 1745428481635
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!j2ZGEwx8MhHZXds4.uuh2qSmWVNoHcqTc'
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037264111
+  modifiedTime: 1725992538591
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!j2ZGEwx8MhHZXds4'

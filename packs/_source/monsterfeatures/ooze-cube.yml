@@ -1,0 +1,70 @@
+_id: CvtGj6YimGuZdrhB
+name: Ooze Cube
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] takes up its entire space. Other
+      creatures can enter the space, but a creature that does so is subjected to
+      the [[lookup @name lowercase]]'s Engulf and has<strong> disadvantage
+      </strong>on the saving throw<strong>. C</strong>reatures inside the
+      [[lookup @name lowercase]] can be seen but have total cover.</p><p>A
+      creature <strong>within 5 feet</strong> of the [[lookup @name lowercase]]
+      can take an action to pull a creature or object out of the [[lookup @name
+      lowercase]]. Doing so requires a successful <strong>DC 12 Strength
+      check</strong>, and the creature making the attempt takes
+      <strong><strong>10 (3d6) <em>acid
+      damage</em></strong></strong><strong>.</strong> the [[lookup @name
+      lowercase]] can hold only one Large creature or up to four Medium or
+      smaller creatures inside it at a time.</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] takes up its entire space. Other
+      creatures can enter the space, but a creature that does so is subjected to
+      the [[lookup @name lowercase]]'s Engulf and has<strong> disadvantage
+      </strong>on the saving throw<strong>. </strong>Creatures inside the cube
+      can be seen but have total cover<strong>. A</strong> creature
+      <strong>within 5 feet</strong> of the [[lookup @name lowercase]] can take
+      an action to pull a creature or object out of the [[lookup @name
+      lowercase]]. Doing so requires a successful Strength check.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: ooze-cube
+flags: {}
+img: icons/magic/water/barrier-ice-water-cube.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304967279
+  modifiedTime: 1725992571543
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!CvtGj6YimGuZdrhB'

@@ -1,0 +1,127 @@
+name: Sage
+system:
+  description:
+    value: >-
+      <p> At any time you choose within one year of drawing this card, you can
+      ask a question in meditation and mentally receive a truthful answer to
+      that question.</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    Cp3zSiZZSrzT3Rf2:
+      type: utility
+      name: Card Effect
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: icons/svg/card-joker.svg
+      _id: Cp3zSiZZSrzT3Rf2
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  identifier: sage
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+_id: dmgDmtSage000000
+type: consumable
+folder: XVXuU21XyvevGap7
+img: icons/environment/people/cleric-grey.webp
+effects: []
+sort: 900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729202990349
+  modifiedTime: 1740680119327
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgDmtSage000000'

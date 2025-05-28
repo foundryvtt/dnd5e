@@ -1,0 +1,143 @@
+_id: dmgMidnightTears
+name: Midnight Tears
+type: consumable
+img: icons/consumables/potions/flask-ornate-skull-green.webp
+system:
+  activities:
+    OddWvlQ19mumkdgE:
+      type: save
+      name: Use Poison
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: spec
+        concentration: false
+        override: false
+        value: ''
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 9
+            denomination: 6
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '17'
+      _id: OddWvlQ19mumkdgE
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Ingested Poison</em></p><p>A creature that ingests Midnight Tears
+      suffers no effect until the stroke of midnight. Any effect that ends the
+      &amp;Reference[Poisoned apply=false] condition neutralizes this poison. If
+      the poison hasn't been neutralized before midnight, the creature makes a
+      DC 17 Constitution saving throw, taking 31 (9d6) Poison damage on a failed
+      save or half as much damage on a successful one.</p>
+    chat: ''
+  identifier: midnight-tears
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 1500
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: poison
+    subtype: ingested
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties: []
+effects: []
+folder: bRhjJ3GivNsz0GTF
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1728419101980
+  modifiedTime: 1740680123698
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgMidnightTears'

@@ -1,0 +1,105 @@
+_id: phbrgeUseMagicDe
+name: Use Magic Device
+type: feat
+folder: dnKXgPPMNF5Jbw2T
+img: icons/sundries/documents/blueprint-magical.webp
+system:
+  description:
+    value: >-
+      <p>You've learned how to maximize use of magic items, granting you the
+      following benefits.</p><p><strong>Attunement.</strong> You can attune to
+      up to four magic items at once.</p><p><strong>Charges.</strong> Whenever
+      you use a magic item property that expends charges, roll [[/r 1d6]]. On a
+      roll of 6, you use the property without expending the
+      charges.</p><p><strong>Scrolls.</strong> You can use any <em>Spell
+      Scroll,</em> using Intelligence as your spellcasting ability for the
+      spell. If the spell is a cantrip or a level 1 spell, you can cast it
+      reliably. If the scroll contains a higher-level spell, you must first
+      succeed on an [[/skill arc]] check (DC 10 plus the spell's level). On a
+      successful check, you cast the spell from the scroll. On a failed check,
+      the scroll disintegrates.</p><section class="secret"
+      id="secret-2tHTpsolDU6Nggvo"><p><strong>Foundry Note</strong></p><p>This
+      feature includes an Active Effect that automatically increases your
+      attunement maximum.</p><p>When using an item property that expends charges
+      roll the d6 and uncheck the consumption box to use it for
+      free.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 13
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: use-magic-device
+effects:
+  - name: Attunement Bonus
+    img: icons/magic/symbols/star-solid-gold.webp
+    _id: FZWFvTtuOvMIj003
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.attunement.max
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The Use Magic Device feature allows you to attune to up to four magic
+      items at once.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbrgeUseMagicDe.FZWFvTtuOvMIj003'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866560489
+  modifiedTime: 1745256764672
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeUseMagicDe'

@@ -2,7 +2,7 @@
 /*  Chat Cards                        */
 /* ---------------------------------- */
 
-:is(.chat-popout, #chat-log) .message {
+:is(.chat-popout, #chat-log, .chat-log) .message {
   padding: .5rem;
   border-width: 1px;
   border-block-end-width: 2px;
@@ -97,8 +97,9 @@
 }
 
 /* Modifier Keys */
-:is(.chat-popout, #chat-log)[data-modifier-shift] {
+:is(.chat-popout, #chat-log, .chat-log)[data-modifier-shift] {
   .message .message-header .message-delete { display: unset; }
+  .message .message-header:has(.message-delete) .chat-control { display: none; }
 }
 
 /* ---------------------------------- */
@@ -274,7 +275,7 @@
 }
 
 .dice-roll {
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
 
   .dice-flavor { display: none; }
 
@@ -303,23 +304,33 @@
 
   .window-header {
     border: none;
-    position: absolute;
     inset: 0 0 auto 0;
     z-index: 1;
     padding: 7px 6px 0 0;
+    background: none;
 
-    a.header-button {
-      width: 15px;
+    :is(a, button).header-button, .header-control {
       height: 15px;
-      display: inline-grid;
-      place-content: center;
       border-radius: 100%;
       background: rgb(0 0 0 / 25%);
+      font-size: var(--font-size-10);
+      min-height: unset;
+    }
+
+    :is(a, button):is(.header-button, .header-control) {
+      width: 15px;
+      display: inline-grid;
+      place-content: center;
       color: var(--color-text-light-highlight);
       margin: 0;
-      font-size: var(--font-size-10);
+      padding: 0;
 
       > i { margin: 0; }
+    }
+
+    .header-control {
+      flex: 0 0 15px;
+      &:hover { text-shadow: 0 0 8px red; }
     }
   }
 
@@ -337,7 +348,10 @@
   &.minimized {
     background: url("../../ui/denim075.png");
     max-height: var(--header-height);
+    .window-header { padding-block: 0; }
   }
+
+  &:not(.minimized) .window-header { position: absolute; }
 
   .message-metadata { padding-right: 18px; }
 }
@@ -372,17 +386,13 @@
 
       .name-stacked {
         flex: 1;
-
-        &.border {
-          padding-right: .5rem;
-          border-right: 1px solid var(--color-border-light-1);
-        }
+        padding-right: .5rem;
       }
 
       > i {
         font-size: var(--font-size-14);
         color: var(--color-text-dark-5);
-        margin-right: .25rem;
+        margin-right: 8px;
         transition: all 250ms ease;
       }
     }
@@ -400,6 +410,10 @@
         flex-direction: column;
         gap: .25rem;
         overflow: hidden;
+
+        /* Immediate children vert margins
+         * are handled by the column gap */
+        > * { margin-block: 0; }
       }
 
       p {
@@ -418,7 +432,7 @@
       }
     }
 
-    &.collapsible .summary { cursor: pointer; }
+    &.collapsible .summary { cursor: var(--cursor-pointer); }
     &.collapsed {
       .summary > i { transform: rotate(-90deg); }
       .details {
@@ -439,7 +453,18 @@
     font-size: var(--font-size-10);
     line-height: 1;
   }
+}
 
+.dice-roll + .chat-card {
+  margin-block-start: .375rem;
+}
+
+.chat-sidebar:not([data-gm-user]) .card-header[data-concealed] {
+  .summary { cursor: inherit; }
+  .fa-chevron-down, .details { display: none; }
+}
+
+.message {
   p.supplement {
     margin: 0;
     font-size: var(--font-size-11);
@@ -453,20 +478,22 @@
       margin-right: .25rem;
     }
   }
+
+  .dice-roll + p.supplement { margin: .5rem 0; }
 }
 
 /* Damage & Effects Trays */
 .dnd5e2 :is(.card-tray, .effects-tray),
 .dnd5e2.card-tray {
   margin-top: .125rem;
-  &.damage-tray { margin-block-start: 8px; }
+  &.damage-tray, &.effects-tray { margin-block-start: 8px; }
   &.targets-tray {
     margin-top: 6px;
     &:not(.collapsed) > label { padding-bottom: 4px; }
   }
 
   > label {
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -602,11 +629,12 @@
 
       button {
         width: 100%;
+        height: unset;
         border-radius: 3px;
         padding: 2px;
         font-size: inherit;
         line-height: unset;
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
 
         &::after {
           content: "";
@@ -699,7 +727,7 @@ enchantment-application {
 /*  Target Evaluations                */
 /* ---------------------------------- */
 
-:is(.chat-popout, #chat-log) .message .dnd5e2.evaluation {
+:is(.chat-popout, #chat-log, .chat-log) .message .dnd5e2.evaluation {
   display: flex;
   flex-direction: column;
   gap: .25rem;
@@ -709,7 +737,7 @@ enchantment-application {
     align-items: center;
     gap: .5rem;
     padding: 0 8px;
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
 
     > i { font-size: var(--font-size-14); }
 
@@ -754,6 +782,35 @@ enchantment-application {
     &.miss > i {
       color: var(--dnd5e-color-failure);
       height: 12px;
+    }
+  }
+}
+
+/* ---------------------------------- */
+/*  Rest & Turn Cards                 */
+/* ---------------------------------- */
+
+.dnd5e2.chat-card {
+  section > strong:first-child {
+    display: block;
+    margin-block-start: 1em;
+  }
+  .activities ul {
+    margin-block-start: 8px;
+
+    li {
+      --gold-icon-size: 32px;
+      gap: 8px;
+    }
+
+    a.rollable:hover .subtitle { text-shadow: none; }
+  }
+  .deltas ul {
+    .delta {
+      display: flex;
+      justify-content: space-between;
+      .label { flex-grow: 1; }
+      .roll { font-size: var(--font-size-12); }
     }
   }
 }

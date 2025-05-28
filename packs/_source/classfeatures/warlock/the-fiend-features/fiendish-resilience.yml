@@ -1,0 +1,137 @@
+_id: 9UZ2WjUF2k58CQug
+name: Fiendish Resilience
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Starting at 10th level, you can choose one damage type when you finish
+      a short or long rest. You gain resistance to that damage type until you
+      choose a different one with this feature. Damage from magical weapons or
+      silver weapons ignores this resistance.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: The Fiend 10
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: fiendish-resilience
+flags: {}
+img: icons/magic/defensive/armor-stone-skin.webp
+effects:
+  - _id: reg3sjReHspgkd0I
+    flags: {}
+    changes:
+      - key: system.traits.dr.custom
+        value: Fiendish Resilience
+        mode: 2
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+      combat: null
+    origin: Item.C2lYHOGH2UpEifk7
+    tint: '#ffffff'
+    transfer: true
+    name: Fiendish Resilience
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/defensive/armor-stone-skin.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!9UZ2WjUF2k58CQug.reg3sjReHspgkd0I'
+folder: AjZEXaNUIFQ13Z3F
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037381075
+  modifiedTime: 1725992287471
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!9UZ2WjUF2k58CQug'

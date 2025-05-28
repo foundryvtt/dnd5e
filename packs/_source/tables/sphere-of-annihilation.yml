@@ -1,0 +1,91 @@
+name: Sphere of Annihilation
+img: icons/magic/unholy/barrier-shield-glowing-pink.webp
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 50
+    drawn: false
+    _id: 3KJemhHAcwM89xKv
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: The sphere is destroyed.
+    name: ''
+    _key: '!tables.results!hHR0Zw75o9PXYl4c.3KJemhHAcwM89xKv'
+  - type: text
+    weight: 1
+    range:
+      - 51
+      - 85
+    drawn: false
+    _id: XAU8h93d079sUYAW
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: The sphere moves through the portal or into the extradimensional space.
+    name: ''
+    _key: '!tables.results!hHR0Zw75o9PXYl4c.XAU8h93d079sUYAW'
+  - type: text
+    weight: 1
+    range:
+      - 86
+      - 100
+    drawn: false
+    _id: 2SQQLAA0ZhwfNyey
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A spatial rift sends each creature and object within 180 feet of the
+      sphere, including the sphere, to a random plane of existence.
+    name: ''
+    _key: '!tables.results!hHR0Zw75o9PXYl4c.2SQQLAA0ZhwfNyey'
+formula: 1d100
+replacement: true
+displayRoll: true
+flags: {}
+_id: hHR0Zw75o9PXYl4c
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037419497
+  modifiedTime: 1725037419497
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+folder: null
+ownership:
+  default: 0
+_key: '!tables!hHR0Zw75o9PXYl4c'

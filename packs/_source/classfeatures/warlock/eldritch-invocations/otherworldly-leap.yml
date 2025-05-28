@@ -1,0 +1,99 @@
+_id: 8zciiglzEOZo7DDN
+name: Otherworldly Leap
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You can cast @UUID[Compendium.dnd5e.spells.Item.ZrTc23tToJ0JpH2h]{Jump}
+      on yourself at will, without expending a spell slot or material
+      components.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: eldritchInvocation
+  requirements: Warlock 9
+  properties: []
+  prerequisites:
+    level: 9
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  identifier: otherworldly-leap
+flags: {}
+img: icons/magic/light/beam-strike-orange-gold.webp
+effects: []
+folder: 0uFCjs5gYeVtl38i
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037381021
+  modifiedTime: 1725992287457
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!8zciiglzEOZo7DDN'

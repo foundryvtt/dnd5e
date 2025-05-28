@@ -1,0 +1,57 @@
+_id: phbwzdEvocationS
+name: Evocation Savant
+type: feat
+folder: ZHJ6ibjd1J4CSyNw
+img: icons/magic/fire/barrier-wall-explosion-orange.webp
+system:
+  description:
+    value: >-
+      <p>Choose two Wizard spells from the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.6AnqLUowgdsqMFvz]{Evocation
+      school} (change the Grouping mode to "School" for easier selection), each
+      of which must be no higher than level 2, and add them to your spellbook
+      for free.</p><p>In addition, whenever you gain access to a new level of
+      spell slots in this class, you can add one Wizard spell from the Evocation
+      school to your spellbook for free. The chosen spell must be of a level for
+      which you have spell slots.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: evocation-savant
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866546265
+  modifiedTime: 1745256768817
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwzdEvocationS'

@@ -1,0 +1,51 @@
+_id: cz1LUaiXG8GshgU9
+name: Angelic Weapons
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>the [[lookup @name lowercase]]'s weapon attacks
+      are magical. When the [[lookup @name lowercase]] hits with any weapon, the
+      weapon deals an <strong>extra 4d8 <em>radiant damage</em></strong>
+      (included in the attack).</p></section><p>the [[lookup @name lowercase]]'s
+      weapon attacks are magical. When the [[lookup @name lowercase]] hits with
+      any weapon, the weapon deals extra <em>radiant damage</em> (included in
+      the attack).</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: angelic-weapons
+flags: {}
+img: icons/magic/fire/dagger-rune-enchant-flame-strong-blue-yellow.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304973662
+  modifiedTime: 1725992573503
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!cz1LUaiXG8GshgU9'

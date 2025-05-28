@@ -1,0 +1,131 @@
+_id: dmgRingOfElement
+name: Ring of Elemental Command
+type: equipment
+img: icons/equipment/finger/ring-band-engraved-scrolls-silver.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Ring, Legendary (Requires Attunement)</em></p><p>Each Ring of
+      Elemental Command is linked to one of the four Elemental Planes. The DM
+      chooses or randomly determines the linked plane. For example, a Ring of
+      Elemental Command (air) is linked to the Elemental Plane of
+      Air.</p><p>Every Ring of Elemental Command has the following two
+      properties:</p><p><strong>Elemental Bane.</strong> While wearing the ring,
+      you have Advantage on attack rolls against Elementals and they have
+      Disadvantage on attack rolls against you.</p><p><strong>Elemental
+      Compulsion.</strong> While wearing the ring, you can take a Magic action
+      to try to compel an Elemental you see within 60 feet of yourself. The
+      Elemental makes a DC 18 Wisdom saving throw. On a failed save, the
+      Elemental has the Charmed condition until the start your next turn, and
+      you determine what it does with its move and action on its next
+      turn.</p><p><strong>Elemental Focus.</strong> While wearing the ring, you
+      benefit from additional properties corresponding to the ring's linked
+      Elemental Plane:</p><p><strong>Air.</strong> You know Auran, you have
+      Resistance to Lightning damage, and you have a Fly Speed equal to your
+      Speed and can hover.</p><p><strong>Earth.</strong> You know Terran, and
+      you have Resistance to Acid damage. Terrain composed of rubble, rocks, or
+      dirt isn't Difficult Terrain for you. In addition, you can move through
+      solid earth or rock as if those areas were Difficult Terrain without
+      disturbing the matter through which you pass. If you end your turn in
+      solid earth or rock, you are shunted out to the nearest unoccupied space
+      you last occupied.</p><p><strong>Fire.</strong> You know Ignan, and you
+      have Immunity to Fire damage.</p><p><strong>Water.</strong> You know
+      Aquan, you gain a Swim Speed of 60 feet, and you can breathe
+      underwater.</p><p><strong>Spellcasting.</strong> The ring has 5 charges
+      and regains 1d4 + 1 expended charges daily at dawn. While wearing the
+      ring, you can cast a spell from it. Choose the spell from the list of
+      available spells based on the Elemental Plane the ring is linked to, as
+      shown in the following table. The table indicates how many charges you
+      must expend to cast the spell, which has a save DC of
+      18.</p><table><thead><tr><td><p>Plane</p></td><td><p>Spells
+      (Charges)</p></td></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.dmgAirRingOfElem]{Air
+      Ring}</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplChainLight]{Chain
+      Lightning} (3 charges),
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFeatherFal]{Feather Fall} (0
+      charges), @UUID[Compendium.dnd5e.spells24.Item.phbsplGustofWind]{Gust of
+      Wind} (2 charges),
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplWindWall00]{Wind Wall} (1
+      charge)</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.dmgEarthRingOfEl]{Earth
+      Ring}</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplEarthquake]{Earthquake}
+      (5 charges), @UUID[Compendium.dnd5e.spells24.Item.phbsplStoneShape]{Stone
+      Shape} (2 charges),
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplStoneskin0]{Stoneskin} (3
+      charges), @UUID[Compendium.dnd5e.spells24.Item.phbsplWallofSton]{Wall of
+      Stone} (3
+      charges)</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.dmgFireRingOfEle]{Fire
+      Ring}</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplBurningHan]{Burning
+      Hands} (1 charge),
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFireball00]{Fireball} (2
+      charges), @UUID[Compendium.dnd5e.spells24.Item.phbsplFireStorm0]{Fire
+      Storm} (4 charges),
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplWallofFire]{Wall of Fire} (3
+      charges)</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.dmgWaterRingOfEl]{Water
+      Ring}</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplCreateorDe]{Create
+      or Destroy Water} (1 charge),
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplIceStorm00]{Ice Storm} (2
+      charges), @UUID[Compendium.dnd5e.spells24.Item.phbsplTsunami000]{Tsunami}
+      (5 charges), @UUID[Compendium.dnd5e.spells24.Item.phbsplWallofIce0]{Wall
+      of Ice} (3 charges),
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplWaterWalk0]{Water Walk} (2
+      charges)</p></td></tr></tbody></table>
+    chat: ''
+  identifier: ring-of-elemental-command
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ring
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+folder: DC1x1wAm0NLFudA6
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1731428580217
+  modifiedTime: 1745712702525
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgRingOfElement'

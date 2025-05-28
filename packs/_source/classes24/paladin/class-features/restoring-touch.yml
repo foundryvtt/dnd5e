@@ -1,0 +1,113 @@
+_id: phbpdnRestoringT
+name: Restoring Touch
+type: feat
+folder: 6uMLnndK8UPkb7Uy
+img: icons/magic/light/hand-sparks-glow-yellow.webp
+system:
+  description:
+    value: >-
+      <p>When you use Lay On Hands on a creature, you can also remove one or
+      more of the following conditions from the creature: Blinded, Charmed,
+      Deafened, Frightened, Paralyzed, or Stunned. You must expend 5 Hit Points
+      from the healing pool of Lay On Hands for each of these conditions you
+      remove; those points don't also restore Hit Points to the
+      creature.</p><section class="secret"
+      id="secret-jxD0l6XyrF6DQqyI"><p><strong>Foundry Note</strong></p><p>This
+      feature includes a Scale prompt for selecting how many conditions you
+      would like to remove that will automatically consume the correct number
+      from your Lay on Hands pool.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 14
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    PgTPWedvQHDlQ7LQ:
+      type: utility
+      _id: PgTPWedvQHDlQ7LQ
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '@classes.paladin.levels'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: 5 * @scaling
+            target: Compendium.dnd5e.classes24.Item.phbpdnLayOnHands
+            scaling:
+              mode: ''
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+  enchant: {}
+  identifier: restoring-touch
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866297701
+  modifiedTime: 1745256764004
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbpdnRestoringT'

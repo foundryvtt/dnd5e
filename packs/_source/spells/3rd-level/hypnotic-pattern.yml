@@ -1,0 +1,171 @@
+_id: 6g3WLOZ2u0EbaLAd
+name: Hypnotic Pattern
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: "<p>You create a twisting pattern of colors that weaves through the air inside a 30-foot cube within range. The pattern appears for a moment and vanishes. Each creature in the area who sees the pattern must make a\_Wisdom saving throw. On a failed save, the creature becomes &amp;Reference[charmed] for the duration. While charmed by this spell, the creature is &amp;Reference[incapacitated] and has a speed of 0.</p><p>The spell ends for an affected creature if it takes any damage or if someone else uses an action to shake the creature out of its stupor.</p>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cube
+      size: '30'
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: ill
+  materials:
+    value: >-
+      A glowing stick of incense or a crystal vial filled with phosphorescent
+      material.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: SQnfuD2rHVcyLZ4j
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: hypnotic-pattern
+sort: 0
+flags: {}
+img: icons/magic/air/air-burst-spiral-pink.webp
+effects:
+  - name: Hypnotic Pattern
+    origin: Compendium.dnd5e.spells.Item.6g3WLOZ2u0EbaLAd
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: SQnfuD2rHVcyLZ4j
+    changes:
+      - key: system.attributes.movement.burrow
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.fly
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.walk
+        mode: 5
+        value: '0'
+        priority: null
+    description: >-
+      <p>The creature is Charmed for the duration. While charmed by this spell,
+      the creature is Incapacitated and has a speed of 0.</p>
+    transfer: false
+    statuses:
+      - charmed
+      - incapacitated
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/air/air-burst-spiral-pink.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!6g3WLOZ2u0EbaLAd.SQnfuD2rHVcyLZ4j'
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037347867
+  modifiedTime: 1725992717137
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!6g3WLOZ2u0EbaLAd'

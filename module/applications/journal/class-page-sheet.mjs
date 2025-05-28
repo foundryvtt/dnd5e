@@ -4,10 +4,17 @@ import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import JournalEditor from "./journal-editor.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * Journal entry page that displays an automatically generated summary of a class along with additional description.
  */
-export default class JournalClassPageSheet extends JournalPageSheet {
+export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalPageSheet {
+
+  /** @override */
+  static _warnedAppV1 = true;
+
+  /* --------------------------------------------- */
 
   /** @inheritDoc */
   static get defaultOptions() {
@@ -235,7 +242,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       if ( item.type === "class" ) cells.push({class: "prof", content: `+${Proficiency.calculateMod(level)}`});
       if ( hasFeatures ) cells.push({class: "features", content: features.join(", ")});
       scaleValues.forEach(s => cells.push({class: "scale", content: s.valueForLevel(level)?.display}));
-      const spellCells = spellProgression?.rows[rows.length];
+      const spellCells = spellProgression?.rows[level - 1];
       if ( spellCells ) cells.push(...spellCells);
 
       // Skip empty rows on subclasses
@@ -285,9 +292,13 @@ export default class JournalClassPageSheet extends JournalPageSheet {
           return Math.max(slot, level || -1);
         }, -1);
 
-        table.rows.push(Array.fromRange(largestSlot, 1).map(spellLevel => {
-          return {class: "spell-slots", content: spells[`spell${spellLevel}`]?.max || "&mdash;"};
-        }));
+        const hasSlots = Object.values(spells).some(slot => slot.max > 0);
+        const row = hasSlots ? Array.fromRange(largestSlot, 1).map(spellLevel => ({
+          class: "spell-slots",
+          content: spells[`spell${spellLevel}`]?.max || "&mdash;"
+        })) : null;
+
+        table.rows.push(row);
       }
 
       // Prepare headers & columns
@@ -314,10 +325,10 @@ export default class JournalClassPageSheet extends JournalPageSheet {
         spellcasting.levels = level;
         Actor5e.computeClassProgression(progression, item, { spellcasting });
         Actor5e.prepareSpellcastingSlots(spells, "pact", progression);
-        table.rows.push([
-          { class: "spell-slots", content: `${spells.pact.max}` },
+        table.rows.push(spells.pact.max ? [
+          { class: "spell-slots", content: spells.pact.max },
           { class: "slot-level", content: spells.pact.level.ordinalString() }
-        ]);
+        ] : null);
       }
     }
 
@@ -408,7 +419,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       const document = await fromUuid(f.uuid);
       if ( document?.type !== "feat" ) return null;
       return {
-        document,
+        document, level,
         name: modernStyle ? game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
           name: document.name, level: formatNumber(level)
         }) : document.name,
@@ -419,13 +430,38 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     };
 
     let features = [];
-    const itemGrants = Array.from(item.advancement.byType.ItemGrant ?? []).sort((lhs, rhs) => lhs.level - rhs.level);
+    const itemGrants = Array.from(item.advancement.byType.ItemGrant ?? []);
     for ( const advancement of itemGrants ) {
       if ( !!advancement.configuration.optional !== optional ) continue;
       features.push(...advancement.configuration.items.map(f => prepareFeature(f, advancement.level)));
     }
+
+    const asiLevels = (item.advancement.byType.AbilityScoreImprovement ?? []).map(a => a.level).sort((a, b) => a - b);
+    if ( asiLevels.length ) {
+      const [firstLevel, ...otherLevels] = asiLevels;
+      const name = game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.Name");
+      features.push({
+        description: game.i18n.format(
+          `DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.Description${modernStyle ? "Modern" : "Legacy"}`,
+          {
+            class: item.name,
+            firstLevel: formatNumber(firstLevel),
+            firstLevelOrdinal: formatNumber(firstLevel, { ordinal: true }),
+            maxAbilityScore: formatNumber(CONFIG.DND5E.maxAbilityScore),
+            otherLevels: game.i18n.getListFormatter({ style: "long" }).format(otherLevels.map(l => formatNumber(l))),
+            otherLevelsOrdinal: game.i18n.getListFormatter({ style: "long" })
+              .format(otherLevels.map(l => formatNumber(l, { ordinal: true })))
+          }
+        ),
+        level: asiLevels[0],
+        name: modernStyle ? game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
+          name: name, level: formatNumber(firstLevel)
+        }) : name
+      });
+    }
+
     features = await Promise.all(features);
-    return features.filter(f => f);
+    return features.filter(f => f).sort((lhs, rhs) => lhs.level - rhs.level);
   }
 
   /* -------------------------------------------- */
@@ -522,8 +558,15 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     event.preventDefault();
     const textKeyPath = event.currentTarget.dataset.target;
     const label = event.target.closest(".form-group").querySelector("label");
-    const editor = new JournalEditor(this.document, { textKeyPath, title: label?.innerText });
+    const editor = new JournalEditor({ document: this.document, textKeyPath, window: { title: label?.innerText } });
     editor.render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _canDragDrop() {
+    return this.isEditable;
   }
 
   /* -------------------------------------------- */

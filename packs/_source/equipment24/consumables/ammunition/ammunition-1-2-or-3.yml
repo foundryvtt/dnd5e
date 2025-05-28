@@ -1,0 +1,329 @@
+name: Ammunition, +1, +2, or +3
+system:
+  description:
+    value: >-
+      <p><em>Weapon (Any Ammunition), Uncommon (+1), Rare (+2), or Very Rare
+      (+3)</em></p><p>You have a bonus to attack rolls and damage rolls made
+      with this piece of magic ammunition. The bonus is determined by the rarity
+      of the ammunition. Once it hits a target, the ammunition is no longer
+      magical.</p><p>This ammunition is typically found or sold in quantities of
+      ten or twenty pieces. Ten pieces of this ammunition are equivalent in
+      value to a potion of the same
+      rarity.</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    RK8InNXk0jFrYMYT:
+      type: enchant
+      _id: RK8InNXk0jFrYMYT
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 08fHYdssxOSTW2nC
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+        - _id: Ck4FgoSL8VjpYhCx
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+        - _id: cAXvvSaUg544GENu
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      name: Ammunition, +1, +2, or +3
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: false
+    max: ''
+  identifier: ammunition-1-2-or-3
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: ammo
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+_id: dmgAmmunition12o
+type: consumable
+img: icons/weapons/ammunition/arrow-head-war-flight.webp
+effects:
+  - type: enchantment
+    name: Ammunition +1
+    img: systems/dnd5e/icons/spell-tiers/spell2.webp
+    disabled: true
+    _id: 08fHYdssxOSTW2nC
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} +1'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgAmmunition12o
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.magicalBonus
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: uncommon
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729871035237
+      modifiedTime: 1729890225858
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgAmmunition12o.08fHYdssxOSTW2nC'
+  - type: enchantment
+    name: Ammunition +2
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    _id: Ck4FgoSL8VjpYhCx
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} +2'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgAmmunition12o
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.magicalBonus
+        mode: 4
+        value: '2'
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: rare
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729871042864
+      modifiedTime: 1731107372236
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgAmmunition12o.Ck4FgoSL8VjpYhCx'
+  - type: enchantment
+    name: Ammunition +3
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    _id: cAXvvSaUg544GENu
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} +3'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgAmmunition12o
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.magicalBonus
+        mode: 4
+        value: '3'
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: veryRare
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729871048604
+      modifiedTime: 1731107379621
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgAmmunition12o.cAXvvSaUg544GENu'
+folder: PVc8RqPP6dm0oGsM
+sort: 300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729870520071
+  modifiedTime: 1745256802119
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgAmmunition12o'

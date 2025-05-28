@@ -1,0 +1,127 @@
+_id: KcUjvqIXZI3APp5a
+name: Breath Weapons
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>(<strong>NOTE: THIS SHOULD BE USED ONLY IF THE CREATURE HAS MORE THAN
+      ONE TYPE OF BREATH WEAPON, AND CONTAINS THE CHARGES FOR THOSE BREATH
+      WEAPONS. EACH BREATH WEAPON ITSELF SHOULD ALSO BE
+      ADDED.</strong>)</p><p><br />The [[lookup @details.type.config.label
+      lowercase]] uses one of the following breath weapons.</p><p>**Fire
+      Breath.** The [[lookup @details.type.config.label lowercase]] exhales fire
+      in an 60-foot line that is 5 feet wide. Each creature in that line must
+      make a <strong>DC 18 Dexterity</strong> saving throw, taking <strong>45
+      (13d6) <em>fire damage</em></strong> on a failed save, or half as much
+      damage on a successful one.</p><p>**Sleep Breath.** The [[lookup
+      @details.type.config.label lowercase]] exhales sleep gas in a 60-foot
+      cone. Each creature in that area must succeed on a <strong>DC 18
+      Constitution</strong> saving throw or fall unconscious for 10 minutes.
+      This effect ends for a creature if the creature takes damage or someone
+      uses an action to wake it.</p>
+
+      </section>
+
+      <p>The [[lookup @details.type.config.label lowercase]] breathes in!</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: breath-weapons
+flags: {}
+img: icons/creatures/abilities/dragon-fire-breath-orange.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304969202
+  modifiedTime: 1725992572119
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!KcUjvqIXZI3APp5a'

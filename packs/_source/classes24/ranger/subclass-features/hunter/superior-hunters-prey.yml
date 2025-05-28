@@ -1,0 +1,113 @@
+_id: phbrgrSuperiorHu
+name: Superior Hunter's Prey
+type: feat
+folder: GWWL7NqfCEyqwfhZ
+img: icons/skills/ranged/arrows-flying-triple-blue.webp
+system:
+  description:
+    value: >-
+      <p>Once per turn when you deal damage to a creature marked by your
+      <em>Hunter's Mark</em>, you can also deal that spell's extra damage to a
+      different creature that you can see within 30 feet of the first
+      creature.</p><section id="secret-AuiRnxdHXs9cXvQV"
+      class="secret"><p><strong>Foundry Note</strong></p><p>You can apply the
+      damage from Hunter's Mark or use the <strong>Damage</strong> activity on
+      this feature.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 11
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    yqOAxbsX16RkOx06:
+      type: damage
+      _id: yqOAxbsX16RkOx06
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: Of the damaged creature
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: true
+              formula: '@scale.ranger.mark'
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+      name: ''
+  enchant: {}
+  identifier: superior-hunters-prey
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866564824
+  modifiedTime: 1745256765218
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 500000
+ownership:
+  default: 0
+_key: '!items!phbrgrSuperiorHu'

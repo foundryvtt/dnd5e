@@ -24,6 +24,21 @@ function _innerLabel(data, config) {
 /* -------------------------------------------- */
 
 /**
+ * Get the schema fields for this trait on the actor.
+ * @param {Actor5e} actor  Actor for which to get the fields.
+ * @param {string} trait   Trait as defined in `CONFIG.DND5E.traits`.
+ * @returns {object|void}
+ */
+export function actorFields(actor, trait) {
+  const keyPath = actorKeyPath(trait);
+  return (keyPath.startsWith("system.")
+    ? actor.system.schema.getField(keyPath.slice(7))
+    : actor.schema.getField(keyPath))?.fields;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Get the key path to the specified trait on an actor.
  * @param {string} trait  Trait as defined in `CONFIG.DND5E.traits`.
  * @returns {string}      Key path to this trait's object within an actor's system data.
@@ -44,7 +59,7 @@ export function actorKeyPath(trait) {
  */
 export async function actorValues(actor, trait) {
   const keyPath = actorKeyPath(trait);
-  const data = foundry.utils.getProperty(actor, keyPath);
+  const data = foundry.utils.getProperty(actor._source, keyPath);
   if ( !data ) return {};
   const values = {};
   const traitChoices = await choices(trait, {prefixed: true});
@@ -58,8 +73,10 @@ export async function actorValues(actor, trait) {
     Object.entries(data).forEach(([k, d]) => setValue(k, d.value));
   } else if ( trait === "saves" ) {
     Object.entries(data).forEach(([k, d]) => setValue(k, d.proficient));
+  } else if ( trait === "dm" ) {
+    Object.entries(data.amount).forEach(([k, d]) => setValue(k, d));
   } else {
-    data.value.forEach(v => setValue(v, 1));
+    data.value?.forEach(v => setValue(v, 1));
   }
 
   if ( trait === "weapon" ) data.mastery?.value?.forEach(v => setValue(v, 2));
@@ -128,6 +145,7 @@ export async function categories(trait) {
 
     // Fetch base items for all IDs
     const baseItems = await Promise.all(Object.entries(ids).map(async ([key, id]) => {
+      if ( foundry.utils.getType(id) === "Object" ) id = id.id;
       const index = await getBaseItem(id);
       return [key, index];
     }));
@@ -172,6 +190,12 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
   const categoryData = await categories(trait);
 
   let result = {};
+
+  if ( traitConfig.labels?.all && !any ) {
+    const key = prefixed ? `${trait}:ALL` : "ALL";
+    result[key] = { label: traitConfig.labels.all, chosen: chosen.has(key), sorting: false };
+  }
+
   if ( prefixed && any ) {
     const key = `${trait}:*`;
     result[key] = {
@@ -185,8 +209,9 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
     if ( !label ) label = key;
     if ( prefixed ) key = `${prefix}:${key}`;
     result[key] = {
-      label: game.i18n.localize(label),
-      chosen: chosen.has(key),
+      label,
+      chosen: data.selectable !== false ? chosen.has(key) : false,
+      selectable: data.selectable !== false,
       sorting: topLevel ? traitConfig.sortCategories === true : true
     };
     if ( data.children ) {
@@ -393,8 +418,11 @@ export function keyLabel(key, config={}) {
   const lastKey = parts.pop();
   if ( !lastKey ) return categoryLabel;
 
+  // All (e.g. "All Languages")
+  if ( lastKey === "ALL" ) return traitConfig.labels?.all ?? key;
+
   // Wildcards (e.g. "Artisan's Tools", "any Artisan's Tools", "any 2 Artisan's Tools", or "2 other Artisan's Tools")
-  if ( lastKey === "*" ) {
+  else if ( lastKey === "*" ) {
     let type;
     if ( parts.length ) {
       let category = traitData;
@@ -421,8 +449,9 @@ export function keyLabel(key, config={}) {
 
     // Base item (e.g. "Shortsword")
     for ( const idsKey of traitConfig.subtypes?.ids ?? [] ) {
-      const baseItemId = CONFIG.DND5E[idsKey]?.[lastKey];
+      let baseItemId = CONFIG.DND5E[idsKey]?.[lastKey];
       if ( !baseItemId ) continue;
+      if ( foundry.utils.getType(baseItemId) === "Object" ) baseItemId = baseItemId.id;
       const index = getBaseItem(baseItemId, { indexOnly: true });
       if ( index ) return index.name;
       break;
@@ -493,11 +522,11 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
 
   // Singular count (e.g. "any skill", "Thieves Tools or any skill", or "Thieves' Tools or any artisan tool")
   if ( (choice.count === 1) && only ) {
-    return listFormatter.format(choice.pool.map(key => keyLabel(key)));
+    return listFormatter.format(Array.from(choice.pool).map(key => keyLabel(key)).filter(_ => _));
   }
 
   // Select from a list of options (e.g. "2 from Thieves' Tools or any skill proficiency")
-  const choices = choice.pool.map(key => keyLabel(key));
+  const choices = Array.from(choice.pool).map(key => keyLabel(key)).filter(_ => _);
   return game.i18n.format("DND5E.TraitConfigChooseList", {
     count: choice.count,
     list: listFormatter.format(choices)
@@ -534,7 +563,7 @@ export function localizedList({ grants=new Set(), choices=[] }) {
   }
 
   const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
-  if ( !sections.length || grants.size ) return listFormatter.format(sections);
+  if ( !sections.length || grants.size ) return listFormatter.format(sections.filter(_ => _));
   return game.i18n.format("DND5E.TraitConfigChooseWrapper", {
     choices: listFormatter.format(sections)
   });

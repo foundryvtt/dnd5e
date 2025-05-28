@@ -1,0 +1,167 @@
+_id: phbDivineStrike0
+name: 'Blessed Strikes: Divine Strike'
+type: feat
+img: icons/magic/holy/prayer-hands-glowing-yellow.webp
+system:
+  activities:
+    uYVz8MBW0EZ2X0zD:
+      type: damage
+      _id: uYVz8MBW0EZ2X0zD
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: >-
+            When you a hit a creature with an attack roll using a weapon once
+            per turn
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: true
+              formula: '@scale.cleric.divine-strike'
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - necrotic
+            scaling:
+              number: 1
+      name: Necrotic Divine Strike
+    MbCGfaQAeW2rzNWb:
+      type: damage
+      name: Radiant Divine Strike
+      _id: MbCGfaQAeW2rzNWb
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: >-
+            When you a hit a creature with an attack roll using a weapon once
+            per turn
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: true
+              formula: '@scale.cleric.divine-strike'
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              number: 1
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>Once on each of your turns when you hit a creature with an attack roll
+      using a weapon, you can cause the target to take an extra 1d8 Necrotic or
+      Radiant damage (your choice).</p><section id="secret-iZHQe1DZBrtcFZCk"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature's
+      damage will automatically increase when you gain
+      @UUID[Compendium.dnd5e.classes24.Item.phbclcImprovedBl]{Improved Blessed
+      Strikes}.</p></section>
+    chat: ''
+  source:
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 7
+    repeatable: false
+  properties: []
+  requirements: Cleric
+  identifier: blessed-strikes-divine-strike
+effects: []
+folder: 3wY92TRgyyyDkpmF
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866373481
+  modifiedTime: 1740680080018
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 750000
+ownership:
+  default: 0
+_key: '!items!phbDivineStrike0'

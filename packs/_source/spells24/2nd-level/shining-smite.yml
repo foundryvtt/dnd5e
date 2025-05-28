@@ -1,0 +1,171 @@
+name: Shining Smite
+system:
+  description:
+    value: >-
+      <p>The target hit by the strike takes an extra 2d6 Radiant damage from the
+      attack. Until the spell ends, the target sheds &amp;Reference[BrightLight]
+      in a 5-foot radius, attack rolls against it have Advantage, and it can't
+      benefit from the &amp;Reference[Invisible] condition.</p><p><strong>Using
+      a Higher-Level Spell Slot.</strong> The damage increases by 1d6 for each
+      spell slot level above 2.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: bonus
+    condition: >-
+      immediately after hitting a creature with a Melee weapon or an Unarmed
+      Strike
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  properties:
+    - vocal
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: pBjrcT286iCAQrjm
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: 2
+            denomination: 6
+            bonus: ''
+            types:
+              - radiant
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: shining-smite
+_id: phbsplShiningSmi
+type: spell
+img: icons/skills/melee/strike-sword-dagger-runes-yellow.webp
+effects:
+  - name: Shining
+    origin: Compendium.dnd5e.spells24.Item.phbsplShiningSmi
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/light/explosion-star-glow-silhouette.webp
+    _id: pBjrcT286iCAQrjm
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.ci.value
+        mode: 2
+        value: invisible
+        priority: null
+    description: >-
+      <p>Until the spell ends, the target sheds &amp;Reference[BrightLight] in a
+      5-foot radius, attack rolls against it have Advantage, and it can’t
+      benefit from the &amp;Reference[Invisible] condition.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - marked
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1725650522091
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplShiningSmi.pBjrcT286iCAQrjm'
+folder: 3SjcO2acsFnWegp4
+sort: 600000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425970772
+  modifiedTime: 1745256798190
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplShiningSmi'

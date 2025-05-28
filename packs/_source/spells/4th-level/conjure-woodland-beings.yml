@@ -1,0 +1,159 @@
+_id: dEfSELiY1eO3cpX9
+name: Conjure Woodland Beings
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: "<p>You summon fey creatures that appear in unoccupied spaces that you can see within range. Choose one of the following options for what appears:</p>\n<ul>\n<li>One fey creature of challenge rating 2 or lower</li>\n<li>Two fey creatures of challenge rating 1 or lower</li>\n<li>Four fey creatures of challenge rating 1/2 or lower</li>\n<li>Eight fey creatures of challenge rating 1/4 or lower</li>\n</ul>\n<p>A summoned creature disappears when it drops to 0 hit points or when the spell ends.</p><p>The summoned creatures are friendly to you and your companions. Roll initiative for the summoned creatures as a group, which have their own turns. They obey any verbal commands that you issue to them (no action required by you). If you don't issue any commands to them, they defend themselves from hostile creatures, but otherwise take no actions.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using certain higher-level spell slots, you choose one of the summoning options above, and more creatures appear: twice as many with a 6th-level slot and three times as many with an 8th-level slot.</p>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: space
+      choice: false
+    template:
+      units: any
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: con
+  materials:
+    value: One holly berry per creature summoned.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: 1 * min(3, floor((@item.level - 2) / 2))
+          cr: '2'
+          name: ''
+          _id: kQDINPmZasFM7K3Q
+          uuid: ''
+          level:
+            min: null
+            max: null
+          types:
+            - fey
+        - count: 2 * min(3, floor((@item.level - 2) / 2))
+          cr: '1'
+          name: ''
+          _id: 3iNRyDrFhh8f5bXy
+          uuid: ''
+          level:
+            min: null
+            max: null
+          types:
+            - fey
+        - count: 4 * min(3, floor((@item.level - 2) / 2))
+          cr: '0.5'
+          name: ''
+          _id: x5Bkpxb7uJN3KDOi
+          uuid: ''
+          level:
+            min: null
+            max: null
+          types:
+            - fey
+        - count: 8 * min(3, floor((@item.level - 2) / 2))
+          cr: '0.25'
+          name: ''
+          _id: h5hp68lZiSO919OX
+          uuid: ''
+          level:
+            min: null
+            max: null
+          types:
+            - fey
+      summon:
+        identifier: ''
+        mode: cr
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: conjure-woodland-beings
+sort: 0
+flags: {}
+img: icons/magic/nature/leaf-glow-maple-orange.webp
+effects: []
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037360953
+  modifiedTime: 1725992721394
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dEfSELiY1eO3cpX9'

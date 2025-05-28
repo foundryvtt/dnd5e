@@ -1,0 +1,55 @@
+name: Jug
+system:
+  description:
+    value: <p>A Jug holds up to 1 gallon.</p>
+    chat: ''
+  price:
+    value: 2
+    denomination: cp
+  quantity: 1
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  weight:
+    value: 4
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties: []
+  capacity:
+    type: weight
+    value: 8.4
+  identifier: jug
+_id: phbagJug00000000
+type: container
+folder: uDk4FBYfcP2JnX6t
+img: icons/containers/kitchenware/jug-terracotta-orange.webp
+effects: []
+sort: 3000000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425909469
+  modifiedTime: 1745256812134
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagJug00000000'

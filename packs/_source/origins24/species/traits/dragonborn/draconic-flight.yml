@@ -1,0 +1,150 @@
+name: Draconic Flight
+system:
+  description:
+    value: >-
+      <p>When you reach character level 5, you can channel draconic magic to
+      give yourself temporary flight. As a Bonus Action, you sprout spectral
+      wings on your back that last for 10 minutes or until you retract the wings
+      (no action required) or have the Incapacitated condition. During that
+      time, you have a Fly Speed equal to your Speed. Your wings appear to be
+      made of the same energy as your Breath Weapon. Once you use this trait,
+      you can't use it again until you finish a Long Rest.</p><section
+      id="secret-pP4PH5jVYBp1OEa3" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature includes an Active Effect for tracking
+      but it does not automatically grant the Fly Speed.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    book: SRD 5.2
+    license: CC-BY-4.0
+  uses:
+    max: '1'
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: 5
+    repeatable: false
+  properties: []
+  requirements: Dragonborn
+  activities:
+    FrsJbUcch66Cr7OZ:
+      type: utility
+      name: Draconic Flight
+      _id: FrsJbUcch66Cr7OZ
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '10'
+      effects:
+        - _id: waI4oHqhpbKUem0M
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/damage/slashing.svg
+  enchant: {}
+  identifier: draconic-flight
+  advancement: []
+  cover: null
+  crewed: false
+_id: phbsptDraconicFl
+type: feat
+folder: 2Bw096HjE0HyGMwM
+img: icons/magic/holy/angel-wings-gray.webp
+effects:
+  - name: Draconic Flight
+    img: icons/magic/holy/angel-wings-gray.webp
+    origin: Compendium.dnd5e.origins24.Item.phbsptDraconicFl
+    transfer: false
+    _id: waI4oHqhpbKUem0M
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsptDraconicFl.waI4oHqhpbKUem0M'
+sort: 300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745340795949
+  modifiedTime: 1745341995023
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsptDraconicFl'

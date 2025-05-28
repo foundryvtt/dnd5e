@@ -1,0 +1,179 @@
+name: Three-dragon ante
+system:
+  description:
+    value: >-
+      <p><strong>Ability:</strong> Wisdom</p><p
+      class="phb-meta"><strong>Utilize:</strong> Discern whether someone is
+      cheating (DC 10), or win the game (DC 20)</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: game
+    baseItem: ''
+  ability: wis
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    EbM17Ylyo84xBjwb:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '10'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Catch Cheating
+      _id: EbM17Ylyo84xBjwb
+      img: ''
+      appliedEffects: []
+    gUPVf8vkBC1YlPN0:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '20'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Play to Win
+      _id: gUPVf8vkBC1YlPN0
+      img: ''
+      appliedEffects: []
+  identifier: three-dragon-ante
+_id: phbgstThreedrago
+type: tool
+folder: oYxcxfKSDOdUdaaN
+img: icons/sundries/gaming/playing-cards-brown.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425915059
+  modifiedTime: 1740680139795
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbgstThreedrago'

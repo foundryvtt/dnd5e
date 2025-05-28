@@ -1,0 +1,211 @@
+name: Ray of Enfeeblement
+system:
+  description:
+    value: >-
+      <p>A beam of enervating energy shoots from you toward a creature within
+      range. The target must make a Constitution saving throw. On a successful
+      save, the target has Disadvantage on the next attack roll it makes until
+      the start of your next turn.</p><p>On a failed save, the target has
+      Disadvantage on Strength-based D20 Tests for the duration. During that
+      time, it also subtracts 1d8 from all its damage rolls. The target repeats
+      the save at the end of each of its turns, ending the spell on a
+      success.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: nec
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: yril8uhQgO1dR507
+          onSave: false
+        - _id: uaHZaHEalgWa6eoC
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: ray-of-enfeeblement
+_id: phbsplRayofEnfee
+type: spell
+img: icons/magic/lightning/bolt-strike-beam-purple.webp
+effects:
+  - name: Brief Enfeeblement
+    origin: Compendium.dnd5e.spells24.Item.phbsplRayofEnfee
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/skills/melee/sword-damaged-broken-glow-red.webp
+    _id: yril8uhQgO1dR507
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The target has Disadvantage on the next attack roll it makes until the
+      start of your next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplRayofEnfee.yril8uhQgO1dR507'
+  - name: Enervated
+    origin: Compendium.dnd5e.spells24.Item.phbsplRayofEnfee
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/skills/wounds/blood-cells-disease-green.webp
+    _id: uaHZaHEalgWa6eoC
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.mwak.damage
+        mode: 2
+        value: '- 1d8'
+        priority: null
+      - key: system.bonuses.rwak.damage
+        mode: 2
+        value: '- 1d8'
+        priority: null
+      - key: system.bonuses.msak.damage
+        mode: 2
+        value: '- 1d8'
+        priority: null
+      - key: system.bonuses.rsak.damage
+        mode: 2
+        value: '- 1d8'
+        priority: null
+    description: >-
+      <p>The target has Disadvantage on Strength-based D20 Tests for the
+      duration. During that time, it also subtracts 1d8 from all its damage
+      rolls. The target repeats the [[/save ability=con]] save at the end of
+      each of its turns, ending the spell on a success.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplRayofEnfee.uaHZaHEalgWa6eoC'
+folder: 3SjcO2acsFnWegp4
+sort: 1100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425968070
+  modifiedTime: 1745256797408
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplRayofEnfee'

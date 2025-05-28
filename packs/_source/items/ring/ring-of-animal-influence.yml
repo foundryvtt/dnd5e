@@ -1,0 +1,247 @@
+_id: ElLfmohtIFMagr5f
+name: Ring of Animal Influence
+type: equipment
+img: icons/equipment/finger/ring-cabochon-gold-orange.webp
+system:
+  description:
+    value: >-
+      <p>This ring has 3 charges, and it regains 1d3 expended charges daily at
+      dawn. While wearing the ring, you can use an action to expend 1 of its
+      charges to cast one of the following spells:</p>
+
+      <ul>
+
+      <li>@UUID[Compendium.dnd5e.spells.Item.hDOENzjuj5WpLq7B]{Animal
+      Friendship} (save DC 13)</li>
+
+      <li>@UUID[Compendium.dnd5e.spells.Item.XXUDGFELgoskdOD0]{Fear} (save DC
+      13), targeting only beasts that have an Intelligence of 3 or lower</li>
+
+      <li>@UUID[Compendium.dnd5e.spells.Item.aL1F8fvYLtNzUbKu]{Speak with
+      Animals}</li>
+
+      </ul>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: '3'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d3
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: ring
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    pC9sdScwAtSLIx3a:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.hDOENzjuj5WpLq7B
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: pC9sdScwAtSLIx3a
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    3Ag2tI8TAhvtGP7V:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.XXUDGFELgoskdOD0
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 3Ag2tI8TAhvtGP7V
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    0zewU222OCtjpOty:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.aL1F8fvYLtNzUbKu
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 0zewU222OCtjpOty
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: ring-of-animal-influence
+effects: []
+folder: 5jrDZJ1U23Q9jDqB
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037138894
+  modifiedTime: 1731017355045
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ElLfmohtIFMagr5f'

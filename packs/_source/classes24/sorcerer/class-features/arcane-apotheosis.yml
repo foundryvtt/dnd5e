@@ -1,0 +1,55 @@
+_id: phbscrArcaneApot
+name: Arcane Apotheosis
+type: feat
+folder: zm1kuLu4kdDhoOyL
+img: icons/magic/symbols/circled-gem-pink.webp
+system:
+  description:
+    value: >-
+      <p>While your Innate Sorcery feature is active, you can use one Metamagic
+      option on each of your turns without spending Sorcery Points on
+      it.</p><section class="secret"
+      id="secret-iZWf2qqSDxd9o6eN"><p><strong>Foundry
+      Note</strong></p><p>Uncheck the Consumption option when using the
+      Metamagic option you would like to use for free.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 20
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: arcane-apotheosis
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866286897
+  modifiedTime: 1745256765306
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbscrArcaneApot'

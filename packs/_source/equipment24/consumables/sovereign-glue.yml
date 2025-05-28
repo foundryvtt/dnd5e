@@ -1,0 +1,201 @@
+_id: dmgSovereignGlue
+name: Sovereign Glue
+type: equipment
+folder: guHYjt0gjPLU2wCs
+img: icons/consumables/drinks/tea-jug-gourd-brown.webp
+system:
+  activities:
+    LCgLQSifP8jigYoR:
+      type: utility
+      name: Determine Ounces
+      _id: LCgLQSifP8jigYoR
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: 1d6 - 2
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    gnuo4HtCHVjx6WSd:
+      type: utility
+      name: Apply Glue
+      _id: gnuo4HtCHVjx6WSd
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '@item.uses.value'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '@scaling'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: square
+          size: '@scaling'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '7'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Legendary</em></p><p>This viscous, milky-white
+      substance can form a permanent adhesive bond between any two objects. It
+      must be stored in a jar or flask that has been coated inside with
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgOilOfSlipperi]{Oil of
+      Slipperiness}. When found, a container contains 1d6 + 1 ounces.</p><p>One
+      ounce of the glue can cover a 1-foot square surface. Applying an ounce of
+      <em>Sovereign Glue</em> takes a Utilize action, and the applied glue takes
+      1 minute to set. Once it has done so, the bond it creates can be broken
+      only by the application of
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgUniversalSolv]{Universal
+      Solvent} or @UUID[Compendium.dnd5e.equipment24.Item.dmgOilOfEthereal]{Oil
+      of Etherealness}, or with a
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish}
+      spell.</p><section class="secret"
+      id="secret-5E4TGkxH4i9Bo67I"><p><strong>Foundry Note</strong></p><p>This
+      item includes 7 limited uses. The <strong>Determine Ounces</strong>
+      activity can be used to determine the number of ounces equivalent to 1d6 +
+      1.</p><p>The <strong>Apply Glue</strong> activity allows you to select the
+      number of ounces you're applying.</p></section>
+    chat: ''
+  identifier: sovereign-glue
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 100000
+    denomination: gp
+  rarity: legendary
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: wondrous
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703461
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1100000
+ownership:
+  default: 0
+_key: '!items!dmgSovereignGlue'

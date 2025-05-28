@@ -1,0 +1,175 @@
+name: Chill Touch
+system:
+  description:
+    value: >-
+      <p>Channeling the chill of the grave, make a melee spell attack against a
+      target within reach. On a hit, the target takes 1d10 Necrotic damage, and
+      it can't regain Hit Points until the end of your next
+      turn.</p><p><strong>Cantrip Upgrade.</strong> The damage increases by 1d10
+      when you reach levels 5 (2d10), 11 (3d10), and 17 (4d10).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: any
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: nec
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    mUy5EZouOr5kqvYN:
+      type: attack
+      _id: mUy5EZouOr5kqvYN
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: zwks0mAqBHGZC1Pk
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '10'
+            bonus: ''
+            types:
+              - necrotic
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      name: ''
+      img: ''
+      appliedEffects:
+        - zwks0mAqBHGZC1Pk
+  identifier: chill-touch
+_id: phbsplChillTouch
+type: spell
+img: icons/magic/unholy/strike-hand-glow-pink.webp
+effects:
+  - name: Blocked Healing
+    img: icons/magic/life/heart-broken-red.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplChillTouch
+    transfer: false
+    _id: zwks0mAqBHGZC1Pk
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>The target can’t regain Hit Points until the end of your next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725396574015
+      modifiedTime: 1726578770586
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplChillTouch.zwks0mAqBHGZC1Pk'
+folder: 4FhsY9FJQd7h7MZb
+sort: 1900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425944733
+  modifiedTime: 1745256787780
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplChillTouch'

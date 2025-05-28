@@ -1,0 +1,522 @@
+_id: dmgPotionOfResis
+name: Potion of Resistance
+type: consumable
+img: icons/consumables/potions/potion-bottle-labeled-medicine-capped-red-black.webp
+system:
+  activities:
+    n52xzzYU7CI8sywr:
+      type: utility
+      name: Drink Potion
+      _id: n52xzzYU7CI8sywr
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: rp68qDxzWquL4KsY
+        - _id: En6oT73Shu6Alr46
+        - _id: UI7peFQB9vCGuwpG
+        - _id: CuxyOkR4W9VP8KOM
+        - _id: ZPdhGzt0bhaZyVd2
+        - _id: 29M8rjINOWKcHek6
+        - _id: VAndQR2Hu88gg4NF
+        - _id: 4YWphFJwC5ojd6Ib
+        - _id: SH3poodOtfaaAiv8
+        - _id: hSarjVpqNwhqKOB1
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects:
+        - rp68qDxzWquL4KsY
+        - En6oT73Shu6Alr46
+        - UI7peFQB9vCGuwpG
+        - CuxyOkR4W9VP8KOM
+        - ZPdhGzt0bhaZyVd2
+        - 29M8rjINOWKcHek6
+        - VAndQR2Hu88gg4NF
+        - 4YWphFJwC5ojd6Ib
+        - SH3poodOtfaaAiv8
+        - hSarjVpqNwhqKOB1
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Potion, Uncommon</em></p><p>When you drink this potion, you have
+      Resistance to one type of damage for 1 hour. The GM chooses the type or
+      determines it randomly by rolling on the following
+      table.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgPotionOfResis
+      caption=false rollable]</p><section class="secret"
+      id="secret-yI26znYuybVCz6iX"><p><strong>Foundry Note</strong></p><p>This
+      item includes Active Effects for each type of resistance. Use the AE for
+      the type of damage chosen by your DM.</p></section>
+    chat: ''
+  identifier: potion-of-resistance
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  price:
+    value: 200
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: potion
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects:
+  - name: Acid  Resistance
+    img: systems/dnd5e/icons/svg/damage/acid.svg
+    _id: rp68qDxzWquL4KsY
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: acid
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730742932160
+      modifiedTime: 1730743308429
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgPotionOfResis.rp68qDxzWquL4KsY'
+  - name: Cold Resistance
+    img: systems/dnd5e/icons/svg/damage/cold.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730742963737
+      modifiedTime: 1730743312391
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: En6oT73Shu6Alr46
+    _key: '!items.effects!dmgPotionOfResis.En6oT73Shu6Alr46'
+  - name: Fire Resistance
+    img: systems/dnd5e/icons/svg/damage/fire.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730742973948
+      modifiedTime: 1730743317025
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: UI7peFQB9vCGuwpG
+    _key: '!items.effects!dmgPotionOfResis.UI7peFQB9vCGuwpG'
+  - name: Force Resistance
+    img: systems/dnd5e/icons/svg/damage/force.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: force
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730742983352
+      modifiedTime: 1730743320811
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: CuxyOkR4W9VP8KOM
+    _key: '!items.effects!dmgPotionOfResis.CuxyOkR4W9VP8KOM'
+  - name: Lightning Resistance
+    img: systems/dnd5e/icons/svg/damage/lightning.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: lightning
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730742995160
+      modifiedTime: 1730743327323
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: ZPdhGzt0bhaZyVd2
+    _key: '!items.effects!dmgPotionOfResis.ZPdhGzt0bhaZyVd2'
+  - name: Necrotic Resistance
+    img: systems/dnd5e/icons/svg/damage/necrotic.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: necrotic
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730743004328
+      modifiedTime: 1730743332532
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: 29M8rjINOWKcHek6
+    _key: '!items.effects!dmgPotionOfResis.29M8rjINOWKcHek6'
+  - name: Poison Resistance
+    img: systems/dnd5e/icons/svg/damage/poison.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730743017944
+      modifiedTime: 1730743338873
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: VAndQR2Hu88gg4NF
+    _key: '!items.effects!dmgPotionOfResis.VAndQR2Hu88gg4NF'
+  - name: Psychic Resistance
+    img: systems/dnd5e/icons/svg/damage/psychic.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: psychic
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730743031712
+      modifiedTime: 1730743345317
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: 4YWphFJwC5ojd6Ib
+    _key: '!items.effects!dmgPotionOfResis.4YWphFJwC5ojd6Ib'
+  - name: Radiant Resistance
+    img: systems/dnd5e/icons/svg/damage/radiant.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: radiant
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730743042178
+      modifiedTime: 1730743348580
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: SH3poodOtfaaAiv8
+    _key: '!items.effects!dmgPotionOfResis.SH3poodOtfaaAiv8'
+  - name: Thunder Resistance
+    img: systems/dnd5e/icons/svg/damage/thunder.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: thunder
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730743053206
+      modifiedTime: 1730743351968
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: hSarjVpqNwhqKOB1
+    _key: '!items.effects!dmgPotionOfResis.hSarjVpqNwhqKOB1'
+folder: 4NjJfCbRAVhw8ESv
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730742719641
+  modifiedTime: 1745256807726
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgPotionOfResis'

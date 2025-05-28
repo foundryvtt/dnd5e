@@ -1,0 +1,118 @@
+_id: E8ozg8avUVOX9N7u
+name: Divine Sense
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>The presence of strong evil registers on your senses like a noxious
+      odor, and powerful good rings like heavenly music in your ears. As an
+      action, you can open your awareness to detect such forces. Until the end
+      of your next turn, you know the location of any celestial, fiend, or
+      undead within 60 feet of you that is not behind total cover. You know the
+      type (celestial, fiend, or undead) of any being whose presence you sense,
+      but not its identity (the vampire Count Strahd von Zarovich, for
+      instance). Within the same radius, you also detect the presence of any
+      place or object that has been consecrated or desecrated, as with the
+      @UUID[Compendium.dnd5e.spells.Item.SLxA9QhrggTz0taU]{Hallow}
+      spell.</p><p>You can use this feature a number of times equal to 1 + your
+      Charisma modifier. When you finish a long rest, you regain all expended
+      uses.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: 1 + @abilities.cha.mod
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Paladin 1
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: round
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: divine-sense
+flags: {}
+img: icons/creatures/eyes/human-single-blue.webp
+effects: []
+folder: 01K0hSSl7NQjYLb8
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037381787
+  modifiedTime: 1725992287695
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!E8ozg8avUVOX9N7u'

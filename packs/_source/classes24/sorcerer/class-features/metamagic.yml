@@ -1,0 +1,60 @@
+_id: phbscrMetamagic0
+name: Metamagic
+type: feat
+folder: zm1kuLu4kdDhoOyL
+img: icons/magic/unholy/orb-colllecting-energy-green.webp
+system:
+  description:
+    value: >-
+      <p>Because your magic flows from within, you can alter your spells to suit
+      your needs; you gain two Metamagic options of your choice from "Metamagic
+      Options". You use the chosen options to temporarily modify spells you
+      cast. To use an option, you must spend the number of Sorcery Points that
+      it costs.</p><p>You can use only one Metamagic option on a spell when you
+      cast it unless otherwise noted in one of those options.</p><p>Whenever you
+      gain a Sorcerer level, you can replace one of your Metamagic options with
+      one you don't know. You gain two more options at Sorcerer level 10 and two
+      more at Sorcerer level 17.</p><section id="secret-IKw7Qq4qXvzx5Iqj"
+      class="secret"><p><strong>Foundry Note</strong></p><p>You will be prompted
+      to choose Metamagic options as you level up.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: metamagic
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866286897
+  modifiedTime: 1745256765550
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbscrMetamagic0'

@@ -1,0 +1,49 @@
+name: Ram, Portable
+system:
+  description:
+    value: >-
+      <p>You can use a Portable Ram to break down doors. When doing so, you gain
+      a +4 bonus to the Strength check. One other character can help you use the
+      ram, giving you Advantage on this check.</p>
+    chat: ''
+  price:
+    value: 4
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 35
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: ram-portable
+_id: phbagRamPortable
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/weapons/maces/mace-skull-ram.webp
+effects: []
+sort: 5200000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425911403
+  modifiedTime: 1745256812690
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagRamPortable'

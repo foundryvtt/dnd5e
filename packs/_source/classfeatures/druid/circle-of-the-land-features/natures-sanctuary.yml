@@ -1,0 +1,107 @@
+_id: EuX1kJNIw1F68yus
+name: Nature's Sanctuary
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>When you reach 14th level, creatures of the natural world sense your
+      connection to nature and become hesitant to attack you.</p><p>When a beast
+      or plant creature attacks you, that creature must make a Wisdom saving
+      throw against your druid spell save DC. On a failed save, the creature
+      must choose a different target, or the attack automatically misses. On a
+      successful save, the creature is immune to this effect for 24
+      hours.</p><p>The creature is aware of this effect before it makes its
+      attack against you.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Circle of the Land 14
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: wis
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: natures-sanctuary
+flags: {}
+img: icons/magic/control/encase-creature-humanoid-hold.webp
+effects: []
+folder: oPF5p4Kt9rOawCdU
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037381924
+  modifiedTime: 1725992287736
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!EuX1kJNIw1F68yus'

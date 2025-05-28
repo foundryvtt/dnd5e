@@ -1,0 +1,190 @@
+name: Modify Memory
+system:
+  description:
+    value: >-
+      <p>You attempt to reshape another creature's memories. One creature that
+      you can see within range makes a Wisdom saving throw. If you are fighting
+      the creature, it has Advantage on the save. On a failed save, the target
+      has the &amp;Reference[Charmed apply=false] condition for the duration.
+      While Charmed in this way, the target also has the
+      &amp;Reference[Incapacitated apply=false] condition and is unaware of its
+      surroundings, though it can hear you. If it takes any damage or is
+      targeted by another spell, this spell ends, and no memories are
+      modified.</p><p>While this charm lasts, you can affect the target's memory
+      of an event that it experienced within the last 24 hours and that lasted
+      no more than 10 minutes. You can permanently eliminate all memory of the
+      event, allow the target to recall the event with perfect clarity, change
+      its memory of the event's details, or create a memory of some other
+      event.</p><p>You must speak to the target to describe how its memories are
+      affected, and it must be able to understand your language for the modified
+      memories to take root. Its mind fills in any gaps in the details of your
+      description. If the spell ends before you finish describing the modified
+      memories, the creature's memory isn't altered. Otherwise, the modified
+      memories take hold when the spell ends.</p><p>A modified memory doesn't
+      necessarily affect how a creature behaves, particularly if the memory
+      contradicts the creature's natural inclinations, alignment, or beliefs. An
+      illogical modified memory, such as a false memory of how much the creature
+      enjoyed swimming in acid, is dismissed as a bad dream. The DM might deem a
+      modified memory too nonsensical to affect a creature.</p><p>A
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplRemoveCurs]{Remove
+      Curse}</em> or
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
+      Restoration}</em> spell cast on the target restores the creature's true
+      memory.</p><p><strong>Using a Higher-Level Spell Slot.</strong> You can
+      alter the target's memories of an event that took place up to 7 days ago
+      (level 6 spell slot), 30 days ago (level 7 spell slot), 365 days ago
+      (level 8 spell slot), or any time in the creature's past (level 9 spell
+      slot).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '30'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: enc
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: ayfixWGhTtaIUusk
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: modify-memory
+_id: phbsplModifyMemo
+type: spell
+img: icons/sundries/documents/document-letter-blue.webp
+effects:
+  - name: Memory Modification
+    origin: Compendium.dnd5e.spells24.Item.phbsplModifyMemo
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/statuses/incapacitated.svg
+    _id: ayfixWGhTtaIUusk
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p><span style="font-family:Signika, sans-serif">While
+      &amp;Reference[Charmed apply=false] in this way, the target also has the
+      &amp;Reference[Incapacitated apply=false] condition and is unaware of its
+      surroundings, though it can hear you. If it takes any damage or is
+      targeted by another spell, this spell ends, and no memories are
+      modified.</span></p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - charmed
+      - incapacitated
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplModifyMemo.ayfixWGhTtaIUusk'
+folder: beZ8MTpWY2cMEUlp
+sort: 1000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425964591
+  modifiedTime: 1745256796378
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplModifyMemo'

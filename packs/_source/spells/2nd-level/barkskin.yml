@@ -1,0 +1,151 @@
+_id: JPwIEfgUPVebr5AH
+name: Barkskin
+type: spell
+img: icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp
+system:
+  description:
+    value: >-
+      <p>You touch a willing creature. Until the spell ends, the target's skin
+      has a rough, bark-like appearance, and the target's AC can't be less than
+      16, regardless of what kind of armor it is wearing.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  materials:
+    value: A handful of oak bark
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: uM6rgctYpcbCVSkn
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: barkskin
+effects:
+  - _id: uM6rgctYpcbCVSkn
+    flags: {}
+    changes:
+      - key: system.attributes.ac.min
+        mode: 5
+        value: '16'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.VQMKMnQDw5rzL0zp
+    tint: '#ffffff'
+    transfer: false
+    name: Barkskin
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1725313057364
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!JPwIEfgUPVebr5AH.uM6rgctYpcbCVSkn'
+folder: Qi4Se3we69ukl2V9
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037353022
+  modifiedTime: 1725992718790
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!JPwIEfgUPVebr5AH'

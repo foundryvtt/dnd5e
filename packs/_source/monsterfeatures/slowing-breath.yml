@@ -1,0 +1,116 @@
+_id: JRy507rS9wxT3GBh
+name: Slowing Breath
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>**Slowing Breath.** The [[lookup @details.type.config.label lowercase]]
+      exhales gas in a 60-foot cone. Each creature in that area must succeed on
+      a  <strong>DC 18 Constitution</strong> saving throw. On a failed save, the
+      creature can't use reactions, its speed is halved, and it can't make more
+      than one attack on its turn. In addition, the creature can use either an
+      action or a bonus action on its turn, but not both. These effects last for
+      1 minute. The creature can repeat the saving throw at the end of each of
+      its turns, ending the effect on itself with a successful save.</p>
+
+      </section>
+
+      <p>The [[lookup @details.type.config.label lowercase]] exhales gas in a
+      60-foot cone. Each creature in that area must make a
+      <strong>Constitution</strong> saving throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: cone
+          size: '60'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '18'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: slowing-breath
+flags: {}
+img: icons/creatures/abilities/dragon-ice-breath-blue.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304968873
+  modifiedTime: 1725992572011
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!JRy507rS9wxT3GBh'

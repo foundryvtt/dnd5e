@@ -1,0 +1,431 @@
+name: Ivory Goats
+system:
+  description:
+    value: >-
+      <p><em>See
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgFigurineOfWon]{Figurine of
+      Wondrous Power}</em></p><p>These ivory statuettes of goats are always
+      created in sets of three. Each goat looks unique and functions differently
+      from the others. Their properties are as follows:</p><p><strong>Goat of
+      Terror.</strong> This figurine can become a
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmGiantGoat00000]{Giant
+      Goat}</strong> for up to 3 hours. The goat can't attack, but you can
+      (harmlessly) remove its horns and use them as weapons. One horn becomes a
+      <em>+1 Lance</em> , and the other becomes a <em>+2 Longsword</em>.
+      Removing a horn requires a Magic action, and the weapons disappear and the
+      horns return when the goat reverts to figurine form. While you ride the
+      goat, any Hostile creature that starts its turn within a 30-foot Emanation
+      originating from the goat must succeed on a DC 15 Wisdom saving throw or
+      have the Frightened condition for 1 minute, until you are no longer riding
+      the goat, or until the goat reverts to figurine form. The Frightened
+      creature repeats the save at the end of each of its turns, ending the
+      effect on itself on a success. Once it succeeds on the save, a creature is
+      immune to this effect for the next 24 hours. Once the figurine has been
+      used, it can't be used again until 15 days have passed.</p><p><strong>Goat
+      of Traveling.</strong> This figurine can become a Large goat with the same
+      statistics as a
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmRidingHorse000]{Riding
+      Horse}</strong>. It has 24 charges, and each hour or portion thereof it
+      spends in goat form costs 1 charge. While it has charges, you can use it
+      as often as you wish. When it runs out of charges, it reverts to a
+      figurine and can't be used again until 7 days have passed, when it regains
+      all expended charges.</p><section class="secret"
+      id="secret-Bzl0aaerk0Ql0uOm"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Revert or Recall Goat of Traveling</strong> activity is optionally
+      provided to aid in tracking the non-contiguous 24 hours the figurine can
+      remain in goat form. When reverting to a figurine, the scaling value for
+      consumption represents the number of hours spent in goat form. When
+      recalling the figurine to goat form, uncheck the "Consume Item Use?"
+      checkbox when using this activity.</p></section><p><strong>Goat of
+      Travail.</strong> This figurine can become a
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmGiantGoat00000]{Giant
+      Goat}</strong> for up to 3 hours. Once it has been used, it can't be used
+      again until 30 days have passed.</p>
+    chat: ''
+  price:
+    value: 4000
+    denomination: gp
+  activities:
+    hDc2bhCP7qL52Z1J:
+      type: summon
+      name: Goat of Terror
+      _id: hDc2bhCP7qL52Z1J
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '15'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '3'
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: unoccupied space
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: day
+            type: formula
+            formula: '1'
+        max: '15'
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: auaefPIdt4ngGOrL
+          uuid: Compendium.dnd5e.actors24.Actor.BNJCponnrcqBAxpI
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      img: ''
+      appliedEffects: []
+    G771YStNNwTixstV:
+      type: summon
+      name: Goat of Traveling
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '7'
+            scaling: {}
+          - type: itemUses
+            value: '-@item.uses.spent'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: spec
+        concentration: false
+        override: false
+        value: '3'
+        special: 24 hours of use (non-contiguous)
+      effects: []
+      range:
+        override: false
+        value: '60'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: unoccupied space
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: day
+            type: formula
+            formula: '1'
+        max: '7'
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: auaefPIdt4ngGOrL
+          uuid: Compendium.dnd5e.actors24.Actor.dmgGoatofTraveli
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+      _id: G771YStNNwTixstV
+      img: ''
+      appliedEffects: []
+    5g8tPLkudHb2kfkt:
+      type: summon
+      name: Revert or Recall Goat of Traveling
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '@item.uses.value'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: Each hour or portion thereof it spends in goat form costs 1 charge.
+      duration:
+        units: spec
+        concentration: false
+        override: false
+        value: '3'
+        special: 24 hours of use (non-contiguous)
+      effects: []
+      range:
+        override: false
+        value: '60'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: unoccupied space
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: auaefPIdt4ngGOrL
+          uuid: Compendium.dnd5e.actors24.Actor.dmgGoatofTraveli
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: false
+        identifier: ''
+        mode: ''
+      _id: 5g8tPLkudHb2kfkt
+      img: icons/magic/time/hourglass-tilted-gray.webp
+      appliedEffects: []
+    KguY9D4cU0ognpu4:
+      type: summon
+      name: Goat of Travail
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '30'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '3'
+        special: 24 hours of use (non-contiguous)
+      effects: []
+      range:
+        override: false
+        value: '60'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: unoccupied space
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: day
+            type: formula
+            formula: '1'
+        max: '30'
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: auaefPIdt4ngGOrL
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobGiantGoat0
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+      _id: KguY9D4cU0ognpu4
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '24'
+  identifier: ivory-goats
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+_id: dmgFwpIvoryGoats
+type: equipment
+img: icons/commodities/bones/horn-curved-worn-brown.webp
+effects: []
+folder: EK3hCTgvAmjsKlfl
+sort: 125000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729781709220
+  modifiedTime: 1745712700149
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgFwpIvoryGoats'

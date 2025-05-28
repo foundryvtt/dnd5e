@@ -1,0 +1,585 @@
+_id: dmgStaffOfThunde
+name: Staff of Thunder and Lightning
+type: weapon
+img: icons/weapons/staves/staff-ornate-teal.webp
+system:
+  activities:
+    hamXh7gqVGNUIcjA:
+      _id: hamXh7gqVGNUIcjA
+      type: attack
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects: []
+    7gbLqdYFIJ1QabDq:
+      type: save
+      name: Thunder
+      _id: 7gbLqdYFIJ1QabDq
+      sort: 300000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: UTstWNbk0NXrKgS6
+          onSave: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '17'
+      img: ''
+      appliedEffects:
+        - UTstWNbk0NXrKgS6
+    npfuUn0YaFlIYyD1:
+      type: damage
+      name: Lightning
+      _id: npfuUn0YaFlIYyD1
+      sort: 200000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 6
+            bonus: ''
+            types:
+              - lightning
+            scaling:
+              number: 1
+      img: ''
+      appliedEffects: []
+    EtOETCHaEK0mcw03:
+      type: save
+      name: Thunder & Lightning
+      _id: EtOETCHaEK0mcw03
+      sort: 400000
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: UTstWNbk0NXrKgS6
+          onSave: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 6
+            bonus: ''
+            types:
+              - lightning
+            scaling:
+              number: 1
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: ''
+            types: []
+            scaling:
+              number: 1
+        onSave: full
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '17'
+      img: ''
+      appliedEffects:
+        - UTstWNbk0NXrKgS6
+    hjxRfoWyCUGCMbMr:
+      type: save
+      name: Lightning Strike
+      _id: hjxRfoWyCUGCMbMr
+      sort: 500000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: line
+          size: '120'
+          width: '5'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 9
+            denomination: 6
+            bonus: ''
+            types:
+              - lightning
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '17'
+      img: ''
+      appliedEffects: []
+    CnEqIoGzAUahrQIH:
+      type: save
+      name: Thunderclap
+      _id: CnEqIoGzAUahrQIH
+      sort: 600000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: VdYJQUJUwgsuptnY
+          onSave: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '60'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 6
+            bonus: ''
+            types:
+              - thunder
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '17'
+      img: ''
+      appliedEffects:
+        - VdYJQUJUwgsuptnY
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p><em>@UUID[Compendium.dnd5e.equipment24.Item.phbafcStaffalsoa]{Staff},
+      Very Rare (Requires Attunement)</em></p><p>This staff can be wielded as a
+      magic Quarterstaff that grants a +2 bonus to attack rolls and damage rolls
+      made with it. It also has the following additional properties. Once one of
+      these properties is used, it can't be used again until the next
+      dawn.</p><p><em><strong>Lightning.</strong></em> When you hit with a melee
+      attack using the staff, you can cause the target to take an extra 2d6
+      Lightning damage (no action
+      required).</p><p><em><strong>Thunder.</strong></em> When you hit with a
+      melee attack using the staff, you can cause the staff to emit a crack of
+      thunder audible out to 300 feet (no action required). The target you hit
+      must succeed on a DC 17 Constitution saving throw or have the Stunned
+      condition until the end of your next turn.</p><p><em><strong>Thunder and
+      Lightning.</strong></em> Immediately after you hit with a melee attack
+      using the staff, you can take a Bonus Action to use the Lightning and
+      Thunder properties (see above) at the same time. Doing so doesn't expend
+      the daily use of those properties, only the use of this
+      one.</p><p><em><strong>Lightning Strike.</strong></em> You can take a
+      Magic action to cause a bolt of lightning to leap from the staff's tip in
+      a Line that is 5 feet wide and 120 feet long. Each creature in that Line
+      makes a DC 17 Dexterity saving throw, taking 9d6 Lightning damage on a
+      failed save or half as much damage on a successful
+      one.</p><p><em><strong>Thunderclap.</strong></em> You can take a Magic
+      action to cause the staff to produce a thunderclap audible out to 600
+      feet. Every creature within a 60-foot Emanation originating from you makes
+      a DC 17 Constitution saving throw. On a failed save, a creature takes 2d6
+      Thunder damage and has the Deafened condition for 1 minute. On a
+      successful save, a creature takes half as much damage only.</p>
+    chat: ''
+  identifier: staff-of-thunder-and-lightning
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: quarterstaff
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  magicalBonus: 2
+  properties:
+    - mgc
+    - ver
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: topple
+effects:
+  - name: Stunned
+    img: icons/magic/control/energy-stream-link-large-white.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgStaffOfThunde
+    transfer: false
+    _id: UTstWNbk0NXrKgS6
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - stunned
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729884183620
+      modifiedTime: 1729884269203
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgStaffOfThunde.UTstWNbk0NXrKgS6'
+  - name: Deafened
+    img: icons/magic/sonic/explosion-impact-shock-wave.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgStaffOfThunde
+    transfer: false
+    _id: VdYJQUJUwgsuptnY
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - deafened
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729886271802
+      modifiedTime: 1729886309381
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgStaffOfThunde.VdYJQUJUwgsuptnY'
+folder: 5p9KrkF39e6vFO4g
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703845
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 200000
+ownership:
+  default: 0
+_key: '!items!dmgStaffOfThunde'

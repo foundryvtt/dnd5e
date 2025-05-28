@@ -1,0 +1,108 @@
+_id: BpwXJvMA7MfVQ7i6
+name: Rock Catching
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>If a rock or similar object is hurled at the
+      [[lookup @details.type.config.label lowercase]], the [[lookup
+      @details.type.config.label lowercase]] can, with a successful DC 10
+      Dexterity saving throw, catch the missile and take no <em>bludgeoning
+      damage</em> from it.</p></section><p>If a rock or similar object is hurled
+      at the [[lookup @details.type.config.label lowercase]], the [[lookup
+      @details.type.config.label lowercase]] can catch the missile and take no
+      <em>bludgeoning damage</em> from it.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '10'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: rock-catching
+flags: {}
+img: icons/skills/melee/unarmed-punch-fist.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304967227
+  modifiedTime: 1725992571518
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!BpwXJvMA7MfVQ7i6'

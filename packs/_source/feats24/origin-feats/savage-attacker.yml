@@ -1,0 +1,52 @@
+name: Savage Attacker
+system:
+  description:
+    value: >-
+      <p>You've trained to deal particularly damaging strikes. Once per turn
+      when you hit a target with a weapon, you can roll the weapon's damage dice
+      twice and use either roll against the target.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: feat
+    subtype: origin
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: savage-attacker
+_id: phbftSavageAttac
+type: feat
+img: icons/skills/wounds/bone-broken-knee-beam.webp
+effects: []
+folder: d5jrO8A6QpjEV9rn
+sort: 103125
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866651117
+  modifiedTime: 1745256780531
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbftSavageAttac'

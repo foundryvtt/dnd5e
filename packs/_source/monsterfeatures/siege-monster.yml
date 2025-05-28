@@ -1,0 +1,46 @@
+_id: cSA0EbjlxCbst4gJ
+name: Siege Monster
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>The [[lookup @details.type.config.label lowercase]] deals double damage
+      to objects and structures.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: siege-monster
+flags: {}
+img: icons/creatures/magical/construct-iron-stomping-yellow.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304973386
+  modifiedTime: 1725992573416
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!cSA0EbjlxCbst4gJ'

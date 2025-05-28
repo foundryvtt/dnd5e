@@ -1,0 +1,152 @@
+name: Summon Dragon
+system:
+  description:
+    value: >-
+      <p>You call forth a Dragon spirit. It manifests in an unoccupied space
+      that you can see within range and uses the
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.phbmobDraconicSp]{Draconic
+      Spirit}</strong> stat block. The creature disappears when it drops to 0
+      Hit Points or when the spell ends.</p><p>The creature is an ally to you
+      and your allies. In combat, the creature shares your Initiative count, but
+      it takes its turn immediately after yours. It obeys your verbal commands
+      (no action required by you). If you don't issue any, it takes the Dodge
+      action and uses its movement to avoid danger.</p><p><strong>Using a
+      Higher-Level Spell Slot. </strong>Use the spell slot's level for the
+      spell's level in the stat block.</p><section class="fvtt advice"
+      style="margin:0.5rem;padding:0.5rem"><article><p>In addition to the noted
+      usage of the spell's level in the spirit's Traits and Actions, the
+      following attributes are also affected.</p><table><caption>Draconic
+      Spirit</caption><tbody><tr><td><strong>AC</strong></td><td>14 + the
+      spell's level</td></tr><tr><td><strong>HP</strong></td><td>50 + 10 for
+      each spell level above
+      5</td></tr><tr><td><strong>PB</strong></td><td>equals your Proficiency
+      Bonus</td></tr></tbody></table></article></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: an object with the image of a dragon engraved on it worth 500+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    gOf4QDymYpUVAvTk:
+      type: summon
+      _id: gOf4QDymYpUVAvTk
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      bonuses:
+        ac: '@item.level'
+        hd: ''
+        hp: 10 * (@item.level - 5)
+        attackDamage: '@item.level'
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: true
+        proficiency: true
+        saves: true
+      profiles:
+        - count: ''
+          name: ''
+          _id: Bi6h3KIV8Sx2zSdH
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobDraconicSp
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: ''
+      img: ''
+  identifier: summon-dragon
+_id: phbsplSummonDrag
+type: spell
+img: icons/creatures/abilities/dragon-breath-purple.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 125000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425973657
+  modifiedTime: 1745256798908
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSummonDrag'

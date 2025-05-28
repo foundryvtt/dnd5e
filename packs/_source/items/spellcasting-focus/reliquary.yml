@@ -1,0 +1,85 @@
+_id: gP1URGq3kVIIFHJ7
+name: Reliquary
+type: equipment
+img: icons/containers/chest/chest-reinforced-steel-red.webp
+system:
+  description:
+    value: >-
+      <p>A tiny box or other container holding a fragment of a precious relic,
+      saint, or other historical figure that dedicated their life to walk the
+      path of a true believer. A deity imbues the bearer of this artifact with
+      the ability to call forth their power and in doing so spread the faith
+      once more.</p>
+
+      <p><strong>Spellcasting Focus</strong>. A cleric or paladin can use a holy
+      symbol as a spellcasting focus. To use the symbol in this way, the caster
+      must hold it in hand, wear it visibly, or bear it on a shield.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 5
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: null
+    dex: null
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - foc
+  activities: {}
+  attuned: false
+  identifier: reliquary
+effects: []
+folder: xedn1r43VWuEBcli
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037251375
+  modifiedTime: 1730324884672
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!gP1URGq3kVIIFHJ7'

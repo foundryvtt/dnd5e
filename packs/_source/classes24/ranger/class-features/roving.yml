@@ -1,0 +1,92 @@
+_id: phbrgrRoving0000
+name: Roving
+type: feat
+folder: h5OUzaJcZzsNsOGc
+img: icons/skills/movement/feet-winged-sandals-tan.webp
+system:
+  description:
+    value: >-
+      <p>Your Speed increases by 10 feet while you aren't wearing Heavy armor.
+      You also have a Climb Speed and a Swim Speed equal to your
+      Speed.</p><section class="secret"
+      id="secret-XnQYiG0fJWJSHkQw"><p><strong>Foundry Note</strong></p><p>This
+      feature includes an Active Effect which increases your Speed by 10 feet.
+      It does not automatically grant an equivalent Climb and Swim Speed though.
+      It can be disabled if you choose to wear Heavy armor.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 6
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: roving
+effects:
+  - name: Roving
+    img: icons/skills/movement/feet-winged-sandals-tan.webp
+    _id: J9RWCSmYGnP0fkn1
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 2
+        value: '10'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbrgrRoving0000.J9RWCSmYGnP0fkn1'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735932734523
+  modifiedTime: 1745256765119
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgrRoving0000'

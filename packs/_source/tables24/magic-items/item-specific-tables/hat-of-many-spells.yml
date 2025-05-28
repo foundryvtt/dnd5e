@@ -1,0 +1,321 @@
+_id: dmgHatOfManySpel
+name: Hat of Many Spells
+img: icons/equipment/head/hat-pointed-leather-purple.webp
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 50
+    drawn: false
+    _id: SEMlrVV4fhfPfPXM
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      You cast a random spell determined by rolling [[/r 1d10]]: on a 1,
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplEnlargeRed]{Enlarge/Reduce}
+      (enlarge effect); on a 2, Enlarge/Reduce (reduce effect); on a 3,
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFaerieFire]{Faerie Fire}; on a
+      4, @UUID[Compendium.dnd5e.spells24.Item.phbsplFireball00]{Fireball}; on a
+      5, @UUID[Compendium.dnd5e.spells24.Item.phbsplGustofWind]{Gust of Wind};
+      on a 6,
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplInvisibili]{Invisibility} (cast
+      on yourself); on a 7,
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplLightningB]{Lightning Bolt}; on
+      an 8, @UUID[Compendium.dnd5e.spells24.Item.phbPhantasmalFor]{Phantasmal
+      Force}; on a 9,
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplPolymorph0]{Polymorph}; on a
+      10, @UUID[Compendium.dnd5e.spells24.Item.phbsplStinkingCl]{Stinking
+      Cloud}.
+    name: ''
+    _key: '!tables.results!dmgHatOfManySpel.SEMlrVV4fhfPfPXM'
+  - type: text
+    weight: 1
+    range:
+      - 51
+      - 55
+    drawn: false
+    _id: rObwGUYoOwdT0zZB
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      You have the &amp;Reference[Stunned] condition until the end of your next
+      turn, believing something awesome just happened.
+    name: ''
+    _key: '!tables.results!dmgHatOfManySpel.rObwGUYoOwdT0zZB'
+  - type: text
+    weight: 1
+    range:
+      - 56
+      - 60
+    drawn: false
+    _id: mx2wCNIBI2owZwgT
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A harmless swarm of butterflies fills a 10-foot Cube within 30 feet of
+      yourself. The swarm disperses after 1 minute.
+    name: ''
+    _key: '!tables.results!dmgHatOfManySpel.mx2wCNIBI2owZwgT'
+  - type: text
+    weight: 1
+    range:
+      - 61
+      - 65
+    drawn: false
+    _id: jcTRxko4j2lpnPag
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      You pull a nonmagical object out of the hat. Roll [[/r 1d4]] to determine
+      the object: on a 1, a vial of
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagAcid0000000]{Acid}; on a 2, a
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagAlchemistsF]{flask of
+      Alchemist’s Fire}; on a 3, a
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagCrowbar0000]{Crowbar}; on a
+      4, a lit @UUID[Compendium.dnd5e.equipment24.Item.phbagTorch000000]{Torch}.
+    name: ''
+    _key: '!tables.results!dmgHatOfManySpel.jcTRxko4j2lpnPag'
+  - type: text
+    weight: 1
+    range:
+      - 66
+      - 70
+    drawn: false
+    _id: DgIRZyY9ddEJEJl1
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      You suffer a bout of “magic sickness” and have the
+      &amp;Reference[Poisoned] condition for 1 hour.
+    name: ''
+    _key: '!tables.results!dmgHatOfManySpel.DgIRZyY9ddEJEJl1'
+  - type: text
+    weight: 1
+    range:
+      - 71
+      - 75
+    drawn: false
+    _id: 7fE5iCFCTVcbkDSL
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      You have the &amp;Reference[Petrified] condition until the end of your
+      next turn.
+    name: ''
+    _key: '!tables.results!dmgHatOfManySpel.7fE5iCFCTVcbkDSL'
+  - type: text
+    weight: 1
+    range:
+      - 76
+      - 80
+    drawn: false
+    _id: 0L5mg4Y6U9VJlULX
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      You pull a nonmagical object out of the hat. Roll [[/r 1d4]] to determine
+      the object: on a 1, a
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepDagger0000]{Dagger}; on a 2,
+      a @UUID[Compendium.dnd5e.equipment24.Item.phbagRope0000000]{Rope} with a
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagGrapplingHo]{Grappling Hook}
+      tied to one end; on a 3, a bag of
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagCaltrops000]{Caltrops}; on a
+      4, a gem worth 50 GP.
+    name: ''
+    _key: '!tables.results!dmgHatOfManySpel.0L5mg4Y6U9VJlULX'
+  - type: text
+    weight: 1
+    range:
+      - 81
+      - 85
+    drawn: false
+    _id: YxqEHizhmvT56Mo8
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A creature appears in an unoccupied space as close to you as possible. The
+      creature isn’t under your control and acts as it normally would, and it
+      disappears after 1 hour or when it drops to 0 Hit Points. Roll [[/r 1d4]]
+      to determine the creature: on a 1, a
+      @UUID[Compendium.dnd5e.actors24.Actor.mmCamel000000000]{Camel}; on a 2, a
+      @UUID[Compendium.dnd5e.actors24.Actor.mmConstrictorSna]{Constrictor
+      Snake}; on a 3, an
+      @UUID[Compendium.dnd5e.actors24.Actor.mmElephant000000]{Elephant}; on a 4,
+      a @UUID[Compendium.dnd5e.actors24.Actor.mmMule0000000000]{Mule}.
+    name: ''
+    _key: '!tables.results!dmgHatOfManySpel.YxqEHizhmvT56Mo8'
+  - type: text
+    weight: 1
+    range:
+      - 86
+      - 90
+    drawn: false
+    _id: cHmj1WiPWe6BTZns
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A Hostile @UUID[Compendium.dnd5e.actors24.Actor.PcZ0QjIG6bHpffp9]{Swarm of
+      Bats} flies out of the hat, occupies your space, and attacks you.
+    name: ''
+    _key: '!tables.results!dmgHatOfManySpel.cHmj1WiPWe6BTZns'
+  - type: text
+    weight: 1
+    range:
+      - 91
+      - 95
+    drawn: false
+    _id: rpeeI4CQhukJnIi8
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A vertical, 10-foot-diameter, two-way portal to another plane of existence
+      opens in an unoccupied space within 30 feet of you and remains open until
+      the end of your next turn. The DM determines where it leads.
+    name: ''
+    _key: '!tables.results!dmgHatOfManySpel.rpeeI4CQhukJnIi8'
+  - type: text
+    weight: 1
+    range:
+      - 96
+      - 100
+    drawn: false
+    _id: mJeNkGaZKY4xkHCV
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      You pull a magic item out of the hat. Roll [[/r 1d6]] to determine the
+      item’s rarity: on a 1–3, Common; on a 4–5, Uncommon; on a 6, Rare. The DM
+      chooses the item, which disappears after 1 hour if it’s not consumed or
+      destroyed before then.
+    name: ''
+    _key: '!tables.results!dmgHatOfManySpel.mJeNkGaZKY4xkHCV'
+replacement: true
+displayRoll: true
+folder: I2IHCZhwMY7ttiXw
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.2
+  createdTime: 1727883396246
+  modifiedTime: 1731379796630
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1200000
+ownership:
+  default: 0
+formula: 1d100
+_key: '!tables!dmgHatOfManySpel'

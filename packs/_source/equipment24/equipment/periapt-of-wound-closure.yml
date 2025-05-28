@@ -1,0 +1,75 @@
+_id: dmgPeriaptOfWoun
+name: Periapt of Wound Closure
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/neck/pendant-faceted-blue.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon (Requires Attunement)</em></p><p>While
+      wearing this pendant, you gain the following
+      benefits.</p><p><em><strong>Life Preservation.</strong></em> Whenever you
+      make a Death Saving Throw, you can change a roll of 9 or lower to a 10,
+      turning a failed save into a successful one.</p><p><em><strong>Natural
+      Healing Boost.</strong></em> Whenever you roll a Hit Point Die to regain
+      Hit Points, double the number of Hit Points it restores.</p>
+    chat: ''
+  identifier: periapt-of-wound-closure
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712701859
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 24800000
+ownership:
+  default: 0
+_key: '!items!dmgPeriaptOfWoun'

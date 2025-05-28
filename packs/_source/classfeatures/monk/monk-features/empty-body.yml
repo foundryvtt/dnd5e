@@ -1,0 +1,186 @@
+_id: 3jwFt3hSqDswBlOH
+name: Empty Body
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 18th level, you can use your action to spend 4 ki points
+      to become invisible for 1 minute. During that time, you also have
+      resistance to all damage but force damage.</p>
+
+      <p>Additionally, you can spend 8 ki points to cast the
+      @UUID[Compendium.dnd5e.spells.Item.TIoadMIsUKD4edXi]{Astral Projection}
+      spell, without needing material components. When you do so, you can't take
+      any other creatures with you.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ki
+  requirements: Monk 18
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: Also requires 4 ki points (or 8 for Astral Projection).
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects:
+        - _id: 4dvYtqvbQGDsVi51
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: superior-defense
+flags: {}
+img: icons/magic/perception/silhouette-stealth-shadow.webp
+effects:
+  - _id: 4dvYtqvbQGDsVi51
+    flags: {}
+    changes:
+      - key: system.traits.dr.value
+        value: fire
+        mode: 2
+        priority: null
+      - key: system.traits.dr.value
+        value: cold
+        mode: 2
+        priority: null
+      - key: system.traits.dr.value
+        value: acid
+        mode: 2
+        priority: null
+      - key: system.traits.dr.value
+        value: bludgeoning
+        mode: 2
+        priority: null
+      - key: system.traits.dr.value
+        value: lightning
+        mode: 2
+        priority: null
+      - key: system.traits.dr.value
+        value: necrotic
+        mode: 2
+        priority: null
+      - key: system.traits.dr.value
+        value: piercing
+        mode: 2
+        priority: null
+      - key: system.traits.dr.value
+        value: psychic
+        mode: 2
+        priority: null
+      - key: system.traits.dr.value
+        value: radiant
+        mode: 2
+        priority: null
+      - key: system.traits.dr.value
+        value: slashing
+        mode: 2
+        priority: null
+      - key: system.traits.dr.value
+        value: thunder
+        mode: 2
+        priority: null
+      - key: system.traits.dr.value
+        value: poison
+        mode: 2
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: 60
+      rounds: 10
+      turns: null
+      startRound: null
+      startTurn: null
+      combat: null
+    origin: Item.xqRleciuHDZlYCl6
+    tint: '#ffffff'
+    transfer: false
+    name: 'Ki: Empty Body'
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/perception/silhouette-stealth-shadow.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!3jwFt3hSqDswBlOH.4dvYtqvbQGDsVi51'
+folder: TMmNG8ujFDBEWXRe
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037379770
+  modifiedTime: 1725992286999
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!3jwFt3hSqDswBlOH'

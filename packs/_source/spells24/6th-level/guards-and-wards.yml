@@ -1,0 +1,165 @@
+name: Guards and Wards
+system:
+  description:
+    value: >-
+      <p>You create a ward that protects up to 2,500 square feet of floor space.
+      The warded area can be up to 20 feet tall, and you shape it as one 50-foot
+      square, one hundred 5-foot squares that are contiguous, or twenty-five
+      10-foot squares that are contiguous.</p><p>When you cast this spell, you
+      can specify individuals that are unaffected by the spell's effects. You
+      can also specify a password that, when spoken aloud within 5 feet of the
+      warded area, makes the speaker immune to its effects.</p><p>The spell
+      creates the effects below within the warded area.
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
+      Magic}</em> has no effect on <em>Guards and Wards</em> itself, but each of
+      the following effects can be dispelled. If all four are dispelled,
+      <em>Guards and Wards</em> ends. If you cast the spell every day for 365
+      days on the same area, the spell thereafter lasts until all its effects
+      are dispelled.</p><p><strong>Corridors.</strong> Fog fills all the warded
+      corridors, making them &amp;Reference[HeavilyObscured]. In addition, at
+      each intersection or branching passage offering a choice of direction,
+      there is a 50 percent chance that a creature other than you believes it is
+      going in the opposite direction from the one it
+      chooses.</p><p><strong>Doors.</strong> All doors in the warded area are
+      magically locked, as if sealed by the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplArcaneLock]{Arcane
+      Lock}</em> spell. In addition, you can cover up to ten doors with an
+      illusion to make them appear as plain sections of
+      wall.</p><p><strong>Stairs.</strong> Webs fill all stairs in the warded
+      area from top to bottom, as in the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWeb0000000]{Web}</em>
+      spell. These strands regrow in 10 minutes if they are destroyed while
+      <em>Guards and Wards</em> lasts.</p><p><strong>Other Spell Effect.
+      </strong>Place one of the following magical effects within the warded
+      area:</p><ul><li><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDancingLig]{Dancing
+      Lights}</em> in four corridors, with a simple program that the lights
+      repeat as long as <em>Guards and Wards</em>
+      lasts</li><li><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMagicMouth]{Magic
+      Mouth}</em> in two
+      locations</li><li><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplStinkingCl]{Stinking
+      Cloud}</em> in two locations (the vapors return within 10 minutes if
+      dispersed while <em>Guards and Wards</em>
+      lasts)</li><li><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGustofWind]{Gust
+      of Wind}</em> in one corridor or room (the wind blows continuously while
+      the spell
+      lasts)</li><li><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplSuggestion]{Suggestion}</em>
+      in one 5-foot square; any creature that enters that square receives the
+      suggestion mentally</li></ul>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: hour
+    condition: ''
+    value: 1
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: up to 2,500 square feet of floor space
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+      size: ''
+      count: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a silver rod worth 10+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    0UuktQmXxk0juJgb:
+      type: utility
+      name: ''
+      _id: 0UuktQmXxk0juJgb
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: square
+          size: '50'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  identifier: guards-and-wards
+_id: phbsplGuardsandW
+type: spell
+img: icons/environment/settlement/stone-stairs.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425957322
+  modifiedTime: 1745256794102
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplGuardsandW'

@@ -1,0 +1,254 @@
+_id: Kwt8YDIBHg6JO2v2
+name: Wall of Ice
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] magically forms an opaque wall of ice on
+      a solid surface it can see within 60 feet of it. The wall is 1 foot thick
+      and up to 30 feet long and 10 feet high, or it's a hemispherical dome up
+      to 20 feet in diameter.</p><p>When the wall appears, each creature in its
+      space is pushed out of it by the shortest route. The creature chooses
+      which side of the wall to end up on, unless the creature is incapacitated.
+      The creature then makes a <strong>DC 17 Dexterity</strong> saving throw,
+      taking <strong>35 (10d6) <em>cold damage</em></strong> on a failed save,
+      or half as much damage on a successful one.</p><p>The wall lasts for 1
+      minute or until the [[lookup @name lowercase]] is incapacitated or dies.
+      The wall can be damaged and breached; each 10-foot section has AC 5, 30
+      hit points, vulnerability to <em>fire damage</em>, and immunity to acid,
+      cold, necrotic, poison, and <em>psychic damage</em>. If a section is
+      destroyed, it leaves behind a sheet of frigid air in the space the wall
+      occupied. Whenever a creature finishes moving through the frigid air on a
+      turn, willingly or otherwise, the creature must make a <strong>DC 17
+      Constitution</strong> saving throw, taking <strong>17 (5d6) <em>cold
+      damage</em></strong> on a failed save, or half as much damage on a
+      successful one. The frigid air dissipates when the rest of the wall
+      vanishes.</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] magically forms an opaque wall of ice on
+      a solid surface it can see within 60 feet of it. The wall is 1 foot thick
+      and up to 30 feet long and 10 feet high, or it's a hemispherical dome up
+      to 20 feet in diameter. When the wall appears, each creature in its space
+      is pushed out of it by the shortest route. The creature chooses which side
+      of the wall to end up on, unless the creature is incapacitated. The
+      creature then makes a Dexterity saving throw.</p><p>The wall can be
+      damaged and breached. If a section is destroyed, it leaves behind a sheet
+      of frigid air in the space the wall occupied. Whenever a creature finishes
+      moving through the frigid air on a turn, willingly or otherwise, the
+      creature must make a <strong>Constitution</strong> saving throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: a solid surface it can see within 60 ft.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: line
+          size: '1'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: spell
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      sort: 0
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: a solid surface it can see within 60 ft.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: line
+          size: '1'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '17'
+      sort: 0
+    dnd5eactivity300:
+      _id: dnd5eactivity300
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: a solid surface it can see within 60 ft.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: line
+          size: '1'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: 5d6
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: wall-of-ice
+flags: {}
+img: icons/magic/water/barrier-ice-crystal-wall-jagged-blue.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304969325
+  modifiedTime: 1725992572169
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Kwt8YDIBHg6JO2v2'

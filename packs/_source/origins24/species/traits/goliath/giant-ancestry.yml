@@ -1,0 +1,67 @@
+_id: phbsptGiantAnces
+name: Giant Ancestry
+type: feat
+img: icons/creatures/magical/construct-iron-stomping-yellow.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>You are descended from Giants. Choose one of the following benefits—a
+      supernatural boon from your ancestry; you can use the chosen benefit a
+      number of times equal to your Proficiency Bonus, and you regain all
+      expended uses when you finish a Long Rest:</p><p><strong>Cloud's Jaunt
+      (Cloud Giant). </strong>As a Bonus Action, you magically teleport up to 30
+      feet to an unoccupied space you can see.</p><p><strong>Fire's Burn (Fire
+      Giant).</strong> When you hit a target with an attack roll and deal damage
+      to it, you can also deal 1d10 Fire damage to that
+      target.</p><p><strong>Frost's Chill (Frost Giant).</strong> When you hit a
+      target with an attack roll and deal damage to it, you can also deal 1d6
+      Cold damage to that target and reduce its Speed by 10 feet until the start
+      of your next turn.</p><p><strong>Hill's Tumble (Hill Giant). </strong>When
+      you hit a Large or smaller creature with an attack roll and deal damage to
+      it, you can give that target the Prone condition.</p><p><strong>Stone's
+      Endurance (Stone Giant).</strong> When you take damage, you can take a
+      Reaction to roll 1d12. Add your Constitution modifier to the number rolled
+      and reduce the damage by that total.</p><p><strong>Storm's Thunder (Storm
+      Giant).</strong> When you take damage from a creature within 60 feet of
+      you, you can take a Reaction to deal 1d8 Thunder damage to that
+      creature.</p>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Goliath
+  identifier: giant-ancestry
+  advancement: []
+  cover: null
+  crewed: false
+effects: []
+folder: 4KZykhQTGVAuVo1I
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745340849458
+  modifiedTime: 1745341995313
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptGiantAnces'

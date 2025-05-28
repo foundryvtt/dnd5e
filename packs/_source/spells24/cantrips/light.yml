@@ -1,0 +1,140 @@
+name: Light
+system:
+  description:
+    value: >-
+      <p>You touch one Large or smaller object that isn't being worn or carried
+      by someone else. Until the spell ends, the object sheds Bright Light in a
+      20-foot radius and Dim Light for an additional 20 feet. The light can be
+      colored as you like.</p><p>Covering the object with something opaque
+      blocks the light. The spell ends if you cast it again.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: evo
+  properties:
+    - vocal
+    - material
+  materials:
+    value: a firefly or phosphorescent moss
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    EnaiVH67oUJzyHsF:
+      type: summon
+      _id: EnaiVH67oUJzyHsF
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes:
+        - sm
+        - med
+        - lg
+        - tiny
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: QD99a4WC0JUMMDH7
+          uuid: Compendium.dnd5e.actors24.Actor.phbsplLight00000
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: false
+        mode: ''
+        identifier: ''
+      name: ''
+      img: ''
+  identifier: light
+_id: phbsplLight00000
+type: spell
+img: icons/sundries/lights/candle-pillar-lit-yellow.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+sort: 1100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425961356
+  modifiedTime: 1745256795489
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplLight00000'

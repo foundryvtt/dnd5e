@@ -1,0 +1,133 @@
+_id: udsLtG0BugXHR2JQ
+name: Prestidigitation
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell is a minor magical trick that novice spellcasters use for
+      practice. You create one of the following magical effects within
+      range:</p>
+
+      <ul>
+
+      <li>You create an instantaneous, harmless sensory effect, such as a shower
+      of sparks, a puff of wind, faint musical notes, or an odd odor.</li>
+
+      <li>You instantaneously light or snuff out a candle, a torch, or a small
+      campfire.</li>
+
+      <li>You instantaneously clean or soil an object no larger than 1 cubic
+      foot.</li>
+
+      <li>You chill, warm, or flavor up to 1 cubic foot of nonliving material
+      for 1 hour.</li>
+
+      <li>You make a color, a small mark, or a symbol appear on an object or a
+      surface for 1 hour.</li>
+
+      <li>You create a nonmagical trinket or an illusory image that can fit in
+      your hand and that lasts until the end of your next turn.</li>
+
+      </ul>
+
+      <p>If you cast this spell multiple times, you can have up to three of its
+      non-instantaneous effects active at a time, and you can dismiss such an
+      effect as an action.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '10'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: trs
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: prestidigitation
+sort: 0
+flags: {}
+img: icons/magic/fire/explosion-fireball-small-purple-orange.webp
+effects: []
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037366250
+  modifiedTime: 1725992723271
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!udsLtG0BugXHR2JQ'

@@ -1,0 +1,119 @@
+_id: YpiLQEKGalROn7iJ
+name: Channel Divinity
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>At 2nd level, you gain the ability to channel divine energy directly
+      from your deity, using that energy to fuel magical effects. You start with
+      two such effects: Turn Undead and an effect determined by your domain.
+      Some domains grant you additional effects as you advance in levels, as
+      noted in the domain description.</p><p>When you use your Channel Divinity,
+      you choose which effect to create. You must then finish a short or long
+      rest to use your Channel Divinity again. Some Channel Divinity effects
+      require saving throws. When you use such an effect from this class, the DC
+      equals your cleric spell save DC.</p><p>Beginning at 6th level, you can
+      use your Channel Divinity twice between rests, and beginning at 18th
+      level, you can use it three times between rests. When you finish a short
+      or long rest, you regain your expended uses.</p><section class="secret
+      foundry-note" id="secret-AZYZtT1NonF68bPW"><p><strong>Foundry
+      Note</strong></p><p>Use this to track all the various uses of Channel
+      Divinity for the cleric.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '@scale.cleric.channel-divinity'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Cleric 2
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: channel-divinity
+flags: {}
+img: icons/magic/lightning/bolt-strike-smoke-yellow.webp
+effects: []
+folder: hraxTGrJtk9MmXqT
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037385174
+  modifiedTime: 1725992288721
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!YpiLQEKGalROn7iJ'

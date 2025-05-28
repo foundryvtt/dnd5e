@@ -1,0 +1,188 @@
+_id: phbmnkSuperiorDe
+name: Superior Defense
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/magic/defensive/shield-barrier-blue.webp
+system:
+  description:
+    value: >-
+      <p>At the start of your turn, you can expend 3 Focus Points to bolster
+      yourself against harm for 1 minute or until you have the Incapacitated
+      condition. During that time, you have Resistance to all damage except
+      Force damage.</p><section id="secret-jojCvqn1dDjsyTzI"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature will
+      expend 3 Focus Points and includes an Active Effect which will apply the
+      relevant Resistances.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ki
+  prerequisites:
+    level: 18
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    tED3Z5V5ZlCkyzWU:
+      type: utility
+      _id: tED3Z5V5ZlCkyzWU
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: At the start of your turn
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '3'
+            target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: zAtnsWRpAcTIkjpz
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+  enchant: {}
+  identifier: superior-defense
+effects:
+  - name: Superior Defense
+    img: systems/dnd5e/icons/svg/items/feature.svg
+    origin: Compendium.dnd5e.classes24.Item.phbmnkSuperiorDe
+    transfer: false
+    _id: zAtnsWRpAcTIkjpz
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: acid
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: bludgeoning
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: lightning
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: necrotic
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: piercing
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: psychic
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: radiant
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: slashing
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: thunder
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbmnkSuperiorDe.zAtnsWRpAcTIkjpz'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1745256763393
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1700000
+ownership:
+  default: 0
+_key: '!items!phbmnkSuperiorDe'

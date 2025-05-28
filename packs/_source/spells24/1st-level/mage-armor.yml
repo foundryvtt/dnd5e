@@ -1,0 +1,157 @@
+name: Mage Armor
+system:
+  description:
+    value: >-
+      <p>You touch a willing creature who isn't wearing armor. Until the spell
+      ends, the target's base AC becomes 13 plus its Dexterity modifier. The
+      spell ends early if the target dons armor.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      type: willing
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a piece of cured leather
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: I59O22yjAwzqZOhN
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects:
+        - I59O22yjAwzqZOhN
+  identifier: mage-armor
+_id: phbsplMageArmor0
+type: spell
+img: icons/equipment/head/hat-pointed-buckle-leather-purple.webp
+effects:
+  - _id: I59O22yjAwzqZOhN
+    changes:
+      - key: system.attributes.ac.calc
+        mode: 5
+        value: mage
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 28800
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.spells24.Item.phbsplMageArmor0
+    transfer: false
+    flags: {}
+    tint: '#ffffff'
+    name: Mage Armor
+    description: <p>The target's base AC becomes 13 + its Dexterity modifier.</p>
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.CKZTpZlxj7hjjo2H.ActiveEffect.cfwMU7LuOJ619Lny
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/equipment/chest/breastplate-helmet-metal.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbsplMageArmor0.I59O22yjAwzqZOhN'
+folder: pBaAAtXBCq9FVEnL
+sort: 1200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425962003
+  modifiedTime: 1745256795660
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMageArmor0'

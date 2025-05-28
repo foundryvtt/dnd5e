@@ -1,0 +1,114 @@
+_id: dmgGlovesOfThiev
+name: Gloves of Thievery
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/hand/glove-tooled-leather-red-purple.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon</em></p><p>These gloves are imperceptible
+      while worn. While wearing them, you gain a +5 bonus to Dexterity (Sleight
+      of Hand) checks.</p><section id="secret-MTbVEJqcHy1oERli"
+      class="secret"><p><strong>Foundry Note</strong></p><p>The <strong>Gloves
+      On</strong> Active Effect automates the +5 to your Sleight of Hand
+      checks.</p></section>
+    chat: ''
+  identifier: gloves-of-thievery
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Gloves On
+    img: icons/equipment/hand/glove-tooled-leather-red-purple.webp
+    _id: 6f8ARzOvPmhNZ0NV
+    type: base
+    system: {}
+    changes:
+      - key: system.skills.slt.bonuses.check
+        mode: 2
+        value: '5'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: 1730728665344
+      modifiedTime: 1745611806102
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgGlovesOfThiev.6f8ARzOvPmhNZ0NV'
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745611795283
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 17100000
+ownership:
+  default: 0
+_key: '!items!dmgGlovesOfThiev'

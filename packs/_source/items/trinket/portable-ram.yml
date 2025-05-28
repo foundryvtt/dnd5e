@@ -1,0 +1,124 @@
+_id: srTRzwTfWKO5opOo
+name: Portable Ram
+type: consumable
+img: icons/weapons/maces/mace-skull-ram.webp
+system:
+  description:
+    value: >-
+      <p>You can use a portable ram to break down doors. When doing so, you gain
+      a +4 bonus on the Strength check. One other character can help you use the
+      ram, giving you advantage on this check.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 35
+    units: lb
+  price:
+    value: 4
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: true
+        formula: d20 + @abilities.str.mod +4
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: check
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: touch
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: object
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      check:
+        ability: str
+        dc: {}
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: portable-ram
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 9800000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037304892
+  modifiedTime: 1725992552611
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!srTRzwTfWKO5opOo'

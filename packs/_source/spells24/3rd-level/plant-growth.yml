@@ -1,0 +1,177 @@
+name: Plant Growth
+system:
+  description:
+    value: >-
+      <p><strong>Casting Time:</strong> Action (Overgrowth) or 8 hours
+      (Enrichment)</p><p>This spell channels vitality into plants. The casting
+      time you use determines whether the spell has the Overgrowth or the
+      Enrichment effect below.</p><p><strong>Overgrowth.</strong> Choose a point
+      within range. All normal plants in a 100-foot-radius Sphere centered on
+      that point become thick and overgrown. A creature moving through that area
+      must spend 4 feet of movement for every 1 foot it moves. You can exclude
+      one or more areas of any size within the spell's area from being
+      affected.</p><p><strong>Enrichment. </strong>All plants in a half-mile
+      radius centered on a point within range become enriched for 365 days. The
+      plants yield twice the normal amount of food when harvested. They can
+      benefit from only one <em>Plant Growth</em> per year.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: special
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: ''
+    template:
+      units: ft
+      type: ''
+      size: '100'
+      contiguous: false
+      count: ''
+  range:
+    value: '150'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: trs
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '100'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: ''
+        override: true
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Overgrowth
+      img: icons/magic/nature/plant-undersea-glow-green.webp
+      appliedEffects: []
+    IrJvud8Qz62PeeIQ:
+      type: utility
+      _id: IrJvud8Qz62PeeIQ
+      activation:
+        type: hour
+        value: 8
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Enrichment
+      img: icons/skills/trades/farming-wheat-circle-yellow.webp
+      appliedEffects: []
+  identifier: plant-growth
+_id: phbsplPlantGrowt
+type: spell
+img: icons/magic/nature/plant-sproud-hands-dirt-green.webp
+effects: []
+folder: HCovEE4VoPGlIbKi
+sort: 400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425966224
+  modifiedTime: 1745256796889
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplPlantGrowt'

@@ -1,0 +1,26 @@
+<ol class="unlist trait-list">
+    {{#if (and children selectable topLevel (not otherGroup))}}
+    <li>
+        <label class="name">{{ localize "DND5E.TraitAll" category=label }}</label>
+        <div class="proficiency">
+            {{ formInput field name=(concat keyPath @key) value=chosen input=input }}
+        </div>
+    </li>
+    {{/if}}
+    {{#each choices}}
+    <li {{~#if category}} class="category"{{/if}}>
+        {{#if icon.svg}}
+        <dnd5e-icon src="{{ icon.src }}"></dnd5e-icon>
+        {{else if icon}}
+        <i class="{{ icon.src }} fa-fw" inert></i>
+        {{/if}}
+        <label class="name">{{ label }}</label>
+        <div class="proficiency">
+            {{ formInput ../field name=(concat ../keyPath @key) value=chosen disabled=disabled input=../input }}
+        </div>
+        {{#if children}}
+        {{> "dnd5e.traits-list" choices=children topLevel=false keyPath=../keyPath field=../field input=../input }}
+        {{/if}}
+    </li>
+    {{/each}}
+</ol>

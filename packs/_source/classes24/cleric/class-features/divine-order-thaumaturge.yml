@@ -1,0 +1,105 @@
+_id: phbDivineOrderTh
+name: 'Divine Order: Thaumaturge'
+type: feat
+img: icons/magic/life/ankh-shadow-green.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>You have dedicated yourself to the following sacred
+      role:</p><p><strong>Thaumaturge.</strong> You know one extra cantrip from
+      the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj]{Cleric
+      spell list}. In addition, your mystical connection to the divine gives you
+      a bonus to your Intelligence (Arcana or Religion) checks. The bonus equals
+      your Wisdom modifier (minimum of +1, currently [[lookup
+      @abilities.wis.mod]]).</p><section id="secret-9NLpq7kfc33QLf8I"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes an Active Effect which increases the number of cantrips you can
+      know and grants the bonus to your Intelligence (Arcana or Religion)
+      checks.</p></section>
+    chat: ''
+  source:
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  identifier: divine-order-thaumaturge
+effects:
+  - name: Thaumaturge
+    img: icons/magic/life/ankh-shadow-green.webp
+    _id: 7fucT9vgkryEEoxI
+    type: base
+    system: {}
+    changes:
+      - key: system.scale.cleric.cantrips-known.value
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.skills.arc.bonuses.check
+        mode: 2
+        value: (max(1,@abilities.wis.mod))
+        priority: null
+      - key: system.skills.rel.bonuses.check
+        mode: 2
+        value: (max(1,@abilities.wis.mod))
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbDivineOrderTh.7fucT9vgkryEEoxI'
+folder: 3wY92TRgyyyDkpmF
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866373481
+  modifiedTime: 1745256759495
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1400000
+ownership:
+  default: 0
+_key: '!items!phbDivineOrderTh'

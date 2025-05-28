@@ -1,0 +1,128 @@
+_id: 9gYGkrL6qFTsE6fw
+name: Spike Growth
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>The ground in a 20-foot radius centered on a point within range twists
+      and sprouts hard spikes and thorns. The area becomes difficult terrain for
+      the Duration. When a creature moves into or within the area, it takes 2d4
+      piercing damage for every 5 feet it travels.</p><p>The transformation of
+      the ground is camouflaged to look natural. Any creature that can't see the
+      area at the time the spell is cast must make a Wisdom (Perception) check
+      against your spell save DC to recognize the terrain as hazardous before
+      entering it.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: radius
+      size: '20'
+      contiguous: false
+  range:
+    value: '150'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  materials:
+    value: Seven sharp thorns or seven small twigs, each sharpened to a point
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: 2
+            denomination: 4
+            bonus: ''
+            types:
+              - piercing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: spike-growth
+sort: 0
+flags: {}
+img: icons/magic/nature/vines-thorned-curled-glow-green.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037349482
+  modifiedTime: 1725992717652
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!9gYGkrL6qFTsE6fw'

@@ -1,0 +1,129 @@
+_id: dmgGlovesOfSwimm
+name: Gloves of Swimming and Climbing
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/hand/glove-cuffed-leather-purple.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon (Requires Attunement)</em></p><p>While
+      wearing these gloves, you have a Climb Speed and a Swim Speed equal to
+      your Speed, and you gain a +5 bonus to Strength (Athletics) checks made to
+      climb or swim.</p><section class="secret"
+      id="secret-9sClXeq4AMq44GSR"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Gloves On</strong> Active Effect increases your Climb and Swim
+      speed by 1 to indicate its equivalence to your Speed.  The +5 bonus to
+      checks made to climb or swim should be added as a situational bonus when
+      applicable.</p></section>
+    chat: ''
+  identifier: gloves-of-swimming-and-climbing
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Gloves On
+    img: systems/dnd5e/icons/items/gloves-of-thievery.webp
+    _id: Nh870Ujh6Eqy0RFi
+    type: base
+    system: {}
+    changes:
+      - key: system.skills.ath.bonuses.check
+        mode: 2
+        value: '5'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>You have a Climb Speed and a Swim Speed equal to your Speed, and you
+      gain a +5 bonus to Strength (Athletics) checks made to climb or swim.</p>
+    origin: Compendium.dnd5e.equipment24.Item.dmgGlovesOfSwimm
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.equipment24.Item.dmgGlovesOfThiev.ActiveEffect.6f8ARzOvPmhNZ0NV
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730728909619
+      modifiedTime: 1731355168612
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgGlovesOfSwimm.Nh870Ujh6Eqy0RFi'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256805526
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 17000000
+ownership:
+  default: 0
+_key: '!items!dmgGlovesOfSwimm'

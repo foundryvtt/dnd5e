@@ -40,6 +40,11 @@ export default class AdvancementFlow extends FormApplication {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static _warnedAppV1 = true;
+
+  /* --------------------------------------------- */
+
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -47,6 +52,11 @@ export default class AdvancementFlow extends FormApplication {
       popOut: false
     });
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _customElements = super._customElements.concat(["dnd5e-checkbox"]);
 
   /* -------------------------------------------- */
 
@@ -106,6 +116,16 @@ export default class AdvancementFlow extends FormApplication {
 
     // Call setPosition on manager to adjust for size changes
     this.options.manager?.setPosition();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve automatic application data from the advancement, if supported.
+   * @returns {object|false}  Data to pass to the apply method, or `false` if advancement requirers user intervention.
+   */
+  getAutomaticApplicationValue() {
+    return this.advancement.automaticApplicationValue(this.level);
   }
 
   /* -------------------------------------------- */

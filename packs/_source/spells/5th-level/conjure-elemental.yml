@@ -1,0 +1,134 @@
+_id: 1LkZvINag7KqBmDR
+name: Conjure Elemental
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: "<p>You call forth an elemental servant. Choose an area of air, earth, fire, or water that fills a 10-foot cube within range. An elemental of challenge rating 5 or lower appropriate to the area you chose appears in an unoccupied space within 10 feet of it. For example, a fire elemental emerges from a bonfire, and an earth elemental rises up from the ground. The elemental disappears when it drops to 0 hit points or when the spell ends.</p><p>The elemental is friendly to you and your companions for the duration. Roll initiative for the elemental, which has its own turns. It obeys any verbal commands that you issue to it (no action required by you). If you don't issue any commands to the elemental, it defends itself from hostile creatures but otherwise takes no actions.</p><p>If your concentration is broken, the elemental doesn't disappear. Instead, you lose control of the elemental, it becomes hostile toward you and your companions, and it might attack. An uncontrolled elemental can't be dismissed by you, and it disappears 1 hour after you summoned it.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a spell slot of 6th level or higher, the challenge rating increases by 1 for each slot level above 5th.</p>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: >-
+      an area of air, earth, fire, or water that fills a 10-foot cube within
+      range
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '90'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: con
+  materials:
+    value: >-
+      Burning incense for air, soft clay for earth, sulfur and phosphorus for
+      fire, or water and sand for water.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: '1'
+          cr: '@item.level'
+          name: ''
+          _id: BFnNfSl7Ojcw4Rm2
+          uuid: ''
+          level:
+            min: null
+            max: null
+          types:
+            - elemental
+      summon:
+        identifier: ''
+        mode: cr
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: conjure-elemental
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-star-pentagon-orange.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037345639
+  modifiedTime: 1725992716468
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!1LkZvINag7KqBmDR'

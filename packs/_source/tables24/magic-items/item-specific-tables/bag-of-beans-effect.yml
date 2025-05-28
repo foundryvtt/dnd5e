@@ -1,0 +1,336 @@
+_id: dmgBagOfBeansEff
+name: Bag of Beans Effect
+img: icons/containers/bags/pouch-cloth-tan.webp
+description: ''
+results:
+  - type: text
+    range:
+      - 1
+      - 1
+    _id: pzLmgpW1yj3mYwzX
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      [[/r 5d4#Toadstools]] toadstools sprout. If a creature eats a toadstool,
+      roll [[/r 1d2#Toadstool side-effect]]{any die}. On an odd roll, the eater
+      must succeed on a [[/save ability=con dc=15 format=long]] or take
+      [[/damage 5d6 type=poison]] damage and have the &amp;Reference[Poisoned]
+      condition for 1 hour. On an even roll, the eater gains [[/healing 5d6
+      type=temphp]] for 1 hour.
+    name: ''
+    _key: '!tables.results!dmgBagOfBeansEff.pzLmgpW1yj3mYwzX'
+  - type: text
+    range:
+      - 2
+      - 10
+    _id: Jhz5rfNBanKmcBVS
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A geyser erupts and spouts water, beer, mayonnaise, tea, vinegar, wine, or
+      oil (DM’s choice) 30 feet into the air for [[/r 1d4#Geyser duration
+      (minutes)]] minutes.
+    name: ''
+    _key: '!tables.results!dmgBagOfBeansEff.Jhz5rfNBanKmcBVS'
+  - type: text
+    range:
+      - 11
+      - 20
+    _id: U8QzXRMnrYX14lFR
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A @UUID[Compendium.dnd5e.actors24.Actor.mmTreant00000000]{Treant} sprouts.
+      Roll [[/r 1d2#Treant alignment]]{any die}. On an odd roll, the treant is
+      Chaotic Evil. On an even roll, the treant is Chaotic Good.
+    name: ''
+    _key: '!tables.results!dmgBagOfBeansEff.U8QzXRMnrYX14lFR'
+  - type: text
+    range:
+      - 21
+      - 30
+    _id: Y0w1OXdEMe9adHEU
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      An animate but immobile stone statue in your likeness rises and makes
+      verbal threats against you. If you leave it and others come near, it
+      describes you as the most heinous of villains and directs the newcomers to
+      find and attack you. If you are on the same plane of existence as the
+      statue, it knows where you are. The statue becomes inanimate after 24
+      hours.
+    name: ''
+    _key: '!tables.results!dmgBagOfBeansEff.Y0w1OXdEMe9adHEU'
+  - type: text
+    range:
+      - 31
+      - 40
+    _id: uo7H3eT6dBXf1kas
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A campfire with green flames springs forth and burns for 24 hours or until
+      it is extinguished.
+    name: ''
+    _key: '!tables.results!dmgBagOfBeansEff.uo7H3eT6dBXf1kas'
+  - type: text
+    range:
+      - 41
+      - 50
+    _id: 2XUZ3pcRsXgZVNUs
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Three @UUID[Compendium.dnd5e.actors24.Actor.mmShriekerFungus]{Shrieker
+      Fungi} sprout.
+    name: ''
+    _key: '!tables.results!dmgBagOfBeansEff.2XUZ3pcRsXgZVNUs'
+  - type: text
+    range:
+      - 51
+      - 60
+    _id: mr4qhK4Tkaotu5Lo
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      [[/r 1d4 + 4#Bright-pink toads]] bright-pink
+      @UUID[Compendium.dnd5e.actors24.Actor.mmFrog0000000000]{toads} crawl
+      forth. Whenever a toad is touched, it transforms into a Large or smaller
+      monster of the DM’s choice that acts in accordance with its alignment and
+      nature. The monster remains for 1 minute, then disappears in a puff of
+      bright-pink smoke.
+    name: ''
+    _key: '!tables.results!dmgBagOfBeansEff.mr4qhK4Tkaotu5Lo'
+  - type: text
+    range:
+      - 61
+      - 70
+    _id: udTEwZi4QrPNpiRQ
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A hungry @UUID[Compendium.dnd5e.actors24.Actor.mmBulette0000000]{Bulette}
+      burrows up and attacks.
+    name: ''
+    _key: '!tables.results!dmgBagOfBeansEff.udTEwZi4QrPNpiRQ'
+  - type: text
+    range:
+      - 71
+      - 80
+    _id: aynJXtHJBHMjXmzH
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A fruit tree grows. It has [[/r 1d10 + 20#Pieces of fruit]] fruit, [[/gmr
+      1d8#Fruits acting as Potions]] of which act as randomly determined
+      potions. The tree vanishes after 1 hour. Picked fruit remains, retaining
+      any magic for 30 days.
+    name: ''
+    _key: '!tables.results!dmgBagOfBeansEff.aynJXtHJBHMjXmzH'
+  - type: text
+    range:
+      - 81
+      - 90
+    _id: 0JjaduR8bN32lrRT
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A nest of [[/r 1d4 + 3#Rainbow-colored eggs]] rainbow-colored eggs springs
+      up. Any creature that eats an egg makes a [[/save ability=con dc=20
+      format=long]]. On a successful save, a creature permanently increases its
+      lowest ability score by 1, randomly choosing among equally low scores. On
+      a failed save, the creature takes [[/damage 10d6 type=force]] damage from
+      an internal explosion.
+    name: ''
+    _key: '!tables.results!dmgBagOfBeansEff.0JjaduR8bN32lrRT'
+  - type: text
+    range:
+      - 91
+      - 95
+    _id: JmBO5EE0A1artKn7
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A pyramid with a 60-foot-square base bursts upward. Inside is a burial
+      chamber containing a
+      @UUID[Compendium.dnd5e.actors24.Actor.mmMummy000000000]{Mummy} , a
+      @UUID[Compendium.dnd5e.actors24.Actor.mmMummyLord00000]{Mummy Lord} , or
+      some other Undead of the DM’s choice. Its sarcophagus contains treasure of
+      the DM’s choice.
+    name: ''
+    _key: '!tables.results!dmgBagOfBeansEff.JmBO5EE0A1artKn7'
+  - type: text
+    range:
+      - 96
+      - 100
+    _id: 1Ki8jM8135BzIQcF
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A giant beanstalk sprouts, growing to a height of the DM’s choice. The top
+      leads where the DM chooses, such as to a great view, a cloud giant’s
+      castle, or another plane of existence.
+    name: ''
+    _key: '!tables.results!dmgBagOfBeansEff.1Ki8jM8135BzIQcF'
+replacement: true
+displayRoll: true
+folder: I2IHCZhwMY7ttiXw
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.2
+  createdTime: 1727883396246
+  modifiedTime: 1745611683650
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1800000
+ownership:
+  default: 0
+formula: 1d100
+_key: '!tables!dmgBagOfBeansEff'

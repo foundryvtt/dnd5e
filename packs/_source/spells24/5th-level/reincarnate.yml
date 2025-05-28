@@ -1,0 +1,118 @@
+name: Reincarnate
+system:
+  description:
+    value: >-
+      <p>You touch a dead Humanoid or a piece of one. If the creature has been
+      dead no longer than 10 days, the spell forms a new body for it and calls
+      the soul to enter that body.
+      @Embed[Compendium.dnd5e.tables24.RollTable.phbsplReincarnat rollable
+      classes="caption-top"]</p><p>The reincarnated creature makes any choices
+      that a species' description offers, and the creature recalls its former
+      life. It retains the capabilities it had in its original form, except it
+      loses the traits of its previous species and gains the traits of its new
+      one.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: hour
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: dead Humanoid or a piece of one
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 5
+  school: nec
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: rare oils worth 1,000+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    bSqu9vf9hRI4v7VX:
+      type: utility
+      name: ''
+      _id: bSqu9vf9hRI4v7VX
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      roll:
+        prompt: false
+        visible: false
+  identifier: reincarnate
+_id: phbsplReincarnat
+type: spell
+img: icons/creatures/magical/spirit-undead-horned-blue.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425968888
+  modifiedTime: 1745256797533
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplReincarnat'

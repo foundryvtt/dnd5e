@@ -1,0 +1,124 @@
+_id: ohqAIBg6de989CIo
+name: Animal Shapes
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Your magic turns others into beasts. Choose any number of willing
+      creatures that you can see within range. You transform each target into
+      the form of a Large or smaller beast with a challenge rating of 4 or
+      lower. On subsequent turns, you can use your action to transform affected
+      creatures into new forms.</p><p>The transformation lasts for the duration
+      for each target, or until the target drops to 0 hit points or dies. You
+      can choose a different form for each target. A target's game statistics
+      are replaced by the statistics of the chosen beast, though the target
+      retains its alignment and Intelligence, Wisdom, and Charisma scores. The
+      target assumes the hit points of its new form, and when it reverts to its
+      normal form, it returns to the number of hit points it had before it
+      transformed. If it reverts as a result of dropping to 0 hit points, any
+      excess damage carries over to its normal form. As long as the excess
+      damage doesn't reduce the creature's normal form to 0 hit points, it isn't
+      knocked unconscious. The creature is limited in the actions it can perform
+      by the nature of its new form, and it can't speak or cast
+      spells.</p><p>The target's gear melds into the new form. The target can't
+      activate, wield, or otherwise benefit from any of its equipment.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      type: creature
+      choice: false
+    template:
+      units: any
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 8
+  school: trs
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: animal-shapes
+sort: 0
+flags: {}
+img: icons/magic/nature/wolf-paw-glow-large-teal-blue.webp
+effects: []
+folder: x1XTiOgx4DJ34wc5
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037365097
+  modifiedTime: 1725992722757
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ohqAIBg6de989CIo'

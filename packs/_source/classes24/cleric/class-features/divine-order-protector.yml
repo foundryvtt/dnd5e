@@ -1,0 +1,96 @@
+_id: phbDivineOrderPr
+name: 'Divine Order: Protector'
+type: feat
+img: icons/magic/holy/barrier-shield-winged-blue.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>You have dedicated yourself to the following sacred
+      role:</p><p><strong>Protector.</strong> Trained for battle, you gain
+      proficiency with Martial weapons and training with Heavy
+      armor.</p><section id="secret-Tsm148wTyiFWlMFv"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes an Active Effect which grants the proficiency and
+      training.</p></section>
+    chat: ''
+  source:
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: Cleric
+  identifier: divine-order-protector
+effects:
+  - name: 'Divine Order: Protector'
+    img: icons/magic/holy/barrier-shield-winged-blue.webp
+    _id: Mvzn4plDBs9fDfph
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.weaponProf.value
+        mode: 2
+        value: mar
+        priority: null
+      - key: system.traits.armorProf.value
+        mode: 2
+        value: hvy
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbDivineOrderPr.Mvzn4plDBs9fDfph'
+folder: 3wY92TRgyyyDkpmF
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866373481
+  modifiedTime: 1745256759459
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1300000
+ownership:
+  default: 0
+_key: '!items!phbDivineOrderPr'

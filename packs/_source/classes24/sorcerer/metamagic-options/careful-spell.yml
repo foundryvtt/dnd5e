@@ -1,0 +1,111 @@
+_id: phbmmoCarefulSpe
+name: Careful Spell
+type: feat
+img: icons/magic/nature/beam-hand-leaves-green.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Cost: 1 Sorcery Point</p></blockquote><p>When you cast a
+      spell that forces other creatures to make a saving throw, you can protect
+      some of those creatures from the spell's full force. To do so, spend 1
+      Sorcery Point and choose a number of those creatures up to your Charisma
+      modifier (minimum of one creature). A chosen creature automatically
+      succeeds on its saving throw against the spell, and it takes no damage if
+      it would normally take half damage on a successful
+      save.</p><p><strong>Creatures You Can Protect:</strong> [[lookup
+      @abilities.cha.mod]]</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: metamagic
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    jD3THRjOL2ILRYuM:
+      type: utility
+      name: Careful Spell
+      _id: jD3THRjOL2ILRYuM
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: >-
+          When you cast a spell that forces other creatures to make a saving
+          throw
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbscrFontOfMagi
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '@abilities.cha.mod'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: careful-spell
+effects: []
+folder: 6RKLEZHPbdWG3fZe
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866286897
+  modifiedTime: 1745256762636
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbmmoCarefulSpe'

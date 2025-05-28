@@ -1,0 +1,108 @@
+_id: phbmnkSlowFall00
+name: Slow Fall
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/magic/control/silhouette-fall-slip-prone.webp
+system:
+  description:
+    value: >-
+      <p>You can take a Reaction when you fall to reduce any damage you take
+      from the fall by an amount equal to five times your Monk
+      level.</p><section id="secret-VRAItEYXrZxp3s8Z"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes a <strong>Reduce</strong> activity which can be used to restore
+      lost Hit Points equal to five times your Monk level.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 4
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    cWpSb7kUmzdpFoc4:
+      type: heal
+      _id: cWpSb7kUmzdpFoc4
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: 5 * @classes.monk.levels
+        scaling:
+          number: 1
+        bonus: ''
+      name: Reduce
+  enchant: {}
+  identifier: slow-fall
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1745256763345
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1500000
+ownership:
+  default: 0
+_key: '!items!phbmnkSlowFall00'

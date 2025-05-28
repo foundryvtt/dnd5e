@@ -1,0 +1,157 @@
+name: Prayer of Healing
+system:
+  description:
+    value: >-
+      <p>Up to five creatures of your choice who remain within range for the
+      spell's entire casting gain the benefits of a &amp;Reference[shortrest]
+      and also regain 2d8 Hit Points. A creature can't be affected by this spell
+      again until that creature finishes a Long Rest.</p><p><strong>Using a
+      Higher-Level Spell Slot. </strong>The healing increases by 1d8 for each
+      spell slot level above 2.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '5'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: abj
+  properties:
+    - vocal
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: BrBVse9ezicC6IVW
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: 2
+        denomination: 8
+        bonus: ''
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: ''
+        scaling:
+          mode: whole
+          number: 1
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: prayer-of-healing
+_id: phbsplPrayerofHe
+type: spell
+img: icons/magic/holy/prayer-hands-glowing-yellow.webp
+effects:
+  - name: Healed by Prayer
+    origin: Compendium.dnd5e.spells24.Item.phbsplPrayerofHe
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/holy/prayer-hands-glowing-yellow.webp
+    _id: BrBVse9ezicC6IVW
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>A creature can’t be affected by the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplPrayerofHe] spell again until
+      that creature finishes a Long Rest.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplPrayerofHe.BrBVse9ezicC6IVW'
+folder: 3SjcO2acsFnWegp4
+sort: 1300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425966923
+  modifiedTime: 1745256797072
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplPrayerofHe'

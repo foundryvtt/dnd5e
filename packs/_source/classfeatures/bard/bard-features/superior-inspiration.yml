@@ -1,0 +1,105 @@
+_id: GBYN5rH4nh1ocRlY
+name: Superior Inspiration
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>At 20th level, when you roll initiative and have no uses of
+      @UUID[Compendium.dnd5e.classfeatures.Item.hpLNiGq7y67d2EHA]{Bardic
+      Inspiraton} left, you regain one use.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Bard 20
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: When you roll initiative and have no uses of Bardic Inspiration
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: Compendium.dnd5e.classfeatures.Item.hpLNiGq7y67d2EHA
+            value: '-1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: superior-inspiration
+flags: {}
+img: icons/magic/earth/explosion-lava-stone-green.webp
+effects: []
+folder: XEu43QVhYfhUcewt
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037382182
+  modifiedTime: 1725992287807
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!GBYN5rH4nh1ocRlY'

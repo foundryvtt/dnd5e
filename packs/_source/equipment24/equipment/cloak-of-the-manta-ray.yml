@@ -1,0 +1,108 @@
+_id: dmgCloakOfTheMan
+name: Cloak of the Manta Ray
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/head/hood-cloth-teal-gold.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Uncommon (Requires
+      Attunement)</em></p></div><p>While wearing this cloak, you can breathe
+      underwater, and you have a Swim Speed of 60 feet.</p>
+    chat: ''
+  identifier: cloak-of-the-manta-ray
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: 'Aquatic Bonuses: Swimming and Breathing'
+    img: icons/creatures/fish/fish-bluefin-yellow-blue.webp
+    _id: OXkwPsxYwsIddeXY
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.swim
+        mode: 4
+        value: '60'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>You can breathe underwater, and you have a Swim Speed of 60 feet.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729020512041
+      modifiedTime: 1729020753676
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgCloakOfTheMan.OXkwPsxYwsIddeXY'
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712698745
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 8300000
+ownership:
+  default: 0
+_key: '!items!dmgCloakOfTheMan'

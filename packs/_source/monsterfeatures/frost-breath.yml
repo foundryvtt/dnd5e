@@ -1,0 +1,121 @@
+_id: Z7U6z4HD1ORlkTIJ
+name: Frost Breath
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] exhales a 15-foot cone of cold air. Each
+      creature in that area must succeed on a <strong>DC 10 Dexterity</strong>
+      saving throw, taking <strong>5 (2d4) <em>cold damage</em></strong> on a
+      failed save, or half as much damage on a successful one.</p><p></p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] exhales a 15-foot cone of cold air. Each
+      creature in that area must make a <strong>Dexterity</strong> saving
+      throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: recharge
+        formula: '6'
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: cone
+          size: '15'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '10'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: frost-breath
+flags: {}
+img: icons/magic/air/wind-tornado-wall-blue.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304972795
+  modifiedTime: 1725992573244
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Z7U6z4HD1ORlkTIJ'

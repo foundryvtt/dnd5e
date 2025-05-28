@@ -1,0 +1,156 @@
+_id: yw0tYQkOMCgKZ8Ur
+name: Guards and Wards
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create a ward that protects up to 2,500 square feet of floor space
+      (an area 50 feet square, or one hundred 5-foot squares or twenty-five
+      10-foot squares). The warded area can be up to 20 feet tall, and shaped as
+      you desire. You can ward several stories of a stronghold by dividing the
+      area among them, as long as you can walk into each contiguous area while
+      you are casting the spell.</p><p>When you cast this spell, you can specify
+      individuals that are unaffected by any or all of the Effects that you
+      choose. You can also specify a password that, when spoken aloud, makes the
+      speaker immune to these Effects.</p><p>Guards and wards creates the
+      following Effects within the warded
+      area.</p><p><strong>Corridors</strong>. Fog fills all the warded
+      corridors, making them heavily obscured. In addition, at each intersection
+      or branching passage offering a choice of direction, there is a 50 percent
+      chance that a creature other than you will believe it is going in the
+      opposite direction from the one it chooses.</p><p><strong>Doors</strong>.
+      All doors in the warded area are magically locked, as if sealed by an
+      Arcane Lock spell. In addition, you can cover up to ten doors with an
+      Illusion (equivalent to the illusory object function of the Minor Illusion
+      spell) to make them appear as plain sections of
+      wall.</p><p><strong>Stairs</strong>. Webs fill all stairs in the warded
+      area from top to bottom, as the web spell. These strands regrow in 10
+      minutes if they are burned or torn away while guards and wards
+      lasts.</p><p><strong>Other Spell Effect</strong>. You can place your
+      choice of one of the following magical Effects within the warded area of
+      the stronghold.</p>
+
+      <ul>
+
+      <li>Place Dancing Lights in four corridors. You can designate a simple
+      program that the lights repeat as long as guards and wards lasts.</li>
+
+      <li>Place Magic Mouth in two locations.</li>
+
+      <li>Place Stinking Cloud in two locations. The vapors appear in the places
+      you designate; they return within 10 minutes if dispersed by wind while
+      guards and wards lasts.</li>
+
+      <li>Place a constant Gust of Wind in one corridor or room.</li>
+
+      <li>Place a Suggestion in one location. You select an area of up to 5 feet
+      square, and any creature that enters or passes through the area receives
+      the Suggestion mentally.</li>
+
+      </ul>
+
+      <p>The whole warded area radiates magic. A Dispel Magic cast on a specific
+      effect, if successful, removes only that effect.</p><p>You can create a
+      permanently guarded and warded structure by casting this spell there every
+      day for one year.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: abj
+  materials:
+    value: >-
+      Burning incense, a small measure of brimstone and oil, a knotted string, a
+      small amount of umber hulk blood, and a small silver rod worth at least
+      10gp
+    consumed: false
+    cost: 10
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: guards-and-wards
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-star-pentagon-magenta.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037367074
+  modifiedTime: 1725992723637
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!yw0tYQkOMCgKZ8Ur'

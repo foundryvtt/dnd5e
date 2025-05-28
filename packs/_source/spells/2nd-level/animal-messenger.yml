@@ -1,0 +1,125 @@
+_id: X8w9EzYLGc4vQ1H2
+name: Animal Messenger
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>By means of this spell, you use an animal to deliver a message. Choose
+      a Tiny beast you can see within range, such as a squirrel, a blue jay, or
+      a bat. You specify a location, which you must have visited, and a
+      recipient who matches a general description, such as "a man or woman
+      dressed in the uniform of the town guard" or "a red-haired dwarf wearing a
+      pointed hat." You also speak a message of up to twenty-five words. The
+      target beast travels for the duration of the spell toward the specified
+      location, covering about 50 miles per 24 hours for a flying messenger, or
+      25 miles for other animals.</p><p>When the messenger arrives, it delivers
+      your message to the creature that you described, replicating the sound of
+      your voice. The messenger speaks only to a creature matching the
+      description you gave. If the messenger doesn't reach its destination
+      before the spell ends, the message is lost, and the beast makes its way
+      back to where you cast this spell.</p><p><strong>At Higher
+      Levels.</strong> If you cast this spell using a spell slot of 3rd level or
+      higher, the duration of the spell increases by 48 hours for each slot
+      level above 2nd.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: 24 + (@item.level - 2) * 48
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: enc
+  materials:
+    value: A morsel of food.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: animal-messenger
+sort: 0
+flags: {}
+img: icons/magic/nature/wolf-paw-glow-small-teal-blue.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037358288
+  modifiedTime: 1725992720523
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!X8w9EzYLGc4vQ1H2'

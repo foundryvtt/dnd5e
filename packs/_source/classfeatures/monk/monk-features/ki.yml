@@ -1,0 +1,126 @@
+_id: 10b6z2W1txNkrGP7
+name: Ki
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Starting at 2nd level, your training allows you to harness the mystic
+      energy of ki. Your access to this energy is represented by a number of ki
+      points. Your monk level equals the number of ki points you have, so a 2nd
+      level monk has 2 ki points, a 16th level monk has 16.</p><p>You can spend
+      these points to fuel various ki features. You start knowing three such
+      features:
+      @UUID[Compendium.dnd5e.classfeatures.Item.5MwNlVZK7m6VolOH]{Flurry of
+      Blows},
+      @UUID[Compendium.dnd5e.classfeatures.Item.TDglPcxIVEzvVSgK]{Patient
+      Defense}, and
+      @UUID[Compendium.dnd5e.classfeatures.Item.yrSFIGTaQOH2PFRI]{Step of the
+      Wind}. You learn more ki features as you gain levels in this
+      class.</p><p>When you spend a ki point, it is unavailable until you finish
+      a short or long rest, at the end of which you draw all of your expended ki
+      back into yourself. You must spend at least 30 minutes of the rest
+      meditating to regain your ki points.</p><p>Some of your ki features
+      require your target to make a saving throw to resist the feature's
+      effects. The saving throw DC is calculated as
+      follows:</p><p><em><strong>Ki save DC</strong> = 8 + your proficiency
+      bonus + your Wisdom modifier</em></p><section class="secret foundry-note"
+      id="secret-gGH32momMmy9KjV3"><p><strong>Foundry Note</strong></p><p>Use
+      this to track all the various uses of ki for the monk.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '@classes.monk.levels'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Monk 2
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: monks-focus
+sort: 0
+flags: {}
+img: icons/magic/light/explosion-beam-impact-silhouette.webp
+effects: []
+folder: TMmNG8ujFDBEWXRe
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037379343
+  modifiedTime: 1725992286853
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!10b6z2W1txNkrGP7'

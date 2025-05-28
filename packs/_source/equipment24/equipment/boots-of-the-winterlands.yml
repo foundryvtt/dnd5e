@@ -1,0 +1,118 @@
+_id: dmgBootsOfTheWin
+name: Boots of the Winterlands
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/feet/boots-leather-banded-furred.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Uncommon (Requires
+      Attunement)</em></p></div><p>These furred boots are snug and feel warm.
+      While wearing them, you gain the following benefits.</p><p><strong>Cold
+      Resistance.</strong> You have Resistance to Cold damage and can tolerate
+      temperatures of 0 degrees Fahrenheit or lower without any additional
+      protection.</p><p><strong>Winter Strider.</strong> You ignore Difficult
+      Terrain created by ice or snow.</p>
+    chat: ''
+  identifier: boots-of-the-winterlands
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Cold Resistance
+    img: icons/magic/water/snowflake-ice-gray.webp
+    _id: QMx1VWIiJ0XZHepP
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>You have Resistance to Cold damage and can tolerate temperatures of 0
+      degrees Fahrenheit or lower without any additional protection.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: 1728681470080
+      modifiedTime: 1728681570978
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgBootsOfTheWin.QMx1VWIiJ0XZHepP'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 4200000
+ownership:
+  default: 0
+_key: '!items!dmgBootsOfTheWin'

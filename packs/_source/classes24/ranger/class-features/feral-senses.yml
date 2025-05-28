@@ -1,0 +1,90 @@
+_id: phbrgrFeralSense
+name: Feral Senses
+type: feat
+folder: h5OUzaJcZzsNsOGc
+img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+system:
+  description:
+    value: >-
+      <p>Your connection to the forces of nature grants you Blindsight with a
+      range of 30 feet.</p><section class="secret"
+      id="secret-g31kKSDLrDEpbpbo"><p><strong>Foundry Note</strong></p><p>This
+      feature includes an Active Effect which upgrades your Blindsight to 30
+      feet if you do not already have it.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 18
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: feral-senses
+effects:
+  - name: Feral Senses
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    _id: ji48r1IGeRKQhpi9
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.senses.blindsight
+        mode: 4
+        value: '30'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbrgrFeralSense.ji48r1IGeRKQhpi9'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735932734523
+  modifiedTime: 1745256764866
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgrFeralSense'

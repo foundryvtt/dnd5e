@@ -1,0 +1,126 @@
+name: Costume Clothes
+type: equipment
+img: icons/equipment/head/crown-feather-brown.webp
+system:
+  description:
+    value: >-
+      <p>A complete costume usually used by performers and artists in all manner
+      of entertainment halls or for those that simply refuse to get out of
+      character.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 2
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 5
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: null
+    dex: null
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  container: 6OYR11aJX2dEVtOj
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: costume-clothes
+effects: []
+folder: Dx3K2y0J1wJUPP9m
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037313608
+  modifiedTime: 1725992555574
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_id: ug9bTGmTTEN7JwmP
+sort: 150000
+ownership:
+  default: 0
+_key: '!items!ug9bTGmTTEN7JwmP'

@@ -1,0 +1,122 @@
+_id: hu2pgYS1RD7hglvg
+name: Horror Nimbus
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>the [[lookup @name lowercase]] magically emits
+      scintillating, multicolored light. Each creature within 15 feet of the
+      [[lookup @name lowercase]] that can see the light must succeed on a 
+      <strong>DC 15 Wisdom</strong> saving throw or be frightened for 1 minute.
+      </p><p>A creature can repeat the saving throw at the end of each of its
+      turns, ending the effect on itself on a success. If a creature's saving
+      throw is successful or the effect ends for it, the creature is immune to
+      the [[lookup @name lowercase]]'s Horror Nimbus for the next 24
+      hours.</p></section><p>A creature can repeat the saving throw at the end
+      of each of its turns, ending the effect on itself on a success. If a
+      creature's saving throw is successful or the effect ends for it, the
+      creature is immune to the [[lookup @name lowercase]]'s Horror Nimbus for
+      the next 24 hours.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '15'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '15'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: horror-nimbus
+flags: {}
+img: icons/creatures/unholy/demons-horned-glowing-pink.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304974869
+  modifiedTime: 1725992573841
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!hu2pgYS1RD7hglvg'

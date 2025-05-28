@@ -1,0 +1,48 @@
+_id: phbrgrRelentless
+name: Relentless Hunter
+type: feat
+folder: h5OUzaJcZzsNsOGc
+img: icons/skills/wounds/injury-pain-body-orange.webp
+system:
+  description:
+    value: <p>Taking damage can't break your Concentration on Hunter's Mark.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 14
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: relentless-hunter
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735932734523
+  modifiedTime: 1745256765098
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgrRelentless'

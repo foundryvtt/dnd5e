@@ -1,0 +1,142 @@
+_id: WdpSeGqhZpptz37y
+name: Bite
+ownership:
+  default: 0
+type: weapon
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>Melee Weapon Attack: +11 to hit, reach 10 ft., one target. Hit: 17
+      (2d10 + 6) piercing damage.</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] attacks with its Bite.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  attunement: ''
+  equipped: true
+  rarity: ''
+  identified: true
+  cover: null
+  range:
+    value: 10
+    long: null
+    units: ft
+    reach: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties: []
+  proficient: 1
+  unidentified:
+    description: ''
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    LL3fnYXElb0RgP7W:
+      _id: LL3fnYXElb0RgP7W
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+  container: null
+  attuned: false
+  crewed: false
+  ammunition: {}
+  magicalBonus: null
+  identifier: bite
+flags: {}
+img: icons/creatures/abilities/mouth-teeth-long-red.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304972151
+  modifiedTime: 1725992573033
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!WdpSeGqhZpptz37y'

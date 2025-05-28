@@ -1,0 +1,137 @@
+name: Chain Lightning
+system:
+  description:
+    value: >-
+      <p>You launch a lightning bolt toward a target you can see within range.
+      Three bolts then leap from that target to as many as three other targets
+      of your choice, each of which must be within 30 feet of the first target.
+      A target can be a creature or an object and can be targeted by only one of
+      the bolts.</p><p>Each target makes a Dexterity saving throw, taking 10d8
+      Lightning damage on a failed save or half as much damage on a successful
+      one.</p><p><strong>Using a Higher-Level Spell Slot.</strong> One
+      additional bolt leaps from the first target to another target for each
+      spell slot level above 6.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '@item.level - 2'
+      type: creatureOrObject
+      special: secondary targets must be within 30 feet of initial target
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '150'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: three silver pins
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    3bSNutM8zsXK1UgP:
+      type: save
+      _id: 3bSNutM8zsXK1UgP
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: '8'
+            bonus: ''
+            types:
+              - lightning
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: chain-lightning
+_id: phbsplChainLight
+type: spell
+img: icons/magic/lightning/bolt-strike-sparks-teal.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 2000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425944436
+  modifiedTime: 1745256787509
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplChainLight'

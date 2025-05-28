@@ -1,0 +1,242 @@
+name: Slow
+system:
+  description:
+    value: >-
+      <p>You alter time around up to six creatures of your choice in a 40-foot
+      Cube within range. Each target must succeed on a Wisdom saving throw or be
+      affected by this spell for the duration.</p><p>An affected target's Speed
+      is halved, it takes a −2 penalty to AC and Dexterity saving throws, and it
+      can't take Reactions. On its turns, it can take either an action or a
+      Bonus Action, not both, and it can make only one attack if it takes the
+      Attack action. If it casts a spell with a Somatic component, there is a
+      [[/r 1d100cs&lt;=25#Slowed spell cast success]]{25 percent} chance the
+      spell fails as a result of the target making the spell's gestures too
+      slowly.</p><p>An affected target repeats the save at the end of each of
+      its turns, ending the spell on itself on a success.</p><section
+      id="secret-2RobIVhv3tn7gmU7" class="secret"><p><strong>Foundry
+      Note</strong></p><p>The inline roll above will return 1 if it succeeded or
+      0 if it failed.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ft
+      type: cube
+      size: '40'
+      contiguous: false
+      count: ''
+  range:
+    value: '120'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a drop of molasses
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: z1lkguBohjqXRSHm
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    dnd5eactivity300:
+      _id: dnd5eactivity300
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: z1lkguBohjqXRSHm
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: 1d100cs>25
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: slow
+_id: phbsplSlow000000
+type: spell
+img: icons/magic/time/clock-stopwatch-white-blue.webp
+effects:
+  - name: Slowed
+    origin: Compendium.dnd5e.spells24.Item.phbsplSlow000000
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: z1lkguBohjqXRSHm
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '-2'
+        priority: null
+      - key: system.attributes.movement.burrow
+        mode: 1
+        value: '0.5'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 1
+        value: '0.5'
+        priority: null
+      - key: system.attributes.movement.fly
+        mode: 1
+        value: '0.5'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 1
+        value: '0.5'
+        priority: null
+      - key: system.attributes.movement.walk
+        mode: 1
+        value: '0.5'
+        priority: null
+      - key: system.abilities.dex.bonuses.save
+        mode: 2
+        value: '-2'
+        priority: null
+    description: >-
+      <p>An affected target’s Speed is halved, it takes a −2 penalty to AC and
+      Dexterity saving throws, and it can’t take Reactions. On its turns, it can
+      take either an action or a Bonus Action, not both, and it can make only
+      one attack if it takes the Attack action. If it casts a spell with a
+      Somatic component, there is a [[/r 1d100cs&gt;25#Slowed spell cast
+      success]]{25 percent} chance the spell fails as a result of the target
+      making the spell’s gestures too slowly.</p><p>An affected target repeats
+      the [[/save ability=wis]] save at the end of each of its turns, ending the
+      spell on itself on a success.</p>
+    transfer: false
+    statuses: []
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.yqUDoxk4x0NWG5Bz.ActiveEffect.YtN8kTDQyxFaxpEx
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/time/clock-stopwatch-white-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbsplSlow000000.z1lkguBohjqXRSHm'
+folder: HCovEE4VoPGlIbKi
+sort: 112500
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425971412
+  modifiedTime: 1745256798405
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSlow000000'

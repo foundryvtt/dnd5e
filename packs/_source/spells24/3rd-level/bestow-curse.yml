@@ -1,0 +1,618 @@
+name: Bestow Curse
+system:
+  description:
+    value: >-
+      <p>You touch a creature, which must succeed on a Wisdom saving throw or
+      become cursed for the duration. Until the curse ends, the target suffers
+      one of the following effects of your choice:</p><ul><li>Choose one
+      ability. The target has Disadvantage on ability checks and saving throws
+      made with that ability (<strong>Curse Ability</strong>
+      activity).</li><li>The target has Disadvantage on attack rolls against you
+      (<strong>Curse Attacks</strong> activity).</li><li>In combat, the target
+      must succeed on a Wisdom saving throw at the start of each of its turns or
+      be forced to take the &amp;Reference[Dodge] action on that turn
+      (<strong>Curse Actions</strong> activity).</li><li>If you deal damage to
+      the target with an attack roll or a spell, the target takes an extra 1d8
+      Necrotic damage (<strong>Curse Resilience</strong>
+      activity).</li></ul><p><strong>Using a Higher-Level Spell Slot.</strong>
+      If you cast this spell using a level 4 spell slot, you can maintain
+      Concentration on it for up to 10 minutes. If you use a level 5+ spell
+      slot, the spell doesn't require Concentration, and the duration becomes 8
+      hours (level 5–6 slot) or 24 hours (level 7–8 slot). If you use a level 9
+      spell slot, the spell lasts until dispelled.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: nec
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    PYFPZ4aLWjKJ1tLZ:
+      type: save
+      _id: PYFPZ4aLWjKJ1tLZ
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Curse Ability
+      img: ''
+      appliedEffects: []
+    azVyTkiGPeIqMzxu:
+      type: save
+      _id: azVyTkiGPeIqMzxu
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: u7Yc7mxHYPDvipS1
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Curse Attacks
+      img: ''
+      appliedEffects:
+        - u7Yc7mxHYPDvipS1
+    nWXSXy8ybiVolvEP:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: u7Yc7mxHYPDvipS1
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Curse Actions
+      _id: nWXSXy8ybiVolvEP
+      img: ''
+      appliedEffects:
+        - u7Yc7mxHYPDvipS1
+    fkQUKM8bxHgAUcg5:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: DRsQi8p3Zvhte2G0
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 8
+            bonus: ''
+            types:
+              - necrotic
+            scaling:
+              mode: ''
+              number: 1
+        onSave: none
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Curse Resilience
+      _id: fkQUKM8bxHgAUcg5
+      img: ''
+      appliedEffects:
+        - DRsQi8p3Zvhte2G0
+  identifier: bestow-curse
+_id: phbsplBestowCurs
+type: spell
+img: icons/magic/unholy/hands-praying-fire-green.webp
+effects:
+  - name: Cursed Charisma
+    origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/abilities/charisma.svg
+    _id: 2Xjz5PKhyDferpZ7
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The target has Disadvantage on ability checks and saving throws made
+      with the chosen ability.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - cursed
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.sC2IXWDs07oTt5JN
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725055417995
+      modifiedTime: 1725055533898
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplBestowCurs.2Xjz5PKhyDferpZ7'
+  - name: Cursed Constitution
+    origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/abilities/constitution.svg
+    _id: BXWN6AGeNbxrRBUZ
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The target has Disadvantage on ability checks and saving throws made
+      with the chosen ability.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - cursed
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.XVQwGWbC0A1svBNm
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725055419250
+      modifiedTime: 1725055539962
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplBestowCurs.BXWN6AGeNbxrRBUZ'
+  - name: Cursed Dexterity
+    origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/abilities/dexterity.svg
+    _id: pG5HdDpW8VELR1O3
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The target has Disadvantage on ability checks and saving throws made
+      with the chosen ability.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - cursed
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.Mmss2SPIy7wtt2PV
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725055420606
+      modifiedTime: 1725055546409
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplBestowCurs.pG5HdDpW8VELR1O3'
+  - name: Cursed Intelligence
+    origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/abilities/intelligence.svg
+    _id: eA7PgIuucNGqZ1AS
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The target has Disadvantage on ability checks and saving throws made
+      with the chosen ability.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - cursed
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.FfVB2Yyb7wfgpsQB
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725055422101
+      modifiedTime: 1725055491416
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplBestowCurs.eA7PgIuucNGqZ1AS'
+  - name: Cursed Strength
+    origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/abilities/strength.svg
+    _id: m5aRx9iXnJi2WWPU
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The target has Disadvantage on ability checks and saving throws made
+      with the chosen ability.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - cursed
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.ljMTBKPVmEnLPX1b
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725055423595
+      modifiedTime: 1725055515289
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplBestowCurs.m5aRx9iXnJi2WWPU'
+  - name: Cursed Wisdom
+    origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/abilities/wisdom.svg
+    _id: qLBTtRHOpGfv4IAb
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The target has Disadvantage on ability checks and saving throws made
+      with the chosen ability.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - cursed
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.k2569xtIeXKRReLU
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725055424987
+      modifiedTime: 1725055527988
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplBestowCurs.qLBTtRHOpGfv4IAb'
+  - name: Cursed Attacks
+    img: icons/skills/melee/sword-damaged-broken-purple.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
+    transfer: false
+    _id: u7Yc7mxHYPDvipS1
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>The target has Disadvantage on attack rolls against you.</p>
+    tint: '#ffffff'
+    statuses:
+      - cursed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725055567320
+      modifiedTime: 1725055842134
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplBestowCurs.u7Yc7mxHYPDvipS1'
+  - name: Cursed Actions
+    img: icons/magic/control/debuff-chains-shackles-movement-blue.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
+    transfer: false
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>In combat, the target must succeed on a [[/save ability=wis
+      dc=@attributes.spell.dc format=long]] at the start of each of its turns or
+      be forced to take the &amp;Reference[Dodge] action on that turn.</p>
+    tint: '#ffffff'
+    statuses:
+      - cursed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725055653002
+      modifiedTime: 1725055732741
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: T3x6XvQbSkg6kW6u
+    _key: '!items.effects!phbsplBestowCurs.T3x6XvQbSkg6kW6u'
+  - name: Cursed Resilience
+    img: icons/skills/wounds/bone-broken-marrow-red.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
+    transfer: false
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>If you deal damage to the target with an attack roll or a spell, the
+      target takes an extra [[/damage 1d8 type=necrotic]] damage.</p>
+    tint: '#ffffff'
+    statuses:
+      - cursed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725055858341
+      modifiedTime: 1725055971137
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: DRsQi8p3Zvhte2G0
+    _key: '!items.effects!phbsplBestowCurs.DRsQi8p3Zvhte2G0'
+folder: HCovEE4VoPGlIbKi
+sort: 3600000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425943234
+  modifiedTime: 1745256786773
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplBestowCurs'

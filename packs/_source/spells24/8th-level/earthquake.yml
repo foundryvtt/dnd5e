@@ -1,0 +1,304 @@
+name: Earthquake
+system:
+  description:
+    value: >-
+      <p>Choose a point on the ground that you can see within range. For the
+      duration, an intense tremor rips through the ground in a 100-foot-radius
+      circle centered on that point. The ground there is Difficult
+      Terrain.</p><p>When you cast this spell and at the end of each of your
+      turns for the duration, each creature on the ground in the area makes a
+      Dexterity saving throw. On a failed save, a creature has the
+      &amp;Reference[Prone] condition, and its Concentration is
+      broken.</p><p>You can also cause the effects
+      below.</p><p><strong>Fissures.</strong> A total of [[/r 1d6]] fissures
+      open in the spell's area at the end of the turn you cast it. You choose
+      the fissures' locations, which can't be under structures. Each fissure is
+      [[/r 1d10 * 10]] feet deep and 10 feet wide, and it extends from one edge
+      of the spell's area to another edge. A creature in the same space as a
+      fissure must succeed on a Dexterity saving throw or fall in. A creature
+      that successfully saves moves with the fissure's edge as it
+      opens.</p><p><strong>Structures.</strong> The tremor deals [[/damage 50
+      type=bludgeoning]] damage to any structure in contact with the ground in
+      the area when you cast the spell and at the end of each of your turns
+      until the spell ends. If a structure drops to 0 Hit Points, it
+      collapses.</p><p>A creature within a distance from a collapsing structure
+      equal to half the structure's height makes a Dexterity saving throw. On a
+      failed save, the creature takes 12d6 Bludgeoning damage, has the
+      &amp;Reference[Prone apply=false] condition, and is buried in the rubble,
+      requiring a [[/check ability=str skill=ath dc=20]] check as an action to
+      escape. On a successful save, the creature takes half as much damage
+      only.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: space
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: circle
+      size: '100'
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '500'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 8
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a fractured rock
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    Z1voDdIYLdJfGwMH:
+      type: save
+      _id: Z1voDdIYLdJfGwMH
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Cast
+      img: icons/magic/sonic/explosion-shock-sound-wave.webp
+      appliedEffects: []
+    2CCthCZliyjEoavy:
+      type: save
+      _id: 2CCthCZliyjEoavy
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: end of turn of initial casting
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: '[[1d6]] Fissure(s)<br>[[10 * 1d10]] Feet deep'
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '1'
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: line
+          size: '200'
+          width: '10'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: End of Turn Fissures
+      img: icons/magic/earth/lava-stone-fire-eye.webp
+      appliedEffects: []
+    qQtXMvVJZDL3NtNF:
+      type: save
+      _id: qQtXMvVJZDL3NtNF
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: when a structure drops to 0 Hit Points
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: 6UanNy7OTib1zFSq
+      range:
+        override: true
+        units: spec
+        special: half of the structure's height
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: ''
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 12
+            denomination: '6'
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Collapsing Structure Save
+      img: icons/environment/settlement/building-rubble.webp
+      appliedEffects:
+        - 6UanNy7OTib1zFSq
+  identifier: earthquake
+_id: phbsplEarthquake
+type: spell
+img: icons/magic/earth/barrier-stone-brown-green.webp
+effects:
+  - name: Buried in Rubble
+    img: icons/environment/settlement/building-rubble.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplEarthquake
+    transfer: false
+    _id: 6UanNy7OTib1zFSq
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>On a failed save, the creature takes 12d6 Bludgeoning damage, has the
+      &amp;Reference[Prone apply=false] condition, and is buried in the rubble,
+      requiring a [[/check ability=str skill=ath dc=20]] check as an action to
+      escape.</p>
+    tint: '#ffffff'
+    statuses:
+      - prone
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725301184846
+      modifiedTime: 1725301621147
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplEarthquake.6UanNy7OTib1zFSq'
+folder: M5CvwK9zVtzx6Dnn
+sort: 100782
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425951573
+  modifiedTime: 1745256792050
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplEarthquake'

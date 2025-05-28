@@ -1,0 +1,217 @@
+name: Warding Bond
+system:
+  description:
+    value: >-
+      <p>You touch another creature that is willing and create a mystic
+      connection between you and the target until the spell ends. While the
+      target is within 60 feet of you, it gains a +1 bonus to AC and saving
+      throws, and it has &amp;Reference[damageresistance]{Resistance} to all
+      damage. Also, each time it takes damage, you take the same amount of
+      damage.</p><p>The spell ends if you drop to 0 Hit Points or if you and the
+      target become separated by more than 60 feet. It also ends if the spell is
+      cast again on either of the connected creatures.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: willing
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: >-
+      a pair of platinum rings worth 50+ GP each, which you and the target must
+      wear for the duration
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: HRfwqQtKmhNzaGX8
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: warding-bond
+_id: phbsplWardingBon
+type: spell
+img: icons/magic/movement/abstract-ribbons-red-orange.webp
+effects:
+  - name: Bonded
+    origin: Compendium.dnd5e.spells24.Item.phbsplWardingBon
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/equipment/finger/ring-band-engraved-scrolls-silver.webp
+    _id: HRfwqQtKmhNzaGX8
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: acid
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: bludgeoning
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: force
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: lightning
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: necrotic
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: piercing
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: psychic
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: radiant
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: slashing
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: thunder
+        priority: null
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '1'
+        priority: null
+    description: >-
+      <p>While the target is within 60 feet of you, it gains a +1 bonus to AC
+      and saving throws, and it has Resistance to all damage. Also, each time it
+      takes damage, you take the same amount of damage.</p><p>The spell ends if
+      you drop to 0 Hit Points or if you and the target become separated by more
+      than 60 feet. It also ends if the spell is cast again on either of the
+      connected creatures.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplWardingBon.HRfwqQtKmhNzaGX8'
+folder: 3SjcO2acsFnWegp4
+sort: 112500
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425977406
+  modifiedTime: 1745256799886
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplWardingBon'

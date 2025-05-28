@@ -1,0 +1,509 @@
+_id: dmgMagicItems000
+name: Magic Items
+pages:
+  - sort: 0
+    name: Magic Item Categories
+    type: text
+    _id: ECu9eaTCA5POlB30
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: "<p>Every magic item belongs to a category. The Magic Item Categories table lists the nine categories and provides examples. Rules for the categories appear after the table.</p><table><caption>Magic Item Categories</caption><thead><tr><th><p>Category</p></th><th><p>Examples</p></th></tr></thead><tbody><tr><td><p>Armor</p></td><td><p><em>+1 Leather Armor</em>, <em>+1 Shield</em></p></td></tr><tr><td><p>Potions</p></td><td><p><em>Potion of Healing</em></p></td></tr><tr><td><p>Rings</p></td><td><p><em>Ring of Invisibility</em></p></td></tr><tr><td><p>Rods</p></td><td><p><em>Immovable Rod</em></p></td></tr><tr><td><p>Scrolls</p></td><td><p><em>Spell Scroll</em></p></td></tr><tr><td><p>Staffs</p></td><td><p><em>Staff of Striking</em></p></td></tr><tr><td><p>Wands</p></td><td><p><em>Wand of Fireballs</em></p></td></tr><tr><td><p>Weapons</p></td><td><p><em>+1 Ammunition</em>, <em>+1 Longsword</em></p></td></tr><tr><td><p>Wondrous Items</p></td><td><p><em>Bag of Holding</em>, <em>Boots of Elvenkind</em></p></td></tr></tbody></table><h2>Armor</h2><p>An item in the Armor category is typically a magical version of armor from @UUID[Compendium.dnd5e.content24.JournalEntry.phbEquipment0000]{Equipment}. Unless an armor’s description notes otherwise, the armor must be worn for its magic to function.</p><p>Some suits of magic armor specify the type of armor they are, such as Chain Mail or Plate Armor. If no type is specified, choose the type or determine it randomly.</p><h2>Potions</h2><p>An item in the Potion category might be a magical brew that must be imbibed or an oil that must be applied to a creature or an object. A typical potion consists of 1 ounce of liquid in a vial.</p><p><em><strong>Using a Potion.</strong></em> Potions are consumable items. Drinking a potion or administering it to another creature requires a Bonus Action. Applying an oil might take longer as specified in its description. Once used, a potion takes effect immediately, and it is used up.</p><p><em><strong>Mixing Potions.</strong></em> A character might drink one potion while still under the effects of another or pour several potions into a single container. The strange ingredients used in creating potions can result in unpredictable interactions.</p><p>When a character mixes two potions together, roll on the Potion Miscibility table. If more than two are combined, roll again for each subsequent potion, combining the results. Unless the effects are immediately obvious, reveal them only when they become evident.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgPotionMiscibi rollable]</p><h2>Rings</h2><p>For its magic to function, an item in the Ring category must be worn on a finger or a similar digit unless its description notes otherwise.</p><h2>Rods</h2><p>An item in the Rod category is a scepter usually made of metal, wood, or bone. A typical rod weighs 2 to 5 pounds.</p><p>Unless its description notes otherwise, a rod can be used as an Arcane Focus.</p><h2>Scrolls</h2><p>An item in the Scroll category is a roll of paper or parchment, sometimes attached to wooden rods and typically kept safe in a tube of ivory, jade, leather, metal, or wood. The most prevalent scroll is the <em>Spell Scroll</em>, a spell stored in written form. However, some scrolls, like the <em>Scroll of Protection</em>, bear an incantation that isn’t a spell.</p><p><em><strong>Using a Scroll.</strong></em> Scrolls are consumable items. Unleashing the magic in a scroll requires the user to read the scroll. When its magic has been invoked, the scroll can’t be used again. Its words fade, or it crumbles into dust.</p><p>Any creature that can understand a written language can read a scroll and attempt to activate it unless its description notes otherwise.</p><section class=\"fvtt advice\"><figure class=\"icon\"><img src=\"icons/vtt-512.png\" /></figure><article><h3>Create Scrolls from Spells</h3><p>You can easily create a Scroll for a Spell by right clicking on the spell and selecting the <span class=\"reference\"><em class=\"fa-solid fa-scroll fa-fw\">\_</em> Create Scroll</span> option.</p></article></section><h2>Staffs</h2><p>Items in the Staff category vary widely in appearance: some are of nearly equal diameter throughout and smooth, others are gnarled and twisted, some are made of wood, and others are composed of polished metal or crystal. A staff weighs between 2 and 7 pounds and serves well as a walking stick or cane.</p><p>Unless its description notes otherwise, a staff can be used as a nonmagical Quarterstaff and an Arcane Focus.</p><h2>Wands</h2><p>An item in the Wand category is typically 12 to 15 inches long and crafted of metal, bone, or wood. It is tipped with metal, crystal, stone, or some other material.</p><p>Unless its description notes otherwise, a wand can be used as an Arcane Focus.</p><h2>Weapons</h2><p>A magic weapon is typically a magical version of a weapon from @UUID[Compendium.dnd5e.content24.JournalEntry.phbEquipment0000]{Equipment}. Some magic weapons specify the type of weapon they are in their descriptions, such as a Longsword or Longbow. If no weapon type is specified, you may choose the type or determine it randomly.</p><p><em><strong>Ammunition.</strong></em> If a magic weapon has the Ammunition property, ammunition fired from it is considered magical for the purpose of any rule that cares whether a weapon is magical or not.</p><h2>Wondrous Items</h2><p>Wondrous Items include wearable items such as boots, belts, capes, amulets, brooches, and circlets. Bags, carpets, figurines, horns, musical instruments, and more also fall into this category.</p>"
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.2
+      createdTime: null
+      modifiedTime: 1745547210476
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!dmgMagicItems000.ECu9eaTCA5POlB30'
+  - sort: 0
+    name: Magic Item Rarity
+    type: text
+    _id: qDuny4owDodH8RDQ
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Every magic item has a rarity, which provides a rough measure of an
+        item’s power relative to other magic items. The rarities are shown in
+        the Magic Item Rarities and Values table.</p><p>Common magic items, such
+        as a <em>Potion of Healing</em>, are the most plentiful. Artifacts, such
+        as the <em>Dragon Orb</em>, are priceless, unique, and difficult to
+        acquire.</p><h2>Magic Item Values by Rarity</h2><p>Common magic items
+        can often be bought in a town or city. Uncommon and Rare magic items are
+        usually found only in cities, and rarer magic items might be sold only
+        in wondrous locations, such as the City of Brass or Sigil. If you allow
+        characters to buy and sell magic items in your campaign, rarity can help
+        you set prices for those items. Gold Piece values are provided in the
+        Magic Item Rarities and Values table, though a seller might ask for a
+        service rather than coin as payment.</p><p>If a magic item incorporates
+        an item that has a purchase cost in Equipment (such as a weapon or a
+        suit of armor), add that item’s cost to the magic item’s value. For
+        example, <em>+1 Armor</em> (Plate Armor) has a value of 5,500 GP, which
+        is the sum of a Rare magic item’s value (4,000 GP) and the cost of Plate
+        Armor (1,500 GP).</p><table><caption>Magic Item Rarities and
+        Values</caption><thead><tr><th><p>Rarity</p></th><th><p>Value*</p></th></tr></thead><tbody><tr><td><p>Common</p></td><td><p>100
+        GP</p></td></tr><tr><td><p>Uncommon</p></td><td><p>400
+        GP</p></td></tr><tr><td><p>Rare</p></td><td><p>4,000
+        GP</p></td></tr><tr><td><p>Very Rare</p></td><td><p>40,000
+        GP</p></td></tr><tr><td><p>Legendary</p></td><td><p>200,000
+        GP</p></td></tr><tr><td><p>Artifact</p></td><td><p>Priceless</p></td></tr></tbody></table><p>*Halve
+        the value for a consumable item other than a <em>Spell Scroll</em>. The
+        value of a <em>Spell Scroll</em> is double what it costs to scribe the
+        scroll (as specified in the
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCraftingEquip.JournalEntryPage.8hAsl8JueZ3GvyS2]{Scribing
+        Spell Scrolls} section of Equipment).</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.2
+      createdTime: null
+      modifiedTime: 1745547666288
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!dmgMagicItems000.qDuny4owDodH8RDQ'
+  - sort: 0
+    name: Activating a Magic Item
+    type: text
+    _id: 4AEfQUDZXzv0lAoA
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>It usually takes a Magic action to activate a magic item. The item’s
+        user might also need to do something special. The description of each
+        item category or individual item details how an item is activated.
+        Certain items use the following rules for their
+        activation.</p><h2>Command Word</h2><p>A command word is a word or short
+        phrase that must be spoken or signed for an item to work. Spoken command
+        words must be audible and fail to work in areas where all sound is
+        suppressed, as in the area of the <em>Silence</em>
+        spell.</p><h2>Consumable Items</h2><p>Some items are consumed—used up,
+        in other words—when they are activated. A <em>Potion of Healing</em>
+        must be swallowed, for example, while the writing vanishes from a scroll
+        when it is read. Once used, a consumable item loses its
+        magic.</p><h2>Spells Cast from Items</h2><p>Some magic items allow the
+        user to cast a spell from the item. The spell is cast at the lowest
+        possible spell and caster level, doesn’t expend any of the user’s spell
+        slots, and requires no components unless the item’s description notes
+        otherwise. The spell uses its normal casting time, range, and duration,
+        and the user of the item must concentrate if the spell requires
+        Concentration. Many items, such as Potions, bypass the casting of a
+        spell and confer the spell’s effects with its usual duration. Certain
+        items make exceptions to these rules, changing the casting time,
+        duration, or other parts of a spell.</p><p>A magic item may require the
+        user to use their own spellcasting ability when casting a spell from the
+        item. If the user has more than one spellcasting ability, the user
+        chooses which one to use with the item. If the user doesn’t have a
+        spellcasting ability, their spellcasting ability modifier is +0 for the
+        item, and the user’s Proficiency Bonus
+        applies.</p><h2>Charges</h2><p>Some magic items have charges that must
+        be expended to activate their properties. The number of charges an item
+        has remaining is revealed when the <em>Identify</em> spell is cast on
+        it. A creature attuned to an item knows how many charges the item has
+        and how many it regains.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.2
+      createdTime: null
+      modifiedTime: 1745547982731
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!dmgMagicItems000.4AEfQUDZXzv0lAoA'
+  - sort: 0
+    name: '"The Next Dawn"'
+    type: text
+    _id: GcIebWGnwi7i7oaF
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Magic items often have charges or properties that recharge at the
+        next dawn or some other specified time. If such an item is on a world or
+        plane of existence where the specified event doesn’t occur, the DM
+        determines when the item recharges.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.2
+      createdTime: null
+      modifiedTime: 1728066865030
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!dmgMagicItems000.GcIebWGnwi7i7oaF'
+  - sort: 0
+    name: Cursed Items
+    type: text
+    _id: HyRrFlQhYbgRttRR
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A magic item’s description specifies whether it bears a curse. Most
+        methods of identifying items, including the <em>Identify</em> spell,
+        fail to reveal such a curse.</p><p>Attunement to a cursed item can’t be
+        ended voluntarily unless the curse is broken first, such as with a
+        <em>Remove Curse</em> spell.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.2
+      createdTime: null
+      modifiedTime: 1728066902463
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!dmgMagicItems000.HyRrFlQhYbgRttRR'
+  - sort: 0
+    name: Magic Item Resilience
+    type: text
+    _id: W5mRHhmNWTWBooI5
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A magic item is at least as durable as a nonmagical item of its kind.
+        Most magic items, other than Potions and Scrolls, have Resistance to all
+        damage.</p><p>An Artifact can be destroyed only in some special way.
+        Otherwise, it is impervious to damage. Learning how to destroy an
+        Artifact usually requires research or the completion of a quest.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.2
+      createdTime: null
+      modifiedTime: 1728848746439
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!dmgMagicItems000.W5mRHhmNWTWBooI5'
+  - sort: -100000
+    name: Overview
+    type: text
+    _id: FsbanAqpAEtJoecr
+    system: {}
+    title:
+      show: false
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Magic items are gleaned from the hoards of felled monsters or
+        discovered in long-lost vaults. Such items grant capabilities a
+        character could rarely have otherwise, or they complement their owner’s
+        capabilities in wondrous ways.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1728919466643
+      modifiedTime: 1745623926263
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!dmgMagicItems000.FsbanAqpAEtJoecr'
+  - sort: 0
+    name: Crafting Magic Items
+    type: text
+    _id: CmKJpbyrDuVrAkIs
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Equipment contains rules on
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCraftingEquip.JournalEntryPage.n47iwiqPFPn2zRqX]{brewing}
+        <em>Potions of Healing</em> and
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCraftingEquip.JournalEntryPage.8hAsl8JueZ3GvyS2]{scribing}
+        <em>Spell Scrolls</em>. To create other magic items, follow the rules
+        below. In these rules, “you” refers to the character crafting the magic
+        item.</p><h2>Arcana Proficiency</h2><p>To craft a magic item, you and
+        any assistants must have proficiency in the Arcana
+        skill.</p><h2>Tools</h2><p>The Magic Item Tools table lists which tool
+        is required to make a magic item of each category. You must use the
+        required tool to make an item and have proficiency with that tool. Any
+        assistants must also have proficiency with it. For more information on
+        the tools, see Equipment.</p><table><caption>Magic Item
+        Tools</caption><thead><tr><th><p>Item Category</p></th><th><p>Required
+        Tool</p></th></tr></thead><tbody><tr><td><p>Armor</p></td><td><p>Leatherworker’s
+        Tools, Smith’s Tools, or Weaver’s Tools depending on the kind of armor
+        as noted in the tools’
+        descriptions</p></td></tr><tr><td><p>Potion</p></td><td><p>Alchemist’s
+        Supplies or <span>Herbalism</span>
+        Kit</p></td></tr><tr><td><p>Ring</p></td><td><p>Jeweler’s
+        Tools</p></td></tr><tr><td><p>Rod</p></td><td><p>Woodcarver’s
+        Tools</p></td></tr><tr><td><p>Scroll</p></td><td><p>Calligrapher’s
+        Supplies</p></td></tr><tr><td><p>Staff</p></td><td><p>Woodcarver’s
+        Tools</p></td></tr><tr><td><p>Wand</p></td><td><p>Woodcarver’s
+        Tools</p></td></tr><tr><td><p>Weapon</p></td><td><p>Leatherworker’s
+        Tools, Smith’s Tools, or Woodcarver’s Tools depending on the kind of
+        weapon as noted in the tools’
+        descriptions</p></td></tr><tr><td><p>Wondrous
+        Item</p></td><td><p>Tinker’s Tools or the tool required to make the
+        nonmagical item on which the magic item is
+        based</p></td></tr></tbody></table><h2>Spells</h2><p>If a magic item
+        allows its user to cast any spells from it, you must have all those
+        spells prepared every day you spend crafting the item.</p><h2>Time and
+        Cost</h2><p>Crafting a magic item takes an amount of time and money
+        based on the item’s rarity as shown in the Magic Item Crafting Time and
+        Cost table.</p><p><em><strong>Work per Day.</strong></em> For each day
+        of crafting, you must work for 8 hours. If an item requires multiple
+        days, those days needn’t be
+        consecutive.</p><p><em><strong>Assistants.</strong></em> Characters can
+        combine their efforts to shorten the crafting time. Divide the time
+        needed to create an item by the number of characters working on it.
+        Normally, only one other character can assist you, but the GM might
+        allow more assistants.</p><p><em><strong>Raw Materials.</strong></em>
+        The cost in the table represents the raw materials needed to make a
+        magic item. The GM determines whether appropriate raw materials are
+        available. In a city, there is a 75 percent chance that the materials
+        are available, and in any other settlement, that chance is 25 percent.
+        If materials aren’t available, you must wait at least 7 days before
+        checking on the availability again.</p><p>If a magic item incorporates
+        an item that has a purchase cost (such as a weapon or a suit of armor),
+        you must also pay that entire cost or craft that item using the rules in
+        Equipment. For example, to make <em>+1 Armor</em> (Plate Armor), you
+        must pay 3,500 GP or pay 2,000 GP and craft the
+        armor.</p><table><caption>Magic Item Crafting Time and
+        Cost</caption><thead><tr><th><p>Item
+        Rarity</p></th><th><p>Time*</p></th><th><p>Cost*</p></th></tr></thead><tbody><tr><td><p>Common</p></td><td><p>5
+        days</p></td><td><p>50
+        GP</p></td></tr><tr><td><p>Uncommon</p></td><td><p>10
+        days</p></td><td><p>200
+        GP</p></td></tr><tr><td><p>Rare</p></td><td><p>50
+        days</p></td><td><p>2,000 GP</p></td></tr><tr><td><p>Very
+        Rare</p></td><td><p>125 days</p></td><td><p>20,000
+        GP</p></td></tr><tr><td><p>Legendary</p></td><td><p>250
+        days</p></td><td><p>100,000 GP</p></td></tr></tbody></table><p
+        class="Table-Styles_Table-Footnote">*The time and cost are halved for a
+        consumable item other than a <em>Spell Scroll</em>, whose crafting time
+        and cost are given in Equipment.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: 1745548440742
+      modifiedTime: 1745548507536
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!dmgMagicItems000.CmKJpbyrDuVrAkIs'
+  - sort: 0
+    name: Sentient Magic Items
+    type: text
+    _id: AMFpeeVHTKXvGbHA
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Some magic items have sentience and personality. Such an item might
+        be possessed, haunted by the spirit of a previous owner, or self-aware
+        thanks to the magic used to create it. A sentient item might be a
+        cherished ally to its wielder or a continual thorn in the
+        side.</p><p>Most sentient items are weapons, but other kinds of items
+        can manifest sentience. Single-use items such as potions and scrolls are
+        never sentient.</p><p>The GM controls sentient magic items and their
+        activated properties. A bearer who maintains a good relationship with
+        the item can access those properties. If the relationship is strained, a
+        conflict can ensue (see @UUID[.AMFpeeVHTKXvGbHA#conflict]{Conflict}
+        below).</p><h2>Sentient Magic Item Traits</h2><p>When you make a
+        sentient magic item, you create the item’s persona much as you would
+        create an NPC, with these
+        exceptions.</p><p><em><strong>Abilities.</strong></em> A sentient magic
+        item has Intelligence, Wisdom, and Charisma scores. Choose the item’s
+        abilities, or determine them randomly as follows: roll [[/r 4d6kh3]] for
+        each one, dropping the lowest roll and totaling the
+        rest.</p><p><em><strong>Alignment.</strong></em> A sentient magic item
+        has an alignment. Its creator or nature might suggest an alignment.
+        Otherwise, pick an alignment or roll on the
+        @UUID[Compendium.dnd5e.tables24.RollTable.dmgSenAlignment0]{Sentient
+        Item's Alignment} table.</p><p><em><strong>Communication.</strong></em>
+        A sentient item communicates by sharing its emotions, broadcasting its
+        thoughts telepathically, or speaking aloud. You can choose how it
+        communicates or roll on the
+        @UUID[Compendium.dnd5e.tables24.RollTable.dmgSenCommunicat]{Sentient
+        Item’s Communication} table.</p><p><em><strong>Senses.</strong></em> A
+        sentient item can perceive its surroundings out to a limited range. You
+        can choose its senses or roll on the
+        @UUID[Compendium.dnd5e.tables24.RollTable.dmgSenSenses0000]{Sentient
+        Item’s Senses} table.</p><p><em><strong>Special Purpose.</strong></em>
+        You can give a sentient item an objective it pursues, perhaps to the
+        exclusion of all else. As long as the wielder’s use of the item aligns
+        with that special purpose, the item remains cooperative. Deviating from
+        this course might cause conflict between the wielder and the item (see
+        Conflict below). You can pick a special purpose or roll on the
+        @UUID[Compendium.dnd5e.tables24.RollTable.dmgSenSpecialPur]{Sentient
+        Item’s Special Purpose}
+        table.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgSenAlignment0
+        rollable]</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgSenCommunicat
+        rollable]</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgSenSpecialPur
+        rollable]</p><h2>Conflict</h2><p>When the bearer of a sentient item acts
+        in a manner opposed to the item’s alignment or purpose, conflict can
+        arise. When such a conflict occurs, the item’s bearer makes a Charisma
+        saving throw (DC 12 plus the item’s Charisma modifier). On a failed
+        save, the item makes one or more of the following
+        demands:</p><p><strong>Chase My Dreams.</strong> The item demands that
+        its bearer pursue the item’s goals to the exclusion of all other
+        goals.</p><p><strong>Get Rid of It.</strong> The item demands that its
+        bearer dispose of anything the item finds repugnant.</p><p><strong>It’s
+        Time for a Change.</strong> The item demands to be given to someone
+        else.</p><p><strong>Keep Me Close.</strong> The item insists on being
+        carried or worn at all times.</p><p>If its bearer refuses to comply with
+        the item’s demands, the item can do any of the
+        following:</p><ul><li>Make it impossible for its bearer to attune to
+        it.</li><li>Suppress one or more of its activated
+        properties.</li><li>Attempt to take control of its bearer, whereupon the
+        bearer makes a Charisma saving throw (DC 12 plus the item’s Charisma
+        modifier). On a failed save, the bearer has the &amp;Reference[Charmed]
+        condition for [[/r 1d12]] hours. While Charmed in this way, the bearer
+        must try to follow the item’s commands. If the bearer takes damage, it
+        repeats the save, ending the effect on a success. Whether or not the
+        attempt to control its bearer succeeds, the item can’t use this power
+        again until the next dawn.</li></ul>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: 1745548766572
+      modifiedTime: 1745549210175
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!dmgMagicItems000.AMFpeeVHTKXvGbHA'
+folder: 2id2XWDktpiQIf0Q
+flags:
+  dnd5e:
+    type: chapter
+    showPages: true
+    title: Magic Items
+    position: 10
+    navigation:
+      previous: dmgRunningCombat
+      next: dmgMagicItemList
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883339433
+  modifiedTime: 1745677863746
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 50000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!dmgMagicItems000'

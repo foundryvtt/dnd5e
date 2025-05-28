@@ -1,0 +1,178 @@
+name: Move Earth
+system:
+  description:
+    value: >-
+      <p>Choose an area of terrain no larger than 40 feet on a side within
+      range. You can reshape dirt, sand, or clay in the area in any manner you
+      choose for the duration. You can raise or lower the area's elevation,
+      create or fill in a trench, erect or flatten a wall, or form a pillar. The
+      extent of any such changes can't exceed half the area's largest dimension.
+      For example, if you affect a 40-foot square, you can create a pillar up to
+      20 feet high, raise or lower the square's elevation by up to 20 feet, dig
+      a trench up to 20 feet deep, and so on. It takes 10 minutes for these
+      changes to complete. Because the terrain's transformation occurs slowly,
+      creatures in the area can't usually be trapped or injured by the ground's
+      movement.</p><p>At the end of every 10 minutes you spend concentrating on
+      the spell, you can choose a new area of terrain to affect within
+      range.</p><p>This spell can't manipulate natural stone or stone
+      construction. Rocks and structures shift to accommodate the new terrain.
+      If the way you shape the terrain would make a structure unstable, it might
+      collapse.</p><p>Similarly, this spell doesn't directly affect plant
+      growth. The moved earth carries any plants along with it.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '2'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ft
+      contiguous: false
+      type: square
+      size: '40'
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '120'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a miniature shovel
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    bWrPos5rvoqFZZTx:
+      type: utility
+      _id: bWrPos5rvoqFZZTx
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Initial Cast
+      img: ''
+      appliedEffects: []
+    YTVF3OSu0S9sYkQb:
+      type: utility
+      _id: YTVF3OSu0S9sYkQb
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Affect New Area
+      img: ''
+      appliedEffects: []
+  identifier: move-earth
+_id: phbsplMoveEarth0
+type: spell
+img: icons/tools/hand/shovel-spade-steel-blue.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425964881
+  modifiedTime: 1745256796440
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMoveEarth0'

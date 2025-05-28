@@ -1,0 +1,118 @@
+_id: phbbrdCuttingWor
+name: Cutting Words
+type: feat
+folder: aA19yenZydaY6uu7
+img: icons/magic/sonic/scream-wail-shout-teal.webp
+system:
+  description:
+    value: >-
+      <p>You learn to use your wit to supernaturally distract, confuse, and
+      otherwise sap the confidence and competence of others. When a creature
+      that you can see within 60 feet of yourself makes a damage roll or
+      succeeds on an ability check or attack roll, you can take a Reaction to
+      expend one use of your Bardic Inspiration; roll your Bardic Inspiration
+      die, and subtract the number rolled from the creature's roll, reducing the
+      damage or potentially turning the success into a failure.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: College of Lore
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: reaction
+        value: 1
+        condition: >-
+          Creature you can see within 60 feet makes a damage roll or succeeds on
+          an ability check or attack roll
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbbrdBardicInsp
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: ''
+        units: inst
+        special: ''
+        override: false
+        concentration: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      roll:
+        formula: '@scale.bard.inspiration'
+        name: Bardic Inspiration
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Cut with Words
+      img: systems/dnd5e/icons/svg/damage/psychic.svg
+  enchant: {}
+  identifier: cutting-words
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866506195
+  modifiedTime: 1740680081116
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrdCuttingWor'

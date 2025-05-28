@@ -1,0 +1,122 @@
+_id: phbftrSecondWind
+name: Second Wind
+type: feat
+folder: xggTDaiQq26ZrVzJ
+img: icons/magic/life/cross-worn-green.webp
+system:
+  description:
+    value: >-
+      <p>You have a limited well of physical and mental stamina that you can
+      draw on. As a Bonus Action, you can use it to regain Hit Points equal to
+      1d10 plus your Fighter level.</p><p>You can use this feature twice. You
+      regain one expended use when you finish a Short Rest, and you regain all
+      expended uses when you finish a Long Rest.</p><p>When you reach certain
+      Fighter levels, you gain more uses of this feature, as shown in the Second
+      Wind column of the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbFighter000000.JournalEntryPage.wDELe3k25FQvYdrq#class-features]{Fighter
+      Features} table.</p><section class="secret"
+      id="secret-GEvXAMpxWEFigqSc"><p><strong>Foundry Note</strong></p><p>This
+      feature automatically scales in usage and recovers the correct number of
+      uses on a Short and Long Rest.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '@scale.fighter.second-wind'
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+      - period: sr
+        type: formula
+        formula: '1'
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    zumaUC11cpntqme1:
+      type: heal
+      _id: zumaUC11cpntqme1
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: 1
+        denomination: 10
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: '@classes.fighter.levels'
+      name: ''
+  enchant: {}
+  identifier: second-wind
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866361253
+  modifiedTime: 1745256761713
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftrSecondWind'

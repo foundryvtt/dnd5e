@@ -1,0 +1,49 @@
+name: Map
+system:
+  description:
+    value: >-
+      <p>If you consult an accurate Map, you gain a +5 bonus to Wisdom
+      (Survival) checks you make to find your way in the place represented on
+      it.</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: map
+_id: phbagMap00000000
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/tools/navigation/map-chart-tan.webp
+effects: []
+sort: 3800000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425910101
+  modifiedTime: 1745256812328
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagMap00000000'

@@ -1,0 +1,118 @@
+_id: cYI4RNNjI5GAmLhy
+name: Find the Path
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell allows you to find the shortest, most direct physical route
+      to a specific fixed location that you are familiar with on the same plane
+      of existence. If you name a destination on another plane of existence, a
+      destination that moves (such as a Mobile fortress), or a destination that
+      isn't specific (such as "a green dragon's lair"), the spell
+      fails.</p><p>For the Duration, as long as you are on the same plane of
+      existence as the destination, you know how far it is and in what direction
+      it lies. While you are traveling there, whenever you are presented with a
+      choice of paths along the way, you automatically determine which path is
+      the shortest and most direct route (but not necessarily the safest route)
+      to the destination.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: day
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: div
+  materials:
+    value: >-
+      A set of divinatory tools—such as bones, ivory sticks, cards, teeth, or
+      carved runes—worth 100 gp and an object from the location you wish to find
+    consumed: false
+    cost: 100
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: find-the-path
+sort: 0
+flags: {}
+img: icons/magic/light/explosion-star-teal.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037360322
+  modifiedTime: 1725992721167
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!cYI4RNNjI5GAmLhy'

@@ -1,0 +1,54 @@
+_id: phbrgeSupremeSne
+name: Supreme Sneak
+type: feat
+folder: dnKXgPPMNF5Jbw2T
+img: icons/magic/perception/shadow-stealth-eyes-purple.webp
+system:
+  description:
+    value: >-
+      <p>You gain the following Cunning Strike option.</p><p><strong>Stealth
+      Attack (Cost: 1d6).</strong> If you have the &amp;Reference[Hide] action's
+      Invisible condition, this attack doesn't end that condition on you if you
+      end the turn behind &amp;Reference[Three-Quarters Cover] or
+      &amp;Reference[Total Cover].</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 9
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: supreme-sneak
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866560489
+  modifiedTime: 1745256764562
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeSupremeSne'

@@ -1,0 +1,68 @@
+_id: dmgFoundryRefere
+name: Foundry References
+pages:
+  - sort: 100000
+    name: How to Use Template Items
+    type: text
+    _id: Ok4iCgD25ENgoRxE
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <section class="fvtt advice"><figure class="icon"><img
+        src="systems/dnd5e/icons/spell-tiers/spell3.webp" class="round"
+        /></figure><article><h3>Make Magical Items with Templates</h3><p>Magical
+        items can often come with a lot of variants. For example, +1 armor can
+        exist on Light, Medium, or Heavy Armor. For +1-3 armor alone that's
+        <span style="text-decoration:underline"><em><span
+        style="text-decoration:underline">36 items</span></em></span>! To keep
+        your Compendia light and speedy we've created <strong>Template</strong>
+        items which can be used to enchant any item. Now, the <strong>Armor, +1,
+        +2, or +3</strong> item and your chosen armor type is all you need!
+        Here's how you can use them:</p><p>Open an item like the
+        @UUID[Compendium.dnd5e.equipment24.Item.dmgArmor12or3000]{Armor, +1, +2,
+        or +3}, change to the <strong>Effects</strong> tab, and drag your effect
+        onto your item. This will automatically apply the enchantment, bring
+        over any helpful Activities and Active Effects, and update the item's
+        description with everything you need to know.</p><p>To remove an
+        enchantment simply open the enchanted item, change to the
+        <strong>Effects</strong> tab and right click on the enchantment where
+        you can disable or delete it.</p></article></section>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1731354937975
+      modifiedTime: 1731425709951
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!dmgFoundryRefere.Ok4iCgD25ENgoRxE'
+folder: kkR3zR8yqdNg4nMV
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1731354907281
+  modifiedTime: 1745677863638
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+flags: {}
+categories: []
+_key: '!journal!dmgFoundryRefere'

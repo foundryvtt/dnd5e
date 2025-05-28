@@ -1,0 +1,236 @@
+_id: dmgRingOfAnimalI
+name: Ring of Animal Influence
+type: equipment
+folder: DC1x1wAm0NLFudA6
+img: icons/equipment/finger/ring-cabochon-gold-orange.webp
+system:
+  activities:
+    Y0cSjJs5olZWdSgZ:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplAnimalFrie
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: Y0cSjJs5olZWdSgZ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    kn4eCuLZrcps7ujc:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFear000000
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: kn4eCuLZrcps7ujc
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Fear (Affects Beasts Only)
+      img: ''
+    76ZGwAp8abm0ZB5Z:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: 76ZGwAp8abm0ZB5Z
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d3
+    max: '3'
+  description:
+    value: >-
+      <p><em>Ring, Rare</em></p><p>This ring has 3 charges, and it regains 1d3
+      expended charges daily at dawn. While wearing the ring, you can expend 1
+      charge to cast one of the following spells (save DC 13) from
+      it:</p><ul><li>@UUID[Compendium.dnd5e.spells24.Item.phbsplAnimalFrie]{Animal
+      Friendship}</li><li>@UUID[Compendium.dnd5e.spells24.Item.phbsplFear000000]{Fear}
+      (affects Beasts
+      only)</li><li>@UUID[Compendium.dnd5e.spells24.Item.phbsplSpeakwithA]{Speak
+      with Animals}</li></ul>
+    chat: ''
+  identifier: ring-of-animal-influence
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ring
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712702464
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 300000
+ownership:
+  default: 0
+_key: '!items!dmgRingOfAnimalI'

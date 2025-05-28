@@ -1,0 +1,151 @@
+_id: 3Lo9boi7P2ro6QV4
+name: Hold Person
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: "<p>Choose a humanoid that you can see within range. The target must succeed on a Wisdom saving throw or be &amp;Reference[paralyzed] for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.</p>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: enc
+  materials:
+    value: A small, straight piece of iron
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: HH5YVjzxkwXpDZS0
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: hold-person
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-chains-ropes-purple.webp
+effects:
+  - name: Hold Person
+    origin: Compendium.dnd5e.spells.Item.3Lo9boi7P2ro6QV4
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: HH5YVjzxkwXpDZS0
+    changes: []
+    description: >-
+      <p>The target is Paralyzed for the duration. At the end of each of its
+      turns, the target can make another Wisdom saving throw. On a success, the
+      spell ends on the target.</p>
+    transfer: false
+    statuses:
+      - paralyzed
+      - incapacitated
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/control/debuff-chains-ropes-purple.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!3Lo9boi7P2ro6QV4.HH5YVjzxkwXpDZS0'
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037346550
+  modifiedTime: 1725992716765
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!3Lo9boi7P2ro6QV4'

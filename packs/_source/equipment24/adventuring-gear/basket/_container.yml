@@ -1,0 +1,55 @@
+name: Basket
+system:
+  description:
+    value: <p>A Basket holds up to 40 pounds within 2 cubic feet.</p>
+    chat: ''
+  price:
+    value: 4
+    denomination: sp
+  quantity: 1
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  weight:
+    value: 2
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties: []
+  capacity:
+    type: weight
+    value: 40
+  identifier: basket
+_id: phbagBasket00000
+type: container
+folder: uDk4FBYfcP2JnX6t
+img: icons/containers/misc/basket-handle-woven-gold.webp
+effects: []
+sort: 7500000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425905399
+  modifiedTime: 1745256810983
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagBasket00000'

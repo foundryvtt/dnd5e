@@ -1,0 +1,96 @@
+_id: phbmnkUnarmoredM
+name: Unarmored Movement
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/skills/movement/figure-running-gray.webp
+system:
+  description:
+    value: >-
+      <p>Your speed increases by 10 feet while you aren't wearing armor or
+      wielding a Shield. This bonus increases when you reach certain Monk
+      levels, as shown on the Monk Features table.</p><p><strong>Current
+      Increase:</strong> [[lookup @scale.monk.unarmored-movement]]</p><section
+      id="secret-2fH97uVacHRVqDCo" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature includes an Unarmored Movement Active
+      Effect which adds 10 feet to your Movement. It can not automatically
+      update as you level up though. You can edit the value to match your
+      current increase.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: unarmored-movement
+effects:
+  - _id: OEYjH4cLYd0VPaKm
+    flags: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 2
+        value: '10'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+      combat: null
+    origin: Compendium.dnd5e.classes24.Item.phbmnkUnarmoredM
+    tint: '#ffffff'
+    transfer: true
+    name: Unarmored Movement
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classfeatures.Item.zCeqyQ8uIPNdYJSW.ActiveEffect.Veg0vXI93A0qlxZn
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/nature/root-vine-entangle-foot-green.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbmnkUnarmoredM.OEYjH4cLYd0VPaKm'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1745256763470
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1800000
+ownership:
+  default: 0
+_key: '!items!phbmnkUnarmoredM'

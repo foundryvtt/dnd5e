@@ -1,0 +1,229 @@
+_id: dmgCandleOfInvoc
+name: Candle of Invocation
+type: consumable
+folder: guHYjt0gjPLU2wCs
+img: icons/sundries/lights/candle-unlit-yellow.webp
+system:
+  activities:
+    hG1Iplp3uG2fd39N:
+      type: utility
+      name: Light Candle (Minutes)
+      _id: hG1Iplp3uG2fd39N
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '@item.uses.max'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '@scaling'
+      effects:
+        - _id: gN0PgSLPlbsD8T2g
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: icons/svg/light.svg
+      appliedEffects:
+        - gN0PgSLPlbsD8T2g
+    N7prweo4AeKHRzd8:
+      type: cast
+      name: Burn and Cast
+      _id: N7prweo4AeKHRzd8
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '@item.uses.max'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '9'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplGate000000
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '240'
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Very Rare (Requires
+      Attunement)</em></p></div><p>This candle's magic is activated when the
+      candle is lit, which requires a Magic action. After burning for 4 hours,
+      the candle is destroyed. You can snuff it out early for use at a later
+      time. Deduct the time it burned in increments of 1 minute from its total
+      burn time.</p><p>While lit, the candle sheds Dim Light in a 30-foot
+      radius. While you are within that light, you have Advantage on D20 Tests.
+      In addition, a Cleric or Druid in the light can cast level 1 spells they
+      have prepared without expending spell slots.</p><p>Alternatively, when you
+      light the candle for the first time, you can cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGate000000]{Gate}</em> with
+      it. Doing so destroys the candle. The portal created by the spell links to
+      a particular Outer Plane chosen by the GM or determined by rolling on the
+      following
+      table.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgCandleOfInvoc
+      rollable]</p>
+    chat: ''
+  identifier: candle-of-invocation
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 20000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects:
+  - name: Lit Candle of Invocation
+    img: icons/sundries/lights/candles-lit-red-evil.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgCandleOfInvoc
+    transfer: false
+    _id: gN0PgSLPlbsD8T2g
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>While lit, the candle sheds Dim Light in a 30-foot radius. While you
+      are within that light, you have Advantage on D20 Tests. In addition, a
+      Cleric or Druid in the light can cast level 1 spells they have prepared
+      without expending spell slots.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1728928218637
+      modifiedTime: 1728928572384
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgCandleOfInvoc.gN0PgSLPlbsD8T2g'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712698463
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+_key: '!items!dmgCandleOfInvoc'

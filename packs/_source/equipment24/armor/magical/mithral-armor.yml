@@ -1,0 +1,200 @@
+_id: dmgMithralArmor0
+name: Mithral Armor
+type: equipment
+folder: 1kn4uV4dTVVduLjA
+img: icons/equipment/chest/breastplate-gorget-steel.webp
+system:
+  activities:
+    XrCgd1NYy3kQqFsp:
+      type: enchant
+      _id: XrCgd1NYy3kQqFsp
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: iopwvJrcnzObDYSR
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      name: Mithral Armor
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Armor (Any Medium or Heavy, Except Hide Armor),
+      Uncommon</em></p><p>Mithral is a light, flexible metal. Armor made of this
+      substance can be worn under normal clothes. If the armor normally imposes
+      Disadvantage on Dexterity (Stealth) checks or has a Strength requirement,
+      the mithral version of the armor
+      doesn't.</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: mithral-armor
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - type: enchantment
+    name: Mithral Armor
+    img: systems/dnd5e/icons/spell-tiers/spell2.webp
+    disabled: true
+    _id: iopwvJrcnzObDYSR
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Mithral {}
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: uncommon
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgMithralArmor0
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.strength
+        mode: 3
+        value: '0'
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: '-stealthDisadvantage'
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '400'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730154623425
+      modifiedTime: 1731099548949
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgMithralArmor0.iopwvJrcnzObDYSR'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256806583
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 137500
+ownership:
+  default: 0
+_key: '!items!dmgMithralArmor0'

@@ -1,0 +1,143 @@
+_id: 7D2EkLdISwShEDlN
+name: Diamond Soul
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 14th level, your mastery of ki grants you proficiency in
+      all saving throws. Additionally, whenever you make a saving throw and
+      fail, you can spend 1 ki point to reroll it and take the second
+      result.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ki
+  requirements: Monk 14
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: ''
+        value: null
+        condition: Whenever you make a saving throw and fail
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: Compendium.dnd5e.classfeatures.Item.10b6z2W1txNkrGP7
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: disciplined-survivor
+flags: {}
+img: icons/magic/water/projectile-icecicle.webp
+effects:
+  - _id: v6jhyPoAYRIIXBG1
+    changes:
+      - key: flags.dnd5e.diamondSoul
+        mode: 5
+        value: 'true'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.PRME1bZBvnc2E0iH
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Diamond Soul
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/water/projectile-icecicle.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!7D2EkLdISwShEDlN.v6jhyPoAYRIIXBG1'
+folder: TMmNG8ujFDBEWXRe
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037380495
+  modifiedTime: 1725992287271
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!7D2EkLdISwShEDlN'

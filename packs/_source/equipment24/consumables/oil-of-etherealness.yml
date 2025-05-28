@@ -1,0 +1,164 @@
+_id: dmgOilOfEthereal
+name: Oil of Etherealness
+type: consumable
+folder: guHYjt0gjPLU2wCs
+img: icons/consumables/potions/bottle-conical-corked-labeled-shell-cyan.webp
+system:
+  description:
+    value: >-
+      <p><em>Potion, Rare</em></p><p>One vial of this oil can cover one Medium
+      or smaller creature, along with the equipment it's wearing and carrying
+      (one additional vial is required for each size category above Medium).
+      Applying the oil takes 10 minutes. The affected creature then gains the
+      effect of the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplEtherealne]{Etherealness} spell
+      for 1 hour.</p><p>Beads of this cloudy, gray oil form on the outside of
+      its container and quickly evaporate.</p>
+    chat: ''
+  identifier: oil-of-etherealness
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties:
+    - mgc
+  capacity:
+    type: weight
+    value: null
+  uses:
+    max: '1'
+    autoDestroy: true
+  activities:
+    CEUD70b6Aouaqs6Z:
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '10'
+      effects:
+        - _id: YIlD33DO4Py9aaRi
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Apply Oil
+      img: systems/dnd5e/icons/svg/trait-saves.svg
+      _id: CEUD70b6Aouaqs6Z
+      appliedEffects:
+        - YIlD33DO4Py9aaRi
+  type:
+    value: potion
+effects:
+  - name: Etherealness
+    img: systems/dnd5e/icons/svg/statuses/ethereal.svg
+    origin: Compendium.dnd5e.equipment24.Item.dmgOilOfEthereal
+    transfer: false
+    _id: YIlD33DO4Py9aaRi
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - ethereal
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplEtherealne.ActiveEffect.louTI4Z9bNUYBa8K
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730494572998
+      modifiedTime: 1730494593209
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgOilOfEthereal.YIlD33DO4Py9aaRi'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256806752
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1150000
+ownership:
+  default: 0
+_key: '!items!dmgOilOfEthereal'

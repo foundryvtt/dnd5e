@@ -1,0 +1,56 @@
+name: Druidic Warrior
+system:
+  description:
+    value: >-
+      <p>You learn two
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.LhvuDQEyrCdg5EfU]{Druid
+      cantrips} of your choice.
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplGuidance00]{Guidance} and
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplStarryWisp]{Starry Wisp} are
+      recommended. The chosen cantrips count as Ranger spells for you, and
+      Wisdom is your spellcasting ability for them. Whenever you gain a Ranger
+      level, you can replace one of these cantrips with another Druid
+      cantrip.</p>
+    chat: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  identifier: druidic-warrior
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: class
+    subtype: fightingStyle
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: Ranger
+  advancement: []
+  cover: null
+  crewed: false
+_id: phbfstDruidicWar
+type: feat
+folder: h5OUzaJcZzsNsOGc
+img: icons/magic/nature/root-vines-face-glow-green.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745514386972
+  modifiedTime: 1745712691399
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbfstDruidicWar'

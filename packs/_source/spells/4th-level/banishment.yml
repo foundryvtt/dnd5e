@@ -1,0 +1,164 @@
+_id: pxpb2eOB6bv4phAf
+name: Banishment
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You attempt to send one creature that you can see within range to
+      another plane of existence. The target must succeed on a Charisma saving
+      throw or be banished.</p><p>If the target is native to the plane of
+      existence you're on, you banish the target to a harmless demiplane. While
+      there, the target is &amp;Reference[incapacitated]. The target remains
+      there until the spell ends, at which point the target reappears in the
+      space it left or in the nearest unoccupied space if that space is
+      occupied.</p><p>If the target is native to a different plane of existence
+      than the one you're on, the target is banished with a faint popping noise,
+      returning to its home plane. If the spell ends before 1 minute has passed,
+      the target reappears in the space it left or in the nearest unoccupied
+      space if that space is occupied. Otherwise, the target doesn't
+      return.</p><p><strong>At Higher Levels.</strong> When you cast this spell
+      using a spell slot of 5th level or higher, you can target one additional
+      creature for each slot level above 4th.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: abj
+  materials:
+    value: An item distasteful to the target
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: bckYDthT7sAOQBNO
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: banishment
+sort: 0
+flags: {}
+img: icons/magic/control/energy-stream-link-spiral-teal.webp
+effects:
+  - name: Banishment
+    origin: Compendium.dnd5e.spells.Item.pxpb2eOB6bv4phAf
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: bckYDthT7sAOQBNO
+    changes: []
+    description: >-
+      <p>The target native to this plane is banished to a harmless demiplane
+      plane and is Incapacitated for the duration.</p>
+    transfer: false
+    statuses:
+      - incapacitated
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/control/energy-stream-link-spiral-teal.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!pxpb2eOB6bv4phAf.bckYDthT7sAOQBNO'
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037365620
+  modifiedTime: 1725992722955
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!pxpb2eOB6bv4phAf'

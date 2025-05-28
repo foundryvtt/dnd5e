@@ -1,0 +1,260 @@
+_id: dmgShieldOfTheCa
+name: Shield of the Cavalier
+type: equipment
+folder: 1kn4uV4dTVVduLjA
+img: icons/equipment/shield/pavise-wooden-wings-blue-white.webp
+system:
+  activities:
+    ABPaLpY5mrKpB4ou:
+      type: attack
+      name: Forceful Bash
+      _id: ABPaLpY5mrKpB4ou
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: TNWNbk14uUGiJGvv
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 6
+            bonus: 2 + @mod
+            types:
+              - force
+            scaling:
+              number: 1
+      img: ''
+      appliedEffects:
+        - TNWNbk14uUGiJGvv
+    Zk2NWOrZcSWTaogR:
+      type: utility
+      name: Protective Field
+      _id: Zk2NWOrZcSWTaogR
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: true
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '5'
+          count: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p><em>Armor (Shield), Very Rare (Requires Attunement)</em></p><p>While
+      holding this Shield, you have a +2 bonus to Armor Class. This bonus is in
+      addition to the Shield's normal bonus to AC.</p><p>The Shield has the
+      following additional properties that you can use while holding
+      it.</p><p><em><strong>Forceful Bash</strong></em><strong>.</strong> When
+      you take the Attack action, you can make one of the attack rolls using the
+      Shield against a target within 5 feet of yourself. Apply your Proficiency
+      Bonus and Strength modifier to the attack roll. On a hit, the Shield deals
+      Force damage to the target equal to 2d6 + 2 plus your Strength modifier,
+      and if the target is a creature, you can push it up to 10 feet directly
+      away from yourself. If the creature is your size or smaller, you can also
+      knock it down, giving it the Prone condition.</p><p><em><strong>Protective
+      Field.</strong></em> As a Reaction, when you or an ally you can see within
+      5 feet of you is targeted by an attack or makes a saving throw against an
+      area of effect, you can use the Shield to create an immobile 5-foot
+      Emanation originating from you. When the Emanation appears, any creatures
+      or objects not fully contained within it are pushed into the nearest
+      unoccupied spaces outside it. The attack or area of effect that triggered
+      the Reaction has no effect on creatures and objects inside the Emanation,
+      which lasts as long as you maintain Concentration, up to 1 minute. Nothing
+      can pass into or out of the Emanation. A creature or object inside the
+      Emanation can't be damaged by attacks or effects originating from outside,
+      nor can a creature inside the Emanation damage anything outside it. Once
+      this property is used, it can't be used again until the next dawn.</p>
+    chat: ''
+  identifier: shield-of-the-cavalier
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: 2
+    magicalBonus: 2
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: shield
+    baseItem: shield
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Knocked Down
+    img: icons/skills/movement/arrow-down-pink.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgShieldOfTheCa
+    transfer: false
+    _id: TNWNbk14uUGiJGvv
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - prone
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730666249612
+      modifiedTime: 1730666318848
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgShieldOfTheCa.TNWNbk14uUGiJGvv'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745612094961
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 837500
+ownership:
+  default: 0
+_key: '!items!dmgShieldOfTheCa'

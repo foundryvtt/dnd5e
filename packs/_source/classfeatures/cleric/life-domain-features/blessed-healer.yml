@@ -1,0 +1,111 @@
+_id: yv49QN6Bzqs0ecCs
+name: Blessed Healer
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 6th level, the healing spells you cast on others heal you
+      as well.</p><p>When you cast a spell of 1st level or higher that restores
+      hit points to a creature other than you, you regain hit points equal to 2
+      + the spell's level.</p><section class="secret foundry-note"
+      id="secret-8pxfORAMtA2mWG44"><p><strong>Foundry Note</strong></p><p>The
+      healing formula is set to 2. Please add the additional from the spell
+      level manually.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Life Domain 6
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      healing:
+        number: null
+        denomination: null
+        bonus: ''
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: '2'
+        scaling:
+          mode: whole
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: blessed-healer
+flags: {}
+img: icons/magic/light/orbs-hand-gray.webp
+effects: []
+folder: CTZ7zZ8ESNtr2IKz
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037390462
+  modifiedTime: 1725992290589
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!yv49QN6Bzqs0ecCs'

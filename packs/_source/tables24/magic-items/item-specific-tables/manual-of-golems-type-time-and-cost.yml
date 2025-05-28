@@ -1,0 +1,119 @@
+_id: dmgManualOfGolem
+name: 'Manual of Golems: Type, Time, and Cost'
+img: icons/sundries/books/book-eye-purple.webp
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 5
+    drawn: false
+    _id: 7I6vQPv0T86eyaR4
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      <strong>Golem:</strong> Clay Golem<br /><strong>Time:</strong> 30 days<br
+      /><strong>Cost:</strong> 65,000 GP
+    name: ''
+    _key: '!tables.results!dmgManualOfGolem.7I6vQPv0T86eyaR4'
+  - type: text
+    weight: 1
+    range:
+      - 6
+      - 17
+    drawn: false
+    _id: OkN7NDendLyIZpeN
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      <strong>Golem:</strong> Flesh Golem<br /><strong>Time:</strong> 60 days<br
+      /><strong>Cost:</strong> 50,000 GP
+    name: ''
+    _key: '!tables.results!dmgManualOfGolem.OkN7NDendLyIZpeN'
+  - type: text
+    weight: 1
+    range:
+      - 18
+      - 18
+    drawn: false
+    _id: fDMIU1f5wTvvhGYg
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      <strong>Golem:</strong> Iron Golem<br /><strong>Time:</strong> 120 days<br
+      /><strong>Cost:</strong> 100,000 GP
+    name: ''
+    _key: '!tables.results!dmgManualOfGolem.fDMIU1f5wTvvhGYg'
+  - type: text
+    weight: 1
+    range:
+      - 19
+      - 20
+    drawn: false
+    _id: 4Jv2P9MWTX6Hk8kO
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      <strong>Golem:</strong> Stone Golem<br /><strong>Time:</strong> 90 days<br
+      /><strong>Cost:</strong> 80,000 GP
+    name: ''
+    _key: '!tables.results!dmgManualOfGolem.4Jv2P9MWTX6Hk8kO'
+replacement: true
+displayRoll: true
+folder: I2IHCZhwMY7ttiXw
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.2
+  createdTime: 1727883396246
+  modifiedTime: 1745441137098
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 900000
+ownership:
+  default: 0
+formula: 1d20
+_key: '!tables!dmgManualOfGolem'

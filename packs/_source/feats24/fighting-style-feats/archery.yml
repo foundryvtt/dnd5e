@@ -1,0 +1,91 @@
+name: Archery
+system:
+  description:
+    value: >-
+      <p><em>(Prerequisite: Fighting Style Feature)</em></p><p>You gain a +2
+      bonus to attack rolls you make with Ranged weapons.</p><section
+      id="secret-n13Z6zR2u0CiIA7D" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature includes an Active Effect which adds the
+      bonus to Ranged weapon attack rolls.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: feat
+    subtype: fightingStyle
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: archery
+_id: phbfstArchery000
+type: feat
+img: icons/skills/ranged/arrow-flying-broadhead-metal.webp
+effects:
+  - name: Archery Style
+    img: icons/skills/ranged/arrow-flying-broadhead-metal.webp
+    _id: kigkIjyf2OGWqdVU
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.rwak.attack
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbfstArchery000.kigkIjyf2OGWqdVU'
+folder: O942K0m1gZMIIoMB
+sort: 100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866298107
+  modifiedTime: 1745256780260
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbfstArchery000'

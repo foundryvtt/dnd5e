@@ -1,0 +1,122 @@
+_id: phbBarbarian0000
+name: Barbarian
+pages:
+  - sort: 100000
+    name: Path of the Berserker
+    type: subclass
+    _id: GvRPKO7EAbXB7TXM
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbbrbBerserker0
+      description:
+        value: >-
+          <blockquote><p>Channel Rage into Violent
+          Fury</p></blockquote><p>Barbarians who walk the
+          @UUID[Compendium.dnd5e.classes24.Item.phbbrbBerserker0]{Path of the
+          Berserker} direct their Rage primarily toward violence. Their path is
+          one of untrammeled fury, and they thrill in the chaos of battle as
+          they allow their Rage to seize and empower them.</p>
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1735934354914
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbBarbarian0000.GvRPKO7EAbXB7TXM'
+  - sort: 0
+    name: Barbarian
+    type: class
+    _id: z2RxKBICH6e6SkUT
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbbrbBarbarian0
+      description:
+        value: >-
+          <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbbrbBarbarian0
+          inline classes="free-rules-embed"]</p><h2>Becoming a Barbarian
+          …</h2><h3>As a Level 1 Character</h3><ul><li><p>Gain all the traits in
+          the Core Barbarian Traits table.</p></li><li><p>Gain the Barbarian's
+          level 1 features, which are listed in the Barbarian Features
+          table.</p></li></ul><h3>As a Multiclass Character</h3><ul><li><p>Gain
+          the following traits from the Core Barbarian Traits table: Hit Point
+          Die, proficiency with Martial weapons, and training with
+          Shields.</p></li><li><p>Gain the Barbarian's level 1 features, which
+          are listed in the Barbarian Features table.</p></li></ul>
+        additionalHitPoints: ''
+        additionalTraits: ''
+        additionalEquipment: ''
+        subclass: >-
+          <p>A Barbarian subclass is a specialization that grants you features
+          at certain levels, as specified in the subclass. The next page
+          presents the
+          @UUID[Compendium.dnd5e.content24.JournalEntry.phbBarbarian0000.JournalEntryPage.GvRPKO7EAbXB7TXM]{Path
+          of the Berserker} subclass.</p>
+      subclassItems: []
+      subclassHeader: Barbarian Subclasses
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745511716149
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbBarbarian0000.z2RxKBICH6e6SkUT'
+folder: 1A8WFP1GVZkKdxii
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 3
+    order: 500100
+    navigation:
+      previous: phbCharacterClas
+      next: phbBard000000000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1724425888089
+  modifiedTime: 1745677864446
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbBarbarian0000'

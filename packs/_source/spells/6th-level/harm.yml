@@ -1,0 +1,129 @@
+_id: tMH6Ivn4GmE1naMj
+name: Harm
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You unleash a virulent disease on a creature that you can see within
+      range. The target must make a Constitution saving throw. On a failed save,
+      it takes 14d6 necrotic damage, or half as much damage on a successful
+      save. The damage can't reduce the target's Hit Points below 1. If the
+      target fails the saving throw, its hit point maximum is reduced for 1 Hour
+      by an amount equal to the necrotic damage it took. Any effect that removes
+      a disease allows a creature's hit point maximum to return to normal before
+      that time passes.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: nec
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 14
+            denomination: 6
+            bonus: ''
+            types:
+              - necrotic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: harm
+sort: 0
+flags: {}
+img: icons/magic/unholy/strike-beam-blood-large-red-purple.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037366045
+  modifiedTime: 1725992723142
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!tMH6Ivn4GmE1naMj'

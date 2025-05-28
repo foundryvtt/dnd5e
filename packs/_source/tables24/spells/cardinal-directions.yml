@@ -1,0 +1,111 @@
+_id: phbgenCardinalDi
+name: Cardinal Directions
+img: icons/tools/navigation/compass-brass-blue-red.webp
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    _id: DNSpGtmvbcTFYI70
+    img: icons/tools/navigation/compass-chain-blue.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: North
+    name: ''
+    _key: '!tables.results!phbgenCardinalDi.DNSpGtmvbcTFYI70'
+  - type: text
+    weight: 1
+    range:
+      - 2
+      - 2
+    drawn: false
+    _id: tKlkAqCz2QJZMRaB
+    img: icons/tools/navigation/compass-chain-blue.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: East
+    name: ''
+    _key: '!tables.results!phbgenCardinalDi.tKlkAqCz2QJZMRaB'
+  - type: text
+    weight: 1
+    range:
+      - 3
+      - 3
+    drawn: false
+    _id: OkQWirC6VKB68BXa
+    img: icons/tools/navigation/compass-chain-blue.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: South
+    name: ''
+    _key: '!tables.results!phbgenCardinalDi.OkQWirC6VKB68BXa'
+  - type: text
+    weight: 1
+    range:
+      - 4
+      - 4
+    drawn: false
+    _id: CyJrrodLJ2WzWGqT
+    img: icons/tools/navigation/compass-chain-blue.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: West
+    name: ''
+    _key: '!tables.results!phbgenCardinalDi.CyJrrodLJ2WzWGqT'
+replacement: true
+displayRoll: true
+folder: RY28PgQgqr68sh45
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1724425888598
+  modifiedTime: 1726509057503
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+formula: 1d4
+sort: 200000
+ownership:
+  default: 0
+_key: '!tables!phbgenCardinalDi'

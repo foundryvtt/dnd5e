@@ -1,0 +1,51 @@
+_id: phbmnkBodyAndMin
+name: Body and Mind
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/magic/perception/third-eye-blue-red.webp
+system:
+  description:
+    value: >-
+      <p>You have developed your body and mind to new heights. Your Dexterity
+      and Wisdom scores increase by 4, to a maximum of 25.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 20
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: body-and-mind
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1745256762930
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 200000
+ownership:
+  default: 0
+_key: '!items!phbmnkBodyAndMin'

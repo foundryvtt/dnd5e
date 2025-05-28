@@ -1,0 +1,161 @@
+name: Regenerate
+system:
+  description:
+    value: >-
+      <p>A creature you touch regains 4d8 + 15 Hit Points. For the duration, the
+      target regains [[/healing 1 type=healing]]{1 Hit Point} at the start of
+      each of its turns, and any severed body parts regrow after 2 minutes.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a prayer wheel
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    RqNTdCQHfXDYaG41:
+      type: heal
+      _id: RqNTdCQHfXDYaG41
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: O73gdwM6cCbr9LXn
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: 4
+        denomination: '8'
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+          mode: ''
+        bonus: '15'
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: regenerate
+_id: phbsplRegenerate
+type: spell
+img: icons/magic/life/cross-explosion-burst-green.webp
+effects:
+  - name: Regenerating
+    img: icons/magic/life/cross-yellow-green.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplRegenerate
+    transfer: false
+    _id: O73gdwM6cCbr9LXn
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>For the duration, the target regains [[/healing 1 type=healing]]{1 Hit
+      Point} at the start of each of its turns, and any severed body parts
+      regrow after 2 minutes.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724966450239
+      modifiedTime: 1724966609573
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplRegenerate.O73gdwM6cCbr9LXn'
+folder: EdAGMG8IF26PLkD3
+sort: 800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425968792
+  modifiedTime: 1745256797505
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplRegenerate'

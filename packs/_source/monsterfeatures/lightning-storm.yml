@@ -1,0 +1,111 @@
+_id: gM767AhU36B6LUGU
+name: Lightning Storm
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>the [[lookup @name lowercase]] magically
+      creates three bolts of lightning, each of which can strike a target the
+      [[lookup @name lowercase]] can see within 120 feet of it. </p><p>A target
+      must make a  <strong>DC 23 Dexterity</strong> saving throw, taking
+      <strong>22 (4d10) <em>lightning damage</em></strong> on a failed save, or
+      half as much damage on a successful one.</p></section><p>the [[lookup
+      @name lowercase]] magically creates three bolts of lightning, each of
+      which can strike a target the [[lookup @name lowercase]] can see within
+      120 feet of it. A target must make a <strong>Dexterity</strong> saving
+      throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '120'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '3'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '23'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: lightning-storm
+flags: {}
+img: icons/magic/lightning/bolts-forked-large-blue-yellow.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304974417
+  modifiedTime: 1725992573716
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!gM767AhU36B6LUGU'

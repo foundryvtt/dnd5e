@@ -1,0 +1,44 @@
+_id: TVPqMOcoLNFBUMyG
+name: Acid Absorption
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: "<p>Whenever the [[lookup @name lowercase]]\_is subjected to <strong><em>acid damage</em></strong>, it takes no damage and instead regains a number of<strong> hit points</strong> equal to the <strong><em>acid damage</em> dealt</strong>.</p>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: acid-absorption
+flags: {}
+img: icons/magic/unholy/orb-smoking-green.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304971377
+  modifiedTime: 1725992572801
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!TVPqMOcoLNFBUMyG'

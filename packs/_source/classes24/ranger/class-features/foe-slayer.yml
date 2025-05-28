@@ -1,0 +1,110 @@
+_id: phbrgrFoeSlayer0
+name: Foe Slayer
+type: feat
+folder: h5OUzaJcZzsNsOGc
+img: icons/skills/targeting/crosshair-triple-strike-orange.webp
+system:
+  description:
+    value: >-
+      <p>@UUID[Compendium.dnd5e.spells24.Item.phbsplHuntersMar]{Hunter's Mark}
+      is a d10 rather than a d6.</p><section id="secret-GUET2urq4zcuitcV"
+      class="secret"><p><strong>Foundry Note</strong></p><p>You may use this
+      feature in place of the <strong>Bonus Mark Damage</strong> activity on the
+      <em>Hunter's Mark</em> spell.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 20
+  properties: []
+  requirements: ''
+  activities:
+    GG4mc3Bw4ArJEUJY:
+      type: damage
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: true
+        concentration: false
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 10
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Improved Hunter's Mark Damage
+      _id: GG4mc3Bw4ArJEUJY
+  enchant: {}
+  identifier: foe-slayer
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735932734523
+  modifiedTime: 1745256764911
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgrFoeSlayer0'

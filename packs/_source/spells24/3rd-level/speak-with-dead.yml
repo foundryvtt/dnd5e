@@ -1,0 +1,124 @@
+name: Speak with Dead
+system:
+  description:
+    value: >-
+      <p>You grant the semblance of life to a corpse of your choice within
+      range, allowing it to answer questions you pose. The corpse must have a
+      mouth, and this spell fails if the deceased creature was Undead when it
+      died. The spell also fails if the corpse was the target of this spell
+      within the past 10 days.</p><p>Until the spell ends, you can ask the
+      corpse up to five questions. The corpse knows only what it knew in life,
+      including the languages it knew. Answers are usually brief, cryptic, or
+      repetitive, and the corpse is under no compulsion to offer a truthful
+      answer if you are antagonistic toward it or it recognizes you as an enemy.
+      This spell doesn't return the creature's soul to its body, only its
+      animating spirit. Thus, the corpse can't learn new information, doesn't
+      comprehend anything that has happened since it died, and can't speculate
+      about future events.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: object
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '10'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: nec
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: burning incense
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: speak-with-dead
+_id: phbsplSpeakwithD
+type: spell
+img: icons/magic/death/undead-ghost-scream-teal.webp
+effects: []
+folder: HCovEE4VoPGlIbKi
+sort: 106250
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425971782
+  modifiedTime: 1745256798535
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSpeakwithD'

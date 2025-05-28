@@ -1,0 +1,194 @@
+name: Fire Shield
+system:
+  description:
+    value: >-
+      <p>Wispy flames wreathe your body for the duration, shedding Bright Light
+      in a 10-foot radius and Dim Light for an additional 10 feet.</p><p>The
+      flames provide you with a warm shield or a chill shield, as you choose.
+      The warm shield grants you Resistance to Cold damage, and the chill shield
+      grants you Resistance to Fire damage.</p><p>In addition, whenever a
+      creature within 5 feet of you hits you with a melee attack roll, the
+      shield erupts with flame. The attacker takes [[/damage 2d8 type=fire]]
+      damage from a warm shield or [[/damage 2d8 type=cold]] damage from a chill
+      shield.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a bit of phosphorus or a firefly
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: YbUr13GTnMrootmf
+        - _id: CMEUOmIT16kjGT5J
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: fire-shield
+_id: phbsplFireShield
+type: spell
+img: icons/equipment/shield/heater-stone-orange.webp
+effects:
+  - name: Warm Shield
+    origin: Compendium.dnd5e.spells24.Item.phbsplFireShield
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/equipment/shield/heater-steel-crystal-red.webp
+    _id: YbUr13GTnMrootmf
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+    description: >-
+      <p>Whenever a creature within 5 feet of you hits you with a melee attack
+      roll, the attacker takes [[/damage 2d8 type=fire]] damage.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplFireShield.YbUr13GTnMrootmf'
+  - name: Chill Shield
+    origin: Compendium.dnd5e.spells24.Item.phbsplFireShield
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/equipment/shield/heater-crystal-blue.webp
+    _id: CMEUOmIT16kjGT5J
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    description: >-
+      <p>Whenever a creature within 5 feet of you hits you with a melee attack
+      roll, the attacker takes [[/damage 2d8 type=cold]] damage.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplFireShield.CMEUOmIT16kjGT5J'
+folder: qi3IbnEwap7mRw4b
+sort: 2200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425953913
+  modifiedTime: 1745256793068
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFireShield'

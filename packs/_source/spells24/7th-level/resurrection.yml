@@ -1,0 +1,479 @@
+name: Resurrection
+system:
+  description:
+    value: >-
+      <p>With a touch, you revive a dead creature that has been dead for no more
+      than a century, didn't die of old age, and wasn't Undead when it
+      died.</p><p>The creature returns to life with all its Hit Points. This
+      spell also neutralizes any poisons that affected the creature at the time
+      of death. This spell closes all mortal wounds and restores any missing
+      body parts.</p><p>Coming back from the dead is an ordeal. The target takes
+      a −4 penalty to D20 Tests. Every time the target finishes a Long Rest, the
+      penalty is reduced by 1 until it becomes 0.</p><p>Casting this spell to
+      revive a creature that has been dead for 365 days or longer taxes you.
+      Until you finish a Long Rest, you can't cast spells again, and you have
+      Disadvantage on D20 Tests.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: hour
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: nec
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a diamond worth 1,000+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    IEI29s99C2llhqEo:
+      type: utility
+      _id: IEI29s99C2llhqEo
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: yC37XvN0jzIDyHTr
+        - _id: NvAysJa5PCR83GRb
+        - _id: PO5KOrBEorm2xGGz
+        - _id: xHPAupRPOI8N2VkA
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Cast
+      img: ''
+      appliedEffects:
+        - yC37XvN0jzIDyHTr
+        - NvAysJa5PCR83GRb
+        - PO5KOrBEorm2xGGz
+        - xHPAupRPOI8N2VkA
+    EMbtn8GwrximmlvQ:
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: yC37XvN0jzIDyHTr
+        - _id: NvAysJa5PCR83GRb
+        - _id: PO5KOrBEorm2xGGz
+        - _id: xHPAupRPOI8N2VkA
+        - _id: gkSKFjp3O7UrdJ2i
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Taxing Cast
+      _id: EMbtn8GwrximmlvQ
+      img: ''
+      appliedEffects:
+        - yC37XvN0jzIDyHTr
+        - NvAysJa5PCR83GRb
+        - PO5KOrBEorm2xGGz
+        - xHPAupRPOI8N2VkA
+  identifier: resurrection
+_id: phbsplResurrecti
+type: spell
+img: icons/magic/death/skeleton-skull-soul-blue.webp
+effects:
+  - name: Resurrection Sickness (Day 1)
+    img: icons/svg/stoned.svg
+    _id: yC37XvN0jzIDyHTr
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.abilities.check
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.attributes.init.bonus
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.mwak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.rwak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Coming back from the dead is an ordeal. The target takes a −4 penalty
+      to D20 Tests. Every time the target finishes a Long Rest, the penalty is
+      reduced by 1 until it becomes 0.</p>
+    origin: Compendium.dnd5e.spells24.Item.phbsplResurrecti
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplRaiseDead0.ActiveEffect.etY0sDrXe6DcFEzc
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724967212268
+      modifiedTime: 1724967212268
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplResurrecti.yC37XvN0jzIDyHTr'
+  - name: Resurrection Sickness (Day 2)
+    img: icons/svg/stoned.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.abilities.check
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.attributes.init.bonus
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.mwak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.rwak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Coming back from the dead is an ordeal. The target takes a −4 penalty
+      to D20 Tests. Every time the target finishes a Long Rest, the penalty is
+      reduced by 1 until it becomes 0.</p>
+    origin: Compendium.dnd5e.spells24.Item.phbsplResurrecti
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplRaiseDead0.ActiveEffect.etY0sDrXe6DcFEzc
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724967227234
+      modifiedTime: 1724967227234
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: NvAysJa5PCR83GRb
+    _key: '!items.effects!phbsplResurrecti.NvAysJa5PCR83GRb'
+  - name: Resurrection Sickness (Day 3)
+    img: icons/svg/stoned.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.abilities.check
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.attributes.init.bonus
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.mwak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.rwak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Coming back from the dead is an ordeal. The target takes a −4 penalty
+      to D20 Tests. Every time the target finishes a Long Rest, the penalty is
+      reduced by 1 until it becomes 0.</p>
+    origin: Compendium.dnd5e.spells24.Item.phbsplResurrecti
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplRaiseDead0.ActiveEffect.etY0sDrXe6DcFEzc
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724967230407
+      modifiedTime: 1724967230407
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: PO5KOrBEorm2xGGz
+    _key: '!items.effects!phbsplResurrecti.PO5KOrBEorm2xGGz'
+  - name: Resurrection Sickness (Day 4)
+    img: icons/svg/stoned.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.abilities.check
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.attributes.init.bonus
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.mwak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: system.bonuses.rwak.attack
+        mode: 2
+        value: '-1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Coming back from the dead is an ordeal. The target takes a −4 penalty
+      to D20 Tests. Every time the target finishes a Long Rest, the penalty is
+      reduced by 1 until it becomes 0.</p>
+    origin: Compendium.dnd5e.spells24.Item.phbsplResurrecti
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplRaiseDead0.ActiveEffect.etY0sDrXe6DcFEzc
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724967232888
+      modifiedTime: 1724967232888
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: xHPAupRPOI8N2VkA
+    _key: '!items.effects!phbsplResurrecti.xHPAupRPOI8N2VkA'
+  - name: Spell Taxed
+    img: systems/dnd5e/icons/svg/break-concentration.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplResurrecti
+    transfer: false
+    _id: gkSKFjp3O7UrdJ2i
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 86400
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Until you finish a Long Rest, you can’t cast spells again, and you have
+      Disadvantage on D20 Tests.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724967372909
+      modifiedTime: 1724967719641
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplResurrecti.gkSKFjp3O7UrdJ2i'
+folder: EdAGMG8IF26PLkD3
+sort: 700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425969170
+  modifiedTime: 1745256797631
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplResurrecti'

@@ -1,0 +1,229 @@
+_id: phbdrdWildCompan
+name: Wild Companion
+type: feat
+img: icons/creatures/mammals/spirit-deer-herd-blue.webp
+system:
+  description:
+    value: >-
+      <p>You can summon a nature spirit that assumes an animal form to aid you.
+      As a Magic action, you can expend a spell slot or a use of Wild Shape to
+      cast the @UUID[Compendium.dnd5e.spells24.Item.phbsplFindFamili]{Find
+      Familiar} spell without Material components.</p><p>When you cast the spell
+      in this way, the familiar is Fey and disappears when you finish a Long
+      Rest.</p><section id="secret-4iYtjsPCmpeQTKY5"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes a Summon activity which can be used to summon your wild
+      companion. You can choose whether to expend a use of wild shape or a spell
+      slot when activating it.</p><p>The summon does not automatically disappear
+      when you finish a Long Rest.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: Druid
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: spellSlots
+            value: '1'
+            target: '1'
+            scaling:
+              mode: level
+              formula: ''
+        scaling:
+          allowed: true
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: ''
+        units: inst
+        special: ''
+        override: false
+        concentration: false
+      range:
+        value: ''
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes:
+        - fey
+      match:
+        proficiency: false
+        attacks: false
+        saves: false
+      profiles:
+        - count: ''
+          cr: '0'
+          name: ''
+          _id: wz56r4MyxNcdIyIf
+          uuid: ''
+          types:
+            - beast
+          level:
+            min: null
+            max: null
+      summon:
+        identifier: ''
+        mode: cr
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Summon with Spell Slot
+      effects: []
+    jKEcwnfOpZdxX2JV:
+      type: summon
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+            scaling:
+              mode: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: ''
+        units: inst
+        special: ''
+        override: false
+        concentration: false
+      range:
+        value: ''
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes:
+        - fey
+      match:
+        proficiency: false
+        attacks: false
+        saves: false
+      profiles:
+        - count: ''
+          cr: '0'
+          name: ''
+          _id: wz56r4MyxNcdIyIf
+          uuid: ''
+          types:
+            - beast
+          level:
+            min: null
+            max: null
+      summon:
+        identifier: ''
+        mode: cr
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Summon with Wild Shape
+      effects: []
+      _id: jKEcwnfOpZdxX2JV
+  enchant: {}
+  identifier: wild-companion
+effects: []
+folder: EXYmwRGoNyMbByN1
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866366918
+  modifiedTime: 1740680082729
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 900000
+ownership:
+  default: 0
+_key: '!items!phbdrdWildCompan'

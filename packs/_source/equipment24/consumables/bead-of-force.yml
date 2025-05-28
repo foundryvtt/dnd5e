@@ -1,0 +1,159 @@
+_id: dmgBeadOfForce00
+name: Bead of Force
+type: consumable
+folder: guHYjt0gjPLU2wCs
+img: icons/commodities/gems/pearl-purple-dark.webp
+system:
+  activities:
+    OZHtgfnTZWKOg9JP:
+      type: save
+      name: Throw Bead
+      _id: OZHtgfnTZWKOg9JP
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '10'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: 4
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '1'
+    autoDestroy: true
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare</em></p><p>This small black sphere measures 3/4
+      of an inch in diameter and weighs an ounce. Typically, [[/r 1d4 + 4#Beads
+      of Force]] <em>Beads of Force</em> are found together.</p><p>You can take
+      a Magic action to throw the bead up to 60 feet. The bead explodes in a
+      10-foot-radius Sphere on impact and is destroyed. Each creature in the
+      Sphere must succeed on a DC 15 Dexterity saving throw or take 5d4 Force
+      damage. A sphere of transparent force then encloses the area for 1 minute.
+      Any creature that failed the save and is completely within the area is
+      trapped inside this sphere. Creatures that succeeded on the save or are
+      partially within the area are pushed away from the center of the sphere
+      until they are no longer inside it. Only breathable air can pass through
+      the sphere's wall. No attack or other effect can pass through.</p><p>An
+      enclosed creature can take a Utilize action to push against the sphere's
+      wall, moving the sphere up to half the creature's Speed. The sphere can be
+      picked up, and its magic causes it to weigh only 1 pound, regardless of
+      the weight of creatures inside.</p>
+    chat: ''
+  identifier: bead-of-force
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 6
+  weight:
+    value: 0.06
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256802756
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 650000
+ownership:
+  default: 0
+_key: '!items!dmgBeadOfForce00'

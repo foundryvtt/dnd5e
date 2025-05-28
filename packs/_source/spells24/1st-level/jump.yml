@@ -1,0 +1,150 @@
+name: Jump
+system:
+  description:
+    value: >-
+      <p>You touch a willing creature. Once on each of its turns until the spell
+      ends, that creature can jump up to 30 feet by spending 10 feet of
+      movement.</p><p><strong>Using a Higher-Level Spell Slot.</strong>You can
+      target one additional creature for each spell slot level above 1.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: bonus
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: willing
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a grasshopper’s hind leg
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: Esyd01OZ3NCv8gtp
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: jump
+_id: phbsplJump000000
+type: spell
+img: icons/creatures/mammals/deer-movement-leap-green.webp
+effects:
+  - name: Jump
+    origin: Compendium.dnd5e.spells24.Item.phbsplJump000000
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/skills/movement/feet-winged-boots-blue.webp
+    _id: Esyd01OZ3NCv8gtp
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>Once on each of its turns until the spell ends, that creature can jump
+      up to 30 feet by spending 10 feet of movement.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplJump000000.Esyd01OZ3NCv8gtp'
+folder: pBaAAtXBCq9FVEnL
+sort: 1400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425960697
+  modifiedTime: 1745256795265
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplJump000000'

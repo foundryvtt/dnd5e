@@ -1,0 +1,153 @@
+name: Color Spray
+system:
+  description:
+    value: >-
+      <p>You launch a dazzling array of flashing, colorful light. Each creature
+      in a 15-foot Cone originating from you must succeed on a Constitution
+      saving throw or have the &amp;Reference[blinded apply=false] condition
+      until the end of your next turn.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ft
+      type: cone
+      size: '15'
+      contiguous: false
+      count: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: ill
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a pinch of colorful sand
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: DKl58EVNaSX976co
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: color-spray
+_id: phbsplColorSpray
+type: spell
+img: icons/magic/light/hand-sparks-smoke-green.webp
+effects:
+  - name: Blinded
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplColorSpray
+    transfer: false
+    _id: DKl58EVNaSX976co
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725046777685
+      modifiedTime: 1725046864838
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplColorSpray.DKl58EVNaSX976co'
+folder: pBaAAtXBCq9FVEnL
+sort: 4800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425945486
+  modifiedTime: 1745256788196
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplColorSpray'

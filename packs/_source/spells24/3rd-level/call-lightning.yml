@@ -1,0 +1,184 @@
+name: Call Lightning
+system:
+  description:
+    value: >-
+      <p>A storm cloud appears at a point within range that you can see above
+      yourself. It takes the shape of a Cylinder that is 10 feet tall with a
+      60-foot radius.</p><p>When you cast the spell, choose a point you can see
+      under the cloud. A lightning bolt shoots from the cloud to that point.
+      Each creature within 5 feet of that point makes a Dexterity saving throw,
+      taking 3d10 Lightning damage on a failed save or half as much damage on a
+      successful one.</p><p>Until the spell ends, you can take a Magic action to
+      call down lightning in that way again, targeting the same point or a
+      different one.</p><p>If you're outdoors in a storm when you cast this
+      spell, the spell gives you control over that storm instead of creating a
+      new one. Under such conditions, the spell's damage increases by
+      1d10.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The damage
+      increases by 1d10 for each spell slot level above 3.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cylinder
+      size: '60'
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 3
+            denomination: 10
+            bonus: ''
+            types:
+              - lightning
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    dnd5eactivity200:
+      _id: dnd5eactivity200
+      type: damage
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: 4
+            denomination: 10
+            bonus: ''
+            types: []
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: call-lightning
+_id: phbsplCallLightn
+type: spell
+img: icons/magic/lightning/bolt-strike-cloud-gray.webp
+effects: []
+folder: HCovEE4VoPGlIbKi
+sort: 3300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425944252
+  modifiedTime: 1745256787363
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplCallLightn'

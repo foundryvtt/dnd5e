@@ -1,0 +1,56 @@
+_id: phbbrbWeaponMast
+name: Weapon Mastery
+type: feat
+img: icons/skills/melee/weapons-crossed-swords-yellow-teal.webp
+system:
+  description:
+    value: >-
+      <p>Your training with weapons allows you to use the mastery properties of
+      two kinds of Simple or Martial Melee weapons of your choice, such as
+      Greataxes and Handaxes. Whenever you finish a Long Rest, you can practice
+      weapon drills and change one of those weapon choices.</p><p>When you reach
+      certain Barbarian levels, you gain the ability to use the mastery
+      properties of more kinds of weapons, as shown in the Weapon Mastery column
+      of the Barbarian Features table.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: Barbarian
+  activities: {}
+  enchant: {}
+  identifier: weapon-mastery
+effects: []
+folder: p6WDpW0gzmKfhGad
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940469
+  modifiedTime: 1745256760208
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbWeaponMast'

@@ -1,0 +1,176 @@
+name: Freedom of Movement
+system:
+  description:
+    value: >-
+      <p>You touch a willing creature. For the duration, the target's movement
+      is unaffected by &amp;Reference[DifficultTerrain], and spells and other
+      magical effects can neither reduce the target's Speed nor cause the target
+      to have the &amp;Reference[Paralyzed apply=false] or
+      &amp;Reference[Restrained apply=false] conditions. The target also has a
+      Swim Speed equal to its Speed.</p><p>In addition, the target can spend 5
+      feet of movement to automatically escape from nonmagical restraints, such
+      as manacles or a creature imposing the &amp;Reference[Grappled
+      apply=false] condition on it.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> You can target one additional creature for each spell slot
+      level above 4.</p><section class="secret"
+      id="secret-uwteEBj1fBNIf7KZ"><p><strong>Foundry Note</strong></p><p>The
+      Active Effect provided by the <strong>Cast</strong> activity upgrades the
+      character's Swim Speed to a value of "1" to indicate equivalence to (walk)
+      Speed, in addition to the condition immunities.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: willing
+      count: '@item.level - 3'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a leather strap
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: bcTPZ6dJ4kHwaBRD
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects:
+        - bcTPZ6dJ4kHwaBRD
+  identifier: freedom-of-movement
+_id: phbsplFreedomofM
+type: spell
+img: icons/magic/water/elemental-water.webp
+effects:
+  - name: Unrestricted Movement
+    origin: Compendium.dnd5e.spells24.Item.phbsplFreedomofM
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/skills/movement/feet-bladed-boots-fire.webp
+    _id: bcTPZ6dJ4kHwaBRD
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.ci.value
+        mode: 2
+        value: paralyzed
+        priority: null
+      - key: system.traits.ci.value
+        mode: 2
+        value: restrained
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 4
+        value: '1'
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplFreedomofM.bcTPZ6dJ4kHwaBRD'
+folder: qi3IbnEwap7mRw4b
+sort: 2000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425955725
+  modifiedTime: 1745256793524
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFreedomofM'

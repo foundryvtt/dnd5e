@@ -1,0 +1,114 @@
+_id: GtGjNjPBgUHxGYAD
+name: Sending
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You send a short message of twenty-five words or less to a creature
+      with which you are familiar. The creature hears the message in its mind,
+      recognizes you as the sender if it knows you, and can answer in a like
+      manner immediately. The spell enables creatures with Intelligence scores
+      of at least 1 to understand the meaning of your message.</p><p>You can
+      send the message across any distance and even to other planes of
+      existence, but if the target is on a different plane than you, there is a
+      5 percent chance that the message doesn't arrive.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: round
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: any
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: evo
+  materials:
+    value: A short piece of fine copper wire
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: sending
+sort: 0
+flags: {}
+img: icons/magic/air/wind-vortex-swirl-purple.webp
+effects: []
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037352068
+  modifiedTime: 1725992718472
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!GtGjNjPBgUHxGYAD'

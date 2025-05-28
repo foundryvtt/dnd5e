@@ -1,0 +1,121 @@
+name: Message
+system:
+  description:
+    value: >-
+      <p>You point toward a creature within range and whisper a message. The
+      target (and only the target) hears the message and can reply in a whisper
+      that only you can hear.</p><p>You can cast this spell through solid
+      objects if you are familiar with the target and know it is beyond the
+      barrier. Magical silence; 1 foot of stone, metal, or wood; or a thin sheet
+      of lead blocks the spell.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: round
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '120'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: trs
+  properties:
+    - somatic
+    - material
+  materials:
+    value: a copper wire
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    j0gd96TwtJYUr0EE:
+      type: utility
+      _id: j0gd96TwtJYUr0EE
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: message
+_id: phbsplMessage000
+type: spell
+img: icons/sundries/documents/envelope-sealed-red-brown.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+sort: 800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425963519
+  modifiedTime: 1745256796131
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMessage000'

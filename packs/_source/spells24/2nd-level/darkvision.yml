@@ -1,0 +1,150 @@
+name: Darkvision
+system:
+  description:
+    value: >-
+      <p>For the duration, a willing creature you touch has
+      &amp;Reference[darkvision] with a range of 150 feet.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      type: willing
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a dried carrot
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: ZWNC1jxea2RuIRVc
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: darkvision
+_id: phbsplDarkvision
+type: spell
+img: icons/magic/perception/eye-winged-pink.webp
+effects:
+  - name: Darkvision
+    origin: Compendium.dnd5e.spells24.Item.phbsplDarkvision
+    duration:
+      startTime: null
+      seconds: 28800
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: ZWNC1jxea2RuIRVc
+    changes:
+      - key: system.attributes.senses.darkvision
+        mode: 4
+        value: '120'
+        priority: null
+    description: >-
+      <p>For the duration, a willing creature you touch has
+      &amp;Reference[darkvision] with a range of 150 feet.</p>
+    transfer: false
+    statuses: []
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.hJ6ZiA3fpoY8v9cp.ActiveEffect.9qaZQFN5xP8Gig8f
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/perception/eye-winged-pink.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbsplDarkvision.ZWNC1jxea2RuIRVc'
+folder: 3SjcO2acsFnWegp4
+sort: 4100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425948935
+  modifiedTime: 1740685851701
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDarkvision'

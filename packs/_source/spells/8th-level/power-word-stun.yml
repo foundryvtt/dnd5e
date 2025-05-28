@@ -1,0 +1,154 @@
+_id: 35j2QIMmIk6aEdxj
+name: Power Word Stun
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You speak a word of power that can overwhelm the mind of one creature
+      you can see within range, leaving it dumbfounded. If the target has 150
+      Hit Points or fewer, it is &amp;Reference[Stunned]. Otherwise, the spell
+      has no effect.</p><p>The stunned target must make a Constitution saving
+      throw at the end of each of its turns. On a successful save, this stunning
+      effect ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 8
+  school: enc
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: XUk41wJR26neJaic
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: power-word-stun
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-chains-ropes-red.webp
+effects:
+  - name: Power Word Stun
+    origin: Compendium.dnd5e.spells.Item.35j2QIMmIk6aEdxj
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: XUk41wJR26neJaic
+    changes: []
+    description: >-
+      <p>The target is Stunned. The stunned target must make a Constitution
+      saving throw at the end of each of its turns. On a successful save, this
+      stunning effect ends.</p>
+    transfer: false
+    statuses:
+      - stunned
+      - incapacitated
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/control/debuff-chains-ropes-red.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!35j2QIMmIk6aEdxj.XUk41wJR26neJaic'
+folder: x1XTiOgx4DJ34wc5
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037346470
+  modifiedTime: 1725992716734
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!35j2QIMmIk6aEdxj'

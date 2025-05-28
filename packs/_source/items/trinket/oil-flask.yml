@@ -1,0 +1,167 @@
+_id: psoZaItkOScMVaHL
+name: Oil Flask
+type: consumable
+img: icons/consumables/potions/bottle-bulb-empty-glass.webp
+system:
+  description:
+    value: >-
+      <p>Oil usually comes in a clay flask that holds 1 pint. As an action, you
+      can splash the oil in this flask onto a creature within 5 feet of you or
+      throw it up to 20 feet, shattering it on impact. Make a ranged attack
+      against a target creature or object, treating the oil as an improvised
+      weapon.</p>
+
+      <p>On a hit, the target is covered in oil. If the target takes any fire
+      damage before the oil dries (after 1 minute), the target takes an
+      additional 5 fire damage from the burning oil. You can also pour a flask
+      of oil on the ground to cover a 5-foot-square area, provided that the
+      surface is level.</p>
+
+      <p>If lit, the oil burns for 2 rounds and deals 5 fire damage to any
+      creature that enters the area or ends its turn in the area. A creature can
+      take this damage only once per turn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 1
+    denomination: sp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      bonus: ''
+      types:
+        - fire
+      custom:
+        enabled: true
+        formula: '5'
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: dex
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - number: null
+            denomination: null
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: true
+              formula: '5'
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: oil-flask
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 8800000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037291158
+  modifiedTime: 1725992547959
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!psoZaItkOScMVaHL'

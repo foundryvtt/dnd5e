@@ -1,0 +1,344 @@
+name: Imprisonment
+system:
+  description:
+    value: >-
+      <p>You create a magical restraint to hold a creature that you can see
+      within range. The target must make a Wisdom saving throw. On a successful
+      save, the target is unaffected, and it is immune to this spell for the
+      next 24 hours. On a failed save, the target is imprisoned. While
+      imprisoned, the target doesn't need to breathe, eat, or drink, and it
+      doesn't age. Divination spells can't locate or perceive the imprisoned
+      target, and the target can't teleport.</p><p>Until the spell ends, the
+      target is also affected by one of the following effects of your
+      choice:</p><p><strong>Burial.</strong> The target is entombed beneath the
+      earth in a hollow globe of magical force that is just large enough to
+      contain the target. Nothing can pass into or out of the
+      globe.</p><p><strong>Chaining.</strong> Chains firmly rooted in the ground
+      hold the target in place. The target has the &amp;Reference[Restrained
+      apply=false] condition and can't be moved by any
+      means.</p><p><strong>Hedged Prison.</strong> The target is trapped in a
+      demiplane that is warded against teleportation and planar travel. The
+      demiplane is your choice of a labyrinth, a cage, a tower, or the
+      like.</p><p><strong>Minimus Containment. </strong>The target becomes 1
+      inch tall and is trapped inside an indestructible gemstone or a similar
+      object. Light can pass through the gemstone (allowing the target to see
+      out and other creatures to see in), but nothing else can pass through by
+      any means.</p><p><strong>Slumber.</strong> The target has the
+      &amp;Reference[Unconscious apply=false] condition and can't be
+      awoken.</p><p><strong>Ending the Spell.</strong> When you cast the spell,
+      specify a trigger that will end it. The trigger can be as simple or as
+      elaborate as you choose, but the DM must agree that it has a high
+      likelihood of happening within the next decade. The trigger must be an
+      observable action, such as someone making a particular offering at the
+      temple of your god, saving your true love, or defeating a specific
+      monster.</p><p>A
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
+      Magic}</em> spell can end the spell only if it is cast with a level 9
+      spell slot, targeting either the prison or the component used to create
+      it.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: disp
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 9
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a statuette of the target worth 5,000+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    lQVWdTLYPGVts5eR:
+      type: save
+      _id: lQVWdTLYPGVts5eR
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: RCuPR9PN6DD1YDFc
+          onSave: false
+        - _id: VrrFIk47pnm9qKuX
+          onSave: false
+        - _id: 6P8mzDayeidhwod7
+          onSave: false
+        - _id: ApXXZFLy8fD2cWO0
+          onSave: false
+        - _id: R4BMRAXaadQwpvwk
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: imprisonment
+_id: phbsplImprisonme
+type: spell
+img: icons/magic/control/debuff-chains-shackles-movement-purple.webp
+effects:
+  - name: Burial
+    img: systems/dnd5e/icons/svg/statuses/burrowing.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplImprisonme
+    transfer: false
+    _id: RCuPR9PN6DD1YDFc
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target is entombed beneath the earth in a hollow globe of magical
+      force that is just large enough to contain the target. Nothing can pass
+      into or out of the globe.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725377202254
+      modifiedTime: 1725377685519
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplImprisonme.RCuPR9PN6DD1YDFc'
+  - name: Chaining
+    img: systems/dnd5e/icons/svg/statuses/restrained.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplImprisonme
+    transfer: false
+    _id: VrrFIk47pnm9qKuX
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Chains firmly rooted in the ground hold the target in place. The target
+      has the &amp;Reference[Restrained apply=false] condition and can’t be
+      moved by any means.</p>
+    tint: '#ffffff'
+    statuses:
+      - restrained
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725377278825
+      modifiedTime: 1725377816655
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplImprisonme.VrrFIk47pnm9qKuX'
+  - name: Hedged Prison
+    img: systems/dnd5e/icons/svg/activity/summon.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplImprisonme
+    transfer: false
+    _id: 6P8mzDayeidhwod7
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target is trapped in a demiplane that is warded against
+      teleportation and planar travel. The demiplane is your choice of a
+      labyrinth, a cage, a tower, or the like.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725377410322
+      modifiedTime: 1725377849364
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplImprisonme.6P8mzDayeidhwod7'
+  - name: Minimus Containment
+    img: icons/svg/down.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplImprisonme
+    transfer: false
+    _id: ApXXZFLy8fD2cWO0
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target becomes 1 inch tall and is trapped inside an indestructible
+      gemstone or a similar object. Light can pass through the gemstone
+      (allowing the target to see out and other creatures to see in), but
+      nothing else can pass through by any means.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725377435545
+      modifiedTime: 1725377954713
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplImprisonme.ApXXZFLy8fD2cWO0'
+  - name: Slumber
+    img: systems/dnd5e/icons/svg/statuses/unconscious.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplImprisonme
+    transfer: false
+    _id: R4BMRAXaadQwpvwk
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Unconscious apply=false] condition
+      and can’t be awoken.</p>
+    tint: '#ffffff'
+    statuses:
+      - unconscious
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725377501907
+      modifiedTime: 1725377972756
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplImprisonme.R4BMRAXaadQwpvwk'
+folder: iG0Zia8jh6uK39TB
+sort: 125000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425959776
+  modifiedTime: 1745256795109
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplImprisonme'

@@ -1,0 +1,118 @@
+_id: ao6mxTJVYy7WaVgW
+name: Blinding Dust
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>Blinding dust and sand swirls magically around the [[lookup @name
+      lowercase]]. Each creature within 5 feet of the [[lookup @name lowercase]]
+      must succeed on a  <strong>DC 16 Constitution</strong> saving throw or be
+      blinded until the end of the creature's next turn.</p>
+
+      </section>
+
+      <p>Blinding dust and sand swirls magically around the [[lookup @name
+      lowercase]]. Each creature within 5 feet of the [[lookup @name lowercase]]
+      must make a <strong>Constitution</strong> saving throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: legendary
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: attribute
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '5'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: con
+          formula: ''
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: blinding-dust
+flags: {}
+img: icons/magic/fire/barrier-wall-explosion-orange.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304973023
+  modifiedTime: 1725992573319
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ao6mxTJVYy7WaVgW'

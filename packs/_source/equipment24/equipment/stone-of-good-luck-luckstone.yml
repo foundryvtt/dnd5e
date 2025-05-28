@@ -1,0 +1,121 @@
+_id: dmgStoneOfGoodLu
+name: Stone of Good Luck (Luckstone)
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/gems/gem-rough-rectangle-red.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon (Requires Attunement)</em></p><p>While this
+      polished agate is on your person, you gain a +1 bonus to ability checks
+      and saving throws.</p><section id="secret-nh2ZHIcUKEYwoYE9"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This item includes
+      an Active Effect that automates the bonus.</p></section>
+    chat: ''
+  identifier: stone-of-good-luck-luckstone
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Lucky
+    img: icons/magic/control/buff-luck-fortune-green.webp
+    _id: FqUhrsOwuBjoJjwK
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.abilities.check
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: 1730665110091
+      modifiedTime: 1745601278536
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgStoneOfGoodLu.FqUhrsOwuBjoJjwK'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 34800000
+ownership:
+  default: 0
+_key: '!items!dmgStoneOfGoodLu'

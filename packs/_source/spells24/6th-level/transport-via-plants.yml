@@ -1,0 +1,118 @@
+name: Transport via Plants
+system:
+  description:
+    value: >-
+      <p>This spell creates a magical link between a Large or larger inanimate
+      plant within range and another plant, at any distance, on the same plane
+      of existence. You must have seen or touched the destination plant at least
+      once before. For the duration, any creature can step into the target plant
+      and exit from the destination plant by using 5 feet of movement.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '2'
+      type: object
+      special: Large or larger inanimate plant
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '10'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: con
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    HgtppydN1kkpdVyw:
+      type: utility
+      name: ''
+      _id: HgtppydN1kkpdVyw
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  identifier: transport-via-plants
+_id: phbsplTransportv
+type: spell
+img: icons/magic/nature/tree-spirit-green.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 100196
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425975925
+  modifiedTime: 1745256799326
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplTransportv'

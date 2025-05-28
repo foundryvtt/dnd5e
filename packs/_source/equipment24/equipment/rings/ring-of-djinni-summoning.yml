@@ -1,0 +1,159 @@
+_id: dmgRingOfDjinniS
+name: Ring of Djinni Summoning
+type: equipment
+folder: DC1x1wAm0NLFudA6
+img: icons/equipment/finger/ring-faceted-gold-purple.webp
+system:
+  activities:
+    rND5FpFgyChafJQN:
+      type: summon
+      _id: rND5FpFgyChafJQN
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: true
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: you can see
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - uuid: Compendium.dnd5e.actors24.Actor.mmDjinni00000000
+          _id: E8ksl8svBNm5a4Lz
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '1'
+  description:
+    value: >-
+      <p><em>Ring, Legendary (Requires Attunement)</em></p><p>While wearing this
+      ring, you can take a Magic action to summon a particular
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmDjinni00000000]{Djinni}</strong>
+      from the Elemental Plane of Air. The djinni appears in an unoccupied space
+      you choose within 120 feet of yourself. It remains as long as you maintain
+      Concentration, to a maximum of 1 hour, or until it drops to 0 Hit
+      Points.</p><p>While summoned, the djinni is Friendly to you and your
+      allies, and it obeys your commands. If you fail to command it, the djinni
+      defends itself against attackers but takes no other actions.</p><p>After
+      the djinni departs, it can't be summoned again for 24 hours, and the ring
+      becomes nonmagical if the djinni dies.</p><p><em>Rings of Djinni
+      Summoning</em> are often created by the djinn they summon and given to
+      mortals as gifts of friendship or tokens of esteem.</p>
+    chat: ''
+  identifier: ring-of-djinni-summoning
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ring
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712702492
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!dmgRingOfDjinniS'

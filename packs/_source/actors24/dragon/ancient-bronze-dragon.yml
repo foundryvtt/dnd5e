@@ -1,0 +1,4604 @@
+_id: mmAncientBronzeD
+name: Ancient Bronze Dragon
+type: npc
+img: null
+system:
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  abilities:
+    str:
+      value: 29
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    dex:
+      value: 10
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    con:
+      value: 27
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    int:
+      value: 18
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    wis:
+      value: 17
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    cha:
+      value: 25
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  skills:
+    acr:
+      ability: dex
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ani:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    arc:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ath:
+      ability: str
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    dec:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    his:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ins:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 1
+      bonuses:
+        check: ''
+        passive: ''
+    itm:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    inv:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    med:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    nat:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    prc:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 2
+      bonuses:
+        check: ''
+        passive: ''
+    prf:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    per:
+      ability: cha
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    rel:
+      ability: int
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    slt:
+      ability: dex
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+    ste:
+      ability: dex
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 1
+      bonuses:
+        check: ''
+        passive: ''
+    sur:
+      ability: wis
+      roll:
+        min: null
+        max: null
+        mode: 0
+      value: 0
+      bonuses:
+        check: ''
+        passive: ''
+  tools: {}
+  spells:
+    spell1:
+      value: 0
+      override: null
+    spell2:
+      value: 0
+      override: null
+    spell3:
+      value: 0
+      override: null
+    spell4:
+      value: 0
+      override: null
+    spell5:
+      value: 0
+      override: null
+    spell6:
+      value: 0
+      override: null
+    spell7:
+      value: 0
+      override: null
+    spell8:
+      value: 0
+      override: null
+    spell9:
+      value: 0
+      override: null
+    pact:
+      value: 0
+      override: null
+  attributes:
+    init:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonus: '@prof * 2'
+    movement:
+      burrow: null
+      climb: null
+      fly: 80
+      swim: 40
+      walk: 40
+      units: null
+      hover: false
+    attunement:
+      max: 3
+    senses:
+      darkvision: 120
+      blindsight: 60
+      tremorsense: null
+      truesight: null
+      units: null
+      special: ''
+    spellcasting: cha
+    exhaustion: 0
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+    ac:
+      flat: 22
+      calc: natural
+    hd:
+      spent: 0
+    hp:
+      value: 444
+      max: 444
+      temp: null
+      tempmax: null
+      formula: 24d20 + 192
+    death:
+      roll:
+        min: null
+        max: null
+        mode: 0
+      success: 0
+      failure: 0
+      bonuses:
+        save: ''
+    spell:
+      level: 0
+    loyalty:
+      value: null
+  details:
+    biography:
+      value: ''
+      public: ''
+    alignment: Lawful Good
+    ideal: ''
+    bond: ''
+    flaw: ''
+    race: null
+    type:
+      value: dragon
+    cr: 22
+    habitat:
+      value:
+        - type: coastal
+      custom: ''
+    treasure:
+      value:
+        - implements
+  resources:
+    legact:
+      value: 3
+      max: 3
+    legres:
+      value: 4
+      max: 4
+    lair:
+      value: true
+      initiative: null
+      inside: false
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  traits:
+    size: grg
+    di:
+      bypasses: []
+      value:
+        - lightning
+      custom: ''
+    dr:
+      bypasses: []
+      value: []
+      custom: ''
+    dv:
+      bypasses: []
+      value: []
+      custom: ''
+    dm:
+      amount: {}
+      bypasses: []
+    ci:
+      value: []
+      custom: ''
+    languages:
+      value:
+        - common
+        - draconic
+      custom: ''
+      communication: {}
+    important: false
+prototypeToken:
+  name: Ancient Bronze Dragon
+  displayName: 0
+  actorLink: false
+  appendNumber: false
+  prependAdjective: false
+  width: 4
+  height: 4
+  texture:
+    src: null
+    anchorX: 0.5
+    anchorY: 0.5
+    offsetX: 0
+    offsetY: 0
+    fit: contain
+    scaleX: 2
+    scaleY: 2
+    rotation: 0
+    tint: '#ffffff'
+    alphaThreshold: 0.75
+  lockRotation: false
+  rotation: 0
+  alpha: 1
+  disposition: -1
+  displayBars: 0
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  light:
+    negative: false
+    priority: 0
+    alpha: 0.5
+    angle: 360
+    bright: 0
+    color: null
+    coloration: 1
+    dim: 0
+    attenuation: 0.5
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      type: null
+      speed: 5
+      intensity: 5
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+  sight:
+    enabled: false
+    range: 0
+    angle: 360
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    brightness: 0
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 2
+      texture: null
+  flags: {}
+  randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
+items:
+  - _id: mmAmphibious0000
+    name: Amphibious
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        chat: ''
+      identifier: amphibious
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties:
+        - trait
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: L9Zgr8qAPc3ngKhb
+    img: icons/creatures/amphibians/bullfrog-glass-teal.webp
+    effects: []
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAmphibious0000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 0
+    _key: '!actors.items!mmAncientBronzeD.mmAmphibious0000'
+  - _id: mmLegendaryResis
+    name: Legendary Resistance
+    type: feat
+    system:
+      activities:
+        nLPRJi7ipeAet7ir:
+          type: utility
+          _id: nLPRJi7ipeAet7ir
+          sort: 0
+          activation:
+            type: special
+            value: null
+            override: false
+            condition: fails a saving throw
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: attribute
+                value: '1'
+                target: resources.legres.value
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Expend Use
+          img: systems/dnd5e/icons/svg/monster.svg
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          choose to succeed instead.</p>
+        chat: ''
+      identifier: legendary-resistance
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      type:
+        value: monster
+        subtype: ''
+      prerequisites:
+        level: null
+        repeatable: false
+      properties:
+        - trait
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: L9Zgr8qAPc3ngKhb
+    img: icons/equipment/shield/heater-steel-crystal-red.webp
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLegendaryResis
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 1
+    _key: '!actors.items!mmAncientBronzeD.mmLegendaryResis'
+  - _id: mmMultiattack000
+    name: Multiattack
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities:
+        Ms63W7e3Mv2Margn:
+          type: utility
+          name: Use
+          _id: Ms63W7e3Mv2Margn
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description: {}
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+          roll:
+            prompt: false
+            visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]] makes three [[/item Rend]]. It can
+          replace one attack with a use of (A) [[/item Repulsion Breath]] or (B)
+          [[/item Spellcasting]] to cast <em>Guiding Bolt</em> (level 2
+          version).</p>
+        chat: ''
+      identifier: multiattack
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: 4T18pEvubPMQLzvD
+    img: icons/skills/melee/strike-weapons-orange.webp
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 2
+    _key: '!actors.items!mmAncientBronzeD.mmMultiattack000'
+  - _id: mmRend0000000000
+    name: Rend
+    type: weapon
+    system:
+      type:
+        value: natural
+        baseItem: ''
+      activities:
+        VP3t6lmmuXKGCRwX:
+          _id: VP3t6lmmuXKGCRwX
+          type: attack
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          attack:
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
+            ability: ''
+            bonus: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: 8
+                bonus: ''
+                types:
+                  - lightning
+                scaling:
+                  number: 1
+          name: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: <p>[[/attack extended]]. [[/damage average extended]].</p>
+        chat: ''
+      identifier: rend
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      identified: true
+      unidentified:
+        description: ''
+      container: null
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      rarity: ''
+      attunement: ''
+      attuned: false
+      equipped: false
+      armor:
+        value: null
+      cover: null
+      crewed: false
+      hp:
+        value: null
+        max: null
+        dt: null
+        conditions: ''
+      ammunition: {}
+      damage:
+        base:
+          number: 2
+          denomination: 8
+          types:
+            - slashing
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+          bonus: ''
+        versatile:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+      magicalBonus: null
+      properties: []
+      proficient: null
+      range:
+        value: null
+        long: null
+        reach: 15
+        units: ft
+      mastery: ''
+    folder: pSCWWdqMX9eUATRJ
+    img: icons/skills/melee/shield-damaged-broken-orange.webp
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRend0000000000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 3
+    _key: '!actors.items!mmAncientBronzeD.mmRend0000000000'
+  - _id: mmRepulsionBreat
+    name: Repulsion Breath
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities:
+        zuf9EEVj4nI1joaH:
+          type: save
+          _id: zuf9EEVj4nI1joaH
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: HG9R2hTEqJ0G5urK
+              onSave: false
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: cone
+              size: '30'
+              count: ''
+            affects:
+              choice: false
+              type: creature
+              count: ''
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            parts: []
+            onSave: none
+          save:
+            ability:
+              - str
+            dc:
+              calculation: con
+              formula: 8 + @mod + @prof
+          name: Save
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
+          @save.dc.value activity=zuf9EEVj4nI1joaH]], each [[lookup
+          @target.affects.type activity=zuf9EEVj4nI1joaH]] in a [[lookup
+          @target.template.size activity=zuf9EEVj4nI1joaH]]-foot Cone.</p><p
+          class="feature"><em>Failure:</em> The target is pushed up to 60 feet
+          straight away from the [[lookup @name lowercase]] and has the
+          &amp;Reference[Prone apply=false] condition.</p>
+        chat: ''
+      identifier: repulsion-breath
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: 4T18pEvubPMQLzvD
+    img: icons/magic/light/beam-explosion-orange.webp
+    effects:
+      - name: Prone
+        img: systems/dnd5e/icons/svg/statuses/prone.svg
+        origin: Item.mmRepulsionBreat
+        _id: HG9R2hTEqJ0G5urK
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: <p>The target has the &amp;Reference[Prone apply=false] condition.</p>
+        tint: '#ffffff'
+        transfer: false
+        statuses:
+          - prone
+        sort: 0
+        flags:
+          dae:
+            enableCondition: ''
+            disableCondition: ''
+            stackable: multi
+            showIcon: false
+            durationExpression: ''
+            specialDuration: []
+          core:
+            overlay: false
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.mmRepulsionBreat.HG9R2hTEqJ0G5urK
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRepulsionBreat
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 4
+    _key: '!actors.items!mmAncientBronzeD.mmRepulsionBreat'
+  - _id: mmLightningBreat
+    name: Lightning Breath
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities:
+        LpjgVwftzGNMgTUJ:
+          type: save
+          _id: LpjgVwftzGNMgTUJ
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: line
+              size: '120'
+              width: '10'
+              count: ''
+            affects:
+              choice: false
+              count: ''
+              type: creature
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 15
+                denomination: 10
+                bonus: ''
+                types:
+                  - lightning
+                scaling:
+                  number: 1
+            onSave: half
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: con
+              formula: ''
+          name: ''
+      uses:
+        spent: 0
+        recovery:
+          - period: recharge
+            formula: '5'
+            type: recoverAll
+        max: '1'
+      description:
+        value: >-
+          <p><em>Dexterity Saving Throw: </em>DC [[lookup @save.dc.value
+          activity=LpjgVwftzGNMgTUJ]], each [[lookup @target.affects.type
+          activity=LpjgVwftzGNMgTUJ]] in a [[lookup @target.template.size
+          activity=LpjgVwftzGNMgTUJ]]-foot-long, [[lookup @target.template.width
+          activity=LpjgVwftzGNMgTUJ]]-foot-wide [[lookup @target.template.type
+          capitalize activity=LpjgVwftzGNMgTUJ]].</p><p><em>Failure:
+          </em>[[/damage average]] damage.</p><p><em>Success:</em> Half
+          damage.</p>
+        chat: ''
+      identifier: lightning-breath
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: 4T18pEvubPMQLzvD
+    img: icons/magic/lightning/bolt-strike-blue.webp
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLightningBreat
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 5
+    _key: '!actors.items!mmAncientBronzeD.mmLightningBreat'
+  - _id: mmSpellcasting00
+    name: Spellcasting
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities:
+        7yll1PX2IYP58adm:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 1
+            properties:
+              - material
+            spellbook: true
+            ability: ''
+          _id: 7yll1PX2IYP58adm
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: ''
+        bKW0LQk0QApktLd5:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 2
+            properties:
+              - material
+            spellbook: true
+            ability: ''
+          _id: bKW0LQk0QApktLd5
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: ''
+        zWGgEWpCjLKPnNmF:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplShapechang
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 9
+            properties:
+              - material
+              - concentration
+            spellbook: true
+            ability: ''
+          _id: zWGgEWpCjLKPnNmF
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: ''
+        Du9LYdBM6PvuZbtT:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 1
+            properties:
+              - material
+            spellbook: true
+            ability: ''
+          _id: Du9LYdBM6PvuZbtT
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: ''
+        wvkM0hifN0HRAjVc:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: null
+            properties:
+              - material
+            spellbook: true
+            ability: ''
+          _id: wvkM0hifN0HRAjVc
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          name: ''
+        p4haCdhv9jKddFiF:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplDetectThou
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 2
+            properties:
+              - material
+            spellbook: true
+            ability: ''
+          _id: p4haCdhv9jKddFiF
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: activityUses
+                value: '1'
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery:
+              - period: day
+                type: recoverAll
+            max: '1'
+          name: ''
+        9gfYxIVBcw6i0ce2:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplControlWat
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 4
+            properties:
+              - material
+            spellbook: true
+            ability: ''
+          _id: 9gfYxIVBcw6i0ce2
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: activityUses
+                value: '1'
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery:
+              - period: day
+                type: recoverAll
+            max: '1'
+          name: ''
+        yjvj2pLCok7FmH7n:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplScrying000
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 5
+            properties:
+              - material
+            spellbook: true
+            ability: ''
+          _id: yjvj2pLCok7FmH7n
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: activityUses
+                value: '1'
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery:
+              - period: day
+                type: recoverAll
+            max: '1'
+          name: ''
+        m7YyaRxruYArQNI9:
+          type: cast
+          spell:
+            uuid: Compendium.dnd5e.spells24.Item.phbsplWaterBreat
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 3
+            properties:
+              - material
+            spellbook: true
+            ability: ''
+          _id: m7YyaRxruYArQNI9
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: activityUses
+                value: '1'
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery:
+              - period: day
+                type: recoverAll
+            max: '1'
+          name: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          following spells, requiring no Material components and using Charisma
+          as the spellcasting ability (spell save DC [[lookup
+          @attributes.spell.dc]], +14 to hit with spell attacks):</p><p
+          class="feature-trait"><strong>At Will:</strong>
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect
+          Magic}</em>,
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGuidingBol]{Guiding
+          Bolt}</em> (level 2 version),
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplShapechang]{Shapechange}</em>
+          (Beast or Humanoid form only, no Temporary Hit Points gained from the
+          spell, and no Concentration or Temporary Hit Points required to
+          maintain the spell),
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplSpeakwithA]{Speak with
+          Animals}</em>,
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplThaumaturg]{Thaumaturgy}</em></p><p
+          class="feature-trait"><strong>1/Day Each:</strong>
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectThou]{Detect
+          Thoughts}</em>,
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplControlWat]{Control
+          Water}</em>,
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScrying000]{Scrying}</em>,
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWaterBreat]{Water
+          Breathing}</em></p>
+        chat: ''
+      identifier: spellcasting
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: 4T18pEvubPMQLzvD
+    img: icons/magic/symbols/circled-gem-pink.webp
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 6
+    _key: '!actors.items!mmAncientBronzeD.mmSpellcasting00'
+  - name: Detect Magic
+    system:
+      description:
+        value: >-
+          <p>For the duration, you sense the presence of magical effects within
+          30 feet of yourself. If you sense such effects, you can take the Magic
+          action to see a faint aura around any visible creature or object in
+          the area that bears the magic, and if an effect was created by a
+          spell, you learn the spell's school of magic.</p><p>The spell is
+          blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin
+          sheet of lead.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          type: self
+          count: ''
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: radius
+          size: '30'
+          count: ''
+      range:
+        value: ''
+        units: self
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: div
+      properties:
+        - vocal
+        - somatic
+        - concentration
+        - ritual
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: BHw91lQmVgdx39WZ
+          range:
+            override: false
+          target:
+            prompt: false
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          name: Cast
+      identifier: detect-magic
+    type: spell
+    img: icons/magic/symbols/runes-carved-stone-green.webp
+    effects:
+      - name: Detect Magic
+        origin: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
+        duration:
+          rounds: null
+          startTime: null
+          seconds: 600
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/magic/symbols/runes-carved-stone-green.webp
+        _id: BHw91lQmVgdx39WZ
+        type: base
+        system: {}
+        changes: []
+        description: ''
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.aS9fEQs26AaqVtkR.BHw91lQmVgdx39WZ
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmAncientBronzeD.Item.mmSpellcasting00.Activity.7yll1PX2IYP58adm
+        changes:
+          - key: system.properties
+            mode: 2
+            value: '-material'
+            priority: null
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.aS9fEQs26AaqVtkR.dnd5espellchange
+    folder: pBaAAtXBCq9FVEnL
+    sort: 4100000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.mmSpellcasting00.Activity.7yll1PX2IYP58adm
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: aS9fEQs26AaqVtkR
+    _key: '!actors.items!mmAncientBronzeD.aS9fEQs26AaqVtkR'
+  - name: Guiding Bolt
+    system:
+      description:
+        value: >-
+          <p>You hurl a bolt of light toward a creature within range. Make a
+          ranged spell attack against the target. On a hit, it takes 4d6 Radiant
+          damage, and the next attack roll made against it before the end of
+          your next turn has Advantage.</p><p><strong>Using a Higher-Level Spell
+          Slot.</strong> The damage increases by 1d6 for each spell slot level
+          above 1.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: round
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+          special: ''
+        template:
+          units: ''
+          contiguous: false
+          type: ''
+      range:
+        value: '120'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: evo
+      properties:
+        - vocal
+        - somatic
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: rHzZCeXfdeTcYyk8
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ranged
+              classification: spell
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - number: 4
+                denomination: 6
+                bonus: ''
+                types:
+                  - radiant
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: guiding-bolt
+    type: spell
+    img: icons/magic/light/projectile-flare-blue.webp
+    effects:
+      - name: Guiding Bolt
+        origin: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
+        duration:
+          rounds: 1
+          startTime: null
+          seconds: null
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/skills/targeting/target-strike-triple-blue.webp
+        _id: rHzZCeXfdeTcYyk8
+        type: base
+        system: {}
+        changes: []
+        description: >-
+          <p><span style="font-family:Signika, sans-serif">The next attack roll
+          made against the target before the end of your next turn has
+          Advantage.</span></p>
+        tint: '#ffffff'
+        transfer: false
+        statuses:
+          - marked
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.UPNvQdn6GdOP79du.rHzZCeXfdeTcYyk8
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmAncientBronzeD.Item.mmSpellcasting00.Activity.bKW0LQk0QApktLd5
+        changes:
+          - key: system.properties
+            mode: 2
+            value: '-material'
+            priority: null
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.UPNvQdn6GdOP79du.dnd5espellchange
+    folder: pBaAAtXBCq9FVEnL
+    sort: 2500000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        cachedFor: .Item.mmSpellcasting00.Activity.bKW0LQk0QApktLd5
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: UPNvQdn6GdOP79du
+    _key: '!actors.items!mmAncientBronzeD.UPNvQdn6GdOP79du'
+  - name: Shapechange
+    system:
+      description:
+        value: >-
+          <p>You shape-shift into another creature for the duration or until you
+          take a Magic action to shape-shift into a different eligible form. The
+          new form must be of a creature that has a Challenge Rating no higher
+          than your level or Challenge Rating. You must have seen the sort of
+          creature before, and it can't be a Construct or an Undead.</p><p>When
+          you shape-shift, you gain a number of Temporary Hit Points equal to
+          the Hit Points of the form. The spell ends early if you have no
+          Temporary Hit Points left.</p><p>Your game statistics are replaced by
+          the stat block of the chosen form, but you retain your creature type;
+          alignment; personality; Intelligence, Wisdom, and Charisma scores; Hit
+          Points; Hit Point Dice; proficiencies; and ability to communicate. If
+          you have the Spellcasting feature, you retain it too.</p><p>Upon
+          shape-shifting, you determine whether your equipment drops to the
+          ground or changes in size and shape to fit the new form while you're
+          in it.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        template:
+          units: ''
+          contiguous: false
+          type: ''
+      range:
+        units: self
+        special: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 9
+      school: trs
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      materials:
+        value: a jade circlet worth 1,500+ GP
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      activities:
+        xLGk73cwKfSx5rhK:
+          type: utility
+          _id: xLGk73cwKfSx5rhK
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Cast
+      identifier: shapechange
+    type: spell
+    img: icons/magic/unholy/hand-fire-skeleton-pink.webp
+    effects:
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmAncientBronzeD.Item.mmSpellcasting00.Activity.zWGgEWpCjLKPnNmF
+        changes:
+          - key: system.properties
+            mode: 2
+            value: '-material'
+            priority: null
+          - key: system.properties
+            mode: 2
+            value: '-concentration'
+            priority: null
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.Wgz6pLYjVBAOvNf5.dnd5espellchange
+    folder: iG0Zia8jh6uK39TB
+    sort: 100391
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        cachedFor: .Item.mmSpellcasting00.Activity.zWGgEWpCjLKPnNmF
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplShapechang
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: Wgz6pLYjVBAOvNf5
+    _key: '!actors.items!mmAncientBronzeD.Wgz6pLYjVBAOvNf5'
+  - name: Speak with Animals
+    system:
+      description:
+        value: >-
+          <p>For the duration, you can comprehend and verbally communicate with
+          Beasts, and you can use any of the Influence action's skill options
+          with them.</p><p>Most Beasts have little to say about topics that
+          don't pertain to survival or companionship, but at minimum, a Beast
+          can give you information about nearby locations and monsters,
+          including whatever it has perceived within the past day.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        template:
+          units: ''
+          contiguous: false
+          type: ''
+      range:
+        units: self
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: div
+      properties:
+        - vocal
+        - somatic
+        - ritual
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: lHx55SIuimKR3ALR
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: speak-with-animals
+    type: spell
+    img: icons/creatures/mammals/dog-husky-white-blue.webp
+    effects:
+      - name: Bestial Communication
+        origin: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
+        duration:
+          rounds: 1
+          startTime: null
+          seconds: 600
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/creatures/mammals/dog-husky-white-blue.webp
+        _id: lHx55SIuimKR3ALR
+        type: base
+        system: {}
+        changes:
+          - key: system.traits.languages.custom
+            mode: 2
+            value: ;comprehend and verbally communicate with Beasts
+            priority: null
+        description: ''
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.b2F1edL1NKY3Yo0j.lHx55SIuimKR3ALR
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmAncientBronzeD.Item.mmSpellcasting00.Activity.Du9LYdBM6PvuZbtT
+        changes:
+          - key: system.properties
+            mode: 2
+            value: '-material'
+            priority: null
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.b2F1edL1NKY3Yo0j.dnd5espellchange
+    folder: pBaAAtXBCq9FVEnL
+    sort: 300000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        cachedFor: .Item.mmSpellcasting00.Activity.Du9LYdBM6PvuZbtT
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: b2F1edL1NKY3Yo0j
+    _key: '!actors.items!mmAncientBronzeD.b2F1edL1NKY3Yo0j'
+  - name: Thaumaturgy
+    system:
+      description:
+        value: >-
+          <p>You manifest a minor wonder within range. You create one of the
+          effects below within range. If you cast this spell multiple times, you
+          can have up to three of its 1-minute effects active at a
+          time.</p><p><strong>Altered Eyes.</strong> You alter the appearance of
+          your eyes for 1 minute.</p><p><strong>Booming Voice.</strong> Your
+          voice booms up to three times as loud as normal for 1 minute. For the
+          duration, you have Advantage on [[/check ability=cha skill=itm]]
+          checks.</p><p><strong>Fire Play.</strong> You cause flames to flicker,
+          brighten, dim, or change color for 1 minute.</p><p><strong>Invisible
+          Hand.</strong> You instantaneously cause an unlocked door or window to
+          fly open or slam shut.</p><p><strong>Phantom Sound.</strong> You
+          create an instantaneous sound that originates from a point of your
+          choice within range, such as a rumble of thunder, the cry of a raven,
+          or ominous whispers.</p><p><strong>Tremors.</strong> You cause
+          harmless tremors in the ground for 1 minute.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        template:
+          units: ''
+          contiguous: false
+          type: ''
+      range:
+        units: ft
+        special: ''
+        value: '30'
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 0
+      school: trs
+      properties:
+        - vocal
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: always
+        prepared: false
+      activities:
+        q83milmNAKF9cymI:
+          type: utility
+          _id: q83milmNAKF9cymI
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: Cast
+      identifier: thaumaturgy
+    type: spell
+    img: icons/environment/people/cleric-orange.webp
+    effects:
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmAncientBronzeD.Item.mmSpellcasting00.Activity.wvkM0hifN0HRAjVc
+        changes:
+          - key: system.properties
+            mode: 2
+            value: '-material'
+            priority: null
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.nEBoPZejGFPgIfWu.dnd5espellchange
+    folder: 4FhsY9FJQd7h7MZb
+    sort: 100391
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.mmSpellcasting00.Activity.wvkM0hifN0HRAjVc
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: nEBoPZejGFPgIfWu
+    _key: '!actors.items!mmAncientBronzeD.nEBoPZejGFPgIfWu'
+  - name: Detect Thoughts
+    system:
+      description:
+        value: >-
+          <p>You activate one of the effects below. Until the spell ends, you
+          can activate either effect as a Magic action on your later
+          turns.</p><p><strong>Sense Thoughts.</strong> You sense the presence
+          of thoughts within 30 feet of yourself that belong to creatures that
+          know languages or are telepathic. You don't read the thoughts, but you
+          know that a thinking creature is present.</p><p>The spell is blocked
+          by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of
+          lead.</p><p><strong>Read Thoughts.</strong> Target one creature you
+          can see within 30 feet of yourself or one creature within 30 feet of
+          yourself that you detected with the Sense Thoughts option. You learn
+          what is most on the target's mind right now. If the target doesn't
+          know any languages and isn't telepathic, you learn nothing.</p><p>As a
+          Magic action on your next turn, you can try to probe deeper into the
+          target's mind. If you probe deeper, the target makes a Wisdom saving
+          throw. On a failed save, you discern the target's reasoning, emotions,
+          and something that looms large in its mind (such as a worry, love, or
+          hate). On a successful save, the spell ends. Either way, the target
+          knows that you are probing into its mind, and until you shift your
+          attention away from the target's mind, the target can take an action
+          on its turn to make an [[/check ability=int skill=arc
+          dc=@attributes.spell.dc]] check against your spell save DC, ending the
+          spell on a success.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: ''
+          choice: false
+          special: ''
+        template:
+          units: ft
+          contiguous: false
+          type: radius
+          size: '30'
+          count: ''
+      range:
+        units: self
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 2
+      school: div
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      materials:
+        value: 1 Copper Piece
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: true
+            units: ft
+            special: ''
+            value: '30'
+          target:
+            prompt: false
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: creature
+              special: ''
+            override: true
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          name: Probe Deeper
+        cNjNJvq5tlzmAjzM:
+          type: utility
+          name: Sense Thoughts
+          _id: cNjNJvq5tlzmAjzM
+          sort: -100000
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          img: systems/dnd5e/icons/svg/damage/psychic.svg
+      identifier: detect-thoughts
+    type: spell
+    img: icons/skills/social/diplomacy-handshake-yellow.webp
+    effects:
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmAncientBronzeD.Item.mmSpellcasting00.Activity.p4haCdhv9jKddFiF
+        changes:
+          - key: system.properties
+            mode: 2
+            value: '-material'
+            priority: null
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.SUqCisgEYVYta6cz.dnd5espellchange
+    folder: 3SjcO2acsFnWegp4
+    sort: 4000000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+        cachedFor: .Item.mmSpellcasting00.Activity.p4haCdhv9jKddFiF
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectThou
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: SUqCisgEYVYta6cz
+    _key: '!actors.items!mmAncientBronzeD.SUqCisgEYVYta6cz'
+  - name: Control Water
+    system:
+      description:
+        value: >-
+          <p>Until the spell ends, you control any water inside an area you
+          choose that is a Cube up to 100 feet on a side, using one of the
+          following effects. As a Magic action on your later turns, you can
+          repeat the same effect or choose a different one.</p><p><strong>Flood.
+          </strong>You cause the water level of all standing water in the area
+          to rise by as much as 20 feet. If you choose an area in a large body
+          of water, you instead create a 20-foot tall wave that travels from one
+          side of the area to the other and then crashes. Any Huge or smaller
+          vehicles in the wave's path are carried with it to the other side. Any
+          Huge or smaller vehicles struck by the wave have a [[/r
+          1d100cs&lt;26#Vehicle is capsized]]{25 percent} chance of
+          capsizing.</p><p>The water level remains elevated until the spell ends
+          or you choose a different effect. If this effect produced a wave, the
+          wave repeats on the start of your next turn while the flood effect
+          lasts.</p><p><strong>Part Water. </strong>You part water in the area
+          and create a trench. The trench extends across the spell's area, and
+          the separated water forms a wall to either side. The trench remains
+          until the spell ends or you choose a different effect. The water then
+          slowly fills in the trench over the course of the next round until the
+          normal water level is restored.</p><p><strong>Redirect Flow.
+          </strong>You cause flowing water in the area to move in a direction
+          you choose, even if the water has to flow over obstacles, up walls, or
+          in other unlikely directions. The water in the area moves as you
+          direct it, but once it moves beyond the spell's area, it resumes its
+          flow based on the terrain. The water continues to move in the
+          direction you chose until the spell ends or you choose a different
+          effect.</p><p><strong>Whirlpool. </strong>You cause a whirlpool to
+          form in the center of the area, which must be at least 50 feet square
+          and 25 feet deep. The whirlpool lasts until you choose a different
+          effect or the spell ends. The whirlpool is 5 feet wide at the base, up
+          to 50 feet wide at the top, and 25 feet tall. Any creature in the
+          water and within 25 feet of the whirlpool is pulled 10 feet toward it.
+          When a creature enters the whirlpool for the first time on a turn or
+          ends its turn there, it makes a Strength saving throw. On a failed
+          save, the creature takes 2d8 Bludgeoning damage. On a successful save,
+          the creature takes half as much damage. A creature can swim away from
+          the whirlpool only if it first takes an action to pull away and
+          succeeds on a [[/check ability=str skill=ath dc=@attributes.spell.dc]]
+          check against your spell save DC.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        template:
+          units: ft
+          type: cube
+          size: '100'
+          contiguous: false
+          count: ''
+      range:
+        value: '300'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 4
+      school: trs
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      materials:
+        value: a mixture of water and dust
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+              type: cylinder
+              size: '25'
+              height: '-25'
+              count: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: true
+          damage:
+            onSave: half
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: 8
+                bonus: ''
+                types:
+                  - bludgeoning
+                scaling:
+                  mode: ''
+                  number: 1
+          save:
+            ability:
+              - str
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          name: Create Whirlpool
+        uvlPi5Em9KSfKICT:
+          type: utility
+          name: Flood, Part, or Redirect
+          _id: uvlPi5Em9KSfKICT
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          roll:
+            prompt: false
+            visible: false
+            name: 25% Capsize Chance
+            formula: 1d100cs<26
+      identifier: control-water
+    type: spell
+    img: icons/magic/water/pseudopod-swirl-blue.webp
+    effects:
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmAncientBronzeD.Item.mmSpellcasting00.Activity.9gfYxIVBcw6i0ce2
+        changes:
+          - key: system.properties
+            mode: 2
+            value: '-material'
+            priority: null
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.weRr4SCAG9rNPGAp.dnd5espellchange
+    folder: qi3IbnEwap7mRw4b
+    sort: 2900000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        cachedFor: .Item.mmSpellcasting00.Activity.9gfYxIVBcw6i0ce2
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplControlWat
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: weRr4SCAG9rNPGAp
+    _key: '!actors.items!mmAncientBronzeD.weRr4SCAG9rNPGAp'
+  - name: Scrying
+    system:
+      description:
+        value: >-
+          <p>You can see and hear a creature you choose that is on the same
+          plane of existence as you. The target makes a Wisdom saving throw,
+          which is modified (see the tables below) by how well you know the
+          target and the sort of physical connection you have to it. The target
+          doesn't know what it is making the save against, only that it feels
+          uneasy.</p><table><thead><tr><td>Your Knowledge of the Target Is
+          …</td><td>Save Modifier</td></tr></thead><tbody><tr><td>Secondhand
+          (heard of the target)</td><td>+5</td></tr><tr><td>Firsthand (met the
+          target)</td><td>+0</td></tr><tr><td>Extensive (know the target
+          well)</td><td>−5</td></tr></tbody></table><table><thead><tr><td>You
+          Have the Target's …</td><td>Save
+          Modifier</td></tr></thead><tbody><tr><td>Picture or other
+          likeness</td><td>−2</td></tr><tr><td>Garment or other
+          possession</td><td>−4</td></tr><tr><td>Body part, lock of hair, or bit
+          of nail</td><td>−10</td></tr></tbody></table><p>On a successful save,
+          the target isn't affected, and you can't use this spell on it again
+          for 24 hours.</p><p>On a failed save, the spell creates an Invisible,
+          intangible sensor within 10 feet of the target. You can see and hear
+          through the sensor as if you were there. The sensor moves with the
+          target, remaining within 10 feet of it for the duration. If something
+          can see the sensor, it appears as a luminous orb about the size of
+          your fist.</p><p>Instead of targeting a creature, you can target a
+          location you have seen. When you do so, the sensor appears at that
+          location and doesn't move.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: minute
+        condition: ''
+        value: 10
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+          count: '1'
+          type: any
+          special: creature on same plane of existence or a location you have seen
+        template:
+          units: ''
+          contiguous: false
+          type: ''
+      range:
+        units: self
+        special: ''
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      level: 5
+      school: div
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      materials:
+        value: >-
+          a focus worth 1,000+ GP, such as a crystal ball, mirror, or
+          water-filled font
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      activities:
+        NeUDDgmX3BdnFGH4:
+          type: save
+          _id: NeUDDgmX3BdnFGH4
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc - 5 + 2'
+          name: Secondhand and Picture
+        2CjCuSPwb4erFwZC:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc - 5 + 4'
+          name: Secondhand and Garment
+          _id: 2CjCuSPwb4erFwZC
+        AwH5PhQZyU2ryO7X:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc - 5 + 10'
+          name: Secondhand and Body Part
+          _id: AwH5PhQZyU2ryO7X
+        L9ejQXxfSH0qg8bB:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc - 0 + 2'
+          name: Firsthand and Picture
+          _id: L9ejQXxfSH0qg8bB
+        QUv35ZZBe3gVvEzK:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc - 0 + 4'
+          name: Firsthand and Garment
+          _id: QUv35ZZBe3gVvEzK
+        xhhjJb25roNtpn8g:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc - 0 + 10'
+          name: Firsthand and Body Part
+          _id: xhhjJb25roNtpn8g
+        7wBprDveLHpbu6Z0:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc + 5 + 2'
+          name: Extensive and Picture
+          _id: 7wBprDveLHpbu6Z0
+        QUhtomQ1kgxShABi:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc + 5 + 4'
+          name: Extensive and Garment
+          _id: QUhtomQ1kgxShABi
+        LwyHxV46sddf89rc:
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: custom
+              formula: '@attributes.spell.dc + 5 + 10'
+          name: Extensive and Body Part
+          _id: LwyHxV46sddf89rc
+        aeMjBXbdsC7SxTTv:
+          type: summon
+          _id: aeMjBXbdsC7SxTTv
+          activation:
+            type: ''
+            value: null
+            override: true
+            condition: ''
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: space
+              special: at target location or within 10 feet of target creature
+            override: true
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes: []
+          creatureTypes: []
+          match:
+            attacks: false
+            proficiency: false
+            saves: false
+          profiles:
+            - count: ''
+              name: ''
+              _id: qLrzNj7kNKH7AlO9
+              uuid: Compendium.dnd5e.actors24.Actor.phbInvisibleSens
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: true
+            mode: ''
+            identifier: ''
+          name: Create Sensor
+          effects: []
+      identifier: scrying
+    type: spell
+    img: icons/magic/perception/orb-crystal-ball-scrying-blue.webp
+    effects:
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmAncientBronzeD.Item.mmSpellcasting00.Activity.yjvj2pLCok7FmH7n
+        changes:
+          - key: system.properties
+            mode: 2
+            value: '-material'
+            priority: null
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.ZOBi3WSp6rdFzHKV.dnd5espellchange
+    folder: beZ8MTpWY2cMEUlp
+    sort: 400000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        cachedFor: .Item.mmSpellcasting00.Activity.yjvj2pLCok7FmH7n
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplScrying000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: ZOBi3WSp6rdFzHKV
+    _key: '!actors.items!mmAncientBronzeD.ZOBi3WSp6rdFzHKV'
+  - name: Water Breathing
+    system:
+      description:
+        value: >-
+          <p>This spell grants up to ten willing creatures of your choice within
+          range the ability to breathe underwater until the spell ends. Affected
+          creatures also retain their normal mode of respiration.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '24'
+        units: hour
+      target:
+        affects:
+          type: willing
+          count: '10'
+          choice: false
+          special: ''
+        template:
+          units: ''
+          contiguous: false
+          type: ''
+      range:
+        value: '30'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 3
+      school: trs
+      properties:
+        - vocal
+        - somatic
+        - material
+        - ritual
+      materials:
+        value: a short reed
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: hyFupFam9XIbim0U
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: water-breathing
+    type: spell
+    img: icons/magic/water/bubbles-air-water-blue.webp
+    effects:
+      - name: Water Breathing
+        origin: Compendium.dnd5e.spells24.Item.phbsplWaterBreat
+        duration:
+          rounds: null
+          startTime: null
+          seconds: 86400
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/creatures/fish/crab-blue-purple.webp
+        _id: hyFupFam9XIbim0U
+        type: base
+        system: {}
+        changes: []
+        description: ''
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.bTqY9xsP9FoWNRYo.hyFupFam9XIbim0U
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmAncientBronzeD.Item.mmSpellcasting00.Activity.m7YyaRxruYArQNI9
+        changes:
+          - key: system.properties
+            mode: 2
+            value: '-material'
+            priority: null
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.bTqY9xsP9FoWNRYo.dnd5espellchange
+    folder: HCovEE4VoPGlIbKi
+    sort: 100025
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        cachedFor: .Item.mmSpellcasting00.Activity.m7YyaRxruYArQNI9
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplWaterBreat
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: bTqY9xsP9FoWNRYo
+    _key: '!actors.items!mmAncientBronzeD.bTqY9xsP9FoWNRYo'
+  - _id: mmGuidingLight00
+    name: Guiding Light
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities:
+        zm9pGaRN3rgfVgGl:
+          type: cast
+          _id: zm9pGaRN3rgfVgGl
+          sort: 0
+          activation:
+            type: legendary
+            value: 1
+            override: true
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          spell:
+            challenge:
+              attack: null
+              save: null
+              override: false
+            level: 2
+            properties:
+              - material
+            spellbook: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
+            ability: ''
+          name: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p class="feature">The [[lookup @name lowercase]] uses [[/item
+          Spellcasting]] to cast
+          <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGuidingBol]{Guiding
+          Bolt}</em> (level 2 version).</p>
+        chat: ''
+      identifier: guiding-light
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: aehE0L1ERkzYCvJW
+    img: icons/magic/light/projectile-flare-blue.webp
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmGuidingLight00
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 7
+    _key: '!actors.items!mmAncientBronzeD.mmGuidingLight00'
+  - name: Guiding Bolt
+    system:
+      description:
+        value: >-
+          <p>You hurl a bolt of light toward a creature within range. Make a
+          ranged spell attack against the target. On a hit, it takes 4d6 Radiant
+          damage, and the next attack roll made against it before the end of
+          your next turn has Advantage.</p><p><strong>Using a Higher-Level Spell
+          Slot.</strong> The damage increases by 1d6 for each spell slot level
+          above 1.</p>
+        chat: ''
+      source:
+        custom: ''
+        rules: '2024'
+        revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
+      activation:
+        type: action
+        condition: ''
+        value: null
+      duration:
+        value: '1'
+        units: round
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+          special: ''
+        template:
+          units: ''
+          contiguous: false
+          type: ''
+      range:
+        value: '120'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: evo
+      properties:
+        - vocal
+        - somatic
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            override: false
+            concentration: false
+          effects:
+            - _id: rHzZCeXfdeTcYyk8
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ranged
+              classification: spell
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - number: 4
+                denomination: 6
+                bonus: ''
+                types:
+                  - radiant
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: guiding-bolt
+    type: spell
+    img: icons/magic/light/projectile-flare-blue.webp
+    effects:
+      - name: Guiding Bolt
+        origin: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
+        duration:
+          rounds: 1
+          startTime: null
+          seconds: null
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: false
+        flags: {}
+        img: icons/skills/targeting/target-strike-triple-blue.webp
+        _id: rHzZCeXfdeTcYyk8
+        type: base
+        system: {}
+        changes: []
+        description: >-
+          <p><span style="font-family:Signika, sans-serif">The next attack roll
+          made against the target before the end of your next turn has
+          Advantage.</span></p>
+        tint: '#ffffff'
+        transfer: false
+        statuses:
+          - marked
+        sort: 0
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.cX5AzyoQwomRKH1I.rHzZCeXfdeTcYyk8
+      - _id: dnd5espellchange
+        type: enchantment
+        name: Spell Changes
+        img: systems/dnd5e/icons/svg/activity/cast.svg
+        origin: >-
+          Compendium.dnd5e.actors24.Actor.mmAncientBronzeD.Item.mmGuidingLight00.Activity.zm9pGaRN3rgfVgGl
+        changes:
+          - key: system.activation
+            mode: 5
+            value: '{"type":"legendary","value":1,"condition":""}'
+            priority: null
+          - key: system.properties
+            mode: 2
+            value: '-material'
+            priority: null
+        system: {}
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.cX5AzyoQwomRKH1I.dnd5espellchange
+    folder: pBaAAtXBCq9FVEnL
+    sort: 2500000
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        cachedFor: .Item.mmGuidingLight00.Activity.zm9pGaRN3rgfVgGl
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: cX5AzyoQwomRKH1I
+    _key: '!actors.items!mmAncientBronzeD.cX5AzyoQwomRKH1I'
+  - _id: mmPounce00000000
+    name: Pounce
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities:
+        IzdTKthBAsB8MBfB:
+          type: utility
+          sort: 0
+          activation:
+            type: legendary
+            value: 1
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: attribute
+                value: '1'
+                target: resources.legact.value
+                scaling: {}
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            formula: ''
+            name: ''
+          name: Expend Use
+          img: systems/dnd5e/icons/svg/monster.svg
+          _id: IzdTKthBAsB8MBfB
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]] moves up to half its Speed, and it
+          makes one [[/item Rend]] attack.</p>
+        chat: ''
+      identifier: pounce
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: aehE0L1ERkzYCvJW
+    img: icons/skills/movement/arrow-upward-yellow.webp
+    effects: []
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPounce00000000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 8
+    _key: '!actors.items!mmAncientBronzeD.mmPounce00000000'
+  - _id: mmThunderclap000
+    name: Thunderclap
+    type: feat
+    system:
+      type:
+        value: monster
+        subtype: ''
+      activities:
+        Lq6GexegvlEVB6Dh:
+          type: save
+          _id: Lq6GexegvlEVB6Dh
+          sort: 0
+          activation:
+            type: legendary
+            value: 1
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: turn
+            concentration: false
+            override: false
+            value: '1'
+          effects:
+            - _id: QyuBYDW1zznn0OS4
+              onSave: false
+          range:
+            override: false
+            units: ft
+            special: ''
+            value: '90'
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: sphere
+              size: '20'
+              count: ''
+            affects:
+              choice: false
+              type: creature
+              count: ''
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
+                denomination: 8
+                bonus: ''
+                types:
+                  - thunder
+                scaling:
+                  number: 1
+            onSave: none
+          save:
+            ability:
+              - con
+            dc:
+              calculation: cha
+              formula: 8 + @mod + @prof
+          name: Save
+          img: systems/dnd5e/icons/svg/activity/save.svg
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+          @save.dc.value activity=Lq6GexegvlEVB6Dh]], each [[lookup
+          @target.affects.type activity=Lq6GexegvlEVB6Dh]] in a [[lookup
+          @target.template.size activity=Lq6GexegvlEVB6Dh]]-foot-radius Sphere
+          centered on a point the [[lookup @name lowercase]] can see within
+          [[lookup @range.value activity=Lq6GexegvlEVB6Dh]] feet.</p><p
+          class="feature"><em>Failure:</em> [[/damage average]] damage, and the
+          target has the &amp;Reference[Deafened apply=false] condition until
+          the end of its next turn.</p>
+        chat: ''
+      identifier: thunderclap
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      properties: []
+      requirements: ''
+      advancement: []
+      cover: null
+      crewed: false
+    folder: aehE0L1ERkzYCvJW
+    img: icons/magic/lightning/bolts-salvo-clouds-sky.webp
+    effects:
+      - name: Deafened
+        img: systems/dnd5e/icons/svg/statuses/deafened.svg
+        origin: Item.mmThunderclap000
+        _id: QyuBYDW1zznn0OS4
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: 1
+          startRound: null
+          startTurn: null
+        description: >-
+          <p>The target is &amp;Reference[Deafened apply=long] until the end of
+          its next turn.</p>
+        tint: '#ffffff'
+        transfer: false
+        statuses:
+          - deafened
+        sort: 0
+        flags:
+          dae:
+            enableCondition: ''
+            disableCondition: ''
+            stackable: multi
+            showIcon: false
+            durationExpression: ''
+            specialDuration: []
+          core:
+            overlay: false
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!mmAncientBronzeD.mmThunderclap000.QyuBYDW1zznn0OS4
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmThunderclap000
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712712311
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    ownership:
+      default: 0
+    sort: 9
+    _key: '!actors.items!mmAncientBronzeD.mmThunderclap000'
+effects: []
+folder: xmXOrBADA4LyJOGl
+flags:
+  dnd5e:
+    showTokenPortrait: false
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745415505941
+  modifiedTime: 1745712712356
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!actors!mmAncientBronzeD'

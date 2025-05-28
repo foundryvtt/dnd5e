@@ -1,0 +1,114 @@
+_id: KrM3oHVv13RAALrS
+name: Find Traps
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You sense the presence of any trap within range that is within line of
+      sight. A trap, for the purpose of this spell, includes anything that would
+      inflict a sudden or unexpected effect you consider harmful or undesirable,
+      which was specifically intended as such by its creator. Thus, the spell
+      would sense an area affected by the alarm spell, a glyph of warding, or a
+      mechanical pit trap, but it would not reveal a natural weakness in the
+      floor, an unstable ceiling, or a hidden sinkhole.</p><p>This spell merely
+      reveals that a trap is present. You don't learn the location of each trap,
+      but you do learn the general nature of the danger posed by a trap you
+      sense.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: div
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: find-traps
+sort: 0
+flags: {}
+img: icons/magic/light/explosion-star-blue-small.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037353795
+  modifiedTime: 1725992719073
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!KrM3oHVv13RAALrS'

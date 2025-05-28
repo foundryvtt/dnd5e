@@ -1,0 +1,156 @@
+name: Longstrider
+system:
+  description:
+    value: >-
+      <p>You touch a creature. The target's Speed increases by 10 feet until the
+      spell ends.</p><p><strong>Using a Higher-Level Spell Slot.</strong> You
+      can target one additional creature for each spell slot level above 1.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '@item.level'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a pinch of dirt
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: I746neZVrgJFkRco
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects:
+        - I746neZVrgJFkRco
+  identifier: longstrider
+_id: phbsplLongstride
+type: spell
+img: icons/equipment/feet/boots-leather-laced-brown.webp
+effects:
+  - name: Longstrider
+    origin: Compendium.dnd5e.spells24.Item.phbsplLongstride
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/equipment/feet/boots-leather-laced-brown.webp
+    _id: I746neZVrgJFkRco
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 2
+        value: '10'
+        priority: null
+    description: <p>The target’s Speed increases by 10 feet until the spell ends.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplLongstride.I746neZVrgJFkRco'
+folder: pBaAAtXBCq9FVEnL
+sort: 1300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425961911
+  modifiedTime: 1745256795632
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplLongstride'

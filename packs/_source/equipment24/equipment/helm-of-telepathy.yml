@@ -1,0 +1,210 @@
+_id: dmgHelmOfTelepat
+name: Helm of Telepathy
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/head/helm-spangen.webp
+system:
+  activities:
+    UtT5lj94xD2gC7t7:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDetectThou
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: UtT5lj94xD2gC7t7
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    KeNwSWKR7BsH8e9G:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplSuggestion
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: KeNwSWKR7BsH8e9G
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon (Requires Attunement)</em></p><p>While
+      wearing this helm, you have telepathy with a range of 30 feet, and you can
+      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplDetectThou]{Detect
+      Thoughts} or
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplSuggestion]{Suggestion} (save
+      DC 13) from the helm. Once either spell is cast from the helm, that spell
+      can't be cast from it again until the next dawn.</p>
+    chat: ''
+  identifier: helm-of-telepathy
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Telepathy
+    img: icons/equipment/head/helm-spangen.webp
+    _id: hFWmlSeGZKjnB2ZE
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.languages.custom
+        mode: 2
+        value: Telepathy (30 feet)
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730696336539
+      modifiedTime: 1730696368791
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgHelmOfTelepat.hFWmlSeGZKjnB2ZE'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712700646
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 18400000
+ownership:
+  default: 0
+_key: '!items!dmgHelmOfTelepat'

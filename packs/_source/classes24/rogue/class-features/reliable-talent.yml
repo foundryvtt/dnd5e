@@ -1,0 +1,92 @@
+_id: phbrgeReliableTa
+name: Reliable Talent
+type: feat
+folder: ymTkGscp5QEOwDlv
+img: icons/skills/ranged/target-bullseye-arrow-glowing.webp
+system:
+  description:
+    value: >-
+      <p>Whenever you make an ability check that uses one of your skill or tool
+      proficiencies, you can treat a d20 roll of 9 or lower as a 10.</p><section
+      class="secret" id="secret-FOATC0HOce35kD20"><p><strong>Foundry
+      Note</strong></p><p>This feature includes an Active Effect which automates
+      the minimum roll of 10 on your skill and tool proficiencies.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 7
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: reliable-talent
+effects:
+  - _id: TIw25thHBYEPdKR1
+    changes:
+      - key: flags.dnd5e.reliableTalent
+        mode: 5
+        value: 'true'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.classes24.Item.phbrgeReliableTa
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Reliable Talent
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classfeatures.Item.YN9xm6MCvse4Y60u.ActiveEffect.vMMZHZQ0qT7MT4I4
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/skills/ranged/target-bullseye-arrow-glowing.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbrgeReliableTa.TIw25thHBYEPdKR1'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866292069
+  modifiedTime: 1745256764370
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeReliableTa'

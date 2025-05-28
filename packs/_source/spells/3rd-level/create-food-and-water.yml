@@ -1,0 +1,109 @@
+_id: BV0mpbHh29IbbIj5
+name: Create Food and Water
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create 45 pounds of food and 30 gallons of water on the ground or
+      in containers within range, enough to sustain up to fifteen humanoids or
+      five steeds for 24 hours. The food is bland but nourishing, and spoils if
+      uneaten after 24 hours. The water is clean and doesn't go bad.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: space
+      choice: false
+    template:
+      units: any
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: create-food-and-water
+sort: 0
+flags: {}
+img: icons/magic/nature/leaf-glow-teal.webp
+effects: []
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037350569
+  modifiedTime: 1725992718001
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!BV0mpbHh29IbbIj5'

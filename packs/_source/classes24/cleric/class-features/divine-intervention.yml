@@ -1,0 +1,120 @@
+_id: phbclcDivineInte
+name: Divine Intervention
+type: feat
+folder: 3wY92TRgyyyDkpmF
+img: icons/magic/light/beam-rays-yellow-blue-small.webp
+system:
+  description:
+    value: >-
+      <p>You can call on your deity or pantheon to intervene on your behalf. As
+      a Magic action, choose any
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj]{Cleric
+      spell} of level 5 or lower that doesn't require a Reaction to cast. As
+      part of the same action, you cast that spell without expending a spell
+      slot or needing Material components. You can't use this feature again
+      until you finish a Long Rest.</p><section id="secret-LP7yqqobTjOqeswv"
+      class="secret"><p><strong>Foundry Note</strong></p><p>Uncheck the
+      "Consumption" box when casting the spell for the free use. This feature
+      can be used to track available uses.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '1'
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 10
+    repeatable: false
+  properties: []
+  requirements: Cleric
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: ''
+        units: inst
+        special: ''
+        override: false
+        concentration: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: systems/dnd5e/icons/svg/damage/force.svg
+  enchant: {}
+  identifier: divine-intervention
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866373481
+  modifiedTime: 1740680081722
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 300000
+ownership:
+  default: 0
+_key: '!items!phbclcDivineInte'

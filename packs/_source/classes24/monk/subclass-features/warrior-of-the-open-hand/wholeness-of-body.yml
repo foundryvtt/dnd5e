@@ -1,0 +1,114 @@
+_id: phbmnkWholenessO
+name: Wholeness of Body
+type: feat
+folder: 8keksVDATj5D9vYl
+img: icons/magic/life/heart-glowing-red.webp
+system:
+  description:
+    value: >-
+      <p>You gain the ability to heal yourself. As a Bonus Action, you can roll
+      your Martial Arts die. You regain a number of Hit Points equal to the
+      number rolled plus your Wisdom modifier (minimum of 1 Hit Point
+      regained).</p><p>You can use this feature a number of times equal to your
+      Wisdom modifier (minimum of once), and you regain all expended uses when
+      you finish a Long Rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: (max(1,@abilities.wis.mod))
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 6
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    CoatPmjognJHbfZ6:
+      type: heal
+      _id: CoatPmjognJHbfZ6
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: '@scale.monk.die'
+        scaling:
+          number: 1
+        bonus: ''
+      name: ''
+  enchant: {}
+  identifier: wholeness-of-body
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866574822
+  modifiedTime: 1745256763525
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbmnkWholenessO'

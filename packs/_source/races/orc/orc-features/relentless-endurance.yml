@@ -1,0 +1,115 @@
+_id: 97c8i9Z28thvZuA8
+name: Relentless Endurance
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>When you are reduced to 0 hit points but not killed outright, you can
+      drop to 1 hit point instead. You can't use this feature again until you
+      finish a long rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: race
+    subtype: ''
+  requirements: Half-Orc
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: special
+        value: null
+        condition: When you are reduced to 0 hit points
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      healing:
+        number: null
+        denomination: null
+        bonus: ''
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: '1'
+        scaling:
+          mode: whole
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: relentless-endurance
+flags: {}
+img: icons/magic/control/control-influence-rally-purple.webp
+effects: []
+folder: jGOdLW5a5cAh2zZe
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037392560
+  modifiedTime: 1725992703275
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!97c8i9Z28thvZuA8'

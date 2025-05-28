@@ -1,0 +1,139 @@
+_id: SAj03P2WBDiWu7zu
+name: Faithful Hound
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You conjure a phantom watchdog in an unoccupied space that you can see
+      within range, where it remains for the Duration, until you dismiss it as
+      an action, or until you move more than 100 feet away from it.</p><p>The
+      hound is Invisible to all creatures except you and can't be harmed. When a
+      Small or larger creature comes within 30 feet of it without first speaking
+      the password that you specify when you cast this spell, the hound starts
+      barking loudly. The hound sees invisible creatures and can see into the
+      Ethereal Plane. It ignores illusions.</p><p>At the start of each of your
+      turns, the hound attempts to bite one creature within 5 feet of it that is
+      hostile to you. The hound's Attack bonus is equal to your Spellcasting
+      ability modifier + your Proficiency Bonus. On a hit, it deals 4d8 piercing
+      damage.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      type: space
+      choice: false
+    template:
+      units: any
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: con
+  materials:
+    value: A tiny silver whistle, a piece of bone, and a thread
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: spell
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - number: 4
+            denomination: 8
+            bonus: ''
+            types:
+              - piercing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: faithful-hound
+sort: 0
+flags: {}
+img: icons/magic/nature/wolf-paw-glow-large-purple-teal.webp
+effects: []
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037356311
+  modifiedTime: 1725992719862
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!SAj03P2WBDiWu7zu'

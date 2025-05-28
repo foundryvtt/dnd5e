@@ -1,0 +1,178 @@
+name: Bane
+system:
+  description:
+    value: >-
+      <p>Up to three creatures of your choice that you can see within range must
+      each make a Charisma saving throw. Whenever a target that fails this save
+      makes an attack roll or a saving throw before the spell ends, the target
+      must subtract 1d4 from the attack roll or save.</p><p><strong>Using a
+      Higher-Level Spell Slot.</strong> You can target one additional creature
+      for each spell slot level above 1.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: 2 + @item.level
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '30'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: enc
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a drop of blood
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: 7g3RcuidZG1x5Mvm
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: bane
+_id: phbsplBane000000
+type: spell
+img: icons/magic/control/voodoo-doll-pain-damage-pink.webp
+effects:
+  - name: Bane
+    origin: Compendium.dnd5e.spells24.Item.phbsplBane000000
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/control/voodoo-doll-pain-damage-tan.webp
+    _id: 7g3RcuidZG1x5Mvm
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '-1d4'
+        priority: null
+      - key: system.bonuses.mwak.attack
+        mode: 2
+        value: '-1d4'
+        priority: null
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '-1d4'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '-1d4'
+        priority: null
+      - key: system.bonuses.rwak.attack
+        mode: 2
+        value: '-1d4'
+        priority: null
+    description: >-
+      <p>Whenever a target makes an attack roll or a saving throw before the
+      spell ends, the target must subtract 1d4 from the attack roll or save.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplBane000000.7g3RcuidZG1x5Mvm'
+folder: pBaAAtXBCq9FVEnL
+sort: 5300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425942415
+  modifiedTime: 1745256786310
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplBane000000'

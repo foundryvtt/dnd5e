@@ -1,0 +1,125 @@
+_id: XwcFK21aM2BThgSk
+name: Fetid Cloud
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>A 10-foot radius of disgusting green gas extends out from the [[lookup
+      @name lowercase]]. The gas spreads around corners, and its area is lightly
+      obscured. It lasts for 1 minute or until a strong wind disperses
+      it.</p><p>Any creature that starts its turn in that area must succeed on
+      a  <strong>DC 11 Constitution</strong> saving throw or be poisoned until
+      the start of its next turn. While poisoned in this way, the target can
+      take either an action or a bonus action on its turn, not both, and can't
+      take reactions. 1 use per day.</p>
+
+      </section>
+
+      <p>A 10-foot radius of disgusting green gas extends out from the [[lookup
+      @name lowercase]]. The gas spreads around corners, and its area is lightly
+      obscured. Any creature that starts its turn in that area must make a
+      <strong>Constitution</strong> saving throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: day
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '10'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '11'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: fetid-cloud
+flags: {}
+img: icons/magic/acid/projectile-glowing-bubbles.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304972579
+  modifiedTime: 1725992573185
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!XwcFK21aM2BThgSk'

@@ -1,0 +1,110 @@
+_id: X96xsQjIolyHtV91
+name: Whirlwind of Sand
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>the [[lookup @name lowercase]] magically transforms into a whirlwind of
+      sand, moves up to 60 feet, and reverts to its normal form. While in
+      whirlwind form, the [[lookup @name lowercase]] is immune to all damage,
+      and it can't be grappled, petrified, knocked prone, restrained, or
+      stunned. Equipment worn or carried by the [[lookup @name lowercase]]
+      remain in its possession.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: legendary
+        value: 2
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: attribute
+            target: ''
+            value: '2'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: whirlwind-of-sand
+flags: {}
+img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304972401
+  modifiedTime: 1725992573138
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!X96xsQjIolyHtV91'

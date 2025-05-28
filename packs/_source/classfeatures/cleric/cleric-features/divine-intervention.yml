@@ -1,0 +1,114 @@
+_id: eVXqHn0ojWrEuYGU
+name: Divine Intervention
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 10th level, you can call on your deity to intervene on
+      your behalf when your need is great.</p><p>Imploring your deity's aid
+      requires you to use your action. Describe the assistance you seek, and
+      roll percentile dice. If you roll a number equal to or lower than your
+      cleric level, your deity intervenes. The GM chooses the nature of the
+      intervention; the effect of any cleric spell or cleric domain spell would
+      be appropriate.</p><p>If your deity intervenes, you can't use this feature
+      again for 7 days. Otherwise, you can use it again after you finish a long
+      rest.</p><p>At 20th level, your call for intervention succeeds
+      automatically, no roll required.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Cleric 10
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: Your need must be great...
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: 1d100
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: divine-intervention
+flags: {}
+img: icons/magic/light/explosion-star-glow-blue-purple.webp
+effects: []
+folder: hraxTGrJtk9MmXqT
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037386371
+  modifiedTime: 1725992289121
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!eVXqHn0ojWrEuYGU'

@@ -1,0 +1,226 @@
+_id: phbrgeCunningAct
+name: Cunning Action
+type: feat
+folder: ymTkGscp5QEOwDlv
+img: icons/skills/movement/figure-running-gray.webp
+system:
+  description:
+    value: >-
+      <p>Your quick thinking and agility allow you to move and act quickly. On
+      your turn, you can take one of the following actions as a Bonus Action:
+      &amp;Reference[Dash], &amp;Reference[Disengage], or
+      &amp;Reference[Hide].</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    NtS3iThuWWwm8O62:
+      type: utility
+      _id: NtS3iThuWWwm8O62
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Dash
+    AeCciDTvw3kS583a:
+      type: utility
+      name: Disengage
+      _id: AeCciDTvw3kS583a
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 300000
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    NiI5qEhg9TepZxMh:
+      type: utility
+      _id: NiI5qEhg9TepZxMh
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: YLfpwyCVUObRTopP
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Hide
+  enchant: {}
+  identifier: cunning-action
+effects:
+  - name: Hiding
+    img: icons/skills/movement/figure-running-gray.webp
+    origin: Compendium.dnd5e.classes24.Item.phbrgeCunningAct
+    transfer: false
+    _id: YLfpwyCVUObRTopP
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - hiding
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbrgeCunningAct.YLfpwyCVUObRTopP'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866292069
+  modifiedTime: 1745256764143
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeCunningAct'

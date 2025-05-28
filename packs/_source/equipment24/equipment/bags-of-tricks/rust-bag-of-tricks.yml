@@ -1,0 +1,221 @@
+_id: dmgRustBagofTric
+name: Rust Bag of Tricks
+type: equipment
+folder: UP7kFWZ3kL6uCYn0
+img: icons/containers/bags/sack-simple-leather-tan.webp
+system:
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Uncommon</em></p><p>This bag made from gray,
+      rust, or tan cloth appears empty. Reaching inside the bag, however,
+      reveals the presence of a small, fuzzy object.</p><p>You can take a Magic
+      action to pull the fuzzy object from the bag and throw it up to 20 feet.
+      When the object lands, it transforms into a creature you determine by
+      rolling on the table that corresponds to the bag's color. See
+      @UUID[Compendium.dnd5e.content24.JournalEntry.mmMonstersAtoZ00]{Monsters}
+      for the creature's stat block. The creature vanishes at the next dawn or
+      when it is reduced to 0 Hit Points.</p><p>The creature is Friendly to you
+      and your allies, and it acts immediately after you on your Initiative
+      count. You can take a Bonus Action to command how the creature moves and
+      what action it takes on its next turn, such as attacking an enemy. In the
+      absence of such orders, the creature acts in a fashion appropriate to its
+      nature.</p><p>Once three fuzzy objects have been pulled from the bag, the
+      bag can't be used again until the next
+      dawn.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgRustBagOfTric
+      rollable]</p></div>
+    chat: ''
+  identifier: bag-of-tricks
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  properties:
+    - mgc
+  activities:
+    v5llnlVkusldILPp:
+      type: summon
+      _id: v5llnlVkusldILPp
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: Transformed creature determined by GM or table roll
+      duration:
+        units: spec
+        concentration: false
+        override: false
+        special: Until the next dawn or when creature is reduced to 0 Hit Points.
+      effects: []
+      range:
+        override: false
+        value: '20'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: 0Ucu6AtxqkzgKsd9
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobBrownBear0
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: sz8G8hKLXnov0Ogq
+          uuid: Compendium.dnd5e.actors24.Actor.SsuCaF2fIEoDdFA3
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: DuOt4Z41ZMs4foqq
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobRat0000000
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: J1kF0U6RizYz9jaa
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobOwl0000000
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: vrkqGgFiq2kOG1kt
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobLion000000
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: iV4Q4Qjp73ZCcLqx
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobGoat000000
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: iYlBabuB5uOig7hm
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobMastiff000
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: 9txdXobEjQtYqTT7
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobGiantGoat0
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: false
+        identifier: ''
+        mode: ''
+      name: Pull and Throw
+  uses:
+    spent: 0
+    max: '3'
+    recovery:
+      - period: dawn
+        type: recoverAll
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+sort: 200000
+ownership:
+  default: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1728589118138
+  modifiedTime: 1745712703243
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgRustBagofTric'

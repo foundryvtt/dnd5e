@@ -1,0 +1,139 @@
+_id: phbinvOtherworld
+name: Otherworldly Leap
+type: feat
+img: icons/creatures/mammals/deer-movement-leap-green.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 2+ Warlock</p></blockquote><p>You can
+      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplJump000000]{Jump} on
+      yourself without expending a spell slot.</p><section
+      id="secret-JpQyXOJAkEKVXxff" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature can be used in place of the Jump spell
+      and includes an Active Effect for tracking.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        override: false
+        concentration: false
+        value: '1'
+      effects:
+        - _id: Esyd01OZ3NCv8gtp
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+  enchant: {}
+  identifier: otherworldly-leap
+effects:
+  - name: Jump
+    origin: Compendium.dnd5e.spells24.Item.phbsplJump000000
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/skills/movement/feet-winged-boots-blue.webp
+    _id: Esyd01OZ3NCv8gtp
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>Once on each of its turns until the spell ends, that creature can jump
+      up to 30 feet by spending 10 feet of movement.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbinvOtherworld.Esyd01OZ3NCv8gtp'
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256762472
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvOtherworld'

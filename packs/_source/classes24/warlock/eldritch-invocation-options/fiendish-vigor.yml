@@ -1,0 +1,110 @@
+_id: phbinvFiendishVi
+name: Fiendish Vigor
+type: feat
+img: icons/magic/death/undead-zombie-grave-green.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 2+ Warlock</p></blockquote><p>You can
+      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplFalseLife0]{False Life} on
+      yourself without expending a spell slot. When you cast the spell with this
+      feature, you don't roll the die for the Temporary Hit Points; you
+      automatically get the highest number on the die.</p><section
+      class="secret" id="secret-9kRkRSKEmbOaga6L"><p><strong>Foundry
+      Note</strong></p><p>The <strong>False Life</strong> activity includes the
+      maximum amount of healing.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    fORgQlbeidLbJ4lv:
+      type: heal
+      name: False Life
+      _id: fORgQlbeidLbJ4lv
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - temphp
+        custom:
+          enabled: true
+          formula: 8 + 4
+        scaling:
+          number: 1
+        bonus: ''
+  enchant: {}
+  identifier: fiendish-vigor
+effects: []
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256762189
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvFiendishVi'

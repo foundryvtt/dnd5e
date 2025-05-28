@@ -1,0 +1,125 @@
+_id: dmgChimeOfOpenin
+name: Chime of Opening
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/tech/pipe-cylinder.webp
+system:
+  activities:
+    FW2x7qXh6xbtpxRQ:
+      type: cast
+      _id: FW2x7qXh6xbtpxRQ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplKnock00000
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: '10'
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Rare</em></p></div><p>This hollow metal tube
+      measures about 1 foot long and weighs 1 pound. As a Magic action, you can
+      strike the chime to cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplKnock00000]{Knock}</em>.
+      The spell's customary knocking sound is replaced by the clear, ringing
+      tone of the chime, which is audible out to 300 feet.</p><p>The chime can
+      be used 10 times. After the tenth time, it cracks and becomes useless.</p>
+    chat: ''
+  identifier: chime-of-opening
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712698598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7300000
+ownership:
+  default: 0
+_key: '!items!dmgChimeOfOpenin'

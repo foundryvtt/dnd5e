@@ -1,0 +1,172 @@
+_id: DGONTFbk5eORs5qv
+name: Black Tentacles
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Squirming, ebony tentacles fill a 20-foot square on ground that you can
+      see within range. For the Duration, these tentacles turn the ground in the
+      area into difficult terrain.</p><p>When a creature enters the affected
+      area for the first time on a turn or starts its turn there, the creature
+      must succeed on a Dexterity saving throw or take 3d6 bludgeoning damage
+      and be &amp;Reference[Restrained] by the tentacles until the spell ends. A
+      creature that starts its turn in the area and is already Restrained by the
+      tentacles takes 3d6 bludgeoning damage.</p><p>A creature Restrained by the
+      tentacles can use its action to make a Strength or Dexterity check (its
+      choice) against your spell save DC. On a success, it frees itself.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: square
+      size: '20'
+      contiguous: false
+  range:
+    value: '90'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: con
+  materials:
+    value: A piece of tentacle from a giant octopus or a giant squid
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: WTgRpzj4EQGJokA6
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 3
+            denomination: 6
+            bonus: ''
+            types:
+              - bludgeoning
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: black-tentacles
+sort: 0
+flags: {}
+img: icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp
+effects:
+  - name: Black Tentacles
+    origin: Compendium.dnd5e.spells.Item.DGONTFbk5eORs5qv
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: WTgRpzj4EQGJokA6
+    changes: []
+    description: >-
+      <p>The creature is Restrained by the tentacles until the spell ends or it
+      uses its action to make a Strength or Dexterity check (its choice) to
+      escape.</p>
+    transfer: false
+    statuses:
+      - restrained
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!DGONTFbk5eORs5qv.WTgRpzj4EQGJokA6'
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037351157
+  modifiedTime: 1725992718161
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!DGONTFbk5eORs5qv'

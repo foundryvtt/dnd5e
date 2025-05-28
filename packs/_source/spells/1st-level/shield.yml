@@ -1,0 +1,150 @@
+_id: z1mx84ONwkXKUZd7
+name: Shield
+type: spell
+img: icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp
+system:
+  description:
+    value: >-
+      <p>An invisible barrier of magical force appears and protects you. Until
+      the start of your next turn, you have a +5 bonus to AC, including against
+      the triggering attack, and you take no damage from magic missile.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: reaction
+    condition: >-
+      Which you take when you are hit by an attack or targeted by the magic
+      missile spell
+    value: 1
+  duration:
+    value: '1'
+    units: round
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: abj
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 6pbotGIvqQkraPva
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: shield
+effects:
+  - _id: 6pbotGIvqQkraPva
+    flags: {}
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '5'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      rounds: 1
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.FlLKKv7bQBlIAs11
+    tint: '#ffffff'
+    transfer: false
+    name: Shield
+    description: >-
+      <p>Until the start of your next turn, you have a +5 bonus to AC, including
+      against the triggering attack, and you take no damage from magic
+      missile.</p>
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!z1mx84ONwkXKUZd7.6pbotGIvqQkraPva'
+folder: ERuXllkhTQF51rDJ
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037367130
+  modifiedTime: 1725992723653
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!z1mx84ONwkXKUZd7'

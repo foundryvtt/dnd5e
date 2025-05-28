@@ -1,0 +1,55 @@
+_id: Ic1CSjvbWKudVUv9
+name: Pact of the Chain
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You learn the @UUID[Compendium.dnd5e.spells.Item.JGT5bNqu9REL7Fuz]{Find
+      Familiar} spell and can cast it as a ritual. The spell doesn't count
+      against your number of spells known. When you cast the spell, you can
+      choose one of the normal forms for your familiar or one of the following
+      special forms:
+      @UUID[Compendium.dnd5e.monsters.Actor.dLQiESMsfsXijD5c]{Imp},
+      pseudodragon,
+      @UUID[Compendium.dnd5e.monsters.Actor.bwtkdzavdNHISgp4]{Quasit}, or
+      @UUID[Compendium.dnd5e.monsters.Actor.MUpBNDoJEr09bLaO]{Sprite}.</p><p>Additionally,
+      when you take the Attack action, you can forgo one of your own attacks to
+      allow your familiar to make one attack of its own with its reaction.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: pact
+  requirements: Warlock 3
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: pact-of-the-chain
+flags: {}
+img: icons/magic/control/debuff-chains-shackle-movement-red.webp
+effects: []
+folder: 5vh3H3BfNi3v9LeS
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037382456
+  modifiedTime: 1725992287878
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Ic1CSjvbWKudVUv9'

@@ -1,0 +1,87 @@
+_id: OTvrJSJSUgAwXrWX
+name: Nature's Ward
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>When you reach 10th level, you can't be charmed or frightened by
+      elementals or fey, and you are immune to poison and disease.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: Circle of the Land 10
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: natures-ward
+flags: {}
+img: icons/commodities/flowers/lotus-pink.webp
+effects:
+  - _id: Jxpz4MZmgTy7z7cm
+    changes:
+      - key: system.traits.ci.value
+        mode: 2
+        value: diseased
+        priority: null
+      - key: system.traits.ci.value
+        mode: 2
+        value: poisoned
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.OTvrJSJSUgAwXrWX
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Nature's Ward
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/commodities/flowers/lotus-pink.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!OTvrJSJSUgAwXrWX.Jxpz4MZmgTy7z7cm'
+folder: oPF5p4Kt9rOawCdU
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037383558
+  modifiedTime: 1725992288214
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!OTvrJSJSUgAwXrWX'

@@ -1,0 +1,237 @@
+name: Vitriolic Sphere
+system:
+  description:
+    value: >-
+      <p>You point at a location within range, and a glowing, 1-foot-diameter
+      ball of acid streaks there and explodes in a 20-foot-radius Sphere. Each
+      creature in that area makes a Dexterity saving throw. On a failed save, a
+      creature takes 10d4 Acid damage and another [[/damage 5d4 type=acid]]
+      damage at the end of its next turn. On a successful save, a creature takes
+      half the initial damage only.</p><p><strong>Using a Higher-Level Spell
+      Slot. </strong>The initial damage increases by 2d4 for each spell slot
+      level above 4.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    book: SRD 5.2
+    license: CC-BY-4.0
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ft
+      type: sphere
+      size: '20'
+      contiguous: false
+      count: ''
+  range:
+    value: '150'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a drop of bile
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+        concentration: false
+      effects:
+        - _id: WHhf4PFHQBDkCAyb
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: (2 * @item.level + 2)d4
+            number: 10
+            denomination: 4
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              mode: whole
+              number: 2
+              formula: ''
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+    dnd5eactivity200:
+      _id: dnd5eactivity200
+      type: damage
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: true
+        concentration: false
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: 4
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              mode: ''
+              number: 1
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: End of Turn Damage
+  identifier: vitriolic-sphere
+_id: phbsplVitriolicS
+type: spell
+img: icons/magic/acid/orb-bubble-smoke-drip.webp
+effects:
+  - name: Lingering Acid
+    origin: Compendium.dnd5e.spells24.Item.phbsplVitriolicS
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/acid/dissolve-drip-droplet-smoke.webp
+    _id: WHhf4PFHQBDkCAyb
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The creature takes [[/damage <span style="font-family:Signika,
+      sans-serif">5d4 type=acid]] damage at the end of its next turn</span></p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplVitriolicS.WHhf4PFHQBDkCAyb'
+folder: qi3IbnEwap7mRw4b
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745433110943
+  modifiedTime: 1745712696407
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 25000
+ownership:
+  default: 0
+_key: '!items!phbsplVitriolicS'

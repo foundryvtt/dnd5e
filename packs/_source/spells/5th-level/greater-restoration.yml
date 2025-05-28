@@ -1,0 +1,122 @@
+_id: WzvJ7G3cqvIubsLk
+name: Greater Restoration
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You imbue a creature you touch with positive energy to undo a
+      debilitating effect. You can reduce the target's Exhaustion level by one,
+      or end one of the following Effects on the target:</p>
+
+      <ul>
+
+      <li>One effect that Charmed or Petrified the target</li>
+
+      <li>One curse, including the target's Attunement to a cursed magic
+      item</li>
+
+      <li>Any reduction to one of the target's Ability Scores</li>
+
+      <li>One effect reducing the target's hit point maximum</li>
+
+      </ul>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: abj
+  materials:
+    value: diamond dust worth at least 100gp, which the spell consumes
+    consumed: true
+    cost: 100
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: greater-restoration
+sort: 0
+flags: {}
+img: icons/magic/life/heart-cross-strong-flame-blue.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037358060
+  modifiedTime: 1725992720448
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!WzvJ7G3cqvIubsLk'

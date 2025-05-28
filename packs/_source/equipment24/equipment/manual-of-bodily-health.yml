@@ -1,0 +1,231 @@
+_id: dmgManualOfBodil
+name: Manual of Bodily Health
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/sundries/books/book-red-square.webp
+system:
+  activities:
+    L5OnUjZIn27NHd2E:
+      type: utility
+      name: Read
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '48'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 9npFjYvEL3twc99F
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: L5OnUjZIn27NHd2E
+    AtSTn7SENNBRbKlL:
+      type: utility
+      name: Reset Progress
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-48'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: AtSTn7SENNBRbKlL
+  uses:
+    spent: 0
+    recovery: []
+    max: '48'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Very Rare</em></p><p>This book contains health and
+      nutrition tips, and its words are charged with magic. If you spend 48
+      hours over a period of 6 days or fewer studying the book's contents and
+      practicing its guidelines, your Constitution increases by 2, to a maximum
+      of 30. The manual then loses its magic but regains it in a
+      century.</p><section class="secret"
+      id="secret-SOm6BCXpqNkcxRCM"><p><strong>Foundry Note</strong></p><p>This
+      item includes 48 max uses for tracking hours read.</p><p>The
+      <strong>Read</strong> activity includes a scaling value that lets you
+      enter the amount of hours you've read. Once you hit 48 you can use the
+      included Active Effect to increase your Constitution.</p><p>The
+      <strong>Reset Progress</strong> activity resets your uses to 0 if you fail
+      to complete the book within 6 days and need to start over.</p></section>
+    chat: ''
+  identifier: manual-of-bodily-health
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Healthy
+    img: icons/skills/social/diplomacy-unity-alliance.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgManualOfBodil
+    transfer: false
+    _id: 7W1n7zchV0g7BKyq
+    type: base
+    system: {}
+    changes:
+      - key: system.abilities.con.value
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.abilities.con.max
+        mode: 4
+        value: '30'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.equipment24.Item.dmgTomeOfUnderst.ActiveEffect.jXvtCEBoDCydH8fa
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730692278297
+      modifiedTime: 1730692346992
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgManualOfBodil.7W1n7zchV0g7BKyq'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 21300000
+ownership:
+  default: 0
+_key: '!items!dmgManualOfBodil'

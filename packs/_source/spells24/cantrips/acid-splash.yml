@@ -1,0 +1,135 @@
+name: Acid Splash
+system:
+  description:
+    value: >-
+      <p>You create an acidic bubble at a point within range, where it explodes
+      in a 5-foot-radius Sphere. Each creature in that Sphere must succeed on a
+      Dexterity saving throw or take 1d6 Acid damage.</p><p><strong>Cantrip
+      Upgrade.</strong> The damage increases by 1d6 when you reach levels 5
+      (2d6), 11 (3d6), and 17 (4d6).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: sphere
+      size: '5'
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: evo
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    eOJpSDmq0JkmzpAV:
+      type: save
+      _id: eOJpSDmq0JkmzpAV
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '6'
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              mode: whole
+        onSave: none
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: acid-splash
+_id: phbsplAcidSplash
+type: spell
+img: icons/magic/acid/dissolve-drip-droplet-smoke.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+sort: 100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425939961
+  modifiedTime: 1745256784865
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplAcidSplash'

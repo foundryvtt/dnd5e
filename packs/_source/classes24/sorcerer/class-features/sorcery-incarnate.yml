@@ -1,0 +1,111 @@
+_id: phbscrSorceryInc
+name: Sorcery Incarnate
+type: feat
+folder: zm1kuLu4kdDhoOyL
+img: icons/magic/life/cross-area-circle-green-white.webp
+system:
+  description:
+    value: >-
+      <p>If you have no uses of Innate Sorcery left, you can use it if you spend
+      2 Sorcery Points when you take the Bonus Action to activate it.</p><p>In
+      addition, while your Innate Sorcery feature is active, you can use up to
+      two of your Metamagic options on each spell you cast.</p><section
+      id="secret-l8yUYHYrWEjQI4Q0" class="secret"><p><strong>Foundry
+      Note</strong></p><p>Use this feature to consume 2 Sorcery Points and
+      restore a use of Innate Sorcery.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 7
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    qSLk2DaH21SNZxve:
+      type: utility
+      name: Restore Innate Sorcery
+      _id: qSLk2DaH21SNZxve
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: Compendium.dnd5e.classes24.Item.phbscrFontOfMagi
+            scaling: {}
+          - type: itemUses
+            value: '-1'
+            target: Compendium.dnd5e.classes24.Item.phbscrInnateSorc
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+  enchant: {}
+  identifier: sorcery-incarnate
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866286897
+  modifiedTime: 1740680088718
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbscrSorceryInc'

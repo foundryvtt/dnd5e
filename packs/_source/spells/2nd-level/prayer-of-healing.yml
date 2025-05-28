@@ -1,0 +1,118 @@
+_id: MOEmz9N0j0QPkKEE
+name: Prayer of Healing
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Up to six creatures of your choice that you can see within range each
+      regain Hit Points equal to 2d8 + your Spellcasting ability modifier. This
+      spell has no effect on Undead or constructs.</p><p><strong>At Higher
+      Levels</strong>. When you cast this spell using a spell slot of 3rd level
+      or higher, the Healing increases by 1d8 for each slot level above 2nd.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '6'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: 2
+        denomination: 8
+        bonus: '@mod'
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: ''
+        scaling:
+          mode: whole
+          number: 1
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: prayer-of-healing
+sort: 0
+flags: {}
+img: icons/magic/life/heart-cross-strong-green.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037354665
+  modifiedTime: 1725992719333
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!MOEmz9N0j0QPkKEE'

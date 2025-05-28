@@ -1,0 +1,163 @@
+name: Comprehend Languages
+system:
+  description:
+    value: >-
+      <p>For the duration, you understand the literal meaning of any language
+      that you hear or see signed. You also understand any written language that
+      you see, but you must be touching the surface on which the words are
+      written. It takes about 1 minute to read one page of text. This spell
+      doesn't decode symbols or secret messages.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    page: ''
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: div
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  materials:
+    value: a pinch of soot and salt
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: ANhwNb9xKRpWs4Q2
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects:
+        - ANhwNb9xKRpWs4Q2
+  identifier: comprehend-languages
+_id: phbsplComprehend
+type: spell
+img: icons/sundries/documents/document-writing-pink.webp
+effects:
+  - name: Comprehension
+    origin: Compendium.dnd5e.spells24.Item.phbsplComprehend
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    img: icons/sundries/books/book-open-purple.webp
+    _id: ANhwNb9xKRpWs4Q2
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.languages.value
+        mode: 2
+        value: ALL
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.2
+      createdTime: null
+      modifiedTime: 1746464316606
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplComprehend.ANhwNb9xKRpWs4Q2'
+folder: pBaAAtXBCq9FVEnL
+sort: 4500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.2
+  createdTime: 1724425945966
+  modifiedTime: 1746464353780
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplComprehend'

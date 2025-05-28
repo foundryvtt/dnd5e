@@ -1,0 +1,94 @@
+_id: phbFiendishLegac
+name: Fiendish Legacy
+img: systems/dnd5e/icons/svg/items/race.svg
+description: >-
+  <p>You are the recipient of a legacy that grants you supernatural
+  abilities.</p>
+results:
+  - type: document
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    img: systems/dnd5e/icons/species/tiefling-abyssal.webp
+    _id: BDTDezjTIxlDKI0W
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Tiefling, Abyssal
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspAbyssalTief
+    description: ''
+    _key: '!tables.results!phbFiendishLegac.BDTDezjTIxlDKI0W'
+  - type: document
+    weight: 1
+    range:
+      - 2
+      - 2
+    drawn: false
+    img: systems/dnd5e/icons/species/tiefling-chthonic.webp
+    _id: az5LLssMmXKwVuVN
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Tiefling, Chthonic
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspChthonicTie
+    description: ''
+    _key: '!tables.results!phbFiendishLegac.az5LLssMmXKwVuVN'
+  - type: document
+    weight: 1
+    range:
+      - 3
+      - 3
+    drawn: false
+    img: systems/dnd5e/icons/species/tiefling-infernal.webp
+    _id: rgmgNUmrPVv1e7Dz
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Tiefling, Infernal
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspInfernalTie
+    description: ''
+    _key: '!tables.results!phbFiendishLegac.rgmgNUmrPVv1e7Dz'
+replacement: true
+displayRoll: true
+folder: H6GuZ74gUlcOEuC5
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1726504214289
+  modifiedTime: 1740685862691
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+formula: 1d3
+sort: 200000
+ownership:
+  default: 0
+_key: '!tables!phbFiendishLegac'

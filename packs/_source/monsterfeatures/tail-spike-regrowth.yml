@@ -1,0 +1,48 @@
+_id: iVOxckt9448v7Ho5
+name: Tail Spike Regrowth
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>the [[lookup @name lowercase]] has twenty-four tail spikes. Used spikes
+      regrow when the [[lookup @name lowercase]] finishes a long rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '24'
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: tail-spike-regrowth
+flags: {}
+img: icons/creatures/mammals/wolf-shadow-black.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304975366
+  modifiedTime: 1725992574007
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!iVOxckt9448v7Ho5'

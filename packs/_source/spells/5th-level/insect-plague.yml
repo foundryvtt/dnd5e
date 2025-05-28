@@ -1,0 +1,134 @@
+_id: OVikYmSdHliAG2YD
+name: Insect Plague
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Swarming, biting locusts fill a 20-foot-radius Sphere centered on a
+      point you choose within range. The sphere spreads around corners. The
+      sphere remains for the Duration, and its area is lightly obscured. The
+      sphere's area is difficult terrain.</p><p>When the area appears, each
+      creature in it must make a Constitution saving throw. A creature takes
+      4d10 piercing damage on a failed save, or half as much damage on a
+      successful one. A creature must also make this saving throw when it enters
+      the spell's area for the first time on a turn or ends its turn
+      there.</p><p><strong>At Higher Levels.</strong> When you cast this spell
+      using a spell slot of 6th level or higher, the damage increases by 1d10
+      for each slot level above 5th.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '20'
+      contiguous: false
+  range:
+    value: '300'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: con
+  materials:
+    value: A few grains of sugar, some kernels of grain, and a smear of fat
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 4
+            denomination: 10
+            bonus: ''
+            types:
+              - piercing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: insect-plague
+sort: 0
+flags: {}
+img: icons/magic/nature/leaf-glow-maple-teal.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037355291
+  modifiedTime: 1725992719554
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!OVikYmSdHliAG2YD'

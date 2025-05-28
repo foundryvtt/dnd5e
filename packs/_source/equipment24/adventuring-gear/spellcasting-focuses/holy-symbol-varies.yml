@@ -1,0 +1,57 @@
+name: Holy Symbol (Varies)
+system:
+  description:
+    value: >-
+      <p>A Holy Symbol takes one of the forms in the Holy Symbol table and is
+      bejeweled or painted to channel divine magic. A Cleric or Paladin can use
+      a Holy Symbol as a Spellcasting Focus.</p><p>The table indicates whether a
+      Holy Symbol needs to be held, worn, or borne on fabric (such as a tabard
+      or banner) or a Shield.</p><table><caption>Holy
+      Symbols</caption><thead><tr><td>Symbol</td><td>Weight</td><td>Cost</td></tr></thead><tbody><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.phbhsyAmuletworn]{Amulet}
+      (worn or held)</td><td>1 lb.</td><td>5
+      GP</td></tr><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.phbhsyEmblemborn]{Emblem}
+      (borne on fabric or a Shield)</td><td>—</td><td>5
+      GP</td></tr><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.phbhsyReliquaryh]{Reliquary}
+      (held)</td><td>2 lb.</td><td>5 GP</td></tr></tbody></table>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  type:
+    value: gear
+    subtype: ''
+  properties: []
+  identifier: holy-symbol-varies
+_id: phbagHolySymbolV
+type: loot
+folder: YKJofRdXHKeBKJ4C
+img: icons/sundries/flags/banner-symbol-sun-gold-red.webp
+effects: []
+sort: 300000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425909046
+  modifiedTime: 1745256811979
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagHolySymbolV'

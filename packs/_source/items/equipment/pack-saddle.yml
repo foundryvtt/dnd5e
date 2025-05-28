@@ -1,0 +1,74 @@
+name: Pack Saddle
+type: equipment
+img: icons/equipment/shoulder/shoulderpad-fur-leather.webp
+system:
+  description:
+    value: >-
+      <p>A type of seat that is fastened to a mount's back, designed to support
+      the rider and affix part of the mount's tack such as stirrups. This type
+      of saddle is suitable for pack mounts.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 15
+    units: lb
+  price:
+    value: 5
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties: []
+  activities: {}
+  attuned: false
+  identifier: pack-saddle
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: ecz2fVDyAg8YgJGe
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037242541
+  modifiedTime: 1725992531460
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ecz2fVDyAg8YgJGe'

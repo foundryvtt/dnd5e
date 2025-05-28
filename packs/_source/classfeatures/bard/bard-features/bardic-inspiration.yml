@@ -1,0 +1,124 @@
+_id: hpLNiGq7y67d2EHA
+name: Bardic Inspiration
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You can inspire others through stirring words or music. To do so, you
+      use a bonus action on your turn to choose one creature other than yourself
+      within 60 feet of you who can hear you. That creature gains one Bardic
+      Inspiration die, a d6. Once within the next 10 minutes, the creature can
+      roll the die and add the number rolled to one ability check, attack roll,
+      or saving throw it makes. The creature can wait until after it rolls the
+      d20 before deciding to use the Bardic Inspiration die, but must decide
+      before the GM says whether the roll succeeds or fails. Once the Bardic
+      Inspiration die is rolled, it is lost. A creature can have only one Bardic
+      Inspiration die at a time.</p><p>You can use this feature a number of
+      times equal to your Charisma modifier (a minimum of once).</p><p>You
+      regain any expended uses when you finish a long rest.</p><p>Your Bardic
+      Inspiration die changes when you reach certain levels in this class. The
+      die becomes a d8 at 5th level, a d10 at 10th level, and a d12 at 15th
+      level.</p><section class="secret"
+      id="secret-eL25CzgN1MY7TpsR"><p><strong>Foundry
+      Note</strong></p><p>Recovery is set to long rest (for levels before
+      @UUID[Compendium.dnd5e.classfeatures.Item.3VDZGs5Ug3hIE322]{Font of
+      Inspiration} is gained). Please manually adjust as required.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: max(1, @abilities.cha.mod)
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Bard 1
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: bonus
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '10'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: 1@scale.bard.inspiration
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: bardic-inspiration
+flags: {}
+img: icons/skills/melee/unarmed-punch-fist.webp
+effects: []
+folder: XEu43QVhYfhUcewt
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037387029
+  modifiedTime: 1725992289351
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!hpLNiGq7y67d2EHA'

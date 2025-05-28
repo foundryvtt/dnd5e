@@ -1,0 +1,143 @@
+_id: phbinvMaskofMany
+name: Mask of Many Faces
+type: feat
+img: icons/creatures/magical/spirit-undead-masked-blue.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 2+ Warlock</p></blockquote><p>You can
+      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplDisguiseSe]{Disguise Self}
+      without expending a spell slot.</p><section class="secret"
+      id="secret-vIzXrLvsSDtyMciU"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Cast</strong> activity can be used in-place of Disguise Self and
+      includes an Active Effect for tracking when you are
+      disguised.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    RgprqPZmHBQwULjl:
+      type: utility
+      name: ''
+      _id: RgprqPZmHBQwULjl
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: swd1Kj9AAVBjVTCv
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: mask-of-many-faces
+effects:
+  - name: Disguised
+    origin: Compendium.dnd5e.classes24.Item.phbinvMaskofMany
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/control/silhouette-aura-energy.webp
+    _id: swd1Kj9AAVBjVTCv
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p><span style="font-family:Signika, sans-serif">To discern that you are
+      disguised, a creature must take the Study action to inspect your
+      appearance and succeed on an [[/check ability=int skill=inv]] check
+      against your spell save DC.</span></p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplDisguiseSe.ActiveEffect.SrIb7dbaZs5F4zi9
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbinvMaskofMany.swd1Kj9AAVBjVTCv'
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256762364
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvMaskofMany'

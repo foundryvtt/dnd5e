@@ -1,0 +1,239 @@
+_id: dmgRodOfAbsorpti
+name: Rod of Absorption
+type: equipment
+img: icons/weapons/wands/wand-carved-fire.webp
+system:
+  activities:
+    wgsdcPGuk1yY5gIG:
+      type: utility
+      name: Restore Slots
+      _id: wgsdcPGuk1yY5gIG
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '5'
+        spellSlot: true
+        targets:
+          - type: spellSlots
+            value: '-1'
+            target: '1'
+            scaling:
+              mode: level
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    y66MTczY5BQfIonF:
+      type: utility
+      name: Absorb Spell
+      _id: y66MTczY5BQfIonF
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: ''
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '50'
+  description:
+    value: >-
+      <p><em>Rod, Very Rare (Requires Attunement)</em></p><p>While holding this
+      rod, you can take a Reaction to absorb a spell that is targeting only you
+      and doesn't create an area of effect. The absorbed spell's effect is
+      canceled, and the spell's energy—not the spell itself—is stored in the
+      rod. The energy has the same level as the spell when it was cast. A
+      canceled spell dissipates with no effect, and any resources used to cast
+      it are wasted. The rod can absorb and store up to 50 levels of energy over
+      the course of its existence. Once the rod absorbs 50 levels of energy, it
+      can't absorb more. If you are targeted by a spell that the rod can't
+      store, the rod has no effect on that spell.</p><p>When you become attuned
+      to the rod, you know how many levels of energy the rod has absorbed over
+      the course of its existence and how many levels of spell energy it
+      currently has stored.</p><p>If you are a spellcaster holding the rod, you
+      can convert energy stored in it into spell slots to cast spells you have
+      prepared or know. You can create spell slots only of a level equal to or
+      lower than your own spell slots, up to a maximum of level 5. You use the
+      stored levels in place of your slots but otherwise cast the spell as
+      normal. For example, you can use 3 levels stored in the rod as a level 3
+      spell slot.</p><p>A newly found rod typically has [[/r 1d10]] levels of
+      spell energy stored in it. A rod that can no longer absorb spell energy
+      and has no energy remaining becomes
+      nonmagical.</p><p><strong>Available:</strong> You can track the amount of
+      available energy here.</p><section class="secret"
+      id="secret-W3rvR0CLtP9xnxbY"><p><strong>Foundry Note</strong></p><p>This
+      item has a max of 50 uses for tracking the total <strong>energy
+      absorbed</strong>. You can roll 1d10 and update the expended uses and the
+      <strong>Available</strong> energy in the description above as
+      desired.</p><p>The <strong>Absorb Spell</strong> activity allows you to
+      select the spell level you're absorbing and expends a number of uses. You
+      should then manually update the <strong>Available</strong> amount of
+      energy in the description above.</p><p>The <strong>Restore Slot</strong>
+      activity allows you to restore a spell slot. You should then manually
+      update the <strong>Available</strong> amount of energy in the description
+      above.</p></section>
+    chat: ''
+  identifier: rod-of-absorption
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: rod
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: ''
+effects: []
+folder: XVIITMl9kCCSjZQz
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745607917257
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+_key: '!items!dmgRodOfAbsorpti'

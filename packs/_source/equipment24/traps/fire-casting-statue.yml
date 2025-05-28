@@ -1,0 +1,350 @@
+_id: dmgFirecastingSt
+name: Fire-Casting Statue
+type: equipment
+img: icons/magic/fire/blast-jet-stream-splash.webp
+system:
+  activities:
+    0B7QEppQVeRNFus3:
+      type: save
+      name: Trigger (1-4)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          count: ''
+          size: '15'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 10
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      _id: 0B7QEppQVeRNFus3
+    6QOy8DtZDtBb0B9O:
+      type: save
+      name: Trigger (5-10)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          count: ''
+          size: '30'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 10
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      _id: 6QOy8DtZDtBb0B9O
+    TlEMqsJPulzRkcfw:
+      type: save
+      name: Trigger (11-16)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          count: ''
+          size: '60'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 10
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      _id: TlEMqsJPulzRkcfw
+    4sHJvhSxHbmJ3P4B:
+      type: save
+      name: Trigger (17-20)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          count: ''
+          size: '120'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 18
+            denomination: 10
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      _id: 4sHJvhSxHbmJ3P4B
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Deadly Trap (Levels 1–4)</em></p><p><strong>Trigger:</strong>
+      A creature moves onto a pressure plate</p><p><strong>Duration:</strong>
+      Instantaneous, and the trap resets at the start of the next
+      turn</p><p>When a creature moves onto this trap's pressure plate for the
+      first time on a turn or starts its turn there, a nearby statue exhales a
+      15-foot Cone of magical flame. The statue can look like anything, such as
+      a dragon or a wizard. Each creature in the Cone must succeed on a DC 15
+      Dexterity saving throw, taking 11 (2d10) Fire damage on a failed save or
+      half as much damage on a successful one.</p><p><em><strong>Detect and
+      Disarm.</strong></em> A <em>Detect Magic</em> spell reveals an aura of
+      Evocation magic around the statue. As a Search action, a creature within 5
+      feet of the statue can examine it and make a [[/check DC prc 10]] check,
+      detecting a tiny glyph on the statue on a successful check. Once the glyph
+      is found, a character can take a Study action to examine it and make a
+      [[/check arc 15]] check, ascertaining that the glyph means "fire" on a
+      successful check. As an action, a character can use a sharp tool to deface
+      the glyph, which disarms the trap.</p><p>As a Search action, a creature
+      can examine the section of floor that forms the pressure plate and make a
+      [[/check prc 15]] check, detecting the pressure plate on a successful
+      check. Wedging an Iron Spike or similar object under the pressure plate
+      prevents the trap from triggering.</p><p><em><strong>At Higher
+      Levels.</strong></em> You can scale the trap for higher levels by
+      increasing the damage and the area of effect, as shown in the following
+      table.</p><table><thead><tr><th><p>Levels</p></th><th><p>Fire
+      Damage</p></th><th><p>Area of
+      Effect</p></th></tr></thead><tbody><tr><td><p>5–10</p></td><td><p>22
+      (4d10)</p></td><td><p>30-foot
+      Cone</p></td></tr><tr><td><p>11–16</p></td><td><p>55
+      (10d10)</p></td><td><p>60-foot
+      Cone</p></td></tr><tr><td><p>17–20</p></td><td><p>99
+      (18d10)</p></td><td><p>120-foot Cone</p></td></tr></tbody></table></div>
+    chat: ''
+  identifier: fire-casting-statue
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  properties: []
+  strength: null
+  proficient: null
+effects: []
+folder: 8wnVMAA0qwPzQVxS
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730831452785
+  modifiedTime: 1745256805254
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgFirecastingSt'

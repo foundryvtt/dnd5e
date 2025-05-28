@@ -1,0 +1,254 @@
+_id: phbsplReincarnat
+name: Reincarnated Species
+img: icons/creatures/magical/spirit-undead-horned-blue.webp
+description: >-
+  <p>Roll [[/r 1d10]] and consult the table below to determine the body’s
+  species, or the DM chooses another playable species.</p>
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    img: systems/dnd5e/icons/svg/items/race.svg
+    _id: DLKTRYgF1vpG4ons
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: Aasimar
+    name: ''
+    _key: '!tables.results!phbsplReincarnat.DLKTRYgF1vpG4ons'
+  - type: document
+    weight: 1
+    range:
+      - 2
+      - 2
+    drawn: false
+    img: systems/dnd5e/icons/svg/items/race.svg
+    _id: lCG2E5mLJL43oGk4
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Dragonborn
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspDragonborn0
+    description: ''
+    _key: '!tables.results!phbsplReincarnat.lCG2E5mLJL43oGk4'
+  - type: document
+    weight: 1
+    range:
+      - 3
+      - 3
+    drawn: false
+    img: systems/dnd5e/icons/species/dwarf.webp
+    _id: Ym4LPQm1DMZ3iUBH
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Dwarf
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspDwarf000000
+    description: ''
+    _key: '!tables.results!phbsplReincarnat.Ym4LPQm1DMZ3iUBH'
+  - type: document
+    weight: 1
+    range:
+      - 6
+      - 6
+    drawn: false
+    img: systems/dnd5e/icons/svg/items/race.svg
+    _id: 9FtTDJCOwnD97SOu
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Goliath
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspGoliath0000
+    description: ''
+    _key: '!tables.results!phbsplReincarnat.9FtTDJCOwnD97SOu'
+  - type: document
+    weight: 1
+    range:
+      - 7
+      - 7
+    drawn: false
+    img: systems/dnd5e/icons/species/halfling.webp
+    _id: RI73kNpd5iAababR
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Halfling
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspHalfling000
+    description: ''
+    _key: '!tables.results!phbsplReincarnat.RI73kNpd5iAababR'
+  - type: document
+    weight: 1
+    range:
+      - 8
+      - 8
+    drawn: false
+    img: systems/dnd5e/icons/species/human.webp
+    _id: 6L3KbE75ugKNdbhg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Human
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspHuman000000
+    description: ''
+    _key: '!tables.results!phbsplReincarnat.6L3KbE75ugKNdbhg'
+  - type: document
+    weight: 1
+    range:
+      - 9
+      - 9
+    drawn: false
+    img: systems/dnd5e/icons/svg/items/race.svg
+    _id: xNcsrma8ucsEEgz3
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Orc
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspOrc00000000
+    description: ''
+    _key: '!tables.results!phbsplReincarnat.xNcsrma8ucsEEgz3'
+  - type: document
+    weight: 1
+    range:
+      - 4
+      - 4
+    drawn: false
+    img: systems/dnd5e/icons/svg/items/race.svg
+    _id: 8g4dm4vqB60zPWw5
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Elven Lineage
+    documentUuid: Compendium.dnd5e.tables24.RollTable.phbElvenLineage0
+    description: ''
+    _key: '!tables.results!phbsplReincarnat.8g4dm4vqB60zPWw5'
+  - type: document
+    weight: 1
+    range:
+      - 10
+      - 10
+    drawn: false
+    img: systems/dnd5e/icons/svg/items/race.svg
+    _id: PkXN8vlW5cXx8vbB
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Fiendish Legacy
+    documentUuid: Compendium.dnd5e.tables24.RollTable.phbFiendishLegac
+    description: ''
+    _key: '!tables.results!phbsplReincarnat.PkXN8vlW5cXx8vbB'
+  - type: document
+    weight: 1
+    range:
+      - 5
+      - 5
+    drawn: false
+    img: systems/dnd5e/icons/svg/items/race.svg
+    _id: ncs8GLvSuavCJAqf
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Gnomish Lineage
+    documentUuid: Compendium.dnd5e.tables24.RollTable.phbGnomishLineag
+    description: ''
+    _key: '!tables.results!phbsplReincarnat.ncs8GLvSuavCJAqf'
+replacement: true
+displayRoll: true
+folder: RY28PgQgqr68sh45
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1724430855495
+  modifiedTime: 1745439069616
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+formula: 1d10
+sort: 0
+ownership:
+  default: 0
+_key: '!tables!phbsplReincarnat'

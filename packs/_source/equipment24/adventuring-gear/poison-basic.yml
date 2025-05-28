@@ -1,0 +1,140 @@
+name: Poison, Basic
+system:
+  description:
+    value: >-
+      <p>As a Bonus Action, you can use a vial of Basic Poison to coat one
+      weapon or up to three pieces of ammunition. A creature that takes Piercing
+      or Slashing damage from the poisoned weapon or ammunition takes an extra
+      1d4 Poison damage. Once applied, the poison retains potency for 1 minute
+      or until its damage is dealt, whichever comes first.</p><section
+      id="secret-YwO5GX35V4XweNWL" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature includes a roll for the Poison
+      damage.</p></section>
+    chat: ''
+  price:
+    value: 100
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: true
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: potion
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    KLsqFTXAS8fnlaYs:
+      type: damage
+      name: ''
+      _id: KLsqFTXAS8fnlaYs
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 4
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+      img: ''
+      appliedEffects: []
+  identifier: poison-basic
+_id: phbagPoisonBasic
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/consumables/potions/potion-bottle-skull-label-poison-teal.webp
+effects: []
+sort: 4500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425910721
+  modifiedTime: 1740680136547
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagPoisonBasic'

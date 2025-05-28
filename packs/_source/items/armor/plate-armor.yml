@@ -1,0 +1,76 @@
+_id: OjkIqlW2UpgFcjZa
+name: Plate Armor
+type: equipment
+img: icons/equipment/chest/breastplate-collared-steel.webp
+system:
+  description:
+    value: >-
+      <p>Plate consists of shaped, interlocking metal plates to cover the entire
+      body. A suit of plate includes gauntlets, heavy leather boots, a visored
+      helmet, and thick layers of padding underneath the armor. Buckles and
+      straps distribute the weight over the body.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 65
+    units: lb
+  price:
+    value: 1500
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 18
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: 15
+  proficient: null
+  type:
+    value: heavy
+    baseItem: plate
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - stealthDisadvantage
+  activities: {}
+  attuned: false
+  identifier: plate-armor
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037177925
+  modifiedTime: 1725992509907
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!OjkIqlW2UpgFcjZa'

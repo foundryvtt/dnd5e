@@ -1,0 +1,119 @@
+_id: 34ddoYIrnOZ2GFYi
+name: Mass Healing Word
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>As you call out words of restoration, up to six creatures of your
+      choice that you can see within range regain hit points equal to 1d4 + your
+      spellcasting ability modifier. This spell has no effect on undead or
+      constructs.</p><p><strong>At Higher Levels.</strong> When you cast this
+      spell using a spell slot of 4th level or higher, the healing increases by
+      1d4 for each slot level above 3rd.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: bonus
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '6'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: 1
+        denomination: 4
+        bonus: '@mod'
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: ''
+        scaling:
+          mode: whole
+          number: 1
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: mass-healing-word
+sort: 0
+flags: {}
+img: icons/magic/life/heart-cross-strong-flame-green.webp
+effects: []
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037346403
+  modifiedTime: 1725992716712
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!34ddoYIrnOZ2GFYi'

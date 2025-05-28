@@ -1,0 +1,229 @@
+name: Hunting Trap
+system:
+  description:
+    value: >-
+      <p>As a Utilize action, you can set a Hunting Trap, which is a sawtooth
+      steel ring that snaps shut when a creature steps on a pressure plate in
+      the center. The trap is affixed by a heavy chain to an immobile object,
+      such as a tree or a spike driven into the ground. A creature that steps on
+      the plate must succeed on a DC 13 Dexterity saving throw or take 1d4
+      Piercing damage and have its Speed reduced to 0 until the start of its
+      next turn. Thereafter, until the creature breaks free of the trap, its
+      movement is limited by the length of the chain (typically 3 feet). A
+      creature can use its action to make a DC 13 Strength (Athletics) check,
+      freeing itself or another creature within its reach on a success. Each
+      failed check deals [[/damage 1 type=piercing]] damage to the trapped
+      creature.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 25
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: false
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    tIsE5Y5S9TjOTs9C:
+      type: save
+      _id: tIsE5Y5S9TjOTs9C
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Steps on the plate
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 9jl46RZ5GOjs9QlJ
+          onSave: false
+      range:
+        override: false
+        units: spec
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 4
+            bonus: ''
+            types:
+              - piercing
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '13'
+      name: ''
+      img: ''
+      appliedEffects: []
+    JjJCLmn9qZmCzlxX:
+      type: check
+      name: Escape
+      _id: JjJCLmn9qZmCzlxX
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '13'
+        ability: ''
+      img: ''
+      appliedEffects: []
+  identifier: hunting-trap
+_id: phbagHuntingTrap
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/environment/traps/trap-jaw-steel.webp
+effects:
+  - name: Trapped
+    img: icons/environment/traps/trap-jaw-steel.webp
+    origin: Compendium.dnd5e.equipment24.Item.phbagHuntingTrap
+    transfer: false
+    _id: 9jl46RZ5GOjs9QlJ
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725851254906
+      modifiedTime: 1725851272140
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbagHuntingTrap.9jl46RZ5GOjs9QlJ'
+sort: 2700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425909228
+  modifiedTime: 1745256812032
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagHuntingTrap'

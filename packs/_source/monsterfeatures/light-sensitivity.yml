@@ -1,0 +1,47 @@
+_id: 2l557y06401lwsqs
+name: Light Sensitivity
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>While in bright light, the [[lookup @name lowercase]] has<strong>
+      disadvantage </strong>on attack rolls and Wisdom (Perception) checks that
+      rely on sight.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: light-sensitivity
+flags: {}
+img: icons/magic/time/day-night-sunset-sunrise.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304965324
+  modifiedTime: 1725992570934
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!2l557y06401lwsqs'

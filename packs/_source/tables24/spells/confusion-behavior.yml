@@ -1,0 +1,140 @@
+_id: phbsplConfusionB
+name: Confusion Behavior
+img: icons/magic/symbols/question-stone-yellow.webp
+description: <p>Behavior for the Turn</p>
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    _id: wOokSBLpTsUWBccD
+    img: icons/skills/movement/figure-running-gray.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      The target doesn’t take an action, and it uses all its movement to move.
+      Roll [[/r 1d4]] for the direction: 1, north; 2, east; 3, south; or 4,
+      west.
+    name: ''
+    _key: '!tables.results!phbsplConfusionB.wOokSBLpTsUWBccD'
+  - type: text
+    weight: 1
+    range:
+      - 2
+      - 6
+    drawn: false
+    _id: VTOEaomsUWS6eaCb
+    img: icons/magic/control/sleep-bubble-purple.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: The target doesn’t move or take actions.
+    name: ''
+    _key: '!tables.results!phbsplConfusionB.VTOEaomsUWS6eaCb'
+  - type: text
+    weight: 1
+    range:
+      - 7
+      - 8
+    drawn: false
+    _id: usPRYhAMow3voSIj
+    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      The target doesn’t move, and it takes the Attack action to make one melee
+      attack against a random creature within reach. If none are within reach,
+      the target takes no action.
+    name: ''
+    _key: '!tables.results!phbsplConfusionB.usPRYhAMow3voSIj'
+  - type: text
+    weight: 1
+    range:
+      - 9
+      - 10
+    drawn: false
+    _id: Vk9ifvOs3jxCZhvd
+    img: icons/skills/social/thumbsup-approval-like.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: The target chooses its behavior.
+    name: ''
+    _key: '!tables.results!phbsplConfusionB.Vk9ifvOs3jxCZhvd'
+  - type: document
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    img: icons/tools/navigation/compass-brass-blue-red.webp
+    _id: 8oHL5jQ0fXbXGpuf
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Cardinal Directions
+    documentUuid: Compendium.dnd5e.tables24.RollTable.phbgenCardinalDi
+    description: ''
+    _key: '!tables.results!phbsplConfusionB.8oHL5jQ0fXbXGpuf'
+replacement: true
+displayRoll: true
+folder: RY28PgQgqr68sh45
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1724425888620
+  modifiedTime: 1740685862724
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+formula: 1d10
+sort: 100000
+ownership:
+  default: 0
+_key: '!tables!phbsplConfusionB'

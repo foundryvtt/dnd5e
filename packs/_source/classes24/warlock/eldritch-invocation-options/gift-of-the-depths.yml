@@ -1,0 +1,149 @@
+_id: phbinvGiftoftheD
+name: Gift of the Depths
+type: feat
+img: icons/magic/water/water-elemental-blue-teeth.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 5+ Warlock</p></blockquote><p>You can
+      breathe underwater, and you gain a Swim Speed equal to your
+      Speed.</p><p>You can also cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplWaterBreat]{Water Breathing}
+      once without expending a spell slot. You regain the ability to cast it in
+      this way again when you finish a Long Rest.</p><section
+      id="secret-aH09PLbY0nXMKypM" class="secret"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Gift Water Breathing</strong> activity
+      consumes a limited use and includes an Active Effect for tracking the
+      chosen creatures.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '1'
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 5
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    cfps5v1q7nFqc2EO:
+      type: utility
+      name: Gift Water Breathing
+      _id: cfps5v1q7nFqc2EO
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '24'
+      effects:
+        - _id: IEhxOF5rtwJ3xhOA
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '10'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: gift-of-the-depths
+effects:
+  - name: Water Breathing
+    origin: Compendium.dnd5e.classes24.Item.phbinvGiftoftheD
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 86400
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/creatures/fish/crab-blue-purple.webp
+    _id: IEhxOF5rtwJ3xhOA
+    type: base
+    system: {}
+    changes: []
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplWaterBreat.ActiveEffect.hyFupFam9XIbim0U
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbinvGiftoftheD.IEhxOF5rtwJ3xhOA'
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256762238
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvGiftoftheD'

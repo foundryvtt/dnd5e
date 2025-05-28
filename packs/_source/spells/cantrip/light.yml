@@ -1,0 +1,116 @@
+_id: Bnn9Nzajixvow9xi
+name: Light
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch one object that is no larger than 10 feet in any dimension.
+      Until the spell ends, the object sheds bright light in a 20-foot radius
+      and dim light for an additional 20 feet. The light can be colored as you
+      like. Completely covering the object with something opaque blocks the
+      light. The spell ends if you cast it again or dismiss it as an
+      action.</p><p>If you target an object held or worn by a hostile creature,
+      that creature must succeed on a Dexterity saving throw to avoid the
+      spell.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: object
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: evo
+  materials:
+    value: A firefly or phosphorescent moss.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: light
+sort: 0
+flags: {}
+img: icons/magic/light/explosion-star-small-blue-yellow.webp
+effects: []
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037350708
+  modifiedTime: 1725992718036
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Bnn9Nzajixvow9xi'

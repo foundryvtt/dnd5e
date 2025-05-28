@@ -1,0 +1,218 @@
+_id: dmgDragonSlayer0
+name: Dragon Slayer
+type: weapon
+img: icons/weapons/swords/sword-jeweled-red.webp
+system:
+  activities:
+    YCd17eWSMhL1ZP9b:
+      type: enchant
+      name: Dragon Slayer
+      _id: YCd17eWSMhL1ZP9b
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: ZveR6kPKafjcwQdY
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - Uq9mZDvMqRzfPyMB
+            effect: []
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      img: ''
+      appliedEffects:
+        - ZveR6kPKafjcwQdY
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Weapon (Any Simple or Martial), Rare</em></p><p>You gain a +1 bonus
+      to attack rolls and damage rolls made with this magic weapon.</p><p>The
+      weapon deals an extra 3d6 damage of the weapon's type if the target is a
+      Dragon.</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: dragon-slayer
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: 1
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: ''
+effects:
+  - type: enchantment
+    name: Dragon Slayer
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    _id: ZveR6kPKafjcwQdY
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Dragon Slayer {}
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: rare
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDragonSlayer0
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.magicalBonus
+        mode: 4
+        value: '1'
+        priority: null
+      - key: activities[attack].description.chatFlavor
+        mode: 5
+        value: '{} Bonus Damage: 3d6 vs Dragon'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730137042510
+      modifiedTime: 1731016629831
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDragonSlayer0.ZveR6kPKafjcwQdY'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - Uq9mZDvMqRzfPyMB
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712699414
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7400000
+ownership:
+  default: 0
+_key: '!items!dmgDragonSlayer0'

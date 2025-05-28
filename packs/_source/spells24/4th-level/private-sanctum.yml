@@ -1,0 +1,128 @@
+_id: phbPrivateSanctu
+name: Private Sanctum
+type: spell
+img: icons/environment/wilderness/cave-entrance-dwarven-hill.webp
+system:
+  description:
+    value: >-
+      <div><p>You make an area within range magically secure. The area is a Cube
+      that can be as small as 5 feet to as large as 100 feet on each side. The
+      spell lasts for the duration.</p><p>When you cast the spell, you decide
+      what sort of security the spell provides, choosing any of the following
+      properties:</p><ul><li>Sound can't pass through the barrier at the edge of
+      the warded area.</li><li>The barrier of the warded area appears dark and
+      foggy, preventing vision (including &amp;Reference[Darkvision]) through
+      it.</li><li>Sensors created by Divination spells can't appear inside the
+      protected area or pass through the barrier at its
+      perimeter.</li><li>Creatures in the area can't be targeted by Divination
+      spells.</li><li>Nothing can teleport into or out of the warded
+      area.</li><li>Planar travel is blocked within the warded
+      area.</li></ul><p>Casting this spell on the same spot every day for 365
+      days makes the spell last until dispelled.</p><p><strong>Using a
+      Higher-Level Spell Slot.</strong> You can increase the size of the Cube by
+      100 feet for each spell slot level above 4.</p></div>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: cube
+      size: 100 * @item.level - 300
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '120'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 4
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a thin sheet of lead
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    MoyU67fLjbEiZLGE:
+      type: utility
+      name: ''
+      _id: MoyU67fLjbEiZLGE
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      roll:
+        prompt: false
+        visible: false
+  identifier: mordenkainens-private-sanctum
+effects: []
+folder: qi3IbnEwap7mRw4b
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425939688
+  modifiedTime: 1745256784665
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 50000
+ownership:
+  default: 0
+_key: '!items!phbPrivateSanctu'

@@ -38,21 +38,26 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
 
   /** @override */
   _usageChatButtons(message) {
-    const ability = CONFIG.DND5E.abilities[this.save.ability]?.label ?? "";
+    const buttons = [];
     const dc = this.save.dc.value;
-    const buttons = [{
-      label: `
-        <span class="visible-dc">${game.i18n.format("DND5E.SavingThrowDC", { dc, ability })}</span>
-        <span class="hidden-dc">${game.i18n.format("DND5E.SavePromptTitle", { ability })}</span>
-      `,
-      icon: '<i class="fa-solid fa-shield-heart" inert></i>',
-      dataset: {
-        dc,
-        ability: this.save.ability,
-        action: "rollSave",
-        visibility: "all"
-      }
-    }];
+
+    for ( const abilityId of this.save.ability ) {
+      const ability = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
+      buttons.push({
+        label: `
+          <span class="visible-dc">${game.i18n.format("DND5E.SavingThrowDC", { dc, ability })}</span>
+          <span class="hidden-dc">${game.i18n.format("DND5E.SavePromptTitle", { ability })}</span>
+        `,
+        icon: '<i class="fa-solid fa-shield-heart" inert></i>',
+        dataset: {
+          dc,
+          ability: abilityId,
+          action: "rollSave",
+          visibility: "all"
+        }
+      });
+    }
+
     if ( this.damage.parts.length ) buttons.push({
       label: game.i18n.localize("DND5E.Damage"),
       icon: '<i class="fas fa-burst" inert></i>',
@@ -103,13 +108,17 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
    */
   static async #rollSave(event, target, message) {
     const targets = getSceneTargets();
+    if ( !targets.length && game.user.character ) targets.push(game.user.character);
     if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
     const dc = parseInt(target.dataset.dc);
     for ( const token of targets ) {
-      const speaker = ChatMessage.getSpeaker({ scene: canvas.scene, token: token.document });
-      await token.actor.rollAbilitySave(target.dataset.ability ?? this.save.ability, {
-        event, speaker, targetValue: Number.isFinite(dc) ? dc : this.save.dc.value
-      });
+      const actor = token instanceof Actor ? token : token.actor;
+      const speaker = ChatMessage.getSpeaker({ actor, scene: canvas.scene, token: token.document });
+      await actor.rollSavingThrow({
+        event,
+        ability: target.dataset.ability ?? this.save.ability.first(),
+        target: Number.isFinite(dc) ? dc : this.save.dc.value
+      }, {}, { data: { speaker } });
     }
   }
 

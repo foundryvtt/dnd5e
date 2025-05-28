@@ -1,0 +1,282 @@
+_id: dmgNineLivesStea
+name: Nine Lives Stealer
+type: weapon
+img: icons/weapons/swords/greatsword-flamberge.webp
+system:
+  activities:
+    QxD7LVTB9MWX8QmK:
+      type: save
+      name: Life Stealing
+      _id: QxD7LVTB9MWX8QmK
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: >-
+          when you roll a 20 on an attack against a creature with fewer than 100
+          Hit Points
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '5'
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects: []
+    9rvsI8e3iaHSuv1k:
+      type: enchant
+      _id: 9rvsI8e3iaHSuv1k
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: qiwTWGRINh3WFPaA
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - QxD7LVTB9MWX8QmK
+            effect: []
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      name: Nine Lives Stealer
+      img: ''
+      appliedEffects:
+        - qiwTWGRINh3WFPaA
+  uses:
+    spent: 0
+    recovery: []
+    max: '9'
+  description:
+    value: >-
+      <p><em>Weapon (Any Simple or Martial), Very Rare (Requires
+      Attunement)</em></p><p>You gain a +2 bonus to attack rolls and damage
+      rolls made with this magic weapon.</p><p><strong>Life Stealing.</strong>
+      The weapon has [[/r 1d8 + 1]] charges. When you attack a creature that has
+      fewer than 100 Hit Points with this weapon and roll a 20 on the d20 for
+      the attack roll, the creature must succeed on a DC 15 Constitution saving
+      throw or be slain instantly as the sword tears its life force from its
+      body. Constructs and Undead succeed on the save automatically. The weapon
+      loses 1 charge if the creature is slain. When the weapon has no charges
+      remaining, it loses this property.</p><section class="secret"
+      id="secret-vSYC0gYqNiDynkjf"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Life Stealing</strong> activity should be updated with its max
+      uses set to the number of charges rolled.</p></section><p>
+      @Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: nine-lives-stealer
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: 2
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: ''
+effects:
+  - type: enchantment
+    name: Nine Lives Stealer
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    _id: qiwTWGRINh3WFPaA
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Nine Lives Stealer {}
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgNineLivesStea
+          caption=false]</p>
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: veryRare
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: system.magicalBonus
+        mode: 4
+        value: '2'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730162619510
+      modifiedTime: 1730162882385
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgNineLivesStea.qiwTWGRINh3WFPaA'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - QxD7LVTB9MWX8QmK
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745433606005
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9300000
+ownership:
+  default: 0
+_key: '!items!dmgNineLivesStea'

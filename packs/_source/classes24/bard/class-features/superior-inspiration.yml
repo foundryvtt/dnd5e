@@ -1,0 +1,51 @@
+_id: phbbrdSuperiorIn
+name: Superior Inspiration
+type: feat
+folder: nP3HNXn7rem24IST
+img: icons/magic/sonic/explosion-impact-shock-wave.webp
+system:
+  description:
+    value: >-
+      <p>When you roll Initiative, you regain expended uses of Bardic
+      Inspiration until you have two if you have fewer than that.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 18
+    repeatable: false
+  properties: []
+  requirements: Bard
+  activities: {}
+  enchant: {}
+  identifier: superior-inspiration
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866377962
+  modifiedTime: 1745256760574
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrdSuperiorIn'

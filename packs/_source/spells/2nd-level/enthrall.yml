@@ -1,0 +1,116 @@
+_id: 30ZgXtijJVCxQk5N
+name: Enthrall
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You weave a distracting string of words, causing creatures of your
+      choice that you can see within range and that can hear you to make a
+      Wisdom saving throw. Any creature that can't be Charmed succeeds on this
+      saving throw automatically, and if you or your companions are fighting a
+      creature, it has advantage on the save. On a failed save, the target has
+      disadvantage on Wisdom (Perception) checks made to perceive any creature
+      other than you until the spell ends or until the target can no longer hear
+      you. The spell ends if you are Incapacitated or can no longer speak.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      choice: false
+    template:
+      units: any
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: enc
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: enthrall
+sort: 0
+flags: {}
+img: icons/magic/air/air-burst-spiral-pink.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037346327
+  modifiedTime: 1725992716689
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!30ZgXtijJVCxQk5N'

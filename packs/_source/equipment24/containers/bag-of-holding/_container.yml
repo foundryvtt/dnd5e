@@ -1,0 +1,77 @@
+_id: dmgBagOfHolding0
+name: Bag of Holding
+type: container
+folder: CXJsbhXV9uLcWcfH
+img: icons/containers/bags/pack-engraved-leather-tan.webp
+system:
+  description:
+    value: >-
+      <div><p>This bag has an interior space considerably larger than its
+      outside dimensions—roughly 2 feet square and 4 feet deep on the inside.
+      The bag can hold up to 500 pounds, not exceeding a volume of 64 <span
+      class="no-break">cubic</span> feet. The bag weighs 5 pounds, regardless of
+      its contents. Retrieving an item from the bag requires a Utilize
+      action.</p><p>If the bag is overloaded, pierced, or torn, it is destroyed,
+      and its contents are scattered in the Astral Plane. If the bag is turned
+      inside out, its contents spill forth unharmed, but the bag must be put
+      right before it can be used again. The bag holds enough air for 10 minutes
+      of breathing, divided by the number of breathing creatures
+      inside.</p><p>Placing a <em>Bag of Holding</em> inside an extradimensional
+      space created by a
+      <em>@UUID[Compendium.dnd5e.equipment24.Item.dmgHewardsHandyH]{Handy
+      Haversack}</em>,
+      <em>@UUID[Compendium.dnd5e.equipment24.Item.dmgPortableHole0]{Portable
+      Hole}</em>, or similar item instantly destroys both items and opens a gate
+      to the Astral Plane. The gate originates where the one item was placed
+      inside the other. Any creature within a 10-foot-radius Sphere centered on
+      the gate is sucked through it to a random location on the Astral Plane.
+      The gate then closes. The gate is one-way and can't be reopened.</p></div>
+    chat: ''
+  identifier: bag-of-holding
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties:
+    - mgc
+    - weightlessContents
+  capacity:
+    type: weight
+    value: 500
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 300000
+ownership:
+  default: 0
+_key: '!items!dmgBagOfHolding0'

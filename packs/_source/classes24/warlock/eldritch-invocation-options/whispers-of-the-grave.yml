@@ -1,0 +1,102 @@
+_id: phbinvWhispersOf
+name: Whispers of the Grave
+type: feat
+img: icons/magic/death/undead-ghost-scream-teal.webp
+system:
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        override: false
+        concentration: false
+        value: '10'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        prompt: false
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: Corpse
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Whisper
+      img: systems/dnd5e/icons/svg/damage/psychic.svg
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 7+ Warlock</p></blockquote><p>You can
+      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplSpeakwithD]{Speak with
+      Dead} without expending a spell slot.</p>
+    chat: ''
+  source:
+    rules: '2024'
+    custom: ''
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 7
+    repeatable: false
+  properties: []
+  requirements: ''
+  identifier: whispers-of-the-grave
+effects: []
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1740680084508
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvWhispersOf'

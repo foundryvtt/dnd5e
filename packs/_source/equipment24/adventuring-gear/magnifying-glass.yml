@@ -1,0 +1,50 @@
+name: Magnifying Glass
+system:
+  description:
+    value: >-
+      <p>A Magnifying Glass grants Advantage on any ability check made to
+      appraise or inspect a highly detailed item. Lighting a fire with a
+      Magnifying Glass requires light as bright as sunlight to focus, tinder to
+      ignite, and about 5 minutes for the fire to ignite.</p>
+    chat: ''
+  price:
+    value: 100
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: magnifying-glass
+_id: phbagMagnifyingG
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/tools/scribal/magnifying-glass.webp
+effects: []
+sort: 3600000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425909932
+  modifiedTime: 1745256812245
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagMagnifyingG'

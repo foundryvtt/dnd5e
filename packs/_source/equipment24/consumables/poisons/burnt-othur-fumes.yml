@@ -1,0 +1,199 @@
+_id: dmgBurntOthurFum
+name: Burnt Othur Fumes
+type: consumable
+img: icons/magic/air/fog-gas-smoke-dense-green.webp
+system:
+  activities:
+    13ZvV9bxzM90FeQO:
+      type: save
+      name: Use Poison
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: 6
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '13'
+      _id: 13ZvV9bxzM90FeQO
+      img: ''
+      appliedEffects: []
+    6o0JLH0kvEJ1n6D8:
+      type: damage
+      name: Successive Failed Save Damage
+      _id: 6o0JLH0kvEJ1n6D8
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Inhaled Poison</em></p><p>A creature subjected to Burnt Othur Fumes
+      must succeed on a DC 13 Constitution saving throw or take 10 (3d6) Poison
+      damage, and it must repeat the save at the start of each of its turns. On
+      each successive failed save, the creature takes 3 (1d6) Poison damage.
+      After three successful saves, the poison ends.</p>
+    chat: ''
+  identifier: burnt-othur-fumes
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 500
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: poison
+    subtype: inhaled
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties: []
+effects: []
+folder: bRhjJ3GivNsz0GTF
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1728419101980
+  modifiedTime: 1740680117213
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgBurntOthurFum'

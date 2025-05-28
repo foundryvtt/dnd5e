@@ -1,0 +1,172 @@
+name: Mind Spike
+system:
+  description:
+    value: >-
+      <p>You drive a spike of psionic energy into the mind of one creature you
+      can see within range. The target makes a Wisdom saving throw, taking 3d8
+      Psychic damage on a failed save or half as much damage on a successful
+      one. On a failed save, you also always know the target's location until
+      the spell ends, but only while the two of you are on the same plane of
+      existence. While you have this knowledge, the target can't become hidden
+      from you, and if it has the &amp;Reference[invisible apply=false]
+      condition, it gains no benefit from that condition against
+      you.</p><p><strong>Using a Higher-Level Spell Slot. </strong>The damage
+      increases by 1d8 for each spell slot level above 2.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    book: SRD 5.2
+    license: CC-BY-4.0
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: div
+  properties:
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+        concentration: false
+      effects:
+        - _id: AbNgTsT2gRxwmBpg
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 3
+            denomination: 8
+            bonus: ''
+            types:
+              - psychic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: mind-spike
+_id: phbsplMindSpike0
+type: spell
+img: icons/magic/unholy/beam-ringed-impact-purple.webp
+effects:
+  - name: Spiked
+    origin: Compendium.dnd5e.spells24.Item.phbsplMindSpike0
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/skills/targeting/target-strike-gray.webp
+    _id: AbNgTsT2gRxwmBpg
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>You always know the target’s location until the spell ends, but only
+      while the two of you are on the same plane of existence. While you have
+      this knowledge, the target can’t become hidden from you, and if it has the
+      &amp;Reference[invisible apply=false] condition, it gains no benefit from
+      that condition against you.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplMindSpike0.AbNgTsT2gRxwmBpg'
+folder: 3SjcO2acsFnWegp4
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745433110943
+  modifiedTime: 1745712695373
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 101563
+ownership:
+  default: 0
+_key: '!items!phbsplMindSpike0'

@@ -1,0 +1,233 @@
+name: Searing Smite
+system:
+  description:
+    value: >-
+      <p>As you hit the target, it takes an extra 1d6 Fire damage from the
+      attack. At the start of each of its turns until the spell ends, the target
+      takes 1d6 Fire damage and then makes a Constitution saving throw. On a
+      failed save, the spell continues. On a successful save, the spell
+      ends.</p><p><strong>Using a Higher-Level Spell Slot. </strong>All the
+      damage increases by 1d6 for each spell slot level above 1.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: bonus
+    condition: >-
+      immediately after hitting a target with a Melee weapon or an Unarmed
+      Strike
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: evo
+  properties:
+    - vocal
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+      damage:
+        onSave: full
+        parts:
+          - number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Start of Turn Save
+      img: ''
+      appliedEffects: []
+    M4KS57lcf4K6fUMU:
+      type: damage
+      name: Damage
+      _id: M4KS57lcf4K6fUMU
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: A0tTvLeRetrC708K
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      img: ''
+      appliedEffects:
+        - A0tTvLeRetrC708K
+  identifier: searing-smite
+_id: phbsplSearingSmi
+type: spell
+img: icons/weapons/hammers/hammer-double-glowing-yellow.webp
+effects:
+  - name: Seared
+    origin: Compendium.dnd5e.spells24.Item.phbsplSearingSmi
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/fire/flame-burning-skull-orange.webp
+    _id: A0tTvLeRetrC708K
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>At the start of each of its turns until the spell ends, the target
+      takes [[/damage 1d6 type=fire]] damage and then makes a [[/save
+      ability=con]] saving throw. On a failed save, the spell continues. On a
+      successful save, the spell ends.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplSearingSmi.A0tTvLeRetrC708K'
+folder: pBaAAtXBCq9FVEnL
+sort: 800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425969823
+  modifiedTime: 1745256797874
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSearingSmi'

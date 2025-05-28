@@ -1,0 +1,124 @@
+_id: 7UwUjJ6owIQkEPrs
+name: Branding Smite
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>The next time you hit a creature with a weapon attack before this spell
+      ends, the weapon gleams with astral radiance as you strike. The attack
+      deals an extra 2d6 radiant damage to the target, which becomes visible if
+      it's invisible, and the target sheds dim light in a 5-foot radius and
+      can't become invisible until the spell ends.</p><p><strong>At Higher
+      Levels.</strong> When you cast this spell using a spell slot of 3rd level
+      or higher, the extra damage increases by 1d6 for each slot level above
+      2nd.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: bonus
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: 2
+            denomination: 6
+            bonus: ''
+            types:
+              - radiant
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: shining-smite
+sort: 0
+flags: {}
+img: icons/magic/fire/dagger-rune-enchant-flame-orange.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037348142
+  modifiedTime: 1725992717246
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!7UwUjJ6owIQkEPrs'

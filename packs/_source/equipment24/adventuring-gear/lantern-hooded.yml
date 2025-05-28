@@ -1,0 +1,138 @@
+name: Lantern, Hooded
+system:
+  description:
+    value: >-
+      <p>A Hooded Lantern burns Oil as fuel to cast Bright Light in a 30-foot
+      radius and Dim Light for an additional 30 feet. As a Bonus Action, you can
+      lower the hood, reducing the light to Dim Light in a 5-foot radius, or
+      raise it again.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: '1'
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities:
+    IU6trhDShBQzMABE:
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '6'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '60'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Light
+      _id: IU6trhDShBQzMABE
+      img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+      appliedEffects: []
+  identifier: lantern-hooded
+_id: phbagLanternHood
+type: equipment
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/lights/lantern-steel.webp
+effects: []
+sort: 3400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425909790
+  modifiedTime: 1745431893688
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagLanternHood'

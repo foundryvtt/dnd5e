@@ -1,0 +1,109 @@
+<div class="statblock npc">
+    <h4 class="statblock-title">{{#if anchor}}{{{ anchor }}}{{else}}{{ name }}{{/if}}</h4>
+    <span class="statblock-tags">{{ summary.tag }}</span>
+    <div class="statblock-content">
+        <div class="statblock-header">
+            <dl>
+                <div class="half-width">
+                    <dt>{{ localize "DND5E.AC" }}</dt>
+                    <dd>{{ system.attributes.ac.value }}</dd>
+                </div>
+                <div class="half-width">
+                    <dt>{{ localize "DND5E.Initiative" }}</dt>
+                    <dd>{{ summary.initiative }}</dd>
+                </div>
+                <div>
+                    <dt>{{ localize "DND5E.HP" }}</dt><dd>{{ system.attributes.hp.max }}</dd>
+                    {{~#if system.attributes.hp.formula~}}
+                    <dd>({{ system.attributes.hp.formula }})</dd>
+                    {{~/if~}}
+                </div>
+                <div>
+                    <dt>{{ localize "DND5E.Speed" }}</dt>
+                    <dd>{{ summary.speed }}</dd>
+                </div>
+            </dl>
+            <div class="abilities">
+                {{#each abilityTables}}
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="visually-hidden">{{ localize "DND5E.Ability" }}</th>
+                            <th scope="col" class="visually-hidden">{{ localize "DND5E.AbilityScoreShort" }}</th>
+                            <th scope="col">{{ localize "DND5E.AbilityModifierShort" }}</th>
+                            <th scope="col">{{ localize "DND5E.SavingThrowShort" }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each abilities}}
+                        <tr>
+                            <th scope="row">{{ label }}</th>
+                            <td class="score">{{ dnd5e-numberFormat value }}</td>
+                            <td>{{ dnd5e-numberFormat mod signDisplay="always" }}</td>
+                            <td>{{ dnd5e-numberFormat save.value signDisplay="always" }}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                {{/each}}
+            </div>
+            <dl>
+                {{#if summary.skills}}
+                <div>
+                    <dt>{{ localize "DND5E.Skills" }}</dt>
+                    <dd>{{ summary.skills }}</dd>
+                </div>
+                {{/if}}
+                {{#if summary.gear}}
+                <div>
+                    <dt>{{ localize "DND5E.Gear" }}</dt>
+                    <dd>{{ summary.gear }}</dd>
+                </div>
+                {{/if}}
+                {{#if summary.vulnerabilities}}
+                <div>
+                    <dt>{{ localize "DND5E.Vulnerabilities" }}</dt>
+                    <dd>{{ summary.vulnerabilities }}</dd>
+                </div>
+                {{/if}}
+                {{#if summary.resistances}}
+                <div>
+                    <dt>{{ localize "DND5E.Resistances" }}</dt>
+                    <dd>{{ summary.resistances }}</dd>
+                </div>
+                {{/if}}
+                {{#if summary.immunities}}
+                <div>
+                    <dt>{{ localize "DND5E.Immunities" }}</dt>
+                    <dd>{{ summary.immunities }}</dd>
+                </div>
+                {{/if}}
+                <div>
+                    <dt>{{ localize "DND5E.Senses" }}</dt>
+                    <dd>{{ summary.senses }}</dd>
+                </div>
+                <div>
+                    <dt>{{ localize "DND5E.Languages" }}</dt>
+                    <dd>{{ summary.languages }}</dd>
+                </div>
+                <div>
+                    <dt>{{ localize "DND5E.AbbreviationCR" }}</dt>
+                    <dd>{{ summary.cr }}</dd>
+                </div>
+            </dl>
+        </div>
+        {{#each actionSections}}
+        <div class="statblock-actions {{ @key }}">
+            <h5 class="statblock-actions-title">{{ label }}</h5>
+            {{{ description }}}
+            {{#each actions}}
+            <div class="statblock-action">
+                {{{ openingTag }}}
+                <span class="name">{{ name }}</span>
+                {{{ description }}}
+            </div>
+            {{/each}}
+        </div>
+        {{/each}}
+    </div>
+</div>

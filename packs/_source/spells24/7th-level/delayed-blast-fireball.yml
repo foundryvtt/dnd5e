@@ -1,0 +1,324 @@
+name: Delayed Blast Fireball
+system:
+  description:
+    value: >-
+      <p>A beam of yellow light flashes from you, then condenses at a chosen
+      point within range as a glowing bead for the duration. When the spell
+      ends, the bead explodes, and each creature in a 20-foot-radius Sphere
+      centered on that point makes a Dexterity saving throw. A creature takes
+      Fire damage equal to the total accumulated damage on a failed save or half
+      as much damage on a successful one.</p><p>The spell's base damage is 12d6,
+      and the damage increases by 1d6 whenever your turn ends and the spell
+      hasn't ended.</p><p>If a creature touches the glowing bead before the
+      spell ends, that creature makes a Dexterity saving throw. On a failed
+      save, the spell ends, causing the bead to explode. On a successful save,
+      the creature can throw the bead up to 40 feet. If the thrown bead enters a
+      creature's space or collides with a solid object, the spell ends, and the
+      bead explodes.</p><p>When the bead explodes, flammable objects in the
+      explosion that aren't being worn or carried start
+      burning.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The base
+      damage increases by 1d6 for each spell slot level above 7.</p><section
+      class="secret" id="secret-8FSRYhwywI2O3Qgb"><p><strong>Foundry
+      Note</strong></p><p>The limited uses value of this spell tracks the number
+      of rounds that have passed since the initial casting and starts at
+      0.</p><p>The <strong>Turn End Damage Increase</strong> activity will
+      increase that value by 1.</p><p>The <strong>Trigger Explosion</strong>
+      activity calculates the total damage based on the limited uses.</p><p>If
+      you would prefer manual tracking, you can use <strong>Trigger
+      Explosion's</strong> Situational Bonus dialog to add the extra d6s and
+      ignore the <strong>Turn End Damage</strong> Increase
+      activity.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ft
+      contiguous: false
+      type: sphere
+      size: '1'
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '150'
+  uses:
+    max: '10'
+    spent: 10
+    recovery:
+      - period: sr
+        type: loseAll
+  level: 7
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a ball of bat guano and sulfur
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    9yLyrnGNwM8EL6Uy:
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '@item.uses.value'
+            target: ''
+            scaling:
+              mode: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: sphere
+          size: '1'
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: -100000
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Create Bead
+      img: systems/dnd5e/icons/svg/damage/force.svg
+      _id: 9yLyrnGNwM8EL6Uy
+    iWd7zKpQIgWofJAp:
+      type: save
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: a creature touches the glowing bead before the spell ends
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Touch Bead
+      img: systems/dnd5e/icons/svg/trait-skills.svg
+      _id: iWd7zKpQIgWofJAp
+    9i14Jmun9em69EnX:
+      type: utility
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: whenever your turn ends
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: ''
+            scaling:
+              mode: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 225000
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Turn End Damage Increase
+      img: systems/dnd5e/icons/svg/scale-value.svg
+      _id: 9i14Jmun9em69EnX
+      appliedEffects: []
+    M15GlfjeWy7Cdiqn:
+      type: save
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: when the spell ends
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: sphere
+          size: '20'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 250000
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 12
+            denomination: 6
+            bonus: (@item.uses.value)d6
+            types:
+              - fire
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Trigger Explosion
+      _id: M15GlfjeWy7Cdiqn
+  identifier: delayed-blast-fireball
+_id: phbsplDelayedBla
+type: spell
+img: icons/magic/fire/explosion-flame-blue.webp
+effects: []
+folder: EdAGMG8IF26PLkD3
+sort: 2000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425949200
+  modifiedTime: 1745256790118
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDelayedBla'

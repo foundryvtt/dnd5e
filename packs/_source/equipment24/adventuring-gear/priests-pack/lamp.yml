@@ -1,0 +1,138 @@
+name: Lamp
+system:
+  description:
+    value: >-
+      <p>A Lamp burns
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagOil00000000]{Oil} as fuel to
+      cast Bright Light in a 15-foot radius and Dim Light for an additional 30
+      feet.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: sp
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagPriestsPack
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: '1'
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities:
+    khBeGXY2PYjIvbvA:
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '6'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '45'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: khBeGXY2PYjIvbvA
+      name: Light
+      img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+  identifier: lamp
+_id: KUlBAAjJ9KmOCSsC
+type: equipment
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/lights/lantern-iron-yellow.webp
+effects: []
+sort: 65479
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726532886287
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!KUlBAAjJ9KmOCSsC'

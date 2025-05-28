@@ -1,0 +1,155 @@
+name: Faerie Fire
+system:
+  description:
+    value: >-
+      <p>Objects in a 20-foot Cube within range are outlined in blue, green, or
+      violet light (your choice). Each creature in the Cube is also outlined if
+      it fails a Dexterity saving throw. For the duration, objects and affected
+      creatures shed &amp;Reference[dimlight] in a 10-foot radius and can't
+      benefit from the Invisible condition.</p><p>Attack rolls against an
+      affected creature or object have Advantage if the attacker can see it.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cube
+      size: '20'
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: evo
+  properties:
+    - vocal
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: Y2i0OvwOixxag0ed
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: faerie-fire
+_id: phbsplFaerieFire
+type: spell
+img: icons/magic/fire/projectile-meteor-salvo-strong-pink.webp
+effects:
+  - name: Outlined
+    origin: Compendium.dnd5e.spells24.Item.phbsplFaerieFire
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/control/silhouette-hold-change-green.webp
+    _id: Y2i0OvwOixxag0ed
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>For the duration, objects and affected creatures shed
+      &amp;Reference[dimlight] in a 10-foot radius and can’t benefit from the
+      Invisible condition.</p><p>Attack rolls against an affected creature or
+      object have Advantage if the attacker can see it.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplFaerieFire.Y2i0OvwOixxag0ed'
+folder: pBaAAtXBCq9FVEnL
+sort: 3200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425952878
+  modifiedTime: 1745256792676
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFaerieFire'

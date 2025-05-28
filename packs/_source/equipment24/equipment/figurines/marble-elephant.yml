@@ -1,0 +1,161 @@
+name: Marble Elephant
+system:
+  description:
+    value: >-
+      <p><em>See
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgFigurineOfWon]{Figurine of
+      Wondrous Power}</em></p><p>This marble statuette resembles a trumpeting
+      elephant. It can become an
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmElephant000000]{Elephant}</strong>
+      for up to 24 hours. Once it has been used, it can't be used again until 7
+      days have passed.</p><section class="secret"
+      id="secret-RHHx3aKcpKsHN2aK"><p><strong>Foundry Note</strong></p><p>This
+      item's limited uses represent the 7 days required before the figurine can
+      be used again.</p></section>
+    chat: ''
+  price:
+    value: 4000
+    denomination: gp
+  activities:
+    rPlK5AnTnpxdcU5o:
+      type: summon
+      _id: rPlK5AnTnpxdcU5o
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '7'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '24'
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: unoccupied space
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: Gl5T1A074yAaSUE1
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobElephant00
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: day
+        type: formula
+        formula: '1'
+    max: '7'
+  identifier: marble-elephant-rare
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+_id: dmgFwpMarbleElep
+type: equipment
+img: icons/commodities/bones/horn-worn-white.webp
+effects: []
+folder: EK3hCTgvAmjsKlfl
+sort: 112500
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729781723263
+  modifiedTime: 1745712700179
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgFwpMarbleElep'

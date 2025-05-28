@@ -1,0 +1,110 @@
+_id: Gsha4bl0apxqspFy
+name: Draconic Presence
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 18th level, you can channel the dread presence of your
+      dragon ancestor, causing those around you to become awestruck or
+      frightened. As an action, you can spend 5 sorcery points to draw on this
+      power and exude an aura of awe or fear (your choice) to a distance of 60
+      feet. For 1 minute or until you lose your concentration (as if you were
+      casting a concentration spell), each hostile creature that starts its turn
+      in this aura must succeed on a Wisdom saving throw or be charmed (if you
+      chose awe) or frightened (if you chose fear) until the aura ends. A
+      creature that succeeds on this saving throw is immune to your aura for 24
+      hours.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Draconic Bloodline 18
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: Also requires 5 sorcery points.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: cha
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: draconic-presence
+flags: {}
+img: icons/magic/acid/projectile-smoke-glowing.webp
+effects: []
+folder: IDrXx9YvOrbmM699
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037382226
+  modifiedTime: 1725992287822
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Gsha4bl0apxqspFy'

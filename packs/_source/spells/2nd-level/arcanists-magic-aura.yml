@@ -1,0 +1,125 @@
+_id: RvEqsD89Zvd5yex4
+name: Arcanist's Magic Aura
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You place an Illusion on a creature or an object you touch so that
+      Divination Spells reveal false information about it. The target can be a
+      willing creature or an object that isn't being carried or worn by another
+      creature.</p><p>When you cast the spell, choose one or both of the
+      following Effects. The effect lasts for the Duration. If you cast this
+      spell on the same creature or object every day for 30 days, placing the
+      same effect on it each time, the illusion lasts until it is
+      dispelled.</p><p><strong>False Aura</strong>. You change the way the
+      target appears to Spells and magical Effects, such as Detect Magic, that
+      detect magical auras. You can make a nonmagical object appear magical, a
+      magical object appear nonmagical, or change the object's magical aura so
+      that it appears to belong to a specific school of magic that you choose.
+      When you use this effect on an object, you can make the false magic
+      apparent to any creature that handles the
+      item.</p><p><strong>Mask</strong>. You change the way the target appears
+      to Spells and magical Effects that detect creature types, such as a
+      paladin's Divine Sense or the trigger of a symbol spell. You choose a
+      creature type and other Spells and magical Effects treat the target as if
+      it were a creature of that type or of that Alignment.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      type: object
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: ill
+  materials:
+    value: a small square of silk
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: arcanists-magic-aura
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-star-magenta.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037356167
+  modifiedTime: 1725992719830
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!RvEqsD89Zvd5yex4'

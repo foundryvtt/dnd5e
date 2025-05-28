@@ -1,0 +1,167 @@
+name: Rogue
+system:
+  description:
+    value: >-
+      <p> An NPC of the DM's choice becomes Hostile toward you. You don't know
+      the identity of this NPC until they or someone else reveals it. Nothing
+      less than a <em>Wish</em> spell or divine intervention can end the NPC's
+      hostility toward you.</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    BIBOhS8gtgWRsjoM:
+      type: utility
+      name: Card Effect
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Card's effect occurs immediately upon draw
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: spec
+        concentration: false
+        override: false
+        special: a Wish spell or divine intervention can end the hostility
+        value: ''
+      effects:
+        - _id: qwsSkmGQOC4YLbCy
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: icons/svg/card-joker.svg
+      _id: BIBOhS8gtgWRsjoM
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  identifier: rogue
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+_id: dmgDmtRogue00000
+type: consumable
+folder: XVXuU21XyvevGap7
+img: icons/environment/people/infantry.webp
+effects:
+  - name: 'Rogue Card: Hostility'
+    img: icons/skills/trades/profession-sailing-pirate.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgDmtRogue00000
+    transfer: false
+    _id: qwsSkmGQOC4YLbCy
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p><em>Source:
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgDmtRogue00000]{Rogue}</em></p><p>An
+      NPC (unknown identity) is Hostile towards you.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729202584655
+      modifiedTime: 1729202738666
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDmtRogue00000.qwsSkmGQOC4YLbCy'
+sort: 700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729202479113
+  modifiedTime: 1745256804465
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgDmtRogue00000'

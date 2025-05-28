@@ -1,0 +1,74 @@
+_id: dmgQuaalsFeather
+name: Feather Token
+type: consumable
+img: icons/commodities/materials/feathers-brown.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rarity Varies</em></p><p>This object looks like a
+      feather. Different types of feather tokens exist, each with a different
+      <span class="no-break">single</span>-use effect. The GM chooses the kind
+      of token or determines it randomly by rolling on the Feather Tokens table.
+      The type of token determines its
+      rarity.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgQuaalsFeather
+      caption=false rollable]</p>
+    chat: ''
+  identifier: feather-token
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects: []
+folder: guHYjt0gjPLU2wCs
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730754690947
+  modifiedTime: 1745712702302
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1150000
+ownership:
+  default: 0
+_key: '!items!dmgQuaalsFeather'

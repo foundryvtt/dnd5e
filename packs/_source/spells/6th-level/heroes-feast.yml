@@ -1,0 +1,164 @@
+_id: mgFqi0ev8f7Ut19y
+name: Heroes' Feast
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You bring forth a great feast, including magnificent food and drink.
+      The feast takes 1 Hour to consume and disappears at the end of that time,
+      and the beneficial Effects don't set in until this hour is over. Up to
+      twelve creatures can partake of the feast.</p><p>A creature that partakes
+      of the feast gains several benefits. The creature is cured of all Diseases
+      and poison, becomes immune to poison and being Frightened, and makes all
+      Wisdom Saving Throws with advantage. Its hit point maximum also increases
+      by 2d10, and it gains the same number of Hit Points. These benefits last
+      for 24 hours.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: con
+  materials:
+    value: A gem-encrusted bowl worth at least 1000gp, which the spell consumes
+    consumed: true
+    cost: 1000
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: RY4byZPJu4TkIxyz
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: heroes-feast
+sort: 0
+flags: {}
+img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
+effects:
+  - name: Heroes' Feast
+    origin: Compendium.dnd5e.spells.Item.mgFqi0ev8f7Ut19y
+    duration:
+      startTime: null
+      seconds: 86400
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: RY4byZPJu4TkIxyz
+    changes:
+      - key: system.traits.di.value
+        mode: 2
+        value: poison
+        priority: null
+      - key: system.traits.ci.value
+        mode: 2
+        value: poisoned
+        priority: null
+      - key: system.traits.ci.value
+        mode: 2
+        value: frightened
+        priority: null
+    description: >-
+      <p>The creature is cured of all Diseases and poison, becomes immune to
+      poison and being Frightened, and makes all Wisdom Saving Throws with
+      advantage. Its hit point maximum also increases by 2d10, and it gains the
+      same number of Hit Points. These benefits last for 24 hours.</p>
+    transfer: false
+    statuses: []
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!mgFqi0ev8f7Ut19y.RY4byZPJu4TkIxyz'
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037364507
+  modifiedTime: 1725992722545
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!mgFqi0ev8f7Ut19y'

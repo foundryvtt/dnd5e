@@ -1,0 +1,100 @@
+_id: 06NVMYf58Z76O85O
+name: Protection
+type: feat
+img: icons/magic/defensive/shield-barrier-deflect-gold.webp
+system:
+  description:
+    value: >-
+      <p>When a creature you can see attacks a target other than you that is
+      within 5 feet of you, you can use your reaction to impose disadvantage on
+      the attack roll. You must be wielding a shield.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: fightingStyle
+  requirements: Fighter 1, Champion 10, Paladin 2
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: reaction
+        value: 1
+        condition: Must be wearing a shield.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: protection
+effects: []
+folder: 159EPyqZTcus1HNJ
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037379199
+  modifiedTime: 1725992286795
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!06NVMYf58Z76O85O'

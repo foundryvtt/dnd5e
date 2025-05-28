@@ -1,0 +1,207 @@
+name: Calm Emotions
+system:
+  description:
+    value: >-
+      <p>Each Humanoid in a 20-foot-radius Sphere centered on a point you choose
+      within range must succeed on a Charisma saving throw or be affected by one
+      of the following effects (choose for each creature):</p><ul><li>The
+      creature has Immunity to the Charmed and Frightened conditions until the
+      spell ends. If the creature was already Charmed or Frightened, those
+      conditions are suppressed for the duration.</li><li>The creature becomes
+      Indifferent about creatures of your choice that it's Hostile toward. This
+      indifference ends if the target takes damage or witnesses its allies
+      taking damage. When the spell ends, the creature's attitude returns to
+      normal.</li></ul>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '20'
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: enc
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: xwyUvd93d4A5LHHH
+          onSave: false
+        - _id: cb3KFq1j9UkOUV2l
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: calm-emotions
+_id: phbsplCalmEmotio
+type: spell
+img: icons/magic/sonic/explosion-shock-sound-wave.webp
+effects:
+  - name: Calmed
+    origin: Compendium.dnd5e.spells24.Item.phbsplCalmEmotio
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/holy/yin-yang-balance-symbol.webp
+    _id: xwyUvd93d4A5LHHH
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.ci.value
+        mode: 2
+        value: charmed
+        priority: null
+      - key: system.traits.ci.value
+        mode: 2
+        value: frightened
+        priority: null
+    description: >-
+      <p>The creature has Immunity to the Charmed and Frightened conditions
+      until the spell ends. If the creature was already Charmed or Frightened,
+      those conditions are suppressed for the duration.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplCalmEmotio.xwyUvd93d4A5LHHH'
+  - name: Indifference
+    origin: Compendium.dnd5e.spells24.Item.phbsplCalmEmotio
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/symbols/question-stone-yellow.webp
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The creature becomes Indifferent about creatures of your choice that
+      it’s Hostile toward. This indifference ends if the target takes damage or
+      witnesses its allies taking damage. When the spell ends, the creature’s
+      attitude returns to normal.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplCalmEmotio.ActiveEffect.xwyUvd93d4A5LHHH
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: cb3KFq1j9UkOUV2l
+    _key: '!items.effects!phbsplCalmEmotio.cb3KFq1j9UkOUV2l'
+folder: 3SjcO2acsFnWegp4
+sort: 4700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425944343
+  modifiedTime: 1745256787417
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplCalmEmotio'

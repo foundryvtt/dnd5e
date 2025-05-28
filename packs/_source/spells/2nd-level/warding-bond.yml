@@ -1,0 +1,116 @@
+_id: JVhKeanAXZH62DrF
+name: Warding Bond
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell wards a willing creature you touch and creates a mystic
+      connection between you and the target until the spell ends. While the
+      target is within 60 feet of you, it gains a +1 bonus to AC and saving
+      throws, and it has resistance to all damage. Also, each time it takes
+      damage, you take the same amount of damage.</p><p>The spell ends if you
+      drop to 0 hit points or if you and the target become separated by more
+      than 60 feet. It also ends if the spell is cast again on either of the
+      connected creatures. You can also dismiss the spell as an action.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: abj
+  materials:
+    value: >-
+      A pair of platinum rings worth at least 50 gp each, which you and the
+      target must wear for the duration
+    consumed: false
+    cost: 100
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: warding-bond
+sort: 0
+flags: {}
+img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037353165
+  modifiedTime: 1725992718855
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!JVhKeanAXZH62DrF'

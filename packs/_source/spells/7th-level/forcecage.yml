@@ -1,0 +1,128 @@
+_id: Y7uWUO4yqUN0JKl0
+name: Forcecage
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>An immobile, Invisible, cube-shaped prison composed of magical force
+      springs into existence around an area you choose within range. The prison
+      can be a cage or a solid box, as you choose.</p><p>A prison in the shape
+      of a cage can be up to 20 feet on a side and is made from 1/2-inch
+      diameter bars spaced 1/2 inch apart.</p><p>A prison in the shape of a box
+      can be up to 10 feet on a side, creating a solid barrier that prevents any
+      matter from passing through it and blocking any Spells cast into or out
+      from the area.</p><p>When you cast the spell, any creature that is
+      completely inside the cage's area is trapped. Creatures only partially
+      within the area, or those too large to fit inside the area, are pushed
+      away from the center of the area until they are completely outside the
+      area.</p><p>A creature inside the cage can't leave it by nonmagical means.
+      If the creature tries to use teleportation or interplanar travel to leave
+      the cage, it must first make a Charisma saving throw. On a success, the
+      creature can use that magic to exit the cage. On a failure, the creature
+      can't exit the cage and wastes the use of the spell or effect. The cage
+      also extends into the Ethereal Plane, blocking ethereal travel.</p><p>This
+      spell can't be dispelled by Dispel Magic.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cube
+      size: '20'
+      contiguous: false
+  range:
+    value: '100'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 7
+  school: evo
+  materials:
+    value: Ruby dust worth 1500gp
+    consumed: false
+    cost: 1500
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: forcecage
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-chains-ropes-net-purple-blue.webp
+effects: []
+folder: irCSpQWIMtp978TA
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037358906
+  modifiedTime: 1725992720732
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Y7uWUO4yqUN0JKl0'

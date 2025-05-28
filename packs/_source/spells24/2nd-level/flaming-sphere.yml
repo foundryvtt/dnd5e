@@ -1,0 +1,199 @@
+name: Flaming Sphere
+system:
+  description:
+    value: >-
+      <p>You create a 5-foot-diameter sphere of fire in an unoccupied space on
+      the ground within range. It lasts for the duration. Any creature that ends
+      its turn within 5 feet of the sphere makes a [[/save ability=dex
+      dc=@attributes.spell.dc]] saving throw, taking 2d6 Fire damage on a failed
+      save or half as much damage on a successful one.</p><p>As a Bonus Action,
+      you can move the sphere up to 30 feet, rolling it along the ground. If you
+      move the sphere into a creature's space, that creature makes the save
+      against the sphere, and the sphere stops moving for the turn.</p><p>When
+      you move the sphere, you can direct it over barriers up to 5 feet tall and
+      jump it across pits up to 10 feet wide. Flammable objects that aren't
+      being worn or carried start burning if touched by the sphere, and it sheds
+      Bright Light in a 20-foot radius and Dim Light for an additional 20
+      feet.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The damage
+      increases by 1d6 for each spell slot level above 2.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a ball of wax
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: (@item.level)d6
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        proficiency: true
+        saves: true
+        attacks: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: duLCA3KGJ0Psh0wo
+          uuid: Compendium.dnd5e.actors24.Actor.phbsplFlamingSph
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 2
+            denomination: 6
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: flaming-sphere
+_id: phbsplFlamingSph
+type: spell
+img: icons/magic/fire/flame-burning-earth-yellow.webp
+effects: []
+folder: 3SjcO2acsFnWegp4
+sort: 3200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425954424
+  modifiedTime: 1745256793225
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFlamingSph'

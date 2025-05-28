@@ -1,0 +1,3925 @@
+name: Riswynn (Dwarf Rogue)
+type: character
+img: null
+system:
+  abilities:
+    str:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    dex:
+      value: 15
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    con:
+      value: 16
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    int:
+      value: 12
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    wis:
+      value: 14
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    cha:
+      value: 8
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+  attributes:
+    ac:
+      flat: null
+      calc: default
+      formula: ''
+    hp:
+      value: 11
+      max: null
+      temp: null
+      tempmax: null
+      bonuses:
+        level: ''
+        overall: ''
+    init:
+      ability: ''
+      bonus: '0'
+      roll:
+        min: null
+        max: null
+        mode: 0
+    movement:
+      burrow: null
+      climb: null
+      fly: null
+      swim: null
+      walk: null
+      units: null
+      hover: false
+    attunement:
+      max: 3
+    senses:
+      darkvision: null
+      blindsight: null
+      tremorsense: null
+      truesight: null
+      units: null
+      special: ''
+    spellcasting: int
+    death:
+      success: 0
+      failure: 0
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    exhaustion: 0
+    inspiration: false
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+  details:
+    biography:
+      value: >-
+        <p>Once a well-respected bureaucrat at the dwarven halls, Riswynn
+        dabbled in intruigue, picked up a few tricks, and ran intro trouble with
+        some nobles. She looks to make a name for herself and regain her social
+        status.</p>
+      public: ''
+    alignment: True neutral
+    race: NvLVKDjXT1tPk6r4
+    background: kLWeji1tfubIJvfT
+    originalClass: C6beIadMtmp9t0Ym
+    xp:
+      value: 0
+    appearance: ''
+    trait: ''
+    ideal: ''
+    bond: ''
+    flaw: ''
+    eyes: ''
+    height: ''
+    faith: ''
+    hair: ''
+    weight: ''
+    gender: ''
+    skin: ''
+    age: ''
+  traits:
+    size: med
+    di:
+      value: []
+      bypasses: []
+      custom: ''
+    dr:
+      value:
+        - poison
+      bypasses: []
+      custom: ''
+    dv:
+      value: []
+      bypasses: []
+      custom: ''
+    ci:
+      value: []
+      custom: ''
+    languages:
+      value:
+        - elvish
+        - halfling
+        - common
+        - dwarvish
+        - cant
+      custom: ''
+    weaponProf:
+      value:
+        - handaxe
+        - lighthammer
+        - battleaxe
+        - warhammer
+        - sim
+        - handcrossbow
+        - longsword
+        - rapier
+        - shortsword
+      custom: ''
+      mastery:
+        value: []
+        bonus: []
+    armorProf:
+      value:
+        - lgt
+      custom: ''
+    dm:
+      amount: {}
+      bypasses: []
+  currency:
+    pp: 0
+    gp: 5
+    ep: 0
+    sp: 0
+    cp: 0
+  skills:
+    acr:
+      value: 1
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ani:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    arc:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ath:
+      value: 0
+      ability: str
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    dec:
+      value: 1
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    his:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ins:
+      value: 1
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    itm:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    inv:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    med:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    nat:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prc:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prf:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    per:
+      value: 1
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    rel:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    slt:
+      value: 2
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ste:
+      value: 2
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    sur:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+  tools:
+    mason:
+      value: 1
+      ability: int
+      bonuses:
+        check: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    thief:
+      value: 1
+      ability: int
+      bonuses:
+        check: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+  spells:
+    spell1:
+      value: 0
+      override: null
+    spell2:
+      value: 0
+      override: null
+    spell3:
+      value: 0
+      override: null
+    spell4:
+      value: 0
+      override: null
+    spell5:
+      value: 0
+      override: null
+    spell6:
+      value: 0
+      override: null
+    spell7:
+      value: 0
+      override: null
+    spell8:
+      value: 0
+      override: null
+    spell9:
+      value: 0
+      override: null
+    pact:
+      value: 0
+      override: null
+    spell0:
+      value: 0
+      override: null
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  resources:
+    primary:
+      value: null
+      max: null
+      sr: false
+      lr: false
+      label: ''
+    secondary:
+      value: null
+      max: null
+      sr: false
+      lr: false
+      label: ''
+    tertiary:
+      value: null
+      max: null
+      sr: false
+      lr: false
+      label: ''
+  favorites:
+    - type: activity
+      id: .Item.6Sg9yU6bqz42WUYV.Activity.dnd5eactivity000
+      sort: 500000
+    - type: item
+      id: .Item.Hn3bI5L2gaHMLNb3
+      sort: 600000
+    - type: item
+      id: .Item.HhZKGBhG6S7og4i0
+      sort: 700000
+    - type: item
+      id: .Item.KZ6pv2Oqgkgjr5rQ
+      sort: 800000
+    - type: item
+      id: .Item.df7IpmSKg7P9gt9J
+      sort: 900000
+    - type: item
+      id: .Item.yLUvPaR9SEEQMeJ2
+      sort: 1000000
+    - type: item
+      id: .Item.FLSNmB3LnQqys43M
+      sort: 1100000
+  bastion:
+    name: ''
+    description: ''
+prototypeToken:
+  flags: {}
+  name: Riswynn
+  displayName: 30
+  width: 1
+  height: 1
+  lockRotation: false
+  rotation: 0
+  actorLink: true
+  disposition: 1
+  displayBars: 40
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: attributes.ac.value
+  randomImg: false
+  alpha: 1
+  light:
+    alpha: 1
+    angle: 360
+    bright: 0
+    coloration: 1
+    dim: 0
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      speed: 5
+      intensity: 5
+      type: null
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+    color: null
+    attenuation: 0.5
+    negative: false
+    priority: 0
+  texture:
+    src: null
+    tint: '#ffffff'
+    scaleX: 1
+    scaleY: 1
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    alphaThreshold: 0.75
+  sight:
+    angle: 360
+    enabled: true
+    range: 60
+    brightness: 0
+    visionMode: darkvision
+    color: null
+    attenuation: 0
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  appendNumber: false
+  prependAdjective: false
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 0
+    subject:
+      scale: 1
+      texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
+items:
+  - name: Bureaucrat
+    type: background
+    system:
+      description:
+        value: >-
+          <ul><li><strong>Skill Proficiencies:</strong> Insight,
+          Persuasion</li><li><strong>Languages:</strong> Two of your
+          choice</li><li><strong>Equipment:</strong> A set of fine clothes and a
+          pouch containing 5 gp</li></ul>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      advancement: []
+      startingEquipment: []
+      identifier: bureaucrat
+    img: icons/skills/social/theft-pickpocket-bribery-brown.webp
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: kLWeji1tfubIJvfT
+    _key: '!actors.items!bzlxBO5km3zCQA8G.kLWeji1tfubIJvfT'
+  - _id: NvLVKDjXT1tPk6r4
+    name: Hill Dwarf
+    type: race
+    img: icons/environment/wilderness/cave-entrance-rocky.webp
+    system:
+      description:
+        value: >-
+          <p><em>Your dwarf character has an assortment of inborn abilities,
+          part and parcel of dwarven nature.</em></p><p><strong>Ability Score
+          Increase.</strong> Your Constitution score increases by
+          2.</p><p><strong>Age.</strong> Dwarves mature at the same rate as
+          humans, but they're considered young until they reach the age of 50.
+          On average, they live about 350
+          years.</p><p><strong>Alignment.</strong> Most dwarves are lawful,
+          believing firmly in the benefits of a well-ordered society. They tend
+          toward good as well, with a strong sense of fair play and a belief
+          that everyone deserves to share in the benefits of a just
+          order.</p><p><strong>Size.</strong> Dwarves stand between 4 and 5 feet
+          tall and average about 150 pounds. Your size is
+          Medium.</p><p><strong>Speed.</strong> Your base walking speed is 25
+          feet. Your speed is not reduced by wearing heavy
+          armor.</p><p><strong>Darkvision.</strong> Accustomed to life
+          underground, you have superior vision in dark and dim conditions. You
+          can see in dim light within 60 feet of you as if it were bright light,
+          and in darkness as if it were dim light. You can't discern color in
+          darkness, only shades of gray.</p><p><strong>Dwarven
+          Resilience.</strong> You have advantage on saving throws against
+          poison, and you have resistance against poison
+          damage.</p><p><strong>Dwarven Combat Training.</strong> You have
+          proficiency with the battleaxe, handaxe, light hammer, and
+          warhammer.</p><p><strong>Tool Proficiency.</strong> You gain
+          proficiency with the artisan's tools of your choice: smith's tools,
+          brewer's supplies, or mason's
+          tools.</p><p><strong>Stonecunning.</strong> Whenever you make an
+          Intelligence (History) check related to the origin of stonework, you
+          are considered proficient in the History skill and add double your
+          proficiency bonus to the check, instead of your normal proficiency
+          bonus.</p><p><strong>Languages.</strong> You can speak, read, and
+          write Common and Dwarvish. Dwarvish is full of hard consonants and
+          guttural sounds, and those characteristics spill over into whatever
+          other language a dwarf might speak.</p><h5>Hill Dwarf</h5><p>As a hill
+          dwarf, you have keen senses, deep intuition, and remarkable
+          resilience.</p><p><strong>Ability Score Increase.</strong> Your Wisdom
+          score increases by 1.</p><p><strong>Dwarven Toughness.</strong> Your
+          hit point maximum increases by 1, and it increases by 1 every time you
+          gain a level.</p><section class="secret"
+          id="secret-bkbaaEWqAGbU8ZgK"><p><strong>Foundry
+          Note</strong></p><p>Dwarven Toughness should be configured by adding 1
+          to the "Per Level" bonus in HP configuration on your character sheet
+          (accessible using the cog next to your character's hit
+          points).</p></section>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      identifier: hill-dwarf
+      advancement:
+        - _id: tNfLTuoHfvAxg2FC
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.races.ufysTkqet2Ctmtyi
+                optional: false
+              - uuid: Compendium.dnd5e.races.mQPZDRbUhgYTbXKa
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value:
+            added:
+              0NoJXoWjNGa10THB: Compendium.dnd5e.races.Item.ufysTkqet2Ctmtyi
+              TaFYgu6nyZIXcUN3: Compendium.dnd5e.races.Item.mQPZDRbUhgYTbXKa
+          level: 0
+          title: ''
+        - _id: Z9hvZFkWUNvowbQX
+          type: AbilityScoreImprovement
+          configuration:
+            points: 0
+            fixed:
+              str: 0
+              dex: 0
+              con: 2
+              int: 0
+              wis: 1
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+            assignments:
+              con: 2
+              wis: 1
+          level: 0
+          title: ''
+        - _id: kdMPoRp3j1uOHQom
+          type: Size
+          configuration:
+            sizes:
+              - med
+          value:
+            size: med
+          level: 1
+          title: ''
+          hint: >-
+            Dwarves stand between 4 and 5 feet tall and average about 150
+            pounds. Your size is Medium.
+        - _id: rmcKuRQ2Laloq1xp
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - languages:standard:common
+              - languages:standard:dwarvish
+            choices: []
+          level: 0
+          title: ''
+          value:
+            chosen:
+              - languages:standard:common
+              - languages:standard:dwarvish
+        - _id: 5zWGcz9uAerx3Dh5
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - dr:poison
+            choices: []
+          level: 0
+          title: Dwarven Resilience
+          value:
+            chosen:
+              - dr:poison
+        - _id: J0UGmCyMy6thWDeU
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - weapon:sim:handaxe
+              - weapon:sim:lighthammer
+              - weapon:mar:battleaxe
+              - weapon:mar:warhammer
+            choices: []
+          level: 0
+          title: Dwarven Combat Training
+          value:
+            chosen:
+              - weapon:sim:handaxe
+              - weapon:sim:lighthammer
+              - weapon:mar:battleaxe
+              - weapon:mar:warhammer
+        - _id: 9CYW7Bj53L9G8Zsw
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants: []
+            choices:
+              - count: 1
+                pool:
+                  - tool:art:brewer
+                  - tool:art:mason
+                  - tool:art:smith
+          level: 0
+          title: ''
+          value:
+            chosen:
+              - tool:art:mason
+      senses:
+        darkvision: 60
+        blindsight: null
+        tremorsense: null
+        truesight: null
+        units: ft
+        special: ''
+      movement:
+        walk: 25
+        burrow: null
+        climb: null
+        fly: null
+        swim: null
+        units: ft
+        hover: false
+      type:
+        subtype: dwarf
+        value: humanoid
+        custom: ''
+    effects: []
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.races.Item.UQiRQUTBcsz8gZU1
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093997686
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    sort: 0
+    folder: H2wvPtn11yEFSd64
+    _key: '!actors.items!bzlxBO5km3zCQA8G.NvLVKDjXT1tPk6r4'
+  - _id: 0NoJXoWjNGa10THB
+    name: Dwarven Resilience
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>You have advantage on saving throws against poison, and you have
+          resistance against poison damage.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: race
+        subtype: ''
+      requirements: Dwarf
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: dwarven-resilience
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.races.Item.ufysTkqet2Ctmtyi
+        advancementOrigin: NvLVKDjXT1tPk6r4.tNfLTuoHfvAxg2FC
+        riders:
+          activity: []
+          effect: []
+    img: icons/creatures/abilities/stinger-poison-green.webp
+    effects: []
+    folder: bYq316CbmhMdFGG4
+    sort: 0
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.races.Item.ufysTkqet2Ctmtyi
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093814574
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!bzlxBO5km3zCQA8G.0NoJXoWjNGa10THB'
+  - _id: TaFYgu6nyZIXcUN3
+    name: Stonecunning
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>Whenever you make an Intelligence (History) check related to the
+          origin of stonework, you are considered proficient in the History
+          skill and add double your proficiency bonus to the check, instead of
+          your normal proficiency bonus.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: race
+        subtype: ''
+      requirements: Dwarf
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: stonecunning
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.races.Item.mQPZDRbUhgYTbXKa
+        advancementOrigin: NvLVKDjXT1tPk6r4.tNfLTuoHfvAxg2FC
+        riders:
+          activity: []
+          effect: []
+    img: icons/commodities/tech/cog-bronze.webp
+    effects: []
+    folder: bYq316CbmhMdFGG4
+    sort: 0
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.races.Item.mQPZDRbUhgYTbXKa
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093814613
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!bzlxBO5km3zCQA8G.TaFYgu6nyZIXcUN3'
+  - _id: C6beIadMtmp9t0Ym
+    name: Rogue
+    type: class
+    img: icons/skills/melee/strike-sword-stabbed-brown.webp
+    system:
+      description:
+        value: >-
+          <p>As a rogue, you have the following class features.</p><h3>Hit
+          Points</h3><p><strong>Hit Dice:</strong> 1d8 per rogue level<br
+          /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution
+          modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5)
+          + your Constitution modifier per rogue level after
+          1st</p><h3>Proficiencies</h3><p><strong>Armor:</strong> Light armor<br
+          /><strong>Weapons:</strong> Simple weapons, hand crossbows,
+          longswords, rapiers, shortswords<br /><strong>Tools:</strong> Thieves'
+          tools<br /><strong>Saving Throws:</strong> Dexterity, Intelligence<br
+          /><strong>Skills:</strong> Choose four from Acrobatics, Athletics,
+          Deception, Insight, Intimidation, Investigation, Perception,
+          Performance, Persuasion, Sleight of Hand, and Stealth</p><h1>Rogue
+          Advancement</h1><table><thead><tr><td>Level</td><td>Proficiency
+          Bonus</td><td>Sneak
+          Attack</td><td>Features</td></tr></thead><tbody><tr><td>1st</td><td>+2</td><td>1d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.3sYPftQKnbbVnHrh]{Expertise},
+          @UUID[Compendium.dnd5e.classfeatures.Item.DPN2Gfk8yi1Z5wp7]{Sneak
+          Attack},
+          @UUID[Compendium.dnd5e.classfeatures.Item.ohwfuwnvuoBWlSQr]{Thieves'
+          Cant}</td></tr><tr><td>2nd</td><td>+2</td><td>1d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.01pcLg6PRu5zGrsb]{Cunning
+          Action}</td></tr><tr><td>3rd</td><td>+2</td><td>2d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.80USV8ZFPIahpLd0]{Roguish
+          Archetype}</td></tr><tr><td>4th</td><td>+2</td><td>2d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.v7MxFuTAgOsmxZCD]{Ability
+          Score
+          Improvement}</td></tr><tr><td>5th</td><td>+3</td><td>3d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.Mm64SKAHJWYecgXS]{Uncanny
+          Dodge}</td></tr><tr><td>6th</td><td>+3</td><td>3d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.3sYPftQKnbbVnHrh]{Expertise
+          improvement}</td></tr><tr><td>7th</td><td>+3</td><td>4d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.a4P4DNMmH8CqSNkC]{Evasion}</td></tr><tr><td>8th</td><td>+3</td><td>4d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.v7MxFuTAgOsmxZCD]{Ability
+          Score
+          Improvement}</td></tr><tr><td>9th</td><td>+4</td><td>5d6</td><td>Roguish
+          Archetype
+          feature</td></tr><tr><td>10th</td><td>+4</td><td>5d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.v7MxFuTAgOsmxZCD]{Ability
+          Score
+          Improvement}</td></tr><tr><td>11th</td><td>+4</td><td>6d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.YN9xm6MCvse4Y60u]{Reliable
+          Talent}</td></tr><tr><td>12th</td><td>+4</td><td>6d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.v7MxFuTAgOsmxZCD]{Ability
+          Score
+          Improvement}</td></tr><tr><td>13th</td><td>+5</td><td>7d6</td><td>Roguish
+          Archetype
+          feature</td></tr><tr><td>14th</td><td>+5</td><td>7d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.fjsBk7zxoAbLf8ZI]{Blindsense}</td></tr><tr><td>15th</td><td>+5</td><td>8d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.V4pwFxlwHtNeB4w9]{Slippery
+          Mind}</td></tr><tr><td>16th</td><td>+5</td><td>8d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.v7MxFuTAgOsmxZCD]{Ability
+          Score
+          Improvement}</td></tr><tr><td>17th</td><td>+6</td><td>9d6</td><td>Roguish
+          Archetype
+          feature</td></tr><tr><td>18th</td><td>+6</td><td>9d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.L7nJSRosos8sHJH9]{Elusive}</td></tr><tr><td>19th</td><td>+6</td><td>10d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.v7MxFuTAgOsmxZCD]{Ability
+          Score
+          Improvement}</td></tr><tr><td>20th</td><td>+6</td><td>10d6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.rQhWDaMHMn7iU4f2]{Stroke
+          of Luck}</td></tr></tbody></table><h1>Roguish Archetypes</h1><p>Rogues
+          have many features in common, including their emphasis on perfecting
+          their skills, their precise and deadly approach to combat, and their
+          increasingly quick reflexes. But different rogues steer those talents
+          in varying directions, embodied by the rogue archetypes. Your choice
+          of archetype is a reflection of your focus—not necessarily an
+          indication of your chosen profession, but a description of your
+          preferred
+          techniques.</p><p>@UUID[Compendium.dnd5e.subclasses.Item.k8iuefRorWOjb9gR]{Thief}</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      identifier: rogue
+      levels: 1
+      hitDice: d8
+      hitDiceUsed: 0
+      advancement:
+        - type: HitPoints
+          configuration: {}
+          value:
+            '1': max
+          title: Hit Points
+          icon: systems/dnd5e/icons/svg/hit-points.svg
+          _id: WMbkpELkLBvDaEsL
+        - _id: OdvmWcuFdpmQa1R9
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - armor:lgt
+            choices: []
+          level: 1
+          title: ''
+          value:
+            chosen:
+              - armor:lgt
+        - _id: IAuJ7LQGV2HvMXWB
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - weapon:sim
+              - weapon:mar:handcrossbow
+              - weapon:mar:longsword
+              - weapon:mar:rapier
+              - weapon:mar:shortsword
+            choices: []
+          level: 1
+          title: ''
+          classRestriction: primary
+          value:
+            chosen:
+              - weapon:sim
+              - weapon:mar:handcrossbow
+              - weapon:mar:longsword
+              - weapon:mar:rapier
+              - weapon:mar:shortsword
+        - _id: ZfLkT5c0hxOmdyti
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - tool:thief
+            choices: []
+          level: 1
+          title: ''
+          value:
+            chosen:
+              - tool:thief
+        - _id: ejtwT3eAwBpgvtcw
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - saves:dex
+              - saves:int
+            choices: []
+          level: 1
+          title: ''
+          classRestriction: primary
+          value:
+            chosen:
+              - saves:dex
+              - saves:int
+        - _id: rKux16jqNCPEtyDL
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants: []
+            choices:
+              - count: 4
+                pool:
+                  - skills:acr
+                  - skills:ath
+                  - skills:dec
+                  - skills:ins
+                  - skills:itm
+                  - skills:inv
+                  - skills:prc
+                  - skills:prf
+                  - skills:per
+                  - skills:slt
+                  - skills:ste
+          level: 1
+          title: ''
+          classRestriction: primary
+          value:
+            chosen:
+              - skills:acr
+              - skills:dec
+              - skills:ins
+              - skills:ste
+        - _id: TDHYngxGqDHllgzw
+          type: Trait
+          configuration:
+            mode: expertise
+            allowReplacements: false
+            grants: []
+            choices:
+              - count: 2
+                pool:
+                  - tool:thief
+                  - skills:*
+          level: 1
+          title: Expertise
+          value:
+            chosen:
+              - skills:slt
+              - skills:ste
+        - type: Trait
+          configuration:
+            mode: expertise
+            allowReplacements: false
+            grants: []
+            choices:
+              - count: 2
+                pool:
+                  - skills:*
+                  - tool:thief
+          level: 6
+          title: Expertise
+          _id: Iozyk39gsM4Kecex
+          value:
+            chosen: []
+        - type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants: []
+            choices:
+              - count: 1
+                pool:
+                  - skills:acr
+                  - skills:ath
+                  - skills:dec
+                  - skills:ins
+                  - skills:itm
+                  - skills:inv
+                  - skills:prc
+                  - skills:prf
+                  - skills:per
+                  - skills:slt
+                  - skills:ste
+          level: 1
+          title: ''
+          _id: CYYQSaGgmuHG7i6z
+          classRestriction: secondary
+          value:
+            chosen: []
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.3sYPftQKnbbVnHrh
+                optional: false
+              - uuid: Compendium.dnd5e.classfeatures.DPN2Gfk8yi1Z5wp7
+                optional: false
+              - uuid: Compendium.dnd5e.classfeatures.ohwfuwnvuoBWlSQr
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value:
+            added:
+              HV4tjQ4I0YwofteT: Compendium.dnd5e.classfeatures.Item.3sYPftQKnbbVnHrh
+              Hn3bI5L2gaHMLNb3: Compendium.dnd5e.classfeatures.Item.DPN2Gfk8yi1Z5wp7
+              J43jsAaIZ54qFAuW: Compendium.dnd5e.classfeatures.Item.ohwfuwnvuoBWlSQr
+          level: 1
+          title: Features
+          _id: 13XHsx4Z3vQ2XYkJ
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.01pcLg6PRu5zGrsb
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 2
+          title: Features
+          _id: 5crdJzGJRQIVhbyr
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.80USV8ZFPIahpLd0
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 3
+          title: Features
+          _id: 9F1ZUcRqNsBCOFNX
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.Mm64SKAHJWYecgXS
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 5
+          title: Features
+          _id: PvQXh3OhvuLhjVoo
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.a4P4DNMmH8CqSNkC
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 7
+          title: Features
+          _id: X8G2PrPxOrfWQevi
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.YN9xm6MCvse4Y60u
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 11
+          title: Features
+          _id: MqV3BlQkAZycZ4Ue
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.fjsBk7zxoAbLf8ZI
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 14
+          title: Features
+          _id: sI4nacIwT4B8Y7mb
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.V4pwFxlwHtNeB4w9
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 15
+          title: Features
+          _id: mugszpD8eVZ2jybU
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.L7nJSRosos8sHJH9
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 18
+          title: Features
+          _id: EOVFTUpweDErdpSz
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.rQhWDaMHMn7iU4f2
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 20
+          title: Features
+          _id: GVuwdOHDEDfQX9cl
+        - type: ScaleValue
+          configuration:
+            identifier: sneak-attack
+            type: dice
+            distance:
+              units: ''
+            scale:
+              '1':
+                number: 1
+                faces: 6
+                modifiers: []
+              '3':
+                number: 2
+                faces: 6
+                modifiers: []
+              '5':
+                number: 3
+                faces: 6
+                modifiers: []
+              '7':
+                number: 4
+                faces: 6
+                modifiers: []
+              '9':
+                number: 5
+                faces: 6
+                modifiers: []
+              '11':
+                number: 6
+                faces: 6
+                modifiers: []
+              '13':
+                number: 7
+                faces: 6
+                modifiers: []
+              '15':
+                number: 8
+                faces: 6
+                modifiers: []
+              '17':
+                number: 9
+                faces: 6
+                modifiers: []
+              '19':
+                number: 10
+                faces: 6
+                modifiers: []
+          value: {}
+          title: Sneak Attack
+          _id: 81nHtANt6Ffg9M4V
+        - type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 4
+          title: Ability Score Improvement
+          _id: smghqQkObY4OOg30
+        - type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 8
+          title: Ability Score Improvement
+          _id: WFAAUfKJA9QR46Bw
+        - type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 12
+          title: Ability Score Improvement
+          _id: ahuQ3gMqz6sCza0m
+        - type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 16
+          title: Ability Score Improvement
+          _id: iVq9vmwTow7KielM
+        - _id: puDaUsYrlks0z5gm
+          type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 19
+          title: ''
+        - _id: WhAioX7KT2ZULDHU
+          type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 10
+          title: ''
+        - _id: 3GyyG2fRAwPbKK7n
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - languages:cant
+            choices: []
+          level: 1
+          title: ''
+          value:
+            chosen:
+              - languages:cant
+        - _id: nCjIrANeqoEqGbTA
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - saves:wis
+            choices: []
+          level: 15
+          title: ''
+          value:
+            chosen: []
+          hint: >-
+            You have acquired greater mental strength. You gain proficiency in
+            Wisdom saving throws.
+        - _id: n0yoxbkyz32yd942
+          type: Subclass
+          configuration: {}
+          value: {}
+          level: 3
+          title: Roguish Archetype
+      spellcasting:
+        progression: none
+        ability: ''
+        preparation: {}
+      startingEquipment:
+        - type: OR
+          _id: vNGTtk3CXH0Nj0Z1
+          group: ''
+          sort: 100000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.Tobce1hexTnDk4sV
+          _id: dOwnHCLVg7zvxAab
+          group: vNGTtk3CXH0Nj0Z1
+          sort: 500000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.osLzOwQdPtrK3rQH
+          _id: g0ItAJ5LheQRUAOD
+          group: vNGTtk3CXH0Nj0Z1
+          sort: 600000
+          requiresProficiency: false
+        - type: OR
+          _id: GMumcdt67Bur537a
+          group: ''
+          sort: 200000
+          requiresProficiency: false
+        - type: AND
+          _id: Ie28G9eNhFlTpSHg
+          group: GMumcdt67Bur537a
+          sort: 800000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.GJv6WkD7D2J6rP6M
+          _id: I09HhsZ0ocRTaEFe
+          group: Ie28G9eNhFlTpSHg
+          sort: 700000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.4MtQKPn9qMWCFjDA
+          _id: DO8Loqz96r8IOGiD
+          group: Ie28G9eNhFlTpSHg
+          sort: 900000
+          requiresProficiency: false
+        - type: linked
+          count: 20
+          key: Compendium.dnd5e.items.Item.3c7JXOzsv55gqJS5
+          _id: UcjlGFFh0lk51391
+          group: Ie28G9eNhFlTpSHg
+          sort: 1000000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.osLzOwQdPtrK3rQH
+          _id: GXCUps2bPVEGOc8w
+          group: GMumcdt67Bur537a
+          sort: 1100000
+          requiresProficiency: false
+        - type: OR
+          _id: BSSnAI0lAAW1sIvZ
+          group: ''
+          sort: 300000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.xsB7Y2WI476kvOt4
+          _id: l2o9mPm6xBpYeEST
+          group: BSSnAI0lAAW1sIvZ
+          sort: 1200000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.XY8b594Dn7plACLL
+          _id: vupchUJffZqketSM
+          group: BSSnAI0lAAW1sIvZ
+          sort: 1300000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.8KWz5DJbWUpNWniP
+          _id: KofifjrJr9q07caY
+          group: BSSnAI0lAAW1sIvZ
+          sort: 1400000
+          requiresProficiency: false
+        - type: AND
+          _id: 2oLBb6kJHLDuVoqe
+          group: ''
+          sort: 400000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.WwdpHLXGX5r8uZu5
+          _id: KHu9Iz8L1uiUWxdK
+          group: 2oLBb6kJHLDuVoqe
+          sort: 1500000
+          requiresProficiency: false
+        - type: linked
+          count: 2
+          key: Compendium.dnd5e.items.Item.0E565kQUBmndJ1a2
+          _id: dYHkcoIvnPhAqYXf
+          group: 2oLBb6kJHLDuVoqe
+          sort: 1600000
+          requiresProficiency: false
+        - _id: n4EciCJzBZqN8QIn
+          group: 2oLBb6kJHLDuVoqe
+          sort: 1700000
+          type: linked
+          key: Compendium.dnd5e.items.Item.woWZ1sO5IUVGzo58
+          requiresProficiency: false
+      wealth: 4d4 * 10
+      primaryAbility:
+        value: []
+        all: true
+    effects: []
+    folder: 6EMu3ghr6Cx6ktHL
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.classes.Item.xEb8jmA5HlNs7xTF
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093997728
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!bzlxBO5km3zCQA8G.C6beIadMtmp9t0Ym'
+  - _id: HV4tjQ4I0YwofteT
+    name: Expertise
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>At 1st level, choose two of your skill proficiencies, or one of
+          your skill proficiencies and your proficiency with thieves' tools.
+          Your proficiency bonus is doubled for any ability check you make that
+          uses either of the chosen proficiencies.</p><p>At 6th level, you can
+          choose two more of your proficiencies (in skills or with thieves'
+          tools) to gain this benefit.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      requirements: Rogue 1
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: expertise
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classfeatures.Item.3sYPftQKnbbVnHrh
+        advancementOrigin: C6beIadMtmp9t0Ym.13XHsx4Z3vQ2XYkJ
+    img: icons/skills/targeting/target-glowing-yellow.webp
+    effects: []
+    folder: RMtv55MamGWKrCfq
+    sort: 0
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.classfeatures.Item.3sYPftQKnbbVnHrh
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093814655
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!bzlxBO5km3zCQA8G.HV4tjQ4I0YwofteT'
+  - _id: Hn3bI5L2gaHMLNb3
+    name: Sneak Attack
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>Beginning at 1st level, you know how to strike subtly and exploit a
+          foe's distraction. Once per turn, you can deal an extra 1d6 damage to
+          one creature you hit with an attack if you have advantage on the
+          attack roll. The attack must use a finesse or a ranged
+          weapon.</p><p>You don't need advantage on the attack roll if another
+          enemy of the target is within 5 feet of it, that enemy isn't
+          incapacitated, and you don't have disadvantage on the attack roll.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: class
+        subtype: ''
+      requirements: Rogue 1
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: damage
+          activation:
+            type: ''
+            value: null
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          damage:
+            critical:
+              allow: false
+              bonus: ''
+            parts:
+              - number: null
+                denomination: null
+                bonus: ''
+                types: []
+                custom:
+                  enabled: true
+                  formula: '@scale.rogue.sneak-attack'
+                scaling:
+                  mode: whole
+                  number: null
+                  formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: sneak-attack
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classfeatures.Item.DPN2Gfk8yi1Z5wp7
+        advancementOrigin: C6beIadMtmp9t0Ym.13XHsx4Z3vQ2XYkJ
+    img: icons/skills/melee/strike-dagger-arcane-pink.webp
+    effects: []
+    folder: RMtv55MamGWKrCfq
+    sort: 0
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.classfeatures.Item.DPN2Gfk8yi1Z5wp7
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093814695
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!bzlxBO5km3zCQA8G.Hn3bI5L2gaHMLNb3'
+  - _id: J43jsAaIZ54qFAuW
+    name: Thieves' Cant
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>During your rogue training you learned thieves' cant, a secret mix
+          of dialect, jargon, and code that allows you to hide messages in
+          seemingly normal conversation. Only another creature that knows
+          thieves' cant understands such messages. It takes four times longer to
+          convey such a message than it does to speak the same idea
+          plainly.</p><p>In addition, you understand a set of secret signs and
+          symbols used to convey short, simple messages, such as whether an area
+          is dangerous or the territory of a thieves' guild, whether loot is
+          nearby, or whether the people in an area are easy marks or will
+          provide a safe house for thieves on the run.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      requirements: Rogue 1
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: thieves-cant
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classfeatures.Item.ohwfuwnvuoBWlSQr
+        advancementOrigin: C6beIadMtmp9t0Ym.13XHsx4Z3vQ2XYkJ
+    img: icons/sundries/documents/document-torn-diagram-tan.webp
+    effects: []
+    folder: RMtv55MamGWKrCfq
+    sort: 0
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.classfeatures.Item.ohwfuwnvuoBWlSQr
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093814733
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!bzlxBO5km3zCQA8G.J43jsAaIZ54qFAuW'
+  - name: Dagger
+    type: weapon
+    img: icons/weapons/daggers/dagger-straight-blue.webp
+    system:
+      description:
+        value: >-
+          <p>A short metal blade mounted to a small hilt and crossguard. The
+          dagger makes an effective side armament for hardened warriors or a
+          hidden blade for assassins and thieves.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 2
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: 20
+        long: 60
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 4
+          bonus: ''
+          types:
+            - piercing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties:
+        - fin
+        - lgt
+        - thr
+      proficient: null
+      type:
+        value: simpleM
+        baseItem: dagger
+      unidentified:
+        description: ''
+      container: null
+      crewed: false
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '20'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      ammunition: {}
+      identifier: dagger
+    effects: []
+    folder: MLMTCAvKsuFE3vYA
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.0E565kQUBmndJ1a2
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: KZ6pv2Oqgkgjr5rQ
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.KZ6pv2Oqgkgjr5rQ'
+  - name: Hammer
+    type: loot
+    img: icons/tools/hand/hammer-cobbler-steel.webp
+    system:
+      description:
+        value: >-
+          <p>A tool with a heavy metal head mounted at the end of its handle,
+          used for jobs such as breaking things and driving in nails. </p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 3
+        units: lb
+      price:
+        value: 1
+        denomination: gp
+      rarity: ''
+      identified: true
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      identifier: hammer
+    effects: []
+    folder: dlru9Hy74nSMv6fr
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.14pNRT4sZy9rgvhb
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: 2NiyMqVLi252yjW7
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.2NiyMqVLi252yjW7'
+  - name: Tinderbox
+    type: loot
+    img: icons/sundries/lights/torch-black.webp
+    system:
+      description:
+        value: >-
+          <p>This small container holds flint, fire steel, and tinder (usually
+          dry cloth soaked in light oil) used to kindle a fire. Using it to
+          light a torch - or anything else with abundant, exposed fuel - takes
+          an action. Lighting any other fire takes 1 minute.</p>
+
+          <p> </p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 5
+        denomination: sp
+      rarity: ''
+      identified: true
+      container: 8KWz5DJbWUpNWniP
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      properties: []
+      identifier: tinderbox
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.1FSubnBpSTDmVaYV
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    ownership:
+      default: 0
+    _id: t6h7cvBg8HdaCSef
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.t6h7cvBg8HdaCSef'
+  - name: Waterskin
+    type: consumable
+    img: icons/sundries/survival/wetskin-leather-purple.webp
+    system:
+      description:
+        value: >-
+          <p>A leather hide sewn into an enclosed skin which can contain up to 4
+          pints of liquid. It weighs 5 pounds when full; a pint of water is
+          approximately 1 pound.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      price:
+        value: 2
+        denomination: sp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '4'
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      container: 6OYR11aJX2dEVtOj
+      properties: []
+      type:
+        value: food
+        subtype: ''
+      unidentified:
+        description: ''
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: touch
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: waterskin
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.1L5wkmbw0fmNAr38
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    ownership:
+      default: 0
+    _id: w7eDAc3dWCR4irTc
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.w7eDAc3dWCR4irTc'
+  - name: Torch
+    type: consumable
+    img: icons/sundries/lights/torch-black.webp
+    system:
+      description:
+        value: >-
+          <p>A torch burns for 1 hour, providing bright light in a 20-foot
+          radius and dim light for an additional 20 feet. If you make a melee
+          attack with a burning torch and hit, it deals 1 fire damage.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 10
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 1
+        denomination: cp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '1'
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          bonus: ''
+          types:
+            - fire
+          custom:
+            enabled: true
+            formula: '1'
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        replace: false
+      container: 8KWz5DJbWUpNWniP
+      properties: []
+      type:
+        value: trinket
+        subtype: ''
+      unidentified:
+        description: ''
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: '1'
+            units: hour
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: radius
+              size: '40'
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          attack:
+            ability: str
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - number: null
+                denomination: null
+                bonus: ''
+                types:
+                  - fire
+                custom:
+                  enabled: true
+                  formula: '1'
+                scaling:
+                  mode: whole
+                  number: null
+                  formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: torch
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.29ZLE8PERtFVD3QU
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    ownership:
+      default: 0
+    _id: DlmtRORaVFPORu7x
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.DlmtRORaVFPORu7x'
+  - name: Fine Clothes
+    type: equipment
+    img: icons/equipment/chest/robe-layered-white.webp
+    system:
+      description:
+        value: >-
+          <p>Set of clothes designed specifically to be expensive and show
+          it.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 6
+        units: lb
+      price:
+        value: 15
+        denomination: gp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      cover: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      armor:
+        value: null
+        dex: null
+        magicalBonus: null
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      speed:
+        value: null
+        conditions: ''
+      strength: null
+      proficient: null
+      type:
+        value: clothing
+        baseItem: ''
+      unidentified:
+        description: ''
+      container: null
+      crewed: false
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: ''
+            value: null
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: fine-clothes
+    effects: []
+    folder: aJgMxnZED9XdoN2W
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.3OXueEpvDDCVfGFA
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: xQRryYoSEs6Hq6vT
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.xQRryYoSEs6Hq6vT'
+  - name: Arrow
+    type: consumable
+    img: icons/weapons/ammunition/arrows-broadhead-white.webp
+    system:
+      description:
+        value: >-
+          <p>Standard ammunition used for bows of all varieties. These mundane
+          arrows are made of smooth wooden shafts with goose feather fletching
+          and hammer metal bodkins.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 20
+      weight:
+        value: 0.05
+        units: lb
+      price:
+        value: 5
+        denomination: cp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: ''
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: 0
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        replace: false
+      type:
+        value: ammo
+        subtype: arrow
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      magicalBonus: null
+      activities: {}
+      attuned: false
+      identifier: arrow
+    effects: []
+    folder: NdDvXSjfqlghXpQZ
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.3c7JXOzsv55gqJS5
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: yLUvPaR9SEEQMeJ2
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.yLUvPaR9SEEQMeJ2'
+  - name: Quiver
+    type: container
+    img: icons/containers/ammunition/arrows-quiver-simple-brown.webp
+    system:
+      description:
+        value: <p>A quiver can hold up to 20 arrows.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 1
+        denomination: gp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      capacity:
+        type: weight
+        value: 1
+      currency:
+        cp: 0
+        sp: 0
+        ep: 0
+        gp: 0
+        pp: 0
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      attuned: false
+      identifier: quiver
+    effects: []
+    folder: PgtyWdfkDTDbc0ov
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.4MtQKPn9qMWCFjDA
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: iS4larVdEIBbLbrF
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.iS4larVdEIBbLbrF'
+  - name: Rations
+    type: consumable
+    img: icons/consumables/grains/bread-loaf-boule-rustic-brown.webp
+    system:
+      description:
+        value: >-
+          <p>Rations consist of dry foods suitable for extended travel,
+          including jerky, dried fruit, hardtack, and nuts.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 10
+      weight:
+        value: 2
+        units: lb
+      price:
+        value: 5
+        denomination: sp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '1'
+        recovery: []
+        autoDestroy: true
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      container: XY8b594Dn7plACLL
+      properties: []
+      type:
+        value: food
+        subtype: ''
+      unidentified:
+        description: ''
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: touch
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: '1'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: rations
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.8d95YV1jHcxPygJ9
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    ownership:
+      default: 0
+    _id: PlUYtw31ZP885rIC
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.PlUYtw31ZP885rIC'
+  - name: Pouch
+    type: container
+    img: icons/containers/bags/pouch-rounded-leather-gold-tan.webp
+    system:
+      description:
+        value: >-
+          <p>A cloth or leather pouch can hold up to 20 sling bullets or 50
+          blowgun needles, among other things. A compartmentalized pouch for
+          holding spell components is called a component pouch. A pouch can hold
+          up to ⅕ cubic foot or 6 pounds of gear.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 5
+        denomination: sp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      capacity:
+        type: weight
+        value: 6
+      currency:
+        cp: 0
+        sp: 0
+        ep: 0
+        gp: 0
+        pp: 0
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      attuned: false
+      identifier: pouch
+    effects: []
+    folder: PgtyWdfkDTDbc0ov
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.9bWTRRDym06PzSAf
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: 5HHUTz3z7HEQfZIQ
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.5HHUTz3z7HEQfZIQ'
+  - name: Crowbar
+    type: loot
+    img: icons/tools/hand/pickaxe-steel-white.webp
+    system:
+      description:
+        value: >-
+          <p>Using a crowbar grants advantage to Strength checks where the
+          crowbar's leverage can be applied.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      price:
+        value: 2
+        denomination: gp
+      rarity: ''
+      identified: true
+      container: XY8b594Dn7plACLL
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      properties: []
+      identifier: crowbar
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.AkyQyonZMVcvOrXU
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    ownership:
+      default: 0
+    _id: 2XtdoKiFPhKvbFcl
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.2XtdoKiFPhKvbFcl'
+  - name: Bedroll
+    type: loot
+    img: icons/sundries/survival/bedroll-grey.webp
+    system:
+      description:
+        value: <p>Roll of cloth used by traveller to sleep in.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 7
+        units: lb
+      price:
+        value: 1
+        denomination: gp
+      rarity: ''
+      identified: true
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      identifier: bedroll
+    effects: []
+    folder: dlru9Hy74nSMv6fr
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.DVXmyetZuvxbzAwW
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: OdXwywt9vQa11MPL
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.OdXwywt9vQa11MPL'
+  - name: Shortbow
+    type: weapon
+    img: icons/weapons/bows/shortbow-leather.webp
+    system:
+      description:
+        value: >-
+          <p>This two handed bow is somewhat smaller than the traditional
+          longbow variant, making it well suited for rapid attacks while on the
+          move or mounted from horseback.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 2
+        units: lb
+      price:
+        value: 25
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: 80
+        long: 320
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 6
+          bonus: ''
+          types:
+            - piercing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties:
+        - amm
+        - two
+      proficient: null
+      type:
+        value: simpleR
+        baseItem: shortbow
+      unidentified:
+        description: ''
+      container: null
+      crewed: false
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '80'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ranged
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      ammunition:
+        type: arrow
+      mastery: ''
+      identifier: shortbow
+    effects: []
+    folder: MLMTCAvKsuFE3vYA
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.GJv6WkD7D2J6rP6M
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: df7IpmSKg7P9gt9J
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.df7IpmSKg7P9gt9J'
+  - name: Backpack
+    type: container
+    img: icons/containers/bags/pack-leather-white-tan.webp
+    system:
+      description:
+        value: >-
+          <p>A backpack can hold one cubic foot or 30 pounds of gear. You can
+          also strap items, such as a bedroll or a coil of rope, to the outside
+          of a backpack.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      price:
+        value: 2
+        denomination: gp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      capacity:
+        type: weight
+        value: 30
+      currency:
+        cp: 0
+        sp: 0
+        ep: 0
+        gp: 0
+        pp: 0
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      attuned: false
+      identifier: backpack
+    effects: []
+    folder: PgtyWdfkDTDbc0ov
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.H8YCd689ezlD26aT
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: rF8gwzNSeMCBNCzG
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.rF8gwzNSeMCBNCzG'
+  - name: Piton
+    type: consumable
+    img: icons/tools/fasteners/nail-steel.webp
+    system:
+      description:
+        value: >-
+          <p>A metal spike that is drive into a seam in a climbing surface with
+          a climbing hammer. It can also be used like iron spikes to block doors
+          in a pinch.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 10
+      weight:
+        value: 0.25
+        units: lb
+      price:
+        value: 5
+        denomination: cp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '1'
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      container: xsB7Y2WI476kvOt4
+      properties: []
+      type:
+        value: trinket
+        subtype: ''
+      unidentified:
+        description: ''
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: piton
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.P31t6tGgt9aLAdYt
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    ownership:
+      default: 0
+    _id: SpPkaGF64gbqUeyz
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.SpPkaGF64gbqUeyz'
+  - name: Hempen Rope (50 ft.)
+    type: consumable
+    img: icons/sundries/survival/rope-wrapped-brown.webp
+    system:
+      description:
+        value: >-
+          <p>Rope, whether made of hemp or silk, has 2 hit points and can be
+          burst with a DC 17 Strength check.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 10
+        units: lb
+      price:
+        value: 1
+        denomination: gp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '1'
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      type:
+        value: trinket
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: check
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                scaling: {}
+                value: '1'
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          check:
+            ability: str
+            dc:
+              calculation: ''
+              formula: '17'
+            associated: []
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          name: Burst
+      attuned: false
+      identifier: hempen-rope-50-ft
+    effects: []
+    folder: UnUwTG4YIgd0kaUJ
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.QXmaarJ4X8P0C1HV
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: V4sidnhoWmGe9ZPi
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.V4sidnhoWmGe9ZPi'
+  - name: Rapier
+    type: weapon
+    img: icons/weapons/swords/sword-guard-bronze.webp
+    system:
+      description:
+        value: >-
+          <p>A thin tensile metal blade, light in weight but long in reach
+          designed for quick darting attacks to target weak points in enemy
+          defenses with lightning swiftness.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 2
+        units: lb
+      price:
+        value: 25
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: null
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 8
+          bonus: ''
+          types:
+            - piercing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties:
+        - fin
+      proficient: null
+      type:
+        value: martialM
+        baseItem: rapier
+      unidentified:
+        description: ''
+      container: null
+      crewed: false
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      ammunition: {}
+      identifier: rapier
+    effects: []
+    folder: MLMTCAvKsuFE3vYA
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.Tobce1hexTnDk4sV
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: HhZKGBhG6S7og4i0
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.HhZKGBhG6S7og4i0'
+  - name: Mess Kit
+    type: loot
+    img: icons/tools/cooking/fork-steel-tan.webp
+    system:
+      description:
+        value: >-
+          <p>This tin box contains a cup and simple cutlery. The box clamps
+          together, and one side can be used as a cooking pan and the other as a
+          plate or shallow bowl.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 2
+        denomination: sp
+      rarity: ''
+      identified: true
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      identifier: mess-kit
+    effects: []
+    folder: dlru9Hy74nSMv6fr
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.V13fjV5oSmvbRdgP
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: NQd6oHPeFT7ZYL85
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.NQd6oHPeFT7ZYL85'
+  - name: Leather Armor
+    type: equipment
+    img: icons/equipment/chest/breastplate-scale-leather.webp
+    system:
+      description:
+        value: >-
+          <p>The breastplate and shoulder protectors of this armor are made of
+          leather that has been stiffened by being boiled in oil. The rest of
+          the armor is made of softer and more flexible materials.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 10
+        units: lb
+      price:
+        value: 10
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      crewed: false
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      armor:
+        value: 11
+        dex: null
+        magicalBonus: null
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      speed:
+        value: null
+        conditions: ''
+      strength: null
+      proficient: null
+      type:
+        value: light
+        baseItem: leather
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      activities: {}
+      attuned: false
+      identifier: leather-armor
+    effects: []
+    folder: JqTP017wj3uxDJ8g
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.WwdpHLXGX5r8uZu5
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: iVRhe5aw8sbEha14
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.iVRhe5aw8sbEha14'
+  - name: Thieves' Tools
+    type: tool
+    img: icons/tools/hand/lockpicks-steel-grey.webp
+    system:
+      description:
+        value: >-
+          <p>This set of tools includes a small file, a set of lock picks, a
+          small mirror mounted on a metal handle, a set of narrow-bladed
+          scissors, and a pair of pliers. Proficiency with these tools lets you
+          add your proficiency bonus to any ability checks you make to disarm
+          traps or open locks.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 25
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      ability: dex
+      chatFlavor: ''
+      proficient: null
+      bonus: ''
+      type:
+        value: ''
+        baseItem: thief
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: check
+          activation:
+            type: ''
+            value: null
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          check:
+            ability: dex
+            dc: {}
+            associated: []
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: thieves-tools
+    effects: []
+    folder: uvZXbqK3cHirDzeT
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.woWZ1sO5IUVGzo58
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: FLSNmB3LnQqys43M
+    sort: 0
+    _key: '!actors.items!bzlxBO5km3zCQA8G.FLSNmB3LnQqys43M'
+effects: []
+folder: null
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    showTokenPortrait: false
+_id: bzlxBO5km3zCQA8G
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725036841160
+  modifiedTime: 1738093115965
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!actors!bzlxBO5km3zCQA8G'

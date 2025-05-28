@@ -1,0 +1,280 @@
+_id: dmgBerserkerAxe0
+name: Berserker Axe
+type: weapon
+img: icons/weapons/axes/axe-battle-skull-black.webp
+system:
+  activities:
+    rWBvAvfPodSbiiLg:
+      type: enchant
+      name: Berserker Axe
+      _id: rWBvAvfPodSbiiLg
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: J4bEaPvFwAGKSrPm
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - 7W0LDyDY0mcAVS1J
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      img: ''
+      appliedEffects:
+        - J4bEaPvFwAGKSrPm
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepBattleaxe0]{Battleaxe},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepGreataxe00]{Greataxe}, or
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepHalberd000]{Halberd}), Rare
+      (Requires Attunement)</em></p><p>You gain a +1 bonus to attack rolls and
+      damage rolls made with this magic weapon. In addition, while you are
+      attuned to this weapon, your Hit Point maximum increases by 1 for each
+      level you have attained.</p><section class="secret"
+      id="secret-kIoBCQDeN3tTKast"><p><strong>Curse.</strong> This weapon is
+      cursed, and becoming attuned to it extends the curse to you. As long as
+      you remain cursed, you are unwilling to part with the weapon, keeping it
+      within reach at all times. You also have Disadvantage on attack rolls with
+      weapons other than this one.</p><p>Whenever another creature damages you
+      while the weapon is in your possession, you must succeed on a [[/save
+      ability=wis dc=15 format=long]] or go berserk. This berserk state ends
+      when you start your turn and there are no creatures within 60 feet of you
+      that you can see or hear.</p><p>While berserk, you regard the creature
+      nearest to you that you can see or hear as your enemy. If there are
+      multiple possible creatures, choose one at random. On each of your turns,
+      you must move as close to the creature as possible and take the Attack
+      action, targeting the creature. If you're unable to get close enough to
+      the creature to attack it with the weapon, your turn ends after you've
+      used up all your available movement. If the creature dies or can no longer
+      be seen or heard by you, the next nearest creature that you can see or
+      hear becomes your new target.</p></section></div><p>
+      @Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: berserker-axe
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: martialM
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  magicalBonus: 1
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: ''
+effects:
+  - name: Berserker HP Increase
+    img: icons/magic/life/heart-glowing-red.webp
+    _id: 7W0LDyDY0mcAVS1J
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.hp.bonuses.level
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>While you are attuned to this weapon, your Hit Point maximum increases
+      by 1 for each level you have attained.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: 1728595622060
+      modifiedTime: 1728595804921
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgBerserkerAxe0.7W0LDyDY0mcAVS1J'
+  - type: enchantment
+    name: Berserker Axe
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    _id: J4bEaPvFwAGKSrPm
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Berserker {}
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: rare
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgBerserkerAxe0
+          caption=false]</p>
+        priority: null
+      - key: system.magicalBonus
+        mode: 4
+        value: '1'
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730835222661
+      modifiedTime: 1730835379186
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgBerserkerAxe0.J4bEaPvFwAGKSrPm'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect:
+        - 7W0LDyDY0mcAVS1J
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745433480191
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7050000
+ownership:
+  default: 0
+_key: '!items!dmgBerserkerAxe0'

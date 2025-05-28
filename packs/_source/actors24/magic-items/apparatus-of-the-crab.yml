@@ -1,0 +1,757 @@
+_id: dmgApparatusofKw
+name: Apparatus of the Crab
+type: vehicle
+img: icons/svg/mystery-man.svg
+system:
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  abilities:
+    str:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    dex:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    con:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    int:
+      value: 0
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    wis:
+      value: 0
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    cha:
+      value: 0
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+  vehicleType: water
+  attributes:
+    init:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonus: ''
+    movement:
+      burrow: null
+      climb: null
+      fly: null
+      swim: 30
+      walk: 30
+      units: ft
+      hover: false
+    ac:
+      flat: 20
+      calc: default
+      motionless: ''
+    hp:
+      value: 200
+      max: 200
+      temp: 0
+      tempmax: 0
+      dt: null
+      mt: null
+    actions:
+      stations: true
+      value: 0
+      thresholds:
+        '0': null
+        '1': null
+        '2': null
+    capacity:
+      creature: '2'
+      cargo: 0
+  details:
+    biography:
+      value: >-
+        <p>To be used as a vehicle, the
+        @UUID[Compendium.dnd5e.equipment24.Item.dmgApparatusOfKw]{apparatus}
+        requires one pilot. While the apparatus’s hatch is closed, the
+        compartment is airtight and watertight. The compartment holds enough air
+        for 10 hours of breathing, divided by the number of breathing creatures
+        inside.</p><p>The apparatus floats on water. It can also go underwater
+        to a depth of 900 feet. Below that, the vehicle takes 2d6 Bludgeoning
+        damage each minute from pressure.</p><p>A creature in the compartment
+        can take a Utilize action to move as many as two of the apparatus’s
+        levers up or down. After each use, a lever goes back to its neutral
+        position. Each lever, from left to right, functions as shown in the
+        Apparatus of the Crab <span class="no-break">Levers</span>
+        table.</p><table><caption>Apparatus of the Crab
+        Levers</caption><thead><tr><td>Lever</td><td>Up</td><td>Down</td></tr></thead><tbody><tr><td>1</td><td>Legs
+        extend, allowing the apparatus to walk and swim.</td><td>Legs retract,
+        reducing the apparatus’s Speed and Swim Speed to 0 and making it unable
+        to benefit from bonuses to speed.</td></tr><tr><td>2</td><td>Forward
+        window shutter opens.</td><td>Forward window shutter
+        closes.</td></tr><tr><td>3</td><td>Side window shutters open (two per
+        side).</td><td>Side window shutters close (two per
+        side).</td></tr><tr><td>4</td><td>Two claws extend from the front side
+        of the apparatus.</td><td>The claws
+        retract.</td></tr><tr><td>5</td><td>Each extended claw makes the
+        following [[/item fmdWz6RQsUCHneZF]]{melee attack}: +8 to hit, reach 5
+        ft. <em>Hit:</em> 7 (2d6) Bludgeoning damage.</td><td>Each extended claw
+        makes the following [[/item tgIjCBtGCZvMu8ij]]{melee attack}: +8 to hit,
+        reach 5 ft. <em>Hit:</em> The target has the Grappled condition (escape
+        DC 15).</td></tr><tr><td>6</td><td>The apparatus walks or swims forward
+        provided its legs are extended.</td><td>The apparatus walks or swims
+        backward provided its legs are extended.</td></tr><tr><td>7</td><td>The
+        apparatus turns 90 degrees counterclockwise provided its legs are
+        extended.</td><td>The apparatus turns 90 degrees clockwise provided its
+        legs are extended.</td></tr><tr><td>8</td><td>Eyelike fixtures emit
+        Bright Light in a 30-foot radius and Dim Light for an additional 30
+        feet.</td><td>The light turns off.</td></tr><tr><td>9</td><td>The
+        apparatus sinks up to 20 feet if it’s in liquid.</td><td>The apparatus
+        rises up to 20 feet if it’s in liquid.</td></tr><tr><td>10</td><td>The
+        rear hatch unseals and opens.</td><td>The rear hatch closes and
+        seals.</td></tr></tbody></table>
+      public: ''
+  source:
+    revision: 1
+    rules: '2024'
+    custom: ''
+    book: SRD 5.2
+    license: CC-BY-4.0
+  traits:
+    size: lg
+    di:
+      bypasses: []
+      value:
+        - poison
+        - psychic
+      custom: ''
+    dr:
+      bypasses: []
+      value: []
+      custom: ''
+    dv:
+      bypasses: []
+      value: []
+      custom: ''
+    dm:
+      amount: {}
+      bypasses: []
+    ci:
+      value: []
+      custom: ''
+    dimensions: 10 x 5 x 5 feet
+  cargo:
+    crew: []
+    passengers: []
+prototypeToken:
+  name: Apparatus of the Crab
+  displayName: 0
+  actorLink: true
+  appendNumber: false
+  prependAdjective: false
+  width: 2
+  height: 2
+  texture:
+    src: icons/svg/mystery-man.svg
+    anchorX: 0.5
+    anchorY: 0.5
+    offsetX: 0
+    offsetY: 0
+    fit: contain
+    scaleX: 1
+    scaleY: 1
+    rotation: 0
+    tint: '#ffffff'
+    alphaThreshold: 0.75
+  lockRotation: false
+  rotation: 0
+  alpha: 1
+  disposition: 0
+  displayBars: 0
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  light:
+    negative: false
+    priority: 0
+    alpha: 0.5
+    angle: 360
+    bright: 0
+    color: null
+    coloration: 1
+    dim: 0
+    attenuation: 0.5
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      type: null
+      speed: 5
+      intensity: 5
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+  sight:
+    enabled: false
+    range: 0
+    angle: 360
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    brightness: 0
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: >-
+        modules/dnd-dungeon-masters-guide/assets/subjects/apparatus-of-kwalish.webp
+  flags: {}
+  randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
+items:
+  - name: Claw Attack
+    type: feat
+    system:
+      activities:
+        yd6hyhKASrfahCB9:
+          type: attack
+          _id: yd6hyhKASrfahCB9
+          sort: 0
+          activation:
+            type: special
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            value: '5'
+            units: ft
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: any
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          attack:
+            critical:
+              threshold: null
+            flat: true
+            type:
+              value: melee
+              classification: weapon
+            ability: ''
+            bonus: '8'
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: 6
+                bonus: ''
+                types:
+                  - bludgeoning
+                scaling:
+                  number: 1
+          name: ''
+          img: ''
+          appliedEffects: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p>Each extended claw makes the following melee attack: +8 to hit,
+          reach 5 ft. <em>Hit:</em> 7 (2d6) Bludgeoning damage.</p>
+        chat: ''
+      identifier: new-feature
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      type:
+        value: monster
+        subtype: ''
+      prerequisites:
+        level: null
+      properties:
+        - mgc
+      requirements: 'Lever 4: Up'
+    _id: fmdWz6RQsUCHneZF
+    img: icons/commodities/tech/metal-jaws.webp
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712710795
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!dmgApparatusofKw.fmdWz6RQsUCHneZF'
+  - name: Grapple Attack
+    type: feat
+    system:
+      activities:
+        yd6hyhKASrfahCB9:
+          type: attack
+          _id: yd6hyhKASrfahCB9
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: '&Reference[grappled] on hit'
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            value: '5'
+            units: ft
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: any
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          attack:
+            critical:
+              threshold: null
+            flat: true
+            type:
+              value: melee
+              classification: weapon
+            ability: ''
+            bonus: '8'
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          name: ''
+        uXBW1AMdcFYJ3bqQ:
+          type: check
+          _id: uXBW1AMdcFYJ3bqQ
+          sort: 0
+          activation:
+            type: special
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: spec
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: ''
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          check:
+            associated:
+              - acr
+              - ath
+            dc:
+              calculation: ''
+              formula: '15'
+            ability: ''
+          name: Grapple Escape Check
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      description:
+        value: >-
+          <p>Each extended claw makes the following melee attack: +8 to hit,
+          reach 5 ft. <em>Hit:</em> The target has the &amp;Reference[Grappled]
+          condition (escape DC 15).</p>
+        chat: ''
+      identifier: new-feature
+      source:
+        revision: 1
+        rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
+      enchant: {}
+      type:
+        value: monster
+        subtype: ''
+      prerequisites:
+        level: null
+      properties:
+        - mgc
+      requirements: 'Lever 4: Down'
+    img: icons/commodities/tech/metal-jaws.webp
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745712710795
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: tgIjCBtGCZvMu8ij
+    _key: '!actors.items!dmgApparatusofKw.tgIjCBtGCZvMu8ij'
+effects:
+  - type: base
+    name: Legs Extended
+    origin: Actor.dmgApparatusofKw
+    duration:
+      rounds: null
+      startTime: 0
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    img: icons/commodities/tech/transmission.webp
+    _id: D6TOlFQbOM6V0Jv8
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 4
+        value: '30'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 4
+        value: '30'
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - transformed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: null
+      modifiedTime: 1728508865121
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.effects!dmgApparatusofKw.D6TOlFQbOM6V0Jv8'
+  - type: base
+    name: Claws Extended
+    origin: Actor.dmgApparatusofKw
+    duration:
+      rounds: null
+      startTime: 0
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    img: icons/commodities/tech/coil-steel-grey.webp
+    _id: 9Sxe5orNBLhYpDwz
+    system: {}
+    changes: []
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - transformed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.effects!dmgApparatusofKw.9Sxe5orNBLhYpDwz'
+  - type: base
+    name: Forward Shutter Open
+    origin: Actor.dmgApparatusofKw
+    duration:
+      rounds: null
+      startTime: 0
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    img: icons/commodities/tech/metal-blue.webp
+    system: {}
+    changes: []
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - transformed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: Actor.dmgApparatusofKw.ActiveEffect.xIiZeSr9KPqMrDFq
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: xIiZeSr9KPqMrDFq
+    _key: '!actors.effects!dmgApparatusofKw.xIiZeSr9KPqMrDFq'
+  - type: base
+    name: Side Shutters Open
+    origin: Actor.dmgApparatusofKw
+    duration:
+      rounds: null
+      startTime: 0
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    img: icons/commodities/tech/metal-panel.webp
+    system: {}
+    changes: []
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - transformed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: Actor.dmgApparatusofKw.ActiveEffect.xIiZeSr9KPqMrDFq
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: sj7HGYh5KeLlZhfr
+    _key: '!actors.effects!dmgApparatusofKw.sj7HGYh5KeLlZhfr'
+  - type: base
+    name: Rear Hatch Open
+    origin: Actor.dmgApparatusofKw
+    duration:
+      rounds: null
+      startTime: 0
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    img: icons/commodities/tech/frame-copper.webp
+    system: {}
+    changes: []
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - transformed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: Actor.dmgApparatusofKw.ActiveEffect.xIiZeSr9KPqMrDFq
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: pvJazR3MqOCj5fq8
+    _key: '!actors.effects!dmgApparatusofKw.pvJazR3MqOCj5fq8'
+  - type: base
+    name: Lights Activated
+    origin: Actor.dmgApparatusofKw
+    duration:
+      rounds: null
+      startTime: 0
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    img: icons/magic/light/light-lantern-lit-white.webp
+    _id: rBFF2F7IQteiU8kL
+    system: {}
+    changes: []
+    description: >-
+      <p>Eyelike fixtures emit Bright Light in a 30-foot radius and Dim Light
+      for an additional 30 feet.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.effects!dmgApparatusofKw.rBFF2F7IQteiU8kL'
+folder: 2AjZvlZWDCwSd0ry
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1728507975227
+  modifiedTime: 1745712710820
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+_key: '!actors!dmgApparatusofKw'

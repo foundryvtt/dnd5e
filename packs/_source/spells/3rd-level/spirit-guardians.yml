@@ -1,0 +1,135 @@
+_id: uCud2s4TjMfjiXUb
+name: Spirit Guardians
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You call forth spirits to protect you. They flit around you to a
+      distance of 15 feet for the duration. If you are good or neutral, their
+      spectral form appears angelic or fey (your choice). If you are evil, they
+      appear fiendish.</p><p>When you cast this spell, you can designate any
+      number of creatures you can see to be unaffected by it. An affected
+      creature's speed is halved in the area, and when the creature enters the
+      area for the first time on a turn or starts its turn there, it must make a
+      Wisdom saving throw. On a failed save, the creature takes 3d8 radiant
+      damage (if you are good or neutral) or 3d8 necrotic damage (if you are
+      evil). On a successful save, the creature takes half as much
+      damage.</p><p><strong>At Higher Levels.</strong> When you cast this spell
+      using a spell slot of 4th level or higher, the damage increases by 1d8 for
+      each slot level above 3rd.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: radius
+      size: '15'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: con
+  materials:
+    value: A holy symbol
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 3
+            denomination: 8
+            bonus: ''
+            types:
+              - radiant
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: spirit-guardians
+sort: 0
+flags: {}
+img: icons/magic/light/projectile-bolts-salvo-white.webp
+effects: []
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037366148
+  modifiedTime: 1725992723195
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!uCud2s4TjMfjiXUb'

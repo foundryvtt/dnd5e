@@ -1,0 +1,166 @@
+name: Banishment
+system:
+  description:
+    value: >-
+      <p>One creature that you can see within range must succeed on a Charisma
+      saving throw or be transported to a harmless demiplane for the duration.
+      While there, the target has the &amp;Reference[Incapacitated apply=false]
+      condition. When the spell ends, the target reappears in the space it left
+      or in the nearest unoccupied space if that space is occupied.</p><p>If the
+      target is an Aberration, a Celestial, an Elemental, a Fey, or a Fiend, the
+      target doesn't return if the spell lasts for 1 minute. The target is
+      instead transported to a random location on a plane (DM's choice)
+      associated with its creature type.</p><p><strong>Using a Higher-Level
+      Spell Slot.</strong> You can target one additional creature for each spell
+      slot level above 4.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '@item.level - 3'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a pentacle
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: nwne4bDtD4pSWWPM
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: banishment
+_id: phbsplBanishment
+type: spell
+img: icons/magic/unholy/barrier-fire-pink.webp
+effects:
+  - name: Banished
+    origin: Compendium.dnd5e.spells24.Item.phbsplBanishment
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/creatures/unholy/demon-fire-horned-clawed.webp
+    _id: nwne4bDtD4pSWWPM
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>While there, the target has the &amp;Reference[Incapacitated
+      apply=false] condition. When the spell ends, the target reappears in the
+      space it left or in the nearest unoccupied space if that space is
+      occupied.</p><p>If the target is an Aberration, a Celestial, an Elemental,
+      a Fey, or a Fiend, the target doesn’t return if the spell lasts for 1
+      minute. The target is instead transported to a random location on a plane
+      (DM’s choice) associated with its creature type.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - incapacitated
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplBanishment.nwne4bDtD4pSWWPM'
+folder: qi3IbnEwap7mRw4b
+sort: 3600000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425942718
+  modifiedTime: 1745256786388
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplBanishment'

@@ -1,0 +1,109 @@
+<section class="advancement tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    {{#each advancement}}
+
+    <div class="items-section card" data-level="{{ @key }}">
+
+        <div class="items-header header">
+
+            <h3 class="item-name">
+                {{#if (eq @key "0")}}
+                {{ localize "DND5E.AdvancementLevelAnyHeader" }}
+                {{else if (eq @key "unconfigured")}}
+                {{ localize "DND5E.AdvancementLevelNoneHeader" }}
+                {{else}}
+                {{ localize "DND5E.AdvancementLevelHeader" level=@key }}
+                {{/if}}
+            </h3>
+
+            <div class="item-header advancement-value">{{ localize "DND5E.Value" }}</div>
+
+            <div class="item-header item-controls">
+                {{#if (and @root.editable configured (ne @key "unconfigured"))}}
+                <button type="button" class="unbutton item-control control-button"
+                        data-action="modifyAdvancementChoices" data-tooltip
+                        aria-label="{{ localize 'DND5E.AdvancementModifyChoices' }}">
+                    <i class="fas fa-cog" inert></i>
+                </button>
+                {{else}}
+
+                {{#if (eq configured "full")}}
+                <a class="info-control" data-tooltip aria-label="{{ localize 'DND5E.AdvancementConfiguredComplete' }}">
+                    <i class="fas fa-check-circle"></i>
+                </a>
+                {{else if (eq configured "partial")}}
+                <a class="info-control" data-tooltip
+                   aria-label="{{ localize 'DND5E.AdvancementConfiguredIncomplete' }}">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </a>
+                {{/if}}
+
+                {{/if}}
+            </div>
+
+        </div>
+
+        <ol class="item-list unlist">
+            {{#each items}}
+
+            <li class="advancement-item item {{ classes }}" data-id="{{ id }}" data-uuid="{{ uuid }}">
+                <div class="item-row">
+
+                    <div class="item-name">
+                        <img class="item-image gold-icon" src="{{ icon }}">
+                        <div class="name">
+                            <div class="title">{{{ title }}}</div>
+                            {{#if summary}}
+                            <div class="summary">{{{ summary }}}</div>
+                            {{/if}}
+                        </div>
+                        <div class="tags">
+                            {{#each tags}}
+                            <span data-tooltip aria-label="{{ localize label }}">
+                                <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                            </span>
+                            {{/each}}
+                        </div>
+                    </div>
+
+                    <div class="item-detail advancement-value {{#unless value}}empty{{/unless}}">
+                        {{#if value includeZero=true}}
+                        {{ value }}
+                        {{/if}}
+                    </div>
+
+                    <div class="item-detail item-controls">
+
+                        {{#if @root.editable}}
+                        {{!-- Editing --}}
+                        <button type="button" class="unbutton control-button item-control item-action"
+                                data-action="showDocument" data-tooltip
+                                aria-label="{{ localize 'DND5E.DND5E.ADVANCEMENT.Action.Edit' }}">
+                            <i class="fas fa-pen-to-square" inert></i>
+                        </button>
+
+                        {{!-- Deleting --}}
+                        <button type="button" class="unbutton control-button item-control item-action"
+                                data-action="deleteDocument" data-tooltip
+                                aria-label="{{ localize 'DND5E.ADVANCEMENT.Action.Delete' }}">
+                            <i class="fas fa-trash" inert></i>
+                        </button>
+                        {{/if}}
+
+                        {{!-- Context Menu --}}
+                        <button type="button" class="unbutton control-button tem-control always-interactive"
+                                data-context-menu aria-label="{{ localize 'DND5E.AdditionalControls' }}">
+                            <i class="fas fa-ellipsis-vertical" inert></i>
+                        </button>
+
+                    </div>
+
+                </div>
+            </li>
+
+            {{/each}}
+        </ol>
+
+    </div>
+
+    {{/each}}
+</section>

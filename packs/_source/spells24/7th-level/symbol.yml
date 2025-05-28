@@ -1,0 +1,671 @@
+name: Symbol
+system:
+  description:
+    value: >-
+      <p>You inscribe a harmful glyph either on a surface (such as a section of
+      floor or wall) or within an object that can be closed (such as a book or
+      chest). The glyph can cover an area no larger than 10 feet in diameter. If
+      you choose an object, it must remain in place; if it is moved more than 10
+      feet from where you cast this spell, the glyph is broken, and the spell
+      ends without being triggered.</p><p>The glyph is nearly imperceptible and
+      requires a successful Wisdom (Perception) check against your spell save DC
+      to notice.</p><p>When you inscribe the glyph, you set its trigger and
+      choose which effect the symbol bears: Death, Discord, Fear, Pain, Sleep,
+      or Stunning. Each one is explained below.</p><p><strong>Set the
+      Trigger.</strong> You decide what triggers the glyph when you cast the
+      spell. For glyphs inscribed on a surface, common triggers include touching
+      or stepping on the glyph, removing another object covering it, or
+      approaching within a certain distance of it. For glyphs inscribed within
+      an object, common triggers include opening that object or seeing the
+      glyph.</p><p>You can refine the trigger so that only creatures of certain
+      types activate it (for example, the glyph could be set to affect
+      Aberrations). You can also set conditions for creatures that don't trigger
+      the glyph, such as those who say a certain password.</p><p>Once triggered,
+      the glyph glows, filling a 60-foot-radius Sphere with Dim Light for 10
+      minutes, after which time the spell ends. Each creature in the Sphere when
+      the glyph activates is targeted by its effect, as is a creature that
+      enters the Sphere for the first time on a turn or ends its turn there. A
+      creature is targeted only once per turn.</p><p><strong>Death.</strong>
+      Each target makes a Constitution saving throw, taking 10d10 Necrotic
+      damage on a failed save or half as much damage on a successful
+      save.</p><p><strong>Discord.</strong> Each target makes a Wisdom saving
+      throw. On a failed save, a target argues with other creatures for 1
+      minute. During this time, it is incapable of meaningful communication and
+      has Disadvantage on attack rolls and ability
+      checks.</p><p><strong>Fear.</strong> Each target must succeed on a Wisdom
+      saving throw or have the Frightened condition for 1 minute. While
+      Frightened, the target must move at least 30 feet away from the glyph on
+      each of its turns, if able.</p><p><strong>Pain.</strong> Each target must
+      succeed on a Constitution saving throw or have the Incapacitated condition
+      for 1 minute.</p><p><strong>Sleep.</strong> Each target must succeed on a
+      Wisdom saving throw or have the Unconscious condition for 10 minutes. A
+      creature awakens if it takes damage or if someone takes an action to shake
+      it awake.</p><p><strong>Stunning.</strong> Each target must succeed on a
+      Wisdom saving throw or have the Stunned condition for 1 minute.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: dstr
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: object
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: powdered diamond worth 1,000+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    lKMEFyE8pOME8eWD:
+      type: utility
+      _id: lKMEFyE8pOME8eWD
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: circle
+          size: '1'
+          count: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Inscribe Glyph
+      img: systems/dnd5e/icons/svg/activity/summon.svg
+      appliedEffects: []
+    oCs1sUAtUAQJwxPU:
+      type: save
+      name: Death
+      _id: oCs1sUAtUAQJwxPU
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '60'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: '10'
+            bonus: ''
+            types:
+              - necrotic
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: ''
+      appliedEffects: []
+    DHsotF5GdSA4Nrpz:
+      type: save
+      name: Discord
+      _id: DHsotF5GdSA4Nrpz
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: YAwLt85sPQpUCIBI
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '60'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: ''
+      appliedEffects:
+        - YAwLt85sPQpUCIBI
+    7mW8h9xFzr7NNsrr:
+      type: save
+      name: Fear
+      _id: 7mW8h9xFzr7NNsrr
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: C5k5nGmPclTf9tZn
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '60'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: ''
+      appliedEffects:
+        - C5k5nGmPclTf9tZn
+    doNUpTnMIKmfuCIa:
+      type: save
+      _id: doNUpTnMIKmfuCIa
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: D8tOj85XIpMRp3Yl
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '60'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Pain
+      img: ''
+      appliedEffects:
+        - D8tOj85XIpMRp3Yl
+    a2n9gGZMabXdO8Sp:
+      type: save
+      name: Sleep
+      _id: a2n9gGZMabXdO8Sp
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '10'
+      effects:
+        - _id: A1VA7t5gB7ODNsr6
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '60'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: ''
+      appliedEffects:
+        - A1VA7t5gB7ODNsr6
+    4TPw3B0RROokuGNg:
+      type: save
+      name: Stunning
+      _id: 4TPw3B0RROokuGNg
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: zZerWADc4a5rGJ9r
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '60'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: ''
+      appliedEffects:
+        - zZerWADc4a5rGJ9r
+  identifier: symbol
+_id: phbsplSymbol0000
+type: spell
+img: icons/magic/symbols/rune-sigil-green-purple.webp
+effects:
+  - name: Arguing
+    img: icons/skills/wounds/injury-face-impact-orange.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplSymbol0000
+    transfer: false
+    _id: YAwLt85sPQpUCIBI
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target is incapable of meaningful communication and has
+      Disadvantage on attack rolls and ability checks.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725033158201
+      modifiedTime: 1725033325053
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplSymbol0000.YAwLt85sPQpUCIBI'
+  - name: Frightened
+    img: systems/dnd5e/icons/svg/statuses/frightened.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplSymbol0000
+    transfer: false
+    _id: C5k5nGmPclTf9tZn
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>While Frightened, the target must move at least 30 feet away from the
+      glyph on each of its turns, if able.</p>
+    tint: '#ffffff'
+    statuses:
+      - frightened
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725033560427
+      modifiedTime: 1725033606274
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplSymbol0000.C5k5nGmPclTf9tZn'
+  - name: Incapacitated
+    img: systems/dnd5e/icons/svg/statuses/incapacitated.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplSymbol0000
+    transfer: false
+    _id: D8tOj85XIpMRp3Yl
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - incapacitated
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725033642176
+      modifiedTime: 1725033710545
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplSymbol0000.D8tOj85XIpMRp3Yl'
+  - name: Sleeping
+    img: systems/dnd5e/icons/svg/statuses/unconscious.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplSymbol0000
+    transfer: false
+    _id: A1VA7t5gB7ODNsr6
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>A creature awakens if it takes damage or if someone takes an action to
+      shake it awake.</p>
+    tint: '#ffffff'
+    statuses:
+      - unconscious
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725033723183
+      modifiedTime: 1725033802474
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplSymbol0000.A1VA7t5gB7ODNsr6'
+  - name: Stunned
+    img: systems/dnd5e/icons/svg/statuses/stunned.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplSymbol0000
+    transfer: false
+    _id: zZerWADc4a5rGJ9r
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - stunned
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725033817116
+      modifiedTime: 1725033932035
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplSymbol0000.zZerWADc4a5rGJ9r'
+folder: EdAGMG8IF26PLkD3
+sort: 300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425974390
+  modifiedTime: 1745256799010
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSymbol0000'

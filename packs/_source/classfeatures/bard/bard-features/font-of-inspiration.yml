@@ -1,0 +1,51 @@
+_id: 3VDZGs5Ug3hIE322
+name: Font of Inspiration
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning when you reach 5th level, you regain all of your expended
+      uses of @UUID[Compendium.dnd5e.classfeatures.Item.hpLNiGq7y67d2EHA]{Bardic
+      Inspiraton} when you finish a short or long rest.</p><section
+      class="secret foundry-note"
+      id="secret-2Ixwv0urEA2kot3D"><p><strong>Foundry Note</strong></p><p>Bardic
+      Inspiration is set to long rest recovery by default. Please edit to short
+      rest upon reaching this level.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: Bard 5
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: font-of-inspiration
+flags: {}
+img: icons/magic/control/sihouette-hold-beam-green.webp
+effects: []
+folder: XEu43QVhYfhUcewt
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037379718
+  modifiedTime: 1725992286983
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!3VDZGs5Ug3hIE322'

@@ -1,0 +1,114 @@
+_id: clwv2PWOcT822hlr
+name: Maze
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You banish a creature that you can see within range into a labyrinthine
+      Demiplane. The target remains there for the Duration or until it escapes
+      the maze.</p><p>The target can use its action to attempt to escape. When
+      it does so, it makes a DC 20 Intelligence check. If it succeeds, it
+      escapes, and the spell ends (a Minotaur or Goristro demon automatically
+      succeeds).</p><p>When the spell ends, the target reappears in the space it
+      left or, if that space is occupied, in the nearest unoccupied space.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 8
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: maze
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-chains-ropes-net-purple-blue.webp
+effects: []
+folder: x1XTiOgx4DJ34wc5
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037360585
+  modifiedTime: 1725992721271
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!clwv2PWOcT822hlr'

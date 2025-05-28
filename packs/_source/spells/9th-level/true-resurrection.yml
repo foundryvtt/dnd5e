@@ -1,0 +1,118 @@
+_id: qLeEXZDbW5y4bmLY
+name: True Resurrection
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch a creature that has been dead for no longer than 200 years
+      and that died for any reason except old age. If the creature's soul is
+      free and willing, the creature is restored to life with all its hit
+      points.</p><p>This spell closes all wounds, neutralizes any poison, cures
+      all diseases, and lifts any curses affecting the creature when it died.
+      The spell replaces damaged or missing organs and limbs. If the creature
+      was undead, it is restored to its non-undead form.</p><p>The spell can
+      even provide a new body if the original no longer exists, in which case
+      you must speak the creature's name. The creature then appears in an
+      unoccupied space you choose within 10 feet of you.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: hour
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 9
+  school: nec
+  materials:
+    value: >-
+      A sprinkle of holy water and diamonds worth at least 25,000 gp, which the
+      spell consumes
+    consumed: true
+    cost: 25000
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: true-resurrection
+sort: 0
+flags: {}
+img: icons/magic/life/heart-cross-strong-flame-blue.webp
+effects: []
+folder: KL6ZY4VRMjojGrL4
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037365730
+  modifiedTime: 1725992723002
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!qLeEXZDbW5y4bmLY'

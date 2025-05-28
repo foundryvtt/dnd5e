@@ -1,0 +1,171 @@
+_id: 91Sw6vOIaO7U8DvM
+name: Dominate Person
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You attempt to beguile a humanoid that you can see within range. It
+      must succeed on a Wisdom saving throw or be &amp;Reference[charmed] by you
+      for the duration. If you or creatures that are friendly to you are
+      fighting it, it has advantage on the saving throw.</p><p>While the target
+      is charmed, you have a telepathic link with it as long as the two of you
+      are on the same plane of existence. You can use this telepathic link to
+      issue commands to the creature while you are conscious (no action
+      required), which it does its best to obey. You can specify a simple and
+      general course of action, such as "Attack that creature," "Run over
+      there," or "Fetch that object." If the creature completes the order and
+      doesn't receive further direction from you, it defends and preserves
+      itself to the best of its ability.</p><p>You can use your action to take
+      total and precise control of the target. Until the end of your next turn,
+      the creature takes only the actions you choose, and doesn't do anything
+      that you don't allow it to do. During this time you can also cause the
+      creature to use a reaction, but this requires you to use your own reaction
+      as well.</p><p>Each time the target takes damage, it makes a new Wisdom
+      saving throw against the spell. If the saving throw succeeds, the spell
+      ends.</p><p><strong>At Higher Levels.</strong> When you cast this spell
+      using a 6th-level spell slot, the duration is concentration, up to 10
+      minutes. When you use a 7th-level spell slot, the duration is
+      concentration, up to 1 hour. When you use a spell slot of 8th level or
+      higher, the duration is concentration, up to 8 hours.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: enc
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: t7q0nA3ojHoNF0A8
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: dominate-person
+sort: 0
+flags: {}
+img: icons/magic/air/air-burst-spiral-large-pink.webp
+effects:
+  - name: Dominate Person
+    origin: Compendium.dnd5e.spells.Item.91Sw6vOIaO7U8DvM
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: t7q0nA3ojHoNF0A8
+    changes: []
+    description: >-
+      <p>The target is Charmed and must do its best to obey any commands sent by
+      the caster.</p>
+    transfer: false
+    statuses:
+      - charmed
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/air/air-burst-spiral-large-pink.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!91Sw6vOIaO7U8DvM.t7q0nA3ojHoNF0A8'
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037349257
+  modifiedTime: 1725992717573
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!91Sw6vOIaO7U8DvM'

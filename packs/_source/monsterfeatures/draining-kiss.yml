@@ -1,0 +1,115 @@
+_id: iq0J225DCbHYU2hU
+name: Draining Kiss
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] kisses a creature charmed by it or a
+      willing creature. The target must make a <strong>DC 15
+      Constitution</strong> saving throw against this magic, taking <strong>32
+      (5d10 + 5) <em>psychic damage</em></strong> on a failed save, or half as
+      much damage on a successful one.</p><p>The target's hit point maximum is
+      reduced by an amount equal to the damage taken. This reduction lasts until
+      the target finishes a long rest. The target dies if this effect reduces
+      its hit point maximum to 0.</p>
+
+      </section>
+
+      <p>The target must make a <strong>Constitution</strong> saving throw
+      against this magic.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: ''
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: draining-kiss
+flags: {}
+img: icons/magic/air/wind-vortex-swirl-purple.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304975490
+  modifiedTime: 1725992574044
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!iq0J225DCbHYU2hU'

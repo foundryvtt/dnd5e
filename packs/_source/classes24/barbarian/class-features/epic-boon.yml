@@ -1,0 +1,54 @@
+_id: phbbrbEpicBoon00
+name: Epic Boon
+type: feat
+img: icons/magic/control/debuff-energy-hold-green.webp
+system:
+  description:
+    value: >-
+      <p>You gain an
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.GxfrwkJbrIvn7reC]{Epic
+      Boon feat} or another feat of your choice for which you qualify.
+      @UUID[Compendium.dnd5e.feats24.Item.phbBoonofIrresis]{Boon of Irresistible
+      Offense} is recommended.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 19
+    repeatable: false
+  properties: []
+  requirements: Barbarian
+  activities: {}
+  enchant: {}
+  identifier: epic-boon
+effects: []
+folder: p6WDpW0gzmKfhGad
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940469
+  modifiedTime: 1745256759757
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbEpicBoon00'

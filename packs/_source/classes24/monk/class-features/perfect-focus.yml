@@ -1,0 +1,54 @@
+_id: phbmnkPerfectFoc
+name: Perfect Focus
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/creatures/eyes/humanoid-single-blind.webp
+system:
+  description:
+    value: >-
+      <p>When you roll Initiative and don't use Uncanny Metabolism, you regain
+      expended Focus Points until you have 4 if you have 3 or fewer.</p><section
+      id="secret-BCqdmLkKRacPf9tr" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature does not automatically regain the
+      expended Focus Points.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 15
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: perfect-focus
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1745256763295
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1300000
+ownership:
+  default: 0
+_key: '!items!phbmnkPerfectFoc'

@@ -1,0 +1,57 @@
+_id: lHS63sC6bypENNlR
+name: Flask
+type: container
+img: icons/consumables/drinks/alcohol-jar-spirits-gray.webp
+system:
+  description:
+    value: <p>A flask holds 1 pint of liquid.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 2
+    denomination: cp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  capacity:
+    type: weight
+    value: 1
+  currency:
+    cp: 0
+    sp: 0
+    ep: 0
+    gp: 0
+    pp: 0
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - weightlessContents
+  attuned: false
+  identifier: flask
+effects: []
+folder: PgtyWdfkDTDbc0ov
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037272855
+  modifiedTime: 1725992541536
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!lHS63sC6bypENNlR'

@@ -1,0 +1,117 @@
+name: Darkness
+system:
+  description:
+    value: >-
+      <p>For the duration, magical &amp;Reference[darkness] spreads from a point
+      within range and fills a 15-foot-radius Sphere. Darkvision can't see
+      through it, and nonmagical light can't illuminate it.</p><p>Alternatively,
+      you cast the spell on an object that isn't being worn or carried, causing
+      the Darkness to fill a 15-foot Emanation originating from that object.
+      Covering that object with something opaque, such as a bowl or helm, blocks
+      the Darkness.</p><p>If any of this spell's area overlaps with an area of
+      Bright Light or Dim Light created by a spell of level 2 or lower, that
+      other spell is dispelled.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '15'
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: evo
+  properties:
+    - vocal
+    - material
+    - concentration
+  materials:
+    value: bat fur and a piece of coal
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: darkness
+_id: phbsplDarkness00
+type: spell
+img: icons/magic/unholy/orb-rays-blue.webp
+effects: []
+folder: 3SjcO2acsFnWegp4
+sort: 4200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425948837
+  modifiedTime: 1745256789926
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDarkness00'

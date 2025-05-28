@@ -1,0 +1,263 @@
+_id: dmgDemonArmor000
+name: Demon Armor
+type: equipment
+folder: 1kn4uV4dTVVduLjA
+img: icons/equipment/chest/breastplate-layered-leather-green.webp
+system:
+  activities:
+    IyjuMX5QvgQ5w0XV:
+      type: enchant
+      name: Demon Armor
+      _id: IyjuMX5QvgQ5w0XV
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: rkijTbDVcBViZ8hs
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - pcxBoqMaubd365yy
+            item:
+              - Compendium.dnd5e.equipment24.Item.dmgClawedGauntle
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      img: ''
+      appliedEffects:
+        - rkijTbDVcBViZ8hs
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Armor (Any Light, Medium, or Heavy), Very Rare (Requires
+      Attunement)</em></p><p>While wearing this armor, you gain a +1 bonus to
+      Armor Class, and you know Abyssal. In addition, the armor's clawed
+      gauntlets allow your Unarmed Strikes to deal 1d8 Slashing damage instead
+      of the usual Bludgeoning damage, and you gain a +1 bonus to the attack and
+      damage rolls of your Unarmed Strikes.</p><section class="secret"
+      id="secret-i2l0Ym3XkTC4Qm8z"><p><strong>Curse.</strong> Once you don this
+      cursed armor, you can't doff it unless you are targeted by a <em>Remove
+      Curse</em> spell or similar magic. While wearing the armor, you have
+      Disadvantage on attack rolls against demons and on saving throws against
+      their spells and special abilities.</p></section><p>
+      @Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: demon-armor
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: >-
+      <p><em>Armor (Any Light, Medium, or Heavy), Very Rare (Requires
+      Attunement)</em></p><p>While wearing this armor, you gain a +1 bonus to
+      Armor Class, and you know Abyssal. In addition, the armor’s clawed
+      gauntlets allow your Unarmed Strikes to deal 1d8 Slashing damage instead
+      of the usual Bludgeoning damage, and you gain a +1 bonus to the attack and
+      damage rolls of your Unarmed Strikes.</p>
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: 1
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - type: enchantment
+    name: Demon Armor
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    _id: rkijTbDVcBViZ8hs
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Demon {}
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDemonArmor000
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: system.armor.magicalBonus
+        mode: 4
+        value: '1'
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: veryRare
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '40000'
+        priority: null
+      - key: system.unidentified.description
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDemonArmor000
+          caption=false]</p>
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/equipment/chest/breastplate-layered-leather-green.webp
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730134613379
+      modifiedTime: 1745438836400
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDemonArmor000.rkijTbDVcBViZ8hs'
+  - name: Abyssal Language
+    img: icons/creatures/unholy/demon-fire-imp.webp
+    _id: pcxBoqMaubd365yy
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.languages.value
+        mode: 2
+        value: abyssal
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730136389597
+      modifiedTime: 1730136568037
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDemonArmor000.pcxBoqMaubd365yy'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect:
+        - pcxBoqMaubd365yy
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712699046
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -150000
+ownership:
+  default: 0
+_key: '!items!dmgDemonArmor000'

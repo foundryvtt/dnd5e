@@ -1,0 +1,262 @@
+_id: phbinvPactChain0
+name: Pact of the Chain
+type: feat
+img: icons/magic/control/debuff-chains-shackle-movement-red.webp
+system:
+  activities:
+    uehA2kfgOCKRIqAs:
+      type: summon
+      name: Find Familiar
+      sort: 0
+      activation:
+        type: action
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: attribute
+            value: '1'
+            target: spells.pact.value
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        value: '10'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes:
+        - celestial
+        - fey
+        - fiend
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: '1'
+          cr: '0'
+          name: CR 0 Beast
+          _id: e5dWV5L2uBJ2KPAM
+          uuid: ''
+          types:
+            - beast
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: true
+        identifier: ''
+        mode: cr
+      _id: uehA2kfgOCKRIqAs
+    5W78W2Opzhax0Jcf:
+      type: summon
+      name: Find Familiar (Expanded Options)
+      sort: 0
+      activation:
+        type: action
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: attribute
+            value: '1'
+            target: spells.pact.value
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        value: '10'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes:
+        - celestial
+        - fey
+        - fiend
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - _id: Rr8F49wXgEzvI3Je
+          level:
+            min: null
+            max: null
+          types: []
+          uuid: Compendium.dnd5e.actors24.Actor.mmImp00000000000
+        - _id: Cg8B2qkwRo7qh7oZ
+          level:
+            min: null
+            max: null
+          types: []
+          uuid: Compendium.dnd5e.actors24.Actor.mmPseudodragon00
+        - _id: 8NAn0ZR5HRnRJvqs
+          level:
+            min: null
+            max: null
+          types: []
+          uuid: Compendium.dnd5e.actors24.Actor.mmQuasit00000000
+        - _id: Gik7lMg53Gno0nSf
+          level:
+            min: null
+            max: null
+          types: []
+          uuid: Compendium.dnd5e.actors24.Actor.mmSphinxOfWonder
+        - _id: m5hfZoWAcEjKrkxo
+          level:
+            min: null
+            max: null
+          types: []
+          uuid: Compendium.dnd5e.actors24.Actor.mmSkeleton000000
+        - _id: mDue5EQkMxi5G6Pf
+          level:
+            min: null
+            max: null
+          types: []
+          uuid: Compendium.dnd5e.actors24.Actor.mmSlaadTadpole00
+        - _id: U60QGv6hzjT15bFK
+          level:
+            min: null
+            max: null
+          types: []
+          uuid: Compendium.dnd5e.actors24.Actor.mmSprite00000000
+        - _id: ZtrQLBrDRmN97IvI
+          level:
+            min: null
+            max: null
+          types: []
+          uuid: Compendium.dnd5e.actors24.Actor.mmVenomousSnake0
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+      _id: 5W78W2Opzhax0Jcf
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>You learn the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFindFamili]{Find Familiar}
+      spell and can cast it as a Magic action without expending a spell
+      slot.</p><p>When you cast the spell, you choose one of the normal forms
+      for your familiar or one of the following special forms:
+      @UUID[Compendium.dnd5e.actors24.Actor.mmImp00000000000]{Imp},
+      @UUID[Compendium.dnd5e.actors24.Actor.mmPseudodragon00]{Pseudodragon},
+      @UUID[Compendium.dnd5e.actors24.Actor.mmQuasit00000000]{Quasit},
+      @UUID[Compendium.dnd5e.actors24.Actor.mmSkeleton000000]{Skeleton}, Slaad
+      Tadpole, @UUID[Compendium.dnd5e.actors24.Actor.mmSphinxOfWonder]{Sphinx of
+      Wonder}, @UUID[Compendium.dnd5e.actors24.Actor.mmSprite00000000]{Sprite},
+      or @UUID[Compendium.dnd5e.actors24.Actor.mmVenomousSnake0]{Venomous
+      Snake}.</p><p>Additionally, when you take the Attack action, you can forgo
+      one of your own attacks to allow your familiar to make one attack of its
+      own with its Reaction.</p><section class="secret"
+      id="secret-aKbhLPfPD3R9Y1KL"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Summon Familiar</strong> activity includes the normal summoning
+      options and the <strong>Summon Familiar (Expanded Options)</strong>
+      activity includes the additional options.</p></section>
+    chat: ''
+  source:
+    rules: '2024'
+    custom: ''
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  identifier: pact-of-the-chain
+effects: []
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745515553373
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvPactChain0'

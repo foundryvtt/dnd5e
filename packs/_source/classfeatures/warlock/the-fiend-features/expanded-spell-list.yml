@@ -1,0 +1,59 @@
+_id: 4IHsIcBhAVDt8QjY
+name: Expanded Spell List
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>The Fiend lets you choose from an expanded list of spells when you
+      learn a warlock spell. The following spells are added to the warlock spell
+      list for you.</p><table><caption>Fiend Expanded
+      Spells</caption><thead><tr><td><strong>Spell
+      Level</strong></td><td><strong>Spells</strong></td></tr></thead><tbody><tr><td>1st</td><td>@UUID[Compendium.dnd5e.spells.Item.5SuJewoa1CRWaj1F]{Burning
+      Hands},
+      @UUID[Compendium.dnd5e.spells.Item.arzCrMRgcNiQuh43]{Command}</td></tr><tr><td>2nd</td><td>@UUID[Compendium.dnd5e.spells.Item.zwGsAv6kmwzYGhh3]{Blindness/Deafness},
+      @UUID[Compendium.dnd5e.spells.Item.7u2obDvuvtZBkTfq]{Scorching
+      Ray}</td></tr><tr><td>3rd</td><td>@UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{Fireball},
+      @UUID[Compendium.dnd5e.spells.Item.TwlD4PLcltv7Xh7j]{Stinking
+      Cloud}</td></tr><tr><td>4th</td><td>@UUID[Compendium.dnd5e.spells.Item.avD5XUtkBPQQR97c]{Fire
+      Shield}, @UUID[Compendium.dnd5e.spells.Item.X3DrXgxjwI2dvkD6]{Wall of
+      Fire}</td></tr><tr><td>5th</td><td>@UUID[Compendium.dnd5e.spells.Item.5e1xTohkzqFqbYH4]{Flame
+      Strike},
+      @UUID[Compendium.dnd5e.spells.Item.SLxA9QhrggTz0taU]{Hallow}</td></tr></tbody></table>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: The Fiend 1
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: expanded-spell-list
+flags: {}
+img: icons/magic/control/encase-creature-monster-hold.webp
+effects: []
+folder: AjZEXaNUIFQ13Z3F
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037379918
+  modifiedTime: 1725992287060
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!4IHsIcBhAVDt8QjY'

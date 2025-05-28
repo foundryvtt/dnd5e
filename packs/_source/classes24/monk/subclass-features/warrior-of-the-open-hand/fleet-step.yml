@@ -1,0 +1,51 @@
+_id: phbmnkFleetStep0
+name: Fleet Step
+type: feat
+folder: 8keksVDATj5D9vYl
+img: icons/skills/movement/feet-winged-boots-brown.webp
+system:
+  description:
+    value: >-
+      <p>When you take a Bonus Action other than Step of the Wind, you can also
+      use Step of the Wind immediately after that Bonus Action.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 11
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: fleet-step
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866574822
+  modifiedTime: 1745256763091
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbmnkFleetStep0'

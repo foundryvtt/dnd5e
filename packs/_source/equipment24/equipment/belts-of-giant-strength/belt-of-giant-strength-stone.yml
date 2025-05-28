@@ -1,0 +1,115 @@
+_id: dmgstoBeltofGian
+name: Belt of Giant Strength (stone)
+type: equipment
+folder: UbsHMB6E1VDKBvHs
+img: icons/equipment/waist/belt-armored-steel.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>See:
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgBeltOfGiantSt]</em></p><p>While
+      wearing this belt, your Strength changes to 23. The type of giant
+      determines the score. The item has no effect on you if your Strength
+      without the belt is equal to or greater than 23.</p></div>
+    chat: ''
+  identifier: belt-of-giant-strength
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Stone Giant Strength
+    img: icons/magic/control/buff-strength-muscle-damage-red.webp
+    _id: dVP7XiBERjMWs7xK
+    type: base
+    system: {}
+    changes:
+      - key: system.abilities.str.value
+        mode: 4
+        value: '23'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.equipment24.Item.dmgBeltOfGiantSt.ActiveEffect.dVP7XiBERjMWs7xK
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: null
+      modifiedTime: 1728595053466
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgstoBeltofGian.dVP7XiBERjMWs7xK'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+sort: 125000
+ownership:
+  default: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1728594623619
+  modifiedTime: 1745432715291
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgstoBeltofGian'

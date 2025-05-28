@@ -1,0 +1,270 @@
+_id: dmgFrostBrand000
+name: Frost Brand
+type: weapon
+img: icons/weapons/swords/greatsword-flamberge.webp
+system:
+  activities:
+    YllotEc66xhLrewT:
+      type: enchant
+      name: Frost Brand
+      _id: YllotEc66xhLrewT
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: KDZFGFsxEOF5WvbJ
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - 6iBMqwU8is1D54T3
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      img: ''
+      appliedEffects:
+        - KDZFGFsxEOF5WvbJ
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepGlaive0000]{Glaive},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatsword]{Greatsword},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepLongsword0]{Longsword},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepRapier0000]{Rapier},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepScimitar00]{Scimitar}, or
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortsword]{Shortsword}),
+      Very Rare (Requires Attunement)</em></p><p>When you hit with an attack
+      roll using this magic weapon, the target takes an extra 1d6 Cold damage.
+      In addition, while you hold the weapon, you have Resistance to Fire
+      damage.</p><p>In freezing temperatures, the weapon sheds Bright Light in a
+      10-foot radius and Dim Light for an additional 10 feet.</p><p>When you
+      draw this weapon, you can extinguish all nonmagical flames within 30 feet
+      of yourself. Once used, this property can't be used again for 1
+      hour.</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: frost-brand
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: martialM
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: ''
+effects:
+  - type: enchantment
+    name: Frost Brand
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    _id: KDZFGFsxEOF5WvbJ
+    system: {}
+    changes:
+      - key: system.damage.parts
+        mode: 2
+        value: '[["1d6","cold"]]'
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgFrostBrand000
+          caption=false]</p>
+        priority: null
+      - key: name
+        mode: 5
+        value: Frost Brand {}
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: veryRare
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/weapons/swords/greatsword-flamberge.webp
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729820793014
+      modifiedTime: 1745438836485
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgFrostBrand000.KDZFGFsxEOF5WvbJ'
+  - name: Fire Resistance
+    img: icons/magic/water/snowflake-ice-gray.webp
+    _id: 6iBMqwU8is1D54T3
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729820998551
+      modifiedTime: 1729821420075
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgFrostBrand000.6iBMqwU8is1D54T3'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect:
+        - 6iBMqwU8is1D54T3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745433564683
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 8100000
+ownership:
+  default: 0
+_key: '!items!dmgFrostBrand000'

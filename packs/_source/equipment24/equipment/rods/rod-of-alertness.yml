@@ -1,0 +1,391 @@
+_id: dmgRodOfAlertnes
+name: Rod of Alertness
+type: equipment
+img: icons/weapons/maces/mace-round-steel.webp
+system:
+  activities:
+    1QtWQjNgCeQvsRXb:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.Mzh95utKDPIrjiH8
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: 1QtWQjNgCeQvsRXb
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    lmhyPV4BzFsooFUy:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: lmhyPV4BzFsooFUy
+      sort: 300000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    FdoTXcNrE4D5k8TZ:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDetectPois
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: FdoTXcNrE4D5k8TZ
+      sort: 400000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    CLHEZxKXJVquJbgo:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplSeeInvisib
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: CLHEZxKXJVquJbgo
+      sort: 500000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    IU45FUsDoVTzMBip:
+      type: utility
+      name: Plant Rod
+      _id: IU45FUsDoVTzMBip
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '10'
+      effects:
+        - _id: fHNlrUKZ6KWRNTmy
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '60'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: ally
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects:
+        - fHNlrUKZ6KWRNTmy
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p><em>Rod, Very Rare (Requires Attunement)</em></p><p>This rod has the
+      following properties.</p><p><strong>Alertness.</strong> While holding the
+      rod, you have Advantage on Wisdom (Perception) checks and on Initiative
+      rolls.</p><p><strong>Spells.</strong> While holding the rod, you can cast
+      the following spells from
+      it:</p><ul><li><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectEvil]{Detect
+      Evil and
+      Good}</p></li><li><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect
+      Magic}</p></li><li><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectPois]{Detect
+      Poison and
+      Disease}</p></li><li><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplSeeInvisib]{See
+      Invisibility}</p></li></ul><p><strong>Protective Aura.</strong> As a Magic
+      action, you can plant the haft end of the rod in the ground, whereupon the
+      rod's head sheds Bright Light in a 60-foot radius and Dim Light for an
+      additional 60 feet. While in that Bright Light, you and your allies gain a
+      +1 bonus to Armor Class and saving throws and can sense the location of
+      any Invisible creature that is also in the Bright Light.</p><p>The rod's
+      head stops glowing and the effect ends after 10 minutes or when a creature
+      takes a Magic action to pull the rod from the ground. Once used, this
+      property can't be used again until the next dawn.</p><section
+      class="secret" id="secret-jGrucoqKAFLoFtqT"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Plant Rod</strong> activity can be used to
+      place a 60 foot template representing the Bright Light radius. It includes
+      an Active Effect which can be applied to the relevant Actors and adds the
+      +1 bonus to AC and Saving Throws.</p></section>
+    chat: ''
+  identifier: rod-of-alertness
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: rod
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+effects:
+  - name: Protective Aura
+    img: icons/magic/defensive/shield-barrier-flaming-diamond-blue.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgRodOfAlertnes
+    transfer: false
+    _id: fHNlrUKZ6KWRNTmy
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730386409754
+      modifiedTime: 1730386904286
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgRodOfAlertnes.fHNlrUKZ6KWRNTmy'
+folder: XVIITMl9kCCSjZQz
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703055
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 200000
+ownership:
+  default: 0
+_key: '!items!dmgRodOfAlertnes'

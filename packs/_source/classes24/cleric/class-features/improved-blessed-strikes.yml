@@ -1,0 +1,114 @@
+_id: phbclcImprovedBl
+name: Improved Blessed Strikes
+type: feat
+folder: 3wY92TRgyyyDkpmF
+img: icons/magic/holy/prayer-hands-glowing-yellow-white.webp
+system:
+  description:
+    value: >-
+      <p>The option you chose for Blessed Strikes grows more
+      powerful.</p><p><strong>Divine Strike.</strong> The extra damage of your
+      Divine Strike increases to 2d8.</p><p><strong>Potent
+      Spellcasting.</strong> When you cast a Cleric cantrip and deal damage to a
+      creature with it, you can give vitality to yourself or another creature
+      within 60 feet of yourself, granting a number of Temporary Hit Points
+      equal to twice your Wisdom modifier.</p><section class="secret"
+      id="secret-UW0So7XcJyHUaivE"><p><strong>Foundry Note</strong></p><p>If you
+      chose <strong>Divine Strike</strong> the damage is automatically
+      increased. If you chose <strong>Potent Spellcasting</strong> you can use
+      the Potent Spellcasting activity on this feature.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 14
+    repeatable: false
+  properties: []
+  requirements: Cleric
+  activities:
+    Uy2oHO5lqVlXgVaE:
+      type: heal
+      _id: Uy2oHO5lqVlXgVaE
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you cast a Cleric cantrip and deal damage to a creature with it
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - temphp
+        custom:
+          enabled: true
+          formula: 2 * @abilities.wis.mod
+        scaling:
+          number: 1
+        bonus: ''
+      name: 'Potent Spellcasting: Heal'
+  enchant: {}
+  identifier: improved-blessed-strikes
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866373481
+  modifiedTime: 1745256760843
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 700000
+ownership:
+  default: 0
+_key: '!items!phbclcImprovedBl'

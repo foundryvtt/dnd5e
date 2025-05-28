@@ -1,0 +1,246 @@
+_id: dmgMaceOfTerror0
+name: Mace of Terror
+type: weapon
+img: icons/weapons/maces/mace-spiked-skull.webp
+system:
+  activities:
+    0s9xKs6AjGSqWXSa:
+      _id: 0s9xKs6AjGSqWXSa
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+    owojSA2KZWmv61Nj:
+      type: save
+      name: Wave of Terror
+      _id: owojSA2KZWmv61Nj
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: amYapIKWPpJZ9EuO
+          onSave: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d3
+    max: '3'
+  description:
+    value: >-
+      <p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepMace000000]{Mace}). Rare
+      (Requires Attunement)</em></p><p>This magic weapon has 3 charges and
+      regains 1d3 expended charges daily at dawn. While holding the weapon, you
+      can take a Magic action and expend 1 charge to release a wave of terror
+      from it. Each creature of your choice within 30 feet of you must succeed
+      on a DC 15 Wisdom saving throw or have the &amp;Reference[Frightened
+      apply=false] condition for 1 minute. While Frightened in this way, a
+      creature must spend its turns trying to move as far away from you as it
+      can, and it can't make Opportunity Attacks. For its action, it can use
+      only the Dash action or try to escape from an effect that prevents it from
+      moving. If it has nowhere it can move, the creature can take the Dodge
+      action. At the end of each of its turns, a creature repeats the save,
+      ending the effect on itself on a success.</p>
+    chat: ''
+  identifier: mace-of-terror
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: mace
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: sap
+effects:
+  - name: Frightened
+    img: icons/magic/control/fear-fright-white.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgMaceOfTerror0
+    transfer: false
+    _id: amYapIKWPpJZ9EuO
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - frightened
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730065036275
+      modifiedTime: 1730065097674
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgMaceOfTerror0.amYapIKWPpJZ9EuO'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712701275
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgMaceOfTerror0'

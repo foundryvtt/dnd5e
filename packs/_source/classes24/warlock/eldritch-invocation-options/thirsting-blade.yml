@@ -1,0 +1,49 @@
+_id: phbinvThirstingB
+name: Thirsting Blade
+type: feat
+img: icons/skills/melee/blade-tip-chipped-blood-red.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 5+ Warlock,
+      @UUID[Compendium.dnd5e.classes24.Item.phbinvPactBlade0]{Pact of the Blade}
+      Invocation.</p></blockquote><p>You gain the Extra Attack feature for your
+      pact weapon only. With that feature, you can attack twice with the weapon
+      instead of once when you take the Attack action on your turn.</p>
+    chat: ''
+  source:
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 5
+    repeatable: false
+  properties: []
+  requirements: Pact of the Blade Invocation
+  identifier: thirsting-blade
+effects: []
+folder: BjeMHiqnKNWkWhox
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1740680084421
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvThirstingB'

@@ -1,0 +1,125 @@
+_id: MRxldJd6C4bsBo3O
+name: Levitate
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>One creature or object of your choice that you can see within range
+      rises vertically, up to 20 feet, and remains suspended there for the
+      duration. The spell can levitate a target that weighs up to 500 pounds. An
+      unwilling creature that succeeds on a Constitution saving throw is
+      unaffected.</p><p>The target can move only by pushing or pulling against a
+      fixed object or surface within reach (such as a wall or a ceiling), which
+      allows it to move as if it were climbing. You can change the target's
+      altitude by up to 20 feet in either direction on your turn. If you are the
+      target, you can move up or down as part of your move. Otherwise, you can
+      use your action to move the target, which must remain within the spell's
+      range.</p><p>When the spell ends, the target floats gently to the ground
+      if it is still aloft.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  materials:
+    value: >-
+      Either a small leather loop or a piece of golden wire bent into a cup
+      shape with a long shank on one end
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: levitate
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-energy-hold-levitate-pink.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037354733
+  modifiedTime: 1725992719362
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!MRxldJd6C4bsBo3O'

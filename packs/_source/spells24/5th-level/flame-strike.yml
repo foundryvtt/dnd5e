@@ -1,0 +1,150 @@
+name: Flame Strike
+system:
+  description:
+    value: >-
+      <p>A vertical column of brilliant fire roars down from above. Each
+      creature in a 10-foot-radius, 40-foot-high Cylinder centered on a point
+      within range makes a Dexterity saving throw, taking 5d6 Fire damage and
+      5d6 Radiant damage on a failed save or half as much damage on a successful
+      one.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The Fire
+      damage and the Radiant damage increase by 1d6 for each spell slot level
+      above 5.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ft
+      type: cylinder
+      size: '10'
+      contiguous: false
+      height: '40'
+      count: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a pinch of sulfur
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: (@item.level)d6
+            number: 5
+            denomination: 6
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+          - custom:
+              enabled: false
+              formula: (@item.level)d6
+            number: 5
+            denomination: 6
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              mode: whole
+              number: 1
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: flame-strike
+_id: phbsplFlameStrik
+type: spell
+img: icons/magic/fire/beam-jet-stream-embers.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 2000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425954315
+  modifiedTime: 1740680098226
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFlameStrik'

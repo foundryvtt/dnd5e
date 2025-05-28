@@ -1,0 +1,134 @@
+_id: 7buEm5KhI5lP8m1z
+name: Guiding Bolt
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A flash of light streaks toward a creature of your choice within range.
+      Make a ranged spell attack against the target. On a hit, the target takes
+      4d6 radiant damage, and the next attack roll made against this target
+      before the end of your next turn has advantage, thanks to the mystical dim
+      light glittering on the target until then.</p><p><strong>Higher
+      Levels.</strong> When you cast this spell using a spell slot of 2nd level
+      or higher, the damage increases by 1d6 for each slot level above 1st.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: round
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: spell
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - number: 4
+            denomination: 6
+            bonus: ''
+            types:
+              - radiant
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: guiding-bolt
+sort: 0
+flags: {}
+img: icons/magic/fire/projectile-fireball-smoke-large-blue.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037348213
+  modifiedTime: 1725992717280
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!7buEm5KhI5lP8m1z'

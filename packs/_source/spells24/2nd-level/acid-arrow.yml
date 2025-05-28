@@ -1,0 +1,231 @@
+name: Acid Arrow
+system:
+  description:
+    value: >-
+      <p>A shimmering green arrow streaks toward a target within range and
+      bursts in a spray of acid. Make a ranged spell attack against the target.
+      On a hit, the target takes 4d4 Acid damage and 2d4 Acid damage at the end
+      of its next turn. On a miss, the arrow splashes the target with acid for
+      half as much of the initial damage only.</p><p><strong>Using a
+      Higher-Level Spell Slot.</strong> The damage (both initial and later)
+      increases by 1d4 for each spell slot level above 2.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      count: ''
+      type: ''
+      choice: false
+    template:
+      type: ''
+      units: ''
+      contiguous: false
+  range:
+    value: '90'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 2
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: powdered rhubarb leaf
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    UvDr2eESFyDiTwTX:
+      type: attack
+      name: Cast and Attack
+      _id: UvDr2eESFyDiTwTX
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: NgglkyjzTbDh5Loa
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 4
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              mode: whole
+              number: 1
+      img: ''
+      appliedEffects: []
+    uAyE5DrJp0YpElcw:
+      type: damage
+      name: Lingering Acid Damage
+      _id: uAyE5DrJp0YpElcw
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 4
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              mode: whole
+              number: 1
+      img: ''
+      appliedEffects: []
+  identifier: melfs-acid-arrow
+_id: phbsplMelfsAcidA
+type: spell
+img: icons/skills/ranged/arrow-flying-poisoned-green.webp
+effects:
+  - name: Lingering Acid
+    img: icons/magic/acid/dissolve-arm-flesh.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA
+    transfer: false
+    _id: NgglkyjzTbDh5Loa
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>On a hit, the target takes 4d4 Acid damage and [[/damage 2d4
+      type=acid]] (plus 1d4 per spell slot level above 2) Acid damage at the end
+      of its next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.1
+      createdTime: 1726502703941
+      modifiedTime: 1726502874630
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplMelfsAcidA.NgglkyjzTbDh5Loa'
+folder: 3SjcO2acsFnWegp4
+sort: 1900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425963336
+  modifiedTime: 1745256796063
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMelfsAcidA'

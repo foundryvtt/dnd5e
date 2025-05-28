@@ -1,0 +1,177 @@
+name: Phantasmal Killer
+system:
+  description:
+    value: >-
+      <p>You tap into the nightmares of a creature you can see within range and
+      create an illusion of its deepest fears, visible only to that creature.
+      The target makes a Wisdom saving throw. On a failed save, the target takes
+      4d10 Psychic damage and has Disadvantage on ability checks and attack
+      rolls for the duration. On a successful save, the target takes half as
+      much damage, and the spell ends.</p><p>For the duration, the target makes
+      a [[/save ability=wis dc=@attributes.spell.dc]] saving throw at the end of
+      each of its turns. On a failed save, it takes the Psychic damage again. On
+      a successful save, the spell ends.</p><p><strong>Using a Higher-Level
+      Spell Slot.</strong>The damage increases by 1d10 for each spell slot level
+      above 4.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '120'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: ill
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: 4k92Sjfpcm5bnguO
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 4
+            denomination: 10
+            bonus: ''
+            types:
+              - psychic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: ''
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: phantasmal-killer
+_id: phbsplPhantasmal
+type: spell
+img: icons/magic/death/undead-ghosts-trio-blue.webp
+effects:
+  - name: Fears Manifested
+    origin: Compendium.dnd5e.spells24.Item.phbsplPhantasmal
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/death/skull-horned-white-purple.webp
+    _id: 4k92Sjfpcm5bnguO
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The target has Disadvantage on ability checks and attack rolls for the
+      duration.</p><p>For the duration, the target makes a [[/save ability=wis]]
+      saving throw at the end of each of its turns. On a failed save, it takes
+      the Psychic damage again. On a successful save, the spell ends.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplPhantasmal.4k92Sjfpcm5bnguO'
+folder: qi3IbnEwap7mRw4b
+sort: 1100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425965711
+  modifiedTime: 1745256796719
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplPhantasmal'

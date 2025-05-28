@@ -1,0 +1,125 @@
+_id: X4c8xCkmF8U9HUMz
+name: Mirror Image
+type: spell
+img: icons/magic/control/debuff-energy-hold-levitate-pink.webp
+system:
+  description:
+    value: >-
+      <p>Three illusory duplicates of yourself appear in your space. Until the
+      spell ends, the duplicates move with you and mimic your actions, shifting
+      position so it's impossible to track which image is real. You can use your
+      action to dismiss the illusory duplicates.</p>
+
+      <p>Each time a creature targets you with an attack during the spell's
+      duration, roll a [[/r 1d20 # Mirror Image Check]] to determine whether the
+      attack instead targets one of your duplicates.</p>
+
+      <p>If you have three duplicates, you must roll a 6 or higher to change the
+      attack's target to a duplicate. With two duplicates, you must roll an 8 or
+      higher. With one duplicate, you must roll an 11 or higher.</p>
+
+      <p>A duplicate's AC equals 10 + your Dexterity modifier. If an attack hits
+      a duplicate, the duplicate is destroyed. A duplicate can be destroyed only
+      by an attack that hits it. It ignores all other damage and effects. The
+      spell ends when all three duplicates are destroyed.</p>
+
+      <p>A creature is unaffected by this spell if it can't see, if it relies on
+      senses other than sight, such as blindsight, or if it can perceive
+      illusions as false, as with truesight.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: ill
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: 1d20
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: mirror-image
+effects: []
+folder: Qi4Se3we69ukl2V9
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037358212
+  modifiedTime: 1725992720488
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!X4c8xCkmF8U9HUMz'

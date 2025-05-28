@@ -1,0 +1,56 @@
+_id: phbscrEpicBoon00
+name: Epic Boon
+type: feat
+folder: zm1kuLu4kdDhoOyL
+img: icons/magic/control/debuff-energy-hold-green.webp
+system:
+  description:
+    value: >-
+      <p>You gain an
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.GxfrwkJbrIvn7reC]{Epic
+      Boon} feat or another feat of your choice for which you qualify.
+      @UUID[Compendium.dnd5e.feats24.Item.phbBoonofDimensi]{Boon of Dimensional
+      Travel} is recommended.</p><section class="secret"
+      id="secret-CmWMt903bQgV5LwE"><p><strong>Foundry Note</strong></p><p>You
+      will be prompted for a choice while leveling up.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 19
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: epic-boon
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866286897
+  modifiedTime: 1745256765479
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbscrEpicBoon00'

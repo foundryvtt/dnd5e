@@ -1,0 +1,125 @@
+_id: SbSvZKkJASyk8jKo
+name: Druidcraft
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Whispering to the spirits of Nature, you create one of the following
+      Effects within range:</p>
+
+      <ul>
+
+      <li>You create a tiny, harmless sensory effect that predicts what the
+      weather will be at your location for the next 24 hours. The effect might
+      manifest as a golden orb for clear skies, a cloud for rain, Falling
+      snowflakes for snow, and so on. This effect persists for 1 round.</li>
+
+      <li>You instantly make a flower blossom, a seed pod open, or a leaf bud
+      bloom.</li>
+
+      <li>You create an Instantaneous, harmless sensory effect, such as Falling
+      leaves, a puff of wind, the sound of a small animal, or the faint odor of
+      skunk. The effect must fit in a 5-foot cube.</li>
+
+      <li>You instantly light or snuff out a Candle, a torch, or a small
+      campfire.</li>
+
+      </ul>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: trs
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: druidcraft
+sort: 0
+flags: {}
+img: icons/magic/nature/vines-thorned-glow-teal.webp
+effects: []
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037356451
+  modifiedTime: 1725992719918
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!SbSvZKkJASyk8jKo'

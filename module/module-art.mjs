@@ -8,7 +8,7 @@
 /**
  * A class responsible for managing module-provided art in compendia.
  */
-export class ModuleArt {
+export default class ModuleArt {
   constructor() {
     /**
      * The stored map of actor UUIDs to their art information.
@@ -23,7 +23,13 @@ export class ModuleArt {
    * Set to true to temporarily prevent actors from loading module art.
    * @type {boolean}
    */
-  suppressArt = false;
+  get suppressArt() {
+    return !game.compendiumArt.enabled;
+  }
+
+  set suppressArt(value) {
+    game.compendiumArt.enabled = !value;
+  }
 
   /* -------------------------------------------- */
 
@@ -35,6 +41,10 @@ export class ModuleArt {
     this.map.clear();
     // Load art modules in reverse order so that higher-priority modules overwrite lower-priority ones.
     for ( const { id, mapping, credit } of this.constructor.getArtModules().reverse() ) {
+      foundry.utils.logCompatibilityWarning(
+        "The dnd5e `ModuleArt` system has been deprecated and replaced with core's `CompendiumArt` system.",
+        { since: "DnD5e 5.0", until: "DnD5e 6.0", once: true }
+      );
       try {
         const json = await foundry.utils.fetchJsonWithTimeout(mapping);
         await this.#parseArtMapping(id, json, credit);
@@ -67,9 +77,9 @@ export class ModuleArt {
         else delete info.actor;
         if ( !settings.tokens ) delete info.token;
         if ( credit ) info.credit = credit;
-        const uuid = `Compendium.${packName}.${actorId}`;
+        const uuid = pack.getUuid(actorId);
         info = foundry.utils.mergeObject(this.map.get(uuid) ?? {}, info, {inplace: false});
-        this.map.set(`Compendium.${packName}.${actorId}`, info);
+        this.map.set(uuid, info);
       }
     }
   }
@@ -120,18 +130,7 @@ export class ModuleArt {
   static getArtModules() {
     const settings = game.settings.get("dnd5e", "moduleArtConfiguration");
     const unsorted = [];
-    const configs = [{
-      id: game.system.id,
-      label: game.system.title,
-      mapping: "systems/dnd5e/json/fa-token-mapping.json",
-      priority: settings.dnd5e?.priority ?? CONST.SORT_INTEGER_DENSITY,
-      credit: `
-        <em>
-          Token artwork by
-          <a href="https://www.forgotten-adventures.net/" target="_blank" rel="noopener">Forgotten Adventures</a>.
-        </em>      
-      `
-    }];
+    const configs = [];
 
     for ( const module of game.modules ) {
       const flags = module.flags?.[module.id];
@@ -148,93 +147,5 @@ export class ModuleArt {
     unsorted.forEach((config, i) => config.priority = maxPriority + ((i + 1) * CONST.SORT_INTEGER_DENSITY));
     configs.sort((a, b) => a.priority - b.priority);
     return configs;
-  }
-}
-
-/**
- * A class responsible for allowing GMs to configure art provided by installed modules.
- */
-export class ModuleArtConfig extends FormApplication {
-  /** @inheritDoc */
-  constructor(object={}, options={}) {
-    object = foundry.utils.mergeObject(game.settings.get("dnd5e", "moduleArtConfiguration"), object, {inplace: false});
-    super(object, options);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      title: game.i18n.localize("DND5E.ModuleArtConfigL"),
-      id: "module-art-config",
-      template: "systems/dnd5e/templates/apps/module-art-config.hbs",
-      popOut: true,
-      width: 600,
-      height: "auto"
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  getData(options={}) {
-    const context = super.getData(options);
-    context.config = [];
-    for ( const config of ModuleArt.getArtModules() ) {
-      const settings = this.object[config.id] ?? { portraits: true, tokens: true };
-      context.config.push({ ...config, ...settings });
-    }
-    return context;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-    html.find("[data-action]").on("click", this._onAction.bind(this));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle priority increase or decrease actions.
-   * @param {PointerEvent} event  The triggering event.
-   * @protected
-   */
-  _onAction(event) {
-    const action = event.currentTarget.dataset.action;
-    const item = event.currentTarget.closest("[data-id]");
-    const id = item.dataset.id;
-    const configs = [];
-    for ( const element of this.form.elements ) {
-      const [id, key] = element.name.split(".");
-      if ( key === "priority" ) configs.push({ id, priority: Number(element.value) });
-    }
-    const idx = configs.findIndex(config => config.id === id);
-    if ( idx < 0 ) return;
-    if ( (action === "increase") && (idx === 0) ) return;
-    if ( (action === "decrease") && (idx === configs.length - 1) ) return;
-    const sortBefore = action === "increase";
-    const config = configs[idx];
-    const target = configs[sortBefore ? idx - 1 : idx + 1];
-    configs.splice(idx, 1);
-    const updates = SortingHelpers.performIntegerSort(config, {
-      target, sortBefore,
-      siblings: configs,
-      sortKey: "priority"
-    });
-    updates.forEach(({ target, update }) => this.form.elements[`${target.id}.priority`].value = update.priority);
-    if ( action === "increase" ) item.previousElementSibling.insertAdjacentElement("beforebegin", item);
-    else item.nextElementSibling.insertAdjacentElement("afterend", item);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _updateObject(event, formData) {
-    await game.settings.set("dnd5e", "moduleArtConfiguration", foundry.utils.expandObject(formData));
-    return SettingsConfig.reloadConfirm({world: true});
   }
 }

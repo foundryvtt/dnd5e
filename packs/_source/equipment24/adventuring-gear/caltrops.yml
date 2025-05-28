@@ -1,0 +1,204 @@
+name: Caltrops
+system:
+  description:
+    value: >-
+      <p>As a Utilize action, you can spread Caltrops from their bag to cover a
+      5-foot-square area within 5 feet of yourself. A creature that enters this
+      area for the first time on a turn must succeed on a DC 15 Dexterity saving
+      throw or take 1 Piercing damage and have its Speed reduced to 0 until the
+      start of its next turn. It takes 10 minutes to recover the Caltrops.</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: true
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    G8upRnZw22jGWKWy:
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects:
+        - _id: HsbtDDdiWhk4d7WB
+          onSave: false
+      range:
+        units: ft
+        special: ''
+        override: false
+        value: '5'
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: square
+          size: '5'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: true
+              formula: '1'
+            number: null
+            denomination: null
+            bonus: ''
+            types:
+              - piercing
+            scaling:
+              number: 1
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: G8upRnZw22jGWKWy
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: caltrops
+_id: phbagCaltrops000
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/weapons/thrown/bomb-spiked-purple.webp
+effects:
+  - name: Slowed
+    img: icons/weapons/thrown/bomb-spiked-purple.webp
+    origin: Compendium.dnd5e.equipment24.Item.phbagCaltrops000
+    transfer: false
+    _id: HsbtDDdiWhk4d7WB
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.fly
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.burrow
+        mode: 5
+        value: '0'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725848497965
+      modifiedTime: 1725848574365
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbagCaltrops000.HsbtDDdiWhk4d7WB'
+sort: 500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425907080
+  modifiedTime: 1745256811307
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagCaltrops000'

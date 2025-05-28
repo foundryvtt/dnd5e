@@ -1,0 +1,84 @@
+_id: YN9xm6MCvse4Y60u
+name: Reliable Talent
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>By 11th level, you have refined your chosen skills until they approach
+      perfection. Whenever you make an ability check that lets you add your
+      proficiency bonus, you can treat a d20 roll of 9 or lower as a 10.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: Rogue 11
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: reliable-talent
+flags: {}
+img: icons/skills/ranged/target-bullseye-arrow-glowing.webp
+effects:
+  - _id: vMMZHZQ0qT7MT4I4
+    changes:
+      - key: flags.dnd5e.reliableTalent
+        mode: 5
+        value: 'true'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.YN9xm6MCvse4Y60u
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Reliable Talent
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/skills/ranged/target-bullseye-arrow-glowing.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!YN9xm6MCvse4Y60u.vMMZHZQ0qT7MT4I4'
+folder: RMtv55MamGWKrCfq
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037385020
+  modifiedTime: 1725992288690
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!YN9xm6MCvse4Y60u'

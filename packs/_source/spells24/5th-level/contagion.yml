@@ -1,0 +1,412 @@
+name: Contagion
+system:
+  description:
+    value: >-
+      <p>Your touch inflicts a magical contagion. The target must succeed on a
+      Constitution saving throw or take 11d8 Necrotic damage and have the
+      &amp;Reference[Poisoned apply=false] condition. Also, choose one ability
+      when you cast the spell. While Poisoned, the target has Disadvantage on
+      saving throws made with the chosen ability.</p><p>The target must repeat
+      the saving throw at the end of each of its turns until it gets three
+      successes or failures. If the target succeeds on three of these saves, the
+      spell ends on the target. If the target fails three of the saves, the
+      spell lasts for 7 days on it.</p><p>Whenever the Poisoned target receives
+      an effect that would end the Poisoned condition, the target must succeed
+      on a [[/save ability=con dc=@attributes.spell.dc format=long]], or the
+      Poisoned condition doesn't end on it.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '7'
+    units: day
+  target:
+    affects:
+      type: any
+      count: ''
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: nec
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: S8jxTZQbT8KKSg5V
+          onSave: false
+        - _id: pqGQCk5wZx196HuY
+          onSave: false
+        - _id: 5aPQT5DlL6Igaxh4
+          onSave: false
+        - _id: EruTLG8AjsLULgHj
+          onSave: false
+        - _id: J77AMHW5tROddZQg
+          onSave: false
+        - _id: xewLYmHBxPTEKPlU
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 11
+            denomination: 8
+            bonus: ''
+            types:
+              - necrotic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: contagion
+_id: phbsplContagion0
+type: spell
+img: icons/magic/acid/dissolve-vomit-green-brown.webp
+effects:
+  - name: Infected (Strength)
+    origin: Compendium.dnd5e.spells24.Item.phbsplContagion0
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 604800
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/abilities/strength.svg
+    _id: S8jxTZQbT8KKSg5V
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <ul><li><p>While &amp;Reference[Poisoned apply=false], the target has
+      Disadvantage on saving throws made with the chosen
+      ability.</p></li><li><p><span style="font-family:Signika, sans-serif">The
+      target must repeat the [[/save ability=con format=long]] at the end of
+      each of its turns until it gets three successes or
+      failures.</span></p></li><li><p>Whenever the target receives an effect
+      that would end the Poisoned condition, the target must succeed on a
+      [[/save ability=con format=long]], or the condition doesn’t end on
+      it.</p></li></ul>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - poisoned
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplContagion0.S8jxTZQbT8KKSg5V'
+  - name: Infected (Dexterity)
+    origin: Compendium.dnd5e.spells24.Item.phbsplContagion0
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 604800
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/abilities/dexterity.svg
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <ul><li><p>While &amp;Reference[Poisoned apply=false], the target has
+      Disadvantage on saving throws made with the chosen
+      ability.</p></li><li><p><span style="font-family:Signika, sans-serif">The
+      target must repeat the [[/save ability=con format=long]] at the end of
+      each of its turns until it gets three successes or
+      failures.</span></p></li><li><p>Whenever the target receives an effect
+      that would end the Poisoned condition, the target must succeed on a
+      [[/save ability=con format=long]], or the condition doesn’t end on
+      it.</p></li></ul>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - poisoned
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplContagion0.ActiveEffect.S8jxTZQbT8KKSg5V
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: pqGQCk5wZx196HuY
+    _key: '!items.effects!phbsplContagion0.pqGQCk5wZx196HuY'
+  - name: Infected (Constitution)
+    origin: Compendium.dnd5e.spells24.Item.phbsplContagion0
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 604800
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/abilities/constitution.svg
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <ul><li><p>While &amp;Reference[Poisoned apply=false], the target has
+      Disadvantage on saving throws made with the chosen
+      ability.</p></li><li><p><span style="font-family:Signika, sans-serif">The
+      target must repeat the [[/save ability=con format=long]] at the end of
+      each of its turns until it gets three successes or
+      failures.</span></p></li><li><p>Whenever the target receives an effect
+      that would end the Poisoned condition, the target must succeed on a
+      [[/save ability=con format=long]], or the condition doesn’t end on
+      it.</p></li></ul>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - poisoned
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplContagion0.ActiveEffect.S8jxTZQbT8KKSg5V
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: 5aPQT5DlL6Igaxh4
+    _key: '!items.effects!phbsplContagion0.5aPQT5DlL6Igaxh4'
+  - name: Infected (Intelligence)
+    origin: Compendium.dnd5e.spells24.Item.phbsplContagion0
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 604800
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/abilities/intelligence.svg
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <ul><li><p>While &amp;Reference[Poisoned apply=false], the target has
+      Disadvantage on saving throws made with the chosen
+      ability.</p></li><li><p><span style="font-family:Signika, sans-serif">The
+      target must repeat the [[/save ability=con format=long]] at the end of
+      each of its turns until it gets three successes or
+      failures.</span></p></li><li><p>Whenever the target receives an effect
+      that would end the Poisoned condition, the target must succeed on a
+      [[/save ability=con format=long]], or the condition doesn’t end on
+      it.</p></li></ul>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - poisoned
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplContagion0.ActiveEffect.S8jxTZQbT8KKSg5V
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: EruTLG8AjsLULgHj
+    _key: '!items.effects!phbsplContagion0.EruTLG8AjsLULgHj'
+  - name: Infected (Wisdom)
+    origin: Compendium.dnd5e.spells24.Item.phbsplContagion0
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 604800
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/abilities/wisdom.svg
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <ul><li><p>While &amp;Reference[Poisoned apply=false], the target has
+      Disadvantage on saving throws made with the chosen
+      ability.</p></li><li><p><span style="font-family:Signika, sans-serif">The
+      target must repeat the [[/save ability=con format=long]] at the end of
+      each of its turns until it gets three successes or
+      failures.</span></p></li><li><p>Whenever the target receives an effect
+      that would end the Poisoned condition, the target must succeed on a
+      [[/save ability=con format=long]], or the condition doesn’t end on
+      it.</p></li></ul>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - poisoned
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplContagion0.ActiveEffect.S8jxTZQbT8KKSg5V
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: J77AMHW5tROddZQg
+    _key: '!items.effects!phbsplContagion0.J77AMHW5tROddZQg'
+  - name: Infected (Charisma)
+    origin: Compendium.dnd5e.spells24.Item.phbsplContagion0
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 604800
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/abilities/charisma.svg
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <ul><li><p>While &amp;Reference[Poisoned apply=false], the target has
+      Disadvantage on saving throws made with the chosen
+      ability.</p></li><li><p><span style="font-family:Signika, sans-serif">The
+      target must repeat the [[/save ability=con format=long]] at the end of
+      each of its turns until it gets three successes or
+      failures.</span></p></li><li><p>Whenever the target receives an effect
+      that would end the Poisoned condition, the target must succeed on a
+      [[/save ability=con format=long]], or the condition doesn’t end on
+      it.</p></li></ul>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - poisoned
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplContagion0.ActiveEffect.S8jxTZQbT8KKSg5V
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: xewLYmHBxPTEKPlU
+    _key: '!items.effects!phbsplContagion0.xewLYmHBxPTEKPlU'
+folder: beZ8MTpWY2cMEUlp
+sort: 2600000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425947437
+  modifiedTime: 1745256789095
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplContagion0'

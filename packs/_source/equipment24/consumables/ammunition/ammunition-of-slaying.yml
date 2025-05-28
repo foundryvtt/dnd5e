@@ -1,0 +1,996 @@
+name: Ammunition of Slaying
+system:
+  description:
+    value: >-
+      <p>This magic ammunition is meant to slay creatures of a particular type,
+      which the GM chooses or determines randomly by rolling on the table below.
+      If a creature of that type takes damage from the ammunition, the creature
+      makes a DC 17 Constitution saving throw, taking an extra 6d10 Force damage
+      on a failed save or half as much extra damage on a successful
+      one.</p><p>After dealing its extra damage to a creature, the ammunition
+      becomes nonmagical.</p><details><summary>Creature Type Table (click to
+      expand)</summary><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgSlayingAmmuni
+      rollable]</p></details><p>
+      @Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    FXPI8uOLJuWDUTax:
+      type: save
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: when the specified creature type is damaged by this ammunition
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: specific creature type
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
+            denomination: 10
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '17'
+      name: Slaying Save
+      _id: FXPI8uOLJuWDUTax
+    ImH9UxTuyMRjiYzp:
+      type: enchant
+      name: Ammunition of Slaying
+      _id: ImH9UxTuyMRjiYzp
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 4GIkMFeZQHZnfjvq
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+        - _id: 70bFeuTndNorjLBe
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+        - _id: o4aDyFCK0ekd9w8j
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+        - _id: AvExH8PizzJN0jSM
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+        - _id: VRMET3XgPTjBG91L
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+        - _id: ku2JX8rDga8GUBul
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+        - _id: ZssaQ07jWS7jFiej
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+        - _id: 3JnW3nSByOVKu1LW
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+        - _id: ulADMO3yope7gn5R
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+        - _id: MKSR9zEe2s3qVILa
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+        - _id: cFNisqoGRSTHYDI4
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+        - _id: 3mSYXVx987sezjuS
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+        - _id: BsXM9mDyGJ1R754S
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+        - _id: 4NXhqKrNtDQjBcc8
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FXPI8uOLJuWDUTax
+            effect: []
+            item: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      img: ''
+      appliedEffects:
+        - 4GIkMFeZQHZnfjvq
+        - 70bFeuTndNorjLBe
+        - o4aDyFCK0ekd9w8j
+        - AvExH8PizzJN0jSM
+        - VRMET3XgPTjBG91L
+        - ku2JX8rDga8GUBul
+        - ZssaQ07jWS7jFiej
+        - 3JnW3nSByOVKu1LW
+        - ulADMO3yope7gn5R
+        - MKSR9zEe2s3qVILa
+        - cFNisqoGRSTHYDI4
+        - 3mSYXVx987sezjuS
+        - BsXM9mDyGJ1R754S
+        - 4NXhqKrNtDQjBcc8
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: false
+    max: ''
+  identifier: ammunition-of-slaying
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.02
+    units: lb
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: ammo
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+_id: dmgSlayingAmmuni
+type: consumable
+img: icons/weapons/ammunition/arrow-broadhead-glowing-orange.webp
+effects:
+  - type: enchantment
+    name: Ammunition of Slaying Aberrations
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    _id: 4GIkMFeZQHZnfjvq
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Aberrations)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: veryRare
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1731107472566
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgSlayingAmmuni.4GIkMFeZQHZnfjvq'
+  - type: enchantment
+    name: Ammunition of Slaying Beasts
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Beasts)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729880757916
+      modifiedTime: 1729890200106
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: 70bFeuTndNorjLBe
+    _key: '!items.effects!dmgSlayingAmmuni.70bFeuTndNorjLBe'
+  - type: enchantment
+    name: Ammunition of Slaying Celestials
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Celestials)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729880762473
+      modifiedTime: 1729890195447
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: o4aDyFCK0ekd9w8j
+    _key: '!items.effects!dmgSlayingAmmuni.o4aDyFCK0ekd9w8j'
+  - type: enchantment
+    name: Ammunition of Slaying Constructs
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Constructs)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729880764703
+      modifiedTime: 1729890192492
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: AvExH8PizzJN0jSM
+    _key: '!items.effects!dmgSlayingAmmuni.AvExH8PizzJN0jSM'
+  - type: enchantment
+    name: Ammunition of Slaying Dragons
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Dragons)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729880766483
+      modifiedTime: 1729890189521
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: VRMET3XgPTjBG91L
+    _key: '!items.effects!dmgSlayingAmmuni.VRMET3XgPTjBG91L'
+  - type: enchantment
+    name: Ammunition of Slaying Elementals
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Elementals)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729880855437
+      modifiedTime: 1729890186558
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: ku2JX8rDga8GUBul
+    _key: '!items.effects!dmgSlayingAmmuni.ku2JX8rDga8GUBul'
+  - type: enchantment
+    name: Ammunition of Slaying Humanoids
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Humanoids)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729880858036
+      modifiedTime: 1729890183754
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: ZssaQ07jWS7jFiej
+    _key: '!items.effects!dmgSlayingAmmuni.ZssaQ07jWS7jFiej'
+  - type: enchantment
+    name: Ammunition of Slaying Fey
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Fey)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729880860245
+      modifiedTime: 1729890181003
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: 3JnW3nSByOVKu1LW
+    _key: '!items.effects!dmgSlayingAmmuni.3JnW3nSByOVKu1LW'
+  - type: enchantment
+    name: Ammunition of Slaying Fiends
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Fiends)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729880862997
+      modifiedTime: 1729890178231
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: ulADMO3yope7gn5R
+    _key: '!items.effects!dmgSlayingAmmuni.ulADMO3yope7gn5R'
+  - type: enchantment
+    name: Ammunition of Slaying Giants
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Giants)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729880991154
+      modifiedTime: 1729890175246
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: MKSR9zEe2s3qVILa
+    _key: '!items.effects!dmgSlayingAmmuni.MKSR9zEe2s3qVILa'
+  - type: enchantment
+    name: Ammunition of Slaying Monstrosities
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Monstrosities)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729880994342
+      modifiedTime: 1729890171819
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: cFNisqoGRSTHYDI4
+    _key: '!items.effects!dmgSlayingAmmuni.cFNisqoGRSTHYDI4'
+  - type: enchantment
+    name: Ammunition of Slaying Oozes
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Oozes)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729880998089
+      modifiedTime: 1729890167836
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: 3mSYXVx987sezjuS
+    _key: '!items.effects!dmgSlayingAmmuni.3mSYXVx987sezjuS'
+  - type: enchantment
+    name: Ammunition of Slaying Plants
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Plants)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729881000245
+      modifiedTime: 1729890162977
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: BsXM9mDyGJ1R754S
+    _key: '!items.effects!dmgSlayingAmmuni.BsXM9mDyGJ1R754S'
+  - type: enchantment
+    name: Ammunition of Slaying Undead
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Slaying (Undead)'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSlayingAmmuni
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729881073350
+      modifiedTime: 1729890158768
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: 4NXhqKrNtDQjBcc8
+    _key: '!items.effects!dmgSlayingAmmuni.4NXhqKrNtDQjBcc8'
+folder: PVc8RqPP6dm0oGsM
+sort: 200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - FXPI8uOLJuWDUTax
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1728337643089
+  modifiedTime: 1746464506652
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgSlayingAmmuni'

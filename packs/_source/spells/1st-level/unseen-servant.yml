@@ -1,0 +1,140 @@
+_id: ccduLIvutyNqvkgv
+name: Unseen Servant
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell creates an &amp;Reference[Invisible], mindless, shapeless,
+      Medium force that performs simple tasks at your command until the spell
+      ends. The servant springs into existence in an unoccupied space on the
+      ground within range. It has AC 10, 1 hit point, and a Strength of 2, and
+      it can't attack. If it drops to 0 hit points, the spell ends.</p><p>Once
+      on each of your turns as a Bonus Action, you can mentally command the
+      servant to move up to 15 feet and interact with an object. The servant can
+      perform simple tasks that a human servant could do, such as fetching
+      things, cleaning, mending, folding clothes, lighting fires, serving food,
+      and pouring wine. Once you give the command, the servant performs the task
+      to the best of its ability until it completes the task, then waits for
+      your next command.</p><p>If you command the servant to perform a task that
+      would move it more than 60 feet away from you, the spell ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: con
+  materials:
+    value: A bit of string and of wood
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - name: ''
+          _id: vmeSKU0Wnzs5TfPn
+          uuid: Compendium.dnd5e.monsters.Actor.BTQz2q4JJVQn8W5W
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: unseen-servant
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-energy-hold-blue-yellow.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037360383
+  modifiedTime: 1725992721193
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ccduLIvutyNqvkgv'

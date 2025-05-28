@@ -36,14 +36,6 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
   );
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static localize() {
-    super.localize();
-    this._localizeSchema(this.schema.fields.profiles.element, ["DND5E.SUMMON.FIELDS.profiles"]);
-  }
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -81,40 +73,13 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
    */
 
   /** @inheritDoc */
-  _createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig) {
-    const config = super._createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig);
-    config.createSummons = usageConfig.create?.summons ?? null;
-    config.summonsProfile = usageConfig.summons?.profile ?? null;
-    config.summonsOptions = {
-      creatureSize: usageConfig.summons?.creatureSize,
-      creatureType: usageConfig.summons?.creatureType
-    };
-    return config;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options) {
-    super._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options);
-    const set = (config, keyPath, value) => {
-      if ( value === undefined ) return;
-      foundry.utils.setProperty(config, keyPath, value);
-    };
-    set(usageConfig, "create.summons", config.createSummons);
-    set(usageConfig, "summons.profile", config.summonsProfile);
-    set(usageConfig, "summons.creatureSize", config.summonsOptions?.creatureSize);
-    set(usageConfig, "summons.creatureType", config.summonsOptions?.creatureType);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   _prepareUsageConfig(config) {
     config = super._prepareUsageConfig(config);
     const summons = this.availableProfiles;
-    config.create ??= {};
-    config.create.summons ??= this.canSummon && canvas.scene && summons.length && this.summon.prompt;
+    if ( config.create !== false ) {
+      config.create ??= {};
+      config.create.summons ??= this.canSummon && canvas.scene && summons.length && this.summon.prompt;
+    }
     config.summons ??= {};
     config.summons.profile ??= summons[0]?._id ?? null;
     config.summons.creatureSize ??= this.creatureSizes.first() ?? null;
@@ -273,7 +238,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
     if ( !actor ) throw new Error(game.i18n.format("DND5E.SUMMON.Warning.NoActor", { uuid }));
 
     const actorLink = actor.prototypeToken.actorLink;
-    if ( !actor.pack && (!actorLink || actor.getFlag("dnd5e", "summon.origin") === this.uuid )) return actor;
+    if ( !actor.pack && (!actorLink || actor.getFlag("dnd5e", "summon.origin") === this.item?.uuid )) return actor;
 
     // Search world actors to see if any usable summoned actor instances are present from prior summonings.
     // Linked actors must match the summoning origin (activity) to be considered.
@@ -282,8 +247,8 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       a.getFlag("dnd5e", "summonedCopy")
       // Sourced from the desired actor UUID
       && (a._stats?.compendiumSource === uuid)
-      // Unlinked or created from this activity specifically
-      && ((a.getFlag("dnd5e", "summon.origin") === this.uuid) || !a.prototypeToken.actorLink)
+      // Unlinked or created from this activity's parent item specifically
+      && ((a.getFlag("dnd5e", "summon.origin") === this.item?.uuid) || !a.prototypeToken.actorLink)
     );
     if ( localActor ) return localActor;
 
@@ -347,7 +312,8 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
     actorUpdates["flags.dnd5e.summon"] = {
       level: this.relevantLevel,
       mod: rollData.mod,
-      origin: this.uuid,
+      origin: this.item.uuid,
+      activity: this.id,
       profile: profile._id
     };
 
@@ -469,16 +435,16 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       }
     }
 
-    const attackDamageBonus = Roll.replaceFormulaData(this.bonuses.attackDamage, rollData);
-    const saveDamageBonus = Roll.replaceFormulaData(this.bonuses.saveDamage, rollData);
-    const healingBonus = Roll.replaceFormulaData(this.bonuses.healing, rollData);
+    const attackDamageBonus = Roll.replaceFormulaData(this.bonuses.attackDamage ?? "", rollData);
+    const saveDamageBonus = Roll.replaceFormulaData(this.bonuses.saveDamage ?? "", rollData);
+    const healingBonus = Roll.replaceFormulaData(this.bonuses.healing ?? "", rollData);
     for ( const item of actor.items ) {
       if ( !item.system.activities?.size ) continue;
       const changes = [];
 
       // Match attacks
       if ( this.match.attacks && item.system.hasAttack ) {
-        const ability = this.item.abilityMod ?? rollData.attributes?.spellcasting;
+        const ability = this.ability ?? this.item.abilityMod ?? rollData.attributes?.spellcasting;
         const actionType = item.system.activities.getByType("attack")[0].actionType;
         const typeMapping = { mwak: "msak", rwak: "rsak" };
         const parts = [
@@ -487,11 +453,11 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
           rollData.bonuses?.[typeMapping[actionType] ?? actionType]?.attack
         ].filter(p => p);
         changes.push({
-          key: "system.attack.bonus",
+          key: "activities[attack].attack.bonus",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: parts.join(" + ")
         }, {
-          key: "system.attack.flat",
+          key: "activities[attack].attack.flat",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: true
         });
@@ -499,19 +465,19 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
 
       // Match saves
       if ( this.match.saves && item.hasSave ) {
-        let dc = rollData.attributes.spelldc;
+        let dc = rollData.abilities?.[this.ability]?.dc ?? rollData.attributes.spell.dc;
         if ( this.item.type === "spell" ) {
           const ability = this.item.system.availableAbilities?.first();
           if ( ability ) dc = rollData.abilities[ability]?.dc ?? dc;
         }
         changes.push({
-          key: "system.save.dc",
+          key: "activities[save].save.dc.formula",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: dc
         }, {
-          key: "system.save.scaling",
+          key: "activities[save].save.calculation",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: "flat"
+          value: ""
         });
       }
 
@@ -522,9 +488,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       else if ( item.isHealing ) damageBonus = healingBonus;
       if ( damageBonus && item.system.activities.find(a => a.damage?.parts?.length || a.healing?.formula) ) {
         changes.push({
-          key: "system.damage.parts",
+          key: "system.damage.bonus",
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: JSON.stringify({ bonus: damageBonus })
+          value: damageBonus
         });
       }
 

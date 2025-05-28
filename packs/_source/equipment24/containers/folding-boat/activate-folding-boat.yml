@@ -1,0 +1,208 @@
+_id: dmgBoatUtility00
+name: Activate Folding Boat
+type: equipment
+img: icons/skills/trades/profession-sailing-ship.webp
+system:
+  activities:
+    eW7dMHWhIna29aRG:
+      type: summon
+      name: 1st and 2nd Command
+      _id: eW7dMHWhIna29aRG
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: folded boat
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: First Command Word (Rowboat)
+          _id: E6rqP9kRz8STANcl
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobRowboat000
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: Second Command Word (Keelboat)
+          _id: cScim8zjtw1E4nCg
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobKeelboat00
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+    pEleWQrvvMQbsRoZ:
+      type: utility
+      name: 3rd Command
+      _id: pEleWQrvvMQbsRoZ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: unfolded Rowboat or Keelboat
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><strong>First Command Word.</strong> The box unfolds into a
+      @UUID[Compendium.dnd5e.actors24.Actor.phbmobRowboat000]{Rowboat}.</p><p><strong>Second
+      Command Word.</strong> The box unfolds into a
+      @UUID[Compendium.dnd5e.actors24.Actor.phbmobKeelboat00]{Keelboat}.</p><p><strong>Third
+      Command Word.</strong> The <em>Folding Boat</em> folds back into a box if
+      no creatures are aboard. Any objects in the vessel that can't fit inside
+      the box remain outside the box as it folds. Any objects in the vessel that
+      can fit inside the box do so.</p><p>When the box becomes a vessel, its
+      weight becomes that of a normal vessel its size, and anything that was
+      stored in the box remains in the boat.</p><p>Statistics for the Rowboat
+      and Keelboat appear in
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbEquipment0000]{Equipment}.
+      If either vessel is reduced to 0 Hit Points, the <em>Folding Boat</em> is
+      destroyed.</p>
+    chat: ''
+  identifier: boat-utility
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: dmgFoldingBoat00
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties: []
+  strength: null
+  proficient: null
+effects: []
+folder: CXJsbhXV9uLcWcfH
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729820074508
+  modifiedTime: 1745712698158
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 900000
+ownership:
+  default: 0
+_key: '!items!dmgBoatUtility00'

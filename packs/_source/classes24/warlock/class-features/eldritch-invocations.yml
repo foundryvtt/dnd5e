@@ -1,0 +1,73 @@
+_id: phbwlkEldritchIn
+name: Eldritch Invocations
+type: feat
+folder: UQiLTq4nLQpaM0Q5
+img: icons/sundries/lights/candles-lit-red-evil.webp
+system:
+  description:
+    value: >-
+      <p>You have unearthed Eldritch Invocations, pieces of forbidden knowledge
+      that imbue you with an abiding magical ability or other lessons. You gain
+      one invocation of your choice, such as
+      @UUID[Compendium.dnd5e.classes24.Item.phbinvPactTome00]{Pact of the Tome}.
+      Invocations are described in the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbWarlock000000.JournalEntryPage.FA4hxx49eazhISIt]{Eldritch
+      Invocation Options} section.</p><p><strong>Prerequisites.</strong> If an
+      invocation has a prerequisite, you must meet it to learn that invocation.
+      For example, if an invocation requires you to be a level 5+ Warlock, you
+      can select the invocation once you reach Warlock level
+      5.</p><p><strong>Replacing and Gaining Invocations.</strong> Whenever you
+      gain a Warlock level, you can replace one of your invocations with another
+      one for which you qualify. You can't replace an invocation if it's a
+      prerequisite for another invocation that you have.</p><p>When you gain
+      certain Warlock levels, you gain more invocations of your choice, as shown
+      in the Invocations column of the Warlock Features
+      table.</p><p><strong>Current Max Eldritch Invocations:</strong> [[lookup
+      @scale.warlock.invocations-known]]</p><p>You can't pick the same
+      invocation more than once unless its description says
+      otherwise.</p><section class="secret"
+      id="secret-Oe1om6AaBjTtabpK"><p><strong>Foundry Note</strong></p><p>You
+      will be prompted for your choices as you level up. The advancement system
+      does not prevent you from taking any invocations so be sure that you meet
+      the requirements before selecting one.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: eldritch-invocations
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256766833
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwlkEldritchIn'

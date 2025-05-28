@@ -1,0 +1,117 @@
+_id: YWtwzp6ZnQJMEmVW
+name: Plant Growth
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell channels vitality into plants within a specific area. There
+      are two possible uses for the spell, granting either immediate or
+      long-term benefits.</p><p>If you cast this spell using 1 action, choose a
+      point within range. All normal plants in a 100-foot radius centered on
+      that point become thick and overgrown. A creature moving through the area
+      must spend 4 feet of movement for every 1 foot it moves.</p><p>You can
+      exclude one or more areas of any size within the spell's area from being
+      affected.</p><p>If you cast this spell over 8 hours, you enrich the land.
+      All plants in a half-mile radius centered on a point within range become
+      enriched for 1 year. The plants yield twice the normal amount of food when
+      harvested.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: radius
+      size: '100'
+      contiguous: false
+  range:
+    value: '150'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: trs
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: plant-growth
+sort: 0
+flags: {}
+img: icons/magic/nature/leaf-glow-triple-green.webp
+effects: []
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037359048
+  modifiedTime: 1725992720772
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!YWtwzp6ZnQJMEmVW'

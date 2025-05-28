@@ -1,0 +1,148 @@
+_id: CKZTpZlxj7hjjo2H
+name: Mage Armor
+type: spell
+img: icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp
+system:
+  description:
+    value: >-
+      <p>You touch a willing creature who isn't wearing armor, and a protective
+      magical force surrounds it until the spell ends. The target's base AC
+      becomes 13 + its Dexterity modifier. The spell ends if the target dons
+      armor or if you dismiss the spell as an action.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: abj
+  materials:
+    value: A piece of cured leather
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: cfwMU7LuOJ619Lny
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: mage-armor
+effects:
+  - _id: cfwMU7LuOJ619Lny
+    changes:
+      - key: system.attributes.ac.calc
+        mode: 5
+        value: mage
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: 28800
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H
+    transfer: false
+    flags: {}
+    tint: '#ffffff'
+    name: Mage Armor
+    description: <p>The target's base AC becomes 13 + its Dexterity modifier.</p>
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/defensive/shield-barrier-glowing-triangle-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!CKZTpZlxj7hjjo2H.cfwMU7LuOJ619Lny'
+folder: ERuXllkhTQF51rDJ
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037350935
+  modifiedTime: 1725992718089
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!CKZTpZlxj7hjjo2H'

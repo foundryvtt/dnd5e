@@ -1,0 +1,151 @@
+name: Giant Insect
+system:
+  description:
+    value: "<p>You summon a giant centipede, spider, or wasp (chosen when you cast the spell). It manifests in an unoccupied space you can see within range and uses the <strong>@UUID[Compendium.dnd5e.actors24.Actor.phbmobGiantInsec]{Giant Insect}</strong> stat block. The form you choose determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the &amp;Reference[Dodge] action and uses its movement to avoid danger.</p><p><strong>Using a Higher-Level Spell Slot.</strong>\_Use the spell slot's level for the spell's level in the stat block.</p><section class=\"fvtt advice\" style=\"margin:0.5rem;padding:0.5rem\"><article><p>In addition to the noted usage of the spell's level in the insect's Traits and Actions, the following attributes are also affected.</p><table><caption>Giant Insect</caption><tbody><tr><td><strong>AC</strong></td><td>11 + the spell's level</td></tr><tr><td><strong>HP</strong></td><td>30 + 10 for each spell level above 4</td></tr><tr><td><strong>Speed</strong></td><td>40 ft., Climb 40 ft., Fly 40 ft. (Wasp only)</td></tr><tr><td><strong>PB</strong></td><td>equals your Proficiency Bonus</td></tr></tbody></table></article></section>"
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: '@item.level'
+        hd: ''
+        hp: 10 * (@item.level - 4)
+        attackDamage: '@item.level'
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        proficiency: true
+        attacks: true
+        saves: true
+      profiles:
+        - count: ''
+          name: ''
+          _id: 87m6T7MhqiLf4cce
+          uuid: Compendium.dnd5e.actors24.Actor.mmGiantCentipede
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: iFpFFJ3LnEvpmc03
+          uuid: Compendium.dnd5e.actors24.Actor.mmGiantSpider000
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: S3oooMSQPdPsBiVU
+          uuid: Compendium.dnd5e.actors24.Actor.mmGiantWasp00000
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: giant-insect
+_id: phbsplGiantInsec
+type: spell
+img: icons/creatures/invertebrates/bee-yellow.webp
+effects: []
+folder: qi3IbnEwap7mRw4b
+sort: 1900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425956378
+  modifiedTime: 1745256793724
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplGiantInsec'

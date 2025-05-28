@@ -1,0 +1,163 @@
+name: Disguise Self
+system:
+  description:
+    value: >-
+      <p>You make yourself—including your clothing, armor, weapons, and other
+      belongings on your person—look different until the spell ends. You can
+      seem 1 foot shorter or taller and can appear heavier or lighter. You must
+      adopt a form that has the same basic arrangement of limbs as you have.
+      Otherwise, the extent of the illusion is up to you.</p><p>The changes
+      wrought by this spell fail to hold up to physical inspection. For example,
+      if you use this spell to add a hat to your outfit, objects pass through
+      the hat, and anyone who touches it would feel nothing.</p><p>To discern
+      that you are disguised, a creature must take the Study action to inspect
+      your appearance and succeed on an [[/check ability=int skill=inv
+      dc=@attributes.spell.dc]] check against your spell save DC.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: ill
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: SrIb7dbaZs5F4zi9
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects:
+        - SrIb7dbaZs5F4zi9
+  identifier: disguise-self
+_id: phbsplDisguiseSe
+type: spell
+img: icons/equipment/head/mask-carved-bird-grey-pink.webp
+effects:
+  - name: Disguised
+    origin: Compendium.dnd5e.spells24.Item.phbsplDisguiseSe
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/control/silhouette-aura-energy.webp
+    _id: SrIb7dbaZs5F4zi9
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p><span style="font-family:Signika, sans-serif">To discern that you are
+      disguised, a creature must take the Study action to inspect your
+      appearance and succeed on an [[/check ability=int skill=inv]] check
+      against your spell save DC.</span></p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplDisguiseSe.SrIb7dbaZs5F4zi9'
+folder: pBaAAtXBCq9FVEnL
+sort: 3900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425949918
+  modifiedTime: 1745256790565
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDisguiseSe'

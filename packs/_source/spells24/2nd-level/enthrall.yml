@@ -1,0 +1,158 @@
+name: Enthrall
+system:
+  description:
+    value: >-
+      <p>You weave a distracting string of words, causing creatures of your
+      choice that you can see within range to make a Wisdom saving throw. Any
+      creature you or your companions are fighting automatically succeeds on
+      this save. On a failed save, a target has a −10 penalty to Wisdom
+      (Perception) checks and Passive Perception until the spell ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: ''
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: enc
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: Na1yaiXqMUEtCXGy
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: enthrall
+_id: phbsplEnthrall00
+type: spell
+img: icons/skills/trades/music-singing-voice-blue.webp
+effects:
+  - name: Distracted
+    origin: Compendium.dnd5e.spells24.Item.phbsplEnthrall00
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/symbols/question-stone-yellow.webp
+    _id: Na1yaiXqMUEtCXGy
+    type: base
+    system: {}
+    changes:
+      - key: system.skills.prc.bonuses.check
+        mode: 2
+        value: '-10'
+        priority: null
+    description: >-
+      <p><span style="font-family:Signika, sans-serif">The target has a −10
+      penalty to [[/check ability=wis skill=prc]] checks and Passive Perception
+      until the spell ends.</span></p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplEnthrall00.Na1yaiXqMUEtCXGy'
+folder: 3SjcO2acsFnWegp4
+sort: 3600000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425952330
+  modifiedTime: 1745256792411
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplEnthrall00'

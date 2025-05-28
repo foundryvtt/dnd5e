@@ -1,0 +1,245 @@
+_id: dmgDwarvenPlate0
+name: Dwarven Plate
+type: equipment
+folder: 1kn4uV4dTVVduLjA
+img: icons/equipment/chest/breastplate-layered-steel-green.webp
+system:
+  activities:
+    n5tsFCvJgAjPSR2U:
+      type: utility
+      name: Reduce Unwilling Movement
+      _id: n5tsFCvJgAjPSR2U
+      sort: 100000
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: an effect moves you against your will along the ground
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: Distance moved reduced by up to 10 feet
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    KV80Pu1iX8Isz7wX:
+      type: enchant
+      name: Dwarven Plate
+      _id: KV80Pu1iX8Isz7wX
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 8E4SvTACyo0LzFBk
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - n5tsFCvJgAjPSR2U
+            effect: []
+            item: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      img: ''
+      appliedEffects:
+        - 8E4SvTACyo0LzFBk
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Armor
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbarmHalfPlateA]{Half Plate} or
+      @UUID[Compendium.dnd5e.equipment24.Item.phbarmPlateArmor]{Plate Armor}),
+      Very Rare</em></p></div><p>While wearing this armor, you gain a +2 bonus
+      to Armor Class. In addition, if an effect moves you against your will
+      along the ground, you can take a Reaction to reduce the distance you are
+      moved by up to 10
+      feet.</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: dwarven-plate
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 65
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: 18
+    magicalBonus: 2
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: plate
+  properties:
+    - mgc
+  strength: 15
+  proficient: null
+effects:
+  - type: enchantment
+    name: Dwarven Plate
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    _id: 8E4SvTACyo0LzFBk
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Dwarven {}
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: veryRare
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDwarvenPlate0
+          caption=false]</p>
+        priority: null
+      - key: system.armor.magicalBonus
+        mode: 4
+        value: '2'
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730837420393
+      modifiedTime: 1730837704945
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDwarvenPlate0.8E4SvTACyo0LzFBk'
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - n5tsFCvJgAjPSR2U
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 500000
+ownership:
+  default: 0
+_key: '!items!dmgDwarvenPlate0'

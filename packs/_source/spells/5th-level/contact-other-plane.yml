@@ -1,0 +1,132 @@
+_id: dSTu1MaPhBqPITwM
+name: Contact Other Plane
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You mentally contact a demigod, the spirit of a long-dead sage, or some
+      other mysterious entity from another plane. Contacting this extraplanar
+      intelligence can strain or even break your mind. When you cast this spell,
+      make a DC 15 Intelligence saving throw. On a failure, you take 6d6 psychic
+      damage and are insane until you finish a long rest. While insane, you
+      can't take actions, can't understand what other creatures say, can't read,
+      and speak only in gibberish. A greater restoration spell cast on you ends
+      this effect.</p><p>On a successful save, you can ask the entity up to five
+      questions. You must ask your questions before the spell ends. The DM
+      answers each question with one word, such as "yes," "no," "maybe,"
+      "never," "irrelevant," or "unclear" (if the entity doesn't know the answer
+      to the question). If a one-word answer would be misleading, the DM might
+      instead offer a short phrase as an answer.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: div
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - ritual
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 6
+            denomination: 6
+            bonus: ''
+            types:
+              - psychic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: int
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: contact-other-plane
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-energy-hold-levitate-teal-blue.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037361114
+  modifiedTime: 1725992721467
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dSTu1MaPhBqPITwM'

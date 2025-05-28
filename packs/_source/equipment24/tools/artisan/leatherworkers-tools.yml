@@ -1,0 +1,136 @@
+name: Leatherworker's Tools
+system:
+  description:
+    value: >-
+      <p class="phb-meta"><strong>Ability:</strong> Dexterity</p><p
+      class="phb-meta"><strong>Utilize:</strong> Add a design to a leather item
+      (DC 10)</p><p class="phb-meta"><strong>Craft:</strong>
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepSling00000]{Sling},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepWhip000000]{Whip},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbarmHideArmor0]{Hide Armor},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbarmLeatherArm]{Leather Armor},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbarmStuddedLea]{Studded Leather
+      Armor},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBackpack000]{Backpack},
+      @UUID[Compendium.dnd5e.items.Item.eJtPBiZtr2pp6ynt]{Crossbow Bolt Case},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagCaseMaporSc]{Map or Scroll
+      Case},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagParchment00]{Parchment},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagPouch000000]{Pouch},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagQuiver00000]{Quiver},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagWaterskin00]{Waterskin}</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 5
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: art
+    baseItem: leatherworker
+  ability: dex
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    9GMvXIRK14ghlLel:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '10'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: 9GMvXIRK14ghlLel
+      name: Add Design
+      img: ''
+      appliedEffects: []
+  identifier: leatherworkers-tools
+_id: phbtulLeatherwor
+type: tool
+folder: V8KHbNkEWoXQP3Pj
+img: icons/commodities/leather/leather-buckle-steel-tan.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425917276
+  modifiedTime: 1740680142065
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbtulLeatherwor'

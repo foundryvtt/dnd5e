@@ -1,0 +1,148 @@
+name: Criminal
+system:
+  description:
+    value: "<p><strong>Ability Scores:</strong> Dexterity, Constitution, Intelligence</p><p><strong>Feat:</strong> @UUID[Compendium.dnd5e.feats24.Item.phbftAlert000000]{Alert}</p><p><strong>Skill Proficiencies:</strong> Sleight of Hand and Stealth</p><p><strong>Tool Proficiency:</strong> Thieves' Tools</p><p><strong>Equipment:</strong> <em>Choose A or B:</em> (A) 2 @UUID[Compendium.dnd5e.equipment24.Item.phbwepDagger0000]{Daggers}, @UUID[Compendium.dnd5e.equipment24.Item.phbtulThievesToo]{Thieves' Tools}, @UUID[Compendium.dnd5e.equipment24.Item.phbagCrowbar0000]{Crowbar}, 2 @UUID[Compendium.dnd5e.equipment24.Item.phbagPouch000000]{Pouches}, @UUID[Compendium.dnd5e.items.Item.SsAmWV6YBqeOFihT]{Traveler's Clothes}, 16\_GP; or (B) 50 GP</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixBackg.JournalEntryPage.phbbgCriminal000 inline classes=\"free-rules-embed\"]</p>"
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  startingEquipment:
+    - type: AND
+      requiresProficiency: false
+      _id: FIqxCvfdb4YPaDyl
+      group: ''
+      sort: 100000
+    - type: linked
+      count: 2
+      key: Compendium.dnd5e.equipment24.Item.phbwepDagger0000
+      requiresProficiency: false
+      _id: 7B991PQwtEPst2lm
+      group: FIqxCvfdb4YPaDyl
+      sort: 200000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbtulThievesToo
+      requiresProficiency: false
+      _id: AlpgDfVKgcYd5rLC
+      group: FIqxCvfdb4YPaDyl
+      sort: 300000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbagCrowbar0000
+      requiresProficiency: false
+      _id: 8PuRM4pC5hnCsIxs
+      group: FIqxCvfdb4YPaDyl
+      sort: 400000
+    - type: linked
+      count: 2
+      key: Compendium.dnd5e.equipment24.Item.phbagPouch000000
+      requiresProficiency: false
+      _id: mp0feeLVQbHaU276
+      group: FIqxCvfdb4YPaDyl
+      sort: 500000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbagClothesTrav
+      requiresProficiency: false
+      _id: 2txtXcXiPUM87Yb7
+      group: FIqxCvfdb4YPaDyl
+      sort: 600000
+  identifier: criminal
+  advancement:
+    - _id: 8gFHAigaFboVUSgH
+      type: AbilityScoreImprovement
+      configuration:
+        cap: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked:
+          - str
+          - wis
+          - cha
+        points: 3
+      value:
+        type: asi
+      level: 0
+      title: Background Ability Score Improvement
+      hint: >-
+        Your background allows you to increase your Dexterity, Constitution, and
+        Charisma scores; increase one of them by 2 and a different one by 1, or
+        increase all three by 1. None of these increases can raise a score above
+        20.
+    - _id: WJA48TLxfqlc3ygz
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.feats24.Item.phbftAlert000000
+        optional: false
+        spell: null
+      value: {}
+      level: 0
+      title: Background Feat
+      hint: Your backgrounds you the Alert feat.
+    - _id: CdiCt0Cr9bP9FQNO
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - tool:thief
+          - skills:slt
+          - skills:ste
+        choices:
+          - count: 1
+            pool: []
+      value:
+        chosen: []
+      level: 0
+      title: Background Proficiencies
+      hint: >-
+        Your background grants you proficiency in Sleight of Hand and Stealth.
+        It also grants you proficiency with Thieves' Tools.
+    - _id: pLGiyOjTP7nwuwTl
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - languages:standard:common
+        choices:
+          - count: 2
+            pool:
+              - languages:standard:*
+      value:
+        chosen: []
+      level: 0
+      title: Choose Languages
+      hint: >-
+        Your character knows at least three languages: Common plus two languages
+        you roll or choose from the Standard Languages table.
+  wealth: '50'
+_id: phbbgCriminal000
+type: background
+img: icons/skills/social/theft-pickpocket-bribery-brown.webp
+effects: []
+folder: ysJSs3cbEBOMC1zV
+sort: 125000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866666283
+  modifiedTime: 1745687868405
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbbgCriminal000'

@@ -1,0 +1,159 @@
+name: Silence
+system:
+  description:
+    value: >-
+      <p>For the duration, no sound can be created within or pass through a
+      20-foot-radius Sphere centered on a point you choose within range. Any
+      creature or object entirely inside the Sphere has Immunity to Thunder
+      damage, and creatures have the &amp;Reference[deafened apply=false]
+      condition while entirely inside it. Casting a spell that includes a Verbal
+      component is impossible there.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      type: sphere
+      size: '20'
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: ill
+  properties:
+    - vocal
+    - somatic
+    - concentration
+    - ritual
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: kjbKMAk1y5VUyEoT
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: silence
+_id: phbsplSilence000
+type: spell
+img: icons/magic/control/debuff-chains-orb-movement-blue.webp
+effects:
+  - name: Silenced
+    origin: Compendium.dnd5e.spells24.Item.phbsplSilence000
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/control/encase-creature-humanoid-hold.webp
+    _id: kjbKMAk1y5VUyEoT
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.di.value
+        mode: 2
+        value: thunder
+        priority: null
+    description: >-
+      <p>Any creature or object entirely inside the Sphere has Immunity to
+      Thunder damage, and creatures have the Deafened condition while entirely
+      inside it. Casting a spell that includes a Verbal component is impossible
+      there.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - deafened
+      - silenced
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplSilence000.kjbKMAk1y5VUyEoT'
+folder: 3SjcO2acsFnWegp4
+sort: 500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425970956
+  modifiedTime: 1745256798254
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSilence000'

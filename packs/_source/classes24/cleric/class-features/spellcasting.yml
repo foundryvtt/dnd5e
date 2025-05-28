@@ -1,0 +1,92 @@
+_id: phbclcSpellcasti
+name: Spellcasting
+type: feat
+folder: 3wY92TRgyyyDkpmF
+img: icons/magic/life/ankh-gold-blue.webp
+system:
+  description:
+    value: >-
+      <p>You have learned to cast spells through prayer and meditation. See
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.mh3akteBDiLegqFK]{chapter
+      7} for the rules on spellcasting. The information below details how you
+      use those rules with Cleric spells, which appear on the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj]{Cleric
+      spell list}.</p><p><strong>Cantrips.</strong> You know three cantrips of
+      your choice from the Cleric spell list.
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplGuidance00]{Guidance},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplSacredFlam]{Sacred Flame}, and
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplThaumaturg]{Thaumaturgy} are
+      recommended.</p><p>Whenever you gain a Cleric level, you can replace one
+      of your cantrips with another cantrip of your choice from the Cleric spell
+      list.</p><p>When you reach Cleric levels 4 and 10, you learn another
+      cantrip of your choice from the Cleric spell list, as shown in the
+      Cantrips column of the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbCleric0000000.JournalEntryPage.acPyA6A4DQBSnuZB#class-features]{Cleric
+      Features} table.</p><p><strong>Spell Slots.</strong> The Cleric Features
+      table shows how many spell slots you have to cast your level 1+ spells.
+      You regain all expended slots when you finish a Long
+      Rest.</p><p><strong>Prepared Spells of Level 1+.</strong> You prepare the
+      list of level 1+ spells that are available for you to cast with this
+      feature. To start, choose four level 1 spells from the Cleric spell list.
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplBless00000]{Bless},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure Wounds},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplGuidingBol]{Guiding Bolt}, and
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplShieldofFa]{Shield of Faith}
+      are recommended.</p><p>The number of spells on your list increases as you
+      gain Cleric levels, as shown in the Prepared Spells column of the Cleric
+      Features table. Whenever that number increases, choose additional spells
+      from the Cleric spell list until the number of spells on your list matches
+      the number on the table. The chosen spells must be of a level for which
+      you have spell slots. For example, if you're a level 3 Cleric, your list
+      of prepared spells can include six spells of levels 1 and 2 in any
+      combination.</p><p>If another Cleric feature gives you spells that you
+      always have prepared, those spells don't count against the number of
+      spells you can prepare with this feature, but those spells otherwise count
+      as Cleric spells for you.</p><p><strong>Changing Your Prepared Spells.
+      </strong>Whenever you finish a Long Rest, you can change your list of
+      prepared spells, replacing any of the spells there with other Cleric
+      spells for which you have spell slots.</p><p><strong>Spellcasting Ability.
+      </strong>Wisdom is your spellcasting ability for your Cleric
+      spells.</p><p><strong>Spellcasting Focus. </strong>You can use a Holy
+      Symbol as a Spellcasting Focus for your Cleric spells.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: Cleric
+  activities: {}
+  enchant: {}
+  identifier: spellcasting
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866373481
+  modifiedTime: 1745256760942
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1000000
+ownership:
+  default: 0
+_key: '!items!phbclcSpellcasti'

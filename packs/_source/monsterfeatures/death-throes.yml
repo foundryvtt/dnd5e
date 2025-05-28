@@ -1,0 +1,117 @@
+_id: EmlE1a0rhucK2UT1
+name: Death Throes
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>When the [[lookup @name lowercase]] dies, it explodes, and each
+      creature within 30 feet of it must make a  <strong>DC 20
+      Dexterity</strong> saving throw, taking <strong>70 (20d6) <em>fire
+      damage</em></strong> on a failed save, or half as much damage on a
+      successful one.</p><p>The explosion ignites flammable objects in that area
+      that aren't being worn or carried, and it destroys the [[lookup @name
+      lowercase]]'s weapons.</p>
+
+      </section>
+
+      <p>When the [[lookup @name lowercase]] dies, it explodes, and each
+      creature within 30 feet of it must make a <strong>Dexterity</strong>
+      saving throw. The explosion ignites flammable objects in that area that
+      aren't being worn or carried, and it destroys the [[lookup @name
+      lowercase]]'s weapons.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: special
+        value: null
+        condition: Upon death
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '30'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '20'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: death-throes
+flags: {}
+img: icons/magic/fire/explosion-fireball-large-red-orange.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304967653
+  modifiedTime: 1725992571640
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!EmlE1a0rhucK2UT1'

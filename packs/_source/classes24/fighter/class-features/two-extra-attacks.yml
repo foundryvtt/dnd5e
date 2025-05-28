@@ -1,0 +1,51 @@
+_id: phbftrTwoExtraAt
+name: Two Extra Attacks
+type: feat
+folder: xggTDaiQq26ZrVzJ
+img: icons/skills/melee/swords-parry-block-yellow.webp
+system:
+  description:
+    value: >-
+      <p>You can attack three times instead of once whenever you take the Attack
+      action on your turn.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 11
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: two-extra-attacks
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866361253
+  modifiedTime: 1745256761897
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftrTwoExtraAt'

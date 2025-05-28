@@ -1,0 +1,378 @@
+_id: dmgDancingSword0
+name: Dancing Sword
+type: weapon
+img: icons/skills/melee/sword-twirl-orange.webp
+system:
+  activities:
+    FztT9hvr1r8FV8kK:
+      type: summon
+      _id: FztT9hvr1r8FV8kK
+      sort: 200000
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: spec
+        concentration: false
+        override: false
+        special: Until the sword has made four attacks while hovering
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: '@mod'
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: true
+        proficiency: true
+        saves: false
+        ability: str
+      profiles:
+        - count: ''
+          name: ''
+          _id: myr3wYutsOj2eEDz
+          uuid: Compendium.dnd5e.actors24.Actor.dmggwsDancingSwo
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: 'Activate Sword: Stength'
+      img: systems/dnd5e/icons/svg/abilities/strength.svg
+      appliedEffects: []
+    HjoCaTF4RcIkhGqc:
+      type: enchant
+      name: Dancing Sword
+      _id: HjoCaTF4RcIkhGqc
+      sort: 100000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: WJSS4dAA3wvYZpRx
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FztT9hvr1r8FV8kK
+              - qQ7MztRj7Iuv2EyK
+            effect: []
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: weapon
+      img: ''
+      appliedEffects:
+        - WJSS4dAA3wvYZpRx
+    qQ7MztRj7Iuv2EyK:
+      type: summon
+      sort: 200000
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: spec
+        concentration: false
+        override: false
+        special: Until the sword has made four attacks while hovering
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: '@mod'
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: true
+        proficiency: true
+        saves: false
+        ability: dex
+      profiles:
+        - count: ''
+          name: ''
+          _id: myr3wYutsOj2eEDz
+          uuid: Compendium.dnd5e.actors24.Actor.dmggwsDancingSwo
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: 'Activate Sword: Dexterity'
+      _id: qQ7MztRj7Iuv2EyK
+      img: systems/dnd5e/icons/svg/abilities/dexterity.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatsword]{Greatsword},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepLongsword0]{Longsword},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepRapier0000]{Rapier},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepScimitar00]{Scimitar}, or
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortsword]{Shortsword}),
+      Very Rare (Requires Attunement)</em></p></div><p>You can take a Bonus
+      Action to toss this magic weapon into the air. When you do so, the weapon
+      begins to hover, flies up to 30 feet, and attacks one creature of your
+      choice within 5 feet of itself. The weapon uses your attack roll and adds
+      your ability modifier to damage rolls.</p><p>While the weapon hovers, you
+      can take a Bonus Action to cause it to fly up to 30 feet to another spot
+      within 30 feet of you. As part of the same Bonus Action, you can cause the
+      weapon to attack one creature within 5 feet of the weapon.</p><p>After the
+      hovering weapon attacks for the fourth time, it flies back to you and
+      tries to return to your hand. If you have no hand free, the weapon falls
+      to the ground in your space. If the weapon has no unobstructed path to
+      you, it moves as close to you as it can and then falls to the ground. It
+      also ceases to hover if you grasp it or are more than 30 feet away from
+      it.</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: dancing-sword
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: martialM
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: ''
+effects:
+  - type: enchantment
+    name: Dancing Sword
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    _id: WJSS4dAA3wvYZpRx
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Dancing {}
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: veryRare
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDancingSword0
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730836705437
+      modifiedTime: 1730836820979
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDancingSword0.WJSS4dAA3wvYZpRx'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - FztT9hvr1r8FV8kK
+        - qQ7MztRj7Iuv2EyK
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745433492099
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 6900000
+ownership:
+  default: 0
+_key: '!items!dmgDancingSword0'

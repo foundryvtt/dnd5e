@@ -1,0 +1,272 @@
+_id: dmgIronFlask0000
+name: Iron Flask
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/consumables/potions/bottle-round-empty-glass.webp
+system:
+  activities:
+    UVei1X4pYM1VZDWv:
+      type: save
+      name: Attempt to Trap Creature
+      _id: UVei1X4pYM1VZDWv
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '17'
+      img: ''
+      appliedEffects: []
+    4FJGA5jQX1wjCADZ:
+      type: summon
+      name: Release Creature
+      _id: 4FJGA5jQX1wjCADZ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      img: ''
+      appliedEffects: []
+    Jd5BGVg4MO1h2ZRl:
+      type: utility
+      name: Add Trapped Creature
+      _id: Jd5BGVg4MO1h2ZRl
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Legendary</em></p><p>While holding this
+      brass-stoppered iron flask, you can take a Magic action to target a
+      creature that you can see within 60 feet of yourself. If the flask is
+      empty and the target is native to a plane of existence other than the one
+      you're on, the target must succeed on a DC 17 Wisdom saving throw or be
+      trapped in the flask. If the target has been trapped by the flask before,
+      it has Advantage on the save. Once trapped, a creature remains in the
+      flask until released. The flask can hold only one creature at a time. A
+      creature trapped in the flask doesn't age and doesn't need to breathe,
+      eat, or drink.</p><p>You can take a Magic action to remove the flask's
+      stopper and release the creature in the flask. The creature then obeys
+      your commands for 1 hour, understanding those commands even if it doesn't
+      know the language in which the commands are given. If you issue no
+      commands or give the creature a command that is likely to result in its
+      death or imprisonment, it defends itself but otherwise takes no actions.
+      At the end of the duration, the creature acts in accordance with its
+      normal disposition and alignment.</p><p>An
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplIdentify00]{Identify} spell
+      reveals if the flask contains a creature, but the only way to determine
+      the type of creature is to open the flask. A newly discovered <em>Iron
+      Flask</em> might already contain a creature chosen by the GM.</p><section
+      class="secret" id="secret-LJ4Og6JjdncKvEKV"><p><strong>Foundry
+      Note</strong></p><p>This item has one limited use for tracking whether or
+      not a creature has been trapped in the flask.</p><p>The <strong>Add
+      Trapped Creature</strong> activity expends a usage to indicate it is
+      currently full.</p><p>The <strong>Release Trapped Creature</strong>
+      activity is a summon activity which restores a usage to indicate it can
+      now contain another creature. You can edit the activity, change to the
+      "Summon" tab and drag the captured creature's Actor onto the tab so it can
+      be summoned later.</p></section>
+    chat: ''
+  identifier: iron-flask
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712701050
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 19400000
+ownership:
+  default: 0
+_key: '!items!dmgIronFlask0000'

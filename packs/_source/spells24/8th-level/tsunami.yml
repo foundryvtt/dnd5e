@@ -1,0 +1,228 @@
+name: Tsunami
+system:
+  description:
+    value: >-
+      <p>A wall of water springs into existence at a point you choose within
+      range. You can make the wall up to 300 feet long, 300 feet high, and 50
+      feet thick. The wall lasts for the duration.</p><p>When the wall appears,
+      each creature in its area makes a Strength saving throw, taking 6d10
+      Bludgeoning damage on a failed save or half as much damage on a successful
+      one.</p><p>At the start of each of your turns after the wall appears, the
+      wall, along with any creatures in it, moves 50 feet away from you. Any
+      Huge or smaller creature inside the wall or whose space the wall enters
+      when it moves must succeed on a Strength saving throw or take 5d10
+      Bludgeoning damage. A creature can take this damage only once per round.
+      At the end of the turn, the wall's height is reduced by 50 feet, and the
+      damage the wall deals on later rounds is reduced by 1d10. When the wall
+      reaches 0 feet in height, the spell ends.</p><p>A creature caught in the
+      wall can move by swimming. Because of the wave's force, though, the
+      creature must succeed on a [[/check ability=str skill=ath
+      dc=@attributes.spell.dc]] check against your spell save DC to move at all.
+      If it fails the check, it can't move. A creature that moves out of the
+      wall falls to the ground.</p><section class="secret"
+      id="secret-WPt2tGia4MNT1Dee"><p><strong>Foundry Note</strong></p><p>The
+      limited uses value of this spell tracks the number of rounds remaining
+      from its initial 6, which is reset as part of the <strong>Create Tsunami
+      </strong>activity.</p><p>The <strong>Start of Turn Effects</strong>
+      activity consumes one use to represent one round passing and uses the
+      updated count for its damage rolls.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    book: SRD 5.2
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '6'
+    units: round
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: wall
+      size: '300'
+      width: '50'
+      height: '300'
+      count: ''
+  range:
+    units: mi
+    special: ''
+    value: '1'
+  uses:
+    max: '6'
+    spent: 0
+    recovery: []
+  level: 8
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    XrJhKOVyHfLOkJ8b:
+      type: save
+      _id: XrJhKOVyHfLOkJ8b
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-6'
+            scaling:
+              mode: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
+            denomination: 10
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - str
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Create Tsunami
+    o7MOuS6uL1ZV3dhe:
+      type: save
+      _id: o7MOuS6uL1ZV3dhe
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: start of each of your turns
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: moves away from you
+        value: '50'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: true
+              formula: (@item.uses.value)d10
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - str
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Start of Turn Effects
+      img: systems/dnd5e/icons/svg/statuses/concentrating.svg
+  identifier: tsunami
+_id: phbsplTsunami000
+type: spell
+img: icons/magic/water/wave-water-blue.webp
+effects: []
+folder: M5CvwK9zVtzx6Dnn
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745433110943
+  modifiedTime: 1745712696366
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100037
+ownership:
+  default: 0
+_key: '!items!phbsplTsunami000'

@@ -1,0 +1,114 @@
+_id: 8M7uOPhbTxoxxJSo
+name: Channel Divinity
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Your oath allows you to channel divine energy to fuel magical effects.
+      Each Channel Divinity option provided by your oath explains how to use
+      it.</p><p>When you use your Channel Divinity, you choose which option to
+      use. You must then finish a short or long rest to use your Channel
+      Divinity again.</p><p>Some Channel Divinity effects require saving throws.
+      When you use such an effect from this class, the DC equals your paladin
+      spell save DC.</p><section class="secret foundry-note"
+      id="secret-zMJG0jvMiZEEkLfI"><p><strong>Foundry Note</strong></p><p>Use
+      this to track all the various uses of Channel Divinity for the
+      paladin.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Paladin 3
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: channel-divinity
+flags: {}
+img: icons/magic/fire/projectile-wave-arrow.webp
+effects: []
+folder: 01K0hSSl7NQjYLb8
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037380841
+  modifiedTime: 1725992287392
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!8M7uOPhbTxoxxJSo'

@@ -1,0 +1,136 @@
+name: Weaver's Tools
+system:
+  description:
+    value: >-
+      <p class="phb-meta"><strong>Ability:</strong> Dexterity</p><p
+      class="phb-meta"><strong>Utilize:</strong> Mend a tear in clothing (DC
+      10), or sew a Tiny design (DC 10)</p><p
+      class="phb-meta"><strong>Craft:</strong>
+      @UUID[Compendium.dnd5e.equipment24.Item.phbarmPaddedArmo]{Padded Armor},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBasket00000]{Basket},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBedroll0000]{Bedroll},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBlanket0000]{Blanket},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagClothesFine]{Fine Clothes},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagNet00000000]{Net},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagRobe0000000]{Robe},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagRope0000000]{Rope},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagSack0000000]{Sack},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagString00000]{String},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagTent0000000]{Tent},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagClothesTrav]{Traveler's
+      Clothes}</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 1
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: art
+    baseItem: weaver
+  ability: dex
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    UccmCl9KzcTB4zGS:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '10'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: UccmCl9KzcTB4zGS
+      name: Mend or Sew
+      img: ''
+      appliedEffects: []
+  identifier: weavers-tools
+_id: phbtulWeaversToo
+type: tool
+folder: V8KHbNkEWoXQP3Pj
+img: icons/equipment/back/cloak-hooded-pink.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425918002
+  modifiedTime: 1745256814324
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbtulWeaversToo'

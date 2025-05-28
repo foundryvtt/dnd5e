@@ -23,54 +23,44 @@ const {
 /**
  * Configuration data for Item Choice advancement.
  *
- * @property {Record<number, ItemChoiceLevelConfig>} choices  Choices & config for specific levels.
  * @property {boolean} allowDrops                             Should players be able to drop non-listed items?
- * @property {string} type                                    Type of item allowed, if it should be restricted.
+ * @property {Record<number, ItemChoiceLevelConfig>} choices  Choices & config for specific levels.
  * @property {ItemChoicePoolEntry[]} pool                     Items that can be chosen.
- * @property {SpellConfigurationData} spell                   Mutations applied to spell items.
  * @property {object} restriction
  * @property {string} restriction.type                        Specific item type allowed.
  * @property {string} restriction.subtype                     Item sub-type allowed.
  * @property {"available"|number} restriction.level           Level of spell allowed.
+ * @property {SpellConfigurationData} spell                   Mutations applied to spell items.
+ * @property {string} type                                    Type of item allowed, if it should be restricted.
  */
 export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
-  /** @inheritDoc */
-  static defineSchema() {
-    return {
-      choices: new MappingField(new SchemaField({
-        count: new NumberField({integer: true, min: 0}),
-        replacement: new BooleanField({label: "DND5E.AdvancementItemChoiceReplacement"})
-      }), {
-        hint: "DND5E.AdvancementItemChoiceLevelsHint"
-      }),
-      allowDrops: new BooleanField({
-        initial: true, label: "DND5E.AdvancementConfigureAllowDrops",
-        hint: "DND5E.AdvancementConfigureAllowDropsHint"
-      }),
-      type: new StringField({
-        blank: false, nullable: true, initial: null,
-        label: "DND5E.AdvancementItemChoiceType", hint: "DND5E.AdvancementItemChoiceTypeHint"
-      }),
-      pool: new ArrayField(new SchemaField({
-        uuid: new StringField()
-      }), {label: "DOCUMENT.Items"}),
-      spell: new EmbeddedDataField(SpellConfigurationData, {nullable: true, initial: null}),
-      restriction: new SchemaField({
-        type: new StringField({label: "DND5E.Type"}),
-        subtype: new StringField({label: "DND5E.Subtype"}),
-        level: new StringField({label: "DND5E.SpellLevel"})
-      })
-    };
-  }
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.ADVANCEMENT.ItemChoice", "DND5E.ADVANCEMENT.SPELLCONFIG"];
 
   /* -------------------------------------------- */
 
-  get hint() {
-    foundry.utils.logCompatibilityWarning(
-      "Advancement hints are now part of the base data model.",
-      { since: "DnD5e 3.3", until: "DnD5e 4.1" }
-    );
-    return this.parent.hint ?? "";
+  /** @inheritDoc */
+  static defineSchema() {
+    return {
+      allowDrops: new BooleanField({ initial: true }),
+      choices: new MappingField(new SchemaField({
+        count: new NumberField({integer: true, min: 0}),
+        replacement: new BooleanField()
+      })),
+      pool: new ArrayField(new SchemaField({ uuid: new StringField() })),
+      restriction: new SchemaField({
+        level: new StringField(),
+        subtype: new StringField(),
+        type: new StringField()
+      }),
+      spell: new EmbeddedDataField(SpellConfigurationData, { nullable: true, initial: null }),
+      type: new StringField({ blank: false, nullable: true, initial: null })
+    };
   }
 
   /* -------------------------------------------- */

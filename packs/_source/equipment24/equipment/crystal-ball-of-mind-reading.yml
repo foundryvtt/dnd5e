@@ -1,0 +1,168 @@
+_id: dmgMindReadingCr
+name: Crystal Ball of Mind Reading
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/materials/glass-orb-blue-gold.webp
+system:
+  activities:
+    3XpjxoC88UF7svp1:
+      type: cast
+      _id: 3XpjxoC88UF7svp1
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '5'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplScrying000
+      name: ''
+      img: ''
+    2MFzBAO64WpUiqFx:
+      type: cast
+      _id: 2MFzBAO64WpUiqFx
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - concentration
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDetectThou
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Legendary (Requires
+      Attunement)</em></p></div><p>While touching this crystal orb, you can cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScrying000]{Scrying}</em>
+      (save DC 17) with it. In addition, you can cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectThou]{Detect
+      Thoughts}</em> (save DC 17) targeting creatures you can see within 30 feet
+      of the spell's sensor. You don't need to concentrate on this <em>Detect
+      Thoughts</em> spell to maintain it during its duration, but it ends if the
+      <em>Scrying</em> spell ends.</p>
+    chat: ''
+  identifier: mind-reading-crystal-ball-of
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256806531
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 22000000
+ownership:
+  default: 0
+_key: '!items!dmgMindReadingCr'

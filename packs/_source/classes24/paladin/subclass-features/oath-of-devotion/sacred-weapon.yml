@@ -1,0 +1,166 @@
+_id: phbpdnSacredWeap
+name: Sacred Weapon
+type: feat
+folder: pDo2UCh4t1Z03F5z
+img: icons/skills/melee/strike-weapons-orange.webp
+system:
+  description:
+    value: >-
+      <p>When you take the Attack action, you can expend one use of your Channel
+      Divinity to imbue one Melee weapon that you are holding with positive
+      energy. For 10 minutes or until you use this feature again, you add your
+      Charisma modifier to attack rolls you make with that weapon (minimum bonus
+      of +1), and each time you hit with it, you cause it to deal its normal
+      damage type or Radiant damage.</p><p>The weapon also emits Bright Light in
+      a 20-foot radius and Dim Light 20 feet beyond that.</p><p>You can end this
+      effect early (no action required). This effect also ends if you aren't
+      carrying the weapon.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    Ew70lNTD8dR3vREt:
+      type: enchant
+      _id: Ew70lNTD8dR3vREt
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbpdnChannelDiv
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '10'
+      effects:
+        - _id: sEWDFOuWn47L5860
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: true
+        categories:
+          - simpleM
+          - martialM
+        properties: []
+        type: weapon
+      name: ''
+  enchant: {}
+  identifier: sacred-weapon
+effects:
+  - type: enchantment
+    name: Sacred Weapon
+    img: icons/skills/melee/strike-weapons-orange.webp
+    disabled: true
+    _id: sEWDFOuWn47L5860
+    system: {}
+    changes:
+      - key: name
+        mode: 2
+        value: ', Sacred Weapon'
+        priority: null
+      - key: system.damage.base.types
+        mode: 2
+        value: radiant
+        priority: null
+      - key: activities[attack].attack.bonus
+        mode: 2
+        value: (max(1,@abilities.cha.mod))
+        priority: null
+    duration:
+      startTime: null
+      seconds: 600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbpdnSacredWeap.sEWDFOuWn47L5860'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866569467
+  modifiedTime: 1745256764036
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbpdnSacredWeap'

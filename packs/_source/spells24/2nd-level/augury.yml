@@ -1,0 +1,123 @@
+name: Augury
+system:
+  description:
+    value: >-
+      <p>You receive an omen from an otherworldly entity about the results of a
+      course of action that you plan to take within the next 30 minutes. The DM
+      chooses the omen from the Omens
+      table.</p><table><thead><tr><td>Omen</td><td>For Results That Will Be
+      …</td></tr></thead><tbody><tr><td>Weal</td><td>Good</td></tr><tr><td>Woe</td><td>Bad</td></tr><tr><td>Weal
+      and woe</td><td>Good and bad</td></tr><tr><td>Indifference</td><td>Neither
+      good nor bad</td></tr></tbody></table><p>The spell doesn't account for
+      circumstances, such as other spells, that might change the
+      results.</p><p>If you cast the spell more than once before finishing a
+      Long Rest, there is a cumulative 25 percent chance for each casting after
+      the first that you get no answer.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: div
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  materials:
+    value: >-
+      specially marked sticks, bones, cards, or other divinatory tokens worth
+      25+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: augury
+_id: phbsplAugury0000
+type: spell
+img: icons/sundries/gaming/playing-cards-black.webp
+effects: []
+folder: 3SjcO2acsFnWegp4
+sort: 5200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425941859
+  modifiedTime: 1745256786118
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplAugury0000'

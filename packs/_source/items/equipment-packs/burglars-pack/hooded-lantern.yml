@@ -1,0 +1,129 @@
+name: Hooded Lantern
+type: consumable
+img: icons/sundries/lights/lantern-iron-yellow.webp
+system:
+  description:
+    value: >-
+      <p>A hooded lantern casts bright light in a 30-foot radius and dim light
+      for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1
+      pint) of oil. As an action, you can lower the hood, reducing the light to
+      dim light in a 5-foot radius.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 10
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  container: xsB7Y2WI476kvOt4
+  properties: []
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '6'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '60'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: hooded-lantern
+effects: []
+folder: Dx3K2y0J1wJUPP9m
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037319391
+  modifiedTime: 1725992557528
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_id: wjHtGnd05SPdURqE
+sort: 298438
+ownership:
+  default: 0
+_key: '!items!wjHtGnd05SPdURqE'

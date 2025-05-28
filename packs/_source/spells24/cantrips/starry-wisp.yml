@@ -1,0 +1,176 @@
+name: Starry Wisp
+system:
+  description:
+    value: >-
+      <p>You launch a mote of light at one creature or object within range. Make
+      a ranged spell attack against the target. On a hit, the target takes 1d8
+      Radiant damage, and until the end of your next turn, it emits Dim Light in
+      a 10-foot radius and can't benefit from the &amp;Reference[Invisible]
+      condition.</p><p><strong>Cantrip Upgrade.</strong> The damage increases by
+      1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creatureOrObject
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: evo
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    iuVRPWuNTiTm0fkj:
+      type: attack
+      _id: iuVRPWuNTiTm0fkj
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: T9kBIL7LS3j0Upwz
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '8'
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              mode: whole
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: starry-wisp
+_id: phbsplStarryWisp
+type: spell
+img: icons/magic/light/orb-hand-green.webp
+effects:
+  - name: Illuminated
+    img: icons/sundries/lights/lantern-iron-lit-yellow.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplStarryWisp
+    transfer: false
+    _id: T9kBIL7LS3j0Upwz
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Until the end of your next turn, it emits Dim Light in a 10-foot radius
+      and can’t benefit from the &amp;Reference[Invisible] condition.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725561224825
+      modifiedTime: 1725561513735
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplStarryWisp.T9kBIL7LS3j0Upwz'
+folder: 4FhsY9FJQd7h7MZb
+sort: 100782
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425972403
+  modifiedTime: 1745256798707
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplStarryWisp'

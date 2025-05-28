@@ -1,0 +1,133 @@
+_id: dmgSendingStones
+name: Sending Stones
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/gems/pearl-rough-white.webp
+system:
+  activities:
+    jDvy4ZWPPLUY7kip:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplSending000
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: false
+      _id: jDvy4ZWPPLUY7kip
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon</em></p><p><em>Sending Stones</em> come in
+      pairs, with each stone carved to match the other so the pairing is easily
+      recognized. While you touch one stone, you can cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplSending000]{Sending} from it.
+      The target is the bearer of the other stone. If no creature bears the
+      other stone, you know that fact as soon as you use the stone, and you
+      don't cast the spell.</p><p>Once <em>Sending</em> is cast using either
+      stone, the stones can't be used again until the next dawn. If one of the
+      stones in a pair is destroyed, the other one becomes nonmagical.</p>
+    chat: ''
+  identifier: sending-stones
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745611883488
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 33500000
+ownership:
+  default: 0
+_key: '!items!dmgSendingStones'

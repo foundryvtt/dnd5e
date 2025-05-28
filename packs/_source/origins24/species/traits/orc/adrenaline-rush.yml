@@ -1,0 +1,114 @@
+name: Adrenaline Rush
+system:
+  description:
+    value: >-
+      <p>You can take the Dash action as a Bonus Action. When you do so, you
+      gain a number of Temporary Hit Points equal to your Proficiency Bonus. You
+      can use this trait a number of times equal to your Proficiency Bonus, and
+      you regain all expended uses when you finish a Short or Long Rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    book: SRD 5.2
+    license: CC-BY-4.0
+  uses:
+    max: '@prof'
+    spent: 0
+    recovery:
+      - period: sr
+        type: recoverAll
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Orc
+  activities:
+    jN5Zo6mDXll3c4Cz:
+      type: heal
+      name: 'Adrenaline Rush: Dash'
+      _id: jN5Zo6mDXll3c4Cz
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - temphp
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: '@prof'
+  enchant: {}
+  identifier: adrenaline-rush
+  advancement: []
+  cover: null
+  crewed: false
+_id: phbsptAdrenaline
+type: feat
+folder: DDjuF7BenXS8Y8FL
+img: icons/skills/movement/arrow-upward-yellow.webp
+effects: []
+sort: 100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745340861480
+  modifiedTime: 1745341994825
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsptAdrenaline'

@@ -1,0 +1,155 @@
+name: True Polymorph
+system:
+  description:
+    value: >-
+      <p>Choose one creature or nonmagical object that you can see within range.
+      The creature shape-shifts into a different creature or a nonmagical
+      object, or the object shape-shifts into a creature (the object must be
+      neither worn nor carried). The transformation lasts for the duration or
+      until the target dies or is destroyed, but if you maintain Concentration
+      on this spell for the full duration, the spell lasts until
+      dispelled.</p><p>An unwilling creature can make a Wisdom saving throw, and
+      if it succeeds, it isn't affected by this spell.</p><p><strong>Creature
+      into Creature. </strong>If you turn a creature into another kind of
+      creature, the new form can be any kind you choose that has a Challenge
+      Rating equal to or less than the target's Challenge Rating or level. The
+      target's game statistics are replaced by the stat block of the new form,
+      but it retains its Hit Points, Hit Point Dice, alignment, and
+      personality.</p><p>The target gains a number of Temporary Hit Points equal
+      to the Hit Points of the new form. These Temporary Hit Points vanish if
+      any remain when the spell ends.</p><p>The target is limited in the actions
+      it can perform by the anatomy of its new form, and it can't speak or cast
+      spells.</p><p>The target's gear melds into the new form. The creature
+      can't use or otherwise benefit from any of that
+      equipment.</p><p><strong>Object into Creature. </strong>You can turn an
+      object into any kind of creature, as long as the creature's size is no
+      larger than the object's size and the creature has a Challenge Rating of 9
+      or lower. The creature is Friendly to you and your allies. In combat, it
+      takes its turns immediately after yours, and it obeys your
+      commands.</p><p>If the spell lasts more than an hour, you no longer
+      control the creature. It might remain Friendly to you, depending on how
+      you have treated it.</p><p><strong>Creature into Object. </strong>If you
+      turn a creature into an object, it transforms along with whatever it is
+      wearing and carrying into that form, as long as the object's size is no
+      larger than the creature's size. The creature's statistics become those of
+      the object, and the creature has no memory of time spent in this form
+      after the spell ends and it returns to normal.</p><section class="secret"
+      id="secret-IB4vzIqK9EZU3ho1"><p><strong>Foundry Note</strong></p><p>An
+      Actor can be dragged onto the polymorphed creature's sheet by the
+      Gamemaster to handle the transformation.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creatureOrObject
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 9
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a drop of mercury, a dollop of gum arabic, and a wisp of smoke
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    SYK6P8qPM8WsZN7U:
+      type: save
+      _id: SYK6P8qPM8WsZN7U
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: true-polymorph
+_id: phbsplTruePolymo
+type: spell
+img: icons/creatures/slimes/slime-giant-face-eyes.webp
+effects: []
+folder: iG0Zia8jh6uK39TB
+sort: 100049
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.2
+  createdTime: 1724425976104
+  modifiedTime: 1746119773121
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplTruePolymo'

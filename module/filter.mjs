@@ -9,13 +9,14 @@
 
 /**
  * Check some data against a filter to determine if it matches.
- * @param {object} data                 Data to check.
- * @param {FilterDescription[]} filter  Filter to compare against.
+ * @param {object} data                                   Data to check.
+ * @param {FilterDescription|FilterDescription[]} filter  Filter to compare against.
  * @returns {boolean}
  * @throws
  */
 export function performCheck(data, filter=[]) {
-  return AND(data, filter);
+  if ( foundry.utils.getType(filter) === "Array" ) return AND(data, filter);
+  return _check(data, filter.k, filter.v, filter.o);
 }
 
 /* -------------------------------------------- */
@@ -245,7 +246,14 @@ export function endswith(data, value) {
  * @returns {boolean}
  */
 export function has(data, value) {
-  return in_(value, data);
+  // If the value is another filter description, apply that check against each member of the collection
+  if ( foundry.utils.getType(value) === "Object" ) {
+    switch ( foundry.utils.getType(data) ) {
+      case "Array":
+      case "Set": return !!data.find(d => performCheck(d, value));
+      default: return false;
+    }
+  } else return in_(value, data);
 }
 
 /* -------------------------------------------- */

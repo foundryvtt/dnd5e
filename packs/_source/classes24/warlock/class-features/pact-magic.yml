@@ -1,0 +1,98 @@
+_id: phbwlkPactMagic0
+name: Pact Magic
+type: feat
+folder: UQiLTq4nLQpaM0Q5
+img: icons/skills/wounds/injury-hand-blood-red.webp
+system:
+  description:
+    value: >-
+      <p>Through occult ceremony, you have formed a pact with a mysterious
+      entity to gain magical powers. The entity is a voice in the shadows—its
+      identity unclear—but its boon to you is concrete: the ability to cast
+      spells. See the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.mh3akteBDiLegqFK]{rules
+      on spellcasting}. The information below details how you use those rules
+      with Warlock spells, which appear in the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.sSzagq8GvYXpfmfs]{Warlock
+      spell list}.</p><p><strong>Cantrips.</strong> You know two Warlock
+      cantrips of your choice.
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplEldritchBl]{Eldritch Blast} and
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplPrestidigi]{Prestidigitation}
+      are recommended. Whenever you gain a Warlock level, you can replace one of
+      your cantrips from this feature with another Warlock cantrip of your
+      choice.</p><p>When you reach Warlock levels 4 and 10, you learn another
+      Warlock cantrip of your choice, as shown in the Cantrips column of the
+      Warlock Features table.</p><p><strong>Current Max Cantrips Known:</strong>
+      [[lookup @scale.warlock.cantrips-known]]</p><p><strong>Spell
+      Slots.</strong> The
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbWarlock000000.JournalEntryPage.znue6EaGDDXgeQb0#class-features]{Warlock
+      Features table} shows how many spell slots you have to cast your Warlock
+      spells of levels 1–5. The table also shows the level of those slots, all
+      of which are the same level. You regain all expended Pact Magic spell
+      slots when you finish a Short or Long Rest.</p><p>For example, when you're
+      a level 5 Warlock, you have two level 3 spell slots. To cast the level 1
+      spell Witch Bolt, you must spend one of those slots, and you cast it as a
+      level 3 spell.</p><p><strong>Prepared Spells of Level 1+.</strong> You
+      prepare the list of level 1+ spells that are available for you to cast
+      with this feature. To start, choose two level 1 Warlock spells.
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplCharmPerso]{Charm Person} and
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplHex0000000]{Hex} are
+      recommended.</p><p><strong>Current Max Prepared Spells:</strong> [[lookup
+      @scale.warlock.max-prepared]]</p><p>The number of spells on your list
+      increases as you gain Warlock levels, as shown in the Prepared Spells
+      column of the Warlock Features table. Whenever that number increases,
+      choose additional Warlock spells until the number of spells on your list
+      matches the number in the table. The chosen spells must be of a level no
+      higher than what's shown in the table's Slot Level column for your level.
+      When you reach level 6, for example, you learn a new Warlock spell, which
+      can be of levels 1–3.</p><p>If another Warlock feature gives you spells
+      that you always have prepared, those spells don't count against the number
+      of spells you can prepare with this feature, but those spells otherwise
+      count as Warlock spells for you.</p><p><strong>Changing Your Prepared
+      Spells.</strong> Whenever you gain a Warlock level, you can replace one
+      spell on your list with another Warlock spell of an eligible
+      level.</p><p><strong>Spellcasting Ability.</strong> Charisma is the
+      spellcasting ability for your Warlock spells.</p><p><strong>Spellcasting
+      Focus.</strong> You can use an Arcane Focus as a Spellcasting Focus for
+      your Warlock spells.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: pact-magic
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745515016388
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwlkPactMagic0'

@@ -1,0 +1,103 @@
+_id: CkbbAckeCtyHXEnL
+name: Frenzy
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Starting when you choose this path at 3rd level, you can go into a
+      frenzy when you
+      @UUID[Compendium.dnd5e.classfeatures.Item.VoR0SUrNX5EJVPIO]{Rage}. If you
+      do so, for the duration of your rage you can make a single melee weapon
+      attack as a bonus action on each of your turns after this one. When your
+      rage ends, you suffer one level of exhaustion (as described in appendix
+      A).</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Path of the Berserker 3
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: bonus
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: frenzy
+flags: {}
+img: icons/skills/wounds/anatomy-organ-heart-red.webp
+effects: []
+folder: 5ajv5k9XdEWyOXzE
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037381470
+  modifiedTime: 1725992287592
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!CkbbAckeCtyHXEnL'

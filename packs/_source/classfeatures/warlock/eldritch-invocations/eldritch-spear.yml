@@ -1,0 +1,47 @@
+_id: r01WtcxTg4yTHm9m
+name: Eldritch Spear
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>When you cast
+      @UUID[Compendium.dnd5e.spells.Item.Z9p1vezIn95jw1Yw]{Eldritch Blast}, its
+      range is 300 feet.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  requirements: Warlock 2, Eldritch Blast
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: eldritch-spear
+flags: {}
+img: icons/weapons/ammunition/arrowhead-glowing-blue.webp
+effects: []
+folder: 0uFCjs5gYeVtl38i
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037388852
+  modifiedTime: 1725992290050
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!r01WtcxTg4yTHm9m'

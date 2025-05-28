@@ -1,0 +1,137 @@
+_id: fkREcytuZ8sngWtC
+name: Planar Ally
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You beseech an otherworldly entity for aid. The being must be known to
+      you: a god, a Primordial, a demon prince, or some other being of cosmic
+      power. That entity sends a Celestial, an elemental, or a fiend loyal to it
+      to aid you, making the creature appear in an unoccupied space within
+      range. If you know a specific creature's name, you can speak that name
+      when you cast this spell to request that creature, though you might get a
+      different creature anyway (DM's choice).</p><p>When the creature appears,
+      it is under no Compulsion to behave in any particular way. You can ask the
+      creature to perform a service in exchange for payment, but it isn't
+      obliged to do so. The requested task could range from simple (fly us
+      across the chasm, or help us fight a battle) to complex (spy on our
+      enemies, or protect us during our foray into the dungeon). You must be
+      able to communicate with the creature to bargain for its
+      Services.</p><p>Payment can take a variety of forms. A Celestial might
+      require a sizable donation of gold or Magic Items to an allied Temple,
+      while a fiend might demand a living sacrifice or a gift of Treasure. Some
+      creatures might exchange their service for a quest undertaken by
+      you.</p><p>As a rule of thumb, a task that can be measured in minutes
+      requires a payment worth 100 gp per minute. A task measured in hours
+      requires 1,000 gp per hour. And a task measured in days (up to 10 days)
+      requires 10,000 gp per day. The DM can adjust these payments based on the
+      circumstances under which you cast the spell. If the task is aligned with
+      the creature's ethos, the payment might be halved or even waived.
+      Nonhazardous tasks typically require only half the suggested payment,
+      while especially dangerous tasks might require a greater gift. Creatures
+      rarely accept tasks that seem suicidal.</p><p>After the creature completes
+      the task, or when the agreed-upon Duration of service expires, the
+      creature returns to its home plane after reporting back to you, if
+      appropriate to the task and if possible. If you are unable to agree on a
+      price for the creature's service, the creature immediately returns to its
+      home plane.</p><p>A creature enlisted to join your group counts as a
+      member of it, receiving a full share of Experience Points awarded.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: space
+      choice: false
+    template:
+      units: any
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: planar-ally
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-star-pentagon-magenta.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037362319
+  modifiedTime: 1725992721868
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!fkREcytuZ8sngWtC'

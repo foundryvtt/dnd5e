@@ -3,20 +3,22 @@
 
     {{!-- Weapon Type --}}
     {{ formField fields.type.fields.value value=source.type.value label="DND5E.ItemWeaponType" localize=true
-                 choices=config.weaponTypes }}
+                 choices=CONFIG.weaponTypes }}
 
     {{!-- Weapon Base --}}
+    {{#if baseItemOptions.length}}
     {{ formField fields.type.fields.baseItem value=source.type.baseItem label="DND5E.ItemWeaponBase" localize=true
-                 choices=baseItems }}
+                 options=baseItemOptions }}
+    {{/if}}
 
     {{!-- Proficiency --}}
     {{#unless system.isMountable}}
     {{ formField fields.proficient value=source.proficient blank="DND5E.Automatic" localize=true
-                 choices=config.weaponAndArmorProficiencyLevels }}
+                 choices=CONFIG.weaponAndArmorProficiencyLevels }}
     {{/unless}}
 
     {{!-- Weapon Mastery --}}
-    {{ formField fields.mastery value=source.mastery choices=config.weaponMasteries }}
+    {{ formField fields.mastery value=source.mastery choices=CONFIG.weaponMasteries labelAttr="label" }}
 
     {{!-- Weapon Properties --}}
     {{ formField fields.properties options=properties.options label="DND5E.ItemWeaponProperties" localize=true
@@ -25,7 +27,7 @@
     {{!-- Magical Properties --}}
     {{#if properties.object.mgc}}
     <div class="form-group split-group">
-        <label>{{ localize "DND5E.Item.Property.Magical" }}</label>
+        <label>{{ localize "DND5E.ITEM.Property.Magical" }}</label>
         <div class="form-fields">
 
             {{!-- Attunement --}}
@@ -41,7 +43,7 @@
                     {{/if}}
 
                     {{!-- Attunement --}}
-                    {{ formInput fields.attunement value=source.attunement choices=config.attunementTypes
+                    {{ formInput fields.attunement value=source.attunement choices=CONFIG.attunementTypes
                                  blank="DND5E.AttunementNone" localize=true }}
                 </div>
             </div>
@@ -56,7 +58,7 @@
 
     {{!-- Ammunition Type --}}
     {{#if properties.object.amm}}
-    {{ formField fields.ammunition.fields.type value=source.ammunition.type choices=config.consumableTypes.ammo.subtypes }}
+    {{ formField fields.ammunition.fields.type value=source.ammunition.type choices=CONFIG.consumableTypes.ammo.subtypes }}
     {{/if}}
 </fieldset>
 
@@ -88,7 +90,7 @@
 
     {{!-- Units --}}
     {{ formField fields.range.fields.units value=source.range.units label="DND5E.MovementUnits" localize=true hint=false
-                 choices=config.movementUnits }}
+                 choices=CONFIG.movementUnits }}
 
     {{else}}
 
@@ -105,7 +107,7 @@
 
             {{!-- Units --}}
             {{ formField fields.range.fields.units value=source.range.units label="DND5E.MovementUnits" localize=true
-                         hint=false choices=config.movementUnits classes="label-top" }}
+                         hint=false choices=CONFIG.movementUnits classes="label-top" }}
         </div>
     </div>
 

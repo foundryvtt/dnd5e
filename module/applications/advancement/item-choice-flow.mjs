@@ -66,7 +66,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       this.dropped = [];
       for ( const data of this.retainedData?.items ?? [] ) {
         const uuid = foundry.utils.getProperty(data, "flags.dnd5e.sourceId");
-        if ( this.pool.find(i => uuid === i.uuid) ) continue;
+        if ( this.pool.find(i => uuid === i?.uuid) ) continue;
         const item = await fromUuid(uuid);
         item.dropped = true;
         this.dropped.push(item);
@@ -117,7 +117,8 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
         i.checked = this.selected.has(i.uuid);
         i.disabled = !i.checked && context.choices.full;
         const validLevel = (i.system.prerequisites?.level ?? -Infinity) <= this.level;
-        if ( !previouslySelected.has(i.uuid) && validLevel ) items.push(i);
+        const available = !previouslySelected.has(i.uuid) || i.system.prerequisites?.repeatable;
+        if ( available && validLevel ) items.push(i);
       }
       return items;
     }, []);
@@ -141,7 +142,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /** @inheritDoc */
   _onChangeInput(event) {
-    if ( event.target.type === "checkbox" ) {
+    if ( event.target.tagName === "DND5E-CHECKBOX" ) {
       if ( event.target.checked ) this.selected.add(event.target.name);
       else this.selected.delete(event.target.name);
     }
@@ -197,17 +198,19 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     if ( this.selected.has(item.uuid) ) return false;
 
     // Check to ensure the dropped item hasn't been selected at a lower level
-    for ( const [level, data] of Object.entries(this.advancement.value.added ?? {}) ) {
-      if ( level >= this.level ) continue;
-      if ( Object.values(data).includes(item.uuid) ) {
-        ui.notifications.error("DND5E.AdvancementItemChoicePreviouslyChosenWarning", {localize: true});
-        return null;
+    if ( item.system.prerequisites?.repeatable !== true ) {
+      for ( const [level, data] of Object.entries(this.advancement.value.added ?? {}) ) {
+        if ( level >= this.level ) continue;
+        if ( Object.values(data).includes(item.uuid) ) {
+          ui.notifications.error("DND5E.ADVANCEMENT.ItemChoice.Warning.PreviouslyChosen", { localize: true });
+          return null;
+        }
       }
     }
 
     // If a feature has a level pre-requisite, make sure it is less than or equal to current level
     if ( (item.system.prerequisites?.level ?? -Infinity) > this.level ) {
-      ui.notifications.error(game.i18n.format("DND5E.AdvancementItemChoiceFeatureLevelWarning", {
+      ui.notifications.error(game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Warning.FeatureLevel", {
         level: item.system.prerequisites.level
       }));
       return null;
@@ -218,7 +221,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     if ( (this.advancement.configuration.type === "spell") && spellLevel === "available" ) {
       const maxSlot = this._maxSpellSlotLevel();
       if ( item.system.level > maxSlot ) {
-        ui.notifications.error(game.i18n.format("DND5E.AdvancementItemChoiceSpellLevelAvailableWarning", {
+        ui.notifications.error(game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellLevelAvailable", {
           level: CONFIG.DND5E.spellLevels[maxSlot]
         }));
         return null;
@@ -229,7 +232,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     this.selected.add(item.uuid);
 
     // If the item doesn't already exist in the pool, add it
-    if ( !this.pool.find(i => i.uuid === item.uuid) ) {
+    if ( !this.pool.find(i => i?.uuid === item.uuid) ) {
       this.dropped.push(item);
       item.dropped = true;
     }

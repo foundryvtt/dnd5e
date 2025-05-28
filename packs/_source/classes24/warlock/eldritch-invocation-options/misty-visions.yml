@@ -1,0 +1,147 @@
+_id: phbinvMistyVisio
+name: Misty Visions
+type: feat
+img: icons/magic/air/air-burst-spiral-teal-green.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 2+ Warlock</p></blockquote><p>You can
+      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplSilentImag]{Silent Image}
+      without expending a spell slot.</p><section class="secret"
+      id="secret-zbni49FP84e1UILg"><p><strong>Foundry Note</strong></p><p>This
+      feature includes Silent Image's activities and can be used in its
+      place.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        override: false
+        concentration: true
+        value: '1'
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        prompt: false
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes:
+        - tiny
+        - sm
+        - med
+        - lg
+        - huge
+      creatureTypes: []
+      match:
+        proficiency: false
+        attacks: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: IxAsPOEknS47M7Ya
+          uuid: Compendium.dnd5e.actors24.Actor.dmgIllusoryCreat
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: FmMkdA2mgbTGgfRe
+          uuid: Compendium.dnd5e.actors24.Actor.phbiluObject0000
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: F2J7UUoTTzvbMzYP
+          uuid: Compendium.dnd5e.actors24.Actor.phbiluSensory000
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      effects: []
+      name: ''
+  enchant: {}
+  identifier: misty-visions
+effects: []
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1740685846463
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvMistyVisio'

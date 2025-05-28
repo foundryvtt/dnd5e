@@ -1,0 +1,113 @@
+_id: phbftrSurvivor00
+name: Survivor
+type: feat
+folder: Amxh67Wqon1bSaHg
+img: icons/skills/wounds/injury-pain-body-orange.webp
+system:
+  description:
+    value: >-
+      <p>You attain the pinnacle of resilience in battle, giving you these
+      benefits.</p><p><strong>Defy Death.</strong> You have Advantage on Death
+      Saving Throws. Moreover, when you roll 18–20 on a Death Saving Throw, you
+      gain the benefit of rolling a 20 on it.</p><p><strong>Heroic
+      Rally.</strong> At the start of each of your turns, you regain Hit Points
+      equal to 5 plus your Constitution modifier if you are Bloodied and have at
+      least 1 Hit Point.</p><section id="secret-z1Nr871ifr67hchm"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature does
+      not automate the Death Saving Throw changes. It includes an activity for
+      healing but does not automatically add it when you are
+      Bloodied.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 18
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    5Fo0QwzexIPyLP3W:
+      type: heal
+      _id: 5Fo0QwzexIPyLP3W
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: At the start of each of your turns
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: '5'
+        scaling:
+          number: 1
+        bonus: ''
+      name: ''
+  enchant: {}
+  identifier: survivor
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866578955
+  modifiedTime: 1745256761796
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftrSurvivor00'

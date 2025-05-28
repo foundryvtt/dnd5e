@@ -1,0 +1,79 @@
+name: Amulet
+system:
+  description:
+    value: >-
+      <p><em><strong>Usage Requirement: </strong>Worn or held</em></p><p>A
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagHolySymbolV]{Holy Symbol}
+      takes one of the forms in the Holy Symbol table and is bejeweled or
+      painted to channel divine magic. A Cleric or Paladin can use a Holy Symbol
+      as a Spellcasting Focus.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities: {}
+  identifier: amulet
+_id: phbhsyAmuletworn
+type: equipment
+folder: z3BNNUO43nbnbTy7
+img: icons/equipment/neck/pendant-bronze-gem-blue.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425915122
+  modifiedTime: 1745256813803
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbhsyAmuletworn'

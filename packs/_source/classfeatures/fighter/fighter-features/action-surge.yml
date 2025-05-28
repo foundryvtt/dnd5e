@@ -1,0 +1,110 @@
+_id: xF1VTcJ3AdkbTsdQ
+name: Action Surge
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Starting at 2nd level, you can push yourself beyond your normal limits
+      for a moment. On your turn, you can take one additional action on top of
+      your regular action and a possible Bonus Action.</p><p>Once you use this
+      feature, you must finish a short or long rest before you can use it again.
+      Starting at 17th level, you can use it twice before a rest, but only once
+      on the same turn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '@scale.fighter.action-surge'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Fighter 2
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: action-surge
+folder: UqduR3MIQ300WxcN
+sort: 0
+flags: {}
+img: icons/skills/social/intimidation-impressing.webp
+effects: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037390148
+  modifiedTime: 1725992290485
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!xF1VTcJ3AdkbTsdQ'

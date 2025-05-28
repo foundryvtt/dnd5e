@@ -1,0 +1,6 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset>
+        <legend>{{ localize "DND5E.FORWARD.FIELDS.activity.label" }}</legend>
+        {{ formInput fields.activity.fields.id value=source.activity.id options=activityOptions }}
+    </fieldset>
+</section>

@@ -1,0 +1,151 @@
+_id: Sx5E6utixHdAbGNb
+name: Acid (vial)
+type: consumable
+img: icons/consumables/potions/bottle-round-corked-green.webp
+system:
+  description:
+    value: >-
+      <p>As an action, you can splash the contents of this vial onto a creature
+      within 5 feet of you or throw the vial up to 20 feet, shattering it on
+      impact. In either case, make a ranged attack against a creature or object,
+      treating the acid as an improvised weapon. On a hit, the target takes 2d6
+      acid damage.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 25
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: 2
+      denomination: 6
+      bonus: '@mod'
+      types:
+        - acid
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: potion
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: improvised weapon
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '20'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: dex
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - number: 2
+            denomination: 6
+            bonus: '@mod'
+            types:
+              - acid
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: acid-vial
+effects: []
+folder: gyBZp72zKb56Da84
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037191870
+  modifiedTime: 1725992514681
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Sx5E6utixHdAbGNb'

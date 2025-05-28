@@ -1,7 +1,7 @@
 /**
  * A helper class for building MeasuredTemplates for 5e spells and abilities
  */
-export default class AbilityTemplate extends MeasuredTemplate {
+export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredTemplate {
 
   /**
    * Track the timestamp when the last mouse move event was captured.
@@ -47,6 +47,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     if ( !templateShape ) return null;
 
     // Prepare template data
+    const rollData = activity.getRollData();
     const templateData = foundry.utils.mergeObject({
       t: templateShape,
       user: game.user.id,
@@ -62,8 +63,9 @@ export default class AbilityTemplate extends MeasuredTemplate {
           height: target.height,
           adjustedSize: target.type === "radius"
         },
+        item: activity.item.uuid,
         origin: activity.uuid,
-        spellLevel: activity.item.system.level
+        spellLevel: rollData.item.level
       } }
     }, options);
 
@@ -99,14 +101,6 @@ export default class AbilityTemplate extends MeasuredTemplate {
      */
     if ( Hooks.call("dnd5e.preCreateActivityTemplate", activity, templateData) === false ) return null;
 
-    if ( "dnd5e.preCreateItemTemplate" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.preCreateItemTemplate` hook has been deprecated and replaced with `dnd5e.preCreateActivityTemplate`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-      );
-      if ( Hooks.call("dnd5e.preCreateItemTemplate", activity.item, templateData) === false ) return null;
-    }
-
     // Construct the templates from activity data
     const cls = CONFIG.MeasuredTemplate.documentClass;
     const created = Array.fromRange(target.count || 1).map(() => {
@@ -127,34 +121,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
      */
     Hooks.callAll("dnd5e.createActivityTemplate", activity, created);
 
-    if ( "dnd5e.createItemTemplate" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.createItemTemplate` hook has been deprecated and replaced with `dnd5e.createActivityTemplate`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-      );
-      Hooks.callAll("dnd5e.createItemTemplate", activity.item, created[0]);
-    }
-
     return created;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * A factory method to create an AbilityTemplate instance using provided data from an Item5e instance
-   * @param {Item5e} item               The Item object for which to construct the template
-   * @param {object} [options={}]       Options to modify the created template.
-   * @returns {AbilityTemplate|null}    The template object, or null if the item does not produce a template
-   * @deprecated since DnD5e 4.0, available until DnD5e 4.4
-   */
-  static fromItem(item, options={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `AbilityTemplate#fromItem` method has been deprecated and replaced with `fromActivity`.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-    );
-    const activity = this.system.activities?.contents[0];
-    if ( activity ) return this.fromActivity(activity, options)?.[0] ?? null;
-    return null;
   }
 
   /* -------------------------------------------- */
@@ -199,7 +166,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
 
       // Activate listeners
       canvas.stage.on("mousemove", this.#events.move);
-      canvas.stage.on("mousedown", this.#events.confirm);
+      canvas.stage.on("mouseup", this.#events.confirm);
       canvas.app.view.oncontextmenu = this.#events.cancel;
       canvas.app.view.onwheel = this.#events.rotate;
     });
@@ -214,7 +181,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
   async _finishPlacement(event) {
     this.layer._onDragLeftCancel(event);
     canvas.stage.off("mousemove", this.#events.move);
-    canvas.stage.off("mousedown", this.#events.confirm);
+    canvas.stage.off("mouseup", this.#events.confirm);
     canvas.app.view.oncontextmenu = null;
     canvas.app.view.onwheel = null;
     if ( this.#hoveredToken ) {
@@ -236,7 +203,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     const now = Date.now(); // Apply a 20ms throttle
     if ( now - this.#moveTime <= 20 ) return;
     const center = event.data.getLocalPosition(this.layer);
-    const updates = canvas.templates.getSnappedPoint(center);
+    const updates = this.getSnappedPosition(center);
 
     // Adjust template size to take hovered token into account if `adjustedSize` is set
     const baseDistance = this.document.flags.dnd5e?.dimensions?.size;

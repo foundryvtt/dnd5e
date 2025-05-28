@@ -1,0 +1,48 @@
+name: Shovel
+system:
+  description:
+    value: >-
+      <p>Working for 1 hour, you can use a Shovel to dig a hole that is 5 feet
+      on each side in soil or similar material.</p>
+    chat: ''
+  price:
+    value: 2
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: shovel
+_id: phbagShovel00000
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/tools/hand/shovel-spade-steel-grey.webp
+effects: []
+sort: 5800000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425911970
+  modifiedTime: 1745256812891
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagShovel00000'

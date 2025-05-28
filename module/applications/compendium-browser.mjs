@@ -1,6 +1,7 @@
 import * as Filter from "../filter.mjs";
 import SourceField from "../data/shared/source-field.mjs";
-import CompendiumBrowserSourceConfig from "./compendium-browser-source-config.mjs";
+import Application5e from "./api/application.mjs";
+import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
 /**
  * @typedef {ApplicationConfiguration} CompendiumBrowserConfiguration
@@ -21,6 +22,8 @@ import CompendiumBrowserSourceConfig from "./compendium-browser-source-config.mj
  * @property {string} [documentClass]  Document type to fetch (e.g. Actor or Item).
  * @property {Set<string>} [types]     Individual document subtypes to filter upon (e.g. "loot", "class", "npc").
  * @property {object} [additional]     Additional type-specific filters applied.
+ * @property {FilterDescription[]} [arbitrary]  Additional arbitrary filters to apply, not displayed in the UI.
+ *                                     Only available as part of locked filters.
  * @property {string} [name]           A substring to filter by Document name.
  */
 
@@ -47,13 +50,10 @@ import CompendiumBrowserSourceConfig from "./compendium-browser-source-config.mj
 
 /**
  * Application for browsing, filtering, and searching for content between multiple compendiums.
- * @extends ApplicationV2
- * @mixes HandlebarsApplicationMixin
+ * @extends Application5e
  * @template CompendiumBrowserConfiguration
  */
-export default class CompendiumBrowser extends foundry.applications.api.HandlebarsApplicationMixin(
-  foundry.applications.api.ApplicationV2
-) {
+export default class CompendiumBrowser extends Application5e {
   constructor(...args) {
     super(...args);
 
@@ -64,10 +64,12 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
       this._applyModeFilters(this.options.mode);
     }
 
-    const isAdvanced = this._mode === this.constructor.MODES.ADVANCED;
-    const tab = this.constructor.TABS.find(t => t.tab === this.options.tab);
-    if ( !tab || (!!tab.advanced !== isAdvanced) ) this.options.tab = isAdvanced ? "actors" : "classes";
-    this._applyTabFilters(this.options.tab);
+    if ( foundry.utils.isEmpty(this.options.filters.locked) ) {
+      const isAdvanced = this._mode === this.constructor.MODES.ADVANCED;
+      const tab = this.constructor.TABS.find(t => t.tab === this.options.tab);
+      if ( !tab || (!!tab.advanced !== isAdvanced) ) this.options.tab = isAdvanced ? "actors" : "classes";
+      this._applyTabFilters(this.options.tab);
+    }
   }
 
   /* -------------------------------------------- */
@@ -75,7 +77,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
   /** @override */
   static DEFAULT_OPTIONS = {
     id: "compendium-browser-{id}",
-    classes: ["dnd5e2", "compendium-browser", "vertical-tabs"],
+    classes: ["compendium-browser", "vertical-tabs"],
     tag: "form",
     window: {
       title: "DND5E.CompendiumBrowser.Title",
@@ -124,17 +126,18 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     },
     search: {
       id: "sidebar-search",
-      classes: ["sidebar-part", "filter-element"],
+      classes: ["filter-element"],
+      container: { id: "sidebar", classes: ["sidebar", "flexcol"] },
       template: "systems/dnd5e/templates/compendium/browser-sidebar-search.hbs"
     },
     types: {
       id: "sidebar-types",
-      classes: ["sidebar-part"],
+      container: { id: "sidebar", classes: ["sidebar", "flexcol"] },
       template: "systems/dnd5e/templates/compendium/browser-sidebar-types.hbs"
     },
     filters: {
       id: "sidebar-filters",
-      classes: ["sidebar-part"],
+      container: { id: "sidebar", classes: ["sidebar", "flexcol"] },
       template: "systems/dnd5e/templates/compendium/browser-sidebar-filters.hbs",
       templates: ["systems/dnd5e/templates/compendium/browser-sidebar-filter-set.hbs"]
     },
@@ -418,16 +421,6 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
 
   /* -------------------------------------------- */
 
-  /** @override */
-  _onFirstRender(context, options) {
-    const sidebar = document.createElement("div");
-    sidebar.classList.add("sidebar", "flexcol");
-    sidebar.replaceChildren(...this.element.querySelectorAll(".sidebar-part"));
-    this.element.querySelector(".window-content").insertAdjacentElement("afterbegin", sidebar);
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
@@ -589,8 +582,9 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     // TODO: Determine if new set of results need to be fetched, otherwise use old results and re-sort as necessary
     // Sorting changes alone shouldn't require a re-fetch, but any change to filters will
     const filters = CompendiumBrowser.applyFilters(context.filterDefinitions, context.filters.additional);
-    // Add the name filter
+    // Add the name & arbitrary filters
     if ( this.#filters.name?.length ) filters.push({ k: "name", o: "icontains", v: this.#filters.name });
+    if ( context.filters.arbitrary?.length ) filters.push(...context.filters.arbitrary);
     this.#results = CompendiumBrowser.fetch(CONFIG[context.filters.documentClass].documentClass, {
       filters,
       types: context.filters.types,
@@ -633,8 +627,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     if ( game.user.isGM ) {
       frame.querySelector('[data-action="close"]').insertAdjacentHTML("beforebegin", `
         <button type="button" class="header-control fas fa-cog icon" data-action="configureSources"
-                data-tooltip="DND5E.CompendiumBrowser.Sources.Label"
-                aria-label="${game.i18n.localize("DND5E.CompendiumBrowser.Sources.Label")}"></button>
+                data-tooltip aria-label="${game.i18n.localize("DND5E.CompendiumBrowser.Sources.Label")}"></button>
       `);
     }
     return frame;
@@ -659,7 +652,9 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
       displaySelection: this.displaySelection,
       selected: this.#selected.has(uuid)
     };
-    const html = await renderTemplate("systems/dnd5e/templates/compendium/browser-entry.hbs", context);
+    const html = await foundry.applications.handlebars.renderTemplate(
+      "systems/dnd5e/templates/compendium/browser-entry.hbs", context
+    );
     const template = document.createElement("template");
     template.innerHTML = html;
     const element = template.content.firstElementChild;
@@ -718,13 +713,16 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
       obj[k.slugify({ strict: true })] = v;
       return obj;
     }, {});
-    const filter = await renderTemplate("systems/dnd5e/templates/compendium/browser-sidebar-filter-set.hbs", {
-      locked,
-      value: locked,
-      key: "source",
-      label: "DND5E.SOURCE.FIELDS.source.label",
-      config: { choices: this.#sources }
-    });
+    const filter = await foundry.applications.handlebars.renderTemplate(
+      "systems/dnd5e/templates/compendium/browser-sidebar-filter-set.hbs",
+      {
+        locked,
+        value: locked,
+        key: "source",
+        label: "DND5E.SOURCE.FIELDS.source.label",
+        config: { choices: this.#sources }
+      }
+    );
     filters.insertAdjacentHTML("beforeend", filter);
   }
 
@@ -921,7 +919,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
    * @this {CompendiumBrowser}
    */
   static #onConfigureSources() {
-    new CompendiumBrowserSourceConfig().render({ force: true });
+    new CompendiumBrowserSettingsConfig().render({ force: true });
   }
 
   /* -------------------------------------------- */
@@ -942,6 +940,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
 
   /**
    * Handle form submission with selection.
+   * @this {CompendiumBrowser}
    * @param {SubmitEvent} event          The form submission event.
    * @param {HTMLFormElement} form       The submitted form element.
    * @param {FormDataExtended} formData  The data from the submitted form.
@@ -1093,7 +1092,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     indexFields.delete("system.source.slug");
 
     // Collate compendium sources.
-    const sources = CompendiumBrowserSourceConfig.collateSources();
+    const sources = CompendiumBrowserSettingsConfig.collateSources();
 
     // Iterate over all packs
     let documents = game.packs
@@ -1247,7 +1246,13 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     `;
     button.addEventListener("click", event => (new CompendiumBrowser()).render({ force: true }));
 
-    const headerActions = html.querySelector(".header-actions");
+    let headerActions = html.querySelector(".header-actions");
+    // FIXME: Workaround for 336 bug. Remove when 337 released.
+    if ( !headerActions ) {
+      headerActions = document.createElement("div");
+      headerActions.className = "header-actions action-buttons flexrow";
+      html.querySelector(":scope > header").insertAdjacentElement("afterbegin", headerActions);
+    }
     headerActions.append(button);
   }
 

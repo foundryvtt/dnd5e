@@ -1,0 +1,138 @@
+_id: dmgSwanBoatQuaal
+name: Feather Token (Swan Boat)
+type: consumable
+folder: rHnqTOyb3aiQKdh4
+img: icons/commodities/materials/feather-blue-grey.webp
+system:
+  activities:
+    zvPSnHVQYjCFfTN4:
+      type: utility
+      _id: zvPSnHVQYjCFfTN4
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '24'
+      effects: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: line
+          size: '50'
+          width: '20'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: body of water at least 60 feet in diameter
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Use
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '1'
+    autoDestroy: true
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare, See:
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgQuaalsFeather]{Feather
+      Token}</em></p><p>You can take a Magic action to touch the token to a body
+      of water at least 60 feet in diameter. The token disappears, and a
+      50-foot-long, 20-foot-wide boat shaped like a swan takes its place. The
+      boat is self-propelled and moves across water at a speed of 6 miles per
+      hour. You can take a Magic action while on the boat to command it to move
+      or to turn up to 90 degrees. The boat remains for 24 hours and then
+      disappears. You can dismiss the boat as a Magic action.</p>
+    chat: ''
+  identifier: swan-boat-feather-token
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712704069
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!dmgSwanBoatQuaal'

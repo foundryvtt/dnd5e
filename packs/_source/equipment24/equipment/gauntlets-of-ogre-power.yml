@@ -1,0 +1,112 @@
+_id: dmgGauntletsOfOg
+name: Gauntlets of Ogre Power
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/hand/gauntlet-armored-steel-grey.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon (Requires Attunement)</em></p><p>Your
+      Strength is 19 while you wear these gauntlets. They have no effect on you
+      if your Strength is 19 or higher without them.</p>
+    chat: ''
+  identifier: gauntlets-of-ogre-power
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Ogre Strength
+    img: systems/dnd5e/icons/items/gauntlets-of-ogre-power.webp
+    _id: 8vCrPyrvsQ5MIxTJ
+    type: base
+    system: {}
+    changes:
+      - key: system.abilities.str.value
+        mode: 4
+        value: '19'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730729800431
+      modifiedTime: 1730729839984
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgGauntletsOfOg.8vCrPyrvsQ5MIxTJ'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 15300000
+ownership:
+  default: 0
+_key: '!items!dmgGauntletsOfOg'

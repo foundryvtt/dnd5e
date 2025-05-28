@@ -1,0 +1,131 @@
+name: Demiplane
+system:
+  description:
+    value: >-
+      <p>You create a shadowy Medium door on a flat solid surface that you can
+      see within range. This door can be opened and closed, and it leads to a
+      demiplane that is an empty room 30 feet in each dimension, made of wood or
+      stone (your choice).</p><p>When the spell ends, the door vanishes, and any
+      objects inside the demiplane remain there. Any creatures inside also
+      remain unless they opt to be shunted through the door as it vanishes,
+      landing with the &amp;Reference[Prone] condition in the unoccupied spaces
+      closest to the door's former space.</p><p>Each time you cast this spell,
+      you can create a new demiplane or connect the shadowy door to a demiplane
+      you created with a previous casting of this spell. Additionally, if you
+      know the nature and contents of a demiplane created by a casting of this
+      spell by another creature, you can connect the shadowy door to that
+      demiplane instead.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: space
+      special: flat surface
+    template:
+      units: ft
+      contiguous: false
+      type: wall
+      size: '5'
+      width: '1'
+      height: '5'
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 8
+  school: con
+  properties:
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    BBwiQVm4TEsGq2HG:
+      type: utility
+      _id: BBwiQVm4TEsGq2HG
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: systems/dnd5e/icons/svg/activity/summon.svg
+      appliedEffects: []
+  identifier: demiplane
+_id: phbsplDemiplane0
+type: spell
+img: icons/environment/wilderness/mine-interior-dungeon-door.webp
+effects: []
+folder: M5CvwK9zVtzx6Dnn
+sort: 103125
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425949288
+  modifiedTime: 1745256790175
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDemiplane0'

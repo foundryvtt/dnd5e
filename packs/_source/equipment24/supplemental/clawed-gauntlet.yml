@@ -1,0 +1,156 @@
+_id: dmgClawedGauntle
+name: Clawed Gauntlet
+type: weapon
+img: icons/weapons/fist/claw-gauntlet-gray.webp
+system:
+  activities:
+    l3wkKgez24GthUoo:
+      _id: l3wkKgez24GthUoo
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: unarmed
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>See:
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgDemonArmor000]</em></p><p>The
+      armor's clawed gauntlets allow your Unarmed Strikes to deal 1d8 Slashing
+      damage instead of the usual Bludgeoning damage, and you gain a +1 bonus to
+      the attack and damage rolls of your Unarmed Strikes.</p>
+    chat: ''
+  identifier: clawed-gauntlet
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: natural
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 8
+      types:
+        - slashing
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: 1
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: ''
+effects: []
+folder: TDK7YU58V9y3Kqjo
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730135705503
+  modifiedTime: 1745256803492
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -100000
+ownership:
+  default: 0
+_key: '!items!dmgClawedGauntle'

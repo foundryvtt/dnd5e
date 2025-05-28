@@ -1,0 +1,57 @@
+_id: phbrgeSecondstor
+name: Second-Story Work
+type: feat
+folder: dnKXgPPMNF5Jbw2T
+img: icons/environment/settlement/stone-stairs.webp
+system:
+  description:
+    value: >-
+      <p>You've trained to get into especially hard-to-reach places, granting
+      you these benefits.</p><p><strong>Climber.</strong> You gain a Climb Speed
+      equal to your Speed.</p><p><strong>Jumper.</strong> You can determine your
+      &amp;Reference[Jumping]{jump} distance using your Dexterity rather than
+      your Strength.</p><section class="secret"
+      id="secret-7BCLTkAFUjinYhJw"><p><strong>Foundry Note</strong></p><p>This
+      feature does not automatically add the Climb Speed and will have to be
+      added manually.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: second-story-work
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866560489
+  modifiedTime: 1745256764448
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeSecondstor'

@@ -1,0 +1,172 @@
+_id: dmgRobeOfTheArch
+name: Robe of the Archmagi
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/back/cloak-plain-white.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Legendary (Requires Attunement by a Sorcerer,
+      Warlock, or Wizard)</em></p><p>This elegant garment is made from exquisite
+      cloth and adorned with runes.</p><p>You gain these benefits while wearing
+      the robe.</p><p><em><strong>Armor.</strong></em> If you aren't wearing
+      armor, your base Armor Class is 15 plus your Dexterity
+      modifier.</p><p><em><strong>Magic Resistance.</strong></em> You have
+      Advantage on saving throws against spells and other magical
+      effects.</p><p><em><strong>War Mage.</strong></em> Your spell save DC and
+      spell attack bonus each increase by 2.</p><section
+      id="secret-IRNV3h4JDt2BjO62" class="secret"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Archmagi Armor</strong> Active Effect sets
+      your AC and should be disabled if you're still wearing armor.</p><p>The
+      <strong>War Mage</strong> Active Effect automatically increases you spell
+      save and attack bonus increases.</p></section>
+    chat: ''
+  identifier: robe-of-the-archmagi
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Archmagi Armor
+    img: systems/dnd5e/icons/items/robe-of-the-archmagi.webp
+    _id: pYCleIMCUWOJPtF9
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.ac.calc
+        mode: 5
+        value: custom
+        priority: null
+      - key: system.attributes.ac.formula
+        mode: 5
+        value: 15 + @abilities.dex.mod
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730677761115
+      modifiedTime: 1730678030533
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgRobeOfTheArch.pYCleIMCUWOJPtF9'
+  - name: War Mage
+    img: icons/magic/symbols/star-rising-purple.webp
+    _id: pBVfmqYFHKSl662C
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.spell.dc
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730678232321
+      modifiedTime: 1730678321514
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgRobeOfTheArch.pBVfmqYFHKSl662C'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 32600000
+ownership:
+  default: 0
+_key: '!items!dmgRobeOfTheArch'

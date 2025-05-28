@@ -1,0 +1,53 @@
+_id: phbpdnAuraExpans
+name: Aura Expansion
+type: feat
+folder: 6uMLnndK8UPkb7Uy
+img: icons/magic/defensive/barrier-shield-dome-blue-purple.webp
+system:
+  description:
+    value: >-
+      <p>Your Aura of Protection is now a 30-foot Emanation.</p><section
+      id="secret-gH6lYObbkvAgLL2q" class="secret"><p><strong>Foundry
+      Note</strong></p><p>The range of your auras update automatically as you
+      level up.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 18
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: aura-expansion
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866297701
+  modifiedTime: 1745256763580
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbpdnAuraExpans'

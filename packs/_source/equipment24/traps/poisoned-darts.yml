@@ -1,0 +1,332 @@
+_id: dmgPoisonedDarts
+name: Poisoned Darts
+type: equipment
+img: icons/skills/ranged/dart-thrown-poison-green.webp
+system:
+  activities:
+    RvICMGIB0eFj7glp:
+      type: save
+      name: Trigger (1-4)
+      _id: RvICMGIB0eFj7glp
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: true
+              formula: 1d6
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '13'
+    MSTCr3QSYGyolvAe:
+      type: save
+      name: Trigger (5-10)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: true
+              formula: (1d3) * 2d6
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '13'
+      _id: MSTCr3QSYGyolvAe
+    dmaXYLZqje000jxt:
+      type: save
+      name: Trigger (11-16)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 6
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '13'
+      _id: dmaXYLZqje000jxt
+    NDPRYh9wNKYZuDbL:
+      type: save
+      name: Trigger (17-20)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 7
+            denomination: 6
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '13'
+      _id: NDPRYh9wNKYZuDbL
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Deadly Trap (Levels 1–4)</em></p><p><strong>Trigger:</strong>
+      A creature moves onto a pressure plate</p><p><strong>Duration:</strong>
+      Instantaneous, and the trap resets at the start of the next turn if it has
+      activated fewer than three times</p><p>When a creature moves onto this
+      trap's pressure plate for the first time on a turn, poisoned darts shoot
+      from tubes embedded in the surrounding walls. The holes that house these
+      tubes are obscured by dust and cobwebs or skillfully hidden amid
+      bas-reliefs, murals, or frescoes.</p><p>Each creature in the darts' path
+      must succeed on a DC 13 Dexterity saving throw or be struck by [[/r 1d3]]
+      darts, taking 3 (1d6) Poison damage per dart.</p><p><em><strong>Detect and
+      Disarm.</strong></em> As a Search action, a creature can examine the walls
+      and make a [[/check prc 15]] check, detecting the holes on a successful
+      check. Plugging all the holes with wax, cloth, or detritus prevents the
+      darts from firing.</p><p>As a Search action, a creature can examine the
+      section of floor that forms the pressure plate and make a [[/check prc
+      15]] check, detecting the pressure plate on a successful check. Wedging an
+      Iron Spike or a similar object under the pressure plate prevents the trap
+      from triggering.</p><p><em><strong>At Higher Levels.</strong></em> You can
+      scale the trap for higher levels by increasing each dart's Poison damage
+      as follows: 7 (2d6) at levels 5–10, 14 (4d6) at levels 11–16, or 24 (7d6)
+      at levels 17–20.</p></div>
+    chat: ''
+  identifier: poisoned-darts
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  properties: []
+  strength: null
+  proficient: null
+effects: []
+folder: 8wnVMAA0qwPzQVxS
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730831452785
+  modifiedTime: 1745256807044
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgPoisonedDarts'

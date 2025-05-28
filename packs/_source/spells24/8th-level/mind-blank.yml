@@ -1,0 +1,163 @@
+name: Mind Blank
+system:
+  description:
+    value: >-
+      <p>Until the spell ends, one willing creature you touch has Immunity to
+      Psychic damage and the Charmed condition. The target is also unaffected by
+      anything that would sense its emotions or alignment, read its thoughts, or
+      magically detect its location, and no spell—not even
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish}</em>—can
+      gather information about the target, observe it remotely, or control its
+      mind.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: willing
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 8
+  school: abj
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    8KFEULolKHXsiv2u:
+      type: utility
+      _id: 8KFEULolKHXsiv2u
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: po9iJIqq4OqhvMw0
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: mind-blank
+_id: phbsplMindBlank0
+type: spell
+img: icons/sundries/books/book-open-purple.webp
+effects:
+  - name: Mind Blanked
+    img: icons/sundries/documents/paper-plain-white.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplMindBlank0
+    transfer: false
+    _id: po9iJIqq4OqhvMw0
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.di.value
+        mode: 2
+        value: psychic
+        priority: null
+      - key: system.traits.ci.value
+        mode: 2
+        value: charmed
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 86400
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725308856004
+      modifiedTime: 1725309438645
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplMindBlank0.po9iJIqq4OqhvMw0'
+folder: M5CvwK9zVtzx6Dnn
+sort: 100025
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425963715
+  modifiedTime: 1745256796193
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMindBlank0'

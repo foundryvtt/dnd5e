@@ -4,7 +4,7 @@ import * as Trait from "../actor/trait.mjs";
 import TraitConfig from "../../applications/advancement/trait-config.mjs";
 import TraitFlow from "../../applications/advancement/trait-flow.mjs";
 import {TraitConfigurationData, TraitValueData} from "../../data/advancement/trait.mjs";
-import { filteredKeys } from "../../utils.mjs";
+import { filteredKeys, localizeSchema } from "../../utils.mjs";
 
 /**
  * Advancement that grants the player with certain traits or presents them with a list of traits from which
@@ -22,13 +22,26 @@ export default class TraitAdvancement extends Advancement {
       order: 30,
       icon: "icons/sundries/scrolls/scroll-yellow-teal.webp",
       typeIcon: "systems/dnd5e/icons/svg/trait.svg",
-      title: game.i18n.localize("DND5E.AdvancementTraitTitle"),
-      hint: game.i18n.localize("DND5E.AdvancementTraitHint"),
+      title: game.i18n.localize("DND5E.ADVANCEMENT.Trait.Title"),
+      hint: game.i18n.localize("DND5E.ADVANCEMENT.Trait.Hint"),
       apps: {
         config: TraitConfig,
         flow: TraitFlow
       }
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform the pre-localization of this data model.
+   */
+  static localize() {
+    super.localize();
+    localizeSchema(
+      this.metadata.dataModels.configuration.schema.fields.choices.element,
+      ["DND5E.ADVANCEMENT.Trait.FIELDS.choices"]
+    );
   }
 
   /* -------------------------------------------- */
@@ -86,7 +99,7 @@ export default class TraitAdvancement extends Advancement {
         grants: this.configuration.grants, choices: this.configuration.choices
       })}</p>`;
     } else {
-      return Array.from(this.value.chosen).map(k => `<span class="tag">${Trait.keyLabel(k)}</span>`).join(" ");
+      return Array.from(this.value?.chosen ?? []).map(k => `<span class="tag">${Trait.keyLabel(k)}</span>`).join(" ");
     }
   }
 
@@ -112,10 +125,27 @@ export default class TraitAdvancement extends Advancement {
         updates[keyPath] = (this.configuration.mode === "default")
           || ((this.configuration.mode === "upgrade") && (existingValue === 0)) ? 1 : 2;
       }
+
+      if ( key.startsWith("tool") ) {
+        const toolId = key.split(":").pop();
+        const ability = CONFIG.DND5E.tools[toolId]?.ability;
+        const kp = `system.tools.${toolId}.ability`;
+        if ( ability && !foundry.utils.hasProperty(this.actor, kp) ) updates[kp] = ability;
+      }
     }
 
     this.actor.updateSource(updates);
     this.updateSource({ "value.chosen": Array.from(data.chosen) });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  automaticApplicationValue(level) {
+    // TODO: Ideally this would be able to detect situations where choices are automatically fulfilled because
+    // they only have one valid option, but that is an async process and cannot be called from within `render`
+    if ( this.configuration.choices.length || this.configuration.allowReplacements ) return false;
+    return { chosen: Array.from(this.configuration.grants) };
   }
 
   /* -------------------------------------------- */
@@ -171,7 +201,7 @@ export default class TraitAdvancement extends Advancement {
 
     // If "default" mode is selected, return all traits
     // If any other mode is selected, only return traits that support expertise or mastery
-    const traitTypes = this.configuration.mode === "default" ? Object.keys(CONFIG.DND5E.traits)
+    const traitTypes = this.configuration.mode === "default" ? Object.keys(CONFIG.DND5E.traits).filter(k => k !== "dm")
       : filteredKeys(CONFIG.DND5E.traits, t => t[this.configuration.mode === "mastery" ? "mastery" : "expertise"]);
 
     for ( const trait of traitTypes ) {
@@ -241,11 +271,11 @@ export default class TraitAdvancement extends Advancement {
     // display all remaining choices as an option
     if ( this.configuration.allowReplacements && (unfilteredLength > available.length) ) {
       const rep = this.representedTraits();
-      return {
+      if ( rep.size === 1 ) return {
         choices: choices.filter(this.representedTraits().map(t => `${t}:*`), { inplace: false }),
-        label: game.i18n.format("DND5E.AdvancementTraitChoicesRemaining", {
+        label: game.i18n.format("DND5E.ADVANCEMENT.Trait.ChoicesRemaining", {
           count: unfilteredLength,
-          type: Trait.traitLabel(rep.size === 1 ? rep.first() : null, unfilteredLength)
+          type: Trait.traitLabel(rep.first(), unfilteredLength)
         })
       };
       // TODO: This works well for types without categories like skills where it is primarily intended,
@@ -265,7 +295,7 @@ export default class TraitAdvancement extends Advancement {
     const rep = this.representedTraits(available.map(a => a.choices.asSet()));
     return {
       choices,
-      label: game.i18n.format("DND5E.AdvancementTraitChoicesRemaining", {
+      label: game.i18n.format("DND5E.ADVANCEMENT.Trait.ChoicesRemaining", {
         count: available.length,
         type: Trait.traitLabel(rep.size === 1 ? rep.first() : null, available.length)
       })

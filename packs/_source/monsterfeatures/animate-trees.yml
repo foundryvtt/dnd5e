@@ -1,0 +1,110 @@
+_id: j6F0v4guYhRYWddT
+name: Animate Trees
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>the [[lookup @name lowercase]] magically
+      animates one or two trees it can see <strong>within 60 feet</strong> of
+      it. These trees have the same statistics as a [[lookup @name lowercase]],
+      except they have Intelligence and Charisma scores of 1, they can't speak,
+      and they have only the Slam action option. </p><p>An animated tree acts as
+      an ally of the [[lookup @name lowercase]]. The tree remains animate for 1
+      day or until it dies; until the [[lookup @name lowercase]] dies or is more
+      than 120 feet from the tree; or until the [[lookup @name lowercase]] takes
+      a bonus action to turn it back into an inanimate tree. The tree then takes
+      root if possible.</p></section><p>the [[lookup @name lowercase]] magically
+      animates one or two trees it can see <strong>within 60 feet</strong> of
+      it.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: animate-trees
+flags: {}
+img: icons/magic/nature/tree-spirit-green.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304975596
+  modifiedTime: 1725992574072
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!j6F0v4guYhRYWddT'

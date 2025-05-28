@@ -1,0 +1,77 @@
+name: Orb
+system:
+  description:
+    value: >-
+      <p>An @UUID[Compendium.dnd5e.equipment24.Item.phbagArcaneFocus]{Arcane
+      Focus} is bejeweled or carved to channel arcane magic. A Sorcerer,
+      Warlock, or Wizard can use such an item as a Spellcasting Focus.</p>
+    chat: ''
+  price:
+    value: 20
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities: {}
+  identifier: orb
+_id: phbafcOrb0000000
+type: equipment
+folder: 5qvlWBbvYXzxqIa1
+img: icons/commodities/gems/pearl-purple-smooth.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425904766
+  modifiedTime: 1745256810616
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbafcOrb0000000'

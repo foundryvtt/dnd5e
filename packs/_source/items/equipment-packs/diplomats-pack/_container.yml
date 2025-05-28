@@ -1,0 +1,56 @@
+name: Diplomat's Pack
+type: container
+img: icons/containers/chest/chest-reinforced-steel-red.webp
+system:
+  description:
+    value: <p>A chest holds 12 cubic feet or 300 pounds of gear.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: '70'
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 25
+    units: lb
+  price:
+    value: 39
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  capacity:
+    type: weight
+    value: 300
+  currency:
+    cp: 0
+    sp: 0
+    ep: 0
+    gp: 0
+    pp: 0
+  container: null
+  unidentified:
+    description: ''
+  properties: []
+  attuned: false
+  identifier: diplomats-pack
+effects: []
+folder: Dx3K2y0J1wJUPP9m
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037185540
+  modifiedTime: 1725992512537
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_id: Qy2aRjl4iQ8EmaT5
+sort: 0
+ownership:
+  default: 0
+_key: '!items!Qy2aRjl4iQ8EmaT5'

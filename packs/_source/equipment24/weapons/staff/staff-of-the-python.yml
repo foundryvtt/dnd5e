@@ -1,0 +1,223 @@
+_id: dmgStaffOfThePyt
+name: Staff of the Python
+type: weapon
+img: icons/weapons/staves/staff-metal-mask.webp
+system:
+  activities:
+    Wn7DTIPOw8KojLSF:
+      _id: Wn7DTIPOw8KojLSF
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+    pu1EtLCcCkZMABET:
+      type: summon
+      _id: pu1EtLCcCkZMABET
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '10'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: Unoccupied
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: rsxy82m9MDij6yUt
+          uuid: Compendium.dnd5e.actors24.Actor.mmGiantConstrict
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: Transform into Snake
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>@UUID[Compendium.dnd5e.equipment24.Item.phbafcStaffalsoa]{Staff},
+      Uncommon (Requires Attunement)</em></p><p>As a Magic action, you can throw
+      this staff so that it lands in an unoccupied space within 10 feet of you,
+      causing the staff to become a <strong>Giant Constrictor Snake</strong> in
+      that space. The snake is under your control and shares your Initiative
+      count, taking its turn immediately after yours.</p><p>On your turn, you
+      can mentally command the snake (no action required) if it is within 60
+      feet of you and you don't have the Incapacitated condition. You decide
+      what action the snake takes and where it moves during its turn, or you can
+      issue it a general command, such as to attack your enemies or guard a
+      location. Absent commands from you, the snake defends itself.</p><p>As a
+      Bonus Action, you can command the snake to revert to staff form in its
+      current space, and you can't use the staff's property again for 1 hour. If
+      the snake is reduced to 0 Hit Points, it dies and reverts to its staff
+      form; the staff then shatters and is destroyed. If the snake reverts to
+      staff form before losing all its Hit Points, it regains all of them.</p>
+    chat: ''
+  identifier: staff-of-the-python
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: quarterstaff
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: topple
+effects: []
+folder: 5p9KrkF39e6vFO4g
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745440963480
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 125000
+ownership:
+  default: 0
+_key: '!items!dmgStaffOfThePyt'

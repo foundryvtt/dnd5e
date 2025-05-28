@@ -1,0 +1,199 @@
+_id: dmgPortableHole0
+name: Portable Hole
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/creatures/eyes/void-single-black-purple.webp
+system:
+  activities:
+    ijstCapAvHeMYnZf:
+      type: utility
+      name: Unfold Portable Hole
+      _id: ijstCapAvHeMYnZf
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: square
+          size: '6'
+          count: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    rOLpsFh6iEEG5o2n:
+      type: check
+      name: Escape Check
+      _id: rOLpsFh6iEEG5o2n
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '10'
+        ability: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare</em></p><p>This fine black cloth, soft as silk,
+      is folded up to the dimensions of a handkerchief. It unfolds into a
+      circular sheet 6 feet in diameter.</p><p>You can take a Magic action to
+      unfold a <em>Portable Hole</em> and place it on or against a solid
+      surface, whereupon the <em>Portable Hole</em> creates an extradimensional
+      hole 10 feet deep. The cylindrical space within the hole exists on a
+      different plane of existence, so it can't be used to create open passages.
+      Any creature inside an open <em>Portable Hole</em> can exit the hole by
+      climbing out of it.</p><p>You can take a Magic action to close a
+      <em>Portable Hole</em> by taking hold of the edges of the cloth and
+      folding it up. Folding the cloth closes the hole, and any creatures or
+      objects within remain in the extradimensional space. No matter what's in
+      it, the hole weighs next to nothing.</p><p>If the hole is folded up, a
+      creature within the hole's extradimensional space can take an action to
+      make a DC 10 Strength (Athletics) check. On a successful check, the
+      creature forces its way out and appears within 5 feet of the <em>Portable
+      Hole</em>. A closed <em>Portable Hole</em> holds enough air for 1 hour of
+      breathing, divided by the number of breathing creatures
+      inside.</p><p>Placing a <em>Portable Hole</em> inside an extradimensional
+      space created by a <em>Bag of Holding</em>, <em>Handy Haversack</em>, or
+      similar item instantly destroys both items and opens a gate to the Astral
+      Plane. The gate originates where the one item was placed inside the other.
+      Any creature within 10 feet of the gate and not behind
+      &amp;Reference[Total Cover] is sucked through it and deposited in a random
+      location on the Astral Plane. The gate then closes. The gate is one-way
+      only and can't be reopened.</p>
+    chat: ''
+  identifier: portable-hole
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712702021
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 26800000
+ownership:
+  default: 0
+_key: '!items!dmgPortableHole0'

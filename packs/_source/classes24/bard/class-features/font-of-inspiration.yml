@@ -1,0 +1,112 @@
+_id: phbbrdFontOfInsp
+name: Font of Inspiration
+type: feat
+folder: nP3HNXn7rem24IST
+img: icons/magic/light/hand-sparks-glow-yellow.webp
+system:
+  description:
+    value: >-
+      <p>You now regain all your expended uses of Bardic Inspiration when you
+      finish a Short or Long Rest.</p><p>In addition, you can expend a spell
+      slot (no action required) to regain one expended use of Bardic
+      Inspiration.</p><section class="secret"
+      id="secret-KgQeVfHTLTrKK1s0"><p><strong>Foundry Note</strong></p><p>You
+      must update the Bardic Inspiration feature on your sheet to refresh on
+      Short Rest as it defaults to Long rest.</p><p>The <strong>Recharge with
+      Spell Slot</strong> activity will expend a spell slot and grant another
+      use of Bardic Inspiration.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 5
+    repeatable: false
+  properties: []
+  requirements: Bard
+  activities:
+    MTIru0Pv58RveWan:
+      type: utility
+      name: Recharge with Spell Slot
+      _id: MTIru0Pv58RveWan
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: Compendium.dnd5e.classes24.Item.phbbrdBardicInsp
+            scaling: {}
+          - type: spellSlots
+            value: '1'
+            target: '1'
+            scaling: {}
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: font-of-inspiration
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866377962
+  modifiedTime: 1745256760410
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrdFontOfInsp'

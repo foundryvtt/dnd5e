@@ -1,0 +1,98 @@
+_id: F2lEKSmOY0NUruzY
+name: Sorcerous Restoration
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>At 20th level, you regain 4 expended sorcery points whenever you finish
+      a short rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Sorcerer 20
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: sorcerous-restoration
+flags: {}
+img: icons/magic/water/orb-water-ice-pink.webp
+effects: []
+folder: s3pztJl6gzeYmXdi
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037381977
+  modifiedTime: 1725992287762
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!F2lEKSmOY0NUruzY'

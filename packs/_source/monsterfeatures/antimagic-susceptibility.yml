@@ -1,0 +1,56 @@
+_id: KMQAgNxBCAHrd2JU
+name: Antimagic Susceptibility
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] is incapacitated while in the area of an
+      antimagic field.</p><p>If targeted by dispel magic, the [[lookup @name
+      lowercase]] must succeed on a Constitution saving throw against the
+      caster's spell save DC or fall unconscious for <strong>1
+      minute</strong>.</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] is incapacitated while in the area of an
+      antimagic field.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: antimagic-susceptibility
+flags: {}
+img: icons/magic/lightning/orb-ball-purple.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304969092
+  modifiedTime: 1725992572095
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!KMQAgNxBCAHrd2JU'

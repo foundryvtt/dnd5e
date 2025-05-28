@@ -1,0 +1,267 @@
+_id: dmgDustOfDryness
+name: Dust of Dryness
+type: consumable
+folder: guHYjt0gjPLU2wCs
+img: icons/commodities/materials/bowl-powder-gold.webp
+system:
+  activities:
+    69ftMGLi7i4hv93j:
+      type: utility
+      name: Determine Number of Pinches
+      _id: 69ftMGLi7i4hv93j
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+          - type: itemUses
+            value: 1d6 - 1
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/activity/utility.svg
+      appliedEffects: []
+    yn0MmiDeHO2dYgFE:
+      type: utility
+      name: Sprinkle over Water
+      _id: yn0MmiDeHO2dYgFE
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cube
+          size: '15'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: object
+          special: water
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/ink-pot.svg
+      appliedEffects: []
+    keqZVIzoCF0jud8i:
+      type: save
+      name: Sprinkle on Elemental
+      _id: keqZVIzoCF0jud8i
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Elemental composed mostly of water
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - necrotic
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '13'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '10'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon</em></p><p>This small packet contains 1d6 +
+      4 pinches of dust. As a Utilize action, you can sprinkle a pinch of the
+      dust over <span class="no-break">water</span>, turning up to a 15-foot
+      Cube of water into one marble-sized pellet, which floats or rests near
+      where the dust was sprinkled. The pellet's weight is negligible. A
+      creature can take a Utilize action to smash the pellet against a hard
+      surface, causing the pellet to shatter and release the water the dust
+      absorbed. <span class="no-break">Doing</span> so destroys the pellet and
+      ends its magic.</p><p>As a Utilize action, you can sprinkle a pinch of the
+      dust on an Elemental within 5 feet of yourself that is composed mostly of
+      water (such as a <strong>Water Elemental</strong>). Such a creature
+      exposed to a pinch of the dust makes a DC 13 Constitution saving throw,
+      taking 10d6 Necrotic damage on a failed save or half as much damage on a
+      <span class="no-break">successful one</span>.</p><section class="secret"
+      id="secret-sKauzfT7TYNuqK0B"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Determine Number of Pinches</strong> activity is provided for
+      optional use and will consume item uses to produce a total of 1d6 + 4
+      remaining uses. Once the number of pinches in the packet has been
+      determined, that activity may be deleted.</p></section>
+    chat: ''
+  identifier: dust-of-dryness
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: ''
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712699479
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 600000
+ownership:
+  default: 0
+_key: '!items!dmgDustOfDryness'

@@ -1,0 +1,235 @@
+name: Sunbeam
+system:
+  description:
+    value: >-
+      <p>You launch a sunbeam in a 5-foot-wide, 60-foot-long Line. Each creature
+      in the Line makes a Constitution saving throw. On a failed save, a
+      creature takes 6d8 Radiant damage and has the Blinded condition until the
+      start of your next turn. On a successful save, it takes half as much
+      damage only.</p><p>Until the spell ends, you can take a Magic action to
+      create a new Line of radiance.</p><p>For the duration, a mote of brilliant
+      radiance shines above you. It sheds Bright Light in a 30-foot radius and
+      Dim Light for an additional 30 feet. This light is sunlight.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: line
+      size: '60'
+      width: '5'
+      count: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a magnifying glass
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    o3kffaumfNGjVvg9:
+      type: save
+      _id: o3kffaumfNGjVvg9
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: RZmnRyi6pyjIRN1i
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
+            denomination: '8'
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Initial Cast
+      img: ''
+      appliedEffects:
+        - RZmnRyi6pyjIRN1i
+    Y0cJvZuD7EfwGqkf:
+      type: save
+      name: Create New Sunbeam
+      _id: Y0cJvZuD7EfwGqkf
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: RZmnRyi6pyjIRN1i
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
+            denomination: '8'
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: systems/dnd5e/icons/svg/statuses/concentrating.svg
+      appliedEffects:
+        - RZmnRyi6pyjIRN1i
+  identifier: sunbeam
+_id: phbsplSunbeam000
+type: spell
+img: icons/magic/light/beam-rays-orange-large.webp
+effects:
+  - name: Blinded
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplSunbeam000
+    transfer: false
+    _id: RZmnRyi6pyjIRN1i
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Blinded apply=false] condition until
+      the start of your next turn.</p>
+    tint: '#ffffff'
+    statuses:
+      - blinded
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724798213021
+      modifiedTime: 1724798277064
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplSunbeam000.RZmnRyi6pyjIRN1i'
+folder: 8WmlLARx1Df3Ii9v
+sort: 100782
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425974121
+  modifiedTime: 1745256798940
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSunbeam000'

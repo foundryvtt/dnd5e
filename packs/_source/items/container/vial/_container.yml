@@ -1,0 +1,56 @@
+_id: meJEfX3gZgtMX4x2
+name: Vial
+type: container
+img: icons/consumables/potions/vial-cork-empty.webp
+system:
+  description:
+    value: <p>A vial can hold up to 4 ounces of liquid.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 1
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  capacity:
+    type: weight
+    value: 0.25
+  currency:
+    cp: 0
+    sp: 0
+    ep: 0
+    gp: 0
+    pp: 0
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  attuned: false
+  identifier: vial
+effects: []
+folder: PgtyWdfkDTDbc0ov
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037279082
+  modifiedTime: 1725992543733
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!meJEfX3gZgtMX4x2'

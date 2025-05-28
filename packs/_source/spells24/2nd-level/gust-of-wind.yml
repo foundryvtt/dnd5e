@@ -1,0 +1,123 @@
+name: Gust of Wind
+system:
+  description:
+    value: >-
+      <p>A Line of strong wind 60 feet long and 10 feet wide blasts from you in
+      a direction you choose for the duration. Each creature in the Line must
+      succeed on a Strength saving throw or be pushed 15 feet away from you in a
+      direction following the Line. A creature that ends its turn in the Line
+      must make the same save.</p><p>Any creature in the Line must spend 2 feet
+      of movement for every 1 foot it moves when moving closer to you.</p><p>The
+      gust disperses gas or vapor, and it extinguishes candles and similar
+      unprotected flames in the area. It causes protected flames, such as those
+      of lanterns, to dance wildly and has a 50 percent chance to extinguish
+      them.</p><p>As a Bonus Action on your later turns, you can change the
+      direction in which the Line blasts from you.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      width: '10'
+      type: line
+      size: '60'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a legume seed
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: str
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: gust-of-wind
+_id: phbsplGustofWind
+type: spell
+img: icons/magic/air/air-wave-gust-blue.webp
+effects: []
+folder: 3SjcO2acsFnWegp4
+sort: 3000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425957595
+  modifiedTime: 1745256794249
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplGustofWind'

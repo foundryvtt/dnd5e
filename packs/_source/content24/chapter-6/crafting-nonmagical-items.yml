@@ -1,0 +1,150 @@
+_id: phbCraftingEquip
+name: Crafting Nonmagical Items
+pages:
+  - sort: 0
+    name: Overview
+    type: text
+    _id: IBY1k8SwRJgBSuEK
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>To craft a nonmagical item, you need tools, raw materials, and time,
+        each of which is detailed below. If you meet the requirements, you make
+        the item, and you can use it or sell it at its normal
+        price.</p><h2>Tools</h2><p>This chapter’s
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbEquipment0000.JournalEntryPage.MK3tMrY7pZgPQZo8]{Tools}
+        section lists which tools are required to make certain items. The DM
+        assigns required tools for items not listed there.</p><p>You must use
+        the required tool to make an item and have proficiency with that tool.
+        Anyone who helps you must also have proficiency with it.</p><h2>Raw
+        Materials</h2><p>To make an item, you need raw materials worth half its
+        purchase cost (round down). For example, you need 750 GP of raw
+        materials to make
+        @UUID[Compendium.dnd5e.equipment24.Item.phbarmPlateArmor]{Plate Armor},
+        which sells for 1,500 GP. The GM determines whether appropriate raw
+        materials are available.</p><h2>Time</h2><p>To determine how many days
+        (working 8 hours a day) it takes to make an item, divide its purchase
+        cost in GP by 10 (round a fraction up to a day). For example, you need 5
+        days to make a
+        @UUID[Compendium.dnd5e.equipment24.Item.phbwepHeavyCross]{Heavy
+        Crossbow}, which sells for 50 GP.</p><p>If an item requires multiple
+        days, the days needn’t be consecutive.</p><p>Characters can combine
+        their efforts to shorten the crafting time. Divide the time needed to
+        create an item by the number of characters working on it. Normally, only
+        one other character can assist you, but the GM might allow more
+        assistants.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745525388965
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCraftingEquip.IBY1k8SwRJgBSuEK'
+  - sort: 0
+    name: Brewing Potions of Healing
+    type: text
+    _id: n47iwiqPFPn2zRqX
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A character who has proficiency with the
+        @UUID[Compendium.dnd5e.equipment24.Item.phbtulHerbalismK]{Herbalism Kit}
+        can create a
+        @UUID[Compendium.dnd5e.equipment24.Item.phbagPotionofHea]{Potion of
+        Healing}. Doing so requires using that kit and 25 GP of raw material
+        over the course of 1 day (8 hours of work).</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1725912807812
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCraftingEquip.n47iwiqPFPn2zRqX'
+  - sort: 0
+    name: Scribing Spell Scrolls
+    type: text
+    _id: 8hAsl8JueZ3GvyS2
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: "<p>A spellcaster can transfer a spell to a scroll and create a <em>Spell Scroll</em>, using the rules below.</p><h2>Time and Cost</h2><p>Scribing a scroll takes an amount of time and money based on the level of the spell, as shown in the Spell Scroll Costs table. For each day of inscription, you must work for 8 hours. If a scroll requires multiple days, those days needn’t be consecutive.</p><h2>Prerequisites for the Scribe</h2><p>To scribe a scroll, you must have proficiency in the Arcana skill or with @UUID[Compendium.dnd5e.equipment24.Item.phbtulCalligraph] and have the spell prepared on each day of the inscription. You must also have at hand any Material components required by the spell; if the spell consumes its Material components, they are consumed only when you complete the scroll. The scroll’s spell uses your spell save DC and spell attack bonus.</p><section class=\"fvtt advice\"><figure class=\"icon\"><img src=\"icons/vtt-512.png\" /></figure><article><h3>Easily Make Spell Scrolls</h3><p>In Foundry you can right click on any spell and select the <span class=\"reference\"><em class=\"fa-solid fa-scroll\">\_</em>Create Scroll</span> option which will allow you to configure the scroll's options like its Level, DC, Save, and Attack Bonus.</p></article></section><h2>Cantrips</h2><p>If the scribed spell is a cantrip, the version on the scroll works as if the caster were your level.</p><table><caption>Spell Scroll Costs</caption><thead><tr><th><p>Spell Level</p></th><th><p>Time</p></th><th><p>Cost</p></th></tr></thead><tbody><tr><td><p>Cantrip</p></td><td><p>1 day</p></td><td><p>15 GP</p></td></tr><tr><td><p>1</p></td><td><p>1 day</p></td><td><p>25 GP</p></td></tr><tr><td><p>2</p></td><td><p>3 days</p></td><td><p>100 GP</p></td></tr><tr><td><p>3</p></td><td><p>5 days</p></td><td><p>150 GP</p></td></tr><tr><td><p>4</p></td><td><p>10 days</p></td><td><p>1,000 GP</p></td></tr><tr><td><p>5</p></td><td><p>25 days</p></td><td><p>1,500 GP</p></td></tr><tr><td><p>6</p></td><td><p>40 days</p></td><td><p>10,000 GP</p></td></tr><tr><td><p>7</p></td><td><p>50 days</p></td><td><p>12,500 GP</p></td></tr><tr><td><p>8</p></td><td><p>60 days</p></td><td><p>15,000 GP</p></td></tr><tr><td><p>9</p></td><td><p>120 days</p></td><td><p>50,000 GP</p></td></tr></tbody></table>"
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726762808919
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCraftingEquip.8hAsl8JueZ3GvyS2'
+folder: tKJ13QUHYIACXz6y
+flags:
+  dnd5e:
+    type: special
+    append: 6
+    order: 801200
+    showPages: true
+    navigation:
+      previous: phbMagicItems000
+      next: phbSpells0000000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425888701
+  modifiedTime: 1745677864798
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -6250
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbCraftingEquip'

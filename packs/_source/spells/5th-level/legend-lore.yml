@@ -1,0 +1,120 @@
+_id: W4Qx5z0id6da0vqg
+name: Legend Lore
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Name or describe a person, place, or object. The spell brings to your
+      mind a brief summary of the significant lore about the thing you named.
+      The lore might consist of current tales, forgotten stories, or even secret
+      lore that has never been widely known. If the thing you named isn't of
+      legendary importance, you gain no information. The more information you
+      already have about the thing, the more precise and detailed the
+      information you receive is.</p><p>The information you learn is accurate
+      but might be couched in figurative language. For example, if you have a
+      mysterious magic axe on hand, the spell might yield this information: "Woe
+      to the evildoer whose hand touches the axe, for even the haft slices the
+      hand of the evil ones. Only a true Child of Stone, lover and beloved of
+      Moradin, may awaken the true powers of the axe, and only with the sacred
+      word Rudnogg on the lips."</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: div
+  materials:
+    value: >-
+      Incense worth at least 250gp, which the spell consumes, and four ivory
+      strips worth at least 50gp each.
+    consumed: true
+    cost: 450
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: legend-lore
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-star-orange-purple.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037357652
+  modifiedTime: 1725992720296
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!W4Qx5z0id6da0vqg'

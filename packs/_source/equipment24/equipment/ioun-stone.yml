@@ -1,0 +1,142 @@
+name: Ioun Stone
+system:
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rarity Varies (Requires
+      Attunement)</em></p><p>Roughly marble sized, <em>Ioun Stones</em> are
+      named after Ioun, a god of knowledge and prophecy revered on some worlds.
+      Many types of <em>Ioun Stones</em> exist, each type a distinct combination
+      of shape and color.</p><p>When you take a Magic action to toss an <em>Ioun
+      Stone</em> into the air, the stone orbits your head at a distance of 1d3
+      feet, conferring its benefit to you while doing so. You can have up to
+      three <em>Ioun Stones</em> orbiting your head at the same time.</p><p>Each
+      <em>Ioun Stone</em> orbiting your head is considered to be an object you
+      are wearing. The orbiting stone avoids contact with other creatures and
+      objects, adjusting its orbit to avoid collisions and thwarting all
+      attempts by other creatures to attack or snatch it.</p><p>As a Utilize
+      action, you can seize and stow any number of <em>Ioun Stones</em> orbiting
+      your head. If your Attunement to an <em>Ioun Stone</em> ends while it's
+      orbiting your head, the stone falls as though you had dropped
+      it.</p><p>The type of stone determines its rarity and
+      effects.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgAbsorptionIou]{Absorption}
+      (Very Rare).</strong> While this pale lavender ellipsoid orbits your head,
+      you can take a Reaction to cancel a spell of level 4 or lower cast by a
+      creature you can see. A canceled spell has no effect, and any resources
+      used to cast it are wasted. Once the stone has canceled 20 levels of
+      spells, it burns out, turns dull gray, and loses its
+      magic.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgAgilityIounSt]{Agility}
+      (Very Rare).</strong> Your Dexterity increases by 2, to a maximum of 20,
+      while this deep-red sphere orbits your
+      head.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgAwarenessIoun]{Awareness}
+      (Rare).</strong> While this dark-blue rhomboid orbits your head, you have
+      Advantage on Initiative rolls and Wisdom (Perception)
+      checks.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgFortitudeIoun]{Fortitude}
+      (Very Rare).</strong> Your Constitution increases by 2, to a maximum of
+      20, while this pink rhomboid orbits your
+      head.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgGreaterAbsorp]{Greater
+      Absorption} (Legendary).</strong> While this marbled lavender and green
+      ellipsoid orbits your head, you can take a Reaction to cancel a spell of
+      level 8 or lower cast by a creature you can see. A canceled spell has no
+      effect, and any resources used to cast it are wasted. Once the stone has
+      canceled 20 levels of spells, it burns out, turns dull gray, and loses its
+      magic.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgInsightIounSt]{Insight}
+      (Very Rare).</strong> Your Wisdom increases by 2, to a maximum of 20,
+      while this incandescent blue sphere orbits your
+      head.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgIntellectIoun]{Intellect}
+      (Very Rare).</strong> Your Intelligence increases by 2, to a maximum of
+      20, while this marbled scarlet and blue sphere orbits your
+      head.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgLeadershipIou]{Leadership}
+      (Very Rare).</strong> Your Charisma increases by 2, to a maximum of 20,
+      while this marbled pink and green sphere orbits your
+      head.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgMasteryIounSt]{Mastery}
+      (Legendary).</strong> Your Proficiency Bonus increases by 1 while this
+      pale green prism orbits your
+      head.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgProtectionIou]{Protection}
+      (Rare).</strong> You gain a +1 bonus to Armor Class while this dusty-rose
+      prism orbits your
+      head.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgRegnerationIo]{Regeneration}
+      (Legendary).</strong> You regain 15 Hit Points at the end of each hour
+      this pearly white spindle orbits your head if you have at least 1 Hit
+      Point.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgReserveIounSt]{Reserve}
+      (Rare).</strong> This vibrant purple prism stores spells cast into it,
+      holding them until you use them. The stone can store up to 4 levels of
+      spells at a time. When found, it contains 1d4 levels of stored spells
+      chosen by the DM.</p><p>Any creature can cast a spell of level 1 through 4
+      into the stone by touching it as the spell is cast. The spell has no
+      effect, other than to be stored in the stone. If the stone can't hold the
+      spell, the spell is expended without effect. The level of the slot used to
+      cast the spell determines how much space it uses.</p><p>While this stone
+      orbits your head, you can cast any spell stored in it. The spell uses the
+      slot level, spell save DC, spell attack bonus, and spellcasting ability of
+      the original caster but is otherwise treated as if you cast the spell. The
+      spell cast from the stone is no longer stored in it, freeing up
+      space.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgStrengthIounS]{Strength}
+      (Very Rare).</strong> Your Strength increases by 2, to a maximum of 20,
+      while this pale blue rhomboid orbits your
+      head.</p><p><strong>@UUID[Compendium.dnd5e.equipment24.Item.dmgSustenanceIou]{Sustenance}
+      (Rare).</strong> You don't need to eat or drink while this clear spindle
+      orbits your head.</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  identifier: ioun-stone
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+_id: dmgIounStone0000
+type: equipment
+img: icons/commodities/gems/gem-rough-ball-purple.webp
+effects: []
+folder: U4xmShLy19Ry54zl
+sort: 38050000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730474102072
+  modifiedTime: 1745712700992
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgIounStone0000'

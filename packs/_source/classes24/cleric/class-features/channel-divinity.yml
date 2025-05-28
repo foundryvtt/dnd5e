@@ -1,0 +1,302 @@
+_id: phbclcChannelDiv
+name: Channel Divinity
+type: feat
+folder: 3wY92TRgyyyDkpmF
+img: icons/magic/symbols/star-rising-purple.webp
+system:
+  description:
+    value: >-
+      <p>You can channel divine energy directly from the Outer Planes to fuel
+      magical effects. You start with two such effects: Divine Spark and Turn
+      Undead, each of which is described below. Each time you use this class's
+      Channel Divinity, choose which Channel Divinity effect from this class to
+      create. You gain additional effect options at higher Cleric
+      levels.</p><p>You can use this class's Channel Divinity twice. You regain
+      one of its expended uses when you finish a Short Rest, and you regain all
+      expended uses when you finish a Long Rest. You gain additional uses when
+      you reach certain Cleric levels, as shown in the Channel Divinity column
+      of the Cleric Features table.</p><p>If a Channel Divinity effect requires
+      a saving throw, the DC equals the spell save DC from this class's
+      Spellcasting feature.</p><p><strong>Divine Spark.</strong> As a Magic
+      action, you point your Holy Symbol at another creature you can see within
+      30 feet of yourself and focus divine energy at it. Roll 1d8 and add your
+      Wisdom modifier. You either restore Hit Points to the creature equal to
+      that total or force the creature to make a Constitution saving throw. On a
+      failed save, the creature takes Necrotic or Radiant damage (your choice)
+      equal to that total. On a successful save, the creature takes half as much
+      damage (round down).</p><p>You roll an additional d8 when you reach Cleric
+      levels 7 (2d8), 13 (3d8), and 18 (4d8).</p><p><strong>Turn
+      Undead.</strong> As a Magic action, you present your Holy Symbol and
+      censure Undead creatures. Each Undead of your choice within 30 feet of you
+      must make a Wisdom saving throw. If the creature fails its save, it has
+      the Frightened and Incapacitated conditions for 1 minute. For that
+      duration, it tries to move as far from you as it can on its turns. This
+      effect ends early on the creature if it takes any damage, if you have the
+      Incapacitated condition, or if you die.</p><section class="secret"
+      id="secret-1ECtJAnUinEegKtL"><p><strong>Foundry Note</strong></p><p>This
+      feature will automatically restore 1 use on a Short Rest and all on a Long
+      Rest. The uses scale automatically as you level up.</p><p>The
+      <strong>Divine Spark: Heal</strong> activity includes the healing
+      effect.</p><p>The <strong>Divine Spark: Save</strong> activity includes
+      the saving throw.</p><p>The <strong>Turn Undead</strong> activity includes
+      an Active Effect that applies the Frightened and Incapacitated
+      conditions.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '@scale.cleric.channel-divinity'
+    recovery:
+      - period: lr
+        type: recoverAll
+      - period: sr
+        type: formula
+        formula: '1'
+    spent: 0
+  type:
+    value: class
+    subtype: channelDivinity
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: Cleric
+  activities:
+    UdbUwbvrWwgDuNy9:
+      type: heal
+      _id: UdbUwbvrWwgDuNy9
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: 1
+        denomination: 8
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: '@abilities.wis.mod'
+      name: 'Divine Spark: Heal'
+    OY9UrTXvlRL0JUoI:
+      type: save
+      name: 'Divine Spark: Save'
+      _id: OY9UrTXvlRL0JUoI
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 8
+            bonus: '@abilities.wis.mod'
+            types:
+              - necrotic
+              - radiant
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - con
+        dc:
+          calculation: spellcasting
+          formula: ''
+    aOptL5pMaj3WtR8S:
+      type: utility
+      name: Turn Undead
+      _id: aOptL5pMaj3WtR8S
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: iUeSbfduM7K8XrCF
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: Undead of your choice
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+  enchant: {}
+  identifier: channel-divinity
+effects:
+  - name: Turned
+    img: icons/magic/symbols/star-rising-purple.webp
+    origin: Compendium.dnd5e.classes24.Item.phbclcChannelDiv
+    transfer: false
+    _id: iUeSbfduM7K8XrCF
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - frightened
+      - incapacitated
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbclcChannelDiv.iUeSbfduM7K8XrCF'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866373481
+  modifiedTime: 1745256760672
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 200000
+ownership:
+  default: 0
+_key: '!items!phbclcChannelDiv'

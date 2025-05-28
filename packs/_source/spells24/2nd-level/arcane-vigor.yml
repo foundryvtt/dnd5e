@@ -1,0 +1,411 @@
+name: Arcane Vigor
+system:
+  description:
+    value: >-
+      <p>You tap into your life force to heal yourself. Roll one or two of your
+      unexpended Hit Point Dice, and regain a number of Hit Points equal to the
+      roll's total plus your spellcasting ability modifier. Those dice are then
+      expended.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The
+      number of unexpended Hit Dice you can roll increases by one for each spell
+      slot level above 2.</p><section id="secret-boiIVpDiaDqivdaw"
+      class="secret"><p><strong>Foundry Note</strong></p><p>The <strong>Expend
+      dN Hit Dice</strong> activities are configured to consume a minimum of 2
+      Hit Dice while adding your modifier only once.</p><p>If expending a
+      <em>single</em> Hit Die is desired, please deduct, roll, and heal
+      manually.</p></section><p></p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: bonus
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: abj
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    5paXkJ6hEw07yl8g:
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        formula: '@attributes.hd.largest'
+        name: Roll Largest Hit Die
+      name: Cast
+      _id: 5paXkJ6hEw07yl8g
+    UnCRwxuITUjxr7On:
+      type: heal
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets:
+          - type: hitDice
+            value: '2'
+            target: d6
+            scaling:
+              mode: amount
+              formula: '1'
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+        concentration: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: 2
+        denomination: '6'
+        bonus: '@mod'
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: 2d@attributes.hd.largestFace + @mod
+        scaling:
+          mode: whole
+          number: 1
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Expend d6 Hit Dice
+      _id: UnCRwxuITUjxr7On
+      img: ''
+      appliedEffects: []
+    VeaLn0Cz180Qr9Sg:
+      type: heal
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets:
+          - type: hitDice
+            value: '2'
+            target: d8
+            scaling:
+              mode: amount
+              formula: '1'
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+        concentration: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: 2
+        denomination: '8'
+        bonus: '@mod'
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: 2d@attributes.hd.largestFace + @mod
+        scaling:
+          mode: whole
+          number: 1
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Expend d8 Hit Dice
+      _id: VeaLn0Cz180Qr9Sg
+      img: ''
+      appliedEffects: []
+    784lF9gaalArLsPs:
+      type: heal
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets:
+          - type: hitDice
+            value: '2'
+            target: d10
+            scaling:
+              mode: amount
+              formula: '1'
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+        concentration: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: 2
+        denomination: '10'
+        bonus: '@mod'
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: 2d@attributes.hd.largestFace + @mod
+        scaling:
+          mode: whole
+          number: 1
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Expend d10 Hit Dice
+      _id: 784lF9gaalArLsPs
+      img: ''
+      appliedEffects: []
+    Kkp5dxHq1yK2WOGI:
+      type: heal
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets:
+          - type: hitDice
+            value: '2'
+            target: d12
+            scaling:
+              mode: amount
+              formula: '1'
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+        concentration: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: 2
+        denomination: '12'
+        bonus: '@mod'
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: 2d@attributes.hd.largestFace + @mod
+        scaling:
+          mode: whole
+          number: 1
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Expend d12 Hit Dice
+      _id: Kkp5dxHq1yK2WOGI
+      img: ''
+      appliedEffects: []
+    H7hUZ2QYED0myy5Z:
+      type: heal
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets:
+          - type: hitDice
+            value: '2'
+            target: d12
+            scaling:
+              mode: amount
+              formula: '1'
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+        concentration: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: 2
+        denomination: 12
+        bonus: '@mod'
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: 2d@attributes.hd.largestFace + @mod
+        scaling:
+          mode: whole
+          number: 1
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Expend d12 Hit Dice
+      _id: H7hUZ2QYED0myy5Z
+  identifier: arcane-vigor
+_id: phbsplArcaneVigo
+type: spell
+img: icons/magic/life/cross-embers-glow-yellow-purple.webp
+effects: []
+folder: 3SjcO2acsFnWegp4
+sort: 5300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425941424
+  modifiedTime: 1745256785876
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplArcaneVigo'

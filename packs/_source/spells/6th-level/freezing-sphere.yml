@@ -1,0 +1,142 @@
+_id: MImfWCzEPRMYD3Xp
+name: Freezing Sphere
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A frigid globe of cold energy streaks from your fingertips to a point
+      of your choice within range, where it explodes in a 60-foot-radius sphere.
+      Each creature within the area must make a Constitution saving throw. On a
+      failed save, a creature takes 10d6 cold damage. On a successful save, it
+      takes half as much damage.</p><p>If the globe strikes a body of water or a
+      liquid that is principally water (not including water-based creatures), it
+      freezes the liquid to a depth of 6 inches over an area 30 feet square.
+      This ice lasts for 1 minute. Creatures that were swimming on the surface
+      of frozen water are trapped in the ice. A trapped creature can use an
+      action to make a Strength check against your spell save DC to break
+      free.</p><p>You can refrain from firing the globe after completing the
+      spell, if you wish. A small globe about the size of a sling stone, cool to
+      the touch, appears in your hand. At any time, you or a creature you give
+      the globe to can throw the globe (to a range of 40 feet) or hurl it with a
+      sling (to the sling's normal range). It shatters on impact, with the same
+      effect as the normal casting of the spell. You can also set the globe down
+      without shattering it. After 1 minute, if the globe hasn't already
+      shattered, it explodes.</p><p><strong>At Higher Levels.</strong> When you
+      cast this spell using a spell slot of 7th level or higher, the damage
+      increases by 1d6 for each slot level above 6th.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '60'
+      contiguous: false
+  range:
+    value: '300'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: evo
+  materials:
+    value: A small crystal sphere
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - cold
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: freezing-sphere
+sort: 0
+flags: {}
+img: icons/magic/light/explosion-star-blue-large.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037354540
+  modifiedTime: 1725992719294
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!MImfWCzEPRMYD3Xp'

@@ -1,0 +1,116 @@
+_id: nqBDWkVOfcGZt4YU
+name: Faerie Fire
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Each object in a 20-foot cube within range is outlined in blue, green,
+      or violet light (your choice). Any creature in the area when the spell is
+      cast is also outlined in light if it fails a Dexterity saving throw. For
+      the duration, objects and affected creatures shed dim light in a 10-foot
+      radius.</p><p>Any attack roll against an affected creature or object has
+      advantage if the attacker can see it, and the affected creature or object
+      can't benefit from being invisible.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cube
+      size: '20'
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: faerie-fire
+sort: 0
+flags: {}
+img: icons/magic/fire/projectile-meteor-salvo-strong-teal.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037364768
+  modifiedTime: 1725992722629
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!nqBDWkVOfcGZt4YU'

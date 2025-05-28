@@ -1,0 +1,122 @@
+_id: ERCv7yuRkQ0YjGx6
+name: Reverse Gravity
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell reverses gravity in a 50-foot-radius, 100-foot high Cylinder
+      centered on a point within range. All creatures and Objects that aren't
+      somehow anchored to the ground in the area fall upward and reach the top
+      of the area when you cast this spell. A creature can make a Dexterity
+      saving throw to grab onto a fixed object it can reach, thus avoiding the
+      fall.</p><p>If some solid object (such as a ceiling) is encountered in
+      this fall, Falling Objects and creatures strike it just as they would
+      during a normal downward fall. If an object or creature reaches the top of
+      the area without striking anything, it remains there, oscillating
+      slightly, for the Duration.</p><p>At the end of the Duration, affected
+      Objects and creatures fall back down.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cylinder
+      size: '50'
+      contiguous: false
+  range:
+    value: '100'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 7
+  school: trs
+  materials:
+    value: A lodestone and iron fillings
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: reverse-gravity
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-energy-hold-yellow.webp
+effects: []
+folder: irCSpQWIMtp978TA
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037351513
+  modifiedTime: 1725992718269
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ERCv7yuRkQ0YjGx6'

@@ -1,0 +1,122 @@
+_id: oIzA2MEHwxhtQneU
+name: Minor Illusion
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create a sound or an image of an object within range that lasts for
+      the duration. The illusion also ends if you dismiss it as an action or
+      cast this spell again.</p><p>If you create a sound, its volume can range
+      from a whisper to a scream. It can be your voice, someone else's voice, a
+      lion's roar, a beating of drums, or any other sound you choose. The sound
+      continues unabated throughout the duration, or you can make discrete
+      sounds at different times before the spell ends.</p><p>If you create an
+      image of an object—such as a chair, muddy footprints, or a small chest—it
+      must be no larger than a 5-foot cube. The image can't create sound, light,
+      smell, or any other sensory effect. Physical interaction with the image
+      reveals it to be an illusion, because things can pass through it.</p><p>If
+      a creature uses its action to examine the sound or image, the creature can
+      determine that it is an illusion with a successful Intelligence
+      (Investigation) check against your spell save DC. If a creature discerns
+      the illusion for what it is, the illusion becomes faint to the
+      creature.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cube
+      size: '5'
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: ill
+  materials:
+    value: A bit of fleece.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: minor-illusion
+sort: 0
+flags: {}
+img: icons/magic/control/hypnosis-mesmerism-eye.webp
+effects: []
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037365024
+  modifiedTime: 1725992722734
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!oIzA2MEHwxhtQneU'

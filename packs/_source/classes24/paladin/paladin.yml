@@ -1,0 +1,599 @@
+_id: phbpdnPaladin000
+name: Paladin
+type: class
+folder: VHaxJHEReTihmspe
+img: systems/dnd5e/icons/classes/paladin.webp
+system:
+  description:
+    value: >-
+      <h3>Core Paladin Traits</h3><table
+      class="core-class-traits"><tbody><tr><th scope="row"><p><strong>Primary
+      Ability</strong></p></th><td><p>Strength and Charisma</p></td></tr><tr><th
+      scope="row"><p><strong>Hit Point Die</strong></p></th><td><p>D10 per
+      Paladin level</p></td></tr><tr><th scope="row"><p><strong>Saving Throw
+      Proficiencies</strong></p></th><td><p>Wisdom and
+      Charisma</p></td></tr><tr><th scope="row"><p><strong>Skill
+      Proficiencies</strong></p></th><td><p><em>Choose 2: </em>Athletics,
+      Insight, Intimidation, Medicine, Persuasion, or
+      Religion</p></td></tr><tr><th scope="row"><p><strong>Weapon
+      Proficiencies</strong></p></th><td><p>Simple and Martial
+      weapons</p></td></tr><tr><th scope="row"><p><strong>Armor
+      Training</strong></p></th><td><p>Light, Medium, and Heavy armor and
+      Shields</p></td></tr><tr><th scope="row"><p><strong>Starting
+      Equipment</strong></p></th><td><p><em>Choose A or B:</em> (A)
+      @UUID[Compendium.dnd5e.equipment24.Item.phbarmChainMail0]{Chain Mail},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbarmShield0000]{Shield},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepLongsword0]{Longsword}, 6
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepJavelin000]{Javelins},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagHolySymbolV]{Holy Symbol},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagPriestsPack]{Priest's Pack},
+      and [[/award 9GP]]; or (B) [[/award
+      150GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbpdnPaladin000
+      inline classes="free-rules-embed"]</p><h2>Becoming a Paladin …</h2><h3>As
+      a Level 1 Character</h3><ul><li>Gain all the traits in the Core Paladin
+      Traits table.</li><li>Gain the Paladin's level 1 features, which are
+      listed in the Paladin Features table.</li></ul><h3>As a Multiclass
+      Character</h3><ul><li>Gain the following traits from the Core Paladin
+      Traits table: Hit Point Die, proficiency with Martial weapons, and
+      training with Light and Medium armor and Shields.</li><li>Gain the
+      Paladin's level 1 features, which are listed in the Paladin Features
+      table. See the multiclassing rules in chapter 2 to determine your
+      available spell slots.</li></ul><blockquote><p><strong>Breaking Your
+      Oath</strong></p><p>A Paladin tries to hold to the highest standards of
+      conduct, but even the most dedicated are fallible. Sometimes a Paladin
+      transgresses their oath.</p><p>A Paladin who has broken a vow typically
+      seeks absolution, spending an all-night vigil as a sign of penitence or
+      undertaking a fast. After a rite of forgiveness, the Paladin starts
+      fresh.</p><p>If your Paladin unrepentantly violates their oath, talk to
+      your DM. Your Paladin should probably take a more appropriate subclass or
+      even abandon the class and adopt another one.</p></blockquote>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  startingEquipment:
+    - type: AND
+      requiresProficiency: false
+      _id: 55QxZJqMqe2yhcIx
+      group: ''
+      sort: 100000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbarmChainMail0
+      requiresProficiency: false
+      _id: CMW1osn8yyeBlaFN
+      group: 55QxZJqMqe2yhcIx
+      sort: 200000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbarmShield0000
+      requiresProficiency: false
+      _id: DetedjFDDGEZPfHF
+      group: 55QxZJqMqe2yhcIx
+      sort: 300000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbwepLongsword0
+      requiresProficiency: false
+      _id: 2bS7ztlTwaWy3vBR
+      group: 55QxZJqMqe2yhcIx
+      sort: 400000
+    - type: linked
+      count: 6
+      key: Compendium.dnd5e.equipment24.Item.phbwepJavelin000
+      requiresProficiency: false
+      _id: ah68oZH9CElaDWV7
+      group: 55QxZJqMqe2yhcIx
+      sort: 500000
+    - type: focus
+      count: null
+      key: holy
+      requiresProficiency: false
+      _id: RDI84jZHYTkZIB8k
+      group: 55QxZJqMqe2yhcIx
+      sort: 600000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbagPriestsPack
+      requiresProficiency: false
+      _id: QtswKbw3wDtJyho7
+      group: 55QxZJqMqe2yhcIx
+      sort: 650000
+  identifier: paladin
+  levels: 1
+  advancement:
+    - _id: H67dh2nWpE6JMoS2
+      type: HitPoints
+      configuration: {}
+      value: {}
+    - _id: Cu9TxxKJqfAOPURY
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbpdnLayOnHands
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbpdnSpellcasti
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbpdnWeaponMast
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 1
+      title: Class Features
+    - _id: AKkVlHKAVYHNqf6q
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.classes24.Item.phbpdnFightingSt
+          - optional: false
+            uuid: Compendium.dnd5e.classes24.Item.phbpdnPaladinsSm
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplDivineSmit
+        optional: false
+        spell:
+          ability: []
+          preparation: always
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+      value: {}
+      level: 2
+      title: Class Features
+      hint: ''
+    - _id: 8I26b7hyVhhTyCho
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbpdnChannelDiv
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Class Features
+    - _id: ETE0AFEPZYVKhGeV
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.classes24.Item.phbpdnExtraAttac
+          - optional: false
+            uuid: Compendium.dnd5e.classes24.Item.phbpdnFaithfulSt
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplFindSteed0
+        optional: false
+        spell:
+          ability: []
+          preparation: always
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+      value: {}
+      level: 5
+      title: Class Features
+      hint: ''
+    - _id: 4ZvtY8dxJGz7VaDN
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbpdnProtection
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 6
+      title: Class Features
+    - _id: S2e43900sVur7sOK
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbpdnAbjureFoes
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 9
+      title: Class Features
+    - _id: 7Nhpo9BJt103peym
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbpdnCourageAur
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 10
+      title: Class Features
+    - _id: sBD0PwAIuNSCs9Px
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbpdnRadiantStr
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 11
+      title: Class Features
+    - _id: G6XicWkWUTdMTmC9
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbpdnRestoringT
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 14
+      title: Class Features
+    - _id: dChGldRqBZQFRIoP
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.classes24.Item.phbpdnAuraExpans
+        optional: false
+        spell: null
+      value: {}
+      level: 18
+      title: Class Features
+      hint: ''
+    - _id: KuXQNIAH1NEikvYO
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbpdnEpicBoon00
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 19
+      title: Class Features
+    - _id: bwCLOdauuzoHofil
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 4
+      title: ''
+    - _id: mRSh9oUVjLU33e7p
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 8
+      title: ''
+    - _id: mhZh3LfLMa15tXee
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 12
+      title: ''
+    - _id: FOf5CkGnSs0OlppY
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 16
+      title: ''
+    - _id: xNrNjQXdjdqudAk8
+      type: ScaleValue
+      configuration:
+        identifier: aura
+        type: distance
+        distance:
+          units: ''
+        scale:
+          '6':
+            value: 10
+          '18':
+            value: 30
+      value: {}
+      title: Aura Distance
+      hint: ''
+    - _id: K0m33nbxbp3BfUKd
+      type: ScaleValue
+      configuration:
+        identifier: max-prepared
+        type: number
+        distance:
+          units: ''
+        scale:
+          '1':
+            value: 2
+          '2':
+            value: 3
+          '3':
+            value: 4
+          '4':
+            value: 5
+          '5':
+            value: 6
+          '7':
+            value: 7
+          '9':
+            value: 9
+          '11':
+            value: 10
+          '13':
+            value: 11
+          '15':
+            value: 12
+          '17':
+            value: 14
+          '19':
+            value: 15
+      value: {}
+      title: Max Prepared Spells
+      hint: ''
+    - _id: czWJhEH2Xw1gaXzl
+      type: ScaleValue
+      configuration:
+        identifier: channel-divinity
+        type: number
+        distance:
+          units: ''
+        scale:
+          '3':
+            value: 2
+          '11':
+            value: 3
+      value: {}
+      title: Channel Divinity Uses
+      hint: ''
+    - _id: qdxNLKaWypoq3W3E
+      type: ItemChoice
+      configuration:
+        choices:
+          '19':
+            count: 1
+            replacement: false
+        allowDrops: true
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofCombatP
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofEnergyR
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFate000
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFortitu
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofIrresis
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofRecover
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSkill00
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpeed00
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpellRe
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonoftheNigh
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofTruesig
+        spell: null
+        restriction:
+          type: feat
+          subtype: ''
+      value:
+        added: {}
+        replaced: {}
+      title: Epic Boon
+      hint: ''
+    - _id: tU89l5dpMkYJBBJ5
+      type: Subclass
+      configuration: {}
+      value:
+        document: null
+        uuid: null
+      level: 3
+      title: ''
+      hint: ''
+    - _id: eK65opSkuSD1C22h
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - saves:wis
+          - saves:cha
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Saving Throw Proficiencies
+      hint: ''
+      classRestriction: primary
+    - _id: WdtO0qeppSNvtel8
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:ath
+              - skills:ins
+              - skills:itm
+              - skills:med
+              - skills:per
+              - skills:rel
+      value:
+        chosen: []
+      level: 1
+      title: Skill Proficiencies
+      hint: ''
+      classRestriction: primary
+    - _id: iZReGwulhKjVqgRD
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - weapon:sim
+          - weapon:mar
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Weapon Proficiencies
+      hint: ''
+      classRestriction: primary
+    - _id: 2sq0pcazOXs74X5l
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - armor:lgt
+          - armor:med
+          - armor:hvy
+          - armor:shl
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Armor Training
+      hint: ''
+      classRestriction: primary
+    - _id: dSjz0J0F5cQLvWTd
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - weapon:mar
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Weapon Proficiencies
+      hint: ''
+      classRestriction: secondary
+    - _id: TZP9M5VqcBv8D313
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - armor:lgt
+          - armor:med
+          - armor:shl
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Armor Training
+      hint: ''
+      classRestriction: secondary
+    - _id: g88kf6OtX8abBt5c
+      type: ItemChoice
+      configuration:
+        choices:
+          '2':
+            count: 1
+            replacement: false
+        allowDrops: true
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstArchery000
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstDefense000
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstGreatWeapo
+          - uuid: Compendium.dnd5e.feats24.Item.phbfstTwoWeaponF
+          - uuid: Compendium.dnd5e.classes24.Item.phbfstBlessedWar
+        spell: null
+        restriction:
+          type: ''
+          subtype: ''
+      value:
+        added: {}
+        replaced: {}
+      title: Fighting Style
+      hint: ''
+    - _id: H2wzREytOuzt7qqC
+      type: Trait
+      configuration:
+        mode: mastery
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - weapon:*
+      value:
+        chosen: []
+      level: 1
+      title: Weapon Mastery
+      hint: ''
+  spellcasting:
+    progression: half
+    ability: cha
+    preparation:
+      formula: '@scale.paladin.max-prepared'
+  wealth: '150'
+  primaryAbility:
+    value:
+      - str
+      - cha
+    all: true
+  hd:
+    denomination: d10
+    spent: 0
+    additional: ''
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866297701
+  modifiedTime: 1745517438572
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbpdnPaladin000'

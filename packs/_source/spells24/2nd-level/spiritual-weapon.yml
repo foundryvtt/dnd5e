@@ -1,0 +1,143 @@
+name: Spiritual Weapon
+system:
+  description:
+    value: >-
+      <p>You create a floating, spectral force that resembles a weapon of your
+      choice and lasts for the duration. The force appears within range in a
+      space of your choice, and you can immediately make one melee spell attack
+      against one creature within 5 feet of the force. On a hit, the target
+      takes Force damage equal to 1d8 plus your spellcasting ability
+      modifier.</p><p>As a Bonus Action on your later turns, you can move the
+      force up to 20 feet and repeat the attack against a creature within 5 feet
+      of it.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The damage
+      increases by 1d8 for every slot level above 2.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: bonus
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        proficiency: true
+        attacks: true
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: Nz3W2vDYmMsyP8Yb
+          uuid: Compendium.dnd5e.actors24.Actor.phbsplSpiritualW
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+  identifier: spiritual-weapon
+_id: phbsplSpiritualW
+type: spell
+img: icons/weapons/axes/axe-double-gold.webp
+effects: []
+folder: 3SjcO2acsFnWegp4
+sort: 200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425972232
+  modifiedTime: 1740685854728
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSpiritualW'

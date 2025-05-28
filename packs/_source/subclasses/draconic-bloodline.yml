@@ -1,0 +1,122 @@
+name: Draconic Bloodline
+type: subclass
+img: icons/creatures/reptiles/dragon-horned-blue.webp
+system:
+  description:
+    value: >-
+      <p>Your innate magic comes from draconic magic that was mingled with your
+      blood or that of your ancestors. Most often, sorcerers with this origin
+      trace their descent back to a mighty sorcerer of ancient times who made a
+      bargain with a dragon or who might even have claimed a dragon parent. Some
+      of these bloodlines are well established in the world, but most are
+      obscure. Any given sorcerer could be the first of a new bloodline, as a
+      result of a pact or some other exceptional circumstance.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: draconic-bloodline
+  classIdentifier: sorcerer
+  advancement:
+    - _id: bjbipb2oydq3zsuy
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.EZsonMThTNLZq35j
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.MW1ExvBLm8Hg82aA
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 1
+      title: Features
+    - _id: cq0cwgss39pkvjox
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.x6eEZ9GUsuOcEa3G
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 6
+      title: Features
+    - _id: rfd6o6858pl8k7fl
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.3647zjKSE9zFwOXc
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 14
+      title: Features
+    - _id: 4xrl7vjblpn8zl5t
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.Gsha4bl0apxqspFy
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 18
+      title: Features
+    - _id: Gg8rCLE8zNfjpGOV
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - languages:exotic:draconic
+        choices: []
+      level: 1
+      title: ''
+      value:
+        chosen: []
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation: {}
+effects: []
+folder: TCB42RLUb0HxUb2M
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: 2nadB2MBSHTQ0kcl
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037372784
+  modifiedTime: 1725992730550
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!2nadB2MBSHTQ0kcl'

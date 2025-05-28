@@ -1,0 +1,149 @@
+name: Water Breathing
+system:
+  description:
+    value: >-
+      <p>This spell grants up to ten willing creatures of your choice within
+      range the ability to breathe underwater until the spell ends. Affected
+      creatures also retain their normal mode of respiration.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      type: willing
+      count: '10'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '30'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  materials:
+    value: a short reed
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: hyFupFam9XIbim0U
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: water-breathing
+_id: phbsplWaterBreat
+type: spell
+img: icons/magic/water/bubbles-air-water-blue.webp
+effects:
+  - name: Water Breathing
+    origin: Compendium.dnd5e.spells24.Item.phbsplWaterBreat
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 86400
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/creatures/fish/crab-blue-purple.webp
+    _id: hyFupFam9XIbim0U
+    type: base
+    system: {}
+    changes: []
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplWaterBreat.hyFupFam9XIbim0U'
+folder: HCovEE4VoPGlIbKi
+sort: 100025
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425977495
+  modifiedTime: 1745256799963
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplWaterBreat'

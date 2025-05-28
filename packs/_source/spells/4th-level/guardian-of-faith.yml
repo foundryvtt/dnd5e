@@ -1,0 +1,128 @@
+_id: TgHsuhNasPbhu8MO
+name: Guardian of Faith
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A Large Spectral Guardian appears and hovers for the Duration in an
+      unoccupied space of your choice that you can see within range. The
+      guardian occupies that space and is indistinct except for a gleaming sword
+      and shield emblazoned with the symbol of your deity.</p><p>Any creature
+      hostile to you that moves to a space within 10 feet of the guardian for
+      the first time on a turn must succeed on a Dexterity saving throw. The
+      creature takes 20 radiant damage on a failed save, or half as much damage
+      on a successful one. The guardian vanishes when it has dealt a total of 60
+      damage.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      type: space
+      choice: false
+    template:
+      units: any
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: null
+            denomination: null
+            bonus: ''
+            types:
+              - radiant
+            custom:
+              enabled: true
+              formula: '20'
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: guardian-of-faith
+sort: 0
+flags: {}
+img: icons/magic/control/buff-flight-wings-runes-blue-white.webp
+effects: []
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037357010
+  modifiedTime: 1725992720123
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!TgHsuhNasPbhu8MO'

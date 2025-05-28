@@ -1,0 +1,92 @@
+_id: phbinvDevilsSigh
+name: Devil's Sight
+type: feat
+img: icons/magic/perception/silhouette-stealth-shadow.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 2+ Warlock</p></blockquote><p>You can
+      see normally in Dim Light and Darkness—both magical and nonmagical—within
+      120 feet of yourself.</p><section class="secret"
+      id="secret-RVsijULbRFU2b9ZU"><p><strong>Foundry Note</strong></p><p>This
+      feature includes an Active Effect that grants you darkvision to 120
+      feet.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: devils-sight
+effects:
+  - name: Devil's Sight
+    img: icons/magic/perception/silhouette-stealth-shadow.webp
+    _id: Qfe7snyNHXLJHp4G
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.senses.darkvision
+        mode: 4
+        value: '120'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbinvDevilsSigh.Qfe7snyNHXLJHp4G'
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256762037
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvDevilsSigh'

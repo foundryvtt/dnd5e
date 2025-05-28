@@ -1,0 +1,75 @@
+_id: 6067acDZGv7KNOkP
+name: Elven Chain
+type: equipment
+img: icons/equipment/back/mantle-collared-green.webp
+system:
+  description:
+    value: >-
+      <p>You gain a +1 bonus to AC while you wear this armor. You are considered
+      proficient with this armor even if you lack proficiency with medium
+      armor.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 20
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 13
+    dex: 2
+    magicalBonus: 1
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: 1
+  type:
+    value: medium
+    baseItem: chainshirt
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: elven-chain
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037102426
+  modifiedTime: 1725992484702
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!6067acDZGv7KNOkP'

@@ -1,0 +1,48 @@
+_id: KTsFgSQlDetDDm1f
+name: Lightning Absorption
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Whenever the [[lookup @name lowercase]] is subjected to
+      <strong><em>lightning damage</em></strong>, it takes no damage and instead
+      regains a number of<strong> hit points</strong> equal to the
+      <strong><em>lightning damage</em> dealt</strong>.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: lightning-absorption
+flags: {}
+img: icons/magic/lightning/bolt-strike-blue.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304969139
+  modifiedTime: 1725992572105
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!KTsFgSQlDetDDm1f'

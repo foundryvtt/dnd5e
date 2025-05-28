@@ -1,0 +1,169 @@
+_id: dmgRodOfSecurity
+name: Rod of Security
+type: equipment
+img: icons/weapons/maces/mace-round-ornate-purple.webp
+system:
+  activities:
+    UObzE9xw3Ro4KtX0:
+      type: utility
+      name: Transport to Demiplane
+      _id: UObzE9xw3Ro4KtX0
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: day
+        concentration: false
+        override: false
+        value: '200'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '200'
+          type: creature
+          special: you can see
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '1'
+  description:
+    value: >-
+      <p><em>Rod, Very Rare</em></p><p>While holding this rod, you can take a
+      Magic action to activate it. The rod then instantly transports you and up
+      to 199 other willing creatures you can see to a demiplane. You choose the
+      form the demiplane takes. It could be a tranquil garden, a cheery tavern,
+      an immense palace, a tropical island, a fantastic carnival, or whatever
+      else you can imagine. Regardless of its nature, the demiplane contains
+      enough water and food to sustain its visitors, and the demiplane's
+      environment can't harm its occupants. Everything else that can be
+      interacted with there can exist only there. For example, a flower picked
+      from a garden there disappears if it is taken outside the
+      demiplane.</p><p>For each hour spent in the demiplane, a visitor regains
+      Hit Points as if it had spent 1 Hit Point Die. Also, creatures don't age
+      while there, although time passes normally. Visitors can remain there for
+      up to 200 days divided by the number of creatures present (round
+      down).</p><p>When the time runs out or you take a Magic action to end the
+      effect, all visitors reappear in the location they occupied when you
+      activated the rod or an unoccupied space nearest that location. Once used,
+      this property can't be used again until 10 days have passed.</p><section
+      class="secret" id="secret-Z6J3bMzIgyeF3UkP"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Transport to Demiplane</strong> activity
+      will consume a use of this item but the ten day recovery period must be
+      tracked manually.</p></section>
+    chat: ''
+  identifier: rod-of-security
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: rod
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+effects: []
+folder: XVIITMl9kCCSjZQz
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703148
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 175000
+ownership:
+  default: 0
+_key: '!items!dmgRodOfSecurity'

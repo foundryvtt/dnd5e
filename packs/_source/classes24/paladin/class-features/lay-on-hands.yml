@@ -1,0 +1,177 @@
+_id: phbpdnLayOnHands
+name: Lay on Hands
+type: feat
+folder: 6uMLnndK8UPkb7Uy
+img: icons/magic/light/orbs-firefly-hand-yellow.webp
+system:
+  description:
+    value: >-
+      <p>Your blessed touch can heal wounds. You have a pool of healing power
+      that replenishes when you finish a Long Rest. With that pool, you can
+      restore a total number of Hit Points equal to five times your Paladin
+      level.</p><p>As a Bonus Action, you can touch a creature (which could be
+      yourself) and draw power from the pool of healing to restore a number of
+      Hit Points to that creature, up to the maximum amount remaining in the
+      pool.</p><p>You can also expend 5 Hit Points from the pool of healing
+      power to remove the Poisoned condition from the creature; those points
+      don't also restore Hit Points to the creature.</p><section
+      id="secret-CgxYFHh5PcKwwbwk" class="secret"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Heal</strong> activity allows you to
+      select the number of Hit Points you would like to restore and reduces your
+      Lay on Hands pool by that amount.</p><p>The <strong>Remove Poison</strong>
+      activity reduces your pool by 5 but does not automatically remove the
+      Poisoned condition.</p></section>
+    chat: ''
+  source:
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: 5 * @classes.paladin.levels
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    gXZh9aGHcywV9huC:
+      type: heal
+      _id: gXZh9aGHcywV9huC
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: 5 * @classes.paladin.levels - @item.uses.spent
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: '@scaling'
+        scaling:
+          number: 1
+          mode: ''
+        bonus: ''
+      name: ''
+    K6UeXQwTyDHWvis8:
+      type: utility
+      name: Remove Poison
+      _id: K6UeXQwTyDHWvis8
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: lay-on-hands
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866297701
+  modifiedTime: 1745256763838
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbpdnLayOnHands'

@@ -1,0 +1,216 @@
+_id: phbpdnHolyNimbus
+name: Holy Nimbus
+type: feat
+folder: pDo2UCh4t1Z03F5z
+img: icons/magic/light/explosion-star-glow-blue-purple.webp
+system:
+  description:
+    value: >-
+      <p>As a Bonus Action, you can imbue your Aura of Protection with holy
+      power, granting the benefits below for 10 minutes or until you end them
+      (no action required). Once you use this feature, you can't use it again
+      until you finish a Long Rest. You can also restore your use of it by
+      expending a level 5 spell slot (no action required).</p><p><strong>Holy
+      Ward.</strong> You have Advantage on any saving throw you are forced to
+      make by a Fiend or an Undead.</p><p><strong>Radiant Damage.</strong>
+      Whenever an enemy starts its turn in the aura, that creature takes Radiant
+      damage equal to your Charisma modifier plus your Proficiency
+      Bonus.</p><p><strong>Sunlight.</strong> The aura is filled with Bright
+      Light that is sunlight.</p><section id="secret-WendmZ2xiuj3cSwE"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes an Active Effect for tracking your Holy Nimbus but it does not
+      automate the Advantage on Saving Throws.</p><p>The <strong>Holy
+      Nimbus</strong> activity includes a damage roll.</p><p>The <strong>Regain
+      Use</strong> activity will consume a 5th level spell slot and restore a
+      use of this feature.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '1'
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 20
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    k6gGbWQBoLTgqbSG:
+      type: damage
+      name: Holy Nimbus
+      _id: k6gGbWQBoLTgqbSG
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '10'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: true
+              formula: '@abilities.cha.mod + @prof'
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              number: 1
+    V0uofujMuoG0bIfp:
+      type: utility
+      name: Regain Use
+      _id: V0uofujMuoG0bIfp
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: ''
+            scaling: {}
+          - type: spellSlots
+            value: '1'
+            target: '5'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: holy-nimbus
+effects:
+  - name: Holy Nimbus
+    img: icons/magic/light/explosion-star-glow-blue-purple.webp
+    _id: aWH0EeuCWFgttRma
+    type: base
+    system: {}
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: 600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbpdnHolyNimbus.aWH0EeuCWFgttRma'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866569467
+  modifiedTime: 1745256763806
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbpdnHolyNimbus'

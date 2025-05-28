@@ -1,0 +1,176 @@
+_id: phbbrbBrutalStri
+name: Brutal Strike
+type: feat
+img: icons/skills/melee/strike-axe-blood-red.webp
+system:
+  description:
+    value: >-
+      <p>If you use [[/item Reckless Attack]], you can forgo any Advantage on
+      one Strength-based attack roll of your choice on your turn. The chosen
+      attack roll mustn't have Disadvantage. If the chosen attack roll hits, the
+      target takes an extra [[lookup @scale.barbarian.brutal-strike]] damage of
+      the same type dealt by the weapon or Unarmed Strike, and you can cause one
+      Brutal Strike effect of your choice. You have the following effect
+      options.</p><p><strong>Forceful Blow. </strong>The target is pushed 15
+      feet straight away from you. You can then move up to half your Speed
+      straight toward the target without provoking &amp;Reference[Opportunity
+      Attacks].</p><p><strong>Hamstring Blow. </strong>The target's Speed is
+      reduced by 15 feet until the start of your next turn. A target can be
+      affected by only one Hamstring Blow at a time - the most recent
+      one.</p><section class="secret"
+      id="secret-vLb1SoKHWW2796Ko"><p><strong>Foundry Note</strong></p><p>This
+      feature includes an Active Effect for the Hamstring Blow which can be
+      applied to a target.</p><p>The <strong>damage</strong> activity
+      automatically scales when you gain Improved Brutal Strike
+      (2).</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 9
+    repeatable: false
+  properties: []
+  requirements: Barbarian
+  activities:
+    nN5gsB6AcSQ4uQPN:
+      type: damage
+      name: Brutal Strike
+      _id: nN5gsB6AcSQ4uQPN
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: bg9jWpPRIJ0Q2vPY
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: true
+              formula: '@scale.barbarian.brutal-strike'
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - acid
+              - bludgeoning
+              - cold
+              - fire
+              - force
+              - lightning
+              - necrotic
+              - piercing
+              - poison
+              - psychic
+              - radiant
+              - slashing
+              - thunder
+            scaling:
+              number: 1
+  enchant: {}
+  identifier: brutal-strike
+effects:
+  - _id: bg9jWpPRIJ0Q2vPY
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 2
+        value: '-15'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.classes24.Item.phbbrbBrutalStri
+    transfer: false
+    flags: {}
+    tint: '#ffffff'
+    name: Hamstrung
+    description: >-
+      <p>Hit by a hamstring blow, this character's Speed has been reduced by 15
+      feet until the start of the attacker's next turn.</p>
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classfeatures.Item.Kl6zifJ5OmdHlOi2.ActiveEffect.TIBmPKKnAAiWYuN4
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/skills/melee/strike-axe-blood-red.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbbrbBrutalStri.bg9jWpPRIJ0Q2vPY'
+folder: p6WDpW0gzmKfhGad
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940469
+  modifiedTime: 1745256759708
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbBrutalStri'

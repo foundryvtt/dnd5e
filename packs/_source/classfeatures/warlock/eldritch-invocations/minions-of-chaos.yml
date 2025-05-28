@@ -1,0 +1,109 @@
+_id: QnRKYXb2bXpnNd2k
+name: Minions of Chaos
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You can cast
+      @UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{Conjure Elemental}
+      once using a warlock spell slot. You can't do so again until you finish a
+      long rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: eldritchInvocation
+  requirements: Warlock 9
+  properties: []
+  prerequisites:
+    level: 9
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '90'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: '10'
+          type: space
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  identifier: minions-of-chaos
+flags: {}
+img: icons/creatures/magical/humanoid-giant-forest-blue.webp
+effects: []
+folder: 0uFCjs5gYeVtl38i
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037384028
+  modifiedTime: 1725992288359
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!QnRKYXb2bXpnNd2k'

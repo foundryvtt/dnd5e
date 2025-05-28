@@ -1,0 +1,121 @@
+_id: phbFuryPrimalStr
+name: 'Elemental Fury: Primal Strike'
+type: feat
+img: icons/magic/nature/hand-weapon-wood-bark-brown.webp
+system:
+  description:
+    value: >-
+      <p>Once on each of your turns when you hit a creature with an attack roll
+      using a weapon or a Beast form's attack in Wild Shape, you can cause the
+      target to take an extra 1d8 [[/damage 1d8 type=cold]]{cold}, [[/damage 1d8
+      type=fire]]{fire}, [[/damage 1d8 type=lightning]]{lightning}, or [[/damage
+      1d8 type=thunder]]{thunder} damage (choose when you hit).</p><section
+      class="secret" id="secret-teMMREyPGTtod1kP"><p><strong>Foundry
+      Note</strong></p><p>This feature's damage will automatically increase when
+      you gain @UUID[Compendium.dnd5e.classes24.Item.phbdrdImprovedEl]{Improved
+      Elemental Fury}. If using the activity you will be able to select the
+      damage type when rolling. It will default to your previously chosen damage
+      type.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 7
+    repeatable: false
+  properties: []
+  requirements: Druid
+  activities:
+    lHdiTksQmeJBFrf7:
+      type: damage
+      name: Primal Strike
+      _id: lHdiTksQmeJBFrf7
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: >-
+            When you hit a creature with an attack roll using a weapon or a
+            Beast form's attack in Wild Shape
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: true
+              formula: '@scale.druid.elemental-fury'
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - cold
+              - fire
+              - lightning
+              - thunder
+            scaling:
+              number: 1
+  enchant: {}
+  identifier: elemental-fury-primal-strike
+effects: []
+folder: EXYmwRGoNyMbByN1
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866366918
+  modifiedTime: 1740685844517
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 625000
+ownership:
+  default: 0
+_key: '!items!phbFuryPrimalStr'

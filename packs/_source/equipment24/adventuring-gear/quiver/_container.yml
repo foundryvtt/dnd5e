@@ -1,0 +1,55 @@
+name: Quiver
+system:
+  description:
+    value: <p>A Quiver holds up to 20 Arrows.</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: gp
+  quantity: 1
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties: []
+  capacity:
+    type: items
+    value: 20
+  identifier: quiver
+_id: phbagQuiver00000
+type: container
+folder: uDk4FBYfcP2JnX6t
+img: icons/containers/ammunition/arrows-quiver-black.webp
+effects: []
+sort: 5100000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425911305
+  modifiedTime: 1745256812663
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagQuiver00000'

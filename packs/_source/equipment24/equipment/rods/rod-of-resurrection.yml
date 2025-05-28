@@ -1,0 +1,205 @@
+_id: dmgRodOfResurrec
+name: Rod of Resurrection
+type: equipment
+img: icons/weapons/staves/staff-spiked-grey.webp
+system:
+  activities:
+    61qS4dLeKZdtrWoL:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplHeal000000
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '6'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: 61qS4dLeKZdtrWoL
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    bHhFcL8mph4snByq:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplResurrecti
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '7'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: bHhFcL8mph4snByq
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: '1'
+    max: '5'
+  description:
+    value: >-
+      <p><em>Rod, Legendary (Requires Attunement)</em></p><p>The rod has 5
+      charges. While you hold it, you can cast one of the following spells from
+      it: @UUID[Compendium.dnd5e.spells24.Item.phbsplHeal000000]{Heal} (expends
+      1 charge) or
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplResurrecti]{Resurrection}
+      (expends 5 charges).</p><p>The rod regains 1 expended charge daily at
+      dawn. If you expend the last charge, roll [[/r 1d20]]. On a 1, the rod
+      disappears in a harmless burst of radiance.</p>
+    chat: ''
+  identifier: rod-of-resurrection
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: rod
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+effects: []
+folder: XVIITMl9kCCSjZQz
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.1
+  createdTime: 1727883376108
+  modifiedTime: 1746118484165
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 150000
+ownership:
+  default: 0
+_key: '!items!dmgRodOfResurrec'

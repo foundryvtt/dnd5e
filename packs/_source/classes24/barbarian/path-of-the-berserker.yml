@@ -1,0 +1,87 @@
+_id: phbbrbBerserker0
+name: Path of the Berserker
+type: subclass
+img: systems/dnd5e/icons/classes/berserker.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Channel Rage into Violent
+      Fury</p></blockquote><p>Barbarians who walk the Path of the Berserker
+      direct their Rage primarily toward violence. Their path is one of
+      untrammeled fury, and they thrill in the chaos of battle as they allow
+      their Rage to seize and empower them.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identifier: berserker
+  classIdentifier: barbarian
+  advancement:
+    - _id: F2EPRo00Nf6Ds8Lk
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbFrenzy0000
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Subclass Features
+    - _id: 2AGvW4P2FHYxDTmU
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbMindlessRa
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 6
+      title: Subclass Features
+    - _id: HPirEn8oG5KFLosG
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbRetaliatio
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 10
+      title: Subclass Features
+    - _id: GouI4YrjO1nFz4uM
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbIntimidati
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 14
+      title: Subclass Features
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation:
+      formula: ''
+effects: []
+folder: ZzMJGIp9Rxhr2hDV
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866492370
+  modifiedTime: 1745256759673
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbBerserker0'

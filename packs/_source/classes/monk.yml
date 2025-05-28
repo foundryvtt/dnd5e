@@ -1,0 +1,616 @@
+_id: 6VoZrWxhOEKGYhnq
+name: Monk
+type: class
+img: icons/skills/melee/hand-grip-staff-blue.webp
+system:
+  description:
+    value: >-
+      <p>As a monk, you gain the following class features.</p><h3>Hit
+      Points</h3><p><strong>Hit Dice:</strong> 1d8 per monk level<br
+      /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution
+      modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) +
+      your Constitution modifier per monk level after
+      1st</p><h3>Proficiencies</h3><p><strong>Armor:</strong> None<br
+      /><strong>Weapons:</strong> Simple weapons, shortswords<br
+      /><strong>Tools:</strong> Choose one type of artisan's tools or one
+      musical instrument<br /><strong>Saving Throws:</strong> Strength,
+      Dexterity<br /><strong>Skills:</strong> Choose two from Acrobatics,
+      Athletics, History, Insight, Religion, and Stealth</p><h1>Monk
+      Advancement</h1><table><thead><tr><td>Level</td><td>Proficiency
+      Bonus</td><td>Martial Arts</td><td>Ki Points</td><td>Unarmored
+      Movement</td><td>Features</td></tr></thead><tbody><tr><td>1st</td><td>+2</td><td>1d4</td><td>—</td><td>—</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.UAvV7N7T4zJhxdfI]{Unarmored
+      Defense},
+      @UUID[Compendium.dnd5e.classfeatures.Item.l50hjTxO2r0iecKw]{Martial
+      Arts}</td></tr><tr><td>2nd</td><td>+2</td><td>1d4</td><td>2</td><td>+10
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.10b6z2W1txNkrGP7]{Ki},
+      @UUID[Compendium.dnd5e.classfeatures.Item.zCeqyQ8uIPNdYJSW]{Unarmored
+      Movement}</td></tr><tr><td>3rd</td><td>+2</td><td>1d4</td><td>3</td><td>+10
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.rtpQdX77dYWbDIOH]{Monastic
+      Tradition},
+      @UUID[Compendium.dnd5e.classfeatures.Item.mzweVbnsJPQiVkAe]{Deflect
+      Missiles}</td></tr><tr><td>4th</td><td>+2</td><td>1d4</td><td>4</td><td>+10
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement},
+      @UUID[Compendium.dnd5e.classfeatures.Item.KQz9bqxVkXjDl8gK]{Slow
+      Fall}</td></tr><tr><td>5th</td><td>+3</td><td>1d6</td><td>5</td><td>+10
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.XogoBnFWmCAHXppo]{Extra
+      Attack},
+      @UUID[Compendium.dnd5e.classfeatures.Item.pvRc6GAu1ok6zihC]{Stunning
+      Strike}</td></tr><tr><td>6th</td><td>+3</td><td>1d6</td><td>6</td><td>+15
+      ft.</td><td><p>@UUID[Compendium.dnd5e.classfeatures.Item.7flZKruSSu6dHg6D]{Ki-Empowered
+      Strikes},</p><p>Monastic Tradition
+      feature</p></td></tr><tr><td>7th</td><td>+3</td><td>1d6</td><td>7</td><td>+15
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.a4P4DNMmH8CqSNkC]{Evasion},
+      @UUID[Compendium.dnd5e.classfeatures.Item.ZmC31XKS4YNENnoc]{Stillness of
+      Mind}</td></tr><tr><td>8th</td><td>+3</td><td>1d6</td><td>8</td><td>+15
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score
+      Improvement}</td></tr><tr><td>9th</td><td>+4</td><td>1d6</td><td>9</td><td>+15
+      ft.</td><td>Unarmored Movement
+      improvement</td></tr><tr><td>10th</td><td>+4</td><td>1d6</td><td>10</td><td>+20
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.bqWA7t9pDELbNRkp]{Purity
+      of
+      Body}</td></tr><tr><td>11th</td><td>+4</td><td>1d8</td><td>11</td><td>+20
+      ft.</td><td>Monastic Tradition
+      feature</td></tr><tr><td>12th</td><td>+4</td><td>1d8</td><td>12</td><td>+20
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score
+      Improvement}</td></tr><tr><td>13th</td><td>+5</td><td>1d8</td><td>13</td><td>+20
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.XjuGBeB8Y0C3A5D4]{Tongue
+      of the Sun and
+      Moon}</td></tr><tr><td>14th</td><td>+5</td><td>1d8</td><td>14</td><td>+25
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.7D2EkLdISwShEDlN]{Diamond
+      Soul}</td></tr><tr><td>15th</td><td>+5</td><td>1d8</td><td>15</td><td>+25
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.gDH8PMrKvLHaNmEI]{Timeless
+      Body}</td></tr><tr><td>16th</td><td>+5</td><td>1d8</td><td>16</td><td>+25
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score
+      Improvement}</td></tr><tr><td>17th</td><td>+6</td><td>1d10</td><td>17</td><td>+25
+      ft.</td><td>Monastic Tradition
+      feature</td></tr><tr><td>18th</td><td>+6</td><td>1d10</td><td>18</td><td>+30
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.3jwFt3hSqDswBlOH]{Empty
+      Body}</td></tr><tr><td>19th</td><td>+6</td><td>1d10</td><td>19</td><td>+30
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score
+      Improvement}</td></tr><tr><td>20th</td><td>+6</td><td>1d10</td><td>20</td><td>+30
+      ft.</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.mQNPg89YIs7g5tG4]{Perfect
+      Self}</td></tr></tbody></table><h1>Monastic Traditions</h1><p>Three
+      traditions of monastic pursuit are common in the monasteries scattered
+      across the multiverse. Most monasteries practice one tradition
+      exclusively, but a few honor the three traditions and instruct each monk
+      according to his or her aptitude and interest. All three traditions rely
+      on the same basic techniques, diverging as the student grows more adept.
+      Thus, a monk need choose a tradition only upon reaching 3rd
+      level.</p><p>@UUID[Compendium.dnd5e.subclasses.Item.IvlpKMXX3PmW1NY2]{Way
+      of the Open Hand}</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: monk
+  levels: 1
+  hitDice: d8
+  hitDiceUsed: 0
+  advancement:
+    - type: HitPoints
+      configuration: {}
+      value: {}
+      title: Hit Points
+      icon: systems/dnd5e/icons/svg/hit-points.svg
+      _id: ocxNtDFJ7YDaYaK7
+    - _id: mmAxx3U7FvXNAcKc
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - weapon:sim
+          - weapon:mar:shortsword
+        choices: []
+      level: 1
+      title: ''
+      value:
+        chosen: []
+    - _id: QPXy59CQGY9HB0c3
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - tool:art:*
+              - tool:music:*
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - _id: 4M8MQ1E64zbcRg6B
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - saves:str
+          - saves:dex
+        choices: []
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - _id: 7HRRCPk80Ng2Evdx
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:acr
+              - skills:ath
+              - skills:his
+              - skills:ins
+              - skills:rel
+              - skills:ste
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - _id: BQWHr3mt5flvkfIj
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - di:poison
+          - ci:diseased
+          - ci:poisoned
+        choices: []
+      level: 10
+      title: Purity of Body
+      value:
+        chosen: []
+      hint: >-
+        Your mastery of the ki flowing through you makes you immune to disease
+        and poison.
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.UAvV7N7T4zJhxdfI
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.l50hjTxO2r0iecKw
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.eGxoNmSMWKNzChCO
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 1
+      title: Features
+      _id: n0q8XyiGA3vLPgpK
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.10b6z2W1txNkrGP7
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.5MwNlVZK7m6VolOH
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.TDglPcxIVEzvVSgK
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.yrSFIGTaQOH2PFRI
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.zCeqyQ8uIPNdYJSW
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 2
+      title: Features
+      _id: 7TyDqpGGi3r3nsp0
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.rtpQdX77dYWbDIOH
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.mzweVbnsJPQiVkAe
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 3
+      title: Features
+      _id: 2sLHTw6k15DSW8WB
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.KQz9bqxVkXjDl8gK
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 4
+      title: Features
+      _id: Zc1jOZK1b9mIKekq
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.pvRc6GAu1ok6zihC
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 5
+      title: Features
+      _id: j9LeWmxlsENKaMLo
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.7flZKruSSu6dHg6D
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 6
+      title: Features
+      _id: psobDjMqtA2216Db
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.a4P4DNMmH8CqSNkC
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.ZmC31XKS4YNENnoc
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 7
+      title: Features
+      _id: K38aFaEMxMqRB0BC
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.bqWA7t9pDELbNRkp
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 10
+      title: Features
+      _id: eLqmJotmwzlGNrxG
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.XjuGBeB8Y0C3A5D4
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 13
+      title: Features
+      _id: N0geIQiuofqYgswj
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.7D2EkLdISwShEDlN
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 14
+      title: Features
+      _id: N1hjizyI82UPp8UI
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.gDH8PMrKvLHaNmEI
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 15
+      title: Features
+      _id: TcLZS9WzC7bPETSd
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.3jwFt3hSqDswBlOH
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 18
+      title: Features
+      _id: tRb3a0tA5IpehPs8
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.mQNPg89YIs7g5tG4
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 20
+      title: Features
+      _id: sEQz9c9XhWYjS9x5
+    - type: ScaleValue
+      configuration:
+        identifier: die
+        type: dice
+        distance:
+          units: ''
+        scale:
+          '1':
+            number: null
+            faces: 4
+            modifiers: []
+          '5':
+            number: null
+            faces: 6
+            modifiers: []
+          '11':
+            number: null
+            faces: 8
+            modifiers: []
+          '17':
+            number: null
+            faces: 10
+            modifiers: []
+      value: {}
+      title: Martial Arts Die
+      _id: MXFbf0nxMiyLdPbX
+    - type: ScaleValue
+      configuration:
+        identifier: unarmored-movement
+        type: distance
+        distance:
+          units: ft
+        scale:
+          '2':
+            value: 10
+          '6':
+            value: 15
+          '10':
+            value: 20
+          '14':
+            value: 25
+          '18':
+            value: 30
+      value: {}
+      title: Unarmored Movement
+      _id: 1OzfWDWCquoHMeX5
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 4
+      title: Ability Score Improvement
+      _id: ofNSUhSHKhhDuPSR
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 8
+      title: Ability Score Improvement
+      _id: s3t9o57hP6iUHirr
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 12
+      title: Ability Score Improvement
+      _id: O24MWOKc1ImsKaml
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 16
+      title: Ability Score Improvement
+      _id: xdqWoLtgO3uyl3nJ
+    - _id: puDaUsYrlks0z5gm
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 19
+      title: ''
+    - _id: 0awj2yq115ev9u9o
+      type: Subclass
+      configuration: {}
+      value: {}
+      level: 3
+      title: Monastic Tradition
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation: {}
+  startingEquipment:
+    - type: OR
+      _id: 5yj0P4r9teJDnDtd
+      group: ''
+      sort: 100000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.osLzOwQdPtrK3rQH
+      _id: R5tuRtaPonfjQCVU
+      group: 5yj0P4r9teJDnDtd
+      sort: 200000
+      requiresProficiency: false
+    - type: weapon
+      count: null
+      key: simpleM
+      _id: Mlf6kel8ws6xgDER
+      group: 5yj0P4r9teJDnDtd
+      sort: 300000
+      requiresProficiency: false
+    - type: OR
+      _id: 3TbVLmLPtjVaSh5O
+      group: ''
+      sort: 400000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.XY8b594Dn7plACLL
+      _id: AvDYtl0uvQsDuhnb
+      group: 3TbVLmLPtjVaSh5O
+      sort: 500000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.8KWz5DJbWUpNWniP
+      _id: 4QKQURCmIurbTAzp
+      group: 3TbVLmLPtjVaSh5O
+      sort: 600000
+      requiresProficiency: false
+    - type: linked
+      count: 10
+      key: Compendium.dnd5e.items.Item.3rCO8MTIdPGSW6IJ
+      _id: AOYuulsULvsHbSLO
+      group: ''
+      sort: 700000
+      requiresProficiency: false
+  wealth: 5d4
+  primaryAbility:
+    value: []
+    all: true
+effects: []
+folder: HQ1Oy7HkbnxnE63o
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037370616
+  modifiedTime: 1725992280386
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!6VoZrWxhOEKGYhnq'

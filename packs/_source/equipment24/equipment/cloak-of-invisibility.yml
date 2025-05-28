@@ -1,0 +1,172 @@
+_id: dmgCloakOfInvisi
+name: Cloak of Invisibility
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/back/cloak-hooded-blue.webp
+system:
+  activities:
+    l9IG07yOeWzPOpWB:
+      type: utility
+      _id: l9IG07yOeWzPOpWB
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: sSsgrnNQCK4vurTm
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Raise Hood
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d3
+    max: '3'
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Legendary (Requires
+      Attunement)</em></p></div><p>This cloak has 3 charges and regains 1d3
+      expended charges daily at dawn . While wearing the cloak, you can take a
+      Magic action to pull its hood over your head and expend 1 charge to give
+      yourself the &amp;Reference[Invisible apply=false] condition for 1 hour.
+      The effect ends early if you pull the hood down (no action required) or
+      cease wearing the cloak.</p>
+    chat: ''
+  identifier: cloak-of-invisibility
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: 'Hood Up: Invisible'
+    img: icons/equipment/back/cloak-hooded-blue.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgCloakOfInvisi
+    transfer: true
+    _id: sSsgrnNQCK4vurTm
+    type: base
+    system: {}
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The effect ends early if you pull the hood down (no action required) or
+      cease wearing the cloak.</p>
+    tint: '#ffffff'
+    statuses:
+      - invisible
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729017377412
+      modifiedTime: 1730836048499
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgCloakOfInvisi.sSsgrnNQCK4vurTm'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1740680117716
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7900000
+ownership:
+  default: 0
+_key: '!items!dmgCloakOfInvisi'

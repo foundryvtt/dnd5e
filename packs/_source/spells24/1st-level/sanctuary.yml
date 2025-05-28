@@ -1,0 +1,210 @@
+_id: phbSanctuary0000
+name: Sanctuary
+type: spell
+img: icons/magic/defensive/shield-barrier-deflect-gold.webp
+system:
+  description:
+    value: >-
+      <div><p>You ward a creature within range. Until the spell ends, any
+      creature who targets the warded creature with an attack roll or a damaging
+      spell must succeed on a [[/save ability=wis dc=@attributes.spell.dc
+      format=long]] or either choose a new target or lose the attack or spell.
+      This spell doesn't protect the warded creature from areas of effect. The
+      spell ends if the warded creature makes an attack roll, casts a spell, or
+      deals damage.</p></div>
+    chat: ''
+  source:
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: bonus
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 1
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a shard of glass from a mirror
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    2iUeoKysfdtmK0kZ:
+      type: utility
+      _id: 2iUeoKysfdtmK0kZ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: OuM8iKhckcDKavOx
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Cast
+      img: ''
+      appliedEffects: []
+    6TdVnZPI3lxQrycI:
+      type: save
+      name: Save on Target
+      _id: 6TdVnZPI3lxQrycI
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: ''
+      appliedEffects: []
+  identifier: sanctuary
+effects:
+  - name: Warded
+    img: icons/skills/social/peace-luck-insult.webp
+    origin: Compendium.dnd5e.spells24.Item.phbSanctuary0000
+    transfer: false
+    _id: OuM8iKhckcDKavOx
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Until the spell ends, any creature who targets the warded creature with
+      an attack roll or a damaging spell must succeed on a [[/save ability=wis
+      format=long]] or either choose a new target or lose the attack or
+      spell.</p><p> The spell ends if the warded creature makes an attack roll,
+      casts a spell, or deals damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725637309210
+      modifiedTime: 1725637468105
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbSanctuary0000.OuM8iKhckcDKavOx'
+folder: pBaAAtXBCq9FVEnL
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425939871
+  modifiedTime: 1745256784793
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100391
+ownership:
+  default: 0
+_key: '!items!phbSanctuary0000'

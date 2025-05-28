@@ -1,0 +1,120 @@
+_id: P6f1PPKPd9BCb742
+name: Compulsion
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Creatures of your choice that you can see within range and that can
+      hear you must make a Wisdom saving throw. A target automatically succeeds
+      on this saving throw if it can't be charmed. On a failed save, a target is
+      affected by this spell. Until the spell ends, you can use a bonus action
+      on each of your turns to designate a direction that is horizontal to you.
+      Each affected target must use as much of its movement as possible to move
+      in that direction on its next turn. It can take any action before it
+      moves. After moving in this way, it can make another Wisdom save to try to
+      end the effect.</p><p>A target isn't compelled to move into an obviously
+      deadly hazard, such as a fire or a pit, but it will provoke opportunity
+      attacks to move in the designated direction.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      choice: false
+    template:
+      units: any
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: enc
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: compulsion
+sort: 0
+flags: {}
+img: icons/magic/fire/explosion-fireball-large-purple-pink.webp
+effects: []
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037355449
+  modifiedTime: 1725992719621
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!P6f1PPKPd9BCb742'

@@ -1,0 +1,125 @@
+_id: ePhRKHXRE7l1sEoQ
+name: Project Image
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create an illusory copy of yourself that lasts for the Duration.
+      The copy can appear at any location within range that you have seen
+      before, regardless of intervening obstacles. The Illusion looks and sounds
+      like you but is intangible. If the illusion takes any damage, it
+      disappears, and the spell ends.</p><p>You can use your action to move this
+      illusion up to twice your speed, and make it gesture, speak, and behave in
+      whatever way you choose. It mimics your mannerisms perfectly.</p><p>You
+      can see through its eyes and hear through its ears as if you were in its
+      space. On Your Turn as a Bonus Action, you can switch from using its
+      senses to using your own, or back again. While you are using its senses,
+      you are Blinded and Deafened in regard to your own
+      surroundings.</p><p>Physical interaction with the image reveals it to be
+      an illusion, because things can pass through it. A creature that uses its
+      action to examine the image can determine that it is an Illusion with a
+      successful Intelligence (Investigation) check against your spell save DC.
+      If a creature discerns the illusion for what it is, the creature can see
+      through the image, and any noise it makes sounds hollow to the
+      creature.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: day
+  target:
+    affects:
+      type: space
+      choice: false
+    template:
+      units: any
+      contiguous: false
+  range:
+    value: '500'
+    units: mi
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 7
+  school: ill
+  materials:
+    value: A small replica of you made from material worth at least 5gp
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: project-image
+sort: 0
+flags: {}
+img: icons/magic/control/energy-stream-link-spiral-teal.webp
+effects: []
+folder: irCSpQWIMtp978TA
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037361736
+  modifiedTime: 1725992721667
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ePhRKHXRE7l1sEoQ'

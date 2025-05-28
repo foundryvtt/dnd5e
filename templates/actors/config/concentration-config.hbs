@@ -1,0 +1,36 @@
+<section class="flexcol">
+    {{!-- Concentration --}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.Concentration" }}</legend>
+        {{ formField fields.ability value=data.ability options=abilityOptions localize=true rootId=partId }}
+        {{ formField fields.bonuses.fields.save value=data.bonuses.save localize=true rootId=partId }}
+        {{ formField fields.limit value=data.limit placeholder="1" localize=true rootId=partId }}
+    </fieldset>
+
+    {{!-- Rolls --}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.ROLL.Section" label=(localize "DND5E.Concentration") }}</legend>
+        {{ formField fields.roll.fields.mode value=data.roll.mode options=advantageModeOptions localize=true
+                     rootId=partId }}
+        <div class="form-group split-group">
+            <label>{{ localize "DND5E.ROLL.Range.Label" }}</label>
+            <div class="form-fields">
+                {{ formField fields.roll.fields.min value=data.roll.min placeholder="1" type="number" localize=true
+                             label=(localize "DND5E.Minimum") hint=false classes="label-top" rootId=partId }}
+                {{ formField fields.roll.fields.max value=data.roll.max placeholder="20" type="number" localize=true
+                             label=(localize "DND5E.Maximum") hint=false classes="label-top" rootId=partId }}
+            </div>
+        </div>
+    </fieldset>
+
+    {{!-- Global Bonus --}}
+    {{#if global}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.ABILITY.SECTIONS.Global.Label" }}</legend>
+        <div class="form-group">
+            <p class="hint">{{ localize "DND5E.ABILITY.SECTIONS.Global.Hint" }}</p>
+        </div>
+        {{ formField global.fields.save value=global.data.save localize=true rootId=partId }}
+    </fieldset>
+    {{/if}}
+</section>

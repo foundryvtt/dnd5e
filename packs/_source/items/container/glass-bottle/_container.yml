@@ -1,0 +1,56 @@
+_id: HZp69hhyNZUUCipF
+name: Glass Bottle
+type: container
+img: icons/consumables/potions/bottle-bulb-empty-glass.webp
+system:
+  description:
+    value: <p>A bottle holds 1½ pints of liquid.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 2
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  capacity:
+    type: weight
+    value: 1.5
+  currency:
+    cp: 0
+    sp: 0
+    ep: 0
+    gp: 0
+    pp: 0
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  attuned: false
+  identifier: glass-bottle
+effects: []
+folder: PgtyWdfkDTDbc0ov
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037151206
+  modifiedTime: 1725992500920
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!HZp69hhyNZUUCipF'

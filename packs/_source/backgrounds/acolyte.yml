@@ -1,0 +1,187 @@
+name: Acolyte
+type: background
+img: icons/equipment/neck/necklace-runed-white-red.webp
+system:
+  description:
+    value: >-
+      <p>You have spent your life in the service of a temple to a specific god
+      or pantheon of gods. You act as an intermediary between the realm of the
+      holy and the mortal world, performing sacred rites and offering sacrifices
+      in order to conduct worshipers into the presence of the divine. You are
+      not necessarily a cleric—performing sacred rites is not the same thing as
+      channeling divine power.</p>
+
+      <p>Choose a god, a pantheon of gods, or some other quasi-divine being from
+      among those listed in
+      @UUID[Compendium.dnd5e.rules.JournalEntry.udVPA9JW5wy5t3G5.JournalEntryPage.2lysbY50fgv1R3v7]{Fantasy-Historical
+      Pantheons}, and work with your DM to detail the nature of your religious
+      service. Were you a lesser functionary in a temple, raised from childhood
+      to assist the priests in the sacred rites? Or were you a high priest who
+      suddenly experienced a call to serve your god in a different way? Perhaps
+      you were the leader of a small cult outside of any established temple
+      structure, or even an occult group that served a fiendish master that you
+      now deny.</p>
+
+      <hr />
+
+      <p><strong>Skill Proficiencies:</strong> Insight, Religion</p>
+
+      <p><strong>Languages:</strong> Two of your choice</p>
+
+      <p><strong>Equipment: </strong>A holy symbol (a gift to you when you
+      entered the priesthood), a prayer book or prayer wheel, 5 sticks of
+      incense, @UUID[Compendium.dnd5e.items.Item.irtqrzaUCeshmTZp]{vestments}, a
+      set of @UUID[Compendium.dnd5e.items.Item.8RXjiddJ6VGyE7vB]{common
+      clothes}, and a pouch containing 15 gp.</p>
+
+      <p><strong>Feature:</strong>
+      @UUID[Compendium.dnd5e.backgrounds.Item.64N1NWh9kC1dI7zN]{Shelter of the
+      Faithful}</p>
+
+      <hr />
+
+      <h3>Suggested Characteristics</h3>
+
+      <p>Acolytes are shaped by their experience in temples or other religious
+      communities. Their study of the history and tenets of their faith and
+      their relationships to temples, shrines, or hierarchies affect their
+      mannerisms and ideals. Their flaws might be some hidden hypocrisy or
+      heretical idea, or an ideal or bond taken to an extreme.</p>
+
+      <p>@UUID[Compendium.dnd5e.tables.RollTable.HDzErjwy3TseLOZX]{Personality
+      Traits}</p>
+
+      <p>@UUID[Compendium.dnd5e.tables.RollTable.W9xqQZy0Ad0CwkN2]{Ideals}</p>
+
+      <p>@UUID[Compendium.dnd5e.tables.RollTable.DZhd8JkjqlpCP8EB]{Bonds}</p>
+
+      <p>@UUID[Compendium.dnd5e.tables.RollTable.COIHGOnoJnmXduad]{Flaws}</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: '60'
+    license: CC-BY-4.0
+    rules: '2014'
+  advancement:
+    - _id: wIwtQfLdf9tJdZNi
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: true
+        grants:
+          - skills:ins
+          - skills:rel
+        choices: []
+      level: 0
+      title: ''
+      value:
+        chosen: []
+    - _id: 9YuEhI3iqUxEfIOk
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - languages:*
+      level: 0
+      title: ''
+      value:
+        chosen: []
+    - _id: 6grrnum72rnphzi5
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.backgrounds.64N1NWh9kC1dI7zN
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 0
+      title: Feature
+  startingEquipment:
+    - type: AND
+      _id: SWn3glXteLaNLSms
+      group: ''
+      sort: 100000
+      requiresProficiency: false
+    - type: focus
+      count: null
+      key: holy
+      _id: lDHM0OOvRne6eE8n
+      group: SWn3glXteLaNLSms
+      sort: 200000
+      requiresProficiency: false
+    - type: OR
+      _id: D2qNFQ88JhFwY8bv
+      group: SWn3glXteLaNLSms
+      sort: 300000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.odV5cq2HSLSCH69k
+      _id: BkhMHTlh4lvWJbUV
+      group: D2qNFQ88JhFwY8bv
+      sort: 400000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.Nd4r4hocpfu6fYDP
+      _id: ZfMgYgrtZd79FA7n
+      group: D2qNFQ88JhFwY8bv
+      sort: 500000
+      requiresProficiency: false
+    - type: linked
+      count: 5
+      key: Compendium.dnd5e.items.Item.3b0RvGi0TnTYpIxn
+      _id: R0uTjUcQN2YrB9rx
+      group: SWn3glXteLaNLSms
+      sort: 600000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.irtqrzaUCeshmTZp
+      _id: xZrjP2RKlIaHP1aH
+      group: SWn3glXteLaNLSms
+      sort: 700000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.8RXjiddJ6VGyE7vB
+      _id: X43SWt9ujvg2tOXt
+      group: SWn3glXteLaNLSms
+      sort: 800000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.backgrounds.Item.dQaOdm9dbVN0RZYP
+      _id: wTrqZ2jdIrHxSuD5
+      group: SWn3glXteLaNLSms
+      sort: 900000
+      requiresProficiency: false
+  identifier: acolyte
+effects: []
+folder: null
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: IgJkSnLiLJOWH7eK
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037368262
+  modifiedTime: 1725992238309
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!IgJkSnLiLJOWH7eK'

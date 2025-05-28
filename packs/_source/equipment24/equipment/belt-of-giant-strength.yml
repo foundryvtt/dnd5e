@@ -1,0 +1,89 @@
+_id: dmgBeltOfGiantSt
+name: Belt of Giant Strength
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/waist/belt-coiled-leather-steel.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rarity Varies (Requires Attunement)</em></p><p>While
+      wearing this belt, your Strength changes to a score granted by the belt.
+      The type of giant determines the score (see the table below). The item has
+      no effect on you if your Strength without the belt is equal to or greater
+      than the belt's
+      score.</p><table><thead><tr><td>Belt</td><td>Str.</td><td>Rarity</td></tr></thead><tbody><tr><td><em>Belt
+      of Giant Strength</em>
+      (@UUID[Compendium.dnd5e.equipment24.Item.dmghilBeltofGian]{hill})</td><td>21</td><td>Rare</td></tr><tr><td><em>Belt
+      of Giant Strength</em>
+      (@UUID[Compendium.dnd5e.equipment24.Item.dmgfroBeltofGian]{frost} or
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgstoBeltofGian]{stone})</td><td>23</td><td>Very
+      Rare</td></tr><tr><td><em>Belt of Giant Strength</em>
+      (@UUID[Compendium.dnd5e.equipment24.Item.dmgfirBeltofGian]{fire})</td><td>25</td><td>Very
+      Rare</td></tr><tr><td><em>Belt of Giant Strength</em>
+      (@UUID[Compendium.dnd5e.equipment24.Item.dmgcloBeltofGian]{cloud})</td><td>27</td><td>Legendary</td></tr><tr><td><em>Belt
+      of Giant Strength</em>
+      (@UUID[Compendium.dnd5e.equipment24.Item.dmgstmBeltofGian]{storm})</td><td>29</td><td>Legendary</td></tr></tbody></table>
+    chat: ''
+  identifier: belt-of-giant-strength
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745432742573
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1750000
+ownership:
+  default: 0
+_key: '!items!dmgBeltOfGiantSt'

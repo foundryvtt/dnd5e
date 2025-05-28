@@ -1,0 +1,128 @@
+name: Fates
+system:
+  description:
+    value: >-
+      <p> Reality's fabric unravels and spins anew, allowing you to avoid or
+      erase one event as if it never happened. You can use the card's magic as
+      soon as you draw the card or at any other time before <span
+      class="no-break">you die</span> .</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    8krOEwV2kT7G1chE:
+      type: utility
+      name: Card Effect
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Card's effect occurs upon draw or at any other time before you die
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: any
+          special: One event that has occured
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: icons/svg/card-joker.svg
+      _id: 8krOEwV2kT7G1chE
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  identifier: fates
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+_id: dmgDmtFates00000
+type: consumable
+img: icons/commodities/materials/material-woven.webp
+effects: []
+folder: XVXuU21XyvevGap7
+sort: 1800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729189701488
+  modifiedTime: 1745256804201
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgDmtFates00000'

@@ -1,0 +1,144 @@
+_id: dmgAmuletOfThePl
+name: Amulet of the Planes Destination
+img: icons/equipment/neck/amulet-carved-stone-purple.webp
+description: ''
+results:
+  - type: text
+    range:
+      - 1
+      - 60
+    _id: m2UKvzZf0ZibczrG
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: Random location on the plane you named
+    name: ''
+    _key: '!tables.results!dmgAmuletOfThePl.m2UKvzZf0ZibczrG'
+  - type: text
+    range:
+      - 61
+      - 70
+    _id: vH6t70BzwrR0dfnM
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Random location on an Inner Plane determined by rolling [[/r 1d6]]: on a 1
+      , the Plane of Air; on a 2 , the Plane of Earth; on a 3 , the Plane of
+      Fire; on a 4 , the Plane of Water; on a 5 , the Feywild; on a 6 , the
+      Shadowfell
+    name: ''
+    _key: '!tables.results!dmgAmuletOfThePl.vH6t70BzwrR0dfnM'
+  - type: text
+    range:
+      - 71
+      - 80
+    _id: k7P9te8NuEctUdxE
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Random location on an Outer Plane determined by rolling [[/r 1d8]]: on a 1
+      , Arborea; on a 2 , Arcadia; on a 3 , the Beastlands; on a 4 , Bytopia; on
+      a 5 , Elysium; on a 6 , Mechanus; on a 7 , Mount Celestia; on an 8 ,
+      Ysgard
+    name: ''
+    _key: '!tables.results!dmgAmuletOfThePl.k7P9te8NuEctUdxE'
+  - type: text
+    range:
+      - 81
+      - 90
+    _id: iMtDiN65JNwyr8oG
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Random location on an Outer Plane determined by rolling [[/r 1d8]]: on a 1
+      , the Abyss; on a 2 , Acheron; on a 3 , Carceri; on a 4 , Gehenna; on a 5
+      , Hades; on a 6 , Limbo; on a 7 , the Nine Hells; on an 8 , Pandemonium
+    name: ''
+    _key: '!tables.results!dmgAmuletOfThePl.iMtDiN65JNwyr8oG'
+  - type: text
+    range:
+      - 91
+      - 100
+    _id: nF1GNDH2Vmrg1HM0
+    img: icons/svg/d20-black.svg
+    weight: 1
+    drawn: false
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: Random location on the Astral Plane
+    name: ''
+    _key: '!tables.results!dmgAmuletOfThePl.nF1GNDH2Vmrg1HM0'
+replacement: true
+displayRoll: true
+folder: I2IHCZhwMY7ttiXw
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.2
+  createdTime: 1727883396246
+  modifiedTime: 1745611634535
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2000000
+ownership:
+  default: 0
+formula: 1d100
+_key: '!tables!dmgAmuletOfThePl'

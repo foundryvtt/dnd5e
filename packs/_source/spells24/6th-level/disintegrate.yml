@@ -1,0 +1,148 @@
+name: Disintegrate
+system:
+  description:
+    value: >-
+      <p>You launch a green ray at a target you can see within range. The target
+      can be a creature, a nonmagical object, or a creation of magical force,
+      such as the wall created by
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWallofForc]{Wall of
+      Force}.</em></p><p>A creature targeted by this spell makes a Dexterity
+      saving throw. On a failed save, the target takes 10d6 + 40 Force damage.
+      If this damage reduces it to 0 Hit Points, it and everything nonmagical it
+      is wearing and carrying are disintegrated into gray dust. The target can
+      be revived only by a
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplTrueResurr]{True
+      Resurrection}</em> or a
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish}</em>
+      spell.</p><p>This spell automatically disintegrates a Large or smaller
+      nonmagical object or a creation of magical force. If such a target is Huge
+      or larger, this spell disintegrates a 10-foot-Cube portion of
+      it.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The damage
+      increases by 3d6 for each spell slot level above 6.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: any
+      special: a creature, a nonmagical object, or a creation of magical force,
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a lodestone and dust
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    nsJamHa2MpBw01mY:
+      type: save
+      _id: nsJamHa2MpBw01mY
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: '6'
+            bonus: '40'
+            types:
+              - force
+            scaling:
+              mode: whole
+              number: 3
+              formula: ''
+        onSave: none
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: disintegrate
+_id: phbsplDisintegra
+type: spell
+img: icons/magic/unholy/hand-claw-fire-green.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 1500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425950013
+  modifiedTime: 1745256790609
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDisintegra'

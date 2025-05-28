@@ -1,0 +1,75 @@
+_id: GtKV1b5uqFQqpEni
+name: Padded Armor
+type: equipment
+img: icons/equipment/chest/breastplate-quilted-brown.webp
+system:
+  description:
+    value: >-
+      <p>Padded armor consists of quilted layers of cloth and batting. Padded
+      armor offers a comparable level of protection as stiffened leather but is
+      somewhat less encumbering to the wearer.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 8
+    units: lb
+  price:
+    value: 5
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 11
+    dex: null
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: light
+    baseItem: padded
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - stealthDisadvantage
+  activities: {}
+  attuned: false
+  identifier: padded-armor
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037148617
+  modifiedTime: 1725992500068
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!GtKV1b5uqFQqpEni'

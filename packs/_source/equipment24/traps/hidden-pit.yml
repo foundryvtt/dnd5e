@@ -1,0 +1,324 @@
+_id: dmgHiddenPit0000
+name: Hidden Pit
+type: equipment
+img: icons/environment/traps/grate-steel.webp
+system:
+  activities:
+    jq9xOi9mBPGjGvZS:
+      type: damage
+      name: Trigger (1-4)
+      _id: jq9xOi9mBPGjGvZS
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              number: 1
+    OdTFfnBTIf5pMuoe:
+      type: damage
+      name: Trigger (5-10)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: 6
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              number: 1
+      _id: OdTFfnBTIf5pMuoe
+    eGupjGTVYHujyovg:
+      type: damage
+      name: Trigger (11-16)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
+            denomination: 6
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              number: 1
+      _id: eGupjGTVYHujyovg
+    QkEQfhEIHrwAqzBd:
+      type: damage
+      name: Trigger (17-20)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 12
+            denomination: 6
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              number: 1
+      _id: QkEQfhEIHrwAqzBd
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Nuisance Trap (Levels
+      1–4)</em></p><p><strong>Trigger:</strong> A creature moves onto the pit's
+      lid</p><p><strong>Duration:</strong> Instantaneous</p><p>This 10-foot-deep
+      pit has a hinged lid constructed from material identical to the
+      surrounding floor. When a creature moves onto the lid, it swings open like
+      a trapdoor, causing the creature to fall into the pit. The lid remains
+      open thereafter.</p><p>A creature that falls into the pit takes 3 (1d6)
+      Bludgeoning damage from the fall.</p><p><em><strong>Detect and
+      Disarm.</strong></em> As a Study action, a creature can examine the
+      section of floor that forms the pit's lid and make a [[/check inv 15]]
+      check, detecting the pit on a successful check. Once the pit is detected,
+      an Iron Spike or a similar object can be wedged between the pit's lid and
+      the surrounding floor to prevent the lid from opening, thereby making it
+      safe to cross. The cover can also be held shut using <em>Arcane Lock</em>
+      or similar magic.</p><p><em><strong>Escape.</strong></em> A creature needs
+      a Climb Speed, climbing gear, or magic such as <em>Spider Climb</em> to
+      scale the pit's smooth walls. You can make the pit easier to escape by
+      adding cracks in the walls big enough to serve as handholds and
+      footholds.</p><p><em><strong>At Higher Levels.</strong></em> You can scale
+      the trap for higher levels by increasing the pit's depth and damage, as
+      shown in the following
+      table.</p><table><thead><tr><th><p>Levels</p></th><th><p>Pit
+      Depth</p></th><th><p>Bludgeoning
+      Damage</p></th></tr></thead><tbody><tr><td><p>5–10</p></td><td><p>30
+      feet</p></td><td><p>10
+      (3d6)</p></td></tr><tr><td><p>11–16</p></td><td><p>60
+      feet</p></td><td><p>21
+      (6d6)</p></td></tr><tr><td><p>17–20</p></td><td><p>120
+      feet</p></td><td><p>42 (12d6)</p></td></tr></tbody></table></div>
+    chat: ''
+  identifier: hidden-pit
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  properties: []
+  strength: null
+  proficient: null
+effects: []
+folder: 8wnVMAA0qwPzQVxS
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730831452785
+  modifiedTime: 1745256805943
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgHiddenPit0000'

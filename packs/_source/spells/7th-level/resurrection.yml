@@ -1,0 +1,121 @@
+_id: jhhT9PsHy5A7EojO
+name: Resurrection
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch a dead creature that has been dead for no more than a
+      century, that didn't die of old age, and that isn't undead. If its soul is
+      free and willing, the target returns to life with all its hit
+      points.</p><p>This spell neutralizes any poisons and cures normal diseases
+      afflicting the creature when it died. It doesn't, however, remove magical
+      diseases, curses, and the like; if such effects aren't removed prior to
+      casting the spell, they afflict the target on its return to
+      life.</p><p>This spell closes all mortal wounds and restores any missing
+      body parts.</p><p>Coming back from the dead is an ordeal. The target takes
+      a −4 penalty to all attack rolls, saving throws, and ability checks. Every
+      time the target finishes a long rest, the penalty is reduced by 1 until it
+      disappears.</p><p>Casting this spell to restore life to a creature that
+      has been dead for one year or longer taxes you greatly. Until you finish a
+      long rest, you can't cast spells again, and you have disadvantage on all
+      attack rolls, ability checks, and saving throws.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: hour
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: spec
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 7
+  school: nec
+  materials:
+    value: A diamond worth at least 1,000 gp, which the spell consumes
+    consumed: true
+    cost: 1000
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: resurrection
+sort: 0
+flags: {}
+img: icons/magic/life/heart-cross-strong-flame-blue.webp
+effects: []
+folder: irCSpQWIMtp978TA
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037363708
+  modifiedTime: 1725992722313
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!jhhT9PsHy5A7EojO'

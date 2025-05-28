@@ -1,0 +1,206 @@
+_id: phbscrDraconicSo
+name: Draconic Sorcery
+type: subclass
+folder: 45fGQlR9VJAIreZA
+img: systems/dnd5e/icons/classes/draconic.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Breathe the Magic of Dragons</p></blockquote><p>Your innate
+      magic comes from the gift of a dragon. Perhaps an ancient dragon facing
+      death bequeathed some of its magical power to you or your ancestor. You
+      might have absorbed magic from a site infused with dragons' power. Or
+      perhaps you handled a treasure taken from a dragon's hoard that was
+      steeped in draconic power. Or you might have a dragon for an ancestor.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identifier: draconic
+  classIdentifier: sorcerer
+  advancement:
+    - _id: L6ggzptPm0jk4nxC
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbscrDraconicRe
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbscrDraconicSp
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Subclass Features
+    - _id: 3ptQZs8Z30J3e8MH
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbscrElementalA
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 6
+      title: Subclass Features
+    - _id: Rr3BfHIS9JdX6c5X
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbscrDragonWing
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 14
+      title: Subclass Features
+    - _id: zWNxZUTJugO6duSj
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbscrDragonComp
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 18
+      title: Subclass Features
+    - _id: EgVTydL5IkLS1uph
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplAlterSelf0
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplChromaticO
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplCommand000
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplDragonsBre
+        optional: false
+        spell:
+          ability: []
+          preparation: always
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 3
+      title: Draconic Spells
+      hint: >-
+        When you reach a Sorcerer level specified in the Draconic Spells table,
+        you thereafter always have the listed spells prepared.
+    - _id: VLhcXqbjyXnCbXTP
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplFear000000
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplFly0000000
+        optional: false
+        spell:
+          ability: []
+          preparation: always
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 5
+      title: Draconic Spells
+      hint: >-
+        When you reach a Sorcerer level specified in the Draconic Spells table,
+        you thereafter always have the listed spells prepared.
+    - _id: nQwB2GYHgvg5IRhf
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplArcaneEye0
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplCharmMonst
+        optional: false
+        spell:
+          ability: []
+          preparation: always
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 7
+      title: Draconic Spells
+      hint: >-
+        When you reach a Sorcerer level specified in the Draconic Spells table,
+        you thereafter always have the listed spells prepared.
+    - _id: zKCculAFWxVPXhnA
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplLegendLore
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplSummonDrag
+        optional: false
+        spell:
+          ability: []
+          preparation: always
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 9
+      title: Draconic Spells
+      hint: >-
+        When you reach a Sorcerer level specified in the Draconic Spells table,
+        you thereafter always have the listed spells prepared.
+    - _id: 8UnvG3X4TR3MpCGe
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - dr:acid
+              - dr:cold
+              - dr:fire
+              - dr:lightning
+              - dr:poison
+      value:
+        chosen: []
+      level: 6
+      title: ''
+      hint: >-
+        Your draconic magic has an affinity with a damage type associated with
+        dragons. Choose one of those types: Acid, Cold, Fire, Lightning, or
+        Poison.
+                        
+                        You have Resistance to that damage type.
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation:
+      formula: ''
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866556244
+  modifiedTime: 1745256765354
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!phbscrDraconicSo'

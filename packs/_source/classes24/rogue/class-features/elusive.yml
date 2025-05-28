@@ -1,0 +1,52 @@
+_id: phbrgeElusive000
+name: Elusive
+type: feat
+folder: ymTkGscp5QEOwDlv
+img: icons/magic/defensive/illusion-evasion-echo-purple.webp
+system:
+  description:
+    value: >-
+      <p>You're so evasive that attackers rarely gain the upper hand against
+      you. No attack roll can have Advantage against you unless you have the
+      Incapacitated condition.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 18
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: elusive
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866292069
+  modifiedTime: 1745256764228
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeElusive000'

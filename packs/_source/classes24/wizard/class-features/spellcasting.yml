@@ -1,0 +1,107 @@
+_id: phbwzdSpellcasti
+name: Spellcasting
+type: feat
+folder: plFztoZhqP7fLHPl
+img: icons/magic/fire/explosion-embers-orange.webp
+system:
+  description:
+    value: >-
+      <p>As a student of arcane magic, you have learned to cast spells. See the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.mh3akteBDiLegqFK]{rules
+      on spellcasting}. The information below details how you use those rules
+      with Wizard spells, which appear in the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.6AnqLUowgdsqMFvz]{Wizard
+      spell list}.</p><p><strong>Cantrips.</strong> You know three Wizard
+      cantrips of your choice.
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplLight00000]{Light},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplMageHand00]{Mage Hand}, and
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplRayofFrost]{Ray of Frost} are
+      recommended. Whenever you finish a Long Rest, you can replace one of your
+      cantrips from this feature with another Wizard cantrip of your
+      choice.</p><p>When you reach Wizard levels 4 and 10, you learn another
+      Wizard cantrip of your choice, as shown in the Cantrips column of the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbWizard0000000.JournalEntryPage.g7cMRWzsgAsEF7zC#class-features]{Wizard
+      Features table}.</p><p><strong>Spellbook. </strong>Your wizardly
+      apprenticeship culminated in the creation of a unique book: your
+      spellbook. It is a Tiny object that weighs 3 pounds, contains 100 pages,
+      and can be read only by you or someone casting
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplIdentify00]{Identify}. You
+      determine the book's appearance and materials, such as a gilt-edged tome
+      or a collection of vellum bound with twine.</p><p>The book contains the
+      level 1+ spells you know. It starts with six level 1 Wizard spells of your
+      choice. @UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect
+      Magic}, @UUID[Compendium.dnd5e.spells24.Item.phbsplFeatherFal]{Feather
+      Fall}, @UUID[Compendium.dnd5e.spells24.Item.phbsplMageArmor0]{Mage Armor},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplMagicMissi]{Magic Missile},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplSleep00000]{Sleep}, and
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplThunderwav]{Thunderwave} are
+      recommended.</p><p>Whenever you gain a Wizard level after 1, add two
+      Wizard spells of your choice to your spellbook. Each of these spells must
+      be of a level for which you have spell slots, as shown in the Wizard
+      Features table. The spells are the culmination of arcane research you do
+      regularly.</p><p><strong>Spell Slots.</strong> The Wizard Features table
+      shows how many spell slots you have to cast your level 1+ spells. You
+      regain all expended slots when you finish a Long
+      Rest.</p><p><strong>Prepared Spells of Level 1+.</strong> You prepare the
+      list of level 1+ spells that are available for you to cast with this
+      feature. To do so, choose four spells from your spellbook. The chosen
+      spells must be of a level for which you have spell slots.</p><p>The number
+      of spells on your list increases as you gain Wizard levels, as shown in
+      the Prepared Spells column of the Wizard Features table. Whenever that
+      number increases, choose additional Wizard spells until the number of
+      spells on your list matches the number in the table. The chosen spells
+      must be of a level for which you have spell slots. For example, if you're
+      a level 3 Wizard, your list of prepared spells can include six spells of
+      levels 1 and 2 in any combination, chosen from your spellbook.</p><p>If
+      another Wizard feature gives you spells that you always have prepared,
+      those spells don't count against the number of spells you can prepare with
+      this feature, but those spells otherwise count as Wizard spells for
+      you.</p><p><strong>Changing Your Prepared Spells.</strong> Whenever you
+      finish a Long Rest, you can change your list of prepared spells, replacing
+      any of the spells there with spells from your
+      spellbook.</p><p><strong>Spellcasting Ability.</strong> Intelligence is
+      your spellcasting ability for your Wizard
+      spells.</p><p><strong>Spellcasting Focus. </strong>You can use an Arcane
+      Focus or your spellbook as a Spellcasting Focus for your Wizard
+      spells.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: spellcasting
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866273692
+  modifiedTime: 1745256770449
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwzdSpellcasti'

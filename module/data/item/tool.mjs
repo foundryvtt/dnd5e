@@ -1,4 +1,4 @@
-import { ItemDataModel } from "../abstract.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
@@ -11,6 +11,10 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 const { NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ */
+
+/**
  * Data definition for Tool items.
  * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
@@ -19,10 +23,12 @@ const { NumberField, SetField, StringField } = foundry.data.fields;
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  *
- * @property {string} ability     Default ability when this tool is being used.
- * @property {string} chatFlavor  Additional text added to chat when this tool is used.
- * @property {number} proficient  Level of proficiency in this tool as defined in `DND5E.proficiencyLevels`.
- * @property {string} bonus       Bonus formula added to tool rolls.
+ * @property {string} ability                      Default ability when this tool is being used.
+ * @property {string} bonus                        Bonus formula added to tool rolls.
+ * @property {string} chatFlavor                   Additional text added to chat when this tool is used.
+ * @property {number} proficient                   Level of proficiency as defined in `DND5E.proficiencyLevels`.
+ * @property {Set<string>} properties              Tool properties.
+ * @property {Omit<ItemTypeData, "subtype">} type  Tool type and base item.
  */
 export default class ToolData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
@@ -56,9 +62,8 @@ export default class ToolData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-    enchantable: true,
-    inventoryItem: true,
-    inventoryOrder: 400
+    hasEffects: true,
+    enchantable: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
@@ -78,6 +83,22 @@ export default class ToolData extends ItemDataModel.mixin(
       ...this.compendiumBrowserPhysicalItemFilters,
       ["properties", this.compendiumBrowserPropertiesFilter("tool")]
     ]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default configuration for this item type's inventory section.
+   * @returns {InventorySectionDescriptor}
+   */
+  static get inventorySection() {
+    return {
+      id: "tool",
+      order: 400,
+      label: "TYPES.Item.toolPl",
+      groups: { type: "tool" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    };
   }
 
   /* -------------------------------------------- */
@@ -107,10 +128,12 @@ export default class ToolData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
-    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.prepareIdentifiable();
+    this.preparePhysicalData();
     this.type.label = CONFIG.DND5E.toolTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.tool);
+    this.type.identifier = CONFIG.DND5E.tools[this.type.baseItem]?.id;
   }
 
   /* -------------------------------------------- */
@@ -202,10 +225,19 @@ export default class ToolData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _preCreate(data, options, user) {
-    if ( super._preCreate(data, options, user) === false ) return false;
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
     if ( this.activities.size ) return;
+
     const activityData = new CONFIG.DND5E.activityTypes.check.documentClass({}, { parent: this.parent }).toObject();
     this.parent.updateSource({ [`system.activities.${activityData._id}`]: activityData });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+    await this.preUpdateIdentifiable(changed, options, user);
   }
 }

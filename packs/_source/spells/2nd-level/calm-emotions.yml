@@ -1,0 +1,122 @@
+_id: 3MYDjS6k9IYL0aTj
+name: Calm Emotions
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You attempt to suppress strong emotions in a group of people. Each
+      humanoid in a 20-foot-radius sphere centered on a point you choose within
+      range must make a Charisma saving throw; a creature can choose to fail
+      this saving throw if it wishes. If a creature fails its saving throw,
+      choose one of the following two effects. You can suppress any effect
+      causing a target to be charmed or frightened. When this spell ends, any
+      suppressed effect resumes, provided that its duration has not expired in
+      the meantime.</p><p>Alternatively, you can make a target indifferent about
+      creatures of your choice that it is hostile toward. This indifference ends
+      if the target is attacked or harmed by a spell or if it witnesses any of
+      its friends being harmed. When the spell ends, the creature becomes
+      hostile again, unless the DM rules otherwise.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '20'
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: enc
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: calm-emotions
+sort: 0
+flags: {}
+img: icons/magic/light/explosion-star-blue.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037346638
+  modifiedTime: 1725992716784
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!3MYDjS6k9IYL0aTj'

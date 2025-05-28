@@ -1,0 +1,168 @@
+name: Find Familiar
+system:
+  description:
+    value: >-
+      <p>You gain the service of a familiar, a spirit that takes an animal form
+      you choose: <strong>Bat</strong>, <strong>Cat</strong>,
+      <strong>Frog</strong>, <strong>Hawk</strong>, <strong>Lizard</strong>,
+      <strong>Octopus</strong>, <strong>Owl</strong>, <strong>Rat</strong>,
+      <strong>Raven</strong>, <strong>Spider</strong>, <strong>Weasel</strong>,
+      or another Beast that has a Challenge Rating of 0. Appearing in an
+      unoccupied space within range, the familiar has the statistics of the
+      chosen form (see appendix B), though it is a Celestial, Fey, or Fiend
+      (your choice) instead of a Beast. Your familiar acts independently of you,
+      but it obeys your commands.</p><p><strong>Telepathic Connection.</strong>
+      While your familiar is within 100 feet of you, you can communicate with it
+      telepathically. Additionally, as a Bonus Action, you can see through the
+      familiar's eyes and hear what it hears until the start of your next turn,
+      gaining the benefits of any special senses it has.</p><p>Finally, when you
+      cast a spell with a range of touch, your familiar can deliver the touch.
+      Your familiar must be within 100 feet of you, and it must take a Reaction
+      to deliver the touch when you cast the
+      spell.</p><p><strong>Combat.</strong> The familiar is an ally to you and
+      your allies. It rolls its own Initiative and acts on its own turn. A
+      familiar can't attack, but it can take other actions as
+      normal.</p><p><strong>Disappearance of the Familiar.</strong> When the
+      familiar drops to 0 Hit Points, it disappears. It reappears after you cast
+      this spell again. As a Magic action, you can temporarily dismiss the
+      familiar to a pocket dimension. Alternatively, you can dismiss it forever.
+      As a Magic action while it is temporarily dismissed, you can cause it to
+      reappear in an unoccupied space within 30 feet of you. Whenever the
+      familiar drops to 0 Hit Points or disappears into the pocket dimension, it
+      leaves behind in its space anything it was wearing or
+      carrying.</p><p><strong>One Familiar Only.</strong> You can't have more
+      than one familiar at a time. If you cast this spell while you have a
+      familiar, you instead cause it to adopt a new eligible form.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: hour
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '10'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  materials:
+    value: burning incense worth 10+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes:
+        - celestial
+        - fey
+        - fiend
+      match:
+        proficiency: false
+        attacks: false
+        saves: false
+      profiles:
+        - count: '1'
+          cr: '0'
+          name: CR 0 Beast
+          _id: 6cJCcsSTdsc2OLnJ
+          uuid: Compendium.dnd5e.actors24.Actor.mmBat00000000000
+          types:
+            - beast
+          level:
+            min: null
+            max: null
+      summon:
+        identifier: ''
+        mode: cr
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: find-familiar
+_id: phbsplFindFamili
+type: spell
+img: icons/creatures/mammals/spirit-deer-herd-blue.webp
+effects: []
+folder: pBaAAtXBCq9FVEnL
+sort: 2900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425953349
+  modifiedTime: 1745256792859
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFindFamili'

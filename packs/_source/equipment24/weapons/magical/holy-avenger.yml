@@ -1,0 +1,237 @@
+_id: dmgHolyAvenger00
+name: Holy Avenger
+type: weapon
+img: icons/weapons/swords/greatsword-guard-gem-blue.webp
+system:
+  activities:
+    IMVUc41lxWG8Hyq3:
+      type: enchant
+      name: Holy Avenger
+      _id: IMVUc41lxWG8Hyq3
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: I7Iwl7awPq2wftoF
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - 6vKfMHP7AWboTcww
+            effect: []
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      img: ''
+      appliedEffects:
+        - I7Iwl7awPq2wftoF
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Weapon (Any Simple or Martial), Legendary (Requires Attunement by a
+      Paladin)</em></p><p>You gain a +3 bonus to attack rolls and damage rolls
+      made with this magic weapon. When you hit a Fiend or an Undead with it,
+      that creature takes an extra 2d10 Radiant damage.</p><p>While you hold the
+      drawn weapon, it creates a 10-foot Emanation originating from you. You and
+      all creatures Friendly to you in the Emanation have Advantage on saving
+      throws against spells and other magical effects. If you have 17 or more
+      levels in the Paladin class, the size of the Emanation increases to 30
+      feet.</p><p>[[10 + floor(@classes.paladin.levels / 17) * 20]]{Emanation
+      Size
+      (feet)}</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: holy-avenger
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: 3
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: ''
+effects:
+  - type: enchantment
+    name: Holy Avenger
+    img: systems/dnd5e/icons/spell-tiers/spell5.webp
+    disabled: true
+    _id: I7Iwl7awPq2wftoF
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Holy Avenger {}
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgHolyAvenger00
+          caption=false]</p>
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: legendary
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.magicalBonus
+        mode: 4
+        value: '3'
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/weapons/swords/greatsword-guard-gem-blue.webp
+        priority: null
+      - key: activities[attack].description.chatFlavor
+        mode: 5
+        value: '{} Bonus Damage: 2d10 Radiant vs Fiend/Undead'
+        priority: null
+      - key: system.damage.parts
+        mode: 2
+        value: '[["0", "radiant"]]'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730147062199
+      modifiedTime: 1745438836668
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgHolyAvenger00.I7Iwl7awPq2wftoF'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - 6vKfMHP7AWboTcww
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712700745
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 8400000
+ownership:
+  default: 0
+_key: '!items!dmgHolyAvenger00'

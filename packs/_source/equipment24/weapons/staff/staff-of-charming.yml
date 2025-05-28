@@ -1,0 +1,413 @@
+_id: dmgStaffOfCharmi
+name: Staff of Charming
+type: weapon
+img: icons/weapons/staves/staff-ornate-green.webp
+system:
+  activities:
+    czwuqy57kayiPVUP:
+      _id: czwuqy57kayiPVUP
+      type: attack
+      sort: -100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+    7bZzIRhMxei7kmFO:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplCharmPerso
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: 7bZzIRhMxei7kmFO
+      sort: 200000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    jqnIS8yB9Mbih7tp:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplCommand000
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: jqnIS8yB9Mbih7tp
+      sort: 400000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    zlCbbGPfUWPIMItx:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplComprehend
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: zlCbbGPfUWPIMItx
+      sort: 500000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    t8vD0vJ4MzCZIku2:
+      type: utility
+      name: Reflect Enchantment
+      _id: t8vD0vJ4MzCZIku2
+      sort: 150000
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/activity/save.svg
+      appliedEffects: []
+    tEk1wNWngqDYOgOB:
+      type: utility
+      name: Resist Enchantment
+      _id: tEk1wNWngqDYOgOB
+      sort: 175000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: formula
+            formula: '1'
+        max: '1'
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/rosa-shield.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d8 + 2
+    max: '10'
+  description:
+    value: >-
+      <p><em>@UUID[Compendium.dnd5e.equipment24.Item.phbafcStaffalsoa]{Staff},
+      Rare (Requires Attunement by a Bard, Cleric, Druid, Sorcerer, Warlock, or
+      Wizard)</em></p><p>This staff has 10 charges. While holding the staff, you
+      can use any of its properties:</p><p><strong>Cast Spell.</strong> You can
+      expend 1 of the staff's charges to cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplCharmPerso]{Charm Person},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]{Command}, or
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplComprehend]{Comprehend
+      Languages} from it using your spell save DC.</p><p><strong>Reflect
+      Enchantment.</strong> If you succeed on a saving throw against an
+      Enchantment spell that targets only you, you can take a Reaction to expend
+      1 charge from the staff and turn the spell back on its caster as if you
+      had cast the spell.</p><p><strong>Resist Enchantment.</strong> If you fail
+      a saving throw against an Enchantment spell that targets only you, you can
+      turn your failed save into a successful one. You can't use this property
+      of the staff again until the next dawn.</p><p><em><strong>Regaining
+      Charges.</strong></em> The staff regains 1d8 + 2 expended charges daily at
+      dawn. If you expend the last charge, roll 1d20. On a 1, the staff crumbles
+      to dust and is destroyed.</p>
+    chat: ''
+  identifier: staff-of-charming
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: quarterstaff
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  magicalBonus: null
+  properties:
+    - mgc
+    - ver
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: topple
+effects: []
+folder: 5p9KrkF39e6vFO4g
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703554
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100025
+ownership:
+  default: 0
+_key: '!items!dmgStaffOfCharmi'

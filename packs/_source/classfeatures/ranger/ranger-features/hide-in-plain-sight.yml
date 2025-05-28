@@ -1,0 +1,143 @@
+_id: r0unvWK0lPsDthDx
+name: Hide in Plain Sight
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Starting at 10th level, you can spend 1 minute creating camouflage for
+      yourself. You must have access to fresh mud, dirt, plants, soot, and other
+      naturally occurring materials with which to create your
+      camouflage.</p><p>Once you are camouflaged in this way, you can try to
+      hide by pressing yourself up against a solid surface, such as a tree or
+      wall, that is at least as tall and wide as you are. You gain a +10 bonus
+      to Dexterity (Stealth) checks as long as you remain there without moving
+      or taking actions. Once you move or take an action or a reaction, you must
+      camouflage yourself again to gain this benefit.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Ranger 10
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: minute
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects:
+        - _id: 7if4vIkT84Sw2zFm
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: hide-in-plain-sight
+flags: {}
+img: icons/magic/nature/stealth-hide-eyes-green.webp
+effects:
+  - _id: 7if4vIkT84Sw2zFm
+    changes:
+      - key: system.skills.ste.bonuses.check
+        mode: 2
+        value: '+10'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.r0unvWK0lPsDthDx
+    transfer: false
+    flags: {}
+    tint: '#ffffff'
+    name: Hide in Plain Sight
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/nature/stealth-hide-eyes-green.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!r0unvWK0lPsDthDx.7if4vIkT84Sw2zFm'
+folder: S0rKJuStpCBy0hAf
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037388894
+  modifiedTime: 1725992290060
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!r0unvWK0lPsDthDx'

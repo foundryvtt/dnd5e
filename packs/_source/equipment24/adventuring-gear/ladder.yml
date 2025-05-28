@@ -1,0 +1,46 @@
+name: Ladder
+system:
+  description:
+    value: <p>A Ladder is 10 feet tall. You must climb to move up or down it.</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: sp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 25
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: ladder
+_id: phbagLadder00000
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/misc/ladder-improvised.webp
+effects: []
+sort: 3100000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425909568
+  modifiedTime: 1745256812164
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagLadder00000'

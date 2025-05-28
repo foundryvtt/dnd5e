@@ -1,0 +1,92 @@
+_id: phbmnkUnarmoredD
+name: Unarmored Defense
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/magic/control/silhouette-hold-change-blue.webp
+system:
+  description:
+    value: >-
+      <p>While you aren't wearing armor or wielding a Shield, your base Armor
+      Class equals 10 plus your Dexterity and Wisdom modifiers.</p><section
+      class="secret" id="secret-yjsIRRlbUz035Dnj"><p><strong>Foundry
+      Note</strong></p><p>This feature includes an Active Effect which updates
+      your Armor Class.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: unarmored-defense
+effects:
+  - _id: m2RCcVkc0YkCXNEb
+    changes:
+      - key: system.attributes.ac.calc
+        mode: 5
+        value: unarmoredMonk
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.classes24.Item.phbmnkUnarmoredD
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Unarmored Defense
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classfeatures.Item.UAvV7N7T4zJhxdfI.ActiveEffect.R5ro4AuNjcdWD56O
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/control/silhouette-hold-change-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbmnkUnarmoredD.m2RCcVkc0YkCXNEb'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1745256763447
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1900000
+ownership:
+  default: 0
+_key: '!items!phbmnkUnarmoredD'

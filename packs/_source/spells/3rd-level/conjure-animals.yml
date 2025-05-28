@@ -1,0 +1,167 @@
+_id: 1Drt0SHxbEAHxprN
+name: Conjure Animals
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: "<p>You summon fey spirits that take the form of beasts and appear in unoccupied spaces that you can see within range. Choose one of the following options for what appears:</p><ul><li>One beast of challenge rating 2 or lower</li><li>Two beasts of challenge rating 1 or lower</li><li>Four beasts of challenge rating 1/2 or lower</li><li>Eight beasts of challenge rating 1/4 or lower</li><li>Each beast is also considered fey, and it disappears when it drops to 0 hit points or when the spell ends.</li></ul><p>The summoned creatures are friendly to you and your companions. Roll initiative for the summoned creatures as a group, which has its own turns. They obey any verbal commands that you issue to them (no action required by you). If you don't issue any commands to them, they defend themselves from hostile creatures, but otherwise take no actions.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using certain higher-level spell slots, you choose one of the summoning options above, and more creatures appear: twice as many with a 5th-level slot, three times as many with a 7th-level, and four times as many with a 9th-level slot.</p>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: space
+      choice: false
+      count: ''
+      special: ''
+    template:
+      units: any
+      contiguous: false
+      type: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes:
+        - fey
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: 1 * floor((@item.level - 1) / 2)
+          cr: '2'
+          name: ''
+          _id: L0UhkCz2NI01zinq
+          uuid: ''
+          types:
+            - beast
+          level:
+            min: null
+            max: null
+        - count: 2 * floor((@item.level - 1) / 2)
+          cr: '1'
+          name: ''
+          _id: CFJttKXu4rVgI4hX
+          uuid: ''
+          types:
+            - beast
+          level:
+            min: null
+            max: null
+        - count: 4 * floor((@item.level - 1) / 2)
+          cr: '0.5'
+          name: ''
+          _id: D5jhKf0u1tiEPE88
+          uuid: ''
+          types:
+            - beast
+          level:
+            min: null
+            max: null
+        - count: 8 * floor((@item.level - 1) / 2)
+          cr: '0.25'
+          name: ''
+          _id: 04lzPfFqexz2myIV
+          uuid: ''
+          types:
+            - beast
+          level:
+            min: null
+            max: null
+      summon:
+        identifier: ''
+        mode: cr
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: conjure-animals
+sort: 0
+flags: {}
+img: icons/magic/nature/wolf-paw-glow-large-orange.webp
+effects: []
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037345541
+  modifiedTime: 1725992716427
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!1Drt0SHxbEAHxprN'

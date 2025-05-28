@@ -1,0 +1,103 @@
+name: Oath of Devotion
+type: subclass
+img: icons/magic/holy/saint-glass-portrait-halo.webp
+system:
+  description:
+    value: "<p>The Oath of Devotion binds a paladin to the loftiest ideals of justice, virtue, and order. Sometimes called cavaliers, white knights, or holy warriors, these paladins meet the ideal of the knight in shining armor, acting with honor in pursuit of justice and the greater good. They hold themselves to the highest standards of conduct, and some, for better or worse, hold the rest of the world to the same standards. Many who swear this oath are devoted to gods of law and good and use their gods' tenets as the measure of their devotion. They hold angels—the perfect servants of good—as their ideals, and incorporate images of angelic wings into their helmets or coats of arms.\_</p><h4>Tenets of Devotion</h4><p>Though the exact words and strictures of the Oath of Devotion vary, paladins of this oath share these tenets.</p><p><strong>Honesty.</strong> Don't lie or cheat. Let your word be your promise.</p><p><strong>Courage.</strong> Never fear to act, though caution is wise.</p><p><strong>Compassion.</strong> Aid others, protect the weak, and punish those who threaten them. Show mercy to your foes, but temper it with wisdom.</p><p><strong>Honor.</strong> Treat others with fairness, and let your honorable deeds be an example to them. Do as much good as possible while causing the least amount of harm.</p><p><strong>Duty.</strong> Be responsible for your actions and their consequences, protect those entrusted to your care, and obey those who have just authority over you.</p><h4>Oath Spells</h4><p>You gain oath spells at the paladin levels listed.</p><table><caption>Oath of Devotion Spells</caption><thead><tr><td>Paladin Level</td><td>Spells</td></tr></thead><tbody><tr><td>3rd</td><td>@UUID[Compendium.dnd5e.spells.Item.xmDBqZhRVrtLP8h2]{Protection from Evil and Good}, @UUID[Compendium.dnd5e.spells.Item.gvdA9nPuWLck4tBl]{Sanctuary}</td></tr><tr><td>5th</td><td>@UUID[Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV]{Lesser Restoration}, @UUID[Compendium.dnd5e.spells.Item.CylBa7jR8DSbo8Z3]{Zone of Truth}</td></tr><tr><td>9th</td><td>@UUID[Compendium.dnd5e.spells.Item.ZU9d6woBdUP8pIPt]{Beacon of Hope}, @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic}</td></tr><tr><td>13th</td><td>@UUID[Compendium.dnd5e.spells.Item.da0a1t2FqaTjRZGT]{Freedom of Movement}, @UUID[Compendium.dnd5e.spells.Item.TgHsuhNasPbhu8MO]{Guardian of Faith}</td></tr><tr><td>17th</td><td>@UUID[Compendium.dnd5e.spells.Item.d54VDyFulD9xxY7J]{Commune}, @UUID[Compendium.dnd5e.spells.Item.5e1xTohkzqFqbYH4]{Flame Strike}</td></tr></tbody></table>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: oath-of-devotion
+  classIdentifier: paladin
+  advancement:
+    - _id: x139gm4ohldqu68j
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.xNN0JMKqlG4hKVYu
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.ZdwGlsJNtc7pGFCd
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 3
+      title: Features
+    - _id: enzzft6q7timpcg1
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.M2DxVsgLeZgXOznT
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 7
+      title: Features
+    - _id: lnfks5j00ywstged
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.ZHJyYrqMYSLub4RY
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 15
+      title: Features
+    - _id: 5a99kkfabklcl06a
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.ANE5gjojvhNEagzz
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 20
+      title: Features
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation: {}
+effects: []
+folder: HwOKB9LPw4dA10L8
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: sZ86mbX8D5PfYuhl
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037372993
+  modifiedTime: 1725992730670
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!sZ86mbX8D5PfYuhl'

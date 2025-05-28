@@ -1,0 +1,47 @@
+_id: 2fyuw7MiCnocDeAU
+name: Agonizing Blast
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>When you cast
+      @UUID[Compendium.dnd5e.spells.Item.Z9p1vezIn95jw1Yw]{Eldritch Blast}, add
+      your Charisma modifier to the damage it deals on a hit.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  requirements: Warlock 2, Eldritch Blast
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: agonizing-blast
+flags: {}
+img: icons/magic/acid/projectile-stream-bubbles.webp
+effects: []
+folder: 0uFCjs5gYeVtl38i
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037379487
+  modifiedTime: 1725992286893
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!2fyuw7MiCnocDeAU'

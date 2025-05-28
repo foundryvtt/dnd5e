@@ -1,0 +1,154 @@
+_id: 1N8dDMMgZ1h1YJ3B
+name: Invisibility
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A creature you touch becomes invisible until the spell ends. Anything
+      the target is wearing or carrying is invisible as long as it is on the
+      target's person. The spell ends for a target that attacks or casts a
+      spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell
+      using a spell slot of 3rd level or higher, you can target one additional
+      creature for each slot level above 2nd.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: ill
+  materials:
+    value: An eyelash encased in gum arabic
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: TeFxBRKYKIXtg6pS
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: invisibility
+sort: 0
+flags: {}
+img: icons/magic/air/fog-gas-smoke-dense-gray.webp
+effects:
+  - name: Invisibility
+    origin: Compendium.dnd5e.spells.Item.1N8dDMMgZ1h1YJ3B
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: TeFxBRKYKIXtg6pS
+    changes: []
+    description: >-
+      <p>The target becomes Invisible until the spell ends. Anything the target
+      is wearing or carrying is invisible as long as it is on the target's
+      person. The spell ends for a target that attacks or casts a spell.</p>
+    transfer: false
+    statuses:
+      - invisible
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/air/fog-gas-smoke-dense-gray.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!1N8dDMMgZ1h1YJ3B.TeFxBRKYKIXtg6pS'
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037345708
+  modifiedTime: 1731016443164
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!1N8dDMMgZ1h1YJ3B'

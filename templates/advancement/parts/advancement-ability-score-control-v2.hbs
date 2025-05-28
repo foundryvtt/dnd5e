@@ -1,0 +1,36 @@
+<li data-score="{{ key }}">
+    <label>{{ label }}</label>
+    {{#if canAdjust}}
+    <button class="unbutton control-button minus" type="button" {{~#if canDecrease}}data-action="decrease"{{else}} disabled{{/if}}
+       data-tooltip aria-label="{{ localize 'DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.decrease' }}">
+        <i class="fas fa-minus" inert></i>
+    </button>
+    {{/if}}
+    <input name="{{ name }}" type="number" min="{{ min }}" max="{{ max }}"
+           step="1" value="{{ value }}" data-initial="{{ initial }}"
+           {{#if isLocked}}readonly aria-readonly="true"{{/if}} {{ disabled isDisabled }}>
+    {{#if canAdjust}}
+    <button class="unbutton control-button plus" type="button" {{~#if canIncrease}} data-action="increase"{{else}} disabled{{/if}}
+       data-tooltip aria-label="{{ localize 'DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.increase' }}">
+        <i class="fas fa-plus" inert></i>
+    </button>
+    {{/if}}
+    {{#if canLock}}
+    <label class="locked">
+        <input type="hidden" name="configuration.locked.{{ key }}" value="{{ locked.value }}" data-dtype="Boolean">
+        <button type="button" class="unbutton control-button" data-action="lock"
+                data-tooltip aria-label="{{ localize locked.hint }}">
+            <i class="fa-solid fa-lock{{ ifThen locked.value "" "-open" }}" inert></i>
+        </button>
+    </label>
+    {{/if}}
+    {{#if showDelta}}
+    <div class="delta">
+        {{#if delta}}{{ delta }}{{else}}&nbsp;{{/if}}
+        {{#if isLocked}}
+        <i class="fa-solid fa-lock" data-tooltip
+           aria-label="{{ localize 'DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.fixed.label' }}"></i>
+        {{/if}}
+    </div>
+    {{/if}}
+</li>

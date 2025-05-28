@@ -1,0 +1,69 @@
+_id: phbGnomishLineag
+name: Gnomish Lineage
+img: systems/dnd5e/icons/svg/items/race.svg
+description: <p>You are part of a lineage that grants you supernatural abilities.</p>
+results:
+  - type: document
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    img: systems/dnd5e/icons/species/gnome-forest.webp
+    _id: AIWT6lRqac4IYvnv
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Gnome, Forest
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspForestGnome
+    description: ''
+    _key: '!tables.results!phbGnomishLineag.AIWT6lRqac4IYvnv'
+  - type: document
+    weight: 1
+    range:
+      - 2
+      - 2
+    drawn: false
+    img: systems/dnd5e/icons/species/gnome-rock.webp
+    _id: tErs3uTFNYKl3gAu
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Gnome, Rock
+    documentUuid: Compendium.dnd5e.origins24.Item.phbspRockGnome00
+    description: ''
+    _key: '!tables.results!phbGnomishLineag.tErs3uTFNYKl3gAu'
+replacement: true
+displayRoll: true
+folder: H6GuZ74gUlcOEuC5
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1726504214289
+  modifiedTime: 1740685862697
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+formula: 1d2
+sort: 150000
+ownership:
+  default: 0
+_key: '!tables!phbGnomishLineag'

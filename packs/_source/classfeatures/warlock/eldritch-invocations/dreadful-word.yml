@@ -1,0 +1,112 @@
+_id: QBk1RsuTIEF4GEBC
+name: Dreadful Word
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You can cast
+      @UUID[Compendium.dnd5e.spells.Item.9hQXdMSmerkTsHDe]{Confusion} once using
+      a warlock spell slot. You can't do so again until you finish a long
+      rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: eldritchInvocation
+  requirements: Warlock 7
+  properties: []
+  prerequisites:
+    level: 7
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '90'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: sphere
+          size: '10'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: cha
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  identifier: dreadful-word
+flags: {}
+img: icons/magic/air/wind-vortex-swirl-blue.webp
+effects: []
+folder: 0uFCjs5gYeVtl38i
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037383878
+  modifiedTime: 1725992288308
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!QBk1RsuTIEF4GEBC'

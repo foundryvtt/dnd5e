@@ -1,0 +1,183 @@
+name: Befuddlement
+system:
+  description:
+    value: >-
+      <p>You blast the mind of a creature that you can see within range. The
+      target makes an Intelligence saving throw.</p><p>On a failed save, the
+      target takes 10d12 Psychic damage and can't cast spells or take the Magic
+      action. At the end of every 30 days, the target repeats the save, ending
+      the effect on a success. The effect can also be ended by the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
+      Restoration}</em>,
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplHeal000000]{Heal}</em>, or
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish}</em>
+      spell.</p><p>On a successful save, the target takes half as much damage
+      only.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '150'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 8
+  school: enc
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a key ring with no keys
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    TAVpYz6KXNk1xZi1:
+      type: save
+      _id: TAVpYz6KXNk1xZi1
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: KjjRlnccDwmAY7gG
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: '12'
+            bonus: ''
+            types:
+              - psychic
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: int
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: befuddlement
+_id: phbsplBefuddleme
+type: spell
+img: icons/skills/trades/academics-investigation-puzzles.webp
+effects:
+  - name: Befuddled
+    img: icons/skills/trades/academics-investigation-puzzles.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplBefuddleme
+    transfer: false
+    _id: KjjRlnccDwmAY7gG
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>On a failed save, the target takes 10d12 Psychic damage and can’t cast
+      spells or take the Magic action. At the end of every 30 days, the target
+      repeats the [[/save ability=wis]] save, ending the effect on a success.
+      The effect can also be ended by the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
+      Restoration}</em>,
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplHeal000000]{Heal}</em>, or
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish}</em>
+      spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725292478326
+      modifiedTime: 1725292767990
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplBefuddleme.KjjRlnccDwmAY7gG'
+folder: M5CvwK9zVtzx6Dnn
+sort: 125000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425943140
+  modifiedTime: 1745256786688
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplBefuddleme'

@@ -7,7 +7,9 @@ import ContextMenu5e from "../context-menu.mjs";
  */
 export default class EffectsElement extends HTMLElement {
   connectedCallback() {
-    this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+    if ( this.#app ) return;
+    this.#app = foundry.applications.instances.get(this.closest(".application")?.id)
+      ?? ui.windows[this.closest(".app")?.dataset.appid];
 
     for ( const control of this.querySelectorAll("[data-action]") ) {
       control.addEventListener("click", event => {
@@ -20,23 +22,16 @@ export default class EffectsElement extends HTMLElement {
     }
 
     for ( const control of this.querySelectorAll("[data-context-menu]") ) {
-      control.addEventListener("click", event => {
-        event.preventDefault();
-        event.stopPropagation();
-        const { clientX, clientY } = event;
-        event.currentTarget.closest("[data-effect-id]").dispatchEvent(new PointerEvent("contextmenu", {
-          view: window, bubbles: true, cancelable: true, clientX, clientY
-        }));
-      });
+      control.addEventListener("click", ContextMenu5e.triggerEvent);
     }
 
     const MenuCls = this.hasAttribute("v2") ? ContextMenu5e : ContextMenu;
-    new MenuCls(this, "[data-effect-id]", [], {onOpen: element => {
+    new MenuCls(this, "[data-effect-id]", [], { onOpen: element => {
       const effect = this.getEffect(element.dataset);
       if ( !effect ) return;
       ui.context.menuItems = this._getContextOptions(effect);
       Hooks.call("dnd5e.getActiveEffectContextOptions", effect, ui.context.menuItems);
-    }});
+    }, jQuery: true });
   }
 
   /* -------------------------------------------- */
@@ -54,7 +49,7 @@ export default class EffectsElement extends HTMLElement {
    * @type {Application}
    * @protected
    */
-  get _app() { return this.#app; }
+  get app() { return this.#app; }
 
   /* -------------------------------------------- */
 
@@ -63,7 +58,7 @@ export default class EffectsElement extends HTMLElement {
    * @type {Actor5e|Item5e}
    */
   get document() {
-    return this._app.document;
+    return this.app.document;
   }
 
   /* -------------------------------------------- */
@@ -158,7 +153,7 @@ export default class EffectsElement extends HTMLElement {
    * @protected
    */
   _getContextOptions(effect) {
-    const isConcentrationEffect = (this.document instanceof Actor5e) && this._app._concentration?.effects.has(effect);
+    const isConcentrationEffect = (this.document instanceof Actor5e) && this.app._concentration?.effects.has(effect);
     const options = [
       {
         name: "DND5E.ContextMenuActionEdit",
@@ -200,7 +195,7 @@ export default class EffectsElement extends HTMLElement {
       const isFavorited = this.document.system.hasFavorite(uuid);
       options.push({
         name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-        icon: "<i class='fas fa-star fa-fw'></i>",
+        icon: "<i class='fas fa-bookmark fa-fw'></i>",
         condition: () => effect.isOwner,
         callback: li => this._onAction(li[0], isFavorited ? "unfavorite" : "favorite"),
         group: "state"

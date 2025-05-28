@@ -1,0 +1,103 @@
+_id: phbrgeStrokeOfLu
+name: Stroke of Luck
+type: feat
+folder: ymTkGscp5QEOwDlv
+img: icons/commodities/flowers/clover.webp
+system:
+  description:
+    value: >-
+      <p>You have a marvelous knack for succeeding when you need to. If you fail
+      a D20 Test, you can turn the roll into a 20.</p><p>Once you use this
+      feature, you can't use it again until you finish a Short or Long Rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '1'
+    spent: 0
+    recovery:
+      - period: sr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 20
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    y4PG8Ow1eNEle580:
+      type: utility
+      name: Stroke of Luck
+      _id: y4PG8Ow1eNEle580
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you fail a D20 Test
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: stroke-of-luck
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866292069
+  modifiedTime: 1745256764537
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeStrokeOfLu'

@@ -1,0 +1,23 @@
+<section>
+    {{#each choices}}
+    <fieldset class="traits card">
+        <legend>{{ label }}</legend>
+        {{#if @root.hint}}<p class="hint">{{ localize @root.hint }}</p>{{/if}}
+        {{> "dnd5e.traits-list" choices=children keyPath=(concat @root.keyPath "." @root.value.key ".") topLevel=true
+            field=@root.value.field input=@root.value.input }}
+    </fieldset>
+    {{/each}}
+    <fieldset class="traits bypasses card">
+        <legend>{{ localize "DND5E.DamagePhysicalBypass" }}</legend>
+        <p class="hint">{{ localize bypassHint }}</p>
+        {{> "dnd5e.traits-list" choices=bypasses keyPath=(concat @root.keyPath ".bypasses.")
+            field=@root.checkbox input=@root.inputs.createCheckboxInput }}
+    </fieldset>
+    {{#if fields.custom}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.Special" }}</legend>
+        {{ formInput fields.custom value=data.custom }}
+        <p class="hint">{{ localize "DND5E.SpecialHint" }}</p>
+    </fieldset>
+    {{/if}}
+</section>

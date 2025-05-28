@@ -1,0 +1,158 @@
+name: Divine Favor
+system:
+  description:
+    value: >-
+      <p>Until the spell ends, your attacks with weapons deal an extra 1d4
+      Radiant damage on a hit.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: bonus
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: trs
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    2vvUcsXMnaLKMB0s:
+      type: utility
+      _id: 2vvUcsXMnaLKMB0s
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: xvEfaqPYJUNKaM58
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: ''
+      appliedEffects:
+        - xvEfaqPYJUNKaM58
+  identifier: divine-favor
+_id: phbsplDivineFavo
+type: spell
+img: icons/skills/melee/weapons-crossed-swords-yellow-teal.webp
+effects:
+  - name: Divine Favor
+    origin: Compendium.dnd5e.spells24.Item.phbsplDivineFavo
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/holy/projectiles-blades-salvo-yellow.webp
+    _id: xvEfaqPYJUNKaM58
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.mwak.damage
+        mode: 2
+        value: 1d4[radiant]
+        priority: null
+      - key: system.bonuses.rwak.damage
+        mode: 2
+        value: 1d4[radiant]
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplDivineFavo.xvEfaqPYJUNKaM58'
+folder: pBaAAtXBCq9FVEnL
+sort: 3700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425950458
+  modifiedTime: 1745256791131
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDivineFavo'

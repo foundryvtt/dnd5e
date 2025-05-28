@@ -1,0 +1,171 @@
+_id: BYNvBJzHcF5VJhXw
+name: Phantasmal Killer
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You tap into the nightmares of a creature you can see within range and
+      create an illusory manifestation of its deepest fears, visible only to
+      that creature. The target must make a Wisdom saving throw. On a failed
+      save, the target becomes &amp;Reference[Frightened] for the Duration. At
+      the end of each of the target's turns before the spell ends, the target
+      must succeed on a Wisdom saving throw or take 4d10 psychic damage. On a
+      successful save, the spell ends.</p><p><strong>At Higher Levels</strong>.
+      When you cast this spell using a spell slot of 5th level or higher, the
+      damage increases by 1d10 for each slot level above 4th.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: ill
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: J6OIwL9rmPzNN307
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 4
+            denomination: 10
+            bonus: ''
+            types:
+              - psychic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: phantasmal-killer
+sort: 0
+flags: {}
+img: icons/magic/control/fear-fright-monster-grin-purple-blue.webp
+effects:
+  - name: Phantasmal Killer
+    origin: Compendium.dnd5e.spells.Item.BYNvBJzHcF5VJhXw
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: J6OIwL9rmPzNN307
+    changes: []
+    description: >-
+      <p>The target becomes Frightened for the Duration. At the end of each of
+      the target's turns before the spell ends, the target must succeed on a
+      Wisdom saving throw or take psychic damage. On a successful save, the
+      spell ends.</p>
+    transfer: false
+    statuses:
+      - frightened
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/control/fear-fright-monster-grin-purple-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!BYNvBJzHcF5VJhXw.J6OIwL9rmPzNN307'
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037350639
+  modifiedTime: 1725992718018
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!BYNvBJzHcF5VJhXw'

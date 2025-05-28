@@ -1,0 +1,163 @@
+_id: czXrVRx6XYRWsHAi
+name: Giant Insect
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You transform up to ten centipedes, three spiders, five wasps, or one
+      Scorpion within range into giant versions of their natural forms for the
+      Duration. A centipede becomes a Giant Centipede, a Spider becomes a Giant
+      Spider, a wasp becomes a Giant Wasp, and a Scorpion becomes a Giant
+      Scorpion.</p><p>Each creature obeys your verbal commands, and in Combat,
+      they act on Your Turn each round. The DM has the Statistics for these
+      creatures and resolves their Actions and Movement.</p><p>A creature
+      remains in its giant size for the Duration, until it drops to 0 Hit
+      Points, or until you use an action to dismiss the effect on it.</p><p>The
+      DM might allow you to choose different Targets. For example, if you
+      transform a bee, its giant version might have the same Statistics as a
+      Giant Wasp.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '10'
+      choice: false
+    template:
+      units: spec
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: trs
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: '10'
+          name: ''
+          _id: xLVPgOloyb3QJ0i1
+          uuid: Compendium.dnd5e.monsters.Actor.Hn8FFLEzscgT7azz
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: zzh3sTByUIvUYVvE
+          uuid: Compendium.dnd5e.monsters.Actor.GxgIVRX5GbVTifiF
+          level:
+            min: null
+            max: null
+          types: []
+        - count: '3'
+          name: ''
+          _id: Mjp51GLFAYyA6NgW
+          uuid: Compendium.dnd5e.monsters.Actor.v99wOosUJjUgcUNF
+          level:
+            min: null
+            max: null
+          types: []
+        - count: '5'
+          name: ''
+          _id: LkxYBiqNIyzUJxuH
+          uuid: Compendium.dnd5e.monsters.Actor.4tl0s2SnaLjkoDiI
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: giant-insect
+sort: 0
+flags: {}
+img: icons/magic/nature/leaf-glow-triple-orange.webp
+effects: []
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037360727
+  modifiedTime: 1725992721324
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!czXrVRx6XYRWsHAi'

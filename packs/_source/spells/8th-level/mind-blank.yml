@@ -1,0 +1,110 @@
+_id: bllEWfm9xfEKynhv
+name: Mind Blank
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Until the spell ends, one willing creature you touch is immune to
+      psychic damage, any effect that would sense its emotions or read its
+      thoughts, Divination Spells, and the Charmed condition. The spell even
+      foils Wish spells and Spells or Effects of similar power used to affect
+      the target's mind or to gain information about the target.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 8
+  school: abj
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: mind-blank
+sort: 0
+flags: {}
+img: icons/magic/air/air-burst-spiral-large-blue.webp
+effects: []
+folder: x1XTiOgx4DJ34wc5
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037360166
+  modifiedTime: 1725992721123
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!bllEWfm9xfEKynhv'

@@ -1,0 +1,86 @@
+_id: phbmnkOpenHandWa
+name: Warrior of the Open Hand
+type: subclass
+folder: Dq7BWtsgu2yi7Ld2
+img: systems/dnd5e/icons/classes/open-hand.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Master Unarmed Combat
+      Techniques</p></blockquote><p>Warriors of the Open Hand are masters of
+      unarmed combat. They learn techniques to push and trip their opponents and
+      manipulate their own energy to protect themselves from harm.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identifier: hand
+  classIdentifier: monk
+  advancement:
+    - _id: VeL49OqjttBKjx3J
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbmnkOpenHandTe
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Subclass Features
+    - _id: KKc6VtzWsSGh2NnC
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbmnkWholenessO
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 6
+      title: Subclass Features
+    - _id: M7cvHrnI6p0Yo150
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbmnkFleetStep0
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 11
+      title: Subclass Features
+    - _id: 1kqB8Z5f6UcgmGjY
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbmnkQuiveringP
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 17
+      title: Subclass Features
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation:
+      formula: ''
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866574822
+  modifiedTime: 1745256763260
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbmnkOpenHandWa'

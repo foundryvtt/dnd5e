@@ -1,0 +1,440 @@
+_id: dmgAirRingOfElem
+name: Air Ring of Elemental Command
+type: equipment
+img: icons/equipment/finger/ring-cabochon-silver-gold-red.webp
+system:
+  activities:
+    Un5AmzSdpsELbHQT:
+      type: save
+      name: Elemental Compulsion
+      _id: Un5AmzSdpsELbHQT
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: cN85nWiTzfGzWR7D
+          onSave: false
+      range:
+        override: false
+        value: '60'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Elemental
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '18'
+    XBLdYOx6G8zS67Gb:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplChainLight
+        challenge:
+          attack: null
+          save: 18
+          override: true
+        level: '6'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: XBLdYOx6G8zS67Gb
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '3'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    WEBJIJBHSUTJruRZ:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFeatherFal
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: WEBJIJBHSUTJruRZ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    KN5CZz5BdRVGC2IN:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplGustofWind
+        challenge:
+          attack: null
+          save: 18
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: KN5CZz5BdRVGC2IN
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    4sy1GTbqChCOkOdZ:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplWindWall00
+        challenge:
+          attack: null
+          save: 18
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: 4sy1GTbqChCOkOdZ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d4 + 1
+    max: '5'
+  description:
+    value: >-
+      <p>Ring, Legendary (Requires Attunement)</p><p>Each <em>Ring of Elemental
+      Command</em> is linked to one of the four Elemental Planes. The GM chooses
+      or randomly determines the linked plane. For example, a <em>Ring of
+      Elemental Command</em> (air) is linked to the Elemental Plane of
+      Air.</p><p>Every <em>Ring of Elemental Command</em> has the following two
+      properties:</p><p><strong>Elemental Bane.</strong> While wearing the ring,
+      you have Advantage on attack rolls against Elementals and they have
+      Disadvantage on attack rolls against you.</p><p><strong>Elemental
+      Compulsion.</strong> While wearing the ring, you can take a Magic action
+      to try to compel an Elemental you see within 60 feet of yourself. The
+      Elemental makes a DC 18 Wisdom saving throw. On a failed save, the
+      Elemental has the &amp;Reference[Charmed apply=false] condition until the
+      start your next turn, and you determine what it does with its move and
+      action on its next turn.</p><p><em><strong>Elemental Focus.</strong></em>
+      While wearing the ring, you benefit from additional properties
+      corresponding to the ring's linked Elemental
+      Plane:</p><p><strong>Air.</strong> You know Auran, you have Resistance to
+      Lightning damage, and you have a Fly Speed equal to your Speed and can
+      hover.</p><p><em><strong>Spellcasting.</strong></em> The ring has 5
+      charges and regains 1d4 + 1 expended charges daily at dawn. While wearing
+      the ring, you can cast a spell from it. Choose the spell from the list of
+      available spells based on the Elemental Plane the ring is linked to, as
+      shown in the following table. The table indicates how many charges you
+      must expend to cast the spell, which has a save DC of
+      18.</p><table><thead><tr><th
+      style="min-width:50px"><p>Plane</p></th><th><p>Spells
+      (Charges)</p></th></tr></thead><tbody><tr><td><p>Air</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplChainLight]{Chain
+      Lightning} (3 charges),
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFeatherFal]{Feather Fall} (0
+      charges), @UUID[Compendium.dnd5e.spells24.Item.phbsplGustofWind]{Gust of
+      Wind} (2 charges),
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplWindWall00]{Wind Wall} (1
+      charge)</p></td></tr></tbody></table>
+    chat: ''
+  identifier: ring-of-elemental-command
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ring
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Charmed
+    img: systems/dnd5e/icons/svg/statuses/charmed.svg
+    origin: Compendium.dnd5e.equipment24.Item.dmgRingOfElement
+    transfer: false
+    _id: cN85nWiTzfGzWR7D
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - charmed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!dmgAirRingOfElem.cN85nWiTzfGzWR7D'
+  - name: Air Focus
+    img: icons/magic/air/fog-gas-smoke-blue-gray.webp
+    _id: d5aFCMPqEUaUQ37L
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.languages.value
+        mode: 2
+        value: auran
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: lightning
+        priority: null
+      - key: system.attributes.movement.hover
+        mode: 5
+        value: 'true'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730685122369
+      modifiedTime: 1730685488423
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgAirRingOfElem.d5aFCMPqEUaUQ37L'
+folder: DC1x1wAm0NLFudA6
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730684815591
+  modifiedTime: 1745712697669
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+_key: '!items!dmgAirRingOfElem'

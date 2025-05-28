@@ -1,5 +1,5 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
-import SystemDataModel from "../../abstract.mjs";
+import SystemDataModel from "../../abstract/system-data-model.mjs";
 
 const { BooleanField, SchemaField, StringField, HTMLField } = foundry.data.fields;
 
@@ -52,8 +52,10 @@ export default class IdentifiableTemplate extends SystemDataModel {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  prepareDerivedData() {
+  /**
+   * Prepare the unidentified name for the item.
+   */
+  prepareIdentifiable() {
     if ( !this.identified && this.unidentified.name ) {
       this.parent.name = this.unidentified.name;
     }
@@ -66,14 +68,14 @@ export default class IdentifiableTemplate extends SystemDataModel {
   /**
    * If no unidentified name or description are set when the identified checkbox is unchecked, then fetch values
    * from base item if possible.
-   * @param {object} changed            The differential data that is changed relative to the documents prior values
+   * @param {object} changed            The differential data that is changed relative to the document's prior values.
    * @param {object} options            Additional options which modify the update request
    * @param {documents.BaseUser} user   The User requesting the document update
    * @returns {Promise<boolean|void>}   A return value of false indicates the update operation should be cancelled.
    * @see {Document#_preUpdate}
    * @protected
    */
-  async _preUpdate(changed, options, user) {
+  async preUpdateIdentifiable(changed, options, user) {
     if ( !foundry.utils.hasProperty(changed, "system.identified") || changed.system.identified ) return;
 
     const fetchName = !foundry.utils.getProperty(changed, "system.unidentified.name") && !this.unidentified.name;
@@ -81,14 +83,7 @@ export default class IdentifiableTemplate extends SystemDataModel {
       && !this.unidentified.description;
     if ( !fetchName && !fetchDesc ) return;
 
-    let baseItemIdentifier;
-    if ( this.parent.type === "weapon" ) baseItemIdentifier = CONFIG.DND5E.weaponIds[this.type.baseItem];
-    else if ( this.parent.type === "tool" ) baseItemIdentifier = CONFIG.DND5E.toolIds[this.type.baseItem];
-    else if ( this.parent.type === "equipment" ) {
-      if ( this.type.value === "shield" ) baseItemIdentifier = CONFIG.DND5E.shieldIds[this.type.baseItem];
-      else baseItemIdentifier = CONFIG.DND5E.armorIds[this.type.baseItem];
-    }
-    const baseItem = await Trait.getBaseItem(baseItemIdentifier ?? "", { fullItem: fetchDesc });
+    const baseItem = await Trait.getBaseItem(this.type?.identifier ?? "", { fullItem: fetchDesc });
 
     // If a base item is set, fetch that and use its name/description
     if ( baseItem ) {

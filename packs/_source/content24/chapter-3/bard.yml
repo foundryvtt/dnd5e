@@ -1,0 +1,126 @@
+_id: phbBard000000000
+name: Bard
+pages:
+  - sort: 100000
+    name: Bard
+    type: class
+    _id: V8pqIWlaL9GhY61t
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbbrdBard000000
+      description:
+        value: >-
+          <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbbrdBard000000
+          inline classes="free-rules-embed"]</p> <h2>Becoming a Bard
+          …</h2><h3>As a Level 1 Character</h3><ul><li><p>Gain all the traits in
+          the Core Bard Traits table.</p></li><li><p>Gain the Bard's level 1
+          features, which are listed in the Bard Features
+          table.</p></li></ul><h3>As a Multiclass Character</h3><ul><li><p>Gain
+          the following traits from the Core Bard Traits table: Hit Point Die,
+          proficiency in one skill of your choice, proficiency with one Musical
+          Instrument of your choice, and training with Light
+          armor.</p></li><li><p>Gain the Bard's level 1 features, which are
+          listed in the Bard Features table. See the multiclassing rules in
+          chapter 2 to determine your available spell slots.</p></li></ul>
+        additionalHitPoints: ''
+        additionalTraits: ''
+        additionalEquipment: ''
+        subclass: >-
+          <p>A Bard subclass is a specialization that grants you features at
+          certain levels, as specified in the subclass. The next page presents
+          the @UUID[Compendium.dnd5e.classes24.Item.phbbrdLore000000]{College of
+          Lore}subclass.</p>
+      subclassItems: []
+      subclassHeader: ''
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745512038999
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbBard000000000.V8pqIWlaL9GhY61t'
+  - sort: 400000
+    name: College of Lore
+    type: subclass
+    _id: AK8mgYdk1zOiIU0w
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbbrdLore000000
+      description:
+        value: >-
+          <blockquote><p>Plumb the Depths of Magical
+          Knowledge</p></blockquote><p>Bards of the
+          @UUID[Compendium.dnd5e.classes24.Item.phbbrdLore000000]{College of
+          Lore} collect spells and secrets from diverse sources, such as
+          scholarly tomes, mystical rites, and peasant tales. The college's
+          members gather in libraries and universities to share their lore with
+          one another. They also meet at festivals or affairs of state, where
+          they can expose corruption, unravel lies, and poke fun at
+          self-important figures of authority.</p>
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1735934426651
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbBard000000000.AK8mgYdk1zOiIU0w'
+folder: 1A8WFP1GVZkKdxii
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 3
+    order: 500200
+    navigation:
+      previous: phbBarbarian0000
+      next: phbCleric0000000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1724425888129
+  modifiedTime: 1745677864495
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 200000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbBard000000000'

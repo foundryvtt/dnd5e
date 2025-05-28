@@ -1,0 +1,3615 @@
+name: Randal (Human Fighter)
+type: character
+img: null
+system:
+  abilities:
+    str:
+      value: 16
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    dex:
+      value: 14
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    con:
+      value: 15
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    int:
+      value: 9
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    wis:
+      value: 13
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    cha:
+      value: 11
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+  attributes:
+    ac:
+      flat: null
+      calc: default
+      formula: ''
+    hp:
+      value: 12
+      max: null
+      temp: null
+      tempmax: null
+      bonuses:
+        level: ''
+        overall: ''
+    init:
+      ability: ''
+      bonus: '0'
+      roll:
+        min: null
+        max: null
+        mode: 0
+    movement:
+      burrow: null
+      climb: null
+      fly: null
+      swim: null
+      walk: null
+      units: null
+      hover: false
+    attunement:
+      max: 3
+    senses:
+      darkvision: null
+      blindsight: null
+      tremorsense: null
+      truesight: null
+      units: null
+      special: ''
+    spellcasting: int
+    death:
+      success: 0
+      failure: 0
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    exhaustion: 0
+    inspiration: false
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+  details:
+    biography:
+      value: >-
+        <p>Randal worked his way through the ranks of his hometown's guard,
+        ultimately growing restless with city life and wandering off in search
+        of adventure.</p>
+      public: ''
+    alignment: Neutral Good
+    race: VFOCTtbEvjeUHo6B
+    background: iODPoFlvprdu59Ga
+    originalClass: IMdfN9m0aSEgqbYt
+    xp:
+      value: 0
+    appearance: ''
+    trait: ''
+    ideal: ''
+    bond: ''
+    flaw: ''
+    eyes: ''
+    height: ''
+    faith: ''
+    hair: ''
+    weight: ''
+    gender: ''
+    skin: ''
+    age: ''
+  traits:
+    size: med
+    di:
+      value: []
+      bypasses: []
+      custom: ''
+    dr:
+      value: []
+      bypasses: []
+      custom: ''
+    dv:
+      value: []
+      bypasses: []
+      custom: ''
+    ci:
+      value: []
+      custom: ''
+    languages:
+      value:
+        - common
+        - dwarvish
+        - elvish
+        - goblin
+      custom: ''
+    weaponProf:
+      value:
+        - sim
+        - mar
+      custom: ''
+      mastery:
+        value: []
+        bonus: []
+    armorProf:
+      value:
+        - lgt
+        - med
+        - hvy
+        - shl
+      custom: ''
+    dm:
+      amount: {}
+      bypasses: []
+  currency:
+    pp: 0
+    gp: 10
+    ep: 0
+    sp: 0
+    cp: 0
+  skills:
+    acr:
+      value: 1
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ani:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    arc:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ath:
+      value: 1
+      ability: str
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    dec:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    his:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ins:
+      value: 1
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    itm:
+      value: 1
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    inv:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    med:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    nat:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prc:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prf:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    per:
+      value: 1
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    rel:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    slt:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ste:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    sur:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+  tools: {}
+  spells:
+    spell1:
+      value: 0
+      override: null
+    spell2:
+      value: 0
+      override: null
+    spell3:
+      value: 0
+      override: null
+    spell4:
+      value: 0
+      override: null
+    spell5:
+      value: 0
+      override: null
+    spell6:
+      value: 0
+      override: null
+    spell7:
+      value: 0
+      override: null
+    spell8:
+      value: 0
+      override: null
+    spell9:
+      value: 0
+      override: null
+    pact:
+      value: 0
+      override: null
+    spell0:
+      value: 0
+      override: null
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  resources:
+    primary:
+      value: null
+      max: null
+      sr: false
+      lr: false
+      label: ''
+    secondary:
+      value: null
+      max: null
+      sr: false
+      lr: false
+      label: ''
+    tertiary:
+      value: null
+      max: null
+      sr: false
+      lr: false
+      label: ''
+  favorites:
+    - type: item
+      id: .Item.7r63kurEAM3GdEec
+      sort: 200000
+    - type: item
+      id: .Item.gta26ORvqC323k3r
+      sort: 300000
+    - type: item
+      id: .Item.DHfjuHRMDDsyjBti
+      sort: 400000
+    - type: item
+      id: .Item.rEwBQ75m41HeBYOs
+      sort: 350000
+    - type: item
+      id: .Item.1TqythtyZfsOOGeJ
+      sort: 600000
+    - type: item
+      id: .Item.r7UallZJjcIFsz8i
+      sort: 700000
+  bastion:
+    name: ''
+    description: ''
+prototypeToken:
+  flags: {}
+  name: Randal
+  displayName: 30
+  width: 1
+  height: 1
+  lockRotation: false
+  rotation: 0
+  actorLink: true
+  disposition: 1
+  displayBars: 40
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: attributes.ac.value
+  randomImg: false
+  alpha: 1
+  light:
+    alpha: 1
+    angle: 360
+    bright: 0
+    coloration: 1
+    dim: 0
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      speed: 5
+      intensity: 5
+      type: null
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+    color: null
+    attenuation: 0.5
+    negative: false
+    priority: 0
+  texture:
+    src: null
+    tint: '#ffffff'
+    scaleX: 1
+    scaleY: 1
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    alphaThreshold: 0.75
+  sight:
+    angle: 360
+    enabled: true
+    range: 5
+    brightness: 0
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  appendNumber: false
+  prependAdjective: false
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
+items:
+  - _id: r7UallZJjcIFsz8i
+    name: Grappler
+    type: feat
+    system:
+      description:
+        value: >-
+          <p><em>Prerequisite: Strength 13 or higher </em></p><p>You've
+          developed the skills necessary to hold your own in close-quarters
+          grappling.</p><p>You gain the following benefits:</p>
+
+          <ul>
+
+          <li>You have advantage on attack rolls against a creature you are
+          grappling.</li>
+
+          <li>You can use your action to try to pin a creature grappled by you.
+          To do so, make another grapple check. If you succeed, you and the
+          creature are both restrained until the grapple ends.</li>
+
+          </ul>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: STR 13 or higher
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: grappler
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    img: icons/skills/melee/unarmed-punch-fist.webp
+    effects: []
+    folder: null
+    ownership:
+      default: 0
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.kP9t6MAeUvBBmoM3
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.r7UallZJjcIFsz8i'
+  - name: Watchman
+    type: background
+    system:
+      description:
+        value: >-
+          <ul><li><strong>Skill Proficiencies:</strong> Athletics,
+          Insight</li><li><strong>Languages:</strong> Two of your
+          choice</li><li><strong>Equipment:</strong> A guard's uniform, a horn
+          with which to summon help, and a pouch containing 10 gp</li></ul>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      advancement: []
+      startingEquipment: []
+      identifier: watchman
+    img: icons/environment/settlement/watchtower-stone.webp
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: iODPoFlvprdu59Ga
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.iODPoFlvprdu59Ga'
+  - _id: VFOCTtbEvjeUHo6B
+    name: Variant Human
+    type: race
+    img: icons/environment/people/commoner.webp
+    system:
+      description:
+        value: >-
+          <p>It's hard to make generalizations about humans, but your human
+          character has these traits.</p><p><em><strong>Ability Score
+          Increase.</strong></em> Your ability scores each increase by
+          1.</p><p><em><strong>Age.</strong></em> Humans reach adulthood in
+          their late teens and live less than a
+          century.</p><p><em><strong>Alignment.</strong></em> Humans tend toward
+          no particular alignment. The best and the worst are found among
+          them.</p><p><em><strong>Size.</strong></em> Humans vary widely in
+          height and build, from barely 5 feet to well over 6 feet tall.
+          Regardless of your position in that range, your size is
+          Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed
+          is 30 feet.</p><p><em><strong>Languages.</strong></em> You can speak,
+          read, and write Common and one extra language of your choice. Humans
+          typically learn the languages of other peoples they deal with,
+          including obscure dialects. They are fond of sprinkling their speech
+          with words borrowed from other tongues: Orc curses, Elvish musical
+          expressions, Dwarvish military phrases, and so on.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      identifier: human
+      advancement:
+        - _id: Z9hvZFkWUNvowbQX
+          type: AbilityScoreImprovement
+          configuration:
+            points: 0
+            fixed:
+              str: 1
+              dex: 1
+              con: 1
+              int: 1
+              wis: 1
+              cha: 1
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 0
+          title: ''
+        - _id: dNSrZePZHz2qwVpi
+          type: Size
+          configuration:
+            sizes:
+              - med
+          value:
+            size: ''
+          level: 1
+          title: ''
+          hint: >-
+            Humans vary widely in height and build, from barely 5 feet to well
+            over 6 feet tall. Regardless of your position in that range, your
+            size is Medium.
+        - _id: HI6r4Y6KjHND0i53
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - languages:standard:common
+            choices:
+              - count: 1
+                pool:
+                  - languages:*
+          level: 0
+          title: ''
+          value:
+            chosen: []
+      movement:
+        burrow: 0
+        climb: 0
+        fly: 0
+        swim: 0
+        walk: 30
+        units: ft
+        hover: false
+      senses:
+        darkvision: 0
+        blindsight: 0
+        tremorsense: 0
+        truesight: 0
+        units: ft
+        special: ''
+      type:
+        value: humanoid
+        subtype: ''
+        custom: ''
+    effects: []
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.races.ydP3QzCmur55mtY2
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    sort: 0
+    folder: null
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.VFOCTtbEvjeUHo6B'
+  - _id: IMdfN9m0aSEgqbYt
+    name: Fighter
+    type: class
+    img: icons/skills/melee/hand-grip-sword-red.webp
+    system:
+      description:
+        value: >-
+          <p>As a fighter, you gain the following class features.</p><h3>Hit
+          Points</h3><p><strong>Hit Dice:</strong> 1d10 per fighter level<br
+          /><strong>Hit Points at 1st Level:</strong> 10 + your Constitution
+          modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d10 (or
+          6) + your Constitution modifier per fighter level after
+          1st</p><h3>Proficiencies</h3><p><strong>Armor:</strong> All armor,
+          shields<br /><strong>Weapons:</strong> Simple weapons, martial
+          weapons<br /><strong>Tools:</strong> None<br /><strong>Saving
+          Throws:</strong> Strength, Constitution<br /><strong>Skills:</strong>
+          Choose two skills from Acrobatics, Animal Handling, Athletics,
+          History, Insight, Intimidation, Perception, and
+          Survival</p><h1>Fighter
+          Advancement</h1><table><thead><tr><td>Level</td><td>Proficiency
+          Bonus</td><td>Features</td></tr></thead><tbody><tr><td>1st</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.fbExzwNwEAl2kW9c]{Fighting
+          Style},
+          @UUID[Compendium.dnd5e.classfeatures.Item.nTjmWbyHweXuIqwc]{Second
+          Wind}</td></tr><tr><td>2nd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.xF1VTcJ3AdkbTsdQ]{Action
+          Surge}</td></tr><tr><td>3rd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.ax8M0X0q1GGWM26j]{Martial
+          Archetype}</td></tr><tr><td>4th</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.sPy2OLoN7JaAcMl4]{Ability
+          Score
+          Improvement}</td></tr><tr><td>5th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.q9g1MLXuLZyxjQMg]{Extra
+          Attack}</td></tr><tr><td>6th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.sPy2OLoN7JaAcMl4]{Ability
+          Score Improvement}</td></tr><tr><td>7th</td><td>+3</td><td>Martial
+          Archetype
+          feature</td></tr><tr><td>8th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.sPy2OLoN7JaAcMl4]{Ability
+          Score
+          Improvement}</td></tr><tr><td>9th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.653ZHbNcmm7ZGXbw]{Indomitable}</td></tr><tr><td>10th</td><td>+4</td><td>Martial
+          Archetype
+          feature</td></tr><tr><td>11th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.q9g1MLXuLZyxjQMg]{Extra
+          Attack
+          (2)}</td></tr><tr><td>12th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.sPy2OLoN7JaAcMl4]{Ability
+          Score
+          Improvement}</td></tr><tr><td>13th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.653ZHbNcmm7ZGXbw]{Indomitable
+          (2
+          uses)}</td></tr><tr><td>14th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.sPy2OLoN7JaAcMl4]{Ability
+          Score Improvement}</td></tr><tr><td>15th</td><td>+5</td><td>Martial
+          Archetype
+          feature</td></tr><tr><td>16th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.sPy2OLoN7JaAcMl4]{Ability
+          Score
+          Improvement}</td></tr><tr><td>17th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.xF1VTcJ3AdkbTsdQ]{Action
+          Surge (2 uses)},
+          @UUID[Compendium.dnd5e.classfeatures.Item.653ZHbNcmm7ZGXbw]{Indomitable
+          (3 uses)}</td></tr><tr><td>18th</td><td>+6</td><td>Martial Archetype
+          feature</td></tr><tr><td>19th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.sPy2OLoN7JaAcMl4]{Ability
+          Score
+          Improvement}</td></tr><tr><td>20th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.q9g1MLXuLZyxjQMg]{Extra
+          Attack (3)}</td></tr></tbody></table><h1>Martial
+          Archetypes</h1><p>Different fighters choose different approaches to
+          perfecting their fighting prowess. The martial archetype you choose to
+          emulate reflects your
+          approach.</p><p>@UUID[Compendium.dnd5e.subclasses.Item.sprHbe7cRg9osTzf]{Champion}</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      identifier: fighter
+      levels: 1
+      hitDice: d10
+      hitDiceUsed: 0
+      advancement:
+        - type: HitPoints
+          configuration: {}
+          value:
+            '1': max
+          title: Hit Points
+          icon: systems/dnd5e/icons/svg/hit-points.svg
+          _id: yhZd0KJPJERAWGgA
+        - _id: mA50Kay0ZDA2jX9p
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - armor:lgt
+              - armor:med
+              - armor:hvy
+              - armor:shl
+            choices: []
+          level: 1
+          title: ''
+          classRestriction: primary
+          value:
+            chosen:
+              - armor:lgt
+              - armor:med
+              - armor:hvy
+              - armor:shl
+        - _id: nmUrDORkeK0uZm0p
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - weapon:sim
+              - weapon:mar
+            choices: []
+          level: 1
+          title: ''
+          value:
+            chosen:
+              - weapon:sim
+              - weapon:mar
+        - _id: 3o2s8ZVAyJd74CrP
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - saves:str
+              - saves:con
+            choices: []
+          level: 1
+          title: ''
+          classRestriction: primary
+          value:
+            chosen:
+              - saves:str
+              - saves:con
+        - _id: JEZnz3P7ydbNAdwN
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants: []
+            choices:
+              - count: 2
+                pool:
+                  - skills:acr
+                  - skills:ani
+                  - skills:ath
+                  - skills:his
+                  - skills:ins
+                  - skills:itm
+                  - skills:prc
+                  - skills:sur
+          level: 1
+          title: ''
+          classRestriction: primary
+          value:
+            chosen:
+              - skills:acr
+              - skills:itm
+        - type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - armor:lgt
+              - armor:med
+              - armor:shl
+            choices: []
+          level: 1
+          title: ''
+          _id: dB3KhImYQRemI4mr
+          classRestriction: secondary
+          value:
+            chosen: []
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.fbExzwNwEAl2kW9c
+                optional: false
+              - uuid: Compendium.dnd5e.classfeatures.nTjmWbyHweXuIqwc
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value:
+            added:
+              mcMzTtxd6fvcIl58: Compendium.dnd5e.classfeatures.Item.fbExzwNwEAl2kW9c
+              7r63kurEAM3GdEec: Compendium.dnd5e.classfeatures.Item.nTjmWbyHweXuIqwc
+          level: 1
+          title: Features
+          _id: PwWJCRoUIftcpy47
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.xF1VTcJ3AdkbTsdQ
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 2
+          title: Features
+          _id: pxHWfZrwT5tdCH61
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.ax8M0X0q1GGWM26j
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 3
+          title: Features
+          _id: tdk8Hj5vUKl7Uz2a
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.q9g1MLXuLZyxjQMg
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 5
+          title: Features
+          _id: 1UqvFqvQRr0Mzk3K
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.653ZHbNcmm7ZGXbw
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 9
+          title: Features
+          _id: hu99eLBFUHiOOKdl
+        - type: ItemChoice
+          configuration:
+            choices:
+              '1':
+                count: 1
+                replacement: false
+            allowDrops: true
+            type: feat
+            pool:
+              - uuid: Compendium.dnd5e.classfeatures.8YwPFv3UAPjWVDNf
+              - uuid: Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB
+              - uuid: Compendium.dnd5e.classfeatures.hCop9uJrWhF1QPb4
+              - uuid: Compendium.dnd5e.classfeatures.3Nc6u9pyStByuJsm
+              - uuid: Compendium.dnd5e.classfeatures.06NVMYf58Z76O85O
+              - uuid: Compendium.dnd5e.classfeatures.mHcSjcHJ8oZu3hkb
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+            restriction:
+              type: class
+              subtype: fightingStyle
+              level: ''
+          value:
+            added:
+              '1':
+                WikxBVtWpucxRSue: Compendium.dnd5e.classfeatures.Item.zSlV0O2rQMdoq6pB
+            replaced: {}
+          title: Fighting Style
+          _id: 3hmYTgl5rz8Y5Z0I
+          hint: >-
+            You adopt a particular style of fighting as your specialty. Choose
+            one of the following options. You can’t take a Fighting Style option
+            more than once, even if you later get to choose again.
+        - type: ScaleValue
+          configuration:
+            identifier: indomitable
+            type: number
+            distance:
+              units: ''
+            scale:
+              '9':
+                value: 1
+              '13':
+                value: 2
+              '17':
+                value: 3
+          value: {}
+          title: Indomitable Uses
+          _id: B7YpSu4cVsEbHbrv
+        - type: ScaleValue
+          configuration:
+            identifier: action-surge
+            type: number
+            distance:
+              units: ''
+            scale:
+              '2':
+                value: 1
+              '17':
+                value: 2
+          value: {}
+          title: Action Surge Uses
+          _id: kxiasN1v8KFm9nse
+        - type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 4
+          title: Ability Score Improvement
+          _id: rvfuW71lYEeJW7HS
+        - type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 8
+          title: Ability Score Improvement
+          _id: g49SXigwmpaZW0Hm
+        - type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 12
+          title: Ability Score Improvement
+          _id: gXVE2mfohi6iErff
+        - type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 16
+          title: Ability Score Improvement
+          _id: GdBOLIPXmNSWRSmO
+        - _id: puDaUsYrlks0z5gm
+          type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 19
+          title: ''
+        - _id: ZvTgE4hnO4clYc0z
+          type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 6
+          title: ''
+        - _id: zw1ftiHmlUeHRTdc
+          type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 14
+          title: ''
+        - _id: aqampk2fc5jk5jqh
+          type: Subclass
+          configuration: {}
+          value: {}
+          level: 3
+          title: Martial Archetype
+      spellcasting:
+        progression: none
+        ability: ''
+        preparation: {}
+      startingEquipment:
+        - type: OR
+          _id: s9uaV2aIhJRhfNsN
+          group: ''
+          sort: 100000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.rLMflzmxpe8JGTOA
+          _id: 1CXA42sVCdr75b8q
+          group: s9uaV2aIhJRhfNsN
+          sort: 500000
+          requiresProficiency: false
+        - type: AND
+          _id: YDuzHE7Z1pfYWo5Z
+          group: s9uaV2aIhJRhfNsN
+          sort: 600000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.WwdpHLXGX5r8uZu5
+          _id: uRHlR3rMWQ5rGoNx
+          group: YDuzHE7Z1pfYWo5Z
+          sort: 700000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.3cymOVja8jXbzrdT
+          _id: sBretcP8abfkOb51
+          group: YDuzHE7Z1pfYWo5Z
+          sort: 800000
+          requiresProficiency: false
+        - type: linked
+          count: 20
+          key: Compendium.dnd5e.items.Item.3c7JXOzsv55gqJS5
+          _id: XhhSGFWuZopWOkrY
+          group: YDuzHE7Z1pfYWo5Z
+          sort: 900000
+          requiresProficiency: false
+        - type: OR
+          _id: tdjZ4MIeLMuGm8eP
+          group: ''
+          sort: 200000
+          requiresProficiency: false
+        - type: AND
+          _id: VDCXYvnOBEK7YZoE
+          group: tdjZ4MIeLMuGm8eP
+          sort: 1100000
+          requiresProficiency: false
+        - type: weapon
+          count: null
+          key: martialM
+          _id: SXyFUvGmduHAHiWo
+          group: VDCXYvnOBEK7YZoE
+          sort: 1000000
+          requiresProficiency: false
+        - type: armor
+          count: null
+          key: shield
+          _id: yG4ji3Hl8goEMT90
+          group: VDCXYvnOBEK7YZoE
+          sort: 2000000
+          requiresProficiency: false
+        - type: weapon
+          count: 2
+          key: martialM
+          _id: M4pmVN6zjIGORSjt
+          group: tdjZ4MIeLMuGm8eP
+          sort: 1300000
+          requiresProficiency: false
+        - type: OR
+          _id: 7CfVS8rairHsHiMp
+          group: ''
+          sort: 300000
+          requiresProficiency: false
+        - type: AND
+          _id: k4qYh8ZqXjMAbDr4
+          group: 7CfVS8rairHsHiMp
+          sort: 1400000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.ddWvQRLmnnIS0eLF
+          _id: LFL31ZPVakTKFbDo
+          group: k4qYh8ZqXjMAbDr4
+          sort: 1500000
+          requiresProficiency: false
+        - type: linked
+          count: 20
+          key: Compendium.dnd5e.items.Item.SItCnYBqhzqBoaWG
+          _id: naSCJ4t5dkSoenKr
+          group: k4qYh8ZqXjMAbDr4
+          sort: 1600000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.eO7Fbv5WBk5zvGOc
+          _id: 6ApDHoLXfPWu6bpv
+          group: 7CfVS8rairHsHiMp
+          sort: 1700000
+          requiresProficiency: false
+        - type: OR
+          _id: TwXz5F6a3MSeCkDG
+          group: ''
+          sort: 400000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.XY8b594Dn7plACLL
+          _id: Da81Omwwh0pmAuO1
+          group: TwXz5F6a3MSeCkDG
+          sort: 1800000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.8KWz5DJbWUpNWniP
+          _id: aXeAVzJbzrqxOqvC
+          group: TwXz5F6a3MSeCkDG
+          sort: 1900000
+          requiresProficiency: false
+      wealth: 5d4 * 10
+      primaryAbility:
+        value: []
+        all: true
+    effects: []
+    folder: Xk0PbUqy0A8R3Ut1
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.classes.Item.ABEBgWyRhVlDUIfq
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093997349
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.IMdfN9m0aSEgqbYt'
+  - _id: mcMzTtxd6fvcIl58
+    name: Fighting Style
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>You adopt a particular style of fighting as your specialty. Choose
+          one of the following options from the appropriate class list. You
+          can't take a Fighting Style option more than once, even if you later
+          get to choose again.</p>
+
+          <p>@UUID[Compendium.dnd5e.classfeatures.Item.8YwPFv3UAPjWVDNf]{Archery}</p>
+
+          <p>@UUID[Compendium.dnd5e.classfeatures.Item.zSlV0O2rQMdoq6pB]{Defense}</p>
+
+          <p>@UUID[Compendium.dnd5e.classfeatures.Item.hCop9uJrWhF1QPb4]{Dueling}</p>
+
+          <p>@UUID[Compendium.dnd5e.classfeatures.Item.3Nc6u9pyStByuJsm]{Great
+          Weapon Fighting}</p>
+
+          <p>@UUID[Compendium.dnd5e.classfeatures.Item.06NVMYf58Z76O85O]{Protection}</p>
+
+          <p>@UUID[Compendium.dnd5e.classfeatures.Item.mHcSjcHJ8oZu3hkb]{Two
+          Weapon Fighting}</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      requirements: Fighter 1
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: fighting-style
+    sort: 0
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classfeatures.Item.fbExzwNwEAl2kW9c
+        advancementOrigin: IMdfN9m0aSEgqbYt.PwWJCRoUIftcpy47
+    img: icons/skills/melee/weapons-crossed-daggers-orange.webp
+    effects: []
+    folder: UqduR3MIQ300WxcN
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.classfeatures.Item.Ho7dVxBlOYFlfBHk
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093813857
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.mcMzTtxd6fvcIl58'
+  - _id: 7r63kurEAM3GdEec
+    name: Second Wind
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>You have a limited well of stamina that you can draw on to protect
+          yourself from harm. On your turn, you can use a bonus action to regain
+          hit points equal to 1d10 + your fighter level.</p><p>Once you use this
+          feature, you must finish a short or long rest before you can use it
+          again.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: '1'
+        recovery:
+          - period: sr
+            type: recoverAll
+        spent: 0
+      type:
+        value: class
+        subtype: ''
+      requirements: Fighter 1
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: heal
+          activation:
+            type: bonus
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          healing:
+            number: 1
+            denomination: 10
+            bonus: '@classes.fighter.levels'
+            types:
+              - healing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: second-wind
+    folder: UqduR3MIQ300WxcN
+    sort: 0
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classfeatures.Item.nTjmWbyHweXuIqwc
+        advancementOrigin: IMdfN9m0aSEgqbYt.PwWJCRoUIftcpy47
+    img: icons/magic/life/heart-glowing-red.webp
+    effects: []
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.classfeatures.Item.nTjmWbyHweXuIqwc
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093813895
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.7r63kurEAM3GdEec'
+  - _id: WikxBVtWpucxRSue
+    name: Defense
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: <p>While you are wearing armor, you gain a +1 bonus to AC</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: fightingStyle
+      requirements: Fighter 1, Champion 10, Paladin 2, Ranger 2
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: defense
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classfeatures.Item.zSlV0O2rQMdoq6pB
+        advancementOrigin: IMdfN9m0aSEgqbYt.3hmYTgl5rz8Y5Z0I
+    img: icons/equipment/shield/heater-stone-orange.webp
+    effects:
+      - _id: U3so0zDcVt4sIBRz
+        flags: {}
+        changes:
+          - key: system.attributes.ac.bonus
+            value: '+1'
+            mode: 2
+            priority: null
+        disabled: false
+        duration:
+          startTime: 0
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        origin: Item.4mQUDmiDBePkQD6Y
+        tint: '#ffffff'
+        transfer: true
+        name: 'Fighting Style: Defense'
+        description: ''
+        statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '13.344'
+          systemId: dnd5e
+          systemVersion: 4.1.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+          exportSource: null
+        img: icons/equipment/shield/heater-stone-orange.webp
+        type: base
+        system: {}
+        sort: 0
+        _key: >-
+          !actors.items.effects!2Pdtnswo8Nj2nafY.WikxBVtWpucxRSue.U3so0zDcVt4sIBRz
+    folder: 159EPyqZTcus1HNJ
+    sort: 0
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.classfeatures.Item.zSlV0O2rQMdoq6pB
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093813928
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.WikxBVtWpucxRSue'
+  - name: Longsword
+    type: weapon
+    img: icons/weapons/swords/greatsword-guard.webp
+    system:
+      description:
+        value: >-
+          <p>A lengthy straight blade designed for slashing foes, the longsword
+          is a highly versatile weapon that may also be wielded with two hands
+          for more punishing strikes.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 3
+        units: lb
+      price:
+        value: 15
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: null
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: 0
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 8
+          bonus: ''
+          types:
+            - slashing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties:
+        - ver
+      proficient: null
+      type:
+        value: martialM
+        baseItem: longsword
+      unidentified:
+        description: ''
+      container: null
+      crewed: false
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      ammunition: {}
+      mastery: ''
+      identifier: longsword
+    effects: []
+    folder: MLMTCAvKsuFE3vYA
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.10ZP2Bu3vnCuYMIB
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: gta26ORvqC323k3r
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.gta26ORvqC323k3r'
+  - name: Hammer
+    type: loot
+    img: icons/tools/hand/hammer-cobbler-steel.webp
+    system:
+      description:
+        value: >-
+          <p>A tool with a heavy metal head mounted at the end of its handle,
+          used for jobs such as breaking things and driving in nails. </p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 3
+        units: lb
+      price:
+        value: 1
+        denomination: gp
+      rarity: ''
+      identified: true
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      identifier: hammer
+    effects: []
+    folder: dlru9Hy74nSMv6fr
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.14pNRT4sZy9rgvhb
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: 7Wo9Qcdhwbyq9bsq
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.7Wo9Qcdhwbyq9bsq'
+  - name: Tinderbox
+    type: loot
+    img: icons/sundries/lights/torch-black.webp
+    system:
+      description:
+        value: >-
+          <p>This small container holds flint, fire steel, and tinder (usually
+          dry cloth soaked in light oil) used to kindle a fire. Using it to
+          light a torch - or anything else with abundant, exposed fuel - takes
+          an action. Lighting any other fire takes 1 minute.</p>
+
+          <p> </p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 5
+        denomination: sp
+      rarity: ''
+      identified: true
+      container: 8KWz5DJbWUpNWniP
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      properties: []
+      identifier: tinderbox
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.1FSubnBpSTDmVaYV
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    ownership:
+      default: 0
+    _id: ARtFVyx8fqe5XvpN
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.ARtFVyx8fqe5XvpN'
+  - name: Waterskin
+    type: consumable
+    img: icons/sundries/survival/wetskin-leather-purple.webp
+    system:
+      description:
+        value: >-
+          <p>A leather hide sewn into an enclosed skin which can contain up to 4
+          pints of liquid. It weighs 5 pounds when full; a pint of water is
+          approximately 1 pound.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      price:
+        value: 2
+        denomination: sp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '4'
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      container: 6OYR11aJX2dEVtOj
+      properties: []
+      type:
+        value: food
+        subtype: ''
+      unidentified:
+        description: ''
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: touch
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: waterskin
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.1L5wkmbw0fmNAr38
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    ownership:
+      default: 0
+    _id: 4c3saZuHGHXb8Qlg
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.4c3saZuHGHXb8Qlg'
+  - name: Torch
+    type: consumable
+    img: icons/sundries/lights/torch-black.webp
+    system:
+      description:
+        value: >-
+          <p>A torch burns for 1 hour, providing bright light in a 20-foot
+          radius and dim light for an additional 20 feet. If you make a melee
+          attack with a burning torch and hit, it deals 1 fire damage.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 10
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 1
+        denomination: cp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '1'
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          bonus: ''
+          types:
+            - fire
+          custom:
+            enabled: true
+            formula: '1'
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        replace: false
+      container: 8KWz5DJbWUpNWniP
+      properties: []
+      type:
+        value: trinket
+        subtype: ''
+      unidentified:
+        description: ''
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: '1'
+            units: hour
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: radius
+              size: '40'
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          attack:
+            ability: str
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - number: null
+                denomination: null
+                bonus: ''
+                types:
+                  - fire
+                custom:
+                  enabled: true
+                  formula: '1'
+                scaling:
+                  mode: whole
+                  number: null
+                  formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: torch
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.29ZLE8PERtFVD3QU
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    ownership:
+      default: 0
+    _id: Di7LgeBsM42Mi6yF
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.Di7LgeBsM42Mi6yF'
+  - name: Arrow
+    type: consumable
+    img: icons/weapons/ammunition/arrows-broadhead-white.webp
+    system:
+      description:
+        value: >-
+          <p>Standard ammunition used for bows of all varieties. These mundane
+          arrows are made of smooth wooden shafts with goose feather fletching
+          and hammer metal bodkins.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 20
+      weight:
+        value: 0.05
+        units: lb
+      price:
+        value: 5
+        denomination: cp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: ''
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: 0
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        replace: false
+      type:
+        value: ammo
+        subtype: arrow
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      magicalBonus: null
+      activities: {}
+      attuned: false
+      identifier: arrow
+    effects: []
+    folder: NdDvXSjfqlghXpQZ
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.3c7JXOzsv55gqJS5
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: 1TqythtyZfsOOGeJ
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.1TqythtyZfsOOGeJ'
+  - name: Longbow
+    type: weapon
+    img: icons/weapons/bows/longbow-recurve-leather-brown.webp
+    system:
+      description:
+        value: >-
+          <p>A thick shaft of laminated wood is bowed by a taut string capable
+          of launching deadly arrows at long distances.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 2
+        units: lb
+      price:
+        value: 50
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: 150
+        long: 600
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 8
+          bonus: ''
+          types:
+            - piercing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties:
+        - amm
+        - hvy
+        - two
+      proficient: null
+      type:
+        value: martialR
+        baseItem: longbow
+      unidentified:
+        description: ''
+      container: null
+      crewed: false
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '150'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ranged
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      ammunition:
+        type: arrow
+      mastery: ''
+      identifier: longbow
+    effects: []
+    folder: MLMTCAvKsuFE3vYA
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.3cymOVja8jXbzrdT
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: DHfjuHRMDDsyjBti
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.DHfjuHRMDDsyjBti'
+  - name: Quiver
+    type: container
+    img: icons/containers/ammunition/arrows-quiver-simple-brown.webp
+    system:
+      description:
+        value: <p>A quiver can hold up to 20 arrows.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 1
+        denomination: gp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      capacity:
+        type: weight
+        value: 1
+      currency:
+        cp: 0
+        sp: 0
+        ep: 0
+        gp: 0
+        pp: 0
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      attuned: false
+      identifier: quiver
+    effects: []
+    folder: PgtyWdfkDTDbc0ov
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.4MtQKPn9qMWCFjDA
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: B2OSARI9hcSzaai9
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.B2OSARI9hcSzaai9'
+  - name: Rations
+    type: consumable
+    img: icons/consumables/grains/bread-loaf-boule-rustic-brown.webp
+    system:
+      description:
+        value: >-
+          <p>Rations consist of dry foods suitable for extended travel,
+          including jerky, dried fruit, hardtack, and nuts.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 10
+      weight:
+        value: 2
+        units: lb
+      price:
+        value: 5
+        denomination: sp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '1'
+        recovery: []
+        autoDestroy: true
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      container: XY8b594Dn7plACLL
+      properties: []
+      type:
+        value: food
+        subtype: ''
+      unidentified:
+        description: ''
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: touch
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: '1'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: rations
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.8d95YV1jHcxPygJ9
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    ownership:
+      default: 0
+    _id: ulOW5qzq7q2edJTP
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.ulOW5qzq7q2edJTP'
+  - name: Pouch
+    type: container
+    img: icons/containers/bags/pouch-rounded-leather-gold-tan.webp
+    system:
+      description:
+        value: >-
+          <p>A cloth or leather pouch can hold up to 20 sling bullets or 50
+          blowgun needles, among other things. A compartmentalized pouch for
+          holding spell components is called a component pouch. A pouch can hold
+          up to ⅕ cubic foot or 6 pounds of gear.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 5
+        denomination: sp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      capacity:
+        type: weight
+        value: 6
+      currency:
+        cp: 0
+        sp: 0
+        ep: 0
+        gp: 0
+        pp: 0
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      attuned: false
+      identifier: pouch
+    effects: []
+    folder: PgtyWdfkDTDbc0ov
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.9bWTRRDym06PzSAf
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: T8BW5LfQIDdur78q
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.T8BW5LfQIDdur78q'
+  - name: Crowbar
+    type: loot
+    img: icons/tools/hand/pickaxe-steel-white.webp
+    system:
+      description:
+        value: >-
+          <p>Using a crowbar grants advantage to Strength checks where the
+          crowbar's leverage can be applied.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      price:
+        value: 2
+        denomination: gp
+      rarity: ''
+      identified: true
+      container: XY8b594Dn7plACLL
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      properties: []
+      identifier: crowbar
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.AkyQyonZMVcvOrXU
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    ownership:
+      default: 0
+    _id: UJASRXvyW3VTm5wn
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.UJASRXvyW3VTm5wn'
+  - name: Bedroll
+    type: loot
+    img: icons/sundries/survival/bedroll-grey.webp
+    system:
+      description:
+        value: <p>Roll of cloth used by traveller to sleep in.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 7
+        units: lb
+      price:
+        value: 1
+        denomination: gp
+      rarity: ''
+      identified: true
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      identifier: bedroll
+    effects: []
+    folder: dlru9Hy74nSMv6fr
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.DVXmyetZuvxbzAwW
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: 4uWprZzCVMbHmA40
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.4uWprZzCVMbHmA40'
+  - name: Backpack
+    type: container
+    img: icons/containers/bags/pack-leather-white-tan.webp
+    system:
+      description:
+        value: >-
+          <p>A backpack can hold one cubic foot or 30 pounds of gear. You can
+          also strap items, such as a bedroll or a coil of rope, to the outside
+          of a backpack.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      price:
+        value: 2
+        denomination: gp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      capacity:
+        type: weight
+        value: 30
+      currency:
+        cp: 0
+        sp: 0
+        ep: 0
+        gp: 0
+        pp: 0
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      attuned: false
+      identifier: backpack
+    effects: []
+    folder: PgtyWdfkDTDbc0ov
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.H8YCd689ezlD26aT
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: wYUZWMKa6FntpIvv
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.wYUZWMKa6FntpIvv'
+  - name: Piton
+    type: consumable
+    img: icons/tools/fasteners/nail-steel.webp
+    system:
+      description:
+        value: >-
+          <p>A metal spike that is drive into a seam in a climbing surface with
+          a climbing hammer. It can also be used like iron spikes to block doors
+          in a pinch.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 10
+      weight:
+        value: 0.25
+        units: lb
+      price:
+        value: 5
+        denomination: cp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '1'
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      container: xsB7Y2WI476kvOt4
+      properties: []
+      type:
+        value: trinket
+        subtype: ''
+      unidentified:
+        description: ''
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: piton
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.P31t6tGgt9aLAdYt
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    ownership:
+      default: 0
+    _id: fzsNQ3GG8bJ8iofD
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.fzsNQ3GG8bJ8iofD'
+  - name: Hempen Rope (50 ft.)
+    type: consumable
+    img: icons/sundries/survival/rope-wrapped-brown.webp
+    system:
+      description:
+        value: >-
+          <p>Rope, whether made of hemp or silk, has 2 hit points and can be
+          burst with a DC 17 Strength check.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 10
+        units: lb
+      price:
+        value: 1
+        denomination: gp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '1'
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      type:
+        value: trinket
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: check
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                scaling: {}
+                value: '1'
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          check:
+            ability: str
+            dc:
+              calculation: ''
+              formula: '17'
+            associated: []
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          name: Burst
+      attuned: false
+      identifier: hempen-rope-50-ft
+    effects: []
+    folder: UnUwTG4YIgd0kaUJ
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.QXmaarJ4X8P0C1HV
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: UVMJHgIbTxTR0HcP
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.UVMJHgIbTxTR0HcP'
+  - name: Mess Kit
+    type: loot
+    img: icons/tools/cooking/fork-steel-tan.webp
+    system:
+      description:
+        value: >-
+          <p>This tin box contains a cup and simple cutlery. The box clamps
+          together, and one side can be used as a cooking pan and the other as a
+          plate or shallow bowl.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 2
+        denomination: sp
+      rarity: ''
+      identified: true
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      identifier: mess-kit
+    effects: []
+    folder: dlru9Hy74nSMv6fr
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.V13fjV5oSmvbRdgP
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: VTK7cdWAzOYl9fon
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.VTK7cdWAzOYl9fon'
+  - name: Horn
+    type: tool
+    img: icons/tools/instruments/flute-simple-wood.webp
+    system:
+      description:
+        value: >-
+          <p>A horn, of any variety, to evoke awe, wonder, or fear in your
+          audience.</p>
+
+          <p>If you have proficiency with a given musical instrument, you can
+          add your proficiency bonus to any ability checks you make to play
+          music with the instrument. A bard can use a musical instrument as a
+          spellcasting focus. Each type of musical instrument requires a
+          separate proficiency. </p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 2
+        units: lb
+      price:
+        value: 3
+        denomination: gp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      ability: cha
+      chatFlavor: ''
+      proficient: null
+      bonus: ''
+      type:
+        value: music
+        baseItem: horn
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: check
+          activation:
+            type: ''
+            value: null
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          check:
+            ability: cha
+            dc: {}
+            associated: []
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: horn
+    effects: []
+    folder: uvZXbqK3cHirDzeT
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.aa9KuBy4dst7WIW9
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: hkjHLyA2QOgfJgM7
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.hkjHLyA2QOgfJgM7'
+  - name: Handaxe
+    type: weapon
+    img: icons/weapons/axes/axe-broad-black.webp
+    system:
+      description:
+        value: >-
+          <p>This one-handed axe is light and balanced for throwing while
+          remaining useful in hand combat.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 2
+        units: lb
+      price:
+        value: 5
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: 20
+        long: 60
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 6
+          bonus: ''
+          types:
+            - slashing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties:
+        - lgt
+        - thr
+      proficient: null
+      type:
+        value: simpleM
+        baseItem: handaxe
+      unidentified:
+        description: ''
+      container: null
+      crewed: false
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '20'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      ammunition: {}
+      mastery: ''
+      identifier: handaxe
+    effects: []
+    folder: MLMTCAvKsuFE3vYA
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.eO7Fbv5WBk5zvGOc
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: rEwBQ75m41HeBYOs
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.rEwBQ75m41HeBYOs'
+  - name: Chain Mail
+    type: equipment
+    img: icons/equipment/chest/breastplate-metal-scaled-grey.webp
+    system:
+      description:
+        value: >-
+          <p>Made of interlocking metal rings, chain mail includes a layer of
+          quilted fabric worn underneath the mail to prevent chafing and to
+          cushion the impact of blows. The suit includes gauntlets.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 55
+        units: lb
+      price:
+        value: 75
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      armor:
+        value: 16
+        dex: 0
+        magicalBonus: null
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      speed:
+        value: null
+        conditions: ''
+      strength: 13
+      proficient: null
+      type:
+        value: heavy
+        baseItem: chainmail
+      unidentified:
+        description: ''
+      container: null
+      crewed: false
+      properties:
+        - stealthDisadvantage
+      activities: {}
+      attuned: false
+      identifier: chain-mail
+    effects: []
+    folder: JqTP017wj3uxDJ8g
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.rLMflzmxpe8JGTOA
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: yz7DxhEVWUzdQKm7
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.yz7DxhEVWUzdQKm7'
+  - name: Shield
+    type: equipment
+    img: icons/equipment/shield/round-wooden-boss-steel-brown.webp
+    system:
+      description:
+        value: >-
+          <p>A shield is made from wood or metal and is carried in one hand.
+          Wielding a shield increases your Armor Class by 2. You can benefit
+          from only one shield at a time.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 6
+        units: lb
+      price:
+        value: 10
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      crewed: false
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      armor:
+        value: 2
+        dex: null
+        magicalBonus: null
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      speed:
+        value: null
+        conditions: ''
+      strength: null
+      proficient: null
+      type:
+        value: shield
+        baseItem: shield
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      activities: {}
+      attuned: false
+      identifier: shield
+    effects: []
+    folder: JqTP017wj3uxDJ8g
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.sSs3hSzkKBMNBgTs
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: u69KONMFqydKuk1H
+    sort: 0
+    _key: '!actors.items!2Pdtnswo8Nj2nafY.u69KONMFqydKuk1H'
+effects: []
+folder: null
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    showTokenPortrait: false
+_id: 2Pdtnswo8Nj2nafY
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725036838221
+  modifiedTime: 1738093115722
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!actors!2Pdtnswo8Nj2nafY'

@@ -1,0 +1,140 @@
+name: Fire Bolt
+system:
+  description:
+    value: >-
+      <p>You hurl a mote of fire at a creature or an object within range. Make a
+      ranged spell attack against the target. On a hit, the target takes 1d10
+      Fire damage. A flammable object hit by this spell starts burning if it
+      isn't being worn or carried.</p><p><strong>Cantrip Upgrade.</strong> The
+      damage increases by 1d10 when you reach levels 5 (2d10), 11 (3d10), and 17
+      (4d10).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creatureOrObject
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '120'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: evo
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    23hcoYMwc0GUIB6V:
+      type: attack
+      _id: 23hcoYMwc0GUIB6V
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '10'
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: whole
+      name: ''
+      img: systems/dnd5e/icons/svg/damage/force.svg
+      appliedEffects: []
+  identifier: fire-bolt
+_id: phbsplFireBolt00
+type: spell
+img: icons/magic/fire/projectile-fireball-orange-green.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+sort: 1400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425953820
+  modifiedTime: 1745256793030
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFireBolt00'

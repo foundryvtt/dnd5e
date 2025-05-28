@@ -1,0 +1,147 @@
+_id: hJ6ZiA3fpoY8v9cp
+name: Darkvision
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch a willing creature to grant it the ability to see in the
+      dark. For the duration, that creature has darkvision out to a range of 60
+      feet.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  materials:
+    value: Either a pinch of dried carrot or an agate
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 9qaZQFN5xP8Gig8f
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: darkvision
+sort: 0
+flags: {}
+img: icons/magic/perception/eye-ringed-glow-angry-small-red.webp
+effects:
+  - name: Darkvision
+    origin: Compendium.dnd5e.spells.Item.hJ6ZiA3fpoY8v9cp
+    duration:
+      startTime: null
+      seconds: 28800
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: 9qaZQFN5xP8Gig8f
+    changes:
+      - key: system.attributes.senses.darkvision
+        mode: 4
+        value: '60'
+        priority: null
+    description: <p>The target has darkvision out to a range of 60 feet.</p>
+    transfer: false
+    statuses: []
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/perception/eye-ringed-glow-angry-small-red.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!hJ6ZiA3fpoY8v9cp.9qaZQFN5xP8Gig8f'
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037363127
+  modifiedTime: 1725992722112
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!hJ6ZiA3fpoY8v9cp'

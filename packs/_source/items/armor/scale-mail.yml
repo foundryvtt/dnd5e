@@ -1,0 +1,75 @@
+_id: XmnlF5fgIO3tg6TG
+name: Scale Mail
+type: equipment
+img: icons/equipment/chest/breastplate-banded-steel.webp
+system:
+  description:
+    value: >-
+      <p>This armor consists of a coat and leggings (and perhaps a separate
+      skirt) of leather covered with overlapping pieces of metal, much like the
+      scales of a fish. The suit includes gauntlets.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 45
+    units: lb
+  price:
+    value: 50
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 14
+    dex: 2
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: medium
+    baseItem: scalemail
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - stealthDisadvantage
+  activities: {}
+  attuned: false
+  identifier: scale-mail
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037211955
+  modifiedTime: 1725992521324
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!XmnlF5fgIO3tg6TG'

@@ -1,0 +1,117 @@
+_id: dmgBroochOfShiel
+name: Brooch of Shielding
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/neck/pendant-bronze-gem-blue.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Uncommon (Requires
+      Attunement)</em></p></div><p>While wearing this brooch, you have
+      Resistance to Force damage, and you have Immunity to damage from the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMagicMissi]{Magic
+      Missile}</em> spell.</p>
+    chat: ''
+  identifier: brooch-of-shielding
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.2
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: 'Resistance: Force'
+    img: systems/dnd5e/icons/svg/activity/save.svg
+    _id: rTeT5OPP4biUfHyX
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: force
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Additionally, you have Immunity to damage from the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMagicMissi]{Magic
+      Missile}</em> spell.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1728924884072
+      modifiedTime: 1728925152043
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgBroochOfShiel.rTeT5OPP4biUfHyX'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5000000
+ownership:
+  default: 0
+_key: '!items!dmgBroochOfShiel'

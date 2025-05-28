@@ -1,0 +1,237 @@
+_id: dmgRopeOfClimbin
+name: Rope of Climbing
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/sundries/survival/rope-wrapped-red.webp
+system:
+  activities:
+    JH4C7mTutLBmBJyi:
+      type: utility
+      name: Damage Rope
+      sort: 100000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '20'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: JH4C7mTutLBmBJyi
+      img: systems/dnd5e/icons/svg/activity/damage.svg
+      appliedEffects: []
+    1zQvPyT12aIg017J:
+      type: utility
+      name: Repair Rope
+      sort: 300000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '20'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: '-1'
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: 1zQvPyT12aIg017J
+      img: systems/dnd5e/icons/svg/activity/heal.svg
+      appliedEffects: []
+    0QUTFIBynESqw7XZ:
+      type: utility
+      name: Command
+      _id: 0QUTFIBynESqw7XZ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      roll:
+        prompt: false
+        visible: false
+  uses:
+    spent: 0
+    recovery: []
+    max: '20'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon</em></p><p>This 60-foot length of rope can
+      hold up to 3,000 pounds. While holding one end of the rope, you can take a
+      Magic action to command the other end of the rope to animate and move
+      toward a destination you choose, up to the rope's length away from you.
+      That end moves 10 feet on your turn when you first command it and 10 feet
+      at the start of each of your subsequent turns until reaching its
+      destination or until you tell it to stop. You can also tell the rope to
+      fasten itself securely to an object or to unfasten itself, to knot or
+      unknot itself, or to coil itself for carrying.</p><p>If you tell the rope
+      to knot, large knots appear at 1-foot intervals along the rope. While
+      knotted, the rope shortens to a 50-foot length and grants Advantage on
+      ability checks made to climb using the rope.</p><p>The rope has AC 20, HP
+      20, and Immunity to Poison and Psychic damage. It regains 1 Hit Point
+      every 5 minutes as long as it has at least 1 Hit Point. If the rope drops
+      to 0 Hit Points, it is destroyed.</p><section class="secret"
+      id="secret-S4xxCILbyoIPQL7g"><p><strong>Foundry Note</strong></p><p>The
+      item includes 20 uses for tracking its HP. The <strong>Damage
+      Rope</strong> activity can be used to apply damage and the <strong>Repair
+      Rope</strong> activity can be used to restore its HP.</p></section>
+    chat: ''
+  identifier: rope-of-climbing
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256808630
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 32800000
+ownership:
+  default: 0
+_key: '!items!dmgRopeOfClimbin'

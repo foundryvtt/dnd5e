@@ -1,0 +1,235 @@
+name: Flesh to Stone
+system:
+  description:
+    value: >-
+      <p>You attempt to turn one creature that you can see within range into
+      stone. The target makes a Constitution saving throw. On a failed save, it
+      has the &amp;Reference[Restrained apply=false] condition for the duration.
+      On a successful save, its Speed is 0 until the start of your next turn.
+      Constructs automatically succeed on the save.</p><p>A Restrained target
+      makes another Constitution saving throw at the end of each of its turns.
+      If it successfully saves against this spell three times, the spell ends.
+      If it fails its saves three times, it is turned to stone and has the
+      &amp;Reference[Petrified] condition for the duration. The successes and
+      failures needn't be consecutive; keep track of both until the target
+      collects three of a kind.</p><p>If you maintain your Concentration on this
+      spell for the entire possible duration, the target is Petrified until the
+      condition is ended by
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
+      Restoration}</em> or similar magic.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a cockatrice feather
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    g34TzvzMcBYBxqp4:
+      type: save
+      _id: g34TzvzMcBYBxqp4
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Xt8AUh0PfYhGYBvY
+          onSave: false
+        - _id: sFyjp6wt9bjyIl9W
+          onSave: true
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects:
+        - Xt8AUh0PfYhGYBvY
+        - sFyjp6wt9bjyIl9W
+  identifier: flesh-to-stone
+_id: phbsplFleshtoSto
+type: spell
+img: icons/magic/earth/strike-body-stone-crumble.webp
+effects:
+  - name: Turning to Stone
+    img: icons/magic/defensive/armor-stone-skin.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplFleshtoSto
+    transfer: false
+    _id: Xt8AUh0PfYhGYBvY
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>A &amp;Reference[Restrained apply=false] target makes another [[/save
+      ability=con format=long]] at the end of each of its turns. If it
+      successfully saves against this spell three times, the spell ends. If it
+      fails its saves three times, it is turned to stone and has the
+      &amp;Reference[Petrified] condition for the duration. </p>
+    tint: '#ffffff'
+    statuses:
+      - restrained
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724708938829
+      modifiedTime: 1724709521609
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplFleshtoSto.Xt8AUh0PfYhGYBvY'
+  - name: Unable to Move
+    img: icons/magic/life/heart-broken-red.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplFleshtoSto
+    transfer: false
+    _id: sFyjp6wt9bjyIl9W
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 3
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.fly
+        mode: 3
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 3
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 3
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.burrow
+        mode: 3
+        value: '0'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>On a successful save, its Speed is 0 until the start of your next
+      turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724709070719
+      modifiedTime: 1724709944544
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplFleshtoSto.sFyjp6wt9bjyIl9W'
+folder: 8WmlLARx1Df3Ii9v
+sort: 1100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425954533
+  modifiedTime: 1745256793278
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFleshtoSto'

@@ -1,0 +1,94 @@
+_id: phbbrdLore000000
+name: College of Lore
+type: subclass
+folder: taXfKVJXVI5Z807d
+img: systems/dnd5e/icons/classes/lore.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Plumb the Depths of Magical
+      Knowledge</p></blockquote><p>Bards of the College of Lore collect spells
+      and secrets from diverse sources, such as scholarly tomes, mystical rites,
+      and peasant tales. The college's members gather in libraries and
+      universities to share their lore with one another. They also meet at
+      festivals or affairs of state, where they can expose corruption, unravel
+      lies, and poke fun at self-important figures of authority.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identifier: lore
+  classIdentifier: bard
+  advancement:
+    - _id: 0Wn8ilqxVDetcEJb
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdMagicalDis
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 6
+      title: Subclass Features
+    - _id: yiYMrVRwPpGHPk0N
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdPeerlessSk
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 14
+      title: Subclass Features
+    - _id: P34BmKnqAYXUdYol
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdBonusProfi
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdCuttingWor
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Subclass Features
+    - _id: zXNjqYhloLv46FqV
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 3
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 3
+      title: Bonus Proficiencies
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation:
+      formula: ''
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866506195
+  modifiedTime: 1745256760456
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrdLore000000'

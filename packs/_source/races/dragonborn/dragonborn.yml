@@ -1,0 +1,225 @@
+_id: K4DNDcR6vngbp0pf
+name: Dragonborn
+type: race
+img: icons/creatures/eyes/lizard-single-slit-green.webp
+system:
+  description:
+    value: >-
+      <p>Your draconic heritage manifests in a variety of traits you share with
+      other dragonborn.</p><p><em><strong>Ability Score Increase.</strong></em>
+      Your Strength score increases by 2, and your Charisma score increases by
+      1.</p><p><em><strong>Age.</strong></em> Young dragonborn grow quickly.
+      They walk hours after hatching, attain the size and development of a
+      10-­year-­old human child by the age of 3, and reach adulthood by 15. They
+      live to be around 80.</p><p><em><strong>Alignment.</strong></em>
+      Dragonborn tend to extremes, making a conscious choice for one side or the
+      other in the cosmic war between good and evil. Most dragonborn are good,
+      but those who side with evil can be terrible
+      villains.</p><p><em><strong>Size.</strong></em> Dragonborn are taller and
+      heavier than humans, standing well over 6 feet tall and averaging almost
+      250 pounds. Your size is Medium.</p><p><em><strong>Speed.</strong></em>
+      Your base walking speed is 30 feet.</p><table><caption>Draconic
+      Ancestry</caption><thead><tr><td>Dragon</td><td>Damage Type</td><td>Breath
+      Weapon</td></tr></thead><tbody><tr><td>Black</td><td>Acid</td><td>5 by 30
+      ft. line (Dex. save)</td></tr><tr><td>Blue</td><td>Lightning</td><td>5 by
+      30 ft. line (Dex. save)</td></tr><tr><td>Brass</td><td>Fire</td><td>5 by
+      30 ft. line (Dex.
+      save)</td></tr><tr><td>Bronze</td><td>Lightning</td><td>5 by 30 ft. line
+      (Dex. save)</td></tr><tr><td>Copper</td><td>Acid</td><td>5 by 30 ft. line
+      (Dex. save)</td></tr><tr><td>Gold</td><td>Fire</td><td>15 ft. cone (Dex.
+      save)</td></tr><tr><td>Green</td><td>Poison</td><td>15 ft. cone (Con.
+      save)</td></tr><tr><td>Red</td><td>Fire</td><td>15 ft. cone (Dex.
+      save)</td></tr><tr><td>Silver</td><td>Cold</td><td>15 ft. cone (Con.
+      save)</td></tr><tr><td>White</td><td>Cold</td><td>15 ft. cone (Con.
+      save)</td></tr></tbody></table><p><em><strong>Draconic
+      Ancestry.</strong></em> You have draconic ancestry. Choose one type of
+      dragon from the Draconic Ancestry table. Your breath weapon and damage
+      resistance are determined by the dragon type, as shown in the
+      table.</p><p><em><strong>Breath Weapon.</strong></em> You can use your
+      action to exhale destructive energy. Your draconic ancestry determines the
+      size, shape, and damage type of the exhalation.</p><p>When you use your
+      breath weapon, each creature in the area of the exhalation must make a
+      saving throw, the type of which is determined by your draconic ancestry.
+      The DC for this saving throw equals 8 + your Constitution modifier + your
+      proficiency bonus. A creature takes 2d6 damage on a failed save, and half
+      as much damage on a successful one. The damage increases to 3d6 at 6th
+      level, 4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use your
+      breath weapon, you can't use it again until you complete a short or long
+      rest.</p><p><em><strong>Damage Resistance.</strong></em> You have
+      resistance to the damage type associated with your draconic
+      ancestry.</p><p><em><strong>Languages.</strong></em> You can speak, read,
+      and write Common and Draconic. Draconic is thought to be one of the oldest
+      languages and is often used in the study of magic. The language sounds
+      harsh to most other creatures and includes numerous hard consonants and
+      sibilants.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: dragonborn
+  advancement:
+    - _id: QIrBmvSmNOTEJLWn
+      type: ItemChoice
+      configuration:
+        choices:
+          '0':
+            count: 1
+            replacement: false
+        allowDrops: false
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.races.NnSZlrsHCFeH3cCq
+          - uuid: Compendium.dnd5e.races.KVgvW5yhKcmQUanz
+          - uuid: Compendium.dnd5e.races.JrUcwLR2aQC09iUM
+          - uuid: Compendium.dnd5e.races.pJzMSk9qYywYy65w
+          - uuid: Compendium.dnd5e.races.bFpLM0N3uTeHLdzu
+          - uuid: Compendium.dnd5e.races.YPQQBZAuRiSwuBfh
+          - uuid: Compendium.dnd5e.races.lXIxndsBaQglHBtO
+          - uuid: Compendium.dnd5e.races.kB61JPKQrDBbSNU7
+          - uuid: Compendium.dnd5e.races.pAYTdRGftNr8AitK
+          - uuid: Compendium.dnd5e.races.KL7wx9Q8XNJQir0k
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+        restriction:
+          type: race
+          subtype: ''
+          level: ''
+      value:
+        added: {}
+        replaced: {}
+      title: Draconic Ancestry
+      hint: >-
+        You have draconic ancestry. Choose one type of dragon from the list.
+        Your breath weapon and damage resistance are determined by the dragon
+        type.
+    - _id: Z9hvZFkWUNvowbQX
+      type: AbilityScoreImprovement
+      configuration:
+        points: 0
+        fixed:
+          str: 2
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 1
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 0
+      title: ''
+    - _id: rXLC7smebN2zPOBT
+      type: ScaleValue
+      configuration:
+        identifier: breath-weapon
+        type: dice
+        distance:
+          units: ''
+        scale:
+          '0':
+            number: 2
+            faces: 6
+            modifiers: []
+          '6':
+            number: 3
+            faces: 6
+            modifiers: []
+          '11':
+            number: 4
+            faces: 6
+            modifiers: []
+          '16':
+            number: 5
+            faces: 6
+            modifiers: []
+      value: {}
+      title: Breath Weapon
+    - _id: 9D8XNnmTLWfzN32K
+      type: Size
+      configuration:
+        sizes:
+          - med
+      value:
+        size: ''
+      level: 1
+      title: ''
+      hint: >-
+        Dragonborn are taller and heavier than humans, standing well over 6 feet
+        tall and averaging almost 250 pounds. Your size is Medium.
+    - _id: 6WUcKNSLh5WJ3Q24
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - languages:standard:common
+          - languages:exotic:draconic
+        choices: []
+      level: 0
+      title: ''
+      value:
+        chosen: []
+    - _id: 2f4dkpTYlhOgRgxu
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - dr:acid
+              - dr:cold
+              - dr:fire
+              - dr:lightning
+              - dr:poison
+      level: 0
+      title: ''
+      value:
+        chosen: []
+      hint: >-
+        You have resistance to the damage type associated with your draconic
+        ancestry.
+  movement:
+    burrow: null
+    climb: null
+    fly: null
+    swim: null
+    walk: 30
+    units: ft
+    hover: false
+  senses:
+    darkvision: null
+    blindsight: null
+    tremorsense: null
+    truesight: null
+    units: ft
+    special: ''
+  type:
+    value: humanoid
+    subtype: dragonborn
+    custom: ''
+effects: []
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037392732
+  modifiedTime: 1725992703354
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+folder: gpuhARM4UqdXSEto
+_key: '!items!K4DNDcR6vngbp0pf'

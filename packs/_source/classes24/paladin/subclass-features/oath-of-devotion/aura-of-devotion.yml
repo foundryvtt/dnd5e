@@ -1,0 +1,90 @@
+_id: phbpdnDevotionAu
+name: Aura of Devotion
+type: feat
+folder: pDo2UCh4t1Z03F5z
+img: icons/magic/life/heart-glowing-red.webp
+system:
+  description:
+    value: >-
+      <p>You and your allies have Immunity to the Charmed condition while in
+      your Aura of Protection. If a Charmed ally enters the aura, that condition
+      has no effect on that ally while there.</p><section
+      id="secret-FUisOAkgNW9r118u" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature includes an Active Effect for tracking
+      characters impacted by your aura but does not automate the
+      effects.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 7
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: aura-of-devotion
+effects:
+  - name: Devoted
+    img: icons/magic/life/heart-glowing-red.webp
+    origin: Compendium.dnd5e.classes24.Item.phbpdnDevotionAu
+    transfer: false
+    _id: iKPJ2nBT687zLvTc
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classes24.Item.phbpdnCourageAur.ActiveEffect.cJtDumOL6RUzrBHA
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbpdnDevotionAu.iKPJ2nBT687zLvTc'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866569467
+  modifiedTime: 1745256763655
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbpdnDevotionAu'

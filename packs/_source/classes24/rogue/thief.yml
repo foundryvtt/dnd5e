@@ -1,0 +1,89 @@
+_id: phbrgeThief00000
+name: Thief
+type: subclass
+folder: JBKpeqLQWPp9Wt59
+img: systems/dnd5e/icons/classes/thief.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Hunt for Treasure as a Classic
+      Adventurer</p></blockquote><p>A mix of burglar, treasure hunter, and
+      explorer, you are the epitome of an adventurer. In addition to improving
+      your agility and stealth, you gain abilities useful for delving into ruins
+      and getting maximum benefit from the magic items you find there.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identifier: thief
+  classIdentifier: rogue
+  advancement:
+    - _id: 52x82ltPXCgmrh1K
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeFastHands0
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Subclass Features
+    - _id: MlEcUhyGRGitfiUJ
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeSupremeSne
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 9
+      title: Subclass Features
+    - _id: aNcqA4J0puHsYiyv
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeUseMagicDe
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 13
+      title: Subclass Features
+    - _id: Q45sJX4IS3NbsrtV
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgeThiefsRefl
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 17
+      title: Subclass Features
+  spellcasting:
+    progression: none
+    ability: int
+    preparation:
+      formula: ''
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866560489
+  modifiedTime: 1745256764583
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 500000
+ownership:
+  default: 0
+_key: '!items!phbrgeThief00000'

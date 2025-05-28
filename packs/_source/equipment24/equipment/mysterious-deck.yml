@@ -1,0 +1,211 @@
+_id: dmgDeckOfManyThi
+name: Mysterious Deck
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/sundries/gaming/rune-card.webp
+system:
+  activities:
+    kX6QeM68hTgCv7do:
+      type: utility
+      name: Check Deck Size
+      _id: kX6QeM68hTgCv7do
+      sort: -100000
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: when determining the number of cards in this Deck
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: 9 * 1d4cs<4
+            target: ''
+            scaling: {}
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: Mysterious Deck
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      roll:
+        prompt: false
+        visible: false
+        name: Deck Size
+        formula: '@item.uses.value'
+      img: ''
+      appliedEffects: []
+    z74JXEy5r4T6cBUA:
+      type: utility
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '@item.uses.value'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: Declaring number of cards to draw over 1 hour
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: true
+        name: Declared Draws
+        formula: '@scaling'
+      name: Draw Cards
+      img: icons/svg/card-hand.svg
+      _id: z74JXEy5r4T6cBUA
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '22'
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Legendary</em></p></div><p>Usually found in a
+      box or pouch, this deck contains a number of cards made of ivory or
+      vellum. Most (75 percent) of these decks have thirteen cards, but some
+      have twenty-two. Use the appropriate column of the Mysterious Deck table
+      when randomly determining cards drawn from the deck.</p><p>Before you draw
+      a card, you must declare how many cards you intend to draw and then draw
+      them randomly. Any cards drawn in excess of this number have no effect.
+      Otherwise, as soon as you draw a card from the deck, its magic takes
+      effect. You must draw each card no more than 1 hour after the previous
+      draw. If you fail to draw the chosen number, the remaining number of cards
+      fly from the deck on their own and take effect all at once.</p><p>Once a
+      card is drawn, it disappears. Unless the card is the Fool or Jester, the
+      card reappears in the deck, making it possible to draw the same card
+      twice. (Once the Fool or Jester has left the deck, reroll on the table if
+      that card comes up
+      again.)</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmg13CardDeckOfM
+      rollable]</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmg22CardDeckOfM
+      rollable]</p><section class="secret"
+      id="secret-89gUJH8GuylznwxV"><p><strong>Foundry Note</strong></p><p>Upon
+      discovery, the owner (or GM) should use the <strong>Check Deck
+      Size</strong> activity in order to determine the number of cards in the
+      deck. The activity will set this item's remaining uses (out of 22)
+      according to the number of cards in this deck. Alternatively, the GM may
+      set this item's <em>max uses</em> based on the deck size.</p><p>In either
+      case, both the <strong>Check Deck Size</strong> activity and the Embedded
+      RollTable link corresponding to the unused deck size can be deleted after
+      this determination has been made.</p></section>
+    chat: ''
+  identifier: mysterious-deck
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1740680118329
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 10500000
+ownership:
+  default: 0
+_key: '!items!dmgDeckOfManyThi'

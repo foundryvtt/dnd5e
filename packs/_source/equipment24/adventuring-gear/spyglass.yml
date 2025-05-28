@@ -1,0 +1,48 @@
+name: Spyglass
+system:
+  description:
+    value: >-
+      <p>Objects viewed through a Spyglass are magnified to twice their
+      size.</p>
+    chat: ''
+  price:
+    value: 1000
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: spyglass
+_id: phbagSpyglass100
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/tools/navigation/spyglass-telescope-brass.webp
+effects: []
+sort: 6200000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425912322
+  modifiedTime: 1745256812990
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagSpyglass100'

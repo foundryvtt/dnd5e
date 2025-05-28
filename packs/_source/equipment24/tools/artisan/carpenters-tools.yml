@@ -1,0 +1,131 @@
+name: Carpenter's Tools
+system:
+  description:
+    value: >-
+      <p class="phb-meta"><strong>Ability:</strong> Strength</p><p
+      class="phb-meta"><strong>Utilize:</strong> Seal or pry open a door or
+      container (DC 20)</p><p class="phb-meta"><strong>Craft:</strong>
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepClub000000]{Club},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatclub0]{Greatclub},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepQuartersta]{Quarterstaff},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBarrel00000]{Barrel},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagChest000000]{Chest},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagLadder00000]{Ladder},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagPole0000000]{Pole},
+      @UUID[Compendium.dnd5e.items.Item.srTRzwTfWKO5opOo]{Portable Ram},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagTorch000000]{Torch}</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  price:
+    value: 8
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: art
+    baseItem: carpenter
+  ability: str
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    FA1LisaMRSw353K6:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: str
+        dc:
+          calculation: ''
+          formula: '20'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: FA1LisaMRSw353K6
+      name: Seal or Pry Open
+      img: ''
+      appliedEffects: []
+  identifier: carpenters-tools
+_id: phbtulCarpenters
+type: tool
+folder: V8KHbNkEWoXQP3Pj
+img: icons/tools/hand/saw-steel-grey.webp
+effects: []
+sort: 125000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425916448
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbtulCarpenters'

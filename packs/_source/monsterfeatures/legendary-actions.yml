@@ -1,0 +1,54 @@
+_id: terEuqr148hQBkIq
+name: Legendary Actions
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] can take 3 legendary actions. Only one
+      legendary action option can be used at a time and only at the end of
+      another creature's turn. the [[lookup @name lowercase]] regains spent
+      legendary actions at the start of its turn.</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] can take 3 legendary actions.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: legendary-actions
+flags: {}
+img: icons/magic/light/hand-sparks-glow-yellow.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304977843
+  modifiedTime: 1725992574851
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!terEuqr148hQBkIq'

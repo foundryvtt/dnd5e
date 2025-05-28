@@ -1,0 +1,212 @@
+_id: phbMountsAndVehi
+name: Mounts and Vehicles
+pages:
+  - sort: 0
+    name: Overview
+    type: text
+    _id: zivUMCaCPRLSXGNI
+    system: {}
+    title:
+      show: false
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A mount can help you move more quickly through the wilderness, but
+        its primary purpose is to carry gear that would otherwise slow you down.
+        The @UUID[.NVPIUDJEdFDaErTg]{Mounts and Other Animals table} shows each
+        animal’s carrying capacity. See
+        @UUID[Compendium.dnd5e.content24.JournalEntry.mmMonstersAtoZ00]{Monsters}
+        for the animals’ stat blocks.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745623607443
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbMountsAndVehi.zivUMCaCPRLSXGNI'
+  - sort: 0
+    name: Mounts and Cargo
+    type: text
+    _id: NVPIUDJEdFDaErTg
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>An animal pulling a carriage, cart, chariot, sled, or wagon can move
+        weight up to five times its base carrying capacity, including the weight
+        of the vehicle. If multiple animals pull the same vehicle, add their
+        carrying capacities together.</p><h2>Barding</h2><p>Barding is armor
+        designed for a mount. Any type of armor on the Armor table in this
+        chapter can be purchased as barding. The cost is four times the normal
+        cost, and it weighs twice as much.</p><h2>Saddles</h2><p>A saddle comes
+        with a bit, a bridle, reins, and any other equipment needed to use the
+        saddle. A Military Saddle gives Advantage on any ability check you make
+        to remain mounted. An Exotic Saddle is required for riding an aquatic or
+        a flying mount.</p><table><caption>Mounts and Other
+        Animals</caption><thead><tr><th><p>Item</p></th><th><p>Carrying
+        Capacity</p></th><th><p>Cost</p></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.mmCamel000000000]{Camel}</p></td><td><p>450
+        lb.</p></td><td><p>50
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.mmElephant000000]{Elephant}</p></td><td><p>1,320
+        lb.</p></td><td><p>200
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.mmDraftHorse0000]{Horse,
+        Draft}</p></td><td><p>540 lb.</p></td><td><p>50
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.mmRidingHorse000]{Horse,
+        Riding}</p></td><td><p>480 lb.</p></td><td><p>75
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.mmMastiff0000000]{Mastiff}</p></td><td><p>195
+        lb.</p></td><td><p>25
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.mmMule0000000000]{Mule}</p></td><td><p>420
+        lb.</p></td><td><p>8
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.mmPony0000000000]{Pony}</p></td><td><p>225
+        lb.</p></td><td><p>30
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.mmWarhorse000000]{Warhorse}</p></td><td><p>540
+        lb.</p></td><td><p>400
+        GP</p></td></tr></tbody></table><table><caption>Tack, Harness, and Drawn
+        Vehicles</caption><thead><tr><th><p>Item</p></th><th><p>Weight</p></th><th><p>Cost</p></th></tr></thead><tbody><tr><td><p>Carriage</p></td><td><p>600
+        lb.</p></td><td><p>100
+        GP</p></td></tr><tr><td><p>Cart</p></td><td><p>200 lb.</p></td><td><p>15
+        GP</p></td></tr><tr><td><p>Chariot</p></td><td><p>100
+        lb.</p></td><td><p>250 GP</p></td></tr><tr><td><p>Feed per
+        day</p></td><td><p>10 lb.</p></td><td><p>5 CP</p></td></tr><tr><td
+        colspan="3"><p><em><strong>Saddle</strong></em></p></td></tr><tr><td><p>Exotic</p></td><td><p>40
+        lb.</p></td><td><p>60
+        GP</p></td></tr><tr><td><p>Military</p></td><td><p>30
+        lb.</p></td><td><p>20
+        GP</p></td></tr><tr><td><p>Riding</p></td><td><p>25
+        lb.</p></td><td><p>10 GP</p></td></tr><tr><td><p>Sled</p></td><td><p>300
+        lb.</p></td><td><p>20 GP</p></td></tr><tr><td><p>Stabling per
+        day</p></td><td><p>—</p></td><td><p>5
+        SP</p></td></tr><tr><td><p>Wagon</p></td><td><p>400
+        lb.</p></td><td><p>35 GP</p></td></tr></tbody></table>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1727465653278
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbMountsAndVehi.NVPIUDJEdFDaErTg'
+  - sort: 0
+    name: Large Vehicles
+    type: text
+    _id: oXm4zg000veQxNUk
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>The Airborne and Waterborne Vehicles table provides statistics for
+        various types of large vehicles. The following notes
+        apply.</p><h2>Speed</h2><p>A ship sailing against a strong wind moves at
+        half speed. In a dead calm (no wind), waterborne ships can’t move under
+        sail and must be rowed. Keelboats and Rowboats are used on lakes and
+        rivers. If going downstream, add the speed of the current (typically 3
+        miles per hour) to the speed of the vehicle. These vehicles can’t be
+        rowed against any significant current, but they can be pulled upstream
+        by draft animals on the shores. A Rowboat can be carried and weighs 100
+        pounds.</p><h2>Crew</h2><p>A ship larger than a Keelboat or Rowboat
+        needs a crew of skilled
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbServices00000.JournalEntryPage.6JpV8RWOi2AG8BdK]{hirelings}
+        to function. The minimum number of skilled hirelings needed to crew a
+        ship depends on the type of ship, as shown in the
+        table.</p><h2>Passengers</h2><p>The table lists the number of Small and
+        Medium passengers the ship can accommodate using hammocks. A ship
+        outfitted with private accommodations can carry one-fifth as many
+        passengers. A passenger usually pays 5 SP per day for a hammock, but
+        prices can vary from ship to ship. A small private cabin usually costs 2
+        GP per day.</p><h2>Damage Threshold</h2><p>If a vehicle has a
+        &amp;Reference[damage threshold]{Damage Threshold}, it’s noted in the
+        table.</p><h2>Ship Repair</h2><p>Repairs to a damaged ship can be made
+        while the vessel is berthed. Repairing 1 Hit Point of damage requires 1
+        day and costs 20 GP for materials and labor. If the repairs are made in
+        a location where supplies and skilled labor are abundant, such as a city
+        shipyard, the repair time and cost are
+        halved.</p><table><caption>Airborne and Waterborne
+        Vehicles</caption><thead><tr><th><p>Ship</p></th><th><p>Speed</p></th><th><p>Crew</p></th><th><p>Passengers</p></th><th><p>Cargo
+        (Tons)</p></th><th><p>AC</p></th><th><p>HP</p></th><th><p>Damage
+        Threshold</p></th><th><p>Cost</p></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.VBTtG9kjHNQstG0a]{Airship}</p></td><td><p>8
+        mph</p></td><td><p>10</p></td><td><p>20</p></td><td><p>1</p></td><td><p>13</p></td><td><p>300</p></td><td><p>—</p></td><td><p>40,000
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.phbmobGalley0000]{Galley}</p></td><td><p>4
+        mph</p></td><td><p>80</p></td><td><p>—</p></td><td><p>150</p></td><td><p>15</p></td><td><p>500</p></td><td><p>20</p></td><td><p>30,000
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.phbmobKeelboat00]{Keelboat}</p></td><td><p>1
+        mph</p></td><td><p>1</p></td><td><p>6</p></td><td><p>1/2</p></td><td><p>15</p></td><td><p>100</p></td><td><p>10</p></td><td><p>3,000
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.phbmobLongship00]{Longship}</p></td><td><p>3
+        mph</p></td><td><p>40</p></td><td><p>150</p></td><td><p>10</p></td><td><p>15</p></td><td><p>300</p></td><td><p>15</p></td><td><p>10,000
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.phbmobRowboat000]{Rowboat}</p></td><td><p>1½
+        mph</p></td><td><p>1</p></td><td><p>3</p></td><td><p>—</p></td><td><p>11</p></td><td><p>50</p></td><td><p>—</p></td><td><p>50
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.phbmobSailingShi]{Sailing
+        Ship}</p></td><td><p>2
+        mph</p></td><td><p>20</p></td><td><p>20</p></td><td><p>100</p></td><td><p>15</p></td><td><p>300</p></td><td><p>15</p></td><td><p>10,000
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.actors24.Actor.phbmobWarship000]{Warship}</p></td><td><p>2½
+        mph</p></td><td><p>60</p></td><td><p>60</p></td><td><p>200</p></td><td><p>15</p></td><td><p>500</p></td><td><p>20</p></td><td><p>25,000
+        GP</p></td></tr></tbody></table>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726020013359
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbMountsAndVehi.oXm4zg000veQxNUk'
+folder: tKJ13QUHYIACXz6y
+flags:
+  dnd5e:
+    type: special
+    append: 6
+    order: 800900
+    navigation:
+      previous: phbEquipment0000
+      next: phbServices00000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1724425889182
+  modifiedTime: 1745677865380
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -50000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbMountsAndVehi'

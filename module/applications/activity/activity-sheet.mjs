@@ -1,24 +1,14 @@
-import Application5e from "../api/application.mjs";
+import { ConsumptionTargetData } from "../../data/activity/fields/consumption-targets-field.mjs";
+import UsesField from "../../data/shared/uses-field.mjs";
+import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 
 /**
  * Default sheet for activities.
  */
-export default class ActivitySheet extends Application5e {
-  constructor(options={}) {
-    super(options);
-    this.#activityId = options.document.id;
-    this.#item = options.document.item;
-  }
-
-  /* -------------------------------------------- */
-
+export default class ActivitySheet extends PseudoDocumentSheet {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    classes: ["activity", "sheet", "standard-form"],
-    tag: "form",
-    document: null,
-    viewPermission: CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED,
-    editPermission: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER,
+    classes: ["activity"],
     window: {
       icon: "fa-solid fa-gauge"
     },
@@ -31,12 +21,7 @@ export default class ActivitySheet extends Application5e {
       deleteDamagePart: ActivitySheet.#deleteDamagePart,
       deleteEffect: ActivitySheet.#deleteEffect,
       deleteRecovery: ActivitySheet.#deleteRecovery,
-      dissociateEffect: ActivitySheet.#dissociateEffect,
-      toggleCollapsed: ActivitySheet.#toggleCollapsed
-    },
-    form: {
-      handler: ActivitySheet.#onSubmitForm,
-      submitOnChange: true
+      dissociateEffect: ActivitySheet.#dissociateEffect
     },
     position: {
       width: 500,
@@ -98,59 +83,7 @@ export default class ActivitySheet extends Application5e {
    * @type {Activity}
    */
   get activity() {
-    return this.item.system.activities.get(this.#activityId);
-  }
-
-  /**
-   * ID of this activity on the parent item.
-   * @type {string}
-   */
-  #activityId;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Expanded states for additional settings sections.
-   * @type {Map<string, boolean>}
-   */
-  #expandedSections = new Map();
-
-  get expandedSections() {
-    return this.#expandedSections;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this Activity sheet visible to the current user?
-   * @type {boolean}
-   */
-  get isVisible() {
-    return this.item.testUserPermission(game.user, this.options.viewPermission);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this Document sheet editable by the current User?
-   * This is governed by the editPermission threshold configured for the class.
-   * @type {boolean}
-   */
-  get isEditable() {
-    if ( game.packs.get(this.item.pack)?.locked ) return false;
-    return this.item.testUserPermission(game.user, this.options.editPermission);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Parent item to which this activity belongs.
-   * @type {Item5e}
-   */
-  #item;
-
-  get item() {
-    return this.#item;
+    return this.document;
   }
 
   /* -------------------------------------------- */
@@ -202,6 +135,7 @@ export default class ActivitySheet extends Application5e {
     context.data = {};
     context.disabled = {};
     for ( const field of ["activation", "duration", "range", "target", "uses"] ) {
+      if ( !this.activity[field] ) continue;
       context.data[field] = this.activity[field].override ? context.source[field] : context.inferred[field];
       context.disabled[field] = this.activity[field].canOverride && !this.activity[field].override;
     }
@@ -215,7 +149,7 @@ export default class ActivitySheet extends Application5e {
       { value: "", label: game.i18n.localize("DND5E.NoneActionLabel") }
     ];
     context.affectsPlaceholder = game.i18n.localize(
-      `DND5E.Target${context.data.target.template.type ? "Every" : "Any"}`
+      `DND5E.TARGET.Count.${context.data.target?.template?.type ? "Every" : "Any"}`
     );
     context.durationUnits = [
       { value: "inst", label: game.i18n.localize("DND5E.TimeInst") },
@@ -229,7 +163,7 @@ export default class ActivitySheet extends Application5e {
     ];
     context.rangeUnits = [
       ...Object.entries(CONFIG.DND5E.rangeTypes).map(([value, label]) => ({ value, label })),
-      ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, label]) => ({
+      ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({
         value, label, group: game.i18n.localize("DND5E.RangeDistance")
       }))
     ];
@@ -240,9 +174,10 @@ export default class ActivitySheet extends Application5e {
       value,
       label: CONFIG.DND5E.activityConsumptionTypes[value].label
     }));
-    context.consumptionTargets = context.activity.consumption.targets.map((data, index) => {
+    context.consumptionTargets = context.source.consumption.targets.map((data, index) => {
       const typeConfig = CONFIG.DND5E.activityConsumptionTypes[data.type] ?? {};
       const showTextTarget = typeConfig.targetRequiresEmbedded && !this.item.isEmbedded;
+      const target = new ConsumptionTargetData(data, { parent: this.activity });
       return {
         data,
         fields: this.activity.schema.fields.consumption.fields.targets.element.fields,
@@ -255,36 +190,33 @@ export default class ActivitySheet extends Application5e {
           ...(typeConfig.scalingModes ?? []).map(({ value, label }) => ({ value, label: game.i18n.localize(label) }))
         ] : null,
         showTargets: "validTargets" in typeConfig,
+        selectedTarget: ("validTargets" in typeConfig) && ((data.type === "itemUses") && data.target?.includes("."))
+          ? (this.activity.actor?.sourcedItems?.get(data.target)?.first()?.id ?? data.target)
+          : data.target,
         targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem") : null,
-        validTargets: showTextTarget ? null : data.validTargets
+        validTargets: showTextTarget ? null : target.validTargets
       };
     });
     context.showConsumeSpellSlot = this.activity.isSpell && (this.item.system.level !== 0);
+    context.showScaling = !this.activity.isSpell;
 
     // Uses recovery
-    context.recoveryPeriods = [
-      ...Object.entries(CONFIG.DND5E.limitedUsePeriods)
-        .filter(([, config]) => !config.deprecated)
-        .map(([value, config]) => ({
-          value, label: config.label, group: game.i18n.localize("DND5E.DurationTime")
-        })),
-      { value: "recharge", label: game.i18n.localize("DND5E.USES.Recovery.Recharge.Label") }
-    ];
+    context.recoveryPeriods = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;
     context.recoveryTypes = [
       { value: "recoverAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.RecoverAll") },
       { value: "loseAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.LoseAll") },
       { value: "formula", label: game.i18n.localize("DND5E.USES.Recovery.Type.Formula") }
     ];
-    context.usesRecovery = context.activity.uses.recovery.map((data, index) => ({
+    context.usesRecovery = context.source.uses.recovery.map((data, index) => ({
       data,
       fields: this.activity.schema.fields.uses.fields.recovery.element.fields,
       prefix: `uses.recovery.${index}.`,
       source: context.source.uses.recovery[index] ?? data,
-      formulaOptions: data.period === "recharge" ? data.recharge?.options : null
+      formulaOptions: data.period === "recharge" ? UsesField.rechargeOptions : null
     }));
 
     // Template dimensions
-    context.dimensions = context.activity.target.template.dimensions;
+    context.dimensions = context.activity.target?.template?.dimensions;
 
     return context;
   }
@@ -333,15 +265,15 @@ export default class ActivitySheet extends Application5e {
         .map(effect => ({
           value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
         }));
-      context.appliedEffects = context.activity.effects.reduce((arr, data, index) => {
+      context.appliedEffects = context.activity.effects.reduce((arr, data) => {
         if ( !data.effect ) return arr;
         const effect = {
           data,
           collapsed: this.expandedSections.get(`effects.${data._id}`) ? "" : "collapsed",
           effect: data.effect,
           fields: this.activity.schema.fields.effects.element.fields,
-          prefix: `effects.${index}.`,
-          source: context.source.effects[index] ?? data,
+          prefix: `effects.${data._index}.`,
+          source: context.source.effects[data._index] ?? data,
           contentLink: data.effect.toAnchor().outerHTML,
           additionalSettings: null
         };
@@ -355,26 +287,26 @@ export default class ActivitySheet extends Application5e {
       ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
     ];
     if ( context.activity.damage?.parts ) {
+      const scaleKey = (this.item.type === "spell") && (this.item.system.level === 0) ? "labelCantrip" : "label";
       const scalingOptions = [
         { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
-        ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, config]) => ({ value, label: config.label }))
+        ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, { [scaleKey]: label }]) => ({ value, label }))
       ];
-      let indexOffset = 0;
-      context.damageParts = context.activity.damage.parts.map((data, index) => {
-        if ( data.base ) indexOffset--;
-        const part = {
-          data,
-          fields: this.activity.schema.fields.damage.fields.parts.element.fields,
-          prefix: `damage.parts.${index + indexOffset}.`,
-          source: context.source.damage.parts[index + indexOffset] ?? data,
-          canScale: this.activity.canScaleDamage,
-          scalingOptions,
-          typeOptions: Object.entries(CONFIG.DND5E.damageTypes).map(([value, config]) => ({
-            value, label: config.label, selected: data.types.has(value)
-          }))
-        };
-        return this._prepareDamagePartContext(context, part);
+      const typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => ({ value, label }));
+      const makePart = (data, index) => this._prepareDamagePartContext(context, {
+        data, index, scalingOptions, typeOptions,
+        locked: data.locked || (index === undefined),
+        canScale: this.activity.canScaleDamage,
+        fields: this.activity.schema.fields.damage.fields.parts.element.fields,
+        prefix: index !== undefined ? `damage.parts.${index}.` : "_.",
+        source: data
       });
+      context.damageParts = [
+        ...context.activity.damage.parts
+          .filter(p => p._index === undefined)
+          .map((data, index) => makePart(data)),
+        ...context.source.damage.parts.map((data, index) => makePart(data, index))
+      ];
     }
 
     return context;
@@ -456,50 +388,10 @@ export default class ActivitySheet extends Application5e {
   /*  Life-Cycle Handlers                         */
   /* -------------------------------------------- */
 
-  /** @override */
-  _canRender(options) {
-    if ( !this.isVisible ) throw new Error(game.i18n.format("SHEETS.DocumentSheetPrivate", {
-      type: game.i18n.localize("DND5E.ACTIVITY.Title.one")
-    }));
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onFirstRender(context, options) {
-    super._onFirstRender(context, options);
-    this.activity.constructor._registerApp(this.activity, this);
-    this.item.apps[this.id] = this;
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   _onRender(context, options) {
     super._onRender(context, options);
-    for ( const element of this.element.querySelectorAll("[data-expand-id]") ) {
-      element.querySelector(".collapsible")?.classList
-        .toggle("collapsed", !this.#expandedSections.get(element.dataset.expandId));
-    }
     this.#toggleNestedTabs();
-    if ( !this.isEditable ) this._disableFields();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _onClose(_options) {
-    this.activity?.constructor._unregisterApp(this.activity, this);
-    delete this.item.apps[this.id];
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _renderFrame(options) {
-    const frame = await super._renderFrame(options);
-    frame.autocomplete = "off";
-    return frame;
   }
 
   /* -------------------------------------------- */
@@ -688,47 +580,12 @@ export default class ActivitySheet extends Application5e {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Handle toggling the collapsed state of an additional settings section.
-   * @this {ActivitySheet}
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Button that was clicked.
-   */
-  static #toggleCollapsed(event, target) {
-    if ( event.target.closest(".collapsible-content") ) return;
-    target.classList.toggle("collapsed");
-    this.#expandedSections.set(
-      target.closest("[data-expand-id]")?.dataset.expandId,
-      !target.classList.contains("collapsed")
-    );
-  }
-
-  /* -------------------------------------------- */
   /*  Form Handling                               */
   /* -------------------------------------------- */
 
-  /**
-   * Handle form submission.
-   * @param {SubmitEvent} event          Triggering submit event.
-   * @param {HTMLFormElement} form       The form that was submitted.
-   * @param {FormDataExtended} formData  Data from the submitted form.
-   */
-  static async #onSubmitForm(event, form, formData) {
-    const submitData = this._prepareSubmitData(event, formData);
-    await this._processSubmitData(event, submitData);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Perform any pre-processing of the form data to prepare it for updating.
-   * @param {SubmitEvent} event          Triggering submit event.
-   * @param {FormDataExtended} formData  Data from the submitted form.
-   * @returns {object}
-   */
+  /** @inheritDoc */
   _prepareSubmitData(event, formData) {
-    const submitData = foundry.utils.expandObject(formData.object);
+    const submitData = super._prepareSubmitData(event, formData);
     for ( const keyPath of this.constructor.CLEAN_ARRAYS ) {
       const data = foundry.utils.getProperty(submitData, keyPath);
       if ( data ) foundry.utils.setProperty(submitData, keyPath, Object.values(data));
@@ -741,21 +598,6 @@ export default class ActivitySheet extends Application5e {
         submitData.effects.push({ _id });
       }
     }
-    // Workaround for https://github.com/foundryvtt/foundryvtt/issues/11610
-    this.element.querySelectorAll("fieldset legend :is(input, select, dnd5e-checkbox)").forEach(input => {
-      foundry.utils.setProperty(submitData, input.name, input.value);
-    });
     return submitData;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle updating the activity based on processed submit data.
-   * @param {SubmitEvent} event  Triggering submit event.
-   * @param {object} submitData  Prepared object for updating.
-   */
-  async _processSubmitData(event, submitData) {
-    await this.activity.update(submitData);
   }
 }

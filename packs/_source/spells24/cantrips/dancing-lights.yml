@@ -1,0 +1,198 @@
+name: Dancing Lights
+system:
+  description:
+    value: >-
+      <p>You create up to four torch-size lights within range, making them
+      appear as torches, lanterns, or glowing orbs that hover for the duration.
+      Alternatively, you combine the four lights into one glowing Medium form
+      that is vaguely humanlike. Whichever form you choose, each light sheds Dim
+      Light in a 10-foot radius.</p><p>As a Bonus Action, you can move the
+      lights up to 60 feet to a space within range. A light must be within 20
+      feet of another light created by this spell, and a light vanishes if it
+      exceeds the spell's range.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '120'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: ill
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a bit of phosphorus
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    7uE4AFHftJsK3rYK:
+      type: summon
+      name: Create Lights
+      _id: 7uE4AFHftJsK3rYK
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: '4'
+          name: ''
+          _id: iOdIvk0ZQyeQJGC3
+          uuid: Compendium.dnd5e.actors24.Actor.phbsplTinyDancin
+          level:
+            min: null
+            max: null
+        - count: '1'
+          name: ''
+          _id: bXvBLXJoA9YMkbbd
+          uuid: Compendium.dnd5e.actors24.Actor.phbsplMediumDanc
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      img: ''
+    4a3L8r8Iobi24dBr:
+      type: utility
+      _id: 4a3L8r8Iobi24dBr
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: space
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Move Lights
+      img: systems/dnd5e/icons/svg/statuses/concentrating.svg
+      appliedEffects: []
+  identifier: dancing-lights
+_id: phbsplDancingLig
+type: spell
+img: icons/magic/light/light-candles-lit-white.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+sort: 1800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425948746
+  modifiedTime: 1745256789846
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDancingLig'

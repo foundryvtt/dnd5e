@@ -1,0 +1,54 @@
+_id: phbwzdRitualAdep
+name: Ritual Adept
+type: feat
+folder: plFztoZhqP7fLHPl
+img: icons/sundries/scrolls/scroll-yellow-teal.webp
+system:
+  description:
+    value: >-
+      <p>You can cast any spell as a
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.YSB1QtxZW2BI9f4Y#casting-without-slots]{Ritual}
+      if that spell has the Ritual tag and the spell is in your spellbook. You
+      needn't have the spell prepared, but you must read from the book to cast a
+      spell in this way.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 2
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: ritual-adept
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866273692
+  modifiedTime: 1745256769516
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwzdRitualAdep'

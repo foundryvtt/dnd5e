@@ -1,0 +1,165 @@
+_id: dmgPotionOfClimb
+name: Potion of Climbing
+type: consumable
+folder: 4NjJfCbRAVhw8ESv
+img: icons/consumables/potions/potion-vial-corked-labeled-purple.webp
+system:
+  activities:
+    RwfSYL6yjdvldoIH:
+      type: utility
+      name: Drink
+      _id: RwfSYL6yjdvldoIH
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: D6fYii3nkDC4Tsbi
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects:
+        - D6fYii3nkDC4Tsbi
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Potion, Common</em></p><p>When you drink this potion, you gain a
+      Climb Speed equal to your Speed for 1 hour. During this time, you have
+      Advantage on Strength (Athletics) checks to climb.</p><p>This potion is
+      separated into brown, silver, and gray layers resembling bands of stone.
+      Shaking the bottle fails to mix the colors.</p><section
+      id="secret-HJGRSX6Nbv4iYQAX" class="secret"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Climber</strong> Active Effect can be used
+      for tracking but can not automate the effects.</p></section>
+    chat: ''
+  identifier: potion-of-climbing
+  source:
+    revision: 2
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  price:
+    value: 50
+    denomination: gp
+  rarity: common
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: potion
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects:
+  - name: Climber
+    img: icons/consumables/potions/vial-cork-empty.webp
+    _id: D6fYii3nkDC4Tsbi
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730862196995
+      modifiedTime: 1730862213048
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgPotionOfClimb.D6fYii3nkDC4Tsbi'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgPotionOfClimb'

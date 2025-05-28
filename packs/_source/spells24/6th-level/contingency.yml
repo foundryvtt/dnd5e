@@ -1,0 +1,182 @@
+name: Contingency
+system:
+  description:
+    value: >-
+      <p>Choose a spell of level 5 or lower that you can cast, that has a
+      casting time of an action, and that can target you. You cast that
+      spell—called the contingent spell—as part of casting <em>Contingency</em>,
+      expending spell slots for both, but the contingent spell doesn't come into
+      effect. Instead, it takes effect when a certain trigger occurs. You
+      describe that trigger when you cast the two spells. For example, a
+      <em>Contingency</em> cast with <em>Water Breathing</em> might stipulate
+      that <em>Water Breathing</em> comes into effect when you are engulfed in
+      water or a similar liquid.</p><p>The contingent spell takes effect
+      immediately after the trigger occurs for the first time, whether or not
+      you want it to, and then <em>Contingency</em> ends.</p><p>The contingent
+      spell takes effect only on you, even if it can normally target others. You
+      can use only one <em>Contingency</em> spell at a time. If you cast this
+      spell again, the effect of another <em>Contingency</em> spell on you ends.
+      Also, <em>Contingency</em> ends on you if its material component is ever
+      not on your person.</p><section class="secret"
+      id="secret-gnXQNvWGYfLGkrBe"><p><strong>Foundry Note</strong></p><p>The
+      "create contingency" activity is configured to optionally enchant a Scroll
+      to track and serve as the triggered spell. Create a spell scroll by right
+      clicking on a spell in your spell list, expend a spell slot of the created
+      scroll's level, and enchant the scroll.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: '10'
+    units: day
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: self
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a gem-encrusted statuette of yourself worth 1,500+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    5pAraLGEhRIXjEgn:
+      type: enchant
+      _id: 5pAraLGEhRIXjEgn
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: NH2gXEd7ryyntWKE
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      enchant: {}
+      restrictions:
+        allowMagical: true
+        categories:
+          - scroll
+        properties: []
+        type: consumable
+      name: Create Contingency
+      img: icons/environment/traps/trap-jaw-tan.webp
+      appliedEffects:
+        - NH2gXEd7ryyntWKE
+  identifier: contingency
+_id: phbsplContingenc
+type: spell
+img: icons/magic/time/hourglass-tilted-glowing-gold.webp
+effects:
+  - type: enchantment
+    name: Contingency Spell
+    img: icons/magic/time/hourglass-tilted-glowing-gold.webp
+    disabled: false
+    _id: NH2gXEd7ryyntWKE
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: 'Contengency: {}'
+        priority: null
+    duration:
+      startTime: null
+      seconds: 864000
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724696287136
+      modifiedTime: 1724697000329
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplContingenc.NH2gXEd7ryyntWKE'
+folder: 8WmlLARx1Df3Ii9v
+sort: 1700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425947532
+  modifiedTime: 1745256789167
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplContingenc'

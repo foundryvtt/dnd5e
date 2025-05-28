@@ -1,0 +1,136 @@
+_id: Advtckpz1B733bu9
+name: Flame Blade
+type: spell
+img: icons/magic/fire/dagger-rune-enchant-flame-orange.webp
+system:
+  description:
+    value: >-
+      <p>You evoke a fiery blade in your free hand. The blade is similar in size
+      and shape to a Scimitar, and it lasts for the Duration. If you let go of
+      the blade, it disappears, but you can evoke the blade again as a Bonus
+      Action.</p><p>You can use your action to make a melee spell Attack with
+      the fiery blade. On a hit, the target takes 3d6 fire damage.</p><p>The
+      flaming blade sheds bright light in a 10-foot radius and dim light for an
+      additional 10 feet.</p><p><strong>At Higher Levels.</strong> When you cast
+      this spell using a spell slot of 4th level or higher, the damage increases
+      by 1d6 for every two slot levels above 2nd.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: bonus
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: evo
+  materials:
+    value: Leaf of sumac
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: spell
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - number: null
+            denomination: null
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: true
+              formula: (floor(2 + @item.level / 2))d6
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: flame-blade
+effects: []
+folder: Qi4Se3we69ukl2V9
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037350089
+  modifiedTime: 1725992717851
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Advtckpz1B733bu9'

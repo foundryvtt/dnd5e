@@ -1,0 +1,166 @@
+_id: ZPd73HtKF3At11jh
+name: Control Weather
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You take control of the weather within 5 miles of you for the duration.
+      You must be outdoors to cast this spell. Moving to a place where you don't
+      have a clear path to the sky ends the spell early.</p><p>When you cast the
+      spell, you change the current weather conditions, which are determined by
+      the DM based on the climate and season. You can change precipitation,
+      temperature, and wind. It takes 1d4 x 10 minutes for the new conditions to
+      take effect. Once they do so, you can change the conditions again. When
+      the spell ends, the weather gradually returns to normal.</p><p>When you
+      change the weather conditions, find a current condition on the following
+      tables and change its stage by one, up or down. When changing the wind,
+      you can change its direction.</p><p><strong>Conditions</strong></p>
+
+      <ol>
+
+      <li>Clear</li>
+
+      <li>Light clouds</li>
+
+      <li>Overcast or ground fog</li>
+
+      <li>Rain, hail, or snow</li>
+
+      <li>Torrential rain, driving hail, or blizzard</li>
+
+      </ol>
+
+      <p><strong>Temperature</strong></p>
+
+      <ol>
+
+      <li>Unbearable heat</li>
+
+      <li>Hot</li>
+
+      <li>Warm</li>
+
+      <li>Cool</li>
+
+      <li>Cold</li>
+
+      <li>Arctic cold</li>
+
+      </ol>
+
+      <p><strong>Wind</strong></p>
+
+      <ol>
+
+      <li>Calm</li>
+
+      <li>Moderate wind</li>
+
+      <li>Strong wind</li>
+
+      <li>Gale</li>
+
+      <li>Storm</li>
+
+      </ol>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: mi
+      type: radius
+      size: '5'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 8
+  school: trs
+  materials:
+    value: Burning incense and bits of earth and wood mixed in water.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: control-weather
+sort: 0
+flags: {}
+img: icons/magic/air/wind-tornado-cyclone-white.webp
+effects: []
+folder: x1XTiOgx4DJ34wc5
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037359191
+  modifiedTime: 1725992720807
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ZPd73HtKF3At11jh'

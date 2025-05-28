@@ -1,0 +1,115 @@
+name: Identify
+system:
+  description:
+    value: >-
+      <p>You touch an object throughout the spell's casting. If the object is a
+      magic item or some other magical object, you learn its properties and how
+      to use them, whether it requires Attunement, and how many charges it has,
+      if any. You learn whether any ongoing spells are affecting the item and
+      what they are. If the item was created by a spell, you learn that spell's
+      name.</p><p>If you instead touch a creature throughout the casting, you
+      learn which ongoing spells, if any, are currently affecting it.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creatureOrObject
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: div
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  materials:
+    value: a pearl worth 100+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: identify
+_id: phbsplIdentify00
+type: spell
+img: icons/tools/scribal/magnifying-glass.webp
+effects: []
+folder: pBaAAtXBCq9FVEnL
+sort: 1700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425959594
+  modifiedTime: 1745256794999
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplIdentify00'

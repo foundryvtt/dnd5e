@@ -1,0 +1,162 @@
+_id: dmgBirdQuaalsFea
+name: Feather Token (Bird)
+type: consumable
+folder: rHnqTOyb3aiQKdh4
+img: icons/commodities/materials/feather-yellow.webp
+system:
+  activities:
+    wRycGjvHeen0dBwg:
+      type: summon
+      name: Use
+      _id: wRycGjvHeen0dBwg
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: spec
+        concentration: false
+        override: false
+        special: >-
+          The bird disappears after flying its maximum distance for a day or if
+          it drops to 0 Hit Points. You can dismiss the bird as a Magic action.
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: dCWVY7LK43yZ2YjC
+          uuid: Compendium.dnd5e.actors24.Actor.mmRoc00000000000
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '1'
+    autoDestroy: true
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare, See:
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgQuaalsFeather]{Feather
+      Token}</em></p><p>You can take a Magic action to toss the token 5 feet
+      into the air. The token disappears and an enormous, multicolored bird
+      takes its place. The bird has the statistics of a
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmRoc00000000000]{Roc}</strong>,
+      but it can't attack. It obeys your simple commands and can carry up to 500
+      pounds while flying at its maximum speed (16 miles per hour for a maximum
+      of 144 miles per day, with a 1-hour rest for every 3 hours of flying) or
+      1,000 pounds at half that speed. The bird disappears after flying its
+      maximum distance for a day or if it drops to 0 Hit Points. You can dismiss
+      the bird as a Magic action.</p>
+    chat: ''
+  identifier: bird-feather-token
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712698096
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 200000
+ownership:
+  default: 0
+_key: '!items!dmgBirdQuaalsFea'

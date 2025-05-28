@@ -1,0 +1,312 @@
+_id: phbProtectionFro
+name: Protection from Energy
+type: spell
+img: icons/magic/symbols/cog-shield-white-blue.webp
+system:
+  description:
+    value: >-
+      <div><p>For the duration, the willing creature you touch has Resistance to
+      one damage type of your choice: Acid, Cold, Fire, Lightning, or
+      Thunder.</p></div>
+    chat: ''
+  source:
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: willing
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 3
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    rIHvDrlENxFLbUQw:
+      type: utility
+      _id: rIHvDrlENxFLbUQw
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: RrJ5b1A9TghFe5QK
+        - _id: xDm8bqlMGiPq7nlt
+        - _id: DsflUNYKqETaLgxG
+        - _id: 0ODEqmz3M45lwd8q
+        - _id: M13rFIPjAIMwKzQp
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: ''
+      appliedEffects:
+        - RrJ5b1A9TghFe5QK
+        - xDm8bqlMGiPq7nlt
+        - DsflUNYKqETaLgxG
+        - 0ODEqmz3M45lwd8q
+        - M13rFIPjAIMwKzQp
+  identifier: protection-from-energy
+effects:
+  - name: Acid Protection
+    img: icons/magic/acid/dissolve-drip-droplet-smoke.webp
+    origin: Compendium.dnd5e.spells24.Item.phbProtectionFro
+    transfer: false
+    _id: RrJ5b1A9TghFe5QK
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: acid
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725642969078
+      modifiedTime: 1725643201422
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbProtectionFro.RrJ5b1A9TghFe5QK'
+  - name: Cold Protection
+    img: icons/magic/water/snowflake-ice-snow-white.webp
+    origin: Compendium.dnd5e.spells24.Item.phbProtectionFro
+    transfer: false
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725643027341
+      modifiedTime: 1725643220725
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: xDm8bqlMGiPq7nlt
+    _key: '!items.effects!phbProtectionFro.xDm8bqlMGiPq7nlt'
+  - name: Fire Protection
+    img: icons/magic/fire/flame-burning-skull-orange.webp
+    origin: Compendium.dnd5e.spells24.Item.phbProtectionFro
+    transfer: false
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725643030302
+      modifiedTime: 1725643261565
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: DsflUNYKqETaLgxG
+    _key: '!items.effects!phbProtectionFro.DsflUNYKqETaLgxG'
+  - name: Lightning Protection
+    img: icons/magic/lightning/bolt-strike-blue-white.webp
+    origin: Compendium.dnd5e.spells24.Item.phbProtectionFro
+    transfer: false
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: lightning
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725643035852
+      modifiedTime: 1725643280384
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: 0ODEqmz3M45lwd8q
+    _key: '!items.effects!phbProtectionFro.0ODEqmz3M45lwd8q'
+  - name: Thunder Protection
+    img: icons/magic/sonic/explosion-shock-wave-teal.webp
+    origin: Compendium.dnd5e.spells24.Item.phbProtectionFro
+    transfer: false
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: thunder
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725643038391
+      modifiedTime: 1725643295217
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: M13rFIPjAIMwKzQp
+    _key: '!items.effects!phbProtectionFro.M13rFIPjAIMwKzQp'
+folder: HCovEE4VoPGlIbKi
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425939781
+  modifiedTime: 1745256784718
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 3900000
+ownership:
+  default: 0
+_key: '!items!phbProtectionFro'

@@ -1,0 +1,71 @@
+_id: phbsptInfernalLe
+name: Fiendish Legacy, Infernal
+type: feat
+img: icons/creatures/unholy/demon-horned-winged-laughing.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>You are the recipient of a legacy that grants you supernatural
+      abilities.</p><p>When you reach character levels 3 and 5, you learn a
+      higher-level spell, as shown on the table. You always have that spell
+      prepared. You can cast it once without a spell slot, and you regain the
+      ability to cast it in that way when you finish a Long Rest. You can also
+      cast the spell using any spell slots you have of the appropriate level.
+      Intelligence, Wisdom, or Charisma is your spellcasting ability for the
+      spells you cast with this trait (choose the ability when you select the
+      legacy).</p><h3 data-anchor="infernal">Infernal</h3><p>The infernal legacy
+      connects tieflings not only to Gehenna but also the Nine Hells and the
+      raging battlefields of Acheron. Horns, spines, tails, golden eyes, and a
+      faint odor of sulfur or smoke are common physical features of such
+      tieflings, most of whom trace their ancestry to
+      devils.</p><table><caption>Infernal Legacy
+      Traits</caption><thead><tr><td>Level 1</td><td>Level 3</td><td>Level
+      5</td></tr></thead><tbody><tr><td>You have Resistance to Fire damage. You
+      also know the @UUID[Compendium.dnd5e.spells24.Item.phbsplFireBolt00]{Fire
+      Bolt}
+      cantrip.</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplHellishReb]{Hellish
+      Rebuke}</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplDarkness00]{Darkness}</td></tr></tbody></table><section
+      class="secret" id="secret-UpLnecebx3jeydEG"><p><strong>Foundry
+      Note</strong></p><p>The Resistance and spells are granted to you
+      automatically and you will be prompted to choose the spellcasting ability
+      during advancement.</p></section>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Tiefling
+  identifier: fiendish-legacy-infernal
+  advancement: []
+  cover: null
+  crewed: false
+effects: []
+folder: VZQeqwpBruLqnL6x
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745340871134
+  modifiedTime: 1745687678473
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptInfernalLe'

@@ -1,0 +1,114 @@
+_id: he8RpPXwSl2lVSIk
+name: Song of Rest
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 2nd level, you can use soothing music or oration to help
+      revitalize your wounded allies during a short rest.</p>
+
+      <p>If you or any friendly creatures who can hear your performance regain
+      hit points at the end of the short rest by spending one or more Hit Dice,
+      each of those creatures regains an extra 1d6 hit points.</p>
+
+      <p>The extra hit points increase when you reach certain levels in this
+      class: to 1d8 at 9th level, to 1d10 at 13th level, and to 1d12 at 17th
+      level.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Bard 2
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      healing:
+        number: null
+        denomination: null
+        bonus: ''
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: 1@scale.bard.song-of-rest
+        scaling:
+          mode: whole
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: song-of-rest
+flags: {}
+img: icons/magic/life/cross-worn-green.webp
+effects: []
+folder: XEu43QVhYfhUcewt
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037386977
+  modifiedTime: 1725992289339
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!he8RpPXwSl2lVSIk'

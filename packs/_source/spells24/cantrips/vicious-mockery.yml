@@ -1,0 +1,171 @@
+name: Vicious Mockery
+system:
+  description:
+    value: >-
+      <p>You unleash a string of insults laced with subtle enchantments at one
+      creature you can see or hear within range. The target must succeed on a
+      Wisdom saving throw or take 1d6 Psychic damage and have Disadvantage on
+      the next attack roll it makes before the end of its next
+      turn.</p><p><strong>Cantrip Upgrade.</strong> The damage increases by 1d6
+      when you reach levels 5 (2d6), 11 (3d6), and 17 (4d6).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: enc
+  properties:
+    - vocal
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    DwMhkWD6NEwUa1L3:
+      type: save
+      _id: DwMhkWD6NEwUa1L3
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: suEeAQQXl0X2JqzF
+          onSave: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - psychic
+            scaling:
+              mode: whole
+              number: 1
+        onSave: none
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: vicious-mockery
+_id: phbsplViciousMoc
+type: spell
+img: icons/magic/control/fear-fright-monster-grin-green.webp
+effects:
+  - name: Mocked
+    img: icons/sundries/flags/banner-flag-white.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplViciousMoc
+    transfer: false
+    _id: suEeAQQXl0X2JqzF
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has Disadvantage on the next attack roll it makes before the
+      end of its next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725573178035
+      modifiedTime: 1725573313432
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplViciousMoc.suEeAQQXl0X2JqzF'
+folder: 4FhsY9FJQd7h7MZb
+sort: 100013
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425976745
+  modifiedTime: 1745256799666
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplViciousMoc'

@@ -1,0 +1,164 @@
+_id: phbpdnChannelDiv
+name: Channel Divinity
+type: feat
+folder: 6uMLnndK8UPkb7Uy
+img: icons/magic/fire/projectile-wave-arrow.webp
+system:
+  description:
+    value: >-
+      <p>You can channel divine energy directly from the Outer Planes, using it
+      to fuel magical effects. You start with one such effect: Divine Sense,
+      which is described below. Other Paladin features give additional Channel
+      Divinity effect options. Each time you use this class's Channel Divinity,
+      you choose which effect from this class to create.</p><p>You can use this
+      class's Channel Divinity twice. You regain one of its expended uses when
+      you finish a Short Rest, and you regain all expended uses when you finish
+      a Long Rest. You gain an additional use when you reach Paladin level
+      11.</p><p>If a Channel Divinity effect requires a saving throw, the DC
+      equals the spell save DC from this class's Spellcasting
+      feature.</p><p><strong>Divine Sense.</strong> As a Bonus Action, you can
+      open your awareness to detect Celestials, Fiends, and Undead. For the next
+      10 minutes or until you have the Incapacitated condition, you know the
+      location of any creature of those types within 60 feet of yourself, and
+      you know its creature type. Within the same radius, you also detect the
+      presence of any place or object that has been consecrated or desecrated,
+      as with the @UUID[Compendium.dnd5e.spells24.Item.phbsplHallow0000]{Hallow}
+      spell.</p><section class="secret"
+      id="secret-lIHCt32JLE7PAUbn"><p><strong>Foundry Note</strong></p><p>The
+      uses of your Channel Divinity increase automatically as you level up. It
+      automatically regains the correct uses after Short and Long
+      Rests.</p><p>The <strong>Divine Sense</strong> activity includes an Active
+      Effect but it does not automatically reveal the given
+      creatures.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '@scale.paladin.channel-divinity'
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+      - period: sr
+        type: formula
+        formula: '1'
+  type:
+    value: class
+    subtype: channelDivinity
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    kjHydAAcspH9wVPI:
+      type: utility
+      name: Divine Sense
+      _id: kjHydAAcspH9wVPI
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: hr8wnlgs3uXphCnI
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: channel-divinity
+effects:
+  - name: Divine Sense
+    img: icons/magic/holy/saint-glass-portrait-halo.webp
+    _id: hr8wnlgs3uXphCnI
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbpdnChannelDiv.hr8wnlgs3uXphCnI'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866297701
+  modifiedTime: 1745256763606
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbpdnChannelDiv'

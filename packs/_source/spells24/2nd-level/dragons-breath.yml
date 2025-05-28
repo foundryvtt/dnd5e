@@ -1,0 +1,193 @@
+name: Dragon's Breath
+system:
+  description:
+    value: >-
+      <p>You touch one willing creature, and choose Acid, Cold, Fire, Lightning,
+      or Poison. Until the spell ends, the target can take a Magic action to
+      exhale a 15-foot Cone. Each creature in that area makes a Dexterity saving
+      throw, taking 3d6 damage of the chosen type on a failed save or half as
+      much damage on a successful one.</p><p><strong>Using a Higher-Level Spell
+      Slot. </strong>The damage increases by 1d6 for each spell slot level above
+      2.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: bonus
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: willing
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Cast
+      img: ''
+      appliedEffects:
+        - QFw5soPxlpH6b1F5
+    61nfYLT1M7MOTibf:
+      type: save
+      name: Exhale
+      _id: 61nfYLT1M7MOTibf
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '15'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: 6
+            bonus: ''
+            types:
+              - acid
+              - cold
+              - fire
+              - lightning
+              - poison
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: systems/dnd5e/icons/svg/statuses/concentrating.svg
+      appliedEffects: []
+  identifier: dragons-breath
+_id: phbsplDragonsBre
+type: spell
+img: icons/creatures/abilities/dragon-fire-breath-orange.webp
+effects: []
+folder: 3SjcO2acsFnWegp4
+sort: 3900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425951204
+  modifiedTime: 1740680096115
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDragonsBre'

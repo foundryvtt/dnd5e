@@ -1,0 +1,126 @@
+name: The Fiend
+type: subclass
+img: icons/magic/control/fear-fright-monster-grin-red-orange.webp
+system:
+  description:
+    value: >-
+      <p>You have made a pact with a fiend from the lower planes of existence, a
+      being whose aims are evil, even if you strive against those aims. Such
+      beings desire the corruption or destruction of all things, ultimately
+      including you. Fiends powerful enough to forge a pact include demon lords
+      such as Demogorgon, Orcus, Fraz'Urb-luu, and Baphomet; archdevils such as
+      Asmodeus, Dispater, Mephistopheles, and Belial; pit fiends and balors that
+      are especially mighty; and ultroloths and other lords of the
+      yugoloths.</p><h4>Expanded Spell List</h4><p>The Fiend lets you choose
+      from an expanded list of spells when you learn a warlock spell. The
+      following spells are added to the warlock spell list for
+      you.</p><table><caption>Fiend Expanded
+      Spells</caption><thead><tr><td>Spell
+      Level</td><td>Spells</td></tr></thead><tbody><tr><td>1st</td><td>@UUID[Compendium.dnd5e.spells.Item.5SuJewoa1CRWaj1F]{Burning
+      Hands},
+      @UUID[Compendium.dnd5e.spells.Item.arzCrMRgcNiQuh43]{Command}</td></tr><tr><td>2nd</td><td>@UUID[Compendium.dnd5e.spells.Item.zwGsAv6kmwzYGhh3]{Blindness/Deafness},
+      @UUID[Compendium.dnd5e.spells.Item.7u2obDvuvtZBkTfq]{Scorching
+      Ray}</td></tr><tr><td>3rd</td><td>@UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{Fireball},
+      @UUID[Compendium.dnd5e.spells.Item.TwlD4PLcltv7Xh7j]{Stinking
+      Cloud}</td></tr><tr><td>4th</td><td>@UUID[Compendium.dnd5e.spells.Item.avD5XUtkBPQQR97c]{Fire
+      Shield}, @UUID[Compendium.dnd5e.spells.Item.X3DrXgxjwI2dvkD6]{Wall of
+      Fire}</td></tr><tr><td>5th</td><td>@UUID[Compendium.dnd5e.spells.Item.5e1xTohkzqFqbYH4]{Flame
+      Strike},
+      @UUID[Compendium.dnd5e.spells.Item.SLxA9QhrggTz0taU]{Hallow}</td></tr></tbody></table>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: the-fiend
+  classIdentifier: warlock
+  advancement:
+    - _id: mwpiq5ybhynszxgq
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.Jv0zu4BtUi8bFCqJ
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.Item.4IHsIcBhAVDt8QjY
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 1
+      title: Features
+    - _id: icxswdpvqj9o89nz
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.OQSb0bO1yDI4aiMx
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 6
+      title: Features
+    - _id: 5ymsjeikr4pdu6u7
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.9UZ2WjUF2k58CQug
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 10
+      title: Features
+    - _id: swdh8yx47ilzgur2
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.aCUmlnHlUPHS0rdu
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 14
+      title: Features
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation: {}
+effects: []
+folder: pmsbVoRR2UHOAFR2
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: WPFVBg589uI8iOMH
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037372923
+  modifiedTime: 1725992730628
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!WPFVBg589uI8iOMH'

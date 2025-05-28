@@ -1,0 +1,258 @@
+name: Comet
+system:
+  description:
+    value: >-
+      <p> The next time you enter combat against one or more Hostile creatures,
+      you can select one of them as your foe when you roll Initiative. If you
+      reduce your foe to 0 Hit Points during that combat, you have Advantage on
+      Death Saving Throws for 1 year. If someone else reduces your chosen foe to
+      0 Hit Points or you don't choose a foe, this card has no effect.</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    fFYGafmMBO89V1OU:
+      type: utility
+      name: 'Card Effect: Start'
+      _id: fFYGafmMBO89V1OU
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: The next time you enter combat against one or more Hostile creatures
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: spec
+        concentration: false
+        override: false
+        special: length of that combat
+      effects:
+        - _id: 3M7d2VBW3htCp7Aj
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: icons/svg/card-joker.svg
+      appliedEffects:
+        - 3M7d2VBW3htCp7Aj
+    mtDgcBY2tDALORDA:
+      type: utility
+      name: 'Card Effect: Resolve'
+      _id: mtDgcBY2tDALORDA
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: when the selected Hostile creature dies during this combat
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: year
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: asqZlVwoKSS1ckCU
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/item-choice.svg
+      appliedEffects:
+        - asqZlVwoKSS1ckCU
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  identifier: comet
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+_id: dmgDmtComet00000
+type: consumable
+img: icons/magic/earth/projectile-stone-boulder-blue.webp
+effects:
+  - name: 'Comet Card: Marked Foe'
+    img: systems/dnd5e/icons/svg/statuses/marked.svg
+    origin: Compendium.dnd5e.equipment24.Item.dmgDmtComet00000
+    transfer: false
+    _id: 3M7d2VBW3htCp7Aj
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>If you reduce your foe to 0 Hit Points during that combat, you have
+      Advantage on Death Saving Throws for 1 year.</p>
+    tint: '#ffffff'
+    statuses:
+      - marked
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729184146197
+      modifiedTime: 1729185015772
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDmtComet00000.3M7d2VBW3htCp7Aj'
+  - name: 'Comet Card: Death Save Advantage'
+    img: icons/magic/control/control-influence-rally-purple.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgDmtComet00000
+    transfer: false
+    _id: asqZlVwoKSS1ckCU
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p><em>Source:
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgDmtComet00000]{Comet}</em></p><p>You
+      have Advantage on Death Saving Throws for 1 year.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729186254079
+      modifiedTime: 1729186500527
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDmtComet00000.asqZlVwoKSS1ckCU'
+folder: XVXuU21XyvevGap7
+sort: 2100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729183692427
+  modifiedTime: 1745432954367
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgDmtComet00000'

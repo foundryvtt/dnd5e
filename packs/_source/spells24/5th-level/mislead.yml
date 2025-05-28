@@ -1,0 +1,173 @@
+name: Mislead
+system:
+  description:
+    value: >-
+      <p>You gain the &amp;Reference[Invisible apply=false] condition at the
+      same time that an illusory double of you appears where you are standing.
+      The double lasts for the duration, but the invisibility ends immediately
+      after you make an attack roll, deal damage, or cast a spell.</p><p>As a
+      Magic action, you can move the illusory double up to twice your Speed and
+      make it gesture, speak, and behave in whatever way you choose. It is
+      intangible and invulnerable.</p><p>You can see through its eyes and hear
+      through its ears as if you were located where it is.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: ill
+  properties:
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        proficiency: false
+        attacks: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: AjhX4dq7UIu11qT8
+          uuid: Compendium.dnd5e.actors24.Actor.dmgIllusoryCreat
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: mislead
+_id: phbsplMislead000
+type: spell
+img: icons/magic/control/fear-fright-mask-orange.webp
+effects:
+  - name: Invisible
+    origin: Compendium.dnd5e.spells24.Item.phbsplMislead000
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/statuses/invisible.svg
+    _id: 3mTWrCYjgS8jIDRU
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The &amp;Reference[invisible apply=false] immediately after you make an
+      attack roll, deals damage, or casts a spell.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - invisible
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplInvisibili.ActiveEffect.9svfDetqjhsFP3ey
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplMislead000.3mTWrCYjgS8jIDRU'
+folder: beZ8MTpWY2cMEUlp
+sort: 1100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425964302
+  modifiedTime: 1745256796321
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMislead000'

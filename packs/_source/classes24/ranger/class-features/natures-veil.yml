@@ -1,0 +1,144 @@
+_id: phbrgrNaturesVei
+name: Nature's Veil
+type: feat
+folder: h5OUzaJcZzsNsOGc
+img: icons/magic/nature/leaf-armor-scale-green.webp
+system:
+  description:
+    value: >-
+      <p>You invoke spirits of nature to magically hide yourself. As a Bonus
+      Action, you can give yourself the Invisible condition until the end of
+      your next turn.</p><p>You can use this feature a number of times equal to
+      your Wisdom modifier (minimum of once), and you regain all expended uses
+      when you finish a Long Rest.</p><section id="secret-CrVc4y9VaKTGeCuG"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes an Active Effect which applies the Invisible
+      condition.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: (max(1,@abilities.wis.mod))
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 14
+  properties: []
+  requirements: ''
+  activities:
+    E54BKGckr7WLLLqf:
+      type: utility
+      _id: E54BKGckr7WLLLqf
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: NOSQczI2MCQ5Ha8F
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Veil
+  enchant: {}
+  identifier: natures-veil
+effects:
+  - name: Veiled
+    img: icons/magic/nature/leaf-armor-scale-green.webp
+    origin: Compendium.dnd5e.classes24.Item.phbrgrNaturesVei
+    transfer: true
+    _id: NOSQczI2MCQ5Ha8F
+    type: base
+    system: {}
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - invisible
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbrgrNaturesVei.NOSQczI2MCQ5Ha8F'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735932734523
+  modifiedTime: 1745256765009
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgrNaturesVei'

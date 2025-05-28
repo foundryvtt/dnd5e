@@ -1,0 +1,173 @@
+name: Mass Suggestion
+system:
+  description:
+    value: >-
+      <p>You suggest a course of activity—described in no more than 25 words—to
+      twelve or fewer creatures you can see within range that can hear and
+      understand you. The suggestion must sound achievable and not involve
+      anything that would obviously deal damage to any of the targets or their
+      allies. For example, you could say, "Walk to the village down that road,
+      and help the villagers there harvest crops until sunset." Or you could
+      say, "Now is not the time for violence. Drop your weapons, and dance! Stop
+      in an hour."</p><p>Each target must succeed on a Wisdom saving throw or
+      have the &amp;Reference[Charmed apply=false] condition for the duration or
+      until you or your allies deal damage to the target. Each Charmed target
+      pursues the suggestion to the best of its ability. The suggested activity
+      can continue for the entire duration, but if the suggested activity can be
+      completed in a shorter time, the spell ends for a target upon completing
+      it.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The duration
+      is longer with a spell slot of level 7 (10 days), 8 (30 days), or 9 (366
+      days).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '24'
+    units: hour
+    special: ''
+  target:
+    affects:
+      choice: false
+      count: '12'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: enc
+  properties:
+    - vocal
+    - material
+  materials:
+    value: a snake’s tongue
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    OLcbp8SQOX4EwM13:
+      type: save
+      _id: OLcbp8SQOX4EwM13
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: kkxX701wci61fEvH
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: mass-suggestion
+_id: phbsplMassSugges
+type: spell
+img: icons/environment/people/charge.webp
+effects:
+  - name: Charmed
+    img: systems/dnd5e/icons/svg/statuses/charmed.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplMassSugges
+    transfer: false
+    _id: kkxX701wci61fEvH
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 86400
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Charmed apply=false] condition for
+      the duration or until you or your allies deal damage to the target. Each
+      Charmed target pursues the suggestion to the best of its ability.</p>
+    tint: '#ffffff'
+    statuses:
+      - charmed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724779473216
+      modifiedTime: 1724779565694
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplMassSugges.kkxX701wci61fEvH'
+folder: 8WmlLARx1Df3Ii9v
+sort: 300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425963056
+  modifiedTime: 1745256795972
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMassSugges'

@@ -1,0 +1,122 @@
+_id: 4smlOvpF5AQHcyg1
+name: Contingency
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Choose a spell of 5th level or lower that you can cast, that has a
+      casting time of 1 action, and that can target you. You cast that
+      spell—called the contingent spell—as part of casting contingency,
+      expending spell slots for both, but the contingent spell doesn't come into
+      effect. Instead, it takes effect when a certain circumstance occurs. You
+      describe that circumstance when you cast the two spells. For example, a
+      contingency cast with water breathing might stipulate that water breathing
+      comes into effect when you are engulfed in water or a similar
+      liquid.</p><p>The contingent spell takes effect immediately after the
+      circumstance is met for the first time, whether or not you want it to. and
+      then contingency ends.</p><p>The contingent spell takes effect only on
+      you, even if it can normally target others. You can use only one
+      contingency spell at a time. If you cast this spell again, the effect of
+      another contingency spell on you ends. Also, contingency ends on you if
+      its material component is ever not on your person.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: '10'
+    units: day
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: evo
+  materials:
+    value: >-
+      A statuette of yourself carved from ivory and decorated with gems worth at
+      least 1,500 gp.
+    consumed: false
+    cost: 1500
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: contingency
+sort: 0
+flags: {}
+img: icons/magic/defensive/shield-barrier-flaming-pentagon-teal-purple.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037347155
+  modifiedTime: 1725992716923
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!4smlOvpF5AQHcyg1'

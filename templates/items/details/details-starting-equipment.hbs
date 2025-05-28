@@ -1,11 +1,12 @@
 <fieldset>
     <legend>
         <span>{{ localize "DND5E.StartingEquipment.Title" }}</span>
-        <a class="config-button" data-action="starting-equipment"
-           data-tooltip="DND5E.StartingEquipment.Action.Configure"
-           aria-label="{{ localize "DND5E.StartingEquipment.Action.Configure" }}">
+        {{#if editable}}
+        <button type="button" class="unbutton control-button" data-action="showConfiguration" data-tooltip
+                data-config="starting-equipment" aria-label="{{ localize "DND5E.StartingEquipment.Action.Configure" }}">
             <i class="fas fa-cog" inert></i>
-        </a>
+        </button>
+        {{/if}}
     </legend>
 
     {{!-- Starting Equipment --}}

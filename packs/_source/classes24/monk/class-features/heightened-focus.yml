@@ -1,0 +1,168 @@
+_id: phbmnkHeightened
+name: Heightened Focus
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/skills/movement/arrows-up-trio-red.webp
+system:
+  description:
+    value: >-
+      <p>Your Flurry of Blows, Patient Defense, and Step of the Wind gain the
+      following benefits.</p><p><strong>Flurry of Blows.</strong> You can expend
+      1 Focus Point to use Flurry of Blows and make three Unarmed Strikes with
+      it instead of two.</p><p><strong>Patient Defense.</strong> When you expend
+      a Focus Point to use Patient Defense, you gain a number of Temporary Hit
+      Points equal to two rolls of your Martial Arts die.</p><p><strong>Step of
+      the Wind.</strong> When you expend a Focus Point to use Step of the Wind,
+      you can choose a willing creature within 5 feet of yourself that is Large
+      or smaller. You move the creature with you until the end of your turn. The
+      creature's movement doesn't provoke Opportunity Attacks.</p><section
+      class="secret" id="secret-OnZBuksoGlTtaJJC"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Flurry of Blows</strong> activity will
+      expend 1 Focus Point and you can then make three Unarmed
+      Strikes.</p><p>The <strong>Patient Defense</strong> activity will roll the
+      Temporary Hit Points for you.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 10
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    XLma1NEOJNEBD6mH:
+      type: utility
+      name: Flurry of Blows
+      _id: XLma1NEOJNEBD6mH
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    x5fBC7ybAnr79AxK:
+      type: heal
+      name: Patient Defense
+      _id: x5fBC7ybAnr79AxK
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you expend a Focus Point to use Patient Defense
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: 2@scale.monk.die
+        scaling:
+          number: 1
+        bonus: ''
+  enchant: {}
+  identifier: heightened-focus
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1740680085231
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1000000
+ownership:
+  default: 0
+_key: '!items!phbmnkHeightened'

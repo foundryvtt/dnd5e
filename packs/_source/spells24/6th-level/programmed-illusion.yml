@@ -1,0 +1,179 @@
+name: Programmed Illusion
+system:
+  description:
+    value: >-
+      <p>You create an illusion of an object, a creature, or some other visible
+      phenomenon within range that activates when a specific trigger occurs. The
+      illusion is imperceptible until then. It must be no larger than a 30-foot
+      Cube, and you decide when you cast the spell how the illusion behaves and
+      what sounds it makes. This scripted performance can last up to 5
+      minutes.</p><p>When the trigger you specify occurs, the illusion springs
+      into existence and performs in the manner you described. Once the illusion
+      finishes performing, it disappears and remains dormant for 10 minutes,
+      after which the illusion can be activated again.</p><p>The trigger can be
+      as general or as detailed as you like, though it must be based on visual
+      or audible phenomena that occur within 30 feet of the area. For example,
+      you could create an illusion of yourself to appear and warn off others who
+      attempt to open a trapped door.</p><p>Physical interaction with the image
+      reveals it to be illusory, since things can pass through it. A creature
+      that takes the Study action to examine the image can determine that it is
+      an illusion with a successful [[/check ability=int skill=inv
+      dc=@attributes.spell.dc]] check against your spell save DC. If a creature
+      discerns the illusion for what it is, the creature can see through the
+      image, and any noise it makes sounds hollow to the creature.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: disp
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: cube
+      size: '30'
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '120'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: ill
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: jade dust worth 25+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    Euy6LiVRjD0ky2Lz:
+      type: summon
+      _id: Euy6LiVRjD0ky2Lz
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes:
+        - sm
+        - med
+        - lg
+        - huge
+        - grg
+        - tiny
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: uQUBjqHnmcmshf2G
+          uuid: Compendium.dnd5e.actors24.Actor.dmgIllusoryCreat
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: fAWwwP2MggsrTyZQ
+          uuid: Compendium.dnd5e.actors24.Actor.phbiluObject0000
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: isK7dOuT0NTE56A2
+          uuid: Compendium.dnd5e.actors24.Actor.phbiluSensory000
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: Create Illusion
+      img: ''
+  identifier: programmed-illusion
+_id: phbsplProgrammed
+type: spell
+img: icons/magic/symbols/cog-glowing-green.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 103125
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425967460
+  modifiedTime: 1745256797228
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplProgrammed'

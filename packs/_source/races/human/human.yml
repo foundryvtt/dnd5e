@@ -1,0 +1,113 @@
+_id: ydP3QzCmur55mtY2
+name: Human
+type: race
+img: icons/environment/people/commoner.webp
+system:
+  description:
+    value: >-
+      <p>It's hard to make generalizations about humans, but your human
+      character has these traits.</p><p><em><strong>Ability Score
+      Increase.</strong></em> Your ability scores each increase by
+      1.</p><p><em><strong>Age.</strong></em> Humans reach adulthood in their
+      late teens and live less than a
+      century.</p><p><em><strong>Alignment.</strong></em> Humans tend toward no
+      particular alignment. The best and the worst are found among
+      them.</p><p><em><strong>Size.</strong></em> Humans vary widely in height
+      and build, from barely 5 feet to well over 6 feet tall. Regardless of your
+      position in that range, your size is
+      Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is
+      30 feet.</p><p><em><strong>Languages.</strong></em> You can speak, read,
+      and write Common and one extra language of your choice. Humans typically
+      learn the languages of other peoples they deal with, including obscure
+      dialects. They are fond of sprinkling their speech with words borrowed
+      from other tongues: Orc curses, Elvish musical expressions, Dwarvish
+      military phrases, and so on.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: human
+  advancement:
+    - _id: Z9hvZFkWUNvowbQX
+      type: AbilityScoreImprovement
+      configuration:
+        points: 0
+        fixed:
+          str: 1
+          dex: 1
+          con: 1
+          int: 1
+          wis: 1
+          cha: 1
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 0
+      title: ''
+    - _id: dNSrZePZHz2qwVpi
+      type: Size
+      configuration:
+        sizes:
+          - med
+      value:
+        size: ''
+      level: 1
+      title: ''
+      hint: >-
+        Humans vary widely in height and build, from barely 5 feet to well over
+        6 feet tall. Regardless of your position in that range, your size is
+        Medium.
+    - _id: HI6r4Y6KjHND0i53
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - languages:standard:common
+        choices:
+          - count: 1
+            pool:
+              - languages:*
+      level: 0
+      title: ''
+      value:
+        chosen: []
+  movement:
+    burrow: null
+    climb: null
+    fly: null
+    swim: null
+    walk: 30
+    units: ft
+    hover: false
+  senses:
+    darkvision: null
+    blindsight: null
+    tremorsense: null
+    truesight: null
+    units: ft
+    special: ''
+  type:
+    value: humanoid
+    subtype: human
+    custom: ''
+effects: []
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037393369
+  modifiedTime: 1725992703802
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+folder: 1GCaQEaMIbogg5ty
+_key: '!items!ydP3QzCmur55mtY2'

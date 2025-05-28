@@ -1,0 +1,126 @@
+_id: g2u9PYfqWQAyg9OI
+name: Poison Spray
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You extend your hand toward a creature you can see within range and
+      project a puff of noxious gas from your palm. The creature must succeed on
+      a Constitution saving throw or take 1d12 poison damage.</p><p>This spell's
+      damage increases by 1d12 when you reach 5th level (2d12), 11th level
+      (3d12), and 17th level (4d12).</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '10'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: none
+        parts:
+          - number: 1
+            denomination: 12
+            bonus: ''
+            types:
+              - poison
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: poison-spray
+sort: 0
+flags: {}
+img: icons/magic/fire/projectile-fireball-smoke-large-green.webp
+effects: []
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037362481
+  modifiedTime: 1725992721917
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!g2u9PYfqWQAyg9OI'

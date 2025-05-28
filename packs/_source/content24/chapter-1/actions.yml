@@ -1,0 +1,204 @@
+_id: phbActions000000
+name: Actions
+pages:
+  - sort: 100000
+    name: Overview
+    type: text
+    _id: nLHvph6iAlDVom9f
+    system: {}
+    title:
+      show: false
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>When you do something other than moving or communicating, you
+        typically take an action. The Action table lists the game’s main
+        actions, which are defined in more detail in the rules
+        glossary.</p><table><caption>Actions</caption><thead><tr><th><p>Action</p></th><th><p>Summary</p></th></tr></thead><tbody><tr><td><p>&amp;Reference[Attack]</p></td><td><p>Attack
+        with a weapon or an Unarmed
+        Strike.</p></td></tr><tr><td><p>&amp;Reference[Dash]</p></td><td><p>For
+        the rest of the turn, give yourself <span>extra</span> movement equal to
+        your
+        Speed.</p></td></tr><tr><td><p>&amp;Reference[Disengage]</p></td><td><p>Your
+        movement doesn’t provoke Opportunity Attacks for the rest of the
+        turn.</p></td></tr><tr><td><p>&amp;Reference[Dodge]</p></td><td><p>Until
+        the start of your next turn, attack rolls against you have Disadvantage,
+        and you make Dexterity saving throws with Advantage. You lose this
+        benefit if you have the Incapacitated condition or if your Speed is
+        0.</p></td></tr><tr><td><p>&amp;Reference[Help]</p></td><td><p>Help
+        another creature’s ability check or attack roll, or administer first
+        aid.</p></td></tr><tr><td><p>&amp;Reference[Hide]</p></td><td><p>Make a
+        Dexterity (Stealth)
+        check.</p></td></tr><tr><td><p>&amp;Reference[Influence]</p></td><td><p>Make
+        a Charisma (Deception, Intimidation, Performance, or Persuasion) or
+        Wisdom (Animal Handling) check to alter a creature’s
+        attitude.</p></td></tr><tr><td><p>&amp;Reference[Magic]</p></td><td><p>Cast
+        a spell, use a magic item, or use a magical
+        feature.</p></td></tr><tr><td><p>&amp;Reference[Ready]</p></td><td><p>Prepare
+        to take an action in response to a trigger you
+        define.</p></td></tr><tr><td><p>&amp;Reference[Search]</p></td><td><p>Make
+        a Wisdom (Insight, Medicine, <span>Perception</span>, or Survival)
+        check.</p></td></tr><tr><td><p>&amp;Reference[Study]</p></td><td><p>Make
+        an Intelligence (Arcana, History, Investigation, Nature, or Religion)
+        check.</p></td></tr><tr><td><p>&amp;Reference[Utilize]</p></td><td><p>Use
+        a nonmagical object.</p></td></tr></tbody></table><p>Player characters
+        and monsters can also do things not covered by these actions. Many class
+        features and other abilities provide additional action options, and you
+        can improvise other actions. When you describe an action not detailed
+        elsewhere in the rules, the Game Master tells you whether that action is
+        possible and what kind of &amp;Reference[D20 Test] you need to make, if
+        any.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745622719337
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbActions000000.nLHvph6iAlDVom9f'
+  - sort: 200000
+    name: One Thing at a Time
+    type: text
+    _id: 69IzOHUyHlEqHA48
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>The game uses actions to govern how much you can do at one time. You
+        can take only one action at a time. This principle is most important in
+        combat, as explained in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCombat0000000]{Combat}
+        later in this chapter.</p><p>Actions can come up in other situations,
+        too: in a social interaction, you can try to &amp;Reference[Influence] a
+        creature or use the &amp;Reference[Search] action to read the creature’s
+        body language, but you can’t do both at the same time. And when you’re
+        exploring a dungeon, you can’t simultaneously use the Search action to
+        look for traps and use the &amp;Reference[Help] action to aid another
+        character who’s trying to open a stuck door (with the
+        &amp;Reference[Utilize] action).</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745591316550
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbActions000000.69IzOHUyHlEqHA48'
+  - sort: 400000
+    name: Reactions
+    type: text
+    _id: v1hdTakUKmhnSBUv
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.2VqLyxMyMxgXe2wC
+        inline]</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745436050665
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbActions000000.v1hdTakUKmhnSBUv'
+  - sort: 300000
+    name: Bonus Actions
+    type: text
+    _id: znz3n8BHERTkntdK
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.EjR3KL7KLTwjWBS0
+        inline]</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbActions000000.znz3n8BHERTkntdK'
+folder: DEIORpZoUWPUBTPh
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 1
+    order: 102000
+    navigation:
+      previous: phbD20Tests00000
+      next: phbSocialInterac
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425887290
+  modifiedTime: 1745677864130
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbActions000000'

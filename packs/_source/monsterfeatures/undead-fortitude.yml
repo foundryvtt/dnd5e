@@ -1,0 +1,57 @@
+_id: VYAnJjIgb5nPXfRr
+name: Undead Fortitude
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>If damage reduces the [[lookup @name lowercase]] to <strong>0 hit
+      points</strong>, it must make a <strong>Constitution</strong> saving throw
+      with a DC of 5+the damage taken, unless the damage is radiant or from a
+      critical hit. On a success, the [[lookup @name lowercase]] drops to
+      <strong>1 hit point</strong> instead.</p>
+
+      </section>
+
+      <p>If damage reduces the [[lookup @name lowercase]] to <strong>0 hit
+      points</strong>, it must make a <strong>Constitution</strong> saving
+      throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: undead-fortitude
+flags: {}
+img: icons/magic/acid/pouring-gas-smoke-liquid.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304971753
+  modifiedTime: 1725992572906
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!VYAnJjIgb5nPXfRr'

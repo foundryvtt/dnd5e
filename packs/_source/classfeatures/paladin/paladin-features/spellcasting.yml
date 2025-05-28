@@ -1,0 +1,90 @@
+_id: ihoQHsmVZlyDbPhX
+name: Spellcasting
+type: feat
+img: icons/magic/symbols/cog-shield-white-blue.webp
+system:
+  description:
+    value: >-
+      <p>By 2nd level, you have learned to draw on divine magic through
+      meditation and prayer to cast spells as a cleric does.</p>
+
+      <h5>Preparing and Casting Spells</h5>
+
+      <p>The Paladin table shows how many spell slots you have to cast your
+      spells. To cast one of your paladin spells of 1st level or higher, you
+      must expend a slot of the spell's level or higher. You regain all expended
+      spell slots when you finish a long rest.</p>
+
+      <p>You prepare the list of paladin spells that are available for you to
+      cast, choosing from the paladin spell list. When you do so, choose a
+      number of paladin spells equal to your Charisma modifier + half your
+      paladin level, rounded down (minimum of one spell). The spells must be of
+      a level for which you have spell slots.</p>
+
+      <p>For example, if you are a 5th-level paladin, you have four 1st-level
+      and two 2nd-level spell slots. With a Charisma of 14, your list of
+      prepared spells can include four spells of 1st or 2nd level, in any
+      combination. If you prepare the 1st-level spell cure wounds, you can cast
+      it using a 1st-level or a 2ndlevel slot. Casting the spell doesn't remove
+      it from your list of prepared spells.</p>
+
+      <p>You can change your list of prepared spells when you finish a long
+      rest. Preparing a new list of paladin spells requires time spent in prayer
+      and meditation: at least 1 minute per spell level for each spell on your
+      list.</p>
+
+      <h5>Spellcasting Ability</h5>
+
+      <p>Charisma is your spellcasting ability for your paladin spells, since
+      their power derives from the strength of your convictions. You use your
+      Charisma whenever a spell refers to your spellcasting ability. In
+      addition, you use your Charisma modifier when setting the saving throw DC
+      for a paladin spell you cast and when making an attack roll with one.</p>
+
+      <p><strong>Spell save DC</strong> = 8 + your proficiency bonus + your
+      Charisma modifier</p>
+
+      <p><strong>Spell attack modifier </strong>= your proficiency bonus + your
+      Charisma modifier</p>
+
+      <h5>Spellcasting Focus</h5>
+
+      <p>You can use a holy symbol as a spellcasting focus for your paladin
+      spells.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: Paladin 2
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: spellcasting
+effects: []
+folder: 01K0hSSl7NQjYLb8
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037387223
+  modifiedTime: 1725992289419
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ihoQHsmVZlyDbPhX'

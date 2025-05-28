@@ -1,0 +1,164 @@
+name: Brewer's Supplies
+system:
+  description:
+    value: >-
+      <p class="phb-meta"><strong>Ability:</strong> Intelligence</p><p
+      class="phb-meta"><strong>Utilize:</strong> Detect poisoned drink (DC 15),
+      or identify alcohol (DC 10)</p><p class="phb-meta"><strong>Craft:</strong>
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagAntitoxin00]{Antitoxin}</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 9
+    units: lb
+  price:
+    value: 20
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: art
+    baseItem: brewer
+  ability: int
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    3OFmxXtcOkeG70rl:
+      type: check
+      name: Detect Poisoned Drink
+      _id: 3OFmxXtcOkeG70rl
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated: []
+        dc:
+          calculation: ''
+          formula: '15'
+        ability: int
+      img: ''
+      appliedEffects: []
+    0jzVWvMqR981vABJ:
+      type: check
+      name: Identify Alcohol
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated: []
+        dc:
+          calculation: ''
+          formula: '10'
+        ability: int
+      _id: 0jzVWvMqR981vABJ
+      img: ''
+      appliedEffects: []
+  identifier: brewers-supplies
+_id: phbtulBrewersSup
+type: tool
+folder: V8KHbNkEWoXQP3Pj
+img: icons/consumables/plants/herb-marjoram-basil-oregano-leaf-bunch-green.webp
+effects: []
+sort: 200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425916317
+  modifiedTime: 1740680141046
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbtulBrewersSup'

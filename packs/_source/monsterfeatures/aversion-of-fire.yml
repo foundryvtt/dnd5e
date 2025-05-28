@@ -1,0 +1,55 @@
+_id: uxFQ3TxO3isW5WKK
+name: Aversion of Fire
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>If the [[lookup @name lowercase]] takes <strong><em>fire
+      damage</em></strong>, it has<strong> disadvantage </strong>on attack rolls
+      and ability checks until the end of its next turn.</p>
+
+      </section>
+
+      <p>If the [[lookup @name lowercase]] takes <strong><em>fire
+      damage</em></strong>, it has<strong> disadvantage </strong>on some
+      rolls.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: aversion-of-fire
+flags: {}
+img: icons/magic/fire/projectile-wave-arrow.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304978226
+  modifiedTime: 1725992574943
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!uxFQ3TxO3isW5WKK'

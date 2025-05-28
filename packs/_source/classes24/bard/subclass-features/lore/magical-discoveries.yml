@@ -1,0 +1,60 @@
+_id: phbbrdMagicalDis
+name: Magical Discoveries
+type: feat
+folder: aA19yenZydaY6uu7
+img: icons/sundries/books/book-tooled-eye-gold-red.webp
+system:
+  description:
+    value: >-
+      <p>You learn two spells of your choice. These spells can come from the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj]{Cleric},
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.LhvuDQEyrCdg5EfU]{Druid},
+      or
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.6AnqLUowgdsqMFvz]{Wizard}
+      spell list or any combination thereof. A spell you choose must be a
+      cantrip or a spell for which you have spell slots, as shown in the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbBard000000000.JournalEntryPage.V8pqIWlaL9GhY61t#equipment]{Bard
+      Features} table.</p><p>You always have the chosen spells prepared, and
+      whenever you gain a Bard level, you can replace one of the spells with
+      another spell that meets these requirements.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 6
+    repeatable: false
+  properties: []
+  requirements: College of Lore
+  activities: {}
+  enchant: {}
+  identifier: magical-discoveries
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866506195
+  modifiedTime: 1745256760479
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrdMagicalDis'

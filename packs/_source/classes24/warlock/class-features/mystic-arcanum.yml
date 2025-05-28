@@ -1,0 +1,58 @@
+_id: phbwlkMysticArca
+name: Mystic Arcanum
+type: feat
+folder: UQiLTq4nLQpaM0Q5
+img: icons/magic/unholy/hand-marked-pink.webp
+system:
+  description:
+    value: >-
+      <p>Your patron grants you a magical secret called an arcanum. Choose one
+      level 6 Warlock spell as this arcanum.</p><p>You can cast your arcanum
+      spell once without expending a spell slot, and you must finish a Long Rest
+      before you can cast it in this way again.</p><p>You gain another Warlock
+      spell of your choice that can be cast in this way when you reach Warlock
+      levels 13 (level 7 spell), 15 (level 8 spell), and 17 (level 9 spell). You
+      regain all uses of your Mystic Arcanum when you finish a Long
+      Rest.</p><p>Whenever you gain a Warlock level, you can replace one of your
+      arcanum spells with another Warlock spell of the same level.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 11
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: mystic-arcanum
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256768263
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwlkMysticArca'

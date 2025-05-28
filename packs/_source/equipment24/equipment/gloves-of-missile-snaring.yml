@@ -1,0 +1,127 @@
+_id: dmgGlovesOfMissi
+name: Gloves of Missile Snaring
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/hand/glove-tooled-leather-blue.webp
+system:
+  activities:
+    x4IPCLTGbrUwWZxn:
+      type: utility
+      name: Snare Missile
+      _id: x4IPCLTGbrUwWZxn
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: Hit by an attack roll with a Ranged or Thrown weapon
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: object
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: Snare Missile
+        formula: 1d10 + @abilities.dex.mod
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon (Requires Attunement)</em></p><p>If you're
+      hit by an attack roll made with a Ranged or Thrown weapon while wearing
+      these gloves, you can take a Reaction to reduce the damage by 1d10 plus
+      your Dexterity modifier if you have a free hand. If you reduce the damage
+      to 0, you can catch the ammunition or weapon if it is small enough for you
+      to hold in that hand.</p>
+    chat: ''
+  identifier: gloves-of-missile-snaring
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712700441
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 16900000
+ownership:
+  default: 0
+_key: '!items!dmgGlovesOfMissi'

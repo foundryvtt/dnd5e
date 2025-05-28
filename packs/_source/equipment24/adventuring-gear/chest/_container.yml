@@ -1,0 +1,55 @@
+name: Chest
+system:
+  description:
+    value: <p>A Chest holds up to 12 cubic feet of contents.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: gp
+  quantity: 1
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  weight:
+    value: 25
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties: []
+  capacity:
+    type: weight
+    value: 360
+  identifier: chest
+_id: phbagChest000000
+type: container
+folder: uDk4FBYfcP2JnX6t
+img: icons/containers/chest/chest-reinforced-steel-walnut-brown.webp
+effects: []
+sort: 1000000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425907570
+  modifiedTime: 1745256811502
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagChest000000'

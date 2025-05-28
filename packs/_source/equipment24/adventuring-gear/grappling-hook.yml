@@ -1,0 +1,129 @@
+name: Grappling Hook
+system:
+  description:
+    value: >-
+      <p>As a Utilize action, you can throw the Grappling Hook at a railing, a
+      ledge, or another catch within 50 feet of yourself, and the hook catches
+      on if you succeed on a DC 13 Dexterity (Acrobatics) check. If you tied a
+      Rope to the hook, you can then climb it.</p>
+    chat: ''
+  price:
+    value: 2
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities:
+    X7mlPFWw8g4zsAmB:
+      type: check
+      name: Throw
+      _id: X7mlPFWw8g4zsAmB
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '50'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - acr
+        dc:
+          calculation: ''
+          formula: '13'
+        ability: ''
+      img: ''
+      appliedEffects: []
+  identifier: grappling-hook
+_id: phbagGrapplingHo
+type: equipment
+folder: uDk4FBYfcP2JnX6t
+img: icons/tools/fishing/hook-multi-steel-brown.webp
+effects: []
+sort: 2300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425908867
+  modifiedTime: 1740680134829
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagGrapplingHo'

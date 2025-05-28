@@ -1,0 +1,133 @@
+name: Reverse Gravity
+system:
+  description:
+    value: >-
+      <p>This spell reverses gravity in a 50-foot-radius, 100-foot high Cylinder
+      centered on a point within range. All creatures and objects in that area
+      that aren't anchored to the ground fall upward and reach the top of the
+      Cylinder. A creature can make a Dexterity saving throw to grab a fixed
+      object it can reach, thus avoiding the fall upward.</p><p>If a ceiling or
+      an anchored object is encountered in this upward fall, creatures and
+      objects strike it just as they would during a downward fall. If an
+      affected creature or object reaches the Cylinder's top without striking
+      anything, it hovers there for the duration. When the spell ends, affected
+      objects and creatures fall downward.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creatureOrObject
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: cylinder
+      size: '50'
+      height: '100'
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '100'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a lodestone and iron filings
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    2he175P3mz8KeBYo:
+      type: save
+      _id: 2he175P3mz8KeBYo
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: reverse-gravity
+_id: phbsplReverseGra
+type: spell
+img: icons/magic/control/sihouette-hold-beam-green.webp
+effects: []
+folder: EdAGMG8IF26PLkD3
+sort: 600000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425969255
+  modifiedTime: 1745256797671
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplReverseGra'

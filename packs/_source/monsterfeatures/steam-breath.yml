@@ -1,0 +1,117 @@
+_id: 4UuuUKjATTixrZGP
+name: Steam Breath
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>the [[lookup @name lowercase]] exhales scalding
+      steam in a 60-foot cone. Each creature in that area must make a 
+      <strong>DC 18 Constitution</strong> saving throw, taking <strong>52 (15d6)
+      <em>fire damage</em></strong> on a failed save, or half as much damage on
+      a successful one.</p><p>Being underwater doesn't grant resistance against
+      this damage.</p></section><p>the [[lookup @name lowercase]] exhales
+      scalding steam in a 60-foot cone. Each creature in that area must make a
+      <strong>Constitution</strong> saving throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: cone
+          size: '60'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '18'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: steam-breath
+flags: {}
+img: icons/creatures/abilities/dragon-ice-breath-blue.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304965735
+  modifiedTime: 1725992571061
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!4UuuUKjATTixrZGP'

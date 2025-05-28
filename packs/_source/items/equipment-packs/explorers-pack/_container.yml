@@ -1,0 +1,59 @@
+name: Explorer's Pack
+type: container
+img: icons/containers/bags/pack-simple-leather-fur-tan.webp
+system:
+  description:
+    value: >-
+      <p>A backpack can hold one cubic foot or 30 pounds of gear. You can also
+      strap items, such as a bedroll or a coil of rope, to the outside of a
+      backpack.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: '70'
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 10
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  capacity:
+    type: weight
+    value: 30
+  currency:
+    cp: 0
+    sp: 0
+    ep: 0
+    gp: 0
+    pp: 0
+  container: null
+  unidentified:
+    description: ''
+  properties: []
+  attuned: false
+  identifier: explorers-pack
+effects: []
+folder: Dx3K2y0J1wJUPP9m
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037112396
+  modifiedTime: 1725992487967
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_id: 8KWz5DJbWUpNWniP
+sort: 0
+ownership:
+  default: 0
+_key: '!items!8KWz5DJbWUpNWniP'

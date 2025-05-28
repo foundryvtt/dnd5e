@@ -1,0 +1,197 @@
+name: Dream
+system:
+  description:
+    value: >-
+      <p>You target a creature you know on the same plane of existence. You or a
+      willing creature you touch enters a trance state to act as a dream
+      messenger. While in the trance, the messenger is
+      &amp;Reference[Incapacitated apply=false] and has a Speed of 0.</p><p>If
+      the target is asleep, the messenger appears in the target's dreams and can
+      converse with the target as long as it remains asleep, through the spell's
+      duration. The messenger can also shape the dream's environment, creating
+      landscapes, objects, and other images. The messenger can emerge from the
+      trance at any time, ending the spell. The target recalls the dream
+      perfectly upon waking.</p><p>If the target is awake when you cast the
+      spell, the messenger knows it and can either end the trance (and the
+      spell) or wait for the target to sleep, at which point the messenger
+      enters its dreams.</p><p>You can make the messenger terrifying to the
+      target. If you do so, the messenger can deliver a message of no more than
+      ten words, and then the target makes a Wisdom saving throw. On a failed
+      save, the target gains no benefit from its rest, and it takes 3d6 Psychic
+      damage when it wakes up.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      type: willing
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: spec
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: ill
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a handful of sand
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: x52Ga7U45IJOPFxK
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 3
+            denomination: 6
+            bonus: ''
+            types:
+              - psychic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: dream
+_id: phbsplDream00000
+type: spell
+img: icons/magic/control/sleep-bubble-purple.webp
+effects:
+  - name: Trance State
+    origin: Compendium.dnd5e.spells24.Item.phbsplDream00000
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 28800
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/control/hypnosis-mesmerism-eye-tan.webp
+    _id: x52Ga7U45IJOPFxK
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 3
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.fly
+        mode: 3
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 3
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.burrow
+        mode: 3
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 3
+        value: '0'
+        priority: null
+    description: >-
+      <p><span style="font-family:Signika, sans-serif">While in the trance, the
+      messenger is Incapacitated and has a Speed of 0.</span></p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - incapacitated
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplDream00000.x52Ga7U45IJOPFxK'
+folder: beZ8MTpWY2cMEUlp
+sort: 2100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425951385
+  modifiedTime: 1745256791862
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDream00000'

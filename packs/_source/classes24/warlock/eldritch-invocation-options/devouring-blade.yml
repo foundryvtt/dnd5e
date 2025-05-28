@@ -1,0 +1,53 @@
+_id: phbinvDevouringB
+name: Devouring Blade
+type: feat
+img: icons/skills/melee/blood-slash-foam-red.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 12+ Warlock,
+      @UUID[Compendium.dnd5e.classes24.Item.phbinvThirstingB]{Thirsting Blade}
+      Invocation</p></blockquote><p>The Extra Attack of your Thirsting Blade
+      invocation confers two extra attacks rather than one.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 12
+    repeatable: false
+  properties: []
+  requirements: Thirsting Blade Invocation
+  activities: {}
+  enchant: {}
+  identifier: devouring-blade
+effects: []
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256762096
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvDevouringB'

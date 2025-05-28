@@ -1,0 +1,99 @@
+_id: 1DY8w3CXeD7PHDXF
+name: Whirlwind Attack
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You can use your action to make a melee attack against any number of
+      creatures within 5 feet of you, with a separate attack roll for each
+      target.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: multiattack
+  requirements: Hunter 11
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: whirlwind-attack
+flags: {}
+img: icons/skills/melee/spear-tips-quintuple-orange.webp
+effects: []
+folder: UYfImiULTmGD1AvR
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037379399
+  modifiedTime: 1725992286868
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!1DY8w3CXeD7PHDXF'

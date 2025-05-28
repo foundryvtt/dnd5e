@@ -1,0 +1,131 @@
+_id: Wl2vtJ4hCt2tpWfR
+name: Weird
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Drawing on the deepest fears of a group of creatures, you create
+      illusory creatures in their minds, visible only to them. Each creature in
+      a 30-foot-radius sphere centered on a point of your choice within range
+      must make a Wisdom saving throw. On a failed save, a creature becomes
+      Frightened for the Duration. The illusion calls on the creature's deepest
+      fears, manifesting its worst nightmares as an implacable threat. At the
+      end of each of the Frightened creature's turns, it must succeed on a
+      Wisdom saving throw or take 4d10 psychic damage. On a successful save, the
+      spell ends for that creature.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '30'
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 9
+  school: ill
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 4
+            denomination: 10
+            bonus: ''
+            types:
+              - psychic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: weird
+sort: 0
+flags: {}
+img: icons/magic/control/fear-fright-monster-grin-green.webp
+effects: []
+folder: KL6ZY4VRMjojGrL4
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037357923
+  modifiedTime: 1725992720397
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Wl2vtJ4hCt2tpWfR'

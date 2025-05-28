@@ -1,0 +1,114 @@
+_id: o8G8BNPJOWoCKzR5
+name: Death Glare
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] targets one frightened creature she can
+      see within 30 ft. of her. If the target can see the [[lookup @name
+      lowercase]], it must succeed on a <strong>DC 11 Wisdom</strong> saving
+      throw against this magic or drop to 0 hit points.</p><p></p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] targets one frightened creature she can
+      see within 30 ft. of her. If the target can see the [[lookup @name
+      lowercase]], it must make a <strong>Wisdom</strong> saving throw against
+      this magic.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: ''
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: death-glare
+flags: {}
+img: icons/magic/death/skull-humanoid-worn-teal.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304976938
+  modifiedTime: 1725992574540
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!o8G8BNPJOWoCKzR5'

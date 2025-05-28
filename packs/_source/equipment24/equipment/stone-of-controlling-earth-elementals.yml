@@ -1,0 +1,156 @@
+_id: dmgStoneOfContro
+name: Stone of Controlling Earth Elementals
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/stone/engraved-symbol-water-grey.webp
+system:
+  activities:
+    EmSYvUIhbX2sGbZx:
+      type: summon
+      name: Summon Elemental
+      _id: EmSYvUIhbX2sGbZx
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - uuid: Compendium.dnd5e.actors24.Actor.mmEarthElemental
+          _id: 8QN8fOmja2sLY3eX
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare</em></p><p>While touching this 5-pound stone to
+      the ground, you can take a Magic action to summon an
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmEarthElemental]{Earth
+      Elemental}</strong>. The elemental appears in an unoccupied space you
+      choose within 30 feet of yourself, obeys your commands, and takes its turn
+      immediately after you on your Initiative count. The elemental disappears
+      after 1 hour, when it dies, or when you dismiss it as a Bonus Action. The
+      stone can't be used this way again until the next dawn.</p>
+    chat: ''
+  identifier: stone-of-controlling-earth-elementals
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703895
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 34700000
+ownership:
+  default: 0
+_key: '!items!dmgStoneOfContro'

@@ -1,0 +1,50 @@
+_id: phbrgrPreciseHun
+name: Precise Hunter
+type: feat
+folder: h5OUzaJcZzsNsOGc
+img: icons/skills/targeting/target-strike-triple-blue.webp
+system:
+  description:
+    value: >-
+      <p>You have Advantage on attack rolls against the creature currently
+      marked by your Hunter's Mark.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 17
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: precise-hunter
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735932734523
+  modifiedTime: 1745256765031
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgrPreciseHun'

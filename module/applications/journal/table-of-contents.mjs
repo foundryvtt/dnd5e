@@ -1,19 +1,32 @@
 /**
  * Compendium that renders pages as a table of contents.
  */
-export default class TableOfContentsCompendium extends Compendium {
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["table-of-contents"],
-      template: "systems/dnd5e/templates/journal/table-of-contents.hbs",
-      width: 800,
-      height: 950,
+export default class TableOfContentsCompendium extends foundry.applications.sidebar.apps.Compendium {
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["table-of-contents"],
+    window: {
       resizable: true,
-      contextMenuSelector: "[data-entry-id]",
-      dragDrop: [{dragSelector: "[data-document-id]", dropSelector: "article"}]
-    });
-  }
+      contentTag: "article"
+    },
+    position: {
+      width: 800,
+      height: 950
+    },
+    actions: {
+      activateEntry: this.prototype._onClickLink
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static PARTS = {
+    article: {
+      root: true,
+      template: "systems/dnd5e/templates/journal/table-of-contents.hbs"
+    }
+  };
 
   /* -------------------------------------------- */
 
@@ -30,9 +43,43 @@ export default class TableOfContentsCompendium extends Compendium {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
+  /** @override */
+  _configureRenderParts(options) {
+    // Skip normal compendium render parts logic.
+    return foundry.utils.deepClone(this.constructor.PARTS);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _createContextMenus() {
+    this._createContextMenu(this._getEntryContextOptions, "[data-entry-id]", { fixed: true });
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
-  async getData(options) {
-    const context = await super.getData(options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    new CONFIG.ux.DragDrop({
+      dragSelector: "[data-document-id]",
+      dropSelector: "article",
+      permissions: {
+        dragstart: this._canDragStart.bind(this),
+        drop: this._canDragDrop.bind(this)
+      },
+      callbacks: {
+        dragstart: this._onDragStart.bind(this),
+        drop: this._onDrop.bind(this)
+      }
+    }).bind(this.element);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
     const documents = await this.collection.getDocuments();
 
     context.chapters = [];
@@ -76,7 +123,7 @@ export default class TableOfContentsCompendium extends Compendium {
     for ( const entry of specialEntries ) {
       const append = entry.flags.append;
       const order = entry.flags.order;
-      if ( append ) {
+      if ( append && (append <= context.chapters.length) ) {
         context.chapters[append - 1].pages.push({ ...entry, sort: order, entry: true });
       } else {
         context.chapters.push(entry);
@@ -84,7 +131,9 @@ export default class TableOfContentsCompendium extends Compendium {
     }
 
     for ( const chapter of context.chapters ) {
-      chapter.pages.sort((lhs, rhs) => lhs.sort - rhs.sort);
+      chapter.pages = chapter.pages
+        .filter(p => !p.flags.tocHidden && (chapter.showPages || p.entry))
+        .sort((lhs, rhs) => lhs.sort - rhs.sort);
       for ( const page of chapter.pages ) {
         if ( page.pages ) page.pages.sort((lhs, rhs) => lhs.sort - rhs.sort);
       }
@@ -94,28 +143,30 @@ export default class TableOfContentsCompendium extends Compendium {
   }
 
   /* -------------------------------------------- */
-  /*  Event Handlers                              */
-  /* -------------------------------------------- */
 
   /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-    html.find("a").on("click", this._onClickLink.bind(this));
+  async _renderFrame(options) {
+    const frame = await super._renderFrame(options);
+    frame.dataset.compendiumId = this.collection.metadata.id;
+    return frame;
   }
 
+  /* -------------------------------------------- */
+  /*  Event Handlers                              */
   /* -------------------------------------------- */
 
   /**
    * Handle clicking a link to a journal entry or page.
    * @param {PointerEvent} event  The triggering click event.
+   * @param {HTMLElement} target  The action target.
    * @protected
    */
-  async _onClickLink(event) {
-    const entryId = event.currentTarget.closest("[data-entry-id]")?.dataset.entryId;
+  async _onClickLink(event, target) {
+    const entryId = target.closest("[data-entry-id]")?.dataset.entryId;
     if ( !entryId ) return;
     const entry = await this.collection.getDocument(entryId);
     entry?.sheet.render(true, {
-      pageId: event.currentTarget.closest("[data-page-id]")?.dataset.pageId
+      pageId: target.closest("[data-page-id]")?.dataset.pageId
     });
   }
 

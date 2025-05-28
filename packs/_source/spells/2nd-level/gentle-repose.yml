@@ -1,0 +1,114 @@
+_id: n4JDcFKe5ikzYmAc
+name: Gentle Repose
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch a corpse or other remains. For the duration, the target is
+      protected from decay and can't become undead.</p><p>The spell also
+      effectively extends the time limit on raising the target from the dead,
+      since days spent under the influence of this spell don't count against the
+      time limit of spells such as raise dead.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: day
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: nec
+  materials:
+    value: >-
+      A pinch of salt and one copper piece placed on each of the corpse's eyes,
+      which must remain there for the duration
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: gentle-repose
+sort: 0
+flags: {}
+img: icons/magic/light/explosion-star-blue.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037364600
+  modifiedTime: 1725992722584
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!n4JDcFKe5ikzYmAc'

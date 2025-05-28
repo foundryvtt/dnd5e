@@ -1,0 +1,115 @@
+_id: wKdRtFsvGfMKQHLY
+name: Natural Recovery
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Starting at 2nd level, you can regain some of your magical energy by
+      sitting in meditation and communing with nature.</p><p>During a short
+      rest, you choose expended spell slots to recover. The spell slots can have
+      a combined level that is equal to or less than half your druid level
+      (rounded up), and none of the slots can be 6th level or higher. You can't
+      use this feature again until you finish a long rest.</p><p>For example,
+      when you are a 4th-level druid, you can recover up to two levels worth of
+      spell slots. You can recover either a 2nd-level slot or two 1st-level
+      slots.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Circle of the Land 2
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: >-
+          The druid can recover this number worth of spell slots (of 5th level
+          or lower):
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ceil(@classes.druid.levels/2)
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: natural-recovery
+flags: {}
+img: icons/magic/control/sihouette-hold-beam-green.webp
+effects: []
+folder: oPF5p4Kt9rOawCdU
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037389893
+  modifiedTime: 1725992290397
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!wKdRtFsvGfMKQHLY'

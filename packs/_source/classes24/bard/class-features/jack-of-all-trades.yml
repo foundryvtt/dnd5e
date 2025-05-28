@@ -1,0 +1,96 @@
+_id: phbbrdJackOfAllT
+name: Jack of All Trades
+type: feat
+folder: nP3HNXn7rem24IST
+img: icons/skills/trades/academics-investigation-puzzles.webp
+system:
+  description:
+    value: >-
+      <p>You can add half your Proficiency Bonus (round down) to any ability
+      check you make that uses a skill proficiency you lack and that doesn't
+      otherwise use your Proficiency Bonus.</p><p>For example, if you make a
+      Strength (Athletics) check and lack Athletics proficiency, you can add
+      half your Proficiency Bonus to the check.</p><section
+      id="secret-su4PzYrZZDdS1qZg" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature includes an Active Effect which will
+      automatically grant you half proficiency for all skills which you aren't
+      currently proficient in.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: Bard
+  activities: {}
+  enchant: {}
+  identifier: jack-of-all-trades
+effects:
+  - _id: c7gWn9MMrBQb8ygm
+    changes:
+      - key: flags.dnd5e.jackOfAllTrades
+        mode: 5
+        value: 'true'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.classes24.Item.phbbrdJackOfAllT
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Jack of All Trades
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classfeatures.Item.ezWijmCnlnQ9ZRX2.ActiveEffect.K4xQzXl1Z4zMnyOa
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/skills/trades/academics-investigation-puzzles.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbbrdJackOfAllT.c7gWn9MMrBQb8ygm'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866377962
+  modifiedTime: 1745256760432
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrdJackOfAllT'

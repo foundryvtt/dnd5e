@@ -1,0 +1,152 @@
+name: Blink
+system:
+  description:
+    value: >-
+      <p>[[/r 1d6]]{Roll 1d6} at the end of each of your turns for the duration.
+      On a roll of 4–6, you vanish from your current plane of existence and
+      appear in the Ethereal Plane (the spell ends instantly if you are already
+      on that plane). While on the Ethereal Plane, you can perceive the plane
+      you left, which is cast in shades of gray, but you can't see anything
+      there more than 60 feet away. You can affect and be affected only by other
+      creatures on the Ethereal Plane, and creatures on the other plane can't
+      perceive you unless they have a special ability that lets them perceive
+      things on the Ethereal Plane.</p><p>You return to the other plane at the
+      start of your next turn and when the spell ends if you are on the Ethereal
+      Plane. You return to an unoccupied space of your choice that you can see
+      within 10 feet of the space you left. If no unoccupied space is available
+      within that range, you appear in the nearest unoccupied space.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: trs
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: La5ofK0TnPSTL3iq
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: 1d6cs>3
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: blink
+_id: phbsplBlink00000
+type: spell
+img: icons/magic/unholy/hand-marked-pink.webp
+effects:
+  - name: Ethereal
+    origin: Compendium.dnd5e.spells24.Item.phbsplBlink00000
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/statuses/ethereal.svg
+    _id: La5ofK0TnPSTL3iq
+    type: base
+    system: {}
+    changes: []
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - ethereal
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplBlink00000.La5ofK0TnPSTL3iq'
+folder: HCovEE4VoPGlIbKi
+sort: 3400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425943980
+  modifiedTime: 1745256787159
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplBlink00000'

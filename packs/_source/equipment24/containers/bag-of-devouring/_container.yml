@@ -1,0 +1,79 @@
+_id: dmgBagOfDevourin
+name: Bag of Devouring
+type: container
+folder: CXJsbhXV9uLcWcfH
+img: icons/containers/bags/pack-engraved-leather-tan.webp
+system:
+  description:
+    value: >-
+      <div><p>This bag resembles a
+      <em>@UUID[Compendium.dnd5e.equipment24.Item.dmgBagOfHolding0]{Bag of
+      Holding}</em> but is a feeding orifice for a gigantic extradimensional
+      creature. Turning the bag inside out closes the orifice.</p><p>The
+      extradimensional creature attached to the bag can sense whatever is placed
+      inside the bag. Animal or vegetable matter placed wholly in the bag is
+      devoured and lost forever. When part of a living creature is placed in the
+      bag, as happens when someone reaches inside it, there is a [[/r
+      1dc#Creature pulled in on a 1, or "Heads"]]{50 percent} chance that the
+      creature is pulled inside the bag. A creature inside the bag can take an
+      action to try to escape, doing so with a successful [[/check ability=str
+      skill=ath dc=15 format=long]]. Another creature can take an action to
+      reach into the bag to pull a creature out, doing so with a successful
+      [[/check ability=str skill=ath dc=20 format=long]], provided the puller
+      isn't pulled inside the bag first. Any creature that starts its turn
+      inside the bag is devoured, its body destroyed.</p><p>Inanimate objects
+      can be stored in the bag, which can hold a cubic foot of such material.
+      However, once each day, the bag swallows any objects inside it and spits
+      them out into another plane of existence. The GM determines the time and
+      plane.</p><p>If the bag is pierced or torn, it is destroyed, and anything
+      contained within it is transported to a random location on the Astral
+      Plane.</p></div>
+    chat: ''
+  identifier: bag-of-devouring
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties:
+    - mgc
+    - weightlessContents
+  capacity:
+    type: weight
+    value: null
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 200000
+ownership:
+  default: 0
+_key: '!items!dmgBagOfDevourin'

@@ -1,0 +1,112 @@
+_id: phbsptStonesEndu
+name: Stone's Endurance
+type: feat
+img: icons/magic/defensive/armor-stone-skin.webp
+system:
+  activities:
+    vrWhAQ6Bj4gznxHq:
+      type: heal
+      _id: vrWhAQ6Bj4gznxHq
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: When you take damage
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: 1
+        denomination: 12
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: '@abilities.con.mod'
+      name: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+    max: '@prof'
+  description:
+    value: >-
+      <p>When you take damage, you can take a Reaction to roll 1d12. Add your
+      Constitution modifier to the number rolled and reduce the damage by that
+      total.</p>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Goliath (Stone Giant)
+  identifier: stones-endurance
+  advancement: []
+  cover: null
+  crewed: false
+effects: []
+folder: 4KZykhQTGVAuVo1I
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745340849458
+  modifiedTime: 1745341995718
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptStonesEndu'

@@ -1,0 +1,194 @@
+_id: phbdrdWildResurg
+name: Wild Resurgence
+type: feat
+folder: EXYmwRGoNyMbByN1
+img: icons/magic/life/cross-worn-green.webp
+system:
+  description:
+    value: >-
+      <p>Once on each of your turns, if you have no uses of Wild Shape left, you
+      can give yourself one use by expending a spell slot (no action
+      required).</p><p>In addition, you can expend one use of Wild Shape (no
+      action required) to give yourself a level 1 spell slot, but you can't do
+      so again until you finish a Long Rest.</p><section class="secret"
+      id="secret-b0eq9t1Lkei4tN53"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Regain Wild Shape</strong> activity consumes a spell slot and
+      grants you another use of Wild Shape.</p><p>The <strong>Regain Spell
+      Slot</strong> activity will consume a use of Wild Shape and grant you a
+      level 1 spell slot.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '1'
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 5
+    repeatable: false
+  properties: []
+  requirements: Druid
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: ''
+        value: null
+        condition: Once on each of your turns
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+            scaling: {}
+          - type: spellSlots
+            value: '-1'
+            target: '1'
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: ''
+        units: inst
+        special: ''
+        override: false
+        concentration: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Regain Spell Slot
+      img: systems/dnd5e/icons/svg/trait.svg
+    7nAgPNN2dth7SR0D:
+      type: utility
+      activation:
+        type: ''
+        value: null
+        condition: Once on each of your turns
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+            scaling:
+              mode: ''
+          - type: spellSlots
+            value: '1'
+            target: '1'
+            scaling:
+              mode: level
+              formula: ''
+        scaling:
+          allowed: true
+          max: '9'
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: ''
+        units: inst
+        special: ''
+        override: false
+        concentration: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: -100000
+      name: Regain Wild Shape
+      _id: 7nAgPNN2dth7SR0D
+      img: systems/dnd5e/icons/svg/abilities/intelligence.svg
+  enchant: {}
+  identifier: wild-resurgence
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866366918
+  modifiedTime: 1740680082812
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1000000
+ownership:
+  default: 0
+_key: '!items!phbdrdWildResurg'

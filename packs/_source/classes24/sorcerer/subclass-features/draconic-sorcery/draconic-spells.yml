@@ -1,0 +1,65 @@
+_id: phbscrDraconicSp
+name: Draconic Spells
+type: feat
+folder: wwMlXikGly63a6go
+img: icons/magic/symbols/mask-metal-silver-white.webp
+system:
+  description:
+    value: >-
+      <p>When you reach a Sorcerer level specified in the Draconic Spells table,
+      you thereafter always have the listed spells
+      prepared.</p><table><caption>Draconic
+      Spells</caption><thead><tr><td>Sorcerer
+      Level</td><td>Spells</td></tr></thead><tbody><tr><td>3</td><td><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplAlterSelf0]{Alter
+      Self}, @UUID[Compendium.dnd5e.spells24.Item.phbsplChromaticO]{Chromatic
+      Orb}, @UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]{Command},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplDragonsBre]{Dragon's
+      Breath}</em></td></tr><tr><td>5</td><td><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFear000000]{Fear},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFly0000000]{Fly}</em></td></tr><tr><td>7</td><td><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplArcaneEye0]{Arcane
+      Eye}, @UUID[Compendium.dnd5e.spells24.Item.phbsplCharmMonst]{Charm
+      Monster}</em></td></tr><tr><td>9</td><td><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLegendLore]{Legend
+      Lore}, @UUID[Compendium.dnd5e.spells24.Item.phbsplSummonDrag]{Summon
+      Dragon}</em></td></tr></tbody></table><section class="secret"
+      id="secret-kL8H0ClyrUNajoht"><p><strong>Foundry Note</strong></p><p>The
+      spells will be automatically granted as you level up.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: draconic-spells
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866556244
+  modifiedTime: 1745256765381
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbscrDraconicSp'

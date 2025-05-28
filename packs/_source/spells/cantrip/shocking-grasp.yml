@@ -1,0 +1,133 @@
+_id: XvbiNhNqXXIFisIy
+name: Shocking Grasp
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Lightning springs from your hand to deliver a shock to a creature you
+      try to touch. Make a melee spell attack against the target. You have
+      advantage on the attack roll if the target is wearing armor made of metal.
+      On a hit, the target takes 1d8 lightning damage, and it can't take
+      reactions until the start of its next turn.</p><p>The spell's damage
+      increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and
+      17th level (4d8).</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: spell
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - number: 1
+            denomination: 8
+            bonus: ''
+            types:
+              - lightning
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: shocking-grasp
+sort: 0
+flags: {}
+img: icons/magic/lightning/bolt-forked-blue.webp
+effects: []
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037358692
+  modifiedTime: 1725992720660
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!XvbiNhNqXXIFisIy'

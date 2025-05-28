@@ -1,0 +1,65 @@
+_id: phbwlkFiendSpell
+name: Fiend Spells
+type: feat
+folder: fP1LEFkoKLotitj0
+img: icons/magic/control/encase-creature-monster-hold.webp
+system:
+  description:
+    value: >-
+      <p>The magic of your patron ensures you always have certain spells ready;
+      when you reach a Warlock level specified in the Fiend Spells table, you
+      thereafter always have the listed spells
+      prepared.</p><table><caption>Fiend Spells</caption><thead><tr><td>Warlock
+      Level</td><td>Spells</td></tr></thead><tbody><tr><td>3</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplBurningHan]{Burning
+      Hands}, @UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]{Command},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplScorchingR]{Scorching Ray},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplSuggestion]{Suggestion}</td></tr><tr><td>5</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplFireball00]{Fireball},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplStinkingCl]{Stinking
+      Cloud}</td></tr><tr><td>7</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplFireShield]{Fire
+      Shield}, @UUID[Compendium.dnd5e.spells24.Item.phbsplWallofFire]{Wall of
+      Fire}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplGeas000000]{Geas},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplInsectPlag]{Insect
+      Plague}</td></tr></tbody></table><section class="secret"
+      id="secret-Az5JbDGwh8PLTt7g"><p><strong>Foundry Note</strong></p><p>As you
+      level up these spells will be granted to you automatically.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: fiend-spells
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866551616
+  modifiedTime: 1745256767588
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwlkFiendSpell'

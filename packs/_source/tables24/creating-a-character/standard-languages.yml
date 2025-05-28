@@ -1,0 +1,91 @@
+_id: phbStandardLangu
+name: Standard Languages
+img: icons/sundries/books/book-open-purple.webp
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    _id: rViHFEn5WjhRbElK
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Language:</strong> Common. <strong>Origin:</strong> Sigil.
+    name: ''
+    _key: '!tables.results!phbStandardLangu.rViHFEn5WjhRbElK'
+  - type: document
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    img: icons/svg/d20-grey.svg
+    _id: pzL0RD1tg43fqDTo
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Sub-Languages Table
+    documentUuid: Compendium.dnd5e.tables24.RollTable.phbSublanguageTa
+    description: ''
+    _key: '!tables.results!phbStandardLangu.pzL0RD1tg43fqDTo'
+  - type: document
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    img: icons/svg/d20-grey.svg
+    _id: JpUuNwaf83gmUwV4
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Sub-Languages Table
+    documentUuid: Compendium.dnd5e.tables24.RollTable.phbSublanguageTa
+    description: ''
+    _key: '!tables.results!phbStandardLangu.JpUuNwaf83gmUwV4'
+replacement: true
+displayRoll: true
+folder: oqsiqoUzcbfevHRV
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1724425888331
+  modifiedTime: 1740685862708
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+formula: '1'
+sort: 0
+ownership:
+  default: 0
+_key: '!tables!phbStandardLangu'

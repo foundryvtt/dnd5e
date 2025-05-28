@@ -1,0 +1,111 @@
+_id: dmgSenSenses0000
+name: Senses
+img: icons/magic/perception/orb-eye-scrying.webp
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    _id: Ci8p2gyHULtiT1Uw
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: Hearing and standard vision out to 30 feet
+    name: ''
+    _key: '!tables.results!dmgSenSenses0000.Ci8p2gyHULtiT1Uw'
+  - type: text
+    weight: 1
+    range:
+      - 2
+      - 2
+    drawn: false
+    _id: ZTU8T3tLr5DEtyUi
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: Hearing and standard vision out to 60 feet
+    name: ''
+    _key: '!tables.results!dmgSenSenses0000.ZTU8T3tLr5DEtyUi'
+  - type: text
+    weight: 1
+    range:
+      - 3
+      - 3
+    drawn: false
+    _id: GEjkKdxm7q5XvDuM
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: Hearing and standard vision out to 120 feet
+    name: ''
+    _key: '!tables.results!dmgSenSenses0000.GEjkKdxm7q5XvDuM'
+  - type: text
+    weight: 1
+    range:
+      - 4
+      - 4
+    drawn: false
+    _id: pOJu9D3HQQlGSpoQ
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: Hearing and Darkvision out to 120 feet
+    name: ''
+    _key: '!tables.results!dmgSenSenses0000.pOJu9D3HQQlGSpoQ'
+replacement: true
+displayRoll: true
+folder: An3ZWDU7HLgF24f1
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745549017709
+  modifiedTime: 1745549033659
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+formula: 1d4
+sort: 125000
+ownership:
+  default: 0
+_key: '!tables!dmgSenSenses0000'

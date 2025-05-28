@@ -1,0 +1,190 @@
+name: Forcecage
+system:
+  description:
+    value: >-
+      <p>An immobile, Invisible, Cube-shaped prison composed of magical force
+      springs into existence around an area you choose within range. The prison
+      can be a cage or a solid box, as you choose.</p><p>A prison in the shape
+      of a cage can be up to 20 feet on a side and is made from 1/2-inch
+      diameter bars spaced 1/2 inch apart. A prison in the shape of a box can be
+      up to 10 feet on a side, creating a solid barrier that prevents any matter
+      from passing through it and blocking any spells cast into or out from the
+      area.</p><p>When you cast the spell, any creature that is completely
+      inside the cage's area is trapped. Creatures only partially within the
+      area, or those too large to fit inside it, are pushed away from the center
+      of the area until they are completely outside it.</p><p>A creature inside
+      the cage can't leave it by nonmagical means. If the creature tries to use
+      teleportation or interplanar travel to leave, it must first make a [[/save
+      ability=cha dc=@attributes.spell.dc format=long]]. On a successful save,
+      the creature can use that magic to exit the cage. On a failed save, the
+      creature doesn't exit the cage and wastes the spell or effect. The cage
+      also extends into the Ethereal Plane, blocking ethereal travel.</p><p>This
+      spell can't be dispelled by <em>Dispel Magic</em>.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '100'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: ruby dust worth 1,500+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    gacP7LGiwvQBdnfU:
+      type: utility
+      _id: gacP7LGiwvQBdnfU
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cube
+          size: '20'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 25000
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Create Cage
+      img: icons/environment/traps/cage-grey-steel.webp
+      appliedEffects: []
+    xhJw5fRtiWP5p0DO:
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: cube
+          size: '10'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 50000
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Create Solid Box
+      _id: xhJw5fRtiWP5p0DO
+      img: icons/commodities/treasure/puzzle-cube.webp
+      appliedEffects: []
+  identifier: forcecage
+_id: phbsplForcecage0
+type: spell
+img: icons/magic/control/silhouette-hold-beam-blue.webp
+effects: []
+folder: EdAGMG8IF26PLkD3
+sort: 1500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425954934
+  modifiedTime: 1745256793436
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplForcecage0'

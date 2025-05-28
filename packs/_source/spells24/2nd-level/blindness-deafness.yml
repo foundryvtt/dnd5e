@@ -1,0 +1,195 @@
+name: Blindness/Deafness
+system:
+  description:
+    value: >-
+      <p>One creature that you can see within range must succeed on a
+      Constitution saving throw, or it has the &amp;Reference[Blinded
+      apply=false] or &amp;Reference[Deafened apply=false] condition (your
+      choice) for the duration. At the end of each of its turns, the target
+      repeats the save, ending the spell on itself on a
+      success.</p><p><strong>Using a Higher-Level Spell Slot.</strong> You can
+      target one additional creature for each spell slot level above 2.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '@item.level - 1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '120'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  properties:
+    - vocal
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: MIYqFloILx3luzwc
+          onSave: false
+        - _id: XY351duUwtwqIGHC
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: blindness-deafness
+_id: phbsplBlindnessD
+type: spell
+img: icons/equipment/head/crown-thorns-gold.webp
+effects:
+  - name: Blindness
+    origin: Compendium.dnd5e.spells24.Item.phbsplBlindnessD
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    _id: MIYqFloILx3luzwc
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>At the end of each of its turns, the target repeats the [[/save
+      ability=con]] save, ending the spell on itself on a success.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - blinded
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplBlindnessD.MIYqFloILx3luzwc'
+  - name: Deafness
+    origin: Compendium.dnd5e.spells24.Item.phbsplBlindnessD
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/statuses/deafened.svg
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>At the end of each of its turns, the target repeats the [[/save
+      ability=con]] save, ending the spell on itself on a success.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - deafened
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _id: XY351duUwtwqIGHC
+    _key: '!items.effects!phbsplBlindnessD.XY351duUwtwqIGHC'
+folder: 3SjcO2acsFnWegp4
+sort: 4900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425943890
+  modifiedTime: 1745256787059
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplBlindnessD'

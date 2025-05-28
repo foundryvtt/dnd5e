@@ -1,0 +1,118 @@
+_id: TfRzwEgBHHkCc6Ql
+name: Irresistible Dance
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Choose one creature that you can see within range. The target begins a
+      comic dance in place: shuffling, tapping its feet, and capering for the
+      duration. Creatures that can't be charmed are immune to this
+      spell.</p><p>A dancing creature must use all its movement to dance without
+      leaving its space and has disadvantage on Dexterity saving throws and
+      attack rolls. While the target is affected by this spell, other creatures
+      have advantage on attack rolls against it. As an action, a dancing
+      creature makes a Wisdom saving throw to regain control of itself. On a
+      successful save, the spell ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: enc
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: irresistible-dance
+sort: 0
+flags: {}
+img: icons/magic/control/energy-stream-link-large-blue.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037356951
+  modifiedTime: 1725992720105
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!TfRzwEgBHHkCc6Ql'

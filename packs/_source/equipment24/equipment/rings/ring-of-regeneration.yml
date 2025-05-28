@@ -1,0 +1,139 @@
+_id: dmgRingOfRegener
+name: Ring of Regeneration
+type: equipment
+folder: DC1x1wAm0NLFudA6
+img: icons/equipment/finger/ring-faceted-gold-purple.webp
+system:
+  activities:
+    0d4MWwdkzKxyt2O2:
+      type: heal
+      name: ''
+      _id: 0d4MWwdkzKxyt2O2
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: Every 10 minutes
+      consumption:
+        scaling:
+          allowed: true
+          max: ''
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: 1
+        denomination: '6'
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+          mode: whole
+          formula: ''
+        bonus: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Ring, Very Rare (Requires Attunement)</em></p><p>While wearing this
+      ring, you regain 1d6 Hit Points every 10 minutes if you have at least 1
+      Hit Point. If you lose a body part, the ring causes the missing part to
+      regrow and return to full functionality after [[/r 1d6 + 1]] days if you
+      have at least 1 Hit Point the whole time.</p><section class="secret"
+      id="secret-N3RMelHP7jT5vBMy"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Heal</strong> activity allows you to enter the number of 10 minute
+      increments that have passed and will automatically scale the healing
+      formula. For example, if it's been an hour, you can enter 6 and it will
+      roll 6d6.</p></section>
+    chat: ''
+  identifier: ring-of-regeneration
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ring
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1200000
+ownership:
+  default: 0
+_key: '!items!dmgRingOfRegener'

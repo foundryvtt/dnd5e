@@ -1,0 +1,121 @@
+_id: o9ZCvuD2B1OTcubb
+name: Wall of Force
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>An invisible wall of force springs into existence at a point you choose
+      within range. The wall appears in any orientation you choose, as a
+      horizontal or vertical barrier or at an angle. It can be free floating or
+      resting on a solid surface. You can form it into a hemispherical dome or a
+      sphere with a radius of up to 10 feet, or you can shape a flat surface
+      made up of ten 10-foot-by-10-foot panels. Each panel must be contiguous
+      with another panel. In any form, the wall is 1/4 inch thick. It lasts for
+      the Duration. If the wall cuts through a creature's space when it appears,
+      the creature is pushed to one side of the wall (your choice which
+      side).</p><p>Nothing can physically pass through the wall. It is immune to
+      all damage and can't be dispelled by Dispel Magic. A Disintegrate spell
+      destroys the wall instantly, however. The wall also extends into the
+      Ethereal Plane, blocking ethereal travel through the wall.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: wall
+      size: '100'
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: evo
+  materials:
+    value: A pinch of powder made by crushing clear gemstone
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: wall-of-force
+sort: 0
+flags: {}
+img: icons/magic/light/beam-rays-magenta-large.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037364962
+  modifiedTime: 1725992722711
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!o9ZCvuD2B1OTcubb'

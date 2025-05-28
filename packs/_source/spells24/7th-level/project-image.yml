@@ -1,0 +1,150 @@
+name: Project Image
+system:
+  description:
+    value: >-
+      <p>You create an illusory copy of yourself that lasts for the duration.
+      The copy can appear at any location within range that you have seen
+      before, regardless of intervening obstacles. The illusion looks and sounds
+      like you, but it is intangible. If the illusion takes any damage, it
+      disappears, and the spell ends.</p><p>You can see through the illusion's
+      eyes and hear through its ears as if you were in its space. As a Magic
+      action, you can move it up to 60 feet and make it gesture, speak, and
+      behave in whatever way you choose. It mimics your mannerisms
+      perfectly.</p><p>Physical interaction with the image reveals it to be
+      illusory, since things can pass through it. A creature that takes the
+      Study action to examine the image can determine that it is an illusion
+      with a successful [[/check ability=int skill=inv dc=@attributes.spell.dc]]
+      check against your spell save DC. If a creature discerns the illusion for
+      what it is, the creature can see through the image, and any noise it makes
+      sounds hollow to the creature.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: day
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: space
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: mi
+    special: ''
+    value: '500'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: ill
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a statuette of yourself worth 5+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    KCmy0ulLA1RPR3eF:
+      type: summon
+      _id: KCmy0ulLA1RPR3eF
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - uuid: Compendium.dnd5e.actors24.Actor.dmgIllusoryCreat
+          _id: kqU6YKom2tUYYBDe
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: false
+        mode: ''
+        identifier: ''
+      name: Create Illusion
+      img: ''
+  identifier: project-image
+_id: phbsplProjectIma
+type: spell
+img: icons/creatures/magical/construct-golem-stone-blue.webp
+effects: []
+folder: EdAGMG8IF26PLkD3
+sort: 900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425967562
+  modifiedTime: 1745256797264
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplProjectIma'

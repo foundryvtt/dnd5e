@@ -42,7 +42,7 @@
             data-item-id="{{item.id}}">
             <div class="item-name flexrow rollable">
                 <div class="item-image item-action" data-action="use" tabindex="0" role="button" aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
-                <h4 class="item-action" data-action="expand">
+                <h4 class="item-action" data-action="toggleExpand">
                     {{#if (eq item.type "subclass")}}&rdsh;{{/if}}
                     {{item.name}}
                     {{#if item.system.isOriginalClass}}
@@ -56,14 +56,14 @@
             <div class="item-detail item-uses">
                 {{#if item.isOnCooldown}}
                 <a class="item-action" data-action="recharge">{{item.labels.recharge}}</a>
-                {{else if item.system.recharge.value}}
+                {{else if ctx.hasRecharge}}
                 {{localize "DND5E.Charged"}}
                 {{else if ctx.hasUses}}
                 <input type="text" value="{{item.system.uses.value}}" placeholder="0" data-dtype="Number" data-name="system.uses.value">/ {{item.system.uses.max}}
                 {{/if}}
             </div>
             <div class="item-detail item-action">
-                {{#if item.system.activation.type}}
+                {{#if item.labels.activation}}
                     {{item.labels.activation}}
                 {{/if}}
             </div>
@@ -71,14 +71,7 @@
             {{else if (eq item.type "class")}}
             <div class="item-detail item-action">
                 <select class="level-selector">
-                    {{#select 0}}
-                    {{#each ctx.availableLevels}}
-                        <option value="{{this.delta}}" {{disabled this.disabled}}>
-                            {{localize "DND5E.LevelNumber" level=this.level}}
-                            {{#if this.delta}}({{numberFormat this.delta sign=true}}){{/if}}
-                        </option>
-                    {{/each}}
-                    {{/select}}
+                    {{ selectOptions ctx.availableLevels selected=0 }}
                 </select>
             </div>
             {{/if}}

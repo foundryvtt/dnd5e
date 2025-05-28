@@ -1,0 +1,143 @@
+_id: phbWizard0000000
+name: Wizard
+pages:
+  - sort: 100000
+    name: Wizard
+    type: class
+    _id: g7cMRWzsgAsEF7zC
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbwzdWizard0000
+      description:
+        value: >-
+          <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbwzdWizard0000
+          inline classes="free-rules-embed"]</p> <h2>Becoming a Wizard
+          …</h2><h3>As a Level 1 Character</h3><ul><li><p>Gain all the traits in
+          the Core Wizard Traits table.</p></li><li><p>Gain the Wizard's level 1
+          features, which are listed in the Wizard Features
+          table.</p></li></ul><h3>As a Multiclass Character</h3><ul><li><p>Gain
+          the Hit Point Die from the Core Wizard Traits
+          table.</p></li><li><p>Gain the Wizard's level 1 features, which are
+          listed in the Wizard Features table. See the multiclassing rules in
+          chapter 2 to determine your available spell
+          slots.</p></li></ul><p><strong>Expanding and Replacing a
+          Spellbook</strong></p><aside class="notable"><p>The spells you add to
+          your spellbook as you gain levels reflect your ongoing magical
+          research, but you might find other spells during your adventures that
+          you can add to the book. You could discover a Wizard spell on a Spell
+          Scroll, for example, and then copy it into your
+          spellbook.</p><p><strong>Copying a Spell into the Book.</strong> When
+          you find a level 1+ Wizard spell, you can copy it into your spellbook
+          if it's of a level you can prepare and if you have time to copy it.
+          For each level of the spell, the transcription takes 2 hours and costs
+          50 GP. Afterward you can prepare the spell like the other spells in
+          your spellbook.</p><p><strong>Copying the Book.</strong> You can copy
+          a spell from your spellbook into another book. This is like copying a
+          new spell into your spellbook but faster, since you already know how
+          to cast the spell. You need spend only 1 hour and 10 GP for each level
+          of the copied spell.</p><p>If you lose your spellbook, you can use the
+          same procedure to transcribe the Wizard spells that you have prepared
+          into a new spellbook. Filling out the remainder of the new book
+          requires you to find new spells to do so. For this reason, many
+          wizards keep a backup spellbook.</p></aside>
+        additionalHitPoints: ''
+        additionalTraits: ''
+        additionalEquipment: ''
+        subclass: >-
+          <p>A Wizard subclass is a specialization that grants you features at
+          certain levels, as specified in the subclass. The next page presents
+          the @UUID[Compendium.dnd5e.classes24.Item.phbwzdEvoker0000]{Evoker}
+          subclass.</p>
+      subclassItems: []
+      subclassHeader: ''
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745515616678
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbWizard0000000.g7cMRWzsgAsEF7zC'
+  - sort: 400000
+    name: Evoker
+    type: subclass
+    _id: F5Nlk4mkB1nUUaob
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbwzdEvoker0000
+      description:
+        value: >-
+          <blockquote><p>Create Explosive Elemental
+          Effects</p></blockquote><p>Your studies focus on magic that creates
+          powerful elemental effects such as bitter cold, searing flame, rolling
+          thunder, crackling lightning, and burning acid. Some
+          @UUID[Compendium.dnd5e.classes24.Item.phbwzdEvoker0000]{Evokers} find
+          employment in military forces, serving as artillery to blast armies
+          from afar. Others use their power to protect others, while some seek
+          their own gain.</p>
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1735934949776
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbWizard0000000.F5Nlk4mkB1nUUaob'
+folder: 1A8WFP1GVZkKdxii
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 3
+    order: 501200
+    navigation:
+      previous: phbWarlock000000
+      next: phbCharacterOrig
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1724425889607
+  modifiedTime: 1745677865812
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1400000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbWizard0000000'

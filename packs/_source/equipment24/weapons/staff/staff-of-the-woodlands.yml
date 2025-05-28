@@ -1,0 +1,672 @@
+_id: dmgStaffOfTheWoo
+name: Staff of the Woodlands
+type: weapon
+img: icons/weapons/staves/staff-nature-spiral.webp
+system:
+  activities:
+    ab5Z0l7OcuWCtauU:
+      _id: ab5Z0l7OcuWCtauU
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+    geAlp70iuxuH1dvD:
+      type: cast
+      name: Animal Friendship
+      _id: geAlp70iuxuH1dvD
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplAnimalFrie
+      img: ''
+    ZsTnyKpNKhX2UNw8:
+      type: cast
+      name: Awaken
+      _id: ZsTnyKpNKhX2UNw8
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplAwaken0000
+      img: ''
+    HRmbe3tUq47ZLbeM:
+      type: cast
+      name: Barkskin
+      _id: HRmbe3tUq47ZLbeM
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplBarkskin00
+      img: ''
+    swaYlNmRQNmfu6MB:
+      type: cast
+      name: Locate Animals or Plants
+      _id: swaYlNmRQNmfu6MB
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplLocateAnim
+      img: ''
+    cDbVrjDu0tnXlzaR:
+      type: cast
+      name: Pass without Trace
+      _id: cDbVrjDu0tnXlzaR
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplPasswithou
+      img: ''
+    j5AgCtSJZN12vsJW:
+      type: cast
+      name: Speak with Animals
+      _id: j5AgCtSJZN12vsJW
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
+      img: ''
+    eoNl5saIm2pOFmsu:
+      type: cast
+      name: Speak with Plants
+      _id: eoNl5saIm2pOFmsu
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '3'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplSpeakwithP
+      img: ''
+    WmZyIUTekKP2iDtH:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplWallofThor
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '6'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: WmZyIUTekKP2iDtH
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '6'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    9xO1w9Vzhq6EU5Qr:
+      type: utility
+      name: Tree Form
+      _id: 9xO1w9Vzhq6EU5Qr
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d6
+    max: '6'
+  description:
+    value: >-
+      <p><em>@UUID[Compendium.dnd5e.equipment24.Item.phbafcStaffalsoa]{Staff},
+      Rare (Requires Attunement by a Druid)</em></p><p>This staff has 6 charges
+      and can be wielded as a magic Quarterstaff that grants a +2 bonus to
+      attack rolls and damage rolls made with it. While holding it, you have a
+      +2 bonus to spell attack rolls.</p><p><em><strong>Spells.</strong></em>
+      While holding the staff, you can cast one of the spells on the following
+      table from it, using your spell save DC. The table indicates how many
+      charges you must expend to cast the
+      spell.</p><table><thead><tr><th><p>Spell</p></th><th><p>Charge
+      Cost</p></th><th></th></tr></thead><tbody><tr><td><p><em>Animal
+      Friendship</em></p></td><td><p>1</p></td><td></td></tr><tr><td><p><em>Awaken</em></p></td><td><p>5</p></td><td></td></tr><tr><td><p><em>Barkskin</em></p></td><td><p>2</p></td><td></td></tr><tr><td><p><em>Locate
+      Animals or
+      Plants</em></p></td><td><p>2</p></td><td></td></tr><tr><td><p><em>Pass
+      without
+      Trace</em></p></td><td><p>2</p></td><td></td></tr><tr><td><p><em>Speak
+      with
+      Animals</em></p></td><td><p>1</p></td><td></td></tr><tr><td><p><em>Speak
+      with
+      Plants</em></p></td><td><p>3</p></td><td></td></tr><tr><td><p><em>Wall of
+      Thorns</em></p></td><td><p>6</p></td><td></td></tr></tbody></table><p><em><strong>Tree
+      Form.</strong></em> You can take a Magic action to plant one end of the
+      staff in earth in an unoccupied space and expend 1 charge to transform the
+      staff into a healthy tree. The tree is 60 feet tall and has a
+      5-foot-diameter trunk, and its branches at the top spread out in a 20-foot
+      radius. The tree appears ordinary but radiates a faint aura of
+      Transmutation magic that can be discerned with the <em>Detect Magic</em>
+      spell. While touching the tree and using a Magic action, you return the
+      staff to its normal form. Any creature in the tree falls when the tree
+      reverts to a staff.</p><p><em><strong>Regaining Charges.</strong></em> The
+      staff regains 1d6 expended charges daily at dawn. If you expend the last
+      charge, roll [[/r 1d20]]. On a 1, the staff loses its properties and
+      becomes a nonmagical Quarterstaff.</p>
+    chat: ''
+  identifier: staff-of-the-woodlands
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: quarterstaff
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  magicalBonus: 2
+  properties:
+    - mgc
+    - ver
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: topple
+effects:
+  - name: Spell Attack Bonus
+    img: icons/magic/life/cross-worn-green.webp
+    _id: r6B9McDx4diFtkOt
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729886547004
+      modifiedTime: 1729886624459
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgStaffOfTheWoo.r6B9McDx4diFtkOt'
+folder: 5p9KrkF39e6vFO4g
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703812
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 150000
+ownership:
+  default: 0
+_key: '!items!dmgStaffOfTheWoo'

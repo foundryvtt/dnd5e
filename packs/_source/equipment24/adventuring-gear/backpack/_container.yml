@@ -1,0 +1,56 @@
+name: Backpack
+system:
+  description:
+    value: >-
+      <p>A Backpack holds up to 30 pounds within 1 cubic foot. It can also serve
+      as a saddlebag.</p>
+    chat: ''
+  price:
+    value: 2
+    denomination: gp
+  quantity: 1
+  source:
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  weight:
+    value: 5
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties: []
+  capacity:
+    type: weight
+    value: 30
+  identifier: backpack
+_id: phbagBackpack000
+type: container
+folder: uDk4FBYfcP2JnX6t
+img: icons/containers/bags/pack-simple-leather.webp
+effects: []
+sort: 7300000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425905136
+  modifiedTime: 1745256810861
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagBackpack000'

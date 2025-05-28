@@ -1,0 +1,130 @@
+name: Animal Shapes
+system:
+  description:
+    value: >-
+      <p>Choose any number of willing creatures that you can see within range.
+      Each target shape-shifts into a Large or smaller Beast of your choice that
+      has a Challenge Rating of 4 or lower. You can choose a different form for
+      each target. On later turns, you can take a Magic action to transform the
+      targets again.</p><p>A target's game statistics are replaced by the chosen
+      Beast's statistics, but the target retains its creature type; Hit Points;
+      Hit Point Dice; alignment; ability to communicate; and Intelligence,
+      Wisdom, and Charisma scores. The target's actions are limited by the Beast
+      form's anatomy, and it can't cast spells. The target's equipment melds
+      into the new form, and the target can't use any of that equipment while in
+      that form.</p><p>The target gains a number of Temporary Hit Points equal
+      to the Hit Points of the first form into which it shape-shifts. These
+      Temporary Hit Points vanish if any remain when the spell ends. The
+      transformation lasts for the duration or until the target ends it as a
+      Bonus Action.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: willing
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 8
+  school: trs
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    LvwieXlKiCmNPEZW:
+      type: utility
+      _id: LvwieXlKiCmNPEZW
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: animal-shapes
+_id: phbsplAnimalShap
+type: spell
+img: icons/creatures/mammals/goat-horned-blue.webp
+effects: []
+folder: M5CvwK9zVtzx6Dnn
+sort: 100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.2
+  createdTime: 1724425940527
+  modifiedTime: 1746119500443
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplAnimalShap'

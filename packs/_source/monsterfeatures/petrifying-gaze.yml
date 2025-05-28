@@ -1,0 +1,130 @@
+_id: wkIN7WTeX8ebbjtv
+name: Petrifying Gaze
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>If a creature starts its turn within <strong>30 ft.</strong> of the
+      [[lookup @name lowercase]] and the two of them can see each other, the
+      [[lookup @name lowercase]] can force the creature to make a <strong>DC 12
+      Constitution saving throw</strong> if the [[lookup @name lowercase]] isn't
+      incapacitated. On a failed save, the creature magically begins to turn to
+      stone and is restrained. It must repeat the saving throw at the end of its
+      next turn. On a success, the effect ends. On a failure, the creature is
+      petrified until freed by the greater restoration spell or other
+      magic.</p><p>A creature that isn't surprised can avert its eyes to avoid
+      the saving throw at the start of its turn. If it does so, it can't see the
+      [[lookup @name lowercase]] until the start of its next turn, when it can
+      avert its eyes again. If it looks at the [[lookup @name lowercase]] in the
+      meantime, it must immediately make the save<strong>. I</strong>f the
+      [[lookup @name lowercase]] sees its reflection within <strong>30
+      ft.</strong> of it in bright light, it mistakes itself for a rival and
+      targets itself with its gaze.</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] can force the creature to make a
+      <strong>Constitution</strong> saving throw. It must repeat the saving
+      throw at the end of its next turn. A creature that isn't surprised can
+      avert its eyes to avoid the saving throw at the start of its turn. If it
+      does so, it can't see the [[lookup @name lowercase]] until the start of
+      its next turn, when it can avert its eyes again. If it looks at the
+      [[lookup @name lowercase]] in the meantime, it must immediately make the
+      save.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '12'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: petrifying-gaze
+flags: {}
+img: icons/magic/control/hypnosis-mesmerism-eye.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304978385
+  modifiedTime: 1725992574973
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!wkIN7WTeX8ebbjtv'

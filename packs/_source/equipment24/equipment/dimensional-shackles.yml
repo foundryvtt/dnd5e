@@ -1,0 +1,226 @@
+_id: dmgDimensionalSh
+name: Dimensional Shackles
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/magic/control/debuff-chains-shackles-movement-blue.webp
+system:
+  activities:
+    0OGzs95U70Iu6y5B:
+      type: utility
+      _id: 0OGzs95U70Iu6y5B
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: JYlrfQOPp5jRIFK2
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Small to Large creature with the Incapacitated condition
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Place Shackles
+      img: ''
+      appliedEffects:
+        - JYlrfQOPp5jRIFK2
+    5jM3pBGMT6098rWY:
+      type: check
+      name: Attempt Escape
+      _id: 5jM3pBGMT6098rWY
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: is bound by Dimensional Shackles
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: Can be attempted once every 30 days
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: Dimensional Shackles binding self
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '30'
+        ability: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Rare</em></p></div><p>You can take a Utilize
+      action to place these shackles on a creature that has the
+      &amp;Reference[Incapacitated apply=false] condition. The shackles adjust
+      to fit a creature of Small to Large size. The shackles prevent a creature
+      bound by them from using any method of extradimensional movement,
+      including teleportation or travel to a different plane of existence. They
+      don't prevent the creature from passing through an interdimensional
+      portal.</p><p>You and any creature you designate when you use the shackles
+      can take a Utilize action to remove them. Once every 30 days, the bound
+      creature can make a [[/check ability=str skill=ath dc=30 format=long]]. On
+      a successful check, the creature breaks free and destroys the
+      shackles.</p>
+    chat: ''
+  identifier: dimensional-shackles
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Dimensionally Bound
+    img: icons/magic/control/debuff-chains-shackles-movement-blue.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgDimensionalSh
+    transfer: false
+    _id: JYlrfQOPp5jRIFK2
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The shackles prevent a creature bound by them from using any method of
+      extradimensional movement, including teleportation or travel to a
+      different plane of existence. They don’t prevent the creature from passing
+      through an interdimensional portal.</p><p>Once every 30 days, the bound
+      creature can make a [[/check ability=str skill=ath dc=30 format=long]]. On
+      a successful check, the creature breaks free and destroys the
+      shackles.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729279459349
+      modifiedTime: 1729280174762
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDimensionalSh.JYlrfQOPp5jRIFK2'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712699079
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 10800000
+ownership:
+  default: 0
+_key: '!items!dmgDimensionalSh'

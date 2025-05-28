@@ -1,0 +1,229 @@
+_id: dmgPipesOfTheSew
+name: Pipes of the Sewers
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/tools/instruments/flute-simple-wood.webp
+system:
+  activities:
+    NTO2u1o5isZNoZol:
+      type: summon
+      name: Call Swarm of Rats
+      _id: NTO2u1o5isZNoZol
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '3'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: rats
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: '@scaling'
+          name: ''
+          _id: GBcQxWRjuyGdqbN2
+          uuid: Compendium.dnd5e.actors24.Actor.mmSwarmOfRats000
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      img: ''
+      appliedEffects: []
+    eODd7jfqxrFREsrY:
+      type: save
+      name: Sway Rats
+      _id: eODd7jfqxrFREsrY
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d3
+    max: '3'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon (Requires Attunement)</em></p><p>While
+      these pipes are on your person, ordinary rats and giant rats are
+      Indifferent toward you and won't attack you unless you threaten or harm
+      them.</p><p>The pipes have 3 charges and regain 1d3 expended charges daily
+      at dawn. If you play the pipes as a Magic action, you can take a Bonus
+      Action to expend 1 to 3 charges, calling forth one
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmSwarmOfRats000]{Swarm of
+      Rats}</strong> with each expended charge if enough rats are within half a
+      mile of you to be called in this fashion (as determined by the DM). If
+      there aren't enough rats to form a swarm, the charge is wasted. Called
+      swarms move toward the music by the shortest available route but aren't
+      under your control otherwise.</p><p>Whenever a <strong>Swarm of
+      Rats</strong> that isn't under another creature's control comes within 30
+      feet of you while you are playing the pipes, the swarm makes a DC 15
+      Wisdom saving throw. On a successful save, the swarm behaves as it
+      normally would and can't be swayed by the pipes' music for the next 24
+      hours. On a failed save, the swarm is swayed by the pipes' music and
+      becomes Friendly to you and your allies for as long as you continue to
+      play the pipes each round as a Magic action. A Friendly swarm obeys your
+      commands. If you issue no commands to a Friendly swarm, it defends itself
+      but otherwise takes no actions. If a Friendly swarm starts its turn more
+      than 30 feet away from you, your control over that swarm ends, and the
+      swarm behaves as it normally would and can't be swayed by the pipes' music
+      for the next 24 hours.</p>
+    chat: ''
+  identifier: pipes-of-the-sewers
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745440756557
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 25100000
+ownership:
+  default: 0
+_key: '!items!dmgPipesOfTheSew'

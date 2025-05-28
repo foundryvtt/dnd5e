@@ -1,0 +1,105 @@
+_id: NMy4piwXIpLjYbRE
+name: Destroy Undead
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Starting at 5th level, when an undead fails its saving throw against
+      your @UUID[Compendium.dnd5e.classfeatures.Item.r91UIgwFdHwkXdia]{Turn
+      Undead} feature, the creature is instantly destroyed if its challenge
+      rating is at or below a certain threshold, as shown in the table
+      below.</p>
+
+      <table border="1">
+
+      <tbody>
+
+      <tr>
+
+      <td><strong>Cleric Level</strong></td>
+
+      <td><strong>Destroys Undead of CR...</strong></td>
+
+      </tr>
+
+      <tr>
+
+      <td>5th</td>
+
+      <td>1/2 or lower</td>
+
+      </tr>
+
+      <tr>
+
+      <td>8th</td>
+
+      <td>1 or lower</td>
+
+      </tr>
+
+      <tr>
+
+      <td>11th</td>
+
+      <td>2 or lower</td>
+
+      </tr>
+
+      <tr>
+
+      <td>14th</td>
+
+      <td>3 or lower</td>
+
+      </tr>
+
+      <tr>
+
+      <td>17th</td>
+
+      <td>4 or lower</td>
+
+      </tr>
+
+      </tbody>
+
+      </table>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: Cleric 5
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: sear-undead
+flags: {}
+img: icons/magic/death/skull-horned-worn-fire-blue.webp
+effects: []
+folder: hraxTGrJtk9MmXqT
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037383365
+  modifiedTime: 1725992288168
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!NMy4piwXIpLjYbRE'

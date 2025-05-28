@@ -1,0 +1,139 @@
+name: Hallow
+system:
+  description:
+    value: >-
+      <p>You touch a point and infuse an area around it with holy or unholy
+      power. The area can have a radius up to 60 feet, and the spell fails if
+      the radius includes an area already under the effect of <em>Hallow</em>.
+      The affected area has the following effects.</p><p><strong>Hallowed
+      Ward.</strong> Choose any of these creature types: Aberration, Celestial,
+      Elemental, Fey, Fiend, or Undead. Creatures of the chosen types can't
+      willingly enter the area, and any creature that is possessed by or that
+      has the Charmed or Frightened condition from such creatures isn't
+      possessed, Charmed, or Frightened by them while in the
+      area.</p><p><strong>Extra Effect.</strong> You bind an extra effect to the
+      area from the list below:</p><p><strong>Courage.</strong> Creatures of any
+      types you choose can't gain the &amp;Reference[Frightened] condition while
+      in the area.</p><p><strong>Darkness.</strong> Darkness fills the area.
+      Normal light, as well as magical light created by spells of a level lower
+      than this spell, can't illuminate the
+      area.</p><p><strong>Daylight.</strong> Bright light fills the area.
+      Magical Darkness created by spells of a level lower than this spell can't
+      extinguish the light.</p><p><strong>Peaceful Rest</strong>. Dead bodies
+      interred in the area can't be turned into
+      Undead.</p><p><strong>Extradimensional Interference.</strong> Creatures of
+      any types you choose can't enter or exit the area using teleportation or
+      interplanar travel.</p><p><strong>Fear.</strong> Creatures of any types
+      you choose have the &amp;Reference[Frightened] condition while in the
+      area.</p><p><strong>Resistance.</strong> Creatures of any types you choose
+      have &amp;Reference[damageresistance]{Resistance} to one damage type of
+      your choice while in the area.</p><p><strong>Silence.</strong> No sound
+      can emanate from within the area, and no sound can reach into
+      it.</p><p><strong>Tongues.</strong> Creatures of any types you choose can
+      communicate with any other creature in the area even if they don't share a
+      common language.</p><p><strong>Vulnerability.</strong> Creatures of any
+      types you choose have &amp;Reference[damagevulnerability]{Vulnerability}
+      to one damage type of your choice while in the area.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: hour
+    condition: ''
+    value: 24
+  duration:
+    value: ''
+    units: disp
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: radius
+      size: '60'
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: incense worth 1,000+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: hallow
+_id: phbsplHallow0000
+type: spell
+img: icons/magic/symbols/star-inverted-yellow.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 1700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425957791
+  modifiedTime: 1745256794283
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplHallow0000'

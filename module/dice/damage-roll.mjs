@@ -10,6 +10,7 @@ const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, St
  * @typedef {BasicRollProcessConfiguration} DamageRollProcessConfiguration
  * @property {DamageRollConfiguration[]} rolls         Configuration data for individual rolls.
  * @property {CriticalDamageConfiguration} [critical]  Critical configuration for all rolls.
+ * @property {boolean} [isCritical]                    Treat each roll as a critical unless otherwise specified.
  * @property {number} [scaling=0]                      Scale increase above base damage.
  */
 
@@ -45,6 +46,8 @@ const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, St
  * @property {string} [powerfulCritical]  Maximize result of extra dice added by critical, rather than rolling.
  */
 
+/* -------------------------------------------- */
+
 /**
  * A type of Roll specific to a damage (or healing) roll in the 5e system.
  * @param {string} formula                  The string formula to parse.
@@ -69,15 +72,20 @@ export default class DamageRoll extends BasicRoll {
 
   /** @inheritDoc */
   static fromConfig(config, process) {
-    const roll = super.fromConfig(config, process);
-    if ( process.critical ) roll.configureDamage({ critical: process.critical });
-    return roll;
+    if ( process.critical ) {
+      config = foundry.utils.deepClone(config);
+      config.options ??= {};
+      config.options.critical = foundry.utils.mergeObject(
+        process.critical, config.options.critical ?? {}, { inplace: false }
+      );
+    }
+    return super.fromConfig(config, process);
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static async build(config = {}, dialog = {}, message = {}) {
+  static async build(config={}, dialog={}, message={}) {
     config.critical ??= {};
     config.critical.multiplyNumeric ??= game.settings.get("dnd5e", "criticalDamageModifiers");
     config.critical.powerfulCritical ??= game.settings.get("dnd5e", "criticalDamageMaxDice");
@@ -89,8 +97,8 @@ export default class DamageRoll extends BasicRoll {
   /** @override */
   static applyKeybindings(config, dialog, message) {
     const keys = {
-      normal: areKeysPressed(config.event, "skipDialogNormal")
-        || areKeysPressed(config.event, "skipDialogDisadvantage"),
+      default: areKeysPressed(config.event, "skipDialogNormal"),
+      normal: areKeysPressed(config.event, "skipDialogDisadvantage"),
       critical: areKeysPressed(config.event, "skipDialogAdvantage")
     };
 
@@ -100,7 +108,7 @@ export default class DamageRoll extends BasicRoll {
     // Determine critical mode
     for ( const roll of config.rolls ) {
       roll.options ??= {};
-      roll.options.isCritical ??= keys.critical;
+      roll.options.isCritical ??= (config.isCritical || keys.critical) && !keys.normal;
     }
   }
 
@@ -185,7 +193,10 @@ export default class DamageRoll extends BasicRoll {
    * @protected
    */
   configureDamage({ critical={} }={}) {
-    foundry.utils.mergeObject(critical, this.options.critical ?? {});
+    critical = foundry.utils.mergeObject(critical, this.options.critical ?? {}, { inplace: false });
+
+    // Remove previous critical bonus damage
+    this.terms = this.terms.filter(t => !t.options.criticalBonusDamage && !t.options.criticalFlatBonus);
 
     const flatBonus = new Map();
     for ( let [i, term] of this.terms.entries() ) {
@@ -218,13 +229,15 @@ export default class DamageRoll extends BasicRoll {
         }
       }
 
-      // Multiply numeric terms
-      else if ( critical.multiplyNumeric && (term instanceof NumericTerm) ) {
-        term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
-        term.number = term.options.baseNumber;
-        if ( this.isCritical ) {
-          term.number *= (critical.multiplier ?? 2);
-          term.options.critical = true;
+      else if ( term instanceof NumericTerm ) {
+        // Multiply numeric terms
+        if ( critical.multiplyNumeric ) {
+          term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
+          term.number = term.options.baseNumber;
+          if ( this.isCritical ) {
+            term.number *= (critical.multiplier ?? 2);
+            term.options.critical = true;
+          }
         }
       }
     }
@@ -232,16 +245,17 @@ export default class DamageRoll extends BasicRoll {
     // Add powerful critical bonus
     if ( critical.powerfulCritical && flatBonus.size ) {
       for ( const [type, number] of flatBonus.entries() ) {
-        this.terms.push(new OperatorTerm({operator: "+"}));
-        this.terms.push(new NumericTerm({number, options: {flavor: type}}));
+        this.terms.push(new OperatorTerm({ operator: "+", options: { criticalFlatBonus: true } }));
+        this.terms.push(new NumericTerm({ number, options: { flavor: type, criticalFlatBonus: true } }));
       }
     }
 
     // Add extra critical damage term
     if ( this.isCritical && critical.bonusDamage ) {
-      const extra = new Roll(critical.bonusDamage, this.data);
-      if ( !(extra.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
-      this.terms.push(...extra.terms);
+      let extraTerms = new Roll(critical.bonusDamage, this.data).terms;
+      if ( !(extraTerms[0] instanceof OperatorTerm) ) extraTerms.unshift(new OperatorTerm({ operator: "+" }));
+      extraTerms.forEach(t => t.options.criticalBonusDamage = true);
+      this.terms.push(...extraTerms);
     }
 
     // Re-compile the underlying formula
@@ -249,54 +263,6 @@ export default class DamageRoll extends BasicRoll {
 
     // Mark configuration as complete
     this.options.configured = true;
-  }
-
-  /* -------------------------------------------- */
-  /*  Configuration Dialog                        */
-  /* -------------------------------------------- */
-
-  /**
-   * Create a Dialog prompt used to configure evaluation of an existing D20Roll instance.
-   * @param {object} data                     Dialog configuration data
-   * @param {string} [data.title]               The title of the shown dialog window
-   * @param {number} [data.defaultRollMode]     The roll mode that the roll mode select element should default to
-   * @param {string} [data.defaultCritical]     Should critical be selected as default
-   * @param {string} [data.template]            A custom path to an HTML template to use instead of the default
-   * @param {boolean} [data.allowCritical=true] Allow critical hit to be chosen as a possible damage mode
-   * @param {object} options                  Additional Dialog customization options
-   * @returns {Promise<D20Roll|null>}         A resulting D20Roll object constructed with the dialog, or null if the
-   *                                          dialog was closed
-   */
-  async configureDialog(data={}, options={}) {
-    const rolls = await this.constructor.configureDialog([this], data, options);
-    return rolls[0] ?? null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Create a Dialog prompt used to configure evaluation of one or more damage rolls.
-   * @param {DamageRoll[]} rolls                Damage rolls to configure.
-   * @param {object} [data={}]                  Dialog configuration data
-   * @param {string} [data.title]               The title of the shown dialog window
-   * @param {number} [data.defaultRollMode]     The roll mode that the roll mode select element should default to
-   * @param {string} [data.defaultCritical]     Should critical be selected as default
-   * @param {string} [data.template]            A custom path to an HTML template to use instead of the default
-   * @param {boolean} [data.allowCritical=true] Allow critical hit to be chosen as a possible damage mode
-   * @param {object} options                    Additional Dialog customization options
-   * @returns {Promise<D20Roll|null>}           A resulting D20Roll object constructed with the dialog, or null if the
-   *                                            dialog was closed
-   */
-  static async configureDialog(rolls, {
-    title, defaultRollMode, defaultCritical=false, template, allowCritical=true}={}, options={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `configureDialog` on DamageRoll has been deprecated and is now handled through `DamageRoll.build`.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-    );
-    const DialogClass = this.DefaultConfigurationDialog;
-    return await DialogClass.configure(
-      { critical: { allow: allowCritical } }, { options: { title } }, { rollMode: defaultRollMode }
-    );
   }
 
   /* -------------------------------------------- */

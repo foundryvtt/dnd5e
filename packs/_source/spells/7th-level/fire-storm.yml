@@ -1,0 +1,130 @@
+_id: J3uILDYS7MiOfmTJ
+name: Fire Storm
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A storm made up of sheets of roaring flame appears in a location you
+      choose within range. The area of the storm consists of up to ten 10-foot
+      cubes, which you can arrange as you wish. Each cube must have at least one
+      face adjacent to the face of another cube. Each creature in the area must
+      make a Dexterity saving throw. It takes 7d10 fire damage on a failed save,
+      or half as much damage on a successful one.</p><p>The fire damages Objects
+      in the area and ignites flammable Objects that aren't being worn or
+      carried. If you choose, plant life in the area is unaffected by this
+      spell.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cube
+      size: '10'
+      contiguous: false
+  range:
+    value: '150'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 7
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 7
+            denomination: 10
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: fire-storm
+sort: 0
+flags: {}
+img: icons/magic/fire/projectile-meteor-salvo-heavy-red.webp
+effects: []
+folder: irCSpQWIMtp978TA
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037352720
+  modifiedTime: 1725992718686
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!J3uILDYS7MiOfmTJ'

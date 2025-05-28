@@ -1,0 +1,113 @@
+_id: phbdrdCirland000
+name: Circle of the Land
+type: subclass
+folder: 5WSAEI5S847BwZ8e
+img: systems/dnd5e/icons/classes/land.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Celebrate Connection to the Natural
+      World</p></blockquote><p>The Circle of the Land comprises mystics and
+      sages who safeguard ancient knowledge and rites. These Druids meet within
+      sacred circles of trees or standing stones to whisper primal secrets in
+      Druidic. The circle's wisest members preside as the chief priests of their
+      communities.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identifier: land
+  classIdentifier: druid
+  advancement:
+    - _id: amRVULpFLpOQ2gPC
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbdrdLandSpells
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbdrdLandsAid00
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Subclass Features
+    - _id: 9l1ICcnaGx27bdOp
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbdrdNaturalRec
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 6
+      title: Subclass Features
+    - _id: tQpnSPCulIWNV3ZV
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbdrdNaturesWar
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 10
+      title: Subclass Features
+    - _id: tdzTZSOWJgyhnk5X
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbdrdNaturesSan
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 14
+      title: Subclass Features
+    - _id: 3QzkY4MkeL5QLWfM
+      type: ScaleValue
+      configuration:
+        identifier: lands-aid
+        type: dice
+        distance:
+          units: ''
+        scale:
+          '3':
+            number: 2
+            faces: 6
+            modifiers: []
+          '10':
+            number: 3
+            faces: 6
+            modifiers: []
+          '14':
+            number: 4
+            faces: 6
+            modifiers: []
+      value: {}
+      title: Lands Aid Damage
+      hint: ''
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation:
+      formula: ''
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866583501
+  modifiedTime: 1745256761026
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+_key: '!items!phbdrdCirland000'

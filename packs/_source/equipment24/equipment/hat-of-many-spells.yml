@@ -1,0 +1,489 @@
+_id: dmgHatOfManySpel
+name: Hat of Many Spells
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/head/hat-pointed-leather-purple.webp
+system:
+  activities:
+    DLxZ5QtUv2iqJrUl:
+      type: check
+      name: Unknown Spell Check
+      _id: DLxZ5QtUv2iqJrUl
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '9'
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - arc
+        dc:
+          calculation: ''
+          formula: 10 + @scaling
+        ability: ''
+      img: ''
+      appliedEffects: []
+    FP4ljN4wxHN6eDyy:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplEnlargeRed
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: FP4ljN4wxHN6eDyy
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    B7ruAG3G8KyYSNXL:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFaerieFire
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: B7ruAG3G8KyYSNXL
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    1Oov0JtLLqUAI5g2:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFireball00
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: 1Oov0JtLLqUAI5g2
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    iMR8V4vNeUNVrl7e:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplInvisibili
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: iMR8V4vNeUNVrl7e
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    IPT9TqSywIaDcipD:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplLightningB
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: IPT9TqSywIaDcipD
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    QvbApkrkH2Nn5qnF:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbPhantasmalFor
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: QvbApkrkH2Nn5qnF
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    Gk6b31UEgbMYpKUk:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplPolymorph0
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: Gk6b31UEgbMYpKUk
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    mqMYCmjvPFOaDSKv:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplStinkingCl
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: mqMYCmjvPFOaDSKv
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Very Rare (Requires Attunement by a
+      Wizard)</em></p><p>This pointed hat has the following
+      properties.</p><p><em><strong>Spellcasting Focus.</strong></em> While
+      holding the hat, you can use it as a Spellcasting Focus for your Wizard
+      spells. Any spell you cast using the hat gains a special Somatic
+      component: you must reach into the hat and "pull" the spell out of
+      it.</p><p><em><strong>Unknown Spell.</strong></em> While holding the hat,
+      you can try to cast a level 1+ spell you don't know. The spell must be on
+      the Wizard spell list, it must be of a level you can cast, and it can't
+      have Material components costing more than 1,000 GP. Once you decide on
+      the spell, you must expend a spell slot of the spell's level. Then, to
+      determine whether you cast the spell, make an Intelligence (Arcana) check
+      (DC 10 plus the spell's level). On a successful check, you cast the spell
+      using its normal casting time, and you can't use this property again until
+      you finish a Short or Long Rest. On a failed check, you fail to cast the
+      spell and a random effect occurs instead, determined by rolling on the
+      following table.</p><p>Any spell you cast from the hat uses your spell
+      save DC and spell attack bonus.</p><details><summary>Roll
+      Table</summary><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgHatOfManySpel
+      caption=false rollable]</p></details>
+    chat: ''
+  identifier: hat-of-many-spells
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - foc
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745611849020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 17700000
+ownership:
+  default: 0
+_key: '!items!dmgHatOfManySpel'

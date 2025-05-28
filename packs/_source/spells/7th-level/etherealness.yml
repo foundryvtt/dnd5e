@@ -1,0 +1,126 @@
+_id: PQuEgKyCdovOvhqN
+name: Etherealness
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You step into the border regions of the Ethereal Plane, in the area
+      where it overlaps with your current plane. You remain in the Border
+      Ethereal for the Duration or until you use your action to dismiss the
+      spell. During this time, you can move in any direction. If you move up or
+      down, every foot of Movement costs an extra foot. You can see and hear the
+      plane you originated from, but everything there looks gray, and you can't
+      see anything more than 60 feet away.</p><p>While on the Ethereal Plane,
+      you can only affect and be affected by other creatures on that plane.
+      Creatures that aren't on the Ethereal Plane can't perceive you and can't
+      interact with you, unless a special ability or magic has given them the
+      ability to do so.</p><p>You ignore all Objects and Effects that aren't on
+      the Ethereal Plane, allowing you to move through objects you perceive on
+      the plane you originated from.</p><p>When the spell ends, you immediately
+      return to the plane you originated from in the spot you currently occupy.
+      If you occupy the same spot as a solid object or creature when this
+      happens, you are immediately shunted to the nearest unoccupied space that
+      you can occupy and take force damage equal to twice the number of feet you
+      are moved.</p><p>This spell has no effect if you cast it while you are on
+      the Ethereal Plane or a plane that doesn't border it, such as one of the
+      Outer Planes.</p><p><strong>At Higher Levels.</strong> When you cast this
+      spell using a spell slot of 8th level or higher, you can target up to
+      three willing creatures (including you) for each slot level above 7th. The
+      creatures must be within 10 feet of you when you cast the spell.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 7
+  school: trs
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: etherealness
+sort: 0
+flags: {}
+img: icons/magic/air/fog-gas-smoke-swirling-white.webp
+effects: []
+folder: irCSpQWIMtp978TA
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037355586
+  modifiedTime: 1725992719656
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!PQuEgKyCdovOvhqN'

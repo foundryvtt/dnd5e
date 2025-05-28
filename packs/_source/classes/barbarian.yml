@@ -1,0 +1,540 @@
+_id: pvEzGSv71zBhaolc
+name: Barbarian
+type: class
+img: icons/skills/melee/hand-grip-sword-orange.webp
+system:
+  description:
+    value: >-
+      <p>As a barbarian, you gain the following class features.</p><h3>Hit
+      Points</h3><p><strong>Hit Dice:</strong> 1d12 per barbarian level<br
+      /><strong>Hit Points at 1st Level:</strong> 12 + your Constitution
+      modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d12 (or 7) +
+      your Constitution modifier per barbarian level after
+      1st</p><h3>Proficiencies</h3><p><strong>Armor:</strong> Light armor,
+      medium armor, shields<br /><strong>Weapons:</strong> Simple weapons,
+      martial weapons<br /><strong>Tools:</strong> None<br /><strong>Saving
+      Throws:</strong> Strength, Constitution<br /><strong>Skills:</strong>
+      Choose two from Animal Handling, Athletics, Intimidation, Nature,
+      Perception, and Survival</p><h1>Barbarian Advancement</h1><table
+      border="0"><thead><tr><td>Level</td><td>Proficiency
+      Bonus</td><td>Features</td><td>Rages</td><td>Rage
+      Damage</td></tr></thead><tbody><tr><td>1st</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.VoR0SUrNX5EJVPIO]{Rage},
+      @UUID[Compendium.dnd5e.classfeatures.Item.SZbsNbaxFFGwBpNK]{Unarmored
+      Defense}</td><td>2</td><td>+2</td></tr><tr><td>2nd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.SCVjqRdlZ9cvHVSR]{Reckless
+      Attack},
+      @UUID[Compendium.dnd5e.classfeatures.Item.vt31lWAULygEl7yk]{Danger
+      Sense}</td><td>2</td><td>+2</td></tr><tr><td>3rd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.TH1QAf6YNGSeBVjT]{Primal
+      Path}</td><td>3</td><td>+2</td></tr><tr><td>4th</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score
+      Improvement}</td><td>3</td><td>+2</td></tr><tr><td>5th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.XogoBnFWmCAHXppo]{Extra
+      Attack}, @UUID[Compendium.dnd5e.classfeatures.Item.Kl6zifJ5OmdHlOi2]{Fast
+      Movement}</td><td>3</td><td>+2</td></tr><tr><td>6th</td><td>+3</td><td>Path
+      feature</td><td>4</td><td>+2</td></tr><tr><td>7th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.NlXslw4yAqmKZWtN]{Feral
+      Instinct}</td><td>4</td><td>+2</td></tr><tr><td>8th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score
+      Improvement}</td><td>4</td><td>+2</td></tr><tr><td>9th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.L94gyvNpUhUe0rwh]{Brutal
+      Critical (1
+      die)}</td><td>4</td><td>+3</td></tr><tr><td>10th</td><td>+4</td><td>Path
+      feature</td><td>4</td><td>+3</td></tr><tr><td>11th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.FqfmbPgxiyrWzhYk]{Relentless
+      Rage}</td><td>4</td><td>+3</td></tr><tr><td>12th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score
+      Improvement}</td><td>5</td><td>+3</td></tr><tr><td>13th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.L94gyvNpUhUe0rwh]{Brutal
+      Critical (2
+      dice)}</td><td>5</td><td>+3</td></tr><tr><td>14th</td><td>+5</td><td>Path
+      feature</td><td>5</td><td>+3</td></tr><tr><td>15th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.l8tUhZ5Pecm9wz7I]{Persistent
+      Rage}</td><td>5</td><td>+3</td></tr><tr><td>16th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score
+      Improvement}</td><td>5</td><td>+4</td></tr><tr><td>17th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.L94gyvNpUhUe0rwh]{Brutal
+      Critical (3
+      dice)}</td><td>6</td><td>+4</td></tr><tr><td>18th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.Q1exex5ALteprrPo]{Indomitable
+      Might}</td><td>6</td><td>+4</td></tr><tr><td>19th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score
+      Improvement}</td><td>6</td><td>+4</td></tr><tr><td>20th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.jVU4AgqfrFaqgXns]{Primal
+      Champion}</td><td>Unlimited</td><td>+4</td></tr></tbody></table><h1>Primal
+      Paths</h1><p>@UUID[Compendium.dnd5e.subclasses.Item.uGuDQX9Mz3oHNHkU]{Path
+      of the Berserker}</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: barbarian
+  levels: 1
+  hitDice: d12
+  hitDiceUsed: 0
+  advancement:
+    - _id: 5jn0ekktgccyvvpw
+      type: HitPoints
+      configuration: {}
+      value: {}
+      title: ''
+    - _id: fjwU0G5OtTZWOkib
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - armor:lgt
+          - armor:med
+          - armor:shl
+        choices: []
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - _id: sFas4Tifj7zKgmkY
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - weapon:sim
+          - weapon:mar
+        choices: []
+      level: 1
+      title: ''
+      value:
+        chosen: []
+    - _id: CmX808i8HaWZ7VMx
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - saves:str
+          - saves:con
+        choices: []
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - _id: lD3JBViqmxFYu0kc
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:ani
+              - skills:ath
+              - skills:itm
+              - skills:nat
+              - skills:prc
+              - skills:sur
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - armor:shl
+        choices: []
+      level: 1
+      title: ''
+      _id: 3ETNrLc8RQlHwNXP
+      classRestriction: secondary
+      value:
+        chosen: []
+    - _id: amez6rlose3eoigo
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.VoR0SUrNX5EJVPIO
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.SZbsNbaxFFGwBpNK
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 1
+      title: Features
+    - _id: udl318k61boq0rnn
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.SCVjqRdlZ9cvHVSR
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.vt31lWAULygEl7yk
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 2
+      title: Features
+    - _id: 8y2ey740kizr4jb6
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.TH1QAf6YNGSeBVjT
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 3
+      title: Features
+    - _id: uoexdq8totskritb
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.XogoBnFWmCAHXppo
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.Kl6zifJ5OmdHlOi2
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 5
+      title: Features
+    - _id: w6ceiqibcmzpcuy8
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.NlXslw4yAqmKZWtN
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 7
+      title: Features
+    - _id: ty9si22p6pfwb3ow
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.L94gyvNpUhUe0rwh
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 9
+      title: Features
+    - _id: 802xi5l50le3ntk8
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.FqfmbPgxiyrWzhYk
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 11
+      title: Features
+    - _id: g9ut0x1ugm31gbhk
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.l8tUhZ5Pecm9wz7I
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 15
+      title: Features
+    - _id: so18afasiyobkpxy
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.Q1exex5ALteprrPo
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 18
+      title: Features
+    - _id: 9hvtrqbg7d7zwg07
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.jVU4AgqfrFaqgXns
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 20
+      title: Features
+    - _id: 62svnflxsuad7oar
+      type: ScaleValue
+      configuration:
+        identifier: rages
+        type: number
+        scale:
+          '1':
+            value: 2
+          '3':
+            value: 3
+          '6':
+            value: 4
+          '12':
+            value: 5
+          '17':
+            value: 6
+          '20':
+            value: 999
+        distance:
+          units: ''
+      value: {}
+      title: Rages
+    - _id: t42incolsbuqn2ec
+      type: ScaleValue
+      configuration:
+        identifier: rage-damage
+        type: number
+        scale:
+          '1':
+            value: 2
+          '9':
+            value: 3
+          '16':
+            value: 4
+        distance:
+          units: ''
+      value: {}
+      title: Rage Damage
+    - _id: y0kr48pnq5doebeb
+      type: ScaleValue
+      configuration:
+        identifier: brutal-critical
+        type: number
+        scale:
+          '9':
+            value: 1
+          '13':
+            value: 2
+          '17':
+            value: 3
+        distance:
+          units: ''
+      value: {}
+      title: Brutal Critical Dice
+    - _id: dZHMy3530RPCjzvD
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 4
+      title: ''
+    - _id: dBMWU3h8MBO4PcEm
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 8
+      title: ''
+    - _id: nROeTbeO8vrGjqAp
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 12
+      title: ''
+    - _id: prZMkvcCNoLvF4yB
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 16
+      title: ''
+    - _id: puDaUsYrlks0z5gm
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 19
+      title: ''
+    - _id: ok09058sgbpt0w6b
+      type: Subclass
+      configuration: {}
+      value: {}
+      level: 3
+      title: Primal Path
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation: {}
+  startingEquipment:
+    - type: OR
+      _id: ibzIV7v9EHcUb8TP
+      group: ''
+      sort: 100000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.1Lxk6kmoRhG8qQ0u
+      _id: 6fTt5110T0AI6UGu
+      group: ibzIV7v9EHcUb8TP
+      sort: 400000
+      requiresProficiency: false
+    - type: weapon
+      count: null
+      key: martialM
+      _id: 4dE11X5bLs1OUNgg
+      group: ibzIV7v9EHcUb8TP
+      sort: 500000
+      requiresProficiency: false
+    - type: OR
+      _id: Qc9WbViMpWP8QWWY
+      group: ''
+      sort: 200000
+      requiresProficiency: false
+    - type: linked
+      count: 2
+      key: Compendium.dnd5e.items.Item.eO7Fbv5WBk5zvGOc
+      _id: YE3Asa2h2sLH52t6
+      group: Qc9WbViMpWP8QWWY
+      sort: 600000
+      requiresProficiency: false
+    - type: weapon
+      count: null
+      key: sim
+      _id: hFCffUR4KAtVWSxs
+      group: Qc9WbViMpWP8QWWY
+      sort: 700000
+      requiresProficiency: false
+    - type: AND
+      _id: UYICcIEggAxtVjw9
+      group: ''
+      sort: 300000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.8KWz5DJbWUpNWniP
+      _id: tCQ3ARfynhsldy40
+      group: UYICcIEggAxtVjw9
+      sort: 800000
+      requiresProficiency: false
+    - type: linked
+      count: 4
+      key: Compendium.dnd5e.items.Item.DWLMnODrnHn8IbAG
+      _id: MzzYDxTlR3mkfPmC
+      group: UYICcIEggAxtVjw9
+      sort: 900000
+      requiresProficiency: false
+  wealth: 2d4 * 10
+  primaryAbility:
+    value: []
+    all: true
+effects: []
+folder: ZTP0KiGOdRqUKVvZ
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037371252
+  modifiedTime: 1725992280752
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!pvEzGSv71zBhaolc'

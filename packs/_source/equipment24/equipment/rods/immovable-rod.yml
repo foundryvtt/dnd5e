@@ -1,0 +1,167 @@
+_id: dmgImmovableRod0
+name: Immovable Rod
+type: equipment
+folder: XVIITMl9kCCSjZQz
+img: icons/commodities/tech/pipe-lead-closed.webp
+system:
+  activities:
+    a9ZLyGvSKD1k33nC:
+      type: utility
+      name: Make Immovable
+      _id: a9ZLyGvSKD1k33nC
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      roll:
+        prompt: false
+        visible: false
+    PweONVtDaHGqDRnZ:
+      type: check
+      name: Attempt to Move
+      _id: PweONVtDaHGqDRnZ
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '30'
+        ability: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Rod, Uncommon</em></p><p>This iron rod has a button on one end. You
+      can take a Utilize action to press the button, which causes the rod to
+      become magically fixed in place. Until you or another creature takes a
+      Utilize action to push the button again, the rod doesn't move, even if it
+      defies gravity. The rod can hold up to 8,000 pounds of weight. More weight
+      causes the rod to deactivate and fall. A creature can take a Utilize
+      action to make a DC 30 Strength (Athletics) check, moving the fixed rod up
+      to 10 feet on a successful check.</p>
+    chat: ''
+  identifier: immovable-rod
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: rod
+    baseItem: ''
+  properties:
+    - foc
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712700892
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 300000
+ownership:
+  default: 0
+_key: '!items!dmgImmovableRod0'

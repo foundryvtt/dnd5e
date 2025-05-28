@@ -1,0 +1,113 @@
+_id: zRDERBe0lMbwyGwN
+name: Repulsion Breath
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>**Repulsion Breath.** The [[lookup @details.type.config.label
+      lowercase]] exhales repulsion energy in a 30-foot cone. Each creature in
+      that area must succeed on a  <strong>DC 19 Strength</strong> saving throw.
+      On a failed save, the creature is pushed 60 feet away from the [[lookup
+      @details.type.config.label lowercase]].</p>
+
+      </section>
+
+      <p>The [[lookup @details.type.config.label lowercase]] exhales repulsion
+      energy in a 30-foot cone. Each creature in that area must make a
+      <strong>Strength</strong> saving throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: cone
+          size: '30'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: str
+        dc:
+          calculation: ''
+          formula: '19'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: repulsion-breath
+flags: {}
+img: icons/magic/air/air-wave-gust-blue.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304979022
+  modifiedTime: 1725992575168
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!zRDERBe0lMbwyGwN'

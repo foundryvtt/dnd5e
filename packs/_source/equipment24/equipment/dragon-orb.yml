@@ -1,0 +1,542 @@
+_id: dmgOrbOfDragonki
+name: Dragon Orb
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/gems/pearl-storm.webp
+system:
+  activities:
+    QXD871jxeGxxNH2j:
+      type: save
+      name: Attunement Save
+      _id: QXD871jxeGxxNH2j
+      sort: 100000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: raPJlnmYfmMnMEE3
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: cha
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects: []
+    FaXepcc5YH9rqwu7:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplSuggestion
+        challenge:
+          attack: null
+          save: 18
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: false
+      _id: FaXepcc5YH9rqwu7
+      sort: 200000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    gU19MBO5R6a6xhIX:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplCureWounds
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '9'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: gU19MBO5R6a6xhIX
+      sort: 400000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '4'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    OQftVaabJyONkpL3:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDaylight00
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: OQftVaabJyONkpL3
+      sort: 500000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    tUFymm8hAKT7VZul:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDeathWard0
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: tUFymm8hAKT7VZul
+      sort: 600000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    QDkpJHMmqFX13rKr:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: QDkpJHMmqFX13rKr
+      sort: 700000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    FJYPyl7amErsBC3X:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplScrying000
+        challenge:
+          attack: null
+          save: 18
+          override: true
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: FJYPyl7amErsBC3X
+      sort: 800000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '3'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    KNtsQw6UPEuzR1Qu:
+      type: utility
+      name: Call Dragons
+      _id: KNtsQw6UPEuzR1Qu
+      sort: 150000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: mi
+        special: ''
+        value: '40'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: Chromatic Dragons
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Artifact (Requires Attunement)</em></p><section
+      class="secret" id="secret-giR5yoa8kkJFGmuP"><p>While attuned to an orb,
+      you can take a Magic action to peer into the orb's depths. You must then
+      make a DC 15 Charisma saving throw. On a successful save, you control the
+      orb for as long as you remain attuned to it. On a failed save, the orb
+      imposes the Charmed condition on you for as long as you remain attuned to
+      it.</p><p>While you are Charmed by the orb, you can't voluntarily end your
+      Attunement to it, and the orb casts
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplSuggestion]{Suggestion} on you
+      at will (save DC 18), urging you to work toward the evil ends it desires.
+      The dragon essence within the orb might want many things: the annihilation
+      of a particular society or organization, freedom from the orb, to spread
+      suffering in the world, to advance the worship of Tiamat, or something
+      else the GM decides.</p><p><em><strong>Destroying an Orb.</strong></em> An
+      <em>Dragon Orb</em> has AC 20 and is destroyed if it takes damage from a
+      <em>+3 Weapon</em> or a
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplDisintegra]{Disintegrate}
+      spell. Nothing else can harm it.</p></section><p>An orb is an etched
+      crystal globe about 10 inches in diameter. When used, it grows to about 20
+      inches in diameter, and mist swirls inside
+      it.</p><p><em><strong>Spells.</strong></em> The orb has 7 charges and
+      regains 1d4 + 3 expended charges daily at dawn. If you control the orb,
+      you can cast one of the spells on the following table from it. The table
+      indicates how many charges you must expend to cast the
+      spell.</p><table><thead><tr><th><p>Spell</p></th><th><p>Charge
+      Cost</p></th><th></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure
+      Wounds} (level 9
+      version)</p></td><td><p>4</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplDaylight00]{Daylight}</p></td><td><p>1</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplDeathWard0]{Death
+      Ward}</p></td><td><p>2</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect
+      Magic}</p></td><td><p>0</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplScrying000]{Scrying}
+      (save DC
+      18)</p></td><td><p>3</p></td><td></td></tr></tbody></table><p><em><strong>Call
+      Dragons.</strong></em> While you control the orb, you can take a Magic
+      action to cause the orb to issue a telepathic call that extends in all
+      directions for 40 miles. Chromatic dragons in range feel compelled to come
+      to the orb as soon as possible by the most direct route. Dragon deities
+      such as Tiamat are unaffected by this call. Chromatic dragons drawn to the
+      orb might be Hostile toward you for compelling them against their will.
+      Once you have used this property, it can't be used again for 1 hour.</p>
+    chat: ''
+  identifier: dragon-orb
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: artifact
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Charmed
+    img: systems/dnd5e/icons/svg/statuses/charmed.svg
+    origin: Compendium.dnd5e.equipment24.Item.dmgOrbOfDragonki
+    transfer: false
+    _id: raPJlnmYfmMnMEE3
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - charmed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730689159090
+      modifiedTime: 1730689175797
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgOrbOfDragonki.raPJlnmYfmMnMEE3'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712701746
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 24200000
+ownership:
+  default: 0
+_key: '!items!dmgOrbOfDragonki'

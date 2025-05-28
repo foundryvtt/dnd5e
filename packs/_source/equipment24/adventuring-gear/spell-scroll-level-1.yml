@@ -1,0 +1,79 @@
+name: Spell Scroll, Level 1
+system:
+  description:
+    value: >-
+      <p>A @UUID[Compendium.dnd5e.equipment24.Item.phbagCantripScro]{Spell
+      Scroll (Cantrip)} or <em>Spell Scroll</em> (Level 1) is a magic item that
+      bears the words of a cantrip or level 1 spell, respectively, determined by
+      the scroll's creator. If the spell is on your class's spell list, you can
+      read the scroll and cast the spell using its normal casting time and
+      without providing any Material components.</p><p>If the spell requires a
+      saving throw or an attack roll, the spell save DC is 13, and the attack
+      bonus is +5. The scroll disintegrates when the casting is completed.</p>
+    chat: ''
+  price:
+    value: 50
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: true
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: scroll
+    subtype: ''
+  magicalBonus: null
+  properties:
+    - mgc
+  activities: {}
+  identifier: spell-scroll-level-1
+_id: phbagSpellScroll
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/scrolls/scroll-bound-blue-white.webp
+effects: []
+sort: 6000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425912111
+  modifiedTime: 1745256812936
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagSpellScroll'

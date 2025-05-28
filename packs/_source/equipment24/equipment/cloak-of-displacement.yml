@@ -1,0 +1,114 @@
+_id: dmgCloakOfDispla
+name: Cloak of Displacement
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/back/cloak-brown-accent-brown-layered-collared-fur.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Rare (Requires
+      Attunement)</em></p></div><p>While you wear this cloak, it magically
+      projects an illusion that makes you appear to be standing in a place near
+      your actual location, causing any creature to have Disadvantage on attack
+      rolls against you. If you take damage, the property ceases to function
+      until the start of your next turn. This property is suppressed while your
+      Speed is 0.</p><section class="secret"
+      id="secret-KZyJxkDneNgXCh7U"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Displacement Suppressed</strong> effect is optionally provided to
+      toggle as an indicator of the cloak's temporarily ceased
+      functionality.</p></section>
+    chat: ''
+  identifier: cloak-of-displacement
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Displacement Suppressed
+    img: icons/magic/control/debuff-chains-orb-movement-blue.webp
+    _id: LeHRRFBeh8gH0Us8
+    type: base
+    system: {}
+    changes: []
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>If you take damage, the property ceases to function until the start of
+      your next turn. This property is suppressed while your Speed is 0.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729009205184
+      modifiedTime: 1729010503430
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgCloakOfDispla.LeHRRFBeh8gH0Us8'
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712698663
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7700000
+ownership:
+  default: 0
+_key: '!items!dmgCloakOfDispla'

@@ -1,0 +1,54 @@
+_id: phbrgrHuntersLor
+name: Hunter's Lore
+type: feat
+folder: GWWL7NqfCEyqwfhZ
+img: icons/creatures/eyes/humanoid-single-blind.webp
+system:
+  description:
+    value: >-
+      <p>You can call on the forces of nature to reveal certain strengths and
+      weaknesses of your prey. While a creature is marked by your <em>Hunter's
+      Mark</em>, you know whether that creature has any Immunities, Resistances,
+      or Vulnerabilities, and if the creature has any, you know what they
+      are.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: hunters-lore
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866564824
+  modifiedTime: 1745256764962
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 300000
+ownership:
+  default: 0
+_key: '!items!phbrgrHuntersLor'

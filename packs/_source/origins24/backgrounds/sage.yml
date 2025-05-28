@@ -1,0 +1,161 @@
+name: Sage
+system:
+  description:
+    value: >-
+      <p><strong>Ability Scores:</strong> Constitution, Intelligence,
+      Wisdom</p><p><strong>Feat:</strong>
+      @UUID[Compendium.dnd5e.feats24.Item.phbftMagicInitia]{Magic Initiate}
+      (Wizard)</p><p><strong>Skill Proficiencies:</strong> Arcana and
+      History</p><p><strong>Tool Proficiency:</strong> Calligrapher's
+      Supplies</p><p><strong>Equipment:</strong> <em>Choose A or B:</em> (A)
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepQuartersta]{Quarterstaff},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbtulCalligraph]{Calligrapher's
+      Supplies}, @UUID[Compendium.dnd5e.equipment24.Item.phbagBook0000000]{Book}
+      (history),
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagParchment00]{Parchment} (8
+      sheets), @UUID[Compendium.dnd5e.equipment24.Item.phbagRobe0000000]{Robe},
+      8 GP; or (B) 50
+      GP</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixBackg.JournalEntryPage.phbbgSage0000000
+      inline classes="free-rules-embed"]</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  startingEquipment:
+    - type: AND
+      requiresProficiency: false
+      _id: uRcBoDkXkBGLcAZa
+      group: ''
+      sort: 100000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbwepQuartersta
+      requiresProficiency: false
+      _id: xLC7HRRS752ZwUWt
+      group: uRcBoDkXkBGLcAZa
+      sort: 200000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbtulCalligraph
+      requiresProficiency: false
+      _id: fHJXE95uLEXFOpM3
+      group: uRcBoDkXkBGLcAZa
+      sort: 300000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbagBook0000000
+      requiresProficiency: false
+      _id: ChFHtKBM5dzyV084
+      group: uRcBoDkXkBGLcAZa
+      sort: 400000
+    - type: linked
+      count: 8
+      key: Compendium.dnd5e.equipment24.Item.phbagParchment00
+      requiresProficiency: false
+      _id: c1HLvf7xNWmkdpms
+      group: uRcBoDkXkBGLcAZa
+      sort: 500000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbagRobe0000000
+      requiresProficiency: false
+      _id: Hnd8cbnz7zj8A7SL
+      group: uRcBoDkXkBGLcAZa
+      sort: 600000
+  identifier: sage
+  advancement:
+    - _id: 3O61L5uTy5jRCqJb
+      type: AbilityScoreImprovement
+      configuration:
+        cap: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked:
+          - str
+          - dex
+          - cha
+        points: 3
+      value:
+        type: asi
+      level: 0
+      title: Background Ability Score Improvement
+      hint: >-
+        Your background allows you to increase your Constitution, Intelligence,
+        and Wisdom scores; increase one of them by 2 and a different one by 1,
+        or increase all three by 1. None of these increases can raise a score
+        above 20.
+    - _id: DMd8rikwPlZdpP1l
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - tool:art:calligrapher
+          - skills:arc
+          - skills:his
+        choices: []
+      value:
+        chosen: []
+      level: 0
+      title: Background Proficiencies
+      hint: >-
+        Your background grants you proficiency in Arcana and History. It also
+        grants you proficiency with Calligrapher's Supplies.
+    - _id: kKt7VMmZUuRr35dP
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.feats24.Item.phbftMagicInitia
+        optional: false
+        spell: null
+      value: {}
+      level: 0
+      title: Background Feat
+      hint: Your backgrounds grants you the Magic Initiate (Wizard) feat.
+    - _id: pLGiyOjTP7nwuwTl
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - languages:standard:common
+        choices:
+          - count: 2
+            pool:
+              - languages:standard:*
+      value:
+        chosen: []
+      level: 0
+      title: Choose Languages
+      hint: >-
+        Your character knows at least three languages: Common plus two languages
+        you roll or choose from the Standard Languages table.
+  wealth: '50'
+_id: phbbgSage0000000
+type: background
+img: icons/sundries/books/book-open-brown.webp
+effects: []
+folder: ysJSs3cbEBOMC1zV
+sort: 100098
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866663056
+  modifiedTime: 1745687918108
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbbgSage0000000'

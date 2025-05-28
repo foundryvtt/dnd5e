@@ -1,0 +1,240 @@
+name: Golden Lions
+system:
+  description:
+    value: >-
+      <p><em>See
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgFigurineOfWon]{Figurine of
+      Wondrous Power}</em></p><p>These gold statuettes of lions are always
+      created in pairs. You can use one figurine or both simultaneously. Each
+      can become a
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmLion0000000000]{Lion}</strong>
+      for up to 1 hour. Once a lion has been used, it can't be used again until
+      7 days have passed.</p><section class="secret"
+      id="secret-e1wLN4czlgS5CpcW"><p><strong>Foundry Note</strong></p><p>Each
+      <strong>Use Lion</strong> activity has limited uses which represent the 7
+      days required before that particular paired figurine can be used
+      again.</p></section>
+    chat: ''
+  price:
+    value: 4000
+    denomination: gp
+  activities:
+    hMYKwe3M3sc1GafD:
+      type: summon
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '7'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        value: '60'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: unoccupied space
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: day
+            type: formula
+            formula: '1'
+        max: '7'
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: EgCV0cs5EPQgUJOh
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobLion000000
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+      name: Use First Lion
+      _id: hMYKwe3M3sc1GafD
+      img: ''
+      appliedEffects: []
+    V9aP1F5pHMZTARve:
+      type: summon
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '7'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        value: '60'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: unoccupied space
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: day
+            type: formula
+            formula: '1'
+        max: '7'
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: EgCV0cs5EPQgUJOh
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobLion000000
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+      name: Use Second Lion
+      _id: V9aP1F5pHMZTARve
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  identifier: golden-lions-rare
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+_id: dmgFwpGoldenLion
+type: equipment
+img: icons/commodities/claws/claw-bear-brown-grey.webp
+effects: []
+folder: EK3hCTgvAmjsKlfl
+sort: 150000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729781683569
+  modifiedTime: 1745712700111
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgFwpGoldenLion'

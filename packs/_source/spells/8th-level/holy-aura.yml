@@ -1,0 +1,160 @@
+_id: j8S49Rea8b1640Zi
+name: Holy Aura
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Divine light washes out from you and coalesces in a soft radiance in a
+      30-foot radius around you. Creatures of your choice in that radius when
+      you cast this spell shed dim light in a 5-foot radius and have advantage
+      on all Saving Throws, and other creatures have disadvantage on Attack
+      rolls against them until the spell ends. In addition, when a fiend or an
+      Undead hits an affected creature with a melee attack, the aura flashes
+      with brilliant light. The attacker must succeed on a Constitution saving
+      throw or be Blinded until the spell ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: radius
+      size: '30'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 8
+  school: abj
+  materials:
+    value: >-
+      A tiny reliquary worth at least 1,000 gp containing a sacred relic, such
+      as a scrap of cloth from a saint's robe or a piece of parchment from a
+      religious text
+    consumed: false
+    cost: 1000
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: holy-aura
+sort: 0
+flags: {}
+img: icons/magic/control/buff-flight-wings-runes-blue-white.webp
+effects: []
+folder: x1XTiOgx4DJ34wc5
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037363483
+  modifiedTime: 1725992722229
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!j8S49Rea8b1640Zi'

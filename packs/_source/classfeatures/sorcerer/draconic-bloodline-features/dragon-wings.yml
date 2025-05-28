@@ -1,0 +1,103 @@
+_id: 3647zjKSE9zFwOXc
+name: Dragon Wings
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>At 14th level, you gain the ability to sprout a pair of dragon wings
+      from your back, gaining a flying speed equal to your current speed. You
+      can create these wings as a bonus action on your turn. They last until you
+      dismiss them as a bonus action on your turn.</p><p>You can't manifest your
+      wings while wearing armor unless the armor is made to accommodate them,
+      and clothing not made to accommodate your wings might be destroyed when
+      you manifest them.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Draconic Bloodline 14
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: bonus
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: dragon-wings
+flags: {}
+img: icons/creatures/abilities/wing-batlike-white-blue.webp
+effects: []
+folder: IDrXx9YvOrbmM699
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037379533
+  modifiedTime: 1725992286902
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!3647zjKSE9zFwOXc'

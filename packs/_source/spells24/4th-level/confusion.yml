@@ -1,0 +1,168 @@
+name: Confusion
+system:
+  description:
+    value: >-
+      <p>Each creature in a 10-foot-radius Sphere centered on a point you choose
+      within range must succeed on a Wisdom saving throw, or that target can't
+      take Bonus Actions or Reactions and must roll 1d10 at the start of each of
+      its turns to determine its behavior for that turn, consulting the table
+      below.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.phbsplConfusionB
+      rollable cite=false classes="caption-top"]{Behavior for the Turn}</p><p>At
+      the end of each of its turns, an affected target repeats the save, ending
+      the spell on itself on a success.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> The Sphere's radius increases by 5 feet for each spell slot
+      level above 4.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ft
+      type: sphere
+      size: '@item.level * 5 - 10'
+      contiguous: false
+      count: ''
+  range:
+    value: '90'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: enc
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: three nut shells
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: VxmsgUz9OIUet6WC
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: confusion
+_id: phbsplConfusion0
+type: spell
+img: icons/magic/symbols/question-stone-yellow.webp
+effects:
+  - name: Confused
+    origin: Compendium.dnd5e.spells24.Item.phbsplConfusion0
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/symbols/question-stone-yellow.webp
+    _id: VxmsgUz9OIUet6WC
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The target can’t take Bonus Actions or Reactions and must roll 1d10 at
+      the start of each of its turns to determine its behavior for that turn,
+      consulting the table
+      below.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.phbsplConfusionB
+      rollable cite=false classes="caption-top"]{Behavior for the Turn}</p><p>At
+      the end of each of its turns, an affected target repeats the [[/save
+      ability=wis]] save, ending the spell on itself on a success.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplConfusion0.VxmsgUz9OIUet6WC'
+folder: qi3IbnEwap7mRw4b
+sort: 3200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425946258
+  modifiedTime: 1745256788584
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplConfusion0'

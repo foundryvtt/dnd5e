@@ -1,0 +1,86 @@
+_id: NlXslw4yAqmKZWtN
+name: Feral Instinct
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>By 7th level, your instincts are so honed that you have advantage on
+      initiative rolls.</p><p>Additionally, if you are surprised at the
+      beginning of combat and aren't incapacitated, you can act normally on your
+      first turn, but only if you enter your rage before doing anything else on
+      that turn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: Barbarian 7
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: feral-instinct
+flags: {}
+img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+effects:
+  - _id: q7TkJQX7PeVOzTQH
+    changes:
+      - key: system.attributes.init.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.o1i0LwvZQPm0Bxpa
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Feral Instinct
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!NlXslw4yAqmKZWtN.q7TkJQX7PeVOzTQH'
+folder: Q2ZQ0SlqfbgueFys
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037383406
+  modifiedTime: 1725992288180
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!NlXslw4yAqmKZWtN'

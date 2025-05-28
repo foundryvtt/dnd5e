@@ -1,0 +1,128 @@
+name: Clone
+system:
+  description:
+    value: >-
+      <p>You touch a creature or at least 1 cubic inch of its flesh. An inert
+      duplicate of that creature forms inside the vessel used in the spell's
+      casting and finishes growing after 120 days; you choose whether the
+      finished clone is the same age as the creature or younger. The clone
+      remains inert and endures indefinitely while its vessel remains
+      undisturbed.</p><p>If the original creature dies after the clone finishes
+      forming, the creature's soul transfers to the clone if the soul is free
+      and willing to return. The clone is physically identical to the original
+      and has the same personality, memories, and abilities, but none of the
+      original's equipment. The creature's original remains, if any, become
+      inert and can't be revived, since the creature's soul is elsewhere.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: hour
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 8
+  school: nec
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: >-
+      a diamond worth 1,000+ GP, which the spell consumes, and a sealable vessel
+      worth 2,000+ GP that is large enough to hold the creature being cloned
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    pxc5ixVQ4cuxrY6x:
+      type: utility
+      _id: pxc5ixVQ4cuxrY6x
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: clone
+_id: phbsplClone00000
+type: spell
+img: icons/commodities/tech/metal-blue.webp
+effects: []
+folder: M5CvwK9zVtzx6Dnn
+sort: 112500
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425945208
+  modifiedTime: 1745256788045
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplClone00000'

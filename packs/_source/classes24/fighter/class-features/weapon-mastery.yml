@@ -1,0 +1,62 @@
+_id: phbftrWeaponMast
+name: Weapon Mastery
+type: feat
+folder: xggTDaiQq26ZrVzJ
+img: icons/skills/ranged/arrow-flying-spiral-blue.webp
+system:
+  description:
+    value: >-
+      <p>Your training with weapons allows you to use the mastery properties of
+      three kinds of Simple or Martial weapons of your choice. Whenever you
+      finish a Long Rest, you can practice weapon drills and change one of those
+      weapon choices.</p><p>When you reach certain Fighter levels, you gain the
+      ability to use the mastery properties of more kinds of weapons, as shown
+      in the Weapon Mastery column of the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbFighter000000.JournalEntryPage.wDELe3k25FQvYdrq#class-features]{Fighter
+      Features} table.</p><section class="secret"
+      id="secret-Qfoze6XoZUYIlAnw"><p><strong>Foundry Note</strong></p><p>To
+      change your masteries toggle on the "Edit" mode of your sheet. On the
+      "Details" tab click on the cog icon next to "Weapons" in the bottom right.
+      You can place a check in the mastery column of your chosen
+      weapons.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: weapon-mastery
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866361253
+  modifiedTime: 1745256761920
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftrWeaponMast'

@@ -1,0 +1,48 @@
+_id: UH57LTsTGDxl2oS6
+name: Fire Absorption
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Whenever the [[lookup @name lowercase]] is subjected to
+      <strong><em>fire damage</em></strong>, it takes no damage and instead
+      regains a number of<strong> hit points</strong> equal to the
+      <strong><em>fire damage</em> dealt</strong>.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: fire-absorption
+flags: {}
+img: icons/magic/fire/flame-burning-campfire-rocks.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304971491
+  modifiedTime: 1725992572822
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!UH57LTsTGDxl2oS6'

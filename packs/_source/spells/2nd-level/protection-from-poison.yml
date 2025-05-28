@@ -1,0 +1,150 @@
+_id: MAxM77CDUu8dgIRQ
+name: Protection from Poison
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch a creature. If it is poisoned, you neutralize the poison. If
+      more than one poison afflicts the target, you neutralize one poison that
+      you know is present, or you neutralize one at random.</p><p>For the
+      duration, the target has advantage on saving throws against being
+      &amp;Reference[poisoned], and it has resistance to poison damage.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: abj
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: dNSELIYDQMBopj0Z
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: protection-from-poison
+sort: 0
+flags: {}
+img: icons/magic/defensive/shield-barrier-glowing-triangle-green.webp
+effects:
+  - name: Protection from Poison
+    origin: Compendium.dnd5e.spells.Item.MAxM77CDUu8dgIRQ
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: dNSELIYDQMBopj0Z
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+    description: >-
+      <p>The target has advantage on saving throws against being poisoned, and
+      it has resistance to poison damage.</p>
+    transfer: false
+    statuses: []
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/defensive/shield-barrier-glowing-triangle-green.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!MAxM77CDUu8dgIRQ.dNSELIYDQMBopj0Z'
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037354331
+  modifiedTime: 1725992719226
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!MAxM77CDUu8dgIRQ'

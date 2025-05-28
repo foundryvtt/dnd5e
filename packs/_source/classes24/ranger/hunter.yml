@@ -1,0 +1,88 @@
+_id: phbrgrHunter0000
+name: Hunter
+type: subclass
+folder: Rbx9mlNEB2XYxGCZ
+img: systems/dnd5e/icons/classes/hunter.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Protect Nature and People from
+      Destruction</p></blockquote><p>You stalk prey in the wilds and elsewhere,
+      using your abilities as a Hunter to protect nature and people everywhere
+      from forces that would destroy them.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identifier: hunter
+  classIdentifier: ranger
+  advancement:
+    - _id: wacj6x75L5ZaZUky
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgrHuntersLor
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgrHuntersPre
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Subclass Features
+    - _id: 4nA7C6uQhBJBtWdS
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgrDefensiveT
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 7
+      title: Subclass Features
+    - _id: gBE1JZA0jf6dglQu
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgrSuperiorHu
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 11
+      title: Subclass Features
+    - _id: 1P4RbYyrzFoutFrj
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 15
+      title: Subclass Features
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation:
+      formula: ''
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866564824
+  modifiedTime: 1745256764932
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 500000
+ownership:
+  default: 0
+_key: '!items!phbrgrHunter0000'

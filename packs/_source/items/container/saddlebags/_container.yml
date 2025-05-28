@@ -1,0 +1,58 @@
+name: Saddlebags
+type: container
+img: icons/containers/bags/pack-leather-black-brown.webp
+system:
+  description:
+    value: >-
+      <p>A set of containers that typically come as a pair, connected by a
+      leather strap and affixed to the saddle of a mount.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 8
+    units: lb
+  price:
+    value: 4
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  capacity:
+    type: weight
+    value: 30
+  currency:
+    cp: 0
+    sp: 0
+    ep: 0
+    gp: 0
+    pp: 0
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  attuned: false
+  identifier: saddlebags
+effects: []
+folder: PgtyWdfkDTDbc0ov
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: TmfaFUSZJAotndn9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037194443
+  modifiedTime: 1725992515517
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!TmfaFUSZJAotndn9'

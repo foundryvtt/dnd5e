@@ -1,0 +1,232 @@
+_id: tWJLHIL6ZIZUez9k
+name: Manacles
+type: consumable
+img: icons/sundries/survival/cuffs-shackles-steel.webp
+system:
+  description:
+    value: >-
+      <p>These metal restraints can bind a Small or Medium creature. Escaping
+      the manacles requires a successful [[/check activity=dnd5eactivity000]]
+      check. Breaking them requires a successful [[/check
+      activity=9DosjAvEYAW0LLK8]] check. Each set of manacles comes with one
+      key. Without the key, a creature proficient with thieves' tools can pick
+      the manacles' lock with a successful [[/check
+      activity=9IBcoj8ChH1OiDT8]]{DC 15 Dexterity} check. Manacles have 15 hit
+      points.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  price:
+    value: 2
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: check
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      check:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '20'
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Attempt Escape
+      img: ''
+      appliedEffects: []
+    9DosjAvEYAW0LLK8:
+      type: check
+      name: Attempt to Break
+      _id: 9DosjAvEYAW0LLK8
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated: []
+        dc:
+          calculation: ''
+          formula: '20'
+        ability: str
+      img: ''
+      appliedEffects: []
+    9IBcoj8ChH1OiDT8:
+      type: check
+      name: Attempt to Pick
+      _id: 9IBcoj8ChH1OiDT8
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - thief
+        dc:
+          calculation: ''
+          formula: '15'
+        ability: dex
+      img: ''
+      appliedEffects: []
+  attuned: false
+  identifier: manacles
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 10000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1725037308976
+  modifiedTime: 1744841453433
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!tWJLHIL6ZIZUez9k'

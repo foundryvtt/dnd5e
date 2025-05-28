@@ -1,0 +1,144 @@
+name: Clairvoyance
+system:
+  description:
+    value: >-
+      <p>You create an Invisible sensor within range in a location familiar to
+      you (a place you have visited or seen before) or in an obvious location
+      that is unfamiliar to you (such as behind a door, around a corner, or in a
+      grove of trees). The intangible, invulnerable sensor remains in place for
+      the duration.</p><p>When you cast the spell, choose seeing or hearing. You
+      can use the chosen sense through the sensor as if you were in its space.
+      As a Bonus Action, you can switch between seeing and hearing.</p><p>A
+      creature that sees the sensor (such as a creature benefiting from <em>See
+      Invisibility</em> or &amp;Reference[truesight]) sees a luminous orb about
+      the size of your fist.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '1'
+    units: mi
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: div
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: >-
+      a focus worth 100+ GP, either a jeweled horn for hearing or a glass eye
+      for seeing
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        proficiency: false
+        attacks: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: OMyIBH1UGRjnWzIa
+          uuid: Compendium.dnd5e.actors24.Actor.phbInvisibleSens
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: clairvoyance
+_id: phbsplClairvoyan
+type: spell
+img: icons/magic/perception/third-eye-blue-red.webp
+effects: []
+folder: HCovEE4VoPGlIbKi
+sort: 3200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425945111
+  modifiedTime: 1745256787996
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplClairvoyan'

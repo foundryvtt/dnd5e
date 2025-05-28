@@ -1,0 +1,282 @@
+name: Wall of Fire
+system:
+  description:
+    value: >-
+      <p>You create a wall of fire on a solid surface within range. You can make
+      the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed
+      wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall
+      is opaque and lasts for the duration.</p><p>When the wall appears, each
+      creature in its area makes a Dexterity saving throw, taking 5d8 Fire
+      damage on a failed save or half as much damage on a successful
+      one.</p><p>One side of the wall, selected by you when you cast this spell,
+      deals 5d8 Fire damage to each creature that ends its turn within 10 feet
+      of that side or inside the wall. A creature takes the same damage when it
+      enters the wall for the first time on a turn or ends its turn there. The
+      other side of the wall deals no damage.</p><p><strong>Using a Higher-Level
+      Spell Slot.</strong> The damage increases by 1d8 for each spell slot level
+      above 4.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: ''
+    template:
+      units: ft
+      width: '1'
+      type: ''
+      size: '20'
+      contiguous: false
+      count: ''
+  range:
+    value: '120'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a piece of charcoal
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: wall
+          size: '60'
+          width: '1'
+          height: '20'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: '8'
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Create Wall
+      img: icons/magic/fire/flame-burning-fence.webp
+      appliedEffects: []
+    aLgpPe1PPRQ0zIrL:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+        concentration: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: cylinder
+          size: '10'
+          width: '1'
+          height: '20'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: '8'
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Create Ring
+      _id: aLgpPe1PPRQ0zIrL
+      img: icons/magic/fire/barrier-wall-flame-ring-yellow.webp
+      appliedEffects: []
+    xHKGvC597exYwpc5:
+      type: damage
+      _id: xHKGvC597exYwpc5
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '10'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: '8'
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      name: ''
+      img: icons/magic/fire/flame-burning-skeleton-explosion.webp
+      appliedEffects: []
+  identifier: wall-of-fire
+_id: phbsplWallofFire
+type: spell
+img: icons/magic/fire/flame-burning-fence.webp
+effects: []
+folder: qi3IbnEwap7mRw4b
+sort: 200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425976932
+  modifiedTime: 1745256799701
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplWallofFire'

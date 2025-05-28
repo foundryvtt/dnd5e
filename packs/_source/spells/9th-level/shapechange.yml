@@ -1,0 +1,141 @@
+_id: N2UEFq8X5LRsLcOZ
+name: Shapechange
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You assume the form of a different creature for the Duration. The new
+      form can be of any creature with a Challenge rating equal to your level or
+      lower. The creature can't be a construct or an Undead, and you must have
+      seen the sort of creature at least once. You transform into an average
+      example of that creature, one without any class levels or the Spellcasting
+      trait.</p><p>Your game statistics are replaced by the statistics of the
+      chosen creature, though you retain your Alignment and Intelligence,
+      Wisdom, and Charisma scores. You also retain all of your skill and saving
+      throw proficiencies, in addition to gaining those of the creature. If the
+      creature has the same proficiency as you and the bonus listed in its
+      Statistics is higher than yours, use the creature's bonus in place of
+      yours. You can't use any legendary Actions or Lair Actions of the new
+      form.</p><p>You assume the Hit Points and Hit Dice of the new form. When
+      you revert to your normal form, you return to the number of Hit Points you
+      had before you transformed. If you revert as a result of Dropping to 0 Hit
+      Points, any excess damage carries over to your normal form. As long as the
+      excess damage doesn't reduce your normal form to 0 Hit Points, you aren't
+      knocked Unconscious.</p><p>You retain the benefit of any features from
+      your class, race, or other source and can use them, provided that your new
+      form is physically capable of doing so. You can't use any Special Senses
+      you have (for example, darkvision) unless your new form also has that
+      sense. You can only speak if the creature can normally speak.</p><p>When
+      you transform, you choose whether your Equipment falls to the ground,
+      merges into the new form, or is worn by it. Worn equipment functions as
+      normal. The DM determines whether it is practical for the new form to wear
+      a piece of equipment, based on the creature's shape and size. Your
+      equipment doesn't change shape or size to match the new form, and any
+      equipment that the new form can't wear must either fall to the ground or
+      merge into your new form. Equipment that merges has no effect in that
+      state.</p><p>During this spell's Duration, you can use your action to
+      assume a different form following the same restrictions and rules for the
+      original form, with one exception: if your new form has more hit points
+      than your current one, your hit points remain at their current value.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 9
+  school: trs
+  materials:
+    value: >-
+      A jade circlet worth at least 1,500 gp, which you must place on your head
+      before you cast the spell
+    consumed: false
+    cost: 1500
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: shapechange
+sort: 0
+flags: {}
+img: icons/magic/nature/wolf-paw-glow-large-orange.webp
+effects: []
+folder: KL6ZY4VRMjojGrL4
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037354933
+  modifiedTime: 1725992719435
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!N2UEFq8X5LRsLcOZ'

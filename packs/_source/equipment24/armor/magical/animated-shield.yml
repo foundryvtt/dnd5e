@@ -1,0 +1,165 @@
+_id: dmgAnimatedShiel
+name: Animated Shield
+type: equipment
+folder: 1kn4uV4dTVVduLjA
+img: icons/skills/melee/shield-block-gray-yellow.webp
+system:
+  activities:
+    e4lsvyMtNay0YxsE:
+      type: utility
+      _id: e4lsvyMtNay0YxsE
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: EyOtzMokDEOeHxkn
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Animate
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Armor (Shield), Very Rare (Requires Attunement)</em></p><p>While
+      holding this Shield, you can take a Bonus Action to cause it to animate.
+      The Shield leaps into the air and hovers in your space to protect you as
+      if you were wielding it, leaving your hands free. The Shield remains
+      animate for 1 minute, until you take a Bonus Action to end this effect, or
+      until you die or have the &amp;Reference[Incapacitated apply=false]
+      condition, at which point the Shield falls to the ground or into your hand
+      if you have one free.</p>
+    chat: ''
+  identifier: animated-shield
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: 2
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: shield
+    baseItem: shield
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Animated Shield
+    img: icons/equipment/shield/heater-steel-segmented-purple.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgAnimatedShiel
+    transfer: false
+    _id: EyOtzMokDEOeHxkn
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The Shield hovers in your space to protect you as if you were wielding
+      it, leaving your hands free.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: 1728434670274
+      modifiedTime: 1728434815589
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgAnimatedShiel.EyOtzMokDEOeHxkn'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256802282
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 900000
+ownership:
+  default: 0
+_key: '!items!dmgAnimatedShiel'

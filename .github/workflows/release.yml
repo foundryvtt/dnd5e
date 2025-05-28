@@ -1,5 +1,9 @@
 name: Release Creation
 
+env:
+  NODE_VERSION: 22
+
+
 on:
   push:
     tags:
@@ -9,17 +13,45 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
 
     steps:
     - uses: actions/checkout@v4
 
 
-    # Load the system.json manifest into memory
-    - name: Load system manifest
-      id: manifest
-      uses: zoexx/github-action-json-file-properties@release
+    - name: Load package type
+      id: type
+      uses: ActionsTools/read-json-action@main
       with:
-        file_path: "./system.json"
+        file_path: "./foundryvtt.json"
+        prop_path: "project.type"
+
+
+    - name: Load project premium status
+      id: premium
+      continue-on-error: true
+      uses: ActionsTools/read-json-action@main
+      with:
+        file_path: "./foundryvtt.json"
+        prop_path: "project.premium"
+
+
+    - name: Load project includes
+      id: config
+      continue-on-error: true
+      uses: ActionsTools/read-json-action@main
+      with:
+        file_path: "./foundryvtt.json"
+
+
+    - name: Load package ID
+      id: package-id
+      uses: ActionsTools/read-json-action@main
+      with:
+        file_path: "./${{ steps.type.outputs.value }}.json"
+        prop_path: "id"
 
 
     # Set up our some variables for future use
@@ -32,25 +64,60 @@ jobs:
       id: get_vars
       run: |
         TAG=${GITHUB_REF/refs\/tags\//}
+        PACKAGE_ID=${{ steps.package-id.outputs.value }}
+        PACKAGE_TYPE=${{ steps.type.outputs.value }}
         echo "TAG_NAME=$TAG" >> $GITHUB_ENV
-        echo "ZIP_NAME=dnd5e-$TAG.zip" >> $GITHUB_ENV
-        echo "RELEASE_DOWNLOAD_URL=https://github.com/${{github.repository}}/releases/download/$TAG/dnd5e-$TAG.zip" >> $GITHUB_ENV
-        echo "RELEASE_INSTALL_URL=https://github.com/${{github.repository}}/releases/download/$TAG/system.json" >> $GITHUB_ENV
+        echo "PACKAGE_ID=$PACKAGE_ID" >> $GITHUB_ENV
+        echo "PACKAGE_TYPE=$PACKAGE_TYPE" >> $GITHUB_ENV
+        echo "ZIP_NAME=$PACKAGE_ID-$TAG.zip" >> $GITHUB_ENV
+        echo "RELEASE_DOWNLOAD_URL=https://github.com/${{ github.repository }}/releases/download/$TAG/$PACKAGE_ID-$TAG.zip" >> $GITHUB_ENV
+        echo "RELEASE_INSTALL_URL=https://github.com/${{ github.repository }}/releases/download/$TAG/$PACKAGE_TYPE.json" >> $GITHUB_ENV
+
+
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+
+    # `npm ci` is recommended:
+    # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+    - name: Install Dependencies
+      run: npm ci --ignore-scripts
+
+
+    - name: Integrate Free Rules
+      uses: ./utils/integrate
+      continue-on-error: true
+
+
+    - name: Build All
+      run: |
+        npm run build
+        mv --force dnd5e-compiled.mjs dnd5e.mjs
+
+
+    - name: Load Manifest
+      id: manifest
+      uses: ActionsTools/read-json-action@main
+      with:
+        file_path: "./${{ steps.type.outputs.value }}.json"
 
 
     # Run some tests to make sure our `system.json` is correct
-    # Exit before setting up node if not
     - name: Verify correct naming
       env:
         TAG_NAME: ${{ env.TAG_NAME }}
         RELEASE_DOWNLOAD: ${{ env.RELEASE_DOWNLOAD_URL }}
+        PACKAGE_TYPE: ${{ env.PACKAGE_TYPE }}
         PACKAGE_VERSION: ${{ steps.manifest.outputs.version }}
         PACKAGE_DOWNLOAD: ${{ steps.manifest.outputs.download }}
       run: |
         # Validate that the tag being released matches the package version.
         if [[ ! $TAG_NAME == release-$PACKAGE_VERSION ]]; then
-          echo "The system.json version does not match tag name."
-          echo "system.json: $PACKAGE_VERSION"
+          echo "The $PACKAGE_TYPE.json version does not match tag name."
+          echo "$PACKAGE_TYPE.json: $PACKAGE_VERSION"
           echo "tag name: $TAG_NAME"
           echo "Please fix this and push the tag again."
           exit 1
@@ -58,8 +125,8 @@ jobs:
 
         # Validate that the package download url matches the release asset that will be created.
         if [[ ! $RELEASE_DOWNLOAD == $PACKAGE_DOWNLOAD ]]; then
-          echo "The system.json download url does not match the created release asset url."
-          echo "system.json: $PACKAGE_DOWNLOAD"
+          echo "The $PACKAGE_TYPE.json download url does not match the created release asset url."
+          echo "$PACKAGE_TYPE.json: $PACKAGE_DOWNLOAD"
           echo "release asset url: $RELEASE_DOWNLOAD"
           echo "Please fix this and push the tag again."
           exit 1
@@ -74,32 +141,49 @@ jobs:
         flags.hotReload: false
 
 
-    # Set up Node
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
+    - name: Set protected flag for premium modules
+      if: ${{ steps.premium.outputs.value }}
+      uses: microsoft/variable-substitution@v1
       with:
-        node-version: '18.x'
-        cache: 'npm'
+        files: "${{ env.PACKAGE_TYPE }}.json"
+      env:
+        protected: true
 
 
-    # `npm ci` is recommended:
-    # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-    - name: Install Dependencies
-      run: npm ci
+    - name: Determine archive contents
+      id: archive
+      uses: actions/github-script@v6
+      env:
+        ESMODULES: ${{ steps.manifest.outputs.esmodules }}
+        INCLUDES: ${{ steps.config.outputs.includes }}
+        LANGUAGES: ${{ steps.manifest.outputs.languages }}
+        PACKS: ${{ steps.manifest.outputs.packs }}
+        STYLES: ${{ steps.manifest.outputs.styles }}
+      with:
+        result-encoding: string
+        script: |
+          const manifest = {};
+          if ( process.env.ESMODULES ) manifest.esmodules = JSON.parse(process.env.ESMODULES);
+          if ( process.env.INCLUDES ) manifest.includes = JSON.parse(process.env.INCLUDES);
+          if ( process.env.LANGUAGES ) manifest.languages = JSON.parse(process.env.LANGUAGES);
+          if ( process.env.PACKS ) manifest.packs = JSON.parse(process.env.PACKS);
+          if ( process.env.STYLES ) manifest.styles = JSON.parse(process.env.STYLES);
+          const includes = [
+            "${{ env.PACKAGE_TYPE }}.json",
+            ...(manifest.esmodules ?? []),
+            ...(manifest.esmodules?.map(s => `${s}.map`) ?? []),
+            ...(manifest.styles ?? []),
+            ...(manifest.packs?.map(p => p.path) ?? []),
+            ...(manifest.languages?.map(l => l.path) ?? []),
+            ...(manifest.includes ?? [])
+          ];
+          return includes.join(" ");
 
 
-    # Run our `build` script
-    - name: Build All
-      run: |
-        npm run build:code --if-present
-        mv --force dnd5e-compiled.mjs dnd5e.mjs
+    - name: Zip package
+      run: zip ${{ env.ZIP_NAME }} -r ${{ steps.archive.outputs.result }}
 
 
-    # Create a zip file with all files required by the module to add to the release
-    - run: zip ${{ env.ZIP_NAME }} -r fonts icons lang json packs templates tokens ui dnd5e.css dnd5e.mjs dnd5e-compiled.mjs.map LICENSE.txt README.md system.json template.json --exclude "packs/_source/*"
-
-
-    # Fetch the body from the release
     - name: Fetch Release Body
       id: release
       uses: cardinalby/git-get-release-action@v1
@@ -110,7 +194,6 @@ jobs:
         doNotFailIfNotFound: true
 
 
-    # Create a release for this specific version
     - name: Update Release with Files
       id: create_version_release
       uses: ncipollo/release-action@v1
@@ -122,9 +205,9 @@ jobs:
         omitDraftDuringUpdate: true
         omitPrereleaseDuringUpdate: true
         token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: './system.json, ./${{ env.ZIP_NAME }}'
+        artifacts: './${{ env.PACKAGE_TYPE }}.json, ./${{ env.ZIP_NAME }}'
         tag: ${{ env.TAG_NAME }}
         body: |
           ${{ steps.release.outputs.body }}
-          
+
           **Installation:** To manually install this release, please use the following manifest URL: ${{ env.RELEASE_INSTALL_URL }}

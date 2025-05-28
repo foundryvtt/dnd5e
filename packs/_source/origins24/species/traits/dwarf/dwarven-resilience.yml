@@ -1,0 +1,50 @@
+_id: phbsptDwarvenRes
+name: Dwarven Resilience
+type: feat
+img: icons/consumables/potions/potion-bottle-skull-label-poison-teal.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>You have Resistance to Poison damage. You also have Advantage on saving
+      throws you make to avoid or end the Poisoned condition.</p><section
+      id="secret-EDaMIgklKLK2il2D" class="secret"><p><strong>Foundry
+      Note</strong></p><p>You will automatically be granted Resistance to Poison
+      damage but not Advantage on saving throws to avoid/end the Poisoned
+      condition.</p></section>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Dwarf
+  identifier: dwarven-resilience
+effects: []
+folder: R0KprZdOrRDNsTBv
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866718338
+  modifiedTime: 1740680089866
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptDwarvenRes'

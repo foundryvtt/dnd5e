@@ -1,0 +1,145 @@
+_id: swK0r5TOIxredxWS
+name: Wild Shape
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: "<p>Starting at 2nd level, you can use your action to magically assume the shape of a beast that you have seen before. You can use this feature twice. You regain expended uses when you finish a short or long rest.</p>\n<p>Your druid level determines the beasts you can transform into, as shown in the Beast Shapes table. At 2nd level, for example, you can transform into any beast that has a challenge rating of 1/4 or lower that doesn't have a flying or swimming speed.</p>\n<table><caption>Beast Shapes</caption>\n<thead>\n<tr>\n<td><strong>Level</strong></td>\n<td><strong>Max. CR</strong></td>\n<td><strong>Limitations</strong></td>\n<td><strong>Example</strong></td>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2nd</td>\n<td>1/4</td>\n<td>No flying or swimming speed</td>\n<td>@UUID[Compendium.dnd5e.monsters.Actor.yawTeS8u2FCfzzZH]{Wolf}</td>\n</tr>\n<tr>\n<td>4th</td>\n<td>1/2</td>\n<td>No flying speed</td>\n<td>@UUID[Compendium.dnd5e.monsters.Actor.8aCTKP5qaBPFOqxM]{Crocodile}</td>\n</tr>\n<tr>\n<td>8th</td>\n<td>1</td>\n<td>—</td>\n<td>@UUID[Compendium.dnd5e.monsters.Actor.9bHoR8k5D2DKHaF3]{Giant Eagle}</td>\n</tr>\n</tbody>\n</table>\n<p>You can stay in a beast shape for a number of hours equal to half your druid level (rounded down). You then revert to your normal form unless you expend another use of this feature. You can revert to your normal form earlier by using a bonus action on your turn. You automatically revert if you fall unconscious, drop to 0 hit points, or die.</p>\n<p>While you are transformed, the following rules apply:</p>\n<ul>\n<li>\n<p>Your game statistics are replaced by the statistics of the beast, but you retain your alignment, personality, and Intelligence, Wisdom, and Charisma scores. You also retain all of your skill and saving throw proficiencies, in addition to gaining those of the creature. If the creature has the same proficiency as you and the bonus in its stat block is higher than yours, use the creature's bonus instead of yours. If the creature has any legendary or lair actions, you can't use them.</p>\n</li>\n<li>\n<p>When you transform, you assume the beast's hit points and Hit Dice. When you revert to your normal form, you return to the number of hit points you had before you transformed. However, if you revert as a result of dropping to 0 hit points, any excess damage carries over to your normal form. For example, if you take 10 damage in animal form and have only 1 hit point left, you revert and take 9 damage. As long as the excess damage doesn't reduce your normal form to 0 hit points, you aren't knocked unconscious.</p>\n</li>\n<li>\n<p>You can't cast spells, and your ability to speak or take any action that requires hands is limited to the capabilities of your beast form. Transforming doesn't break your concentration on a spell you've already cast, however, or prevent you from taking actions that are part of a spell, such as\_call lightning, that you've already cast.</p>\n</li>\n<li>\n<p>You retain the benefit of any features from your class, race, or other source and can use them if the new form is physically capable of doing so. However, you can't use any of your special senses, such as darkvision, unless your new form also has that sense.</p>\n</li>\n<li>\n<p>You choose whether your equipment falls to the ground in your space, merges into your new form, or is worn by it. Worn equipment functions as normal, but the GM decides whether it is practical for the new form to wear a piece of equipment, based on the creature's shape and size. Your equipment doesn't change size or shape to match the new form, and any equipment that the new form can't wear must either fall to the ground or merge with it. Equipment that merges with the form has no effect until you leave the form.</p>\n</li>\n</ul>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '@scale.druid.wild-shape-uses'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Druid 2
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: transform
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: floor(@classes.druid.levels / 2)
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      transform:
+        identifier: druid
+        preset: wildshape
+      profiles:
+        - cr: '0.25'
+          name: CR ¼
+          _id: ZpU9q522gmEoHq0Z
+          sizes: []
+          types:
+            - beast
+          movement:
+            - fly
+            - swim
+          level:
+            min: null
+            max: 3
+        - cr: '0.5'
+          name: CR ½
+          _id: mnIE9O2DcYdFKlM7
+          sizes: []
+          types:
+            - beast
+          movement:
+            - fly
+          level:
+            min: 4
+            max: 7
+        - cr: '1'
+          name: CR 1
+          _id: nGveIM1zZpa21W33
+          sizes: []
+          types:
+            - beast
+          movement: []
+          level:
+            min: 8
+            max: null
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: wild-shape
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+img: icons/creatures/mammals/elk-moose-marked-green.webp
+effects: []
+folder: mZ45KUWDvNUEfxkC
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1725037389459
+  modifiedTime: 1745602283183
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!swK0r5TOIxredxWS'

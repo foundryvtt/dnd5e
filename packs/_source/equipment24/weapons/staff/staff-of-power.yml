@@ -1,0 +1,754 @@
+_id: dmgStaffOfPower0
+name: Staff of Power
+type: weapon
+img: icons/weapons/staves/staff-ornate-banded-purple.webp
+system:
+  activities:
+    TiwtYONl60S1vYKh:
+      _id: TiwtYONl60S1vYKh
+      type: attack
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+    NQqC0MHmisyfOmfQ:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplConeofCold
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: NQqC0MHmisyfOmfQ
+      sort: 300000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    zNjqfiDxCIdNI7Rn:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFireball00
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: zNjqfiDxCIdNI7Rn
+      sort: 400000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    QABYkCIP5lk8NXSh:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplGlobeofInv
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '6'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: QABYkCIP5lk8NXSh
+      sort: 500000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '6'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    NoWO7edVhEWuVAmx:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplHoldMonste
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: NoWO7edVhEWuVAmx
+      sort: 600000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    czjvyoIovQka1F9F:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplLevitate00
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: czjvyoIovQka1F9F
+      sort: 700000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    mRMA2XqUdvDvMOnP:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplLightningB
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: mRMA2XqUdvDvMOnP
+      sort: 800000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    aORrsuLy6pVeYbRK:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplMagicMissi
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: aORrsuLy6pVeYbRK
+      sort: 900000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    w4ATj8Ttf7inmYQ8:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplRayofEnfee
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: w4ATj8Ttf7inmYQ8
+      sort: 1000000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    NpEs7lhVzV3erVyY:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplWallofForc
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: NpEs7lhVzV3erVyY
+      sort: 1100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    udI31yfOHiwPCiSF:
+      type: damage
+      name: Retributive Strike
+      sort: 200000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: true
+              formula: 16 * @item.uses.value
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+      _id: udI31yfOHiwPCiSF
+    3CrTUVjWDAG17HYK:
+      type: save
+      name: 'Retributive Strike: Save'
+      sort: 250000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: true
+              formula: 4 * @item.uses.value
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '17'
+      _id: 3CrTUVjWDAG17HYK
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 2d8 + 4
+    max: '20'
+  description:
+    value: >-
+      <p><em>@UUID[Compendium.dnd5e.equipment24.Item.phbafcStaffalsoa]{Staff},
+      Very Rare (Requires Attunement by a Sorcerer, Warlock, or
+      Wizard)</em></p><p>This staff has 20 charges and can be wielded as a magic
+      Quarterstaff that grants a +2 bonus to attack rolls and damage rolls made
+      with it. While holding it, you gain a +2 bonus to Armor Class, saving
+      throws, and spell attack rolls.</p><p><em><strong>Spells.</strong></em>
+      While holding the staff, you can cast one of the spells on the following
+      table from it, using your spell save DC. The table indicates how many
+      charges you must expend to cast the spell.</p><details><summary>Spell Cost
+      Table</summary><table><thead><tr><th><p>Spell</p></th><th><p>Charge
+      Cost</p></th><th></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplConeofCold]{Cone
+      of
+      Cold}</p></td><td><p>5</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplFireball00]{Fireball}
+      (level 5
+      version)</p></td><td><p>5</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplGlobeofInv]{Globe
+      of
+      Invulnerability}</p></td><td><p>6</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplHoldMonste]{Hold
+      Monster}</p></td><td><p>5</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplLevitate00]{Levitate}</p></td><td><p>2</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplLightningB]{Lightning
+      Bolt} (level 5
+      version)</p></td><td><p>5</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplMagicMissi]{Magic
+      Missile}</p></td><td><p>1</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplRayofEnfee]{Ray
+      of
+      Enfeeblement}</p></td><td><p>1</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplWallofForc]{Wall
+      of
+      Force}</p></td><td><p>5</p></td><td></td></tr></tbody></table></details><p><em><strong>Regaining
+      Charges.</strong></em> The staff regains 2d8 + 4 expended charges daily at
+      dawn. If you expend the last charge, roll [[/r 1d20]]. On a 1, the staff
+      retains its +2 bonus to attack rolls and damage rolls but loses all other
+      properties. On a 20, the staff regains [[/r 1d8 + 2]]
+      charges.</p><p><em><strong>Retributive Strike.</strong></em> You can take
+      a Magic action to break the staff over your knee or against a solid
+      surface. The staff is destroyed and releases its magic in an explosion
+      that fills a 30-foot Emanation originating from itself. You have a 50
+      percent chance to instantly travel to a random plane of existence,
+      avoiding the explosion. If you fail to avoid the effect, you take Force
+      damage equal to 16 times the number of charges in the staff. Each other
+      creature in the area makes a DC 17 Dexterity saving throw. On a failed
+      save, a creature takes Force damage equal to 4 times the number of charges
+      in the staff. On a successful save, a creature takes half as much
+      damage.</p>
+    chat: ''
+  identifier: staff-of-power
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: quarterstaff
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  magicalBonus: 2
+  properties:
+    - mgc
+    - ver
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: topple
+effects: []
+folder: 5p9KrkF39e6vFO4g
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703688
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100782
+ownership:
+  default: 0
+_key: '!items!dmgStaffOfPower0'

@@ -1,0 +1,119 @@
+_id: NXWWWgHtWb7Nv21F
+name: Tiny Hut
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A 10-foot-radius immobile dome of force springs into existence around
+      and above you and remains stationary for the duration. The spell ends if
+      you leave its area.</p><p>Nine creatures of Medium size or smaller can fit
+      inside the dome with you. The spell fails if its area includes a larger
+      creature or more than nine creatures. Creatures and objects within the
+      dome when you cast this spell can move through it freely. All other
+      creatures and objects are barred from passing through it. Spells and other
+      magical effects can't extend through the dome or be cast through it. The
+      atmosphere inside the space is comfortable and dry, regardless of the
+      weather outside.</p><p>Until the spell ends, you can command the interior
+      to become dimly lit or dark. The dome is opaque from the outside, of any
+      color you choose, but it is transparent from the inside.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '10'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: evo
+  materials:
+    value: A small crystal bead
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: tiny-hut
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-star-blue.webp
+effects: []
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037355072
+  modifiedTime: 1725992719492
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!NXWWWgHtWb7Nv21F'

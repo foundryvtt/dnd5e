@@ -1,0 +1,179 @@
+_id: Eh80lkzHiEOJP8FI
+name: Engulf
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] moves up to its speed. While doing so,
+      it can enter Large or smaller creatures' spaces. Whenever the [[lookup
+      @name lowercase]] enters a creature's space, the creature must make a
+      <strong>DC 12 Dexterity</strong> saving throw.On a successful save, the
+      creature can choose to be pushed 5 feet back or to the side of the
+      [[lookup @name lowercase]]. A creature that chooses not to be pushed
+      suffers the consequences of a failed saving throw.</p><p>On a failed save,
+      the [[lookup @name lowercase]] enters the creature's space, and the
+      creature takes <strong>10 (3d6) <em>acid damage</em></strong> and is
+      engulfed. The engulfed creature can't breathe, is restrained, and takes
+      <strong>21 (6d6) <em>acid damage</em></strong> at the start of each of the
+      [[lookup @name lowercase]]'s turns. When the [[lookup @name lowercase]]
+      moves, the engulfed creature moves with it. An engulfed creature can try
+      to escape by taking an action to make a DC 12 Strength check. On a
+      success, the creature escapes and enters a space of its choice within 5
+      feet of the [[lookup @name lowercase]].</p>
+
+      </section>
+
+      <p>Whenever the [[lookup @name lowercase]] enters a creature's space, the
+      creature must make a <strong>Dexterity</strong> saving throw. On a
+      successful save, the creature can choose to be pushed 5 feet back or to
+      the side of the [[lookup @name lowercase]]. A creature that chooses not to
+      be pushed suffers the consequences of a failed saving throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: touch
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '12'
+      sort: 0
+    dnd5eactivity300:
+      _id: dnd5eactivity300
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: touch
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: 6d6
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: engulf
+flags: {}
+img: icons/magic/water/pseudopod-swirl-blue.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304967584
+  modifiedTime: 1725992571612
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Eh80lkzHiEOJP8FI'

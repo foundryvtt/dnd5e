@@ -1,0 +1,193 @@
+_id: phbbrbRage000000
+name: Rage
+type: feat
+img: icons/creatures/abilities/mouth-teeth-human.webp
+system:
+  description:
+    value: >-
+      <p>You can imbue yourself with a primal power called Rage, a force that
+      grants you extraordinary might and resilience. You can enter it as a Bonus
+      Action if you aren't wearing Heavy armor.</p><p>You can enter your Rage
+      the number of times shown for your Barbarian level in the Rages column of
+      the Barbarian Features table (currently [[lookup
+      @scale.barbarian.rages]]). You regain one expended use when you finish a
+      Short Rest, and you regain all expended uses when you finish a Long
+      Rest.</p><p>While active, your Rage follows the rules
+      below.</p><p><strong>Damage Resistance.</strong> You have Resistance to
+      Bludgeoning, Piercing, and Slashing damage.</p><p><strong>Rage
+      Damage.</strong> When you make an attack using Strength—with either a
+      weapon or an Unarmed Strike—and deal damage to the target, you gain a
+      bonus to the damage that increases as you gain levels as a Barbarian, as
+      shown in the Rage Damage column of the Barbarian Features
+      table.</p><p><strong>Strength Advantage.</strong> You have Advantage on
+      Strength checks and Strength saving throws.</p><p><strong>No Concentration
+      or Spells.</strong> You can't maintain Concentration, and you can't cast
+      spells.</p><p><strong>Duration.</strong> The Rage lasts until the end of
+      your next turn, and it ends early if you don Heavy armor or have the
+      Incapacitated condition. If your Rage is still active on your next turn,
+      you can extend the Rage for another round by doing one of the
+      following:</p><ul><li>Make an attack roll against an enemy.</li><li>Force
+      an enemy to make a saving throw.</li><li>Take a Bonus Action to extend
+      your Rage.</li></ul><p>Each time the Rage is extended, it lasts until the
+      end of your next turn. You can maintain a Rage for up to 10
+      minutes.</p><section class="secret"
+      id="secret-o72MSFMdhSQC7kYa"><p><strong>Foundry Note</strong></p><p>This
+      feature includes an Active Effect which automates the Resistance and
+      additional damage. This feature will also automatically recharge your Rage
+      uses on a Short and Long Rest.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '@scale.barbarian.rages'
+    recovery:
+      - period: lr
+        type: recoverAll
+      - period: sr
+        type: formula
+        formula: '1'
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: Barbarian
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: bonus
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: '10'
+        units: minute
+        special: ''
+        override: false
+        concentration: false
+      effects:
+        - _id: G5XZTi4zYTFiHVll
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Expend Rage
+  enchant: {}
+  identifier: rage
+effects:
+  - _id: G5XZTi4zYTFiHVll
+    flags: {}
+    changes:
+      - key: system.bonuses.mwak.damage
+        mode: 2
+        value: +@scale.barbarian.rage-damage
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: slashing
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: piercing
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: bludgeoning
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      rounds: 10
+      seconds: 600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.classes24.Item.phbbrbRage000000
+    tint: '#ffffff'
+    transfer: true
+    name: Rage
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classfeatures.Item.VoR0SUrNX5EJVPIO.ActiveEffect.eWhL8hUr0c2ujDUm
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/creatures/abilities/mouth-teeth-human.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbbrbRage000000.G5XZTi4zYTFiHVll'
+folder: p6WDpW0gzmKfhGad
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940469
+  modifiedTime: 1745256760067
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbRage000000'

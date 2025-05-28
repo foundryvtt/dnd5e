@@ -1,0 +1,124 @@
+name: True Resurrection
+system:
+  description:
+    value: >-
+      <p>You touch a creature that has been dead for no longer than 200 years
+      and that died for any reason except old age. The creature is revived with
+      all its Hit Points.</p><p>This spell closes all wounds, neutralizes any
+      poison, cures all magical contagions, and lifts any curses affecting the
+      creature when it died. The spell replaces damaged or missing organs and
+      limbs. If the creature was Undead, it is restored to its non-Undead
+      form.</p><p>The spell can provide a new body if the original no longer
+      exists, in which case you must speak the creature's name. The creature
+      then appears in an unoccupied space you choose within 10 feet of you.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: hour
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: >-
+        creature that has been dead for no longer than 200 years and that died
+        for any reason except old age.
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 9
+  school: nec
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: diamonds worth 25,000+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    Y511fgJNIyHXQPOK:
+      type: utility
+      name: ''
+      _id: Y511fgJNIyHXQPOK
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  identifier: true-resurrection
+_id: phbsplTrueResurr
+type: spell
+img: icons/magic/life/ankh-gold-blue.webp
+effects: []
+folder: iG0Zia8jh6uK39TB
+sort: 100025
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425976194
+  modifiedTime: 1745256799448
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplTrueResurr'

@@ -1,3 +1,5 @@
+const TooltipManager = foundry.helpers.interaction.TooltipManager.implementation;
+
 /**
  * A class responsible for orchestrating tooltips in the system.
  */
@@ -164,7 +166,9 @@ export default class Tooltips5e {
     }
 
     this.tooltip.classList.add("dnd5e-tooltip", "passive-tooltip");
-    this.tooltip.innerHTML = await renderTemplate("systems/dnd5e/templates/journal/passive-tooltip.hbs", context);
+    this.tooltip.innerHTML = await foundry.applications.handlebars.renderTemplate(
+      "systems/dnd5e/templates/journal/passive-tooltip.hbs", context
+    );
     game.tooltip._setAnchor(TooltipManager.TOOLTIP_DIRECTIONS.DOWN);
   }
 

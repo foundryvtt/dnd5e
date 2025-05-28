@@ -1,0 +1,140 @@
+name: Spike Growth
+system:
+  description:
+    value: >-
+      <p>The ground in a 20-foot-radius Sphere centered on a point within range
+      sprouts hard spikes and thorns. The area becomes Difficult Terrain for the
+      duration. When a creature moves into or within the area, it takes
+      [[/damage 2d4 type=piercing]] damage for every 5 feet it
+      travels.</p><p>The transformation of the ground is camouflaged to look
+      natural. Any creature that can't see the area when the spell is cast must
+      take a Search action and succeed on a [[/check ability=wis skill=prc
+      dc=@attributes.spell.dc]] or [[/check ability=wis skill=sur
+      dc=@attributes.spell.dc]] check against your spell save DC to recognize
+      the terrain as hazardous before entering it.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ft
+      type: sphere
+      size: '20'
+      contiguous: false
+      count: ''
+  range:
+    value: '150'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: seven thorns
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 4
+            bonus: ''
+            types:
+              - piercing
+            scaling:
+              mode: ''
+              number: 1
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: spike-growth
+_id: phbsplSpikeGrowt
+type: spell
+img: icons/creatures/abilities/stinger-spine-horn-blood.webp
+effects: []
+folder: 3SjcO2acsFnWegp4
+sort: 300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425972056
+  modifiedTime: 1745256798632
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSpikeGrowt'

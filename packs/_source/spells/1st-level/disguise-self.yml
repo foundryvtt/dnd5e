@@ -1,0 +1,118 @@
+_id: A3q2gTNqG6fvNGrv
+name: Disguise Self
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You make yourself—including your clothing, armor, weapons, and other
+      belongings on your person—look different until the spell ends or until you
+      use your action to dismiss it. You can seem 1 foot shorter or taller and
+      can appear thin, fat, or in between. You can't change your body type, so
+      you must adopt a form that has the same basic arrangement of limbs.
+      Otherwise, the extent of the illusion is up to you.</p><p>The changes
+      wrought by this spell fail to hold up to physical inspection. For example,
+      if you use this spell to add a hat to your outfit, objects pass through
+      the hat, and anyone who touches it would feel nothing or would feel your
+      head and hair. If you use this spell to appear thinner than you are, the
+      hand of someone who reaches out to touch you would bump into you while it
+      was seemingly still in midair.</p><p>To discern that you are disguised, a
+      creature can use its action to inspect your appearance and must succeed on
+      an Intelligence (Investigation) check against your spell save DC.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: ill
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: disguise-self
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-energy-hold-teal-blue.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037349706
+  modifiedTime: 1725992717737
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!A3q2gTNqG6fvNGrv'

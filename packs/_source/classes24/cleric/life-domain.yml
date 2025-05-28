@@ -1,0 +1,168 @@
+_id: phbclcLifeDomain
+name: Life Domain
+type: subclass
+folder: 4I70IkQQuwHPyfKp
+img: systems/dnd5e/icons/classes/life.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Soothe the Hurts of the World</p></blockquote><p>The Life
+      Domain focuses on the positive energy that helps sustain all life in the
+      multiverse. Clerics who tap into this domain are masters of healing, using
+      that life force to cure many hurts.</p><p>Existence itself relies on the
+      positive energy associated with this domain, so a Cleric of almost any
+      religious tradition might choose it. This domain is particularly
+      associated with agricultural deities, gods of healing or endurance, and
+      gods of home and community. Religious orders of healing also seek the
+      magic of this domain.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 2
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identifier: life
+  classIdentifier: cleric
+  advancement:
+    - _id: xGJEF0anyVTaO02x
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbclcDiscipleOf
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbclcLifeSpells
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbclcPreserveLi
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Subclass Features
+    - _id: Qkx3Cd07TGIwBX91
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbclcBlessedHea
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 6
+      title: Subclass Features
+    - _id: fke7bQihEBwKmOXP
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbclcSupremeHea
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 17
+      title: Subclass Features
+    - _id: MOUCVB3JGazDiUI3
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.spells24.Item.phbsplAid0000000
+            optional: false
+          - uuid: Compendium.dnd5e.spells24.Item.phbsplCureWounds
+            optional: false
+          - uuid: Compendium.dnd5e.spells24.Item.phbsplLesserRest
+            optional: false
+          - uuid: Compendium.dnd5e.spells24.Item.phbsplBless00000
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: always
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 3
+      title: Life Domain Spells
+      hint: ''
+    - _id: zfcT1xCvqRLRZXiH
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplMassHealin
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplRevivify00
+        optional: false
+        spell:
+          ability: []
+          preparation: always
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 5
+      title: Life Domain Spells
+      hint: ''
+    - _id: 1FttAn0lw9lBpofn
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplAuraofLife
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplDeathWard0
+        optional: false
+        spell:
+          ability: []
+          preparation: always
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 7
+      title: Life Domain Spells
+      hint: ''
+    - _id: iYrz7E0p8N6pp5Uy
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplGreaterRes
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplMassCureWo
+        optional: false
+        spell:
+          ability: []
+          preparation: always
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 9
+      title: Life Domain Spells
+      hint: ''
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation:
+      formula: ''
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866589552
+  modifiedTime: 1745256760855
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbclcLifeDomain'

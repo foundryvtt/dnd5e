@@ -1,0 +1,106 @@
+_id: t5yP0d7YaKwuKKiH
+name: Yew Wand
+type: equipment
+img: icons/weapons/staves/staff-ornate-wood.webp
+system:
+  description:
+    value: >-
+      <p>This wand or scepter has been carved from yew or another special wood
+      and inscribed with powerful runes to invoke the power of nature by those
+      who heed its call.</p>
+
+      <p><strong>Spellcasting Focus</strong>. A druidic focus is a special item
+      designed to channel the power of spells from the druid's spell list. A
+      druid can use such an item as a spellcasting focus, using it in place of
+      any material component which does not list a cost.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 10
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ''
+    reach: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - foc
+  proficient: null
+  type:
+    value: wand
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: null
+  activities: {}
+  attuned: false
+  ammunition: {}
+  identifier: yew-wand
+effects: []
+folder: xedn1r43VWuEBcli
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037305821
+  modifiedTime: 1730324933141
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!t5yP0d7YaKwuKKiH'

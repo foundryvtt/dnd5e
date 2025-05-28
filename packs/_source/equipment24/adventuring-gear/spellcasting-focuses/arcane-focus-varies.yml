@@ -1,0 +1,62 @@
+name: Arcane Focus (Varies)
+system:
+  description:
+    value: >-
+      <p>An Arcane Focus takes one of the forms in the Arcane Focuses table and
+      is bejeweled or carved to channel arcane magic. A Sorcerer, Warlock, or
+      Wizard can use such an item as a Spellcasting
+      Focus.</p><table><caption>Arcane
+      Focuses</caption><thead><tr><td>Focus</td><td>Weight</td><td>Cost</td></tr></thead><tbody><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.phbafcCrystal000]{Crystal}</td><td>1
+      lb.</td><td>10
+      GP</td></tr><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.phbafcOrb0000000]{Orb}</td><td>3
+      lb.</td><td>20
+      GP</td></tr><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.phbafcRod0000000]{Rod}</td><td>2
+      lb.</td><td>10
+      GP</td></tr><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.phbafcStaffalsoa]{Staff}
+      (also a
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepQuartersta]{Quarterstaff})</td><td>4
+      lb.</td><td>5
+      GP</td></tr><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.phbafcWand000000]{Wand}</td><td>1
+      lb.</td><td>10 GP</td></tr></tbody></table>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 0
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  type:
+    value: gear
+    subtype: ''
+  properties: []
+  identifier: arcane-focus-varies
+_id: phbagArcaneFocus
+type: loot
+img: icons/commodities/gems/gem-faceted-large-green.webp
+effects: []
+folder: YKJofRdXHKeBKJ4C
+sort: 100000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425905071
+  modifiedTime: 1745256810828
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagArcaneFocus'

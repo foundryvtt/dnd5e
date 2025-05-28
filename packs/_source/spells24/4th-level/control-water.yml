@@ -1,0 +1,216 @@
+name: Control Water
+system:
+  description:
+    value: >-
+      <p>Until the spell ends, you control any water inside an area you choose
+      that is a Cube up to 100 feet on a side, using one of the following
+      effects. As a Magic action on your later turns, you can repeat the same
+      effect or choose a different one.</p><p><strong>Flood. </strong>You cause
+      the water level of all standing water in the area to rise by as much as 20
+      feet. If you choose an area in a large body of water, you instead create a
+      20-foot tall wave that travels from one side of the area to the other and
+      then crashes. Any Huge or smaller vehicles in the wave's path are carried
+      with it to the other side. Any Huge or smaller vehicles struck by the wave
+      have a [[/r 1d100cs&lt;26#Vehicle is capsized]]{25 percent} chance of
+      capsizing.</p><p>The water level remains elevated until the spell ends or
+      you choose a different effect. If this effect produced a wave, the wave
+      repeats on the start of your next turn while the flood effect
+      lasts.</p><p><strong>Part Water. </strong>You part water in the area and
+      create a trench. The trench extends across the spell's area, and the
+      separated water forms a wall to either side. The trench remains until the
+      spell ends or you choose a different effect. The water then slowly fills
+      in the trench over the course of the next round until the normal water
+      level is restored.</p><p><strong>Redirect Flow. </strong>You cause flowing
+      water in the area to move in a direction you choose, even if the water has
+      to flow over obstacles, up walls, or in other unlikely directions. The
+      water in the area moves as you direct it, but once it moves beyond the
+      spell's area, it resumes its flow based on the terrain. The water
+      continues to move in the direction you chose until the spell ends or you
+      choose a different effect.</p><p><strong>Whirlpool. </strong>You cause a
+      whirlpool to form in the center of the area, which must be at least 50
+      feet square and 25 feet deep. The whirlpool lasts until you choose a
+      different effect or the spell ends. The whirlpool is 5 feet wide at the
+      base, up to 50 feet wide at the top, and 25 feet tall. Any creature in the
+      water and within 25 feet of the whirlpool is pulled 10 feet toward it.
+      When a creature enters the whirlpool for the first time on a turn or ends
+      its turn there, it makes a Strength saving throw. On a failed save, the
+      creature takes 2d8 Bludgeoning damage. On a successful save, the creature
+      takes half as much damage. A creature can swim away from the whirlpool
+      only if it first takes an action to pull away and succeeds on a [[/check
+      ability=str skill=ath dc=@attributes.spell.dc]] check against your spell
+      save DC.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ft
+      type: cube
+      size: '100'
+      contiguous: false
+      count: ''
+  range:
+    value: '300'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a mixture of water and dust
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: cylinder
+          size: '25'
+          height: '-25'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: true
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: '8'
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+      save:
+        ability: str
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Create Whirlpool
+      img: ''
+      appliedEffects: []
+    uvlPi5Em9KSfKICT:
+      type: utility
+      name: Flood, Part, or Redirect
+      _id: uvlPi5Em9KSfKICT
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: 25% Capsize Chance
+        formula: 1d100cs<26
+      img: ''
+      appliedEffects: []
+  identifier: control-water
+_id: phbsplControlWat
+type: spell
+img: icons/magic/water/pseudopod-swirl-blue.webp
+effects: []
+folder: qi3IbnEwap7mRw4b
+sort: 2900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425947713
+  modifiedTime: 1745256789285
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplControlWat'

@@ -1,4 +1,4 @@
-import { ItemDataModel } from "../abstract.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
@@ -8,11 +8,18 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ */
+
+/**
  * Data definition for Loot items.
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
+ *
+ * @property {Set<string>} properties               General properties of a loot item.
+ * @property {Omit<ItemTypeData, "baseItem">} type  Loot type and subtype.
  */
 export default class LootData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate
@@ -39,9 +46,7 @@ export default class LootData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-    enchantable: true,
-    inventoryItem: true,
-    inventoryOrder: 600
+    enchantable: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
@@ -63,6 +68,22 @@ export default class LootData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Default configuration for this item type's inventory section.
+   * @returns {InventorySectionDescriptor}
+   */
+  static get inventorySection() {
+    return {
+      id: "loot",
+      order: 600,
+      label: "TYPES.Item.lootPl",
+      groups: { type: "loot" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    };
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -70,6 +91,8 @@ export default class LootData extends ItemDataModel.mixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.prepareIdentifiable();
+    this.preparePhysicalData();
     this.type.label = CONFIG.DND5E.lootTypes[this.type.value]?.label ?? game.i18n.localize(CONFIG.Item.typeLabels.loot);
   }
 
@@ -81,7 +104,13 @@ export default class LootData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+
     context.parts = ["dnd5e.details-loot"];
+    const itemTypes = CONFIG.DND5E.lootTypes[this._source.type.value];
+    if ( itemTypes ) {
+      context.itemType = itemTypes.label;
+      context.itemSubtypes = itemTypes.subtypes;
+    }
   }
 
   /* -------------------------------------------- */
@@ -105,5 +134,15 @@ export default class LootData extends ItemDataModel.mixin(
   /** @override */
   static get itemCategories() {
     return CONFIG.DND5E.lootTypes;
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+    await this.preUpdateIdentifiable(changed, options, user);
   }
 }

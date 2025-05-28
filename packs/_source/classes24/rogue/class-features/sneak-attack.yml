@@ -1,0 +1,139 @@
+_id: phbrgeSneakAttac
+name: Sneak Attack
+type: feat
+folder: ymTkGscp5QEOwDlv
+img: icons/skills/melee/strike-dagger-white-orange.webp
+system:
+  description:
+    value: >-
+      <p>You know how to strike subtly and exploit a foe's distraction. Once per
+      turn, you can deal an extra 1d6 damage to one creature you hit with an
+      attack roll if you have Advantage on the roll and the attack uses a
+      Finesse or a Ranged weapon. The extra damage's type is the same as the
+      weapon's type.</p><p>You don't need Advantage on the attack roll if at
+      least one of your allies is within 5 feet of the target, the ally doesn't
+      have the Incapacitated condition, and you don't have Disadvantage on the
+      attack roll.</p><p>The extra damage increases as you gain Rogue levels, as
+      shown in the Sneak Attack column of the Rogue Features
+      table.</p><p><strong>Current Sneak Attack Damage:</strong> [[lookup
+      @scale.rogue.sneak-attack]]</p><section class="secret"
+      id="secret-ulLpai4CguAExpmN"><p><strong>Foundry Note</strong></p><p>Your
+      sneak attack damage will automatically scale as you level up. You can
+      select the damage type in the damage roll's dialog box.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 2
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    a1T6nHaqmvbLpyJr:
+      type: damage
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      damage:
+        critical:
+          allow: true
+          bonus: ''
+        parts:
+          - custom:
+              enabled: true
+              formula: '@scale.rogue.sneak-attack'
+            number: null
+            denomination: null
+            bonus: ''
+            types:
+              - acid
+              - bludgeoning
+              - cold
+              - fire
+              - force
+              - lightning
+              - necrotic
+              - piercing
+              - poison
+              - psychic
+              - radiant
+              - slashing
+              - thunder
+            scaling:
+              number: 1
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      sort: 0
+      _id: a1T6nHaqmvbLpyJr
+      name: ''
+  enchant: {}
+  identifier: sneak-attack
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866292069
+  modifiedTime: 1745256764486
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeSneakAttac'

@@ -1,0 +1,54 @@
+_id: uqoqQJ9NpMCPra6P
+name: Hellish Weapons
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]]'s weapon attacks are magical and deal an
+      extra <strong><strong>13 (3d8) <em>poison damage</em></strong></strong> on
+      a hit (included in the attacks).</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]]'s weapon attacks are magical and deal
+      extra <em>poison damage</em> on a hit (included in the attacks).</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: hellish-weapons
+flags: {}
+img: icons/weapons/axes/axe-battle-eyes-red.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304978158
+  modifiedTime: 1725992574930
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!uqoqQJ9NpMCPra6P'

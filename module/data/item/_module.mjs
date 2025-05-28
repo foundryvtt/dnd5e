@@ -3,6 +3,7 @@ import ClassData from "./class.mjs";
 import ConsumableData from "./consumable.mjs";
 import ContainerData from "./container.mjs";
 import EquipmentData from "./equipment.mjs";
+import FacilityData from "./facility.mjs";
 import FeatData from "./feat.mjs";
 import LootData from "./loot.mjs";
 import RaceData from "./race.mjs";
@@ -17,6 +18,7 @@ export {
   ConsumableData,
   ContainerData,
   EquipmentData,
+  FacilityData,
   FeatData,
   LootData,
   RaceData,
@@ -29,8 +31,6 @@ export {default as EnchantmentField, EnchantmentData, EnchantmentError} from "./
 export {default as ItemTypeField} from "./fields/item-type-field.mjs";
 export {default as SpellcastingField} from "./fields/spellcasting-field.mjs";
 export {default as SummonsField, SummonsData} from "./fields/summons-field.mjs";
-export {default as ActionTemplate} from "./templates/action.mjs";
-export {default as ActivatedEffectTemplate} from "./templates/activated-effect.mjs";
 export {default as ActivitiesTemplate} from "./templates/activities.mjs";
 export {default as EquippableItemTemplate} from "./templates/equippable-item.mjs";
 export {default as IdentifiableTemplate} from "./templates/identifiable.mjs";
@@ -46,6 +46,7 @@ export const config = {
   class: ClassData,
   consumable: ConsumableData,
   equipment: EquipmentData,
+  facility: FacilityData,
   feat: FeatData,
   loot: LootData,
   race: RaceData,

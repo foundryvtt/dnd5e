@@ -1,0 +1,115 @@
+_id: SleYkHovQ8NagmeV
+name: Locate Object
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Describe or name an object that is familiar to you. You sense the
+      direction to the object's location, as long as that object is within 1,000
+      feet of you. If the object is in motion, you know the direction of its
+      movement.</p><p>The spell can locate a specific object known to you, as
+      long as you have seen it up close—within 30 feet—at least once.
+      Alternatively, the spell can locate the nearest object of a particular
+      kind, such as a certain kind of apparel, jewelry, furniture, tool, or
+      weapon.</p><p>This spell can't locate an object if any thickness of lead,
+      even a thin sheet, blocks a direct path between you and the object.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: div
+  materials:
+    value: A forked twig
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: locate-object
+sort: 0
+flags: {}
+img: icons/magic/earth/projectile-stone-boulder-purple.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037356654
+  modifiedTime: 1725992720009
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!SleYkHovQ8NagmeV'

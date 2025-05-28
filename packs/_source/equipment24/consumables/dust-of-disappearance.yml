@@ -1,0 +1,178 @@
+_id: dmgDustOfDisappe
+name: Dust of Disappearance
+type: consumable
+folder: guHYjt0gjPLU2wCs
+img: icons/magic/water/bubbles-air-water-light.webp
+system:
+  activities:
+    OVcWAXY5IJGdKSqw:
+      type: utility
+      _id: OVcWAXY5IJGdKSqw
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: spec
+        concentration: false
+        override: false
+        special: up to 2d4 minutes
+        value: ''
+      effects:
+        - _id: MC5GAZMrAc4wSvAS
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '10'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creatureOrObject
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: Duration (Minutes)
+        formula: 2d4
+      name: Utilize
+      img: ''
+      appliedEffects:
+        - MC5GAZMrAc4wSvAS
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon</em></p><p>This powder resembles fine sand.
+      There is enough of it for one use. When you take a Utilize action to throw
+      the dust into the air, you and each creature and object within a 10-foot
+      Emanation originating from you have the Invisible condition for 2d4
+      minutes. The duration is the same for all subjects, and the dust is
+      consumed when its magic takes effect. Immediately after an affected
+      creature makes an attack roll, deals damage, or casts a spell, the
+      Invisible condition ends for that creature.</p>
+    chat: ''
+  identifier: dust-of-disappearance
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: ''
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects:
+  - name: Invisible
+    img: systems/dnd5e/icons/svg/statuses/invisible.svg
+    origin: Compendium.dnd5e.equipment24.Item.dmgDustOfDisappe
+    transfer: false
+    _id: MC5GAZMrAc4wSvAS
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p><em>Source:
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgDustOfDisappe]{Dust of
+      Disappearance}</em></p><p>You have the &amp;Reference[Invisible] condition
+      for 2d4 minutes or until you make an attack roll, deal damage, or cast a
+      spell.</p>
+    tint: '#ffffff'
+    statuses:
+      - invisible
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729283147607
+      modifiedTime: 1729283460839
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDustOfDisappe.MC5GAZMrAc4wSvAS'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712699449
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 500000
+ownership:
+  default: 0
+_key: '!items!dmgDustOfDisappe'

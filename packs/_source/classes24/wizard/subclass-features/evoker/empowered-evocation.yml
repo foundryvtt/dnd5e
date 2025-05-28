@@ -1,0 +1,124 @@
+_id: phbwzdEmpoweredE
+name: Empowered Evocation
+type: feat
+folder: ZHJ6ibjd1J4CSyNw
+img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+system:
+  description:
+    value: >-
+      <p>Whenever you cast a Wizard spell from the Evocation school, you can add
+      your Intelligence modifier to one damage roll of that spell.</p><section
+      class="secret" id="secret-3cdT0RlurgG5XV4o"><p><strong>Foundry
+      Note</strong></p><p>You can add your Intelligence modifier to the spell's
+      Situational Bonus in the damage dialog or use this feature's
+      <strong>Damage</strong> activity which allows you to select the type in
+      the damage dialog.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 2
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 10
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    24lZHflqzcwoBev5:
+      type: damage
+      _id: 24lZHflqzcwoBev5
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Whenever you cast a Wizard spell from the Evocation school
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: '@abilities.int.mod'
+            types:
+              - acid
+              - bludgeoning
+              - cold
+              - fire
+              - force
+              - lightning
+              - necrotic
+              - piercing
+              - poison
+              - psychic
+              - radiant
+              - slashing
+              - thunder
+            scaling:
+              number: 1
+      name: ''
+  enchant: {}
+  identifier: empowered-evocation
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866546265
+  modifiedTime: 1745256768696
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwzdEmpoweredE'

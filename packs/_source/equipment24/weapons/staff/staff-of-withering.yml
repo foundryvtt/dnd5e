@@ -1,0 +1,255 @@
+_id: dmgStaffOfWither
+name: Staff of Withering
+type: weapon
+img: icons/weapons/staves/staff-animal-skull-bull.webp
+system:
+  activities:
+    fIuLd6JkeCxxkuzy:
+      _id: fIuLd6JkeCxxkuzy
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+    aV1D7luak106JNQS:
+      type: save
+      name: Damage & Save
+      _id: aV1D7luak106JNQS
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: x0R9R2vD4quIgYy2
+          onSave: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 10
+            bonus: ''
+            types:
+              - necrotic
+            scaling:
+              number: 1
+        onSave: full
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects:
+        - x0R9R2vD4quIgYy2
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d3
+    max: '3'
+  description:
+    value: >-
+      <p><em>@UUID[Compendium.dnd5e.equipment24.Item.phbafcStaffalsoa]{Staff},
+      Rare (Requires Attunement)</em></p><p>This staff has 3 charges and regains
+      1d3 expended charges daily at dawn.</p><p>The staff can be wielded as a
+      magic Quarterstaff. On a hit, it deals damage as a normal Quarterstaff,
+      and you can expend 1 charge to deal an extra 2d10 Necrotic damage to the
+      target and force it to make a DC 15 Constitution saving throw. On a failed
+      save, the target has Disadvantage for 1 hour on any ability check or
+      saving throw that uses Strength or Constitution.</p><section
+      class="secret" id="secret-XLCxThjwbGtdndsQ"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Save</strong> activity includes an Active
+      Effect for tracking the disadvantage.</p></section>
+    chat: ''
+  identifier: staff-of-withering
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: quarterstaff
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  magicalBonus: null
+  properties:
+    - mgc
+    - ver
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: topple
+effects:
+  - name: Withered
+    img: icons/magic/death/hand-undead-skeleton-fire-pink.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgStaffOfWither
+    transfer: false
+    _id: x0R9R2vD4quIgYy2
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has Disadvantage for 1 hour on any ability check or saving
+      throw that uses Strength or Constitution.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729883755882
+      modifiedTime: 1729883816382
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgStaffOfWither.x0R9R2vD4quIgYy2'
+folder: 5p9KrkF39e6vFO4g
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+_key: '!items!dmgStaffOfWither'

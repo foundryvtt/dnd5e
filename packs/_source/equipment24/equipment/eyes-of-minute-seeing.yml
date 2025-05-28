@@ -1,0 +1,73 @@
+_id: dmgEyesOfMinuteS
+name: Eyes of Minute Seeing
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/tools/scribal/spectacles-glasses.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Uncommon</em></p></div><p>These crystal lenses
+      fit over the eyes. While wearing them, your vision improves significantly
+      out to a range of 1 foot, granting you Darkvision within that range and
+      Advantage on Intelligence (Investigation) checks made to examine something
+      within that range.</p>
+    chat: ''
+  identifier: eyes-of-minute-seeing
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712699777
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12400000
+ownership:
+  default: 0
+_key: '!items!dmgEyesOfMinuteS'

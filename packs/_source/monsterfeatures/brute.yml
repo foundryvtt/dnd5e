@@ -1,0 +1,46 @@
+_id: q8w1UF9woZDGIwvS
+name: Brute
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>A melee weapon deals one extra die of its damage when the [[lookup
+      @name lowercase]] hits with it (included in the attack).</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: brute
+flags: {}
+img: icons/skills/melee/unarmed-punch-fist.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304977176
+  modifiedTime: 1725992574625
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!q8w1UF9woZDGIwvS'

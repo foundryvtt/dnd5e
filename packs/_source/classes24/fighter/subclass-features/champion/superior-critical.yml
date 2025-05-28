@@ -1,0 +1,92 @@
+_id: phbftrSuperiorCr
+name: Superior Critical
+type: feat
+folder: Amxh67Wqon1bSaHg
+img: icons/skills/melee/strike-sword-dagger-runes-red.webp
+system:
+  description:
+    value: >-
+      <p>Your attack rolls with weapons and Unarmed Strikes can now score a
+      Critical Hit on a roll of 18–20 on the d20.</p><section
+      id="secret-zQkYyojU3VNzw6kH" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature automatically increases the Critical Hit
+      threshold to 18.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: superior-critical
+effects:
+  - name: Superior Critical
+    img: icons/skills/melee/strike-sword-dagger-runes-red.webp
+    _id: kKOE6KCEE0v4a5lw
+    type: base
+    system: {}
+    changes:
+      - key: flags.dnd5e.weaponCriticalThreshold
+        mode: 3
+        value: '18'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: Compendium.dnd5e.classes24.Item.phbftrSuperiorCr
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classes24.Item.phbftrImprovedCr.ActiveEffect.fbCF0jqdt3NMZdkc
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbftrSuperiorCr.kKOE6KCEE0v4a5lw'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866578955
+  modifiedTime: 1745256761772
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftrSuperiorCr'

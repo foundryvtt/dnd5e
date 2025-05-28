@@ -1,0 +1,187 @@
+_id: phbwlkFiendPatro
+name: Fiend Patron
+type: subclass
+folder: gG4h5ERlpEXbmxIJ
+img: systems/dnd5e/icons/classes/fiend.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Make a Deal with the Lower Planes</p></blockquote><p>Your
+      pact draws on the Lower Planes, the realms of perdition. You might forge a
+      bargain with a demon lord such as Demogorgon or Orcus; an archdevil such
+      as Asmodeus; or a pit fiend, balor, yugoloth, or night hag that is
+      especially mighty. That patron's aims are evil—the corruption or
+      destruction of all things, ultimately including you—and your path is
+      defined by the extent to which you strive against those aims.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identifier: fiend
+  classIdentifier: warlock
+  advancement:
+    - _id: EyDjHPlaiU9pcKWc
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbwlkDarkOnesBl
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbwlkFiendSpell
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Subclass Features
+    - _id: pkjDsDeyI1xHOSDb
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbwlkDarkOnesOw
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 6
+      title: Subclass Features
+    - _id: hEHLXeuzpfLUyPbb
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 10
+      title: Subclass Features
+    - _id: BXdX73NWYsGIrZyc
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbwlkHurlThroug
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 14
+      title: Subclass Features
+    - _id: BL0KO6NHMdWDzORz
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplBurningHan
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplCommand000
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplScorchingR
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplSuggestion
+        optional: false
+        spell:
+          ability: []
+          preparation: pact
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 3
+      title: Fiend Spells
+      hint: >-
+        The magic of your patron ensures you always have certain spells ready;
+        when you reach a Warlock level specified in the Fiend Spells table, you
+        thereafter always have the listed spells prepared.
+    - _id: RQGbS50hbBG90d1e
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplFireball00
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplStinkingCl
+        optional: false
+        spell:
+          ability: []
+          preparation: pact
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 5
+      title: Fiend Spells
+      hint: >-
+        The magic of your patron ensures you always have certain spells ready;
+        when you reach a Warlock level specified in the Fiend Spells table, you
+        thereafter always have the listed spells prepared.
+    - _id: HI0odgqJuVranhPH
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplFireShield
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplWallofFire
+        optional: false
+        spell:
+          ability: []
+          preparation: pact
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 7
+      title: Fiend Spells
+      hint: >-
+        The magic of your patron ensures you always have certain spells ready;
+        when you reach a Warlock level specified in the Fiend Spells table, you
+        thereafter always have the listed spells prepared.
+    - _id: Aqu6VkaM9Z70GTtM
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplGeas000000
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplInsectPlag
+        optional: false
+        spell:
+          ability: []
+          preparation: pact
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 9
+      title: Fiend Spells
+      hint: >-
+        The magic of your patron ensures you always have certain spells ready;
+        when you reach a Warlock level specified in the Fiend Spells table, you
+        thereafter always have the listed spells prepared.
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation:
+      formula: ''
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866551616
+  modifiedTime: 1745256767365
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!phbwlkFiendPatro'

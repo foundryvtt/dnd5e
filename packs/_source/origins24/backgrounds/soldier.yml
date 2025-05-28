@@ -1,0 +1,180 @@
+name: Soldier
+system:
+  description:
+    value: >-
+      <p><strong>Ability Scores:</strong> Strength, Dexterity,
+      Constitution</p><p><strong>Feat:</strong>
+      @UUID[Compendium.dnd5e.feats24.Item.phbftSavageAttac]{Savage
+      Attacker}</p><p><strong>Skill Proficiencies:</strong> Athletics and
+      Intimidation</p><p><strong>Tool Proficiency:</strong> <em>Choose one kind
+      of</em> <em>Gaming Set</em> (see
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbEquipment0000.JournalEntryPage.GCvg8n7Q7ltSPRxe#gaming-set-(varies)]{chapter
+      6})</p><p><strong>Equipment:</strong> <em>Choose A or B:</em> (A)
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepSpear00000]{Spear},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortbow00]{Shortbow}, 20
+      @UUID[Compendium.dnd5e.equipment24.Item.phbamoArrows0000]{Arrows}, Gaming
+      Set (same as above),
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagHealersKit0]{Healer's Kit},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagQuiver00000]{Quiver},
+      @UUID[Compendium.dnd5e.items.Item.SsAmWV6YBqeOFihT]{Traveler's Clothes},
+      14 GP; or (B) 50
+      GP</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixBackg.JournalEntryPage.phbbgSoldier0000
+      inline classes="free-rules-embed"]</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  startingEquipment:
+    - type: AND
+      requiresProficiency: false
+      _id: tjUkY8Vnhv56vBSI
+      group: ''
+      sort: 100000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbwepSpear00000
+      requiresProficiency: false
+      _id: DtQbHpEADm0GisSh
+      group: tjUkY8Vnhv56vBSI
+      sort: 200000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbwepShortbow00
+      requiresProficiency: false
+      _id: XNRbfyybOUcefRds
+      group: tjUkY8Vnhv56vBSI
+      sort: 300000
+    - type: linked
+      count: 20
+      key: Compendium.dnd5e.equipment24.Item.phbamoArrows0000
+      requiresProficiency: false
+      _id: eTkEm2kVE7f0O858
+      group: tjUkY8Vnhv56vBSI
+      sort: 400000
+    - type: tool
+      count: null
+      key: game
+      requiresProficiency: false
+      _id: 1BxsBihESoB1IdMl
+      group: tjUkY8Vnhv56vBSI
+      sort: 500000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbagHealersKit0
+      requiresProficiency: false
+      _id: 1YAWN3EyOKg2hPrV
+      group: tjUkY8Vnhv56vBSI
+      sort: 600000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbagQuiver00000
+      requiresProficiency: false
+      _id: UJMbdz4YGev9s0NK
+      group: tjUkY8Vnhv56vBSI
+      sort: 700000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.SsAmWV6YBqeOFihT
+      requiresProficiency: false
+      _id: pgQLCuuBfGxbMKTl
+      group: tjUkY8Vnhv56vBSI
+      sort: 800000
+  identifier: soldier
+  advancement:
+    - _id: 5hLHlmqxzoAta0uf
+      type: AbilityScoreImprovement
+      configuration:
+        cap: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked:
+          - int
+          - wis
+          - cha
+        points: 3
+      value:
+        type: asi
+      level: 0
+      title: Background Ability Score Improvement
+      hint: >-
+        Your background allows you to increase your Strength, Dexterity, and
+        Constitution scores; increase one of them by 2 and a different one by 1,
+        or increase all three by 1. None of these increases can raise a score
+        above 20.
+    - _id: y4FZ4I6wU0F8DEjO
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - skills:ath
+          - skills:itm
+        choices:
+          - count: 1
+            pool:
+              - tool:game:*
+      value:
+        chosen: []
+      level: 0
+      title: Background Proficiencies
+      hint: >-
+        Your background grants you proficiency in Athletics and Intimidation. It
+        also grants you proficiency with any Gaming Set.
+    - _id: tk8CFgIW7fXL0mlu
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.feats24.Item.phbftSavageAttac
+        optional: false
+        spell: null
+      value: {}
+      level: 0
+      title: Background Feat
+      hint: Your background grants you the Savage Attacker feat.
+    - _id: pLGiyOjTP7nwuwTl
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - languages:standard:common
+        choices:
+          - count: 2
+            pool:
+              - languages:standard:*
+      value:
+        chosen: []
+      level: 0
+      title: Choose Languages
+      hint: >-
+        Your character knows at least three languages: Common plus two languages
+        you roll or choose from the Standard Languages table.
+  wealth: '50'
+_id: phbbgSoldier0000
+type: background
+img: icons/environment/people/spearfighter.webp
+effects: []
+folder: ysJSs3cbEBOMC1zV
+sort: 100013
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866651037
+  modifiedTime: 1745687998374
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbbgSoldier0000'

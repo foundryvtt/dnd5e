@@ -1,0 +1,247 @@
+_id: dmgVorpalSword00
+name: Vorpal Sword
+type: weapon
+img: icons/weapons/swords/scimitar-guard-gold.webp
+system:
+  activities:
+    YligIBCrHtZpIGbp:
+      type: enchant
+      name: Vorpal Sword
+      _id: YligIBCrHtZpIGbp
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: mxrAgEyDsV2h5jla
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories:
+          - martialM
+        properties: []
+        type: weapon
+      img: ''
+      appliedEffects:
+        - mxrAgEyDsV2h5jla
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepGlaive0000]{Glaive},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatsword]{Greatsword},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepLongsword0]{Longsword}, or
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepScimitar00]{Scimitar}),
+      Legendary (Requires Attunement)</em></p><p>You gain a +3 bonus to attack
+      rolls and damage rolls made with this magic weapon. In addition, the
+      weapon ignores Resistance to Slashing damage.</p><p>When you use this
+      weapon to attack a creature that has at least one head and roll a 20 on
+      the d20 for the attack roll, you cut off one of the creature's heads. The
+      creature dies if it can't survive without the lost head. A creature is
+      immune to this effect if it has Immunity to Slashing damage, if it doesn't
+      have or need a head, or if the GM decides that the creature is too big for
+      its head to be cut off with this weapon. Such a creature instead takes an
+      extra 30 Slashing damage from the hit. If the creature has Legendary
+      Resistance, it can expend one daily use of that trait to avoid losing its
+      head, taking the extra damage
+      instead.</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: vorpal-sword
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ft
+  mastery: ''
+effects:
+  - type: enchantment
+    name: Vorpal Sword
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    _id: mxrAgEyDsV2h5jla
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Vorpal {}
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: legendary
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgVorpalSword00
+          caption=false]</p>
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.magicalBonus
+        mode: 4
+        value: '3'
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/weapons/swords/scimitar-guard-gold.webp
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '200000'
+        priority: null
+      - key: system.price.denomination
+        mode: 5
+        value: gp
+        priority: null
+      - key: activities[attack].damage.critical.bonus
+        mode: 2
+        value: '30'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730912375652
+      modifiedTime: 1745438837141
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgVorpalSword00.mxrAgEyDsV2h5jla'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712704504
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 16100000
+ownership:
+  default: 0
+_key: '!items!dmgVorpalSword00'

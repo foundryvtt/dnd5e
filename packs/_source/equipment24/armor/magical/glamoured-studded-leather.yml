@@ -1,0 +1,75 @@
+_id: dmgGlamouredStud
+name: Glamoured Studded Leather
+type: equipment
+folder: 1kn4uV4dTVVduLjA
+img: icons/equipment/chest/breastplate-rivited-red.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Armor (Studded Leather Armor), Rare</em></p><p>While wearing this
+      armor, you gain a +1 bonus to Armor Class. You can also take a Bonus
+      Action to cause the armor to assume the appearance of a normal set of
+      clothing or some other kind of armor. You decide what it looks
+      like—including color, style, and accessories—but the armor retains its
+      normal bulk and weight. The illusory appearance lasts until you use this
+      property again or doff the armor.</p>
+    chat: ''
+  identifier: glamoured-studded-leather
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 13
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: 12
+    magicalBonus: 1
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: light
+    baseItem: studded
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 700000
+ownership:
+  default: 0
+_key: '!items!dmgGlamouredStud'

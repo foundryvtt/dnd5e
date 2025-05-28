@@ -1,0 +1,220 @@
+_id: dmgSwordOfSharpn
+name: Sword of Sharpness
+type: weapon
+img: icons/weapons/swords/scimitar-guard-wood.webp
+system:
+  activities:
+    ximpnpVgz8dZ2q9R:
+      type: enchant
+      name: Sword of Sharpness
+      _id: ximpnpVgz8dZ2q9R
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: nxid1s2CZrB06HH8
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      enchant: {}
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepGlaive0000]{Glaive},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatsword]{Greatsword},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepLongsword0]{Longsword}, or
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepScimitar00]{Scimitar}), Very
+      Rare (Requires Attunement)</em></p><p>When you attack an object with this
+      magic weapon and hit, maximize your weapon damage dice against the
+      target.</p><p>When you attack a creature with this weapon and roll a 20 on
+      the d20 for the attack roll, that target takes an extra 14 Slashing damage
+      and gains <span class="no-break">1 &amp;Reference[Exhaustion]</span>
+      level.</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: sword-of-sharpness
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: martialM
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: ''
+effects:
+  - type: enchantment
+    name: Sword of Sharpness
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    _id: nxid1s2CZrB06HH8
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Sharpness'
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: veryRare
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSwordOfSharpn
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: activities[attack].damage.critical.bonus
+        mode: 2
+        value: 14d1[necrotic]
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '40000'
+        priority: null
+      - key: system.price.denomination
+        mode: 5
+        value: gp
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730941512837
+      modifiedTime: 1730941811204
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgSwordOfSharpn.nxid1s2CZrB06HH8'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712704133
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 15200000
+ownership:
+  default: 0
+_key: '!items!dmgSwordOfSharpn'

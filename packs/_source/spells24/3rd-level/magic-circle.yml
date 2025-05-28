@@ -1,0 +1,134 @@
+name: Magic Circle
+system:
+  description:
+    value: >-
+      <p>You create a 10-foot-radius, 20-foot-tall Cylinder of magical energy
+      centered on a point on the ground that you can see within range. Glowing
+      runes appear wherever the Cylinder intersects with the floor or other
+      surface.</p><p>Choose one or more of the following types of creatures:
+      Celestials, Elementals, Fey, Fiends, or Undead. The circle affects a
+      creature of the chosen type in the following ways:</p><ul><li>The creature
+      can't willingly enter the Cylinder by nonmagical means. If the creature
+      tries to use teleportation or interplanar travel to do so, it must first
+      succeed on a Charisma saving throw.</li><li>The creature has Disadvantage
+      on attack rolls against targets within the Cylinder.</li><li>Targets
+      within the Cylinder can't be possessed by or gain the
+      &amp;Reference[charmed apply=false] or &amp;reference[frightened
+      apply=false] condition from the creature.</li></ul><p>Each time you cast
+      this spell, you can cause its magic to operate in the reverse direction,
+      preventing a creature of the specified type from leaving the Cylinder and
+      protecting targets outside it.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> The duration increases by 1 hour for each spell slot level
+      above 3.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '@item.level - 2'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ft
+      type: cylinder
+      size: '10'
+      contiguous: false
+      height: ''
+      count: ''
+  range:
+    value: '10'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: salt and powdered silver worth 100+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: magic-circle
+_id: phbsplMagicCircl
+type: spell
+img: icons/magic/symbols/ring-circle-smoke-blue.webp
+effects: []
+folder: HCovEE4VoPGlIbKi
+sort: 1100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425962207
+  modifiedTime: 1745256795723
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMagicCircl'

@@ -1,0 +1,115 @@
+_id: YwlHI3BVJapz4a3E
+name: Playing Cards Set
+type: tool
+img: icons/sundries/gaming/playing-cards.webp
+system:
+  description:
+    value: >-
+      <p>This item encompasses a wide range of playing card types, both unmarked
+      and marked.</p>
+
+      <p>If you are proficient with a gaming set, you can add your proficiency
+      bonus to ability checks you make to play a game with that set. Each type
+      of gaming set requires a separate proficiency.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 5
+    denomination: sp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  ability: dex
+  chatFlavor: ''
+  proficient: null
+  bonus: ''
+  type:
+    value: game
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: check
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      check:
+        ability: dex
+        dc: {}
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: playing-cards-set
+effects: []
+folder: uvZXbqK3cHirDzeT
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037216493
+  modifiedTime: 1725992522855
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!YwlHI3BVJapz4a3E'

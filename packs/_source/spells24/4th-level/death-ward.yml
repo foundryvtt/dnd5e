@@ -1,0 +1,151 @@
+name: Death Ward
+system:
+  description:
+    value: >-
+      <p>You touch a creature and grant it a measure of protection from death.
+      The first time the target would drop to 0 Hit Points before the spell
+      ends, the target instead drops to 1 Hit Point, and the spell
+      ends.</p><p>If the spell is still in effect when the target is subjected
+      to an effect that would kill it instantly without dealing damage, that
+      effect is negated against the target, and the spell ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: abj
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: mLUL8mRFsCzleR5d
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: death-ward
+_id: phbsplDeathWard0
+type: spell
+img: icons/magic/death/skull-horned-worn-fire-blue.webp
+effects:
+  - name: Protection from Death
+    origin: Compendium.dnd5e.spells24.Item.phbsplDeathWard0
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 28800
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/death/skull-horned-worn-fire-blue.webp
+    _id: mLUL8mRFsCzleR5d
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The first time the target would drop to 0 Hit Points before the spell
+      ends, the target instead drops to 1 Hit Point, and the spell
+      ends.</p><p>If the spell is still in effect when the target is subjected
+      to an effect that would kill it instantly without dealing damage, that
+      effect is negated against the target, and the spell ends.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplDeathWard0.mLUL8mRFsCzleR5d'
+folder: qi3IbnEwap7mRw4b
+sort: 2800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425949111
+  modifiedTime: 1745256790056
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDeathWard0'

@@ -1,0 +1,125 @@
+_id: XbwGq5kDJNvAxNXV
+name: Gate
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You conjure a portal linking an unoccupied space you can see within
+      range to a precise location on a different plane of existence. The portal
+      is a circular opening, which you can make 5 to 20 feet in diameter. You
+      can orient the portal in any direction you choose. The portal lasts for
+      the Duration.</p><p>The portal has a front and a back on each plane where
+      it appears. Travel through the portal is possible only by moving through
+      its front. Anything that does so is instantly transported to the other
+      plane, appearing in the unoccupied space nearest to the
+      portal.</p><p>Deities and other planar rulers can prevent portals created
+      by this spell from opening in their presence or anywhere within their
+      domains.</p><p>When you cast this spell, you can speak the name of a
+      specific creature (a pseudonym, title, or nickname doesn't work). If that
+      creature is on a plane other than the one you are on, the portal opens in
+      the named creature's immediate vicinity and draws the creature through it
+      to the nearest unoccupied space on your side of the portal. You gain no
+      special power over the creature, and it is free to act as the DM deems
+      appropriate. It might leave, Attack you, or help you.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: space
+      count: '20'
+      choice: false
+    template:
+      units: ft
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 9
+  school: con
+  materials:
+    value: A diamond at least worth 5000gp
+    consumed: false
+    cost: 5000
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: gate
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-star-pentagon-orange.webp
+effects: []
+folder: KL6ZY4VRMjojGrL4
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037358568
+  modifiedTime: 1725992720618
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!XbwGq5kDJNvAxNXV'

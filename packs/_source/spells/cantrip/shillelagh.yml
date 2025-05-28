@@ -1,0 +1,249 @@
+_id: VzgFzcmocr1X1cp4
+name: Shillelagh
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>The wood of a club or quarterstaff you are holding is imbued with
+      nature's power. For the duration, you can use your spellcasting ability
+      instead of Strength for the attack and damage rolls of melee attacks using
+      that weapon, and the weapon's damage die becomes a d8. The weapon also
+      becomes magical, if it isn't already. The spell ends if you cast it again
+      or if you let go of the weapon.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: bonus
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: object
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: spec
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: trs
+  materials:
+    value: A shamrock leaf, and a club or quarterstaff
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: enchant
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: QPsqj6jfS0iXSrTs
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - ONVab5lmTqJwwMBC
+            effect: []
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant: {}
+      restrictions:
+        allowMagical: true
+        categories:
+          - simpleM
+        properties: []
+        type: weapon
+      name: Imbue Weapon
+      img: ''
+      appliedEffects:
+        - QPsqj6jfS0iXSrTs
+    ONVab5lmTqJwwMBC:
+      type: attack
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: ''
+        units: ''
+        special: ''
+        override: false
+        concentration: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: spellcasting
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: ONVab5lmTqJwwMBC
+      name: Spellcasting Attack
+      img: ''
+      appliedEffects: []
+  identifier: shillelagh
+sort: 0
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - ONVab5lmTqJwwMBC
+      effect: []
+img: icons/magic/fire/dagger-rune-enchant-teal.webp
+effects:
+  - type: enchantment
+    name: Shillelagh
+    img: icons/magic/fire/dagger-rune-enchant-teal.webp
+    disabled: false
+    _id: QPsqj6jfS0iXSrTs
+    system: {}
+    changes:
+      - key: name
+        mode: 2
+        value: ', Shillelagh'
+        priority: null
+      - key: system.damage.base.number
+        mode: 5
+        value: '1'
+        priority: null
+      - key: system.damage.base.denomination
+        mode: 5
+        value: '8'
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725554262842
+      modifiedTime: 1730833877207
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!VzgFzcmocr1X1cp4.QPsqj6jfS0iXSrTs'
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037357582
+  modifiedTime: 1730833889711
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!VzgFzcmocr1X1cp4'

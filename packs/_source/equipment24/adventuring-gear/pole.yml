@@ -1,0 +1,50 @@
+name: Pole
+system:
+  description:
+    value: >-
+      <p>A Pole is 10 feet long. You can use it to touch something up to 10 feet
+      away. If you must make a Strength (Athletics) check as part of a High or
+      Long Jump, you can use the Pole to vault, giving yourself Advantage on the
+      check.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: cp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 7
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: pole
+_id: phbagPole0000000
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/commodities/wood/wood-pole.webp
+effects: []
+sort: 4600000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425910807
+  modifiedTime: 1745256812533
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagPole0000000'

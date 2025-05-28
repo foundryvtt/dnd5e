@@ -1,0 +1,165 @@
+name: Antitoxin
+system:
+  description:
+    value: >-
+      <p>As a Bonus Action, you can drink a vial of Antitoxin to gain Advantage
+      on saving throws to avoid or end the Poisoned condition for 1 hour.</p>
+    chat: ''
+  price:
+    value: 50
+    denomination: gp
+  source:
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: true
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: potion
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    2TNbDh0n59svuGIx:
+      type: utility
+      activation:
+        type: bonus
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: hour
+        special: ''
+        override: false
+      effects:
+        - _id: DzWVacNiq6ggXbU9
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: 2TNbDh0n59svuGIx
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: antitoxin
+_id: phbagAntitoxin00
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/consumables/potions/bottle-round-corked-pink.webp
+effects:
+  - name: Antitoxin
+    img: icons/consumables/potions/bottle-round-corked-pink.webp
+    origin: Compendium.dnd5e.equipment24.Item.phbagAntitoxin00
+    transfer: false
+    _id: DzWVacNiq6ggXbU9
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725846653216
+      modifiedTime: 1725846664457
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbagAntitoxin00.DzWVacNiq6ggXbU9'
+sort: 7200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425905028
+  modifiedTime: 1745256810801
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagAntitoxin00'

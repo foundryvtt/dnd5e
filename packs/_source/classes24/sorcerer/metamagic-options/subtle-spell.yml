@@ -1,0 +1,103 @@
+_id: phbmmoSubtleSpel
+name: Subtle Spell
+type: feat
+img: icons/creatures/slimes/slime-movement-swirling-blue.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Cost: 1 Sorcery Point</p></blockquote><p>When you cast a
+      spell, you can spend 1 Sorcery Point to cast it without any Verbal,
+      Somatic, or Material components, except Material components that are
+      consumed by the spell or that have a cost specified in the spell.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: metamagic
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    9jWUnfRzs0TqKWC2:
+      type: utility
+      name: Subtle Spell
+      _id: 9jWUnfRzs0TqKWC2
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you cast a spell
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbscrFontOfMagi
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: subtle-spell
+effects: []
+folder: 6RKLEZHPbdWG3fZe
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866286897
+  modifiedTime: 1745256762825
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbmmoSubtleSpel'

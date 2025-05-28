@@ -1,0 +1,76 @@
+_id: dmgShieldOfMissi
+name: Shield of Missile Attraction
+type: equipment
+folder: 1kn4uV4dTVVduLjA
+img: icons/equipment/shield/kite-decorative-steel-claws.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Armor (Shield), Rare (Requires Attunement)</em></p><p>While holding
+      this Shield, you have Resistance to damage from attacks made with Ranged
+      weapons.</p><p><em><strong>Curse.</strong></em> This Shield is cursed.
+      Attuning to it curses you until you are targeted by a
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplRemoveCurs]{Remove Curse} spell
+      or similar magic. Removing the Shield fails to end the curse on you.
+      Whenever an attack with a Ranged weapon targets a creature within 10 feet
+      of you, the curse causes you to become the target instead.</p>
+    chat: ''
+  identifier: shield-of-missile-attraction
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: 2
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: shield
+    baseItem: shield
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703338
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 825000
+ownership:
+  default: 0
+_key: '!items!dmgShieldOfMissi'

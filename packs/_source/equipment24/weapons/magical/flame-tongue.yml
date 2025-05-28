@@ -1,0 +1,326 @@
+_id: dmgFlameTongue00
+name: Flame Tongue
+type: weapon
+img: icons/weapons/swords/greatsword-crossguard-flanged-red.webp
+system:
+  activities:
+    QYYI3r1wlDAyKzAv:
+      type: enchant
+      name: Flame Tongue
+      _id: QYYI3r1wlDAyKzAv
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: perm
+        concentration: false
+        override: false
+      effects:
+        - _id: VtBOwsAVipxkP2f5
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - FrNZRC1C2HFJxUNu
+            effect: []
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      img: ''
+      appliedEffects:
+        - VtBOwsAVipxkP2f5
+    FrNZRC1C2HFJxUNu:
+      type: enchant
+      name: Engulf in Flames
+      _id: FrNZRC1C2HFJxUNu
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: disp
+        concentration: false
+        override: false
+      effects:
+        - _id: MHnAqxEXBhUbnjPq
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      range:
+        override: true
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: true
+        categories:
+          - simpleM
+          - martialM
+        properties: []
+        type: weapon
+      img: ''
+      appliedEffects:
+        - MHnAqxEXBhUbnjPq
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Weapon (Any Melee Weapon), Rare (Requires
+      Attunement)</em></p><p>While holding this magic weapon, you can take a
+      Bonus Action and use a command word to cause flames to engulf the <span
+      class="no-break">damage</span>-dealing part of the weapon. These flames
+      shed Bright Light in a 40-foot radius and Dim Light for an additional 40
+      feet. While the weapon is ablaze, it deals an extra 2d6 Fire damage on a
+      hit. The flames last until you take a Bonus Action to issue the command
+      again or until you drop, stow, or sheathe the
+      weapon.</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: flame-tongue
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ft
+  mastery: ''
+effects:
+  - type: enchantment
+    name: Flame Tongue
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    _id: VtBOwsAVipxkP2f5
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Flame Tongue {}
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgFlameTongue00
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '4000'
+        priority: null
+      - key: system.price.denomination
+        mode: 5
+        value: gp
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729803617244
+      modifiedTime: 1731004864280
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgFlameTongue00.VtBOwsAVipxkP2f5'
+  - type: enchantment
+    name: Ablaze
+    img: systems/dnd5e/icons/items/flame-tongue-longsword.webp
+    disabled: true
+    _id: MHnAqxEXBhUbnjPq
+    system: {}
+    changes:
+      - key: system.damage.parts
+        mode: 2
+        value: '[["2d6", "fire"]]'
+        priority: null
+      - key: name
+        mode: 5
+        value: '{} (Ablaze)'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1731004134526
+      modifiedTime: 1732647163594
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgFlameTongue00.MHnAqxEXBhUbnjPq'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - FrNZRC1C2HFJxUNu
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745433544359
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 8000000
+ownership:
+  default: 0
+_key: '!items!dmgFlameTongue00'

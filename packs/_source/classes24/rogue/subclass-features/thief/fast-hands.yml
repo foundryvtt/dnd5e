@@ -1,0 +1,203 @@
+_id: phbrgeFastHands0
+name: Fast Hands
+type: feat
+folder: dnKXgPPMNF5Jbw2T
+img: icons/skills/social/theft-pickpocket-bribery-brown.webp
+system:
+  description:
+    value: >-
+      <p>As a Bonus Action, you can do one of the
+      following.</p><p><strong>Sleight of Hand.</strong> Make a Dexterity
+      (Sleight of Hand) check to pick a lock or disarm a trap with Thieves'
+      Tools or to pick a pocket.</p><p><strong>Use an Object.</strong> Take the
+      Utilize action, or take the Magic action to use a magic item that requires
+      that action.</p><section id="secret-jnQLm5F5Pq3fBPRp"
+      class="secret"><p><strong>Foundry Note</strong></p><p>The <strong>Sleight
+      of Hand</strong> and <strong>Thieves' Tools</strong> activities include
+      the relevant checks.</p><p>The <strong>Use an Object</strong> activity can
+      be used for tracking Bonus Action use.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    G2QVu7o56FSQvuhy:
+      type: check
+      name: Sleight of Hand
+      _id: G2QVu7o56FSQvuhy
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      check:
+        dc:
+          calculation: ''
+          formula: ''
+        associated:
+          - slt
+        ability: ''
+      img: systems/dnd5e/icons/svg/statuses/grappled.svg
+    g6OUYMMm32iPjgCB:
+      type: check
+      name: Thieves' Tools
+      _id: g6OUYMMm32iPjgCB
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      check:
+        dc:
+          calculation: ''
+          formula: ''
+        associated:
+          - thief
+        ability: dex
+      img: systems/dnd5e/icons/svg/versatile.svg
+    5pHgM0ZQStN6rIGE:
+      type: utility
+      name: Use an Object
+      _id: 5pHgM0ZQStN6rIGE
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: fast-hands
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866560489
+  modifiedTime: 1745256764318
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeFastHands0'

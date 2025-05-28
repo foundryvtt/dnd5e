@@ -1,0 +1,48 @@
+_id: xna3UTd4EFLCZMt9
+name: Limited Telepathy
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>the [[lookup @name lowercase]] can magically transmit simple messages
+      and images to any creature within <strong>120 ft.</strong> of it that can
+      understand a language. This form of telepathy doesn't allow the receiving
+      creature to telepathically respond.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: limited-telepathy
+flags: {}
+img: icons/magic/defensive/illusion-evasion-echo-purple.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304978623
+  modifiedTime: 1725992575044
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!xna3UTd4EFLCZMt9'

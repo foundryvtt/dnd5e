@@ -1,0 +1,104 @@
+_id: OqRnKL4703RuReS1
+name: Shriek
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>When bright light or a creature is within 30
+      feet of the [[lookup @name lowercase]], it emits a shriek audible within
+      300 feet of it. the [[lookup @name lowercase]] continues to shriek until
+      the disturbance moves out of range and for 1d4 of the [[lookup @name
+      lowercase]]'s turns afterward</p><p></p></section><p>When bright light or
+      a creature is within 30 feet of the [[lookup @name lowercase]], it emits a
+      shriek audible within 300 feet of it. </p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: reaction
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: 1d4
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: shriek
+flags: {}
+img: icons/creatures/abilities/mouth-teeth-human.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304970393
+  modifiedTime: 1725992572510
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!OqRnKL4703RuReS1'

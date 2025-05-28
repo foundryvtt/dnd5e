@@ -1,0 +1,52 @@
+_id: phbdrdBeastSpell
+name: Beast Spells
+type: feat
+folder: EXYmwRGoNyMbByN1
+img: icons/creatures/mammals/elk-moose-marked-green.webp
+system:
+  description:
+    value: >-
+      <p>While using Wild Shape, you can cast spells in Beast form, except for
+      any spell that has a Material component with a cost specified or that
+      consumes its Material component.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 18
+    repeatable: false
+  properties: []
+  requirements: Druid
+  activities: {}
+  enchant: {}
+  identifier: beast-spells
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866366918
+  modifiedTime: 1745256760993
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 200000
+ownership:
+  default: 0
+_key: '!items!phbdrdBeastSpell'

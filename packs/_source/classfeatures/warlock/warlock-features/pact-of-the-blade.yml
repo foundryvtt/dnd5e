@@ -1,0 +1,113 @@
+_id: 9dSSa68mIPoX2ezA
+name: Pact of the Blade
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You can use your action to create a pact weapon in your empty hand. You
+      can choose the form that this melee weapon takes each time you create it.
+      You are proficient with it while you wield it. This weapon counts as
+      magical for the purpose of overcoming resistance and immunity to
+      nonmagical attacks and damage.</p><p>Your pact weapon disappears if it is
+      more than 5 feet away from you for 1 minute or more. It also disappears if
+      you use this feature again, if you dismiss the weapon (no action
+      required), or if you die.</p><p>You can transform one magic weapon into
+      your pact weapon by performing a special ritual while you hold the weapon.
+      You perform the ritual over the course of 1 hour, which can be done during
+      a short rest. You can then dismiss the weapon, shunting it into an
+      extradimensional space, and it appears whenever you create your pact
+      weapon thereafter. You can't affect an artifact or a sentient weapon in
+      this way. The weapon ceases being your pact weapon if you die, if you
+      perform the 1-hour ritual on a different weapon, or if you use a 1-hour
+      ritual to break your bond to it. The weapon appears at your feet if it is
+      in the extradimensional space when the bond breaks.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: pact
+  requirements: Warlock 3
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: pact-of-the-blade
+flags: {}
+img: icons/skills/melee/weapons-crossed-swords-teal.webp
+effects: []
+folder: 5vh3H3BfNi3v9LeS
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037381177
+  modifiedTime: 1725992287496
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!9dSSa68mIPoX2ezA'

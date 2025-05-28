@@ -1,0 +1,159 @@
+_id: l9Ju5KE7bbn3WpTm
+name: Hold Monster
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Choose a creature that you can see within range. The target must
+      succeed on a Wisdom saving throw or be &amp;Reference[Paralyzed] for the
+      Duration. This spell has no effect on Undead. At the end of each of its
+      turns, the target can make another Wisdom saving throw. On a success, the
+      spell ends on the target.</p><p><strong>At Higher Levels.</strong> When
+      you cast this spell using a spell slot of 6th level or higher, you can
+      target one additional creature for each slot level above 5th. The
+      creatures must be within 30 feet of each other when you target them.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '90'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: enc
+  materials:
+    value: A small, straight piece of iron
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 1nGyCW9SEQ2TusXw
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: hold-monster
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-chains-ropes-red.webp
+effects:
+  - name: Hold Monster
+    origin: Compendium.dnd5e.spells.Item.l9Ju5KE7bbn3WpTm
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: 1nGyCW9SEQ2TusXw
+    changes: []
+    description: >-
+      <p>The target is Paralyzed for the Duration. At the end of each of its
+      turns, the target can make another Wisdom saving throw. On a success, the
+      spell ends on the target.</p>
+    transfer: false
+    statuses:
+      - paralyzed
+      - incapacitated
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/control/debuff-chains-ropes-red.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!l9Ju5KE7bbn3WpTm.1nGyCW9SEQ2TusXw'
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037364173
+  modifiedTime: 1725992722436
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!l9Ju5KE7bbn3WpTm'

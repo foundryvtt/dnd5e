@@ -1,0 +1,111 @@
+_id: M6VSMzVtKPhh8B0i
+name: Intimidating Presence
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 10th level, you can use your action to frighten someone
+      with your menacing presence.</p><p>When you do so, choose one creature
+      that you can see within 30 feet of you. If the creature can see or hear
+      you, it must succeed on a Wisdom saving throw (DC equal to 8 + your
+      proficiency bonus + your Charisma modifier) or be frightened of you until
+      the end of your next turn. On subsequent turns, you can use your action to
+      extend the duration of this effect on the frightened creature until the
+      end of your next turn. This effect ends if the creature ends its turn out
+      of line of sight or more than 60 feet away from you.</p><p>If the creature
+      succeeds on its saving throw, you can't use this feature on that creature
+      again for 24 hours.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Path of the Berserker 10
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: cha
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: intimidating-presence
+flags: {}
+img: icons/creatures/magical/construct-iron-stomping-yellow.webp
+effects: []
+folder: 5ajv5k9XdEWyOXzE
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037383129
+  modifiedTime: 1725992288089
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!M6VSMzVtKPhh8B0i'

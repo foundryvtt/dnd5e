@@ -1,0 +1,286 @@
+_id: Sgjrf8qqv97CCWM4
+name: Magic Weapon
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch a nonmagical weapon. Until the spell ends, that weapon
+      becomes a magic weapon with a +1 bonus to Attack rolls and Damage
+      Rolls.</p><p><strong>At Higher Levels.</strong> When you cast this spell
+      using a spell slot of 4th level or higher, the bonus increases to +2. When
+      you use a spell slot of 6th level or higher, the bonus increases to
+      +3.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: bonus
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: enchant
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: SLSudYaACjmmmZsU
+          level:
+            min: null
+            max: 3
+          riders: []
+        - _id: 8OhsRxK3dF1JeQXO
+          level:
+            min: 4
+            max: 5
+          riders: []
+        - _id: 7L1wKfaEdN85IA0Z
+          level:
+            min: 6
+            max: null
+          riders: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        type: weapon
+        categories: []
+        properties: []
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: magic-weapon
+sort: 0
+flags: {}
+img: icons/magic/fire/dagger-rune-enchant-flame-blue.webp
+effects:
+  - name: Magic Weapon, +1
+    flags:
+      dnd5e:
+        enchantment:
+          level:
+            min: null
+            max: 3
+          riders: []
+    _id: SLSudYaACjmmmZsU
+    changes:
+      - key: name
+        mode: 5
+        value: '{}, +1'
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.magicalBonus
+        mode: 5
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>This weapon becomes a magic weapon with a +1 bonus to Attack rolls and
+      Damage Rolls.</p>
+    origin: null
+    transfer: false
+    statuses: []
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/fire/dagger-rune-enchant-flame-blue.webp
+    type: enchantment
+    system: {}
+    sort: 0
+    _key: '!items.effects!Sgjrf8qqv97CCWM4.SLSudYaACjmmmZsU'
+  - name: Magic Weapon, +2
+    flags:
+      dnd5e:
+        enchantment:
+          level:
+            min: 4
+            max: 5
+          riders: []
+    changes:
+      - key: name
+        mode: 5
+        value: '{}, +2'
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.magicalBonus
+        mode: 5
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>This weapon becomes a magic weapon with a +2 bonus to Attack rolls and
+      Damage Rolls.</p>
+    origin: null
+    transfer: false
+    statuses: []
+    tint: '#ffffff'
+    _id: 8OhsRxK3dF1JeQXO
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/fire/dagger-rune-enchant-flame-blue.webp
+    type: enchantment
+    system: {}
+    sort: 0
+    _key: '!items.effects!Sgjrf8qqv97CCWM4.8OhsRxK3dF1JeQXO'
+  - name: Magic Weapon, +3
+    flags:
+      dnd5e:
+        enchantment:
+          level:
+            min: 6
+            max: null
+          riders: []
+    changes:
+      - key: name
+        mode: 5
+        value: '{}, +3'
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.magicalBonus
+        mode: 5
+        value: '3'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>This weapon becomes a magic weapon with a +3 bonus to Attack rolls and
+      Damage Rolls.</p>
+    origin: null
+    transfer: false
+    statuses: []
+    tint: '#ffffff'
+    _id: 7L1wKfaEdN85IA0Z
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/fire/dagger-rune-enchant-flame-blue.webp
+    type: enchantment
+    system: {}
+    sort: 0
+    _key: '!items.effects!Sgjrf8qqv97CCWM4.7L1wKfaEdN85IA0Z'
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037356520
+  modifiedTime: 1725992719940
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Sgjrf8qqv97CCWM4'

@@ -1,0 +1,93 @@
+_id: phbpdnRadiantStr
+name: Radiant Strikes
+type: feat
+folder: 6uMLnndK8UPkb7Uy
+img: icons/skills/melee/strike-sword-dagger-runes-yellow.webp
+system:
+  description:
+    value: >-
+      <p>Your strikes now carry supernatural power. When you hit a target with
+      an attack roll using a Melee weapon or an Unarmed Strike, the target takes
+      an extra 1d8 Radiant damage.</p><section class="secret"
+      id="secret-fSg1MH5IBJqfecX2"><p><strong>Foundry Note</strong></p><p>This
+      feature includes an Active Effect which automatically adds the Radiant
+      damage to all Damage Rolls made with your Melee Weapon Attacks and Unarmed
+      Strikes.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 11
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: radiant-strikes
+effects:
+  - name: Radiant Strikes
+    img: icons/skills/melee/strike-sword-dagger-runes-yellow.webp
+    _id: peNRQizvyp2vL84H
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.mwak.damage
+        mode: 2
+        value: 1d8[radiant]
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbpdnRadiantStr.peNRQizvyp2vL84H'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866297701
+  modifiedTime: 1745256763979
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbpdnRadiantStr'

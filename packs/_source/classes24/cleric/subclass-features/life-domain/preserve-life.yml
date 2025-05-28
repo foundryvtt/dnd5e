@@ -1,0 +1,126 @@
+_id: phbclcPreserveLi
+name: Preserve Life
+type: feat
+folder: jWzqOsH9e7IW7WO7
+img: icons/magic/life/heart-hand-gold-green.webp
+system:
+  description:
+    value: >-
+      <p>As a Magic action, you present your Holy Symbol and expend a use of
+      your Channel Divinity to evoke healing energy that can restore a number of
+      Hit Points equal to five times your Cleric level. Choose
+      &amp;Reference[Bloodied] creatures within 30 feet of yourself (which can
+      include you), and divide those Hit Points among them. This feature can
+      restore a creature to no more than half its Hit Point maximum.</p><section
+      class="secret" id="secret-vybBdwcDQO3jMVDo"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Heal</strong> activity does not
+      automatically restrict the HP gained to 50% of the target's
+      max.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: Life Domain
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbclcChannelDiv
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: ''
+        units: inst
+        special: ''
+        override: false
+        concentration: false
+      effects: []
+      range:
+        value: ''
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '30'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: creature
+          choice: true
+          special: Blooed creatures
+        prompt: true
+        override: false
+      healing:
+        number: null
+        denomination: null
+        bonus: ''
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: 5 * @classes.cleric.levels
+        scaling:
+          mode: whole
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+  enchant: {}
+  identifier: preserve-life
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866589552
+  modifiedTime: 1740680082017
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!phbclcPreserveLi'

@@ -1,0 +1,118 @@
+_id: XqzXSKNR75ZdYTA9
+name: Divination
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Your magic and an offering put you in contact with a god or a god's
+      servants. You ask a single question concerning a specific goal, event, or
+      activity to occur within 7 days. The DM offers a truthful reply. The reply
+      might be a short phrase, a cryptic rhyme, or an omen.</p><p>The spell
+      doesn't take into account any possible circumstances that might change the
+      outcome, such as the casting of additional spells or the loss or gain of a
+      companion.</p><p>If you cast the spell two or more times before finishing
+      your next long rest, there is a cumulative 25 percent chance for each
+      casting after the first that you get a random reading. The DM makes this
+      roll in secret.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: div
+  materials:
+    value: >-
+      Incense and a sacrificial offering appropiate to your religion, together
+      worth at least 25gp, which the spell consumes
+    consumed: true
+    cost: 25
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: divination
+sort: 0
+flags: {}
+img: icons/magic/light/beam-rays-blue.webp
+effects: []
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037358631
+  modifiedTime: 1725992720644
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!XqzXSKNR75ZdYTA9'

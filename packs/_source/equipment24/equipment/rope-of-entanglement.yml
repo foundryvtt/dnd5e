@@ -1,0 +1,347 @@
+_id: dmgRopeOfEntangl
+name: Rope of Entanglement
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/sundries/survival/rope-wrapped-purple.webp
+system:
+  activities:
+    oY5qoF7eii3fFuzY:
+      type: save
+      name: Entangle
+      _id: oY5qoF7eii3fFuzY
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: sYzIZOD83JG2W6wh
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '20'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects: []
+    4Zem04Lsz9nIP2qM:
+      type: check
+      name: Escape
+      _id: 4Zem04Lsz9nIP2qM
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - acr
+          - ath
+        dc:
+          calculation: ''
+          formula: '15'
+        ability: ''
+      img: ''
+      appliedEffects: []
+    945K5l88AeS7w4hV:
+      type: utility
+      name: Damage Rope
+      _id: 945K5l88AeS7w4hV
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '20'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/activity/damage.svg
+      appliedEffects: []
+    60i9AJLDM4Meg8TG:
+      type: utility
+      name: Repair Rope
+      _id: 60i9AJLDM4Meg8TG
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '20'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: '-1'
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/activity/heal.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '20'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare</em></p><p>This rope is 30 feet long. While
+      holding one end of the rope, you can take a Magic action to command the
+      other end to dart forward and entangle one creature you can see within 20
+      feet of yourself. The target must succeed on a DC 15 Dexterity saving
+      throw or have the &amp;Reference[Restrained apply=false] condition. You
+      can release the target by letting go of your end of the rope (causing the
+      rope to coil up in the target's space) or by using a Bonus Action to
+      repeat the command (causing the rope to coil up in your hand).</p><p>A
+      target Restrained by the rope can take an action to make its choice of a
+      DC 15 Strength (Athletics) or Dexterity (Acrobatics) check. On a
+      successful check, the target is no longer Restrained by the rope. If
+      you're still holding onto the rope when a target escapes from it, you can
+      take a Reaction to command the rope to coil up in your hand; otherwise,
+      the rope coils up in the target's space.</p><p>The rope has AC 20, HP 20,
+      and Immunity to Poison and Psychic damage. It regains 1 Hit Point every 5
+      minutes as long as it has at least 1 Hit Point. If the rope drops to 0 Hit
+      Points, it is destroyed.</p><section class="secret"
+      id="secret-7RGkmfY1bTmeeb5L"><p><strong>Foundry Note</strong></p><p>The
+      item includes 20 uses for tracking its HP. The <strong>Damage
+      Rope</strong> activity can be used to apply damage and the <strong>Repair
+      Rope</strong> activity can be used to restore its HP.</p><p>The
+      <strong>Escape</strong> activity can be used to send an Athletics and
+      Dexterity check to the chat for the target to roll for their
+      escape.</p></section>
+    chat: ''
+  identifier: rope-of-entanglement
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Entangled
+    img: icons/sundries/survival/rope-wrapped-purple.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgRopeOfEntangl
+    transfer: false
+    _id: sYzIZOD83JG2W6wh
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - restrained
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730668967369
+      modifiedTime: 1730668978033
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgRopeOfEntangl.sYzIZOD83JG2W6wh'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703205
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 32900000
+ownership:
+  default: 0
+_key: '!items!dmgRopeOfEntangl'

@@ -1,0 +1,159 @@
+name: Animal Friendship
+system:
+  description:
+    value: >-
+      <p>Target a Beast that you can see within range. The target must succeed
+      on a Wisdom saving throw or have the &amp;Reference[charmed apply=false]
+      condition for the duration. If you or one of your allies deals damage to
+      the target, the spells ends.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> You can target one additional Beast for each spell slot
+      level above 1.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '@item.level'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '30'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: enc
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a morsel of food
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: 55NWwccKvMKQPL4h
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: animal-friendship
+_id: phbsplAnimalFrie
+type: spell
+img: icons/creatures/abilities/paw-glowing-yellow.webp
+effects:
+  - name: Charmed
+    origin: Compendium.dnd5e.spells24.Item.phbsplAnimalFrie
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: 86400
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/statuses/charmed.svg
+    _id: 55NWwccKvMKQPL4h
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p><span style="font-family:Signika, sans-serif">The target has the
+      &amp;Reference[charmed apply=false] condition for the duration. If you or
+      one of your allies deals damage to the target, the spells ends.</span></p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - charmed
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplAnimalFrie.55NWwccKvMKQPL4h'
+folder: pBaAAtXBCq9FVEnL
+sort: 5600000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425940341
+  modifiedTime: 1745256785241
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplAnimalFrie'

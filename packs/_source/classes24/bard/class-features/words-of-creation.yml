@@ -1,0 +1,58 @@
+_id: phbbrdWordsOfCre
+name: Words of Creation
+type: feat
+folder: nP3HNXn7rem24IST
+img: icons/magic/life/heart-area-circle-red-green.webp
+system:
+  description:
+    value: >-
+      <p>You have mastered two of the Words of Creation: the words of life and
+      death. You therefore always have the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplPowerWordH]{Power Word Heal}
+      and @UUID[Compendium.dnd5e.spells24.Item.phbsplPowerWordK]{Power Word
+      Kill} spells prepared. When you cast either spell, you can target a second
+      creature with it if that creature is within 10 feet of the first
+      target.</p><section id="secret-aHHp3ZnTrWPHHB7j"
+      class="secret"><p><strong>Foundry Note</strong></p><p>You are
+      automatically granted these spells as you level up.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 20
+    repeatable: false
+  properties: []
+  requirements: Bard
+  activities: {}
+  enchant: {}
+  identifier: words-of-creation
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866377962
+  modifiedTime: 1745256760596
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrdWordsOfCre'

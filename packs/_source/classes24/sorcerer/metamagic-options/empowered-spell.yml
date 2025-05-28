@@ -1,0 +1,106 @@
+_id: phbmmoEmpoweredS
+name: Empowered Spell
+type: feat
+img: icons/magic/air/wind-tornado-wall-blue.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Cost: 1 Sorcery Point</p></blockquote><p>When you roll
+      damage for a spell, you can spend 1 Sorcery Point to reroll a number of
+      the damage dice up to your Charisma modifier (minimum of one, currently
+      [[lookup @abilities.cha.mod]]), and you must use the new rolls.</p><p>You
+      can use Empowered Spell even if you've already used a different Metamagic
+      option during the casting of the spell.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: metamagic
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    NkEwJOEFigqsdbZy:
+      type: utility
+      name: Empowered Spell
+      _id: NkEwJOEFigqsdbZy
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you roll damage for a spell
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbscrFontOfMagi
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/ability-score-improvement.svg
+  enchant: {}
+  identifier: empowered-spell
+effects: []
+folder: 6RKLEZHPbdWG3fZe
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866286897
+  modifiedTime: 1745256762703
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbmmoEmpoweredS'

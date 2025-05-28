@@ -1,0 +1,124 @@
+_id: phbFighter000000
+name: Fighter
+pages:
+  - sort: 100000
+    name: Fighter
+    type: class
+    _id: wDELe3k25FQvYdrq
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbftrFighter000
+      description:
+        value: >-
+          <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbftrFighter000
+          inline classes="free-rules-embed"]</p> <h2>Becoming a Fighter
+          …</h2><h3>As a Level 1 Character</h3><ul><li><p>Gain all the traits in
+          the Core Fighter Traits table.</p></li><li><p>Gain the Fighter's level
+          1 features, which are listed in the Fighter Features
+          table.</p></li></ul><h3>As a Multiclass Character</h3><ul><li><p>Gain
+          the following traits from the Core Fighter Traits table: Hit Point
+          Die, proficiency with Martial weapons, and training with Light and
+          Medium armor and Shields.</p></li><li><p>Gain the Fighter's level 1
+          features, which are listed in the Fighter Features
+          table.</p></li></ul>
+        additionalHitPoints: ''
+        additionalTraits: ''
+        additionalEquipment: ''
+        subclass: >-
+          <p>A Fighter subclass is a specialization that grants you features at
+          certain levels, as specified in the subclass. The next page presents
+          the  @UUID[Compendium.dnd5e.classes24.Item.phbftrChampion00]{Champion}
+          subclass.</p>
+      subclassItems: []
+      subclassHeader: ''
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745512340053
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbFighter000000.wDELe3k25FQvYdrq'
+  - sort: 300000
+    name: Champion
+    type: subclass
+    _id: oIre3TldjyfnGzQr
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbftrChampion00
+      description:
+        value: >-
+          <blockquote><p>Pursue Physical Excellence in
+          Combat</p></blockquote><p>A
+          @UUID[Compendium.dnd5e.classes24.Item.phbftrChampion00]{Champion}
+          focuses on the development of martial prowess in a relentless pursuit
+          of victory. Champions combine rigorous training with physical
+          excellence to deal devastating blows, withstand peril, and garner
+          glory. Whether in athletic contests or bloody battle, Champions strive
+          for the crown of the victor.</p>
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1735934562691
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbFighter000000.oIre3TldjyfnGzQr'
+folder: 1A8WFP1GVZkKdxii
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 3
+    order: 500500
+    navigation:
+      previous: phbDruid00000000
+      next: phbMonk000000000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1724425889070
+  modifiedTime: 1745677865241
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 600000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbFighter000000'

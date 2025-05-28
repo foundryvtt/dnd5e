@@ -1,0 +1,130 @@
+_id: gbcy9MyUF06iUC88
+name: Enslave
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] targets one creature it can see within
+      30 ft. of it. The target must succeed on a  <strong>DC 14 Wisdom</strong>
+      saving throw or be magically charmed by the [[lookup @name lowercase]]
+      until the [[lookup @name lowercase]] dies or until it is on a different
+      plane of existence from the target.</p><p>The charmed target is under the
+      [[lookup @name lowercase]]'s control and can't take reactions, and the
+      [[lookup @name lowercase]] and the target can communicate telepathically
+      with each other over any distance.Whenever the charmed target takes
+      damage, the target can repeat the saving throw. On a success, the effect
+      ends. No more than once every 24 hours, the target can also repeat the
+      saving throw when it is at least 1 mile away from the [[lookup @name
+      lowercase]].</p>
+
+      </section>
+
+      <p>The target must make a <strong>Wisdom</strong> saving throw. Whenever
+      the target takes damage, the target can repeat the saving throw. No more
+      than once every 24 hours, the target can also repeat the saving throw when
+      it is at least 1 mile away from the [[lookup @name lowercase]].</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '3'
+    recovery:
+      - period: day
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: wis
+          formula: ''
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: enslave
+flags: {}
+img: icons/magic/control/hypnosis-mesmerism-watch.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304974525
+  modifiedTime: 1725992573744
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!gbcy9MyUF06iUC88'

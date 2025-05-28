@@ -1,0 +1,213 @@
+_id: phbbrbIntimidati
+name: Intimidating Presence
+type: feat
+img: icons/creatures/magical/construct-iron-stomping-yellow.webp
+system:
+  description:
+    value: >-
+      <p>As a Bonus Action, you can strike terror into others with your menacing
+      presence and primal power. When you do so, each creature of your choice in
+      a 30-foot Emanation originating from you must make a Wisdom saving throw
+      (DC 8 plus your Strength modifier and Proficiency Bonus). On a failed
+      save, a creature has the Frightened condition for 1 minute. At the end of
+      each of the &amp;Reference[Frightened] creature's turns, the creature
+      repeats the save, ending the effect on itself on a success.</p><p>Once you
+      use this feature, you can't use it again until you finish a Long Rest
+      unless you expend a use of your Rage (no action required) to restore your
+      use of it.</p><section class="secret"
+      id="secret-vRQdGrtACAbxH4Tm"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Save</strong> activity includes an Active Effect which adds the
+      Frightened condition.</p><p>The <strong>Recharge</strong> activity
+      consumes a use of Rage and recharges your use of Intimidating
+      Presence.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '1'
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 14
+    repeatable: false
+  properties: []
+  requirements: Path of the Berserker
+  activities:
+    ZRHT8mOlea6T8XpP:
+      type: save
+      _id: ZRHT8mOlea6T8XpP
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+        concentration: false
+      effects:
+        - _id: 3LofAPFLZJMQJirN
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '30'
+          count: ''
+        affects:
+          choice: true
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: custom
+          formula: 8 + @abilities.str.mod + @prof
+      name: ''
+    Qr0vi4CEDfbdMNMa:
+      type: utility
+      _id: Qr0vi4CEDfbdMNMa
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbbrbRage000000
+            scaling: {}
+          - type: itemUses
+            value: '-1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+        concentration: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Recharge with Rage
+      img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+  enchant: {}
+  identifier: intimidating-presence
+effects:
+  - name: Intimidated
+    origin: Compendium.dnd5e.classes24.Item.phbbrbIntimidati
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/creatures/magical/construct-iron-stomping-yellow.webp
+    _id: 3LofAPFLZJMQJirN
+    type: base
+    system: {}
+    changes: []
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - frightened
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbbrbIntimidati.3LofAPFLZJMQJirN'
+folder: bEMqmmgGROsTGe0J
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866492370
+  modifiedTime: 1745256759960
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbIntimidati'

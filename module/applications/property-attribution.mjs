@@ -1,11 +1,14 @@
+import Application5e from "./api/application.mjs";
+
 /**
  * Description for a single part of a property attribution.
  * @typedef {object} AttributionDescription
- * @property {string} label  Descriptive label that will be displayed. If the label is in the form
- *                           of an @ property, the system will try to turn it into a human-readable label.
- * @property {number} mode   Application mode for this step as defined in
+ * @property {string} label               Descriptive label that will be displayed. If the label is in the form
+ *                                        of an @ property, the system will try to turn it into a human-readable label.
+ * @property {number} mode                Application mode for this step as defined in
  *                           [CONST.ACTIVE_EFFECT_MODES](https://foundryvtt.com/api/module-constants.html#.ACTIVE_EFFECT_MODES).
- * @property {number} value  Value of this step.
+ * @property {number} value               Value of this step.
+ * @property {ActiveEffect5e} [document]  Active effect applying this attribution, if any.
  */
 
 /**
@@ -16,7 +19,7 @@
  * @param {string} property                        Dot separated path to the property.
  * @param {object} [options={}]                    Application rendering options.
  */
-export default class PropertyAttribution extends Application {
+export default class PropertyAttribution extends Application5e {
   constructor(object, attributions, property, options={}) {
     super(options);
     this.object = object;
@@ -26,17 +29,26 @@ export default class PropertyAttribution extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      id: "property-attribution",
-      classes: ["dnd5e", "property-attribution"],
-      template: "systems/dnd5e/templates/apps/property-attribution.hbs",
-      width: 320,
-      height: "auto"
-    });
-  }
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["property-attribution"],
+    window: {
+      frame: false,
+      positioned: false
+    }
+  };
 
+  /* -------------------------------------------- */
+
+  /** @override */
+  static PARTS = {
+    attribution: {
+      template: "systems/dnd5e/templates/apps/property-attribution.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
   /* -------------------------------------------- */
 
   /**
@@ -44,21 +56,26 @@ export default class PropertyAttribution extends Application {
    * @returns {Promise<string>}
    */
   async renderTooltip() {
-    const data = this.getData(this.options);
-    return (await this._renderInner(data))[0].outerHTML;
+    await this.render({ force: true });
+    return this.element.innerHTML;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  getData(options={}) {
+  /** @override */
+  _insertElement(element) {}
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _prepareContext(options) {
     const property = foundry.utils.getProperty(this.object.system, this.property);
     let total;
     if ( Number.isNumeric(property)) total = property;
     else if ( typeof property === "object" && Number.isNumeric(property.value) ) total = property.value;
     const sources = foundry.utils.duplicate(this.attributions);
     return {
-      caption: game.i18n.localize(options.title),
+      caption: game.i18n.localize(this.options.title),
       sources: sources.map(entry => {
         if ( entry.label.startsWith("@") ) entry.label = this.getPropertyLabel(entry.label.slice(1));
         if ( (entry.mode === CONST.ACTIVE_EFFECT_MODES.ADD) && (entry.value < 0) ) {
@@ -71,6 +88,8 @@ export default class PropertyAttribution extends Application {
     };
   }
 
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
   /* -------------------------------------------- */
 
   /**

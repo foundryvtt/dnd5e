@@ -1,0 +1,83 @@
+name: Grappler
+system:
+  description:
+    value: >-
+      <p>You gain the following benefits.</p><p><strong>Ability Score
+      Increase.</strong> Increase your Strength or Dexterity score by 1, to a
+      maximum of 20.</p><p><strong>Punch and Grab.</strong> When you hit a
+      creature with an Unarmed Strike as part of the Attack action on your turn,
+      you can use both the Damage and the Grapple option. You can use this
+      benefit only once per turn.</p><p><strong>Attack Advantage.</strong> You
+      have Advantage on attack rolls against a creature &amp;Reference[Grappled]
+      by you.</p><p><strong>Fast Wrestler.</strong> You don't have to spend
+      extra movement to move a creature by you if the creature is your size or
+      smaller.</p><section class="secret"
+      id="secret-LAjjGo55LPacAy8v"><p><strong>Foundry Note</strong></p><p>The
+      Advantage is not automated.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    book: SRD 5.2
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: feat
+    subtype: general
+  prerequisites:
+    level: 4
+    repeatable: false
+  properties: []
+  requirements: Strength or Dexterity 13+
+  activities: {}
+  enchant: {}
+  identifier: grappler
+  advancement:
+    - _id: LrAuj0THVHMjO158
+      type: AbilityScoreImprovement
+      configuration:
+        cap: 1
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked:
+          - con
+          - int
+          - wis
+          - cha
+        points: 1
+      value:
+        type: asi
+      level: 0
+      title: ''
+      hint: ''
+  cover: null
+  crewed: false
+_id: phbftGrappler000
+type: feat
+img: icons/skills/melee/unarmed-punch-fist.webp
+effects: []
+folder: tzwFgcTAGcVUmune
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745433362362
+  modifiedTime: 1745712692805
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftGrappler000'

@@ -1,0 +1,86 @@
+_id: phbdrdLandSpells
+name: Circle of the Land Spells
+type: feat
+img: icons/magic/nature/leaf-glow-triple-green.webp
+system:
+  description:
+    value: >-
+      <p>Whenever you finish a Long Rest, choose one type of land: arid, polar,
+      temperate, or tropical. Consult the table below that corresponds to the
+      chosen type; you have the spells listed for your Druid level and lower
+      prepared.</p><table><caption>Arid Land</caption><thead><tr><td>Druid
+      Level</td><td>Circle
+      Spells</td></tr></thead><tbody><tr><td>3</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplBlur000000]{Blur},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplBurningHan]{Burning Hands},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFireBolt00]{Fire
+      Bolt}</td></tr><tr><td>5</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplFireball00]{Fireball}</td></tr><tr><td>7</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplBlight0000]{Blight}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplWallofSton]{Wall
+      of Stone}</td></tr></tbody></table><table><caption>Polar
+      Land</caption><thead><tr><td>Druid Level</td><td>Circle
+      Spells</td></tr></thead><tbody><tr><td>3</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplFogCloud00]{Fog
+      Cloud}, @UUID[Compendium.dnd5e.spells24.Item.phbsplHoldPerson]{Hold
+      Person}, @UUID[Compendium.dnd5e.spells24.Item.phbsplRayofFrost]{Ray of
+      Frost}</td></tr><tr><td>5</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplSleetStorm]{Sleet
+      Storm}</td></tr><tr><td>7</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplIceStorm00]{Ice
+      Storm}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplConeofCold]{Cone
+      of Cold}</td></tr></tbody></table><table><caption>Temperate
+      Land</caption><thead><tr><td>Druid Level</td><td>Circle
+      Spells</td></tr></thead><tbody><tr><td>3</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplMistyStep0]{Misty
+      Step}, @UUID[Compendium.dnd5e.spells24.Item.phbsplShockingGr]{Shocking
+      Grasp},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplSleep00000]{Sleep}</td></tr><tr><td>5</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplLightningB]{Lightning
+      Bolt}</td></tr><tr><td>7</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplFreedomofM]{Freedom
+      of
+      Movement}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplTreeStride]{Tree
+      Stride}</td></tr></tbody></table><table><caption>Tropical
+      Land</caption><thead><tr><td>Druid Level</td><td>Circle
+      Spells</td></tr></thead><tbody><tr><td>3</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplAcidSplash]{Acid
+      Splash}, @UUID[Compendium.dnd5e.spells24.Item.phbsplRayofSickn]{Ray of
+      Sickness},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplWeb0000000]{Web}</td></tr><tr><td>5</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplStinkingCl]{Stinking
+      Cloud}</td></tr><tr><td>7</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplPolymorph0]{Polymorph}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplInsectPlag]{Insect
+      Plague}</td></tr></tbody></table><section class="secret"
+      id="secret-0B8V69GLRm5swkth"><p><strong>Foundry Note</strong></p><p>This
+      feature does not automate swapping between prepared spell
+      options.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: Circle of Land
+  activities: {}
+  enchant: {}
+  identifier: circle-of-the-land-spells
+effects: []
+folder: WJ4IXskgADlprLEA
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866583501
+  modifiedTime: 1745256761165
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 200000
+ownership:
+  default: 0
+_key: '!items!phbdrdLandSpells'

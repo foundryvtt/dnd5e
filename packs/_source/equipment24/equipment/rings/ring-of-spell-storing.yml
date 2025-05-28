@@ -1,0 +1,93 @@
+_id: dmgRingOfSpellSt
+name: Ring of Spell Storing
+type: equipment
+folder: DC1x1wAm0NLFudA6
+img: icons/equipment/finger/ring-cabochon-silver-gold-red.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Ring, Rare (Requires Attunement)</em></p><p>This ring stores spells
+      cast into it, holding them until the attuned wearer uses them. The ring
+      can store up to 5 levels worth of spells at a time. When found, it
+      contains [[/r 1d6 − 1]] levels of stored spells chosen by the
+      GM.</p><p>Any creature can cast a spell of level 1 through 5 into the ring
+      by touching the ring as the spell is cast. The spell has no effect other
+      than to be stored in the ring. If the ring can't hold the spell, the spell
+      is expended without effect. The level of the slot used to cast the spell
+      determines how much space it uses.</p><p>While wearing this ring, you can
+      cast any spell stored in it. The spell uses the slot level, spell save DC,
+      spell attack bonus, and spellcasting ability of the original caster but is
+      otherwise treated as if you cast the spell. The spell cast from the ring
+      is no longer stored in it, freeing up space.</p><section class="secret"
+      id="secret-HxkxM5cqqoVK0W9S"><p><strong>Foundry Note</strong></p><p>To
+      store a spell in this ring, drag the spell onto the Activities tab to
+      create a "Cast a Spell" activity. Then change to the "Spell" tab, set the
+      "Casting Level", check the "Override Values" box and enter the relevant
+      Attack Bonus and Save DC from the original caster's values. You will then
+      be able to cast that spell from this ring without expending your own
+      slots. You will then need to delete the activity since each spell is a
+      one-time use.</p></section>
+    chat: ''
+  identifier: ring-of-spell-storing
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ring
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745609570919
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1400000
+ownership:
+  default: 0
+_key: '!items!dmgRingOfSpellSt'

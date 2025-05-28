@@ -1,0 +1,112 @@
+_id: 6HEEhLdJz32TL4Js
+name: Foresight
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch a willing creature and bestow a limited ability to see into
+      the immediate future. For the Duration, the target can't be surprised and
+      has advantage on Attack rolls, Ability Checks, and Saving Throws.
+      Additionally, other creatures have disadvantage on attack rolls against
+      the target for the duration.</p><p>This spell immediately ends if you cast
+      it again before its Duration ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 9
+  school: div
+  materials:
+    value: A hummingbird feather
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: foresight
+sort: 0
+flags: {}
+img: icons/magic/perception/eye-ringed-glow-angry-large-teal.webp
+effects: []
+folder: KL6ZY4VRMjojGrL4
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037347803
+  modifiedTime: 1725992717114
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!6HEEhLdJz32TL4Js'

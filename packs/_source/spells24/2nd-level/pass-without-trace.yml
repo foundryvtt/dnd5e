@@ -1,0 +1,151 @@
+name: Pass without Trace
+system:
+  description:
+    value: >-
+      <p>You radiate a concealing aura in a 30-foot Emanation for the duration.
+      While in the aura, you and each creature you choose have a +10 bonus to
+      [[/check ability=dex skill=ste]] checks and leave no tracks.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: ''
+      choice: false
+    template:
+      units: ft
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: ashes from burned mistletoe
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: MDdoug4Lfu8klZRO
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: pass-without-trace
+_id: phbsplPasswithou
+type: spell
+img: icons/creatures/mammals/humanoid-cat-skulking-teal.webp
+effects:
+  - name: Concealed
+    origin: Compendium.dnd5e.spells24.Item.phbsplPasswithou
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/nature/stealth-hide-beast-eyes-green.webp
+    _id: MDdoug4Lfu8klZRO
+    type: base
+    system: {}
+    changes:
+      - key: system.skills.ste.bonuses.check
+        mode: 2
+        value: '10'
+        priority: null
+    description: >-
+      <p>While in the aura, you and each creature you choose have a +10 bonus to
+      [[/check ability=dex skill=ste]] checks and leave no tracks.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplPasswithou.MDdoug4Lfu8klZRO'
+folder: 3SjcO2acsFnWegp4
+sort: 1400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425965601
+  modifiedTime: 1745256796684
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplPasswithou'

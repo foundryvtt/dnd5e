@@ -1,193 +1,406 @@
-import ActiveEffect5e from "../../documents/active-effect.mjs";
+import UsesField from "../../data/shared/uses-field.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
-import ActorMovementConfig from "../actor/movement-config.mjs";
-import ActorSensesConfig from "../actor/senses-config.mjs";
-import ActorTypeConfig from "../actor/type-config.mjs";
+import { filteredKeys } from "../../utils.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
-import Accordion from "../accordion.mjs";
+import DocumentSheet5e from "../api/document-sheet.mjs";
+import PrimarySheetMixin from "../api/primary-sheet-mixin.mjs";
 import EffectsElement from "../components/effects.mjs";
+import ContextMenu5e from "../context-menu.mjs";
+import CreatureTypeConfig from "../shared/creature-type-config.mjs";
+import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import SourceConfig from "../source-config.mjs";
-import StartingEquipmentConfig from "./starting-equipment-config.mjs";
+import StartingEquipmentConfig from "./config/starting-equipment-config.mjs";
+
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
- * Override and extend the core ItemSheet implementation to handle specific item types.
+ * Base item sheet built on ApplicationV2.
  */
-export default class ItemSheet5e extends ItemSheet {
-  constructor(...args) {
-    super(...args);
-
-    this._accordions = this._createAccordions();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      width: 560,
-      classes: ["dnd5e", "sheet", "item"],
-      resizable: true,
-      scrollY: [
-        ".tab[data-tab=details]",
-        ".tab[data-tab=effects] .items-list",
-        ".tab[data-tab=description] .editor-content",
-        ".tab[data-tab=advancement] .items-list"
-      ],
-      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
-      dragDrop: [
-        {dragSelector: "[data-effect-id]", dropSelector: "form"},
-        {dragSelector: ".advancement-item", dropSelector: ".advancement"}
-      ],
-      accordions: [{
-        headingSelector: ".description-header", contentSelector: ".editor"
-      }],
-      elements: {
-        effects: "dnd5e-effects"
-      },
-      legacyDisplay: true,
-      contextMenu: ContextMenu
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Whether advancements on embedded items should be configurable.
-   * @type {boolean}
-   */
-  advancementConfigurationMode = false;
-
-  /* -------------------------------------------- */
-
-  /**
-   * The description currently being edited.
-   * @type {string}
-   */
-  editingDescriptionTarget;
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get template() {
-    return `systems/dnd5e/templates/items/${this.item.type}.hbs`;
-  }
-
-  /* -------------------------------------------- */
-  /*  Context Preparation                         */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _render(force, options) {
-    if ( !this.editingDescriptionTarget ) this._accordions.forEach(accordion => accordion._saveCollapsedState());
-    return super._render(force, options);
-  }
+export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    actions: {
+      addRecovery: ItemSheet5e.#addRecovery,
+      deleteCraft: ItemSheet5e.#deleteCraft,
+      deleteDocument: ItemSheet5e.#deleteDocument,
+      deleteRecovery: ItemSheet5e.#deleteRecovery,
+      editDescription: ItemSheet5e.#editDescription,
+      modifyAdvancementChoices: ItemSheet5e.#modifyAdvancementChoices,
+      showConfiguration: ItemSheet5e.#showConfiguration,
+      showDocument: ItemSheet5e.#showDocument,
+      showIcon: ItemSheet5e.#showIcon,
+      toggleState: ItemSheet5e.#toggleState
+    },
+    classes: ["item"],
+    editingDescriptionTarget: null,
+    elements: {
+      effects: "dnd5e-effects"
+    },
+    form: {
+      submitOnChange: true
+    },
+    position: {
+      width: 500
+    },
+    window: {
+      resizable: false
+    }
+  };
 
   /* -------------------------------------------- */
 
   /** @override */
-  async getData(options) {
-    const context = await super.getData(options);
-    const item = context.item;
-    const source = item.toObject();
+  static PARTS = {
+    header: {
+      template: "systems/dnd5e/templates/items/header.hbs"
+    },
+    tabs: {
+      template: "systems/dnd5e/templates/items/tabs.hbs",
+      templates: ["templates/generic/tab-navigation.hbs"]
+    },
+    activities: {
+      template: "systems/dnd5e/templates/items/activities.hbs",
+      scrollable: [""]
+    },
+    advancement: {
+      template: "systems/dnd5e/templates/items/advancement.hbs",
+      scrollable: [""]
+    },
+    description: {
+      template: "systems/dnd5e/templates/items/description.hbs",
+      scrollable: [""]
+    },
+    details: {
+      template: "systems/dnd5e/templates/items/details.hbs",
+      scrollable: [""]
+    },
+    effects: {
+      template: "systems/dnd5e/templates/items/effects.hbs",
+      scrollable: [""]
+    }
+  };
 
-    // Game system configuration
-    context.config = CONFIG.DND5E;
+  /* -------------------------------------------- */
 
-    // Item rendering data
-    foundry.utils.mergeObject(context, {
-      source: source.system,
-      system: item.system,
-      labels: item.labels,
-      isEmbedded: item.isEmbedded,
-      advancementEditable: (this.advancementConfigurationMode || !item.isEmbedded) && context.editable,
-      rollData: this.item.getRollData(),
-      user: game.user,
+  /** @override */
+  static TABS = [
+    { tab: "description", label: "DND5E.ITEM.SECTIONS.Description" },
+    { tab: "details", label: "DND5E.ITEM.SECTIONS.Details", condition: this.isItemIdentified.bind(this) },
+    { tab: "activities", label: "DND5E.ITEM.SECTIONS.Activities", condition: this.itemHasActivities.bind(this) },
+    { tab: "effects", label: "DND5E.ITEM.SECTIONS.Effects", condition: this.itemHasEffects.bind(this) },
+    { tab: "advancement", label: "DND5E.ITEM.SECTIONS.Advancement", condition: this.itemHasAdvancement.bind(this) }
+  ];
 
-      // Item Type, Status, and Details
-      itemType: game.i18n.localize(CONFIG.Item.typeLabels[this.item.type]),
-      itemStatus: this._getItemStatus(),
-      itemProperties: this._getItemProperties(),
-      baseItems: await this._getItemBaseTypes(),
-      isPhysical: item.system.hasOwnProperty("quantity"),
+  /* -------------------------------------------- */
 
-      // Action Details
-      isHealing: item.system.actionType === "heal",
-      isFlatDC: item.system.save?.scaling === "flat",
-      isLine: ["line", "wall"].includes(item.system.target?.type),
-      isFormulaRecharge: !!CONFIG.DND5E.limitedUsePeriods[item.system.uses?.per]?.formula,
-      isCostlessAction: item.system.activation?.type in CONFIG.DND5E.staticAbilityActivationTypes,
+  /** @override */
+  tabGroups = {
+    primary: "description"
+  };
 
-      // Identified state
-      isIdentifiable: "identified" in item.system,
-      isIdentified: item.system.identified !== false,
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
 
-      // Vehicles
-      isCrewed: item.system.activation?.type === "crew",
+  /**
+   * The Actor owning the item, if any.
+   * @type {Actor5e}
+   */
+  get actor() {
+    return this.document.actor;
+  }
 
-      // Armor Class
-      hasDexModifier: item.isArmor && (item.system.type.value !== "shield"),
+  /* -------------------------------------------- */
 
-      // Advancement
-      advancement: this._getItemAdvancement(item),
+  /**
+   * Additional toggles added to header buttons.
+   * @type {Record<string, HTMLElement>}
+   */
+  _headerToggles = {};
 
-      // Enchantment
-      appliedEnchantments: item.system.appliedEnchantments?.map(enchantment => ({
-        enchantment,
-        name: enchantment.parent._source.name,
-        actor: enchantment.parent.actor,
-        item: enchantment.parent
-      })),
+  /* -------------------------------------------- */
 
-      // Prepare Active Effects
-      effects: EffectsElement.prepareCategories(item.effects, { parent: this.item }),
-      elements: this.options.elements,
+  /**
+   * Description currently being edited for items types with multiple descriptions.
+   * @type {string|null}
+   */
+  editingDescriptionTarget = null;
 
-      concealDetails: !game.user.isGM && (this.document.system.identified === false)
+  /* -------------------------------------------- */
+
+  /** @override */
+  _filters = {
+    effects: { name: "", properties: new Set() }
+  };
+
+  /* -------------------------------------------- */
+
+  /**
+   * The Item document managed by this sheet.
+   * @type {Item5e}
+   */
+  get item() {
+    return this.document;
+  }
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _configureRenderOptions(options) {
+    await super._configureRenderOptions(options);
+    if ( options.isFirstRender ) {
+      this.expandedSections.set("system.description.value", true);
+      if ( !game.user.isGM ) this.expandedSections.set("system.unidentified.description", true);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _disableFields() {
+    this.element.querySelectorAll(":is(document-embed, secret-block) button").forEach(el => {
+      el.classList.add("always-interactive");
     });
-    if ( !item.isEmbedded && foundry.utils.isEmpty(context.abilityConsumptionTargets) ) {
-      context.abilityConsumptionHint = (this.item.system.consume?.type === "attribute")
-        ? "DND5E.ConsumeHint.Attribute" : "DND5E.ConsumeHint.Item";
+    super._disableFields();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = {
+      ...await super._prepareContext(options),
+      concealDetails: !game.user.isGM && (this.item.system.identified === false),
+      elements: this.options.elements,
+      fields: this.item.system.schema.fields,
+      isEmbedded: this.item.isEmbedded,
+      isIdentifiable: "identified" in this.item.system,
+      isIdentified: this.item.system.identified !== false,
+      isPhysical: "quantity" in this.item.system,
+      item: this.item,
+      labels: this.item.labels,
+      system: this.item.system,
+      user: game.user
+    };
+    context.source = context.editable ? this.item.system._source : this.item.system;
+
+    context.properties = {
+      active: [],
+      object: Object.fromEntries((context.system.properties ?? []).map(p => [p, true])),
+      options: (this.item.system.validProperties ?? []).reduce((arr, k) => {
+        const { label } = CONFIG.DND5E.itemProperties[k];
+        arr.push({
+          label,
+          value: k,
+          selected: context.source.properties?.includes?.(k) ?? context.source.properties?.has?.(k)
+        });
+        return arr;
+      }, [])
+    };
+    if ( this.item.type !== "spell" ) {
+      context.properties.options.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
+    }
+    if ( game.user.isGM || context.isIdentified ) context.properties.active.push(
+      ...this.item.system.cardProperties ?? [],
+      ...Object.values(this.item.labels.activations?.[0] ?? {}),
+      ...this.item.system.equippableItemCardProperties ?? []
+    );
+
+    await this.item.system.getSheetData?.(context);
+
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
+    switch ( partId ) {
+      case "activities": context = await this._prepareActivitiesContext(context, options); break;
+      case "advancement": context = await this._prepareAdvancementContext(context, options); break;
+      case "description": context = await this._prepareDescriptionContext(context, options); break;
+      case "details": context = await this._prepareDetailsContext(context, options); break;
+      case "effects": context = await this._prepareEffectsContext(context, options); break;
+      case "header": context = await this._prepareHeaderContext(context, options); break;
     }
 
-    if ( ("properties" in item.system) && (item.type in CONFIG.DND5E.validProperties) ) {
-      context.properties = item.system.validProperties.reduce((obj, k) => {
-        const v = CONFIG.DND5E.itemProperties[k];
-        obj[k] = {
-          label: v.label,
-          selected: item.system.properties.has(k)
+    if ( context.properties?.active ) context.properties.active = context.properties.active.filter(_ => _);
+
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare rendering context for the activities tab.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  async _prepareActivitiesContext(context, options) {
+    context.activities = (this.item.system.activities ?? [])
+      .filter(a => CONFIG.DND5E.activityTypes[a.type]?.configurable !== false)
+      .map(activity => {
+        const { _id: id, name, img, sort } = activity.prepareSheetContext();
+        return {
+          id, name, sort,
+          img: { src: img, svg: img?.endsWith(".svg") },
+          uuid: activity.uuid
         };
-        return obj;
-      }, {});
-      if ( item.type !== "spell" ) context.properties = sortObjectEntries(context.properties, "label");
-    }
+      });
 
-    // Handle item subtypes.
-    if ( ["feat", "loot", "consumable"].includes(item.type) ) {
-      const name = item.type === "feat" ? "feature" : item.type;
-      const itemTypes = CONFIG.DND5E[`${name}Types`][item.system.type.value];
-      if ( itemTypes ) {
-        context.itemType = itemTypes.label;
-        context.itemSubtypes = itemTypes.subtypes;
-      }
-    }
+    return context;
+  }
 
-    // Enrich HTML description
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare rendering context for the advancement tab.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  async _prepareAdvancementContext(context, options) {
+    context.advancement = this._getAdvancement();
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare rendering context for the description tab.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  async _prepareDescriptionContext(context, options) {
+    context.expanded = this.expandedSections.entries().reduce((obj, [k, v]) => {
+      obj[k] = v;
+      return obj;
+    }, {});
+
     const enrichmentOptions = {
-      secrets: item.isOwner, relativeTo: this.item, rollData: context.rollData
+      secrets: this.item.isOwner, relativeTo: this.item, rollData: this.item.getRollData()
     };
     context.enriched = {
-      description: await TextEditor.enrichHTML(item.system.description.value, enrichmentOptions),
-      unidentified: await TextEditor.enrichHTML(item.system.unidentified?.description, enrichmentOptions),
-      chat: await TextEditor.enrichHTML(item.system.description.chat, enrichmentOptions)
+      description: await TextEditor.enrichHTML(this.item.system.description.value, enrichmentOptions),
+      unidentified: await TextEditor.enrichHTML(this.item.system.unidentified?.description, enrichmentOptions),
+      chat: await TextEditor.enrichHTML(this.item.system.description.chat, enrichmentOptions)
     };
-    if ( this.editingDescriptionTarget ) {
-      context.editingDescriptionTarget = this.editingDescriptionTarget;
-      context.enriched.editing = await TextEditor.enrichHTML(
-        foundry.utils.getProperty(context, this.editingDescriptionTarget), enrichmentOptions
-      );
+    if ( this.editingDescriptionTarget ) context.editingDescription = {
+      target: this.editingDescriptionTarget,
+      value: foundry.utils.getProperty(this.item._source, this.editingDescriptionTarget)
+    };
+
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare rendering context for the details tab.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  async _prepareDetailsContext(context, options) {
+    context.tab = context.tabs.details;
+    context.parts ??= [];
+
+    context.baseItemOptions = await this._getBaseItemOptions();
+    context.coverOptions = Object.entries(CONFIG.DND5E.cover).map(([value, label]) => ({ value, label }));
+
+    // If using modern rules, do not show redundant artificer progression unless it is already selected.
+    context.spellProgression = { ...CONFIG.DND5E.spellProgression };
+    if ( (game.settings.get("dnd5e", "rulesVersion") === "modern")
+      && (this.item.system.spellcasting?.progression !== "artificer") ) delete context.spellProgression.artificer;
+    context.spellProgression = Object.entries(context.spellProgression).map(([value, label]) => ({ value, label }));
+
+    // Limited Uses
+    context.data = { uses: context.source.uses };
+    context.hasLimitedUses = this.item.system.hasLimitedUses;
+    context.recoveryPeriods = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;
+    context.recoveryTypes = [
+      { value: "recoverAll", label: "DND5E.USES.Recovery.Type.RecoverAll" },
+      { value: "loseAll", label: "DND5E.USES.Recovery.Type.LoseAll" },
+      { value: "formula", label: "DND5E.USES.Recovery.Type.Formula" }
+    ];
+    context.usesRecovery = (context.source.uses?.recovery ?? []).map((data, index) => ({
+      data,
+      fields: context.fields.uses.fields.recovery.element.fields,
+      prefix: `system.uses.recovery.${index}.`,
+      source: context.source.uses.recovery[index] ?? data,
+      formulaOptions: data.period === "recharge" ? UsesField.rechargeOptions : null
+    }));
+
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare rendering context for the effects tab.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  async _prepareEffectsContext(context, options) {
+    context.tab = context.tabs.effects;
+
+    context.effects = EffectsElement.prepareCategories(this.item.effects, { parent: this.item });
+    for ( const category of Object.values(context.effects) ) {
+      category.effects = await category.effects.reduce(async (arr, effect) => {
+        effect.updateDuration();
+        const { id, name, img, disabled, duration } = effect;
+        const source = await effect.getSource();
+        arr = await arr;
+        arr.push({
+          id, name, img, disabled, duration, source,
+          parent,
+          durationParts: duration.remaining ? duration.label.split(", ") : [],
+          hasTooltip: true
+        });
+        return arr;
+      }, []);
     }
+
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare rendering context for the header.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  async _prepareHeaderContext(context, options) {
+    if ( ("identified" in this.item.system) && !context.isIdentified ) context.name = {
+      value: this.item.system.unidentified.name,
+      editable: this.item.system._source.unidentified.name,
+      field: this.item.system.schema.getField("unidentified.name")
+    };
+    else context.name = {
+      value: this.item.name,
+      editable: this.item._source.name,
+      field: this.item.schema.getField("name")
+    };
+    context.img = {
+      value: this.item.img,
+      editable: this.item._source.img
+    };
+
     return context;
   }
 
@@ -195,28 +408,30 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the display object used to show the advancement tab.
-   * @param {Item5e} item  The item for which the advancement is being prepared.
    * @returns {object}     Object with advancement data grouped by levels.
    */
-  _getItemAdvancement(item) {
-    if ( !item.system.advancement ) return {};
+  _getAdvancement() {
+    if ( !this.item.system.advancement ) return {};
+
     const advancement = {};
-    const configMode = !item.parent || this.advancementConfigurationMode;
+    const configMode = !this.item.parent || this.advancementConfigurationMode;
+    // TODO: `advancementConfigurationMode` isn't used anymore, how is this handled now?
     const legacyDisplay = this.options.legacyDisplay;
-    const maxLevel = !configMode
-      ? (item.system.levels ?? item.class?.system.levels ?? item.parent.system.details?.level ?? -1) : -1;
+    const maxLevel = !configMode ? (this.item.system.levels ?? this.item.class?.system.levels
+      ?? this.item.parent.system.details?.level ?? -1) : -1;
 
     // Improperly configured advancements
-    if ( item.advancement.needingConfiguration.length ) {
+    if ( this.item.advancement.needingConfiguration.length ) {
       advancement.unconfigured = {
-        items: item.advancement.needingConfiguration.map(a => ({
+        items: this.item.advancement.needingConfiguration.map(a => ({
           id: a.id,
+          uuid: a.uuid,
           order: a.constructor.order,
           title: a.title,
           icon: a.icon,
           classRestriction: a.classRestriction,
           configured: false,
-          tags: this._getItemAdvancementTags(a),
+          tags: this._getAdvancementTags(a),
           classes: [a.icon?.endsWith(".svg") ? "svg" : ""].filterJoin(" ")
         })),
         configured: "partial"
@@ -224,17 +439,18 @@ export default class ItemSheet5e extends ItemSheet {
     }
 
     // All other advancements by level
-    for ( let [level, advancements] of Object.entries(item.advancement.byLevel) ) {
+    for ( let [level, advancements] of Object.entries(this.item.advancement.byLevel) ) {
       if ( !configMode ) advancements = advancements.filter(a => a.appliesToClass);
       const items = advancements.map(advancement => ({
         id: advancement.id,
+        uuid: advancement.uuid,
         order: advancement.sortingValueForLevel(level),
         title: advancement.titleForLevel(level, { configMode, legacyDisplay }),
         icon: advancement.icon,
         classRestriction: advancement.classRestriction,
         summary: advancement.summaryForLevel(level, { configMode, legacyDisplay }),
         configured: advancement.configuredForLevel(level),
-        tags: this._getItemAdvancementTags(advancement),
+        tags: this._getAdvancementTags(advancement),
         value: advancement.valueForLevel?.(level),
         classes: [advancement.icon?.endsWith(".svg") ? "svg" : ""].filterJoin(" ")
       }));
@@ -252,408 +468,341 @@ export default class ItemSheet5e extends ItemSheet {
   /**
    * Prepare tags for an Advancement.
    * @param {Advancement} advancement  The Advancement.
-   * @returns {{label: string, icon: string}[]}
+   * @returns {{ label: string, icon: string }[]}
    * @protected
    */
-  _getItemAdvancementTags(advancement) {
-    return [];
+  _getAdvancementTags(advancement) {
+    if ( this.item.isEmbedded && (this._mode !== this.constructor.MODES.EDIT) ) return [];
+    const tags = [];
+    if ( advancement.classRestriction === "primary" ) {
+      tags.push({
+        label: "DND5E.AdvancementClassRestrictionPrimary",
+        icon: "systems/dnd5e/icons/svg/original-class.svg"
+      });
+    } else if ( advancement.classRestriction === "secondary" ) {
+      tags.push({
+        label: "DND5E.AdvancementClassRestrictionSecondary",
+        icon: "systems/dnd5e/icons/svg/multiclass.svg"
+      });
+    }
+    return tags;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Get the base weapons and tools based on the selected type.
-   * @returns {Promise<object>}  Object with base items for this type formatted for selectOptions.
+   * @returns {Promise<FormSelectOptions[]|null>}
    * @protected
    */
-  async _getItemBaseTypes() {
+  async _getBaseItemOptions() {
     const baseIds = this.item.type === "equipment" ? {
       ...CONFIG.DND5E.armorIds,
       ...CONFIG.DND5E.shieldIds
     } : CONFIG.DND5E[`${this.item.type}Ids`];
-    if ( baseIds === undefined ) return {};
+    if ( baseIds === undefined ) return null;
 
-    const baseType = this.item.system.type.value;
-
-    const items = {};
-    for ( const [name, id] of Object.entries(baseIds) ) {
+    const baseType = this.item.system._source.type.value ?? this.item.system.type.value;
+    const options = [];
+    for ( const [value, id] of Object.entries(baseIds) ) {
       const baseItem = await Trait.getBaseItem(id);
       if ( baseType !== baseItem?.system?.type?.value ) continue;
-      items[name] = baseItem.name;
-    }
-    return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1], game.i18n.lang)));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet.
-   * @returns {string|null}  Item status string if applicable to item's type.
-   * @protected
-   */
-  _getItemStatus() {
-    switch ( this.item.type ) {
-      case "class":
-        return game.i18n.format("DND5E.LevelCount", {ordinal: this.item.system.levels.ordinalString()});
-      case "equipment":
-      case "weapon":
-        return game.i18n.localize(this.item.system.equipped ? "DND5E.Equipped" : "DND5E.Unequipped");
-      case "feat":
-      case "consumable":
-        return this.item.system.type.label;
-      case "spell":
-        return CONFIG.DND5E.spellPreparationModes[this.item.system.preparation.mode]?.label;
-      case "tool":
-        return CONFIG.DND5E.proficiencyLevels[this.item.system.prof?.multiplier || 0];
-    }
-    return null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Retrieve the list of fields that are currently modified by Active Effects on the Item.
-   * @returns {string[]}
-   * @protected
-   */
-  _getItemOverrides() {
-    const overrides = Object.keys(foundry.utils.flattenObject(this.item.overrides ?? {}));
-    this.item.system.getItemOverrides?.(overrides);
-    if ( "properties" in this.item.system ) {
-      ActiveEffect5e.addOverriddenChoices(this.item, "system.properties", "system.properties", overrides);
-    }
-    if ( ("damage" in this.item.system) && foundry.utils.getProperty(this.item.overrides, "system.damage.parts") ) {
-      overrides.push("damage-control");
-      Array.fromRange(this.item.system.damage.parts.length).forEach(index => overrides.push(
-        `system.damage.parts.${index}.0`, `system.damage.parts.${index}.1`
-      ));
-    }
-    return overrides;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the Array of item properties which are used in the small sidebar of the description tab.
-   * @returns {string[]}   List of property labels to be shown.
-   * @private
-   */
-  _getItemProperties() {
-    const props = [];
-    const labels = this.item.labels;
-    switch ( this.item.type ) {
-      case "consumable":
-      case "weapon":
-        if ( this.item.isMountable ) props.push(labels.armor);
-        const ip = CONFIG.DND5E.itemProperties;
-        const vp = CONFIG.DND5E.validProperties[this.item.type];
-        this.item.system.properties.forEach(k => {
-          if ( vp.has(k) ) props.push(ip[k].label);
-        });
-        break;
-      case "equipment":
-        props.push(CONFIG.DND5E.equipmentTypes[this.item.system.type.value]);
-        if ( this.item.isArmor || this.item.isMountable ) props.push(labels.armor);
-        break;
-      case "feat":
-        props.push(labels.featType);
-        break;
-      case "spell":
-        props.push(labels.components.vsm, labels.materials, ...labels.components.tags);
-        break;
+      options.push({ value, label: baseItem.name });
     }
 
-    // Action type
-    if ( this.item.system.actionType ) {
-      props.push(CONFIG.DND5E.itemActionTypes[this.item.system.actionType]);
-    }
-
-    // Action usage
-    if ( (this.item.type !== "weapon") && !foundry.utils.isEmpty(this.item.system.activation) ) {
-      props.push(labels.activation, labels.range, labels.target, labels.duration);
-    }
-    return props.filter(p => !!p);
+    return options.length ? [
+      { value: "", label: "" },
+      ...options.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang))
+    ] : null;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onChangeTab(event, tabs, active) {
-    this.setPosition({ height: "auto" });
-  }
+  async _renderFrame(options) {
+    const html = await super._renderFrame(options);
 
-  /* -------------------------------------------- */
+    if ( this.isEditable ) {
+      const classes = ["fa-solid", "icon"];
+      const buttons = [];
+      if ( "identified" in this.item.system ) buttons.push({
+        id: "identified", property: "system.identified", classes: [...classes, "fa-wand-sparkles", "toggle-identified"]
+      });
+      if ( "equipped" in this.item.system ) buttons.push({
+        id: "equipped", property: "system.equipped", classes: [...classes, "fa-shield-halved", "toggle-equipped"]
+      });
 
-  /** @inheritDoc */
-  async activateEditor(name, options={}, initialContent="") {
-    options.relativeLinks = true;
-    options.plugins = {
-      menu: ProseMirror.ProseMirrorMenu.build(ProseMirror.defaultSchema, {
-        compact: true,
-        destroyOnSave: true,
-        onSave: () => {
-          this.saveEditor(name, {remove: true});
-          this.editingDescriptionTarget = null;
-        }
-      })
-    };
-    return super.activateEditor(name, options, initialContent);
-  }
-
-  /* -------------------------------------------- */
-  /*  Form Submission                             */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _getSubmitData(updateData={}) {
-    const formData = foundry.utils.expandObject(super._getSubmitData(updateData));
-
-    // Handle Damage array
-    const damage = formData.system?.damage;
-    if ( damage && !foundry.utils.getProperty(this.item.overrides, "system.damage.parts") ) {
-      damage.parts = Object.values(damage?.parts || {}).map(d => [d[0] || "", d[1] || ""]);
+      const sibling = html.querySelector('[data-action="copyUuid"], [data-action="close"]');
+      for ( const { id, property, classes } of buttons ) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.classList.add("header-control", "pseudo-header-control", "state-toggle", ...classes);
+        Object.assign(button.dataset, { action: "toggleState", property, tooltipDirection: "DOWN" });
+        sibling.before(button);
+        this._headerToggles[id] = button;
+      }
     }
+
+    this._renderSourceFrame(html);
+    return html;
+  }
+
+  /* -------------------------------------------- */
+  /*  Life-Cycle Handlers                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+
+    new ContextMenu5e(this.element, ".advancement-item[data-id]", [], {
+      onOpen: target => dnd5e.documents.advancement.Advancement.onContextMenu(this.item, target), jQuery: false
+    });
+    new ContextMenu5e(this.element, ".activity[data-activity-id]", [], {
+      onOpen: target => dnd5e.documents.activity.UtilityActivity.onContextMenu(this.item, target), jQuery: false
+    });
+
+    new CONFIG.ux.DragDrop({
+      dragSelector: ":is(.advancement-item, [data-activity-id], [data-effect-id], [data-item-id])",
+      dropSelector: null,
+      callbacks: {
+        dragstart: this._onDragStart.bind(this),
+        dragover: this._onDragOver.bind(this),
+        drop: this._onDrop.bind(this)
+      }
+    }).bind(this.element);
+
+    if ( this._mode === this.constructor.MODES.PLAY ) this._disableFields();
+
+    this.element.querySelectorAll(".editor-content[data-edit]").forEach(div => this._activateEditor(div));
+
+    if ( this._headerToggles.identified ) {
+      const isIdentified = this.item.system.identified;
+      const label = isIdentified ? "DND5E.Identified" : "DND5E.Unidentified.Title";
+      this._headerToggles.identified.setAttribute("aria-label", game.i18n.localize(label));
+      this._headerToggles.identified.dataset.tooltip = label;
+      this._headerToggles.identified.classList.toggle("active", isIdentified);
+    }
+
+    if ( this._headerToggles.equipped ) {
+      const isEquipped = this.item.system.equipped;
+      const label = isEquipped ? "DND5E.Equipped" : "DND5E.Unequipped";
+      this._headerToggles.equipped.setAttribute("aria-label", game.i18n.localize(label));
+      this._headerToggles.equipped.dataset.tooltip = label;
+      this._headerToggles.equipped.classList.toggle("active", isEquipped);
+    }
+
+    if ( this.editingDescriptionTarget ) {
+      this.element.querySelectorAll("prose-mirror").forEach(editor => editor.addEventListener("save", () => {
+        this.editingDescriptionTarget = null;
+        this.render();
+      }));
+    }
+
+    this._renderSource();
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _addDocument() {
+    if ( this.tabGroups.primary === "activities" ) {
+      return dnd5e.documents.activity.UtilityActivity.createDialog({}, {
+        parent: this.item,
+        types: Object.entries(CONFIG.DND5E.activityTypes).filter(([, { configurable }]) => {
+          return configurable !== false;
+        }).map(([k]) => k)
+      });
+    }
+
+    if ( this.tabGroups.primary === "advancement" ) {
+      return dnd5e.documents.advancement.Advancement.createDialog({}, { parent: this.item });
+    }
+
+    if ( this.tabGroups.primary === "effects" ) {
+      return ActiveEffect.implementation.create({
+        name: this.document.name,
+        img: this.document.img,
+        origin: this.document.uuid
+      }, { parent: this.document, renderSheet: true });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle adding a recovery option.
+   * @this {ItemSheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   * @returns {any}
+   */
+  static #addRecovery(event, target) {
+    return this.submit({ updateData: { "system.uses.recovery": [...this.item.system.toObject().uses.recovery, {}] } });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle removing an document.
+   * @this {ItemSheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #deleteDocument(event, target) {
+    const uuid = target.closest("[data-uuid]").dataset?.uuid;
+    const doc = await fromUuid(uuid);
+    doc?.deleteDialog();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle removing an item currently being crafted.
+   * @this {ItemSheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #deleteCraft(event, target) {
+    this.submit({ updateData: { "system.craft": null } });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle removing a recovery option.
+   * @this {ItemSheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #deleteRecovery(event, target) {
+    const recovery = this.item.system.toObject().uses.recovery;
+    recovery.splice(target.closest("[data-index]").dataset.index, 1);
+    this.submit({ updateData: { "system.uses.recovery": recovery } });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle expanding the description editor.
+   * @this {ItemSheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #editDescription(event, target) {
+    if ( target.ariaDisabled ) return;
+    this.editingDescriptionTarget = target.dataset.target;
+    this.render();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle modifying the choices for an advancement level.
+   * @this {ItemSheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #modifyAdvancementChoices(event, target) {
+    const level = target.closest("[data-level]")?.dataset.level;
+    const manager = AdvancementManager.forModifyChoices(this.actor, this.item.id, Number(level));
+    if ( manager.steps.length ) manager.render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening a configuration application.
+   * @this {ItemSheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   * @returns {any}
+   */
+  static #showConfiguration(event, target) {
+    switch ( target.dataset.config ) {
+      case "movement":
+      case "senses":
+        return new MovementSensesConfig({ document: this.item, type: target.dataset.config }).render({ force: true });
+      case "source":
+        return new SourceConfig({ document: this.item, keyPath: "system.source" }).render({ force: true });
+      case "starting-equipment":
+        return new StartingEquipmentConfig({ document: this.item }).render({ force: true });
+      case "type":
+        return new CreatureTypeConfig({ document: this.item, keyPath: "type" }).render({ force: true });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening a document sheet.
+   * @this {ItemSheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #showDocument(event, target) {
+    const uuid = target.closest("[data-uuid]")?.dataset.uuid;
+    const doc = await fromUuid(uuid);
+    doc?.sheet?.render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle showing the Item's art.
+   * @this {ItemSheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #showIcon(event, target) {
+    const title = this.item.system.identified === false ? this.item.system.unidentified.name : this.item.name;
+    new foundry.applications.apps.ImagePopout({
+      src: this.item.img,
+      uuid: this.item.uuid,
+      window: { title }
+    }).render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling Item state.
+   * @this {ItemSheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #toggleState(event, target) {
+    const state = target.classList.contains("active");
+    this.submit({ updateData: { [target.dataset.property]: !state } });
+  }
+
+  /* -------------------------------------------- */
+  /*  Form Handling                               */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _processFormData(event, form, formData) {
+    const submitData = super._processFormData(event, form, formData);
 
     // Handle properties
-    if ( foundry.utils.hasProperty(formData, "system.properties") ) {
-      const keys = new Set(Object.keys(formData.system.properties));
-      const preserve = new Set(this.item._source.system.properties ?? []).difference(keys);
-      formData.system.properties = [...filteredKeys(formData.system.properties), ...preserve];
+    if ( foundry.utils.hasProperty(submitData, "system.properties") ) {
+      submitData.system.properties = filteredKeys(submitData.system.properties);
     }
 
-    // Check max uses formula
-    const uses = formData.system?.uses;
-    if ( uses?.max ) {
-      const maxRoll = new Roll(uses.max);
-      if ( !maxRoll.isDeterministic ) {
-        uses.max = this.item._source.system.uses.max;
-        this.form.querySelector("input[name='system.uses.max']").value = uses.max;
-        ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
-          name: game.i18n.localize("DND5E.LimitedUses")
-        }));
-        return null;
-      }
-    }
-
-    // Check duration value formula
-    const duration = formData.system?.duration;
-    if ( duration?.value ) {
-      const durationRoll = new Roll(duration.value);
-      if ( !durationRoll.isDeterministic ) {
-        duration.value = this.item._source.system.duration.value;
-        this.form.querySelector("input[name='system.duration.value']").value = duration.value;
-        ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
-          name: game.i18n.localize("DND5E.Duration")
-        }));
-        return null;
-      }
-    }
-
-    // Check class identifier
-    if ( formData.system?.identifier && !dnd5e.utils.validators.isValidIdentifier(formData.system.identifier) ) {
-      formData.system.identifier = this.item._source.system.identifier;
-      this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
-      ui.notifications.error("DND5E.IdentifierError", {localize: true});
-      return null;
-    }
-
-    // Return the flattened submission data
-    return foundry.utils.flattenObject(formData);
+    return submitData;
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-    if ( !this.editingDescriptionTarget ) this._accordions.forEach(accordion => accordion.bind(html[0]));
-    if ( this.isEditable ) {
-      html.find(".config-button").click(this._onConfigMenu.bind(this));
-      html.find(".damage-control").click(this._onDamageControl.bind(this));
-      html.find(".enchantment-button").click(this._onEnchantmentAction.bind(this));
-      html.find(".advancement .item-control").click(event => {
-        const t = event.currentTarget;
-        if ( t.dataset.action ) this._onAdvancementAction(t, t.dataset.action);
-      });
-      html.find(".description-edit").click(event => {
-        if ( event.currentTarget.ariaDisabled ) return;
-        event.stopPropagation();
-        this.editingDescriptionTarget = event.currentTarget.dataset.target;
-        this.render();
-      });
-      for ( const override of this._getItemOverrides() ) {
-        for ( const element of html[0].querySelectorAll(`[name="${override}"]`) ) {
-          element.disabled = true;
-          element.dataset.tooltip = "DND5E.ENCHANTMENT.Warning.Override";
-        }
-        for ( const element of html[0].querySelectorAll(`[data-target="${override}"]`) ) {
-          element.ariaDisabled = true;
-          element.dataset.tooltip = "DND5E.ENCHANTMENT.Warning.Override";
-        }
-        if ( override === "damage-control" ) html[0].querySelectorAll(".damage-control").forEach(e => e.remove());
-      }
-    }
-    html[0].querySelectorAll('[data-action="view"]').forEach(e => e.addEventListener("click", this._onView.bind(this)));
-
-    // Advancement context menu
-    const contextOptions = this._getAdvancementContextMenuOptions();
-    /**
-     * A hook event that fires when the context menu for the advancements list is constructed.
-     * @function dnd5e.getItemAdvancementContext
-     * @memberof hookEvents
-     * @param {jQuery} html                      The HTML element to which the context options are attached.
-     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
-     */
-    Hooks.call("dnd5e.getItemAdvancementContext", html, contextOptions);
-    if ( contextOptions ) new this.options.contextMenu(html, ".advancement-item", contextOptions);
-  }
-
+  /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 
   /**
-   * Get the set of ContextMenu options which should be applied for advancement entries.
-   * @returns {ContextMenuEntry[]}  Context menu entries.
+   * Handle beginning drag events on the sheet.
+   * @param {DragEvent} event  The initiating drag start event.
    * @protected
    */
-  _getAdvancementContextMenuOptions() {
-    const condition = li => (this.advancementConfigurationMode || !this.isEmbedded) && this.isEditable;
-    return [
-      {
-        name: "DND5E.AdvancementControlEdit",
-        icon: "<i class='fas fa-edit fa-fw'></i>",
-        condition,
-        callback: li => this._onAdvancementAction(li[0], "edit")
-      },
-      {
-        name: "DND5E.AdvancementControlDuplicate",
-        icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: li => {
-          const id = li[0].closest(".advancement-item")?.dataset.id;
-          const advancement = this.item.advancement.byId[id];
-          return condition(li) && advancement?.constructor.availableForItem(this.item);
-        },
-        callback: li => this._onAdvancementAction(li[0], "duplicate")
-      },
-      {
-        name: "DND5E.AdvancementControlDelete",
-        icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
-        condition,
-        callback: li => this._onAdvancementAction(li[0], "delete")
-      }
-    ];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle spawning the configuration applications.
-   * @param {Event} event   The click event which originated the selection.
-   * @protected
-   */
-  _onConfigMenu(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    const button = event.currentTarget;
-    let app;
-    switch ( button.dataset.action ) {
-      case "movement":
-        app = new ActorMovementConfig(this.item, { keyPath: "system.movement" });
-        break;
-      case "senses":
-        app = new ActorSensesConfig(this.item, { keyPath: "system.senses" });
-        break;
-      case "source":
-        app = new SourceConfig({ document: this.item, keyPath: "system.source" });
-        break;
-      case "starting-equipment":
-        app = new StartingEquipmentConfig(this.item);
-        break;
-      case "type":
-        app = new ActorTypeConfig(this.item, { keyPath: "system.type" });
-        break;
-    }
-    app?.render(true);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Add or remove a damage part from the damage formula.
-   * @param {Event} event             The original click event.
-   * @returns {Promise<Item5e>|null}  Item with updates applied.
-   * @private
-   */
-  async _onDamageControl(event) {
-    event.preventDefault();
-    const a = event.currentTarget;
-
-    // Add new damage component
-    if ( a.classList.contains("add-damage") ) {
-      await this._onSubmit(event);  // Submit any unsaved changes
-      const damage = this.item.system.damage;
-      return this.item.update({"system.damage.parts": damage.parts.concat([["", ""]])});
-    }
-
-    // Remove a damage component
-    if ( a.classList.contains("delete-damage") ) {
-      await this._onSubmit(event);  // Submit any unsaved changes
-      const li = a.closest(".damage-part");
-      const damage = foundry.utils.deepClone(this.item.system.damage);
-      damage.parts.splice(Number(li.dataset.damagePart), 1);
-      return this.item.update({"system.damage.parts": damage.parts});
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle actions on entries in the enchanted items list.
-   * @param {PointerEvent} event  Triggering click event.
-   * @private
-   */
-  async _onEnchantmentAction(event) {
-    event.preventDefault();
-    const enchantment = fromUuidSync(event.currentTarget.closest("[data-enchantment-uuid]")?.dataset.enchantmentUuid);
-    if ( !enchantment ) return;
-    switch ( event.currentTarget.dataset.action ) {
-      case "removeEnchantment":
-        await enchantment.delete();
-        this.render();
-        break;
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle actions on a view sheet button.
-   * @param {PointerEvent} event  Triggering click event.
-   * @private
-   */
-  async _onView(event) {
-    event.preventDefault();
-    const doc = await fromUuid(event.currentTarget.dataset.uuid);
-    doc?.sheet.render(true);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _canDragStart(selector) {
-    if ( [".advancement-item", "[data-effect-id]", ".activity[data-activity-id]"].includes(selector) ) return true;
-    return this.isEditable;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _canDragDrop(selector) {
-    return this.isEditable;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   _onDragStart(event) {
     const li = event.currentTarget;
     if ( event.target.classList.contains("content-link") ) return;
@@ -665,7 +814,17 @@ export default class ItemSheet5e extends ItemSheet {
     if ( li.dataset.effectId ) {
       const effect = this.item.effects.get(li.dataset.effectId);
       dragData = effect.toDragData();
-    } else if ( li.classList.contains("advancement-item") ) {
+    }
+
+    // Activity
+    else if ( li.closest("[data-activity-id]") ) {
+      const { activityId } = event.target.closest(".activity[data-activity-id]")?.dataset ?? {};
+      const activity = this.item.system.activities?.get(activityId);
+      dragData = activity.toDragData();
+    }
+
+    // Advancement
+    else if ( li.classList.contains("advancement-item") ) {
       dragData = this.item.advancement.byId[li.dataset.id]?.toDragData();
     }
 
@@ -677,7 +836,12 @@ export default class ItemSheet5e extends ItemSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /**
+   * Handle dropping items onto the sheet.
+   * @param {DragEvent} event  The concluding drag event.
+   * @returns {any}
+   * @protected
+   */
   _onDrop(event) {
     const data = TextEditor.getDragEventData(event);
     const item = this.item;
@@ -686,21 +850,23 @@ export default class ItemSheet5e extends ItemSheet {
      * A hook event that fires when some useful data is dropped onto an ItemSheet5e.
      * @function dnd5e.dropItemSheetData
      * @memberof hookEvents
-     * @param {Item5e} item                  The Item5e
-     * @param {ItemSheet5e} sheet            The ItemSheet5e application
-     * @param {object} data                  The data that has been dropped onto the sheet
+     * @param {Item5e} item                  The Item5e.
+     * @param {ItemSheet5e} sheet            The ItemSheet5e application.
+     * @param {object} data                  The data that has been dropped onto the sheet.
      * @returns {boolean}                    Explicitly return `false` to prevent normal drop handling.
      */
     const allowed = Hooks.call("dnd5e.dropItemSheetData", item, this, data);
     if ( allowed === false ) return;
+    event.stopPropagation();
 
     switch ( data.type ) {
       case "ActiveEffect":
         return this._onDropActiveEffect(event, data);
       case "Activity":
         return this._onDropActivity(event, data);
-      case "Advancement":
       case "Item":
+        return this._onDropItem(event, data);
+      case "Advancement":
         return this._onDropAdvancement(event, data);
     }
   }
@@ -727,11 +893,46 @@ export default class ItemSheet5e extends ItemSheet {
       options.keepOrigin = true;
       options.dnd5e = {
         enchantmentProfile: effect.id,
-        activityId: data.activityId
+        activityId: data.activityId ?? effect.parent?.system.activities?.getByType("enchant").find(a =>
+          a.effects.some(e => e._id === effect.id)
+        )?.id
       };
     }
 
     return ActiveEffect.create(effectData, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping an Activity onto the sheet.
+   * @param {DragEvent} event       The drag event.
+   * @param {object} transfer       The dropped data.
+   * @param {object} transfer.data  The Activity data.
+   * @protected
+   */
+  _onDropActivity(event, { data }) {
+    const { _id: id, type } = data;
+    const source = this.item.system.activities.get(id);
+
+    // Reordering
+    if ( source ) {
+      const targetId = event.target.closest(".activity[data-activity-id]")?.dataset.activityId;
+      const target = this.item.system.activities.get(targetId);
+      if ( !target || (target === source) ) return;
+      const siblings = this.item.system.activities.filter(a => a._id !== id);
+      const sortUpdates = SortingHelpers.performIntegerSort(source, { target, siblings });
+      const updateData = Object.fromEntries(sortUpdates.map(({ target, update }) => {
+        return [target._id, { sort: update.sort }];
+      }));
+      this.item.update({ "system.activities": updateData });
+    }
+
+    // Copying
+    else {
+      delete data._id;
+      this.item.createActivity(type, data, { renderSheet: false });
+    }
   }
 
   /* -------------------------------------------- */
@@ -789,54 +990,86 @@ export default class ItemSheet5e extends ItemSheet {
   /* -------------------------------------------- */
 
   /**
-   * Handle one of the advancement actions from the buttons or context menu.
-   * @param {Element} target  Button or context menu entry that triggered this action.
-   * @param {string} action   Action being triggered.
-   * @returns {Promise|void}
+   * Handle dropping another item onto this item.
+   * @param {DragEvent} event  The drag event.
+   * @param {object} data      The dropped data.
    */
-  _onAdvancementAction(target, action) {
-    const id = target.closest(".advancement-item")?.dataset.id;
-    const advancement = this.item.advancement.byId[id];
-    let manager;
-    if ( ["edit", "delete", "duplicate"].includes(action) && !advancement ) return;
-    switch (action) {
-      case "add": return game.dnd5e.applications.advancement.AdvancementSelection.createDialog(this.item);
-      case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
-      case "delete":
-        if ( this.item.actor?.system.metadata?.supportsAdvancement
-            && !game.settings.get("dnd5e", "disableAdvancements") ) {
-          manager = AdvancementManager.forDeletedAdvancement(this.item.actor, this.item.id, id);
-          if ( manager.steps.length ) return manager.render(true);
-        }
-        return this.item.deleteAdvancement(id);
-      case "duplicate": return this.item.duplicateAdvancement(id);
-      case "modify-choices":
-        const level = target.closest("[data-level]")?.dataset.level;
-        manager = AdvancementManager.forModifyChoices(this.item.actor, this.item.id, Number(level));
-        if ( manager.steps.length ) manager.render(true);
-        return;
-      case "toggle-configuration":
-        this.advancementConfigurationMode = !this.advancementConfigurationMode;
-        return this.render();
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _onSubmit(...args) {
-    if ( this._tabs[0].active === "details" ) this.position.height = "auto";
-    await super._onSubmit(...args);
+  async _onDropItem(event, data) {
+    const item = await Item.implementation.fromDropData(data);
+    if ( (item?.type === "spell") && this.item.system.activities ) this._onDropSpell(event, item);
+    else this._onDropAdvancement(event, data);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Instantiate accordion widgets.
-   * @returns {Accordion[]}
+   * Handle creating a "Cast" activity when dropping a spell.
+   * @param {DragEvent} event  The drag event.
+   * @param {Item5e} item      The dropped item.
+   */
+  _onDropSpell(event, item) {
+    this.item.createActivity("cast", { spell: { uuid: item.uuid } });
+  }
+
+  /* -------------------------------------------- */
+  /*  Filtering                                   */
+  /* -------------------------------------------- */
+
+  /**
+   * Filter child documents based on the current set of filters.
+   * @param {string} collection    The embedded collection name.
+   * @param {Set<string>} filters  Filters to apply to the children.
+   * @returns {Document[]}
    * @protected
    */
-  _createAccordions() {
-    return this.options.accordions.map(config => new Accordion(config));
+  _filterChildren(collection, filters) {
+    if ( collection === "effects" ) return Array.from(this.item.effects);
+    return [];
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether an Item is considered identified.
+   * @param {Item5e} item  The Item.
+   * @returns {boolean}
+   */
+  static isItemIdentified(item) {
+    return game.user.isGM || (item.system.identified !== false);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine if an Item support Activities.
+   * @param {Item5e} item  The Item.
+   * @returns {boolean}
+   */
+  static itemHasActivities(item) {
+    return this.isItemIdentified(item) && ("activities" in item.system);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine if an Item support Advancement.
+   * @param {Item5e} item  The Item.
+   * @returns {boolean}
+   */
+  static itemHasAdvancement(item) {
+    return "advancement" in item.system;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine if an Item should show an effects tab.
+   * @param {Item5e} item  The Item.
+   * @returns {boolean}
+   */
+  static itemHasEffects(item) {
+    return this.isItemIdentified(item) && item.system.constructor.metadata.hasEffects;
   }
 }

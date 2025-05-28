@@ -1,0 +1,142 @@
+_id: phbMagnificentMa
+name: Magnificent Mansion
+type: spell
+img: icons/environment/settlement/house-manor.webp
+system:
+  description:
+    value: >-
+      <div><p>You conjure a shimmering door in range that lasts for the
+      duration. The door leads to an extradimensional dwelling and is 5 feet
+      wide and 10 feet tall. You and any creature you designate when you cast
+      the spell can enter the extradimensional dwelling as long as the door
+      remains open. You can open or close it (no action required) if you are
+      within 30 feet of it. While closed, the door is
+      imperceptible.</p><p>Beyond the door is a magnificent foyer with numerous
+      chambers beyond. The dwelling's atmosphere is clean, fresh, and
+      warm.</p><p>You can create any floor plan you like for the dwelling, but
+      it can't exceed 50 contiguous 10-foot Cubes. The place is furnished and
+      decorated as you choose. It contains sufficient food to serve a
+      nine-course banquet for up to 100 people. Furnishings and other objects
+      created by this spell dissipate into smoke if removed from it.</p><p>A
+      staff of 100 near-transparent servants attends all who enter. You
+      determine the appearance of these servants and their attire. They are
+      invulnerable and obey your commands. Each servant can perform tasks that a
+      human could perform, but they can't attack or take any action that would
+      directly harm another creature. Thus the servants can fetch things, clean,
+      mend, fold clothes, light fires, serve food, pour wine, and so on. The
+      servants can't leave the dwelling.</p><p>When the spell ends, any
+      creatures or objects left inside the extradimensional space are expelled
+      into the unoccupied spaces nearest to the entrance.</p></div>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: space
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: wall
+      size: '5'
+      width: '1'
+      height: '10'
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '300'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a miniature door worth 15+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    N0agqO0OhJMU6cEB:
+      type: utility
+      name: Create Door
+      _id: N0agqO0OhJMU6cEB
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/trait-condition-immunities.svg
+      appliedEffects: []
+  identifier: mordenkainens-magnificent-mansion
+effects: []
+folder: EdAGMG8IF26PLkD3
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425939497
+  modifiedTime: 1745256784600
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1350000
+ownership:
+  default: 0
+_key: '!items!phbMagnificentMa'

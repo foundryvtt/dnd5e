@@ -1,0 +1,183 @@
+name: Gem
+system:
+  description:
+    value: >-
+      <p> Twenty-five pieces of jewelry worth 2,000 GP each or fifty gems worth
+      1,000 GP each appear at your feet.</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    ffZF8Wmubz3dGBAs:
+      type: utility
+      name: 'Card Effect: Jewelry'
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Card's effect occurs immediately upon draw
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: >-
+          Creates 25 pieces of
+          @UUID[Compendium.dnd5e.equipment24.Item.dmgJewelry2000GP]{Jewelry}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: icons/svg/card-joker.svg
+      _id: ffZF8Wmubz3dGBAs
+      appliedEffects: []
+    fT9artpC9o5QnXvC:
+      type: utility
+      name: 'Card Effect: Gems'
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Card's effect occurs immediately upon draw
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: >-
+          Creates 50
+          @UUID[Compendium.dnd5e.equipment24.Item.dmgGemstone1000G]{Gemstones}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: icons/svg/card-joker.svg
+      _id: fT9artpC9o5QnXvC
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  identifier: gem
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+_id: dmgDmtGem0000000
+type: consumable
+img: icons/commodities/gems/gem-cut-faceted-princess-purple.webp
+effects: []
+folder: XVXuU21XyvevGap7
+sort: 1500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729195872325
+  modifiedTime: 1740685857088
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgDmtGem0000000'

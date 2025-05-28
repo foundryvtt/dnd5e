@@ -1,0 +1,120 @@
+_id: jhAU6pb5GvbjwTX7
+name: Darkness Aura
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>A 15-foot radius of magical darkness extends out from the [[lookup
+      @name lowercase]], moves with it, and spreads around corners. The darkness
+      lasts as long as the [[lookup @name lowercase]] maintains concentration,
+      up to 10 minutes (as if concentrating on a spell).</p><p>Darkvision can't
+      penetrate this darkness, and no natural light can illuminate it. If any of
+      the darkness overlaps with an area of light created by a spell of 2nd
+      level or lower, the spell creating the light is dispelled.</p>
+
+      </section>
+
+      <p>A 15-foot radius of magical darkness extends out from the [[lookup
+      @name lowercase]], moves with it, and spreads around corners. Darkvision
+      can't penetrate this darkness, and no natural light can illuminate it.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: day
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '10'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '15'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: darkness-aura
+flags: {}
+img: icons/magic/perception/eye-ringed-glow-angry-red.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304975700
+  modifiedTime: 1725992574121
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!jhAU6pb5GvbjwTX7'

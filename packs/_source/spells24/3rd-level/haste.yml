@@ -1,0 +1,296 @@
+name: Haste
+system:
+  description:
+    value: >-
+      <p>Choose a willing creature that you can see within range. Until the
+      spell ends, the target's Speed is doubled, it gains a +2 bonus to Armor
+      Class, it has Advantage on Dexterity saving throws, and it gains an
+      additional action on each of its turns. That action can be used to take
+      only the Attack (one attack only), Dash, Disengage, Hide, or Utilize
+      action.</p><p>When the spell ends, the target is
+      &amp;Reference[Incapacitated apply=false] and has a Speed of 0 until the
+      end of its next turn, as a wave of lethargy washes over it.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: willing
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '30'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a shaving of licorice root
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: NEFWcyysYgsE6de3
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Cast
+      img: ''
+      appliedEffects:
+        - NEFWcyysYgsE6de3
+    rBQrZnq7cHkSUAK9:
+      type: utility
+      name: Apply Lethargy
+      _id: rBQrZnq7cHkSUAK9
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: round
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: S5XcFawnnNHO8bUr
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects:
+        - S5XcFawnnNHO8bUr
+  identifier: haste
+_id: phbsplHaste00000
+type: spell
+img: icons/magic/time/clock-spinning-gold-pink.webp
+effects:
+  - name: Hasted
+    origin: Compendium.dnd5e.spells24.Item.phbsplHaste00000
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/time/clock-spinning-gold-pink.webp
+    _id: NEFWcyysYgsE6de3
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 1
+        value: '2'
+        priority: null
+      - key: system.attributes.movement.burrow
+        mode: 1
+        value: '2'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 1
+        value: '2'
+        priority: null
+      - key: system.attributes.movement.fly
+        mode: 1
+        value: '2'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 1
+        value: '2'
+        priority: null
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    description: >-
+      <p>Until the spell ends, the target’s Speed is doubled, it gains a +2
+      bonus to Armor Class, it has Advantage on Dexterity saving throws, and it
+      gains an additional action on each of its turns. That action can be used
+      to take only the Attack (one attack only), Dash, Disengage, Hide, or
+      Utilize action.</p><p>When the spell ends, the target is Incapacitated and
+      has a Speed of 0 until the end of its next turn, as a
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplHaste00000.ActiveEffect.S5XcFawnnNHO8bUr]{wave
+      of lethargy} washes over it.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplHaste00000.NEFWcyysYgsE6de3'
+  - name: Lethargy
+    origin: Compendium.dnd5e.spells24.Item.phbsplHaste00000
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/tools/nautical/anchor-blue.webp
+    _id: S5XcFawnnNHO8bUr
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 3
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.burrow
+        mode: 3
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 3
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.fly
+        mode: 3
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 3
+        value: '0'
+        priority: null
+    description: >-
+      <p>When the spell ends, the target is &amp;Reference[incapacitated
+      apply=false] and has a Speed of 0 until the end of its next turn, as a
+      wave of lethargy washes over it.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - incapacitated
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplHaste00000.S5XcFawnnNHO8bUr'
+folder: HCovEE4VoPGlIbKi
+sort: 1700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425958065
+  modifiedTime: 1745256794412
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplHaste00000'

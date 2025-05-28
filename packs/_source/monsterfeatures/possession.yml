@@ -1,0 +1,132 @@
+_id: NI3FPb5jQsePdlVl
+name: Possession
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>One humanoid that the [[lookup @name
+      lowercase]] can see within 5 ft. of it must succeed on a  <strong>DC 13
+      Charisma</strong> saving throw or be possessed by the [[lookup @name
+      lowercase]]; the [[lookup @name lowercase]] then disappears, and the
+      target is incapacitated and loses control of its body. the [[lookup @name
+      lowercase]] now controls the body but doesn't deprive the target of
+      awareness. </p><p>the [[lookup @name lowercase]] can't be targeted by any
+      attack, spell, or other effect, except ones that turn [[lookup
+      @details.type.config.label lowercase]], and it retains its alignment,
+      Intelligence, Wisdom, Charisma, and immunity to being charmed and
+      frightened. It otherwise uses the possessed target's statistics, but
+      doesn't gain access to the target's knowledge, class features, or
+      proficiencies.The possession lasts until the body drops to 0 hit points,
+      the [[lookup @name lowercase]] ends it as a bonus action, or the [[lookup
+      @name lowercase]] is turned or forced out by an effect like the dispel
+      evil and good spell. When the possession ends, the [[lookup @name
+      lowercase]] reappears in an unoccupied space within 5 ft. of the body. The
+      target is immune to this [[lookup @name lowercase]]'s Possession for 24
+      hours after succeeding on the saving throw or after the possession
+      ends.</p></section><p>One humanoid that the [[lookup @name lowercase]] can
+      see within 5 ft. of it must make a <strong>Charisma</strong> saving
+      throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: recharge
+        formula: '6'
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: spec
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: cha
+        dc:
+          calculation: ''
+          formula: '13'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: possession
+flags: {}
+img: icons/magic/control/fear-fright-monster-grin-purple-blue.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304970108
+  modifiedTime: 1725992572413
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!NI3FPb5jQsePdlVl'

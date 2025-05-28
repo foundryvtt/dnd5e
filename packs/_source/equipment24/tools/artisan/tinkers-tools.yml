@@ -1,0 +1,136 @@
+name: Tinker's Tools
+system:
+  description:
+    value: >-
+      <p class="phb-meta"><strong>Ability:</strong> Dexterity</p><p
+      class="phb-meta"><strong>Utilize:</strong> Assemble a Tiny item composed
+      of scrap, which falls apart in 1 minute (DC 20)</p><p
+      class="phb-meta"><strong>Craft:</strong>
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepMusket0000]{Musket},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepPistol0000]{Pistol},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBell0000000]{Bell},
+      @UUID[Compendium.dnd5e.items.Item.UkWdyJYQTfVX2cJW]{Bullseye Lantern},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagFlask000000]{Flask},
+      @UUID[Compendium.dnd5e.items.Item.wjHtGnd05SPdURqE]{Hooded Lantern},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagHuntingTrap]{Hunting Trap},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagLock0000000]{Lock},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagManacles000]{Manacles},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagMirror00000]{Mirror},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagShovel00000]{Shovel},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagSignalWhist]{Signal Whistle},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagTinderbox00]{Tinderbox}</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 10
+    units: lb
+  price:
+    value: 50
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: art
+    baseItem: tinker
+  ability: dex
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    JSVBIHDQAhgJf1jV:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '20'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: JSVBIHDQAhgJf1jV
+      name: Assemble a Tiny Item
+      img: ''
+      appliedEffects: []
+  identifier: tinkers-tools
+_id: phbtulTinkersToo
+type: tool
+folder: V8KHbNkEWoXQP3Pj
+img: icons/commodities/cloth/thread-spindle-white-needle.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425917898
+  modifiedTime: 1740680142852
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbtulTinkersToo'

@@ -1,0 +1,116 @@
+_id: baoe3U5BfMMMxhCU
+name: Viol
+type: tool
+img: icons/tools/instruments/lute-gold-brown.webp
+system:
+  description:
+    value: >-
+      <p>A viol to evoke awe, wonder, or fear in your audience.</p>
+
+      <p>If you have proficiency with a given musical instrument, you can add
+      your proficiency bonus to any ability checks you make to play music with
+      the instrument. A bard can use a musical instrument as a spellcasting
+      focus. Each type of musical instrument requires a separate proficiency.
+      </p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 30
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  ability: cha
+  chatFlavor: ''
+  proficient: null
+  bonus: ''
+  type:
+    value: music
+    baseItem: viol
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: check
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      check:
+        ability: cha
+        dc: {}
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: viol
+effects: []
+folder: uvZXbqK3cHirDzeT
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037228112
+  modifiedTime: 1725992526673
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!baoe3U5BfMMMxhCU'

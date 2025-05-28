@@ -1,0 +1,291 @@
+name: Create Undead
+system:
+  description:
+    value: >-
+      <p>You can cast this spell only at night. Choose up to three corpses of
+      Medium or Small Humanoids within range. Each one becomes a
+      <strong>@UUID[Compendium.dnd5e.monsters.Actor.OBujQLLPSmlJiZnL]{Ghoul}</strong>
+      under your control (see the <em>Monster Manual</em> for its stat
+      block).</p><p>As a Bonus Action on each of your turns, you can mentally
+      command any creature you animated with this spell if the creature is
+      within 120 feet of you (if you control multiple creatures, you can command
+      any of them at the same time, issuing the same command to them). You
+      decide what action the creature will take and where it will move on its
+      next turn, or you can issue a general command, such as to guard a
+      particular place. If you issue no commands, the creature takes the
+      &amp;Reference[Dodge] action and moves only to avoid harm. Once given an
+      order, the creature continues to follow the order until its task is
+      complete.</p><p>The creature is under your control for 24 hours, after
+      which it stops obeying any command you've given it. To maintain control of
+      the creature for another 24 hours, you must cast this spell on the
+      creature before the current 24-hour period ends. This use of the spell
+      reasserts your control over up to three creatures you have animated with
+      this spell rather than animating new ones.</p><p><strong>Using a
+      Higher-Level Spell Slot.</strong>If you use a level 7 spell slot, you can
+      animate or reassert control over four <strong>Ghouls</strong>. If you use
+      a level 8 spell slot, you can animate or reassert control over five
+      <strong>Ghouls</strong> or two
+      <strong>@UUID[Compendium.dnd5e.monsters.Actor.IyIybE5t2adMEVUM]{Ghasts}</strong>
+      or
+      <strong>@UUID[Compendium.dnd5e.monsters.Actor.rbyp54px2D0ql4QK]{Wights}</strong>.
+      If you use a level 9 spell slot, you can animate or reassert control over
+      six <strong>Ghouls</strong>, three <strong>Ghasts</strong> or
+      <strong>Wights</strong>, or two
+      <strong>@UUID[Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8]{Mummies}</strong>.
+      See the <em>Monster Manual</em> for these stat blocks.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: only at night
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '@item.level - 3'
+      type: creatureOrObject
+      special: corpse of Medium or Small Humanoid or previously created undead
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '10'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: nec
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: one 150+ GP black onyx stone for each corpse
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    ExyqLKqLhGbaJVVd:
+      type: summon
+      _id: ExyqLKqLhGbaJVVd
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '@item.level - 3'
+          type: object
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: '@item.level - 3'
+          name: ''
+          _id: AD8SieTZpNO367vu
+          uuid: Compendium.dnd5e.monsters.Actor.OBujQLLPSmlJiZnL
+          level:
+            min: null
+            max: null
+          types: []
+        - count: '@item.level - 6'
+          name: ''
+          _id: wxjtP08Cq6Qx4DNt
+          uuid: Compendium.dnd5e.monsters.Actor.IyIybE5t2adMEVUM
+          level:
+            min: 8
+            max: null
+          types: []
+        - count: '@item.level - 6'
+          name: ''
+          _id: 1VEmzIL2JMUEG9aD
+          uuid: Compendium.dnd5e.monsters.Actor.rbyp54px2D0ql4QK
+          level:
+            min: 8
+            max: null
+          types: []
+        - count: '2'
+          name: ''
+          _id: oegT9SQrB7ZuMGie
+          uuid: Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8
+          level:
+            min: 9
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: Animate Corpses
+      img: icons/magic/death/hand-dirt-undead-zombie.webp
+    BepVtap2tWyUwaxk:
+      type: utility
+      _id: BepVtap2tWyUwaxk
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: true
+        value: '24'
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '@item.level - 3'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Reassert Control
+      img: icons/magic/death/skull-humanoid-crown-white-blue.webp
+      appliedEffects: []
+    CIv9t4XuVEcgmX9n:
+      type: utility
+      _id: CIv9t4XuVEcgmX9n
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Mentally Command
+      img: icons/magic/death/skull-energy-light-purple.webp
+      appliedEffects: []
+  identifier: create-undead
+_id: phbsplCreateUnde
+type: spell
+img: icons/magic/death/skull-flames-white-blue.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 1600000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425948206
+  modifiedTime: 1745256789584
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplCreateUnde'

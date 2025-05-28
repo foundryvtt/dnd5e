@@ -1,0 +1,190 @@
+_id: phbdrdArchdruid0
+name: Archdruid
+type: feat
+folder: EXYmwRGoNyMbByN1
+img: icons/magic/nature/root-vines-face-glow-green.webp
+system:
+  description:
+    value: >-
+      <p>The vitality of nature constantly blooms within you, granting you the
+      following benefits.</p><p><strong>Evergreen Wild Shape.</strong> Whenever
+      you roll Initiative and have no uses of Wild Shape left, you regain one
+      expended use of it.</p><p><strong>Nature Magician.</strong> You can
+      convert uses of Wild Shape into a spell slot (no action required). Choose
+      a number of your unexpended uses of Wild Shape and convert them into a
+      single spell slot, with each use contributing 2 spell levels. For example,
+      if you convert two uses of Wild Shape, you produce a level 4 spell slot.
+      Once you use this benefit, you can't do so again until you finish a Long
+      Rest.</p><p><strong>Longevity.</strong> The primal magic that you wield
+      causes you to age more slowly. For every ten years that pass, your body
+      ages only one year.</p><section class="secret"
+      id="secret-qKoW7fFZUwKC0IOG"><p><strong>Foundry Note</strong></p><p>This
+      feature does not automate regaining a use of Wild Shape when rolling
+      initiative but it does include an activity which will restore a use when
+      activated.</p><p>The <strong>Nature Magician</strong> activity can be used
+      to convert Wild Shape uses to spell slots.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '1'
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 20
+    repeatable: false
+  properties: []
+  requirements: Druid
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: ''
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+            scaling:
+              mode: amount
+          - type: spellSlots
+            value: '-1'
+            target: '2'
+            scaling:
+              mode: level
+              formula: '2'
+        scaling:
+          allowed: true
+          max: '@scale.druid.wild-shape-uses'
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: ''
+        units: inst
+        special: ''
+        override: false
+        concentration: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Nature Magician
+    xqLZdQ13RBZkeACB:
+      type: utility
+      name: Recharge on Initiative
+      _id: xqLZdQ13RBZkeACB
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
+            scaling: {}
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg
+  enchant: {}
+  identifier: archdruid
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866366918
+  modifiedTime: 1740680082199
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+_key: '!items!phbdrdArchdruid0'

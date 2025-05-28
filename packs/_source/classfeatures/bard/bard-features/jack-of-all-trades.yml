@@ -1,0 +1,84 @@
+_id: ezWijmCnlnQ9ZRX2
+name: Jack of All Trades
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Starting at 2nd level, you can add half your proficiency bonus, rounded
+      down, to any ability check you make that doesn't already include your
+      proficiency bonus.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: Bard 2
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: jack-of-all-trades
+flags: {}
+img: icons/commodities/tech/cog-steel.webp
+effects:
+  - _id: K4xQzXl1Z4zMnyOa
+    changes:
+      - key: flags.dnd5e.jackOfAllTrades
+        mode: 5
+        value: 'true'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.LaQuQ37mInXH6TiR
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Jack of All Trades
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/commodities/tech/cog-steel.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!ezWijmCnlnQ9ZRX2.K4xQzXl1Z4zMnyOa'
+folder: XEu43QVhYfhUcewt
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037386462
+  modifiedTime: 1725992289161
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ezWijmCnlnQ9ZRX2'

@@ -1,0 +1,54 @@
+_id: i3viKtKcSVeWLJFJ
+name: Heated Weapons
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>When the [[lookup @name lowercase]] hits with a metal melee weapon, it
+      deals an extra <strong><strong>3 (1d6) <em>fire
+      damage</em></strong></strong> (included in the attack).</p>
+
+      </section>
+
+      <p>When the [[lookup @name lowercase]] hits with a metal melee weapon, it
+      deals extra <em>fire damage</em> (included in the attack).</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: heated-weapons
+flags: {}
+img: icons/skills/melee/strike-sword-blood-red.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304974974
+  modifiedTime: 1725992573881
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!i3viKtKcSVeWLJFJ'

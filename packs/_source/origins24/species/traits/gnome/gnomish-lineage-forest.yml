@@ -1,0 +1,57 @@
+_id: phbsptForestGnom
+name: Gnomish Lineage, Forest
+type: feat
+img: icons/environment/wilderness/tree-oak.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>You know the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplMinorIllus]{Minor Illusion}
+      cantrip. You also always have the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplSpeakwithA]{Speak with Animals}
+      spell prepared. You can cast it without a spell slot a number of times
+      equal to your Proficiency Bonus, and you regain all expended uses when you
+      finish a Long Rest. You can also use any spell slots you have to cast the
+      spell.</p><section id="secret-CwVBuqSGI27gl6R9"
+      class="secret"><p><strong>Foundry Note</strong></p><p>The free castings
+      are included in the spell.</p></section>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Gnome (Forest)
+  identifier: gnomish-lineage-forest
+  advancement: []
+  cover: null
+  crewed: false
+effects: []
+folder: e9Bx86LUj7rJMszu
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745340832108
+  modifiedTime: 1745687047732
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptForestGnom'

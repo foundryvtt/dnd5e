@@ -1,0 +1,16 @@
+<fieldset class="card">
+    <ol class="unlist form-grid form-grid-50 skills-list" style="--skill-rows: {{ rows }};">
+        {{#each skills}}
+        <li class="skill-row" data-key="{{ @key }}">
+            <proficiency-cycle type="skill" name="system.skills.{{ @key }}.value" value="{{ value }}"
+                               data-tooltip aria-label="{{ localize tooltip }}"></proficiency-cycle>
+            <span class="name">{{ label }}</span>
+            <div class="bonus">{{ dnd5e-formatModifier total }}</div>
+            <a class="config-button" data-action="configure" data-tooltip
+               aria-label="{{ localize "DND5E.SkillConfigure" }}">
+                <i class="fa-solid fa-cog" inert></i>
+            </a>
+        </li>
+        {{/each}}
+    </ol>
+</fieldset>

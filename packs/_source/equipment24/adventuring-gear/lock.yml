@@ -1,0 +1,49 @@
+name: Lock
+system:
+  description:
+    value: >-
+      <p>A Lock comes with a key. Without the key, a creature can use
+      @UUID[Compendium.dnd5e.equipment24.Item.phbtulThievesToo]{Thieves' Tools}
+      to pick this Lock with a successful [[/tool thief dex 15]] check.</p>
+    chat: ''
+  price:
+    value: 10
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: lock
+_id: phbagLock0000000
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/misc/lock-bronze-reinforced.webp
+effects: []
+sort: 3500000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425909878
+  modifiedTime: 1745256812219
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagLock0000000'

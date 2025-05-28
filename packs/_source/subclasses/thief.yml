@@ -1,0 +1,110 @@
+name: Thief
+type: subclass
+img: icons/equipment/hand/glove-tooled-leather-red.webp
+system:
+  description:
+    value: >-
+      <p>You hone your skills in the larcenous arts. Burglars, bandits,
+      cutpurses, and other criminals typically follow this archetype, but so do
+      rogues who prefer to think of themselves as professional treasure seekers,
+      explorers, delvers, and investigators. In addition to improving your
+      agility and stealth, you learn skills useful for delving into ancient
+      ruins, reading unfamiliar languages, and using magic items you normally
+      couldn't employ.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: thief
+  classIdentifier: rogue
+  advancement:
+    - _id: q1y2nsk2voi9hift
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.ga3dt2zrCn2MHK8R
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.FGrbXs6Ku5qxFK5G
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 3
+      title: Features
+    - _id: mn1phw6y8csnul2f
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.Ei1Oh4UAA2E30jcD
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 9
+      title: Features
+    - _id: 5zutrvrhem8ygscb
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.NqWyHE7Rpw9lyKWu
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 13
+      title: Features
+    - _id: 8r4g78wm6s2k9jwo
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.LhRm1EeUMvp2EWhV
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 17
+      title: Features
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation: {}
+effects: []
+folder: 6EMu3ghr6Cx6ktHL
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: k8iuefRorWOjb9gR
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037372969
+  modifiedTime: 1725992730659
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!k8iuefRorWOjb9gR'

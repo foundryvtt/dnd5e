@@ -1,0 +1,174 @@
+_id: dmgSunBlade00000
+name: Sun Blade
+type: weapon
+img: icons/commodities/treasure/sceptre-jeweled-gold.webp
+system:
+  activities:
+    z4LHh8k7n6vIl2gK:
+      _id: z4LHh8k7n6vIl2gK
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: 'Bonus Damage: 1d8 Radiant vs Undead'
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepLongsword0]{Longsword}),
+      Rare (Requires Attunement)</em></p><p>This item appears to be a sword
+      hilt.</p><p><em><strong>Blade of Radiance.</strong></em> While grasping
+      the hilt, you can take a Bonus Action to cause a blade of pure radiance to
+      spring into existence or make the blade disappear. While the blade exists,
+      this magic weapon functions as a Longsword with the Finesse property. If
+      you are proficient with Longswords or Shortswords, you are proficient with
+      the <em>Sun Blade</em>.</p><p>You gain a +2 bonus to attack rolls and
+      damage rolls made with this weapon, which deals Radiant damage instead of
+      Slashing damage. When you hit an Undead with it, that target takes an
+      extra 1d8 Radiant damage.</p><p><em><strong>Sunlight.</strong></em> The
+      sword's luminous blade emits Bright Light in a 15-foot radius and Dim
+      Light for an additional 15 feet. The light is sunlight. While the blade
+      persists, you can take a Magic action to expand or reduce its radius of
+      Bright Light and Dim Light by 5 feet each, to a maximum of 30 feet each or
+      a minimum of 10 feet each.</p><section class="secret"
+      id="secret-DDIn6fZIjHvPnfKS"><p><strong>Foundry Note</strong></p><p>If you
+      are proficient with Shortswords you can manually set the item as
+      proficient.</p></section>
+    chat: ''
+  identifier: sun-blade
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: martialM
+    baseItem: longsword
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 8
+      types:
+        - radiant
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  magicalBonus: 2
+  properties:
+    - fin
+    - mgc
+    - ver
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: sap
+effects: []
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703987
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgSunBlade00000'

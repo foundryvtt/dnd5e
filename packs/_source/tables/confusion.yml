@@ -1,0 +1,117 @@
+name: Confusion
+img: icons/magic/air/wind-tornado-cyclone-purple-pink.webp
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    _id: JJjhhU1Br9ThNEWA
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      The creature uses all its movement to move in a random direction. To
+      determine the direction, roll a [[/r d8]] and assign a direction to each
+      die face. The creature doesn't take an action this turn.
+    name: ''
+    _key: '!tables.results!LHEts1oDaDwcehuj.JJjhhU1Br9ThNEWA'
+  - type: text
+    weight: 1
+    range:
+      - 2
+      - 6
+    drawn: false
+    _id: p1PpjMO47bT41JH7
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: The creature doesn't move or take actions this turn.
+    name: ''
+    _key: '!tables.results!LHEts1oDaDwcehuj.p1PpjMO47bT41JH7'
+  - type: text
+    weight: 1
+    range:
+      - 7
+      - 8
+    drawn: false
+    _id: d8WgsQzLYbVXdtPj
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      The creature uses its action to make a melee attack against a randomly
+      determined creature within its reach. If there is no creature within its
+      reach, the creature does nothing this turn.
+    name: ''
+    _key: '!tables.results!LHEts1oDaDwcehuj.d8WgsQzLYbVXdtPj'
+  - type: text
+    weight: 1
+    range:
+      - 9
+      - 10
+    drawn: false
+    _id: f4VYbhVsLT7q72ih
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: The creature can act and move normally.
+    name: ''
+    _key: '!tables.results!LHEts1oDaDwcehuj.f4VYbhVsLT7q72ih'
+formula: 1d10
+replacement: true
+displayRoll: true
+flags: {}
+_id: LHEts1oDaDwcehuj
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037418988
+  modifiedTime: 1725037418988
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+folder: null
+ownership:
+  default: 0
+_key: '!tables!LHEts1oDaDwcehuj'

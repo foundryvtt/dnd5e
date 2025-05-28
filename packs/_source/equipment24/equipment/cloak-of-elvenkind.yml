@@ -1,0 +1,72 @@
+_id: dmgCloakOfElvenk
+name: Cloak of Elvenkind
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/back/cloak-collared-feathers-green.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Uncommon (Requires
+      Attunement)</em></p></div><p>While you wear this cloak, Wisdom
+      (Perception) checks made to perceive you have Disadvantage, and you have
+      Advantage on Dexterity (Stealth) checks.</p>
+    chat: ''
+  identifier: cloak-of-elvenkind
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712698692
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7800000
+ownership:
+  default: 0
+_key: '!items!dmgCloakOfElvenk'

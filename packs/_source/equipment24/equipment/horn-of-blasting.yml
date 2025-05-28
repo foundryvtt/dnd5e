@@ -1,0 +1,347 @@
+_id: dmgHornOfBlastin
+name: Horn of Blasting
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/tools/instruments/flute-simple-wood.webp
+system:
+  activities:
+    FMTcQOb5MZKBohdN:
+      type: save
+      name: Blow Horn
+      _id: FMTcQOb5MZKBohdN
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: HREyjqFevgTvN4uC
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: 8
+            bonus: ''
+            types:
+              - thunder
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects: []
+    CohXMZ4aojCQTIpk:
+      type: damage
+      name: Object Damage
+      _id: CohXMZ4aojCQTIpk
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: object
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 8
+            bonus: ''
+            types:
+              - thunder
+            scaling:
+              number: 1
+      img: ''
+      appliedEffects: []
+    FIPuYfZI5jKkVYYo:
+      type: utility
+      name: Roll for Explosion Chance
+      _id: FIPuYfZI5jKkVYYo
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: Roll for Explosion Chance
+        formula: 1d100cs<21
+      img: ''
+      appliedEffects: []
+    q8PShLHyh2ItXbkQ:
+      type: damage
+      name: Explosion Damage
+      _id: q8PShLHyh2ItXbkQ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare</em></p><p>You can take a Magic action to blow
+      the horn, which emits a thunderous blast in a 30-foot Cone that is audible
+      out to 600 feet. Each creature in the Cone makes a DC 15 Constitution
+      saving throw. On a failed save, a creature takes 5d8 Thunder damage and
+      has the &amp;Reference[Deafened apply=false] condition for 1 minute. On a
+      successful save, a creature takes half as much damage only. Glass or
+      crystal objects in the Cone that aren't being worn or carried take 10d8
+      Thunder damage.</p><p>Each use of the horn's magic has a 20 percent chance
+      of causing the horn to explode. The explosion deals 10d6 Force damage to
+      the user and destroys the horn.</p><section class="secret"
+      id="secret-rkHeC2mFJBKqNOh0"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Roll for Explosion Chance</strong> activity will return 1 if it
+      explodes otherwise it will return 0.</p></section>
+    chat: ''
+  identifier: horn-of-blasting
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Deafened
+    img: icons/tools/instruments/flute-simple-wood.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgHornOfBlastin
+    transfer: false
+    _id: HREyjqFevgTvN4uC
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - deafened
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730695719031
+      modifiedTime: 1730695732077
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgHornOfBlastin.HREyjqFevgTvN4uC'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712700775
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 18600000
+ownership:
+  default: 0
+_key: '!items!dmgHornOfBlastin'

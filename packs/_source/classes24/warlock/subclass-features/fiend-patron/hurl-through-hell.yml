@@ -1,0 +1,184 @@
+_id: phbwlkHurlThroug
+name: Hurl Through Hell
+type: feat
+folder: fP1LEFkoKLotitj0
+img: icons/creatures/abilities/mouth-teeth-fire-orange.webp
+system:
+  description:
+    value: >-
+      <p>Once per turn when you hit a creature with an attack roll, you can try
+      to instantly transport the target through the Lower Planes. The target
+      must succeed on a Charisma saving throw against your spell save DC, or the
+      target disappears and hurtles through a nightmare landscape. The target
+      takes 8d10 Psychic damage if it isn't a Fiend, and it has the
+      &amp;Reference[Incapacitated] condition until the end of your next turn,
+      when it returns to the space it previously occupied or the nearest
+      unoccupied space.</p><p>Once you use this feature, you can't use it again
+      until you finish a Long Rest unless you expend a Pact Magic spell slot (no
+      action required) to restore your use of it.</p><section class="secret"
+      id="secret-gG3gHikiPJVXNkev"><p><strong>Foundry Note</strong></p><p>This
+      feature includes one limited use.</p><p>The <strong>Regain Use</strong>
+      activity will expend a Pact Magic spell slot and restore a use of this
+      feature.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '1'
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 14
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    vIY5Deb2vCh5POdP:
+      type: save
+      name: Hurl Through Hell
+      _id: vIY5Deb2vCh5POdP
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Once per turn when you hit a creature with an attack roll
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 8
+            denomination: 10
+            bonus: ''
+            types:
+              - psychic
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability:
+          - cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+    0e3VQjiAyCisCoxN:
+      type: utility
+      name: Regain Use
+      _id: 0e3VQjiAyCisCoxN
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: ''
+            scaling: {}
+          - type: attribute
+            value: '1'
+            target: spells.pact.value
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: hurl-through-hell
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866551616
+  modifiedTime: 1745256767968
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwlkHurlThroug'

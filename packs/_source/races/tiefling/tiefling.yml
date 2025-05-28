@@ -1,0 +1,201 @@
+_id: aHTokZ151W0ASSmo
+name: Tiefling
+type: race
+img: icons/creatures/unholy/demon-female-succubus-orange.webp
+system:
+  description:
+    value: >-
+      <p>Tieflings share certain racial traits as a result of their infernal
+      descent.</p><p><em><strong>Ability Score Increase.</strong></em> Your
+      Intelligence score increases by 1, and your Charisma score increases by
+      2.</p><p><em><strong>Age.</strong></em> Tieflings mature at the same rate
+      as humans but live a few years
+      longer.</p><p><em><strong>Alignment.</strong></em> Tieflings might not
+      have an innate tendency toward evil, but many of them end up there. Evil
+      or not, an independent nature inclines many tieflings toward a chaotic
+      alignment.</p><p><em><strong>Size.</strong></em> Tieflings are about the
+      same size and build as humans. Your size is
+      Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is
+      30 feet.</p><p><em><strong>Darkvision.</strong></em> Thanks to your
+      infernal heritage, you have superior vision in dark and dim conditions.
+      You can see in dim light within 60 feet of you as if it were bright light,
+      and in darkness as if it were dim light. You can't discern color in
+      darkness, only shades of gray.</p><p><em><strong>Hellish
+      Resistance.</strong></em> You have resistance to fire
+      damage.</p><p><em><strong>Infernal Legacy.</strong></em> You know the
+      thaumaturgy cantrip. When you reach 3rd level, you can cast the hellish
+      rebuke spell as a 2nd-­level spell once with this trait and regain the
+      ability to do so when you finish a long rest. When you reach 5th level,
+      you can cast the darkness spell once with this trait and regain the
+      ability to do so when you finish a long rest. Charisma is your
+      spellcasting ability for these
+      spells.</p><p><em><strong>Languages.</strong></em> You can speak, read,
+      and write Common and Infernal.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: tiefling
+  advancement:
+    - _id: 1TyE6rcEq01VWRZc
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.races.q71Pe1F8RRtEJt8Q
+            optional: false
+          - uuid: Compendium.dnd5e.races.wJc88B8OP1y1xzMw
+            optional: false
+        optional: false
+        spell:
+          ability:
+            - cha
+          preparation: innate
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 0
+      title: ''
+    - _id: d8rqpB59h8lfbnva
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.spells.22dPoeXfaaAv4K3h
+            optional: false
+        optional: false
+        spell:
+          ability:
+            - cha
+          preparation: innate
+          uses:
+            max: '1'
+            per: lr
+      value: {}
+      level: 3
+      title: Infernal Legacy
+    - _id: p2AP4Rn6S8A8Xu5L
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq
+            optional: false
+        optional: false
+        spell:
+          ability:
+            - cha
+          preparation: innate
+          uses:
+            max: '1'
+            per: lr
+      value: {}
+      level: 5
+      title: Infernal Legacy
+    - _id: Z9hvZFkWUNvowbQX
+      type: AbilityScoreImprovement
+      configuration:
+        points: 0
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 1
+          wis: 0
+          cha: 2
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 0
+      title: ''
+    - _id: RdFKqK8MykC5CYIB
+      type: Size
+      configuration:
+        sizes:
+          - med
+      value:
+        size: ''
+      level: 1
+      title: ''
+      hint: >-
+        Tieflings are about the same size and build as humans. Your size is
+        Medium.
+    - _id: rE6m74Xp32VuJC5y
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - dr:fire
+        choices: []
+      level: 0
+      title: Hellish Resistance
+      value:
+        chosen: []
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
+            optional: false
+        optional: false
+        spell:
+          ability:
+            - cha
+          preparation: innate
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 0
+      title: Infernal Legacy
+      _id: VUUQMvAtL25wj3vD
+    - _id: jGeaKhTjGApgqmWw
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - languages:standard:common
+          - languages:exotic:infernal
+        choices: []
+      level: 0
+      title: ''
+      value:
+        chosen: []
+  senses:
+    darkvision: 60
+    blindsight: null
+    tremorsense: null
+    truesight: null
+    units: ft
+    special: ''
+  movement:
+    burrow: null
+    climb: null
+    fly: null
+    swim: null
+    walk: 30
+    units: ft
+    hover: false
+  type:
+    value: humanoid
+    subtype: tiefling
+    custom: ''
+effects: []
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037393065
+  modifiedTime: 1725992703578
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+folder: f5ljsAWhb2orebtX
+_key: '!items!aHTokZ151W0ASSmo'

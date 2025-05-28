@@ -1,0 +1,51 @@
+name: Book
+system:
+  description:
+    value: >-
+      <p>A Book contains fiction or nonfiction. If you consult an accurate
+      nonfiction Book about its topic, you gain a +5 bonus to Intelligence
+      (Arcana, History, Nature, or Religion) checks you make about that
+      topic.</p>
+    chat: ''
+  price:
+    value: 25
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagScholarsPac
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: book
+_id: phiPN9UzkXk3i5xh
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/books/book-worn-brown.webp
+effects: []
+sort: 56250
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726532961659
+  modifiedTime: 1745256814730
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phiPN9UzkXk3i5xh'

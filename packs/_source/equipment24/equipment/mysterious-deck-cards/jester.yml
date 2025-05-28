@@ -1,0 +1,181 @@
+name: Jester
+system:
+  description:
+    value: >-
+      <p> You have Advantage on D20 Tests for the next 72 hours, or you can draw
+      two additional cards beyond your declared draws.</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    6WJ08JWazu3OZign:
+      type: utility
+      name: 'Card Effect: Advantage'
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Card's chosen effect occurs immediately upon draw
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '72'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: icons/svg/card-joker.svg
+      _id: 6WJ08JWazu3OZign
+      appliedEffects: []
+    gzBrijeF3lJYqIkz:
+      type: utility
+      name: 'Card Effect: Draw Two'
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Card's chosen effect occurs immediately upon draw
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: You draw two additional cards
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: icons/svg/card-joker.svg
+      _id: gzBrijeF3lJYqIkz
+      appliedEffects:
+        - 4PPDM5AWhWupsiSq
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  identifier: jester
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+_id: dmgDmtJester0000
+type: consumable
+folder: XVXuU21XyvevGap7
+img: icons/creatures/magical/spirit-fire-yellow.webp
+effects: []
+sort: 100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729200597533
+  modifiedTime: 1740680118930
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgDmtJester0000'

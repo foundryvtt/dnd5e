@@ -1,0 +1,105 @@
+name: Path of the Berserker
+type: subclass
+img: icons/skills/melee/strike-flail-destructive-yellow.webp
+system:
+  description:
+    value: >-
+      <p>For some barbarians, rage is a means to an end—that end being violence.
+      The Path of the Berserker is a path of untrammeled fury, slick with blood.
+      As you enter the berserker's rage, you thrill in the chaos of battle,
+      heedless of your own health or well-being.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: path-of-the-berserker
+  classIdentifier: barbarian
+  advancement:
+    - _id: 79o5gdodki55y2s6
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.CkbbAckeCtyHXEnL
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 3
+      title: Features
+    - _id: v2wgomyba9p2orht
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.0Jgf8fYY2ExwgQpN
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 6
+      title: Features
+    - _id: zstkqtiw4rd9jy03
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.M6VSMzVtKPhh8B0i
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 10
+      title: Features
+    - _id: sngpm2xqk3cv1g3g
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.xzD9zlRP6dUxCtCl
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 14
+      title: Features
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation: {}
+effects: []
+folder: ZTP0KiGOdRqUKVvZ
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: uGuDQX9Mz3oHNHkU
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037373053
+  modifiedTime: 1725992730698
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!uGuDQX9Mz3oHNHkU'

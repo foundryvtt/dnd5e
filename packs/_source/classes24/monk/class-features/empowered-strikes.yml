@@ -1,0 +1,124 @@
+_id: phbmnkEmpoweredS
+name: Empowered Strikes
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/magic/control/buff-strength-muscle-damage-orange.webp
+system:
+  description:
+    value: >-
+      <p>Whenever you deal damage with your Unarmed Strike, it can deal your
+      choice of Force damage or its normal damage type.</p><section
+      class="secret" id="secret-Hg8UeaCyLgncM7iJ"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Empowered Strike</strong> activity on this
+      feature can allows you to choose between Force and Bludgeoning damage in
+      the roll dialog. It will remember your choice going forward.</p><p>It uses
+      your Martial Arts Die (currently [[lookup @scale.monk.die]] for damage and
+      will automatically update as you level up.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 6
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    fBW26ceybofkx8Ua:
+      type: attack
+      name: Empowered Strike
+      _id: fBW26ceybofkx8Ua
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: unarmed
+        ability: dex
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: true
+              formula: '@scale.monk.die + @mod'
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - bludgeoning
+              - force
+            scaling:
+              number: 1
+  enchant: {}
+  identifier: empowered-strikes
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1740680085105
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 600000
+ownership:
+  default: 0
+_key: '!items!phbmnkEmpoweredS'

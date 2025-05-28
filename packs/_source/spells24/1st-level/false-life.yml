@@ -1,0 +1,124 @@
+name: False Life
+system:
+  description:
+    value: >-
+      <p>You gain 2d4 + 4 Temporary Hit Points.</p><p><strong>Using a
+      Higher-Level Spell Slot.</strong> You gain 5 additional Temporary Hit
+      Points for each spell slot level above 1.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: nec
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a drop of alcohol
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: 2
+        denomination: '4'
+        bonus: '4'
+        types:
+          - temphp
+        custom:
+          enabled: false
+          formula: ''
+        scaling:
+          mode: whole
+          number: null
+          formula: '5'
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Temporary Health
+      img: ''
+      appliedEffects: []
+  identifier: false-life
+_id: phbsplFalseLife0
+type: spell
+img: icons/skills/wounds/injury-stapled-flesh-tan.webp
+effects: []
+folder: pBaAAtXBCq9FVEnL
+sort: 3100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425952979
+  modifiedTime: 1745256792724
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFalseLife0'

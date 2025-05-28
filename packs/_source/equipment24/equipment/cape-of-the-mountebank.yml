@@ -1,0 +1,133 @@
+_id: dmgCapeOfTheMoun
+name: Cape of the Mountebank
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/head/hood-cloth-trimmed-pink-gold.webp
+system:
+  activities:
+    qsuojT0nn8ZkAY19:
+      type: cast
+      _id: qsuojT0nn8ZkAY19
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ' The space you left is &Reference[LightlyObscured] by smoke until the end of your next turn.'
+      duration:
+        units: round
+        concentration: false
+        override: true
+        value: '1'
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cube
+          size: '5'
+          count: ''
+        affects:
+          choice: false
+          count: '2'
+          type: willing
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '4'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDimensionD
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Rare</em></p></div><p>This cape smells faintly
+      of brimstone. While wearing it, you can use it to cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDimensionD]{Dimension
+      Door}</em> as a Magic action. This property can't be used again until the
+      next dawn.</p><p>When you teleport with that spell, you leave behind a
+      cloud of smoke. The space you left is &amp;Reference[LightlyObscured] by
+      that smoke until the end of your next turn.</p>
+    chat: ''
+  identifier: cape-of-the-mountebank
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712698493
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5300000
+ownership:
+  default: 0
+_key: '!items!dmgCapeOfTheMoun'

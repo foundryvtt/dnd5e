@@ -1,0 +1,164 @@
+_id: phbclcSearUndead
+name: Sear Undead
+type: feat
+folder: 3wY92TRgyyyDkpmF
+img: icons/magic/fire/flame-burning-skeleton-explosion.webp
+system:
+  description:
+    value: >-
+      <p>Whenever you use Turn Undead, you can roll a number of d8s equal to
+      your Wisdom modifier (minimum of 1d8, currently [[lookup
+      @abilities.wis.mod]]) and add the rolls together. Each Undead that fails
+      its saving throw against that use of Turn Undead takes Radiant damage
+      equal to the roll's total. This damage doesn't end the turn
+      effect.</p><section class="secret"
+      id="secret-VJPPRFTlu1fFg8XB"><p><strong>Foundry Note</strong></p><p>This
+      feature can be used in place of Turn Undead. It consumes a use of Channel
+      Divinity, includes the Save, Active Effects for the conditions, and this
+      feature's damage roll.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: channelDivinity
+  prerequisites:
+    level: 5
+    repeatable: false
+  properties: []
+  requirements: Cleric
+  activities:
+    fW3U8L8Ca9a6O9Wx:
+      type: save
+      name: 'Channel Divinity: Turn Undead'
+      _id: fW3U8L8Ca9a6O9Wx
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbclcChannelDiv
+            scaling: {}
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        value: ''
+      effects:
+        - _id: OftTd0Eiwnls76cX
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '30'
+          count: ''
+        affects:
+          choice: true
+          count: ''
+          type: creature
+          special: Undead
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: true
+              formula: (@abilities.wis.mod)d8
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+  enchant: {}
+  identifier: sear-undead
+effects:
+  - name: Turn Undead
+    img: systems/dnd5e/icons/svg/items/feature.svg
+    origin: Compendium.dnd5e.classes24.Item.phbclcSearUndead
+    transfer: false
+    _id: OftTd0Eiwnls76cX
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - frightened
+      - incapacitated
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbclcSearUndead.OftTd0Eiwnls76cX'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866373481
+  modifiedTime: 1745256760920
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 900000
+ownership:
+  default: 0
+_key: '!items!phbclcSearUndead'

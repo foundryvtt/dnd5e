@@ -1,0 +1,195 @@
+name: Flame Blade
+system:
+  description:
+    value: >-
+      <p>You evoke a fiery blade in your free hand. The blade is similar in size
+      and shape to a scimitar, and it lasts for the duration. If you let go of
+      the blade, it disappears, but you can evoke it again as a Bonus
+      Action.</p><p>As a Magic action, you can make a melee spell attack with
+      the fiery blade. On a hit, the target takes Fire damage equal to 3d6 plus
+      your spellcasting ability modifier.</p><p>The flaming blade sheds Bright
+      Light in a 10-foot radius and Dim Light for an additional 10
+      feet.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The damage
+      increases by 1d6 for each spell slot level above 2.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: bonus
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: self
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a sumac leaf
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: true
+      effects: []
+      range:
+        override: true
+        units: touch
+        special: ''
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: any
+          special: ''
+        override: true
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: spell
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: 6
+            bonus: '@mod'
+            types:
+              - fire
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 200000
+      name: ''
+      img: ''
+      appliedEffects: []
+    OIU1htXAoSF0cU3U:
+      type: utility
+      _id: OIU1htXAoSF0cU3U
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Evoke Blade
+      img: ''
+      appliedEffects: []
+  identifier: flame-blade
+_id: phbsplFlameBlade
+type: spell
+img: icons/weapons/daggers/dagger-glowing-white.webp
+effects: []
+folder: 3SjcO2acsFnWegp4
+sort: 3300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425954219
+  modifiedTime: 1740680098204
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFlameBlade'

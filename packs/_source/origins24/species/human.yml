@@ -1,0 +1,128 @@
+name: Human
+system:
+  description:
+    value: >-
+      <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspHuman000000
+      inline classes="free-rules-embed"]</p><h3 data-anchor="human-traits">Human
+      Traits</h3><p><strong>Creature Type: </strong>Humanoid</p><p><strong>Size:
+      </strong>Medium (about 4–7 feet tall) or Small (about 2–4 feet tall),
+      chosen when you select this species</p><p><strong>Speed: </strong>30
+      feet</p><p>As a Human, you have these special
+      traits.</p><p><strong>Resourceful. </strong>You gain Heroic Inspiration
+      whenever you finish a Long Rest.</p><p><strong>Skillful. </strong>You gain
+      proficiency in one skill of your choice.</p><p><strong>Versatile.</strong>
+      You gain an Origin feat of your choice (see chapter 5). Skilled is
+      recommended.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  advancement:
+    - _id: dLxv96vt2B2KOEe2
+      type: Size
+      configuration:
+        sizes:
+          - sm
+          - med
+      level: 0
+      title: ''
+      hint: >-
+        Medium (about 4-7 feet tall) or Small (about 2-4 feet tall), hosen when
+        you select this species
+      value: {}
+    - _id: 2H3yQa0PfjBgXw2W
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptResourcefu
+            optional: false
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptSkillful00
+            optional: false
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptVersatile0
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 0
+      title: Human Traits
+      hint: ''
+    - _id: xIdIaWtTj1cBERln
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 0
+      title: Skillful
+      hint: You gain proficiency in one skill of your choice.
+    - _id: KB8IQLwyuL6SOFnv
+      type: ItemChoice
+      configuration:
+        choices:
+          '0':
+            count: 1
+            replacement: false
+        allowDrops: true
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.feats24.Item.phbftAlert000000
+          - uuid: Compendium.dnd5e.feats24.Item.phbftMagicInitia
+          - uuid: Compendium.dnd5e.feats24.Item.phbftSavageAttac
+          - uuid: Compendium.dnd5e.feats24.Item.phbftSkilled0000
+        spell: null
+        restriction:
+          type: feat
+          subtype: origin
+      value:
+        added: {}
+        replaced: {}
+      title: Versatile
+      hint: You gain an Origin feat of your choice. Skillful is recommended.
+  movement:
+    burrow: null
+    climb: null
+    fly: null
+    swim: null
+    walk: 30
+    units: null
+    hover: false
+  senses:
+    darkvision: null
+    blindsight: null
+    tremorsense: null
+    truesight: null
+    units: null
+    special: ''
+  type:
+    value: humanoid
+    custom: ''
+    subtype: Human
+  identifier: human
+_id: phbspHuman000000
+type: race
+folder: Ulvo8nbygUegLa59
+img: icons/environment/people/commoner.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.3
+  createdTime: 1735866697989
+  modifiedTime: 1747071019574
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbspHuman000000'

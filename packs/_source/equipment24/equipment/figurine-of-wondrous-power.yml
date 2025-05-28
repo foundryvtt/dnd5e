@@ -1,0 +1,104 @@
+_id: dmgFigurineOfWon
+name: Figurine of Wondrous Power
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/magic/light/beam-red-orange.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Rarity Varies</em></p></div><p>A <em>Figurine
+      of Wondrous Power</em> is a statuette small enough to fit in a pocket. If
+      you take a Magic action to throw the figurine to a point on the ground
+      within 60 feet of yourself, the figurine becomes a living creature
+      specified in the figurine's description below. If the space where the
+      creature would appear is occupied by other creatures or objects, or if
+      there isn't enough space for the creature, the figurine doesn't become a
+      creature.</p><p>The creature is Friendly to you and your allies. It
+      understands your languages, obeys your commands, and takes its turn
+      immediately after you on your Initiative count. If you issue no commands,
+      the creature defends itself but takes no other actions.</p><p>The creature
+      exists for a duration specific to each figurine. At the end of the
+      duration, the creature reverts to its figurine form. It reverts to a
+      figurine early if its creature form drops to 0 Hit Points or if you take a
+      Magic action while touching the creature to make it revert to figurine
+      form. When the creature becomes a figurine again, its property can't be
+      used again until a certain amount of time has passed, as specified in the
+      figurine's
+      description.</p><p>@UUID[Compendium.dnd5e.equipment24.Item.dmgFwpBronzeGrif]{Bronze
+      Griffon
+      (Rare)}</p><p>@UUID[Compendium.dnd5e.equipment24.Item.dmgFwpEbonyFlyRa]{Ebony
+      Fly
+      (Rare)}</p><p>@UUID[Compendium.dnd5e.equipment24.Item.dmgFwpGoldenLion]{Golden
+      Lions
+      (Rare)}</p><p>@UUID[Compendium.dnd5e.equipment24.Item.dmgFwpIvoryGoats]{Ivory
+      Goats
+      (Rare)}</p><p>@UUID[Compendium.dnd5e.equipment24.Item.dmgFwpMarbleElep]{Marble
+      Elephant
+      (Rare)}</p><p>@UUID[Compendium.dnd5e.equipment24.Item.dmgFwpObsidianSt]{Obsidian
+      Steed (Very
+      Rare)}</p><p>@UUID[Compendium.dnd5e.equipment24.Item.dmgFwpOnyxDogRar]{Onyx
+      Dog
+      (Rare)}</p><p>@UUID[Compendium.dnd5e.equipment24.Item.dmgFwpSerpentine]{Serpentine
+      Owl
+      (Rare)}</p><p>@UUID[Compendium.dnd5e.equipment24.Item.dmgFwpSilverRave]{Silver
+      Raven (Uncommon)}</p>
+    chat: ''
+  identifier: figurine-of-wondrous-power
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712699867
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12700000
+ownership:
+  default: 0
+_key: '!items!dmgFigurineOfWon'

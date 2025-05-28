@@ -1,0 +1,60 @@
+_id: phbclcBlessedStr
+name: Blessed Strikes
+type: feat
+folder: 3wY92TRgyyyDkpmF
+img: icons/magic/holy/projectiles-blades-salvo-yellow.webp
+system:
+  description:
+    value: >-
+      <p>Divine power infuses you in battle. You gain one of the following
+      options of your choice (if you get either option from a Cleric subclass in
+      an older book, use only the option you choose for this
+      feature).</p><p><strong>Divine Strike.</strong> Once on each of your turns
+      when you hit a creature with an attack roll using a weapon, you can cause
+      the target to take an extra 1d8 Necrotic or Radiant damage (your
+      choice).</p><p><strong>Potent Spellcasting.</strong> Add your Wisdom
+      modifier to the damage you deal with any Cleric cantrip.</p><section
+      id="secret-1YTjpzZamslVlTTM" class="secret"><p><strong>Foundry
+      Note</strong></p><p>During advancement you will be able to choose which
+      option you prefer.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 7
+    repeatable: false
+  properties: []
+  requirements: Cleric
+  activities: {}
+  enchant: {}
+  identifier: blessed-strikes
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866373481
+  modifiedTime: 1745256760648
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+_key: '!items!phbclcBlessedStr'

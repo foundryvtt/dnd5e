@@ -1,0 +1,103 @@
+_id: 6VBXkjjBgjSpNElh
+name: Sculpt Spells
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 2nd level, you can create pockets of relative safety
+      within the effects of your evocation spells. When you cast an evocation
+      spell that affects other creatures that you can see, you can choose a
+      number of them equal to 1 + the spell's level. The chosen creatures
+      automatically succeed on their saving throws against the spell, and they
+      take no damage if they would normally take half damage on a successful
+      save.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: School of Evocation 2
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: sculpt-spells
+flags: {}
+img: icons/creatures/slimes/slime-movement-dripping-pseudopods-green.webp
+effects: []
+folder: YLWTEANVPKOUJNbs
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037380441
+  modifiedTime: 1725992287248
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!6VBXkjjBgjSpNElh'

@@ -1,0 +1,112 @@
+_id: dmgAmuletOfHealt
+name: Amulet of Health
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/neck/pendant-faceted-red.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare (Requires Attunement)</em></p><p>Your
+      Constitution is 19 while you wear this amulet. It has no effect on you if
+      your Constitution is 19 or higher without it.</p>
+    chat: ''
+  identifier: amulet-of-health
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Upgraded Constitution
+    img: icons/magic/life/heart-shadow-red.webp
+    _id: ObtXWapsou2jYoip
+    type: base
+    system: {}
+    changes:
+      - key: system.abilities.con.value
+        mode: 4
+        value: '19'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: 1728433127976
+      modifiedTime: 1728433290062
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgAmuletOfHealt.ObtXWapsou2jYoip'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1500000
+ownership:
+  default: 0
+_key: '!items!dmgAmuletOfHealt'

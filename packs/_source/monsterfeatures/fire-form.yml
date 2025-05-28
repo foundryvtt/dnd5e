@@ -1,0 +1,116 @@
+_id: 0YuGSS8E8ElHLRyb
+name: Fire Form
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>The [[lookup @details.type.config.label
+      lowercase]] can move through a space as narrow as 1 inch wide without
+      squeezing. A creature that touches the [[lookup @details.type.config.label
+      lowercase]] or hits it with a melee attack while within 5 ft. of it takes
+      <strong>5 (1d10) <em>fire damage</em></strong>. </p><p>In addition, the
+      [[lookup @details.type.config.label lowercase]] can enter a hostile
+      creature's space and stop there. The first time it enters a creature's
+      space on a turn, that creature takes <strong>5 (1d10) <em>fire
+      damage</em></strong> and catches fire; until someone takes an action to
+      douse the fire, the creature takes <strong>5 (1d10) <em>fire
+      damage</em></strong> at the start of each of its turns.</p></section><p>A
+      creature that touches the [[lookup @details.type.config.label lowercase]]
+      or hits it with a melee attack while within 5 ft. of it takes <em>fire
+      damage</em>. In addition, the [[lookup @details.type.config.label
+      lowercase]] can enter a hostile creature's space and stop there. The first
+      time it enters a creature's space on a turn, that creature takes <em>fire
+      damage</em> and catches fire; until someone takes an action to douse the
+      fire, the creature takes <em>fire damage</em> at the start of each of its
+      turns.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: fire-form
+flags: {}
+img: icons/magic/earth/lava-explosion-orange.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304964881
+  modifiedTime: 1725992570774
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!0YuGSS8E8ElHLRyb'

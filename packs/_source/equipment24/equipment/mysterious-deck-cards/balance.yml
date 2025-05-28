@@ -1,0 +1,129 @@
+name: Balance
+system:
+  description:
+    value: >-
+      <p>You can increase one of your ability scores by 2, to a maximum of 22,
+      provided you also decrease another one of your ability scores by 2. You
+      can't decrease an ability that has a score of 5 or lower. Alternatively,
+      you can choose not to adjust your ability scores, in which case this card
+      has <span class="no-break">no effect</span>.</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    iMo4aIfzOzKP01Cz:
+      type: utility
+      name: Card Effect
+      _id: iMo4aIfzOzKP01Cz
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Card's effect occurs immediately upon draw
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: perm
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: icons/svg/card-joker.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  identifier: balance
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+_id: dmgDmtBalance000
+type: consumable
+img: icons/tools/hand/scale-balances-merchant-brown.webp
+effects: []
+folder: XVXuU21XyvevGap7
+sort: 1400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729182036633
+  modifiedTime: 1745256803973
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgDmtBalance000'

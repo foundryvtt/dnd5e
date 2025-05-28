@@ -1,0 +1,196 @@
+name: Forbiddance
+system:
+  description:
+    value: >-
+      <p>You create a ward against magical travel that protects up to 40,000
+      square feet of floor space to a height of 30 feet above the floor. For the
+      duration, creatures can't teleport into the area or use portals, such as
+      those created by the <em>Gate</em> spell, to enter the area. The spell
+      proofs the area against planar travel, and therefore prevents creatures
+      from accessing the area by way of the Astral Plane, the Ethereal Plane,
+      the Feywild, the Shadowfell, or the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplPlaneShift]{Plane
+      Shift}</em> spell.</p><p>In addition, the spell damages types of creatures
+      that you choose when you cast it. Choose one or more of the following:
+      Aberrations, Celestials, Elementals, Fey, Fiends, and Undead. When a
+      creature of a chosen type enters the spell's area for the first time on a
+      turn or ends its turn there, the creature takes 5d10 Radiant or Necrotic
+      damage (your choice when you cast this spell).</p><p>You can designate a
+      password when you cast the spell. A creature that speaks the password as
+      it enters the area takes no damage from the spell.</p><p>The spell's area
+      can't overlap with the area of another <em>Forbiddance</em> spell. If you
+      cast <em>Forbiddance</em> every day for 30 days in the same location, the
+      spell lasts until it is dispelled, and the Material components are
+      consumed on the last casting.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: '1'
+    units: day
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: 40,000 square feet to a height of 30 feet
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: ruby dust worth 1,000+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    T2XK004SAb09LvvP:
+      type: utility
+      _id: T2XK004SAb09LvvP
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Create Ward
+      img: systems/dnd5e/icons/svg/rosa-shield.svg
+      appliedEffects: []
+    9IBiOeIf2PC1wcLp:
+      type: damage
+      _id: 9IBiOeIf2PC1wcLp
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: >-
+          creature of a chosen type enters the spell’s area for the first time
+          on a turn or ends its turn there
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: any
+        special: within the spell's area
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: '10'
+            bonus: ''
+            types:
+              - radiant
+              - necrotic
+            scaling:
+              mode: ''
+      name: Damage Forbidden Creature
+      img: ''
+      appliedEffects: []
+  identifier: forbiddance
+_id: phbsplForbiddanc
+type: spell
+img: icons/magic/symbols/squares-3d-green.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 1000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425954836
+  modifiedTime: 1745256793399
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplForbiddanc'

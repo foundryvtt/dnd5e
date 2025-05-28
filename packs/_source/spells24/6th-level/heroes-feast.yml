@@ -1,0 +1,243 @@
+name: Heroes' Feast
+system:
+  description:
+    value: >-
+      <p>You conjure a feast that appears on a surface in an unoccupied 10-foot
+      Cube next to you. The feast takes 1 hour to consume and disappears at the
+      end of that time, and the beneficial effects don't set in until this hour
+      is over. Up to twelve creatures can partake of the feast.</p><p>A creature
+      that partakes gains several benefits, which last for 24 hours. The
+      creature has &amp;Reference[damageResistance]{Resistance} to Poison
+      damage, and it has Immunity to the &amp;Reference[Frightened] and
+      &amp;Reference[Poisoned] conditions. Its Hit Point maximum also increases
+      by 2d10, and it gains the same number of Hit Points.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: unoccupied
+    template:
+      units: ft
+      contiguous: false
+      type: cube
+      size: '10'
+      count: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: '12'
+    spent: 12
+    recovery:
+      - period: sr
+        type: loseAll
+  level: 6
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a gem-encrusted bowl worth 1,000+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    ooQ2IAF9MIDJssGp:
+      type: utility
+      _id: ooQ2IAF9MIDJssGp
+      activation:
+        type: hour
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-12'
+            target: ''
+            scaling:
+              mode: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '24'
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Conjure Feast
+      img: systems/dnd5e/icons/svg/activity/summon.svg
+      appliedEffects: []
+    6GsLAWV31TuE6ysp:
+      type: heal
+      _id: 6GsLAWV31TuE6ysp
+      activation:
+        type: hour
+        value: 1
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: ''
+      description:
+        chatFlavor: Hit Point maximum increased by healing amount
+      duration:
+        units: hour
+        concentration: false
+        override: true
+        value: '24'
+      effects:
+        - _id: wGsbKojtJs43Pjyx
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: 2
+        denomination: '10'
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: ''
+      name: Consume Feast
+      img: ''
+      appliedEffects: []
+  identifier: heroes-feast
+_id: phbsplHeroesFeas
+type: spell
+img: icons/consumables/food/cooked-hock-glowing-orange.webp
+effects:
+  - name: Feast's Benefits
+    img: icons/consumables/food/cooked-ribs-rack-glazed-bones-brown-white.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplHeroesFeas
+    transfer: false
+    _id: wGsbKojtJs43Pjyx
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+      - key: system.traits.ci.value
+        mode: 2
+        value: frightened
+        priority: null
+      - key: system.traits.ci.value
+        mode: 2
+        value: poisoned
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 86400
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The creature has &amp;Reference[damageResistance]{Resistance} to Poison
+      damage, and it has Immunity to the &amp;Reference[Frightened] and
+      &amp;Reference[Poisoned] conditions. Its Hit Point maximum also increases
+      by 2d10, and it gains the same number of Hit Points.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724773715492
+      modifiedTime: 1724774447270
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplHeroesFeas.wGsbKojtJs43Pjyx'
+folder: 8WmlLARx1Df3Ii9v
+sort: 500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425958524
+  modifiedTime: 1745256794591
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplHeroesFeas'

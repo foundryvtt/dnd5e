@@ -1,0 +1,115 @@
+_id: icZokbgV1jIMpNCv
+name: Message
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You point your finger toward a creature within range and whisper a
+      message. The target (and only the target) hears the message and can reply
+      in a whisper that only you can hear.</p><p>You can cast this spell through
+      solid Objects if you are familiar with the target and know it is beyond
+      the barrier. Magical silence, 1 foot of stone, 1 inch of common metal, a
+      thin sheet of lead, or 3 feet of wood blocks the spell. The spell doesn't
+      have to follow a straight line and can travel freely around corners or
+      through openings.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: round
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: trs
+  materials:
+    value: A short piece of copper wire
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: message
+sort: 0
+flags: {}
+img: icons/commodities/currency/coin-engraved-sun-smile-copper.webp
+effects: []
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037363340
+  modifiedTime: 1725992722192
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!icZokbgV1jIMpNCv'

@@ -1,0 +1,158 @@
+_id: da0a1t2FqaTjRZGT
+name: Freedom of Movement
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch a willing creature. For the Duration, the target's Movement
+      is unaffected by difficult terrain, and Spells and other magical Effects
+      can neither reduce the target's speed nor cause the target to be Paralyzed
+      or Restrained.</p><p>The target can also spend 5 feet of Movement to
+      automatically escape from nonmagical restraints, such as Manacles or a
+      creature that has it Grappled. Finally, being Underwater imposes no
+      penalties on the target's movement or attacks.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: abj
+  materials:
+    value: A leather strap, bound around the arm or a similar appendage
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: OnWa3f4IQ3pneB5T
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: freedom-of-movement
+sort: 0
+flags: {}
+img: icons/skills/melee/strike-blade-knife-white-red.webp
+effects:
+  - name: Freedom of Movement
+    origin: Compendium.dnd5e.spells.Item.da0a1t2FqaTjRZGT
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: OnWa3f4IQ3pneB5T
+    changes:
+      - key: system.traits.di.value
+        mode: 2
+        value: paralyzed
+        priority: null
+      - key: system.traits.di.value
+        mode: 2
+        value: restrained
+        priority: null
+    description: >-
+      <p>The target's Movement is unaffected by difficult terrain, and Spells
+      and other magical Effects can neither reduce the target's speed nor cause
+      the target to be Paralyzed or Restrained.</p>
+    transfer: false
+    statuses: []
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/skills/melee/strike-blade-knife-white-red.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!da0a1t2FqaTjRZGT.OnWa3f4IQ3pneB5T'
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037361182
+  modifiedTime: 1725992721490
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!da0a1t2FqaTjRZGT'

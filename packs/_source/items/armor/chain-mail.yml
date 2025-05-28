@@ -1,0 +1,75 @@
+_id: rLMflzmxpe8JGTOA
+name: Chain Mail
+type: equipment
+img: icons/equipment/chest/breastplate-metal-scaled-grey.webp
+system:
+  description:
+    value: >-
+      <p>Made of interlocking metal rings, chain mail includes a layer of
+      quilted fabric worn underneath the mail to prevent chafing and to cushion
+      the impact of blows. The suit includes gauntlets.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 55
+    units: lb
+  price:
+    value: 75
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 16
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: 13
+  proficient: null
+  type:
+    value: heavy
+    baseItem: chainmail
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - stealthDisadvantage
+  activities: {}
+  attuned: false
+  identifier: chain-mail
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037297963
+  modifiedTime: 1725992550308
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!rLMflzmxpe8JGTOA'

@@ -1,0 +1,121 @@
+_id: S7VbUetIfVT7B6Eq
+name: Darkness
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Magical darkness spreads from a point you choose within range to fill a
+      15-foot-radius sphere for the duration. The darkness spreads around
+      corners. A creature with darkvision can't see through this darkness, and
+      nonmagical light can't illuminate it.</p><p>If the point you choose is on
+      an object you are holding or one that isn't being worn or carried, the
+      darkness emanates from the object and moves with it. Completely covering
+      the source of the darkness with an opaque object, such as a bowl or a
+      helm, blocks the darkness.</p><p>If any of this spell's area overlaps with
+      an area of light created by a spell of 2nd level or lower, the spell that
+      created the light is dispelled.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ft
+      type: sphere
+      size: '15'
+      contiguous: false
+      count: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: evo
+  materials:
+    value: Bat fur and a drop of pitch or piece of coal
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: darkness
+sort: 0
+flags: {}
+img: icons/magic/perception/eye-ringed-glow-angry-red.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037356237
+  modifiedTime: 1731016464670
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!S7VbUetIfVT7B6Eq'

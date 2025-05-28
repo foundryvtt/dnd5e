@@ -1,0 +1,232 @@
+name: Ball Bearings
+system:
+  description:
+    value: >-
+      <p>As a Utilize action, you can spill Ball Bearings from their pouch. They
+      spread to cover a level, 10-foot-square area within 10 feet of yourself. A
+      creature that enters this area for the first time on a turn must succeed
+      on a DC 10 Dexterity saving throw or have the &amp;Reference[Prone]
+      condition. It takes 10 minutes to recover the Ball Bearings.</p><section
+      id="secret-bbcC5syRGw0PCZnG" class="secret"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Recover Ball Bearings</strong> activity
+      grants another use of this item.</p></section>
+    chat: ''
+  price:
+    value: 1
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: false
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    FCoYqKd4jqXjHFNN:
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects:
+        - _id: zW4roNKVL8HcoNwV
+          onSave: false
+      range:
+        units: ft
+        special: ''
+        override: false
+        value: '10'
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: square
+          size: '10'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '10'
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: FCoYqKd4jqXjHFNN
+      name: Spill Ball Bearings
+      img: ''
+      appliedEffects:
+        - zW4roNKVL8HcoNwV
+    IKk7iQcYsjxDfnmk:
+      type: utility
+      name: Recover Ball Bearings
+      _id: IKk7iQcYsjxDfnmk
+      sort: 0
+      activation:
+        type: minute
+        value: 10
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  identifier: ball-bearings
+_id: phbagBallBearing
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/weapons/ammunition/shot-round-brown.webp
+effects:
+  - name: Tripped
+    img: icons/commodities/gems/pearl-rock.webp
+    origin: Compendium.dnd5e.equipment24.Item.phbagBallBearing
+    transfer: false
+    _id: zW4roNKVL8HcoNwV
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - prone
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725847255172
+      modifiedTime: 1725847281508
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbagBallBearing.zW4roNKVL8HcoNwV'
+sort: 6700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425905176
+  modifiedTime: 1745256810895
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagBallBearing'

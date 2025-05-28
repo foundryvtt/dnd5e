@@ -1,0 +1,204 @@
+_id: dmgNolzursMarvel
+name: Marvelous Pigments
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/materials/powder-red-green-yellow.webp
+system:
+  activities:
+    yoPyCsTjtbJ8kmRK:
+      type: utility
+      name: Determine Number of Pots
+      _id: yoPyCsTjtbJ8kmRK
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: 1d3
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/item-choice.svg
+      appliedEffects: []
+    CTHts7uxrSeThshF:
+      type: utility
+      name: Paint
+      _id: CTHts7uxrSeThshF
+      sort: 0
+      activation:
+        type: minute
+        value: 10
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: true
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cube
+          size: '20'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '4'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Very Rare</em></p><p>This fine wooden box contains
+      1d4 pots of pigment and a brush (weighing 1 pound in total).</p><p>Using
+      the brush and expending 1 pot of pigment, you can paint any number of
+      three-dimensional objects and terrain features (such as walls, doors,
+      trees, flowers, weapons, webs, and pits), provided these elements are all
+      confined to a 20-foot Cube. The effort takes 10 minutes (regardless of the
+      number of elements you create), during which time you must remain in the
+      Cube, and requires Concentration. If your Concentration is broken or you
+      leave the Cube before the work is done, all the painted elements vanish,
+      and the pot of pigment is wasted.</p><p>When the work is done, all the
+      painted objects and terrain features become real. Thus, painting a door on
+      a wall creates an actual door, which can be opened to whatever is beyond.
+      Painting a pit creates a real pit, the entire depth of which must lie
+      within the 20-foot Cube.</p><p>No object created by a pot of pigment can
+      have a value greater than 25 GP, and the total value of all objects
+      created by a pot of pigment can't exceed 500 GP. If you paint objects of
+      greater value (such as a large pile of gold), they look authentic, but
+      close inspection reveals they're made from paste, cookies, or some other
+      worthless material.</p><p>If you paint a form of energy such as fire or
+      lightning, the energy dissipates as soon as you complete the painting,
+      doing no harm.</p><section class="secret"
+      id="secret-qUNCffT2Tfry1qQt"><p><strong>Foundry Note</strong></p><p>This
+      item begins with 4 max uses. The <strong>Determine the Number of
+      Pots</strong> activity can be used to determine how many pots remain in
+      the box.</p></section>
+    chat: ''
+  identifier: marvelous-pigments
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 20000
+    denomination: gp
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712701620
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 24000000
+ownership:
+  default: 0
+_key: '!items!dmgNolzursMarvel'

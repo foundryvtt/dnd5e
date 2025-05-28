@@ -1,0 +1,118 @@
+_id: iiQxTvDOhPGW5spF
+name: Amulet of Health
+type: equipment
+img: icons/equipment/neck/pendant-faceted-red.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item (requires attunement)</em></p>
+
+      <p>Your Constitution score is 19 while you wear this amulet. It has no
+      effect on you if your Constitution is already 19 or higher without it.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 8000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: amulet-of-health
+effects:
+  - name: Amulet of Health
+    img: icons/equipment/neck/pendant-faceted-red.webp
+    origin: Compendium.dnd5e.items.Item.iiQxTvDOhPGW5spF
+    _id: EDhQAxztAvrCtTMV
+    type: base
+    system: {}
+    changes:
+      - key: system.abilities.con.value
+        mode: 4
+        value: '19'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Your Constitution score is 19 while you wear this amulet. It has no
+      effect on you if your Constitution is already 19 or higher without it.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 5.0.0
+      createdTime: 1745428281095
+      modifiedTime: 1745428312509
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!iiQxTvDOhPGW5spF.EDhQAxztAvrCtTMV'
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037262170
+  modifiedTime: 1725992537919
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!iiQxTvDOhPGW5spF'

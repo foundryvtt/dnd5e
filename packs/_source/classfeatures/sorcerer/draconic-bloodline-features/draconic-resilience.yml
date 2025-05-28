@@ -1,0 +1,87 @@
+_id: MW1ExvBLm8Hg82aA
+name: Draconic Resilience
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>As magic flows through your body, it causes physical traits of your
+      dragon ancestors to emerge. At 1st level, your hit point maximum increases
+      by 1 and increases by 1 again whenever you gain a level in this
+      class.</p><p>Additionally, parts of your skin are covered by a thin sheen
+      of dragon-like scales. When you aren't wearing armor, your AC equals 13 +
+      your Dexterity modifier.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: Draconic Bloodline 1
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: draconic-resilience
+flags: {}
+img: icons/creatures/claws/claw-scaled-red.webp
+effects:
+  - _id: Pu89Tsgy2FJjYPQi
+    changes:
+      - key: system.attributes.ac.calc
+        mode: 5
+        value: draconic
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.MW1ExvBLm8Hg82aA
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Draconic Resilience
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/creatures/claws/claw-scaled-red.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!MW1ExvBLm8Hg82aA.Pu89Tsgy2FJjYPQi'
+folder: IDrXx9YvOrbmM699
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037383185
+  modifiedTime: 1725992288100
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!MW1ExvBLm8Hg82aA'

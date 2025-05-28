@@ -1,0 +1,504 @@
+_id: dmgWandOfWonderE
+name: Wand of Wonder Effects
+img: icons/weapons/wands/wand-gem-violet.webp
+description: >-
+  <p>A roll table of effects for the
+  @UUID[Compendium.dnd5e.equipment24.Item.dmgWandOfWonder0]{Wand of Wonder}
+  which implements the effects as activities where possible.</p>
+results:
+  - type: text
+    drawn: false
+    range:
+      - 1
+      - 20
+    _id: 2I7bZrYZgzKuOSf6
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      You cast a spell originating from the chosen point. Roll 1d10 to determine
+      the spell: on a 1–2,
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplDarkness00]{Darkness}; on a
+      3–4, @UUID[Compendium.dnd5e.spells24.Item.phbsplFaerieFire]{Faerie Fire};
+      on a 5–6,
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplFireball00]{Fireball}; on a
+      7–8, @UUID[Compendium.dnd5e.spells24.Item.phbsplSlow000000]{Slow}; on a
+      9–10, @UUID[Compendium.dnd5e.spells24.Item.phbsplStinkingCl]{Stinking
+      Cloud}.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.2I7bZrYZgzKuOSf6'
+  - type: text
+    drawn: false
+    range:
+      - 21
+      - 25
+    _id: MgohXc5L0ALOJ9J1
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Nothing happens at the chosen point of origin. Instead, you have the
+      &amp;Reference[Stunned] condition until the start of your next turn,
+      believing something awesome just happened.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.MgohXc5L0ALOJ9J1'
+  - type: text
+    drawn: false
+    range:
+      - 26
+      - 30
+    _id: NdZZ0RbaqUnMmpsZ
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      You cast @UUID[Compendium.dnd5e.spells24.Item.phbsplGustofWind]{Gust of
+      Wind}. The Line created by the spell extends from you to the chosen point
+      of origin.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.NdZZ0RbaqUnMmpsZ'
+  - type: text
+    drawn: false
+    range:
+      - 31
+      - 35
+    _id: AOZqEKwIPSsmYlWH
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Nothing happens at the chosen point of origin. Instead, you take [[/damage
+      1d6 type=psychic]] damage.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.AOZqEKwIPSsmYlWH'
+  - type: text
+    drawn: false
+    range:
+      - 36
+      - 40
+    _id: By7IyRJgT1XLmT7p
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Heavy rain falls for 1 minute in a 120-foot-high, 60-foot-radius Cylinder
+      centered on the chosen point of origin. During that time, the area of
+      effect is &amp;Reference[Lightly Obscured].
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.By7IyRJgT1XLmT7p'
+  - type: text
+    drawn: false
+    range:
+      - 41
+      - 45
+    _id: VTPznWLFXBljIIpo
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A cloud of 600 oversized butterflies fills a 60-foot-high, 30-foot-radius
+      Cylinder centered on the chosen point of origin. The butterflies remain
+      for 10 minutes, during which time the area of effect is
+      &amp;Reference[Heavily Obscured].
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.VTPznWLFXBljIIpo'
+  - type: text
+    drawn: false
+    range:
+      - 46
+      - 50
+    _id: tJmickpM5EOCde6g
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      You cast @UUID[Compendium.dnd5e.spells24.Item.phbsplLightningB]{Lightning
+      Bolt}. The Line created by the spell extends from you to the chosen point
+      of origin.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.tJmickpM5EOCde6g'
+  - type: text
+    drawn: false
+    range:
+      - 51
+      - 55
+    _id: mHnstASeHRgEcEam
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      The creature closest to the chosen point of origin is enlarged as if you
+      had cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplEnlargeRed]{Enlarge/Reduce} on
+      it. If the target isn’t you and can’t be affected by that spell, you
+      become the target instead.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.mHnstASeHRgEcEam'
+  - type: text
+    drawn: false
+    range:
+      - 56
+      - 60
+    _id: 8G9Ky0WzPb8UnJQF
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A magically formed creature appears in an unoccupied space as close to the
+      chosen point of origin as possible. The creature isn’t under your control,
+      acts as it normally would, and disappears after 1 hour or when it drops to
+      0 Hit Points. Roll [[/r 1d4]] to determine which creature appears. On a 1,
+      a Rhinoceros appears; on a 2, an Elephant appears; and on a 3–4, a Rat
+      appears.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.8G9Ky0WzPb8UnJQF'
+  - type: text
+    drawn: false
+    range:
+      - 61
+      - 64
+    _id: oHSWbZhRqZmbGK8c
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Grass covers a 60-foot-radius circle of ground, with the center of that
+      circle as close to the chosen point of origin as possible. Grass that’s
+      already there grows to ten times its normal size and remains overgrown for
+      1 minute.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.oHSWbZhRqZmbGK8c'
+  - type: text
+    drawn: false
+    range:
+      - 65
+      - 68
+    _id: SEbtgSxovGRCQ4Dq
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      An object of the DM’s choice disappears into the Ethereal Plane. The
+      object must be neither worn nor carried, within 120 feet of the chosen
+      point of origin, and no larger than 10 feet in any dimension. If there are
+      no such objects in range, nothing happens.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.SEbtgSxovGRCQ4Dq'
+  - type: text
+    drawn: false
+    range:
+      - 69
+      - 72
+    _id: caPlRb51hUbh7kir
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Nothing happens at the chosen point of origin. Instead, you shrink as if
+      you had cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplEnlargeRed]{Enlarge/Reduce} on
+      yourself and remain in that state for 1 minute.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.caPlRb51hUbh7kir'
+  - type: text
+    drawn: false
+    range:
+      - 73
+      - 77
+    _id: Fhw5JKvvrZgJOOz7
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Leaves grow from the creature nearest to the chosen point of origin.
+      Unless they are picked off, the leaves turn brown and fall off after 24
+      hours.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.Fhw5JKvvrZgJOOz7'
+  - type: text
+    drawn: false
+    range:
+      - 78
+      - 82
+    _id: ydNv7BubjEfpgVDa
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Nothing happens at the chosen point of origin. Instead, a burst of
+      colorful, shimmering light extends from you in a 30-foot Emanation. Each
+      creature in the area must succeed on a [[/save con 15]] saving throw or
+      have the &amp;Reference[Blinded] condition for 1 minute. A creature
+      repeats the save at the end of each of its turns, ending the effect on
+      itself on a success.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.ydNv7BubjEfpgVDa'
+  - type: text
+    drawn: false
+    range:
+      - 83
+      - 87
+    _id: AnmrUluiTuPEDidg
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Nothing happens at the chosen point of origin. Instead, you cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplInvisibili]{Invisibility} on
+      yourself.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.AnmrUluiTuPEDidg'
+  - type: text
+    drawn: false
+    range:
+      - 88
+      - 92
+    _id: A5UAwk4VoCaxFJ5F
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Nothing happens at the chosen point of origin. Instead, a stream of [[/r
+      1d4*10 #Gems]] gems, each worth 1 GP, shoots from the wand’s tip in a Line
+      30 feet long and 5 feet wide toward the chosen point of origin. Each gem
+      deals [[/damage 1 type=bludgeoning]] damage, and the total damage of the
+      gems is divided equally among all creatures in the Line.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.A5UAwk4VoCaxFJ5F'
+  - type: text
+    drawn: false
+    range:
+      - 93
+      - 97
+    _id: 0oGFkNQHSlt9HzJY
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      You cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplPolymorph0]{Polymorph},
+      targeting the creature closest to the chosen point of origin. Roll [[/r
+      1d4]] to determine the target’s new form. On a 1, the new form is a Black
+      Bear; on a 2, the new form is a Giant Wasp; on a 3–4, the new form is a
+      Frog.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.0oGFkNQHSlt9HzJY'
+  - type: text
+    drawn: false
+    range:
+      - 98
+      - 100
+    _id: 4cFS9yfJW2gakbcA
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      The creature closest to the chosen point of origin makes a [[/save con
+      15]] saving throw. On a failed save, the creature has the
+      &amp;Reference[Restrained] condition and begins to turn to stone. While
+      Restrained in this way, the creature repeats the save at the end of its
+      next turn. On a successful save, the effect ends. On a failed save, the
+      creature has the &amp;Reference[Petrified] condition instead of the
+      Restrained condition. The petrification lasts until the creature is freed
+      by the @UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
+      Restoration} spell or similar magic.
+    name: ''
+    _key: '!tables.results!dmgWandOfWonderE.4cFS9yfJW2gakbcA'
+replacement: true
+displayRoll: true
+folder: I2IHCZhwMY7ttiXw
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.2
+  createdTime: 1727883396246
+  modifiedTime: 1745612232635
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 112500
+ownership:
+  default: 0
+formula: 1d100
+_key: '!tables!dmgWandOfWonderE'

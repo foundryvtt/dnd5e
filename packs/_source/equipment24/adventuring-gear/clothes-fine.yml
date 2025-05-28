@@ -1,0 +1,77 @@
+name: Clothes, Fine
+system:
+  description:
+    value: >-
+      <p>Fine Clothes are made of expensive fabrics and adorned with expertly
+      crafted details. Some events and locations admit only people wearing these
+      clothes.</p>
+    chat: ''
+  price:
+    value: 15
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: clothing
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities: {}
+  identifier: clothes-fine
+_id: phbagClothesFine
+type: equipment
+folder: uDk4FBYfcP2JnX6t
+img: icons/equipment/back/cloak-collared-feathers-green.webp
+effects: []
+sort: 1200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425907786
+  modifiedTime: 1745256811558
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagClothesFine'

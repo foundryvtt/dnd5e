@@ -1,0 +1,134 @@
+name: Sacred Flame
+system:
+  description:
+    value: >-
+      <p>Flame-like radiance descends on a creature that you can see within
+      range. The target must succeed on a Dexterity saving throw or take 1d8
+      Radiant damage. The target gains no benefit from Half Cover or
+      Three-Quarters Cover for this save.</p><p><strong>Cantrip
+      Upgrade.</strong> The damage increases by 1d8 when you reach levels 5
+      (2d8), 11 (3d8), and 17 (4d8).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: evo
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    dTJW1b6fCd5TyMEa:
+      type: save
+      name: ''
+      _id: dTJW1b6fCd5TyMEa
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '8'
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              mode: whole
+        onSave: none
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: ''
+      appliedEffects: []
+  identifier: sacred-flame
+_id: phbsplSacredFlam
+type: spell
+img: icons/magic/fire/projectile-embers-orange.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+sort: 125000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425969520
+  modifiedTime: 1745256797775
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSacredFlam'

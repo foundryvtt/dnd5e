@@ -1,0 +1,228 @@
+name: Rope
+system:
+  description:
+    value: >-
+      <p>As a Utilize action, you can tie a knot with Rope if you succeed on a
+      DC 10 Dexterity (Sleight of Hand) check. The Rope can be burst with a
+      successful DC 20 Strength (Athletics) check.</p><p>You can bind an
+      unwilling creature with the Rope only if the creature has the
+      &amp;Reference[Grappled], &amp;Reference[Incapacitated], or
+      &amp;Reference[Restrained] condition. If the creature's legs are bound,
+      the creature has the Restrained condition until it escapes. Escaping the
+      Rope requires the creature to make a successful DC 15 Dexterity
+      (Acrobatics) check as an action.</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagBurglarsPac
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: false
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    Y0LvyxjfVHNbp4CG:
+      type: check
+      name: Tie Knot
+      _id: Y0LvyxjfVHNbp4CG
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - slt
+        dc:
+          calculation: ''
+          formula: '10'
+        ability: ''
+    rYGOWDRcT5jBKvzq:
+      type: check
+      name: Burst Rope
+      _id: rYGOWDRcT5jBKvzq
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '20'
+        ability: ''
+    5q6tX1T7ONDvgJiA:
+      type: check
+      name: Escape Check
+      _id: 5q6tX1T7ONDvgJiA
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - acr
+        dc:
+          calculation: ''
+          formula: '15'
+        ability: ''
+  identifier: rope
+_id: x8jC9e00t4cUYiKR
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/survival/rope-wrapped-brown.webp
+effects: []
+sort: 63282
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726532241053
+  modifiedTime: 1745256815034
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!x8jC9e00t4cUYiKR'

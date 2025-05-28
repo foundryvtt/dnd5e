@@ -1,0 +1,119 @@
+_id: wvLbtemkH8gyBpdc
+name: Sequester
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>By means of this spell, a willing creature or an object can be hidden
+      away, safe from detection for the Duration. When you cast the spell and
+      touch the target, it becomes Invisible and can't be targeted by divination
+      spells or perceived through Scrying sensors created by Divination
+      Spells.</p><p>If the target is a creature, it falls into a state of
+      suspended animation. Time ceases to flow for it, and it doesn't grow
+      older.</p><p>You can set a condition for the spell to end early. The
+      condition can be anything you choose, but it must occur or be visible
+      within 1 mile of the target. Examples include "after 1,000 years" or "when
+      the Tarrasque awakens." This spell also ends if the target takes any
+      damage.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: disp
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 7
+  school: trs
+  materials:
+    value: >-
+      A powder composed of diamond, emerald, ruby, and sapphire dust worth at
+      least 5,000 gp, which the spell consumes
+    consumed: true
+    cost: 5000
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: sequester
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-chains-ropes-purple.webp
+effects: []
+folder: irCSpQWIMtp978TA
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037366592
+  modifiedTime: 1725992723423
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!wvLbtemkH8gyBpdc'

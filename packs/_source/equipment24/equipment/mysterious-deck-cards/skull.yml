@@ -1,0 +1,158 @@
+name: Skull
+system:
+  description:
+    value: >-
+      <p>An
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.dmgAvatarofDeath]{Avatar of
+      Death}</strong> appears in an unoccupied space as close to you as
+      possible. The avatar targets only you with its attacks, appearing as a
+      ghostly skeleton clad in a tattered black robe and carrying a spectral
+      scythe. The avatar disappears when it drops to 0 Hit Points or you die. If
+      an ally of yours deals damage to the avatar, that ally summons another
+      <strong>Avatar of Death</strong> . The new avatar appears in an unoccupied
+      space as close to that ally as possible and targets only that ally with
+      its attacks. You and your allies can each summon only one avatar as a
+      consequence of this draw. A creature slain by an avatar can't be restored
+      to life.</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    nFXEoUa92fZkV5Q4:
+      type: summon
+      name: Card Effect
+      _id: nFXEoUa92fZkV5Q4
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: Card's effect occurs immediately upon draw
+      duration:
+        units: spec
+        concentration: false
+        override: false
+        special: until the avatar drops to 0 Hit Points or you die
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: nearest unoccupied space
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ceil(@attributes.hp.max / 2)
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: true
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: 6eWFgxvs2WzF6580
+          uuid: Compendium.dnd5e.actors24.Actor.dmgAvatarofDeath
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      img: icons/svg/card-joker.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  identifier: skull
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+_id: dmgDmtSkull00000
+type: consumable
+folder: XVXuU21XyvevGap7
+img: icons/commodities/treasure/token-white-skull.webp
+effects: []
+sort: 1000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729203113442
+  modifiedTime: 1745433044518
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgDmtSkull00000'

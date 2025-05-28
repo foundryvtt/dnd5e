@@ -1,0 +1,367 @@
+_id: dmgCarpetOfFlyin
+name: Carpet of Flying
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/cloth/cloth-bolt-embroidered-pink.webp
+system:
+  activities:
+    FlIdB5o4WYpAxEgw:
+      type: summon
+      name: Activate (3 by 5 ft.)
+      _id: FlIdB5o4WYpAxEgw
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: perm
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: The Carpet of Flying
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - uuid: Compendium.dnd5e.actors24.Actor.dmg3x5CarpetofFl
+          _id: oBweoMWkw0gwe2fl
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      img: ''
+      appliedEffects: []
+    zPbWQcgfqE9VPEbV:
+      type: summon
+      name: Activate (4 by 6 ft.)
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: perm
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        value: '30'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: The Carpet of Flying
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: oBweoMWkw0gwe2fl
+          uuid: Compendium.dnd5e.actors24.Actor.dmg4x6CarpetofFl
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+      _id: zPbWQcgfqE9VPEbV
+      img: ''
+      appliedEffects: []
+    ghKGPgnv6VO9GJxZ:
+      type: summon
+      name: Activate (5 by 7 ft.)
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: perm
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        value: '30'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: The Carpet of Flying
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: oBweoMWkw0gwe2fl
+          uuid: Compendium.dnd5e.actors24.Actor.dmg5x7CarpetofFl
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+      _id: ghKGPgnv6VO9GJxZ
+      img: ''
+      appliedEffects: []
+    nDpqXW746xRCaSlM:
+      type: summon
+      name: Activate (6 by 9 ft.)
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: perm
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        value: '30'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: The Carpet of Flying
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: oBweoMWkw0gwe2fl
+          uuid: Compendium.dnd5e.actors24.Actor.dmg6x9CarpetofFl
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+      _id: nDpqXW746xRCaSlM
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Very Rare</em></p></div><p>You can make this
+      carpet hover and fly by taking a Magic action and using the carpet's
+      command word. It moves according to your directions if you are within 30
+      feet of it.</p><p>Four sizes of <em>Carpet of Flying</em> exist. The GM
+      chooses the size of a given carpet or determines it randomly by rolling on
+      the following table. A carpet can carry up to twice the weight shown on
+      the table, but its Fly Speed is halved if it carries more than its normal
+      capacity.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgCarpetOfFlyin
+      rollable]</p><section class="secret"
+      id="secret-T3avxyNy4el35GqZ"><p><strong>Foundry Note</strong></p><p>The
+      four provided summoning activities represent the possible sizes of the
+      carpet. When the GM chooses a size, the three activities corresponding to
+      the other sizes should be deleted.</p></section>
+    chat: ''
+  identifier: carpet-of-flying
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712698522
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5400000
+ownership:
+  default: 0
+_key: '!items!dmgCarpetOfFlyin'

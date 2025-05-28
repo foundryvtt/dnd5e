@@ -1,0 +1,615 @@
+_id: phbbrbBarbarian0
+name: Barbarian
+type: class
+img: systems/dnd5e/icons/classes/barbarian.webp
+system:
+  description:
+    value: "<h3>Core Barbarian Traits</h3><table class=\"core-class-traits\"><tbody><tr><th scope=\"row\"><p>Primary Ability</p></th><td><p>Strength</p></td></tr><tr><th><p><strong>Hit Point Die</strong></p></th><td><p>D12 per Barbarian level</p></td></tr><tr><th><p><strong>Saving Throw Proficiencies</strong></p></th><td><p>Strength and Constitution</p></td></tr><tr><th><p><strong>Skill Proficiencies</strong></p></th><td><p><em>Choose 2:</em> Animal Handling, Athletics, Intimidation, Nature, Perception, or Survival</p></td></tr><tr><th><p><strong>Weapon Proficiencies</strong></p></th><td><p>Simple and Martial\_weapons</p></td></tr><tr><th><p><strong>Armor Training</strong></p></th><td><p>Light and Medium armor and Shields</p></td></tr><tr><th><p><strong>Starting Equipment</strong></p></th><td><p><em>Choose A or B:</em> (A) @UUID[Compendium.dnd5e.equipment24.Item.phbwepGreataxe00]{Greataxe}, 4 @UUID[Compendium.dnd5e.equipment24.Item.phbwepHandaxe000]{Handaxes}, @UUID[Compendium.dnd5e.equipment24.Item.phbagExplorersPa]{Explorer's Pack}, and [[/award 15GP]]; or (B) [[/award 75GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbbrbBarbarian0 inline classes=\"free-rules-embed\"]</p><h2>Becoming a Barbarian …</h2><h3>As a Level 1 Character</h3><ul><li>Gain all the traits in the Core Barbarian Traits table.</li><li>Gain the Barbarian's level 1 features, which are listed in the Barbarian Features table.</li></ul><h3>As a Multiclass Character</h3><ul><li>Gain the following traits from the Core Barbarian Traits table: Hit Point Die, proficiency with Martial weapons, and training with Shields.</li><li>Gain the Barbarian's level 1 features, which are listed in the Barbarian Features table.</li></ul>"
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  startingEquipment:
+    - type: OR
+      requiresProficiency: false
+      _id: iEStK5sr3bu18iLG
+      group: ''
+      sort: 100000
+    - type: AND
+      requiresProficiency: false
+      _id: 0Yx0DOCxeeNYZw7n
+      group: iEStK5sr3bu18iLG
+      sort: 800000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbagExplorersPa
+      requiresProficiency: false
+      _id: EFPVIxAZ7F488Wt8
+      group: 0Yx0DOCxeeNYZw7n
+      sort: 300000
+    - type: linked
+      count: 4
+      key: Compendium.dnd5e.equipment24.Item.phbwepHandaxe000
+      requiresProficiency: false
+      _id: CF9oDnOKVLy0OehZ
+      group: 0Yx0DOCxeeNYZw7n
+      sort: 400000
+    - type: linked
+      count: 1
+      key: Compendium.dnd5e.equipment24.Item.phbwepGreataxe00
+      requiresProficiency: false
+      _id: ubIakV0ZwY5Av8bB
+      group: 0Yx0DOCxeeNYZw7n
+      sort: 600000
+  identifier: barbarian
+  levels: 1
+  advancement:
+    - _id: JsGU20wwFmwSQ5He
+      type: ScaleValue
+      configuration:
+        identifier: rage-damage
+        type: number
+        distance:
+          units: ''
+        scale:
+          '1':
+            value: 2
+          '9':
+            value: 3
+          '16':
+            value: 4
+      value: {}
+      title: Rage Damage
+      hint: ''
+    - _id: Hc3cNal60BVZjgi5
+      type: ScaleValue
+      configuration:
+        identifier: mastery
+        type: number
+        distance:
+          units: ''
+        scale:
+          '1':
+            value: 2
+          '4':
+            value: 3
+          '10':
+            value: 4
+      value: {}
+      title: Weapon Masteries Known
+      hint: ''
+    - _id: c07WAYE7J6zHt0yk
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbRage000000
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbUnarmoredD
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbWeaponMast
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbUnarmedStr
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 1
+      title: Class Features
+    - _id: vbNdqiHqN2qTbnUw
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbDangerSens
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbRecklessAt
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 2
+      title: Class Features
+    - _id: MUU3y634K3edUdyL
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbPrimalKnow
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 3
+      title: Class Features
+    - _id: YzgEeP9pAA0c3bbn
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 4
+      title: ''
+      hint: ''
+    - _id: 49KNhnvoZJduJaOI
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbExtraAttac
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbFastMoveme
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 5
+      title: Class Features
+    - _id: ALO7yStJ7IHDxOss
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbFeralInsti
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbInstinctiv
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 7
+      title: Class Features
+    - _id: Xl4k2CTxTMhAZbGt
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 8
+      title: ''
+    - _id: JNtXQqEZhCUM1NLJ
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbBrutalStri
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 9
+      title: Class Features
+    - _id: 5S7821U8Dtg9egZu
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbRelentless
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 11
+      title: Class Features
+    - _id: 5hgfh1Zcyct9PXLy
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 12
+      title: ''
+    - _id: zqXib0MKbaqrTTVR
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 13
+      title: Class Features
+    - _id: YYXyPXHTKRgnPswF
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbPersistent
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 15
+      title: Class Features
+    - _id: SI7lbuRXd2YfXXEi
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 16
+      title: ''
+    - _id: e5XIkDQYhqNDImgs
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbImp2Brutal
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 17
+      title: Class Features
+    - _id: WlOoBbYeEoCTcD0t
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbIndomitabl
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 18
+      title: Class Features
+    - _id: kIMEx40ps3Q3mVlS
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbEpicBoon00
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 19
+      title: Class Features
+    - _id: vsCiTVHhgLseNJjr
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrbPrimalCham
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 20
+      title: Class Features
+    - _id: WB74p7CaIJKZVoNK
+      type: HitPoints
+      configuration: {}
+      value: {}
+      title: ''
+    - _id: n7u8pfM928PJ8Mkd
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - skills:ani
+              - skills:ath
+              - skills:itm
+              - skills:nat
+              - skills:prc
+              - skills:sur
+      value:
+        chosen: []
+      level: 3
+      title: Primal Knowledge
+      hint: >-
+        You gain proficiency in another skill of your choice from the skill list
+        available to Barbarians at level 1.
+    - _id: 1zsrV0jlLKFLZt4o
+      type: ItemChoice
+      configuration:
+        choices:
+          '19':
+            count: 1
+            replacement: false
+        allowDrops: true
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofEnergyR
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFate000
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFortitu
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofIrresis
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofRecover
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSkill00
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpeed00
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpellRe
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonoftheNigh
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofTruesig
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofCombatP
+        spell: null
+        restriction:
+          type: feat
+      value:
+        added: {}
+        replaced: {}
+      title: Epic Boon
+      hint: ''
+    - _id: apkonPAaBjVFh5eF
+      type: AbilityScoreImprovement
+      configuration:
+        points: 0
+        fixed:
+          str: 4
+          dex: 0
+          con: 4
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 1
+        locked:
+          - str
+          - dex
+          - con
+          - int
+          - wis
+          - cha
+      value:
+        type: asi
+      level: 20
+      title: Primal Champion
+      hint: >-
+        You embody primal power. Your Strength and Constitution scores increase
+        by 4, to a maximum of 25.
+    - _id: joUosIRgww6atx7N
+      type: ScaleValue
+      configuration:
+        identifier: ''
+        type: dice
+        distance:
+          units: ''
+        scale:
+          '9':
+            number: 1
+            faces: 10
+            modifiers: []
+          '17':
+            number: 2
+            faces: 10
+            modifiers: []
+      value: {}
+      title: Brutal Strike
+      hint: ''
+    - _id: llft9LHzCcVGZr1R
+      type: Subclass
+      configuration: {}
+      value:
+        document: null
+        uuid: null
+      level: 3
+      title: ''
+      hint: ''
+    - _id: yRMpy6l9CCzZfkmT
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - saves:str
+          - saves:con
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Saving Throws Proficiencies
+      hint: ''
+      classRestriction: primary
+    - _id: x68sQAjEcrIug4VO
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:ani
+              - skills:ath
+              - skills:itm
+              - skills:nat
+              - skills:prc
+              - skills:sur
+      value:
+        chosen: []
+      level: 1
+      title: Skill Proficiencies
+      hint: ''
+      classRestriction: primary
+    - _id: Q4crzEug7m7VK51P
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - weapon:sim
+          - weapon:mar
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Weapon Proficiencies
+      hint: ''
+      classRestriction: primary
+    - _id: HKfpwmpBxd4539HK
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - armor:lgt
+          - armor:med
+          - armor:shl
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Armor Training
+      hint: ''
+      classRestriction: primary
+    - _id: yj2VgvjKystoRCK6
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - weapon:mar
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Weapon Proficiencies
+      hint: ''
+      classRestriction: secondary
+    - _id: oxhsE5PIGxe6mO4s
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - armor:shl
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Armor Training
+      hint: ''
+      classRestriction: secondary
+    - _id: UJdrH9cjLqpQrLCz
+      type: Trait
+      configuration:
+        mode: mastery
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - weapon:*
+      value:
+        chosen: []
+      level: 1
+      title: Weapon Mastery
+      hint: >-
+        Your training with weapons allows you to use the mastery properties of
+        additional weapons.
+    - _id: WYkWGiSyjLN4WC4x
+      type: Trait
+      configuration:
+        mode: mastery
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - weapon:*
+      value:
+        chosen: []
+      level: 4
+      title: Weapon Mastery
+      hint: >-
+        Your training with weapons allows you to use the mastery properties of
+        additional weapons.
+    - _id: EUfvF7zVF9ooQGUg
+      type: Trait
+      configuration:
+        mode: mastery
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - weapon:*
+      value:
+        chosen: []
+      level: 10
+      title: Weapon Mastery
+      hint: >-
+        Your training with weapons allows you to use the mastery properties of
+        additional weapons.
+    - _id: 6FTnn7DjW37STeW6
+      type: ScaleValue
+      configuration:
+        identifier: ''
+        type: string
+        distance:
+          units: ''
+        scale:
+          '1':
+            value: '2'
+          '3':
+            value: '3'
+          '6':
+            value: '4'
+          '12':
+            value: '5'
+          '16':
+            value: '6'
+      value: {}
+      title: Rages
+      hint: ''
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation:
+      formula: ''
+  wealth: '75'
+  primaryAbility:
+    value:
+      - str
+    all: true
+  hd:
+    denomination: d12
+    spent: 0
+    additional: ''
+effects: []
+folder: ZzMJGIp9Rxhr2hDV
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940469
+  modifiedTime: 1745517458913
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbBarbarian0'

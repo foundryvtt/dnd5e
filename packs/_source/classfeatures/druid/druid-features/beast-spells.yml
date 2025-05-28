@@ -1,0 +1,49 @@
+_id: xvgPu1O57DgXCM86
+name: Beast Spells
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 18th level, you can cast many of your druid spells in any
+      shape you assume using
+      @UUID[Compendium.dnd5e.classfeatures.Item.swK0r5TOIxredxWS]{Wild Shape}.
+      You can perform the somatic and verbal components of a druid spell while
+      in a beast shape, but you aren't able to provide material components.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: Druid 18
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: beast-spells
+flags: {}
+img: icons/creatures/abilities/stinger-poison-green.webp
+effects: []
+folder: mZ45KUWDvNUEfxkC
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037390240
+  modifiedTime: 1725992290531
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!xvgPu1O57DgXCM86'

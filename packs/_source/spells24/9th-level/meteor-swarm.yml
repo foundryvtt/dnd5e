@@ -1,0 +1,148 @@
+name: Meteor Swarm
+system:
+  description:
+    value: >-
+      <p>Blazing orbs of fire plummet to the ground at four different points you
+      can see within range. Each creature in a 40-foot-radius Sphere centered on
+      each of those points makes a Dexterity saving throw. A creature takes 20d6
+      Fire damage and 20d6 Bludgeoning damage on a failed save or half as much
+      damage on a successful one. A creature in the area of more than one fiery
+      Sphere is affected only once.</p><p>A nonmagical object that isn't being
+      worn or carried also takes the damage if it's in the spell's area, and the
+      object starts burning if it's flammable.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creatureOrObject
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: sphere
+      size: '40'
+      count: '4'
+  range:
+    units: mi
+    special: ''
+    value: '1'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 9
+  school: evo
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    AaMd4MdvLxg32RGK:
+      type: save
+      _id: AaMd4MdvLxg32RGK
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 20
+            denomination: '6'
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: ''
+          - custom:
+              enabled: false
+              formula: ''
+            number: 20
+            denomination: '6'
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: meteor-swarm
+_id: phbsplMeteorSwar
+type: spell
+img: icons/magic/fire/projectile-fireball-orange-yellow.webp
+effects: []
+folder: iG0Zia8jh6uK39TB
+sort: 106250
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425963614
+  modifiedTime: 1745256796161
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMeteorSwar'

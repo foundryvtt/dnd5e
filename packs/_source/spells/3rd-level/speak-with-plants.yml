@@ -1,0 +1,121 @@
+_id: 2VXGS206tuChoeXy
+name: Speak with Plants
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You imbue Plants within 30 feet of you with limited sentience and
+      animation, giving them the ability to communicate with you and follow your
+      simple commands. You can question plants about events in the spell's area
+      within the past day, gaining information about creatures that have passed,
+      weather, and other circumstances.</p><p>You can also turn difficult
+      terrain caused by Plant Growth (such as thickets and undergrowth) into
+      ordinary terrain that lasts for the Duration. Or you can turn ordinary
+      terrain where Plants are present into difficult terrain that lasts for the
+      duration, causing vines and branches to hinder pursuers, for
+      example.</p><p>Plants might be able to perform other tasks on your behalf,
+      at the DM's discretion. The spell doesn't enable Plants to uproot
+      themselves and move about, but they can freely move branches, tendrils,
+      and stalks.</p><p>If a plant creature is in the area, you can communicate
+      with it as if you shared a Common language, but you gain no magical
+      ability to influence it.</p><p>This spell can cause the plants created by
+      the Entangle spell to release a Restrained creature.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: radius
+      size: '30'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: trs
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: speak-with-plants
+sort: 0
+flags: {}
+img: icons/magic/nature/leaf-glow-teal.webp
+effects: []
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037346119
+  modifiedTime: 1725992716623
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!2VXGS206tuChoeXy'

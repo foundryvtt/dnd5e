@@ -1,0 +1,153 @@
+name: Invisibility
+system:
+  description:
+    value: >-
+      <p>A creature you touch has the &amp;Reference[invisible apply=false]
+      condition until the spell ends. The spell ends early immediately after the
+      target makes an attack roll, deals damage, or casts a
+      spell.</p><p><strong>Using a Higher-Level Spell Slot.</strong> You can
+      target one additional creature for each spell slot level above 2.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '@item.level - 1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: ill
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: an eyelash in gum arabic
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: 9svfDetqjhsFP3ey
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: invisibility
+_id: phbsplInvisibili
+type: spell
+img: icons/creatures/magical/spirit-undead-ghost-purple.webp
+effects:
+  - name: Invisible
+    origin: Compendium.dnd5e.spells24.Item.phbsplInvisibili
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/statuses/invisible.svg
+    _id: 9svfDetqjhsFP3ey
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The spell ends early immediately after the target makes an attack roll,
+      deals damage, or casts a spell.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - invisible
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplInvisibili.9svfDetqjhsFP3ey'
+folder: 3SjcO2acsFnWegp4
+sort: 2700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425960202
+  modifiedTime: 1745256795236
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplInvisibili'

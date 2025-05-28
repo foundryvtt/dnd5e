@@ -1,0 +1,48 @@
+_id: V1lW1vnrTpVTDr6o
+name: Pack Tactics
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>the [[lookup @name lowercase]] has<strong> advantage </strong>on an
+      attack roll against a creature if at least one of the [[lookup @name
+      lowercase]]'s allies is within <strong>5 ft.</strong> of the creature and
+      the ally isn't incapacitated.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: Baboon
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: pack-tactics
+flags: {}
+img: icons/creatures/abilities/paw-print-orange.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304971703
+  modifiedTime: 1725992572891
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!V1lW1vnrTpVTDr6o'

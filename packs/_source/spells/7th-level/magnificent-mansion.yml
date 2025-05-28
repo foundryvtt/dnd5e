@@ -1,0 +1,129 @@
+_id: pn4SnsFDvYDiE6rC
+name: Magnificent Mansion
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You conjure an extradimensional dwelling in range that lasts for the
+      Duration. You choose where its one entrance is located. The entrance
+      shimmers faintly and is 5 feet wide and 10 feet tall. You and any creature
+      you designate when you cast the spell can enter the extradimensional
+      dwelling as long as the portal remains open. You can open or close the
+      portal if you are within 30 feet of it. While closed, the portal is
+      Invisible.</p><p>Beyond the portal is a magnificent foyer with numerous
+      chambers beyond. The atmosphere is clean, fresh, and warm.</p><p>You can
+      create any floor plan you like, but the space can't exceed 50 cubes, each
+      cube being 10 feet on each side. The place is furnished and decorated as
+      you choose. It contains sufficient food to serve a nine-course banquet for
+      up to 100 people. A staff of 100 near-transparent Servants attends all who
+      enter. You decide the visual appearance of these Servants and their
+      attire. They are completely obedient to your orders. Each servant can
+      perform any task a normal human servant could perform, but they can't
+      Attack or take any action that would directly harm another creature. Thus
+      the Servants can fetch things, clean, mend, fold clothes, light fires,
+      serve food, pour wine, and so on. The Servants can go anywhere in the
+      mansion but can't leave it. Furnishings and other Objects created by this
+      spell dissipate into smoke if removed from the mansion. When the spell
+      ends, any creatures inside the extradimensional space are expelled into
+      the open spaces nearest to the entrance.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '300'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 7
+  school: con
+  materials:
+    value: >-
+      A miniature portal carved from ivory, a small piece of polished marble,
+      and a tiny silver spoon, each item worth at least 5gp
+    consumed: false
+    cost: 15
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: magnificent-mansion
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
+effects: []
+folder: irCSpQWIMtp978TA
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037365462
+  modifiedTime: 1725992722885
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!pn4SnsFDvYDiE6rC'

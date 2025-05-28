@@ -1,0 +1,181 @@
+_id: SGgVxdZbmsStfeGB
+name: Fey Charm
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] targets one humanoid or beast that she
+      can see within 30 feet of her. If the target can see the [[lookup @name
+      lowercase]], it must succeed on a <strong>DC 14 Wisdom</strong> saving
+      throw or be magically charmed.</p><p>The charmed creature regards the
+      [[lookup @name lowercase]] as a trusted friend to be heeded and protected.
+      Although the target isn't under the [[lookup @name lowercase]]'s control,
+      it takes the [[lookup @name lowercase]]'s requests or actions in the most
+      favorable way it can.Each time the [[lookup @name lowercase]] or its
+      allies do anything harmful to the target, it can repeat the saving throw,
+      ending the effect on itself on a success. Otherwise, the effect lasts 24
+      hours or until the [[lookup @name lowercase]] dies, is on a different
+      plane of existence from the target, or ends the effect as a bonus action.
+      If a target's saving throw is successful, the target is immune to the
+      [[lookup @name lowercase]]'s Fey Charm for the next 24 hours. the [[lookup
+      @name lowercase]] can have no more than one humanoid and up to three
+      beasts charmed at a time.</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] targets one humanoid or beast that she
+      can see within 30 feet of her. If the target can see the [[lookup @name
+      lowercase]], it must make a <strong>Wisdom</strong> saving throw. Each
+      time the [[lookup @name lowercase]] or its allies do anything harmful to
+      the target, it can repeat the saving throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: one humanoid or beast
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '24'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: one humanoid or beast
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '24'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '14'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: fey-charm
+flags: {}
+img: icons/consumables/plants/leaf-veins-glowing-green.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304971080
+  modifiedTime: 1725992572711
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!SGgVxdZbmsStfeGB'

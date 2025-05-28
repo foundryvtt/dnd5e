@@ -1,0 +1,152 @@
+_id: n5L000DkNBU6h2oJ
+name: Half-Orc
+type: race
+img: icons/commodities/bones/skull-tusked-grey.webp
+system:
+  description:
+    value: >-
+      <p>Your half-orc character has certain traits deriving from your orc
+      ancestry.</p><p><em><strong>Ability Score Increase.</strong></em> Your
+      Strength score increases by 2, and your Constitution score increases by
+      1.</p><p><em><strong>Age.</strong></em> Half-­orcs mature a little faster
+      than humans, reaching adulthood around age 14. They age noticeably faster
+      and rarely live longer than 75
+      years.</p><p><em><strong>Alignment.</strong></em> Half-orcs inherit a
+      tendency toward chaos from their orc parents and are not strongly inclined
+      toward good. Half-orcs raised among orcs and willing to live out their
+      lives among them are usually evil.</p><p><em><strong>Size.</strong></em>
+      Half‑orcs are somewhat larger and bulkier than humans, and they range from
+      5 to well over 6 feet tall. Your size is
+      Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is
+      30 feet.</p><p><em><strong>Darkvision.</strong></em> Thanks to your orc
+      blood, you have superior vision in dark and dim conditions. You can see in
+      dim light within 60 feet of you as if it were bright light, and in
+      darkness as if it were dim light. You can't discern color in darkness,
+      only shades of gray.</p><p><em><strong>Menacing.</strong></em> You gain
+      proficiency in the Intimidation skill.</p><p><em><strong>Relentless
+      Endurance.</strong></em> When you are reduced to 0 hit points but not
+      killed outright, you can drop to 1 hit point instead. You can't use this
+      feature again until you finish a long rest.</p><p><em><strong>Savage
+      Attacks.</strong></em> When you score a critical hit with a melee weapon
+      attack, you can roll one of the weapon's damage dice one additional time
+      and add it to the extra damage of the critical
+      hit.</p><p><em><strong>Languages.</strong></em> You can speak, read, and
+      write Common and Orc. Orc is a harsh, grating language with hard
+      consonants. It has no script of its own but is written in the Dwarvish
+      script.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: half-orc
+  advancement:
+    - _id: Nj1VOKOTjxKU15J8
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.races.97c8i9Z28thvZuA8
+            optional: false
+          - uuid: Compendium.dnd5e.races.0kUsT4sMUOr5FcoX
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 0
+      title: ''
+    - _id: Z9hvZFkWUNvowbQX
+      type: AbilityScoreImprovement
+      configuration:
+        points: 0
+        fixed:
+          str: 2
+          dex: 0
+          con: 1
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 0
+      title: ''
+    - _id: jdak6D1rjScJSK8i
+      type: Size
+      configuration:
+        sizes:
+          - med
+      value:
+        size: ''
+      level: 1
+      title: ''
+      hint: >-
+        Half-orcs are somewhat larger and bulkier than humans, and they range
+        from 5 to well over 6 feet tall. Your size is Medium.
+    - _id: aRv9Ec4xJCyrFMpY
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - skills:itm
+        choices: []
+      level: 0
+      title: Menacing
+      value:
+        chosen: []
+    - _id: 4cI2nhWNr0D1hOnx
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - languages:standard:common
+          - languages:standard:orc
+        choices: []
+      level: 0
+      title: ''
+      value:
+        chosen: []
+  type:
+    subtype: orc
+    value: humanoid
+    custom: ''
+  senses:
+    darkvision: 60
+    blindsight: null
+    tremorsense: null
+    truesight: null
+    units: ft
+    special: ''
+  movement:
+    burrow: null
+    climb: null
+    fly: null
+    swim: null
+    walk: 30
+    units: ft
+    hover: false
+effects: []
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037393238
+  modifiedTime: 1725992703691
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+folder: oatm8xkzxakCJapM
+_key: '!items!n5L000DkNBU6h2oJ'

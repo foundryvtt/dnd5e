@@ -1,0 +1,244 @@
+_id: dmgDwarvenThrowe
+name: Dwarven Thrower
+type: weapon
+img: icons/weapons/hammers/hammer-double-engraved-gold.webp
+system:
+  activities:
+    bd1kKOncfoLha8CT:
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: '0'
+            types:
+              - force
+            scaling:
+              number: 1
+      name: Attack
+      _id: bd1kKOncfoLha8CT
+      img: ''
+      appliedEffects: []
+    w3ATyMSroDLch6Re:
+      type: attack
+      name: Throw
+      _id: w3ATyMSroDLch6Re
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: 'Bonus Damage: 1d8 Force vs Giant'
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 8
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepWarhammer0]{Warhammer}),
+      Very Rare (Requires Attunement by a Dwarf or a Creature Attuned to a
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgBeltOfDwarven]{Belt of
+      Dwarvenkind})</em></p></div><p>You gain a +3 bonus to attack rolls and
+      damage rolls made with this magic weapon. It has the Thrown property with
+      a normal range of 20 feet and a long range of 60 feet. When you hit with a
+      ranged attack using this weapon, it deals an extra [[/damage 1d8
+      type=force]] damage, or an extra [[/damage 2d8 type=force]] damage if the
+      target is a Giant. Immediately after hitting or missing, the weapon flies
+      back to your hand.</p>
+    chat: ''
+  identifier: dwarven-thrower
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: martialM
+    baseItem: warhammer
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 8
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  magicalBonus: 3
+  properties:
+    - mgc
+    - ret
+    - thr
+    - ver
+  proficient: null
+  range:
+    value: 20
+    long: 60
+    reach: 5
+    units: ft
+  mastery: push
+effects: []
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7500000
+ownership:
+  default: 0
+_key: '!items!dmgDwarvenThrowe'

@@ -1,0 +1,134 @@
+name: Harm
+system:
+  description:
+    value: >-
+      <p>You unleash virulent magic on a creature you can see within range. The
+      target makes a Constitution saving throw. On a failed save, it takes 14d6
+      Necrotic damage, and its Hit Point maximum is reduced by an amount equal
+      to the Necrotic damage it took. On a successful save, it takes half as
+      much damage only. This spell can't reduce a target's Hit Point maximum
+      below 1.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: nec
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    m8KSieDGOHcM2hVw:
+      type: save
+      _id: m8KSieDGOHcM2hVw
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 14
+            denomination: '6'
+            bonus: ''
+            types:
+              - necrotic
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: harm
+_id: phbsplHarm000000
+type: spell
+img: icons/magic/unholy/strike-body-explode-disintegrate.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425957975
+  modifiedTime: 1745256794369
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplHarm000000'

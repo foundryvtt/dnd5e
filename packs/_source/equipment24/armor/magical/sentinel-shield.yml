@@ -1,0 +1,108 @@
+_id: dmgSentinelShiel
+name: Sentinel Shield
+type: equipment
+folder: 1kn4uV4dTVVduLjA
+img: icons/equipment/shield/targe-copper-eye.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Armor (Shield), Uncommon</em></p><p>While holding this Shield, you
+      have Advantage on Initiative rolls and Wisdom (Perception) checks. The
+      Shield is emblazoned with a symbol of an eye.</p>
+    chat: ''
+  identifier: sentinel-shield
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: 2
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: shield
+    baseItem: shield
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Initiative Advantage
+    img: icons/equipment/shield/targe-copper-eye.webp
+    _id: bHeGysatAXUbusV0
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.init.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730667051674
+      modifiedTime: 1730667303183
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgSentinelShiel.bHeGysatAXUbusV0'
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1740680128053
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 850000
+ownership:
+  default: 0
+_key: '!items!dmgSentinelShiel'

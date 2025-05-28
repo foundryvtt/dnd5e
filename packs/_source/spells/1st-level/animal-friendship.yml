@@ -1,0 +1,118 @@
+_id: hDOENzjuj5WpLq7B
+name: Animal Friendship
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell lets you convince a beast that you mean it no harm. Choose a
+      beast that you can see within range. It must see and hear you. If the
+      beast's Intelligence is 4 or higher, the spell fails. Otherwise, the beast
+      must succeed on a Wisdom saving throw or be charmed by you for the spell's
+      duration. If you or one of your companions harms the target, the spell
+      ends.</p><p><strong>At Higher Levels.</strong> When you cast this spell
+      using a spell slot of 2nd level or higher, you can affect one additional
+      beast for each slot level above 1st.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: enc
+  materials:
+    value: A morsel of food.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: animal-friendship
+sort: 0
+flags: {}
+img: icons/magic/nature/wolf-paw-glow-teal-blue.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037363056
+  modifiedTime: 1725992722095
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!hDOENzjuj5WpLq7B'

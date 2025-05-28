@@ -1,0 +1,568 @@
+_id: phbSpeciesDescri
+name: Character Species
+pages:
+  - sort: 0
+    name: Overview
+    type: text
+    _id: 7iLsgz6RUQJVpUsH
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Nine species are presented in this section in alphabetical order:
+        @UUID[.Duq9xnLywFNK3gv1]{Dragonborn}, @UUID[.4zCNgk0JSKVzv9Y9]{Dwarf},
+        @UUID[.h9oGyt2Wh9mp0xbg]{Elf}, @UUID[.BKZ4ViHHUMxaqPz4]{Gnome},
+        @UUID[.l4PycBAExkT2g62X]{Goliath}, @UUID[.I5mX89tfojsyQmdA]{Halfling},
+        @UUID[.8t4u8CWYbxubXflR]{Human}, @UUID[.qUxclCvBClnEafEY]{Orc}, and
+        @UUID[.xiCNZr3S4OmJezyv]{Tiefling}.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        type: special
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726206874683
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbSpeciesDescri.7iLsgz6RUQJVpUsH'
+  - sort: 0
+    name: Dragonborn
+    type: text
+    _id: Duq9xnLywFNK3gv1
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: "<p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspDragonborn0 inline classes=\"free-rules-embed\"]</p><h2>Dragonborn Traits</h2><p><strong>Creature Type: </strong>Humanoid</p><p><strong>Size: </strong>Medium (about 5–7 feet tall)</p><p><strong>Speed:</strong> 30 feet</p><p>As a Dragonborn, you have these special traits.</p><p><em><strong>Draconic Ancestry.</strong></em> Your lineage stems from a dragon progenitor. Choose the kind of dragon from the Draconic Ancestors table. Your choice affects your Breath Weapon and Damage Resistance traits as well as your appearance.</p><table><caption>Draconic Ancestors</caption><thead><tr><th><p>Dragon</p></th><th><p>Damage Type</p></th><th></th><th><p>Dragon</p></th><th><p>Damage Type</p></th></tr></thead><tbody><tr><td><p>Black</p></td><td><p>Acid</p></td><td></td><td><p>Gold</p></td><td><p>Fire</p></td></tr><tr><td><p>Blue</p></td><td><p>Lightning</p></td><td></td><td><p>Green</p></td><td><p>Poison</p></td></tr><tr><td><p>Brass</p></td><td><p>Fire</p></td><td></td><td><p>Red</p></td><td><p>Fire</p></td></tr><tr><td><p>Bronze</p></td><td><p>Lightning</p></td><td></td><td><p>Silver</p></td><td><p>Cold</p></td></tr><tr><td><p>Copper</p></td><td><p>Acid</p></td><td></td><td><p>White</p></td><td><p>Cold</p></td></tr></tbody></table><p><em><strong>Breath Weapon.</strong></em> When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in either a 15-foot Cone or a 30-foot Line that is 5 feet wide (choose the shape each time). Each creature in that area must make a Dexterity saving throw (DC 8 plus your Constitution modifier and Proficiency Bonus). On a failed save, a creature takes 1d10 damage of the type determined by your Draconic Ancestry trait. On a successful save, a creature takes half as much damage. This damage increases by 1d10 when you reach character levels 5 (2d10), 11 (3d10), and 17\_(4d10).</p><p>You can use this Breath Weapon a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.</p><p><em><strong>Damage Resistance. </strong></em>You have Resistance to the damage type determined by your Draconic Ancestry trait.</p><p><em><strong>Darkvision. </strong></em>You have Darkvision with a range of 60 feet.</p><p><em><strong>Draconic Flight.</strong></em> When you reach character level 5, you can channel draconic magic to give yourself temporary flight. As a Bonus Action, you sprout spectral wings on your back that last for 10 minutes or until you retract the wings (no action required) or have the Incapacitated condition. During that time, you have a Fly Speed equal to your Speed. Your wings appear to be made of the same energy as your Breath Weapon. Once you use this trait, you can’t use it again until you finish a Long Rest.</p>"
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726014652972
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbSpeciesDescri.Duq9xnLywFNK3gv1'
+  - sort: 0
+    name: Dwarf
+    type: text
+    _id: 4zCNgk0JSKVzv9Y9
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspDwarf000000
+        inline classes="free-rules-embed"]</p><h2>Dwarf
+        Traits</h2><p><strong>Creature Type:
+        </strong>Humanoid</p><p><strong>Size: </strong>Medium (about 4–5 feet
+        tall)</p><p><strong>Speed:</strong> 30 feet</p><p>As a Dwarf, you have
+        these special traits.</p><p><em><strong>Darkvision. </strong></em>You
+        have Darkvision with a range of 120 feet.</p><p><em><strong>Dwarven
+        Resilience.</strong></em> You have Resistance to Poison damage. You also
+        have Advantage on saving throws you make to avoid or end the Poisoned
+        condition.</p><p><em><strong>Dwarven Toughness.</strong></em> Your Hit
+        Point maximum increases by 1, and it increases by 1 again whenever you
+        gain a level.</p><p><em><strong>Stonecunning.</strong></em> As a Bonus
+        Action, you gain &amp;Reference[Tremorsense] with a range of 60 feet for
+        10 minutes. You must be on a stone surface or touching a stone surface
+        to use this Tremorsense. The stone can be natural or worked.</p><p>You
+        can use this Bonus Action a number of times equal to your Proficiency
+        Bonus, and you regain all expended uses when you finish a Long Rest.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726014696505
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbSpeciesDescri.4zCNgk0JSKVzv9Y9'
+  - sort: 0
+    name: Elf
+    type: text
+    _id: h9oGyt2Wh9mp0xbg
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspElf00000000
+        inline classes="free-rules-embed"]</p>
+        <h3>Drow</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspDrow0000000
+        inline classes="free-rules-embed"]</p> <h3>High
+        Elves</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspHighElf0000
+        inline classes="free-rules-embed"]</p> <h3>Wood
+        Elves</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspWoodElf0000
+        inline classes="free-rules-embed"]</p><h2>Elf
+        Traits</h2><p><strong>Creature Type:
+        </strong>Humanoid</p><p><strong>Size: </strong>Medium (about 5–6 feet
+        tall)</p><p><strong>Speed:</strong> 30 feet</p><p>As an Elf, you have
+        these special traits.</p><p><em><strong>Darkvision. </strong></em>You
+        have Darkvision with a range of 60 feet.</p><p><em><strong>Elven
+        Lineage. </strong></em>You are part of a lineage that grants you
+        supernatural abilities. Choose a lineage from the Elven Lineages table.
+        You gain the level 1 benefit of that lineage.</p><p>When you reach
+        character levels 3 and 5, you learn a higher-level spell, as shown on
+        the table. You always have that spell prepared. You can cast it once
+        without a spell slot, and you regain the ability to cast it in that way
+        when you finish a Long Rest. You can also cast the spell using any spell
+        slots you have of the appropriate level.<br />Intelligence, Wisdom, or
+        Charisma is your spellcasting ability for the spells you cast with this
+        trait (choose the ability when you select the
+        lineage).</p><p><em><strong>Fey Ancestry.</strong></em> You have
+        Advantage on saving throws you make to avoid or end the
+        &amp;Reference[Charmed] condition.</p><p><em><strong>Keen
+        Senses.</strong></em> You have proficiency in the Insight, Perception,
+        or Survival skill.</p><p><em><strong>Trance.</strong></em> You don’t
+        need to sleep, and magic can’t put you to sleep. You can finish a Long
+        Rest in 4 hours if you spend those hours in a trancelike meditation,
+        during which you retain consciousness.</p><table><caption>Elven
+        Lineages</caption><thead><tr><th><p>Lineage</p></th><th><p>Level
+        1</p></th><th><p>Level 3</p></th><th><p>Level
+        5</p></th></tr></thead><tbody><tr><td><p>Drow</p></td><td><p>The range
+        of your Darkvision increases to 120 feet. <br />You also know the
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplDancingLig]{Dancing Lights}
+        cantrip.</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplFaerieFire]{Faerie
+        Fire}</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplDarkness00]{Darkness}</p></td></tr><tr><td><p>High
+        Elf</p></td><td><p>You know the
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplPrestidigi]{Prestidigitation}
+        cantrip. Whenever you finish a Long Rest, you can replace that cantrip
+        with a different cantrip from the Wizard spell
+        list.</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect
+        Magic}</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplMistyStep0]{Misty
+        Step}</p></td></tr><tr><td><p>Wood Elf</p></td><td><p>Your Speed
+        increases to 35 feet. You also know the
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplDruidcraft]{Druidcraft}
+        cantrip.</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplLongstride]{Longstrider}</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplPasswithou]{Pass
+        without Trace}</p></td></tr></tbody></table>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1740505516657
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbSpeciesDescri.h9oGyt2Wh9mp0xbg'
+  - sort: 0
+    name: Gnome
+    type: text
+    _id: BKZ4ViHHUMxaqPz4
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspGnome000000
+        inline classes="free-rules-embed"]</p><h2>Gnome
+        Traits</h2><p><strong>Creature Type:
+        </strong>Humanoid</p><p><strong>Size: </strong>Small (about 3–4 feet
+        tall)</p><p><strong>Speed:</strong> 30 feet</p><p>As a Gnome, you have
+        these special traits.</p><p><em><strong>Darkvision. </strong></em>You
+        have Darkvision with a range of 60 feet.</p><p><em><strong>Gnomish
+        Cunning.</strong></em> You have Advantage on Intelligence, Wisdom, and
+        Charisma saving throws.</p><p><em><strong>Gnomish Lineage.</strong></em>
+        You are part of a lineage that grants you supernatural abilities. Choose
+        one of the following options; whichever one you choose, Intelligence,
+        Wisdom, or Charisma is your spellcasting ability for the spells you cast
+        with this trait (choose the ability when you select the
+        lineage):</p><p><strong>Forest Gnome.</strong> You know the
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplMinorIllus]{Minor Illusion}
+        cantrip. You also always have the Speak with Animals spell prepared. You
+        can cast it without a spell slot a number of times equal to your
+        Proficiency Bonus, and you regain all expended uses when you finish a
+        Long Rest. You can also use any spell slots you have to cast the
+        spell.</p><p><strong>Rock Gnome.</strong> You know the
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplMending000]{Mending} and
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplPrestidigi]{Prestidigitation}
+        cantrips. In addition, you can spend 10 minutes casting Prestidigitation
+        to create a Tiny clockwork device (AC 5, 1 HP), such as a toy, fire
+        starter, or music box. When you create the device, you determine its
+        function by choosing one effect from <em>Prestidigitation</em>; the
+        device produces that effect whenever you or another creature takes a
+        Bonus Action to activate it with a touch. If the chosen effect has
+        options within it, you choose one of those options for the device when
+        you create it. For example, if you choose the spell’s ignite-extinguish
+        effect, you determine whether the device ignites or extinguishes fire;
+        the device doesn’t do both. You can have three such devices in existence
+        at a time, and each falls apart 8 hours after its creation or when you
+        dismantle it with a touch as a Utilize action.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726014338908
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbSpeciesDescri.BKZ4ViHHUMxaqPz4'
+  - sort: 0
+    name: Goliath
+    type: text
+    _id: l4PycBAExkT2g62X
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspGoliath0000
+        inline classes="free-rules-embed"]</p><h2>Goliath
+        Traits</h2><p><strong>Creature Type:
+        </strong>Humanoid</p><p><strong>Size: </strong>Medium (about 7–8 feet
+        tall)</p><p><strong>Speed:</strong> 35 feet</p><p>As a Goliath, you have
+        these special traits.</p><p><em><strong>Giant Ancestry.</strong></em>
+        You are descended from Giants. Choose one of the following benefits—a
+        supernatural boon from your ancestry; you can use the chosen benefit a
+        number of times equal to your Proficiency Bonus, and you regain all
+        expended uses when you finish a Long Rest:</p><p><strong>Cloud’s Jaunt
+        (Cloud Giant). </strong>As a Bonus Action, you magically teleport up to
+        30 feet to an unoccupied space you can see.</p><p><strong>Fire’s Burn
+        (Fire Giant).</strong> When you hit a target with an attack roll and
+        deal damage to it, you can also deal 1d10 Fire damage to that
+        target.</p><p><strong>Frost’s Chill (Frost Giant).</strong> When you hit
+        a target with an attack roll and deal damage to it, you can also deal
+        1d6 Cold damage to that target and reduce its Speed by 10 feet until the
+        start of your next turn.</p><p><strong>Hill’s Tumble (Hill Giant).
+        </strong>When you hit a Large or smaller creature with an attack roll
+        and deal damage to it, you can give that target the
+        &amp;Reference[Prone] condition.</p><p><strong>Stone’s Endurance (Stone
+        Giant).</strong> When you take damage, you can take a Reaction to roll
+        1d12. Add your Constitution modifier to the number rolled and reduce the
+        damage by that total.</p><p><strong>Storm’s Thunder (Storm
+        Giant).</strong> When you take damage from a creature within 60 feet of
+        you, you can take a Reaction to deal 1d8 Thunder damage to that
+        creature.</p><p><em><strong>Large Form.</strong></em> Starting at
+        character level 5, you can change your size to Large as a Bonus Action
+        if you’re in a big enough space. This transformation lasts for 10
+        minutes or until you end it (no action required). For that duration, you
+        have Advantage on Strength checks, and your Speed increases by 10 feet.
+        Once you use this trait, you can’t use it again until you finish a Long
+        Rest.</p><p><em><strong>Powerful Build.</strong></em> You have Advantage
+        on any saving throw you make to end the &amp;Reference[Grappled]
+        condition. You also count as one size larger when determining your
+        carrying capacity.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726014380552
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbSpeciesDescri.l4PycBAExkT2g62X'
+  - sort: 0
+    name: Halfling
+    type: text
+    _id: I5mX89tfojsyQmdA
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspHalfling000
+        inline classes="free-rules-embed"]</p><h2>Halfling
+        Traits</h2><p><strong>Creature Type:
+        </strong>Humanoid</p><p><strong>Size: </strong>Small (about 2–3 feet
+        tall)</p><p><strong>Speed:</strong> 30 feet</p><p>As a Halfling, you
+        have these special traits.</p><p><em><strong>Brave.</strong></em> You
+        have Advantage on saving throws you make to avoid or end the
+        &amp;Reference[Frightened] condition.</p><p><em><strong>Halfling
+        Nimbleness.</strong></em> You can move through the space of any creature
+        that is a size larger than you, but you can’t stop in the same
+        space.</p><p><em><strong>Luck.</strong></em> When you roll a 1 on the
+        d20 of a &amp;Reference[D20 Test], you can reroll the die, and you must
+        use the new roll.</p><p><em><strong>Naturally Stealthy.</strong></em>
+        You can take the Hide action even when you are obscured only by a
+        creature that is at least one size larger than you.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726014422484
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbSpeciesDescri.I5mX89tfojsyQmdA'
+  - sort: 0
+    name: Human
+    type: text
+    _id: 8t4u8CWYbxubXflR
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspHuman000000
+        inline classes="free-rules-embed"]</p><h2>Human
+        Traits</h2><p><strong>Creature Type:
+        </strong>Humanoid</p><p><strong>Size: </strong>Medium (about 4–7 feet
+        tall) or Small (about 2–4 feet tall), chosen when you select this
+        species</p><p><strong>Speed: </strong>30 feet</p><p>As a Human, you have
+        these special
+        traits.</p><p><em><strong>Resourceful.</strong></em><strong>
+        </strong>You gain Heroic Inspiration whenever you finish a Long
+        Rest.</p><p><em><strong>Skillful.</strong></em><strong> </strong>You
+        gain proficiency in one skill of your
+        choice.</p><p><em><strong>Versatile.</strong></em> You gain an
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.otAeQs0TLHYIBNuj]{Origin
+        feat} of your choice.
+        @UUID[Compendium.dnd5e.feats24.Item.phbftSkilled0000]{Skilled} is
+        recommended.</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbCh4ArtHandout.JournalEntryPage.CjvYlNXXgNP49lz6
+        caption=false]</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726014458773
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbSpeciesDescri.8t4u8CWYbxubXflR'
+  - sort: 0
+    name: Orc
+    type: text
+    _id: qUxclCvBClnEafEY
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspOrc00000000
+        inline classes="free-rules-embed"]</p><h2>Orc
+        Traits</h2><p><strong>Creature Type:
+        </strong>Humanoid</p><p><strong>Size: </strong>Medium (about 6–7 feet
+        tall)</p><p><strong>Speed:</strong> 30 feet</p><p>As an Orc, you have
+        these special traits.</p><p><em><strong>Adrenaline Rush.
+        </strong></em>You can take the Dash action as a Bonus Action. When you
+        do so, you gain a number of Temporary Hit Points equal to your
+        Proficiency Bonus.</p><p>You can use this trait a number of times equal
+        to your Proficiency Bonus, and you regain all expended uses when you
+        finish a Short or Long Rest.</p><p><em><strong>Darkvision.</strong></em>
+        You have Darkvision with a range of 120
+        feet.</p><p><em><strong>Relentless Endurance.</strong></em> When you are
+        reduced to 0 Hit Points but not killed outright, you can drop to 1 Hit
+        Point instead. Once you use this trait, you can’t do so again until you
+        finish a Long Rest.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726014484852
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbSpeciesDescri.qUxclCvBClnEafEY'
+  - sort: 0
+    name: Tiefling
+    type: text
+    _id: xiCNZr3S4OmJezyv
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspTiefling000
+        inline classes="free-rules-embed"]</p>
+        <h4>Abyssal</h4><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspAbyssalTief
+        inline
+        classes="free-rules-embed"]</p><h4>Chthonic</h4><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspChthonicTie
+        inline classes="free-rules-embed"]</p>
+        <h4>Infernal</h4><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspInfernalTie
+        inline classes="free-rules-embed"]</p><h2>Tiefling
+        Traits</h2><p><strong>Creature Type:
+        </strong>Humanoid</p><p><strong>Size: </strong>Medium (about 4–7 feet
+        tall) or Small (about 3–4 feet tall), chosen when you select this
+        species</p><p><strong>Speed:</strong> 30 feet</p><p>As a Tiefling, you
+        have the following special traits.</p><p><em><strong>Darkvision.
+        </strong></em>You have Darkvision with a range of 60
+        feet.</p><p><em><strong>Fiendish Legacy.</strong></em> You are the
+        recipient of a legacy that grants you supernatural abilities. Choose a
+        legacy from the Fiendish Legacies table. You gain the level 1 benefit of
+        the chosen legacy.</p><p>When you reach character levels 3 and 5, you
+        learn a higher-level spell, as shown on the table. You always have that
+        spell prepared. You can cast it once without a spell slot, and you
+        regain the ability to cast it in that way when you finish a Long Rest.
+        You can also cast the spell using any spell slots you have of the
+        appropriate level.</p><p>Intelligence, Wisdom, or Charisma is your
+        spellcasting ability for the spells you cast with this trait (choose the
+        ability when you select the legacy).</p><p><em><strong>Otherworldly
+        Presence.</strong></em> You know the
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplThaumaturg]{Thaumaturgy}
+        cantrip. When you cast it with this trait, the spell uses the same
+        spellcasting ability you use for your Fiendish Legacy
+        trait.</p><table><caption>Fiendish
+        Legacies</caption><thead><tr><th><p>Legacy</p></th><th><p>Level
+        1</p></th><th><p>Level 3</p></th><th><p>Level
+        5</p></th></tr></thead><tbody><tr><td><p>Abyssal</p></td><td><p>You have
+        Resistance to Poison damage.<br />You also know the
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplPoisonSpra]{Poison Spray}
+        cantrip.</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplRayofSickn]{Ray
+        of
+        Sickness}</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplHoldPerson]{Hold
+        Person}</p></td></tr><tr><td><p>Chthonic</p></td><td><p>You have
+        Resistance to Necrotic damage.<br />You also know the
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplChillTouch]{Chill Touch}
+        cantrip.</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplFalseLife0]{False
+        Life}</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplRayofEnfee]{Ray
+        of Enfeeblement}</p></td></tr><tr><td><p>Infernal</p></td><td><p>You
+        have Resistance to Fire damage.<br />You also know the
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplFireBolt00]{Fire Bolt}
+        cantrip.</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplHellishReb]{Hellish
+        Rebuke}</p></td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplDarkness00]{Darkness}</p></td></tr></tbody></table>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726014567926
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbSpeciesDescri.xiCNZr3S4OmJezyv'
+folder: v4zw0s9RxCacTexO
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 4
+    order: 600300
+    navigation:
+      previous: phbBackgroundDes
+      next: phbFeats00000000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1724425889432
+  modifiedTime: 1745677865674
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -125000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbSpeciesDescri'

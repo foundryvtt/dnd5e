@@ -1,0 +1,46 @@
+name: Paper
+system:
+  description:
+    value: <p>One sheet of Paper can hold about 250 handwritten words.</p>
+    chat: ''
+  price:
+    value: 2
+    denomination: sp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: paper
+_id: phbagPaper000000
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/documents/paper-plain-white.webp
+effects: []
+sort: 4200000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425910471
+  modifiedTime: 1745256812442
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagPaper000000'

@@ -2,12 +2,14 @@
     <legend>{{ localize "DND5E.ItemToolProperties" }}</legend>
 
     {{!-- Tool Type --}}
-    {{ formField fields.type.fields.value value=source.type.value choices=config.toolTypes label="DND5E.ItemToolType"
+    {{ formField fields.type.fields.value value=source.type.value choices=CONFIG.toolTypes label="DND5E.ItemToolType"
                  blank="" localize=true }}
 
     {{!-- Base Tool --}}
-    {{ formField fields.type.fields.baseItem value=source.type.baseItem choices=baseItems label="DND5E.ItemToolBase"
-                 blank="" localize=true }}
+    {{#if baseItemOptions.length}}
+    {{ formField fields.type.fields.baseItem value=source.type.baseItem options=baseItemOptions blank=""
+                 label="DND5E.ItemToolBase" localize=true }}
+    {{/if}}
 
     {{!-- Tool Properties --}}
     {{ formField fields.properties options=properties.options label="DND5E.ItemToolProperties" localize=true
@@ -19,11 +21,11 @@
         <div class="form-fields">
 
             {{!-- Proficiency --}}
-            {{ formField fields.proficient value=source.proficient choices=config.proficiencyLevels
+            {{ formField fields.proficient value=source.proficient choices=CONFIG.proficiencyLevels
                          label="DND5E.Proficiency" blank="DND5E.Automatic" localize=true classes="label-top" }}
 
             {{!-- Ability --}}
-            {{ formField fields.ability value=source.ability choices=config.abilities labelAttr="label"
+            {{ formField fields.ability value=source.ability choices=CONFIG.abilities labelAttr="label"
                          label="DND5E.Ability" blank="DND5E.Default" localize=true classes="label-top" }}
         </div>
     </div>
@@ -44,7 +46,7 @@
             {{/if}}
 
             {{!-- Attunement --}}
-            {{ formInput fields.attunement value=source.attunement choices=config.attunementTypes
+            {{ formInput fields.attunement value=source.attunement choices=CONFIG.attunementTypes
                          blank="DND5E.AttunementNone" localize=true }}
         </div>
     </div>

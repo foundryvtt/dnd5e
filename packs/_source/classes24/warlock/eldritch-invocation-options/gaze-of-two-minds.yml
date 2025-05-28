@@ -1,0 +1,108 @@
+_id: phbinvGazeofTwoM
+name: Gaze of Two Minds
+type: feat
+img: icons/magic/perception/third-eye-blue-red.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 5+ Warlock</p></blockquote><p>You can
+      use a Bonus Action to touch a willing creature and perceive through its
+      senses until the end of your next turn. As long as the creature is on the
+      same plane of existence as you, you can take a Bonus Action on subsequent
+      turns to maintain this connection, extending the duration until the end of
+      your next turn. The connection ends if you don't maintain it in this
+      way.</p><p>While perceiving through the other creature's senses, you
+      benefit from any special senses possessed by that creature, and you can
+      cast spells as if you were in your space or the other creature's space if
+      the two of you are within 60 feet of each other.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 5
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    TqjZeWzJpT25ZX8s:
+      type: utility
+      name: Gaze of Two Minds
+      _id: TqjZeWzJpT25ZX8s
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: willing
+          special: Touch
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/damage/psychic.svg
+  enchant: {}
+  identifier: gaze-of-two-minds
+effects: []
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256762213
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvGazeofTwoM'

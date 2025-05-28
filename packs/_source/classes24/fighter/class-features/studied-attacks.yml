@@ -1,0 +1,56 @@
+_id: phbftrStudiedAtt
+name: Studied Attacks
+type: feat
+folder: xggTDaiQq26ZrVzJ
+img: icons/skills/melee/sword-engraved-glow-purple.webp
+system:
+  description:
+    value: >-
+      <p>You study your opponents and learn from each attack you make. If you
+      make an attack roll against a creature and miss, you have Advantage on
+      your next attack roll against that creature before the end of your next
+      turn.</p><section class="secret"
+      id="secret-JB6LwCHybmUrbihQ"><p><strong>Foundry Note</strong></p><p>This
+      feature does not automate the Advantage on your next attack
+      roll.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 13
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: studied-attacks
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866361253
+  modifiedTime: 1745256761746
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftrStudiedAtt'

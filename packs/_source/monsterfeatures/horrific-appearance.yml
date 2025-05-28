@@ -1,0 +1,124 @@
+_id: YShGyidij4sLpyzF
+name: Horrific Appearance
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>Any humanoid that starts its turn <strong>within 30 feet</strong> of
+      the [[lookup @name lowercase]] and can see the [[lookup @name
+      lowercase]]'s true form must make a <strong>DC 11 Wisdom saving
+      throw</strong>. On a failed save, the creature is frightened for <strong>1
+      minute</strong>. A creature can repeat the saving throw at the end of each
+      of its turns, with<strong> disadvantage </strong>if the hag is within line
+      of sight, ending the effect on itself on a success.</p><p>If a creature's
+      saving throw is successful or the effect ends for it, the creature is
+      immune to the [[lookup @name lowercase]]'s Horrific Appearance for the
+      next 24 hours<strong>. </strong>Unless the target is surprised or the
+      revelation of the hag's true form is sudden, the target can avert its eyes
+      and avoid making the initial saving throw. Until the start of its next
+      turn, a creature that averts its eyes has<strong> disadvantage </strong>on
+      attack rolls against the [[lookup @name lowercase]].</p>
+
+      </section>
+
+      <p>Any humanoid that starts its turn <strong>within 30 feet</strong> of
+      the [[lookup @name lowercase]] and can see the [[lookup @name
+      lowercase]]'s true form must make a <strong>Wisdom</strong> saving
+      throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '30'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: ''
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: horrific-appearance
+flags: {}
+img: icons/creatures/unholy/demon-winged-cyclops-drooling.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304972740
+  modifiedTime: 1725992573233
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!YShGyidij4sLpyzF'

@@ -1,0 +1,60 @@
+_id: phbdrdDruidic000
+name: Druidic
+type: feat
+folder: EXYmwRGoNyMbByN1
+img: icons/commodities/treasure/token-runed-circle-green.webp
+system:
+  description:
+    value: >-
+      <p>You know Druidic, the secret language of Druids. While learning this
+      ancient tongue, you also unlocked the magic of communicating with animals;
+      you always have the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplSpeakwithA]{Speak with Animals}
+      spell prepared.</p><p>You can use Druidic to leave hidden messages. You
+      and others who know Druidic automatically spot such a message. Others spot
+      the message's presence with a successful [[/check inv 15]] check but can't
+      decipher it without magic.</p><section class="secret"
+      id="secret-5uD3Qi61JX7q2Fk8"><p><strong>Foundry
+      Note</strong></p><p>Druidic and Speak with Animals are automatically added
+      during advancement.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: Druid
+  activities: {}
+  enchant: {}
+  identifier: druidic
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866366918
+  modifiedTime: 1745256761069
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 300000
+ownership:
+  default: 0
+_key: '!items!phbdrdDruidic000'

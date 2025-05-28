@@ -1,0 +1,48 @@
+name: Mirror
+system:
+  description:
+    value: >-
+      <p>A handheld steel Mirror is useful for personal cosmetics but also for
+      peeking around corners and reflecting light as a signal.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: mirror
+_id: phbagMirror00000
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/survival/mirror-plain.webp
+effects: []
+sort: 3900000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425910222
+  modifiedTime: 1745256812354
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagMirror00000'

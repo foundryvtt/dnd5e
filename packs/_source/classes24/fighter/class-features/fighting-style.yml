@@ -1,0 +1,55 @@
+_id: phbftrFightingSt
+name: Fighting Style
+type: feat
+folder: xggTDaiQq26ZrVzJ
+img: icons/skills/melee/hand-grip-staff-blue.webp
+system:
+  description:
+    value: >-
+      <p>You have honed your martial prowess and gain a
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.sbHImaCB8ZMEHYkb]{Fighting
+      Style feat} of your choice.
+      @UUID[Compendium.dnd5e.feats24.Item.phbfstDefense000]{Defense} is
+      recommended.</p><p>Whenever you gain a Fighter level, you can replace the
+      feat you chose with a different Fighting Style feat.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: fighting-style
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866361253
+  modifiedTime: 1745256761597
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftrFightingSt'

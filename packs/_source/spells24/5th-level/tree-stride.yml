@@ -1,0 +1,124 @@
+name: Tree Stride
+system:
+  description:
+    value: >-
+      <p>You gain the ability to enter a tree and move from inside it to inside
+      another tree of the same kind within 500 feet. Both trees must be living
+      and at least the same size as you. You must use 5 feet of movement to
+      enter a tree. You instantly know the location of all other trees of the
+      same kind within 500 feet and, as part of the move used to enter the tree,
+      can either pass into one of those trees or step out of the tree you're in.
+      You appear in a spot of your choice within 5 feet of the destination tree,
+      using another 5 feet of movement. If you have no movement left, you appear
+      within 5 feet of the tree you entered.</p><p>You can use this
+      transportation ability only once on each of your turns. You must end each
+      turn outside a tree.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 5
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    vcosPna67heYEKpl:
+      type: utility
+      name: ''
+      _id: vcosPna67heYEKpl
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  identifier: tree-stride
+_id: phbsplTreeStride
+type: spell
+img: icons/magic/nature/tree-spirit-blue.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 100782
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425976015
+  modifiedTime: 1745256799353
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplTreeStride'

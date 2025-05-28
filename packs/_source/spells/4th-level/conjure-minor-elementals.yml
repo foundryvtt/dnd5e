@@ -1,0 +1,158 @@
+_id: KgEw3sDr39C6g8nY
+name: Conjure Minor Elementals
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: "<p>You summon elementals that appear in unoccupied spaces that you can see within range. You choose one the following options for what appears:</p>\n<ul>\n<li>One elemental of challenge rating 2 or lower</li>\n<li>Two elementals of challenge rating 1 or lower</li>\n<li>Four elementals of challenge rating 1/2 or lower</li>\n<li>Eight elementals of challenge rating 1/4 or lower.</li>\n</ul>\n<p>An elemental summoned by this spell disappears when it drops to 0 hit points or when the spell ends.</p><p>The summoned creatures are friendly to you and your companions. Roll initiative for the summoned creatures as a group, which has its own turns. They obey any verbal commands that you issue to them (no action required by you). If you don't issue any commands to them, they defend themselves from hostile creatures, but otherwise take no actions.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using certain higher-level spell slots, you choose one of the summoning options above, and more creatures appear: twice as many with a 6th-level slot and three times as many with an 8th-level slot.</p>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: space
+      choice: false
+    template:
+      units: any
+      contiguous: false
+  range:
+    value: '90'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: 1 * min(3, floor((@item.level - 2) / 2))
+          cr: '2'
+          name: ''
+          _id: GXYOvyt5u1zbrtH5
+          uuid: ''
+          level:
+            min: null
+            max: null
+          types:
+            - elemental
+        - count: 2 * min(3, floor((@item.level - 2) / 2))
+          cr: '1'
+          name: ''
+          _id: ip4lVc7sx8WcM7Vd
+          uuid: ''
+          level:
+            min: null
+            max: null
+          types:
+            - elemental
+        - count: 4 * min(3, floor((@item.level - 2) / 2))
+          cr: '0.5'
+          name: ''
+          _id: 1jJHfKlD44tW61sJ
+          uuid: ''
+          level:
+            min: null
+            max: null
+          types:
+            - elemental
+        - count: 8 * min(3, floor((@item.level - 2) / 2))
+          cr: '0.25'
+          name: ''
+          _id: 7sGiKZLEAIU83Lqx
+          uuid: ''
+          level:
+            min: null
+            max: null
+          types:
+            - elemental
+      summon:
+        identifier: ''
+        mode: cr
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: conjure-minor-elementals
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-star-orange.webp
+effects: []
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037353557
+  modifiedTime: 1725992718973
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!KgEw3sDr39C6g8nY'

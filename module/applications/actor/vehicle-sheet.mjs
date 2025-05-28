@@ -1,4 +1,4 @@
-import ActorSheet5e from "./base-sheet.mjs";
+import ActorSheet5e from "./deprecated/base-sheet.mjs";
 
 /**
  * An Actor sheet for Vehicle type actors.
@@ -52,16 +52,17 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     context.toggleTitle = game.i18n.localize(`DND5E.${isCrewed ? "Crewed" : "Uncrewed"}`);
 
     // Handle crew actions
-    if ( item.type === "feat" && item.system.activation.type === "crew" ) {
-      context.cover = game.i18n.localize(`DND5E.${item.system.cover ? "CoverTotal" : "None"}`);
-      if ( item.system.cover === .5 ) context.cover = "½";
+    const hasCrewedActivation = item.system.activities?.contents[0]?.activation.type === "crew";
+    if ( (item.type === "feat") && hasCrewedActivation ) {
+      if ( item.system.cover === 1 ) context.cover = game.i18n.localize("DND5E.CoverTotal");
+      else if ( item.system.cover === .5 ) context.cover = "½";
       else if ( item.system.cover === .75 ) context.cover = "¾";
-      else if ( item.system.cover === null ) context.cover = "—";
+      else context.cover = "—";
     }
 
     // Prepare vehicle weapons
     if ( (item.type === "equipment") || (item.type === "weapon") ) {
-      context.threshold = item.system.hp.dt ? item.system.hp.dt : "—";
+      context.threshold = item.system.hp?.dt ? item.system.hp.dt : "—";
     }
   }
 
@@ -205,10 +206,14 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
           features.equipment.items.push(item);
           break;
         case "feat":
-          const act = item.system.activation;
-          if ( !act.type || (act.type === "none") ) features.passive.items.push(item);
-          else if (act.type === "reaction") features.reactions.items.push(item);
+          const act = item.system.activities?.contents[0] ?? {};
+          if ( !act.activation?.type || (act.activation?.type === "none") ) features.passive.items.push(item);
+          else if (act.activation?.type === "reaction") features.reactions.items.push(item);
           else features.actions.items.push(item);
+          ctx.hasRecharge = item.system.uses?.recovery?.find(r => r.period === "recharge")
+            || act.uses?.recovery?.find(r => r.period === "recharge");
+          break;
+        case "spell":
           break;
         default:
           cargo.cargo.items.push(item);
@@ -241,6 +246,13 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     if (this.actor.system.attributes.actions.stations) {
       html.find(".counter.actions, .counter.action-thresholds").hide();
     }
+
+    html[0].addEventListener("inventory", event => {
+      if ( event.detail !== "crew" ) return;
+      event.preventDefault();
+      const item = this.actor.items.get(event.target.closest("[data-item-id]")?.dataset?.itemId);
+      item?.update({ "system.crewed": !item.system.crewed });
+    });
   }
 
   /* -------------------------------------------- */
@@ -305,10 +317,10 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropSingleItem(itemData) {
+  async _onDropSingleItem(itemData, event) {
     const cargoTypes = ["weapon", "equipment", "consumable", "tool", "loot", "container"];
     const isCargo = cargoTypes.includes(itemData.type) && (this._tabs[0].active === "cargo");
     foundry.utils.setProperty(itemData, "flags.dnd5e.vehicleCargo", isCargo);
-    return super._onDropSingleItem(itemData);
+    return super._onDropSingleItem(itemData, event);
   }
 }

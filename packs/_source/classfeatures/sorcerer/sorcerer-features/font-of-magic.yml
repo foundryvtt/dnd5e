@@ -1,0 +1,169 @@
+_id: LBKChJY5n02Afhnq
+name: Font of Magic
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: "<p>At 2nd level, you tap into a deep wellspring of magic within yourself. This wellspring is represented by sorcery points, which allow you to create a variety of magical effects.</p><h5>Sorcery Points</h5><p>You have 2 sorcery points, and you gain more as you reach higher levels. Your sorcerer level equals the number of sorcery points you have, so a 4th level sorcerer has 4 sorcery points, a 16th level sorcerer has 16. You can never have more sorcery points than your level dictates.\_ You regain all spent sorcery points when you finish a long rest.</p><h5>Flexible Casting</h5><p>You can use your sorcery points to gain additional spell slots, or sacrifice spell slots to gain additional sorcery points. You learn other ways to use your sorcery points as you reach higher levels.</p><p><em><strong>Creating Spell Slots</strong>.</em>You can transform unexpended sorcery points into one spell slot as a bonus action on your turn. The Creating Spell Slots table shows the cost of creating a spell slot of a given level. You can create spell slots no higher in level than 5th.</p><p>Any spell slot you create with this feature vanishes when you finish a long rest.</p><table><caption>Creating Spell Slots</caption><thead><tr><td><strong>Spell Slot Level</strong></td><td><strong>Sorcery Point Cost</strong></td></tr></thead><tbody><tr><td>1st</td><td>2</td></tr><tr><td>2nd</td><td>3</td></tr><tr><td>3rd</td><td>5</td></tr><tr><td>4th</td><td>6</td></tr><tr><td>5th</td><td>7</td></tr></tbody></table><p><em><strong>Converting a Spell Slot to Sorcery Points</strong>. </em>As a bonus action on your turn, you can expend one spell slot and gain a number of sorcery points equal to the slot's level.</p><section class=\"secret foundry-note\" id=\"secret-6nrlbnZxIbKqf5Ul\"><p><strong>Foundry Note</strong></p><p>Use this to track all the various uses of sorcery points for the sorcerer.</p></section>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '@classes.sorcerer.levels'
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Sorcerer 2
+  properties: []
+  activities:
+    EHLXN6WrPpxg0pRN:
+      type: utility
+      name: Regain Spell Slot
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '5'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: 1 + @scaling + floor(@scaling / 3)
+            target: ''
+            scaling:
+              mode: ''
+          - type: spellSlots
+            value: '-1'
+            target: '1'
+            scaling:
+              mode: level
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/damage/force.svg
+      _id: EHLXN6WrPpxg0pRN
+    72ZtIT83h5t5iHHC:
+      type: utility
+      name: Regain Sorcery Points
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '9'
+        spellSlot: true
+        targets:
+          - type: spellSlots
+            value: '1'
+            target: '1'
+            scaling:
+              mode: level
+              formula: ''
+          - type: itemUses
+            value: 0 - @scaling
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/activity/heal.svg
+      _id: 72ZtIT83h5t5iHHC
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: font-of-magic
+sort: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+img: icons/magic/control/silhouette-hold-change-blue.webp
+effects: []
+folder: s3pztJl6gzeYmXdi
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.3.0
+  createdTime: 1725037382917
+  modifiedTime: 1738906913202
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!LBKChJY5n02Afhnq'

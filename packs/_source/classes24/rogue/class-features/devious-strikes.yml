@@ -1,0 +1,338 @@
+_id: phbrgeDeviousStr
+name: Devious Strikes
+type: feat
+folder: ymTkGscp5QEOwDlv
+img: icons/skills/melee/strike-sword-stabbed-brown.webp
+system:
+  description:
+    value: >-
+      <p>You've practiced new ways to use your Sneak Attack deviously. The
+      following effects are now among your Cunning Strike
+      options.</p><p><strong>Daze (Cost: 2d6).</strong> The target must succeed
+      on a Constitution saving throw, or on its next turn, it can do only one of
+      the following: move or take an action or a Bonus
+      Action.</p><p><strong>Knock Out (Cost: 6d6).</strong> The target must
+      succeed on a Constitution saving throw, or it has the
+      &amp;Reference[Unconscious] condition for 1 minute or until it takes any
+      damage. The Unconscious target repeats the save at the end of each of its
+      turns, ending the effect on itself on a success.</p><p><strong>Obscure
+      (Cost: 3d6).</strong> The target must succeed on a Dexterity saving throw,
+      or it has the &amp;Reference[Blinded] condition until the end of its next
+      turn.</p><section class="secret"
+      id="secret-1jUuw8B9GvVx5ctH"><p><strong>Foundry Note</strong></p><p>After
+      using Cunning Strike effects use the [[/item Cunning Strike
+      activity=Cunning Sneak Attack]]{Cunning Sneak Attack} activity. It will
+      prompt you to select how many dice you expended on effects and deduct them
+      from your Sneak Attack roll automatically.</p><p>You can control the
+      damage type in the damage roll dialog box.</p><p>The <strong>Daze</strong>
+      activity includes an Active Effect for tracking the dazed target but it
+      does not automate the effect.</p><p>The <strong>Knock Out</strong>
+      activity includes an Active Effect which applies the Unconscious
+      condition.</p><p>The <strong>Obscure</strong> activity includes an Active
+      Effect which applies the Blinded condition.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 14
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    4TnBjQTJzt9UjUos:
+      type: save
+      name: Daze
+      _id: 4TnBjQTJzt9UjUos
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you deal Sneak Attack damage
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: wWFV1p8u9C1TUPg5
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability:
+          - con
+        dc:
+          calculation: dex
+          formula: ''
+    3eq7lcmpkJJBU2KO:
+      type: save
+      name: Knock Out
+      _id: 3eq7lcmpkJJBU2KO
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you deal Sneak Attack damage
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: C2IGgt4PnRMxZVey
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability:
+          - con
+        dc:
+          calculation: dex
+          formula: ''
+    ki4lIPVGNA0HjEzH:
+      type: save
+      name: Obscure
+      _id: ki4lIPVGNA0HjEzH
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you deal Sneak Attack damage
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Fb1n6Yk2MlOAckf0
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: dex
+          formula: ''
+  enchant: {}
+  identifier: devious-strikes
+effects:
+  - name: 'Devious Strikes: Dazed'
+    img: icons/skills/melee/strike-sword-stabbed-brown.webp
+    origin: Compendium.dnd5e.classes24.Item.phbrgeDeviousStr
+    transfer: false
+    _id: wWFV1p8u9C1TUPg5
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>On its next turn, the target can do only one of the following: move or
+      take an action or a Bonus Action.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbrgeDeviousStr.wWFV1p8u9C1TUPg5'
+  - name: 'Devious Strikes: Knocked Out'
+    img: icons/skills/melee/strike-sword-stabbed-brown.webp
+    origin: Compendium.dnd5e.classes24.Item.phbrgeDeviousStr
+    transfer: false
+    _id: C2IGgt4PnRMxZVey
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the Unconscious condition for 1 minute or until it takes
+      any damage. The Unconscious target repeats the save at the end of each of
+      its turns, ending the effect on itself on a success.</p>
+    tint: '#ffffff'
+    statuses:
+      - unconscious
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbrgeDeviousStr.C2IGgt4PnRMxZVey'
+  - name: 'Devious Strikes: Blinded'
+    img: icons/skills/melee/strike-sword-stabbed-brown.webp
+    origin: Compendium.dnd5e.classes24.Item.phbrgeDeviousStr
+    transfer: false
+    _id: Fb1n6Yk2MlOAckf0
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: <p>The target has the Blinded condition until the end of its next turn</p>
+    tint: '#ffffff'
+    statuses:
+      - blinded
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbrgeDeviousStr.Fb1n6Yk2MlOAckf0'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866292069
+  modifiedTime: 1745256764196
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeDeviousStr'

@@ -1,0 +1,115 @@
+_id: 1nhIxh0DsJsntCfj
+name: Knock
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Choose an object that you can see within range. The object can be a
+      door, a box, a chest, a set of Manacles, a padlock, or another object that
+      contains a mundane or magical means that prevents access.</p><p>A target
+      that is held shut by a mundane lock or that is stuck or barred becomes
+      unlocked, unstuck, or unbarred. If the object has multiple locks, only one
+      of them is unlocked.</p><p>If you choose a target that is held shut with
+      Arcane Lock, that spell is suppressed for 10 minutes, during which time
+      the target can be opened and shut normally.</p><p>When you cast the spell,
+      a loud knock, audible from as far away as 300 feet, emanates from the
+      target object.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: object
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: knock
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-triangle-orange.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037345836
+  modifiedTime: 1725992716536
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!1nhIxh0DsJsntCfj'

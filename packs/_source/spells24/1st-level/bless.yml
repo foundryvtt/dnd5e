@@ -1,0 +1,171 @@
+name: Bless
+system:
+  description:
+    value: >-
+      <p>You bless up to three creatures within range. Whenever a target makes
+      an attack roll or a saving throw before the spell ends, the target adds
+      1d4 to the attack roll or save.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> You can target one additional creature for each spell slot
+      level above 1.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: 2 + @item.level
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: enc
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a Holy Symbol worth 5+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: 1dzvDffEh8wZ0oQy
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: bless
+_id: phbsplBless00000
+type: spell
+img: icons/magic/holy/prayer-hands-glowing-yellow-white.webp
+effects:
+  - _id: 1dzvDffEh8wZ0oQy
+    flags: {}
+    changes:
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: 1d4
+        priority: null
+      - key: system.bonuses.mwak.attack
+        mode: 2
+        value: 1d4
+        priority: null
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: 1d4
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: 1d4
+        priority: null
+      - key: system.bonuses.rwak.attack
+        mode: 2
+        value: 1d4
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      rounds: 10
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.spells24.Item.phbsplBless00000
+    tint: '#ffffff'
+    transfer: false
+    name: Blessed
+    description: >-
+      <p>Whenever a target makes an attack roll or a saving throw before the
+      spell ends, the target adds 1d4 to the attack roll or save.</p>
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr.ActiveEffect.8rP3gwmXVTgZqYZE
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/holy/chalice-glowing-gold-water.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbsplBless00000.1dzvDffEh8wZ0oQy'
+folder: pBaAAtXBCq9FVEnL
+sort: 5200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425943614
+  modifiedTime: 1740685851017
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplBless00000'

@@ -1,16 +1,18 @@
 /**
  * The detection mode for Blindsight.
  */
-export class DetectionModeBlindsight extends DetectionMode {
+export class DetectionModeBlindsight extends foundry.canvas.perception.DetectionMode {
   constructor() {
     super({
       id: "blindsight",
       label: "DND5E.SenseBlindsight",
-      type: DetectionMode.DETECTION_TYPES.OTHER,
+      type: (foundry.canvas?.perception?.DetectionMode ?? DetectionMode).DETECTION_TYPES.OTHER,
       walls: true,
       angle: false
     });
   }
+
+  /* -------------------------------------------- */
 
   /** @override */
   static getDetectionFilter() {
@@ -21,14 +23,18 @@ export class DetectionModeBlindsight extends DetectionMode {
     });
   }
 
+  /* -------------------------------------------- */
+
   /** @override */
   _canDetect(visionSource, target) {
     if ( visionSource.object.document.hasStatusEffect(CONFIG.specialStatusEffects.BURROW) ) return false;
-    if ( target instanceof Token ) {
+    if ( target instanceof foundry.canvas.placeables.Token ) {
       if ( target.document.hasStatusEffect(CONFIG.specialStatusEffects.BURROW) ) return false;
     }
     return true;
   }
+
+  /* -------------------------------------------- */
 
   /** @override */
   _testLOS(visionSource, mode, target, test) {

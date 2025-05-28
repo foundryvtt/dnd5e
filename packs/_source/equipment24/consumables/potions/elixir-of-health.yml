@@ -1,0 +1,129 @@
+_id: dmgElixirOfHealt
+name: Elixir of Health
+type: consumable
+folder: 4NjJfCbRAVhw8ESv
+img: icons/consumables/potions/potion-flask-corked-shiny-red.webp
+system:
+  activities:
+    KGZw6qZsVqtfC19a:
+      type: utility
+      _id: KGZw6qZsVqtfC19a
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Utilize
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <div><p><em>Potion, Rare</em></p></div><p>When you drink this potion, you
+      are cured of all magical contagions. In addition, the following conditions
+      end on you: &amp;Reference[Blinded apply=false], &amp;Reference[Deafened
+      apply=false], &amp;Reference[Paralyzed apply=false], and
+      &amp;Reference[Poisoned apply=false].</p><p>The clear, red liquid has tiny
+      bubbles of light in it.</p>
+    chat: ''
+  identifier: elixir-of-health
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: potion
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.1
+  createdTime: 1727883376108
+  modifiedTime: 1746118225931
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgElixirOfHealt'

@@ -1,0 +1,169 @@
+name: Word of Recall
+system:
+  description:
+    value: >-
+      <p>You and up to five willing creatures within 5 feet of you instantly
+      teleport to a previously designated sanctuary. You and any creatures that
+      teleport with you appear in the nearest unoccupied space to the spot you
+      designated when you prepared your sanctuary (see below). If you cast this
+      spell without first preparing a sanctuary, the spell has no
+      effect.</p><p>You must designate a location, such as a temple, as a
+      sanctuary by casting this spell there.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '6'
+      type: willing
+      special: you and five other creatures
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '5'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: con
+  properties:
+    - vocal
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    fErYiqUpSCDHfV61:
+      type: utility
+      _id: fErYiqUpSCDHfV61
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Teleport to Sanctuary
+      img: systems/dnd5e/icons/svg/trait-saves.svg
+      appliedEffects: []
+    CJ6NOsqtoO3HCGjQ:
+      type: utility
+      name: Designate Sanctuary
+      _id: CJ6NOsqtoO3HCGjQ
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/items/background.svg
+      appliedEffects: []
+  identifier: word-of-recall
+_id: phbsplWordofReca
+type: spell
+img: icons/magic/movement/portal-vortex-orange.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 100007
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425978529
+  modifiedTime: 1745256800278
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplWordofReca'

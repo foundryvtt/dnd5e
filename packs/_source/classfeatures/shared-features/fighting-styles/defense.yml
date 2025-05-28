@@ -1,0 +1,81 @@
+_id: zSlV0O2rQMdoq6pB
+name: Defense
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: <p>While you are wearing armor, you gain a +1 bonus to AC</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: fightingStyle
+  requirements: Fighter 1, Champion 10, Paladin 2, Ranger 2
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: defense
+flags: {}
+img: icons/equipment/shield/heater-stone-orange.webp
+effects:
+  - _id: U3so0zDcVt4sIBRz
+    flags: {}
+    changes:
+      - key: system.attributes.ac.bonus
+        value: '+1'
+        mode: 2
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.4mQUDmiDBePkQD6Y
+    tint: '#ffffff'
+    transfer: true
+    name: 'Fighting Style: Defense'
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/equipment/shield/heater-stone-orange.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!zSlV0O2rQMdoq6pB.U3so0zDcVt4sIBRz'
+folder: 159EPyqZTcus1HNJ
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037390653
+  modifiedTime: 1725992290669
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!zSlV0O2rQMdoq6pB'

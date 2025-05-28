@@ -1,0 +1,115 @@
+_id: 8cse7rit0oswRPUP
+name: Arcane Lock
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch a closed door, window, gate, chest, or other entryway, and it
+      becomes locked for the duration. You and the creatures you designate when
+      you cast this spell can open the object normally. You can also set a
+      password that, when spoken within 5 feet of the object, suppresses this
+      spell for 1 minute. Otherwise, it is impassable until it is broken or the
+      spell is dispelled or suppressed. Casting knock on the object suppresses
+      arcane lock for 10 minutes.</p><p>While affected by this spell, the object
+      is more difficult to break or force open; the DC to break it or pick any
+      locks on it increases by 10.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: disp
+  target:
+    affects:
+      type: object
+      count: '1'
+      choice: false
+    template:
+      units: spec
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: abj
+  materials:
+    value: Gold dust worth at least 25 gp, which the spell consumes.
+    consumed: true
+    cost: 25
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: arcane-lock
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-star-orange.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037348987
+  modifiedTime: 1725992717504
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!8cse7rit0oswRPUP'

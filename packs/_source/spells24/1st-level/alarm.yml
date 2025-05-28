@@ -1,0 +1,176 @@
+name: Alarm
+system:
+  description:
+    value: >-
+      <p>You set an alarm against intrusion. Choose a door, a window, or an area
+      within range that is no larger than a 20-foot Cube. Until the spell ends,
+      an alarm alerts you whenever a creature touches or enters the warded area.
+      When you cast the spell, you can designate creatures that won't set off
+      the alarm. You also choose whether the alarm is audible or
+      mental:</p><p><strong>Audible Alarm.</strong> The alarm produces the sound
+      of a handbell for 10 seconds within 60 feet of the warded
+      area.</p><p><strong>Mental Alarm.</strong> You are alerted by a mental
+      ping if you are within 1 mile of the warded area. This ping awakens you if
+      you're asleep.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ft
+      type: cube
+      size: '20'
+      contiguous: false
+      count: ''
+  range:
+    value: '30'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  materials:
+    value: a bell and silver wire
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Cast over Area
+      img: ''
+      appliedEffects: []
+    gXbhFkULaCTcB0WJ:
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+        concentration: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: cube
+          size: '5'
+          count: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: true
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Cast on Window or Door
+      _id: gXbhFkULaCTcB0WJ
+      img: ''
+      appliedEffects: []
+  identifier: alarm
+_id: phbsplAlarm00000
+type: spell
+img: icons/tools/instruments/bell-gold.webp
+effects: []
+folder: pBaAAtXBCq9FVEnL
+sort: 100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425940151
+  modifiedTime: 1745256785013
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplAlarm00000'

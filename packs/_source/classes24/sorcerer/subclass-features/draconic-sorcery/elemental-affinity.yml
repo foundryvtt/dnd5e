@@ -1,0 +1,340 @@
+_id: phbscrElementalA
+name: Elemental Affinity
+type: feat
+folder: wwMlXikGly63a6go
+img: icons/magic/symbols/elements-air-earth-fire-water.webp
+system:
+  description:
+    value: >-
+      <p>Your draconic magic has an affinity with a damage type associated with
+      dragons. Choose one of those types: Acid, Cold, Fire, Lightning, or
+      Poison.</p><p>You have Resistance to that damage type, and when you cast a
+      spell that deals damage of that type, you can add your Charisma modifier
+      to one damage roll of that spell.</p><section class="secret"
+      id="secret-3vHUORtVzoP6V4xF"><p><strong>Foundry Note</strong></p><p>You
+      will be prompted to choose the damage type as you level up. The additional
+      damage is not automatically added but this feature includes an activity
+      for each type of damage.</p><p>You can speed up use of this feature by
+      moving your chosen damage type to the top and it will be used
+      automatically when using this feature.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 6
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    RDl054AHObOn4Lf9:
+      type: damage
+      name: Acid
+      _id: RDl054AHObOn4Lf9
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you cast a spell that deals damage of your elemental affinity
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: '@abilities.cha.mod'
+            types:
+              - acid
+            scaling:
+              number: 1
+    8c416jhRGbwBaFtn:
+      type: damage
+      name: Cold
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you cast a spell that deals damage of your elemental affinity
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: '@abilities.cha.mod'
+            types:
+              - cold
+            scaling:
+              number: 1
+      _id: 8c416jhRGbwBaFtn
+    QtWZ4Z7tGn9FhBMI:
+      type: damage
+      name: Fire
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you cast a spell that deals damage of your elemental affinity
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: '@abilities.cha.mod'
+            types:
+              - fire
+            scaling:
+              number: 1
+      _id: QtWZ4Z7tGn9FhBMI
+    HIZjwCtrr9r9EDet:
+      type: damage
+      name: Lightning
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you cast a spell that deals damage of your elemental affinity
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: '@abilities.cha.mod'
+            types:
+              - lightning
+            scaling:
+              number: 1
+      _id: HIZjwCtrr9r9EDet
+    SV6ewryKJ1bBxeyD:
+      type: damage
+      name: Poison
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you cast a spell that deals damage of your elemental affinity
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: '@abilities.cha.mod'
+            types:
+              - poison
+            scaling:
+              number: 1
+      _id: SV6ewryKJ1bBxeyD
+  enchant: {}
+  identifier: elemental-affinity
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866556244
+  modifiedTime: 1745256765451
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbscrElementalA'

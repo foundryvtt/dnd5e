@@ -1,0 +1,57 @@
+_id: Ervkb8H99e2Beiae
+name: Vampire Weaknesses
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>the [[lookup @name lowercase]] has the following
+      flaws:</p><p><em>Forbiddance</em>. the [[lookup @name lowercase]] can't
+      enter a residence without an invitation from one of the occupants<strong>.
+      </strong></p><p><em>Harmed by Running Water</em>. the [[lookup @name
+      lowercase]] takes 20 <em>acid damage</em> if it ends its turn in running
+      water<strong>. </strong></p><p><em>Stake to the Heart</em>. If a piercing
+      weapon made of wood is driven into the [[lookup @name lowercase]]'s heart
+      while the [[lookup @name lowercase]] is incapacitated in its resting
+      place, the [[lookup @name lowercase]] is paralyzed until the stake is
+      removed.</p><p><em>Sunlight Hypersensitivity</em>. the [[lookup @name
+      lowercase]] takes 20 <em>radiant damage</em> when it starts its turn in
+      sunlight. While in sunlight, it has<strong> disadvantage </strong>on
+      attack rolls and ability checks.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: vampire-weaknesses
+flags: {}
+img: icons/magic/control/encase-creature-monster-hold.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304967830
+  modifiedTime: 1725992571679
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Ervkb8H99e2Beiae'

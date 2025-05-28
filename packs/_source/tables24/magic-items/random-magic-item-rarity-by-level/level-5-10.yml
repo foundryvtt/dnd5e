@@ -1,0 +1,111 @@
+_id: dmg510RandomMagi
+name: Level 5-10
+img: icons/svg/d20-grey.svg
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 30
+    drawn: false
+    _id: BfCedvnPTTAwkb1N
+    img: systems/dnd5e/icons/spell-tiers/spell1.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: Common
+    name: ''
+    _key: '!tables.results!dmg510RandomMagi.BfCedvnPTTAwkb1N'
+  - type: text
+    weight: 1
+    range:
+      - 31
+      - 81
+    drawn: false
+    _id: IwfBiK8JLRPOzRVP
+    img: systems/dnd5e/icons/spell-tiers/spell2.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: Uncommon
+    name: ''
+    _key: '!tables.results!dmg510RandomMagi.IwfBiK8JLRPOzRVP'
+  - type: text
+    weight: 1
+    range:
+      - 82
+      - 98
+    drawn: false
+    _id: Y59GJGrOrBcGmIMl
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: Rare
+    name: ''
+    _key: '!tables.results!dmg510RandomMagi.Y59GJGrOrBcGmIMl'
+  - type: text
+    weight: 1
+    range:
+      - 99
+      - 100
+    drawn: false
+    _id: rhVTXTughS2Dexzv
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: Very Rare
+    name: ''
+    _key: '!tables.results!dmg510RandomMagi.rhVTXTughS2Dexzv'
+replacement: true
+displayRoll: true
+folder: Iql5oCfKyncKTjZ1
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1730222847613
+  modifiedTime: 1731376915937
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+formula: 1d100
+sort: 50000
+ownership:
+  default: 0
+_key: '!tables!dmg510RandomMagi'

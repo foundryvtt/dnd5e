@@ -1,0 +1,138 @@
+_id: HBHbOGKNVVprSlwn
+name: Disintegrate
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A thin green ray springs from your pointing finger to a target that you
+      can see within range. The target can be a creature, an object, or a
+      creation of magical force, such as the wall created by wall of
+      force.</p><p>A creature targeted by this spell must make a Dexterity
+      saving throw. On a failed save, the target takes 10d6 + 40 force damage.
+      The target is disintegrated if this damage leaves it with 0 hit
+      points.</p><p>A disintegrated creature and everything it is wearing and
+      carrying, except magic items, are reduced to a pile of fine gray dust. The
+      creature can be restored to life only by means of a true resurrection or a
+      wish spell.</p><p>This spell automatically disintegrates a Large or
+      smaller nonmagical object or a creation of magical force. If the target is
+      a Huge or larger object or creation of force, this spell disintegrates a
+      10-foot-cube portion of it. A magic item is unaffected by this
+      spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell
+      using a spell slot of 7th level or higher, the damage increases by 3d6 for
+      each slot level above 6th.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: trs
+  materials:
+    value: A lodestone and a pinch of dust
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 10
+            denomination: 6
+            bonus: '40'
+            types:
+              - force
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 3
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: disintegrate
+sort: 0
+flags: {}
+img: icons/magic/unholy/strike-beam-blood-large-red-purple.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037352146
+  modifiedTime: 1725992718491
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!HBHbOGKNVVprSlwn'

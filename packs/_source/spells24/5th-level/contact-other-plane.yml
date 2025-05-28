@@ -1,0 +1,136 @@
+name: Contact Other Plane
+system:
+  description:
+    value: >-
+      <p>You mentally contact a demigod, the spirit of a long-dead sage, or some
+      other knowledgeable entity from another plane. Contacting this
+      otherworldly intelligence can break your mind. When you cast this spell,
+      make a DC 15 Intelligence saving throw. On a successful save, you can ask
+      the entity up to five questions. You must ask your questions before the
+      spell ends. The DM answers each question with one word, such as "yes,"
+      "no," "maybe," "never," "irrelevant," or "unclear" (if the entity doesn't
+      know the answer to the question). If a one-word answer would be
+      misleading, the DM might instead offer a short phrase as an
+      answer.</p><p>On a failed save, you take 6d6 Psychic damage and have the
+      &amp;Reference[Incapacitated] condition until you finish a Long Rest. A
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
+      Restoration}</em> spell cast on you ends this effect.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: div
+  properties:
+    - vocal
+    - ritual
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 6
+            denomination: 6
+            bonus: ''
+            types:
+              - psychic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: int
+        dc:
+          calculation: custom
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: contact-other-plane
+_id: phbsplContactOth
+type: spell
+img: icons/creatures/magical/spirit-fear-energy-pink.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 2700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425947349
+  modifiedTime: 1745256789006
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplContactOth'

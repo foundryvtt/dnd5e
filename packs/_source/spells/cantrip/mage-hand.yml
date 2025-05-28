@@ -1,0 +1,134 @@
+_id: Utk1OQRwYkMkFRD3
+name: Mage Hand
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A spectral, floating hand appears at a point you choose within range.
+      The hand lasts for the duration or until you dismiss it as an action. The
+      hand vanishes if it is ever more than 30 feet away from you or if you cast
+      this spell again.</p><p>You can use your action to control the hand. You
+      can use the hand to manipulate an object, open an unlocked door or
+      container, stow or retrieve an item from an open container, or pour the
+      contents out of a vial. You can move the hand up to 30 feet each time you
+      use it.</p><p>The hand can't attack, activate magic items, or carry more
+      than 10 pounds.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - name: ''
+          _id: H4LmY7OuwtEQFipO
+          uuid: Compendium.dnd5e.monsters.Actor.zwT2WjWo7cTm2631
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: mage-hand
+sort: 0
+flags: {}
+img: icons/magic/water/water-hand.webp
+effects: []
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037357436
+  modifiedTime: 1725992720244
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Utk1OQRwYkMkFRD3'

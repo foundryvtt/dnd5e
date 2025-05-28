@@ -1,0 +1,171 @@
+_id: LrPvWHBPmiMQQsKB
+name: Dominate Beast
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You attempt to beguile a beast that you can see within range. It must
+      succeed on a Wisdom saving throw or be &amp;Reference[charmed] by you for
+      the duration. If you or creatures that are friendly to you are fighting
+      it, it has advantage on the saving throw.</p><p>While the beast is
+      charmed, you have a telepathic link with it as long as the two of you are
+      on the same plane of existence. You can use this telepathic link to issue
+      commands to the creature while you are conscious (no action required),
+      which it does its best to obey. You can specify a simple and general
+      course of action, such as "Attack that creature," "Run over there," or
+      "Fetch that object." If the creature completes the order and doesn't
+      receive further direction from you, it defends and preserves itself to the
+      best of its ability.</p><p>You can use your action to take total and
+      precise control of the target. Until the end of your next turn, the
+      creature takes only the actions you choose, and doesn't do anything that
+      you don't allow it to do. During this time, you can also cause the
+      creature to use a reaction, but this requires you to use your own reaction
+      as well.</p><p>Each time the target takes damage, it makes a new Wisdom
+      saving throw against the spell. If the saving throw succeeds, the spell
+      ends.</p><p><strong>At Higher Levels.</strong> When you cast this spell
+      with a 5th-level spell slot, the duration is concentration, up to 10
+      minutes. When you use a 6th-level spell slot, the duration is
+      concentration, up to 1 hour. When you use a spell slot of 7th level or
+      higher, the duration is concentration, up to 8 hours.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: enc
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: fX9KJAQYigkiCMhL
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: dominate-beast
+sort: 0
+flags: {}
+img: icons/magic/air/air-burst-spiral-large-teal-green.webp
+effects:
+  - name: Dominate Beast
+    origin: Compendium.dnd5e.spells.Item.LrPvWHBPmiMQQsKB
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: fX9KJAQYigkiCMhL
+    changes: []
+    description: >-
+      <p>The target is Charmed and must do its best to obey any commands send by
+      the caster.</p>
+    transfer: false
+    statuses:
+      - charmed
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/air/air-burst-spiral-large-teal-green.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!LrPvWHBPmiMQQsKB.fX9KJAQYigkiCMhL'
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037354259
+  modifiedTime: 1725992719201
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!LrPvWHBPmiMQQsKB'

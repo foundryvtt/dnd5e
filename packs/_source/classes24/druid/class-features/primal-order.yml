@@ -1,0 +1,59 @@
+_id: phbdrdPrimalOrde
+name: Primal Order
+type: feat
+folder: EXYmwRGoNyMbByN1
+img: icons/magic/nature/leaf-juggle-humanoid-green.webp
+system:
+  description:
+    value: >-
+      <p>You have dedicated yourself to one of the following sacred roles of
+      your choice.</p><p><strong>Magician.</strong> You know one extra cantrip
+      from the Druid spell list. In addition, your mystical connection to nature
+      gives you a bonus to your Intelligence (Arcana or Nature) checks. The
+      bonus equals your Wisdom modifier (minimum bonus of
+      +1).</p><p><strong>Warden.</strong> Trained for battle, you gain
+      proficiency with Martial weapons and training with Medium
+      armor.</p><section id="secret-SgYOtpnQW9hL4WJ8"
+      class="secret"><p><strong>Foundry Note</strong></p><p>You will be prompted
+      to choose during advancement.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: Druid
+  activities: {}
+  enchant: {}
+  identifier: primal-order
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866366918
+  modifiedTime: 1745256761285
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 700000
+ownership:
+  default: 0
+_key: '!items!phbdrdPrimalOrde'

@@ -1,0 +1,113 @@
+_id: wXzkqpeFP8eWgJzK
+name: Antilife Shell
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A shimmering barrier extends out from you in a 10-foot radius and moves
+      with you, remaining centered on you and hedging out creatures other than
+      undead and constructs. The barrier lasts for the duration.</p><p>The
+      barrier prevents an affected creature from passing or reaching through. An
+      affected creature can cast spells or make attacks with ranged or reach
+      weapons through the barrier.</p><p>If you move so that an affected
+      creature is forced to pass through the barrier, the spell ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: radius
+      size: '10'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: abj
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: antilife-shell
+sort: 0
+flags: {}
+img: icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037366436
+  modifiedTime: 1725992723347
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!wXzkqpeFP8eWgJzK'

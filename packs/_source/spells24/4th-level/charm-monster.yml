@@ -1,0 +1,157 @@
+name: Charm Monster
+system:
+  description:
+    value: >-
+      <p>One creature you can see within range makes a Wisdom saving throw. It
+      does so with Advantage if you or your allies are fighting it. On a failed
+      save, the target has the &amp;Reference[Charmed apply=false] condition
+      until the spell ends or until you or your allies damage it. The Charmed
+      creature is Friendly to you. When the spell ends, the target knows it was
+      Charmed by you.</p><p><strong>Using a Higher-Level Spell Slot.</strong>You
+      can target one additional creature for each spell slot level above 4.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '@item.level - 3'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: enc
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: CB1jIPB4yINOpjQX
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: charm-monster
+_id: phbsplCharmMonst
+type: spell
+img: icons/creatures/magical/humanoid-silhouette-glowing-pink.webp
+effects:
+  - name: Charmed
+    origin: Compendium.dnd5e.spells24.Item.phbsplCharmMonst
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/statuses/charmed.svg
+    _id: CB1jIPB4yINOpjQX
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The target has the &amp;Reference[Charmed apply=false] condition until
+      the spell ends or until you or your allies damage it. The Charmed creature
+      is Friendly to you. When the spell ends, the target knows it was Charmed
+      by you.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - charmed
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplCharmMonst.CB1jIPB4yINOpjQX'
+folder: qi3IbnEwap7mRw4b
+sort: 3400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425944531
+  modifiedTime: 1745256787596
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplCharmMonst'

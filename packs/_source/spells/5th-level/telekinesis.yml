@@ -1,0 +1,132 @@
+_id: HQfd7jJyULIoGxrZ
+name: Telekinesis
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You gain the ability to move or manipulate creatures or objects by
+      thought. When you cast the spell, and as your action each round for the
+      Duration, you can exert your will on one creature or object that you can
+      see within range, causing the appropriate effect below. You can affect the
+      same target round after round, or choose a new one at any time. If you
+      switch targets, the prior target is no longer affected by the
+      spell.</p><p><strong>Creature</strong>. You can try to move a Huge or
+      smaller creature. Make an ability check with your spellcasting ability
+      contested by the creature's Strength check. If you win the contest, you
+      move the creature up to 30 feet in any direction, including upward but not
+      beyond the range of this spell. Until the end of your next turn, the
+      creature is Restrained in your telekinetic grip. A creature lifted upward
+      is suspended in mid-air.</p><p>On subsequent rounds, you can use your
+      action to attempt to maintain your telekinetic grip on the creature by
+      repeating the contest.</p><p><strong>Object</strong>. You can try to move
+      an object that weighs up to 1,000 pounds. If the object isn't being worn
+      or carried, you automatically move it up to 30 feet in any direction, but
+      not beyond the range of this spell.</p><p>If the object is worn or carried
+      by a creature, you must make an ability check with your Spellcasting
+      ability contested by that creature's Strength check. If you succeed, you
+      pull the object away from that creature and can move it up to 30 feet in
+      any direction but not beyond the range of this spell.</p><p>You can exert
+      fine control on Objects with your telekinetic grip, such as manipulating a
+      simple tool, opening a door or a container, stowing or retrieving an item
+      from an open container, or pouring the contents from a vial.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: trs
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: telekinesis
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-energy-hold-levitate-yellow.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037352291
+  modifiedTime: 1725992718559
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!HQfd7jJyULIoGxrZ'

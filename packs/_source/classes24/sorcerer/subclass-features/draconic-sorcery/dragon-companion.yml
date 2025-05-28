@@ -1,0 +1,111 @@
+_id: phbscrDragonComp
+name: Dragon Companion
+type: feat
+folder: wwMlXikGly63a6go
+img: icons/creatures/abilities/dragon-fire-breath-orange.webp
+system:
+  description:
+    value: >-
+      <p>You can cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplSummonDrag]{Summon Dragon}
+      without a Material component. You can also cast it once without a spell
+      slot, and you regain the ability to cast it in this way when you finish a
+      Long Rest.</p><p>Whenever you start casting the spell, you can modify it
+      so that it doesn't require Concentration. If you do so, the spell's
+      duration becomes 1 minute for that casting.</p><section
+      id="secret-dxl0rjuVblJvTXgy" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature can be used for tracking your free usage.
+      When you cast the spell you can uncheck the "Consumption" box and,
+      optionally, the "Concentration" box.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '1'
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 18
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    8HTVZ32kirDLNqOu:
+      type: utility
+      name: Expend Use
+      _id: 8HTVZ32kirDLNqOu
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: dragon-companion
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866556244
+  modifiedTime: 1745256765404
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbscrDragonComp'

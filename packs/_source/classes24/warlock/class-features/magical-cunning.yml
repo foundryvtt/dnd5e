@@ -1,0 +1,114 @@
+_id: phbwlkMagicalCun
+name: Magical Cunning
+type: feat
+folder: UQiLTq4nLQpaM0Q5
+img: icons/magic/unholy/hands-circle-light-green.webp
+system:
+  description:
+    value: >-
+      <p>You can perform an esoteric rite for 1 minute. At the end of it, you
+      regain expended Pact Magic spell slots but no more than a number equal to
+      half your maximum (round up). Once you use this feature, you can't do so
+      again until you finish a Long Rest.</p><section
+      id="secret-uXJIaDc9mWHsrILV" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature includes one free use and will restore
+      the correct number of Pact Magic spell slots.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '1'
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    EK3yOTVml5LbmpmQ:
+      type: utility
+      _id: EK3yOTVml5LbmpmQ
+      activation:
+        type: minute
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+          - type: attribute
+            value: '-(ceil(@spells.pact.max / 2))'
+            target: spells.pact.value
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Regain Pact Spell Slots
+      img: systems/dnd5e/icons/svg/activity/heal.svg
+  enchant: {}
+  identifier: magical-cunning
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256768167
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwlkMagicalCun'

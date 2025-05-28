@@ -1,0 +1,160 @@
+name: Detect Poison and Disease
+system:
+  description:
+    value: >-
+      <p>For the duration, you sense the location of poisons, poisonous or
+      venomous creatures, and magical contagions within 30 feet of yourself. You
+      sense the kind of poison, creature, or contagion in each case.</p><p>The
+      spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a
+      thin sheet of lead.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: self
+      count: ''
+      choice: false
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: radius
+      size: '30'
+      count: ''
+  range:
+    value: ''
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: div
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+    - ritual
+  materials:
+    value: a yew leaf
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: zSS8rmsXm5JCaM5x
+      range:
+        override: false
+      target:
+        prompt: false
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects:
+        - zSS8rmsXm5JCaM5x
+  identifier: detect-poison-and-disease
+_id: phbsplDetectPois
+type: spell
+img: icons/skills/toxins/poison-bottle-open-fire-purple.webp
+effects:
+  - name: Detect Poison and Disease
+    origin: Compendium.dnd5e.spells24.Item.phbsplDetectPois
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/skills/toxins/poison-bottle-open-fire-purple.webp
+    _id: zSS8rmsXm5JCaM5x
+    type: base
+    system: {}
+    changes: []
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1727465745268
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplDetectPois.zSS8rmsXm5JCaM5x'
+folder: pBaAAtXBCq9FVEnL
+sort: 4000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425949650
+  modifiedTime: 1745256790340
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDetectPois'

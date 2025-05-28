@@ -1,0 +1,1044 @@
+name: 'Chapter 6: Customization Options'
+pages:
+  - name: Multiclassing
+    type: text
+    title:
+      show: true
+      level: 1
+    text:
+      format: 1
+      content: >-
+        <p>Multiclassing allows you to gain levels in multiple classes. Doing so
+        lets you mix the abilities of those classes to realize a character
+        concept that might not be reflected in one of the standard class
+        options.</p>
+
+        <p>With this rule, you have the option of gaining a level in a new class
+        whenever you advance in level, instead of gaining a level in your
+        current class. Your levels in all your classes are added together to
+        determine your character level. For example, if you have three levels in
+        wizard and two in fighter, you’re a 5th-level character.</p>
+
+        <p>As you advance in levels, you might primarily remain a member of your
+        original class with just a few levels in another class, or you might
+        change course entirely, never looking back at the class you left behind.
+        You might even start progressing in a third or fourth class. Compared to
+        a single-class character of the same level, you’ll sacrifice some focus
+        in exchange for versatility.</p>
+
+        <h2>Prerequisites</h2>
+
+        <p>To qualify for a new class, you must meet the ability score
+        prerequisites for both your current class and your new one, as shown in
+        the Multiclassing Prerequisites table. For example, a barbarian who
+        decides to multiclass into the druid class must have both Strength and
+        Wisdom scores of 13 or higher. Without the full training that a
+        beginning character receives, you must be a quick study in your new
+        class, having a natural aptitude that is reflected by higherthan-average
+        ability scores.</p>
+
+        <table border="0"><caption>
+
+        <h4>Multiclassing Prerequisites</h4>
+
+        </caption>
+
+        <thead>
+
+        <tr>
+
+        <td>Class</td>
+
+        <td>Ability Score Minimum</td>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+        <td>Barbarian</td>
+
+        <td>Strength 13</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Bard</td>
+
+        <td>Charisma 13</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Cleric</td>
+
+        <td>Wisdom 13</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Druid</td>
+
+        <td>Wisdom 13</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Fighter</td>
+
+        <td>Strength 13 or Dexterity 13</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Monk</td>
+
+        <td>Dexterity 13 and Wisdom 13</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Paladin</td>
+
+        <td>Strength 13 and Charisma 13</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Ranger</td>
+
+        <td>Dexterity 13 and Wisdom 13</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Rogue</td>
+
+        <td>Dexterity 13</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Sorcerer</td>
+
+        <td>Charisma 13</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Warlock</td>
+
+        <td>Charisma 13</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Wizard</td>
+
+        <td>Intelligence 13</td>
+
+        </tr>
+
+        </tbody>
+
+        </table>
+
+        <h2>Experience Points</h2>
+
+        <p>The experience point cost to gain a level is always based on your
+        total character level, as shown in the Character Advancement table, not
+        your level in a particular class. So, if you are a cleric 6/fighter 1,
+        you must gain enough XP to reach 8th level before you can take your
+        second level as a fighter or your seventh level as a cleric.</p>
+
+        <h2>Hit Points and Hit Dice</h2>
+
+        <p>You gain the hit points from your new class as described for levels
+        after 1st. You gain the 1st-level hit points for a class only when you
+        are a 1st-level character.</p>
+
+        <p>You add together the Hit Dice granted by all your classes to form
+        your pool of Hit Dice. If the Hit Dice are the same die type, you can
+        simply pool them together. For example, both the fighter and the paladin
+        have a d10, so if you are a paladin 5/fighter 5, you have ten d10 Hit
+        Dice. If your classes give you Hit Dice of different types, keep track
+        of them separately. If you are a paladin 5/cleric 5, for example, you
+        have five d10 Hit Dice and five d8 Hit Dice.</p>
+
+        <h2>Proficiency Bonus</h2>
+
+        <p>Your proficiency bonus is always based on your total character level,
+        as shown in the
+        @UUID[Compendium.dnd5e.rules.JournalEntry.5LoAJLkfIYBAgWTW]{Character
+        Advancement} table, not your level in a particular class. For example,
+        if you are a fighter 3/rogue 2, you have the proficiency bonus of a
+        5th-level character, which is +3.</p>
+
+        <h2>Proficiencies</h2>
+
+        <p>When you gain your first level in a class other than your initial
+        class, you gain only some of new class’s starting proficiencies, as
+        shown in the Multiclassing Proficiencies table.</p>
+
+        <table border="0"><caption>
+
+        <h4>Multiclassing Proficiencies</h4>
+
+        </caption>
+
+        <thead>
+
+        <tr>
+
+        <td>Class</td>
+
+        <td>Proficiencies Gained</td>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+        <td>Barbarian</td>
+
+        <td>Shields, simple weapons, martial weapons</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Bard</td>
+
+        <td>Light armor, one skill of your choice, one musical instrument of
+        your choice</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Cleric</td>
+
+        <td>Light armor, medium armor, shields</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Druid</td>
+
+        <td>Light armor, medium armor, shields (druids will not wear armor or
+        use shields made of metal)</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Fighter</td>
+
+        <td>Light armor, medium armor, shields, simple weapons, martial
+        weapons</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Monk</td>
+
+        <td>Simple weapons, shortswords</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Paladin</td>
+
+        <td>Light armor, medium armor, shields, simple weapons, martial
+        weapons</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Ranger</td>
+
+        <td>Light armor, medium armor, shields, simple weapons, martial weapons,
+        one skill from the class’s skill list</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Rogue</td>
+
+        <td>Light armor, one skill from the class’s skill list, thieves’
+        tools</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Sorcerer</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Warlock</td>
+
+        <td>Light armor, simple weapons</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Wizard</td>
+
+        <td>—</td>
+
+        </tr>
+
+        </tbody>
+
+        </table>
+
+        <h2>Class Features</h2>
+
+        <p>When you gain a new level in a class, you get its features for that
+        level. You don’t, however, receive the class’s starting equipment, and a
+        few features have additional rules when you’re multiclassing: Channel
+        Divinity, Extra Attack, Unarmored Defense, and Spellcasting.</p>
+
+        <h3>Channel Divinity</h3>
+
+        <p>If you already have the Channel Divinity
+        (@UUID[Compendium.dnd5e.classfeatures.Item.YpiLQEKGalROn7iJ]{Cleric}
+        @UUID[Compendium.dnd5e.classfeatures.Item.8M7uOPhbTxoxxJSo]{Paladin})feature
+        and gain a level in a class that also grants the feature, you gain the
+        Channel Divinity effects granted by that class, but getting the feature
+        again doesn’t give you an additional use of it. You gain additional uses
+        only when you reach a class level that explicitly grants them to you.
+        For example, if you are a cleric 6/paladin 4, you can use Channel
+        Divinity twice between rests because you are high enough level in the
+        cleric class to have more uses. Whenever you use the feature, you can
+        choose any of the Channel Divinity effects available to you from your
+        two classes.</p>
+
+        <h3>Extra Attack</h3>
+
+        <p>If you gain the
+        @UUID[Compendium.dnd5e.classfeatures.Item.XogoBnFWmCAHXppo]{Extra
+        Attack} class feature from more than one class, the features don’t add
+        together. You can’t make more than two attacks with this feature unless
+        it says you do (as the fighter’s version of
+        @UUID[Compendium.dnd5e.classfeatures.Item.q9g1MLXuLZyxjQMg]{Extra
+        Attack} does). Similarly, the warlock’s eldritch invocation
+        @UUID[Compendium.dnd5e.classfeatures.Item.pJADgAxxefgcATWr]{Thirsting
+        Blade} doesn’t give you additional attacks if you also have Extra
+        Attack.</p>
+
+        <h3>Unarmored Defense</h3>
+
+        <p>If you already have the Unarmored Defense
+        (@UUID[Compendium.dnd5e.classfeatures.Item.SZbsNbaxFFGwBpNK]{Barbarian}
+        @UUID[Compendium.dnd5e.classfeatures.Item.UAvV7N7T4zJhxdfI]{Monk})
+        feature, you can’t gain it again from another class.</p>
+
+        <h3>Spellcasting</h3>
+
+        <p>Your capacity for spellcasting depends partly on your combined levels
+        in all your spellcasting classes and partly on your individual levels in
+        those classes. Once you have the Spellcasting feature from more than one
+        class, use the rules below. If you multiclass but have the Spellcasting
+        feature from only one class, you follow the rules as described in that
+        class.</p>
+
+        <p><strong>Spells Known and Prepared.</strong> You determine what spells
+        you know and can prepare for each class individually, as if you were a
+        single-classed member of that class. If you are a ranger 4/wizard 3, for
+        example, you know three 1st-level ranger spells based on your levels in
+        the ranger class. As 3rd-level wizard, you know three wizard cantrips,
+        and your spellbook contains ten wizard spells, two of which (the two you
+        gained when you reached 3rd level as a wizard) can be 2nd-level spells.
+        If your Intelligence is 16, you can prepare six wizard spells from your
+        spellbook.</p>
+
+        <p>Each spell you know and prepare is associated with one of your
+        classes, and you use the spellcasting ability of that class when you
+        cast the spell. Similarly, a spellcasting focus, such as a holy symbol,
+        can be used only for the spells from the class associated with that
+        focus.</p>
+
+        <p><strong>Spell Slots. </strong>You determine your available spell
+        slots by adding together all your levels in the bard, cleric, druid,
+        sorcerer, and wizard classes, and half your levels (rounded down) in the
+        paladin and ranger classes. Use this total to determine your spell slots
+        by consulting the Multiclass Spellcaster table.</p>
+
+        <p>If you have more than one spellcasting class, this table might give
+        you spell slots of a level that is higher than the spells you know or
+        can prepare. You can use those slots, but only to cast your lower-level
+        spells. If a lower-level spell that you cast, like burning hands, has an
+        enhanced effect when cast using a higher-level slot, you can use the
+        enhanced effect, even though you don’t have any spells of that higher
+        level.</p>
+
+        <p>For example, if you are the aforementioned ranger 4/wizard 3, you
+        count as a 5th-level character when determining your spell slots: you
+        have four 1st-level slots, three 2nd-level slots, and two 3rd-level
+        slots. However, you don’t know any 3rd-level spells, nor do you know any
+        2nd-level ranger spells. You can use the spell slots of those levels to
+        cast the spells you do know—and potentially enhance their effects.</p>
+
+        <p><strong>Pact Magic.</strong> If you have both the Spellcasting class
+        feature and the Pact Magic class feature from the warlock class, you can
+        use the spell slots you gain from the Pact Magic feature to cast spells
+        you know or have prepared from classes with the Spellcasting class
+        feature, and you can use the spell slots you gain from the Spellcasting
+        class feature to cast warlock spells you know.</p>
+
+        <table border="0"><caption>
+
+        <h4>Multiclass Spellcaster: Spell Slots per Spell Level</h4>
+
+        </caption>
+
+        <thead>
+
+        <tr>
+
+        <td>Lvl.</td>
+
+        <td>1st</td>
+
+        <td>2nd</td>
+
+        <td>3rd</td>
+
+        <td>4th</td>
+
+        <td>5th</td>
+
+        <td>6th</td>
+
+        <td>7th</td>
+
+        <td>8th</td>
+
+        <td>9th</td>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+        <td>1st</td>
+
+        <td>2</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>2nd</td>
+
+        <td>3</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>3rd</td>
+
+        <td>4</td>
+
+        <td>2</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>4th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>5th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>2</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>6th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>7th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>1</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>8th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>2</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>9th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>1</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>10th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>2</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>11th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>2</td>
+
+        <td>1</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>12th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>2</td>
+
+        <td>1</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>13th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>2</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>14th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>2</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>—</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>15th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>2</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>16th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>2</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>—</td>
+
+        </tr>
+
+        <tr>
+
+        <td>17th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>2</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        </tr>
+
+        <tr>
+
+        <td>18th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        </tr>
+
+        <tr>
+
+        <td>19th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>2</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        </tr>
+
+        <tr>
+
+        <td>20th</td>
+
+        <td>4</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>2</td>
+
+        <td>2</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        </tr>
+
+        </tbody>
+
+        </table>
+      markdown: ''
+    _id: icbKYJ9K1sUzmL5W
+    image: {}
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system: {}
+    sort: 0
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!hgHJdp8lTiJ5TpN9.icbKYJ9K1sUzmL5W'
+  - name: Feats
+    type: text
+    title:
+      show: true
+      level: 1
+    text:
+      format: 1
+      content: >-
+        <p>A feat represents a talent or an area of expertise that gives a
+        character special capabilities. It embodies training, experience, and
+        abilities beyond what a class provides.</p>
+
+        <p>At certain levels, your class gives you the Ability Score Improvement
+        feature. Using the optional feats rule, you can forgo taking that
+        feature to take a feat of your choice instead. You can take each feat
+        only once, unless the feat's description says otherwise.</p>
+
+        <p>You must meet any prerequisite specified in a feat to take that feat.
+        If you ever lose a feat's prerequisite, you can't use that feat until
+        you regain the prerequisite. For example, the Grappler feat requires you
+        to have a Strength of 13 or higher. If your Strength is reduced below 13
+        somehow—perhaps by a withering curse—you can't benefit from the Grappler
+        feat until your Strength is restored.</p>
+
+        <h2>Grappler</h2>
+
+        <p><em>Prerequisite: Strength 13 or higher</em></p>
+
+        <p>You've developed the skills necessary to hold your own in
+        close-quarters grappling. You gain the following benefits:</p>
+
+        <ul>
+
+        <li>You have advantage on attack rolls against a creature you are
+        grappling.</li>
+
+        <li>You can use your action to try to pin a creature grappled by you. To
+        do so, make another grapple check. If you succeed, you and the creature
+        are both restrained until the grapple ends.</li>
+
+        </ul>
+    _id: 8V1QMgTrcYbGWppo
+    image: {}
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system: {}
+    sort: 0
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!hgHJdp8lTiJ5TpN9.8V1QMgTrcYbGWppo'
+ownership:
+  default: 0
+flags:
+  core:
+    viewMode: 2
+  dnd5e:
+    type: chapter
+    position: 6
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037417745
+  modifiedTime: 1725037417745
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+folder: null
+sort: 0
+_id: hgHJdp8lTiJ5TpN9
+categories: []
+_key: '!journal!hgHJdp8lTiJ5TpN9'

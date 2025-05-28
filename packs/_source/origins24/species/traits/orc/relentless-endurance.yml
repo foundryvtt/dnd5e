@@ -1,0 +1,112 @@
+name: Relentless Endurance
+system:
+  activities:
+    DULUqgjDy0u99UKM:
+      type: heal
+      name: Relentlessly Endure
+      _id: DULUqgjDy0u99UKM
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you are reduced to 0 Hit Points but not killed outright
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: '1'
+  uses:
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p>When you are reduced to 0 Hit Points but not killed outright, you can
+      drop to 1 Hit Point instead. Once you use this trait, you can't do so
+      again until you finish a Long Rest.</p>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Orc
+  identifier: relentless-endurance
+  advancement: []
+  cover: null
+  crewed: false
+_id: phbsptRelentless
+type: feat
+folder: DDjuF7BenXS8Y8FL
+img: icons/magic/life/cross-area-circle-green-white.webp
+effects: []
+sort: 400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745340861480
+  modifiedTime: 1745341995618
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsptRelentless'

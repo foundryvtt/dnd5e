@@ -1,0 +1,73 @@
+_id: z9SbsMIBZzuhZOqT
+name: Sling Bullet
+type: consumable
+img: icons/commodities/stone/paver-cobbles-blue.webp
+system:
+  description:
+    value: >-
+      <p>A hardened pebble of stone, bone, or metal which can be flung at high
+      velocity using a sling.</p><section class="secret foundry-note"
+      id="secret-nfge79saW8cFjJrx"><p><strong>Foundry Note</strong></p><p>It
+      will usually be impossible to buy one sling bullet because they are worth
+      less than a copper piece (5 bullets = 1 cp).</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.075
+    units: lb
+  price:
+    value: 0.2
+    denomination: cp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    replace: false
+  type:
+    value: ammo
+    subtype: slingBullet
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  magicalBonus: null
+  activities: {}
+  attuned: false
+  identifier: sling-bullet
+effects: []
+folder: NdDvXSjfqlghXpQZ
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037328642
+  modifiedTime: 1725992560849
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!z9SbsMIBZzuhZOqT'

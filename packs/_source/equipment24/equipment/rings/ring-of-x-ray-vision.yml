@@ -1,0 +1,216 @@
+_id: dmgRingOfXrayVis
+name: Ring of X-ray Vision
+type: equipment
+folder: DC1x1wAm0NLFudA6
+img: icons/equipment/finger/ring-eye-silver-green.webp
+system:
+  activities:
+    IDCiIcSPKDBJgCwr:
+      type: utility
+      name: Gain X-Ray Vision
+      _id: IDCiIcSPKDBJgCwr
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: vj2uuYo0TMWWXExd
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/damage/psychic.svg
+      appliedEffects: []
+    v41FhJBMoCPTochw:
+      type: save
+      _id: v41FhJBMoCPTochw
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: InZzuugyN8PbtKGR
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Ring, Rare (Requires Attunement)</em></p><p>While wearing this
+      ring, you can take a Magic action to gain X-ray vision with a range of 30
+      feet for 1 minute. To you, solid objects within that radius appear
+      transparent and don't prevent light from passing through them. The vision
+      can penetrate 1 foot of stone, 1 inch of common metal, or up to 3 feet of
+      wood or dirt. Thicker substances or a thin sheet of lead block the
+      vision.</p><p>Whenever you use the ring again before taking a Long Rest,
+      you must succeed on a DC 15 Constitution saving throw or gain 1
+      &amp;Reference[Exhaustion] level.</p>
+    chat: ''
+  identifier: ring-of-x-ray-vision
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ring
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: X-Ray Vision
+    img: icons/magic/perception/orb-crystal-ball-scrying-blue.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgRingOfXrayVis
+    transfer: false
+    _id: vj2uuYo0TMWWXExd
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730679751329
+      modifiedTime: 1730679787518
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgRingOfXrayVis.vj2uuYo0TMWWXExd'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712702884
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2200000
+ownership:
+  default: 0
+_key: '!items!dmgRingOfXrayVis'

@@ -1,0 +1,154 @@
+_id: phbinvRepellingB
+name: Repelling Blast
+type: feat
+img: icons/magic/fire/explosion-embers-evade-silhouette.webp
+system:
+  activities:
+    OXhI1TDQxORrGAgc:
+      type: enchant
+      name: Make Repelling
+      _id: OXhI1TDQxORrGAgc
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: DShZGDAUy0w9RUzS
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: true
+        categories: []
+        properties: []
+        type: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 2+ Warlock, a Warlock Cantrip That
+      Deals Damage via an Attack Roll</p></blockquote><p>Choose one of your
+      known Warlock cantrips that requires an attack roll. When you hit a Large
+      or smaller creature with that cantrip, you can push the creature up to 10
+      feet straight away from you.</p><p>Repeatable. You can gain this
+      invocation more than once. Each time you do so, choose a different
+      eligible cantrip.</p><section class="secret"
+      id="secret-5xV7SaKI7sGaeKvq"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Make Repelling</strong> activity can be used to enchant a cantrip
+      which adds ", Repelling" as a reminder.</p></section>
+    chat: ''
+  source:
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: Warlock Cantrip That Deals Damage via an Attack
+  identifier: repelling-blast
+effects:
+  - type: enchantment
+    name: Repelling Blast
+    img: icons/magic/fire/explosion-embers-evade-silhouette.webp
+    disabled: true
+    _id: DShZGDAUy0w9RUzS
+    system: {}
+    changes:
+      - key: name
+        mode: 2
+        value: ', Repelling'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Choose one of your known Warlock cantrips that requires an attack roll.
+      When you hit a Large or smaller creature with that cantrip, you can push
+      the creature up to 10 feet straight away from you.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbinvRepellingB.DShZGDAUy0w9RUzS'
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256762552
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvRepellingB'

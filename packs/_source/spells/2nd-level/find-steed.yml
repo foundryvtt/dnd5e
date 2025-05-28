@@ -1,0 +1,181 @@
+_id: 5eh2HFbS13078Y3H
+name: Find Steed
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You summon a spirit that assumes the form of an unusually intelligent,
+      strong, and loyal steed, creating a long-lasting bond with it. Appearing
+      in an unoccupied space within range, the steed takes on a form that you
+      choose, such as a
+      @UUID[Compendium.dnd5e.monsters.Actor.T1xZTDCGuvMBSq8d]{warhorse}, a
+      @UUID[Compendium.dnd5e.monsters.Actor.PHO4J98zK2p4KNyc]{pony}, a
+      @UUID[Compendium.dnd5e.monsters.Actor.FQMFuzzSh73d0Nrd]{camel}, an
+      @UUID[Compendium.dnd5e.monsters.Actor.55PkbskG5iBZGrgR]{elk}, or a
+      @UUID[Compendium.dnd5e.monsters.Actor.YTpL2c3NO4sOn2UA]{mastiff}. (Your DM
+      might allow other animals to be summoned as steeds.) The steed has the
+      statistics of the chosen form, though it is a celestial, fey, or fiend
+      (your choice) instead of its normal type. Additionally, if your steed has
+      an Intelligence of 5 or less, its Intelligence becomes 6, and it gains the
+      ability to understand one language of your choice that you
+      speak.</p><p>Your steed serves you as a mount, both in combat and out, and
+      you have an instinctive bond with it that allows you to fight as a
+      seamless unit. While mounted on your steed, you can make any spell you
+      cast that targets only you also target your steed.</p><p>When the steed
+      drops to 0 hit points, it disappears, leaving behind no physical form. You
+      can also dismiss your steed at any time as an action, causing it to
+      disappear. In either case, casting this spell again summons the same
+      steed, restored to its hit point maximum.</p><p>While your steed is within
+      1 mile of you, you can communicate with it telepathically.</p><p>You can't
+      have more than one steed bonded by this spell at a time. As an action, you
+      can release the steed from its bond at any time, causing it to
+      disappear.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: pg. 143
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: space
+      choice: false
+    template:
+      units: any
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes:
+        - celestial
+        - fey
+        - fiend
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - name: ''
+          _id: AjbDWduosqyViS2D
+          uuid: Compendium.dnd5e.monsters.Actor.FQMFuzzSh73d0Nrd
+          level:
+            min: null
+            max: null
+          types: []
+        - name: ''
+          _id: 5bNPkSBX9Nc043lQ
+          uuid: Compendium.dnd5e.monsters.Actor.55PkbskG5iBZGrgR
+          level:
+            min: null
+            max: null
+          types: []
+        - name: ''
+          _id: 3hWu8Ub25OiFqWhu
+          uuid: Compendium.dnd5e.monsters.Actor.YTpL2c3NO4sOn2UA
+          level:
+            min: null
+            max: null
+          types: []
+        - name: ''
+          _id: qwzKyNaevY3tXRfu
+          uuid: Compendium.dnd5e.monsters.Actor.PHO4J98zK2p4KNyc
+          level:
+            min: null
+            max: null
+          types: []
+        - name: ''
+          _id: DprNdxi3hb7lbrjw
+          uuid: Compendium.dnd5e.monsters.Actor.T1xZTDCGuvMBSq8d
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: find-steed
+sort: 0
+flags: {}
+img: icons/magic/nature/wolf-paw-glow-teal-blue.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037347604
+  modifiedTime: 1725992717038
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!5eh2HFbS13078Y3H'

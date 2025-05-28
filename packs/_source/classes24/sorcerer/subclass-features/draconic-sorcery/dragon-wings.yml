@@ -1,0 +1,207 @@
+_id: phbscrDragonWing
+name: Dragon Wings
+type: feat
+folder: wwMlXikGly63a6go
+img: icons/creatures/abilities/wing-batlike-white-blue.webp
+system:
+  description:
+    value: >-
+      <p>As a Bonus Action, you can cause draconic wings to appear on your back.
+      The wings last for 1 hour or until you dismiss them (no action required).
+      For the duration, you have a Fly Speed of 60 feet.</p><p>Once you use this
+      feature, you can't use it again until you finish a Long Rest unless you
+      spend 3 Sorcery Points (no action required) to restore your use of
+      it.</p><section class="secret"
+      id="secret-sOSBeegnxa98QlIn"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Dragon Wings</strong> activity includes an Active Effect that
+      grants you a Fly Speed of 60 feet.</p><p>The <strong>Restore Use</strong>
+      activity can be used to expend the Sorcery Points to restore a use of the
+      <strong>Dragon Wings</strong> activity.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '1'
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 14
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    W3TaYUpTcgqAtLD7:
+      type: utility
+      name: Dragon Wings
+      _id: W3TaYUpTcgqAtLD7
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: RZklxO114TnQQDyG
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    j52NY9ULfqEFdnDm:
+      type: utility
+      name: Restore Use
+      _id: j52NY9ULfqEFdnDm
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '3'
+            target: Compendium.dnd5e.classes24.Item.phbscrFontOfMagi
+            scaling: {}
+          - type: itemUses
+            value: '-1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: dragon-wings
+effects:
+  - name: Winged
+    img: icons/creatures/abilities/wing-batlike-white-blue.webp
+    origin: Compendium.dnd5e.classes24.Item.phbscrDragonWing
+    transfer: true
+    _id: RZklxO114TnQQDyG
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.fly
+        mode: 4
+        value: '60'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>he wings last for 1 hour or until you dismiss them (no action
+      required). For the duration, you have a Fly Speed of 60 feet.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbscrDragonWing.RZklxO114TnQQDyG'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866556244
+  modifiedTime: 1745256765427
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbscrDragonWing'

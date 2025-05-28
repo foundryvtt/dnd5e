@@ -1,0 +1,591 @@
+_id: dmgFallingNet000
+name: Falling Net
+type: equipment
+img: icons/tools/fishing/net-simple-tan.webp
+system:
+  activities:
+    JALPu15v7AargcIY:
+      type: save
+      name: Trigger (1-4)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: bXEGPRY5cCI6s34S
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: square
+          count: ''
+          size: '10'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '10'
+      _id: JALPu15v7AargcIY
+    0RRvsd02pznY2Jw4:
+      type: save
+      name: Trigger (5-10)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: bXEGPRY5cCI6s34S
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: square
+          count: ''
+          size: '10'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '12'
+      _id: 0RRvsd02pznY2Jw4
+    XQpKgUgQU6TYBLdB:
+      type: save
+      name: Trigger (11-16)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: bXEGPRY5cCI6s34S
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: square
+          count: ''
+          size: '10'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '14'
+      _id: XQpKgUgQU6TYBLdB
+    HKXb1e4RZBdB7dpP:
+      type: save
+      name: Trigger (17-20)
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: bXEGPRY5cCI6s34S
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: square
+          count: ''
+          size: '10'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '16'
+      _id: HKXb1e4RZBdB7dpP
+    mAZhtjGckUSA4Hxv:
+      type: check
+      name: Escape Check (1-4)
+      _id: mAZhtjGckUSA4Hxv
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '10'
+        ability: ''
+    OXxYljUNvXyx1q0U:
+      type: check
+      name: Escape Check (5-10)
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '12'
+        ability: ''
+      _id: OXxYljUNvXyx1q0U
+    3LBzOxi0a18iGqm9:
+      type: check
+      name: Escape Check (11-16)
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '14'
+        ability: ''
+      _id: 3LBzOxi0a18iGqm9
+    ScGFfLG4qcSyBRKU:
+      type: check
+      name: Escape Check (17-20)
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '16'
+        ability: ''
+      _id: ScGFfLG4qcSyBRKU
+    OYk9mNmINrnrGv5i:
+      type: check
+      name: Set Trap
+      _id: OYk9mNmINrnrGv5i
+      sort: 0
+      activation:
+        type: minute
+        value: 10
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - slt
+        dc:
+          calculation: ''
+          formula: '13'
+        ability: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Nuisance Trap (Levels
+      1–4)</em></p><p><strong>Trigger:</strong> A creature crosses a trip
+      wire</p><p><strong>Duration:</strong> Instantaneous</p><p>A falling net
+      trap uses a trip wire to release a weighted, 10-foot-square Net suspended
+      from the ceiling. The trip wire is 3 inches off the ground and stretches
+      between two columns or trees.</p><p>The first creature that crosses the
+      trip wire causes the Net to fall on it. The target must succeed on a DC 10
+      Dexterity saving throw or have the &amp;Reference[Restrained] condition
+      until it escapes. The target succeeds automatically if it's Huge or
+      larger. A creature can take an action to make a DC 10 Strength (Athletics)
+      check, freeing itself or another creature within its reach from the Net on
+      a successful check.</p><p><em><strong>Detect and Disarm.</strong></em> As
+      a Search action, a creature can examine the trapped area and make a
+      [[/check prc 11]] check, detecting the trip wire and the suspended
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagNet00000000]{Net} on a
+      successful check. Once detected, the trip wire can be easily cut or
+      avoided (no ability check required).</p><p><em><strong>Destroy the
+      Net.</strong></em> Reducing the Net to 0 Hit Points frees any creature
+      trapped in it (see
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbEquipment0000.JournalEntryPage.xIDcbjgXOndS8zRl]{Adventuring
+      Gear} for the Net's statistics).</p><p><em><strong>Set the
+      Trap.</strong></em> A creature that has Thieves' Tools and all the trap's
+      components (including a Net) can try to set a falling net trap, doing so
+      with a successful DC 13 Dexterity (Sleight of Hand) check. Each attempt to
+      set this trap takes 10 minutes.</p><p><em><strong>At Higher
+      Levels.</strong></em> You can scale the trap for higher levels by
+      increasing the weight of the Net, which increases the save DC and the DC
+      of the Strength (Athletics) check as follows: DC 12 at levels 5–10, DC 14
+      at levels 11–16, or DC 16 at levels 17–20.</p></div>
+    chat: ''
+  identifier: falling-net
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  properties: []
+  strength: null
+  proficient: null
+effects:
+  - name: Captured
+    img: icons/tools/fishing/net-simple-tan.webp
+    origin: Item.dmgFallingNet000
+    transfer: false
+    _id: bXEGPRY5cCI6s34S
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - restrained
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!dmgFallingNet000.bXEGPRY5cCI6s34S'
+folder: 8wnVMAA0qwPzQVxS
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730831452785
+  modifiedTime: 1745256805161
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgFallingNet000'

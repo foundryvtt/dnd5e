@@ -1,0 +1,131 @@
+name: Mirage Arcane
+system:
+  description:
+    value: >-
+      <p>You make terrain in an area up to 1 mile square look, sound, smell, and
+      even feel like some other sort of terrain. Open fields or a road could be
+      made to resemble a swamp, hill, crevasse, or some other rough or
+      impassable terrain. A pond can be made to seem like a grassy meadow, a
+      precipice like a gentle slope, or a rock-strewn gully like a wide and
+      smooth road.</p><p>Similarly, you can alter the appearance of structures
+      or add them where none are present. The spell doesn't disguise, conceal,
+      or add creatures.</p><p>The illusion includes audible, visual, tactile,
+      and olfactory elements, so it can turn clear ground into Difficult Terrain
+      (or vice versa) or otherwise impede movement through the area. Any piece
+      of the illusory terrain (such as a rock or stick) that is removed from the
+      spell's area disappears immediately.</p><p>Creatures with
+      &amp;Reference[Truesight] can see through the illusion to the terrain's
+      true form; however, all other elements of the illusion remain, so while
+      the creature is aware of the illusion's presence, the creature can still
+      physically interact with the illusion.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: '10'
+    units: day
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: up to 1 square mile
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: any
+    special: within sight
+    value: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: ill
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    KaRjDCTLQy7DYIhS:
+      type: utility
+      _id: KaRjDCTLQy7DYIhS
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Alter Terrain
+      img: systems/dnd5e/icons/svg/damage/slashing.svg
+      appliedEffects: []
+  identifier: mirage-arcane
+_id: phbsplMirageArca
+type: spell
+img: icons/environment/wilderness/terrain-forest-gray.webp
+effects: []
+folder: EdAGMG8IF26PLkD3
+sort: 1400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425964108
+  modifiedTime: 1745256796256
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMirageArca'

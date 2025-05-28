@@ -1,0 +1,78 @@
+name: Bolts
+system:
+  description:
+    value: >-
+      <p><em><strong>Storage:</strong>
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagCaseCrossbo]{Case}</em></p><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagAmmunitionV]{Ammunition}
+      is required by a weapon that has the Ammunition property. A weapon's
+      description specifies the type of ammunition used by the weapon. The
+      Ammunition table lists the different types and the amount you get when you
+      buy them. The table also lists the item that is typically used to store
+      each type; storage must be bought separately.</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 20
+  weight:
+    value: 0.075
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    autoDestroy: false
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    replace: false
+  type:
+    value: ammo
+    subtype: crossbowBolt
+  magicalBonus: null
+  properties: []
+  activities: {}
+  identifier: bolts
+_id: phbamoBolts00000
+type: consumable
+folder: EkXAWGxKr4wYpODe
+img: icons/weapons/ammunition/arrow-broadhead-white.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425913096
+  modifiedTime: 1745256813224
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbamoBolts00000'

@@ -1,0 +1,137 @@
+_id: FjYE214HTERCRZNm
+name: Flaming Sphere
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A 5-foot-diameter Sphere of fire appears in an unoccupied space of your
+      choice within range and lasts for the Duration. Any creature that ends its
+      turn within 5 feet of the sphere must make a Dexterity saving throw. The
+      creature takes 2d6 fire damage on a failed save, or half as much damage on
+      a successful one.</p><p>As a Bonus Action, you can move the Sphere up to
+      30 feet. If you ram the sphere into a creature, that creature must make
+      the saving throw against the sphere's damage, and the sphere stops moving
+      this turn.</p><p>When you move the Sphere, you can direct it over barriers
+      up to 5 feet tall and jump it across pits up to 10 feet wide. The sphere
+      ignites flammable Objects not being worn or carried, and it sheds bright
+      light in a 20-foot radius and dim light for an additional 20
+      feet.</p><p><strong>At Higher Levels.</strong> When you cast this spell
+      using a spell slot of 3rd level or higher, the damage increases by 1d6 for
+      each slot level above 2nd.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '5'
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: con
+  materials:
+    value: A bit of tallow, a pinch of brimstone, and a dusting of powdered iron
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 2
+            denomination: 6
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: flaming-sphere
+sort: 0
+flags: {}
+img: icons/magic/light/explosion-star-large-orange.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037351860
+  modifiedTime: 1725992718378
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!FjYE214HTERCRZNm'

@@ -1,0 +1,129 @@
+name: Lightning Bolt
+system:
+  description:
+    value: >-
+      <p>A stroke of lightning forming a 100-foot-long, 5-foot-wide Line blasts
+      out from you in a direction you choose. Each creature in the Line makes a
+      Dexterity saving throw, taking 8d6 Lightning damage on a failed save or
+      half as much damage on a successful one.</p><p><strong>Using a
+      Higher-Level Spell Slot.</strong> The damage increases by 1d6 for each
+      spell slot level above 3.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      width: '5'
+      type: line
+      size: '100'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a bit of fur and a crystal rod
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 8
+            denomination: 6
+            bonus: ''
+            types:
+              - lightning
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: lightning-bolt
+_id: phbsplLightningB
+type: spell
+img: icons/magic/lightning/bolt-strike-blue.webp
+effects: []
+folder: HCovEE4VoPGlIbKi
+sort: 1200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425961540
+  modifiedTime: 1745256795519
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplLightningB'

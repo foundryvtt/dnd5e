@@ -1,0 +1,156 @@
+_id: dmgYellowElement
+name: Elemental Gem (Yellow Diamond)
+type: consumable
+folder: ewxJI9GJAOrYvqNe
+img: icons/commodities/gems/gem-faceted-octagon-yellow.webp
+system:
+  activities:
+    yAwX3AtUgZ97G1iS:
+      type: summon
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: unoccupied space as close to the broken gem as possible
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: 8PS0IkGkrw7OwRWq
+          uuid: Compendium.dnd5e.actors24.Actor.mmEarthElemental
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+      name: Utilize
+      _id: yAwX3AtUgZ97G1iS
+  uses:
+    spent: 0
+    recovery: []
+    max: '1'
+    autoDestroy: true
+  description:
+    value: >-
+      <p><em>See:
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgElementalGem0]</em></p><p>This
+      gem contains a mote of elemental energy. When you take a Utilize action to
+      break the gem, an
+      @UUID[Compendium.dnd5e.actors24.Actor.mmEarthElemental]{Earth Elemental}
+      is summoned, and the gem ceases to be magical. The elemental appears in an
+      unoccupied space as close to the broken gem as possible, understands your
+      languages, obeys your commands, and takes its turn immediately after you
+      on your Initiative count. The elemental disappears after 1 hour, when it
+      dies, or when you dismiss it as a Bonus Action.</p>
+    chat: ''
+  identifier: yellow-elemental-gem
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712705077
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!dmgYellowElement'

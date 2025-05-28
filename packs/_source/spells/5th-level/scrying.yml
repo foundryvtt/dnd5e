@@ -1,0 +1,209 @@
+_id: fVbCxFRaORalHB20
+name: Scrying
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You can see and hear a particular creature you choose that is on the
+      same plane of existence as you. The target must make a Wisdom saving
+      throw, which is modified by how well you know the target and the sort of
+      physical connection you have to it. If a target knows you're casting this
+      spell, it can fail the saving throw voluntarily if it wants to be
+      observed.</p>
+
+      <table border="1">
+
+      <tbody>
+
+      <tr>
+
+      <td><strong>Knowledge</strong></td>
+
+      <td><strong>Save Modifier</strong></td>
+
+      </tr>
+
+      <tr>
+
+      <td>Secondhand (you have heard of the target)</td>
+
+      <td>+5</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Firsthand (you have met the target)</td>
+
+      <td>+0</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Familiar (you know the target well)</td>
+
+      <td>-5</td>
+
+      </tr>
+
+      </tbody>
+
+      </table>
+
+
+      <table border="1">
+
+      <tbody>
+
+      <tr>
+
+      <td><strong>Connection</strong></td>
+
+      <td><strong>Save Modifier</strong></td>
+
+      </tr>
+
+      <tr>
+
+      <td>Likeness or picture</td>
+
+      <td>-2</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Possession or garment</td>
+
+      <td>-4</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Body part, lock of hair, bit of nail, or the like</td>
+
+      <td>-10</td>
+
+      </tr>
+
+      </tbody>
+
+      </table>
+
+      <p>On a successful save, the target isn't affected, and you can't use this
+      spell against it again for 24 hours.</p><p>On a failed save, the spell
+      creates an Invisible sensor within 10 feet of the target. You can see and
+      hear through the sensor as if you were there. The sensor moves with the
+      target, remaining within 10 feet of it for the Duration. A creature that
+      can see Invisile Objects sees the sensor as a luminous orb about the size
+      of your fist.</p><p>Instead of targeting a creature, you can choose a
+      location you have seen before as the target of this spell. When you do,
+      the sensor appears at that location and doesn't move.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: div
+  materials:
+    value: >-
+      A focus worth at least 1,000 gp, such as a crystal ball, a silver mirror,
+      or a font filled with holy water.
+    consumed: false
+    cost: 1000
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: scrying
+sort: 0
+flags: {}
+img: icons/magic/perception/eye-ringed-glow-angry-large-teal.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037362252
+  modifiedTime: 1725992721833
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!fVbCxFRaORalHB20'

@@ -1,0 +1,41 @@
+<section class="flexcol">
+    {{!-- Ability Score & Maxmimum --}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.ABILITY.SECTIONS.Score" ability=label }}</legend>
+        <div class="form-group split-group">
+            <label>{{ localize "DND5E.AbilityScore" }}</label>
+            <div class="form-fields">
+                {{ formField fields.value name=(concat prefix "value") value=data.value localize=true
+                             label=(localize "DND5E.AbilityScoreShort") classes="label-top" rootId=partId }}
+                {{ formField fields.max name=(concat prefix "max") value=data.max placeholder="20" localize=true
+                             label=(localize "DND5E.AbilityScoreMaxShort") classes="label-top" rootId=partId }}
+            </div>
+        </div>
+        {{ formField fields.proficient name=(concat prefix "proficient") value=data.proficient
+                     options=proficiencyOptions localize=true rootId=partId }}
+    </fieldset>
+
+    {{!-- Local Bonuses --}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.ABILITY.SECTIONS.Bonuses.Label" ability=label }}</legend>
+        <div class="form-group">
+            <p class="hint">{{ localize "DND5E.ABILITY.SECTIONS.Bonuses.Hint" ability=label }}</p>
+        </div>
+        {{ formField fields.bonuses.fields.save name=(concat prefix "bonuses.save") value=data.bonuses.save
+                     localize=true rootId=partId }}
+        {{ formField fields.bonuses.fields.check name=(concat prefix "bonuses.check") value=data.bonuses.check
+                     localize=true rootId=partId }}
+    </fieldset>
+
+    {{!-- Global Bonuses --}}
+    {{#if global}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.ABILITY.SECTIONS.Global.Label" }}</legend>
+        <div class="form-group">
+            <p class="hint">{{ localize "DND5E.ABILITY.SECTIONS.Global.Hint" }}</p>
+        </div>
+        {{ formField global.fields.save value=global.data.save localize=true rootId=partId }}
+        {{ formField global.fields.check value=global.data.check localize=true rootId=partId }}
+    </fieldset>
+    {{/if}}
+</section>

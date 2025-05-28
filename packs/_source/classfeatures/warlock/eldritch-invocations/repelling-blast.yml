@@ -1,0 +1,47 @@
+_id: rdBPd6CwqXT64iJM
+name: Repelling Blast
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>When you hit a creature with
+      @UUID[Compendium.dnd5e.spells.Item.Z9p1vezIn95jw1Yw]{Eldritch Blast}, you
+      can push the creature up to 10 feet away from you in a straight line.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  requirements: Warlock 2, Eldritch Blast
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: repelling-blast
+flags: {}
+img: icons/magic/fire/explosion-embers-evade-silhouette.webp
+effects: []
+folder: 0uFCjs5gYeVtl38i
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037389091
+  modifiedTime: 1725992290150
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!rdBPd6CwqXT64iJM'

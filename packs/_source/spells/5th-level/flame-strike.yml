@@ -1,0 +1,142 @@
+_id: 5e1xTohkzqFqbYH4
+name: Flame Strike
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A vertical column of divine fire roars down from the heavens in a
+      location you specify. Each creature in a 10-foot-radius, 40-foot-high
+      Cylinder centered on a point within range must make a Dexterity saving
+      throw. A creature takes 4d6 fire damage and 4d6 radiant damage on a failed
+      save, or half as much damage on a successful one.</p><p><strong>At Higher
+      Levels.</strong> When you cast this spell using a spell slot of 6th level
+      or higher, the fire damage or the radiant damage (your choice) increases
+      by 1d6 for each slot level above 5th.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cylinder
+      size: '10'
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: evo
+  materials:
+    value: A pinch of sulfur
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 4
+            denomination: 6
+            bonus: ''
+            types:
+              - radiant
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+          - number: 4
+            denomination: 6
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: flame-strike
+sort: 0
+flags: {}
+img: icons/magic/light/beam-rays-red-large.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037347523
+  modifiedTime: 1725992717019
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!5e1xTohkzqFqbYH4'

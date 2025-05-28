@@ -1,0 +1,143 @@
+name: Mage Hand
+system:
+  description:
+    value: >-
+      <p>A spectral, floating hand appears at a point you choose within range.
+      The hand lasts for the duration. The hand vanishes if it is ever more than
+      30 feet away from you or if you cast this spell again.</p><p>When you cast
+      the spell, you can use the hand to manipulate an object, open an unlocked
+      door or container, stow or retrieve an item from an open container, or
+      pour the contents out of a vial.</p><p>As a Magic action on your later
+      turns, you can control the hand thus again. As part of that action, you
+      can move the hand up to 30 feet.</p><p>The hand can't attack, activate
+      magic items, or carry more than 10 pounds.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: space
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: con
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    QdMC2s97UJKjUBoD:
+      type: summon
+      _id: QdMC2s97UJKjUBoD
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: '0'
+        saveDamage: '0'
+        healing: '0'
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: yXLZxwYBIj9AR2iQ
+          uuid: Compendium.dnd5e.actors24.Actor.phbsplMageHand00
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: mage-hand
+_id: phbsplMageHand00
+type: spell
+img: icons/magic/light/hand-sparks-smoke-teal.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+sort: 1000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425962104
+  modifiedTime: 1745256795695
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMageHand00'

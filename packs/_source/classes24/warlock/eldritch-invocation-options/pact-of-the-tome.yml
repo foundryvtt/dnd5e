@@ -1,0 +1,61 @@
+_id: phbinvPactTome00
+name: Pact of the Tome
+type: feat
+img: icons/sundries/books/book-embossed-jewel-gold-purple.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>Stitching together strands of shadow, you conjure forth a book in your
+      hand at the end of a Short or Long Rest. This
+      @UUID[Compendium.dnd5e.classes24.Item.phbwlkBookOfShad]{Book of Shadows}
+      (you determine its appearance) contains eldritch magic that only you can
+      access, granting you the benefits below. The book disappears if you
+      conjure another book with this feature or if you
+      die.</p><p><strong>Cantrips and Rituals.</strong> When the book appears,
+      choose three cantrips, and choose two level 1 spells that have the Ritual
+      tag. The spells can be from any class's spell list, and they must be
+      spells you don't already have prepared. While the book is on your person,
+      you have the chosen spells prepared, and they function as Warlock spells
+      for you.</p><p><strong>Spellcasting Focus.</strong> You can use the book
+      as a Spellcasting Focus.</p>
+    chat: ''
+  source:
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  identifier: pact-of-the-tome
+effects: []
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256762530
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvPactTome00'

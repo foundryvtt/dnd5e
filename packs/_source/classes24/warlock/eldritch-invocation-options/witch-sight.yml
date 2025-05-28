@@ -1,0 +1,90 @@
+_id: phbinvWitchSight
+name: Witch Sight
+type: feat
+img: icons/magic/perception/eye-tendrils-web-purple.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 15+ Warlock</p></blockquote><p>You have
+      Truesight with a range of 30 feet.</p><section
+      id="secret-yUE0N1X1QX3kZHcx" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature includes an Active Effect which
+      automatically grants you Truesight.</p></section>
+    chat: ''
+  source:
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 15
+    repeatable: false
+  properties: []
+  requirements: ''
+  identifier: witch-sight
+effects:
+  - name: Witch Sight
+    img: icons/magic/perception/eye-tendrils-web-purple.webp
+    _id: CkC8PmrUFz70FTwS
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.senses.truesight
+        mode: 4
+        value: '30'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbinvWitchSight.CkC8PmrUFz70FTwS'
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256762611
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvWitchSight'

@@ -1,0 +1,51 @@
+_id: phbsptVersatile0
+name: Versatile
+type: feat
+img: icons/skills/trades/academics-investigation-puzzles.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>You gain an
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.otAeQs0TLHYIBNuj]{Origin
+      feat} of your choice.
+      @UUID[Compendium.dnd5e.feats24.Item.phbftSkilled0000]{Skilled} is
+      recommended.</p><section id="secret-9E1yve6WHohyBage"
+      class="secret"><p><strong>Foundry Note</strong></p><p>You will be prompted
+      for your choice when you select this Species.</p></section>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Human
+  identifier: versatile
+effects: []
+folder: uCr9wkkriM8r4C9R
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866697989
+  modifiedTime: 1740680089966
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 150000
+ownership:
+  default: 0
+_key: '!items!phbsptVersatile0'

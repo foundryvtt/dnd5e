@@ -1,0 +1,550 @@
+name: Scrying
+system:
+  description:
+    value: >-
+      <p>You can see and hear a creature you choose that is on the same plane of
+      existence as you. The target makes a Wisdom saving throw, which is
+      modified (see the tables below) by how well you know the target and the
+      sort of physical connection you have to it. The target doesn't know what
+      it is making the save against, only that it feels
+      uneasy.</p><table><thead><tr><td>Your Knowledge of the Target Is
+      …</td><td>Save Modifier</td></tr></thead><tbody><tr><td>Secondhand (heard
+      of the target)</td><td>+5</td></tr><tr><td>Firsthand (met the
+      target)</td><td>+0</td></tr><tr><td>Extensive (know the target
+      well)</td><td>−5</td></tr></tbody></table><table><thead><tr><td>You Have
+      the Target's …</td><td>Save
+      Modifier</td></tr></thead><tbody><tr><td>Picture or other
+      likeness</td><td>−2</td></tr><tr><td>Garment or other
+      possession</td><td>−4</td></tr><tr><td>Body part, lock of hair, or bit of
+      nail</td><td>−10</td></tr></tbody></table><p>On a successful save, the
+      target isn't affected, and you can't use this spell on it again for 24
+      hours.</p><p>On a failed save, the spell creates an Invisible, intangible
+      sensor within 10 feet of the target. You can see and hear through the
+      sensor as if you were there. The sensor moves with the target, remaining
+      within 10 feet of it for the duration. If something can see the sensor, it
+      appears as a luminous orb about the size of your fist.</p><p>Instead of
+      targeting a creature, you can target a location you have seen. When you do
+      so, the sensor appears at that location and doesn't move.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: any
+      special: creature on same plane of existence or a location you have seen
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 5
+  school: div
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: >-
+      a focus worth 1,000+ GP, such as a crystal ball, mirror, or water-filled
+      font
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    NeUDDgmX3BdnFGH4:
+      type: save
+      _id: NeUDDgmX3BdnFGH4
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: custom
+          formula: '@attributes.spell.dc - 5 + 2'
+      name: Secondhand and Picture
+      img: ''
+      appliedEffects: []
+    2CjCuSPwb4erFwZC:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: custom
+          formula: '@attributes.spell.dc - 5 + 4'
+      name: Secondhand and Garment
+      _id: 2CjCuSPwb4erFwZC
+      img: ''
+      appliedEffects: []
+    AwH5PhQZyU2ryO7X:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: custom
+          formula: '@attributes.spell.dc - 5 + 10'
+      name: Secondhand and Body Part
+      _id: AwH5PhQZyU2ryO7X
+      img: ''
+      appliedEffects: []
+    L9ejQXxfSH0qg8bB:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: custom
+          formula: '@attributes.spell.dc - 0 + 2'
+      name: Firsthand and Picture
+      _id: L9ejQXxfSH0qg8bB
+      img: ''
+      appliedEffects: []
+    QUv35ZZBe3gVvEzK:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: custom
+          formula: '@attributes.spell.dc - 0 + 4'
+      name: Firsthand and Garment
+      _id: QUv35ZZBe3gVvEzK
+      img: ''
+      appliedEffects: []
+    xhhjJb25roNtpn8g:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: custom
+          formula: '@attributes.spell.dc - 0 + 10'
+      name: Firsthand and Body Part
+      _id: xhhjJb25roNtpn8g
+      img: ''
+      appliedEffects: []
+    7wBprDveLHpbu6Z0:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: custom
+          formula: '@attributes.spell.dc + 5 + 2'
+      name: Extensive and Picture
+      _id: 7wBprDveLHpbu6Z0
+      img: ''
+      appliedEffects: []
+    QUhtomQ1kgxShABi:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: custom
+          formula: '@attributes.spell.dc + 5 + 4'
+      name: Extensive and Garment
+      _id: QUhtomQ1kgxShABi
+      img: ''
+      appliedEffects: []
+    LwyHxV46sddf89rc:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: wis
+        dc:
+          calculation: custom
+          formula: '@attributes.spell.dc + 5 + 10'
+      name: Extensive and Body Part
+      _id: LwyHxV46sddf89rc
+      img: ''
+      appliedEffects: []
+    aeMjBXbdsC7SxTTv:
+      type: summon
+      _id: aeMjBXbdsC7SxTTv
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: at target location or within 10 feet of target creature
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: qLrzNj7kNKH7AlO9
+          uuid: Compendium.dnd5e.actors24.Actor.phbInvisibleSens
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: Create Sensor
+      img: ''
+  identifier: scrying
+_id: phbsplScrying000
+type: spell
+img: icons/magic/perception/orb-crystal-ball-scrying-blue.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425969731
+  modifiedTime: 1745256797846
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplScrying000'

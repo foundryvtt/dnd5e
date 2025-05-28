@@ -1,0 +1,25 @@
+<fieldset>
+    {{#each classes}}
+    <div class="form-group" data-class="{{ id }}">
+        <label>{{ label }}</label>
+        <div class="form-fields">
+            <button type="button" class="unbutton control-button middle" data-action="decrease"
+                    aria-label="{{ localize 'DND5E.HITDICE.Action.Decrease' }}">
+                <i class="fa-solid fa-minus" inert></i>
+            </button>
+            <input type="number" name="{{ id }}" value="{{ data.value }}"
+                   min="0" max="{{ data.max }}" step="1">
+            <span class="separator">/</span>
+            <span class="max">{{ data.max }}</span>
+            <button type="button" class="unbutton control-button middle" data-action="increase"
+                    aria-label="{{ localize 'DND5E.HITDICE.Action.Increase' }}">
+                <i class="fa-solid fa-plus" inert></i>
+            </button>
+            <button type="button" class="dice-button" data-action="roll" data-denomination="d{{ denomination }}"
+                    data-tooltip aria-label="{{ localize 'DND5E.Roll' }}">
+                <i class="fa-solid fa-dice-d20" inert></i>
+            </button>
+        </div>
+    </div>
+    {{/each}}
+</fieldset>

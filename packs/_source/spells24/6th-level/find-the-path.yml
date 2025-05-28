@@ -1,0 +1,118 @@
+name: Find the Path
+system:
+  description:
+    value: >-
+      <p>You magically sense the most direct physical route to a location you
+      name. You must be familiar with the location, and the spell fails if you
+      name a destination on another plane of existence, a moving destination
+      (such as a mobile fortress), or an unspecific destination (such as "a
+      green dragon's lair").</p><p>For the duration, as long as you are on the
+      same plane of existence as the destination, you know how far it is and in
+      what direction it lies. Whenever you face a choice of paths along the way
+      there, you know which path is the most direct.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: day
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: must be familiar with the location
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 6
+  school: div
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a set of divination tools—such as cards or runes—worth 100+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    PHAUPcO1VMXTSyFm:
+      type: utility
+      name: ''
+      _id: PHAUPcO1VMXTSyFm
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      roll:
+        prompt: false
+        visible: false
+  identifier: find-the-path
+_id: phbsplFindthePat
+type: spell
+img: icons/tools/navigation/spyglass-telescope-brass-blue.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 1200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425953628
+  modifiedTime: 1745256792963
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFindthePat'

@@ -1,0 +1,187 @@
+name: Geas
+system:
+  description:
+    value: >-
+      <p>You give a verbal command to a creature that you can see within range,
+      ordering it to carry out some service or refrain from an action or a
+      course of activity as you decide. The target must succeed on a Wisdom
+      saving throw or have the &amp;Reference[Charmed apply=false] condition for
+      the duration. The target automatically succeeds if it can't understand
+      your command.</p><p>While Charmed, the creature takes [[/damage 5d10
+      type=psychic]] damage if it acts in a manner directly counter to your
+      command. It takes this damage no more than once each day.</p><p>You can
+      issue any command you choose, short of an activity that would result in
+      certain death. Should you issue a suicidal command, the spell
+      ends.</p><p>A
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplRemoveCurs]{Remove
+      Curse}</em>,
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
+      Restoration}</em>, or
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish}</em>
+      spell ends this spell.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> If you use a level 7 or 8 spell slot, the duration is 365
+      days. If you use a level 9 spell slot, the spell lasts until it is ended
+      by one of the spells mentioned above.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '30'
+    units: day
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: enc
+  properties:
+    - vocal
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: TXwfzpj9bERo0X1r
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: none
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: 10
+            bonus: ''
+            types:
+              - psychic
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects:
+        - TXwfzpj9bERo0X1r
+  identifier: geas
+_id: phbsplGeas000000
+type: spell
+img: icons/equipment/head/hat-pointed-leather-black-glowing.webp
+effects:
+  - name: Under Orders
+    origin: Compendium.dnd5e.spells24.Item.phbsplGeas000000
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 2592000
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/skills/wounds/anatomy-organ-brain-pink-red.webp
+    _id: TXwfzpj9bERo0X1r
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>While &amp;Reference[Charmed apply=false], the creature takes [[/damage
+      5d10 type=psyhic]] damage if it acts in a manner directly counter to your
+      command. It takes this damage no more than once each day.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - charmed
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplGeas000000.TXwfzpj9bERo0X1r'
+folder: beZ8MTpWY2cMEUlp
+sort: 1900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425956193
+  modifiedTime: 1745256793639
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplGeas000000'

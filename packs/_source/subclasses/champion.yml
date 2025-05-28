@@ -1,0 +1,152 @@
+name: Champion
+type: subclass
+img: icons/skills/social/diplomacy-peace-alliance.webp
+system:
+  description:
+    value: >-
+      <p>The archetypal Champion focuses on the development of raw physical
+      power honed to deadly perfection. Those who model themselves on this
+      archetype combine rigorous training with physical excellence to deal
+      devastating blows.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: champion
+  classIdentifier: fighter
+  advancement:
+    - _id: bsdg4f5me0klskxn
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.YgLQV1O849wE5TgM
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 3
+      title: Features
+    - _id: 22ktkhqczogk0jcg
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.dHu1yzIjD38BvGGd
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 7
+      title: Features
+    - _id: r84l4q20d5aduwlw
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.kYJsED0rqqqUcgKz
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 10
+      title: Features
+    - _id: p4pxgvxtf206xc35
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.aVKH6TLn1AG9hPSA
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 15
+      title: Features
+    - _id: y6rlhwedv35dcrsq
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.ipG5yx1tRNmeJfSH
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 18
+      title: Features
+    - _id: DDqfOiw4IQMv4bAi
+      type: ItemChoice
+      configuration:
+        choices:
+          '10':
+            count: 1
+            replacement: false
+        allowDrops: true
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.classfeatures.8YwPFv3UAPjWVDNf
+          - uuid: Compendium.dnd5e.classfeatures.zSlV0O2rQMdoq6pB
+          - uuid: Compendium.dnd5e.classfeatures.hCop9uJrWhF1QPb4
+          - uuid: Compendium.dnd5e.classfeatures.3Nc6u9pyStByuJsm
+          - uuid: Compendium.dnd5e.classfeatures.06NVMYf58Z76O85O
+          - uuid: Compendium.dnd5e.classfeatures.mHcSjcHJ8oZu3hkb
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+        restriction:
+          type: class
+          subtype: fightingStyle
+          level: ''
+      value:
+        added: {}
+        replaced: {}
+      title: Additional Fighting Style
+      hint: Choose a second option from the Fighting Style class feature.
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation: {}
+effects: []
+folder: Xk0PbUqy0A8R3Ut1
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: sprHbe7cRg9osTzf
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037373027
+  modifiedTime: 1725992730683
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!sprHbe7cRg9osTzf'

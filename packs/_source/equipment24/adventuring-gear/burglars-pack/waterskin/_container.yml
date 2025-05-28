@@ -1,0 +1,58 @@
+name: Waterskin
+system:
+  description:
+    value: >-
+      <p>A Waterskin holds up to 4 pints. If you don't drink sufficient water,
+      you risk &amp;Reference[dehydration].</p>
+    chat: ''
+  price:
+    value: 2
+    denomination: sp
+  quantity: 1
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagBurglarsPac
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties: []
+  capacity:
+    type: weight
+    value: 4
+  identifier: waterskin
+_id: X5XgogJLLydoKdrJ
+type: container
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/survival/waterskin-leather-brown.webp
+effects: []
+sort: 63868
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726532249040
+  modifiedTime: 1745256801932
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!X5XgogJLLydoKdrJ'

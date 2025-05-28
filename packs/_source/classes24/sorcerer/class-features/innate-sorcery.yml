@@ -1,0 +1,153 @@
+_id: phbscrInnateSorc
+name: Innate Sorcery
+type: feat
+folder: zm1kuLu4kdDhoOyL
+img: icons/magic/control/silhouette-hold-change-blue.webp
+system:
+  description:
+    value: >-
+      <p>An event in your past left an indelible mark on you, infusing you with
+      simmering magic. As a Bonus Action, you can unleash that magic for 1
+      minute, during which you gain the following benefits:</p><ul><li>The spell
+      save DC of your Sorcerer spells increases by 1.</li><li>You have Advantage
+      on the attack rolls of Sorcerer spells you cast.</li></ul><p>You can use
+      this feature twice, and you regain all expended uses of it when you finish
+      a Long Rest.</p><section id="secret-nB2j1T08cVjrcuAj"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes an Active Effect which will increase your spell save DC. The
+      Advantage on attack rolls is not automated.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '2'
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    mh49lCJGuCDeiyB8:
+      type: utility
+      _id: mh49lCJGuCDeiyB8
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: WtiHwWONdmCOeSDR
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Innate Sorcery
+  enchant: {}
+  identifier: innate-sorcery
+effects:
+  - name: Innate Sorcery
+    img: icons/magic/control/silhouette-hold-change-blue.webp
+    origin: Compendium.dnd5e.classes24.Item.phbscrInnateSorc
+    transfer: true
+    _id: WtiHwWONdmCOeSDR
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.spell.dc
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The spell save DC of your Sorcerer spells increases by 1.
+      (Automated)</p><p>You have Advantage on the attack rolls of Sorcerer
+      spells you cast. (Not automated)</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbscrInnateSorc.WtiHwWONdmCOeSDR'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866286897
+  modifiedTime: 1745256765528
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbscrInnateSorc'

@@ -1,0 +1,50 @@
+_id: m0FA3UM62hlTPVSA
+name: Freeze
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>If the [[lookup @details.type.config.label
+      lowercase]] takes <strong><em>cold damage</em></strong>, it partially
+      freezes; its speed is reduced by <strong>20 ft.</strong> until the end of
+      its next turn.</p></section><p>If the [[lookup @details.type.config.label
+      lowercase]] takes <strong><em>cold damage</em></strong>, it partially
+      freezes.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: freeze
+flags: {}
+img: icons/magic/water/ice-crystal-white.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304976458
+  modifiedTime: 1725992574362
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!m0FA3UM62hlTPVSA'

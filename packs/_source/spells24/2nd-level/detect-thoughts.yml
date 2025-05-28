@@ -1,0 +1,192 @@
+name: Detect Thoughts
+system:
+  description:
+    value: >-
+      <p>You activate one of the effects below. Until the spell ends, you can
+      activate either effect as a Magic action on your later
+      turns.</p><p><strong>Sense Thoughts.</strong> You sense the presence of
+      thoughts within 30 feet of yourself that belong to creatures that know
+      languages or are telepathic. You don't read the thoughts, but you know
+      that a thinking creature is present.</p><p>The spell is blocked by 1 foot
+      of stone, dirt, or wood; 1 inch of metal; or a thin sheet of
+      lead.</p><p><strong>Read Thoughts.</strong> Target one creature you can
+      see within 30 feet of yourself or one creature within 30 feet of yourself
+      that you detected with the Sense Thoughts option. You learn what is most
+      on the target's mind right now. If the target doesn't know any languages
+      and isn't telepathic, you learn nothing.</p><p>As a Magic action on your
+      next turn, you can try to probe deeper into the target's mind. If you
+      probe deeper, the target makes a Wisdom saving throw. On a failed save,
+      you discern the target's reasoning, emotions, and something that looms
+      large in its mind (such as a worry, love, or hate). On a successful save,
+      the spell ends. Either way, the target knows that you are probing into its
+      mind, and until you shift your attention away from the target's mind, the
+      target can take an action on its turn to make an [[/check ability=int
+      skill=arc dc=@attributes.spell.dc]] check against your spell save DC,
+      ending the spell on a success.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: ''
+      choice: false
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: radius
+      size: '30'
+      count: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: div
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: 1 Copper Piece
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        prompt: false
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Probe Deeper
+      img: ''
+      appliedEffects: []
+    cNjNJvq5tlzmAjzM:
+      type: utility
+      name: Sense Thoughts
+      _id: cNjNJvq5tlzmAjzM
+      sort: -100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/damage/psychic.svg
+      appliedEffects: []
+  identifier: detect-thoughts
+_id: phbsplDetectThou
+type: spell
+img: icons/skills/social/diplomacy-handshake-yellow.webp
+effects: []
+folder: 3SjcO2acsFnWegp4
+sort: 4000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425949744
+  modifiedTime: 1745256790391
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDetectThou'

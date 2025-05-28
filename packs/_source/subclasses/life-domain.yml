@@ -1,0 +1,172 @@
+_id: H3RYLGqCiqm8BP3q
+name: Life Domain
+type: subclass
+img: icons/magic/life/cross-yellow-green.webp
+system:
+  description:
+    value: >-
+      <p>The Life domain focuses on the vibrant positive energy—one of the
+      fundamental forces of the universe—that sustains all life. The gods of
+      life promote vitality and health through healing the sick and wounded,
+      caring for those in need, and driving away the forces of death and
+      undeath. Almost any non-­evil deity can claim influence over this domain,
+      particularly agricultural deities (such as Chauntea, Arawai, and Demeter),
+      sun gods (such as Lathander, Pelor, and Re-­Horakhty), gods of healing or
+      endurance (such as Ilmater, Mishakal, Apollo, and Diancecht), and gods of
+      home and community (such as Hestia, Hathor, and
+      Boldrei).</p><table><caption>Life Domain
+      Spells</caption><thead><tr><td>Cleric
+      Level</td><td>Spells</td></tr></thead><tbody><tr><td>1st</td><td>@UUID[Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr]{Bless},
+      @UUID[Compendium.dnd5e.spells.Item.uUWb1wZgtMou0TVP]{Cure
+      Wounds}</td></tr><tr><td>3rd</td><td>@UUID[Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV]{Lesser
+      Restoration},
+      @UUID[Compendium.dnd5e.spells.Item.JbxsYXxSOTZbf9I0]{Spiritual
+      Weapon}</td></tr><tr><td>5th</td><td>@UUID[Compendium.dnd5e.spells.Item.ZU9d6woBdUP8pIPt]{Beacon
+      of Hope},
+      @UUID[Compendium.dnd5e.spells.Item.LmRHHMtplpxr9fX6]{Revivify}</td></tr><tr><td>7th</td><td>@UUID[Compendium.dnd5e.spells.Item.VtCXMdyM6mAdIJZb]{Death
+      Ward}, @UUID[Compendium.dnd5e.spells.Item.TgHsuhNasPbhu8MO]{Guardian of
+      Faith}</td></tr><tr><td>9th</td><td>@UUID[Compendium.dnd5e.spells.Item.Pyzmm8R7rVsNAPsd]{Mass
+      Cure Wounds}, @UUID[Compendium.dnd5e.spells.Item.AGFMPAmuzwWO6Dfz]{Raise
+      Dead}</td></tr></tbody></table>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: life-domain
+  classIdentifier: cleric
+  advancement:
+    - _id: bW7chouU8WIVH0Le
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - armor:hvy
+        choices: []
+      level: 1
+      title: ''
+      value:
+        chosen: []
+    - _id: 9fyr5t01nhdg0u8n
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.68bYIOvx6rIqnlOW
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.jF8AFfEMICIJnAkR
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 1
+      title: Features
+    - _id: 4qh4ejxpwugva6ma
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.hEymt45rICi4f9eL
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 2
+      title: Features
+    - _id: ihquu4r80mxr07qt
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.yv49QN6Bzqs0ecCs
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 6
+      title: Features
+    - _id: ayh4gqp9vxjo9yd3
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.T6u5z8ZTX6UftXqE
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 8
+      title: Features
+    - _id: m4m8xp6cabt71mdq
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.4UOgxzr83vFuUash
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 17
+      title: Features
+    - _id: RYU9NFMQarGlfW23
+      type: ScaleValue
+      configuration:
+        identifier: divine-strike
+        type: dice
+        distance:
+          units: ''
+        scale:
+          '8':
+            number: 1
+            faces: 8
+            modifiers: []
+          '14':
+            number: 2
+            faces: 8
+            modifiers: []
+      value: {}
+      title: Divine Strike Damage
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation: {}
+effects: []
+folder: m1NqJdyiVSU7ghF5
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037372837
+  modifiedTime: 1725992730577
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!H3RYLGqCiqm8BP3q'

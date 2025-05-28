@@ -1,0 +1,107 @@
+_id: iCae1IDxHvRmjEgi
+name: Heart Sight
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>the [[lookup @name lowercase]] touches a
+      creature and magically knows the creature's current emotional state.
+      </p><p>If the target fails a  <strong>DC 10 Charisma</strong> saving
+      throw, the [[lookup @name lowercase]] also knows the creature's alignment.
+      Celestials, fiends, and undead automatically fail the saving
+      throw.</p></section><p>the [[lookup @name lowercase]] touches a creature.
+      target must make a <strong>Charisma</strong> saving throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: touch
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: cha
+        dc:
+          calculation: ''
+          formula: ''
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: heart-sight
+flags: {}
+img: icons/magic/control/hypnosis-mesmerism-eye.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304975097
+  modifiedTime: 1725992573927
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!iCae1IDxHvRmjEgi'

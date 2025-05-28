@@ -1,0 +1,142 @@
+name: Holy Water
+system:
+  description:
+    value: >-
+      <p>When you take the Attack action, you can replace one of your attacks
+      with throwing a flask of Holy Water. Target one creature you can see
+      within 20 feet of yourself. The target must succeed on a Dexterity saving
+      throw (DC 8 plus your Dexterity modifier and Proficiency Bonus) or take
+      2d8 Radiant damage if it is a Fiend or an Undead.</p>
+    chat: ''
+  price:
+    value: 25
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: true
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: potion
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    ArV3jMOIvfj5c5y9:
+      type: save
+      name: Throw
+      _id: ArV3jMOIvfj5c5y9
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '20'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 8
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: dex
+          formula: ''
+      img: ''
+      appliedEffects: []
+  identifier: holy-water
+_id: phbagHolyWater00
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/consumables/potions/bottle-round-empty-glass.webp
+effects: []
+sort: 2600000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425909126
+  modifiedTime: 1740680135139
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagHolyWater00'

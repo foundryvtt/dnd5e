@@ -1,0 +1,122 @@
+_id: kZpl32DBmqxlRegX
+name: Acid Spray
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] spits acid in a line that is 30 ft. long
+      and 5 ft. wide, provided that it has no creature grappled.</p><p>Each
+      creature in that line must make a  <strong>DC 13 Dexterity</strong> saving
+      throw, taking <strong>10 (3d6) <em>acid damage</em></strong> on a failed
+      save, or half as much damage on a successful one.</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] spits acid in a line that is 30 ft. long
+      and 5 ft. wide. Each creature in that line must make a
+      <strong>Dexterity</strong> saving throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: recharge
+        formula: '6'
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: line
+          size: '30'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '13'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: acid-spray
+flags: {}
+img: icons/magic/acid/projectile-smoke-glowing.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304975916
+  modifiedTime: 1725992574173
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!kZpl32DBmqxlRegX'

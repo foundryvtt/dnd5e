@@ -1,0 +1,126 @@
+_id: phbClcPotentSpel
+name: 'Blessed Strikes: Potent Spellcasting'
+type: feat
+img: icons/magic/life/cross-yellow-green.webp
+system:
+  activities:
+    2ADklkzUUW3aAeOt:
+      type: damage
+      _id: 2ADklkzUUW3aAeOt
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Deal damage with any Cleric cantrip
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: '@abilities.wis.mod'
+            types:
+              - acid
+              - bludgeoning
+              - cold
+              - fire
+              - force
+              - lightning
+              - necrotic
+              - piercing
+              - poison
+              - psychic
+              - radiant
+              - slashing
+              - thunder
+            scaling:
+              number: 1
+      name: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>Add your Wisdom modifier to the damage you deal with any Cleric
+      cantrip.</p><section class="secret"
+      id="secret-bDHa7ClHZ3YPWKvs"><p><strong>Foundry Note</strong></p><p>This
+      bonus damage is not automatically included in your cantrips.</p><p>You can
+      add [[lookup @abilities.wis.mod]] to the Situational Bonus field of your
+      cantrip's damage rolls or you can permanently add it to your cantrips by
+      adding "@abilities.wis.mod" (minus the quotes) in the Bonus
+      field.</p><p>Alternatively, the <strong>Damage</strong> activity on this
+      feature includes your Wisdom modifier and allows you to choose the damage
+      type in the roll's dialog box.</p></section>
+    chat: ''
+  source:
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 7
+    repeatable: false
+  properties: []
+  requirements: Cleric
+  identifier: blessed-strikes-potent-spellcasting
+effects: []
+folder: 3wY92TRgyyyDkpmF
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866373481
+  modifiedTime: 1740685844407
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 800000
+ownership:
+  default: 0
+_key: '!items!phbClcPotentSpel'

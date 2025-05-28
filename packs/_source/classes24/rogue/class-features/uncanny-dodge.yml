@@ -1,0 +1,95 @@
+_id: phbrgeUncannyDod
+name: Uncanny Dodge
+type: feat
+folder: ymTkGscp5QEOwDlv
+img: icons/skills/movement/feet-winged-sandals-tan.webp
+system:
+  description:
+    value: "<p>When an attacker that you can see hits you with an attack roll, you can take a Reaction to halve the attack's damage against you (round down).</p><section class=\"secret\" id=\"secret-fLqTNntX7T0swRsu\"><p><strong>Foundry Note</strong></p><p>With your token selected you can either right click on the damage roll's chat card and select <span class=\"reference\"><em class=\"fas fa-user-shield\">\_</em>Apply Half Damage</span> or click the \"1/2\" button and then the <span class=\"reference\"><em class=\"fa-solid fa-reply-all\">\_</em>Apply</span> button.</p></section>"
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 5
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    7krJIcGhZl9RqzYl:
+      type: utility
+      name: Uncanny Dodge
+      _id: 7krJIcGhZl9RqzYl
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: When an attacker that you can see hits you with an attack roll
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: uncanny-dodge
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866292069
+  modifiedTime: 1745256764649
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeUncannyDod'

@@ -1,0 +1,172 @@
+name: Planar Binding
+system:
+  description:
+    value: >-
+      <p>You attempt to bind a Celestial, an Elemental, a Fey, or a Fiend to
+      your service. The creature must be within range for the entire casting of
+      the spell. (Typically, the creature is first summoned into the center of
+      the inverted version of the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMagicCircl]{Magic
+      Circle}</em> spell to trap it while this spell is cast.) At the completion
+      of the casting, the target must succeed on a Charisma saving throw or be
+      bound to serve you for the duration. If the creature was summoned or
+      created by another spell, that spell's duration is extended to match the
+      duration of this spell.</p><p>A bound creature must follow your commands
+      to the best of its ability. You might command the creature to accompany
+      you on an adventure, to guard a location, or to deliver a message. If the
+      creature is Hostile, it strives to twist your commands to achieve its own
+      objectives. If the creature carries out your commands completely before
+      the spell ends, it travels to you to report this fact if you are on the
+      same plane of existence. If you are on a different plane, it returns to
+      the place where you bound it and remains there until the spell
+      ends.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The duration
+      increases with a spell slot of level 6 (10 days), 7 (30 days), 8 (180
+      days), and 9 (366 days).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: hour
+    condition: ''
+    value: 1
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a jewel worth 1,000+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: L72Zv8oIomBPthq7
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: planar-binding
+_id: phbsplPlanarBind
+type: spell
+img: icons/magic/control/debuff-chains-shackles-movement-blue.webp
+effects:
+  - name: Bound to Service
+    origin: Compendium.dnd5e.spells24.Item.phbsplPlanarBind
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 86400
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/control/debuff-chains-shackles-movement-blue.webp
+    _id: L72Zv8oIomBPthq7
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>A bound creature must follow your commands to the best of its ability.
+      If the creature is Hostile, it strives to twist your commands to achieve
+      its own objectives.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplPlanarBind.L72Zv8oIomBPthq7'
+folder: beZ8MTpWY2cMEUlp
+sort: 800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425966021
+  modifiedTime: 1745256796822
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplPlanarBind'

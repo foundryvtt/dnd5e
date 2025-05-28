@@ -1,0 +1,522 @@
+_id: dmgEnergyBow0000
+name: Energy Bow
+type: weapon
+img: icons/weapons/bows/longbow-gold-pink.webp
+system:
+  activities:
+    JHQrREvLMhTq53nr:
+      _id: JHQrREvLMhTq53nr
+      type: attack
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+    fBce4PkKN7HiCmRd:
+      type: utility
+      name: Arrow of Transport
+      _id: fBce4PkKN7HiCmRd
+      sort: 200000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: Willing target teleported to within 10 feet of you
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creatureOrObject
+          special: Medium or smaller willing creature or object
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+      appliedEffects: []
+    tb2iE3Kl3QUgMeO4:
+      type: utility
+      _id: tb2iE3Kl3QUgMeO4
+      sort: 400000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: Creates a magical ladder 60 feet high
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: wall
+          size: '3'
+          width: '2'
+          height: '60'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: object
+          special: a wall
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Energy Ladder
+      img: systems/dnd5e/icons/svg/size.svg
+      appliedEffects: []
+    chvrwNIzOx8rq5fE:
+      type: enchant
+      name: Energy Bow
+      _id: chvrwNIzOx8rq5fE
+      sort: 500000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: jQnQ2ghbt7j3nWke
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - fBce4PkKN7HiCmRd
+              - oR4052opJWNiSVdQ
+              - tb2iE3Kl3QUgMeO4
+            effect:
+              - Yw1oocFffwM4cePn
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      img: ''
+      appliedEffects:
+        - jQnQ2ghbt7j3nWke
+    oR4052opJWNiSVdQ:
+      type: save
+      name: Arrow of Restraint
+      _id: oR4052opJWNiSVdQ
+      sort: 300000
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: instead of dealing damage
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: >-
+          Save Fail: &Reference[restrained]<br>Escape: [[/check ability=str
+          skill=ath dc=20]]
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Yw1oocFffwM4cePn
+          onSave: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: str
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects:
+        - Yw1oocFffwM4cePn
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepLongbow000]{Longbow} or
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortbow00]{Shortbow}), Very
+      Rare (Requires Attunement)</em></p><p>You gain a +1 bonus to attack rolls
+      and damage rolls made with this magic weapon, which has no string. Each
+      time you pull your arm back in a firing motion, a magical arrow made of
+      golden energy appears nocked and ready to fire. An arrow produced by this
+      weapon deals Force damage instead of Piercing damage on a hit, and it
+      disappears after it hits or misses its target. Until it disappears, the
+      arrow emits Bright Light in a 20-foot radius and Dim Light for an
+      additional 20 feet.</p><p>This weapon has the following additional
+      properties.</p><details><summary><strong>Arrow of
+      Restraint.</strong></summary><p>Whenever you use this weapon to make a
+      ranged attack against a creature, you can try to restrain the target
+      instead of dealing damage to it. If the arrow hits, the target must
+      succeed on a [[/save ability=str dc=15 format=long]] or have the
+      &amp;Reference[Restrained apply=false] condition for 1 minute. As an
+      action, a creature Restrained by an arrow can make a [[/check ability=str
+      skill=ath dc=20 format=long]] to try to break the restraint, ending the
+      effect on itself on a successful
+      check.</p></details><details><summary><strong>Arrow of
+      Transport.</strong></summary><p>As a Magic action, you can fire one energy
+      arrow from this weapon at a target you can see within 60 feet of yourself.
+      The target can be either a willing Medium or smaller creature or an object
+      that isn't being worn or carried, provided the object is small enough to
+      fit inside a 5-foot Cube. The arrow teleports the target to an unoccupied
+      space you can see within 10 feet of
+      you.</p></details><details><summary><strong>Energy
+      Ladder.</strong></summary><p>As a Magic action, you can loose a flurry of
+      energy arrows from this weapon at a wall up to 60 feet away from yourself.
+      The arrows become glowing rungs that stick out of the wall, forming a
+      magical ladder up to 60 feet long on the wall. This ladder lasts for 1
+      minute before disappearing.</p></details><p>
+      @Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: energy-bow
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: longbow
+  ammunition:
+    type: ''
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: 1
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: ''
+effects:
+  - type: enchantment
+    name: Energy Bow
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    disabled: true
+    _id: jQnQ2ghbt7j3nWke
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Energy {}
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: veryRare
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgEnergyBow0000
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: '-amm'
+        priority: null
+      - key: system.magicalBonus
+        mode: 4
+        value: '1'
+        priority: null
+      - key: system.damage.base.types
+        mode: 2
+        value: force
+        priority: null
+      - key: system.damage.base.types
+        mode: 2
+        value: '-piercing'
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/weapons/bows/longbow-gold-pink.webp
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '40000'
+        priority: null
+      - key: system.price.denomination
+        mode: 5
+        value: gp
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: 1730326243999
+      modifiedTime: 1745611759074
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgEnergyBow0000.jQnQ2ghbt7j3nWke'
+  - name: Restrained (Arrow of Restraint)
+    img: systems/dnd5e/icons/svg/statuses/restrained.svg
+    origin: Compendium.dnd5e.equipment24.Item.dmgEnergyBow0000
+    transfer: false
+    _id: Yw1oocFffwM4cePn
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Restrained apply=false] condition for
+      1 minute. As an action, a creature Restrained by an arrow can make a
+      [[/check ability=str skill=ath dc=20 format=long]] to try to break the
+      restraint, ending the effect on itself on a successful check.</p>
+    tint: '#ffffff'
+    statuses:
+      - restrained
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd-dungeon-masters-guide.equipment.Item.dmgEnergyBow0000.ActiveEffect.8hnthmLhtIdRp00M
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730327456828
+      modifiedTime: 1730327456828
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgEnergyBow0000.Yw1oocFffwM4cePn'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - fBce4PkKN7HiCmRd
+        - oR4052opJWNiSVdQ
+        - tb2iE3Kl3QUgMeO4
+      effect:
+        - Yw1oocFffwM4cePn
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745611751175
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7600000
+ownership:
+  default: 0
+_key: '!items!dmgEnergyBow0000'

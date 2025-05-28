@@ -1,0 +1,509 @@
+_id: phbinvMasterofMy
+name: Master of Myriad Forms
+type: feat
+img: icons/creatures/abilities/cougar-pounce-stalk-black.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 5+ Warlock</p></blockquote><p>You can
+      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplAlterSelf0]{Alter Self}
+      without expending a spell slot.</p><section class="secret"
+      id="secret-x7wmXuFqGaXQspxB"><p><strong>Foundry Note</strong></p><p>This
+      feature includes Alter Self's activities.</p><p>The <strong>Aquatic
+      Adaptation</strong>, <strong>Change Appearance</strong>, and
+      <strong>Natural Weapons</strong> activities include Active Effects for
+      tracking your choice and require Concentration.</p><p>The
+      <strong>Attack</strong> activities can be used for your attack/damage
+      rolls when you choose the <strong>Natural Weapons</strong>
+      option.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 5
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        override: false
+        concentration: true
+        value: '1'
+      effects:
+        - _id: 6SL9vuAkx7nAfS5D
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        prompt: false
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Aquatic Adaptation
+      img: icons/creatures/fish/fish-bluefin-yellow-blue.webp
+    wQGpfux8qzcvwsDo:
+      type: utility
+      _id: wQGpfux8qzcvwsDo
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: true
+        override: false
+        value: '1'
+      effects:
+        - _id: 1jrUeJtfZMGhJOZa
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Change Appearance
+      img: icons/creatures/magical/spirit-undead-ghost-blue.webp
+    dQnMvyjoGqhgl9wP:
+      type: utility
+      _id: dQnMvyjoGqhgl9wP
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: true
+        override: false
+        value: '1'
+      effects:
+        - _id: baEBDez6IgWNpkSX
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Natural Weapons
+      img: icons/creatures/abilities/fang-tooth-blood-red.webp
+    SEwXqOHdPCyejSYR:
+      type: attack
+      name: 'Attack: Claws'
+      _id: SEwXqOHdPCyejSYR
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: unarmed
+        ability: spellcasting
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: '@mod'
+            types:
+              - slashing
+            scaling:
+              mode: ''
+              number: 1
+    osceJQzUOQPJ9CLn:
+      type: attack
+      name: 'Attack: Fangs/Horns'
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        value: '5'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: unarmed
+        ability: spellcasting
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: '@mod'
+            types:
+              - piercing
+            scaling:
+              mode: ''
+              number: 1
+      _id: osceJQzUOQPJ9CLn
+    eHtpASAnamFUc69H:
+      type: attack
+      name: 'Attack: Hooves'
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        value: '5'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: unarmed
+        ability: spellcasting
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: '@mod'
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+              number: 1
+      _id: eHtpASAnamFUc69H
+  enchant: {}
+  identifier: master-of-myriad-forms
+effects:
+  - name: Aquatic Adaptation
+    img: icons/creatures/fish/fish-bluefin-yellow-blue.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplAlterSelf0
+    transfer: false
+    _id: 6SL9vuAkx7nAfS5D
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.swim
+        mode: 4
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>You can breathe underwater and gain a Swim Speed equal to your
+      Speed.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbinvMasterofMy.6SL9vuAkx7nAfS5D'
+  - name: Altered Appearance
+    img: icons/creatures/magical/spirit-undead-ghost-blue.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplAlterSelf0
+    transfer: false
+    _id: 1jrUeJtfZMGhJOZa
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbinvMasterofMy.1jrUeJtfZMGhJOZa'
+  - name: Natural Weapon
+    img: icons/creatures/abilities/fang-tooth-blood-red.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplAlterSelf0
+    transfer: false
+    _id: baEBDez6IgWNpkSX
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>When you use your Unarmed Strike to deal damage with that new growth,
+      it deals 1d6 damage of the type in parentheses instead of dealing the
+      normal damage for your Unarmed Strike, and you use your spellcasting
+      ability modifier for the attack and damage rolls rather than using
+      Strength.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbinvMasterofMy.baEBDez6IgWNpkSX'
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256762407
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvMasterofMy'

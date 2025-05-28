@@ -1,0 +1,190 @@
+_id: dmgPotionOfHeroi
+name: Potion of Heroism
+type: consumable
+folder: 4NjJfCbRAVhw8ESv
+img: icons/consumables/potions/bottle-conical-bubbling-blue.webp
+system:
+  activities:
+    gdyQxFAXH5PM9qy5:
+      type: heal
+      name: Drink
+      _id: gdyQxFAXH5PM9qy5
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: null
+        denomination: ''
+        types:
+          - temphp
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: '10'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Potion, Rare</em></p><p>When you drink this potion, you gain 10
+      Temporary Hit Points that last for 1 hour. For the same duration, you are
+      under the effect of the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplBless00000]{Bless} spell (no
+      Concentration required).</p><p>This potion's blue liquid bubbles and
+      steams as if boiling.</p>
+    chat: ''
+  identifier: potion-of-heroism
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: potion
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects:
+  - _id: dHNT1jBXfvYuNH16
+    flags: {}
+    changes:
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: 1d4
+        priority: null
+      - key: system.bonuses.mwak.attack
+        mode: 2
+        value: 1d4
+        priority: null
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: 1d4
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: 1d4
+        priority: null
+      - key: system.bonuses.rwak.attack
+        mode: 2
+        value: 1d4
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      rounds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.equipment24.Item.dmgPotionOfHeroi
+    tint: '#ffffff'
+    transfer: false
+    name: Blessed
+    description: >-
+      <p>Whenever a target makes an attack roll or a saving throw before the
+      effect ends, the target adds 1d4 to the attack roll or save.</p>
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr.ActiveEffect.8rP3gwmXVTgZqYZE
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730863613614
+      modifiedTime: 1730863634882
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/magic/holy/chalice-glowing-gold-water.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!dmgPotionOfHeroi.dHNT1jBXfvYuNH16'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256807479
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgPotionOfHeroi'

@@ -1,0 +1,170 @@
+name: Levitate
+system:
+  description:
+    value: >-
+      <p>One creature or loose object of your choice that you can see within
+      range rises vertically up to 20 feet and remains suspended there for the
+      duration. The spell can levitate an object that weighs up to 500 pounds.
+      An unwilling creature that succeeds on a Constitution saving throw is
+      unaffected.</p><p>The target can move only by pushing or pulling against a
+      fixed object or surface within reach (such as a wall or a ceiling), which
+      allows it to move as if it were climbing. You can change the target's
+      altitude by up to 20 feet in either direction on your turn. If you are the
+      target, you can move up or down as part of your move. Otherwise, you can
+      take a Magic action to move the target, which must remain within the
+      spell's range.</p><p>When the spell ends, the target floats gently to the
+      ground if it is still aloft.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      type: creatureOrObject
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '60'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a metal spring
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: axhLHcJQHprSpHRD
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects:
+        - axhLHcJQHprSpHRD
+  identifier: levitate
+_id: phbsplLevitate00
+type: spell
+img: icons/magic/light/orbs-firefly-hand-yellow.webp
+effects:
+  - name: Levitating
+    img: icons/magic/control/silhouette-hold-change-blue.webp
+    _id: axhLHcJQHprSpHRD
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target can move only by pushing or pulling against a fixed object
+      or surface within reach (such as a wall or a ceiling), which allows it to
+      move as if it were climbing.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.1
+      createdTime: 1726687988535
+      modifiedTime: 1726688069693
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplLevitate00.axhLHcJQHprSpHRD'
+folder: 3SjcO2acsFnWegp4
+sort: 2400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425961258
+  modifiedTime: 1745256795453
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplLevitate00'

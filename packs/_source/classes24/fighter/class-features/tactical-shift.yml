@@ -1,0 +1,51 @@
+_id: phbftrTacticalSh
+name: Tactical Shift
+type: feat
+folder: xggTDaiQq26ZrVzJ
+img: icons/magic/movement/chevrons-down-yellow.webp
+system:
+  description:
+    value: >-
+      <p>Whenever you activate your Second Wind with a Bonus Action, you can
+      move up to half your Speed without provoking Opportunity Attacks.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 5
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: tactical-shift
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866361253
+  modifiedTime: 1745256761853
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftrTacticalSh'

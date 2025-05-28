@@ -1,0 +1,48 @@
+_id: eL3OJmc4FuetizKO
+name: Swarm
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>The swarm can occupy another creature's space and vice versa, and the
+      swarm can move through any opening large enough for a Tiny [[lookup @name
+      lowercase]]. The swarm can't regain<strong> hit points</strong> or gain
+      temporary<strong> hit points</strong>.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: Bats
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: swarm
+flags: {}
+img: icons/creatures/mammals/bats-movement-flying-purple.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304974003
+  modifiedTime: 1725992573608
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!eL3OJmc4FuetizKO'

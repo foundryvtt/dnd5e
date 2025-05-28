@@ -1,0 +1,54 @@
+_id: phbmnkEvasion000
+name: Evasion
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/skills/movement/arrow-down-pink.webp
+system:
+  description:
+    value: >-
+      <p>When you're subjected to an effect that allows you to make a Dexterity
+      saving throw to take only half damage, you instead take no damage if you
+      succeed on the saving throw and only half damage if you fail.</p><p>You
+      don't benefit from this feature if you have the Incapacitated
+      condition.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 7
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: evasion
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1745256763044
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 800000
+ownership:
+  default: 0
+_key: '!items!phbmnkEvasion000'

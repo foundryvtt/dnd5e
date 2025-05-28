@@ -1,0 +1,140 @@
+_id: pO4zGe5LmFIYqJiL
+name: Bestow Curse
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch a creature, and that creature must succeed on a Wisdom saving
+      throw or become cursed for the duration of the spell. When you cast this
+      spell, choose the nature of the curse from the following options:</p>
+
+      <ul>
+
+      <li>Choose one ability score. While cursed, the target has disadvantage on
+      ability checks and saving throws made with that ability score.</li>
+
+      <li>While cursed, the target has disadvantage on attack rolls against
+      you.</li>
+
+      <li>While cursed, the target must make a Wisdom saving throw at the start
+      of each of its turns. If it fails, it wastes its action that turn doing
+      nothing.</li>
+
+      <li>While the target is cursed, your attacks and spells deal an extra 1d8
+      necrotic damage to the target.</li>
+
+      </ul>
+
+      <p>A remove curse spell ends this effect. At the DM's option, you may
+      choose an alternative curse effect, but it should be no more powerful than
+      those described above. The DM has final say on such a curse's
+      effect.</p><p><strong>At Higher Levels.</strong> If you cast this spell
+      using a spell slot of 4th level or higher, the duration is concentration,
+      up to 10 minutes. If you use a spell slot of 5th level or higher, the
+      duration is 8 hours. If you use a spell slot of 7th level or higher, the
+      duration is 24 hours. If you use a 9th level spell slot, the spell lasts
+      until it is dispelled. Using a spell slot of 5th level or higher grants a
+      duration that doesn't require concentration.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: nec
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: bestow-curse
+sort: 0
+flags: {}
+img: icons/magic/control/buff-flight-wings-runes-red.webp
+effects: []
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037365284
+  modifiedTime: 1725992722822
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!pO4zGe5LmFIYqJiL'

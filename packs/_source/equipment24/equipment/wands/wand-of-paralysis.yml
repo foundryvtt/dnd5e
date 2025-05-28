@@ -1,0 +1,200 @@
+_id: dmgWandOfParalys
+name: Wand of Paralysis
+type: equipment
+img: icons/weapons/wands/wand-gem-violet.webp
+system:
+  activities:
+    ZacZ5Gb5e5npCYhG:
+      type: save
+      name: Paralyze
+      _id: ZacZ5Gb5e5npCYhG
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: AwFDnHD5U7aOOzds
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d6 + 1
+    max: '7'
+  description:
+    value: >-
+      <p><em>Wand, Rare (Requires Attunement by a Spellcaster)</em></p><p>This
+      wand has 7 charges. While holding it, you can take a Magic action to
+      expend 1 charge to cause a thin blue ray to streak from the tip toward a
+      creature you can see within 60 feet of yourself. The target must succeed
+      on a DC 15 Constitution saving throw or have the &amp;Reference[Paralyzed
+      apply=false] condition for 1 minute. At the end of each of the target's
+      turns, it repeats the save, ending the effect on itself on a
+      success.</p><p><em><strong>Regaining Charges.</strong></em> The wand
+      regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's
+      last charge, roll [[/r 1d20]]. On a 1, the wand crumbles into ashes and is
+      destroyed.</p>
+    chat: ''
+  identifier: wand-of-paralysis
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wand
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+effects:
+  - name: Paralyzed
+    img: icons/weapons/wands/wand-gem-violet.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgWandOfParalys
+    transfer: false
+    _id: AwFDnHD5U7aOOzds
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - paralyzed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730464184228
+      modifiedTime: 1730464215585
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgWandOfParalys.AwFDnHD5U7aOOzds'
+folder: rLoBplj1TIznxeWI
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712704716
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -350000
+ownership:
+  default: 0
+_key: '!items!dmgWandOfParalys'

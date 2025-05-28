@@ -1,0 +1,168 @@
+_id: kozNy29b0X6exFhY
+name: Flesh to Stone
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You attempt to turn one creature that you can see within range into
+      stone. If the target's body is made of flesh, the creature must make a
+      Constitution saving throw. On a failed save, it is
+      &amp;Reference[Restrained] as its flesh begins to harden. On a successful
+      save, the creature isn't affected.</p><p>A creature Restrained by this
+      spell must make another Constitution saving throw at the end of each of
+      its turns. If it successfully saves against this spell three times, the
+      spell ends. If it fails its saves three times, it is turned to stone and
+      subjected to the &amp;Reference[Petrified] condition for the Duration. The
+      successes and failures don't need to be consecutive; keep track of both
+      until the target collects three of a kind.</p><p>If the creature is
+      physically broken while Petrified, it suffers from similar deformities if
+      it reverts to its original state.</p><p>If you maintain your Concentration
+      on this spell for the entire possible Duration, the creature is turned to
+      stone until the effect is removed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: trs
+  materials:
+    value: A pinch of lime, water, and earth
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: mVqFBzC5qYpFnZFV
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: flesh-to-stone
+sort: 0
+flags: {}
+img: icons/magic/control/energy-stream-link-large-blue.webp
+effects:
+  - name: Flesh to Stone
+    origin: Compendium.dnd5e.spells.Item.kozNy29b0X6exFhY
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: mVqFBzC5qYpFnZFV
+    changes: []
+    description: >-
+      <p>The target is Restrained as its flesh begins to harden. A creature
+      Restrained by this spell must make another Constitution saving throw at
+      the end of each of its turns. If it successfully saves against this spell
+      three times, the spell ends. If it fails its saves three times, it is
+      turned to stone and subjected to the Petrified condition for the
+      Duration.</p>
+    transfer: false
+    statuses:
+      - restrained
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/control/energy-stream-link-large-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!kozNy29b0X6exFhY.mVqFBzC5qYpFnZFV'
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037364026
+  modifiedTime: 1725992722394
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!kozNy29b0X6exFhY'

@@ -1,0 +1,101 @@
+_id: Uvy7vla2EhYSfTl0
+name: Ignited Illumination
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>As a bonus action, the [[lookup @name lowercase]] can set itself ablaze
+      or extinguish its flames. While ablaze, the [[lookup @name lowercase]]
+      sheds bright light in a <strong>10-foot radius</strong> and dim light for
+      an additional <strong>10 ft.</strong></p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: bonus
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: ignited-illumination
+flags: {}
+img: icons/magic/fire/explosion-mushroom-nuke-orange.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304971651
+  modifiedTime: 1725992572856
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Uvy7vla2EhYSfTl0'

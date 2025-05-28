@@ -1,0 +1,422 @@
+name: Storm of Vengeance
+system:
+  description:
+    value: >-
+      <p>A churning storm cloud forms for the duration, centered on a point
+      within range and spreading to a radius of 300 feet. Each creature under
+      the cloud when it appears must succeed on a Constitution saving throw or
+      take 2d6 Thunder damage and have the &amp;Reference[Deafened apply=false]
+      condition for the duration.</p><p>At the start of each of your later
+      turns, the storm produces different effects, as detailed
+      below.</p><p><strong>Turn 2.</strong> Acidic rain falls. Each creature and
+      object under the cloud takes 4d6 Acid damage.</p><p><strong>Turn
+      3.</strong> You call six bolts of lightning from the cloud to strike six
+      different creatures or objects beneath it. Each target makes a Dexterity
+      saving throw, taking 10d6 Lightning damage on a failed save or half as
+      much damage on a successful one.</p><p><strong>Turn 4.</strong> Hailstones
+      rain down. Each creature under the cloud takes 2d6 Bludgeoning
+      damage.</p><p><strong>Turns 5–10.</strong> Gusts and freezing rain assail
+      the area under the cloud. Each creature there takes 1d6 Cold damage. Until
+      the spell ends, the area is &amp;Reference[DifficultTerrain] and
+      &amp;Reference[HeavilyObscured], ranged attacks with weapons are
+      impossible there, and strong wind blows through the area.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: circle
+      size: '300'
+      count: ''
+  range:
+    units: mi
+    special: ''
+    value: '1'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 9
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    8QALATRgSsmWWxCl:
+      type: save
+      name: Create Storm
+      _id: 8QALATRgSsmWWxCl
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: ujpteFz6imf8RZsj
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: '6'
+            bonus: ''
+            types:
+              - thunder
+            scaling:
+              mode: ''
+        onSave: none
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: systems/dnd5e/icons/svg/statuses/exhaustion-1.svg
+      appliedEffects:
+        - ujpteFz6imf8RZsj
+    WOo8u0FLAzNMpMJN:
+      type: damage
+      name: 'Turn 2: Acid Rain'
+      _id: WOo8u0FLAzNMpMJN
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: at the start of your turn
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: creatures under the cloud
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: '6'
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              mode: ''
+      img: systems/dnd5e/icons/svg/statuses/exhaustion-2.svg
+      appliedEffects: []
+    Fd8ZGgmDyNmJJuj3:
+      type: save
+      name: 'Turn 3: Lightning'
+      _id: Fd8ZGgmDyNmJJuj3
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: at the start of your turn
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: creatures under the cloud
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: '6'
+            bonus: ''
+            types:
+              - lightning
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: systems/dnd5e/icons/svg/statuses/exhaustion-3.svg
+      appliedEffects: []
+    H4uCtCkANBkttnov:
+      type: damage
+      _id: H4uCtCkANBkttnov
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: at the start of your turn
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: creatures under the cloud
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: '6'
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+      name: 'Turn 4: Hailstones'
+      img: systems/dnd5e/icons/svg/statuses/exhaustion-4.svg
+      appliedEffects: []
+    yt2oWWelZl1zV4CB:
+      type: damage
+      name: 'Turn 5+: Gusts and Rain'
+      _id: yt2oWWelZl1zV4CB
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: at the start of your turn
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: creatures under the cloud
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - cold
+            scaling:
+              mode: ''
+              number: 1
+      img: systems/dnd5e/icons/svg/statuses/exhaustion-5.svg
+      appliedEffects: []
+  identifier: storm-of-vengeance
+_id: phbsplStormofVen
+type: spell
+img: icons/magic/lightning/bolt-cloud-sky-white.webp
+effects:
+  - name: Deafened
+    img: systems/dnd5e/icons/svg/statuses/deafened.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplStormofVen
+    transfer: false
+    _id: ujpteFz6imf8RZsj
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - deafened
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725386260763
+      modifiedTime: 1725386286562
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplStormofVen.ujpteFz6imf8RZsj'
+folder: iG0Zia8jh6uK39TB
+sort: 100196
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425973107
+  modifiedTime: 1745256798836
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplStormofVen'

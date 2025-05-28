@@ -1,0 +1,105 @@
+name: Way of the Open Hand
+type: subclass
+img: icons/skills/social/wave-halt-stop.webp
+system:
+  description:
+    value: >-
+      <p>Monks of the Way of the Open Hand are the ultimate masters of martial
+      arts combat, whether armed or unarmed. They learn techniques to push and
+      trip their opponents, manipulate ki to heal damage to their bodies, and
+      practice advanced meditation that can protect them from harm.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: way-of-the-open-hand
+  classIdentifier: monk
+  advancement:
+    - _id: 6mobkr8qlx5gk60w
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.iQxLNydNLlCHNKbp
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 3
+      title: Features
+    - _id: 0bhigjb0qzullpil
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.Q7mOdk4b1lgjcptF
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 6
+      title: Features
+    - _id: hj02xkoyhx9s29ci
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.rBDZLatuoolT2FUW
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 11
+      title: Features
+    - _id: htx1d5pqlsn313pb
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.h1gM8SH3BNRtFevE
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 17
+      title: Features
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation: {}
+effects: []
+folder: HQ1Oy7HkbnxnE63o
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: IvlpKMXX3PmW1NY2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037372867
+  modifiedTime: 1725992730596
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!IvlpKMXX3PmW1NY2'

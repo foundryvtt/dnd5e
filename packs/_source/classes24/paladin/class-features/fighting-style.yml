@@ -1,0 +1,55 @@
+_id: phbpdnFightingSt
+name: Fighting Style
+type: feat
+folder: 6uMLnndK8UPkb7Uy
+img: icons/skills/melee/hand-grip-staff-blue.webp
+system:
+  description:
+    value: >-
+      <p>You gain a
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.sbHImaCB8ZMEHYkb]{Fighting
+      Style feat} of your choice. Instead of choosing one of those feats, you
+      can choose the option below.</p><hr
+      /><p>@Embed[Compendium.dnd5e.classes24.Item.phbfstBlessedWar
+      caption=false]</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: fighting-style
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866297701
+  modifiedTime: 1745513511345
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbpdnFightingSt'

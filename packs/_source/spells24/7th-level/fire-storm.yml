@@ -1,0 +1,136 @@
+name: Fire Storm
+system:
+  description:
+    value: >-
+      <p>A storm of fire appears within range. The area of the storm consists of
+      up to ten 10-foot Cubes, which you arrange as you like. Each Cube must be
+      contiguous with at least one other Cube. Each creature in the area makes a
+      Dexterity saving throw, taking 7d10 Fire damage on a failed save or half
+      as much damage on a successful one.</p><p>Flammable objects in the area
+      that aren't being worn or carried start burning.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creatureOrObject
+      special: ''
+    template:
+      units: ft
+      contiguous: true
+      type: cube
+      size: '10'
+      count: '10'
+  range:
+    units: ft
+    special: ''
+    value: '150'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: evo
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    H6SfndICBTe2AsDg:
+      type: save
+      name: Create Storm
+      _id: H6SfndICBTe2AsDg
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 7
+            denomination: '10'
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: ''
+      appliedEffects: []
+  identifier: fire-storm
+_id: phbsplFireStorm0
+type: spell
+img: icons/magic/fire/projectile-wave-yellow.webp
+effects: []
+folder: EdAGMG8IF26PLkD3
+sort: 1600000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425954011
+  modifiedTime: 1745256793107
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFireStorm0'

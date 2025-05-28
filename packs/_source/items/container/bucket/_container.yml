@@ -1,0 +1,56 @@
+_id: mQVYcHmMSoCUnBnM
+name: Bucket
+type: container
+img: icons/containers/misc/bucket-steel.webp
+system:
+  description:
+    value: <p>A bucket holds 3 gallons of liquid or ½ cubic foot of solids.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 5
+    denomination: cp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  capacity:
+    type: weight
+    value: 25
+  currency:
+    cp: 0
+    sp: 0
+    ep: 0
+    gp: 0
+    pp: 0
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  attuned: false
+  identifier: bucket
+effects: []
+folder: PgtyWdfkDTDbc0ov
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037278512
+  modifiedTime: 1725992543513
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!mQVYcHmMSoCUnBnM'

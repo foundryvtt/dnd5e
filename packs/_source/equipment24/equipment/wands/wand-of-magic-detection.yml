@@ -1,0 +1,150 @@
+_id: dmgWandOfMagicDe
+name: Wand of Magic Detection
+type: equipment
+img: icons/weapons/wands/wand-gem-purple.webp
+system:
+  activities:
+    dWZ4qmQhS20AwoaG:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: dWZ4qmQhS20AwoaG
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d3
+    max: '3'
+  description:
+    value: >-
+      <p><em>Wand, Uncommon</em></p><p>This wand has 3 charges. While holding
+      it, you can expend 1 charge to cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect Magic} from
+      it. The wand regains 1d3 expended charges daily at dawn.</p>
+    chat: ''
+  identifier: wand-of-magic-detection
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wand
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+effects: []
+folder: rLoBplj1TIznxeWI
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712704680
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -250000
+ownership:
+  default: 0
+_key: '!items!dmgWandOfMagicDe'

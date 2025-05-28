@@ -1,0 +1,158 @@
+name: Entangle
+type: spell
+img: icons/magic/nature/vines-thorned-curled-glow-green.webp
+system:
+  description:
+    value: >-
+      <p>Grasping weeds and vines sprout from the ground in a 20-foot square
+      starting from a point within range. For the Duration, these Plants turn
+      the ground in the area into difficult terrain.</p><p>A creature in the
+      area when you cast the spell must succeed on a Strength saving throw or be
+      &amp;Reference[Restrained] by the entangling Plants until the spell ends.
+      A creature restrained by the plants can use its action to make a Strength
+      check against your spell save DC. On a success, it frees
+      itself.</p><p>When the spell ends, the conjured Plants wilt away.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: square
+      size: '20'
+      contiguous: false
+  range:
+    value: '90'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: fO14IutGR3Hrepun
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: str
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: entangle
+effects:
+  - name: Entangle
+    origin: Compendium.dnd5e.spells.Item.gMrWeG8fMDPRFiVe
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: fO14IutGR3Hrepun
+    changes: []
+    description: >-
+      <p>A creature in the area is Restrained by the entangling Plants until the
+      spell ends. A creature restrained by the plants can use its action to make
+      a Strength check against your spell save DC. On a success, it frees
+      itself.</p>
+    transfer: false
+    statuses:
+      - restrained
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/nature/vines-thorned-curled-glow-green.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!gMrWeG8fMDPRFiVe.fO14IutGR3Hrepun'
+flags: {}
+_id: gMrWeG8fMDPRFiVe
+folder: ERuXllkhTQF51rDJ
+sort: 0
+ownership:
+  default: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037362549
+  modifiedTime: 1725992721946
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!gMrWeG8fMDPRFiVe'

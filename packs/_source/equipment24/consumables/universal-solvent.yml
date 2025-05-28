@@ -1,0 +1,190 @@
+_id: dmgUniversalSolv
+name: Universal Solvent
+type: equipment
+folder: guHYjt0gjPLU2wCs
+img: icons/consumables/potions/potion-bottle-corked-white.webp
+system:
+  activities:
+    zLSDeTP2AoZlrhAj:
+      type: utility
+      name: Determine Ounces
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: 1d6 - 2
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: zLSDeTP2AoZlrhAj
+    29Jn4qIeO3YkUZhG:
+      type: utility
+      name: Apply Glue
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '@item.uses.value'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '@scaling'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: square
+          size: '@scaling'
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: 29Jn4qIeO3YkUZhG
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '7'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Legendary</em></p><p>This tube holds milky liquid
+      with a strong alcohol smell. When found, a tube contains 1d6 + 1
+      ounces.</p><p>You can take a Utilize action to pour 1 or more ounces of
+      solvent from the tube onto a surface within reach. Each ounce instantly
+      dissolves up to 1 square foot of adhesive it touches, including
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgSovereignGlue]{Sovereign
+      Glue}.</p><section class="secret"
+      id="secret-cCr2F0ctb7qvQ3x8"><p><strong>Foundry Note</strong></p><p>This
+      item includes 7 limited uses. The <strong>Determine Ounces</strong>
+      activity can be used to determine the number of ounces equivalent to 1d6 +
+      1.</p><p>The <strong>Apply Solvent</strong> activity allows you to select
+      the number of ounces you're applying.</p></section>
+    chat: ''
+  identifier: universal-solvent
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 100000
+    denomination: gp
+  rarity: legendary
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: wondrous
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712704448
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1200000
+ownership:
+  default: 0
+_key: '!items!dmgUniversalSolv'

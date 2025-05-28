@@ -1,0 +1,222 @@
+name: Glyph of Warding
+system:
+  description:
+    value: >-
+      <p>You inscribe a glyph that later unleashes a magical effect. You
+      inscribe it either on a surface (such as a table or a section of floor) or
+      within an object that can be closed (such as a book or chest) to conceal
+      the glyph. The glyph can cover an area no larger than 10 feet in diameter.
+      If the surface or object is moved more than 10 feet from where you cast
+      this spell, the glyph is broken, and the spell ends without being
+      triggered.</p><p>The glyph is nearly imperceptible and requires a
+      successful [[/check ability=wis skill=prc dc=@attributes.spell.dc]] check
+      against your spell save DC to notice.</p><p>When you inscribe the glyph,
+      you set its trigger and choose whether it's an explosive rune or a spell
+      glyph, as explained below.</p><p><strong>Set the Trigger.</strong> You
+      decide what triggers the glyph when you cast the spell. For glyphs
+      inscribed on a surface, common triggers include touching or stepping on
+      the glyph, removing another object covering it, or approaching within a
+      certain distance of it. For glyphs inscribed within an object, common
+      triggers include opening that object or seeing the glyph. Once a glyph is
+      triggered, this spell ends.</p><p>You can refine the trigger so that only
+      creatures of certain types activate it (for example, the glyph could be
+      set to affect Aberrations). You can also set conditions for creatures that
+      don't trigger the glyph, such as those who say a certain
+      password.</p><p><strong>Explosive Rune.</strong> When triggered, the glyph
+      erupts with magical energy in a 20-foot-radius Sphere centered on the
+      glyph. Each creature in the area makes a [[/save ability=dex
+      dc=@attributes.spell.dc]] saving throw. A creature takes 5d8 [[/damage
+      (@item.level + 2)d8 type=acid]]{Acid}, [[/damage (@item.level + 2)d8
+      type=acid]]{Cold}, [[/damage (@item.level + 2)d8 type=acid]]{Fire},
+      [[/damage (@item.level + 2)d8 type=acid]]{Lightning}, or [[/damage
+      (@item.level + 2)d8 type=acid]]{Thunder} damage (your choice when you
+      create the glyph) on a failed save or half as much damage on a successful
+      one.</p><p><strong>Spell Glyph.</strong> You can store a prepared spell of
+      level 3 or lower in the glyph by casting it as part of creating the glyph.
+      The spell must target a single creature or an area. The spell being stored
+      has no immediate effect when cast in this way.</p><p>When the glyph is
+      triggered, the stored spell takes effect. If the spell has a target, it
+      targets the creature that triggered the glyph. If the spell affects an
+      area, the area is centered on that creature. If the spell summons Hostile
+      creatures or creates harmful objects or traps, they appear as close as
+      possible to the intruder and attack it. If the spell requires
+      Concentration, it lasts until the end of its full
+      duration.</p><p><strong>Using a Higher-Level Spell Slot.</strong> The
+      damage of an explosive rune increases by 1d8 for each spell slot level
+      above 3. If you create a spell glyph, you can store any spell of up to the
+      same level as the spell slot you use for the <em>Glyph of
+      Warding</em>.</p><section class="secret"
+      id="secret-S9SAlMniIN14fjKi"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Explosive Rune</strong> activity allows you to choose the damage
+      type in the roll dialog.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: hour
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: dstr
+  target:
+    affects:
+      type: object
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: powdered diamond worth 200+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Spell Glyph
+      img: ''
+      appliedEffects: []
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: 8
+            bonus: ''
+            types:
+              - acid
+              - cold
+              - fire
+              - lightning
+              - thunder
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Explosive Rune
+      img: ''
+      appliedEffects: []
+  identifier: glyph-of-warding
+_id: phbsplGlyphofWar
+type: spell
+img: icons/magic/symbols/triangle-glowing-green.webp
+effects: []
+folder: HCovEE4VoPGlIbKi
+sort: 1800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425956670
+  modifiedTime: 1745256793844
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplGlyphofWar'

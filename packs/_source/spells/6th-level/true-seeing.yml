@@ -1,0 +1,112 @@
+_id: XzkJpE6XpZfKjODD
+name: True Seeing
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell gives the willing creature you touch the ability to see
+      things as they actually are. For the duration, the creature has truesight,
+      notices secret doors hidden by magic, and can see into the Ethereal Plane,
+      all out to a range of 120 feet.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: div
+  materials:
+    value: >-
+      An ointment for the eyes that costs 25gp; is made from mushroom powder,
+      saffron, and fat; and is consumed by the spell
+    consumed: true
+    cost: 25
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: true-seeing
+sort: 0
+flags: {}
+img: icons/magic/perception/eye-ringed-glow-angry-large-teal.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037358759
+  modifiedTime: 1725992720678
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!XzkJpE6XpZfKjODD'

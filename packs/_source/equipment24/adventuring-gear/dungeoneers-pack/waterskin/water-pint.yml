@@ -1,0 +1,122 @@
+name: Water (Pint)
+type: consumable
+img: icons/magic/water/water-drop-swirl-blue.webp
+system:
+  activities:
+    XlTBFtJ0jyBJ71bh:
+      type: utility
+      name: Consume
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: XlTBFtJ0jyBJ71bh
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p>If you don't drink sufficient water, you risk
+      &amp;Reference[dehydration].</p>
+    chat: ''
+  identifier: water-pint
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: 5tEPJK0TLcjPvPNF
+  quantity: 4
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: food
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties: []
+effects: []
+folder: uDk4FBYfcP2JnX6t
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726532465543
+  modifiedTime: 1745256801980
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+ownership:
+  default: 0
+_id: aWEY8Xh0wfn69Q1w
+sort: 100000
+_key: '!items!aWEY8Xh0wfn69Q1w'

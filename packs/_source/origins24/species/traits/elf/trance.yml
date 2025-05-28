@@ -1,0 +1,51 @@
+_id: phbsptTrance0000
+name: Trance
+type: feat
+img: icons/magic/holy/meditation-chi-focus-blue.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>You don't need to sleep, and magic can't put you to sleep. You can
+      finish a Long Rest in 4 hours if you spend those hours in a trancelike
+      meditation, during which you retain consciousness.</p>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Elf
+  identifier: trance
+effects: []
+folder: 3uafOaOCZJQeUNtw
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866707969
+  modifiedTime: 1745256778021
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptTrance0000'

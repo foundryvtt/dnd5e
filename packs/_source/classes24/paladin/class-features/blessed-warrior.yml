@@ -1,0 +1,56 @@
+name: Blessed Warrior
+system:
+  description:
+    value: >-
+      <p>You learn two
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj#cantrip]{Cleric
+      cantrips} of your choice.
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGuidance00]{Guidance}</em>
+      and <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplSacredFlam]{Sacred
+      Flame}</em> are recommended. The chosen cantrips count as Paladin spells
+      for you, and Charisma is your spellcasting ability for them. Whenever you
+      gain a Paladin level, you can replace one of these cantrips with another
+      Cleric cantrip.</p>
+    chat: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  identifier: blessed-warrior
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: class
+    subtype: fightingStyle
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: Paladin
+  advancement: []
+  cover: null
+  crewed: false
+_id: phbfstBlessedWar
+type: feat
+folder: 6uMLnndK8UPkb7Uy
+img: icons/skills/melee/sword-winged-holy-orange.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745513480134
+  modifiedTime: 1745712691385
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1500000
+ownership:
+  default: 0
+_key: '!items!phbfstBlessedWar'

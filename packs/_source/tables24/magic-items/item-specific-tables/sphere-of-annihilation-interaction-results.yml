@@ -1,0 +1,91 @@
+_id: dmgSphereOfAnnih
+name: Sphere of Annihilation Interaction Results
+img: icons/magic/unholy/orb-glowing-purple.webp
+description: ''
+results:
+  - type: text
+    drawn: false
+    range:
+      - 1
+      - 50
+    _id: jcbSwmojW07pbuSR
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: The sphere is destroyed.
+    name: ''
+    _key: '!tables.results!dmgSphereOfAnnih.jcbSwmojW07pbuSR'
+  - type: text
+    drawn: false
+    range:
+      - 51
+      - 85
+    _id: bjcgoj9e1pNuEgoz
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: The sphere moves through the portal or into the extradimensional space.
+    name: ''
+    _key: '!tables.results!dmgSphereOfAnnih.bjcgoj9e1pNuEgoz'
+  - type: text
+    drawn: false
+    range:
+      - 86
+      - 100
+    _id: Bzi6el4tj31VYJo6
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      A spatial rift sends the sphere and each creature and object within 180
+      feet of the sphere to a random plane of existence.
+    name: ''
+    _key: '!tables.results!dmgSphereOfAnnih.Bzi6el4tj31VYJo6'
+replacement: true
+displayRoll: true
+folder: I2IHCZhwMY7ttiXw
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.2
+  createdTime: 1727883396246
+  modifiedTime: 1745612199237
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 125000
+ownership:
+  default: 0
+formula: 1d100
+_key: '!tables!dmgSphereOfAnnih'

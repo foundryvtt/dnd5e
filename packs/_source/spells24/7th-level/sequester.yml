@@ -1,0 +1,165 @@
+name: Sequester
+system:
+  description:
+    value: >-
+      <p>With a touch, you magically sequester an object or a willing creature.
+      For the duration, the target has the Invisible condition and can't be
+      targeted by Divination spells, detected by magic, or viewed remotely with
+      magic.</p><p>If the target is a creature, it enters a state of suspended
+      animation; it has the Unconscious condition, doesn't age, and doesn't need
+      food, water, or air.</p><p>You can set a condition for the spell to end
+      early. The condition can be anything you choose, but it must occur or be
+      visible within 1 mile of the target. Examples include "after 1,000 years"
+      or "when the tarrasque awakens." This spell also ends if the target takes
+      any damage.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: disp
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creatureOrObject
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: gem dust worth 5,000+ GP, which the spell consumes
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    mDRkoRyY7Fj5Wwvu:
+      type: utility
+      _id: mDRkoRyY7Fj5Wwvu
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: DWu3UoqOICFFQA1W
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: sequester
+_id: phbsplSequester0
+type: spell
+img: icons/containers/chest/chest-reinforced-box-brown.webp
+effects:
+  - name: Sequestered
+    img: icons/magic/control/debuff-chains-orb-movement-blue.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplSequester0
+    transfer: false
+    _id: DWu3UoqOICFFQA1W
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>If the target is a creature, it enters a state of suspended animation;
+      it has the &amp;Reference[Unconscious apply=false] condition, doesn’t age,
+      and doesn’t need food, water, or air. This spell also ends if the target
+      takes any damage.</p>
+    tint: '#ffffff'
+    statuses:
+      - invisible
+      - unconscious
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724970035225
+      modifiedTime: 1724970321949
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplSequester0.DWu3UoqOICFFQA1W'
+folder: EdAGMG8IF26PLkD3
+sort: 500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425970199
+  modifiedTime: 1745256797997
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSequester0'

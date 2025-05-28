@@ -1,0 +1,95 @@
+_id: phbbrdSpellcasti
+name: Spellcasting
+type: feat
+folder: nP3HNXn7rem24IST
+img: icons/skills/trades/music-notes-sound-blue.webp
+system:
+  description:
+    value: >-
+      <p>You have learned to cast spells through your bardic arts. See
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.mh3akteBDiLegqFK]{chapter
+      7} for the rules on spellcasting. The information below details how you
+      use those rules with Bard spells, which appear in the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.wwia6Wwo4BgE9GSI]{Bard
+      spell list}.</p><p><strong>Cantrips.</strong> You know two cantrips of
+      your choice from the Bard spell list.
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDancingLig]{Dancing
+      Lights}</em> and
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplViciousMoc]{Vicious
+      Mockery}</em> are recommended.</p><p>Whenever you gain a Bard level, you
+      can replace one of your cantrips with another cantrip of your choice from
+      the Bard spell list.</p><p>When you reach Bard levels 4 and 10, you learn
+      another cantrip of your choice from the Bard spell list, as shown in the
+      Cantrips column of the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbBard000000000.JournalEntryPage.V8pqIWlaL9GhY61t#class-features]{Bard
+      Features} table.</p><p><strong>Spell Slots.</strong> The Bard Features
+      table shows how many spell slots you have to cast your level 1+ spells.
+      You regain all expended slots when you finish a Long
+      Rest.</p><p><strong>Prepared Spells of Level 1+.</strong> You prepare the
+      list of level 1+ spells that are available for you to cast with this
+      feature. To start, choose four level 1 spells from the Bard spell list.
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCharmPerso]{Charm
+      Person}</em>,
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplColorSpray]{Color
+      Spray}</em>,
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDissonantW]{Dissonant
+      Whispers}</em>, and
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplHealingWor]{Healing Word}
+      </em>are recommended.</p><p>The number of spells on your list increases as
+      you gain Bard levels, as shown in the Prepared Spells column of the Bard
+      Features table. Whenever that number increases, choose additional spells
+      from the Bard spell list until the number of spells on your list matches
+      the number on the table. The chosen spells must be of a level for which
+      you have spell slots. For example, if you're a level 3 Bard, your list of
+      prepared spells can include six spells of levels 1 and 2 in any
+      combination.</p><p>If another Bard feature gives you spells that you
+      always have prepared, those spells don't count against the number of
+      spells you can prepare with this feature, but those spells otherwise count
+      as Bard spells for you.</p><p><strong>Changing Your Prepared Spells.
+      </strong>Whenever you gain a Bard level, you can replace one spell on your
+      list with another Bard spell for which you have spell
+      slots.</p><p><strong>Spellcasting Ability. </strong>Charisma is your
+      spellcasting ability for your Bard spells.</p><p><strong>Spellcasting
+      Focus. </strong>You can use a Musical Instrument as a Spellcasting Focus
+      for your Bard spells.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: Bard
+  activities: {}
+  enchant: {}
+  identifier: spellcasting
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866377962
+  modifiedTime: 1745256760553
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrdSpellcasti'

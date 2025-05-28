@@ -1,0 +1,147 @@
+name: Antilife Shell
+system:
+  description:
+    value: >-
+      <p>An aura extends from you in a 10-foot Emanation for the duration. The
+      aura prevents creatures other than Constructs and Undead from passing or
+      reaching through it. An affected creature can cast spells or make attacks
+      with Ranged or Reach weapons through the barrier.</p><p>If you move so
+      that an affected creature is forced to pass through the barrier, the spell
+      ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: radius
+      size: '10'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: IrE5td3goSQtcc0U
+      range:
+        override: false
+      target:
+        prompt: false
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: antilife-shell
+_id: phbsplAntilifeSh
+type: spell
+img: icons/magic/unholy/silhouette-light-fire-blue.webp
+effects:
+  - name: Antilife Shell
+    origin: Compendium.dnd5e.spells24.Item.phbsplAntilifeSh
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/control/silhouette-hold-beam-blue.webp
+    _id: IrE5td3goSQtcc0U
+    type: base
+    system: {}
+    changes: []
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplAntilifeSh.IrE5td3goSQtcc0U'
+folder: beZ8MTpWY2cMEUlp
+sort: 3800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425940827
+  modifiedTime: 1745256785558
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplAntilifeSh'

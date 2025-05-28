@@ -1,0 +1,128 @@
+_id: dmgRingOfSpellTu
+name: Ring of Spell Turning
+type: equipment
+folder: DC1x1wAm0NLFudA6
+img: icons/equipment/finger/ring-band-engraved-scrolls-silver.webp
+system:
+  activities:
+    I3DSeRgV7QFooplu:
+      type: utility
+      name: Reflect Spell
+      _id: I3DSeRgV7QFooplu
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Ring, Legendary (Requires Attunement)</em></p><p>While wearing this
+      ring, you have Advantage on saving throws against spells. If you succeed
+      on the save for a spell of level 7 or lower, the spell has no effect on
+      you. If that spell targeted only you and didn't create an area of effect,
+      you can take a Reaction to deflect the spell back at the spell's caster;
+      the caster must make a saving throw against the spell using their own
+      spell save DC.</p>
+    chat: ''
+  identifier: ring-of-spell-turning
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ring
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712702737
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1500000
+ownership:
+  default: 0
+_key: '!items!dmgRingOfSpellTu'

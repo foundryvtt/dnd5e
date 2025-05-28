@@ -1,0 +1,56 @@
+_id: phbclcSupremeHea
+name: Supreme Healing
+type: feat
+folder: jWzqOsH9e7IW7WO7
+img: icons/magic/life/heart-area-circle-red-green.webp
+system:
+  description:
+    value: >-
+      <p>When you would normally roll one or more dice to restore Hit Points to
+      a creature with a spell or Channel Divinity, don't roll those dice for the
+      healing; instead use the highest number possible for each die. For
+      example, instead of restoring 2d6 Hit Points to a creature with a spell,
+      you restore 12.</p><section id="secret-1Bw7MOem4xyPO17q"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature does
+      not automate the maximizing of all of your rolls.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 17
+    repeatable: false
+  properties: []
+  requirements: Life Domain
+  activities: {}
+  enchant: {}
+  identifier: supreme-healing
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866589552
+  modifiedTime: 1745256760962
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 500000
+ownership:
+  default: 0
+_key: '!items!phbclcSupremeHea'

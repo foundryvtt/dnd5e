@@ -1,0 +1,118 @@
+_id: ap4dmtshjEbwU3Ts
+name: Rope Trick
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You touch a length of rope that is up to 60 feet long. One end of the
+      rope then rises into the air until the whole rope hangs perpendicular to
+      the ground. At the upper end of the rope, an invisible entrance opens to
+      an extradimensional space that lasts until the spell ends.</p><p>The
+      extradimensional space can be reached by climbing to the top of the rope.
+      The space can hold as many as eight Medium or smaller creatures. The rope
+      can be pulled into the space, making the rope disappear from view outside
+      the space.</p><p>Attacks and spells can't cross through the entrance into
+      or out of the extradimensional space, but those inside can see out of it
+      as if through a 3-foot-by-5-foot window centered on the
+      rope.</p><p>Anything inside the extradimensional space drops out when the
+      spell ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: object
+      count: '1'
+      choice: false
+    template:
+      units: spec
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  materials:
+    value: Powdered corn extract and a twisted loop of parchment
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: rope-trick
+sort: 0
+flags: {}
+img: icons/skills/melee/strike-blade-scimitar-gray-red.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037359799
+  modifiedTime: 1725992720999
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ap4dmtshjEbwU3Ts'

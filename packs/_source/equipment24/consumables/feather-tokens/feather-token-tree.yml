@@ -1,0 +1,136 @@
+_id: dmgTreeQuaalsFea
+name: Feather Token (Tree)
+type: consumable
+folder: rHnqTOyb3aiQKdh4
+img: icons/commodities/materials/feather-colored-green.webp
+system:
+  activities:
+    wG1nrX8zkBjD7S4W:
+      type: utility
+      name: Use
+      _id: wG1nrX8zkBjD7S4W
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: perm
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cylinder
+          size: '2.5'
+          height: '60'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: unoccupied space on the ground
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '1'
+    autoDestroy: true
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon, See:
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgQuaalsFeather]{Feather
+      Token}</em></p><p>You must be outdoors to use this token. You can take a
+      Magic action to touch it to an unoccupied space on the ground. The token
+      disappears, and in its place a nonmagical oak tree springs into existence.
+      The tree is 60 feet tall and has a 5-foot-diameter trunk, and its branches
+      at the top spread out in a 20-foot radius.</p>
+    chat: ''
+  identifier: tree-feather-token
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712704373
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 500000
+ownership:
+  default: 0
+_key: '!items!dmgTreeQuaalsFea'

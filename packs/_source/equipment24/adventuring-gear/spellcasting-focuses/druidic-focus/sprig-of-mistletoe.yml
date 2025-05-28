@@ -1,0 +1,78 @@
+name: Sprig of mistletoe
+system:
+  description:
+    value: >-
+      <p>A @UUID[Compendium.dnd5e.equipment24.Item.phbagDruidicFocu]{Druidic
+      Focus} takes one of the forms in the Druidic Focuses table and is carved,
+      tied with ribbon, or painted to channel primal magic. A Druid or Ranger
+      can use such an object as a Spellcasting Focus.</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities: {}
+  identifier: sprig-of-mistletoe
+_id: phbdfcSprigofmis
+type: equipment
+folder: kECSduSbNoLHv8fK
+img: icons/consumables/plants/fern-lady-green.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425914546
+  modifiedTime: 1745256813716
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbdfcSprigofmis'

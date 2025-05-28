@@ -1,0 +1,106 @@
+_id: phbftrTacticalMi
+name: Tactical Mind
+type: feat
+folder: xggTDaiQq26ZrVzJ
+img: icons/sundries/documents/document-torn-diagram-tan.webp
+system:
+  description:
+    value: >-
+      <p>You have a mind for tactics on and off the battlefield. When you fail
+      an ability check, you can expend a use of your Second Wind to push
+      yourself toward success. Rather than regaining Hit Points, you roll 1d10
+      and add the number rolled to the ability check, potentially turning it
+      into a success. If the check still fails, this use of Second Wind isn't
+      expended.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    VVEGPoQePVprCF9A:
+      type: utility
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you fail an ability check
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbftrSecondWind
+            scaling: {}
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        formula: 1d10
+        name: Bonus
+      name: Expend Second Wind
+      _id: VVEGPoQePVprCF9A
+  enchant: {}
+  identifier: tactical-mind
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866361253
+  modifiedTime: 1740680083501
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftrTacticalMi'

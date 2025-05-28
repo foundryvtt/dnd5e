@@ -1,0 +1,119 @@
+name: Alchemist's Supplies
+system:
+  description:
+    value: "<p class=\"phb-meta\"><strong>Ability:</strong> Intelligence</p><p class=\"phb-meta\"><strong>Utilize:</strong> Identify a substance (DC 15), or start a fire (DC\_15)</p><p class=\"phb-meta\"><strong>Craft:</strong> @UUID[Compendium.dnd5e.equipment24.Item.phbagAcid0000000]{Acid}, @UUID[Compendium.dnd5e.equipment24.Item.phbagAlchemistsF]{Alchemist's Fire}, @UUID[Compendium.dnd5e.equipment24.Item.phbagComponentPo]{Component Pouch}, @UUID[Compendium.dnd5e.equipment24.Item.phbagOil00000000]{Oil}, @UUID[Compendium.dnd5e.equipment24.Item.phbagPaper000000]{Paper}, @UUID[Compendium.dnd5e.equipment24.Item.phbagPerfume0000]{Perfume}</p>"
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 8
+    units: lb
+  price:
+    value: 50
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: art
+    baseItem: alchemist
+  ability: int
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    3tr6iV1buoI6GB27:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      check:
+        ability: int
+        dc:
+          calculation: ''
+          formula: '15'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: 3tr6iV1buoI6GB27
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: alchemists-supplies
+_id: phbtulAlchemists
+type: tool
+folder: V8KHbNkEWoXQP3Pj
+img: icons/tools/cooking/mortar-herbs-yellow.webp
+effects: []
+sort: 100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425916205
+  modifiedTime: 1745256813980
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbtulAlchemists'

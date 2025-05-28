@@ -1,0 +1,108 @@
+_id: ipG5yx1tRNmeJfSH
+name: Survivor
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You attain the pinnacle of resilience in battle.</p><p>At the start of
+      each of your turns, you regain hit points equal to 5 + your Constitution
+      modifier if you have no more than half of your hit points left.</p><p>You
+      don't gain this benefit if you have 0 hit points.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Champion 18
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      healing:
+        number: null
+        denomination: null
+        bonus: ''
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: 5 + @mod
+        scaling:
+          mode: whole
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: survivor
+flags: {}
+img: icons/magic/life/heart-glowing-red.webp
+effects: []
+folder: sGTtP8NsRFDOc0tP
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037387315
+  modifiedTime: 1725992289444
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ipG5yx1tRNmeJfSH'

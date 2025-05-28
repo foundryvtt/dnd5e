@@ -1,0 +1,371 @@
+_id: dmgCubeOfForce00
+name: Cube of Force
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/sundries/gaming/dice-runed-brown.webp
+system:
+  activities:
+    P5hQL8Tv1BZgMM5p:
+      type: cast
+      _id: P5hQL8Tv1BZgMM5p
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplMageArmor0
+      name: ''
+      img: ''
+    ZtRR3jrinUNMIEvU:
+      type: cast
+      _id: ZtRR3jrinUNMIEvU
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplShield0000
+      name: ''
+      img: ''
+    tCJJNlbzPWFK6X2m:
+      type: cast
+      _id: tCJJNlbzPWFK6X2m
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '3'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '3'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplLeomundsTi
+      name: ''
+      img: ''
+    KRhYoWhmZNWAmv1i:
+      type: cast
+      _id: KRhYoWhmZNWAmv1i
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '4'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '4'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbPrivateSanctu
+      name: ''
+      img: ''
+    N5Y0YZKK2llU4HXf:
+      type: cast
+      _id: N5Y0YZKK2llU4HXf
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '4'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '4'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplOtilukesRe
+      name: ''
+      img: ''
+    ZIMYDxhyS56bcRQE:
+      type: cast
+      _id: ZIMYDxhyS56bcRQE
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplWallofForc
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d6
+    max: '10'
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Rare (Requires
+      Attunement)</em></p></div><p>This cube is about an inch across. Each face
+      has a distinct marking on it. You can press one of those faces, expend the
+      number of charges required for it, and thereby cast the spell associated
+      with it (save DC 17), as shown in the Cube of Force Faces table.</p><p>The
+      cube starts with 10 charges, and it regains 1d6 <span
+      class="no-break">expended</span> charges daily at
+      dawn.</p><table><caption>Cube of Force
+      Faces</caption><thead><tr><td>Spell</td><td>Charge
+      Cost</td></tr></thead><tbody><tr><td><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMageArmor0]{Mage
+      Armor}</em></td><td>1</td></tr><tr><td><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplShield0000]{Shield}</em></td><td>1</td></tr><tr><td><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLeomundsTi]{Tiny
+      Hut}</em></td><td>3</td></tr><tr><td><em>@UUID[Compendium.dnd5e.spells24.Item.phbPrivateSanctu]{Private
+      Sanctum}</em></td><td>4</td></tr><tr><td><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplOtilukesRe]{Resilient
+      Sphere}</em></td><td>4</td></tr><tr><td><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWallofForc]{Wall
+      of Force}</em></td><td>5</td></tr></tbody></table>
+    chat: ''
+  identifier: cube-of-force
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712698819
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9900000
+ownership:
+  default: 0
+_key: '!items!dmgCubeOfForce00'

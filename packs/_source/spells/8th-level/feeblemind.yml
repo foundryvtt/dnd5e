@@ -1,0 +1,179 @@
+_id: hYCrN82dMJFuJODB
+name: Feeblemind
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You blast the mind of a creature that you can see within range,
+      attempting to shatter its intellect and personality. The target takes 4d6
+      psychic damage and must make an Intelligence saving throw.</p><p>On a
+      failed save, the creature's Intelligence and Charisma scores become 1. The
+      creature can't cast Spells, activate Magic Items, understand language, or
+      communicate in any intelligible way. The creature can, however, identify
+      its friends, follow them, and even protect them.</p><p>At the end of every
+      30 days, the creature can repeat its saving throw against this spell. If
+      it succeeds on its saving throw, the spell ends.</p><p>The spell can also
+      be ended by Greater Restoration, heal, or wish.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '150'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 8
+  school: enc
+  materials:
+    value: A handful of clay, crystal, glass, or mineral spheres
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: flpBCg1pgZchf5Hz
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 4
+            denomination: 6
+            bonus: ''
+            types:
+              - psychic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: int
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: befuddlement
+sort: 0
+flags: {}
+img: icons/magic/light/explosion-star-large-teal-purple.webp
+effects:
+  - name: Feeblemind
+    origin: Compendium.dnd5e.spells.Item.hYCrN82dMJFuJODB
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: flpBCg1pgZchf5Hz
+    changes:
+      - key: system.abilities.int.value
+        mode: 5
+        value: '1'
+        priority: null
+      - key: system.abilities.cha.value
+        mode: 5
+        value: '1'
+        priority: null
+    description: >-
+      <p>The creature's Intelligence and Charisma scores become 1. The creature
+      can't cast Spells, activate Magic Items, understand language, or
+      communicate in any intelligible way. The creature can, however, identify
+      its friends, follow them, and even protect them.</p>
+    transfer: false
+    statuses: []
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/light/explosion-star-large-teal-purple.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!hYCrN82dMJFuJODB.flpBCg1pgZchf5Hz'
+folder: x1XTiOgx4DJ34wc5
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037363195
+  modifiedTime: 1725992722134
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!hYCrN82dMJFuJODB'

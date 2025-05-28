@@ -1,0 +1,128 @@
+_id: BDnjS1sQi2pdARh8
+name: Stone Golem - Slow
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] targets one or more creatures it can see
+      within 10 ft. of it. Each target must make a <strong>DC 17 Wisdom</strong>
+      saving throw against this magic.</p><p>On a failed save, a target can't
+      use reactions, its speed is halved, and it can't make more than one attack
+      on its turn. In addition, the target can take either an action or a bonus
+      action on its turn, not both. These effects last for 1 minute. A target
+      can repeat the saving throw at the end of each of its turns, ending the
+      effect on itself on a success.</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] targets one or more creatures it can see
+      within 10 ft. of it. Each target must make a <strong>Wisdom</strong>
+      saving throw against this magic. A target can repeat the saving throw at
+      the end of each of its turns, ending the effect on itself on a
+      success.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '10'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: ''
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: stone-golem-slow
+flags: {}
+img: icons/tools/navigation/watch-simple-blue.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304967032
+  modifiedTime: 1725992571473
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!BDnjS1sQi2pdARh8'

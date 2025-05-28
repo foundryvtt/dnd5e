@@ -1,0 +1,111 @@
+_id: s7nXgot5gGZVcMrv
+name: Transport via Plants
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell creates a magical link between a Large or larger inanimate
+      plant within range and another plant, at any distance, on the same plane
+      of existence. You must have seen or touched the destination plant at least
+      once before. For the Duration, any creature can step into the target plant
+      and exit from the destination plant by using 5 feet of Movement.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: round
+  target:
+    affects:
+      type: object
+      count: '2'
+      choice: false
+    template:
+      units: spec
+      contiguous: false
+  range:
+    value: '10'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: transport-via-plants
+sort: 0
+flags: {}
+img: icons/magic/nature/leaf-glow-maple-teal.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037365888
+  modifiedTime: 1725992723061
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!s7nXgot5gGZVcMrv'

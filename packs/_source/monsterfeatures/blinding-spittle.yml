@@ -1,0 +1,124 @@
+_id: 0awyZX05OnVLF4k2
+name: Blinding Spittle
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] spits a chemical glob at a point it can
+      see within 15 feet of it. The glob explodes in a blinding flash of light
+      on impact.</p><p>Each creature within 5 feet of the flash must succeed on
+      a <strong>DC 13 Dexterity</strong> saving throw or be blinded until the
+      end of the [[lookup @name lowercase]]'s next turn.</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] spits a chemical glob at a point it can
+      see within 15 feet of it. The glob explodes in a blinding flash of light
+      on impact. Each creature within 5 feet of the flash must make a
+      <strong>Dexterity</strong> saving throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: turn
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '15'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '5'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '13'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: blinding-spittle
+flags: {}
+img: icons/magic/nature/root-vine-thorned-fire-purple.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304964938
+  modifiedTime: 1725992570797
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!0awyZX05OnVLF4k2'

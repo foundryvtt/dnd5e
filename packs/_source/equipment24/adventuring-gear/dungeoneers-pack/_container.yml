@@ -1,0 +1,66 @@
+name: Dungeoneer's Pack
+system:
+  description:
+    value: >-
+      <p>A Dungeoneer's Pack contains the following items:
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBackpack000]{Backpack},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagCaltrops000]{Caltrops},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagCrowbar0000]{Crowbar}, 2
+      flasks of @UUID[Compendium.dnd5e.equipment24.Item.phbagOil00000000]{Oil},
+      10 days of
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagRations0000]{Rations},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagRope0000000]{Rope},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagTinderbox00]{Tinderbox}, 10
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagTorch000000]{Torches}, and
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagWaterskin00]{Waterskin}.</p>
+    chat: ''
+  price:
+    value: 12
+    denomination: gp
+  quantity: 1
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  weight:
+    value: 5
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties: []
+  capacity:
+    type: weight
+    value: 30
+  identifier: dungeoneers-pack
+_id: phbagDungeoneers
+type: container
+folder: uDk4FBYfcP2JnX6t
+img: icons/containers/bags/pack-simple-stitched-leather-tan.webp
+effects: []
+sort: 1900000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425908386
+  modifiedTime: 1745256811812
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagDungeoneers'

@@ -1,0 +1,109 @@
+_id: rQhWDaMHMn7iU4f2
+name: Stroke of Luck
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>At 20th level, you have an uncanny knack for succeeding when you need
+      to. If your attack misses a target within range, you can turn the miss
+      into a hit. Alternatively, if you fail an ability check, you can treat the
+      d20 roll as a 20.</p><p>Once you use this feature, you can't use it again
+      until you finish a short or long rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Rogue 20
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: stroke-of-luck
+flags: {}
+img: icons/magic/light/hand-sparks-glow-yellow.webp
+effects: []
+folder: RMtv55MamGWKrCfq
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037389041
+  modifiedTime: 1725992290138
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!rQhWDaMHMn7iU4f2'

@@ -1,0 +1,139 @@
+_id: AQsBc94ES7W7s7iG
+name: Wall of Thorns
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create a wall of tough, pliable, tangled brush bristling with
+      needle-sharp thorns. The wall appears within range on a solid surface and
+      lasts for the Duration. You choose to make the wall up to 60 feet long, 10
+      feet high, and 5 feet thick or a circle that has a 20-foot diameter and is
+      up to 20 feet high and 5 feet thick. The wall blocks line of
+      sight.</p><p>When the wall appears, each creature within its area must
+      make a Dexterity saving throw. On a failed save, a creature takes 7d8
+      piercing damage, or half as much damage on a successful save.</p><p>A
+      creature can move through the wall, albeit slowly and painfully. For every
+      1 foot a creature moves through the wall, it must spend 4 feet of
+      Movement. Furthermore, the first time a creature enters the wall on a turn
+      or ends its turn there, the creature must make a Dexterity saving throw.
+      It takes 7d8 slashing damage on a failed save, or half as much damage on a
+      successful one.</p><p><strong>At Higher Levels</strong>. When you cast
+      this spell using a spell slot of 7th level or higher, both types of damage
+      increase by 1d8 for each slot level above 6th.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: wall
+      size: '60'
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: con
+  materials:
+    value: A handful of thorns
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 7
+            denomination: 8
+            bonus: ''
+            types:
+              - piercing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: wall-of-thorns
+sort: 0
+flags: {}
+img: icons/magic/light/beam-rays-green-large.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037349938
+  modifiedTime: 1725992717804
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!AQsBc94ES7W7s7iG'

@@ -1,0 +1,140 @@
+name: Poison Spray
+system:
+  description:
+    value: >-
+      <p>You spray toxic mist at a creature within range. Make a ranged spell
+      attack against the target. On a hit, the target takes 1d12 Poison
+      damage.</p><p><strong>Cantrip Upgrade.</strong> The damage increases by
+      1d12 when you reach levels 5 (2d12), 11 (3d12), and 17 (4d12).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: nec
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    UbLJ36AaSvIMQ2dy:
+      type: attack
+      _id: UbLJ36AaSvIMQ2dy
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '12'
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: poison-spray
+_id: phbsplPoisonSpra
+type: spell
+img: icons/magic/acid/pouring-gas-smoke-liquid.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+sort: 500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425966324
+  modifiedTime: 1745256796926
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplPoisonSpra'

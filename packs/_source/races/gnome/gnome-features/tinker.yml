@@ -1,0 +1,118 @@
+_id: koRPOLtj8XAFMwnW
+name: Tinker
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You have proficiency with artisan's tools (tinker's tools). Using those
+      tools, you can spend 1 hour and 10 gp worth of materials to construct a
+      Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24
+      hours (unless you spend 1 hour repairing it to keep the device
+      functioning), or when you use your action to dismantle it; at that time,
+      you can reclaim the materials used to create it. You can have up to three
+      such devices active at a time. When you create a device, choose one of the
+      following options:</p>
+
+      <p><em>Clockwork Toy:</em> This toy is a clockwork animal, monster, or
+      person, such as a frog, mouse, bird, dragon, or soldier. When placed on
+      the ground, the toy moves 5 feet across the ground on each of your turns
+      in a random direction. It makes noises as appropriate to the creature it
+      represents.</p>
+
+      <p><em>Fire Starter:</em> The device produces a miniature flame, which you
+      can use to light a candle, torch, or campfire. Using the device requires
+      your action.</p>
+
+      <p><em>Music Box:</em> When opened, this music box plays a single song at
+      a moderate volume. The box stops playing when it reaches the song's end or
+      when it is closed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: race
+    subtype: ''
+  requirements: Rock Gnome
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: hour
+        value: 1
+        condition: Expend 10 gp worth of materials
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: tinker
+flags: {}
+img: icons/commodities/tech/cog-steel.webp
+effects: []
+folder: AabmBKPsHt2BlNVK
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037393173
+  modifiedTime: 1725992703644
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!koRPOLtj8XAFMwnW'

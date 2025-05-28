@@ -1,0 +1,56 @@
+_id: fdmzHw875EzpXM2a
+name: Spellcasting
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>the [[lookup @name lowercase]] is a 1st-level spellcaster. Its
+      spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell
+      attacks). the [[lookup @name lowercase]] has following cleric spells
+      prepared:</p><p>Cantrips (at will): light, sacred flame,
+      thaumaturgy</p><p>1st level (3 slots): bless, cure wounds, sanctuary</p>
+
+      </section>
+
+      <p>the [[lookup @name lowercase]] is a spellcaster. Its spellcasting
+      ability is Wisdom.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: spellcasting
+flags: {}
+img: icons/magic/light/projectiles-star-purple.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304974307
+  modifiedTime: 1725992573674
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!fdmzHw875EzpXM2a'

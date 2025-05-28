@@ -1,0 +1,127 @@
+_id: MUO1uYN7JR1hm4dR
+name: Thaumaturgy
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create one of the following magical effects within range:</p>
+
+      <ul>
+
+      <li>Your voice booms up to three times as loud as normal for 1
+      minute.</li>
+
+      <li>You cause flames to flicker, brighten, dim, or change color for 1
+      minute.</li>
+
+      <li>You cause harmless tremors in the ground for 1 minute.</li>
+
+      <li>You create a sound that originates from a point of your choice within
+      range.</li>
+
+      <li>You cause an unlocked door or window to fly open or slam shut.</li>
+
+      <li>You alter the appearance of your eyes for 1 minute.</li>
+
+      </ul>
+
+      <p>If you cast this spell multiple times, you can have up to three of its
+      1-minute effects active at a time, and you can dismiss such an effect as
+      an action.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: trs
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: thaumaturgy
+sort: 0
+flags: {}
+img: icons/magic/fire/explosion-fireball-small-purple-orange.webp
+effects: []
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037354805
+  modifiedTime: 1725992719394
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!MUO1uYN7JR1hm4dR'

@@ -1,0 +1,78 @@
+_id: dmgSlippersOfSpi
+name: Slippers of Spider Climbing
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/feet/boots-leather-black.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon (Requires Attunement)</em></p><p>While you
+      wear these light shoes, you can move up, down, and across vertical
+      surfaces and along ceilings, while leaving your hands free. You have a
+      Climb Speed equal to your Speed. However, the slippers don't allow you to
+      move this way on a slippery surface, such as one covered by ice or
+      oil.</p>
+    chat: ''
+  identifier: slippers-of-spider-climbing
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745605623294
+  modifiedTime: 1745712703427
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgSlippersOfSpi'

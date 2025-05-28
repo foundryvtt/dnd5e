@@ -28,8 +28,7 @@
     <legend>
         <span>{{ localize "DND5E.Recovery" }}</span>
         <button type="button" class="unbutton control-button" data-action="addRecovery"
-                data-tooltip="DND5E.USES.Recovery.Action.Create"
-                aria-label="{{ localize "DND5E.USES.Recovery.Action.Create" }}">
+                data-tooltip aria-label="{{ localize "DND5E.USES.Recovery.Action.Create" }}">
             <i class="fas fa-plus" inert></i>
         </button>
     </legend>
@@ -54,14 +53,13 @@
             {{/if}}
 
             <button type="button" class="unbutton control-button" data-action="deleteRecovery"
-                    data-tooltip="DND5E.USES.Recovery.Action.Delete"
-                    aria-label="{{ localize "DND5E.USES.Recovery.Action.Delete" }}">
+                    data-tooltip aria-label="{{ localize "DND5E.USES.Recovery.Action.Delete" }}">
                 <i class="fas fa-minus" inert></i>
             </button>
         </div>
     </div>
     {{else}}
-    <div class="empty">{{ localize "DND5E.UsesPeriods.Never" }}</div>
+    <div class="empty">{{ localize "DND5E.USES.Recovery.Never" }}</div>
     {{/each}}
 </fieldset>
 {{/if}}

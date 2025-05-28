@@ -1,0 +1,53 @@
+_id: phbrgeThiefsRefl
+name: Thief's Reflexes
+type: feat
+folder: dnKXgPPMNF5Jbw2T
+img: icons/magic/symbols/symbol-lightning-bolt.webp
+system:
+  description:
+    value: >-
+      <p>You are adept at laying ambushes and quickly escaping danger. You can
+      take two turns during the first round of any combat. You take your first
+      turn at your normal Initiative and your second turn at your Initiative
+      minus 10.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 17
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: thiefs-reflexes
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866560489
+  modifiedTime: 1745256764603
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeThiefsRefl'

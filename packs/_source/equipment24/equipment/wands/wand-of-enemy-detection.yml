@@ -1,0 +1,162 @@
+_id: dmgWandOfEnemyDe
+name: Wand of Enemy Detection
+type: equipment
+img: icons/weapons/wands/wand-simple-eye.webp
+system:
+  activities:
+    hqaNcPYVaNTvctFo:
+      type: utility
+      name: Detect Hostile Creature
+      _id: hqaNcPYVaNTvctFo
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+        value: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '60'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d6 + 1
+    max: '7'
+  description:
+    value: >-
+      <p><em>Wand, Rare (Requires Attunement)</em></p><p>This wand has 7
+      charges. While holding it, you can take a Magic action to expend 1 charge.
+      For 1 minute, you know the direction of the nearest creature Hostile to
+      you within 60 feet, but not its distance from you. The wand can sense the
+      presence of Hostile creatures that are Invisible, ethereal, disguised, or
+      hidden, as well as those in plain sight. The effect ends if you stop
+      holding the wand.</p><p><em><strong>Regaining Charges.</strong></em> The
+      wand regains 1d6 + 1 expended charges daily at dawn. If you expend the
+      wand's last charge, roll [[/r 1d20]]. On a 1, the wand crumbles into ashes
+      and is destroyed.</p>
+    chat: ''
+  identifier: wand-of-enemy-detection
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wand
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+effects: []
+folder: rLoBplj1TIznxeWI
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712704567
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 62500
+ownership:
+  default: 0
+_key: '!items!dmgWandOfEnemyDe'

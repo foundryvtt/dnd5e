@@ -1,0 +1,90 @@
+_id: phbbrbUnarmoredD
+name: Unarmored Defense
+type: feat
+img: icons/magic/control/buff-strength-muscle-damage-orange.webp
+system:
+  description:
+    value: >-
+      <p>While you aren't wearing any armor, your base Armor Class equals 10
+      plus your Dexterity and Constitution modifiers. You can use a Shield and
+      still gain this benefit.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: Barbarian
+  activities: {}
+  enchant: {}
+  identifier: unarmored-defense
+effects:
+  - _id: 2nOM7nl6sd6UAxA1
+    changes:
+      - key: system.attributes.ac.calc
+        mode: 5
+        value: unarmoredBarb
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.classes24.Item.phbbrbUnarmoredD
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Unarmored Defense
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classfeatures.Item.SZbsNbaxFFGwBpNK.ActiveEffect.hEgUnQNVxtBo2zkK
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/control/silhouette-hold-change-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbbrbUnarmoredD.2nOM7nl6sd6UAxA1'
+folder: p6WDpW0gzmKfhGad
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940469
+  modifiedTime: 1745256760181
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbUnarmoredD'

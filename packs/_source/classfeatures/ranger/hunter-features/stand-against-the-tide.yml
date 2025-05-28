@@ -1,0 +1,99 @@
+_id: Xf763cJoDHPPWSGG
+name: Stand Against the Tide
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>When a hostile creature misses you with a melee attack, you can use
+      your reaction to force that creature to repeat the same attack against
+      another creature (other than itself) of your choice.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: superiorHuntersDefense
+  requirements: Hunter 15
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: reaction
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: stand-against-the-tide
+flags: {}
+img: icons/magic/water/pseudopod-teal.webp
+effects: []
+folder: UYfImiULTmGD1AvR
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037384882
+  modifiedTime: 1725992288638
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Xf763cJoDHPPWSGG'

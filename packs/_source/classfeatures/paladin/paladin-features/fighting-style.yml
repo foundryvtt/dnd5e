@@ -1,0 +1,57 @@
+name: Fighting Style
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You adopt a particular style of fighting as your specialty. Choose one
+      of the following options from the appropriate class list. You can't take a
+      Fighting Style option more than once, even if you later get to choose
+      again.</p>
+
+      <p>@UUID[Compendium.dnd5e.classfeatures.Item.zSlV0O2rQMdoq6pB]{Defense}</p>
+
+      <p>@UUID[Compendium.dnd5e.classfeatures.Item.hCop9uJrWhF1QPb4]{Dueling}</p>
+
+      <p>@UUID[Compendium.dnd5e.classfeatures.Item.3Nc6u9pyStByuJsm]{Great
+      Weapon Fighting}</p>
+
+      <p>@UUID[Compendium.dnd5e.classfeatures.Item.06NVMYf58Z76O85O]{Protection}</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: Paladin 2
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: fighting-style
+flags: {}
+img: icons/skills/melee/weapons-crossed-daggers-orange.webp
+effects: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037382293
+  modifiedTime: 1725992287833
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+folder: 01K0hSSl7NQjYLb8
+sort: 0
+_id: Ho7dVxBlOYFlfBHk
+_key: '!items!Ho7dVxBlOYFlfBHk'

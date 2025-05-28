@@ -1,0 +1,530 @@
+name: Alter Self
+system:
+  description:
+    value: >-
+      <p>You alter your physical form. Choose one of the following options. Its
+      effects last for the duration, during which you can take a Magic action to
+      replace the option you chose with a different one.</p><p><strong>Aquatic
+      Adaptation.</strong> You sprout gills and grow webs between your fingers.
+      You can breathe underwater and gain a Swim Speed equal to your
+      Speed.</p><section class="secret"
+      id="secret-7sTILHJaR1io7TWi"><p><strong>Foundry Note</strong></p><p>The
+      Active Effect provided by the <strong>Aquatic Adaptation</strong> activity
+      upgrades the character's Swim Speed to a value of "1" to indicate
+      equivalence to (walk) Speed.</p></section><p><strong>Change
+      Appearance.</strong> You alter your appearance. You decide what you look
+      like, including your height, weight, facial features, sound of your voice,
+      hair length, coloration, and other distinguishing characteristics. You can
+      make yourself appear as a member of another species, though none of your
+      statistics change. You can't appear as a creature of a different size, and
+      your basic shape stays the same; if you're bipedal, you can't use this
+      spell to become quadrupedal, for instance. For the duration, you can take
+      a Magic action to change your appearance in this way
+      again.</p><p><strong>Natural Weapons. </strong>You grow claws (Slashing),
+      fangs (Piercing), horns (Piercing), or hooves (Bludgeoning). When you use
+      your Unarmed Strike to deal damage with that new growth, it deals 1d6
+      damage of the type in parentheses instead of dealing the normal damage for
+      your Unarmed Strike, and you use your spellcasting ability modifier for
+      the attack and damage rolls rather than using Strength.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: self
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: 6SL9vuAkx7nAfS5D
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Aquatic Adaptation
+      img: icons/creatures/fish/fish-bluefin-yellow-blue.webp
+      appliedEffects:
+        - 6SL9vuAkx7nAfS5D
+    wQGpfux8qzcvwsDo:
+      type: utility
+      _id: wQGpfux8qzcvwsDo
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 1jrUeJtfZMGhJOZa
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Change Appearance
+      img: icons/creatures/magical/spirit-undead-ghost-blue.webp
+      appliedEffects:
+        - 1jrUeJtfZMGhJOZa
+    dQnMvyjoGqhgl9wP:
+      type: utility
+      _id: dQnMvyjoGqhgl9wP
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: baEBDez6IgWNpkSX
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Natural Weapons
+      img: icons/creatures/abilities/fang-tooth-blood-red.webp
+      appliedEffects:
+        - baEBDez6IgWNpkSX
+    SEwXqOHdPCyejSYR:
+      type: attack
+      name: 'Attack: Claws'
+      _id: SEwXqOHdPCyejSYR
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: unarmed
+        ability: spellcasting
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '6'
+            bonus: '@mod'
+            types:
+              - slashing
+            scaling:
+              mode: ''
+      img: ''
+      appliedEffects: []
+    osceJQzUOQPJ9CLn:
+      type: attack
+      name: 'Attack: Fangs/Horns'
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        value: '5'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: unarmed
+        ability: spellcasting
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '6'
+            bonus: '@mod'
+            types:
+              - piercing
+            scaling:
+              mode: ''
+      _id: osceJQzUOQPJ9CLn
+      img: ''
+      appliedEffects: []
+    eHtpASAnamFUc69H:
+      type: attack
+      name: 'Attack: Hooves'
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        value: '5'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: unarmed
+        ability: spellcasting
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '6'
+            bonus: '@mod'
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+      _id: eHtpASAnamFUc69H
+      img: ''
+      appliedEffects: []
+  identifier: alter-self
+_id: phbsplAlterSelf0
+type: spell
+img: icons/magic/control/silhouette-hold-change-green.webp
+effects:
+  - name: Aquatic Adaptation
+    img: icons/creatures/fish/fish-bluefin-yellow-blue.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplAlterSelf0
+    transfer: false
+    _id: 6SL9vuAkx7nAfS5D
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.swim
+        mode: 4
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>You can breathe underwater and gain a Swim Speed equal to your
+      Speed.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725048208451
+      modifiedTime: 1725048922411
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplAlterSelf0.6SL9vuAkx7nAfS5D'
+  - name: Altered Appearance
+    img: icons/creatures/magical/spirit-undead-ghost-blue.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplAlterSelf0
+    transfer: false
+    _id: 1jrUeJtfZMGhJOZa
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725048980878
+      modifiedTime: 1725049328488
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplAlterSelf0.1jrUeJtfZMGhJOZa'
+  - name: Natural Weapon
+    img: icons/creatures/abilities/fang-tooth-blood-red.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplAlterSelf0
+    transfer: false
+    _id: baEBDez6IgWNpkSX
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>When you use your Unarmed Strike to deal damage with that new growth,
+      it deals 1d6 damage of the type in parentheses instead of dealing the
+      normal damage for your Unarmed Strike, and you use your spellcasting
+      ability modifier for the attack and damage rolls rather than using
+      Strength.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725049566534
+      modifiedTime: 1725049699059
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplAlterSelf0.baEBDez6IgWNpkSX'
+folder: 3SjcO2acsFnWegp4
+sort: 5600000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425940243
+  modifiedTime: 1745256785130
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplAlterSelf0'

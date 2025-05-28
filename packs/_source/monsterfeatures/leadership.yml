@@ -1,0 +1,113 @@
+_id: cl5sUkAIeJoAG4gh
+name: Leadership
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>For 1 minute, the [[lookup @name lowercase]] can utter a special
+      command or warning whenever a nonhostile creature that it can see within
+      30 ft. of it makes an attack roll or a saving throw. The creature can add
+      a d4 to its roll provided it can hear and understand the [[lookup @name
+      lowercase]]. A creature can benefit from only one Leadership die at a
+      time. This effect ends if the [[lookup @name lowercase]] is
+      incapacitated.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: leadership
+flags: {}
+img: icons/sundries/documents/document-sealed-red-yellow.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304973510
+  modifiedTime: 1725992573441
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!cl5sUkAIeJoAG4gh'

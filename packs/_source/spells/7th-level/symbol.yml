@@ -1,0 +1,330 @@
+_id: B2kbmgbA2WQR00kx
+name: Symbol
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>When you cast this spell, you inscribe a harmful glyph either on a
+      surface (such as a section of floor, a wall, or a table) or within an
+      object that can be closed to conceal the glyph (such as a book, a scroll,
+      or a treasure chest). If you choose a surface, the glyph can cover an area
+      of the surface no larger than 10 feet in diameter. If you choose an
+      object, that object must remain in its place; if the object is moved more
+      than 10 feet from where you cast this spell, the glyph is broken, and the
+      spell ends without being triggered.</p><p>The glyph is nearly invisible,
+      requiring an Intelligence (Investigation) check against your spell save DC
+      to find it.</p><p>You decide what triggers the glyph when you cast the
+      spell. For glyphs inscribed on a surface, the most typical triggers
+      include touching or stepping on the glyph, removing another object
+      covering it, approaching within a certain distance of it, or manipulating
+      the object that holds it. For glyphs inscribed within an object, the most
+      common triggers are opening the object, approaching within a certain
+      distance of it, or seeing or reading the glyph.</p><p>You can further
+      refine the trigger so the spell is activated only under certain
+      circumstances or according to a creature's physical characteristics (such
+      as height or weight), or physical kind (for example, the ward could be set
+      to affect hags or shapechangers). You can also specify creatures that
+      don't trigger the glyph, such as those who say a certain
+      password.</p><p>When you inscribe the glyph, choose one of the options
+      below for its effect. Once triggered, the glyph glows, filling a
+      60-foot-radius sphere with dim light for 10 minutes, after which time the
+      spell ends. Each creature in the sphere when the glyph activates is
+      targeted by its effect, as is a creature that enters the Sphere for the
+      first time on a turn or ends its turn
+      there.</p><ul><li><strong>Death.</strong> Each target must make a
+      Constitution saving throw, taking 10d10 necrotic damage on a failed save,
+      or half as much damage on a successful
+      save.</li><li><strong>Discord.</strong> Each target must make a
+      Constitution saving throw. On a failed save, a target bickers and argues
+      with other creatures for 1 minute. During this time, it is incapable of
+      meaningful communication and has disadvantage on Attack rolls and Ability
+      Checks.</li><li><strong>Fear.</strong> Each target must make a Wisdom
+      saving throw and becomes &amp;Reference[Frightened] for 1 minute on a
+      failed save. While Frightened, the target drops whatever it is holding and
+      must move at least 30 feet away from the glyph on each of its turns, if
+      able.</li><li><strong>Hopelessness.</strong> Each target must make a
+      Charisma saving throw. On a failed save, the target is overwhelmed with
+      despair for 1 minute. During this time, it can't attack or target any
+      creature with harmful Abilities, Spells, or other magical
+      Effects.</li><li><strong>Insanity.</strong> Each target must make an
+      Intelligence saving throw. On a failed save, the target is driven insane
+      for 1 minute. An insane creature can't take Actions, can't understand what
+      other creatures say, can't read, and speaks only in gibberish. The DM
+      controls its Movement, which is erratic.</li><li><strong>Pain.</strong>
+      Each target must make a Constitution saving throw and becomes
+      &amp;Reference[Incapacitated] with excruciating pain for 1 minute on a
+      failed save.</li><li><strong>Sleep.</strong> Each target must make a
+      Wisdom saving throw and falls &amp;Reference[Unconscious] for 10 minutes
+      on a failed save. A creature awakens if it takes damage or if someone uses
+      an action to shake or slap it awake.</li><li><strong>Stunning.</strong>
+      Each target must make a Wisdom saving throw and becomes
+      &amp;Reference[Stunned] for 1 minute on a failed save.</li></ul>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: dstr
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 7
+  school: abj
+  materials:
+    value: >-
+      Mercury, phosphorus, and powdered diamond and opal with a total value of
+      at least 1,000 gp, which the spell consumes
+    consumed: true
+    cost: 1000
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: ydHIFthrNnlBuOyx
+          onSave: false
+        - _id: pSwauN9UZrF8WPMt
+          onSave: false
+        - _id: yNP9RLi4ym3s5Hrl
+          onSave: false
+        - _id: J8f0JYFInPaKpnMC
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 10
+            denomination: 10
+            bonus: ''
+            types:
+              - necrotic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: symbol
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-star-pentagon-blue.webp
+effects:
+  - name: Symbol (fear)
+    origin: Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: ydHIFthrNnlBuOyx
+    changes: []
+    description: >-
+      <p>The target becomes &amp;Reference[Frightened] for 1 minute on a failed
+      save. While Frightened, the target drops whatever it is holding and must
+      move at least 30 feet away from the glyph on each of its turns, if
+      able.</p>
+    transfer: false
+    statuses:
+      - frightened
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/symbols/runes-star-pentagon-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!B2kbmgbA2WQR00kx.ydHIFthrNnlBuOyx'
+  - name: Symbol (pain)
+    origin: Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: pSwauN9UZrF8WPMt
+    changes: []
+    description: >-
+      <p>The target becomes Incapacitated with excruciating pain for 1
+      minute.</p>
+    transfer: false
+    statuses:
+      - incapacitated
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/symbols/runes-star-pentagon-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!B2kbmgbA2WQR00kx.pSwauN9UZrF8WPMt'
+  - name: Symbol (sleep)
+    origin: Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx
+    duration:
+      startTime: null
+      seconds: 600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: yNP9RLi4ym3s5Hrl
+    changes: []
+    description: >-
+      <p>The target falls Unconscious for 10 minutes. A creature awakens if it
+      takes damage or if someone uses an action to shake or slap it awake.</p>
+    transfer: false
+    statuses:
+      - unconscious
+      - incapacitated
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/symbols/runes-star-pentagon-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!B2kbmgbA2WQR00kx.yNP9RLi4ym3s5Hrl'
+  - name: Symbol (stunning)
+    origin: Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: J8f0JYFInPaKpnMC
+    changes: []
+    description: <p>The target becomes Stunned for 1 minute.</p>
+    transfer: false
+    statuses:
+      - stunned
+      - incapacitated
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/symbols/runes-star-pentagon-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!B2kbmgbA2WQR00kx.J8f0JYFInPaKpnMC'
+folder: irCSpQWIMtp978TA
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037350335
+  modifiedTime: 1725992717934
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!B2kbmgbA2WQR00kx'

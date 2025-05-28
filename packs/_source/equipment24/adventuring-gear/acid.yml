@@ -1,0 +1,140 @@
+name: Acid
+system:
+  description:
+    value: >-
+      <p>When you take the Attack action, you can replace one of your attacks
+      with throwing a vial of Acid. Target one creature or object you can see
+      within 20 feet of yourself. The target must succeed on a Dexterity saving
+      throw (DC 8 plus your Dexterity modifier and Proficiency Bonus) or take
+      2d6 Acid damage.</p>
+    chat: ''
+  price:
+    value: 25
+    denomination: gp
+  source:
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: true
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: potion
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    PnWlLChqr5JsfCJC:
+      type: save
+      name: Throw Acid
+      _id: PnWlLChqr5JsfCJC
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '20'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creatureOrObject
+          special: You can see
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 6
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability: dex
+        dc:
+          calculation: dex
+          formula: ''
+      img: ''
+      appliedEffects: []
+  identifier: acid
+_id: phbagAcid0000000
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/consumables/potions/bottle-round-corked-green.webp
+effects: []
+sort: 7000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425904904
+  modifiedTime: 1740680132197
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagAcid0000000'

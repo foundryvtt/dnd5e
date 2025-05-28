@@ -1,0 +1,119 @@
+_id: EguIm3u5kkopYwEM
+name: Disrupt Life
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>Each non-[[lookup @details.type.config.label lowercase]] creature
+      within 20 feet of the [[lookup @name lowercase]] must make a  <strong>DC
+      18 Constitution</strong> saving throw against this magic, taking
+      <strong>21 (6d6) <em>necrotic damage</em></strong> on a failed save, or
+      half as much damage on a successful one.</p>
+
+      </section>
+
+      <p>Each non-[[lookup @details.type.config.label lowercase]] creature
+      within 20 feet of the [[lookup @name lowercase]] must make a
+      <strong>Constitution</strong> saving throw against this magic.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: legendary
+        value: 3
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: attribute
+            target: ''
+            value: '3'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '20'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '18'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: disrupt-life
+flags: {}
+img: icons/magic/death/projectile-skull-fire-purple.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304967522
+  modifiedTime: 1725992571600
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!EguIm3u5kkopYwEM'

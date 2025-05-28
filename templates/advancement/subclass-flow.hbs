@@ -1,0 +1,20 @@
+<form id="{{ appId }}" data-level="{{ level }}" data-id="{{ advancement.id }}" data-type="{{ type }}">
+    <h3>{{{ title }}}</h3>
+    {{#if advancement.hint}}<p>{{ advancement.hint }}</p>{{/if}}
+
+    <div class="pill-lg {{#unless subclass}}roboto-upper empty{{/unless}}"
+         {{~#if subclass}} data-uuid="{{ subclass.uuid }}"{{else}} data-action="browse"{{/if}}>
+        {{#if subclass}}
+        <img class="gold-icon" data-action="viewItem" src="{{ subclass.img }}" alt="{{ subclass.name }}">
+        <div class="name-stacked">
+            <div class="title">{{ subclass.name }}</div>
+        </div>
+        <button type="button" class="unbutton control-button item-control" data-action="delete"
+                data-tooltip aria-label="{{ localize 'DND5E.ItemDelete' }}">
+            <i class="fas fa-trash" inert></i>
+        </button>
+        {{else}}
+        {{ localize "DND5E.ADVANCEMENT.Subclass.Action.Select" }}
+        {{/if}}
+    </div>
+</form>

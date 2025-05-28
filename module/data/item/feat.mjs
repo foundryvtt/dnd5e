@@ -1,11 +1,16 @@
-import { ItemDataModel } from "../abstract.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
+import AdvancementField from "../fields/advancement-field.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
-import { FormulaField } from "../fields/_module.mjs";
 
-const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+
+/**
+ * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ */
 
 /**
  * Data definition for Feature items.
@@ -13,13 +18,18 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  *
+ * @property {Advancement[]} advancement            Advancement objects for this feature.
+ * @property {number} cover                         Amount of cover this feature affords to its crew on a vehicle.
+ * @property {boolean} crewed                       Is this vehicle feature currently crewed?
  * @property {object} enchant
  * @property {string} enchant.max                   Maximum number of items that can have this enchantment.
  * @property {string} enchant.period                Frequency at which the enchantment can be swapped.
  * @property {object} prerequisites
  * @property {number} prerequisites.level           Character or class level required to choose this feature.
+ * @property {boolean} prerequisites.repeatable     Can this item be selected more than once?
  * @property {Set<string>} properties               General properties of a feature item.
  * @property {string} requirements                  Actor details required to use this feature.
+ * @property {Omit<ItemTypeData, "baseItem">} type  Feature type and subtype.
  */
 export default class FeatData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, ItemTypeTemplate
@@ -30,27 +40,36 @@ export default class FeatData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT", "DND5E.Prerequisites", "DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.FEATURE", "DND5E.ENCHANTMENT", "DND5E.Prerequisites", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
+      cover: new NumberField({ min: 0, max: 1 }),
+      crewed: new BooleanField(),
       enchant: new SchemaField({
-        max: new FormulaField({deterministic: true}),
+        max: new FormulaField({ deterministic: true }),
         period: new StringField()
       }),
-      type: new ItemTypeField({baseItem: false}, {label: "DND5E.ItemFeatureType"}),
       prerequisites: new SchemaField({
-        level: new NumberField({integer: true, min: 0})
+        level: new NumberField({ integer: true, min: 0 }),
+        repeatable: new BooleanField()
       }),
-      properties: new SetField(new StringField(), {
-        label: "DND5E.ItemFeatureProperties"
-      }),
-      requirements: new StringField({required: true, nullable: true, label: "DND5E.Requirements"})
+      properties: new SetField(new StringField()),
+      requirements: new StringField({ required: true, nullable: true }),
+      type: new ItemTypeField({ baseItem: false })
     });
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    hasEffects: true
+  }, { inplace: false }));
 
   /* -------------------------------------------- */
 
@@ -58,7 +77,7 @@ export default class FeatData extends ItemDataModel.mixin(
   static get compendiumBrowserFilters() {
     return new Map([
       ["category", {
-        label: "DND5E.Item.Category.Label",
+        label: "DND5E.ITEM.Category.Label",
         type: "set",
         config: {
           choices: CONFIG.DND5E.featureTypes,
@@ -86,7 +105,6 @@ export default class FeatData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
-    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
 
@@ -98,8 +116,8 @@ export default class FeatData extends ItemDataModel.mixin(
 
     let label;
     const activation = this.activities.contents[0]?.activation.type;
-    if ( activation === "legendary" ) label = game.i18n.localize("DND5E.LegendaryActionLabel");
-    else if ( activation === "lair" ) label = game.i18n.localize("DND5E.LairActionLabel");
+    if ( activation === "legendary" ) label = game.i18n.localize("DND5E.LegendaryAction.Label");
+    else if ( activation === "lair" ) label = game.i18n.localize("DND5E.LAIR.Action.Label");
     else if ( activation === "action" && this.hasAttack ) label = game.i18n.localize("DND5E.Attack");
     else if ( activation ) label = game.i18n.localize("DND5E.Action");
     else label = game.i18n.localize("DND5E.Passive");
@@ -112,32 +130,6 @@ export default class FeatData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareFinalData() {
     this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
-
-    const uses = this.uses;
-    this.recharge ??= {};
-    Object.defineProperty(this.recharge, "value", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "Recharge data has been merged into uses data. Recharge state can now be determined by checking"
-          + " `system.uses.recovery` for a profile with a `period` of 'recharge', and checking its `formula` for the"
-          + " recharge formula.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-        );
-        return uses.period === "recharge" ? Number(uses.formula) : null;
-      },
-      configurable: true
-    });
-    Object.defineProperty(this.recharge, "charged", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "Recharge data has been merged into uses data. Determining charged state can now be done by determining"
-          + " whether `system.uses.value` is greater than `0`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-        );
-        return uses.value > 0;
-      },
-      configurable: true
-    });
   }
 
   /* -------------------------------------------- */
@@ -160,7 +152,13 @@ export default class FeatData extends ItemDataModel.mixin(
       { label: this.requirements, value: this._source.requirements, field: this.schema.getField("requirements"),
         placeholder: "DND5E.Requirements" }
     ];
+
     context.parts = ["dnd5e.details-feat", "dnd5e.field-uses"];
+    const itemTypes = CONFIG.DND5E.featureTypes[this._source.type.value];
+    if ( itemTypes ) {
+      context.itemType = itemTypes.label;
+      context.itemSubtypes = itemTypes.subtypes;
+    }
   }
 
   /* -------------------------------------------- */
@@ -258,5 +256,19 @@ export default class FeatData extends ItemDataModel.mixin(
    */
   get proficiencyMultiplier() {
     return 1;
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+
+    // Set type as "Monster Feature" if created directly on a NPC
+    if ( (this.parent.actor?.type === "npc") && !foundry.utils.hasProperty(data, "system.type.value") ) {
+      this.updateSource({ "type.value": "monster" });
+    }
   }
 }

@@ -1,0 +1,209 @@
+_id: dmgRollingStone0
+name: Rolling Stone
+type: equipment
+img: icons/magic/earth/projectile-stone-boulder-brown.webp
+system:
+  activities:
+    MLbhL4DqA54XPO0N:
+      type: save
+      _id: MLbhL4DqA54XPO0N
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 10
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      name: ''
+    xYCs4eHhCOtp4faS:
+      type: check
+      name: Slow
+      _id: xYCs4eHhCOtp4faS
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '20'
+        ability: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p ><em>Deadly Trap (Levels 11–16) or Nuisance Trap (Levels
+      17–20)</em></p><p><strong>Trigger:</strong> A creature moves onto a
+      pressure plate</p><p><strong>Duration:</strong> Until the stone stops
+      rolling</p><p>When a creature moves onto a hidden pressure plate, a
+      5-foot-radius orb of solid stone is released from a secret compartment and
+      begins to roll. The stone and all creatures nearby roll Initiative; the
+      stone gets a [[/r 1d20 + 8]]{+8} bonus on its Initiative roll.</p><p>On
+      its turn, the stone moves 60 feet in one direction, changing course if
+      redirected by an obstacle. The stone can move through creatures' spaces,
+      and creatures can move through the stone's space, treating it as
+      &amp;Reference[Difficult Terrain]. Whenever the stone enters a creature's
+      space for the first time on a turn or a creature enters the stone's space
+      while the stone is rolling, that creature must succeed on a DC 15
+      Dexterity saving throw or take 55 (10d10) Bludgeoning damage and have the
+      &amp;Reference[Prone apply=false] condition.</p><p>The stone stops when it
+      hits a wall or similar barrier. It can't go around corners, but creative
+      dungeon builders incorporate curving turns into nearby passages that allow
+      the stone to keep moving.</p><p><em><strong>Detect and
+      Disarm.</strong></em> As a Study action, a creature can examine the
+      section of floor that forms the pressure plate and make a [[/check inv
+      15]] check, deducing the pressure plate's function on a successful check.
+      Wedging an Iron Spike or a similar object under the pressure plate
+      prevents the trap from triggering.</p><p><em><strong>Destroy the
+      Stone.</strong></em> The stone is a Large object that has AC 17, HP 100, a
+      Damage Threshold of 10, and Immunity to Poison and Psychic
+      damage.</p><p><em><strong>Slow the Stone.</strong></em> As an action, a
+      creature can try to slow down the stone with a DC 20 Strength (Athletics)
+      check. If the check is successful, the distance the stone moves on its
+      turn is reduced by 15 feet. If that distance drops to 0, it stops moving
+      and is no longer a threat.</p></div>
+    chat: ''
+  identifier: rolling-stone
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  properties: []
+  strength: null
+  proficient: null
+effects: []
+folder: 8wnVMAA0qwPzQVxS
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730831452785
+  modifiedTime: 1745256808587
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgRollingStone0'

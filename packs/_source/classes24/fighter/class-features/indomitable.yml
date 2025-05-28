@@ -1,0 +1,107 @@
+_id: phbftrIndomitabl
+name: Indomitable
+type: feat
+folder: xggTDaiQq26ZrVzJ
+img: icons/skills/melee/shield-block-fire-orange.webp
+system:
+  description:
+    value: >-
+      <p>If you fail a saving throw, you can reroll it with a bonus equal to
+      your Fighter level (currently, [[lookup @classes.fighter.levels]]). You
+      must use the new roll, and you can't use this feature again until you
+      finish a Long Rest.</p><p>You can use this feature twice before a Long
+      Rest starting at level 13 and three times before a Long Rest starting at
+      level 17.</p><section class="secret"
+      id="secret-eVLmL8YfOocgD4rC"><p><strong>Foundry Note</strong></p><p>This
+      feature's maximum usages scale automatically as you level
+      up.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '@scale.fighter.indomitable'
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 9
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    84EBzlT1nDmNqhqM:
+      type: utility
+      _id: 84EBzlT1nDmNqhqM
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: Bonus
+        formula: '@classes.fighter.levels'
+      name: ''
+  enchant: {}
+  identifier: indomitable
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866361253
+  modifiedTime: 1745256761663
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbftrIndomitabl'

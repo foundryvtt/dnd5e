@@ -1,0 +1,80 @@
+name: Emblem
+system:
+  description:
+    value: >-
+      <p><em><strong>Usage Requirement: </strong>Borne on fabric or a
+      Shield</em></p><p>A
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagHolySymbolV]{Holy Symbol}
+      takes one of the forms in the Holy Symbol table and is bejeweled or
+      painted to channel divine magic. A Cleric or Paladin can use a Holy Symbol
+      as a Spellcasting Focus.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities: {}
+  identifier: emblem
+_id: phbhsyEmblemborn
+type: equipment
+folder: z3BNNUO43nbnbTy7
+img: icons/sundries/flags/banner-symbol-sun-gold-red.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425915234
+  modifiedTime: 1745256813828
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbhsyEmblemborn'

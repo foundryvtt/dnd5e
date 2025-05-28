@@ -1,0 +1,123 @@
+_id: VbBHypDc0eLWbsNE
+name: Nightmare Haunting
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>While on the Ethereal Plane, the [[lookup @name lowercase]] magically
+      touches a sleeping humanoid on the Material Plane. A protection from evil
+      and good spell cast on the target prevents this contact, as does a magic
+      circle.</p><p>As long as the contact persists, the target has dreadful
+      visions. If these visions last for at least 1 hour, the target gains no
+      benefit from its rest, and its hit point maximum is reduced by 5 (1d10).
+      If this effect reduces the target's hit point maximum to 0, the target
+      dies, and if the target was evil, its soul is trapped in the hag's soul
+      bag. The reduction to the target's hit point maximum lasts until removed
+      by the greater restoration spell or similar magic.</p>
+
+      </section>
+
+      <p>While on the Ethereal Plane, the [[lookup @name lowercase]] magically
+      touches a sleeping humanoid on the Material Plane. As long as the contact
+      persists, the target has dreadful visions.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: day
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: nightmare-haunting
+flags: {}
+img: icons/commodities/tech/smoke-bomb-purple.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304971803
+  modifiedTime: 1725992572916
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!VbBHypDc0eLWbsNE'

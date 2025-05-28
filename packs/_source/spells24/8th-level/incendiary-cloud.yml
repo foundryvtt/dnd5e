@@ -1,0 +1,205 @@
+name: Incendiary Cloud
+system:
+  description:
+    value: >-
+      <p>A swirling cloud of embers and smoke fills a 20-foot-radius Sphere
+      centered on a point within range. The cloud's area is
+      &amp;Reference[HeavilyObscured]. It lasts for the duration or until a
+      strong wind (like that created by
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGustofWind]{Gust of
+      Wind}</em>) disperses it.</p><p>When the cloud appears, each creature in
+      it makes a Dexterity saving throw, taking 10d8 Fire damage on a failed
+      save or half as much damage on a successful one. A creature must also make
+      this save when the Sphere moves into its space and when it enters the
+      Sphere or ends its turn there. A creature makes this save only once per
+      turn.</p><p>The cloud moves 10 feet away from you in a direction you
+      choose at the start of each of your turns.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: sphere
+      size: '20'
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '150'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 8
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    Hhw0octbLetO5Nsi:
+      type: save
+      _id: Hhw0octbLetO5Nsi
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: '8'
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Create Cloud
+      img: ''
+      appliedEffects: []
+    lLAC6qfRLaes7956:
+      type: save
+      _id: lLAC6qfRLaes7956
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: '8'
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Per Turn Save
+      img: ''
+      appliedEffects: []
+  identifier: incendiary-cloud
+_id: phbsplIncendiary
+type: spell
+img: icons/magic/fire/beam-jet-stream-spiral-yellow.webp
+effects: []
+folder: M5CvwK9zVtzx6Dnn
+sort: 100098
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425959876
+  modifiedTime: 1745256795145
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplIncendiary'

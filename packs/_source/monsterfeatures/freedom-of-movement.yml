@@ -1,0 +1,50 @@
+_id: fUMY4b9snsiKl30e
+name: Freedom of Movement
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>the [[lookup @name lowercase]] ignores
+      difficult terrain, and magical effects can't reduce its speed or cause it
+      to be restrained. It can spend 5 feet of movement to escape from
+      nonmagical restraints or being grappled.</p></section><p>the [[lookup
+      @name lowercase]] ignores difficult terrain, and magical effects can't
+      reduce its speed or cause it to be restrained. </p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: freedom-of-movement
+flags: {}
+img: icons/skills/movement/feet-winged-boots-brown.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304974253
+  modifiedTime: 1725992573664
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!fUMY4b9snsiKl30e'

@@ -1,0 +1,216 @@
+name: Horn of Valhalla
+system:
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare (Silver or Brass), Very Rare (Bronze), or
+      Legendary (Iron)</em></p><p>You can take a Magic action to blow this horn.
+      In response, warrior spirits from the plane of Ysgard appear in unoccupied
+      spaces within 60 feet of you. Each spirit uses the
+      <strong>Berserker</strong> stat block and returns to Ysgard after 1 hour
+      or when it drops to 0 Hit Points. The spirits look like living, breathing
+      warriors, and they have Immunity to the Charmed and Frightened conditions.
+      Once you use the horn, it can't be used again until 7 days have
+      passed.</p><p>Four types of <em>Horn of Valhalla</em> are known to exist,
+      each made of a different metal. The horn's type determines how many
+      spirits it summons, as well as the requirement for its use. The GM chooses
+      the horn's type or determines it randomly by rolling on the following
+      table.</p><p>If you blow the horn without meeting its requirement, the
+      summoned spirits attack you. If you meet the requirement, they are
+      Friendly to you and your allies and follow your
+      commands.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgHornOfValhall
+      rollable]</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    WmIILVGCgz1f5cE4:
+      type: summon
+      _id: WmIILVGCgz1f5cE4
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '5'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '@item.uses.max'
+            target: ''
+            scaling:
+              mode: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: 7da5gsAdyzIIfWBL
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '@scaling'
+          type: space
+          special: unoccupied space
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: '@scaling'
+          name: ''
+          _id: duDmJXZDPTjLDu4W
+          uuid: Compendium.dnd5e.actors24.Actor.kz1t6xeXVwODpYb2
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: Summon Warriors
+      img: ''
+      appliedEffects:
+        - 7da5gsAdyzIIfWBL
+  uses:
+    spent: 0
+    recovery:
+      - period: day
+        type: formula
+        formula: '1'
+    max: '7'
+  identifier: horn-of-valhalla
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+_id: dmgHornofValhall
+type: equipment
+img: icons/tools/instruments/flute-simple-wood.webp
+effects:
+  - name: 'Horn of Valhalla: Condition Immunity'
+    img: icons/commodities/treasure/horn-carved-banded.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgHornofValhall
+    transfer: false
+    _id: 7da5gsAdyzIIfWBL
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.ci.value
+        mode: 2
+        value: charmed
+        priority: null
+      - key: system.traits.ci.value
+        mode: 2
+        value: frightened
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The spirits look like living, breathing warriors, and they have
+      Immunity to the &amp;Reference[Charmed apply=false] and
+      &amp;Reference[Frightened apply=false] conditions.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730403921838
+      modifiedTime: 1730404021898
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgHornofValhall.7da5gsAdyzIIfWBL'
+folder: U4xmShLy19Ry54zl
+sort: 37950000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730402610154
+  modifiedTime: 1745712700805
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgHornofValhall'

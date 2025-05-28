@@ -1,0 +1,171 @@
+_id: dmgCarrionCrawle
+name: Crawler Mucus
+type: consumable
+img: icons/consumables/potions/vial-cork-green.webp
+system:
+  activities:
+    StL0A8FviYKfGlQ8:
+      type: save
+      name: Use Poison
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '13'
+      _id: StL0A8FviYKfGlQ8
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Contact Poison</em></p><p>A creature subjected to Carrion Crawler
+      Mucus must succeed on a DC 13 Constitution saving throw or have the
+      &amp;Reference[Poisoned apply=false] condition for 1 minute. The creature
+      also has the &amp;Reference[Paralyzed apply=false] condition while
+      Poisoned in this way. The creature repeats the save at the end of each of
+      its turns, ending the effect on itself on a success.</p>
+    chat: ''
+  identifier: crawler-mucus
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    page: ''
+    custom: ''
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: poison
+    subtype: contact
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties: []
+effects:
+  - name: Poisoned and Paralyzed
+    img: icons/consumables/potions/vial-cork-green.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgCarrionCrawle
+    transfer: false
+    _id: a9KfUV3KbbB5wrFY
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - paralyzed
+      - poisoned
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.equipment24.Item.dmgAssassinsBloo.ActiveEffect.zpDCMRInMzrnRAAd
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730740294138
+      modifiedTime: 1730740463800
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgCarrionCrawle.a9KfUV3KbbB5wrFY'
+folder: bRhjJ3GivNsz0GTF
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1728419101980
+  modifiedTime: 1745545959446
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgCarrionCrawle'

@@ -1,0 +1,125 @@
+name: Simulacrum
+system:
+  description:
+    value: >-
+      <p>You create a simulacrum of one Beast or Humanoid that is within 10 feet
+      of you for the entire casting of the spell. You finish the casting by
+      touching both the creature and a pile of ice or snow that is the same size
+      as that creature, and the pile turns into the simulacrum, which is a
+      creature. It uses the game statistics of the original creature at the time
+      of casting, except it is a Construct, its Hit Point maximum is half as
+      much, and it can't cast this spell.</p><p>The simulacrum is Friendly to
+      you and creatures you designate. It obeys your commands and acts on your
+      turn in combat. The simulacrum can't gain levels, and it can't take Short
+      or Long Rests.</p><p>If the simulacrum takes damage, the only way to
+      restore its Hit Points is to repair it as you take a Long Rest, during
+      which you expend components worth 100 GP per Hit Point restored. The
+      simulacrum must stay within 5 feet of you for the repair.</p><p>The
+      simulacrum lasts until it drops to 0 Hit Points, at which point it reverts
+      to snow and melts away. If you cast this spell again, any simulacrum you
+      created with this spell is instantly destroyed.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: hour
+    condition: ''
+    value: 12
+  duration:
+    value: ''
+    units: disp
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: and a pile of ice or snow
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: ill
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: powdered ruby worth 1,500+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    59uVyosvu2TW6e3D:
+      type: utility
+      name: Create Simulacrum
+      _id: 59uVyosvu2TW6e3D
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+  identifier: simulacrum
+_id: phbsplSimulacrum
+type: spell
+img: icons/magic/water/ice-snowman.webp
+effects: []
+folder: EdAGMG8IF26PLkD3
+sort: 400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425971142
+  modifiedTime: 1745256798314
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSimulacrum'

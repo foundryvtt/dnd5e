@@ -1,0 +1,128 @@
+name: Glassblower's Tools
+system:
+  description:
+    value: >-
+      <p class="phb-meta"><strong>Ability:</strong> Intelligence</p><p
+      class="phb-meta"><strong>Utilize:</strong> Discern what a glass object
+      held in the past 24 hours (DC 15)</p><p
+      class="phb-meta"><strong>Craft:</strong>
+      @UUID[Compendium.dnd5e.items.Item.HZp69hhyNZUUCipF]{Glass Bottle},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagMagnifyingG]{Magnifying
+      Glass},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagSpyglass100]{Spyglass},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagVial0000000]{Vial}</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 30
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: art
+    baseItem: glassblower
+  ability: int
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    Ah1G0WFrQCrH8Ct4:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: int
+        dc:
+          calculation: ''
+          formula: '15'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: Ah1G0WFrQCrH8Ct4
+      name: Discern Previous Contents
+      img: ''
+      appliedEffects: []
+  identifier: glassblowers-tools
+_id: phbtulGlassblowe
+type: tool
+folder: V8KHbNkEWoXQP3Pj
+img: icons/commodities/tech/metal-insert.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425917035
+  modifiedTime: 1740680141749
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbtulGlassblowe'

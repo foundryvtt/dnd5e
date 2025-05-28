@@ -1,0 +1,136 @@
+name: Smith's Tools
+system:
+  description:
+    value: >-
+      <p class="phb-meta"><strong>Ability:</strong> Strength</p><p
+      class="phb-meta"><strong>Utilize:</strong> Pry open a door or container
+      (DC 20)</p><p class="phb-meta"><strong>Craft:</strong> Any Melee weapon
+      (except Club, Greatclub, Quarterstaff, and Whip), Medium armor (except
+      Hide), Heavy armor,
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBallBearing]{Ball Bearings},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagBucket00000]{Bucket},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagCaltrops000]{Caltrops},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagChain000000]{Chain},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagCrowbar0000]{Crowbar},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbamoBulletsFir]{Firearm
+      Bullets},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagGrapplingHo]{Grappling Hook},
+      @UUID[Compendium.dnd5e.items.Item.M8xM8BLK4tpUayEE]{Iron Pot},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagSpikesIron0]{Iron Spikes},
+      @UUID[Compendium.dnd5e.equipment24.Item.phbamoBulletsSli]{Sling
+      Bullets}</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 8
+    units: lb
+  price:
+    value: 20
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: art
+    baseItem: smith
+  ability: str
+  chatFlavor: ''
+  proficient: null
+  properties: []
+  bonus: ''
+  activities:
+    NkpANzY0LKUz2Vm0:
+      type: check
+      activation:
+        type: action
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      check:
+        ability: str
+        dc:
+          calculation: ''
+          formula: '20'
+        associated: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      _id: NkpANzY0LKUz2Vm0
+      name: Pry Open
+      img: ''
+      appliedEffects: []
+  identifier: smiths-tools
+_id: phbtulSmithsTool
+type: tool
+folder: V8KHbNkEWoXQP3Pj
+img: icons/skills/trades/smithing-tongs-metal-red.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425917756
+  modifiedTime: 1740680142673
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbtulSmithsTool'

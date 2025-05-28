@@ -1,0 +1,152 @@
+_id: FAk41RPCTcvCk6KI
+name: Improved Divine Smite
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>By 11th level, you are so suffused with righteous might that all your
+      melee weapon strikes carry divine power with them.</p><p>Whenever you hit
+      a creature with a melee weapon, the creature takes an extra 1d8 radiant
+      damage. If you also use your
+      @UUID[Compendium.dnd5e.classfeatures.Item.ySMPQ6zNSlvkrl2f]{Divine Smite}
+      with an attack, you add this damage to the extra damage of your Divine
+      Smite.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Paladin 11
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: 1
+            denomination: 8
+            bonus: ''
+            types:
+              - radiant
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: radiant-strikes
+flags: {}
+img: icons/magic/symbols/cog-shield-white-blue.webp
+effects:
+  - _id: yvLL91omI6kHMHau
+    changes:
+      - key: system.bonuses.mwak.damage
+        mode: 2
+        value: +1d8[Radiant]
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.FAk41RPCTcvCk6KI
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Improved Divine Smite
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/symbols/cog-shield-white-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!FAk41RPCTcvCk6KI.yvLL91omI6kHMHau'
+folder: 01K0hSSl7NQjYLb8
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037382034
+  modifiedTime: 1725992287773
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!FAk41RPCTcvCk6KI'

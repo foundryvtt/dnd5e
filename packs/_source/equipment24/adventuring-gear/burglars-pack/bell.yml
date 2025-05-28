@@ -1,0 +1,77 @@
+name: Bell
+system:
+  description:
+    value: >-
+      <p>When rung as a Utilize action, a Bell produces a sound that can be
+      heard up to 60 feet away.</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagBurglarsPac
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities: {}
+  identifier: bell
+_id: GDF2kmAUO8B5UEEJ
+type: equipment
+folder: uDk4FBYfcP2JnX6t
+img: icons/tools/instruments/bell-brass-brown.webp
+effects: []
+sort: 50000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726532218752
+  modifiedTime: 1745256801348
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!GDF2kmAUO8B5UEEJ'

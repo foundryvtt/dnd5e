@@ -1,0 +1,112 @@
+_id: xNN0JMKqlG4hKVYu
+name: 'Channel Divinity: Sacred Weapon'
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>As an action, you can imbue one weapon that you are holding with
+      positive energy, using your Channel Divinity.</p><p>For 1 minute, you add
+      your Charisma modifier to attack rolls made with that weapon (with a
+      minimum bonus of +1). The weapon also emits bright light in a 20-foot
+      radius and dim light 20 feet beyond that. If the weapon is not already
+      magical, it becomes magical for the duration.</p><p>You can end this
+      effect on your turn as part of any other action. If you are no longer
+      holding or carrying this weapon, or if you fall unconscious, this effect
+      ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: channelDivinity
+  requirements: Oath of Devotion 3
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: Compendium.dnd5e.classfeatures.Item.8M7uOPhbTxoxxJSo
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '20'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: channel-divinity-sacred-weapon
+flags: {}
+img: icons/skills/melee/weapons-crossed-swords-yellow-teal.webp
+effects: []
+folder: W9eAXfvupEhLWmZ4
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037390191
+  modifiedTime: 1725992290502
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!xNN0JMKqlG4hKVYu'

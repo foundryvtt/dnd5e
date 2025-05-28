@@ -1,0 +1,46 @@
+name: Parchment
+system:
+  description:
+    value: <p>One sheet of Parchment can hold about 250 handwritten words.</p>
+    chat: ''
+  price:
+    value: 1
+    denomination: sp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: parchment
+_id: phbagParchment00
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/scrolls/scroll-plain-tan.webp
+effects: []
+sort: 4300000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425910570
+  modifiedTime: 1745256812466
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagParchment00'

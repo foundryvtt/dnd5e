@@ -22,11 +22,9 @@ export default class FormulaField extends foundry.data.fields.StringField {
 
   /** @inheritDoc */
   _validateType(value) {
-    Roll.validate(value);
-    if ( this.options.deterministic ) {
-      const roll = new Roll(value);
-      if ( !roll.isDeterministic ) throw new Error("must not contain dice terms");
-    }
+    const roll = new Roll(value.replace(/@([a-z.0-9_-]+)/gi, "1"));
+    roll.evaluateSync({ strict: false });
+    if ( this.options.deterministic && !roll.isDeterministic ) throw new Error(`must not contain dice terms: ${value}`);
     super._validateType(value);
   }
 
@@ -65,7 +63,7 @@ export default class FormulaField extends foundry.data.fields.StringField {
   _applyChangeUpgrade(value, delta, model, change) {
     if ( !value ) return delta;
     const terms = new Roll(value).terms;
-    if ( (terms.length === 1) && (terms[0].fn === "max") ) return current.replace(/\)$/, `, ${delta})`);
+    if ( (terms.length === 1) && (terms[0].fn === "max") ) return value.replace(/\)$/, `, ${delta})`);
     return `max(${value}, ${delta})`;
   }
 
@@ -75,7 +73,7 @@ export default class FormulaField extends foundry.data.fields.StringField {
   _applyChangeDowngrade(value, delta, model, change) {
     if ( !value ) return delta;
     const terms = new Roll(value).terms;
-    if ( (terms.length === 1) && (terms[0].fn === "min") ) return current.replace(/\)$/, `, ${delta})`);
+    if ( (terms.length === 1) && (terms[0].fn === "min") ) return value.replace(/\)$/, `, ${delta})`);
     return `min(${value}, ${delta})`;
   }
 }

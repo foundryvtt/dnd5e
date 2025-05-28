@@ -1,0 +1,378 @@
+_id: phbsplTeleportMi
+name: Teleport Mishap
+img: icons/magic/movement/abstract-ribbons-red-orange.webp
+description: >-
+  <p><strong>Mishap damage:</strong> [[/damage 3d10
+  type=force]]</p><p><strong>Off target distance:</strong> [[/r
+  2d12#Miles]]{2d12 miles} [[/r 1d8#Direction]]{Direction}</p>
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 100
+    drawn: false
+    _id: RaCnOnLRcJPv11Vf
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Permanent circle:</strong> On target
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.RaCnOnLRcJPv11Vf'
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 100
+    drawn: false
+    _id: 4W9YPHqIIDyt3WbV
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Linked object:</strong> On target
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.4W9YPHqIIDyt3WbV'
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 5
+    drawn: false
+    _id: MgxjepFoJzZqVf1M
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Very familiar:</strong> Mishap
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.MgxjepFoJzZqVf1M'
+  - type: text
+    weight: 1
+    range:
+      - 6
+      - 13
+    drawn: false
+    _id: BtifMFAP26aAcDOx
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Very familiar:</strong> Similar area
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.BtifMFAP26aAcDOx'
+  - type: text
+    weight: 1
+    range:
+      - 14
+      - 24
+    drawn: false
+    _id: K6jZpSdlRXI1Wg9Q
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Very familiar:</strong> Off target
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.K6jZpSdlRXI1Wg9Q'
+  - type: text
+    weight: 1
+    range:
+      - 25
+      - 100
+    drawn: false
+    _id: ZPWjjJxSnyLENM8O
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Very familiar:</strong> On target
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.ZPWjjJxSnyLENM8O'
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 33
+    drawn: false
+    _id: niANcATD48MDIE5s
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Seen casually:</strong> Mishap
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.niANcATD48MDIE5s'
+  - type: text
+    weight: 1
+    range:
+      - 34
+      - 43
+    drawn: false
+    _id: rPgQoygHRRWRRmIK
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Seen casually:</strong> Similar area
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.rPgQoygHRRWRRmIK'
+  - type: text
+    weight: 1
+    range:
+      - 44
+      - 53
+    drawn: false
+    _id: 5hV5vL7SYu53EPvb
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Seen casually:</strong> Off target
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.5hV5vL7SYu53EPvb'
+  - type: text
+    weight: 1
+    range:
+      - 54
+      - 73
+    drawn: false
+    _id: KShVQqILsbEKwNQ1
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Seen casually:</strong> Off target
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.KShVQqILsbEKwNQ1'
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 43
+    drawn: false
+    _id: n7LhrgNZV6rYGYBv
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Viewed or described:</strong> Mishap
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.n7LhrgNZV6rYGYBv'
+  - type: text
+    weight: 1
+    range:
+      - 44
+      - 53
+    drawn: false
+    _id: S3FXuqVgRazP23RK
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Viewed or described:</strong> Similar area
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.S3FXuqVgRazP23RK'
+  - type: text
+    weight: 1
+    range:
+      - 54
+      - 73
+    drawn: false
+    _id: LWWefv3FEwkukueE
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Viewed or described:</strong> Off target
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.LWWefv3FEwkukueE'
+  - type: text
+    weight: 1
+    range:
+      - 74
+      - 100
+    drawn: false
+    _id: K3Uun9ZfyGTdLNJl
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>Viewed or described:</strong> On target
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.K3Uun9ZfyGTdLNJl'
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 50
+    drawn: false
+    _id: UH8N3zGLSGiLPObv
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>False destination:</strong> Mishap
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.UH8N3zGLSGiLPObv'
+  - type: text
+    weight: 1
+    range:
+      - 51
+      - 100
+    drawn: false
+    _id: yJ4FhyyZvenG7AJl
+    img: icons/svg/d20-black.svg
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: <strong>False destination:</strong> Similar area
+    name: ''
+    _key: '!tables.results!phbsplTeleportMi.yJ4FhyyZvenG7AJl'
+replacement: true
+displayRoll: true
+folder: RY28PgQgqr68sh45
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725039723294
+  modifiedTime: 1725039723294
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+formula: 1d100
+sort: 0
+ownership:
+  default: 0
+_key: '!tables!phbsplTeleportMi'

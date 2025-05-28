@@ -1,0 +1,128 @@
+name: Teleportation Circle
+system:
+  description:
+    value: >-
+      <p>As you cast the spell, you draw a 5-foot-radius circle on the ground
+      inscribed with sigils that link your location to a permanent teleportation
+      circle of your choice whose sigil sequence you know and that is on the
+      same plane of existence as you. A shimmering portal opens within the
+      circle you drew and remains open until the end of your next turn. Any
+      creature that enters the portal instantly appears within 5 feet of the
+      destination circle or in the nearest unoccupied space if that space is
+      occupied.</p><p>Many major temples, guildhalls, and other important places
+      have permanent teleportation circles. Each circle includes a unique sigil
+      sequence—a string of runes arranged in a particular pattern.</p><p>When
+      you first gain the ability to cast this spell, you learn the sigil
+      sequences for two destinations on the Material Plane, determined by the
+      DM. You might learn additional sigil sequences during your adventures. You
+      can commit a new sigil sequence to memory after studying it for 1
+      minute.</p><p>You can create a permanent teleportation circle by casting
+      this spell in the same location every day for 365 days.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: round
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: circle
+      size: '5'
+      count: ''
+      height: ''
+  range:
+    units: ft
+    special: ''
+    value: '10'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 5
+  school: con
+  properties:
+    - vocal
+    - material
+  materials:
+    value: rare inks worth 50+ GP, which the spell consumes
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    naWXNn0rMcVvKOi2:
+      type: utility
+      name: ''
+      _id: naWXNn0rMcVvKOi2
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      roll:
+        prompt: false
+        visible: false
+  identifier: teleportation-circle
+_id: phbsplTeleportat
+type: spell
+img: icons/magic/symbols/runes-carved-stone-yellow.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 101563
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425975042
+  modifiedTime: 1745256799140
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplTeleportat'

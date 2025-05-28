@@ -1,0 +1,114 @@
+_id: DPN2Gfk8yi1Z5wp7
+name: Sneak Attack
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 1st level, you know how to strike subtly and exploit a
+      foe's distraction. Once per turn, you can deal an extra 1d6 damage to one
+      creature you hit with an attack if you have advantage on the attack roll.
+      The attack must use a finesse or a ranged weapon.</p><p>You don't need
+      advantage on the attack roll if another enemy of the target is within 5
+      feet of it, that enemy isn't incapacitated, and you don't have
+      disadvantage on the attack roll.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Rogue 1
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: null
+            denomination: null
+            bonus: ''
+            types: []
+            custom:
+              enabled: true
+              formula: '@scale.rogue.sneak-attack'
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: sneak-attack
+flags: {}
+img: icons/skills/melee/strike-dagger-arcane-pink.webp
+effects: []
+folder: RMtv55MamGWKrCfq
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037381522
+  modifiedTime: 1725992287607
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!DPN2Gfk8yi1Z5wp7'

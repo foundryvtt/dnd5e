@@ -1,0 +1,1323 @@
+_id: phbEquipment0000
+name: Equipment
+pages:
+  - sort: 200000
+    name: Coins
+    type: text
+    _id: XJAhidsdr94Oxcii
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Characters often find coins on their adventures and can spend those
+        coins in shops, inns, and other businesses. Coins come in different
+        denominations based on the relative worth of their material. The Coin
+        Values table lists coins and how much they’re worth relative to the Gold
+        Piece, which is the game’s main coin. For example, 100 Copper Pieces are
+        worth 1 Gold Piece.</p><p>A coin weighs about a third of an ounce, so
+        fifty coins weigh a pound.</p><table><caption>Coin
+        Values</caption><thead><tr><th><p>Coin</p></th><th><p>Value in
+        GP</p></th><th></th></tr></thead><tbody><tr><td><p>Copper Piece
+        (CP)</p></td><td><p>1/100</p></td><td></td></tr><tr><td><p>Silver Piece
+        (SP)</p></td><td><p>1/10</p></td><td></td></tr><tr><td><p>Electrum Piece
+        (EP)</p></td><td><p>1/2</p></td><td></td></tr><tr><td><p>Gold Piece
+        (GP)</p></td><td><p>1</p></td><td></td></tr><tr><td><p>Platinum Piece
+        (PP)</p></td><td><p>10</p></td><td></td></tr></tbody></table>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        order: 800100
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.1
+      createdTime: null
+      modifiedTime: 1726537512528
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbEquipment0000.XJAhidsdr94Oxcii'
+  - sort: 300000
+    name: Weapons
+    type: text
+    _id: dWQ2ZTLOuKr3PMAx
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>The @UUID[.z1wx4cNO7AfqyNof]{Weapons table} in this section shows the
+        game’s main weapons. The table lists the cost and weight of each weapon,
+        as well as the following details:</p><p><strong>Category.</strong> Every
+        weapon falls into a category: Simple or Martial. Weapon proficiencies
+        are usually tied to one of these categories. For example, you might have
+        proficiency with Simple weapons.</p><p><strong>Melee or Ranged.</strong>
+        A weapon is classified as either Melee or Ranged. A Melee weapon is used
+        to attack a target within 5 feet, whereas a Ranged weapon is used to
+        attack at a greater distance.</p><p><strong>Damage.</strong> The table
+        lists the amount of damage a weapon deals when an attacker hits with it
+        as well as the type of that damage.</p><p><strong>Properties.</strong>
+        Any properties a weapon has are listed in the Properties column. Each
+        property is defined in the “Properties”
+        section.</p><p><strong>Mastery.</strong> Each weapon has a mastery
+        property, which is defined in the “Mastery Properties” section later in
+        this chapter. To use that property, you must have a feature that lets
+        you use it.</p><aside class="notable"><h3>Selling
+        Equipment</h3><p>Equipment fetches half its cost when sold. In contrast,
+        trade goods and valuables—like gems and art objects—retain their full
+        value in the marketplace.
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbMagicItems000]{Magic
+        Items} has prices for magic items.</p></aside><h2>Weapon
+        Proficiency</h2><p>Anyone can wield a weapon, but you must have
+        proficiency with it to add your Proficiency Bonus to an attack roll you
+        make with it. A player character’s features can provide weapon
+        proficiencies. A monster is proficient with any weapon in its stat
+        block.</p>
+      markdown: ''
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        order: 800200
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.1
+      createdTime: null
+      modifiedTime: 1745523067172
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbEquipment0000.dWQ2ZTLOuKr3PMAx'
+  - sort: 400000
+    name: Weapons Table
+    type: text
+    _id: z1wx4cNO7AfqyNof
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <table><caption>Weapons</caption><thead><tr><th><p>Name</p></th><th><p>Damage</p></th><th><p>Properties</p></th><th><p>Mastery</p></th><th><p>Weight</p></th><th><p>Cost</p></th></tr></thead><tbody><tr><td
+        colspan="2"><p><em>Simple Melee
+        Weapons</em></p></td><td></td><td></td><td></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepClub000000]{Club}</p></td><td><p>1d4
+        Bludgeoning</p></td><td><p>Light</p></td><td><p>Slow</p></td><td><p>2
+        lb.</p></td><td><p>1
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepDagger0000]{Dagger}</p></td><td><p>1d4
+        Piercing</p></td><td><p>Finesse, Light, Thrown (Range
+        20/60)</p></td><td><p>Nick</p></td><td><p>1 lb.</p></td><td><p>2
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatclub0]{Greatclub}</p></td><td><p>1d8
+        Bludgeoning</p></td><td><p>Two-Handed</p></td><td><p>Push</p></td><td><p>10
+        lb.</p></td><td><p>2
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepHandaxe000]{Handaxe}</p></td><td><p>1d6
+        Slashing</p></td><td><p>Light, Thrown (Range
+        20/60)</p></td><td><p>Vex</p></td><td><p>2 lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepJavelin000]{Javelin}</p></td><td><p>1d6
+        Piercing</p></td><td><p>Thrown (Range
+        30/120)</p></td><td><p>Slow</p></td><td><p>2 lb.</p></td><td><p>5
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepLightHamme]{Light
+        Hammer}</p></td><td><p>1d4 Bludgeoning</p></td><td><p>Light, Thrown
+        (Range 20/60)</p></td><td><p>Nick</p></td><td><p>2 lb.</p></td><td><p>2
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepMace000000]{Mace}</p></td><td><p>1d6
+        Bludgeoning</p></td><td><p>—</p></td><td><p>Sap</p></td><td><p>4
+        lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepQuartersta]{Quarterstaff}</p></td><td><p>1d6
+        Bludgeoning</p></td><td><p>Versatile
+        (1d8)</p></td><td><p>Topple</p></td><td><p>4 lb.</p></td><td><p>2
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepSickle0000]{Sickle}</p></td><td><p>1d4
+        Slashing</p></td><td><p>Light</p></td><td><p>Nick</p></td><td><p>2
+        lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepSpear00000]{Spear}</p></td><td><p>1d6
+        Piercing</p></td><td><p>Thrown (Range 20/60), Versatile
+        (1d8)</p></td><td><p>Sap</p></td><td><p>3 lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td colspan="2"><p><em>Simple Ranged
+        Weapons</em></p></td><td></td><td></td><td></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepDart000000]{Dart}</p></td><td><p>1d4
+        Piercing</p></td><td><p>Finesse, Thrown (Range
+        20/60)</p></td><td><p>Vex</p></td><td><p>1/4 lb.</p></td><td><p>5
+        CP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepLightCross]{Light
+        Crossbow}</p></td><td><p>1d8 Piercing</p></td><td><p>Ammunition (Range
+        80/320; Bolt), Loading, Two-Handed</p></td><td><p>Slow</p></td><td><p>5
+        lb.</p></td><td><p>25
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepShortbow00]{Shortbow}</p></td><td><p>1d6
+        Piercing</p></td><td><p>Ammunition (Range 80/320; Arrow),
+        Two-Handed</p></td><td><p>Vex</p></td><td><p>2 lb.</p></td><td><p>25
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepSling00000]{Sling}</p></td><td><p>1d4
+        Bludgeoning</p></td><td><p>Ammunition (Range 30/120;
+        Bullet)</p></td><td><p>Slow</p></td><td><p>—</p></td><td><p>1
+        SP</p></td></tr><tr><td colspan="2"><p><em>Martial Melee
+        Weapons</em></p></td><td></td><td></td><td></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepBattleaxe0]{Battleaxe}</p></td><td><p>1d8
+        Slashing</p></td><td><p>Versatile
+        (1d10)</p></td><td><p>Topple</p></td><td><p>4 lb.</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepFlail00000]{Flail}</p></td><td><p>1d8
+        Bludgeoning</p></td><td><p>—</p></td><td><p>Sap</p></td><td><p>2
+        lb.</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepGlaive0000]{Glaive}</p></td><td><p>1d10
+        Slashing</p></td><td><p>Heavy, Reach,
+        Two-Handed</p></td><td><p>Graze</p></td><td><p>6 lb.</p></td><td><p>20
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepGreataxe00]{Greataxe}</p></td><td><p>1d12
+        Slashing</p></td><td><p>Heavy,
+        Two-Handed</p></td><td><p>Cleave</p></td><td><p>7 lb.</p></td><td><p>30
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepGreatsword]{Greatsword}</p></td><td><p>2d6
+        Slashing</p></td><td><p>Heavy,
+        Two-Handed</p></td><td><p>Graze</p></td><td><p>6 lb.</p></td><td><p>50
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepHalberd000]{Halberd}</p></td><td><p>1d10
+        Slashing</p></td><td><p>Heavy, Reach,
+        Two-Handed</p></td><td><p>Cleave</p></td><td><p>6 lb.</p></td><td><p>20
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepLance00000]{Lance}</p></td><td><p>1d10
+        Piercing</p></td><td><p>Heavy, Reach, Two-Handed (unless
+        mounted)</p></td><td><p>Topple</p></td><td><p>6 lb.</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepLongsword0]{Longsword}</p></td><td><p>1d8
+        Slashing</p></td><td><p>Versatile
+        (1d10)</p></td><td><p>Sap</p></td><td><p>3 lb.</p></td><td><p>15
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepMaul000000]{Maul}</p></td><td><p>2d6
+        Bludgeoning</p></td><td><p>Heavy,
+        Two-Handed</p></td><td><p>Topple</p></td><td><p>10 lb.</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepMorningsta]{Morningstar}</p></td><td><p>1d8
+        Piercing</p></td><td><p>—</p></td><td><p>Sap</p></td><td><p>4
+        lb.</p></td><td><p>15
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepPike000000]{Pike}</p></td><td><p>1d10
+        Piercing</p></td><td><p>Heavy, Reach,
+        Two-Handed</p></td><td><p>Push</p></td><td><p>18 lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepRapier0000]{Rapier}</p></td><td><p>1d8
+        Piercing</p></td><td><p>Finesse</p></td><td><p>Vex</p></td><td><p>2
+        lb.</p></td><td><p>25
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepScimitar00]{Scimitar}</p></td><td><p>1d6
+        Slashing</p></td><td><p>Finesse,
+        Light</p></td><td><p>Nick</p></td><td><p>3 lb.</p></td><td><p>25
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepShortsword]{Shortsword}</p></td><td><p>1d6
+        Piercing</p></td><td><p>Finesse,
+        Light</p></td><td><p>Vex</p></td><td><p>2 lb.</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepTrident000]{Trident}</p></td><td><p>1d8
+        Piercing</p></td><td><p>Thrown (Range 20/60), Versatile
+        (1d10)</p></td><td><p>Topple</p></td><td><p>4 lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepWarhammer0]{Warhammer}</p></td><td><p>1d8
+        Bludgeoning</p></td><td><p>Versatile
+        (1d10)</p></td><td><p>Push</p></td><td><p>5 lb.</p></td><td><p>15
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepWarPick000]{War
+        Pick}</p></td><td><p>1d8 Piercing</p></td><td><p>Versatile
+        (1d10)</p></td><td><p>Sap</p></td><td><p>2 lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepWhip000000]{Whip}</p></td><td><p>1d4
+        Slashing</p></td><td><p>Finesse,
+        Reach</p></td><td><p>Slow</p></td><td><p>3 lb.</p></td><td><p>2
+        GP</p></td></tr><tr><td colspan="2"><p><em>Martial Ranged
+        Weapons</em></p></td><td></td><td></td><td></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepBlowgun000]{Blowgun}</p></td><td><p>1
+        Piercing</p></td><td><p>Ammunition (Range 25/100; Needle),
+        Loading</p></td><td><p>Vex</p></td><td><p>1 lb.</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepHandCrossb]{Hand
+        Crossbow}</p></td><td><p>1d6 Piercing</p></td><td><p>Ammunition (Range
+        30/120; Bolt), Light, Loading</p></td><td><p>Vex</p></td><td><p>3
+        lb.</p></td><td><p>75
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepHeavyCross]{Heavy
+        Crossbow}</p></td><td><p>1d10 Piercing</p></td><td><p>Ammunition (Range
+        100/400; Bolt), Heavy, Loading,
+        Two-Handed</p></td><td><p>Push</p></td><td><p>18 lb.</p></td><td><p>50
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepLongbow000]{Longbow}</p></td><td><p>1d8
+        Piercing</p></td><td><p>Ammunition (Range 150/600; Arrow), Heavy,
+        Two-Handed</p></td><td><p>Slow</p></td><td><p>2 lb.</p></td><td><p>50
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepMusket0000]{Musket}</p></td><td><p>1d12
+        Piercing</p></td><td><p>Ammunition (Range 40/120; Bullet), Loading,
+        Two-Handed</p></td><td><p>Slow</p></td><td><p>10 lb.</p></td><td><p>500
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbwepPistol0000]{Pistol}</p></td><td><p>1d10
+        Piercing</p></td><td><p>Ammunition (Range 30/90; Bullet),
+        Loading</p></td><td><p>Vex</p></td><td><p>3 lb.</p></td><td><p>250
+        GP</p></td></tr></tbody></table>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726017041795
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbEquipment0000.z1wx4cNO7AfqyNof'
+  - sort: 500000
+    name: Armor
+    type: text
+    _id: flJnTPWIwTrAzqTi
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>The @UUID[.adlJqek4sIyJePKO]{Armor table} lists the game’s main
+        armor. The table includes the cost and weight of armor, as well as the
+        following details:</p><p><strong>Category.</strong> Every type of armor
+        falls into a category: Light, Medium, or Heavy. The category determines
+        how long it takes to don or doff the armor (as shown in the
+        table).</p><p><strong>Armor Class (AC).</strong> The table’s Armor Class
+        column tells you what your base AC is when you wear a type of armor. For
+        example, if you wear Leather Armor, your base AC is 11 plus your
+        Dexterity modifier, whereas your AC is 16 in Chain
+        Mail.</p><p><strong>Strength.</strong> If the table shows a Strength
+        score in the Strength column for an armor type, that armor reduces the
+        wearer’s speed by 10 feet unless the wearer has a Strength score equal
+        to or higher than the listed score.</p><p><strong>Stealth.</strong> If
+        the table shows “Disadvantage” in the Stealth column for an armor type,
+        the wearer has Disadvantage on Dexterity (Stealth) checks.</p><h2>Armor
+        Training</h2><p>Anyone can don armor or hold a Shield, but only those
+        with training can use them effectively, as explained below. A
+        character’s class and other features determine the character’s armor
+        training. A monster has training with any armor in its stat
+        block.</p><h3>Light, Medium, or Heavy Armor</h3><p>If you wear Light,
+        Medium, or Heavy armor and lack training with it, you have Disadvantage
+        on any D20 Test that involves Strength or Dexterity, and you can’t cast
+        spells.</p><h3>Shield</h3><p>You gain the Armor Class benefit of a
+        Shield only if you have training with it.</p><h2>One at a Time</h2><p>A
+        creature can wear only one suit of armor at a time and wield only one
+        Shield at a time.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        order: 800500
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.1
+      createdTime: null
+      modifiedTime: 1745523362137
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbEquipment0000.flJnTPWIwTrAzqTi'
+  - sort: 600000
+    name: Armor Table
+    type: text
+    _id: adlJqek4sIyJePKO
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <table><caption>Armor</caption><thead><tr><th><p>Armor</p></th><th><p>Armor
+        Class
+        (AC)</p></th><th><p>Strength</p></th><th><p>Stealth</p></th><th><p>Weight</p></th><th><p>Cost</p></th></tr></thead><tbody><tr><td
+        colspan="2"><p><em>Light Armor (1 Minute to Don or
+        Doff)</em></p></td><td></td><td></td><td></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbarmPaddedArmo]{Padded
+        Armor}</p></td><td><p>11 + Dex
+        modifier</p></td><td><p>—</p></td><td><p>Disadvantage</p></td><td><p>8
+        lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbarmLeatherArm]{Leather
+        Armor}</p></td><td><p>11 + Dex
+        modifier</p></td><td><p>—</p></td><td><p>—</p></td><td><p>10
+        lb.</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbarmStuddedLea]{Studded
+        Leather Armor}</p></td><td><p>12 + Dex
+        modifier</p></td><td><p>—</p></td><td><p>—</p></td><td><p>13
+        lb.</p></td><td><p>45 GP</p></td></tr><tr><td colspan="2"><p><em>Medium
+        Armor (5 Minutes to Don and 1 Minute to
+        Doff)</em></p></td><td></td><td></td><td></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbarmHideArmor0]{Hide
+        Armor}</p></td><td><p>12 + Dex modifier (max
+        2)</p></td><td><p>—</p></td><td><p>—</p></td><td><p>12
+        lb.</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbarmChainShirt]{Chain
+        Shirt}</p></td><td><p>13 + Dex modifier (max
+        2)</p></td><td><p>—</p></td><td><p>—</p></td><td><p>20
+        lb.</p></td><td><p>50
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbarmScaleMail0]{Scale
+        Mail}</p></td><td><p>14 + Dex modifier (max
+        2)</p></td><td><p>—</p></td><td><p>Disadvantage</p></td><td><p>45
+        lb.</p></td><td><p>50
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbarmBreastplat]{Breastplate}</p></td><td><p>14
+        + Dex modifier (max
+        2)</p></td><td><p>—</p></td><td><p>—</p></td><td><p>20
+        lb.</p></td><td><p>400
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbarmHalfPlateA]{Half
+        Plate Armor}</p></td><td><p>15 + Dex modifier (max
+        2)</p></td><td><p>—</p></td><td><p>Disadvantage</p></td><td><p>40
+        lb.</p></td><td><p>750 GP</p></td></tr><tr><td colspan="2"><p><em>Heavy
+        Armor (10 Minutes to Don and 5 Minutes to
+        Doff)</em></p></td><td></td><td></td><td></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbarmRingMail00]{Ring
+        Mail}</p></td><td><p>14</p></td><td><p>—</p></td><td><p>Disadvantage</p></td><td><p>40
+        lb.</p></td><td><p>30
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbarmChainMail0]{Chain
+        Mail}</p></td><td><p>16</p></td><td><p>Str
+        13</p></td><td><p>Disadvantage</p></td><td><p>55 lb.</p></td><td><p>75
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbarmSplintArmo]{Splint
+        Armor}</p></td><td><p>17</p></td><td><p>Str
+        15</p></td><td><p>Disadvantage</p></td><td><p>60 lb.</p></td><td><p>200
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbarmPlateArmor]{Plate
+        Armor}</p></td><td><p>18</p></td><td><p>Str
+        15</p></td><td><p>Disadvantage</p></td><td><p>65
+        lb.</p></td><td><p>1,500 GP</p></td></tr><tr><td><p><em>Shield (Utilize
+        Action to Don or
+        Doff)</em></p></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbarmShield0000]{Shield}</p></td><td><p>+2</p></td><td><p>—</p></td><td><p>—</p></td><td><p>6
+        lb.</p></td><td><p>10 GP</p></td></tr></tbody></table>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726762732781
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbEquipment0000.adlJqek4sIyJePKO'
+  - sort: 700000
+    name: Tools
+    type: text
+    _id: MK3tMrY7pZgPQZo8
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A tool helps you make specialized ability checks, craft certain
+        items, or both. A tool’s description includes the tool’s cost and
+        weight, as well as the following
+        entries:</p><p><strong>Ability.</strong> This entry lists the ability to
+        use when making an ability check with the
+        tool.</p><p><strong>Utilize.</strong> This entry lists things you can do
+        with the tool when you take the Utilize action. You can do one of those
+        things each time you take the action. This entry also provides the DC
+        for the action.</p><p><strong>Craft.</strong> This entry lists what, if
+        anything, you can craft with the tool. For crafting rules, see
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCraftingEquip]{Crafting
+        Equipment}.</p><p><strong>Variants.</strong> This entry appears if the
+        tool has variants, which are listed. Each requires a separate
+        proficiency.</p><h2>Tool Proficiency</h2><p>If you have proficiency with
+        a tool, add your Proficiency Bonus to any ability check you make that
+        uses the tool. If you have proficiency in a skill that’s used with that
+        check, you have Advantage on the check too.</p><p>Your features might
+        give you proficiency with a tool. A monster has proficiency with any
+        tool in its stat block.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        order: 800600
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.1
+      createdTime: null
+      modifiedTime: 1736028225295
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbEquipment0000.MK3tMrY7pZgPQZo8'
+  - sort: 750000
+    name: Artisan Tools
+    type: text
+    _id: ibFcHkHH1icuT3l8
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: "<p>Artisan’s Tools are each focused on crafting items and pursuing a trade. Each of these tools requires a separate proficiency.</p><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulAlchemists]{Alchemist’s Supplies} (50 GP)</h3><p><strong>Ability:</strong> Intelligence <strong>Weight:</strong> 8 lb.</p><p><strong>Utilize:</strong> Identify a substance (DC 15), or start a fire (DC\_15)</p><p><strong>Craft:</strong> Acid, Alchemist’s Fire, Component Pouch, Oil, Paper, Perfume</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulBrewersSup]{Brewer’s Supplies} (20 GP)</h3><p><strong>Ability:</strong> Intelligence <strong>Weight:</strong> 9 lb.</p><p><strong>Utilize:</strong> Detect poisoned drink (DC 15), or identify alcohol (DC 10)</p><p><strong>Craft:</strong> Antitoxin</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulCalligraph]{Calligrapher’s Supplies} (10 GP)</h3><p><strong>Ability:</strong> Dexterity <strong>Weight:</strong> 5 lb.</p><p><strong>Utilize:</strong> Write text with impressive flourishes that guard against forgery (DC 15)</p><p><strong>Craft:</strong> Ink, <em>Spell Scroll</em></p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulCarpenters]{Carpenter’s Tools} (8 GP)</h3><p><strong>Ability:</strong> Strength <strong>Weight:</strong> 6 lb.</p><p><strong>Utilize:</strong> Seal or pry open a door or container (DC 20)</p><p><strong>Craft:</strong> Club, Greatclub, Quarterstaff, Barrel, Chest, Ladder, Pole, Portable Ram, Torch</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulCartograph]{Cartographer’s Tools} (15 GP)</h3><p><strong>Ability:</strong> Wisdom <strong>Weight:</strong> 6 lb.</p><p><strong>Utilize:</strong> Draft a map of a small area (DC 15)</p><p><strong>Craft:</strong> Map</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulCobblersTo]{Cobbler’s Tools} (5 GP)</h3><p><strong>Ability:</strong> Dexterity <strong>Weight:</strong> 5 lb.</p><p><strong>Utilize:</strong> Modify footwear to give Advantage on the wearer’s next Dexterity (Acrobatics) check (DC 10)</p><p><strong>Craft:</strong> Climber’s Kit</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulCooksUtens]{Cook’s Utensils} (1 GP)</h3><p><strong>Ability:</strong> Wisdom <strong>Weight:</strong> 8 lb.</p><p><strong>Utilize:</strong> Improve food’s flavor (DC 10), or detect spoiled or poisoned food (DC 15)</p><p><strong>Craft:</strong> Rations</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulGlassblowe]{Glassblower’s Tools} (30 GP)</h3><p><strong>Ability:</strong> Intelligence <strong>Weight:</strong> 5 lb.</p><p><strong>Utilize:</strong> Discern what a glass object held in the past 24 hours (DC 15)</p><p><strong>Craft:</strong> Glass Bottle, Magnifying Glass, Spyglass, Vial</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulJewelersTo]{Jeweler’s Tools} (25 GP)</h3><p><strong>Ability:</strong> Intelligence <strong>Weight:</strong> 2 lb.</p><p><strong>Utilize:</strong> Discern a gem’s value (DC 15)</p><p><strong>Craft:</strong> Arcane Focus, Holy Symbol</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulLeatherwor]{Leatherworker’s Tools} (5 GP)</h3><p><strong>Ability:</strong> Dexterity <strong>Weight:</strong> 5 lb.</p><p><strong>Utilize:</strong> Add a design to a leather item (DC 10)</p><p><strong>Craft:</strong> Sling, Whip, Hide Armor, Leather Armor, Studded Leather Armor, Backpack, Crossbow Bolt Case, Map or Scroll Case, Parchment, Pouch, Quiver, Waterskin</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulMasonsTool]{Mason’s Tools} (10 GP)</h3><p><strong>Ability:</strong> Strength <strong>Weight:</strong> 8 lb.</p><p><strong>Utilize:</strong> Chisel a symbol or hole in stone (DC 10)</p><p><strong>Craft:</strong> Block and Tackle</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulPaintersSu]{Painter’s Supplies} (10 GP)</h3><p><strong>Ability:</strong> Wisdom <strong>Weight:</strong> 5 lb.</p><p><strong>Utilize:</strong> Paint a recognizable image of something you’ve seen (DC 10)</p><p><strong>Craft:</strong> Druidic Focus, Holy Symbol</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulPottersToo]{Potter’s Tools} (10 GP)</h3><p><strong>Ability:</strong> Intelligence <strong>Weight:</strong> 3 lb.</p><p><strong>Utilize:</strong> Discern what a ceramic object held in the past 24 hours (DC 15)</p><p><strong>Craft:</strong> Jug, Lamp</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulSmithsTool]{Smith’s Tools} (20 GP)</h3><p><strong>Ability:</strong> Strength <strong>Weight:</strong> 8 lb.</p><p><strong>Utilize:</strong> Pry open a door or container (DC 20)</p><p><strong>Craft:</strong> Any Melee weapon (except Club, Greatclub, Quarterstaff, and Whip), Medium armor (except Hide), Heavy armor, Ball Bearings, Bucket, Caltrops, Chain, Crowbar, Firearm Bullets, Grappling Hook, Iron Pot, Iron Spikes, Sling Bullets</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulTinkersToo]{Tinker’s Tools} (50 GP)</h3><p><strong>Ability:</strong> Dexterity <strong>Weight:</strong> 10 lb.</p><p><strong>Utilize:</strong> Assemble a Tiny item composed of scrap, which falls apart in 1 minute (DC 20)</p><p><strong>Craft:</strong> Musket, Pistol, Bell, Bullseye Lantern, Flask, Hooded Lantern, Hunting Trap, Lock, Manacles, Mirror, Shovel, Signal Whistle, Tinderbox</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulWeaversToo]{Weaver’s Tools} (1 GP)</h3><p><strong>Ability:</strong> Dexterity <strong>Weight:</strong> 5 lb.</p><p><strong>Utilize:</strong> Mend a tear in clothing (DC 10), or sew a Tiny design (DC 10)</p><p><strong>Craft:</strong> Padded Armor, Basket, Bedroll, Blanket, Fine Clothes, Net, Robe, Rope, Sack, String, Tent, Traveler’s Clothes</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulWoodcarver]{Woodcarver’s Tools} (1 GP)</h3><p><strong>Ability:</strong> Dexterity <strong>Weight:</strong> 5 lb.</p><p><strong>Utilize:</strong> Carve a pattern in wood (DC 10)</p><p><strong>Craft:</strong> Club, Greatclub, Quarterstaff, Ranged weapons (except Pistol, Musket, and Sling), Arcane Focus, Arrows, Bolts, Druidic Focus, Ink Pen, Needles</p>"
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1725911770636
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbEquipment0000.ibFcHkHH1icuT3l8'
+  - sort: 775000
+    name: Other Tools
+    type: text
+    _id: GCvg8n7Q7ltSPRxe
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: "<p>These tools support adventure and other pursuits.</p><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulDisguiseKi]{Disguise Kit} (25 GP)</h3><p><strong>Ability:</strong> Charisma <strong>Weight:</strong> 3 lb.</p><p><strong>Utilize:</strong> Apply makeup (DC 10)</p><p><strong>Craft:</strong> Costume</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulForgeryKit]{Forgery Kit} (15 GP)</h3><p><strong>Ability:</strong> Dexterity <strong>Weight:</strong> 5 lb.</p><p><strong>Utilize:</strong> Mimic 10 or fewer words of someone else’s handwriting (DC 15), or duplicate a wax seal (DC 20)</p><hr /><h3>Gaming Set (Varies)</h3><p><strong>Ability:</strong> Wisdom <strong>Weight:</strong> —</p><p><strong>Utilize:</strong> Discern whether someone is cheating (DC 10), or win the game (DC 20)</p><p><strong>Variants:</strong> @UUID[Compendium.dnd5e.equipment24.Item.phbgstDice000000]{Dice} (1 SP), @UUID[Compendium.dnd5e.equipment24.Item.phbgstDragonches]{dragonchess} (1 GP), @UUID[Compendium.dnd5e.equipment24.Item.phbgstPlayingcar]{playing cards} (5 SP), @UUID[Compendium.dnd5e.equipment24.Item.phbgstThreedrago]{three-dragon ante} (1 GP)</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulHerbalismK]{Herbalism Kit} (5 GP)</h3><p><strong>Ability:</strong> Intelligence <strong>Weight:</strong> 3 lb.</p><p><strong>Utilize:</strong> Identify a plant (DC 10)</p><p><strong>Craft:</strong> Antitoxin, Candle, Healer’s Kit, <em>Potion of Healing</em></p><hr /><h3>Musical Instrument (Varies)</h3><p><strong>Ability:</strong> Charisma <strong>Weight:</strong> Varies</p><p><strong>Utilize:</strong> Play a known tune (DC 10), or improvise a song (DC 15)</p><p><strong>Variants:</strong> @UUID[Compendium.dnd5e.equipment24.Item.phbmusBagpipes00]{Bagpipes} (30 GP, 6 lb.), @UUID[Compendium.dnd5e.equipment24.Item.phbmusDrum000000]{drum} (6 GP, 3 lb.), @UUID[Compendium.dnd5e.equipment24.Item.phbmusDulcimer00]{dulcimer} (25 GP, 10 lb.), @UUID[Compendium.dnd5e.equipment24.Item.phbmusFlute00000]{flute} (2 GP, 1 lb.), @UUID[Compendium.dnd5e.equipment24.Item.phbmusHorn000000]{horn} (3 GP, 2 lb.), @UUID[Compendium.dnd5e.equipment24.Item.phbmusLute000000]{lute} (35 GP, 2 lb.), @UUID[Compendium.dnd5e.equipment24.Item.phbmusLyre000000]{lyre} (30 GP, 2 lb.), @UUID[Compendium.dnd5e.equipment24.Item.phbmusPanflute00]{pan flute} (12 GP, 2 lb.), @UUID[Compendium.dnd5e.equipment24.Item.phbmusShawm00000]{shawm} (2 GP, 1 lb.), @UUID[Compendium.dnd5e.equipment24.Item.phbmusViol000000]{viol} (30 GP, 1 lb.)</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulNavigators]{Navigator’s Tools} (25 GP)</h3><p><strong>Ability:</strong> Wisdom <strong>Weight:</strong> 2 lb.</p><p><strong>Utilize:</strong> Plot a course (DC 10), or determine position by stargazing (DC\_15)</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulPoisonersK]{Poisoner’s Kit} (50 GP)</h3><p><strong>Ability:</strong> Intelligence <strong>Weight:</strong> 2 lb.</p><p><strong>Utilize:</strong> Detect a poisoned object (DC\_10)</p><p><strong>Craft:</strong> Basic Poison</p><hr /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbtulThievesToo]{Thieves’ Tools} (25 GP)</h3><p><strong>Ability:</strong> Dexterity <strong>Weight:</strong> 1 lb.</p><p><strong>Utilize:</strong> Pick a lock (DC 15), or disarm a trap (DC 15)</p>"
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1738363036809
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbEquipment0000.GCvg8n7Q7ltSPRxe'
+  - sort: 350000
+    name: Properties
+    type: text
+    _id: 7qSj8lqMAP0FBNKK
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Here are definitions of the properties in the Properties column of
+        the Weapons table.</p><h3>Ammunition</h3><p>You can use a weapon that
+        has the Ammunition property to make a ranged attack only if you have
+        ammunition to fire from it. The type of ammunition required is specified
+        with the weapon’s range. Each attack expends one piece of ammunition.
+        Drawing the ammunition is part of the attack (you need a free hand to
+        load a one-handed weapon). After a fight, you can spend 1 minute to
+        recover half the ammunition (round down) you used in the fight; the rest
+        is lost.</p><h3>Finesse</h3><p>When making an attack with a Finesse
+        weapon, use your choice of your Strength or Dexterity modifier for the
+        attack and damage rolls. You must use the same modifier for both
+        rolls.</p><h3>Heavy</h3><p>You have Disadvantage on attack rolls with a
+        Heavy weapon if it’s a Melee weapon and your Strength score isn’t at
+        least 13 or if it’s a Ranged weapon and your Dexterity score isn’t at
+        least 13.</p><h3>Light</h3><p>When you take the Attack action on your
+        turn and attack with a Light weapon, you can make one extra attack as a
+        Bonus Action later on the same turn. That extra attack must be made with
+        a different Light weapon, and you don’t add your ability modifier to the
+        extra attack’s damage unless that modifier is negative. For example, you
+        can attack with a Shortsword in one hand and a Dagger in the other using
+        the Attack action and a Bonus Action, but you don’t add your Strength or
+        Dexterity modifier to the damage roll of the Bonus Action unless that
+        modifier is negative.</p><h3>Loading</h3><p>You can fire only one piece
+        of ammunition from a Loading weapon when you use an action, a Bonus
+        Action, or a Reaction to fire it, regardless of the number of attacks
+        you can normally make.</p><h3>Range</h3><p>A Range weapon has a range in
+        parentheses after the Ammunition or Thrown property. The range lists two
+        numbers. The first is the weapon’s normal range in feet, and the second
+        is the weapon’s long range. When attacking a target beyond normal range,
+        you have Disadvantage on the attack roll. You can’t attack a target
+        beyond the long range.</p><h3>Reach</h3><p>A Reach weapon adds 5 feet to
+        your reach when you attack with it, as well as when determining your
+        reach for Opportunity Attacks with it.</p><h3>Thrown</h3><p>If a weapon
+        has the Thrown property, you can throw the weapon to make a ranged
+        attack, and you can draw that weapon as part of the attack. If the
+        weapon is a Melee weapon, use the same ability modifier for the attack
+        and damage rolls that you use for a melee attack with that
+        weapon.</p><h3>Two-Handed</h3><p>A Two-Handed weapon requires two hands
+        when you attack with it.</p><h3>Versatile</h3><p>A Versatile weapon can
+        be used with one or two hands. A damage value in parentheses appears
+        with the property. The weapon deals that damage when used with two hands
+        to make a melee attack.</p><aside class="notable"><h3>Improvised
+        Weapons</h3><p>If you use an object—such as a table leg, frying pan, or
+        bottle—as a makeshift weapon, see “Improvised Weapons” in the rules
+        glossary. Also see those rules if you wield a weapon in an unusual way,
+        such as using a Ranged weapon to make a melee attack.</p></aside>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        order: 800300
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.1
+      createdTime: null
+      modifiedTime: 1745523251715
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbEquipment0000.7qSj8lqMAP0FBNKK'
+  - sort: 375000
+    name: Mastery Properties
+    type: text
+    _id: EOW6yQHLKlXre3jn
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.7MN2Hp5KnjtddH3m
+        inline]</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        order: 800400
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.1
+      createdTime: null
+      modifiedTime: 1726677964391
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbEquipment0000.EOW6yQHLKlXre3jn'
+  - sort: 875000
+    name: Adventuring Gear List
+    type: text
+    _id: xIDcbjgXOndS8zRl
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagAcid0000000]{Acid} (25
+        GP)</h3><p>When you take the Attack action, you can replace one of your
+        attacks with throwing a vial of Acid. Target one creature or object you
+        can see within 20 feet of yourself. The target must succeed on a
+        Dexterity saving throw (DC 8 plus your Dexterity modifier and
+        Proficiency Bonus) or take 2d6 Acid damage.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagAlchemistsF]{Alchemist's
+        Fire} (50 GP)</h3><p>When you take the Attack action, you can replace
+        one of your attacks with throwing a flask of Alchemist’s Fire. Target
+        one creature or object you can see within 20 feet of yourself. The
+        target must succeed on a Dexterity saving throw (DC 8 plus your
+        Dexterity modifier and Proficiency Bonus) or take 1d4 Fire damage and
+        start burning (see the rules glossary).</p><hr /><h3>Ammunition
+        (Varies)</h3><p>Ammunition is required by a weapon that has the
+        Ammunition property. A weapon’s description specifies the type of
+        ammunition used by the weapon. The Ammunition table lists the different
+        types and the amount you get when you buy them. The table also lists the
+        item that is typically used to store each type; storage must be bought
+        separately.</p><table><caption>Ammunition</caption><thead><tr><th><p>Type</p></th><th><p>Amount</p></th><th><p>Storage</p></th><th><p>Weight</p></th><th><p>Cost</p></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbamoArrows0000]{Arrows}</p></td><td><p>20</p></td><td><p>Quiver</p></td><td><p>1
+        lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbamoBolts00000]{Bolts}</p></td><td><p>20</p></td><td><p>Case</p></td><td><p>1½
+        lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbamoBulletsFir]{Bullets,
+        Firearm}</p></td><td><p>10</p></td><td><p>Pouch</p></td><td><p>2
+        lb.</p></td><td><p>3
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbamoBulletsSli]{Bullets,
+        Sling}</p></td><td><p>20</p></td><td><p>Pouch</p></td><td><p>1½
+        lb.</p></td><td><p>4
+        CP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbamoNeedles000]{Needles}</p></td><td><p>50</p></td><td><p>Pouch</p></td><td><p>1
+        lb.</p></td><td><p>1 GP</p></td></tr></tbody></table><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagAntitoxin00]{Antitoxin}
+        (50 GP)</h3><p>As a Bonus Action, you can drink a vial of Antitoxin to
+        gain Advantage on saving throws to avoid or end the Poisoned condition
+        for 1 hour.</p><hr /><h3>Arcane Focus (Varies)</h3><p>An Arcane Focus
+        takes one of the forms in the Focuses table and is bejeweled or carved
+        to channel arcane magic. A Sorcerer, Warlock, or Wizard can use such an
+        item as a Spellcasting Focus.</p><table><caption>Arcane
+        Focuses</caption><thead><tr><th><p>Focus</p></th><th><p>Weight</p></th><th><p>Cost</p></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbafcCrystal000]{Crystal}</p></td><td><p>1
+        lb.</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbafcOrb0000000]{Orb}</p></td><td><p>3
+        lb.</p></td><td><p>20
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbafcRod0000000]{Rod}</p></td><td><p>2
+        lb.</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbafcStaffalsoa]{Staff}
+        (also a
+        @UUID[Compendium.dnd5e.equipment24.Item.phbwepQuartersta]{Quarterstaff})</p></td><td><p>4
+        lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbafcWand000000]{Wand}</p></td><td><p>1
+        lb.</p></td><td><p>10 GP</p></td></tr></tbody></table><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagBackpack000]{Backpack}
+        (2 GP)</h3><p>A Backpack holds up to 30 pounds within 1 cubic foot. It
+        can also serve as a saddlebag.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagBallBearing]{Ball
+        Bearings} (1 GP)</h3><p>As a Utilize action, you can spill Ball Bearings
+        from their pouch. They spread to cover a level, 10-foot-square area
+        within 10 feet of yourself. A creature that enters this area for the
+        first time on a turn must succeed on a DC 10 Dexterity saving throw or
+        have the Prone condition. It takes 10 minutes to recover the Ball
+        Bearings.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagBarrel00000]{Barrel}
+        (2 GP)</h3><p>A Barrel holds up to 40 gallons of liquid or up to 4 cubic
+        feet of dry goods.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagBasket00000]{Basket}
+        (4 SP)</h3><p>A Basket holds up to 40 pounds within 2 cubic feet.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagBedroll0000]{Bedroll}
+        (1 GP)</h3><p>A Bedroll sleeps one Small or Medium creature. While in a
+        Bedroll, you automatically succeed on saving throws against extreme cold
+        (see the <em>Game Master’s Guide</em>).</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagBell0000000]{Bell} (1
+        GP)</h3><p>When rung as a Utilize action, a Bell produces a sound that
+        can be heard up to 60 feet away.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagBlanket0000]{Blanket}
+        (5 SP)</h3><p>While wrapped in a blanket, you have Advantage on saving
+        throws against extreme cold (see the <em>Game Master’s
+        Guide</em>).</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagBlockandTac]{Block
+        and Tackle} (1 GP)</h3><p>A Block and Tackle allows you to hoist up to
+        four times the weight you can normally lift.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagBook0000000]{Book}
+        (25 GP)</h3><p>A Book contains fiction or nonfiction. If you consult an
+        accurate nonfiction Book about its topic, you gain a +5 bonus to
+        Intelligence (Arcana, History, Nature, or Religion) checks you make
+        about that topic.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagBottleGlass]{Bottle,
+        Glass} (2 GP)</h3><p>A Glass Bottle holds up to 11/2 pints.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagBucket00000]{Bucket}
+        (5 CP)</h3><p>A Bucket holds up to half a cubic foot of
+        contents.</p><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagBurglarsPac]{Burglar’s
+        Pack} (16 GP)</h3><p>A Burglar’s Pack contains the following items:
+        Backpack, Ball Bearings, Bell, 10 Candles, Crowbar, Hooded Lantern, 7
+        flasks of Oil, 5 days of Rations, Rope, Tinderbox, and Waterskin.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagCaltrops000]{Caltrops}
+        (1 GP)</h3><p>As a Utilize action, you can spread Caltrops from their
+        bag to cover a 5-foot-square area within 5 feet of yourself. A creature
+        that enters this area for the first time on a turn must succeed on a DC
+        15 Dexterity saving throw or take 1 Piercing damage and have its Speed
+        reduced to 0 until the start of its next turn. It takes 10 minutes to
+        recover the Caltrops.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagCandle00000]{Candle}
+        (1 CP)</h3><p>For 1 hour, a lit Candle sheds Bright Light in a 5-foot
+        radius and Dim Light for an additional 5 feet.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagCaseCrossbo]{Case,
+        Crossbow Bolt} (1 GP)</h3><p>A Crossbow Bolt Case holds up to 20
+        Bolts.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagCaseMaporSc]{Case,
+        Map or Scroll} (1 GP)</h3><p>A Map or Scroll Case holds up to 10 sheets
+        of paper or 5 sheets of parchment.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagChain000000]{Chain}
+        (5 GP)</h3><p>As a Utilize action, you can wrap a Chain around an
+        unwilling creature within 5 feet of yourself that has the Grappled,
+        Incapacitated, or Restrained condition if you succeed on a DC 13
+        Strength (Athletics) check. If the creature’s legs are bound, the
+        creature has the Restrained condition until it escapes. Escaping the
+        Chain requires the creature to make a successful DC 18 Dexterity
+        (Acrobatics) check as an action. Bursting the Chain requires a
+        successful DC 20 Strength (Athletics) check as an action.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagChest000000]{Chest}
+        (5 GP)</h3><p>A Chest holds up to 12 cubic feet of contents.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagClimbersKit]{Climber’s
+        Kit} (25 GP)</h3><p>A Climber’s Kit includes boot tips, gloves, pitons,
+        and a harness. As a Utilize action, you can use the Climber’s Kit to
+        anchor yourself; when you do, you can’t fall more than 25 feet from the
+        anchor point, and you can’t move more than 25 feet from there without
+        undoing the anchor as a Bonus Action.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagClothesFine]{Clothes,
+        Fine} (15 GP)</h3><p>Fine Clothes are made of expensive fabrics and
+        adorned with expertly crafted details. Some events and locations admit
+        only people wearing these clothes.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagClothesTrav]{Clothes,
+        Traveler’s} (2 GP)</h3><p>Traveler’s Clothes are resilient garments
+        designed for travel in various environments.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagComponentPo]{Component
+        Pouch} (25 GP)</h3><p>A Component Pouch is watertight and filled with
+        compartments that hold all the free Material components of your
+        spells.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagCostume0000]{Costume}
+        (5 GP)</h3><p>While wearing a Costume, you have Advantage on any ability
+        check you make to impersonate the person or type of person it
+        represents.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagCrowbar0000]{Crowbar}
+        (2 GP)</h3><p>Using a Crowbar gives you Advantage on Strength checks
+        where the Crowbar’s leverage can be applied.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagDiplomatsPa]{Diplomat’s
+        Pack} (39 GP)</h3><p>A Diplomat’s Pack contains the following items:
+        Chest, Fine Clothes, Ink, 5 Ink Pens, Lamp, 2 Map or Scroll Cases, 4
+        flasks of Oil, 5 sheets of Paper, 5 sheets of Parchment, Perfume, and
+        Tinderbox.</p><hr /><h3>Druidic Focus (Varies)</h3><p>A Druidic Focus
+        takes one of the forms in the Druidic Focuses table and is carved, tied
+        with ribbon, or painted to channel primal magic. A Druid or Ranger can
+        use such an object as a Spellcasting Focus.</p><table><caption>Druidic
+        Focuses</caption><thead><tr><th><p>Focus</p></th><th><p>Weight</p></th><th><p>Cost</p></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbdfcSprigofmis]{Sprig
+        of mistletoe}</p></td><td><p>—</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbdfcWoodenstaf]{Wooden
+        staff} (also a
+        @UUID[Compendium.dnd5e.equipment24.Item.phbwepQuartersta]{Quarterstaff})</p></td><td><p>4
+        lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbdfcYewwand000]{Yew
+        wand}</p></td><td><p>1 lb.</p></td><td><p>10
+        GP</p></td></tr></tbody></table><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagDungeoneers]{Dungeoneer’s
+        Pack} (12 GP)</h3><p>A Dungeoneer’s Pack contains the following items:
+        Backpack, Caltrops, Crowbar, 2 flasks of Oil, 10 days of Rations, Rope,
+        Tinderbox, 10 Torches, and Waterskin.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagEntertainer]{Entertainer’s
+        Pack} (40 GP)</h3><p>An Entertainer’s Pack contains the following items:
+        Backpack, Bedroll, Bell, Bullseye Lantern, 3 Costumes, Mirror, 8 flasks
+        of Oil, 9 days of Rations, Tinderbox, and Waterskin.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagExplorersPa]{Explorer’s
+        Pack} (10 GP)</h3><p>An Explorer’s Pack contains the following items:
+        Backpack, Bedroll, 2 flasks of Oil, 10 days of Rations, Rope, Tinderbox,
+        10 Torches, and Waterskin.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagFlask000000]{Flask}
+        (2 CP)</h3><p>A Flask holds up to 1 pint.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagGrapplingHo]{Grappling
+        Hook} (2 GP)</h3><p>As a Utilize action, you can throw the Grappling
+        Hook at a railing, a ledge, or another catch within 50 feet of yourself,
+        and the hook catches on if you succeed on a DC 13 Dexterity (Acrobatics)
+        check. If you tied a Rope to the hook, you can then climb it.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagHealersKit0]{Healer’s
+        Kit} (5 GP)</h3><p>A Healer’s Kit has ten uses. As a Utilize action, you
+        can expend one of its uses to stabilize an Unconscious creature that has
+        0 Hit Points without needing to make a Wisdom (Medicine) check.</p><hr
+        /><h3>Holy Symbol (Varies)</h3><p>A Holy Symbol takes one of the forms
+        in the Holy Symbol table and is bejeweled or painted to channel divine
+        magic. A Cleric or Paladin can use a Holy Symbol as a Spellcasting
+        Focus.</p><p>The table indicates whether a Holy Symbol needs to be held,
+        worn, or borne on fabric (such as a tabard or banner) or a
+        Shield.</p><table><caption>Holy
+        Symbols</caption><thead><tr><th><p>Symbol</p></th><th><p>Weight</p></th><th><p>Cost</p></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbhsyAmuletworn]{Amulet}
+        (worn or held)</p></td><td><p>1 lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbhsyEmblemborn]{Emblem}
+        (borne on fabric or a Shield)</p></td><td><p>—</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbhsyReliquaryh]{Reliquary}
+        (held)</p></td><td><p>2 lb.</p></td><td><p>5
+        GP</p></td></tr></tbody></table><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagHolyWater00]{Holy
+        Water} (25 GP)</h3><p>When you take the Attack action, you can replace
+        one of your attacks with throwing a flask of Holy Water. Target one
+        creature you can see within 20 feet of yourself. The target must succeed
+        on a Dexterity saving throw (DC 8 plus your Dexterity modifier and
+        Proficiency Bonus) or take 2d8 Radiant damage if it is a Fiend or an
+        Undead.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagHuntingTrap]{Hunting
+        Trap} (5 GP)</h3><p>As a Utilize action, you can set a Hunting Trap,
+        which is a sawtooth steel ring that snaps shut when a creature steps on
+        a pressure plate in the center. The trap is affixed by a heavy chain to
+        an immobile object, such as a tree or a spike driven into the ground. A
+        creature that steps on the plate must succeed on a DC 13 Dexterity
+        saving throw or take 1d4 Piercing damage and have its Speed reduced to 0
+        until the start of its next turn. Thereafter, until the creature breaks
+        free of the trap, its movement is limited by the length of the chain
+        (typically 3 feet). A creature can use its action to make a DC 13
+        Strength (Athletics) check, freeing itself or another creature within
+        its reach on a success. Each failed check deals 1 Piercing damage to the
+        trapped creature.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagInk00000000]{Ink} (10
+        GP)</h3><p>Ink comes in a 1-ounce bottle, which provides enough ink to
+        write about 500 pages.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagInkPen00000]{Ink Pen}
+        (2 CP)</h3><p>Using Ink, an Ink Pen is used to write or draw.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagJug00000000]{Jug} (2
+        CP)</h3><p>A Jug holds up to 1 gallon.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagLadder00000]{Ladder}
+        (1 SP)</h3><p>A Ladder is 10 feet tall. You must climb to move up or
+        down it.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagLamp0000000]{Lamp} (5
+        SP)</h3><p>A Lamp burns Oil as fuel to cast Bright Light in a 15-foot
+        radius and Dim Light for an additional 30 feet.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagLanternBull]{Lantern,
+        Bullseye} (10 GP)</h3><p>A Bullseye Lantern burns Oil as fuel to cast
+        Bright Light in a 60-foot Cone and Dim Light for an additional 60
+        feet.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagLanternHood]{Lantern,
+        Hooded} (5 GP)</h3><p>A Hooded Lantern burns Oil as fuel to cast Bright
+        Light in a 30-foot radius and Dim Light for an additional 30 feet. As a
+        Bonus Action, you can lower the hood, reducing the light to Dim Light in
+        a 5-foot radius, or raise it again.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagLock0000000]{Lock}
+        (10 GP)</h3><p>A Lock comes with a key. Without the key, a creature can
+        use Thieves’ Tools to pick this Lock with a successful DC 15 Dexterity
+        (Sleight of Hand) check.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagMagnifyingG]{Magnifying
+        Glass} (100 GP)</h3><p>A Magnifying Glass grants Advantage on any
+        ability check made to appraise or inspect a highly detailed item.
+        Lighting a fire with a Magnifying Glass requires light as bright as
+        sunlight to focus, tinder to ignite, and about 5 minutes for the fire to
+        ignite.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagManacles000]{Manacles}
+        (2 GP)</h3><p>As a Utilize action, you can use Manacles to bind an
+        unwilling Small or Medium creature within 5 feet of yourself that has
+        the Grappled, Incapacitated, or Restrained condition if you succeed on a
+        DC 13 Dexterity (Sleight of Hand) check. While bound, a creature has
+        Disadvantage on attack rolls, and the creature is Restrained if the
+        Manacles are attached to a chain or hook that is fixed in place.
+        Escaping the Manacles requires a successful DC 20 Dexterity (Sleight of
+        Hand) check as an action. Bursting them requires a successful DC 25
+        Strength (Athletics) check as an action.</p><p>Each set of Manacles
+        comes with a key. Without the key, a creature can use Thieves’ Tools to
+        pick the Manacles’ lock with a successful DC 15 Dexterity (Sleight of
+        Hand) check.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagMap00000000]{Map} (1
+        GP)</h3><p>If you consult an accurate Map, you gain a +5 bonus to Wisdom
+        (Survival) checks you make to find your way in the place represented on
+        it.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagMirror00000]{Mirror}
+        (5 GP)</h3><p>A handheld steel Mirror is useful for personal cosmetics
+        but also for peeking around corners and reflecting light as a
+        signal.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagNet00000000]{Net} (1
+        GP)</h3><p>When you take the Attack action, you can replace one of your
+        attacks with throwing a Net. Target a creature you can see within 15
+        feet of yourself. The target must succeed on a Dexterity saving throw
+        (DC 8 plus your Dexterity modifier and Proficiency Bonus) or have the
+        Restrained condition until it escapes. The target succeeds automatically
+        if it is Huge or larger.</p><p>To escape, the target or a creature
+        within 5 feet of it must take an action to make a DC 10 Strength
+        (Athletics) check, freeing the Restrained creature on a success.
+        Destroying the Net (AC 10; 5 HP; Immunity to Bludgeoning, Poison, and
+        Psychic damage) also frees the target, ending the effect.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagOil00000000]{Oil} (1
+        SP)</h3><p>You can douse a creature, object, or space with Oil or use it
+        as fuel, as detailed below.</p><p><em><strong>Dousing a Creature or an
+        Object.</strong></em> When you take the Attack action, you can replace
+        one of your attacks with throwing an Oil flask. Target one creature or
+        object within 20 feet of yourself. The target must succeed on a
+        Dexterity saving throw (DC 8 plus your Dexterity modifier and
+        Proficiency Bonus) or be covered in oil. If the target takes Fire damage
+        before the oil dries (after 1 minute), the target takes an extra 5 Fire
+        damage from burning oil.</p><p><em><strong>Dousing a
+        Space.</strong></em> You can take the Utilize action to pour an Oil
+        flask on level ground to cover a 5-foot-square area within 5 feet of
+        yourself. If lit, the oil burns until the end of the turn 2 rounds from
+        when the oil was lit (or 12 seconds) and deals 5 Fire damage to any
+        creature that enters the area or ends its turn there. A creature can
+        take this damage only once per
+        turn.</p><p><em><strong>Fuel.</strong></em> Oil serves as fuel for Lamps
+        and Lanterns. Once lit, a flask of Oil burns for 6 hours in a Lamp or
+        Lantern. That duration doesn’t need to be consecutive; you can
+        extinguish the burning Oil (as a Utilize action) and rekindle it again
+        until it has burned for a total of 6 hours.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagPaper000000]{Paper}
+        (2 SP)</h3><p>One sheet of Paper can hold about 250 handwritten
+        words.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagParchment00]{Parchment}
+        (1 SP)</h3><p>One sheet of Parchment can hold about 250 handwritten
+        words.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagPerfume0000]{Perfume}
+        (5 GP)</h3><p>Perfume comes in a 4-ounce vial. For 1 hour after applying
+        Perfume to yourself, you have Advantage on Charisma (Persuasion) checks
+        made to influence an Indifferent Humanoid within 5 feet of
+        yourself.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagPoisonBasic]{Poison,
+        Basic} (100 GP)</h3><p>As a Bonus Action, you can use a vial of Basic
+        Poison to coat one weapon or up to three pieces of ammunition. A
+        creature that takes Piercing or Slashing damage from the poisoned weapon
+        or ammunition takes an extra 1d4 Poison damage. Once applied, the poison
+        retains potency for 1 minute or until its damage is dealt, whichever
+        comes first.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagPole0000000]{Pole} (5
+        CP)</h3><p>A Pole is 10 feet long. You can use it to touch something up
+        to 10 feet away. If you must make a Strength (Athletics) check as part
+        of a High or Long Jump, you can use the Pole to vault, giving yourself
+        Advantage on the check.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagPotIron0000]{Pot,
+        Iron} (2 GP)</h3><p>An Iron Pot holds up to 1 gallon.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagPotionofHea]{Potion
+        of Healing} (50 GP)</h3><p>This potion is a magic item. As a Bonus
+        Action, you can drink it or administer it to another creature within 5
+        feet of yourself. The creature that drinks the magical red fluid in this
+        vial regains 2d4 + 2 Hit Points.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagPouch000000]{Pouch}
+        (5 SP)</h3><p>A Pouch holds up to 6 pounds within one-fifth of a cubic
+        foot.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagPriestsPack]{Priest’s
+        Pack} (33 GP)</h3><p>A Priest’s Pack contains the following items:
+        Backpack, Blanket, Holy Water, Lamp, 7 days of Rations, Robe, and
+        Tinderbox.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagQuiver00000]{Quiver}
+        (1 GP)</h3><p>A Quiver holds up to 20 Arrows.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagRamPortable]{Ram,
+        Portable} (4 GP)</h3><p>You can use a Portable Ram to break down doors.
+        When doing so, you gain a +4 bonus to the Strength check. One other
+        character can help you use the ram, giving you Advantage on this
+        check.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagRations0000]{Rations}
+        (5 SP)</h3><p>Rations consist of travel-ready food, including jerky,
+        dried fruit, hardtack, and nuts. See “Malnutrition” in the rules
+        glossary for the risks of not eating.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagRobe0000000]{Robe} (1
+        GP)</h3><p>A Robe has vocational or ceremonial significance. Some events
+        and locations admit only people wearing a Robe bearing certain colors or
+        symbols.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagRope0000000]{Rope} (1
+        GP)</h3><p>As a Utilize action, you can tie a knot with Rope if you
+        succeed on a DC 10 Dexterity (Sleight of Hand) check. The Rope can be
+        burst with a successful DC 20 Strength (Athletics) check.</p><p>You can
+        bind an unwilling creature with the Rope only if the creature has the
+        Grappled, Incapacitated, or Restrained condition. If the creature’s legs
+        are bound, the creature has the Restrained condition until it escapes.
+        Escaping the Rope requires the creature to make a successful DC 15
+        Dexterity (Acrobatics) check as an action.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagSack0000000]{Sack} (1
+        CP)</h3><p>A Sack holds up to 30 pounds within 1 cubic foot.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagScholarsPac]{Scholar’s
+        Pack} (40 GP)</h3><p>A Scholar’s Pack contains the following items:
+        Backpack, Book, Ink, Ink Pen, Lamp, 10 flasks of Oil, 10 sheets of
+        Parchment, and Tinderbox.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagShovel00000]{Shovel}
+        (2 GP)</h3><p>Working for 1 hour, you can use a Shovel to dig a hole
+        that is 5 feet on each side in soil or similar material.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagSignalWhist]{Signal
+        Whistle} (5 CP)</h3><p>When blown as a Utilize action, a Signal Whistle
+        produces a sound that can be heard up to 600 feet away.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagCantripScro]{Spell
+        Scroll (Cantrip)} (30 GP);<br
+        />@UUID[Compendium.dnd5e.equipment24.Item.phbagSpellScroll]{Spell Scroll
+        (Level 1)} (50 GP)</h3><p>A <em>Spell Scroll</em> (Cantrip) or <em>Spell
+        Scroll</em> (Level 1) is a magic item that bears the words of a cantrip
+        or level 1 spell, respectively, determined by the scroll’s creator. If
+        the spell is on your class’s spell list, you can read the scroll and
+        cast the spell using its normal casting time and without providing any
+        Material components.</p><p>If the spell requires a saving throw or an
+        attack roll, the spell save DC is 13, and the attack bonus is +5. The
+        scroll disintegrates when the casting is completed.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagSpikesIron0]{Spikes,
+        Iron} (1 GP)</h3><p>Iron Spikes come in bundles of ten. As a Utilize
+        action, you can use a blunt object, such as a Light Hammer, to hammer a
+        spike into wood, earth, or a similar material. You can do so to jam a
+        door shut or to then tie a Rope or Chain to the Spike.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagSpyglass100]{Spyglass}
+        (1,000 GP)</h3><p>Objects viewed through a Spyglass are magnified to
+        twice their size.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagString00000]{String}
+        (1 SP)</h3><p>String is 10 feet long. You can tie a knot in it as a
+        Utilize action.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagTent0000000]{Tent} (2
+        GP)</h3><p>A Tent sleeps up to two Small or Medium creatures.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagTinderbox00]{Tinderbox}
+        (5 SP)</h3><p>A Tinderbox is a small container holding flint, fire
+        steel, and tinder (usually dry cloth soaked in light oil) used to kindle
+        a fire. Using it to light a Candle, Lamp, Lantern, or Torch—or anything
+        else with exposed fuel—takes a Bonus Action. Lighting any other fire
+        takes 1 minute.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagTorch000000]{Torch}
+        (1 CP)</h3><p>A Torch burns for 1 hour, casting Bright Light in a
+        20-foot radius and Dim Light for an additional 20 feet. When you take
+        the Attack action, you can attack with the Torch, using it as a Simple
+        Melee weapon. On a hit, the target takes 1 Fire damage.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagVial0000000]{Vial} (1
+        GP)</h3><p>A Vial holds up to 4 ounces.</p><hr
+        /><h3>@UUID[Compendium.dnd5e.equipment24.Item.phbagWaterskin00]{Waterskin}
+        (2 SP)</h3><p>A Waterskin holds up to 4 pints. If you don’t drink
+        sufficient water, you risk dehydration (see the rules glossary).</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        order: 800800
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.1
+      createdTime: null
+      modifiedTime: 1736028366237
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbEquipment0000.xIDcbjgXOndS8zRl'
+  - sort: 775000
+    name: Adventuring Gear
+    type: text
+    _id: fWDbFyRcjabZV9lW
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>The Adventuring Gear table in this section includes gear that
+        adventurers often find useful. These items are described here in
+        alphabetical order, with an item’s price appearing after its name.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        order: 800700
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.1
+      createdTime: null
+      modifiedTime: 1736028334874
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbEquipment0000.fWDbFyRcjabZV9lW'
+  - sort: 875000
+    name: Adventuring Gear Table
+    type: text
+    _id: cfhVAnmKmLQ5RUmD
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <table><caption>Adventuring
+        Gear</caption><thead><tr><th><p>Item</p></th><th><p>Weight</p></th><th><p>Cost</p></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagAcid0000000]{Acid}</p></td><td><p>1
+        lb.</p></td><td><p>25
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagAlchemistsF]{Alchemist’s
+        Fire}</p></td><td><p>1 lb.</p></td><td><p>50
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagAmmunitionV]{Ammunition}</p></td><td><p>Varies</p></td><td><p>Varies</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagAntitoxin00]{Antitoxin}</p></td><td><p>—</p></td><td><p>50
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagArcaneFocus]{Arcane
+        Focus}</p></td><td><p>Varies</p></td><td><p>Varies</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagBackpack000]{Backpack}</p></td><td><p>5
+        lb.</p></td><td><p>2
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagBallBearing]{Ball
+        Bearings}</p></td><td><p>2 lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagBarrel00000]{Barrel}</p></td><td><p>70
+        lb.</p></td><td><p>2
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagBasket00000]{Basket}</p></td><td><p>2
+        lb.</p></td><td><p>4
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagBedroll0000]{Bedroll}</p></td><td><p>7
+        lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagBell0000000]{Bell}</p></td><td><p>—</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagBlanket0000]{Blanket}</p></td><td><p>3
+        lb.</p></td><td><p>5
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagBlockandTac]{Block
+        and Tackle}</p></td><td><p>5 lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagBook0000000]{Book}</p></td><td><p>5
+        lb.</p></td><td><p>25
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagBottleGlass]{Bottle,
+        Glass}</p></td><td><p>2 lb.</p></td><td><p>2
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagBucket00000]{Bucket}</p></td><td><p>2
+        lb.</p></td><td><p>5
+        CP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagBurglarsPac]{Burglar’s
+        Pack}</p></td><td><p>42 lb.</p></td><td><p>16
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagCaltrops000]{Caltrops}</p></td><td><p>2
+        lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagCandle00000]{Candle}</p></td><td><p>—</p></td><td><p>1
+        CP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagCaseCrossbo]{Case,
+        Crossbow Bolt}</p></td><td><p>1 lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagCaseMaporSc]{Case,
+        Map or Scroll}</p></td><td><p>1 lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagChain000000]{Chain}</p></td><td><p>10
+        lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagChest000000]{Chest}</p></td><td><p>25
+        lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagClimbersKit]{Climber’s
+        Kit}</p></td><td><p>12 lb.</p></td><td><p>25
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagClothesFine]{Clothes,
+        Fine}</p></td><td><p>6 lb.</p></td><td><p>15
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagClothesTrav]{Clothes,
+        Traveler’s}</p></td><td><p>4 lb.</p></td><td><p>2
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagComponentPo]{Component
+        Pouch}</p></td><td><p>2 lb.</p></td><td><p>25
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagCostume0000]{Costume}</p></td><td><p>4
+        lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagCrowbar0000]{Crowbar}</p></td><td><p>5
+        lb.</p></td><td><p>2
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagDiplomatsPa]{Diplomat’s
+        Pack}</p></td><td><p>39 lb.</p></td><td><p>39
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagDruidicFocu]{Druidic
+        Focus}</p></td><td><p>Varies</p></td><td><p>Varies</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagDungeoneers]{Dungeoneer’s
+        Pack}</p></td><td><p>55 lb.</p></td><td><p>12
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagEntertainer]{Entertainer’s
+        Pack}</p></td><td><p>58½ lb.</p></td><td><p>40
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagExplorersPa]{Explorer’s
+        Pack}</p></td><td><p>55 lb.</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagFlask000000]{Flask}</p></td><td><p>1
+        lb.</p></td><td><p>2
+        CP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagGrapplingHo]{Grappling
+        Hook}</p></td><td><p>4 lb.</p></td><td><p>2
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagHealersKit0]{Healer’s
+        Kit}</p></td><td><p>3 lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagHolySymbolV]{Holy
+        Symbol}</p></td><td><p>Varies</p></td><td><p>Varies</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagHolyWater00]{Holy
+        Water}</p></td><td><p>1 lb.</p></td><td><p>25
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagHuntingTrap]{Hunting
+        Trap}</p></td><td><p>25 lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagInk00000000]{Ink}</p></td><td><p>—</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagInkPen00000]{Ink
+        Pen}</p></td><td><p>—</p></td><td><p>2
+        CP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagJug00000000]{Jug}</p></td><td><p>4
+        lb.</p></td><td><p>2
+        CP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagLadder00000]{Ladder}</p></td><td><p>25
+        lb.</p></td><td><p>1
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagLamp0000000]{Lamp}</p></td><td><p>1
+        lb.</p></td><td><p>5
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagLanternBull]{Lantern,
+        Bullseye}</p></td><td><p>2 lb.</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagLanternHood]{Lantern,
+        Hooded}</p></td><td><p>2 lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagLock0000000]{Lock}</p></td><td><p>1
+        lb.</p></td><td><p>10
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagMagnifyingG]{Magnifying
+        Glass}</p></td><td><p>—</p></td><td><p>100
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagManacles000]{Manacles}</p></td><td><p>6
+        lb.</p></td><td><p>2
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagMap00000000]{Map}</p></td><td><p>—</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagMirror00000]{Mirror}</p></td><td><p>1/2
+        lb.</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagNet00000000]{Net}</p></td><td><p>3
+        lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagOil00000000]{Oil}</p></td><td><p>1
+        lb.</p></td><td><p>1
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagPaper000000]{Paper}</p></td><td><p>—</p></td><td><p>2
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagParchment00]{Parchment}</p></td><td><p>—</p></td><td><p>1
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagPerfume0000]{Perfume}</p></td><td><p>—</p></td><td><p>5
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagPoisonBasic]{Poison,
+        Basic}</p></td><td><p>—</p></td><td><p>100
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagPole0000000]{Pole}</p></td><td><p>7
+        lb.</p></td><td><p>5
+        CP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagPotIron0000]{Pot,
+        Iron}</p></td><td><p>10 lb.</p></td><td><p>2
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagPotionofHea]{Potion
+        of Healing}</p></td><td><p>1/2 lb.</p></td><td><p>50
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagPouch000000]{Pouch}</p></td><td><p>1
+        lb.</p></td><td><p>5
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagPriestsPack]{Priest’s
+        Pack}</p></td><td><p>29 lb.</p></td><td><p>33
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagQuiver00000]{Quiver}</p></td><td><p>1
+        lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagRamPortable]{Ram,
+        Portable}</p></td><td><p>35 lb.</p></td><td><p>4
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagRations0000]{Rations}</p></td><td><p>2
+        lb.</p></td><td><p>5
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagRobe0000000]{Robe}</p></td><td><p>4
+        lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagRope0000000]{Rope}</p></td><td><p>5
+        lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagSack0000000]{Sack}</p></td><td><p>1/2
+        lb.</p></td><td><p>1
+        CP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagScholarsPac]{Scholar’s
+        Pack}</p></td><td><p>22 lb.</p></td><td><p>40
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagShovel00000]{Shovel}</p></td><td><p>5
+        lb.</p></td><td><p>2
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagSignalWhist]{Signal
+        Whistle}</p></td><td><p>—</p></td><td><p>5
+        CP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagCantripScro]{Spell
+        Scroll (Cantrip)}</p></td><td><p>—</p></td><td><p>30
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagSpellScroll]{Spell
+        Scroll (Level 1)}</p></td><td><p>—</p></td><td><p>50
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagSpikesIron0]{Spikes,
+        Iron}</p></td><td><p>5 lb.</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagSpyglass100]{Spyglass}</p></td><td><p>1
+        lb.</p></td><td><p>1,000
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagString00000]{String}</p></td><td><p>—</p></td><td><p>1
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagTent0000000]{Tent}</p></td><td><p>20
+        lb.</p></td><td><p>2
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagTinderbox00]{Tinderbox}</p></td><td><p>1
+        lb.</p></td><td><p>5
+        SP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagTorch000000]{Torch}</p></td><td><p>1
+        lb.</p></td><td><p>1
+        CP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagVial0000000]{Vial}</p></td><td><p>—</p></td><td><p>1
+        GP</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.equipment24.Item.phbagWaterskin00]{Waterskin}</p></td><td><p>5
+        lb. (full)</p></td><td><p>2 SP</p></td></tr></tbody></table>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726521917895
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbEquipment0000.cfhVAnmKmLQ5RUmD'
+folder: tKJ13QUHYIACXz6y
+flags:
+  dnd5e:
+    type: chapter
+    showPages: true
+    position: 6
+    title: Equipment
+    order: 1
+    navigation:
+      previous: phbFeats00000000
+      next: phbMountsAndVehi
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1724425888925
+  modifiedTime: 1745677865086
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -200000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbEquipment0000'

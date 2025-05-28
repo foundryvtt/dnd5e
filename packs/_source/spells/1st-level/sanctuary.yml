@@ -1,0 +1,117 @@
+_id: gvdA9nPuWLck4tBl
+name: Sanctuary
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You ward a creature within range against attack. Until the spell ends,
+      any creature who targets the warded creature with an attack or a harmful
+      spell must first make a Wisdom saving throw. On a failed save, the
+      creature must choose a new target or lose the attack or spell. This spell
+      doesn't protect the warded creature from area effects, such as the
+      explosion of a Fireball.</p><p>If the warded creature makes an attack or
+      casts a spell that affects an enemy creature, this spell ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: bonus
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: abj
+  materials:
+    value: A small silver mirror
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: sanctuary
+sort: 0
+flags: {}
+img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037362927
+  modifiedTime: 1725992722059
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!gvdA9nPuWLck4tBl'

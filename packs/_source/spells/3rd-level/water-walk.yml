@@ -1,0 +1,115 @@
+_id: YBda6nLKjxdT1LbS
+name: Water Walk
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell grants the ability to move across any liquid surface—such as
+      water, acid, mud, snow, quicksand, or lava—as if it were harmless solid
+      ground (creatures crossing molten lava can still take damage from the
+      heat). Up to ten willing creatures you can see within range gain this
+      ability for the duration.</p><p>If you target a creature submerged in a
+      liquid, the spell carries the target to the surface of the liquid at a
+      rate of 60 feet per round.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '10'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: trs
+  materials:
+    value: A piece of cork
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: water-walk
+sort: 0
+flags: {}
+img: icons/creatures/slimes/slime-movement-swirling-blue.webp
+effects: []
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037358985
+  modifiedTime: 1725992720750
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!YBda6nLKjxdT1LbS'

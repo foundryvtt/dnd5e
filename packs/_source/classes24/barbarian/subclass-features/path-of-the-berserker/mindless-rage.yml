@@ -1,0 +1,98 @@
+_id: phbbrbMindlessRa
+name: Mindless Rage
+type: feat
+img: icons/magic/fire/flame-burning-eye.webp
+system:
+  description:
+    value: >-
+      <p>You have Immunity to the &amp;Reference[Charmed] and
+      &amp;Reference[Frightened] conditions while your Rage is active. If you're
+      Charmed or Frightened when you enter your Rage, the condition ends on
+      you.</p><section class="secret"
+      id="secret-CnCRD0Dyvx4FFGfV"><p><strong>Foundry Note</strong></p><p>This
+      feature includes an Active Effect which grants the Charmed and Frightened
+      condition immunity. It is not applied automatically when you begin your
+      Rage though.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 6
+    repeatable: false
+  properties: []
+  requirements: Path of the Berserker
+  activities: {}
+  enchant: {}
+  identifier: mindless-rage
+effects:
+  - name: Mindless Rage
+    origin: Compendium.dnd5e.classes24.Item.phbbrbMindlessRa
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    flags: {}
+    img: systems/dnd5e/icons/svg/items/feature.svg
+    _id: Y9LOXK6Q4vot2cxi
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.ci.value
+        mode: 2
+        value: charmed
+        priority: null
+      - key: system.traits.ci.value
+        mode: 2
+        value: frightened
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbbrbMindlessRa.Y9LOXK6Q4vot2cxi'
+folder: bEMqmmgGROsTGe0J
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866492370
+  modifiedTime: 1745256759982
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbMindlessRa'

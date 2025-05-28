@@ -1,4 +1,4 @@
-import SystemDataModel from "../../abstract.mjs";
+import SystemDataModel from "../../abstract/system-data-model.mjs";
 
 /**
  * Data model template with item type, subtype and baseItem.

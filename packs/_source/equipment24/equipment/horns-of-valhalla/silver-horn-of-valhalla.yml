@@ -1,0 +1,213 @@
+_id: dmgSilverHornOfV
+name: Silver Horn of Valhalla
+type: equipment
+folder: wIhC5bN9XvOuZMFF
+img: icons/tools/instruments/flute-simple-wood.webp
+system:
+  activities:
+    VvLWZ1hM1xxABTvv:
+      type: summon
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+          max: '5'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '@item.uses.max'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: k8UhBonX9A2LPImO
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '2'
+          type: space
+          special: unoccupied spaces
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: '2'
+          name: ''
+          _id: duDmJXZDPTjLDu4W
+          uuid: Compendium.dnd5e.actors24.Actor.mmBerserker00000
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+      name: Summon Warriors
+      _id: VvLWZ1hM1xxABTvv
+      img: ''
+      appliedEffects:
+        - k8UhBonX9A2LPImO
+  uses:
+    spent: 0
+    recovery:
+      - period: day
+        type: formula
+        formula: '1'
+    max: '7'
+  description:
+    value: >-
+      <p><em>See: @UUID[Compendium.dnd5e.equipment24.Item.dmgHornofValhall]{Horn
+      of Valhalla}</em></p><p><em>Requirement: None</em></p><p><em>Spirits:
+      2</em></p><p>You can take a Magic action to blow this horn. In response,
+      warrior spirits from the plane of Ysgard appear in unoccupied spaces
+      within 60 feet of you. Each spirit uses the
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmBerserker00000]{Berserker}</strong>
+      stat block and returns to Ysgard after 1 hour or when it drops to 0 Hit
+      Points. The spirits look like living, breathing warriors, and they have
+      Immunity to the &amp;Reference[Charmed apply=false] and
+      &amp;Reference[Frightened apply=false] conditions. Once you use the horn,
+      it can't be used again until 7 days have passed.</p><p>If you blow the
+      horn without meeting its requirement, the summoned spirits attack you. If
+      you meet the requirement, they are Friendly to you and your allies and
+      follow your commands.</p>
+    chat: ''
+  identifier: silver-horn-of-valhalla
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: 'Horn of Valhalla: Condition Immunity'
+    img: icons/commodities/treasure/horn-carved-banded.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgSilverHornOfV
+    transfer: false
+    _id: k8UhBonX9A2LPImO
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.ci.value
+        mode: 2
+        value: charmed
+        priority: null
+      - key: system.traits.ci.value
+        mode: 2
+        value: frightened
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The spirits look like living, breathing warriors, and they have
+      Immunity to the &amp;Reference[Charmed apply=false] and
+      &amp;Reference[Frightened apply=false] conditions.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.equipment24.Item.dmgHornofValhall.ActiveEffect.7da5gsAdyzIIfWBL
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730408061245
+      modifiedTime: 1730408061245
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgSilverHornOfV.k8UhBonX9A2LPImO'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703368
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+_key: '!items!dmgSilverHornOfV'

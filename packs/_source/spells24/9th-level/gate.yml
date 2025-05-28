@@ -1,0 +1,292 @@
+name: Gate
+system:
+  description:
+    value: >-
+      <p>You conjure a portal linking an unoccupied space you can see within
+      range to a precise location on a different plane of existence. The portal
+      is a circular opening, which you can make 5 to 20 feet in diameter. You
+      can orient the portal in any direction you choose. The portal lasts for
+      the duration, and the portal's destination is visible through
+      it.</p><p>The portal has a front and a back on each plane where it
+      appears. Travel through the portal is possible only by moving through its
+      front. Anything that does so is instantly transported to the other plane,
+      appearing in the unoccupied space nearest to the portal.</p><p>Deities and
+      other planar rulers can prevent portals created by this spell from opening
+      in their presence or anywhere within their domains.</p><p>When you cast
+      this spell, you can speak the name of a specific creature (a pseudonym,
+      title, or nickname doesn't work). If that creature is on a plane other
+      than the one you are on, the portal opens next to the named creature and
+      transports it to the nearest unoccupied space on your side of the portal.
+      You gain no special power over the creature, and it is free to act as the
+      DM deems appropriate. It might leave, attack you, or help you.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: space
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 9
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a diamond worth 5,000+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    2RkjJD6gPT6nVMUO:
+      type: utility
+      _id: 2RkjJD6gPT6nVMUO
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: wall
+          size: '5'
+          width: '1'
+          height: '5'
+          count: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Small Vertical Portal
+      img: systems/dnd5e/icons/svg/trait-condition-immunities.svg
+      appliedEffects: []
+    rR2zwuw2IFFRTQhi:
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: wall
+          size: '20'
+          width: '1'
+          height: '20'
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Large Vertical Portal
+      _id: rR2zwuw2IFFRTQhi
+      img: systems/dnd5e/icons/svg/trait-condition-immunities.svg
+      appliedEffects: []
+    iUhxzsW99W33R6di:
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: circle
+          size: '5'
+          width: '1'
+          height: '5'
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Small Horizontal Portal
+      _id: iUhxzsW99W33R6di
+      img: systems/dnd5e/icons/svg/activity/summon.svg
+      appliedEffects: []
+    B3wsBcXONvUm9pUR:
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: circle
+          size: '20'
+          width: '1'
+          height: '5'
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Large Horizontal Portal
+      _id: B3wsBcXONvUm9pUR
+      img: systems/dnd5e/icons/svg/activity/summon.svg
+      appliedEffects: []
+  identifier: gate
+_id: phbsplGate000000
+type: spell
+img: icons/magic/symbols/circled-gem-pink.webp
+effects: []
+folder: iG0Zia8jh6uK39TB
+sort: 150000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425956097
+  modifiedTime: 1745256793604
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplGate000000'

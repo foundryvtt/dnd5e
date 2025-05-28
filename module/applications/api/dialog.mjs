@@ -14,27 +14,17 @@ export default class Dialog5e extends Application5e {
     }
   };
 
+  /* -------------------------------------------- */
+
   /** @override */
   static PARTS = {
     content: {
-      template: ""
+      template: "systems/dnd5e/templates/shared/dialog-content.hbs"
     },
     footer: {
       template: "templates/generic/form-footer.hbs"
     }
   };
-
-  /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Form element within the dialog.
-   * @type {HTMLFormElement|void}
-   */
-  get form() {
-    return this.options.tag === "form" ? this.element : this.element.querySelector("form");
-  }
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
@@ -58,6 +48,7 @@ export default class Dialog5e extends Application5e {
    * @protected
    */
   async _prepareContentContext(context, options) {
+    context.content = this.options.content ?? "";
     return context;
   }
 
@@ -75,20 +66,5 @@ export default class Dialog5e extends Application5e {
       ...button, cssClass: button.class
     }));
     return context;
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Listeners and Handlers                */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _attachFrameListeners() {
-    super._attachFrameListeners();
-
-    // Add event listeners to the form manually (see https://github.com/foundryvtt/foundryvtt/issues/11621)
-    if ( this.options.tag !== "form" ) {
-      this.form?.addEventListener("submit", this._onSubmitForm.bind(this, this.options.form));
-      this.form?.addEventListener("change", this._onChangeForm.bind(this, this.options.form));
-    }
   }
 }

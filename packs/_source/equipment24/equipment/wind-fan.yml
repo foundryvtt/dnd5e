@@ -1,0 +1,134 @@
+_id: dmgWindFan000000
+name: Wind Fan
+type: equipment
+img: icons/commodities/treasure/trinket-wing-white.webp
+system:
+  activities:
+    XDZGf9wOd5swcJJ3:
+      type: cast
+      name: Gust of Wind
+      _id: XDZGf9wOd5swcJJ3
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '2'
+        properties: []
+        spellbook: false
+        uuid: Compendium.dnd5e.spells24.Item.phbsplGustofWind
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '5'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon</em></p><p>While holding this fan, you can
+      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplGustofWind]{Gust of Wind}
+      (save DC 13) from it. Each subsequent time the fan is used before the next
+      dawn, it has a cumulative 20 percent chance of not working; if the fan
+      fails to work, it tears into useless, nonmagical
+      tatters.</p><p><strong>Roll for Chance of Not Working:</strong> [[/r
+      1d5cs&gt;@item.uses.spent]]</p><section class="secret"
+      id="secret-hNmHToEJ6Gg4usEf"><p><strong>Foundry Note</strong></p><p>Each
+      of use of Gust of Wind expends a use of this item and is reset at dawn.
+      The inline roll above rolls 1d5 and checks if the value is higher than the
+      number of uses to handle the cumulative 20 percent chance of not working.
+      It will return "1" if it's successful and "0" if it fails.</p></section>
+    chat: ''
+  identifier: wind-fan
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+folder: U4xmShLy19Ry54zl
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729874927255
+  modifiedTime: 1745712704997
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 37950000
+ownership:
+  default: 0
+_key: '!items!dmgWindFan000000'

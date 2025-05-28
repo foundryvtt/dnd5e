@@ -1,0 +1,147 @@
+_id: tEpDmYZNGc9f5OhJ
+name: Greater Invisibility
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You or a creature you touch becomes Invisible until the spell ends.
+      Anything the target is wearing or carrying is Invisible as long as it is
+      on the target's person.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: ill
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: lhYVl4DD9jyS5gcn
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: greater-invisibility
+sort: 0
+flags: {}
+img: icons/magic/air/fog-gas-smoke-swirling-gray.webp
+effects:
+  - name: Greater Invisibility
+    origin: Compendium.dnd5e.spells.Item.tEpDmYZNGc9f5OhJ
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: lhYVl4DD9jyS5gcn
+    changes: []
+    description: >-
+      <p>The target becomes Invisible until the spell ends. Anything the target
+      is wearing or carrying is Invisible as long as it is on the target's
+      person.</p>
+    transfer: false
+    statuses:
+      - invisible
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/air/fog-gas-smoke-swirling-gray.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!tEpDmYZNGc9f5OhJ.lhYVl4DD9jyS5gcn'
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037365994
+  modifiedTime: 1725992723118
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!tEpDmYZNGc9f5OhJ'

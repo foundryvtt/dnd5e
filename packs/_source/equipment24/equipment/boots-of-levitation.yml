@@ -1,0 +1,128 @@
+_id: dmgBootsOfLevita
+name: Boots of Levitation
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/feet/boots-armored-steel-purple.webp
+system:
+  activities:
+    IcLhhO0f7VGtA9ut:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplLevitate00
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: IcLhhO0f7VGtA9ut
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: true
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare (Requires Attunement)</em></p><p>While you wear
+      these boots, you can cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLevitate00]{Levitate}</em>
+      on yourself.</p>
+    chat: ''
+  identifier: boots-of-levitation
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1740680116496
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 3900000
+ownership:
+  default: 0
+_key: '!items!dmgBootsOfLevita'

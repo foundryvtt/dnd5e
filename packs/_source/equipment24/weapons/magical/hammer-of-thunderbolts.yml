@@ -1,0 +1,516 @@
+_id: dmgHammerOfThund
+name: Hammer of Thunderbolts
+type: weapon
+img: icons/weapons/hammers/hammer-double-glowing-yellow.webp
+system:
+  activities:
+    sOG5DXs2HNhx1U5m:
+      type: enchant
+      name: Hammer of Thunderbolts
+      _id: sOG5DXs2HNhx1U5m
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: RSpASIW4HbToM7yC
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - ArjEe6ID0twOfNfA
+            effect: []
+            item: []
+        - _id: NpHh40FxvJqKojsI
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - VwpaQcj4wp0XLazq
+            effect:
+              - dC3xorzL0AAgy7y1
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      img: ''
+      appliedEffects:
+        - RSpASIW4HbToM7yC
+        - NpHh40FxvJqKojsI
+    ArjEe6ID0twOfNfA:
+      type: attack
+      name: Hurl Hammer
+      _id: ArjEe6ID0twOfNfA
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: 'On Hit: [[/save ability=con dc=17]] vs Stunned'
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 4awBYMh85YMXFJDS
+      range:
+        override: true
+        units: ft
+        special: long range of 60 feet
+        value: '20'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creatureOrObject
+          special: Excluding self
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: formula
+            formula: 1d4 + 1
+        max: '5'
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: false
+        parts: []
+      img: ''
+      appliedEffects:
+        - 4awBYMh85YMXFJDS
+    VwpaQcj4wp0XLazq:
+      type: save
+      name: Giants' Bane (On Crit)
+      _id: VwpaQcj4wp0XLazq
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: 'Save failure: Death'
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: 0
+            bonus: '1000'
+            types: []
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '17'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Weapon
+      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepMaul000000]{Maul} or
+      @UUID[Compendium.dnd5e.equipment24.Item.phbwepWarhammer0]{Warhammer}),
+      Legendary (Requires Attunement)</em></p><p>You gain a +1 bonus to attack
+      rolls and damage rolls made with this magic weapon.</p><p>The weapon has 5
+      charges. You can expend 1 charge and make a ranged attack with the weapon,
+      hurling it as if it had the Thrown property with a normal range of 20 feet
+      and a long range of 60 feet. If the attack hits, the weapon unleashes a
+      thunderclap audible out to 300 feet. The target and every creature within
+      30 feet of it other than you must succeed on a DC 17 Constitution saving
+      throw or have the Stunned condition until the end of your next turn.
+      Immediately after hitting or missing, the weapon flies back to your hand.
+      The weapon regains 1d4 + 1 expended charges daily at
+      dawn.</p><p><strong>Giant's Bane.</strong> While you are attuned to the
+      weapon and wearing either a <em>Belt of Giant Strength</em> or
+      <em>Gauntlets of Ogre Power</em> to which you are also attuned, you gain
+      the following benefits:</p><details><summary><strong>Giants'
+      Bane.</strong></summary><p>When you roll a 20 on the d20 for an attack
+      roll made with this weapon against a Giant, the creature must succeed on a
+      DC 17 Constitution saving throw or
+      die.</p></details><details><summary><strong>Might of
+      Giants.</strong></summary><p>The Strength score bestowed by your <em>Belt
+      of Giant Strength</em> or <em>Gauntlets of Ogre Power</em> increases by 4,
+      to a maximum of 30.</p></details><p>
+      @Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: hammer-of-thunderbolts
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: martialM
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: 1
+  properties:
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ''
+  mastery: ''
+effects:
+  - type: enchantment
+    name: Hammer of Thunderbolts
+    img: systems/dnd5e/icons/spell-tiers/spell5.webp
+    disabled: true
+    _id: RSpASIW4HbToM7yC
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Thunderbolts'
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: legendary
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.magicalBonus
+        mode: 4
+        value: '1'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgHammerOfThund
+          caption=false]</p>
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '200000'
+        priority: null
+      - key: system.price.denomination
+        mode: 5
+        value: gp
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/weapons/hammers/hammer-double-glowing-yellow.webp
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730397010444
+      modifiedTime: 1745438836576
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgHammerOfThund.RSpASIW4HbToM7yC'
+  - name: Stunned
+    img: systems/dnd5e/icons/svg/statuses/stunned.svg
+    origin: Compendium.dnd5e.equipment24.Item.dmgHammerOfThund
+    transfer: false
+    _id: 4awBYMh85YMXFJDS
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Stunned apply=false] condition until
+      the end of your next turn.</p>
+    tint: '#ffffff'
+    statuses:
+      - stunned
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730397252747
+      modifiedTime: 1730828665849
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgHammerOfThund.4awBYMh85YMXFJDS'
+  - type: enchantment
+    name: 'Giant''s Bane: Paired Attunement Bonuses'
+    img: icons/svg/upgrade.svg
+    disabled: true
+    _id: NpHh40FxvJqKojsI
+    system: {}
+    changes:
+      - key: name
+        mode: 2
+        value: ', Giant''s Bane'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p><strong>Giant’s Bane.</strong> While you are attuned to the weapon and
+      wearing either a <em>Belt of Giant Strength</em> or <em>Gauntlets of Ogre
+      Power</em> to which you are also attuned, you gain the following
+      benefits:</p><ul><li><p><strong>Giants’ Bane.</strong> When you roll a 20
+      on the d20 for an attack roll made with this weapon against a Giant, the
+      creature must succeed on a DC 17 Constitution saving throw or
+      die.</p></li><li><p><strong>Might of Giants.</strong> The Strength score
+      bestowed by your <em>Belt of Giant Strength</em> or <em>Gauntlets of Ogre
+      Power</em> increases by 4, to a maximum of 30.</p></li></ul>
+    origin: null
+    tint: '#11358d'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730397956984
+      modifiedTime: 1730829063221
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgHammerOfThund.NpHh40FxvJqKojsI'
+  - name: Might of Giants
+    img: icons/skills/melee/hand-grip-hammer-spiked-blue.webp
+    _id: dC3xorzL0AAgy7y1
+    type: base
+    system: {}
+    changes:
+      - key: system.abilities.str.value
+        mode: 2
+        value: '4'
+        priority: null
+      - key: system.abilities.str.value
+        mode: 3
+        value: '30'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The Strength score bestowed by your <em>Belt of Giant Strength</em> or
+      <em>Gauntlets of Ogre Power</em> increases by 4, to a maximum of 30.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730399272124
+      modifiedTime: 1730399751219
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgHammerOfThund.dC3xorzL0AAgy7y1'
+folder: kie870i5kr7yuxO8
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - ArjEe6ID0twOfNfA
+        - VwpaQcj4wp0XLazq
+      effect:
+        - dC3xorzL0AAgy7y1
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712700540
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 8300000
+ownership:
+  default: 0
+_key: '!items!dmgHammerOfThund'

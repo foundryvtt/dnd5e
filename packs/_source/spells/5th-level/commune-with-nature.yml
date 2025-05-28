@@ -1,0 +1,130 @@
+_id: dp6xny4v8PDoIGjh
+name: Commune with Nature
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You briefly become one with nature and gain knowledge of the
+      surrounding territory. In the outdoors, the spell gives you knowledge of
+      the land within 3 miles of you. In caves and other natural underground
+      settings, the radius is limited to 300 feet. The spell doesn't function
+      where nature has been replaced by construction, such as in dungeons and
+      towns.</p><p>You instantly gain knowledge of up to three facts of your
+      choice about any of the following subjects as they relate to the area:</p>
+
+      <ul>
+
+      <li>terrain and bodies of water</li>
+
+      <li>prevalent plants, minerals, animals, or peoples</li>
+
+      <li>powerful celestials, fey, fiends, elementals, or undead</li>
+
+      <li>influence from other planes of existence</li>
+
+      <li>buildings</li>
+
+      </ul>
+
+      <p>For example, you could determine the location of powerful undead in the
+      area, the location of major sources of safe drinking water, and the
+      location of any nearby towns.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: div
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - ritual
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: commune-with-nature
+sort: 0
+flags: {}
+img: icons/magic/nature/leaf-glow-triple-green.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037361455
+  modifiedTime: 1725992721578
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dp6xny4v8PDoIGjh'

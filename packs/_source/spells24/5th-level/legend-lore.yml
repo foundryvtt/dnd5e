@@ -1,0 +1,116 @@
+name: Legend Lore
+system:
+  description:
+    value: >-
+      <p>Name or describe a famous person, place, or object. The spell brings to
+      your mind a brief summary of the significant lore about that famous thing,
+      as described by the DM.</p><p>The lore might consist of important details,
+      amusing revelations, or even secret lore that has never been widely known.
+      The more information you already know about the thing, the more precise
+      and detailed the information you receive is. That information is accurate
+      but might be couched in figurative language or poetry, as determined by
+      the DM.</p><p>If the famous thing you chose isn't actually famous, you
+      hear sad musical notes played on a trombone, and the spell fails.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: div
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: >-
+      incense worth 250+ GP, which the spell consumes, and four ivory strips
+      worth 50+ GP each
+    consumed: true
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: legend-lore
+_id: phbsplLegendLore
+type: spell
+img: icons/sundries/books/book-red-exclamation.webp
+effects: []
+folder: beZ8MTpWY2cMEUlp
+sort: 1300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425960887
+  modifiedTime: 1745256795323
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplLegendLore'

@@ -1,0 +1,105 @@
+_id: SEJmsjkEhdAZ90ki
+name: Countercharm
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>At 6th level, you gain the ability to use musical notes or words of
+      power to disrupt mind-influencing effects. As an action, you can start a
+      performance that lasts until the end of your next turn. During that time,
+      you and any friendly creatures within 30 feet of you have advantage on
+      saving throws against being frightened or charmed. A creature must be able
+      to hear you to gain this benefit. The performance ends early if you are
+      incapacitated or silenced or if you voluntarily end it (no action
+      required).</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Bard 6
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: Creatures must be able to hear you to benefit.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: round
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: countercharm
+flags: {}
+img: icons/magic/sonic/scream-wail-shout-teal.webp
+effects: []
+folder: XEu43QVhYfhUcewt
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037384183
+  modifiedTime: 1725992288407
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!SEJmsjkEhdAZ90ki'

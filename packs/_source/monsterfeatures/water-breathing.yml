@@ -1,0 +1,44 @@
+_id: c4Q6NDCLJSNcNc9T
+name: Water Breathing
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: <p>the [[lookup @name lowercase]] can breathe only underwater.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: Octopus
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: water-breathing
+flags: {}
+img: icons/magic/water/projectile-water-ice-orb.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304973335
+  modifiedTime: 1725992573406
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!c4Q6NDCLJSNcNc9T'

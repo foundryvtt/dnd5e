@@ -1,0 +1,139 @@
+_id: fbcQsOgWCjhEAGY7
+name: Efreeti Bottle
+type: consumable
+img: icons/consumables/potions/potion-flask-corked-orange.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This painted brass bottle weighs 1 pound. When you use an action to
+      remove the stopper, a cloud of thick smoke flows out of the bottle. At the
+      end of your turn, the smoke disappears with a flash of harmless fire, and
+      an @UUID[Compendium.dnd5e.monsters.Actor.LTomFUTBrkRi0Pj5]{Efreeti}
+      appears in an unoccupied space within 30 feet of you.</p>
+
+      <p>The first time the bottle is opened, the GM rolls to determine what
+      happens from the
+      @UUID[Compendium.dnd5e.tables.RollTable.yZMFNfocj5qyVuOC]{Efreeti Bottle}
+      table.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: veryRare
+  identified: true
+  uses:
+    max: '4'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: square
+          size: '10'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: efreeti-bottle
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 7000000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037248493
+  modifiedTime: 1725992533245
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!fbcQsOgWCjhEAGY7'

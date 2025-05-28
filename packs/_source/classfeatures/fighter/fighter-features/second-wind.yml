@@ -1,0 +1,117 @@
+_id: nTjmWbyHweXuIqwc
+name: Second Wind
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You have a limited well of stamina that you can draw on to protect
+      yourself from harm. On your turn, you can use a bonus action to regain hit
+      points equal to 1d10 + your fighter level.</p><p>Once you use this
+      feature, you must finish a short or long rest before you can use it
+      again.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Fighter 1
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: bonus
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      healing:
+        number: 1
+        denomination: 10
+        bonus: '@classes.fighter.levels'
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: ''
+        scaling:
+          mode: whole
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: second-wind
+folder: UqduR3MIQ300WxcN
+sort: 0
+flags: {}
+img: icons/magic/life/heart-glowing-red.webp
+effects: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037388273
+  modifiedTime: 1725992289836
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!nTjmWbyHweXuIqwc'

@@ -1,0 +1,96 @@
+_id: phbPrimalOrderWa
+name: 'Primal Order: Warden'
+type: feat
+img: icons/magic/nature/barrier-shield-wood-vines.webp
+system:
+  description:
+    value: >-
+      <p>Trained for battle, you gain proficiency with Martial weapons and
+      training with Medium armor.</p><section id="secret-hVQSjHcU93Zpf54G"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes an Active Effect which automates the addition of your Martial
+      weapons proficiency and Medium armor training.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: Druid
+  activities: {}
+  enchant: {}
+  identifier: primal-order-warden
+effects:
+  - name: 'Primal Order: Warden'
+    origin: Item.phbPrimalOrderWa
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/items/feature.svg
+    _id: j6MsESItx2TEvDju
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.armorProf.value
+        mode: 2
+        value: '"med"'
+        priority: null
+      - key: system.traits.weaponProf.value
+        mode: 2
+        value: '"mar"'
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classes24.Item.phbdrdPrimalOrde.ActiveEffect.FZ2cZXwJx1f7bUxQ
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbPrimalOrderWa.j6MsESItx2TEvDju'
+folder: EXYmwRGoNyMbByN1
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866366918
+  modifiedTime: 1745256759605
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1050000
+ownership:
+  default: 0
+_key: '!items!phbPrimalOrderWa'

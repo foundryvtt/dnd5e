@@ -1,0 +1,114 @@
+_id: dmgBootsOfStridi
+name: Boots of Striding and Springing
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/feet/boots-collared-leather-brown.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Uncommon (Requires
+      Attunement)</em></p></div><p>While you wear these boots, your Speed
+      becomes 30 feet unless your Speed is higher, and your Speed isn't reduced
+      by you carrying weight in excess of your carrying capacity or wearing
+      Heavy Armor.</p><p>Once on each of your turns, you can jump up to 30 feet
+      by spending only 10 feet of movement.</p>
+    chat: ''
+  identifier: boots-of-striding-and-springing
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Unburdened Movement
+    img: icons/skills/movement/feet-winged-boots-brown.webp
+    _id: XQcjU7ekeFYPMM2R
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 4
+        value: '30'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Your Speed becomes 30 feet unless your Speed is higher, and your Speed
+      isn’t reduced by you carrying weight in excess of your carrying capacity
+      or wearing Heavy Armor.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: 1728681153281
+      modifiedTime: 1728681264276
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgBootsOfStridi.XQcjU7ekeFYPMM2R'
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712698223
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 4100000
+ownership:
+  default: 0
+_key: '!items!dmgBootsOfStridi'

@@ -1,0 +1,300 @@
+_id: dmgOilOfSharpnes
+name: Oil of Sharpness
+type: consumable
+folder: guHYjt0gjPLU2wCs
+img: icons/consumables/potions/vial-ornet-silver-black.webp
+system:
+  description:
+    value: >-
+      <p><em>Potion, Very Rare</em></p><p>One vial of this oil can coat one
+      Melee weapon or twenty pieces of ammunition, but only ammunition and Melee
+      weapons that are nonmagical and deal Slashing or Piercing damage are
+      affected. Applying the oil takes 1 minute, after which the oil magically
+      seeps into whatever it coats, turning the coated weapon into a +3 Weapon
+      or the coated ammunition into +3 Ammunition.</p><p>This clear, gelatinous
+      oil sparkles with tiny, ultrathin silver shards.</p>
+    chat: ''
+  identifier: oil-of-sharpness
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 20000
+    denomination: gp
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties:
+    - mgc
+  capacity:
+    type: weight
+    value: null
+  uses:
+    max: '1'
+    autoDestroy: true
+  type:
+    value: potion
+  activities:
+    qobONpalBAZbVnNS:
+      type: enchant
+      name: Apply Oil to Weapon
+      _id: qobONpalBAZbVnNS
+      sort: 0
+      activation:
+        type: minute
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: qwUNBZRXUAvDcqDw
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories:
+          - simpleM
+          - martialM
+        properties: []
+        type: weapon
+      img: ''
+      appliedEffects:
+        - qwUNBZRXUAvDcqDw
+    MVRpUqiBnbDX0snB:
+      type: enchant
+      name: Apply Oil to Ammunition
+      sort: 0
+      activation:
+        type: minute
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: qwUNBZRXUAvDcqDw
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories:
+          - ammo
+        properties: []
+        type: consumable
+      _id: MVRpUqiBnbDX0snB
+      img: ''
+      appliedEffects:
+        - qwUNBZRXUAvDcqDw
+effects:
+  - type: enchantment
+    name: Oiled
+    img: icons/magic/symbols/runes-etched-steel-blade.webp
+    disabled: true
+    _id: qwUNBZRXUAvDcqDw
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} Oiled'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: '{}<p>This item has been oiled and is +3 weapon for the next hour.</p>'
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.magicalBonus
+        mode: 4
+        value: '3'
+        priority: null
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730491842978
+      modifiedTime: 1731107177415
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgOilOfSharpnes.qwUNBZRXUAvDcqDw'
+  - type: enchantment
+    name: Oiled Ammunition
+    img: icons/magic/symbols/runes-etched-steel-blade.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} Oiled'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: '{}<p>This ammunition has been oiled and is a +3 for the next hour.</p>'
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.magicalBonus
+        mode: 4
+        value: '3'
+        priority: null
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730735237175
+      modifiedTime: 1731107171216
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: RcpoKs7oJMugW7ib
+    _key: '!items.effects!dmgOilOfSharpnes.RcpoKs7oJMugW7ib'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712701671
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1300000
+ownership:
+  default: 0
+_key: '!items!dmgOilOfSharpnes'

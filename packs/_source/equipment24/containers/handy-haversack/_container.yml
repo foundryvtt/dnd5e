@@ -1,0 +1,80 @@
+_id: dmgHewardsHandyH
+name: Handy Haversack
+type: container
+folder: CXJsbhXV9uLcWcfH
+img: icons/containers/bags/pack-leather-tan.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare</em></p><p>This backpack has a central pouch
+      and two side pouches, each of which is an extradimensional space. Each
+      side pouch can hold up to 200 pounds of material, not exceeding a volume
+      of 25 cubic feet. The central pouch can hold up to 500 pounds of material,
+      not exceeding a volume of 64 cubic feet. The haversack always weighs 5
+      pounds, regardless of its contents.</p><p>Retrieving an item from the
+      haversack requires a Utilize action or a Bonus Action (your choice). When
+      you reach into the haversack for a specific item, the item is always
+      magically on top.</p><p>If any of its pouches is overloaded, pierced, or
+      torn, the haversack ruptures and is destroyed. If the haversack is
+      destroyed, its contents are lost forever, although an Artifact always
+      turns up again somewhere. If the haversack is turned inside out, its
+      contents spill forth unharmed, and the haversack must be put right before
+      it can be used again.</p><p>Each pouch of the haversack holds enough air
+      for 10 minutes of breathing, divided by the number of breathing creatures
+      inside.</p><p>Placing the haversack inside an extradimensional space
+      created by a @UUID[Compendium.dnd5e.equipment24.Item.dmgBagOfHolding0]{Bag
+      of Holding},
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgPortableHole0]{Portable Hole},
+      or similar item instantly destroys both items and opens a gate to the
+      Astral Plane. The gate originates where the one item was placed inside the
+      other. Any creature within 10 feet of the gate and not behind Total Cover
+      is sucked through it and deposited in a random location on the Astral
+      Plane. The gate then closes. The gate is one-way only and can't be
+      reopened.</p>
+    chat: ''
+  identifier: handy-haversack
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties: []
+  capacity:
+    type: weight
+    value: null
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712700688
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 500000
+ownership:
+  default: 0
+_key: '!items!dmgHewardsHandyH'

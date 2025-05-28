@@ -1,0 +1,229 @@
+_id: eGMhwmuleAM46C6L
+name: Prismatic Spray
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Eight multicolored rays of light flash from your hand. Each ray is a
+      different color and has a different power and purpose. Each creature in a
+      60-foot cone must make a Dexterity saving throw. For each target, roll a
+      d8 to determine which color ray affects
+      it.</p><ol><li><strong>Red</strong>. The target takes 10d6 fire damage on
+      a failed save, or half as much damage on a successful
+      one.</li><li><strong>Orange</strong>. The target takes 10d6 acid damage on
+      a failed save, or half as much damage on a successful
+      one.</li><li><strong>Yellow</strong>. The target takes 10d6 lightning
+      damage on a failed save, or half as much damage on a successful
+      one.</li><li><strong>Green</strong>. The target takes 10d6 poison damage
+      on a failed save, or half as much damage on a successful
+      one.</li><li><strong>Blue</strong>. The target takes 10d6 cold damage on a
+      failed save, or half as much damage on a successful
+      one.</li><li><strong>Indigo</strong>. On a failed save, the target is
+      &amp;Reference[Restrained]. It must then make a Constitution saving throw
+      at the end of each of its turns. If it successfully saves three times, the
+      spell ends. If it fails its save three times, it permanently turns to
+      stone and is subjected to the &amp;Reference[Petrified] condition. The
+      successes and failures don't need to be consecutive; keep track of both
+      until the target collects three of a
+      kind.</li><li><strong>Violet</strong>. On a failed save, the target is
+      &amp;Reference[Blinded]. It must then make a Wisdom saving throw at the
+      start of your next turn. A successful save ends the blindness. If it fails
+      that save, the creature is transported to another plane of existence of
+      the DM's choosing and is no longer Blinded. (Typically, a creature that is
+      on a plane that isn't its home plane is banished home, while other
+      creatures are usually cast into the Astral or Ethereal
+      planes.)</li><li><strong>Special</strong>. The target is struck by two
+      rays. Roll twice more, rerolling any 8.</li></ol>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cone
+      size: '60'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 7
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 6bNxvdxYMSZK9N0A
+          onSave: false
+        - _id: Y5OA9lzI3tMHA3KF
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 10
+            denomination: 6
+            bonus: ''
+            types: []
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: prismatic-spray
+sort: 0
+flags: {}
+img: icons/magic/light/projectile-beams-salvo-yellow.webp
+effects:
+  - name: Prismatic Spray (indigo)
+    origin: Compendium.dnd5e.spells.Item.eGMhwmuleAM46C6L
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: 6bNxvdxYMSZK9N0A
+    changes: []
+    description: >-
+      <p>The target is Restrained. It must then make a Constitution saving throw
+      at the end of each of its turns. If it successfully saves three times, the
+      spell ends. If it fails its save three times, it permanently turns to
+      stone and is subjected to the Petrified condition.</p>
+    transfer: false
+    statuses:
+      - restrained
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/light/projectile-beams-salvo-yellow.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!eGMhwmuleAM46C6L.6bNxvdxYMSZK9N0A'
+  - name: Prismatic Spray (violet)
+    origin: Compendium.dnd5e.spells.Item.eGMhwmuleAM46C6L
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: Y5OA9lzI3tMHA3KF
+    changes: []
+    description: >-
+      <p>The target is Blinded. It must then make a Wisdom saving throw at the
+      start of the caster's next turn. A successful save ends the blindness. If
+      it fails that save, the creature is transported to another plane of
+      existence and is no longer Blinded.</p>
+    transfer: false
+    statuses:
+      - blinded
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/light/projectile-beams-salvo-yellow.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!eGMhwmuleAM46C6L.Y5OA9lzI3tMHA3KF'
+folder: irCSpQWIMtp978TA
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037361670
+  modifiedTime: 1725992721644
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!eGMhwmuleAM46C6L'

@@ -1,0 +1,104 @@
+_id: kaHcUGiwi8AtfZIm
+name: Primeval Awareness
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 3rd level, you can use your action and expend one ranger
+      spell slot to focus your awareness on the region around you. For 1 minute
+      per level of the spell slot you expend, you can sense whether the
+      following types of creatures are present within 1 mile of you (or within
+      up to 6 miles if you are in your favored terrain): aberrations,
+      celestials, dragons, elementals, fey, fiends, and undead. This feature
+      doesn't reveal the creatures' location or number.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Ranger 3
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: It also expends a spell slot; the slot level dictates duration.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: spec
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '1'
+        units: mi
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: primeval-awareness
+flags: {}
+img: icons/magic/perception/eye-slit-pink.webp
+effects: []
+folder: S0rKJuStpCBy0hAf
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037387640
+  modifiedTime: 1725992289599
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!kaHcUGiwi8AtfZIm'

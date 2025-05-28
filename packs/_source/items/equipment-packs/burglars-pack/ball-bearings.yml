@@ -1,0 +1,133 @@
+name: Ball Bearings
+type: consumable
+img: icons/weapons/ammunition/shot-round-brown.webp
+system:
+  description:
+    value: >-
+      <p>As an action, you can spill these 1,000 tiny metal balls from their
+      pouch to cover a level area 10 feet square. A creature moving across the
+      covered area must succeed on a DC 10 Dexterity saving throw or fall prone.
+      A creature moving through the area at half speed doesn't need to make the
+      saving throw.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1000
+  weight:
+    value: 0.002
+    units: lb
+  price:
+    value: 0.1
+    denomination: cp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  container: xsB7Y2WI476kvOt4
+  properties: []
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: square
+          size: '10'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '10'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: ball-bearings
+effects: []
+folder: Dx3K2y0J1wJUPP9m
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037107981
+  modifiedTime: 1725992486535
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_id: 79zrBwqEp2MCJ1Bl
+sort: 100000
+ownership:
+  default: 0
+_key: '!items!79zrBwqEp2MCJ1Bl'

@@ -1,0 +1,180 @@
+name: Alchemist's Fire
+system:
+  description:
+    value: >-
+      <p>When you take the Attack action, you can replace one of your attacks
+      with throwing a flask of Alchemist's Fire. Target one creature or object
+      you can see within 20 feet of yourself. The target must succeed on a
+      Dexterity saving throw (DC 8 plus your Dexterity modifier and Proficiency
+      Bonus) or take [[/damage 1d4 type=fire]] damage and start
+      &amp;Reference[burning].</p>
+    chat: ''
+  price:
+    value: 50
+    denomination: gp
+  source:
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  uses:
+    max: '1'
+    autoDestroy: true
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: potion
+    subtype: ''
+  magicalBonus: null
+  properties: []
+  activities:
+    NVclbplLi9uFhKQE:
+      type: save
+      _id: NVclbplLi9uFhKQE
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: HL12olRyPOCmmMQ5
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '20'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creatureOrObject
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 4
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: dex
+          formula: ''
+      name: ''
+  identifier: alchemists-fire
+_id: phbagAlchemistsF
+type: consumable
+folder: uDk4FBYfcP2JnX6t
+img: icons/consumables/potions/bottle-round-label-cork-yellow.webp
+effects:
+  - name: Burning.
+    img: icons/consumables/potions/bottle-round-label-cork-yellow.webp
+    origin: Compendium.dnd5e.equipment24.Item.phbagAlchemistsF
+    transfer: false
+    _id: HL12olRyPOCmmMQ5
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: '<p>Rules reference: &amp;Reference[burning].</p>'
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbagAlchemistsF.HL12olRyPOCmmMQ5'
+sort: 200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425904945
+  modifiedTime: 1745256810720
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagAlchemistsF'

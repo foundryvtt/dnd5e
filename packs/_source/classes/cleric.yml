@@ -1,0 +1,485 @@
+_id: tlwBnN8GmqJcTgub
+name: Cleric
+type: class
+img: icons/magic/life/ankh-gold-blue.webp
+system:
+  description:
+    value: >-
+      <p>As a cleric, you gain the following class features.</p><h3>Hit
+      Points</h3><p><strong>Hit Dice:</strong> 1d8 per cleric level<br
+      /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution
+      modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5) +
+      your Constitution modifier per cleric level after
+      1st</p><h3>Proficiencies</h3><p><strong>Armor:</strong> Light armor,
+      medium armor, shields<br /><strong>Weapons:</strong> Simple weapons<br
+      /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong>
+      Wisdom, Charisma<br /><strong>Skills:</strong> Choose two from History,
+      Insight, Medicine, Persuasion, and Religion</p><h1>Cleric
+      Advancement</h1><table><thead><tr><td>Level</td><td>Proficiency
+      Bonus</td><td>Features</td></tr></thead><tbody><tr><td>1st</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.v4gKwLhAq9vuqza7]{Spellcasting}
+      , @UUID[Compendium.dnd5e.classfeatures.Item.x637K2Icp2ZFM1TB]{Divine
+      Domain}</td></tr><tr><td>2nd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.YpiLQEKGalROn7iJ]{Channel
+      Divinity (1/rest)}, Divine Domain
+      feature</td></tr><tr><td>3rd</td><td>+2</td><td>2nd Level Spell
+      Slot</td></tr><tr><td>4th</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>5th</td><td>+3</td><td>3rd Level Spell
+      Slot, @UUID[Compendium.dnd5e.classfeatures.Item.NMy4piwXIpLjYbRE]{Destroy
+      Undead (CR
+      1/2)}</td></tr><tr><td>6th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.YpiLQEKGalROn7iJ]{Channel
+      Divinity (2/rest)}, Divine Domain
+      feature</td></tr><tr><td>7th</td><td>+3</td><td>4th Level Spell
+      Slot</td></tr><tr><td>8th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{ASI},
+      @UUID[Compendium.dnd5e.classfeatures.Item.NMy4piwXIpLjYbRE]{Destroy Undead
+      (CR 1)}, Divine Domain feature</td></tr><tr><td>9th</td><td>+4</td><td>5th
+      Level Spell
+      Slot</td></tr><tr><td>10th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.eVXqHn0ojWrEuYGU]{Divine
+      Intervention}</td></tr><tr><td>11th</td><td>+4</td><td>6th Level Spell
+      Slot, @UUID[Compendium.dnd5e.classfeatures.Item.NMy4piwXIpLjYbRE]{Destroy
+      Undead (CR
+      2)}</td></tr><tr><td>12th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>13th</td><td>+5</td><td>7th Level
+      Spell
+      Slot</td></tr><tr><td>14th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.NMy4piwXIpLjYbRE]{Destroy
+      Undead (CR 3)}</td></tr><tr><td>15th</td><td>+5</td><td>8th Level Spell
+      Slot</td></tr><tr><td>16th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score Improvement}</td></tr><tr><td>17th</td><td>+6</td><td>9th Level
+      Spell Slot,
+      @UUID[Compendium.dnd5e.classfeatures.Item.NMy4piwXIpLjYbRE]{Destroy Undead
+      (CR 4)}, Divine Domain
+      feature</td></tr><tr><td>18th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.YpiLQEKGalROn7iJ]{Channel
+      Divinity
+      (3/rest)}</td></tr><tr><td>19th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+      Score
+      Improvement}</td></tr><tr><td>20th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.eVXqHn0ojWrEuYGU]{Divine
+      Intervention (Automatic Success)}</td></tr></tbody></table><h1>Divine
+      Domains</h1><p>@UUID[Compendium.dnd5e.subclasses.Item.H3RYLGqCiqm8BP3q]{Life
+      Domain}</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: cleric
+  levels: 1
+  hitDice: d8
+  hitDiceUsed: 0
+  advancement:
+    - type: HitPoints
+      configuration: {}
+      value: {}
+      title: Hit Points
+      icon: systems/dnd5e/icons/svg/hit-points.svg
+      _id: XqASCKr26BUOObF5
+    - _id: vLDkTMgod0IS4HJn
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - armor:lgt
+          - armor:med
+          - armor:shl
+        choices: []
+      level: 1
+      title: ''
+      value:
+        chosen: []
+    - _id: uyLXlhMnjMSHHdbs
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - weapon:sim
+        choices: []
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - _id: bcFNu9fM4o5He4J7
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - saves:wis
+          - saves:cha
+        choices: []
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - _id: 6YQrE9NkjbvhfN8F
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:his
+              - skills:ins
+              - skills:med
+              - skills:per
+              - skills:rel
+      level: 1
+      title: ''
+      classRestriction: primary
+      value:
+        chosen: []
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.v4gKwLhAq9vuqza7
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.x637K2Icp2ZFM1TB
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 1
+      title: Features
+      _id: axeH6FmdvAfb3TnK
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.YpiLQEKGalROn7iJ
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.r91UIgwFdHwkXdia
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 2
+      title: Features
+      _id: PpE7QUl3ZRdIwbSW
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.NMy4piwXIpLjYbRE
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 5
+      title: Features
+      _id: PwcMUZPMhGxn6JnJ
+    - type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.eVXqHn0ojWrEuYGU
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 10
+      title: Features
+      _id: RAGsl9ESVLpLfX5u
+    - type: ScaleValue
+      configuration:
+        identifier: channel-divinity
+        type: number
+        distance:
+          units: ''
+        scale:
+          '2':
+            value: 1
+          '6':
+            value: 2
+          '18':
+            value: 3
+      value: {}
+      title: Channel Divinity Uses
+      _id: oOvaOWkQdMJHHwzo
+    - type: ScaleValue
+      configuration:
+        identifier: destroy-undead
+        type: cr
+        distance:
+          units: ''
+        scale:
+          '5':
+            value: 0.5
+          '8':
+            value: 1
+          '11':
+            value: 2
+          '14':
+            value: 3
+          '17':
+            value: 4
+      value: {}
+      title: Destroy Undead CR
+      _id: bRWP2zsP33jeZcUY
+    - type: ScaleValue
+      configuration:
+        identifier: cantrips-known
+        type: number
+        distance:
+          units: ''
+        scale:
+          '1':
+            value: 3
+          '4':
+            value: 4
+          '10':
+            value: 5
+      value: {}
+      title: Cantrips Known
+      _id: b6vbDSfWTwxqyTke
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 4
+      title: Ability Score Improvement
+      _id: PrfXQ3yQP9js943H
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 8
+      title: Ability Score Improvement
+      _id: FLozwaTlMVqZKbaN
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 12
+      title: Ability Score Improvement
+      _id: yplB3bqCjEXkNAAq
+    - type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 16
+      title: Ability Score Improvement
+      _id: LoImJ16J7Sn1HXi2
+    - _id: puDaUsYrlks0z5gm
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 19
+      title: ''
+    - _id: 8k7cukgzwwl67h6c
+      type: Subclass
+      configuration: {}
+      value: {}
+      level: 1
+      title: Divine Domain
+  spellcasting:
+    progression: full
+    ability: wis
+    preparation:
+      formula: '@abilities.wis.mod + @classes.cleric.levels'
+  startingEquipment:
+    - type: OR
+      _id: 8YSDVdYvwcM9CZyn
+      group: ''
+      sort: 100000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.Ajyq6nGwF7FtLhDQ
+      _id: lomxiG4seGEODc0X
+      group: 8YSDVdYvwcM9CZyn
+      sort: 600000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.F0Df164Xv1gWcYt0
+      _id: oPqhjxGI22oLSbJU
+      group: 8YSDVdYvwcM9CZyn
+      sort: 700000
+      requiresProficiency: true
+    - type: OR
+      _id: kQ5WDegIiIjZ80F2
+      group: ''
+      sort: 200000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.XmnlF5fgIO3tg6TG
+      _id: pcfTItJqTlcXtDlH
+      group: kQ5WDegIiIjZ80F2
+      sort: 800000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.WwdpHLXGX5r8uZu5
+      _id: kSPggXc9mzhJoGt8
+      group: kQ5WDegIiIjZ80F2
+      sort: 900000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.rLMflzmxpe8JGTOA
+      _id: 0pHFdJtUUguvm8Ew
+      group: kQ5WDegIiIjZ80F2
+      sort: 1000000
+      requiresProficiency: true
+    - type: OR
+      _id: PxjFEJ3rFboYUkXJ
+      group: ''
+      sort: 300000
+      requiresProficiency: false
+    - type: AND
+      _id: JTXoh1m5OJ6A1Nsn
+      group: PxjFEJ3rFboYUkXJ
+      sort: 1100000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.ddWvQRLmnnIS0eLF
+      _id: mzsGhss9eFfp8Vr8
+      group: JTXoh1m5OJ6A1Nsn
+      sort: 1200000
+      requiresProficiency: false
+    - type: linked
+      count: 20
+      key: Compendium.dnd5e.items.Item.SItCnYBqhzqBoaWG
+      _id: pTcJ5DdfXPpuzG03
+      group: JTXoh1m5OJ6A1Nsn
+      sort: 1300000
+      requiresProficiency: false
+    - type: weapon
+      count: null
+      key: sim
+      _id: s7Vkg77JWlGWY1B7
+      group: PxjFEJ3rFboYUkXJ
+      sort: 1400000
+      requiresProficiency: false
+    - type: OR
+      _id: RtqG5F8t7K6hJSlc
+      group: ''
+      sort: 400000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.6BybWxK5GcEzqcOV
+      _id: pwn69DG4Fa6yosHE
+      group: RtqG5F8t7K6hJSlc
+      sort: 1500000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.8KWz5DJbWUpNWniP
+      _id: 3bdc9v8f5R9Hy23e
+      group: RtqG5F8t7K6hJSlc
+      sort: 1600000
+      requiresProficiency: false
+    - type: AND
+      _id: M69HsHoj2jxdBLBU
+      group: ''
+      sort: 500000
+      requiresProficiency: false
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.items.Item.sSs3hSzkKBMNBgTs
+      _id: SUjHLQ6oJoxSW0CE
+      group: M69HsHoj2jxdBLBU
+      sort: 1700000
+      requiresProficiency: false
+    - type: focus
+      count: null
+      key: holy
+      _id: GGBx54GwIwyvPvA1
+      group: M69HsHoj2jxdBLBU
+      sort: 1800000
+      requiresProficiency: false
+  wealth: 5d4 * 10
+  primaryAbility:
+    value: []
+    all: true
+effects: []
+folder: m1NqJdyiVSU7ghF5
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037371340
+  modifiedTime: 1725992280830
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!tlwBnN8GmqJcTgub'

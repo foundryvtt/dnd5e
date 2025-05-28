@@ -1,0 +1,117 @@
+name: Create or Destroy Water
+system:
+  description:
+    value: >-
+      <p>You do one of the following:</p><p><strong>Create Water.</strong> You
+      create up to 10 gallons of clean water within range in an open container.
+      Alternatively, the water falls as rain in a 30-foot Cube within range,
+      extinguishing exposed flames there.</p><p><strong>Destroy Water.</strong>
+      You destroy up to 10 gallons of water in an open container within range.
+      Alternatively, you destroy fog in a 30-foot Cube within
+      range.</p><p><strong>Using a Higher-Level Spell Slot.</strong> You create
+      or destroy 10 additional gallons of water, or the size of the Cube
+      increases by 5 feet, for each spell slot level above 1.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cube
+      size: 25 + 5 * @item.level
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a mix of water and sand
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: 10 * @item.level
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: create-or-destroy-water
+_id: phbsplCreateorDe
+type: spell
+img: icons/magic/water/water-hand.webp
+effects: []
+folder: pBaAAtXBCq9FVEnL
+sort: 4400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425948298
+  modifiedTime: 1745256789649
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplCreateorDe'

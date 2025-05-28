@@ -1,0 +1,249 @@
+_id: phbWarlock000000
+name: Warlock
+pages:
+  - sort: 100000
+    name: Warlock
+    type: class
+    _id: znue6EaGDDXgeQb0
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbwlkWarlock000
+      description:
+        value: >-
+          <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbwlkWarlock000
+          inline classes="free-rules-embed"]</p> <h2>Becoming a Warlock
+          …</h2><h3>As a Level 1 Character</h3><ul><li><p>Gain all the traits in
+          the Core Warlock Traits table.</p></li><li><p>Gain the Warlock's level
+          1 features, which are listed in the Warlock Features
+          table.</p></li></ul><h3>As a Multiclass Character</h3><ul><li><p>Gain
+          the following traits from the Core Warlock Traits table: Hit Point Die
+          and training with Light armor.</p></li><li><p>Gain the Warlock's level
+          1 features, which are listed in the Warlock Features table. See the
+          multiclassing rules in chapter 2 to determine your available spell
+          slots.</p></li></ul>
+        additionalHitPoints: ''
+        additionalTraits: ''
+        additionalEquipment: ''
+        subclass: >-
+          <p>A Warlock subclass is a specialization that grants you features at
+          certain levels, as specified in the subclass. The next page presents
+          the  @UUID[Compendium.dnd5e.classes24.Item.phbwlkFiendPatro]{Fiend
+          Patron} subclass.</p>
+      subclassItems: []
+      subclassHeader: ''
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745514948269
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbWarlock000000.znue6EaGDDXgeQb0'
+  - sort: 400000
+    name: Fiend Patron
+    type: subclass
+    _id: 4km6CWhHArWi0klF
+    system:
+      item: Compendium.dnd5e.classes24.Item.phbwlkFiendPatro
+      description:
+        value: >-
+          <blockquote><p>Make a Deal with the Lower
+          Planes</p></blockquote><p>Your pact draws on the Lower Planes, the
+          realms of perdition. You might forge a bargain with a demon lord such
+          as Demogorgon or Orcus; an archdevil such as Asmodeus; or a pit fiend,
+          balor, yugoloth, or night hag that is especially mighty. That patron's
+          aims are evil—the corruption or destruction of all things, ultimately
+          including you—and your path is defined by the extent to which you
+          strive against those aims
+          (@UUID[Compendium.dnd5e.classes24.Item.phbwlkFiendPatro]{Fiend Patron}
+          subclass).</p>
+      style: ''
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1735934892846
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbWarlock000000.4km6CWhHArWi0klF'
+  - sort: 600000
+    name: Eldritch Invocation Options
+    type: text
+    _id: FA4hxx49eazhISIt
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <div
+        class="hide-secrets"><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvAgonizingB]{Agonizing
+        Blast}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvAgonizingB
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvArmorofSha]{Armor of
+        Shadows}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvArmorofSha
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvAscendantS]{Ascendant
+        Step}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvAscendantS
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvDevilsSigh]{Devil's
+        Sight}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvDevilsSigh
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvDevouringB]{Devouring
+        Blade}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvDevouringB
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvEldritchMi]{Eldritch
+        Mind}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvEldritchMi
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvEldritchSm]{Eldritch
+        Smite}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvEldritchSm
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvEldritchSp]{Eldritch
+        Spear}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvEldritchSp
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvFiendishVi]{Fiendish
+        Vigor}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvFiendishVi
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvGazeofTwoM]{Gaze of
+        Two
+        Minds}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvGazeofTwoM
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvGiftoftheD]{Gift of
+        the
+        Depths}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvGiftoftheD
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvGiftoftheP]{Gift of
+        the
+        Protectors}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvGiftoftheP
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvInvestment]{Investment
+        of the Chain
+        Master}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvInvestment
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvLessonsoft]{Lessons of
+        the First
+        Ones}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvLessonsoft
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvLifedrinke]{Lifedrinker}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvLifedrinke
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvMaskofMany]{Mask of
+        Many
+        Faces}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvMaskofMany
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvMasterofMy]{Master of
+        Myriad
+        Forms}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvMasterofMy
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvMistyVisio]{Misty
+        Visions}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvMistyVisio
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvOnewithSha]{One with
+        Shadows}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvOnewithSha
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvOtherworld]{Otherworldly
+        Leap}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvOtherworld
+        cite=false caption=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvPactBlade0]{Pact of
+        the
+        Blade}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvPactBlade0
+        caption=false cite=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvPactChain0]{Pact of
+        the
+        Chain}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvPactChain0
+        caption=false cite=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvPactTome00]{Pact of
+        the Tome}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvPactTome00
+        caption=false cite=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvRepellingB]{Repelling
+        Blast}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvRepellingB
+        caption=false cite=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvThirstingB]{Thirsting
+        Blade}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvThirstingB
+        caption=false cite=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvVisionsOfD]{Visions of
+        Distant
+        Realms}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvVisionsOfD
+        caption=false cite=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvWhispersOf]{Whispers
+        of the
+        Grave}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvWhispersOf
+        caption=false cite=false]</p><hr
+        /><h2>@UUID[Compendium.dnd5e.classes24.Item.phbinvWitchSight]{Witch
+        Sight}</h2><p>@Embed[Compendium.dnd5e.classes24.Item.phbinvWitchSight
+        caption=false cite=false]</p></div>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725210055805
+      modifiedTime: 1745623294835
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbWarlock000000.FA4hxx49eazhISIt'
+folder: 1A8WFP1GVZkKdxii
+flags:
+  dnd5e:
+    type: special
+    showPages: true
+    append: 3
+    order: 501100
+    navigation:
+      previous: phbSorcerer00000
+      next: phbWizard0000000
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.1
+  createdTime: 1724425889530
+  modifiedTime: 1745677865773
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1200000
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbWarlock000000'

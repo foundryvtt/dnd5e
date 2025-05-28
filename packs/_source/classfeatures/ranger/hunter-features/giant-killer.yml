@@ -1,0 +1,100 @@
+_id: StfmqK1twVfukpa0
+name: Giant Killer
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>When a Large or larger creature within 5 feet of you hits or misses you
+      with an attack, you can use your reaction to attack that creature
+      immediately after its attack, provided that you can see the creature.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: huntersPrey
+  requirements: Hunter 3
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: reaction
+        value: 1
+        condition: Creature must be Large or larger and visible.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: giant-killer
+flags: {}
+img: icons/skills/social/intimidation-impressing.webp
+effects: []
+folder: UYfImiULTmGD1AvR
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037384270
+  modifiedTime: 1725992288430
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!StfmqK1twVfukpa0'

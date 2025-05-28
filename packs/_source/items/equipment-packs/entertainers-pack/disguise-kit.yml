@@ -1,0 +1,113 @@
+name: Disguise Kit
+type: tool
+img: icons/equipment/back/cloak-hooded-blue.webp
+system:
+  description:
+    value: >-
+      <p>This pouch of cosmetics, hair dye, and small props lets you create
+      disguises that change your physical appearance. Proficiency with this kit
+      lets you add your proficiency bonus to any ability checks you make to
+      create a visual disguise.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 25
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  ability: int
+  chatFlavor: ''
+  proficient: null
+  bonus: ''
+  container: 6OYR11aJX2dEVtOj
+  type:
+    value: ''
+    baseItem: disg
+  unidentified:
+    description: ''
+  properties: []
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: check
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      check:
+        ability: int
+        dc: {}
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: disguise-kit
+effects: []
+folder: Dx3K2y0J1wJUPP9m
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037269770
+  modifiedTime: 1725992540490
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_id: kj5DNiBKasYWyuj6
+sort: 500000
+ownership:
+  default: 0
+_key: '!items!kj5DNiBKasYWyuj6'

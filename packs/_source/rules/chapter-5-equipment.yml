@@ -1,0 +1,825 @@
+name: 'Chapter 5: Equipment'
+pages:
+  - name: Equipment
+    type: text
+    title:
+      show: false
+      level: 1
+    text:
+      format: 1
+      content: >-
+        <p>Common coins come in several different denominations based on the
+        relative worth of the metal from which they are made. The three most
+        common coins are the gold piece (gp), the silver piece (sp), and the
+        copper piece (cp).</p><p>With one gold piece, a character can buy a
+        bedroll, 50 feet of good rope, or a goat. A skilled (but not
+        exceptional) artisan can earn one gold piece a day. The gold piece is
+        the standard unit of measure for wealth, even if the coin itself is not
+        commonly used. When merchants discuss deals that involve goods or
+        services worth hundreds or thousands of gold pieces, the transactions
+        don’t usually involve the exchange of individual coins. Rather, the gold
+        piece is a standard measure of value, and the actual exchange is in gold
+        bars, letters of credit, or valuable goods.</p><p>One gold piece is
+        worth ten silver pieces, the most prevalent coin among commoners. A
+        silver piece buys a laborer’s work for half a day, a flask of lamp oil,
+        or a night’s rest in a poor inn.</p><p>One silver piece is worth ten
+        copper pieces, which are common among laborers and beggars. A single
+        copper piece buys a candle, a torch, or a piece of chalk.</p><p>In
+        addition, unusual coins made of other precious metals sometimes appear
+        in treasure hoards. The electrum piece (ep) and the platinum piece (pp)
+        originate from fallen empires and lost kingdoms, and they sometimes
+        arouse suspicion and skepticism when used in transactions. An electrum
+        piece is worth five silver pieces, and a platinum piece is worth ten
+        gold pieces.</p><p>A standard coin weighs about a third of an ounce, so
+        fifty coins weigh a pound.</p><table><caption><h4>Standard Exchange
+        Rates</h4></caption><thead><tr><td>Coin</td><td>CP</td><td>SP</td><td>EP</td><td>GP</td><td>PP</td></tr></thead><tbody><tr><td>Copper
+        (cp)</td><td>1</td><td>1/10</td><td>1/50</td><td>1/100</td><td>1/1,000</td></tr><tr><td>Silver
+        (sp)</td><td>10</td><td>1</td><td>1/5</td><td>1/10</td><td>1/100</td></tr><tr><td>Electrum
+        (ep)</td><td>50</td><td>5</td><td>1</td><td>1/2</td><td>1/20</td></tr><tr><td>Gold
+        (gp)</td><td>100</td><td>10</td><td>2</td><td>1</td><td>1/10</td></tr><tr><td>Platinum
+        (pp)</td><td>1000</td><td>100</td><td>20</td><td>10</td><td>1</td></tr></tbody></table>
+      markdown: ''
+    _id: R9nWciuL1bon7BuY
+    image: {}
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system: {}
+    sort: 0
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!BYFd9hiJGo9L5aOM.R9nWciuL1bon7BuY'
+  - name: Selling Treasure
+    type: text
+    title:
+      show: true
+      level: 1
+    text:
+      format: 1
+      content: >-
+        <p>Opportunities abound to find treasure, equipment, weapons, armor, and
+        more in the dungeons you explore. Normally, you can sell your treasures
+        and trinkets when you return to a town or other settlement, provided
+        that you can find buyers and merchants interested in your loot.</p>
+
+        <p><strong>Arms, Armor, and Other Equipment.</strong> As a general rule,
+        undamaged weapons, armor, and other equipment fetch half their cost when
+        sold in a market. Weapons and armor used by monsters are rarely in good
+        enough condition to sell.</p>
+
+        <p><strong>Magic Items. </strong>Selling magic items is problematic.
+        Finding someone to buy a potion or a scroll isn't too hard, but other
+        items are out of the realm of most but the wealthiest nobles. Likewise,
+        aside from a few common magic items, you won't normally come across
+        magic items or spells to purchase. The value of magic is far beyond
+        simple gold and should always be treated as such.</p>
+
+        <p><strong>Gems, Jewelry, and Art Objects. </strong>These items retain
+        their full value in the marketplace, and you can either trade them in
+        for coin or use them as currency for other transactions. For
+        exceptionally valuable treasures, the GM might require you to find a
+        buyer in a large town or larger community first.</p>
+
+        <p><strong>Trade Goods. </strong>On the borderlands, many people conduct
+        transactions through barter. Like gems and art objects, trade goods—bars
+        of iron, bags of salt, livestock, and so on—retain their full value in
+        the market and can be used as currency.</p>
+    _id: FcAth0Y91MCUozKO
+    image: {}
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system: {}
+    sort: 0
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!BYFd9hiJGo9L5aOM.FcAth0Y91MCUozKO'
+  - name: Armor
+    type: text
+    title:
+      show: true
+      level: 1
+    text:
+      format: 1
+      content: "<p>Fantasy gaming worlds are a vast tapestry made up of many different cultures, each with its own technology level. For this reason, adventurers have access to a variety of armor types, ranging from leather armor to chain mail to costly plate armor, with several other kinds of armor in between. The Armor table collects the most commonly available types of armor found in the game and separates them into three categories: light armor, medium armor, and heavy armor. Many warriors supplement their armor with a shield.</p><p>The Armor table shows the cost, weight, and other properties of the common types of armor worn in fantasy gaming worlds.</p><p><strong>Armor Proficiency. </strong>Anyone can put on a suit of armor or strap a shield to an arm. Only those proficient in the armor's use know how to wear it effectively, however. Your class gives you proficiency with certain types of armor. If you wear armor that you lack proficiency with, you have disadvantage on any ability check, saving throw, or attack roll that involves Strength or Dexterity, and you can't cast spells.</p><p><strong>Armor Class (AC).</strong> Armor protects its wearer from attacks. The armor (and shield) you wear determines your base Armor Class.</p><p><strong>Heavy Armor. </strong>Heavier armor interferes with the wearer's ability to move quickly, stealthily, and freely. If the Armor table shows “Str 13” or “Str 15” in the Strength column for an armor type, the armor reduces the wearer's speed by 10 feet unless the wearer has a Strength score equal to or higher than the listed score.</p><p><strong>Stealth. </strong>If the Armor table shows “Disadvantage” in the Stealth column, the wearer has disadvantage on Dexterity (Stealth) checks.</p><p><strong>Shields. </strong>A shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.</p><h2>Light Armor</h2><p>Made from supple and thin materials, light armor favors agile adventurers since it offers some protection without sacrificing mobility. If you wear light armor, you add your Dexterity modifier to the base number from your armor type to determine your Armor Class.</p><p><strong>Padded. </strong>Padded armor consists of quilted layers of cloth and batting.</p><p><strong>Leather. </strong>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p><p><strong>Studded Leather. </strong>Made from tough but flexible leather, studded leather is reinforced with close-set rivets or spikes.</p><h2>Medium Armor</h2><p>Medium armor offers more protection than light armor, but it also impairs movement more. If you wear medium armor, you add your Dexterity modifier, to a maximum of +2, to the base number from your armor type to determine your Armor Class.</p><p><strong>Hide.</strong> This crude armor consists of thick furs and pelts. It is commonly worn by barbarian tribes, evil humanoids, and other folk who lack access to the tools and materials needed to create better armor.</p><p><strong>Chain Shirt. </strong>Made of interlocking metal rings, a chain shirt is worn between layers of clothing or leather. This armor offers modest protection to the wearer's upper body and allows the sound of the rings rubbing against one another to be muffled by outer layers.</p><p><strong>Scale Mail. </strong>This armor consists of a coat and leggings (and perhaps a separate skirt) of leather covered with overlapping pieces of metal, much like the scales of a fish. The suit includes gauntlets.</p><p><strong>Breastplate. </strong>This armor consists of a fitted metal chest piece worn with supple leather. Although it leaves the legs and arms relatively unprotected, this armor provides good protection for the wearer's vital organs while leaving the wearer relatively unencumbered.</p><p><strong>Half Plate. </strong>Half plate consists of shaped metal plates that cover most of the wearer's body. It does not include leg protection beyond simple greaves that are attached with leather straps.</p><h2>Heavy Armor</h2><p>Of all the armor categories, heavy armor offers the best protection. These suits of armor cover the entire body and are designed to stop a wide range of attacks. Only proficient warriors can manage their weight and bulk.</p><p>Heavy armor doesn't let you add your Dexterity modifier to your Armor Class, but it also doesn't penalize you if your Dexterity modifier is negative.</p><p><strong>Ring Mail.</strong> This armor is leather armor with heavy rings sewn into it. The rings help reinforce the armor against blows from swords and axes. Ring mail is inferior to chain mail, and it's usually worn only by those who can't afford better armor.</p><p><strong>Chain Mail. </strong>Made of interlocking metal rings, chain mail includes a layer of quilted fabric worn underneath the mail to prevent chafing and to cushion the impact of blows. The suit includes gauntlets.</p><p><strong>Splint. </strong>This armor is made of narrow vertical strips of metal riveted to a backing of leather that is worn over cloth padding. Flexible chain mail protects the joints.</p><p><strong>Plate.</strong> Plate consists of shaped, interlocking metal plates to cover the entire body. A suit of plate includes gauntlets, heavy leather boots, a visored helmet, and thick layers of padding underneath the armor. Buckles and straps distribute the weight over the body.</p><table border=\"0\"><caption><h4>Armor</h4></caption><thead><tr><td>Armor</td><td>Cost</td><td>Armor Class (AC)</td><td>Strength</td><td>Stealth</td><td>Weight</td></tr></thead><tbody><tr><td colspan=\"6\"><em>Light Armor</em></td></tr><tr><td>Padded</td><td>5 gp</td><td>11 + Dex modifier</td><td>—</td><td>Disadvantage</td><td>8 lb.</td></tr><tr><td>Leather</td><td>10 gp</td><td>11 + Dex modifier</td><td>—</td><td>—</td><td>10 lb.</td></tr><tr><td>Studded leather</td><td>45 gp</td><td>12 + Dex modifier</td><td>—</td><td>—</td><td>13 lb.</td></tr><tr><td><em>Medium Armor</em></td><td>\_</td><td>\_</td><td>\_</td><td>\_</td><td>\_</td></tr><tr><td>Hide</td><td>10 gp</td><td>12 + Dex modifier (max 2)</td><td>—</td><td>—</td><td>12 lb.</td></tr><tr><td>Chain shirt</td><td>50 gp</td><td>13 + Dex modifier (max 2)</td><td>—</td><td>—</td><td>20 lb.</td></tr><tr><td>Scale mail</td><td>50 gp</td><td>14 + Dex modifier (max 2)</td><td>—</td><td>Disadvantage</td><td>45 lb.</td></tr><tr><td>Breastplate</td><td>400 gp</td><td>14 + Dex modifier (max 2)</td><td>—</td><td>—</td><td>20 lb.</td></tr><tr><td>Half plate</td><td>750 gp</td><td>15 + Dex modifier (max 2)</td><td>—</td><td>Disadvantage</td><td>40 lb.</td></tr><tr><td colspan=\"6\"><em>Heavy Armor</em></td></tr><tr><td>Ring mail</td><td>30 gp</td><td>14</td><td>—</td><td>Disadvantage</td><td>40 lb.</td></tr><tr><td>Chain mail</td><td>75 gp</td><td>16</td><td>Str 13</td><td>Disadvantage</td><td>55 lb.</td></tr><tr><td>Splint</td><td>200 gp</td><td>17</td><td>Str 15</td><td>Disadvantage</td><td>60 lb.</td></tr><tr><td>Plate</td><td>1,500 gp</td><td>18</td><td>Str 15</td><td>Disadvantage</td><td>65 lb.</td></tr><tr><td colspan=\"6\"><em>Shield</em></td></tr><tr><td>Shield</td><td>10 gp</td><td>2</td><td>—</td><td>—</td><td>6 lb.</td></tr></tbody></table><h2>Getting Into and Out of Armor</h2><p>The time it takes to don or doff armor depends on the armor's category.</p><p><strong>Don. </strong>This is the time it takes to put on armor. You benefit from the armor's AC only if you take the full time to don the suit of armor.</p><p><strong>Doff. </strong>This is the time it takes to take off armor. If you have help, reduce this time by half.</p><table border=\"0\"><caption><h4>Donning and Doffing Armor</h4></caption><thead><tr><td>Category</td><td>Don</td><td>Doff</td></tr></thead><tbody><tr><td>Light Armor</td><td>1 minute</td><td>1 minute</td></tr><tr><td>Medium Armor</td><td>5 minutes</td><td>1 minute</td></tr><tr><td>Heavy Armor</td><td>10 minutes</td><td>5 minutes</td></tr><tr><td>Shield</td><td>1 action</td><td>1 action</td></tr></tbody></table>"
+    _id: PVD47ooQoPqxZqvV
+    image: {}
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system: {}
+    sort: 0
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!BYFd9hiJGo9L5aOM.PVD47ooQoPqxZqvV'
+  - name: Weapons
+    type: text
+    title:
+      show: true
+      level: 1
+    text:
+      format: 1
+      content: "<p>Your class grants proficiency in certain weapons, reflecting both the class's focus and the tools you are most likely to use. Whether you favor a longsword or a longbow, your weapon and your ability to wield it effectively can mean the difference between life and death while adventuring.</p><p>The Weapons table shows the most common weapons used in the fantasy gaming worlds, their price and weight, the damage they deal when they hit, and any special properties they possess. Every weapon is classified as either melee or ranged. A <strong>melee weapon</strong> is used to attack a target within 5 feet of you, whereas a <strong>ranged weapon</strong> is used to attack a target at a distance.</p><h2>Weapon Proficiency</h2><p>Your race, class, and feats can grant you proficiency with certain weapons or categories of weapons. The two categories are <strong>simple</strong> and <strong>martial</strong>. Most people can use simple weapons with proficiency. These weapons include clubs, maces, and other weapons often found in the hands of commoners. Martial weapons, including swords, axes, and polearms, require more specialized training to use effectively. Most warriors use martial weapons because these weapons put their fighting style and training to best use.</p><p>Proficiency with a weapon allows you to add your proficiency bonus to the attack roll for any attack you make with that weapon. If you make an attack roll using a weapon with which you lack proficiency, you do not add your proficiency bonus to the attack roll.</p><h2>Weapon Properties</h2><p>Many weapons have special properties related to their use, as shown in the Weapons table.</p><p><strong>Ammunition. </strong>You can use a weapon that has the ammunition property to make a ranged attack only if you have ammunition to fire from the weapon. Each time you attack with the weapon, you expend one piece of ammunition. Drawing the ammunition from a quiver, case, or other container is part of the attack (you need a free hand to load a one-handed weapon). At the end of the battle, you can recover half your expended ammunition by taking a minute to search the battlefield.</p><p>If you use a weapon that has the ammunition property to make a melee attack, you treat the weapon as an improvised weapon (see “Improvised Weapons” later in the section). A sling must be loaded to deal any damage when used in this way</p><p><strong>Finesse. </strong>When making an attack with a finesse weapon, you use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.</p><p><strong>Heavy. </strong>Small creatures have disadvantage on attack rolls with heavy weapons. A heavy weapon's size and bulk make it too large for a Small creature to use effectively.</p><p><strong>Light. </strong>A light weapon is small and easy to handle, making it ideal for use when fighting with two weapons.</p><p><strong>Loading. </strong>Because of the time required to load this weapon, you can fire only one piece of ammunition from it when you use an action, bonus action, or reaction to fire it, regardless of the number of attacks you can normally make.</p><p><strong>Range.</strong> A weapon that can be used to make a ranged attack has a range in parentheses after the ammunition or thrown property. The range lists two numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's long range. When attacking a target beyond normal range, you have disadvantage on the attack roll. You can't attack a target beyond the weapon's long range.</p><p><strong>Reach. </strong>This weapon adds 5 feet to your reach when you attack with it, as well as when determining your reach for opportunity attacks with it.</p><p><strong>Special. </strong>A weapon with the special property has unusual rules governing its use, explained in the weapon's description (see “Special Weapons” later in this section).</p><p><strong>Thrown. </strong>If a weapon has the thrown property, you can throw the weapon to make a ranged attack. If the weapon is a melee weapon, you use the same ability modifier for that attack roll and damage roll that you would use for a melee attack with the weapon. For example, if you throw a handaxe, you use your Strength, but if you throw a dagger, you can use either your Strength or your Dexterity, since the dagger has the finesse property.</p><p><strong>Two-Handed. </strong>This weapon requires two hands when you attack with it.</p><p><strong>Versatile. </strong>This weapon can be used with one or two hands. A damage value in parentheses appears with the property—the damage when the weapon is used with two hands to make a melee attack.</p><h3>Improvised Weapons</h3><p>Sometimes characters don't have their weapons and have to attack with whatever is at hand. An improvised weapon includes any object you can wield in one or two hands, such as broken glass, a table leg, a frying pan, a wagon wheel, or a dead goblin.</p><p>Often, an improvised weapon is similar to an actual weapon and can be treated as such. For example, a table leg is akin to a club. At the GM's option, a character proficient with a weapon can use a similar object as if it were that weapon and use his or her proficiency bonus.</p><p>An object that bears no resemblance to a weapon deals 1d4 damage (the GM assigns a damage type appropriate to the object). If a character uses a ranged weapon to make a melee attack, or throws a melee weapon that does not have the thrown property, it also deals 1d4 damage. An improvised thrown weapon has a normal range of 20 feet and a long range of 60 feet.</p><h3>Silvered Weapons</h3><p>Some monsters that have immunity or resistance to nonmagical weapons are susceptible to silver weapons, so cautious adventurers invest extra coin to plate their weapons with silver. You can silver a single weapon or ten pieces of ammunition for 100 gp. This cost represents not only the price of the silver, but the time and expertise needed to add silver to the weapon without making it less effective.</p><h3>Special Weapons</h3><p>Weapons with special rules are described here.</p><p><strong>Lance. </strong>You have disadvantage when you use a lance to attack a target within 5 feet of you. Also, a lance requires two hands to wield when you aren't mounted.</p><p><strong>Net. </strong>A Large or smaller creature hit by a net is restrained until it is freed. A net has no effect on creatures that are formless, or creatures that are Huge or larger. A creature can use its action to make a DC 10 Strength check, freeing itself or another creature within its reach on a success. Dealing 5 slashing damage to the net (AC 10) also frees the creature without harming it, ending the effect and destroying the net.</p><p>When you use an action, bonus action, or reaction to attack with a net, you can make only one attack regardless of the number of attacks you can normally make.</p><table border=\"0\"><caption>\_</caption><thead><tr><td>Name</td><td>Cost</td><td>Damage</td><td>Weight</td><td>Properties</td></tr></thead><tbody><tr><td colspan=\"5\"><em>Simple Melee Weapons</em></td></tr><tr><td>Club</td><td>1 sp</td><td>1d4 bludgeoning</td><td>2 lb.</td><td>Light</td></tr><tr><td>Dagger</td><td>2 gp</td><td>1d4 piercing</td><td>1 lb.</td><td>Finesse, light, thrown (range 20/60)</td></tr><tr><td>Greatclub</td><td>2 sp</td><td>1d8 bludgeoning</td><td>10 lb.</td><td>Two-handed</td></tr><tr><td>Handaxe</td><td>5 gp</td><td>1d6 slashing</td><td>2 lb.</td><td>Light, thrown (range 20/60)</td></tr><tr><td>Javelin</td><td>5 sp</td><td>1d6 piercing</td><td>2 lb.</td><td>Thrown (range 30/120)</td></tr><tr><td>Light hammer</td><td>2 gp</td><td>1d4 bludgeoning</td><td>2 lb.</td><td>Light, thrown (range 20/60)</td></tr><tr><td>Mace</td><td>5 gp</td><td>1d6 bludgeoning</td><td>4 lb.</td><td>—</td></tr><tr><td>Quarterstaff</td><td>2 sp</td><td>1d6 bludgeoning</td><td>4 lb.</td><td>Versatile (1d8)</td></tr><tr><td>Sickle</td><td>1 gp</td><td>1d4 slashing</td><td>2 lb.</td><td>Light</td></tr><tr><td>Spear</td><td>1 gp</td><td>1d6 piercing</td><td>3 lb.</td><td>Thrown (range 20/60), versatile (1d8)</td></tr><tr><td colspan=\"5\"><em>Simple Ranged Weapons</em></td></tr><tr><td>Crossbow, light</td><td>25 gp</td><td>1d8 piercing</td><td>5 lb.</td><td>Ammunition (range 80/320), loading, two-handed</td></tr><tr><td>Dart</td><td>5 cp</td><td>1d4 piercing</td><td>1/4 lb.</td><td>Finesse, thrown (range 20/60)</td></tr><tr><td>Shortbow</td><td>25 gp</td><td>1d6 piercing</td><td>2 lb.</td><td>Ammunition (range 80/320), two-handed</td></tr><tr><td>Sling</td><td>1 sp</td><td>1d4 bludgeoning</td><td>—</td><td>Ammunition (range 30/120)</td></tr><tr><td colspan=\"5\"><em>Martial Melee Weapons</em></td></tr><tr><td>Battleaxe</td><td>10 gp</td><td>1d8 slashing</td><td>4 lb.</td><td>Versatile (1d10)</td></tr><tr><td>Flail</td><td>10 gp</td><td>1d8 bludgeoning</td><td>2 lb.</td><td>—</td></tr><tr><td>Glaive</td><td>20 gp</td><td>1d10 slashing</td><td>6 lb.</td><td>Heavy, reach, two-handed</td></tr><tr><td>Greataxe</td><td>30 gp</td><td>1d12 slashing</td><td>7 lb.</td><td>Heavy, two-handed</td></tr><tr><td>Greatsword</td><td>50 gp</td><td>2d6 slashing</td><td>6 lb.</td><td>Heavy, two-handed</td></tr><tr><td>Halberd</td><td>20 gp</td><td>1d10 slashing</td><td>6 lb.</td><td>Heavy, reach, two-handed</td></tr><tr><td>Lance</td><td>10 gp</td><td>1d12 piercing</td><td>6 lb.</td><td>Reach, special</td></tr><tr><td>Longsword</td><td>15 gp</td><td>1d8 slashing</td><td>3 lb.</td><td>Versatile (1d10)</td></tr><tr><td>Maul</td><td>10 gp</td><td>2d6 bludgeoning</td><td>10 lb.</td><td>Heavy, two-handed</td></tr><tr><td>Morningstar</td><td>15 gp</td><td>1d8 piercing</td><td>4 lb.</td><td>—</td></tr><tr><td>Pike</td><td>5 gp</td><td>1d10 piercing</td><td>18 lb.</td><td>Heavy, reach, two-handed</td></tr><tr><td>Rapier</td><td>25 gp</td><td>1d8 piercing</td><td>2 lb.</td><td>Finesse</td></tr><tr><td>Scimitar</td><td>25 gp</td><td>1d6 slashing</td><td>3 lb.</td><td>Finesse, light</td></tr><tr><td>Shortsword</td><td>10 gp</td><td>1d6 piercing</td><td>2 lb.</td><td>Finesse, light</td></tr><tr><td>Trident</td><td>5 gp</td><td>1d6 piercing</td><td>4 lb.</td><td>Thrown (range 20/60), versatile (1d8)</td></tr><tr><td>War pick</td><td>5 gp</td><td>1d8 piercing</td><td>2 lb.</td><td>—</td></tr><tr><td>Warhammer</td><td>15 gp</td><td>1d8 bludgeoning</td><td>2 lb.</td><td>Versatile (1d10)</td></tr><tr><td>Whip</td><td>2 gp</td><td>1d4 slashing</td><td>3 lb.</td><td>Finesse, reach</td></tr><tr><td colspan=\"5\"><em>Martial Ranged Weapons</em></td></tr><tr><td>Blowgun</td><td>10 gp</td><td>1 piercing</td><td>1 lb.</td><td>Ammunition (range 25/100), loading</td></tr><tr><td>Crossbow, hand</td><td>75 gp</td><td>1d6 piercing</td><td>3 lb.</td><td>Ammunition (range 30/120), light, loading</td></tr><tr><td>Crossbow, heavy</td><td>50 gp</td><td>1d10 piercing</td><td>18 lb.</td><td>Ammunition (range 100/400), heavy, loading, two-handed</td></tr><tr><td>Longbow</td><td>50 gp</td><td>1d8 piercing</td><td>2 lb.</td><td>Ammunition (range 150/600), heavy, two-handed</td></tr><tr><td>Net</td><td>1 gp</td><td>—</td><td>3 lb.</td><td>Special, thrown (range 5/15)</td></tr></tbody></table>"
+      markdown: ''
+    _id: AOOs5OrXYgGzwI9d
+    image: {}
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system: {}
+    sort: 0
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!BYFd9hiJGo9L5aOM.AOOs5OrXYgGzwI9d'
+  - name: Adventuring Gear
+    type: text
+    title:
+      show: true
+      level: 1
+    text:
+      format: 1
+      content: "<p>This section describes items that have special rules or require further explanation.</p><p><strong>Acid.</strong> As an action, you can splash the contents of this vial onto a creature within 5 feet of you or throw the vial up to 20 feet, shattering it on impact. In either case, make a ranged attack against a creature or object, treating the acid as an improvised weapon. On a hit, the target takes 2d6 acid damage.</p><p><strong>Alchemist's Fire. </strong>This sticky, adhesive fluid ignites when exposed to air. As an action, you can throw this flask up to 20 feet, shattering it on impact. Make a ranged attack against a creature or object, treating the alchemist's fire as an improvised weapon. On a hit, the target takes 1d4 fire damage at the start of each of its turns. A creature can end this damage by using its action to make a DC 10 Dexterity check to extinguish the flames.</p><p><strong>Antitoxin. </strong>A creature that drinks this vial of liquid gains advantage on saving throws against poison for 1 hour. It confers no benefit to undead or constructs.</p><p><strong>Arcane Focus. </strong>An arcane focus is a special item— an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item— designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus.</p><p><strong>Ball Bearings. </strong>As an action, you can spill these tiny metal balls from their pouch to cover a level, square area that is 10 feet on a side. A creature moving across the covered area must succeed on a DC 10 Dexterity saving throw or fall prone. A creature moving through the area at half speed doesn't need to make the save.</p><p><strong>Block and Tackle. </strong>A set of pulleys with a cable threaded through them and a hook to attach to objects, a block and tackle allows you to hoist up to four times the weight you can normally lift.</p><p><strong>Book. </strong>A book might contain poetry, historical accounts, information pertaining to a particular field of lore, diagrams and notes on gnomish contraptions, or just about anything else that can be represented using text or pictures. A book of spells is a spellbook (described later in this section).</p><p><strong>Caltrops. </strong>As an action, you can spread a bag of caltrops to cover a square area that is 5 feet on a side. Any creature that enters the area must succeed on a DC 15 Dexterity saving throw or stop moving this turn and take 1 piercing damage. Taking this damage reduces the creature's walking speed by 10 feet until the creature regains at least 1 hit point. A creature moving through the area at half speed doesn't need to make the save.</p><p><strong>Candle. </strong>For 1 hour, a candle sheds bright light in a 5-foot radius and dim light for an additional 5 feet.</p><p><strong>Case, Crossbow Bolt. </strong>This wooden case can hold up to twenty crossbow bolts.</p><p><strong>Case, Map or Scroll. </strong>This cylindrical leather case can hold up to ten rolled-up sheets of paper or five rolled-up sheets of parchment.</p><p><strong>Chain. </strong>A chain has 10 hit points. It can be burst with a successful DC 20 Strength check.</p><p><strong>Climber's Kit. </strong>A climber's kit includes special pitons, boot tips, gloves, and a harness. You can use the climber's kit as an action to anchor yourself; when you do, you can't fall more than 25 feet from the point where you anchored yourself, and you can't climb more than 25 feet away from that point without undoing the anchor.</p><p><strong>Component Pouch. </strong>A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells, except for those components that have a specific cost (as indicated in a spell's description).</p><p><strong>Crowbar. </strong>Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied.</p><p><strong>Druidic Focus. </strong>A druidic focus might be a sprig of mistletoe or holly, a wand or scepter made of yew or another special wood, a staff drawn whole out of a living tree, or a totem object incorporating feathers, fur, bones, and teeth from sacred animals. A druid can use such an object as a spellcasting focus.</p><p><strong>Fishing Tackle. </strong>This kit includes a wooden rod, silken line, corkwood bobbers, steel hooks, lead sinkers, velvet lures, and narrow netting.</p><p><strong>Healer's Kit. </strong>This kit is a leather pouch containing bandages, salves, and splints. The kit has ten uses. As an action, you can expend one use of the kit to stabilize a creature that has 0 hit points, without needing to make a Wisdom (Medicine) check.</p><p><strong>Holy Symbol. </strong>A holy symbol is a representation of a god or pantheon. It might be an amulet depicting a symbol representing a deity, the same symbol carefully engraved or inlaid as an emblem on a shield, or a tiny box holding a fragment of a sacred relic. Appendix PH-B \"Fantasy-Historical Pantheons\" lists the symbols commonly associated with many gods in the multiverse. A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield.</p><p><strong>Holy Water. </strong>As an action, you can splash the contents of this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. In either case, make a ranged attack against a target creature, treating the holy water as an improvised weapon. If the target is a fiend or undead, it takes 2d6 radiant damage. A cleric or paladin may create holy water by performing a special ritual. The ritual takes 1 hour to perform, uses 25 gp worth of powdered silver, and requires the caster to expend a 1st-level spell slot.</p><p><strong>Hunting Trap.</strong> When you use your action to set it, this trap forms a saw-toothed steel ring that snaps shut when a creature steps on a pressure plate in the center. The trap is affixed by a heavy chain to an immobile object, such as a tree or a spike driven into the ground. A creature that steps on the plate must succeed on a DC 13 Dexterity saving throw or take 1d4 piercing damage and stop moving. Thereafter, until the creature breaks free of the trap, its movement is limited by the length of the chain (typically 3 feet long). A creature can use its action to make a DC 13 Strength check, freeing itself or another creature within its reach on a success. Each failed check deals 1 piercing damage to the trapped creature.</p><p><strong>Lamp. </strong>A lamp casts bright light in a 15-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil.</p><p><strong>Lantern, Bullseye. </strong>A bullseye lantern casts bright light in a 60-foot cone and dim light for an additional 60 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil.</p><p><strong>Lantern, Hooded. </strong>A hooded lantern casts bright light in a 30-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil. As an action, you can lower the hood, reducing the light to dim light in a 5-foot radius.</p><p><strong>Lock. </strong>A key is provided with the lock. Without the key, a creature proficient with thieves' tools can pick this lock with a successful DC 15 Dexterity check. Your GM may decide that better locks are available for higher prices.</p><p><strong>Magnifying Glass.</strong> This lens allows a closer look at small objects. It is also useful as a substitute for flint and steel when starting fires. Lighting a fire with a magnifying glass requires light as bright as sunlight to focus, tinder to ignite, and about 5 minutes for the fire to ignite. A magnifying glass grants advantage on any ability check made to appraise or inspect an item that is small or highly detailed.</p><p><strong>Manacles. </strong>These metal restraints can bind a Small or Medium creature. Escaping the manacles requires a successful DC 20 Dexterity check. Breaking them requires a successful DC 20 Strength check. Each set of manacles comes with one key. Without the key, a creature proficient with thieves' tools can pick the manacles' lock with a successful DC 15 Dexterity check. Manacles have 15 hit points.</p><p><strong>Mess Kit. </strong>This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.</p><p><strong>Oil. </strong>Oil usually comes in a clay flask that holds 1 pint. As an action, you can splash the oil in this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. Make a ranged attack against a target creature or object, treating the oil as an improvised weapon. On a hit, the target is covered in oil. If the target takes any fire damage before the oil dries (after 1 minute), the target takes an additional 5 fire damage from the burning oil. You can also pour a flask of oil on the ground to cover a 5-foot-square area, provided that the surface is level. If lit, the oil burns for 2 rounds and deals 5 fire damage to any creature that enters the area or ends its turn in the area. A creature can take this damage only once per turn.</p><p><strong>Poison, Basic.</strong> You can use the poison in this vial to coat one slashing or piercing weapon or up to three pieces of ammunition. Applying the poison takes an action. A creature hit by the poisoned weapon or ammunition must make a DC 10 Constitution saving throw or take 1d4 poison damage. Once applied, the poison retains potency for 1 minute before drying.</p><p><strong>Potion of Healing. </strong>A character who drinks the magical red fluid in this vial regains 2d4 + 2 hit points. Drinking or administering a potion takes an action.</p><p><strong>Pouch. </strong>A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch (described earlier in this section).</p><p><strong>Quiver.</strong> A quiver can hold up to 20 arrows.</p><p><strong>Ram, Portable. </strong>You can use a portable ram to break down doors. When doing so, you gain a +4 bonus on the Strength check. One other character can help you use the ram, giving you advantage on this check.</p><p><strong>Rations. </strong>Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.</p><p><strong>Rope.</strong> Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.</p><p><strong>Scale, Merchant's. </strong>A scale includes a small balance, pans, and a suitable assortment of weights up to 2 pounds. With it, you can measure the exact weight of small objects, such as raw precious metals or trade goods, to help determine their worth.</p><p><strong>Spellbook.</strong> Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells.</p><p><strong>Spyglass.</strong> Objects viewed through a spyglass are magnified to twice their size.</p><p><strong>Tent. </strong>A simple and portable canvas shelter, a tent sleeps two.</p><p><strong>Tinderbox. </strong>This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch—or anything else with abundant, exposed fuel—takes an action. Lighting any other fire takes 1 minute.</p><p><strong>Torch.</strong> A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.</p><table border=\"0\"><caption><h4>Adventuring Gear</h4></caption><thead><tr><td>Item</td><td>Cost</td><td>Weight</td></tr></thead><tbody><tr><td>Abacus</td><td>2 gp</td><td>2 lb.</td></tr><tr><td>Acid (vial)</td><td>25 gp</td><td>1 lb.</td></tr><tr><td>Alchemist's fire (flask)</td><td>50 gp</td><td>1 lb.</td></tr><tr><td><em>Ammunition</em></td><td>\_</td><td>\_</td></tr><tr><td>Arrows (20)</td><td>1 gp</td><td>1 lb.</td></tr><tr><td>Blowgun needles (50)</td><td>1 gp</td><td>1 lb.</td></tr><tr><td>Crossbow bolts (20)</td><td>1 gp</td><td>1½ lb.</td></tr><tr><td>Sling bullets (20)</td><td>4 cp</td><td>1½ lb.</td></tr><tr><td>Antitoxin (vial)</td><td>50 gp</td><td>—</td></tr><tr><td><em>Arcane focus</em></td><td>\_</td><td>\_</td></tr><tr><td>Crystal</td><td>10 gp</td><td>1 lb.</td></tr><tr><td>Orb</td><td>20 gp</td><td>3 lb.</td></tr><tr><td>Rod</td><td>10 gp</td><td>2 lb.</td></tr><tr><td>Staff</td><td>5 gp</td><td>4 lb.</td></tr><tr><td>Wand</td><td>10 gp</td><td>1 lb.</td></tr><tr><td>Backpack</td><td>2 gp</td><td>5 lb.</td></tr><tr><td>Ball bearings (bag of 1,000)</td><td>1 gp</td><td>2 lb.</td></tr><tr><td>Barrel</td><td>2 gp</td><td>70 lb.</td></tr><tr><td>Basket</td><td>4 sp</td><td>2 lb.</td></tr><tr><td>Bedroll</td><td>1 gp</td><td>7 lb.</td></tr><tr><td>Bell</td><td>1 gp</td><td>—</td></tr><tr><td>Blanket</td><td>5 sp</td><td>3 lb.</td></tr><tr><td>Block and tackle</td><td>1 gp</td><td>5 lb.</td></tr><tr><td>Book</td><td>25 gp</td><td>5 lb.</td></tr><tr><td>Bottle, glass</td><td>2 gp</td><td>2 lb.</td></tr><tr><td>Bucket</td><td>5 cp</td><td>2 lb.</td></tr><tr><td>Caltrops (bag of 20)</td><td>1 gp</td><td>2 lb.</td></tr><tr><td>Candle</td><td>1 cp</td><td>—</td></tr><tr><td>Case, crossbow bolt</td><td>1 gp</td><td>1 lb.</td></tr><tr><td>Case, map or scroll</td><td>1 gp</td><td>1 lb.</td></tr><tr><td>Chain (10 feet)</td><td>5 gp</td><td>10 lb.</td></tr><tr><td>Chalk (1 piece)</td><td>1 cp</td><td>—</td></tr><tr><td>Chest</td><td>5 gp</td><td>25 lb.</td></tr><tr><td>Climber's kit</td><td>25 gp</td><td>12 lb.</td></tr><tr><td>Clothes, common</td><td>5 sp</td><td>3 lb.</td></tr><tr><td>Clothes, costume</td><td>5 gp</td><td>4 lb.</td></tr><tr><td>Clothes, fine</td><td>15 gp</td><td>6 lb.</td></tr><tr><td>Clothes, traveler's</td><td>2 gp</td><td>4 lb.</td></tr><tr><td>Component pouch</td><td>25 gp</td><td>2 lb.</td></tr><tr><td>Crowbar</td><td>2 gp</td><td>5 lb.</td></tr><tr><td><em>Druidic focus</em></td><td>\_</td><td>\_</td></tr><tr><td>Sprig of mistletoe</td><td>1 gp</td><td>—</td></tr><tr><td>Totem</td><td>1 gp</td><td>—</td></tr><tr><td>Wooden staff</td><td>5 gp</td><td>4 lb.</td></tr><tr><td>Yew wand</td><td>10 gp</td><td>1 lb.</td></tr><tr><td>Fishing tackle</td><td>1 gp</td><td>4 lb.</td></tr><tr><td>Flask or tankard</td><td>2 cp</td><td>1 lb.</td></tr><tr><td>Grappling hook</td><td>2 gp</td><td>4 lb.</td></tr><tr><td>Hammer</td><td>1 gp</td><td>3 lb.</td></tr><tr><td>Hammer, sledge</td><td>2 gp</td><td>10 lb.</td></tr><tr><td>Healer's kit</td><td>5 gp</td><td>3 lb.</td></tr><tr><td><em>Holy symbol</em></td><td>\_</td><td>\_</td></tr><tr><td>Amulet</td><td>5 gp</td><td>1 lb.</td></tr><tr><td>Emblem</td><td>5 gp</td><td>—</td></tr><tr><td>Reliquary</td><td>5 gp</td><td>2 lb.</td></tr><tr><td>Holy water (flask)</td><td>25 gp</td><td>1 lb.</td></tr><tr><td>Hourglass</td><td>25 gp</td><td>1 lb.</td></tr><tr><td>Hunting trap</td><td>5 gp</td><td>25 lb.</td></tr><tr><td>Ink (1 ounce bottle)</td><td>10 gp</td><td>—</td></tr><tr><td>Ink pen</td><td>2 cp</td><td>—</td></tr><tr><td>Jug or pitcher</td><td>2 cp</td><td>4 lb.</td></tr><tr><td>Ladder (10-foot)</td><td>1 sp</td><td>25 lb.</td></tr><tr><td>Lamp</td><td>5 sp</td><td>1 lb.</td></tr><tr><td>Lantern, bullseye</td><td>10 gp</td><td>2 lb.</td></tr><tr><td>Lantern, hooded</td><td>5 gp</td><td>2 lb.</td></tr><tr><td>Lock</td><td>10 gp</td><td>1 lb.</td></tr><tr><td>Magnifying glass</td><td>100 gp</td><td>—</td></tr><tr><td>Manacles</td><td>2 gp</td><td>6 lb.</td></tr><tr><td>Mess kit</td><td>2 sp</td><td>1 lb.</td></tr><tr><td>Mirror, steel</td><td>5 gp</td><td>1/2 lb.</td></tr><tr><td>Oil (flask)</td><td>1 sp</td><td>1 lb.</td></tr><tr><td>Paper (one sheet)</td><td>2 sp</td><td>—</td></tr><tr><td>Parchment (one sheet)</td><td>1 sp</td><td>—</td></tr><tr><td>Perfume (vial)</td><td>5 gp</td><td>—</td></tr><tr><td>Pick, miner's</td><td>2 gp</td><td>10 lb.</td></tr><tr><td>Piton</td><td>5 cp</td><td>1/4 lb.</td></tr><tr><td>Poison, basic (vial)</td><td>100 gp</td><td>—</td></tr><tr><td>Pole (10-foot)</td><td>5 cp</td><td>7 lb.</td></tr><tr><td>Pot, iron</td><td>2 gp</td><td>10 lb.</td></tr><tr><td>Potion of healing</td><td>50 gp</td><td>1/2 lb.</td></tr><tr><td>Pouch</td><td>5 sp</td><td>1 lb.</td></tr><tr><td>Quiver</td><td>1 gp</td><td>1 lb.</td></tr><tr><td>Ram, portable</td><td>4 gp</td><td>35 lb.</td></tr><tr><td>Rations (1 day)</td><td>5 sp</td><td>2 lb.</td></tr><tr><td>Robes</td><td>1 gp</td><td>4 lb.</td></tr><tr><td>Rope, hempen (50 feet)</td><td>1 gp</td><td>10 lb.</td></tr><tr><td>Rope, silk (50 feet)</td><td>10 gp</td><td>5 lb.</td></tr><tr><td>Sack</td><td>1 cp</td><td>1/2 lb.</td></tr><tr><td>Scale, merchant's</td><td>5 gp</td><td>3 lb.</td></tr><tr><td>Sealing wax</td><td>5 sp</td><td>—</td></tr><tr><td>Shovel</td><td>2 gp</td><td>5 lb.</td></tr><tr><td>Signal whistle</td><td>5 cp</td><td>—</td></tr><tr><td>Signet ring</td><td>5 gp</td><td>—</td></tr><tr><td>Soap</td><td>2 cp</td><td>—</td></tr><tr><td>Spellbook</td><td>50 gp</td><td>3 lb.</td></tr><tr><td>Spikes, iron (10)</td><td>1 gp</td><td>5 lb.</td></tr><tr><td>Spyglass</td><td>1,000 gp</td><td>1 lb.</td></tr><tr><td>Tent, two-person</td><td>2 gp</td><td>20 lb.</td></tr><tr><td>Tinderbox</td><td>5 sp</td><td>1 lb.</td></tr><tr><td>Torch</td><td>1 cp</td><td>1 lb.</td></tr><tr><td>Vial</td><td>1 gp</td><td>—</td></tr><tr><td>Waterskin</td><td>2 sp</td><td>5 lb. (full)</td></tr><tr><td>Whetstone</td><td>1 cp</td><td>1 lb.</td></tr></tbody></table><table border=\"0\"><caption><h4>Container Capacity</h4></caption><thead><tr><td>Container</td><td>Capacity</td></tr></thead><tbody><tr><td>Backpack*</td><td>1 cubic foot/30 pounds of gear</td></tr><tr><td>Barrel</td><td>40 gallons liquid, 4 cubic feet solid</td></tr><tr><td>Basket</td><td>2 cubic feet/40 pounds of gear</td></tr><tr><td>Bottle</td><td>1½ pints liquid</td></tr><tr><td>Bucket</td><td>3 gallons liquid, 1/2 cubic foot solid</td></tr><tr><td>Chest</td><td>12 cubic feet/300 pounds of gear</td></tr><tr><td>Flask or tankard</td><td>1 pint liquid</td></tr><tr><td>Jug or pitcher</td><td>1 gallon liquid</td></tr><tr><td>Pot, iron</td><td>1 gallon liquid</td></tr><tr><td>Pouch</td><td>1/5 cubic foot/6 pounds of gear</td></tr><tr><td>Sack</td><td>1 cubic foot/30 pounds of gear</td></tr><tr><td>Vial</td><td>4 ounces liquid</td></tr><tr><td>Waterskin</td><td>4 pints liquid</td></tr></tbody><tfoot><tr><td colspan=\"2\">* You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.</td></tr></tfoot></table><div class=\"fvtt advice\"><figure class=\"icon\"><img src=\"icons/containers/bags/pack-simple-leather.webp\" class=\"round\" /></figure><article><h4>Equipment Packs</h4><p>The starting equipment you get from your class includes a collection of useful adventuring gear, put together in a pack. The contents of these packs are listed here. If you are buying your starting equipment, you can purchase a pack for the price shown, which might be cheaper than buying the items individually.</p><p><strong>Burglar's Pack (16 gp).</strong> Includes a backpack, a bag of 1,000 ball bearings, 10 feet of string, a bell, 5 candles, a crowbar, a hammer, 10 pitons, a hooded lantern, 2 flasks of oil, 5 days rations, a tinderbox, and a waterskin. The pack also has 50 feet of hempen rope strapped to the side of it.</p><p><strong>Diplomat's Pack (39 gp).</strong> Includes a chest, 2 cases for maps and scrolls, a set of fine clothes, a bottle of ink, an ink pen, a lamp, 2 flasks of oil, 5 sheets of paper, a vial of perfume, sealing wax, and soap.</p><p><strong>Dungeoneer's Pack (12 gp). </strong>Includes a backpack, a crowbar, a hammer, 10 pitons, 10 torches, a tinderbox, 10 days of rations, and a waterskin. The pack also has 50 feet of hempen rope strapped to the side of it.</p><p><strong>Entertainer's Pack (40 gp). </strong>Includes a backpack, a bedroll, 2 costumes, 5 candles, 5 days of rations, a waterskin, and a disguise kit.</p><p><strong>Explorer's Pack (10 gp). </strong>Includes a backpack, a bedroll, a mess kit, a tinderbox, 10 torches, 10 days of rations, and a waterskin. The pack also has 50 feet of hempen rope strapped to the side of it.</p><p><strong>Priest's Pack (19 gp).</strong> Includes a backpack, a blanket, 10 candles, a tinderbox, an alms box, 2 blocks of incense, a censer, vestments, 2 days of rations, and a waterskin.</p><p><strong>Scholar's Pack (40 gp). </strong>Includes a backpack, a book of lore, a bottle of ink, an ink pen, 10 sheets of parchment, a little bag of sand, and a small knife.</p></article></div>"
+    _id: AjavRU4yPfI9hfaI
+    image: {}
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system: {}
+    sort: 0
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!BYFd9hiJGo9L5aOM.AjavRU4yPfI9hfaI'
+  - name: Tools
+    type: text
+    title:
+      show: true
+      level: 1
+    text:
+      format: 1
+      content: >-
+        <p>A tool helps you to do something you couldn't otherwise do, such as
+        craft or repair an item, forge a document, or pick a lock. Your race,
+        class, background, or feats give you proficiency with certain tools.
+        Proficiency with a tool allows you to add your proficiency bonus to any
+        ability check you make using that tool. Tool use is not tied to a single
+        ability, since proficiency with a tool represents broader knowledge of
+        its use. For example, the GM might ask you to make a Dexterity check to
+        carve a fine detail with your woodcarver's tools, or a Strength check to
+        make something out of particularly hard wood.</p><table
+        border="0"><caption><h4>Tools</h4></caption><thead><tr><td>Item</td><td>Cost</td><td>Weight</td></tr></thead><tbody><tr><td
+        colspan="3"><em>Artisan's tools</em></td></tr><tr><td>Alchemist's
+        supplies</td><td>50 gp</td><td>8 lb.</td></tr><tr><td>Brewer's
+        supplies</td><td>20 gp</td><td>9 lb.</td></tr><tr><td>Calligrapher's
+        supplies</td><td>10 gp</td><td>5 lb.</td></tr><tr><td>Carpenter's
+        tools</td><td>8 gp</td><td>6 lb.</td></tr><tr><td>Cartographer's
+        tools</td><td>15 gp</td><td>6 lb.</td></tr><tr><td>Cobbler's
+        tools</td><td>5 gp</td><td>5 lb.</td></tr><tr><td>Cook's
+        utensils</td><td>1 gp</td><td>8 lb.</td></tr><tr><td>Glassblower's
+        tools</td><td>30 gp</td><td>5 lb.</td></tr><tr><td>Jeweler's
+        tools</td><td>25 gp</td><td>2 lb.</td></tr><tr><td>Leatherworker's
+        tools</td><td>5 gp</td><td>5 lb.</td></tr><tr><td>Mason's
+        tools</td><td>10 gp</td><td>8 lb.</td></tr><tr><td>Painter's
+        supplies</td><td>10 gp</td><td>5 lb.</td></tr><tr><td>Potter's
+        tools</td><td>10 gp</td><td>3 lb.</td></tr><tr><td>Smith's
+        tools</td><td>20 gp</td><td>8 lb.</td></tr><tr><td>Tinker's
+        tools</td><td>50 gp</td><td>10 lb.</td></tr><tr><td>Weaver's
+        tools</td><td>1 gp</td><td>5 lb.</td></tr><tr><td>Woodcarver's
+        tools</td><td>1 gp</td><td>5 lb.</td></tr><tr><td>Disguise
+        kit</td><td>25 gp</td><td>3 lb.</td></tr><tr><td>Forgery kit</td><td>15
+        gp</td><td>5 lb.</td></tr><tr><td colspan="3"><em>Gaming
+        set</em></td></tr><tr><td>Dice set</td><td>1
+        sp</td><td>—</td></tr><tr><td>Playing card set</td><td>5
+        sp</td><td>—</td></tr><tr><td>Herbalism kit</td><td>5 gp</td><td>3
+        lb.</td></tr><tr><td colspan="3"><em>Musical
+        instrument</em></td></tr><tr><td>Bagpipes</td><td>30 gp</td><td>6
+        lb.</td></tr><tr><td>Drum</td><td>6 gp</td><td>3
+        lb.</td></tr><tr><td>Dulcimer</td><td>25 gp</td><td>10
+        lb.</td></tr><tr><td>Flute</td><td>2 gp</td><td>1
+        lb.</td></tr><tr><td>Lute</td><td>35 gp</td><td>2
+        lb.</td></tr><tr><td>Lyre</td><td>30 gp</td><td>2
+        lb.</td></tr><tr><td>Horn</td><td>3 gp</td><td>2
+        lb.</td></tr><tr><td>Pan flute</td><td>12 gp</td><td>2
+        lb.</td></tr><tr><td>Shawm</td><td>2 gp</td><td>1
+        lb.</td></tr><tr><td>Viol</td><td>30 gp</td><td>1
+        lb.</td></tr><tr><td>Navigator's tools</td><td>25 gp</td><td>2
+        lb.</td></tr><tr><td>Poisoner's kit</td><td>50 gp</td><td>2
+        lb.</td></tr><tr><td>Thieves' tools</td><td>25 gp</td><td>1
+        lb.</td></tr><tr><td>Vehicles (land or
+        water)</td><td>*</td><td>*</td></tr></tbody><tfoot><tr><td colspan="3">*
+        See the @UUID[.FayGZfFQU5llJ0LQ]{Mounts and Vehicles}
+        section.</td></tr></tfoot></table><p><strong>Artisan's Tools.</strong>
+        These special tools include the items needed to pursue a craft or trade.
+        The table shows examples of the most common types of tools, each
+        providing items related to a single craft. Proficiency with a set of
+        artisan's tools lets you add your proficiency bonus to any ability
+        checks you make using the tools in your craft. Each type of artisan's
+        tools requires a separate proficiency.</p><p><strong>Disguise
+        Kit.</strong> This pouch of cosmetics, hair dye, and small props lets
+        you create disguises that change your physical appearance. Proficiency
+        with this kit lets you add your proficiency bonus to any ability checks
+        you make to create a visual disguise.</p><p><strong>Forgery Kit.
+        </strong>This small box contains a variety of papers and parchments,
+        pens and inks, seals and sealing wax, gold and silver leaf, and other
+        supplies necessary to create convincing forgeries of physical documents.
+        Proficiency with this kit lets you add your proficiency bonus to any
+        ability checks you make to create a physical forgery of a
+        document.</p><p><strong>Gaming Set. </strong>This item encompasses a
+        wide range of game pieces, including dice and decks of cards (for games
+        such as Three-Dragon Ante). A few common examples appear on the Tools
+        table, but other kinds of gaming sets exist. If you are proficient with
+        a gaming set, you can add your proficiency bonus to ability checks you
+        make to play a game with that set. Each type of gaming set requires a
+        separate proficiency.</p><p><strong>Herbalism Kit. </strong>This kit
+        contains a variety of instruments such as clippers, mortar and pestle,
+        and pouches and vials used by herbalists to create remedies and potions.
+        Proficiency with this kit lets you add your proficiency bonus to any
+        ability checks you make to identify or apply herbs. Also, proficiency
+        with this kit is required to create antitoxin and
+        @UUID[Compendium.dnd5e.items.Item.ytlsBjYsZ7OBSEBs]{Potion of
+        Healing}.</p><p><strong>Musical Instrument.</strong> Several of the most
+        common types of musical instruments are shown on the table as examples.
+        If you have proficiency with a given musical instrument, you can add
+        your proficiency bonus to any ability checks you make to play music with
+        the instrument. A bard can use a musical instrument as a spellcasting
+        focus. Each type of musical instrument requires a separate
+        proficiency.</p><p><strong>Navigator's Tools. </strong>This set of
+        instruments is used for navigation at sea. Proficiency with navigator's
+        tools lets you chart a ship's course and follow navigation charts. In
+        addition, these tools allow you to add your proficiency bonus to any
+        ability check you make to avoid getting lost at
+        sea.</p><p><strong>Poisoner's Kit.</strong> A poisoner's kit includes
+        the vials, chemicals, and other equipment necessary for the creation of
+        poisons. Proficiency with this kit lets you add your proficiency bonus
+        to any ability checks you make to craft or use
+        poisons.</p><p><strong>Thieves' Tools. </strong>This set of tools
+        includes a small file, a set of lock picks, a small mirror mounted on a
+        metal handle, a set of narrow-bladed scissors, and a pair of pliers.
+        Proficiency with these tools lets you add your proficiency bonus to any
+        ability checks you make to disarm traps or open locks.</p>
+    _id: Rs0xLMFGbcCkEhuA
+    image: {}
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system: {}
+    sort: 0
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!BYFd9hiJGo9L5aOM.Rs0xLMFGbcCkEhuA'
+  - name: Mounts and Vehicles
+    type: text
+    title:
+      show: true
+      level: 1
+    text:
+      format: 1
+      content: >-
+        <p>A good mount can help you move more quickly through the wilderness,
+        but its primary purpose is to carry the gear that would otherwise slow
+        you down. The Mounts and Other Animals table shows each animal's speed
+        and base carrying capacity.</p><p>An animal pulling a carriage, cart,
+        chariot, sled, or wagon can move weight up to five times its base
+        carrying capacity, including the weight of the vehicle. If multiple
+        animals pull the same vehicle, they can add their carrying capacity
+        together.</p><p>Mounts other than those listed here are available in
+        fantasy gaming worlds, but they are rare and not normally available for
+        purchase. These include flying mounts (pegasi, griffons, hippogriffs,
+        and similar animals) and even aquatic mounts (giant sea horses, for
+        example). Acquiring such a mount often means securing an egg and raising
+        the creature yourself, making a bargain with a powerful entity, or
+        negotiating with the mount itself.</p><p><strong>Barding.</strong>
+        Barding is armor designed to protect an animal's head, neck, chest, and
+        body. Any type of armor shown on the Armor table can be purchased as
+        barding. The cost is four times the equivalent armor made for humanoids,
+        and it weighs twice as much.</p><p><strong>Saddles.</strong> A military
+        saddle braces the rider, helping you keep your seat on an active mount
+        in battle. It gives you advantage on any check you make to remain
+        mounted. An exotic saddle is required for riding any aquatic or flying
+        mount.</p><p><strong>Vehicle Proficiency. </strong>If you have
+        proficiency with a certain kind of vehicle (land or water), you can add
+        your proficiency bonus to any check you make to control that kind of
+        vehicle in difficult circumstances.</p><p><strong>Rowed Vessels.
+        </strong>Keelboats and rowboats are used on lakes and rivers. If going
+        downstream, add the speed of the current (typically 3 miles per hour) to
+        the speed of the vehicle. These vehicles can't be rowed against any
+        significant current, but they can be pulled upstream by draft animals on
+        the shores. A rowboat weighs 100 pounds, in case adventurers carry it
+        over land.</p><table border="0"><caption><h4>Mounts and Other
+        Animals</h4></caption><thead><tr><td>Item</td><td>Cost</td><td>Speed</td><td>Carrying
+        Capacity</td></tr></thead><tbody><tr><td>Camel</td><td>50 gp</td><td>50
+        ft.</td><td>480 lb.</td></tr><tr><td>Donkey or mule</td><td>8
+        gp</td><td>40 ft.</td><td>420 lb.</td></tr><tr><td>Elephant</td><td>200
+        gp</td><td>40 ft.</td><td>1,320 lb.</td></tr><tr><td>Horse,
+        draft</td><td>50 gp</td><td>40 ft.</td><td>540
+        lb.</td></tr><tr><td>Horse, riding</td><td>75 gp</td><td>60
+        ft.</td><td>480 lb.</td></tr><tr><td>Mastiff</td><td>25 gp</td><td>40
+        ft.</td><td>195 lb.</td></tr><tr><td>Pony</td><td>30 gp</td><td>40
+        ft.</td><td>225 lb.</td></tr><tr><td>Warhorse</td><td>400 gp</td><td>60
+        ft.</td><td>540 lb.</td></tr></tbody></table><table
+        border="0"><caption><h4>Tack, Harness, and Drawn
+        Vehicles</h4></caption><thead><tr><td>Item</td><td>Cost</td><td>Weight</td></tr></thead><tbody><tr><td>Barding</td><td>×4</td><td>×2</td></tr><tr><td>Bit
+        and bridle</td><td>2 gp</td><td>1
+        lb.</td></tr><tr><td>Carriage</td><td>100 gp</td><td>600
+        lb.</td></tr><tr><td>Cart</td><td>15 gp</td><td>200
+        lb.</td></tr><tr><td>Chariot</td><td>250 gp</td><td>100
+        lb.</td></tr><tr><td>Feed (per day)</td><td>5 cp</td><td>10
+        lb.</td></tr><tr><td
+        colspan="3"><em>Saddle</em></td></tr><tr><td>Exotic</td><td>60
+        gp</td><td>40 lb.</td></tr><tr><td>Military</td><td>20 gp</td><td>30
+        lb.</td></tr><tr><td>Pack</td><td>5 gp</td><td>15
+        lb.</td></tr><tr><td>Riding</td><td>10 gp</td><td>25
+        lb.</td></tr><tr><td>Saddlebags</td><td>4 gp</td><td>8
+        lb.</td></tr><tr><td>Sled</td><td>20 gp</td><td>300
+        lb.</td></tr><tr><td>Stabling (per day)</td><td>5
+        sp</td><td>—</td></tr><tr><td>Wagon</td><td>35 gp</td><td>400
+        lb.</td></tr></tbody></table><table border="0"><caption><h4>Waterborne
+        Vehicles</h4></caption><thead><tr><td>Item</td><td>Cost</td><td>Speed</td></tr></thead><tbody><tr><td>Galley</td><td>30,000
+        gp</td><td>4 mph</td></tr><tr><td>Keelboat</td><td>3,000 gp</td><td>1
+        mph</td></tr><tr><td>Longship</td><td>10,000 gp</td><td>3
+        mph</td></tr><tr><td>Rowboat</td><td>50 gp</td><td>1½
+        mph</td></tr><tr><td>Sailing ship</td><td>10,000 gp</td><td>2
+        mph</td></tr><tr><td>Warship</td><td>25,000 gp</td><td>2½
+        mph</td></tr></tbody></table>
+    _id: FayGZfFQU5llJ0LQ
+    image: {}
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system: {}
+    sort: 0
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!BYFd9hiJGo9L5aOM.FayGZfFQU5llJ0LQ'
+  - name: Trade Goods
+    type: text
+    title:
+      show: true
+      level: 1
+    text:
+      format: 1
+      content: >-
+        <p>Most wealth is not in coins. It is measured in livestock, grain,
+        land, rights to collect taxes, or rights to resources (such as a mine or
+        a forest).</p>
+
+        <p>Guilds, nobles, and royalty regulate trade. Chartered companies are
+        granted rights to conduct trade along certain routes, to send merchant
+        ships to various ports, or to buy or sell specific goods. Guilds set
+        prices for the goods or services that they control, and determine who
+        may or may not offer those goods and services. Merchants commonly
+        exchange trade goods without using currency. The Trade Goods table shows
+        the value of commonly exchanged goods.</p>
+
+        <table border="0"><caption>
+
+        <h4>Trade Goods</h4>
+
+        </caption>
+
+        <thead>
+
+        <tr>
+
+        <td>Cost</td>
+
+        <td>Goods</td>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+        <td>1 cp</td>
+
+        <td>1 lb. of wheat</td>
+
+        </tr>
+
+        <tr>
+
+        <td>2 cp</td>
+
+        <td>1 lb. of flour or one chicken</td>
+
+        </tr>
+
+        <tr>
+
+        <td>5 cp</td>
+
+        <td>1 lb. of salt</td>
+
+        </tr>
+
+        <tr>
+
+        <td>1 sp</td>
+
+        <td>1 lb. of iron or 1 sq. yd. of canvas</td>
+
+        </tr>
+
+        <tr>
+
+        <td>5 sp</td>
+
+        <td>1 lb. of copper or 1 sq. yd. of cotton cloth</td>
+
+        </tr>
+
+        <tr>
+
+        <td>1 gp</td>
+
+        <td>1 lb. of ginger or one goat</td>
+
+        </tr>
+
+        <tr>
+
+        <td>2 gp</td>
+
+        <td>1 lb. of cinnamon or pepper, or one sheep</td>
+
+        </tr>
+
+        <tr>
+
+        <td>3 gp</td>
+
+        <td>1 lb. of cloves or one pig</td>
+
+        </tr>
+
+        <tr>
+
+        <td>5 gp</td>
+
+        <td>1 lb. of silver or 1 sq. yd. of linen</td>
+
+        </tr>
+
+        <tr>
+
+        <td>10 gp</td>
+
+        <td>1 sq. yd. of silk or one cow</td>
+
+        </tr>
+
+        <tr>
+
+        <td>15 gp</td>
+
+        <td>1 lb. of saffron or one ox</td>
+
+        </tr>
+
+        <tr>
+
+        <td>50 gp</td>
+
+        <td>1 lb. of gold</td>
+
+        </tr>
+
+        <tr>
+
+        <td>500 gp</td>
+
+        <td>1 lb. of platinum</td>
+
+        </tr>
+
+        </tbody>
+
+        </table>
+    _id: qUyioT438hkwApBG
+    image: {}
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system: {}
+    sort: 0
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!BYFd9hiJGo9L5aOM.qUyioT438hkwApBG'
+  - name: Expenses
+    type: text
+    title:
+      show: true
+      level: 1
+    text:
+      format: 1
+      content: >-
+        <p>When not descending into the depths of the earth, exploring ruins for
+        lost treasures, or waging war against the encroaching darkness,
+        adventurers face more mundane realities. Even in a fantastical world,
+        people require basic necessities such as shelter, sustenance, and
+        clothing. These things cost money, although some lifestyles cost more
+        than others.</p><h2>Lifestyle Expenses</h2><p>Lifestyle expenses provide
+        you with a simple way to account for the cost of living in a fantasy
+        world. They cover your accommodations, food and drink, and all your
+        other necessities. Furthermore, expenses cover the cost of maintaining
+        your equipment so you can be ready when adventure next calls.</p><p>At
+        the start of each week or month (your choice), choose a lifestyle from
+        the Expenses table and pay the price to sustain that lifestyle. The
+        prices listed are per day, so if you wish to calculate the cost of your
+        chosen lifestyle over a thirty-day period, multiply the listed price by
+        30. Your lifestyle might change from one period to the next, based on
+        the funds you have at your disposal, or you might maintain the same
+        lifestyle throughout your character’s career.</p><p>Your lifestyle
+        choice can have consequences. Maintaining a wealthy lifestyle might help
+        you make contacts with the rich and powerful, though you run the risk of
+        attracting thieves. Likewise, living frugally might help you avoid
+        criminals, but you are unlikely to make powerful
+        connections.</p><table><caption><h4>Lifestyle
+        Expenses</h4></caption><thead><tr><td>Lifestyle</td><td>Price/Day</td></tr></thead><tbody><tr><td>Wretched</td><td>—</td></tr><tr><td>Squalid</td><td>1
+        sp</td></tr><tr><td>Poor</td><td>2 sp</td></tr><tr><td>Modest</td><td>1
+        gp</td></tr><tr><td>Comfortable</td><td>2
+        gp</td></tr><tr><td>Wealthy</td><td>4
+        gp</td></tr><tr><td>Aristocratic</td><td>10 gp
+        minimum</td></tr></tbody></table><p><strong>Wretched.</strong> You live
+        in inhumane conditions. With no place to call home, you shelter wherever
+        you can, sneaking into barns, huddling in old crates, and relying on the
+        good graces of people better off than you. A wretched lifestyle presents
+        abundant dangers. Violence, disease, and hunger follow you wherever you
+        go. Other wretched people covet your armor, weapons, and adventuring
+        gear, which represent a fortune by their standards. You are beneath the
+        notice of most people.</p><p><strong>Squalid. </strong>You live in a
+        leaky stable, a mud-floored hut just outside town, or a vermin-infested
+        boarding house in the worst part of town. You have shelter from the
+        elements, but you live in a desperate and often violent environment, in
+        places rife with disease, hunger, and misfortune. You are beneath the
+        notice of most people, and you have few legal protections. Most people
+        at this lifestyle level have suffered some terrible setback. They might
+        be disturbed, marked as exiles, or suffer from
+        disease.</p><p><strong>Poor.</strong> A poor lifestyle means going
+        without the comforts available in a stable community. Simple food and
+        lodgings, threadbare clothing, and unpredictable conditions result in a
+        sufficient, though probably unpleasant, experience. Your accommodations
+        might be a room in a flophouse or in the common room above a tavern. You
+        benefit from some legal protections, but you still have to contend with
+        violence, crime, and disease. People at this lifestyle level tend to be
+        unskilled laborers, costermongers, peddlers, thieves, mercenaries, and
+        other disreputable types.</p><p><strong>Modest. </strong>A modest
+        lifestyle keeps you out of the slums and ensures that you can maintain
+        your equipment. You live in an older part of town, renting a room in a
+        boarding house, inn, or temple. You don’t go hungry or thirsty, and your
+        living conditions are clean, if simple. Ordinary people living modest
+        lifestyles include soldiers with families, laborers, students, priests,
+        hedge wizards, and the like.</p><p><strong>Comfortable.
+        </strong>Choosing a comfortable lifestyle means that you can afford
+        nicer clothing and can easily maintain your equipment. You live in a
+        small cottage in a middle-class neighborhood or in a private room at a
+        fine inn. You associate with merchants, skilled tradespeople, and
+        military officers.</p><p><strong>Wealthy.</strong> Choosing a wealthy
+        lifestyle means living a life of luxury, though you might not have
+        achieved the social status associated with the old money of nobility or
+        royalty. You live a lifestyle comparable to that of a highly successful
+        merchant, a favored servant of the royalty, or the owner of a few small
+        businesses. You have respectable lodgings, usually a spacious home in a
+        good part of town or a comfortable suite at a fine inn. You likely have
+        a small staff of servants.</p><p><strong>Aristocratic. </strong>You live
+        a life of plenty and comfort. You move in circles populated by the most
+        powerful people in the community. You have excellent lodgings, perhaps a
+        townhouse in the nicest part of town or rooms in the finest inn. You
+        dine at the best restaurants, retain the most skilled and fashionable
+        tailor, and have servants attending to your every need. You receive
+        invitations to the social gatherings of the rich and powerful, and spend
+        evenings in the company of politicians, guild leaders, high priests, and
+        nobility. You must also contend with the highest levels of deceit and
+        treachery. The wealthier you are, the greater the chance you will be
+        drawn into political intrigue as a pawn or participant.</p><div
+        class="fvtt advice"><figure class="icon"><img
+        src="icons/skills/trades/woodcutting-logging-axe-stump.webp"
+        class="round" /></figure><article><h4>Self-Sufficiency</h4><p>The
+        expenses and lifestyles described here assume that you are spending your
+        time between adventures in town, availing yourself of whatever services
+        you can afford—paying for food and shelter, paying townspeople to
+        sharpen your sword and repair your armor, and so on. Some characters,
+        though, might prefer to spend their time away from civilization,
+        sustaining themselves in the wild by hunting, foraging, and repairing
+        their own gear.</p><p>Maintaining this kind of lifestyle doesn’t require
+        you to spend any coin, but it is time-consuming. If you spend your time
+        between adventures practicing a profession, you can eke out the
+        equivalent of a poor lifestyle. Proficiency in the Survival skill lets
+        you live at the equivalent of a comfortable
+        lifestyle.</p></article></div><h2>Food, Drink, and Lodging</h2><p>The
+        Food, Drink, and Lodging table gives prices for individual food items
+        and a single night’s lodging. These prices are included in your total
+        lifestyle expenses.</p><table border="0"><caption><h4>Food, Drink, and
+        Lodging</h4></caption><thead><tr><td>Item</td><td>Cost</td></tr></thead><tbody><tr><td
+        colspan="2"><em>Ale</em></td></tr><tr><td>Gallon</td><td>2
+        sp</td></tr><tr><td>Mug</td><td>4 cp</td></tr><tr><td>Banquet (per
+        person)</td><td>10 gp</td></tr><tr><td>Bread, loaf</td><td>2
+        cp</td></tr><tr><td>Cheese, hunk</td><td>1 sp</td></tr><tr><td
+        colspan="2"><em>Inn stay (per
+        day)</em></td></tr><tr><td>Squalid</td><td>7
+        cp</td></tr><tr><td>Poor</td><td>1 sp</td></tr><tr><td>Modest</td><td>5
+        sp</td></tr><tr><td>Comfortable</td><td>8
+        sp</td></tr><tr><td>Wealthy</td><td>2
+        gp</td></tr><tr><td>Aristocratic</td><td>4 gp</td></tr><tr><td
+        colspan="2"><em>Meals (per day)</em></td></tr><tr><td>Squalid</td><td>3
+        cp</td></tr><tr><td>Poor</td><td>6 cp</td></tr><tr><td>Modest</td><td>3
+        sp</td></tr><tr><td>Comfortable</td><td>5
+        sp</td></tr><tr><td>Wealthy</td><td>8
+        sp</td></tr><tr><td>Aristocratic</td><td>2 gp</td></tr><tr><td>Meat,
+        chunk</td><td>3 sp</td></tr><tr><td
+        colspan="2"><em>Wine</em></td></tr><tr><td>Common (pitcher)</td><td>2
+        sp</td></tr><tr><td>Fine (bottle)</td><td>10
+        gp</td></tr></tbody></table><h2>Services</h2><p>Adventurers can pay
+        nonplayer characters to assist them or act on their behalf in a variety
+        of circumstances. Most such hirelings have fairly ordinary skills, while
+        others are masters of a craft or art, and a few are experts with
+        specialized adventuring skills.</p><p>Some of the most basic types of
+        hirelings appear on the Services table. Other common hirelings include
+        any of the wide variety of people who inhabit a typical town or city,
+        when the adventurers pay them to perform a specific task. For example, a
+        wizard might pay a carpenter to construct an elaborate chest (and its
+        miniature replica) for use in the secret chest spell. A fighter might
+        commission a blacksmith to forge a special sword. A bard might pay a
+        tailor to make exquisite clothing for an upcoming performance in front
+        of the duke.</p><p>Other hirelings provide more expert or dangerous
+        services. Mercenary soldiers paid to help the adventurers take on a
+        hobgoblin army are hirelings, as are sages hired to research ancient or
+        esoteric lore. If a high-level adventurer establishes a stronghold of
+        some kind, he or she might hire a whole staff of servants and agents to
+        run the place, from a castellan or steward to menial laborers to keep
+        the stables clean. These hirelings often enjoy a long-term contract that
+        includes a place to live within the stronghold as part of the offered
+        compensation.</p><table
+        border="0"><caption><h4>Services</h4></caption><thead><tr><td>Service</td><td>Pay</td></tr></thead><tbody><tr><td
+        colspan="2"><em>Coach cab</em></td></tr><tr><td>Between towns</td><td>3
+        cp per mile</td></tr><tr><td>Within a city</td><td>1 cp</td></tr><tr><td
+        colspan="2"><em>Hireling</em></td></tr><tr><td>Skilled</td><td>2 gp per
+        day</td></tr><tr><td>Untrained</td><td>2 sp per
+        day</td></tr><tr><td>Messenger</td><td>2 cp per
+        mile</td></tr><tr><td>Road or gate toll</td><td>1
+        cp</td></tr><tr><td>Ship’s passage</td><td>1 sp per
+        mile</td></tr></tbody></table><p>Skilled hirelings include anyone hired
+        to perform a service that involves a proficiency (including weapon,
+        tool, or skill): a mercenary, artisan, scribe, and so on. The pay shown
+        is a minimum; some expert hirelings require more pay. Untrained
+        hirelings are hired for menial work that requires no particular skill
+        and can include laborers, porters, maids, and similar
+        workers.</p><h2>Spellcasting Services</h2><p>People who are able to cast
+        spells don’t fall into the category of ordinary hirelings. It might be
+        possible to find someone willing to cast a spell in exchange for coin or
+        favors, but it is rarely easy and no established pay rates exist. As a
+        rule, the higher the level of the desired spell, the harder it is to
+        find someone who can cast it and the more it costs.</p><p>Hiring someone
+        to cast a relatively common spell of 1st or 2nd level, such as
+        @UUID[Compendium.dnd5e.spells.Item.uUWb1wZgtMou0TVP]{Cure Wounds} or
+        @UUID[Compendium.dnd5e.spells.Item.3OZnNhunvRtPOQmH]{Identify}, is easy
+        enough in a city or town, and might cost 10 to 50 gold pieces (plus the
+        cost of any expensive material components). Finding someone able and
+        willing to cast a higher-level spell might involve traveling to a large
+        city, perhaps one with a university or prominent temple. Once found, the
+        spellcaster might ask for a service instead of payment—the kind of
+        service that only adventurers can provide, such as retrieving a rare
+        item from a dangerous locale or traversing a monster-infested wilderness
+        to deliver something important to a distant settlement.</p>
+    _id: ixeXj7Eqq5zPDUYo
+    image: {}
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system: {}
+    sort: 0
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!BYFd9hiJGo9L5aOM.ixeXj7Eqq5zPDUYo'
+ownership:
+  default: 0
+flags:
+  core:
+    viewMode: 2
+  dnd5e:
+    type: chapter
+    position: 5
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037416641
+  modifiedTime: 1725037416641
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+folder: null
+sort: 0
+_id: BYFd9hiJGo9L5aOM
+categories: []
+_key: '!journal!BYFd9hiJGo9L5aOM'

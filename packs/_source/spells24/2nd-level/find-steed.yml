@@ -1,0 +1,272 @@
+name: Find Steed
+system:
+  description:
+    value: "<p>You summon an otherworldly being that appears as a loyal steed in an unoccupied space of your choice within range. This creature uses the <strong>@UUID[Compendium.dnd5e.actors24.Actor.phbmobOtherworld]{Otherworldly Steed}</strong> stat block. If you already have a steed from this spell, the steed is replaced by the new one.</p><p>The steed resembles a Large, rideable animal of your choice, such as a horse, a camel, a dire wolf, or an elk. Whenever you cast the spell, choose the steed's creature type—Celestial, Fey, or Fiend—which determines certain traits in the stat block.</p><p><strong>Combat.</strong> The steed is an ally to you and your allies. In combat, it shares your Initiative count, and it functions as a &amp;Reference[controllingamount]{controlled mount} while you ride it (as defined in the rules on mounted combat). If you have the Incapacitated condition, the steed takes its turn immediately after yours and acts independently, focusing on protecting you.</p><p><strong>Disappearance of the Steed.</strong> The steed disappears if it drops to 0 Hit Points or if you die. When it disappears, it leaves behind anything it was wearing or carrying. If you cast this spell again, you decide whether you summon the steed that disappeared or a different one.</p><p><strong>Using a Higher-Level Spell Slot.</strong>\_Use the spell slot's level for the spell's level in the stat block.</p><section class=\"fvtt advice\" style=\"margin:0.5rem;padding:0.5rem\"><article><p>In addition to the noted usage of the spell's level in the steed's Traits and Actions, the following attributes are also affected.</p><table><caption>Otherworldly Steed</caption><tbody><tr><td><strong>AC</strong></td><td>10 + 1 per spell level</td></tr><tr><td><strong>HP</strong></td><td>5 + 10 per spell level (the steed has a number of Hit Dice [d10s] equal to the spell's level)</td></tr><tr><td><strong>Speed</strong></td><td>60 ft., Fly 60 ft. (requires level 4+ spell)</td></tr><tr><td><strong>PB</strong></td><td>equals your Proficiency Bonus</td></tr></tbody></table></article></section><section class=\"secret\" id=\"secret-SI4qlfj05o21BBGg\"><p><strong>Foundry Note</strong></p><p>The <strong>Summon Flying Steed</strong> activity should be used when consuming a fourth level or higher spell slot and is configured to apply the Fly Speed.</p><p>When using a second or third level spell slot, the <strong>Summon Steed</strong> activity should be used instead.</p></section>"
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '30'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: con
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: '@item.level'
+        hd: '@item.level'
+        hp: 10 * @item.level
+        attackDamage: '@item.level'
+        saveDamage: ''
+        healing: '@item.level'
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        proficiency: true
+        attacks: true
+        saves: true
+      profiles:
+        - count: ''
+          name: ''
+          _id: 75tIki6OBwIbeSvJ
+          uuid: Compendium.dnd5e.actors24.Actor.phbostCelestial0
+          level:
+            min: null
+            max: 3
+          types: []
+        - count: ''
+          name: ''
+          _id: 1Wg8ocHDB4qRwiPq
+          uuid: Compendium.dnd5e.actors24.Actor.phbostFey0000000
+          level:
+            min: null
+            max: 3
+          types: []
+        - count: ''
+          name: ''
+          _id: PjGZSSjpULYaglnm
+          uuid: Compendium.dnd5e.actors24.Actor.phbostFiend00000
+          level:
+            min: null
+            max: 3
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Summon Steed
+      img: ''
+      appliedEffects: []
+      effects: []
+    o4YsONnsS8rOOEaS:
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+        concentration: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: '@item.level'
+        hd: '@item.level'
+        hp: 10 * @item.level
+        attackDamage: '@item.level'
+        saveDamage: ''
+        healing: '@item.level'
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        proficiency: true
+        attacks: true
+        saves: true
+      profiles:
+        - count: ''
+          name: ''
+          _id: 75tIki6OBwIbeSvJ
+          uuid: Compendium.dnd5e.actors24.Actor.phbostCelestial0
+          level:
+            min: 4
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: 1Wg8ocHDB4qRwiPq
+          uuid: Compendium.dnd5e.actors24.Actor.phbostFey0000000
+          level:
+            min: 4
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: PjGZSSjpULYaglnm
+          uuid: Compendium.dnd5e.actors24.Actor.phbostFiend00000
+          level:
+            min: 4
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Summon Flying Steed
+      effects:
+        - _id: SgNNVLaKxZOVKyKx
+      _id: o4YsONnsS8rOOEaS
+      img: ''
+      appliedEffects:
+        - SgNNVLaKxZOVKyKx
+  identifier: find-steed
+_id: phbsplFindSteed0
+type: spell
+img: icons/commodities/claws/claw-blue-grey.webp
+effects:
+  - name: Flying Steed
+    origin: Compendium.dnd5e.spells24.Item.phbsplFindSteed0
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/svg/wing.svg
+    _id: SgNNVLaKxZOVKyKx
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.fly
+        mode: 4
+        value: '60'
+        priority: null
+    description: >-
+      <p>The steed has a Fly speed of 60ft. when summoned by a level 4+
+      spell.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplFindSteed0.SgNNVLaKxZOVKyKx'
+folder: 3SjcO2acsFnWegp4
+sort: 3500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425953437
+  modifiedTime: 1745256792900
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplFindSteed0'

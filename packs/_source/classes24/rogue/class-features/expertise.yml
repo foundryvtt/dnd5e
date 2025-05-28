@@ -1,0 +1,55 @@
+_id: phbrgeExpertise0
+name: Expertise
+type: feat
+folder: ymTkGscp5QEOwDlv
+img: icons/magic/symbols/chevron-elipse-circle-blue.webp
+system:
+  description:
+    value: >-
+      <p>You gain Expertise in two of your skill proficiencies of your choice.
+      Sleight of Hand and Stealth are recommended if you have proficiency in
+      them.</p><p>At Rogue level 6, you gain Expertise in two more of your skill
+      proficiencies of your choice.</p><section id="secret-d8cc1fheUe7P6H44"
+      class="secret"><p><strong>Foundry Note</strong></p><p>You will be prompted
+      for your expertise choices as you level up.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: expertise
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866292069
+  modifiedTime: 1745256764294
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeExpertise0'

@@ -1,0 +1,61 @@
+_id: phbclcDivineOrde
+name: Divine Order
+type: feat
+folder: 3wY92TRgyyyDkpmF
+img: icons/magic/light/explosion-star-glow-blue-purple.webp
+system:
+  description:
+    value: >-
+      <p>You have dedicated yourself to one of the following sacred roles of
+      your choice.</p><p><strong>Protector.</strong> Trained for battle, you
+      gain proficiency with Martial weapons and training with Heavy
+      armor.</p><p><strong>Thaumaturge.</strong> You know one extra cantrip from
+      the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj]{Cleric
+      spell list}. In addition, your mystical connection to the divine gives you
+      a bonus to your Intelligence (Arcana or Religion) checks. The bonus equals
+      your Wisdom modifier (minimum of +1).</p><section class="secret"
+      id="secret-mBkdTF86GHVjdNKD"><p><strong>Foundry Note</strong></p><p>During
+      advancement you will be able to choose which option you
+      prefer.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: Cleric
+  activities: {}
+  enchant: {}
+  identifier: divine-order
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866373481
+  modifiedTime: 1745256760771
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!phbclcDivineOrde'

@@ -1,0 +1,151 @@
+_id: dmgWandOfWeb0000
+name: Wand of Web
+type: equipment
+img: icons/weapons/staves/staff-crescent-purple.webp
+system:
+  activities:
+    P7PnWcum8exAm2EG:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplWeb0000000
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: P7PnWcum8exAm2EG
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d6 + 1
+    max: '7'
+  description:
+    value: >-
+      <p><em>Wand, Uncommon (Requires Attunement by a
+      Spellcaster)</em></p><p>This wand has 7 charges. While holding it, you can
+      expend 1 charge to cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplWeb0000000]{Web} (save DC 13)
+      from it.</p><p><em><strong>Regaining Charges.</strong></em> The wand
+      regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's
+      last charge, roll [[/r 1d20]]. On a 1, the wand crumbles into ashes and is
+      destroyed.</p>
+    chat: ''
+  identifier: wand-of-web
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wand
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+effects: []
+folder: rLoBplj1TIznxeWI
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712704801
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -400000
+ownership:
+  default: 0
+_key: '!items!dmgWandOfWeb0000'

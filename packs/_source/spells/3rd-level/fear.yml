@@ -1,0 +1,159 @@
+_id: XXUDGFELgoskdOD0
+name: Fear
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You project a phantasmal image of a creature's worst fears. Each
+      creature in a 30-foot cone must succeed on a Wisdom saving throw or drop
+      whatever it is holding and become &amp;Reference[Frightened] for the
+      duration.</p><p>While Frightened by this spell, a creature must take the
+      Dash action and move away from you by the safest available route on each
+      of its turns, unless there is nowhere to move. If the creature ends its
+      turn in a location where it doesn't have line of sight to you, the
+      creature can make a Wisdom saving throw. On a successful save, the spell
+      ends for that creature.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cone
+      size: '30'
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: ill
+  materials:
+    value: A white feather or the heart of a hen.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 4QpReACTSQTg2KTw
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: fear
+sort: 0
+flags: {}
+img: icons/magic/control/fear-fright-monster-purple-blue.webp
+effects:
+  - name: Fear
+    origin: Compendium.dnd5e.spells.Item.XXUDGFELgoskdOD0
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: 4QpReACTSQTg2KTw
+    changes: []
+    description: >-
+      <p>The target drops whatever it is holding and become Frightened for the
+      duration. While Frightened by this spell, a creature must take the Dash
+      action and move away from the caster by the safest available route on each
+      of its turns, unless there is nowhere to move.</p>
+    transfer: false
+    statuses:
+      - frightened
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/control/fear-fright-monster-purple-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!XXUDGFELgoskdOD0.4QpReACTSQTg2KTw'
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037358436
+  modifiedTime: 1725992720569
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!XXUDGFELgoskdOD0'

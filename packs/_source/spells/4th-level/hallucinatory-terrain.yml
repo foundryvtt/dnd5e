@@ -1,0 +1,120 @@
+_id: sTIkQK7KuQNOyY0C
+name: Hallucinatory Terrain
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You make natural terrain in a 150-foot cube in range look, sound, and
+      smell like some other sort of natural terrain. Thus, open fields or a road
+      can be made to resemble a swamp, hill, crevasse, or some other difficult
+      or impassable terrain. A pond can be made to seem like a grassy meadow, a
+      precipice like a gentle slope, or a rock-strewn gully like a wide and
+      smooth road. Manufactured structures, Equipment, and creatures within the
+      area aren't changed in appearance.</p><p>The tactile characteristics of
+      the terrain are unchanged, so creatures entering the area are likely to
+      see through the Illusion. If the difference isn't obvious by touch, a
+      creature carefully examining the Illusion can attempt an Intelligence
+      (Investigation) check against your spell save DC to disbelieve it. A
+      creature who discerns the Illusion for what it is, sees it as a vague
+      image superimposed on the terrain.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: '24'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cube
+      size: '150'
+      contiguous: false
+  range:
+    value: '300'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: ill
+  materials:
+    value: A stone, a twig, and a bit of green plant
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: hallucinatory-terrain
+sort: 0
+flags: {}
+img: icons/magic/air/air-burst-spiral-teal-green.webp
+effects: []
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037365938
+  modifiedTime: 1725992723092
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!sTIkQK7KuQNOyY0C'

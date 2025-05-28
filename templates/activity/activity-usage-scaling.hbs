@@ -1,6 +1,5 @@
 <section>
     {{~#if hasScaling}}
-    {{> "dnd5e.activity-usage-notes" }}
     <fieldset>
         <legend>{{ localize "DND5E.USAGE.SECTION.Scaling" }}</legend>
         {{#if spellSlots}}
@@ -22,5 +21,6 @@
         </div>
         {{/if}}
     </fieldset>
+    {{> "dnd5e.activity-usage-notes" }}
     {{/if~}}
 </section>

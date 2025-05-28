@@ -1,0 +1,780 @@
+_id: dmgRodOfLordlyMi
+name: Rod of Lordly Might
+type: weapon
+img: icons/weapons/staves/staff-ornate-gold-jeweled.webp
+system:
+  activities:
+    8Wv808WO8l4pWlUW:
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: ''
+      _id: 8Wv808WO8l4pWlUW
+    apuqiDlUPRWfQkhf:
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      attack:
+        ability: ''
+        bonus: '-3'
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 6
+            bonus: '-3'
+            types:
+              - fire
+            scaling:
+              number: 1
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 200000
+      name: Button 1 Attack
+      _id: apuqiDlUPRWfQkhf
+      img: ''
+      appliedEffects: []
+    BsQ1WDJiSRkltvi5:
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 8
+            bonus: ''
+            types:
+              - slashing
+            scaling:
+              number: 1
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 300000
+      name: Button 2 Attack
+      _id: BsQ1WDJiSRkltvi5
+      img: ''
+      appliedEffects: []
+    CVIAWq4QHDwg2R3U:
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: true
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 8
+            bonus: ''
+            types:
+              - piercing
+            scaling:
+              number: 1
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 400000
+      name: Button 3 Attack
+      _id: CVIAWq4QHDwg2R3U
+      img: ''
+      appliedEffects: []
+    Q9R9WCGGIX935S4g:
+      type: save
+      name: Drain Life
+      _id: Q9R9WCGGIX935S4g
+      sort: 600000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 6
+            bonus: ''
+            types:
+              - necrotic
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '17'
+      img: ''
+      appliedEffects: []
+    YhJPINea1brL2HKP:
+      type: save
+      name: Paralyze
+      sort: 700000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        value: ''
+      effects:
+        - _id: vi5lX9Cyx51e2fNs
+          onSave: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '17'
+      _id: YhJPINea1brL2HKP
+      img: ''
+      appliedEffects:
+        - cBnYRJkAGVoHDyiN
+    LxHj2WU81djz502O:
+      type: save
+      name: Terrify
+      sort: 800000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        value: ''
+      effects:
+        - _id: cBnYRJkAGVoHDyiN
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+        value: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: you can see
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '17'
+      _id: LxHj2WU81djz502O
+      img: ''
+      appliedEffects:
+        - cBnYRJkAGVoHDyiN
+    5Mhd70dNk5UBYbXW:
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 10
+            bonus: ''
+            types:
+              - slashing
+            scaling:
+              number: 1
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 350000
+      name: Button 2 Versatile Attack
+      _id: 5Mhd70dNk5UBYbXW
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Rod, Legendary (Requires Attunement)</em></p><p>This rod has a
+      flanged head, and it functions as a magic Mace that grants a +3 bonus to
+      attack rolls and damage rolls made with it. The rod has properties
+      associated with six different buttons that are set in a row along the
+      haft. It has three other properties as well, detailed
+      below.</p><p><em><strong>Buttons</strong></em>. You can press one of the
+      following buttons as a Bonus Action; a button's effect lasts until you
+      push a different button or until you push the same button again, which
+      causes the rod to revert to its normal form:</p><details><summary>Button
+      Effects</summary><p><strong>Button 1.</strong> A fiery blade sprouts from
+      the end opposite the rod's flanged head. The flames shed Bright Light in a
+      40-foot radius and Dim Light for an additional 40 feet, and the blade
+      functions as a magic Longsword or Shortsword (your choice) that deals an
+      extra 2d6 Fire damage on a hit.</p><p><strong>Button 2.</strong> The rod's
+      flanged head folds down and two crescent-shaped blades spring out,
+      transforming the rod into a magic Battleaxe that grants a +3 bonus to
+      attack rolls and damage rolls made with it.</p><p><strong>Button
+      3.</strong> The rod's flanged head folds down, a spear point springs from
+      the rod's tip, and the rod's handle lengthens into a 6-foot haft,
+      transforming the rod into a magic Spear that grants a +3 bonus to attack
+      rolls and damage rolls made with it.</p><p><strong>Button 4.</strong> The
+      rod transforms into a climbing pole up to 50 feet long (you specify the
+      length), though the rod's buttons remain within your reach. In surfaces as
+      hard as granite, a spike at the bottom and three hooks at the top anchor
+      the pole. Horizontal bars 3 inches long fold out from the sides, 1 foot
+      apart, forming a ladder. The pole can bear up to 4,000 pounds. More weight
+      or lack of solid anchoring causes the rod to revert to its normal
+      form.</p><p><strong>Button 5.</strong> The rod transforms into a handheld
+      battering ram and grants its user a +10 bonus to Strength (Athletics)
+      checks made to break through doors, barricades, and other
+      barriers.</p><p><strong>Button 6.</strong> The rod assumes or remains in
+      its normal form and indicates magnetic north. (Nothing happens if this
+      function of the rod is used in a location that has no magnetic north.) The
+      rod also gives you knowledge of your approximate depth beneath the ground
+      or your height above it.</p></details><p><strong>Drain Life.</strong> When
+      you hit a creature with a melee attack using the rod, you can force the
+      target to make a DC 17 Constitution saving throw. On a failed save, the
+      target takes an extra 4d6 Necrotic damage, and you regain a number of Hit
+      Points equal to half that Necrotic damage. Once used, this property can't
+      be used again until the next dawn.</p><p><strong>Paralyze.</strong> When
+      you hit a creature with a melee attack using the rod, you can force the
+      target to make a DC 17 Constitution saving throw. On a failed save, the
+      target has the &amp;Reference[Paralyzed apply=false] condition for 1
+      minute. The target repeats the save at the end of each of its turns,
+      ending the effect on a success. Once used, this property can't be used
+      again until the next dawn.</p><p><strong>Terrify.</strong> While holding
+      the rod, you can take a Magic action to force each creature you can see
+      within 30 feet of yourself to make a DC 17 Wisdom saving throw. On a
+      failed save, a target has the &amp;Reference[Frightened apply=false]
+      condition for 1 minute. A Frightened target repeats the save at the end of
+      each of its turns, ending the effect on itself on a success. Once used,
+      this property can't be used again until the next dawn.</p><section
+      class="secret" id="secret-o1BCgF1HX5lyWN4U"><p><strong>Foundry
+      Note</strong></p><p>An activity has been added for each usable button that
+      implements the attack with the relevant bonuses.</p><p>The properties are
+      also implemented as activities and track their own uses per
+      dawn.</p><p>When using Button 5, you can manually add a +10 bonus in the
+      Situational Bonus field when making the check.</p></section>
+    chat: ''
+  identifier: rod-of-lordly-might
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: true
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: 3
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: simpleM
+    baseItem: mace
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: 3
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+    units: ft
+  mastery: sap
+effects:
+  - name: Frightened
+    img: icons/magic/control/fear-fright-white.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgRodOfLordlyMi
+    transfer: false
+    _id: cBnYRJkAGVoHDyiN
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - frightened
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730389093102
+      modifiedTime: 1730389252250
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgRodOfLordlyMi.cBnYRJkAGVoHDyiN'
+  - name: Paralyzed
+    img: icons/magic/control/debuff-energy-hold-pink.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgRodOfLordlyMi
+    transfer: false
+    _id: vi5lX9Cyx51e2fNs
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - paralyzed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730390205505
+      modifiedTime: 1730390241432
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgRodOfLordlyMi.vi5lX9Cyx51e2fNs'
+folder: XVIITMl9kCCSjZQz
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703085
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgRodOfLordlyMi'

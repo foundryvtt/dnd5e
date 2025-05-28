@@ -1,0 +1,235 @@
+_id: dmgDeckOfIllusio
+name: Deck of Illusions
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/sundries/gaming/playing-cards-black.webp
+system:
+  activities:
+    FE7gpKlVdto3qvBT:
+      type: utility
+      name: Count Number of Cards
+      _id: FE7gpKlVdto3qvBT
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: 1d20 - 1
+            target: ''
+            scaling: {}
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: You find the deck missing some cards.
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: The Deck of Illusions
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    MLOgyKzX7bYibzpV:
+      type: summon
+      name: Draw Card
+      _id: MLOgyKzX7bYibzpV
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes:
+        - tiny
+        - sm
+        - med
+        - lg
+        - huge
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: VP2dV3II1UkimGJz
+          uuid: Compendium.dnd5e.actors24.Actor.dmgIllusoryCreat
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '34'
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Uncommon</em></p></div><p>This box contains a
+      set of cards. A full deck has 34 cards: 32 depicting specific creatures
+      and two with a mirrored surface. A deck found as treasure is usually
+      missing [[/r 1d20 − 1#Missing cards]] cards.</p><p>The magic of the deck
+      functions only if its cards are drawn at random. You can take a Magic
+      action to draw a card at random from the deck and throw it to the ground
+      at a point within 30 feet of yourself. An illusion of a creature,
+      determined by rolling on the Deck of Illusions table, forms over the
+      thrown card and remains until dispelled. The illusory creature created by
+      the card looks and behaves like a real creature of its kind, except that
+      it can do no harm. While you are within 120 feet of the illusory creature
+      and can see it, you can take a Magic action to move it anywhere within 30
+      feet of its card.</p><p>Any physical interaction with the illusory
+      creature reveals it to be false, because objects pass through it. A
+      creature that takes a Study action to visually inspect the illusory
+      creature identifies it as an illusion with a successful [[/check
+      ability=int skill=inv dc=15 format=long]]. The illusion lasts until its
+      card is moved or the illusion is dispelled (using a
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
+      Magic}</em> spell or a similar effect). When the illusion ends, the image
+      on its card disappears, and that card can't be used
+      again.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgDeckOfIllusio
+      rollable]</p><section class="secret"
+      id="secret-dg7rbpSc8GfB0AXm"><p><strong>Foundry Note</strong></p><p>Due to
+      the single-use nature of each card, it is recommended to import a copy of
+      the @UUID[Compendium.dnd5e.tables24.RollTable.dmgDeckOfIllusio]{table} and
+      insert its UUID into the @Embed enricher, above.</p><p>Additionally, when
+      first obtained, the GM or player should use the <strong>Count Number of
+      Cards</strong> activity to randomly determine the total number of cards
+      remaining in the deck. After one use, it may be
+      deleted.</p></section><p></p>
+    chat: ''
+  identifier: deck-of-illusions
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256803902
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 10400000
+ownership:
+  default: 0
+_key: '!items!dmgDeckOfIllusio'

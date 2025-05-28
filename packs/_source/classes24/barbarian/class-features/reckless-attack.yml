@@ -1,0 +1,91 @@
+_id: phbbrbRecklessAt
+name: Reckless Attack
+type: feat
+img: icons/skills/melee/blade-tips-triple-bent-white.webp
+system:
+  description:
+    value: >-
+      <p>You can throw aside all concern for defense to attack with increased
+      ferocity. When you make your first attack roll on your turn, you can
+      decide to attack recklessly. Doing so gives you Advantage on attack rolls
+      using Strength until the start of your next turn, but attack rolls against
+      you have Advantage during that time.</p><section
+      id="secret-W7MI2ZVKsMQcSW6d" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature includes an Active Effect for tracking
+      whether you are reckless or not but it does not automate Advantage on your
+      attacks or attacks against you.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: Barbarian
+  activities: {}
+  enchant: {}
+  identifier: reckless-attack
+effects:
+  - name: Reckless
+    origin: Compendium.dnd5e.classes24.Item.phbbrbRecklessAt
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/skills/melee/blade-tips-triple-bent-white.webp
+    _id: XA0GhXVB54U2IuRP
+    type: base
+    system: {}
+    changes: []
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbbrbRecklessAt.XA0GhXVB54U2IuRP'
+folder: p6WDpW0gzmKfhGad
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940469
+  modifiedTime: 1745256760101
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbRecklessAt'

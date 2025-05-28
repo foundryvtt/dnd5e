@@ -1,0 +1,271 @@
+_id: dmgMirrorOfLifeT
+name: Mirror of Life Trapping
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/magic/air/wind-vortex-swirl-purple.webp
+system:
+  activities:
+    LBblEPSD08p00pe2:
+      type: save
+      _id: LBblEPSD08p00pe2
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: Sees its reflection
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: cha
+        dc:
+          calculation: ''
+          formula: '15'
+      name: ''
+      img: ''
+      appliedEffects: []
+    7Gg3wdYSJRWDNIOH:
+      type: utility
+      name: Add Trapped Creature
+      _id: 7Gg3wdYSJRWDNIOH
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    spCmQeov51Eu4Edi:
+      type: utility
+      name: Free Trapped Creature
+      _id: spCmQeov51Eu4Edi
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '12'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Very Rare</em></p><p>When this 4-foot-tall,
+      2-foot-wide mirror is viewed indirectly, its surface shows faint images of
+      creatures. The mirror weighs 50 pounds, and it has AC 11, HP 10, Immunity
+      to Poison and Psychic damage, and Vulnerability to Bludgeoning damage. It
+      shatters and is destroyed when reduced to 0 Hit Points.</p><p>If the
+      mirror is hanging on a vertical surface and you are within 5 feet of it,
+      you can take a Magic action and use a command word to activate it. It
+      remains activated until you take a Magic action and repeat the command
+      word to deactivate it.</p><p>Any creature other than you that sees its
+      reflection in the activated mirror while within 30 feet of the mirror must
+      succeed on a DC 15 Charisma saving throw or be trapped, along with
+      anything it is wearing or carrying, in one of the mirror's twelve
+      extradimensional cells. A creature that knows the mirror's nature makes
+      the save with Advantage, and Constructs succeed on the save
+      automatically.</p><p>An extradimensional cell is an infinite expanse
+      filled with thick fog that reduces visibility to 10 feet. Creatures
+      trapped in the mirror's cells don't age, and they don't need to eat,
+      drink, or sleep. A creature trapped within a cell can escape using magic
+      that permits planar travel. Otherwise, the creature is confined to the
+      cell until freed.</p><p>If the mirror traps a creature but its twelve
+      extradimensional cells are already occupied, the mirror frees one trapped
+      creature at random to accommodate the new prisoner. A freed creature
+      appears in an unoccupied space within sight of the mirror but facing away
+      from it. If the mirror is shattered, all creatures it contains are freed
+      and appear in unoccupied spaces near it.</p><p>While within 5 feet of the
+      mirror, you can take a Magic action to name one creature trapped in it or
+      call out a particular cell by number. The creature named or contained in
+      the named cell appears as an image on the mirror's surface. You and the
+      creature can then communicate.</p><p>In a similar way, you can take a
+      Magic action and use a second command word to free one creature trapped in
+      the mirror. The freed creature appears, along with its possessions, in the
+      unoccupied space nearest to the mirror and facing away from
+      it.</p><p>Placing the mirror inside an extradimensional space created by a
+      <em>Bag of Holding</em>, <em>Portable Hole</em>, or similar item instantly
+      destroys both items and opens a gate to the Astral Plane. The gate
+      originates where the one item was placed inside the other. Any creature
+      within 10 feet of the gate and not behind Total Cover is sucked through it
+      to a random location on the Astral Plane. The gate then closes. The gate
+      is one-way only and can't be reopened.</p><section
+      id="secret-wD2MAubhr1RWqA6v" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This item has a max uses of 12 which can be used to
+      track the number of creatures trapped within the mirror. The
+      <strong>Add/Free Trapped Creature</strong> activities can be used to
+      increment/decrement that number.</p></section>
+    chat: ''
+  identifier: mirror-of-life-trapping
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712701447
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 22100000
+ownership:
+  default: 0
+_key: '!items!dmgMirrorOfLifeT'

@@ -1,0 +1,268 @@
+_id: dmgBagOfBeans000
+name: Bag of Beans
+type: equipment
+folder: guHYjt0gjPLU2wCs
+img: icons/containers/bags/coinpouch-simple-leather-tan.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous Item, Rare</em></p><p>This heavy cloth bag contains 3d4
+      dry beans when found. The bag weighs half a pound regardless of how many
+      beans it contains and becomes a
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagPouch000000]{nonmagical item}
+      when it no longer contains any beans.</p><p>If you dump one or more beans
+      out of the bag, they explode in a 10-foot-radius Sphere centered on them.
+      All the dumped beans are destroyed in the explosion, and each creature in
+      the Sphere, including you, makes a DC 15 Dexterity saving throw, taking
+      5d4 Force damage on a failed save or half as much damage on a successful
+      one.</p><p>If you remove a bean from the bag, plant it in dirt or sand,
+      and then water it, the bean disappears as it produces an effect 1 minute
+      later from the ground where it was planted. The GM can choose an effect
+      from the following table or determine it
+      randomly.</p><details><summary>Bag of Beans Effect (click to
+      expand)</summary><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgBagOfBeansEff
+      rollable caption=false]</p></details><p></p><section class="secret"
+      id="secret-Ksf2KyYXOK1HhLmm"><p><strong>Foundry Note</strong></p><p>Upon
+      obtaining this item, the <strong>Count Beans</strong> activity can be used
+      to determine the number of dry beans contained within and set this item's
+      number of uses accordingly.</p></section>
+    chat: ''
+  identifier: bag-of-beans
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  properties:
+    - mgc
+    - weightlessContents
+  capacity:
+    type: items
+    value: 12
+  type:
+    value: wondrous
+  uses:
+    max: '12'
+    spent: 12
+  activities:
+    pCPfWEoVCDCMzl58:
+      type: utility
+      name: Count Beans
+      _id: pCPfWEoVCDCMzl58
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Upon discovering the bag.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-3d4'
+            target: ''
+            scaling: {}
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: 3d4 dry beans found in bag.
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: Held Bag of Beans
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    2OuJC3aroy0tJ8SW:
+      type: save
+      name: Dump Beans
+      _id: 2OuJC3aroy0tJ8SW
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: Object interaction
+      consumption:
+        scaling:
+          allowed: true
+          max: '@item.uses.value'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '10'
+          count: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: 4
+            bonus: ''
+            types:
+              - force
+            scaling:
+              mode: ''
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects: []
+    fo7GQpsx1ryDXtPU:
+      type: utility
+      _id: fo7GQpsx1ryDXtPU
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: Object interaction
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: Dirt or sand
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Plant Bean
+      img: ''
+      appliedEffects: []
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712697960
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 350000
+ownership:
+  default: 0
+_key: '!items!dmgBagOfBeans000'

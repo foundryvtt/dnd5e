@@ -1,0 +1,54 @@
+_id: LkepRN2rP3Hp4orY
+name: Grasping Tendrils
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>the [[lookup @name lowercase]] can have up to
+      six tendrils at a time. Each tendril can be attacked (AC 20; <strong>10
+      hit points</strong>; immunity to poison and <em>psychic damage</em>).
+      </p><p>Destroying a tendril deals no damage to the [[lookup @name
+      lowercase]], which can extrude a replacement tendril on its next turn. A
+      tendril can also be broken if a creature takes an action and succeeds on a
+      <strong>DC 15 Strength check</strong> against it.</p></section><p>the
+      [[lookup @name lowercase]] can have up to six tendrils at a time. Each
+      tendril can be attacked. A tendril can also be broken if a creature takes
+      an action and succeeds on a Strength check against it.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: grasping-tendrils
+flags: {}
+img: icons/magic/nature/root-vine-entangle-foot-green.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304969727
+  modifiedTime: 1725992572299
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!LkepRN2rP3Hp4orY'

@@ -1,0 +1,131 @@
+_id: dmgPotionOfMindR
+name: Potion of Mind Reading
+type: consumable
+folder: 4NjJfCbRAVhw8ESv
+img: icons/consumables/potions/bottle-round-corked-pink.webp
+system:
+  activities:
+    gwZYxagDcgDZp04h:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDetectThou
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+          - concentration
+        spellbook: true
+      _id: gwZYxagDcgDZp04h
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '10'
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: false
+    max: ''
+  description:
+    value: >-
+      <p><em>Potion, Rare</em></p><p>When you drink this potion, you gain the
+      effect of the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplDetectThou]{Detect Thoughts}
+      spell (save DC 13) for 10 minutes (no Concentration required).</p><p>This
+      potion's dense, purple liquid has an ovoid cloud of pink floating in
+      it.</p>
+    chat: ''
+  identifier: potion-of-mind-reading
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: potion
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256807587
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgPotionOfMindR'

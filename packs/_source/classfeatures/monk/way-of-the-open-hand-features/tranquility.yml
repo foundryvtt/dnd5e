@@ -1,0 +1,106 @@
+_id: rBDZLatuoolT2FUW
+name: Tranquility
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Beginning at 11th level, you can enter a special meditation that
+      surrounds you with an aura of peace. At the end of a long rest, you gain
+      the effect of a
+      @UUID[Compendium.dnd5e.spells.Item.gvdA9nPuWLck4tBl]{Sanctuary} spell that
+      lasts until the start of your next long rest (the spell can end early as
+      normal). The saving throw DC for the spell equals 8 + your Wisdom modifier
+      + your proficiency bonus.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Way of the Open Hand 11
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: wis
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: tranquility
+flags: {}
+img: icons/magic/nature/tree-spirit-blue.webp
+effects: []
+folder: MXzsbYUTe9IwCyHP
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037388992
+  modifiedTime: 1725992290111
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!rBDZLatuoolT2FUW'

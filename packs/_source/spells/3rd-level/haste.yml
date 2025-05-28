@@ -1,0 +1,179 @@
+_id: Szvk5FEVQW3uhJi5
+name: Haste
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Choose a willing creature that you can see within range. Until the
+      spell ends, the target's speed is doubled, it gains a +2 bonus to AC, it
+      has advantage on Dexterity Saving Throws, and it gains an additional
+      action on each of its turns. That action can be used only to take the
+      Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object
+      action.</p><p>When the spell ends, the target can't move or take Actions
+      until after its next turn, as a wave of lethargy sweeps over it.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: trs
+  materials:
+    value: A shaving of licorice root
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: DEPrzDiNHOqKj4Hj
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: haste
+sort: 0
+flags: {}
+img: icons/magic/control/buff-flight-wings-runes-purple.webp
+effects:
+  - name: Haste
+    origin: Compendium.dnd5e.spells.Item.Szvk5FEVQW3uhJi5
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: DEPrzDiNHOqKj4Hj
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.attributes.movement.burrow
+        mode: 1
+        value: '2'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 1
+        value: '2'
+        priority: null
+      - key: system.attributes.movement.fly
+        mode: 1
+        value: '2'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 1
+        value: '2'
+        priority: null
+      - key: system.attributes.movement.walk
+        mode: 1
+        value: '2'
+        priority: null
+    description: >-
+      <p>Until the spell ends, the target's speed is doubled, it gains a +2
+      bonus to AC, it has advantage on Dexterity Saving Throws, and it gains an
+      additional action on each of its turns. That action can be used only to
+      take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an
+      Object action.</p>
+    transfer: false
+    statuses: []
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.yqUDoxk4x0NWG5Bz.ActiveEffect.YtN8kTDQyxFaxpEx
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/control/buff-flight-wings-runes-purple.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!Szvk5FEVQW3uhJi5.DEPrzDiNHOqKj4Hj'
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037356722
+  modifiedTime: 1725992720032
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Szvk5FEVQW3uhJi5'

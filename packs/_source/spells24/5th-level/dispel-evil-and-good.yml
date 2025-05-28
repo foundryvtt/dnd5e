@@ -1,0 +1,268 @@
+name: Dispel Evil and Good
+system:
+  description:
+    value: >-
+      <p>For the duration, Celestials, Elementals, Fey, Fiends, and Undead have
+      Disadvantage on attack rolls against you. You can end the spell early by
+      using either of the following special functions.</p><p><strong>Break
+      Enchantment.</strong> As a Magic action, you touch a creature that is
+      possessed by or has the &amp;Reference[Charmed] or
+      &amp;Reference[Frightened] condition from one or more creatures of the
+      types above. The target is no longer possessed, Charmed, or Frightened by
+      such creatures.</p><p><strong>Dismissal.</strong> As a Magic action, you
+      target one creature you can see within 5 feet of you that has one of the
+      creature types above. The target must succeed on a Charisma saving throw
+      or be sent back to its home plane if it isn't there already. If they
+      aren't on their home plane, Undead are sent to the Shadowfell, and Fey are
+      sent to the Feywild.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: powdered silver and iron
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: true
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Celestial, Elemental, Fey, Fiend, or Undead
+        override: true
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Dismissal
+      img: ''
+      appliedEffects:
+        - RMeb9TUrFdhXMTzz
+    eBbyE0du7mEJWDbZ:
+      type: utility
+      name: Break Enchantment
+      _id: eBbyE0du7mEJWDbZ
+      sort: 300000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Celestial, Elemental, Fey, Fiend, or Undead
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    0vS3We98acymzUXC:
+      type: utility
+      name: Cast
+      _id: 0vS3We98acymzUXC
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: RMeb9TUrFdhXMTzz
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+      appliedEffects:
+        - RMeb9TUrFdhXMTzz
+  identifier: dispel-evil-and-good
+_id: phbsplDispelEvil
+type: spell
+img: icons/magic/holy/yin-yang-balance-symbol.webp
+effects:
+  - name: Dispelling Evil and Good
+    origin: Compendium.dnd5e.spells24.Item.phbsplDispelEvil
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/light/orb-hands-humanoid-yellow.webp
+    _id: RMeb9TUrFdhXMTzz
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>For the duration, Celestials, Elementals, Fey, Fiends, and Undead have
+      Disadvantage on attack rolls against you. You can end the spell early by
+      using either of the following special functions: <strong>Break
+      Enchantment</strong> or <strong>Dismissal</strong>.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplDispelEvil.RMeb9TUrFdhXMTzz'
+folder: beZ8MTpWY2cMEUlp
+sort: 2300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425950100
+  modifiedTime: 1745256790696
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDispelEvil'

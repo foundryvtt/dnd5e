@@ -1,0 +1,1240 @@
+_id: dmgArmorOfResist
+name: Armor of Resistance
+type: equipment
+folder: 1kn4uV4dTVVduLjA
+img: icons/equipment/chest/breastplate-layered-gold.webp
+system:
+  activities:
+    WBZbIEyjUkYdQ6i2:
+      type: enchant
+      name: Armor of Resistance
+      _id: WBZbIEyjUkYdQ6i2
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: YreDFSu9z9mGCWt1
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - YP420EGhAHmNVa8w
+            item: []
+        - _id: LTByr2rsRPBLLOA0
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - ACmdUQgMzhh6BiJs
+            item: []
+        - _id: MqubvD3XEwB7DRST
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - Lakck2k6LIxzlncZ
+            item: []
+        - _id: lsPKUk288Jkvahsp
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - nP2MPjGkjwc2qoa7
+            item: []
+        - _id: 18IZ8X8zpDXyN33T
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - MHtyWzlMMBeUoFnz
+            item: []
+        - _id: CfxFdUSiXkOUXym6
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - OVh17qutRZ4vceWw
+            item: []
+        - _id: VST1qNRu1dHDzkD2
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - R2WuyXjV8Z8E0wKu
+            item: []
+        - _id: mmp5O2pZOxJUc2vq
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - meu3jAB2SZjKZrUC
+            item: []
+        - _id: jyWNVNHLYdxvCOQz
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - MOoO1WhULDcQtooN
+            item: []
+        - _id: cbsuJ2tdbBuT5e8U
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - FtKhRdQT4zB1DG4f
+            item: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      img: ''
+      appliedEffects:
+        - YreDFSu9z9mGCWt1
+        - LTByr2rsRPBLLOA0
+        - MqubvD3XEwB7DRST
+        - lsPKUk288Jkvahsp
+        - 18IZ8X8zpDXyN33T
+        - CfxFdUSiXkOUXym6
+        - VST1qNRu1dHDzkD2
+        - mmp5O2pZOxJUc2vq
+        - jyWNVNHLYdxvCOQz
+        - cbsuJ2tdbBuT5e8U
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Armor (Any Light, Medium, or Heavy), Rare (Requires
+      Attunement)</em></p><p>You have Resistance to one type of damage while you
+      wear this armor. The GM chooses the type or determines it randomly by
+      rolling on the following
+      table.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgArmorOfResist
+      rollable
+      caption=false]</p><p>@Embed[Compendium.dnd5e.content24.JournalEntry.dmgFoundryRefere.JournalEntryPage.Ok4iCgD25ENgoRxE
+      cite=false caption=false classes="hide-in-embed"]</p>
+    chat: ''
+  identifier: armor-of-resistance
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ''
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - type: enchantment
+    name: Armor of Acid Resistance
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    _id: YreDFSu9z9mGCWt1
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Acid Resistance'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmorOfResist
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: rare
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/equipment/chest/breastplate-layered-gold.webp
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '4000'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729892397256
+      modifiedTime: 1745438836208
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgArmorOfResist.YreDFSu9z9mGCWt1'
+  - type: enchantment
+    name: Armor of Cold Resistance
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Cold Resistance'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmorOfResist
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: rare
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/equipment/chest/breastplate-layered-gold.webp
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '4000'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729893003088
+      modifiedTime: 1745438836208
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: LTByr2rsRPBLLOA0
+    _key: '!items.effects!dmgArmorOfResist.LTByr2rsRPBLLOA0'
+  - type: enchantment
+    name: Armor of Fire Resistance
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Fire Resistance'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmorOfResist
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: rare
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/equipment/chest/breastplate-layered-gold.webp
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '4000'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729893005605
+      modifiedTime: 1745438836208
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: MqubvD3XEwB7DRST
+    _key: '!items.effects!dmgArmorOfResist.MqubvD3XEwB7DRST'
+  - type: enchantment
+    name: Armor of Force Resistance
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Force Resistance'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmorOfResist
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: rare
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/equipment/chest/breastplate-layered-gold.webp
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '4000'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729893007482
+      modifiedTime: 1745438836208
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: lsPKUk288Jkvahsp
+    _key: '!items.effects!dmgArmorOfResist.lsPKUk288Jkvahsp'
+  - type: enchantment
+    name: Armor of Lightning Resistance
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Lightning Resistance'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmorOfResist
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: rare
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/equipment/chest/breastplate-layered-gold.webp
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '4000'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729893010452
+      modifiedTime: 1745438836208
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: 18IZ8X8zpDXyN33T
+    _key: '!items.effects!dmgArmorOfResist.18IZ8X8zpDXyN33T'
+  - type: enchantment
+    name: Armor of Necrotic Resistance
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Necrotic Resistance'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmorOfResist
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: rare
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/equipment/chest/breastplate-layered-gold.webp
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '4000'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729893012660
+      modifiedTime: 1745438836208
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: CfxFdUSiXkOUXym6
+    _key: '!items.effects!dmgArmorOfResist.CfxFdUSiXkOUXym6'
+  - type: enchantment
+    name: Armor of Poison Resistance
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Poison Resistance'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmorOfResist
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: rare
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/equipment/chest/breastplate-layered-gold.webp
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '4000'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729893014795
+      modifiedTime: 1745438836208
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: VST1qNRu1dHDzkD2
+    _key: '!items.effects!dmgArmorOfResist.VST1qNRu1dHDzkD2'
+  - type: enchantment
+    name: Armor of Psychic Resistance
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Psychic Resistance'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmorOfResist
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: rare
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/equipment/chest/breastplate-layered-gold.webp
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '4000'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729893016849
+      modifiedTime: 1745438836208
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: mmp5O2pZOxJUc2vq
+    _key: '!items.effects!dmgArmorOfResist.mmp5O2pZOxJUc2vq'
+  - type: enchantment
+    name: Armor of Radiant Resistance
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Radiant Resistance'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmorOfResist
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: rare
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/equipment/chest/breastplate-layered-gold.webp
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '4000'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729893019082
+      modifiedTime: 1745438836208
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: jyWNVNHLYdxvCOQz
+    _key: '!items.effects!dmgArmorOfResist.jyWNVNHLYdxvCOQz'
+  - type: enchantment
+    name: Armor of Thunder Resistance
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    disabled: true
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: '{} of Thunder Resistance'
+        priority: null
+      - key: system.description.value
+        mode: 5
+        value: >-
+          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmorOfResist
+          caption=false]</p>
+        priority: null
+      - key: system.properties
+        mode: 2
+        value: mgc
+        priority: null
+      - key: system.rarity
+        mode: 5
+        value: rare
+        priority: null
+      - key: system.attunement
+        mode: 5
+        value: required
+        priority: null
+      - key: img
+        mode: 5
+        value: icons/equipment/chest/breastplate-layered-gold.webp
+        priority: null
+      - key: system.price.value
+        mode: 2
+        value: '4000'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729893021163
+      modifiedTime: 1745438836208
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: cbsuJ2tdbBuT5e8U
+    _key: '!items.effects!dmgArmorOfResist.cbsuJ2tdbBuT5e8U'
+  - name: Acid Resistance
+    img: systems/dnd5e/icons/svg/damage/acid.svg
+    _id: YP420EGhAHmNVa8w
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: acid
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729893460230
+      modifiedTime: 1729893547494
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgArmorOfResist.YP420EGhAHmNVa8w'
+  - name: Cold Resistance
+    img: systems/dnd5e/icons/svg/damage/cold.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729894296026
+      modifiedTime: 1729894345175
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: ACmdUQgMzhh6BiJs
+    _key: '!items.effects!dmgArmorOfResist.ACmdUQgMzhh6BiJs'
+  - name: Fire Resistance
+    img: systems/dnd5e/icons/svg/damage/fire.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729894299779
+      modifiedTime: 1729894362652
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: Lakck2k6LIxzlncZ
+    _key: '!items.effects!dmgArmorOfResist.Lakck2k6LIxzlncZ'
+  - name: Force Resistance
+    img: systems/dnd5e/icons/svg/damage/force.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: force
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729894303907
+      modifiedTime: 1729894381549
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: nP2MPjGkjwc2qoa7
+    _key: '!items.effects!dmgArmorOfResist.nP2MPjGkjwc2qoa7'
+  - name: Lightning Resistance
+    img: systems/dnd5e/icons/svg/damage/lightning.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: lightning
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729894307661
+      modifiedTime: 1729894407795
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: MHtyWzlMMBeUoFnz
+    _key: '!items.effects!dmgArmorOfResist.MHtyWzlMMBeUoFnz'
+  - name: Necrotic Resistance
+    img: systems/dnd5e/icons/svg/damage/necrotic.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: necrotic
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729894312825
+      modifiedTime: 1729894510534
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: OVh17qutRZ4vceWw
+    _key: '!items.effects!dmgArmorOfResist.OVh17qutRZ4vceWw'
+  - name: Poison Resistance
+    img: systems/dnd5e/icons/svg/damage/necrotic.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729894518604
+      modifiedTime: 1729894568863
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: R2WuyXjV8Z8E0wKu
+    _key: '!items.effects!dmgArmorOfResist.R2WuyXjV8Z8E0wKu'
+  - name: Radiant Resistance
+    img: systems/dnd5e/icons/svg/damage/radiant.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: radiant
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729894522623
+      modifiedTime: 1729894657469
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: MOoO1WhULDcQtooN
+    _key: '!items.effects!dmgArmorOfResist.MOoO1WhULDcQtooN'
+  - name: Psychic Resistance
+    img: systems/dnd5e/icons/svg/damage/psychic.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: psychic
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729894526215
+      modifiedTime: 1729894640414
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: meu3jAB2SZjKZrUC
+    _key: '!items.effects!dmgArmorOfResist.meu3jAB2SZjKZrUC'
+  - name: Thunder Resistance
+    img: systems/dnd5e/icons/svg/damage/thunder.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: thunder
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729894674209
+      modifiedTime: 1729894816750
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: FtKhRdQT4zB1DG4f
+    _key: '!items.effects!dmgArmorOfResist.FtKhRdQT4zB1DG4f'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect:
+        - YP420EGhAHmNVa8w
+        - ACmdUQgMzhh6BiJs
+        - Lakck2k6LIxzlncZ
+        - nP2MPjGkjwc2qoa7
+        - MHtyWzlMMBeUoFnz
+        - OVh17qutRZ4vceWw
+        - R2WuyXjV8Z8E0wKu
+        - meu3jAB2SZjKZrUC
+        - MOoO1WhULDcQtooN
+        - FtKhRdQT4zB1DG4f
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745598576712
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -100000
+ownership:
+  default: 0
+_key: '!items!dmgArmorOfResist'

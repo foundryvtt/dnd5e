@@ -1,0 +1,139 @@
+_id: 5Rxo4K9cgpwgW9vZ
+name: Wand of Enemy Detection
+type: equipment
+img: icons/weapons/wands/wand-simple-eye.webp
+system:
+  description:
+    value: >-
+      <p><em>Wand (requires attunement)</em></p><p>This wand has 7 charges.
+      While holding it, you can use an action and expend 1 charge to speak its
+      command word. For the next minute, you know the direction of the nearest
+      creature hostile to you within 60 feet, but not its distance from you. The
+      wand can sense the presence of hostile creatures that are ethereal,
+      invisible, disguised, or hidden, as well as those in plain sight. The
+      effect ends if you stop holding the wand.</p><p>The wand regains 1d6 + 1
+      expended charges daily at dawn. If you expend the wand's last charge, roll
+      a d20. On a 1, the wand crumbles into ashes and is destroyed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '7'
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d6 + 1
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: wand
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - foc
+    - mgc
+  magicalBonus: null
+  activities:
+    8rw7aoQH53r3yP40:
+      type: utility
+      _id: 8rw7aoQH53r3yP40
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: enemy
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Detect Enemy
+      img: ''
+      appliedEffects: []
+  attuned: false
+  identifier: wand-of-enemy-detection
+effects: []
+folder: 1aDgsGVwDbPdxG2V
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1725037100973
+  modifiedTime: 1731015765246
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!5Rxo4K9cgpwgW9vZ'

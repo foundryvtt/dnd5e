@@ -1,0 +1,127 @@
+name: Circle of the Land
+type: subclass
+img: icons/environment/wilderness/tree-oak.webp
+system:
+  description:
+    value: >-
+      <p>The Circle of the Land is made up of mystics and sages who safeguard
+      ancient knowledge and rites through a vast oral tradition. These druids
+      meet within sacred circles of trees or standing stones to whisper primal
+      secrets in Druidic. The circle's wisest members preside as the chief
+      priests of communities that hold to the Old Faith and serve as advisors to
+      the rulers of those folk. As a member of this circle, your magic is
+      influenced by the land where you were initiated into the circle's
+      mysterious rites.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  identifier: circle-of-the-land
+  classIdentifier: druid
+  advancement:
+    - _id: v3qw412amvkgm7i5
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.lT8GsPOPgRzDC3QJ
+            optional: false
+          - uuid: Compendium.dnd5e.classfeatures.wKdRtFsvGfMKQHLY
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 2
+      title: Features
+    - _id: ejei160vgl8crsxk
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.YiK59gWSlcQ6Mbdz
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 3
+      title: Features
+    - _id: hsw1uymkf4814h8s
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.3FB25qKxmkmxcxuC
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 6
+      title: Features
+    - _id: vxmvdslbnlhreo62
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.OTvrJSJSUgAwXrWX
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 10
+      title: Features
+    - _id: ti7txllqo5o344af
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classfeatures.EuX1kJNIw1F68yus
+            optional: false
+        optional: false
+        spell:
+          ability: []
+          preparation: ''
+          uses:
+            max: ''
+            per: ''
+      value: {}
+      level: 14
+      title: Features
+  spellcasting:
+    progression: none
+    ability: ''
+    preparation: {}
+effects: []
+folder: lxQ0CSa4jrl17HgP
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: 4Ae2SPZRXEVbVs0M
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037372807
+  modifiedTime: 1725992730564
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!4Ae2SPZRXEVbVs0M'

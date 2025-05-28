@@ -1,0 +1,123 @@
+_id: ihWvcWsnfqW2HFlA
+name: Spores
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>A 15-foot-radius cloud of toxic spores extends
+      out from the [[lookup @name lowercase]]. The spores spread around corners.
+      Each creature in that area must succeed on a  <strong>DC 14
+      Constitution</strong> saving throw or become poisoned. </p><p>While
+      poisoned in this way, a target takes <strong>5 (1d10) <em>poison
+      damage</em></strong> at the start of each of its turns. A target can
+      repeat the saving throw at the end of each of its turns, ending the effect
+      on itself on a success. Emptying a vial of holy water on the target also
+      ends the effect on it.</p></section><p>A 15-foot-radius cloud of toxic
+      spores extends out from the [[lookup @name lowercase]]. The spores spread
+      around corners. Each creature in that area must make a
+      <strong>Constitution</strong> saving throw. A target can repeat the saving
+      throw at the end of each of its turns, ending the effect on itself on a
+      success.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: recharge
+        formula: '6'
+        type: recoverAll
+    spent: 0
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '15'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '14'
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: spores
+flags: {}
+img: icons/magic/earth/orb-stone-smoke-teal.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304975422
+  modifiedTime: 1725992574024
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ihWvcWsnfqW2HFlA'

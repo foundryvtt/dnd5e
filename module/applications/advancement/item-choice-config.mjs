@@ -1,63 +1,111 @@
-import AdvancementConfig from "./advancement-config.mjs";
+import AdvancementConfig from "./advancement-config-v2.mjs";
 
 /**
  * Configuration application for item choices.
  */
 export default class ItemChoiceConfig extends AdvancementConfig {
-
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement", "item-choice", "three-column"],
-      dragDrop: [{ dropSelector: ".drop-target" }],
-      dropKeyPath: "pool",
-      template: "systems/dnd5e/templates/advancement/item-choice-config.hbs",
-      width: 780
-    });
-  }
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["item-choice", "three-column"],
+    dropKeyPath: "pool",
+    position: {
+      width: 800
+    }
+  };
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  getData(options={}) {
-    const indexes = this.advancement.configuration.pool.map(i => fromUuidSync(i.uuid));
-    const context = {
-      ...super.getData(options),
-      abilities: Object.entries(CONFIG.DND5E.abilities).reduce((obj, [k, c]) => {
-        obj[k] = { label: c.label, selected: this.advancement.configuration.spell?.ability.has(k) ? "selected" : "" };
-        return obj;
-      }, {}),
-      showContainerWarning: indexes.some(i => i?.type === "container"),
-      showSpellConfig: this.advancement.configuration.type === "spell",
-      showRequireSpellSlot: !this.advancement.configuration.spell?.preparation
-        || CONFIG.DND5E.spellPreparationModes[this.advancement.configuration.spell?.preparation]?.upcast,
-      validTypes: this.advancement.constructor.VALID_TYPES.reduce((obj, type) => {
-        obj[type] = game.i18n.localize(CONFIG.Item.typeLabels[type]);
-        return obj;
-      }, {})
-    };
-    context.choices = Object.entries(context.levels).reduce((obj, [level, label]) => {
-      obj[level] = { label, ...this.advancement.configuration.choices[level] };
+  static PARTS = {
+    config: {
+      container: { classes: ["column-container"], id: "column-left" },
+      template: "systems/dnd5e/templates/advancement/advancement-controls-section.hbs"
+    },
+    details: {
+      container: { classes: ["column-container"], id: "column-left" },
+      template: "systems/dnd5e/templates/advancement/item-choice-config-details.hbs"
+    },
+    spellConfig: {
+      container: { classes: ["column-container"], id: "column-left" },
+      template: "systems/dnd5e/templates/advancement/advancement-spell-config-section.hbs"
+    },
+    items: {
+      container: { classes: ["column-container"], id: "column-center" },
+      template: "systems/dnd5e/templates/advancement/item-choice-config-items.hbs"
+    },
+    levels: {
+      container: { classes: ["column-container"], id: "column-right" },
+      template: "systems/dnd5e/templates/advancement/item-choice-config-levels.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+
+    context.items = this.advancement.configuration.pool.map(data => ({
+      data,
+      fields: this.advancement.configuration.schema.fields.pool.element.fields,
+      index: fromUuidSync(data.uuid)
+    }));
+
+    context.abilityOptions = Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }));
+    context.choices = context.levels.reduce((obj, { value, label }) => {
+      obj[value] = { label, ...this.advancement.configuration.choices[value] };
       return obj;
     }, {});
+    context.levelRestrictionOptions = [
+      { value: "", label: "" },
+      {
+        value: "available",
+        label: game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.FIELDS.restriction.level.Available")
+      },
+      { rule: true },
+      ...Object.entries(CONFIG.DND5E.spellLevels).map(([value, label]) => ({ value, label }))
+    ];
+    context.showContainerWarning = context.items.some(i => i.index?.type === "container");
+    context.showSpellConfig = this.advancement.configuration.type === "spell";
+    context.showRequireSpellSlot = !this.advancement.configuration.spell?.preparation
+      || CONFIG.DND5E.spellPreparationModes[this.advancement.configuration.spell?.preparation]?.upcast;
+    context.typeOptions = [
+      { value: "", label: game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.FIELDS.type.Any") },
+      { rule: true },
+      ...this.advancement.constructor.VALID_TYPES
+        .map(value => ({ value, label: game.i18n.localize(CONFIG.Item.typeLabels[value]) }))
+    ];
+
     if ( this.advancement.configuration.type === "feat" ) {
       const selectedType = CONFIG.DND5E.featureTypes[this.advancement.configuration.restriction.type];
       context.typeRestriction = {
         typeLabel: game.i18n.localize("DND5E.ItemFeatureType"),
-        typeOptions: CONFIG.DND5E.featureTypes,
+        typeOptions: [
+          { value: "", label: "" },
+          ...Object.entries(CONFIG.DND5E.featureTypes).map(([value, { label }]) => ({ value, label }))
+        ],
         subtypeLabel: game.i18n.format("DND5E.ItemFeatureSubtype", {category: selectedType?.label}),
-        subtypeOptions: selectedType?.subtypes
+        subtypeOptions: selectedType?.subtypes ? [
+          { value: "", label: "" },
+          ...Object.entries(selectedType.subtypes).map(([value, label]) => ({ value, label }))
+        ] : null
       };
     }
+
     return context;
   }
 
+  /* -------------------------------------------- */
+  /*  Form Handling                               */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   async prepareConfigurationUpdate(configuration) {
     if ( configuration.choices ) configuration.choices = this.constructor._cleanedObject(configuration.choices);
     if ( configuration.spell ) configuration.spell.ability ??= [];
+    if ( configuration.pool ) configuration.pool = Object.values(configuration.pool);
 
     // Ensure items are still valid if type restriction or spell restriction are changed
     const pool = [];
@@ -71,6 +119,8 @@ export default class ItemChoiceConfig extends AdvancementConfig {
     return configuration;
   }
 
+  /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

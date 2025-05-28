@@ -1,0 +1,117 @@
+_id: 7p9IuWrSWFgfyQo2
+name: Alarm
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You set an alarm against unwanted intrusion. Choose a door, a window,
+      or an area within range that is no larger than a 20-foot cube. Until the
+      spell ends, an alarm alerts you whenever a Tiny or larger creature touches
+      or enters the warded area. When you cast the spell, you can designate
+      creatures that won't set off the alarm. You also choose whether the alarm
+      is mental or audible.</p><p>A mental alarm alerts you with a ping in your
+      mind if you are within 1 mile of the warded area. This ping awakens you if
+      you are sleeping.</p><p>An audible alarm produces the sound of a hand bell
+      for 10 seconds within 60 feet.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cube
+      size: '20'
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: abj
+  materials:
+    value: A tiny bell and a piece of fine silver wire.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: alarm
+sort: 0
+flags: {}
+img: icons/magic/symbols/runes-triangle-orange-purple.webp
+effects: []
+folder: ERuXllkhTQF51rDJ
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037348427
+  modifiedTime: 1725992717344
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!7p9IuWrSWFgfyQo2'

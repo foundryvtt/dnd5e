@@ -1,0 +1,169 @@
+name: Etherealness
+system:
+  description:
+    value: >-
+      <p>You step into the border regions of the Ethereal Plane, where it
+      overlaps with your current plane. You remain in the Border Ethereal for
+      the duration. During this time, you can move in any direction. If you move
+      up or down, every foot of movement costs an extra foot. You can perceive
+      the plane you left, which looks gray, and you can't see anything there
+      more than 60 feet away.</p><p>While on the Ethereal Plane, you can affect
+      and be affected only by creatures, objects, and effects on that plane.
+      Creatures that aren't on the Ethereal Plane can't perceive or interact
+      with you unless a feature gives them the ability to do so.</p><p>When the
+      spell ends, you return to the plane you left in the spot that corresponds
+      to your space in the Border Ethereal. If you appear in an occupied space,
+      you are shunted to the nearest unoccupied space and take Force damage
+      equal to twice the number of feet you are moved.</p><p>This spell ends
+      instantly if you cast it while you are on the Ethereal Plane or a plane
+      that doesn't border it, such as one of the Outer
+      Planes.</p><p><strong>Using a Higher-Level Spell Slot.</strong>You can
+      target up to three willing creatures (including yourself) for each spell
+      slot level above 7. The creatures must be within 10 feet of you when you
+      cast the spell.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: 1 + 3 * (@item.level - 7)
+      type: willing
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: con
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    goIEUkL18XKPxbiu:
+      type: utility
+      _id: goIEUkL18XKPxbiu
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: louTI4Z9bNUYBa8K
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Enter Border Ethereal
+      img: systems/dnd5e/icons/svg/trait-saves.svg
+      appliedEffects:
+        - louTI4Z9bNUYBa8K
+  identifier: etherealness
+_id: phbsplEtherealne
+type: spell
+img: icons/magic/air/wind-vortex-swirl-purple.webp
+effects:
+  - name: Etherealness
+    img: systems/dnd5e/icons/svg/statuses/ethereal.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplEtherealne
+    transfer: false
+    _id: louTI4Z9bNUYBa8K
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 28800
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - ethereal
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724883904852
+      modifiedTime: 1724884047228
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplEtherealne.louTI4Z9bNUYBa8K'
+folder: EdAGMG8IF26PLkD3
+sort: 1800000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425952418
+  modifiedTime: 1745256792447
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplEtherealne'

@@ -1,0 +1,220 @@
+name: Stinking Cloud
+system:
+  description:
+    value: >-
+      <p>You create a 20-foot-radius Sphere of yellow, nauseating gas centered
+      on a point within range. The cloud is &amp;Reference[heavilyobscured]. The
+      cloud lingers in the air for the duration or until a strong wind (such as
+      the one created by
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGustofWind]{Gust of
+      Wind}</em>) disperses it.</p><p>Each creature that starts its turn in the
+      Sphere must succeed on a Constitution saving throw or have the
+      &amp;Reference[poisoned apply=false] condition until the end of the
+      current turn. While Poisoned in this way, the creature can't take an
+      action or a Bonus Action.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ft
+      type: sphere
+      size: '20'
+      contiguous: false
+      count: ''
+  range:
+    value: '90'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a rotten egg
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: true
+      effects:
+        - _id: gFid0DG5HydORpr3
+          onSave: false
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 200000
+      name: Start of Turn Save
+      img: ''
+      appliedEffects:
+        - gFid0DG5HydORpr3
+    b4WUwQ8fDL83FwYC:
+      type: utility
+      _id: b4WUwQ8fDL83FwYC
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Create Cloud
+      img: ''
+      appliedEffects: []
+  identifier: stinking-cloud
+_id: phbsplStinkingCl
+type: spell
+img: icons/magic/air/fog-gas-smoke-dense-green.webp
+effects:
+  - name: Stinking Poison
+    origin: Compendium.dnd5e.spells24.Item.phbsplStinkingCl
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/acid/dissolve-vomit-green-brown.webp
+    _id: gFid0DG5HydORpr3
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>While &amp;Reference[poisoned apply=false] in this way, the creature
+      can’t take an action or a Bonus Action.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - poisoned
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1725649527395
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplStinkingCl.gFid0DG5HydORpr3'
+folder: HCovEE4VoPGlIbKi
+sort: 100782
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425972615
+  modifiedTime: 1745256798739
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplStinkingCl'

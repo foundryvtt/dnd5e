@@ -1,0 +1,133 @@
+name: Throne
+system:
+  description:
+    value: >-
+      <p>You gain proficiency and &amp;Reference[Expertise] in your choice of
+      History, Insight, Intimidation, or Persuasion. In addition, you gain
+      rightful ownership of a small keep somewhere in the world. However, the
+      keep is currently home to one or more monsters, which must be cleared out
+      before you can claim the keep as yours.</p><section
+      id="secret-KpjqOSPJGy0Ec8YA" class="secret"><p><strong>Foundry
+      Note</strong></p><p>Unlike the other cards from the Deck, this item will
+      <em>not</em> destroy itself upon use in order to serve as a symbol of
+      ownership of the keep.</p></section>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities:
+    QgyIAhhyqrgMK47c:
+      type: utility
+      name: Card Effect
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Card's effect occurs immediately upon draw
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: perm
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: icons/svg/card-joker.svg
+      _id: QgyIAhhyqrgMK47c
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: false
+    max: '1'
+  identifier: throne
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+_id: dmgDmtThrone0000
+type: consumable
+img: icons/commodities/treasure/broach-crown-gold.webp
+effects: []
+folder: XVXuU21XyvevGap7
+sort: 150000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1729206221979
+  modifiedTime: 1745433097777
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!dmgDmtThrone0000'

@@ -1,0 +1,57 @@
+_id: phbrgeImprovedCu
+name: Improved Cunning Strike
+type: feat
+folder: ymTkGscp5QEOwDlv
+img: icons/skills/melee/blade-tip-smoke-green.webp
+system:
+  description:
+    value: >-
+      <p>You can use up to two Cunning Strike effects when you deal Sneak Attack
+      damage, paying the die cost for each effect.</p><section class="secret"
+      id="secret-8yelsP7k8fXkEA5W"><p><strong>Foundry Note</strong></p><p>After
+      using Cunning Strike effects use the [[/item Cunning Strike
+      activity=Cunning Sneak Attack]]{Cunning Sneak Attack} activity. It will
+      prompt you to select how many dice you expended on effects and deduct them
+      from your Sneak Attack roll automatically.</p><p>You can control the
+      damage type in the damage roll dialog box.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 11
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: improved-cunning-strike
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866292069
+  modifiedTime: 1745256764346
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgeImprovedCu'

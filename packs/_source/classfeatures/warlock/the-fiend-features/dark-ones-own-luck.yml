@@ -1,0 +1,110 @@
+_id: OQSb0bO1yDI4aiMx
+name: Dark One's Own Luck
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Starting at 6th level, you can call on your patron to alter fate in
+      your favor. When you make an ability check or a saving throw, you can use
+      this feature to add a d10 to your roll. You can do so after seeing the
+      initial roll but before any of the roll's effects occur.</p><p>Once you
+      use this feature, you can't use it again until you finish a short or long
+      rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: The Fiend 6
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: 1d10
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: dark-ones-own-luck
+flags: {}
+img: icons/creatures/unholy/demon-fanged-horned-yellow.webp
+effects: []
+folder: AjZEXaNUIFQ13Z3F
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037383517
+  modifiedTime: 1725992288203
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!OQSb0bO1yDI4aiMx'

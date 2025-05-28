@@ -1,0 +1,179 @@
+name: Elementalism
+system:
+  description:
+    value: >-
+      <p>You exert control over the elements, creating one of the following
+      effects within range.</p><p><strong>Beckon Air.</strong> You create a
+      breeze strong enough to ripple cloth, stir dust, rustle leaves, and close
+      open doors and shutters, all in a 5-foot Cube. Doors and shutters being
+      held open by someone or something aren't affected.</p><p><strong>Beckon
+      Earth.</strong> You create a thin shroud of dust or sand that covers
+      surfaces in a 5-foot-square area, or you cause a single word to appear in
+      your handwriting in a patch of dirt or sand.</p><p><strong>Beckon
+      Fire.</strong> You create a thin cloud of harmless embers and colored,
+      scented smoke in a 5-foot Cube. You choose the color and scent, and the
+      embers can light candles, torches, or lamps in that area. The smoke's
+      scent lingers for 1 minute.</p><p><strong>Beckon Water.</strong> You
+      create a spray of cool mist that lightly dampens creatures and objects in
+      a 5-foot Cube. Alternatively, you create 1 cup of clean water either in an
+      open container or on a surface, and the water evaporates in 1
+      minute.</p><p><strong>Sculpt Element.</strong> You cause dirt, sand, fire,
+      smoke, mist, or water that can fit in a 1-foot Cube to assume a crude
+      shape (such as that of a creature) for 1 hour.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    book: SRD 5.2
+    license: CC-BY-4.0
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: space
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: cube
+      size: '5'
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: trs
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    NND0Ry2h5vSfZgq5:
+      type: utility
+      _id: NND0Ry2h5vSfZgq5
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: Fire and water beckoning lasts for 1 minute
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Beckon Element
+      img: systems/dnd5e/icons/svg/statuses/grappled.svg
+    8IholW9syQX6TFOg:
+      type: utility
+      _id: 8IholW9syQX6TFOg
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: true
+        value: '1'
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cube
+          size: '1'
+          count: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Sculpt Element
+      img: systems/dnd5e/icons/svg/damage/bludgeoning.svg
+  identifier: elementalism
+_id: phbsplElementali
+type: spell
+img: icons/magic/nature/leaf-hand-green.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745433110943
+  modifiedTime: 1745712694300
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100007
+ownership:
+  default: 0
+_key: '!items!phbsplElementali'

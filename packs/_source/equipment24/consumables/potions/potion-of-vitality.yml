@@ -1,0 +1,171 @@
+_id: dmgPotionOfVital
+name: Potion of Vitality
+type: consumable
+folder: 4NjJfCbRAVhw8ESv
+img: icons/consumables/potions/potion-flask-corled-pink-red.webp
+system:
+  activities:
+    o23C4IHWZOgCjqBz:
+      type: utility
+      _id: o23C4IHWZOgCjqBz
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '24'
+      effects:
+        - _id: GxutU47JS0FNfeoM
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Drink
+      img: ''
+      appliedEffects:
+        - GxutU47JS0FNfeoM
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Potion, Very Rare</em></p><p>When you drink this potion, it removes
+      any &amp;Reference[Exhaustion apply=false] levels you have and ends the
+      &amp;Reference[Poisoned apply=false] condition on you. For the next 24
+      hours, you regain the maximum number of Hit Points for any Hit Point Die
+      you spend.</p><p>This potion's crimson liquid regularly pulses with dull
+      light, calling to mind a heartbeat.</p><section class="secret"
+      id="secret-z0SSGecWIDLeIdS3"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Full of Vitality</strong> Active Effect can be used for
+      tracking.</p></section>
+    chat: ''
+  identifier: potion-of-vitality
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  price:
+    value: 20000
+    denomination: gp
+  rarity: veryRare
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: potion
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects:
+  - name: Full of Vitality
+    img: icons/consumables/potions/potion-flask-corled-pink-red.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgPotionOfVital
+    transfer: false
+    _id: GxutU47JS0FNfeoM
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 86400
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.1
+      createdTime: 1730864551236
+      modifiedTime: 1746118341518
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgPotionOfVital.GxutU47JS0FNfeoM'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745612001388
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgPotionOfVital'

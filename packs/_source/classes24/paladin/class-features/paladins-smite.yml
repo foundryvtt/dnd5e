@@ -1,0 +1,57 @@
+_id: phbpdnPaladinsSm
+name: Paladin's Smite
+type: feat
+folder: 6uMLnndK8UPkb7Uy
+img: icons/skills/melee/strike-flail-destructive-yellow.webp
+system:
+  description:
+    value: >-
+      <p>You always have the
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplDivineSmit]{Divine Smite} spell
+      prepared. In addition, you can cast it without expending a spell slot, but
+      you must finish a Long Rest before you can cast it in this way
+      again.</p><section id="secret-47mDL7wHB8aQP7SD"
+      class="secret"><p><strong>Foundry Note</strong></p><p>When you reach this
+      level the Divine Smite spell is added to your spells as Always Prepared
+      and with a free use.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: paladins-smite
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866297701
+  modifiedTime: 1745256763929
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbpdnPaladinsSm'

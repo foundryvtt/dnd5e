@@ -1,0 +1,80 @@
+_id: dmgRingOfMindShi
+name: Ring of Mind Shielding
+type: equipment
+folder: DC1x1wAm0NLFudA6
+img: icons/equipment/finger/ring-cabochon-gold-purple.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Ring, Uncommon (Requires Attunement)</em></p><p>While wearing this
+      ring, you are immune to magic that allows other creatures to read your
+      thoughts, determine whether you are lying, know your alignment, or know
+      your creature type. Creatures can telepathically communicate with you only
+      if you allow it.</p><p>You can take a Magic action to cause the ring to
+      become imperceptible until you take another Magic action to make it
+      perceptible, until you remove the ring, or until you die.</p><p>If you die
+      while wearing the ring, your soul enters it, unless it already houses a
+      soul. You can remain in the ring or depart for the afterlife. As long as
+      your soul is in the ring, you can telepathically communicate with any
+      creature wearing it. A wearer can't prevent this telepathic
+      communication.</p>
+    chat: ''
+  identifier: ring-of-mind-shielding
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ring
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712702629
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1000000
+ownership:
+  default: 0
+_key: '!items!dmgRingOfMindShi'

@@ -1,0 +1,120 @@
+name: Arcane Lock
+system:
+  description:
+    value: >-
+      <p>You touch a closed door, window, gate, container, or hatch and
+      magically lock it for the duration. This lock can't be unlocked by any
+      nonmagical means. You and any creatures you designate when you cast the
+      spell can open and close the object despite the lock. You can also set a
+      password that, when spoken within 5 feet of the object, unlocks it for 1
+      minute.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: disp
+  target:
+    affects:
+      type: object
+      count: '1'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: gold dust worth 25+ GP, which the spell consumes
+    consumed: true
+    cost: null
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: arcane-lock
+_id: phbsplArcaneLock
+type: spell
+img: icons/sundries/misc/lock-steel-blue.webp
+effects: []
+folder: 3SjcO2acsFnWegp4
+sort: 5400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425941294
+  modifiedTime: 1745256785796
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplArcaneLock'

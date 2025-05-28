@@ -1,0 +1,125 @@
+name: Plane Shift
+system:
+  description:
+    value: >-
+      <p>You and up to eight willing creatures who link hands in a circle are
+      transported to a different plane of existence. You can specify a target
+      destination in general terms, such as the City of Brass on the Elemental
+      Plane of Fire or the palace of Dispater on the second level of the Nine
+      Hells, and you appear in or near that destination, as determined by the
+      DM.</p><p>Alternatively, if you know the sigil sequence of a teleportation
+      circle on another plane of existence, this spell can take you to that
+      circle. If the teleportation circle is too small to hold all the creatures
+      you transported, they appear in the closest unoccupied spaces next to the
+      circle.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: '9'
+      type: willing
+      special: you and up to eight willing creatures
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a forked, metal rod worth 250+ GP and attuned to a plane of existence
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    xE0rm4EPLcH17Ypa:
+      type: utility
+      _id: xE0rm4EPLcH17Ypa
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Transport
+      img: systems/dnd5e/icons/svg/trait-saves.svg
+      appliedEffects: []
+  identifier: plane-shift
+_id: phbsplPlaneShift
+type: spell
+img: icons/skills/targeting/target-glowing-yellow.webp
+effects: []
+folder: EdAGMG8IF26PLkD3
+sort: 1200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425966118
+  modifiedTime: 1745256796851
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplPlaneShift'

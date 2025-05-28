@@ -1,0 +1,217 @@
+_id: dmgPotionMiscibi
+name: Potion Miscibility
+img: icons/tools/laboratory/mortar-liquid-pink.webp
+description: ''
+results:
+  - type: text
+    drawn: false
+    range:
+      - 1
+      - 1
+    _id: nzczvt9tOAWk3pcO
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Both potions lose their effects, and the mixture creates a magical
+      explosion in a 5-foot-radius Sphere centered on itself. Each creature in
+      that area takes [[/damage 4d10 type=force]] damage.
+    name: ''
+    _key: '!tables.results!dmgPotionMiscibi.nzczvt9tOAWk3pcO'
+  - type: text
+    drawn: false
+    range:
+      - 2
+      - 8
+    _id: YOg721h1c08NTssm
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Both potions lose their effects, and the mixture becomes an ingested
+      poison of your choice (see
+      @UUID[Compendium.dnd5e.content24.JournalEntry.dmgDmsToolbox000.JournalEntryPage.UfAEdm3LbTzvQHC5]{Poison}).
+    name: ''
+    _key: '!tables.results!dmgPotionMiscibi.YOg721h1c08NTssm'
+  - type: text
+    drawn: false
+    range:
+      - 9
+      - 15
+    _id: fMSHjSMweAnnZYsn
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: Both potions lose their effects.
+    name: ''
+    _key: '!tables.results!dmgPotionMiscibi.fMSHjSMweAnnZYsn'
+  - type: text
+    drawn: false
+    range:
+      - 16
+      - 25
+    _id: KxvMJW5a8Nr7wWCg
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: One potion loses its effect.
+    name: ''
+    _key: '!tables.results!dmgPotionMiscibi.KxvMJW5a8Nr7wWCg'
+  - type: text
+    drawn: false
+    range:
+      - 26
+      - 35
+    _id: QqB2o1VFtAJmFrCD
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Both potions work, but with their numerical effects and durations halved.
+      If a potion has no numerical effect and no duration, it instead loses its
+      effect.
+    name: ''
+    _key: '!tables.results!dmgPotionMiscibi.QqB2o1VFtAJmFrCD'
+  - type: text
+    drawn: false
+    range:
+      - 36
+      - 90
+    _id: OuMyVYWmto2IanjY
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: Both potions work normally.
+    name: ''
+    _key: '!tables.results!dmgPotionMiscibi.OuMyVYWmto2IanjY'
+  - type: text
+    drawn: false
+    range:
+      - 91
+      - 99
+    _id: bSAO3Vx0LrbFecwI
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Both potions work, but the numerical effects and duration of one potion
+      are <span>doubled</span>. If neither potion has anything to double in this
+      way, they work normally.
+    name: ''
+    _key: '!tables.results!dmgPotionMiscibi.bSAO3Vx0LrbFecwI'
+  - type: text
+    drawn: false
+    range:
+      - 100
+      - 100
+    _id: TsdsAf1A9DydPzVQ
+    img: icons/svg/d20-black.svg
+    weight: 1
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Only one potion works, but its effects are permanent. Choose the simplest
+      effect to make permanent or the one that seems the most fun. For example,
+      a Potion of Healing might increase the drinker’s Hit Point maximum by
+      [[/roll 2d4 + 2]], or a Potion of Invisibility might give the drinker the
+      Invisible condition indefinitely. At your discretion, a Dispel Magic spell
+      or similar magic might end this lasting effect.
+    name: ''
+    _key: '!tables.results!dmgPotionMiscibi.TsdsAf1A9DydPzVQ'
+replacement: true
+displayRoll: true
+folder: An3ZWDU7HLgF24f1
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.2
+  createdTime: 1727883396246
+  modifiedTime: 1745549033157
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 150000
+ownership:
+  default: 0
+formula: 1d100
+_key: '!tables!dmgPotionMiscibi'

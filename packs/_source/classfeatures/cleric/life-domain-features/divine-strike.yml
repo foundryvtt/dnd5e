@@ -1,0 +1,113 @@
+_id: T6u5z8ZTX6UftXqE
+name: Divine Strike
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>At 8th level, you gain the ability to infuse your weapon strikes with
+      divine energy.</p><p>Once on each of your turns when you hit a creature
+      with a weapon attack, you can cause the attack to deal an extra 1d8
+      radiant damage to the target. When you reach 14th level, the extra damage
+      increases to 2d8.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  requirements: Life Domain 8
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: null
+            denomination: null
+            bonus: ''
+            types:
+              - radiant
+            custom:
+              enabled: true
+              formula: '@scale.life-domain.divine-strike'
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: divine-strike
+flags: {}
+img: icons/skills/melee/weapons-crossed-swords-yellow-teal.webp
+effects: []
+folder: CTZ7zZ8ESNtr2IKz
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037384329
+  modifiedTime: 1725992288442
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!T6u5z8ZTX6UftXqE'

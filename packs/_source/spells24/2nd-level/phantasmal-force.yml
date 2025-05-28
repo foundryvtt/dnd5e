@@ -1,0 +1,242 @@
+_id: phbPhantasmalFor
+name: Phantasmal Force
+type: spell
+img: icons/creatures/magical/spirit-undead-winged-ghost.webp
+system:
+  description:
+    value: >-
+      <div><p>You attempt to craft an illusion in the mind of a creature you can
+      see within range. The target makes an Intelligence saving throw. On a
+      failed save, you create a phantasmal object, creature, or other phenomenon
+      that is no larger than a 10-foot Cube and that is perceivable only to the
+      target for the duration. The phantasm includes sound, temperature, and
+      other stimuli.</p><p>The target can take a &amp;Reference[Study]{Study}
+      action to examine the phantasm with an [[/check ability=int skill=inv
+      dc=@attributes.spell.dc]] check against your spell save DC. If the check
+      succeeds, the target realizes that the phantasm is an illusion, and the
+      spell ends.</p><p>While affected by the spell, the target treats the
+      phantasm as if it were real and rationalizes any illogical outcomes from
+      interacting with it. For example, if the target steps through a phantasmal
+      bridge and survives the fall, it believes the bridge exists and something
+      else caused it to fall.</p><p>An affected target can even take damage from
+      the illusion if the phantasm represents a dangerous creature or hazard. On
+      each of your turns, such a phantasm can deal 2d8 Psychic damage to the
+      target if it is in the phantasm's area or within 5 feet of the phantasm.
+      The target perceives the damage as a type appropriate to the
+      illusion.</p></div>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    book: SRD 5.2
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 2
+  school: ill
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a bit of fleece
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    5LLVXOLZf1fTstUw:
+      type: save
+      name: Cast
+      _id: 5LLVXOLZf1fTstUw
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: QyPQcXhcl8sTDQ3d
+          onSave: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cube
+          size: '10'
+          count: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - int
+        dc:
+          calculation: spellcasting
+          formula: ''
+    QCUpctimdMH6E6F8:
+      type: damage
+      name: Phantasm Damage
+      _id: QCUpctimdMH6E6F8
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 8
+            bonus: ''
+            types:
+              - psychic
+            scaling:
+              mode: ''
+              number: 1
+  identifier: phantasmal-force
+effects:
+  - name: Seeing Illusions
+    img: icons/magic/control/hypnosis-mesmerism-eye.webp
+    origin: Compendium.dnd5e.spells24.Item.phbPhantasmalFor
+    transfer: false
+    _id: QyPQcXhcl8sTDQ3d
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target can take a &amp;Reference[Study]{Study} action to examine
+      the phantasm with an [[/check ability=int skill=inv]] check against your
+      spell save DC. If the check succeeds, the target realizes that the
+      phantasm is an illusion, and the spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbPhantasmalFor.QyPQcXhcl8sTDQ3d'
+folder: 3SjcO2acsFnWegp4
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745433110943
+  modifiedTime: 1745712693318
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100782
+ownership:
+  default: 0
+_key: '!items!phbPhantasmalFor'

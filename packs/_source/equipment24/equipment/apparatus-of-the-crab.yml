@@ -1,0 +1,138 @@
+_id: dmgApparatusOfKw
+name: Apparatus of the Crab
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/containers/barrels/barrel-walnut-steel-brown.webp
+system:
+  activities:
+    h7YokhkkRF3yKBWn:
+      type: utility
+      name: Move Levers
+      _id: h7YokhkkRF3yKBWn
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: Adjust up to two levers up or down
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '2'
+          type: object
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Legendary</em></p><p>This item first appears to
+      be a sealed iron barrel weighing 500 pounds. The barrel has a hidden
+      catch, which can be found with a successful [[/check ability=int skill=inv
+      dc=20]] check. Releasing the catch unlocks a hatch at one end of the
+      barrel, allowing two Medium or smaller creatures to crawl inside. Ten
+      levers are set in a row at the far end, each in a neutral position, able
+      to move up or down. When certain levers are used, the apparatus transforms
+      to resemble a giant lobster.</p><p>The
+      <em>@UUID[Compendium.dnd5e.actors24.Actor.dmgApparatusofKw]{Apparatus of
+      the Crab}</em> is a Large object with the following statistics: AC 20; HP
+      200; Speed 30 ft., Swim 30 ft. (or 0 ft. for both if the legs aren't
+      extended); Immunity to Poison and Psychic
+      damage.</p><p>@Embed[Compendium.dnd5e.actors24.Actor.dmgApparatusofKw
+      caption=false]</p></div>
+    chat: ''
+  identifier: apparatus-of-the-crab
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 500
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+  speed:
+    value: null
+    conditions: ''
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712697806
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2100000
+ownership:
+  default: 0
+_key: '!items!dmgApparatusOfKw'

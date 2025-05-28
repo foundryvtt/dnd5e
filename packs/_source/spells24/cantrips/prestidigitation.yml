@@ -1,0 +1,124 @@
+name: Prestidigitation
+system:
+  description:
+    value: >-
+      <p>You create a magical effect within range. Choose the effect from the
+      options below. If you cast this spell multiple times, you can have up to
+      three of its non-instantaneous effects active at a
+      time.</p><p><strong>Sensory Effect.</strong> You create an instantaneous,
+      harmless sensory effect, such as a shower of sparks, a puff of wind, faint
+      musical notes, or an odd odor.</p><p><strong>Fire Play.</strong> You
+      instantaneously light or snuff out a candle, a torch, or a small
+      campfire.</p><p><strong>Clean or Soil.</strong> You instantaneously clean
+      or soil an object no larger than 1 cubic foot.</p><p><strong>Minor
+      Sensation.</strong> You chill, warm, or flavor up to 1 cubic foot of
+      nonliving material for 1 hour.</p><p><strong>Magic Mark.</strong> You make
+      a color, a small mark, or a symbol appear on an object or a surface for 1
+      hour.</p><p><strong>Minor Creation.</strong> You create a nonmagical
+      trinket or an illusory image that can fit in your hand. It lasts until the
+      end of your next turn. A trinket can deal no damage and has no monetary
+      worth.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '10'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: trs
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    gbdxQQmWwEAL1zpH:
+      type: utility
+      name: ''
+      _id: gbdxQQmWwEAL1zpH
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      roll:
+        prompt: false
+        visible: false
+  identifier: prestidigitation
+_id: phbsplPrestidigi
+type: spell
+img: icons/weapons/wands/wand-star-white.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+sort: 400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425967035
+  modifiedTime: 1745256797100
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplPrestidigi'

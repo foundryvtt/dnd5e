@@ -1,0 +1,50 @@
+name: Perfume
+system:
+  description:
+    value: >-
+      <p>Perfume comes in a 4-ounce vial. For 1 hour after applying Perfume to
+      yourself, you have Advantage on Charisma (Persuasion) checks made to
+      influence an Indifferent Humanoid within 5 feet of yourself.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagDiplomatsPa
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: perfume
+_id: yoRKNd2QddQp1XuX
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/consumables/potions/bottle-bulb-corked-purple.webp
+effects: []
+sort: 66407
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726533179637
+  modifiedTime: 1745256815126
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!yoRKNd2QddQp1XuX'

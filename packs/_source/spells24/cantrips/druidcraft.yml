@@ -1,0 +1,132 @@
+name: Druidcraft
+system:
+  description:
+    value: >-
+      <p>Whispering to the spirits of nature, you create one of the following
+      effects within range.</p><p><strong>Weather Sensor.</strong> You create a
+      Tiny, harmless sensory effect that predicts what the weather will be at
+      your location for the next 24 hours. The effect might manifest as a golden
+      orb for clear skies, a cloud for rain, falling snowflakes for snow, and so
+      on. This effect persists for 1 round.</p><p><strong>Bloom.</strong> You
+      instantly make a flower blossom, a seed pod open, or a leaf bud
+      bloom.</p><p><strong>Sensory Effect.</strong> You create a harmless
+      sensory effect, such as falling leaves, spectral dancing fairies, a gentle
+      breeze, the sound of an animal, or the faint odor of skunk. The effect
+      must fit in a 5-foot Cube.</p><p><strong>Fire Play.</strong> You light or
+      snuff out a candle, a torch, or a campfire.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: trs
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    q44z5qbBWBc0qUdc:
+      type: utility
+      name: ''
+      _id: q44z5qbBWBc0qUdc
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cube
+          size: '5'
+          count: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  identifier: druidcraft
+_id: phbsplDruidcraft
+type: spell
+img: icons/magic/nature/plant-seed-hands-glow-yellow.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+sort: 1700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425951474
+  modifiedTime: 1745256791957
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDruidcraft'

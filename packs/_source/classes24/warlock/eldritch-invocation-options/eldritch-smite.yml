@@ -1,0 +1,120 @@
+_id: phbinvEldritchSm
+name: Eldritch Smite
+type: feat
+img: icons/skills/melee/strike-axe-energy-pink.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 5+ Warlock,
+      @UUID[Compendium.dnd5e.classes24.Item.phbinvPactBlade0]{Pact of the Blade}
+      Invocation</p></blockquote><p>Once per turn when you hit a creature with
+      your pact weapon, you can expend a Pact Magic spell slot to deal an extra
+      1d8 Force damage to the target, plus another 1d8 per level of the spell
+      slot, and you can give the target the &amp;Reference[Prone] condition if
+      it is Huge or smaller.</p><section class="secret"
+      id="secret-AoE71IXdo0xg5OKe"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Smite</strong> activity consumes a Pact Magic spell slot and
+      increases the damage based on your pact spell level.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 5
+    repeatable: false
+  properties: []
+  requirements: Pact of the Blade Invocation
+  activities:
+    CXJlzDUkMYU9w9i9:
+      type: damage
+      name: Smite
+      _id: CXJlzDUkMYU9w9i9
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: Hit a creature with your pact weapon
+      consumption:
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+        targets:
+          - type: attribute
+            value: '1'
+            target: spells.pact.value
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: true
+              formula: (1 + @spells.pact.level)d8
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+  enchant: {}
+  identifier: eldritch-smite
+effects: []
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1740680083830
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvEldritchSm'

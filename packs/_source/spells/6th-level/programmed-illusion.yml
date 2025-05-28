@@ -1,0 +1,128 @@
+_id: bA2sk9eMKBeY7EPD
+name: Programmed Illusion
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create an Illusion of an object, a creature, or some other visible
+      phenomenon within range that activates when a specific condition occurs.
+      The illusion is imperceptible until then. It must be no larger than a
+      30-foot cube, and you decide when you cast the spell how the illusion
+      behaves and what sounds it makes. This scripted Performance can last up to
+      5 minutes.</p><p>When the condition you specify occurs, the illusion
+      springs into existence and performs in the manner you described. Once the
+      illusion finishes performing, it disappears and remains dormant for 10
+      minutes. After this time, the illusion can be activated again.</p><p>The
+      triggering condition can be as general or as detailed as you like, though
+      it must be based on visual or audible Conditions that occur within 30 feet
+      of the area. For example, you could create an illusion of yourself to
+      appear and warn off others who attempt to open a trapped door, or you
+      could set the illusion to trigger only when a creature says the correct
+      word or phrase.</p><p>Physical interaction with the image reveals it to be
+      an illusion, because things can pass through it. A creature that uses its
+      action to examine the image can determine that it is an illusion with a
+      successful Intelligence (Investigation) check against your spell save DC.
+      If a creature discerns the Illusion for what it is, the creature can see
+      through the image, and any noise it makes sounds hollow to the
+      creature</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: disp
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cube
+      size: '30'
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: ill
+  materials:
+    value: A bit of fleece and jade dust worth at least 25gp
+    consumed: false
+    cost: 25
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: programmed-illusion
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-chains-ropes-net-purple-blue.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037360035
+  modifiedTime: 1725992721076
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!bA2sk9eMKBeY7EPD'

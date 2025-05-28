@@ -1,0 +1,134 @@
+name: Dimension Door
+system:
+  description:
+    value: >-
+      <p>You teleport to a location within range. You arrive at exactly the spot
+      desired. It can be a place you can see, one you can visualize, or one you
+      can describe by stating distance and direction, such as "200 feet straight
+      downward" or "300 feet upward to the northwest at a 45-degree
+      angle."</p><p>You can also teleport one willing creature. The creature
+      must be within 5 feet of you when you teleport, and it teleports to a
+      space within 5 feet of your destination space.</p><p>If you, the other
+      creature, or both would arrive in a space occupied by a creature or
+      completely filled by one or more objects, you and any creature traveling
+      with you each take 4d6 Force damage, and the teleportation fails.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: willing
+      count: '2'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '500'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: con
+  properties:
+    - vocal
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 6
+            bonus: ''
+            types:
+              - force
+            scaling:
+              mode: ''
+              number: 1
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: systems/dnd5e/icons/svg/trait-saves.svg
+      appliedEffects: []
+  identifier: dimension-door
+_id: phbsplDimensionD
+type: spell
+img: icons/environment/wilderness/portal.webp
+effects: []
+folder: qi3IbnEwap7mRw4b
+sort: 2700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425949835
+  modifiedTime: 1745256790484
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplDimensionD'

@@ -1,0 +1,123 @@
+name: Truth Serum
+type: consumable
+img: icons/consumables/potions/bottle-bulb-corked-labeled-blue.webp
+system:
+  description:
+    value: >-
+      <p>A creature subjected to this poison must succeed on a [[/save]] saving
+      throw or become &amp;Reference[poisoned] for 1 hour. The poisoned creature
+      can't knowingly speak a lie, as if under the effect of a
+      @UUID[Compendium.dnd5e.spells.Item.CylBa7jR8DSbo8Z3]{Zone of Truth}
+      spell.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 150
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: ''
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: poison
+    subtype: ingested
+  unidentified:
+    description: ''
+  container: null
+  properties: []
+  magicalBonus: null
+  activities:
+    IXiAkr30YyhobMw8:
+      type: save
+      _id: IXiAkr30YyhobMw8
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '11'
+      name: ''
+      img: ''
+      appliedEffects: []
+  attuned: false
+  identifier: truth-serum
+effects: []
+sort: 100000
+flags: {}
+_id: a86F565Pjdzym1jH
+folder: ZzUfnm1OuSL02nLG
+ownership:
+  default: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1725037220965
+  modifiedTime: 1725992524337
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!a86F565Pjdzym1jH'

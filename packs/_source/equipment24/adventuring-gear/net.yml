@@ -1,0 +1,168 @@
+_id: phbagNet00000000
+name: Net
+type: equipment
+img: icons/tools/fishing/net-simple-brown.webp
+system:
+  activities:
+    3u15g2fvhp6MyN5O:
+      type: save
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: cMQAYD7OnCQK6Ux9
+          onSave: false
+      range:
+        override: false
+        value: '15'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: dex
+        dc:
+          calculation: dex
+          formula: ''
+      name: ''
+      _id: 3u15g2fvhp6MyN5O
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>When you take the Attack action, you can replace one of your attacks
+      with throwing a Net. Target a creature you can see within 15 feet of
+      yourself. The target must succeed on a Dexterity saving throw (DC 8 plus
+      your Dexterity modifier and Proficiency Bonus) or have the
+      &amp;Reference[Restrained] condition until it escapes. The target succeeds
+      automatically if it is Huge or larger.</p><p>To escape, the target or a
+      creature within 5 feet of it must take an action to make a [[/skill ath
+      10]] check, freeing the Restrained creature on a success. Destroying the
+      Net (AC 10; 5 HP; Immunity to Bludgeoning, Poison, and Psychic damage)
+      also frees the target, ending the effect.</p>
+    chat: ''
+  identifier: net
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 1
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties: []
+  strength: null
+  proficient: null
+effects:
+  - name: Caught in Net
+    img: icons/tools/fishing/net-simple-brown.webp
+    origin: Item.phbagNet00000000
+    transfer: false
+    _id: 67ofG0FVqrrkAHKa
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - restrained
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: Item.phbagNet00000000.ActiveEffect.MrZjrcUIzXwDYHYP
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.2
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbagNet00000000.67ofG0FVqrrkAHKa'
+folder: uDk4FBYfcP2JnX6t
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727448884108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbagNet00000000'

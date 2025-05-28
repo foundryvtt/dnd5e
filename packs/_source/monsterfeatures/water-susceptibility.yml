@@ -1,0 +1,48 @@
+_id: 5V7SCABXvIbnk2Zn
+name: Water Susceptibility
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>For every <strong>5 ft.</strong> the [[lookup
+      @details.type.config.label lowercase]] moves in water, or for every gallon
+      of water splashed on it, it takes<strong> 1 <em>cold
+      damage</em>.</strong></p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: water-susceptibility
+flags: {}
+img: icons/magic/water/pseudopod-swirl-blue.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304966037
+  modifiedTime: 1725992571156
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!5V7SCABXvIbnk2Zn'

@@ -1,0 +1,127 @@
+_id: phbbrbPersistent
+name: Persistent Rage
+type: feat
+img: icons/skills/social/intimidation-impressing.webp
+system:
+  description:
+    value: >-
+      <p>When you roll Initiative, you can regain all expended uses of Rage.
+      After you regain uses of Rage in this way, you can't do so again until you
+      finish a Long Rest.</p><p>In addition, your Rage is so fierce that it now
+      lasts for 10 minutes without you needing to do anything to extend it from
+      round to round. Your Rage ends early if you have the
+      &amp;Reference[Unconscious] condition (not just the
+      &amp;Reference[Incapacitated] condition) or don Heavy armor.</p><section
+      class="secret" id="secret-3IS0iUbWZ04tp74k"><p><strong>Foundry
+      Note</strong></p><p>This feature includes an activity which can be used
+      when you roll Initiative which will recharge all of your Rage
+      uses.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: '1'
+    recovery:
+      - period: lr
+        type: recoverAll
+    spent: 0
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 15
+    repeatable: false
+  properties: []
+  requirements: Barbarian
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: ''
+        value: null
+        condition: When you roll initiative
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+          - type: itemUses
+            value: '-@scale.barbarian.rage'
+            target: Compendium.dnd5e.classes24.Item.phbbrbRage000000
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        value: ''
+        units: inst
+        special: ''
+        override: false
+        concentration: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery:
+          - period: lr
+            type: recoverAll
+        max: ''
+      sort: 0
+      name: Recharge Rage on Initiative
+      img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+  enchant: {}
+  identifier: persistent-rage
+effects: []
+folder: p6WDpW0gzmKfhGad
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940469
+  modifiedTime: 1740680080695
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbPersistent'

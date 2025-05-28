@@ -1,0 +1,141 @@
+name: Phantom Steed
+system:
+  description:
+    value: >-
+      <p>A Large, quasi-real,
+      @UUID[Compendium.dnd5e.actors24.Actor.phbsumPhantomSte]{horselike
+      creature} appears on the ground in an unoccupied space of your choice
+      within range. You decide the creature's appearance, and it is equipped
+      with a saddle, bit, and bridle. Any of the equipment created by the spell
+      vanishes in a puff of smoke if it is carried more than 10 feet away from
+      the steed.</p><p>For the duration, you or a creature you choose can ride
+      the steed. The steed uses the
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmRidingHorse000]{Riding
+      Horse}</strong> stat block (see appendix B), except it has a Speed of 100
+      feet and can travel 13 miles in an hour. When the spell ends, the steed
+      gradually fades, giving the rider 1 minute to dismount. The spell ends
+      early if the steed takes any damage.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: space
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: ill
+  properties:
+    - vocal
+    - somatic
+    - ritual
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: G7S0KZMpdXcKb2eo
+          uuid: Compendium.dnd5e.actors24.Actor.phbsumPhantomSte
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: phantom-steed
+_id: phbsplPhantomSte
+type: spell
+img: icons/creatures/mammals/deer-antlers-glowing-blue.webp
+effects: []
+folder: HCovEE4VoPGlIbKi
+sort: 500000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425965814
+  modifiedTime: 1745256796749
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplPhantomSte'

@@ -1,0 +1,108 @@
+_id: phbwlkEldritchMa
+name: Eldritch Master
+type: feat
+folder: UQiLTq4nLQpaM0Q5
+img: icons/magic/lightning/orb-ball-purple.webp
+system:
+  description:
+    value: >-
+      <p>When you use your Magical Cunning feature, you regain all your expended
+      Pact Magic spell slots.</p><section id="secret-Ei3yWRJ5hdPjWIH0"
+      class="secret"><p><strong>Foundry Note</strong></p><p>Use this feature to
+      restore all expended Pact Magic spell slots. It will consume the free use
+      from your Magical Cunning feature.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 20
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    ySE8596WjBPyBt2W:
+      type: utility
+      name: Eldritch Master
+      _id: ySE8596WjBPyBt2W
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you use Magical Cunning
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbwlkMagicalCun
+            scaling: {}
+          - type: attribute
+            value: '-(@spells.pact.max)'
+            target: spells.pact.value
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: eldritch-master
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256767072
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbwlkEldritchMa'

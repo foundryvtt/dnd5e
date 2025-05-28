@@ -1,0 +1,58 @@
+_id: 0z5v1BfMqQl5Z7UW
+name: Corrode Metal
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret">
+
+      <p>Any nonmagical weapon made of metal that hits the [[lookup
+      @details.type.config.label lowercase]] corrodes. After <strong>dealing
+      damage</strong>, the weapon takes a permanent and cumulative -1 penalty to
+      damage rolls.</p><p>If its penalty drops to -5, the weapon is destroyed.
+      Nonmagical ammunition made of metal that hits the [[lookup
+      @details.type.config.label lowercase]] is destroyed after dealing damage.
+      The [[lookup @details.type.config.label lowercase]] can eat through
+      2-inch-thick, nonmagical metal in 1 round.</p>
+
+      </section>
+
+      <p>The [[lookup @details.type.config.label lowercase]] corrodes metal.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: corrode-metal
+flags: {}
+img: icons/magic/earth/orb-stone-smoke-teal.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304965111
+  modifiedTime: 1725992570863
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!0z5v1BfMqQl5Z7UW'

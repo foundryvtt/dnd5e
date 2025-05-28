@@ -1,0 +1,189 @@
+_id: phbmnkDeflectEne
+name: Deflect Energy
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/magic/defensive/shield-barrier-deflect-teal.webp
+system:
+  description:
+    value: >-
+      <p>You can now use your Deflect Attacks feature against attacks that deal
+      any damage type, not just Bludgeoning, Piercing, or Slashing.</p><section
+      class="secret" id="secret-XAQmFmc4TpSF2Oh1"><p>The <strong>Reduce</strong>
+      activity can be used to heal yourself to reduce the total damage if it's
+      not enough to reduce it to 0.</p><p>The <strong>Redirect</strong> activity
+      can be used to roll damage and consume a use of your Focus Points if you
+      can reduce it to 0. You can select the type of damage in the roll dialog.
+      The dice increase automatically as you level up.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 3
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    F7NbTRmkUTDDZxj7:
+      type: heal
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: >-
+          When an attack roll hits you and its damage includes Bludgeoning,
+          Piercing, or Slashing damage
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: 1
+        denomination: 10
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: ''
+        scaling:
+          number: 1
+        bonus: '@abilities.dex.mod + @classes.monk.levels'
+      name: Reduce
+      _id: F7NbTRmkUTDDZxj7
+    AnEiO80Ga3etD595:
+      type: save
+      name: Redirect
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: If you reduce the damage to 0
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: 5 feet for melee attacks or 60 feet for ranged attacks
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Isn't behind Total Cover
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: true
+              formula: 2@scale.monk.die + @abilities.dex.mod
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - acid
+              - bludgeoning
+              - cold
+              - fire
+              - force
+              - lightning
+              - necrotic
+              - piercing
+              - poison
+              - psychic
+              - radiant
+              - slashing
+              - thunder
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: wis
+          formula: ''
+      _id: AnEiO80Ga3etD595
+  enchant: {}
+  identifier: deflect-energy
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1740680085024
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!phbmnkDeflectEne'

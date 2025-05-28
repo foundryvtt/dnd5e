@@ -1,0 +1,131 @@
+_id: dmgEyesOfCharmin
+name: Eyes of Charming
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/tools/scribal/spectacles-glasses.webp
+system:
+  activities:
+    73f7nND3BlavEH4a:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplCharmPerso
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '1'
+        properties: []
+      _id: 73f7nND3BlavEH4a
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: true
+          max: ''
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '3'
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Uncommon (Requires
+      Attunement)</em></p></div><p>These crystal lenses fit over the eyes. They
+      have 3 charges. While wearing them, you can expend 1 or more charges to
+      cast <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCharmPerso]{Charm
+      Person}</em> (save DC 13). For 1 charge, you cast the level 1 version of
+      the spell. You increase the spell's level by one for each additional
+      charge you expend. The lenses regain all expended charges daily at
+      dawn.</p>
+    chat: ''
+  identifier: eyes-of-charming
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712699748
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12300000
+ownership:
+  default: 0
+_key: '!items!dmgEyesOfCharmin'

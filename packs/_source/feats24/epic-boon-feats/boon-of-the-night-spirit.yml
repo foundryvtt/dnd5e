@@ -1,0 +1,241 @@
+name: Boon of the Night Spirit
+system:
+  description:
+    value: >-
+      <p>You gain the following benefits.</p><p><strong>Ability Score
+      Increase.</strong> Increase one ability score of your choice by 1, to a
+      maximum of 30.</p><p><strong>Merge with Shadows.</strong> While within Dim
+      Light or Darkness, you can give yourself the &amp;Reference[Invisible]
+      condition as a Bonus Action. The condition ends on you immediately after
+      you take an action, a Bonus Action, or a Reaction.</p><p><strong>Shadowy
+      Form.</strong> While within Dim Light or Darkness, you have Resistance to
+      all damage except Psychic and Radiant.</p><section
+      id="secret-fpWHPSTNYUeGtg0w" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature's <strong>Boon of the Night
+      Spirit</strong> Active Effect includes the Resistances but must be toggled
+      on/off in the Effects tab of your sheet.</p><p>The <strong>Merge with
+      Shadows</strong> activity includes an Active Effect that applies the
+      Invisible condition.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 2
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: feat
+    subtype: epicBoon
+  prerequisites:
+    level: 19
+    repeatable: false
+  properties: []
+  requirements: Level 19
+  activities:
+    z2BNb47xtdCmqViA:
+      type: utility
+      name: Merge with the Shadows
+      _id: z2BNb47xtdCmqViA
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Zusz9sywPycPxb1N
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: boon-of-the-night-spirit
+  advancement:
+    - _id: zNqJRAI2ON8SRu40
+      type: AbilityScoreImprovement
+      configuration:
+        cap: 1
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked: []
+        points: 1
+      value:
+        type: asi
+      level: 0
+      title: ''
+      hint: ''
+_id: phbBoonoftheNigh
+type: feat
+img: icons/magic/unholy/silhouette-robe-evil-power.webp
+effects:
+  - name: Boon of the Night Spirit
+    img: icons/magic/unholy/silhouette-robe-evil-power.webp
+    _id: f6JofmGpxquX9bqb
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: acid
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: bludgeoning
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: force
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: lightning
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: necrotic
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: piercing
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: slashing
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: thunder
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbBoonoftheNigh.f6JofmGpxquX9bqb'
+  - name: Merged with Shadows
+    img: icons/magic/unholy/silhouette-robe-evil-power.webp
+    origin: Compendium.dnd5e.feats24.Item.phbBoonoftheNigh
+    transfer: false
+    _id: Zusz9sywPycPxb1N
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - invisible
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbBoonoftheNigh.Zusz9sywPycPxb1N'
+folder: 7zo2bljGLQY3uwXI
+sort: 100196
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940774
+  modifiedTime: 1745256780197
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbBoonoftheNigh'

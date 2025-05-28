@@ -1,0 +1,143 @@
+_id: CAxSzHWizrafT033
+name: Dancing Lights
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create up to four torch-sized lights within range, making them
+      appear as torches, lanterns, or glowing orbs that hover in the air for the
+      duration. You can also combine the four lights into one glowing vaguely
+      humanoid form of Medium size. Whichever form you choose, each light sheds
+      dim light in a 10-foot radius.</p><p>As a bonus action on your turn, you
+      can move the lights up to 60 feet to a new spot within range. A light must
+      be within 20 feet of another light created by this spell, and a light
+      winks out if it exceeds the spell's range.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: space
+      choice: false
+    template:
+      units: any
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 0
+  school: evo
+  materials:
+    value: A bit of phosphorus or wychwood, or a glowworm
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: VCE7UzvbkVLU3yGQ
+          uuid: Compendium.dnd5e.monsters.Actor.JNmHqTwkWayvkH37
+          level:
+            min: null
+            max: null
+          types: []
+        - count: '4'
+          name: ''
+          _id: HC2PKEK56d2l8mFi
+          uuid: Compendium.dnd5e.monsters.Actor.UrXp9O9N7DvdH9nL
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: dancing-lights
+sort: 0
+flags: {}
+img: icons/magic/fire/projectile-meteor-salvo-strong-blue.webp
+effects: []
+folder: Z8kZlnggh1PtuF3Y
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037350862
+  modifiedTime: 1725992718071
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!CAxSzHWizrafT033'

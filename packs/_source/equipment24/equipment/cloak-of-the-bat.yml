@@ -1,0 +1,225 @@
+_id: dmgCloakOfTheBat
+name: Cloak of the Bat
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/back/cloak-layered-tattered-purple.webp
+system:
+  activities:
+    bHixxjmSIBwsov9t:
+      type: utility
+      name: Grip Edges
+      _id: bHixxjmSIBwsov9t
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: in an area of Dim Light or Darkness
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: spec
+        concentration: false
+        override: false
+        special: >-
+          fail to grip the cloak’s edges while flying in this way, or if you are
+          no longer in Dim Light or Darkness
+      effects:
+        - _id: LOByj7F1KjZdSUMi
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: edges of the cloak
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    baY1WKtwieimGXWd:
+      type: cast
+      _id: baY1WKtwieimGXWd
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: true
+        condition: in an area of Dim Light or Darkness
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '4'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplPolymorph0
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Rare (Requires
+      Attunement)</em></p></div><p>While wearing this cloak, you have Advantage
+      on Dexterity (Stealth) checks. In an area of Dim Light or Darkness, you
+      can grip the edges of the cloak and use it to gain a Fly Speed of 40 feet.
+      If you ever fail to grip the cloak's edges while flying in this way, or if
+      you are no longer in &amp;Reference[DimLight] or &amp;Reference[Darkness],
+      you lose this Fly Speed.</p><p>While wearing the cloak in an area of Dim
+      Light or Darkness, you can cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplPolymorph0]{Polymorph}</em>
+      on yourself, shape-shifting into a
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmBat00000000000]{Bat}</strong>.
+      While in that form, you retain your Intelligence, Wisdom, and Charisma
+      scores. The cloak can't be used this way again until the next dawn.</p>
+    chat: ''
+  identifier: cloak-of-the-bat
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Fly Speed
+    img: icons/creatures/mammals/bat-movement-flying-blue-purple.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgCloakOfTheBat
+    transfer: false
+    _id: LOByj7F1KjZdSUMi
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - flying
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1729020079158
+      modifiedTime: 1729020377323
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgCloakOfTheBat.LOByj7F1KjZdSUMi'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256803703
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 8200000
+ownership:
+  default: 0
+_key: '!items!dmgCloakOfTheBat'

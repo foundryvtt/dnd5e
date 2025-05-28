@@ -1,0 +1,131 @@
+_id: hzK7FQya0BDjSmLE
+name: Sunburst
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Brilliant sunlight flashes in a 60-foot radius centered on a point you
+      choose within range. Each creature in that light must make a Constitution
+      saving throw. On a failed save, a creature takes 12d6 radiant damage and
+      is Blinded for 1 minute. On a successful save, it takes half as much
+      damage and isn't blinded by this spell. Undead and oozes have disadvantage
+      on this saving throw.</p><p>A creature Blinded by this spell makes another
+      Constitution saving throw at the end of each of its turns. On a successful
+      save, it is no longer blinded.</p><p>This spell dispels any Darkness in
+      its area that was created by a spell.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: radius
+      size: '60'
+      contiguous: false
+  range:
+    value: '150'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 8
+  school: evo
+  materials:
+    value: Fire and a piece of sunstone
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 12
+            denomination: 6
+            bonus: ''
+            types:
+              - radiant
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: sunburst
+sort: 0
+flags: {}
+img: icons/magic/fire/explosion-fireball-large-purple-orange.webp
+effects: []
+folder: x1XTiOgx4DJ34wc5
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037363270
+  modifiedTime: 1725992722162
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!hzK7FQya0BDjSmLE'

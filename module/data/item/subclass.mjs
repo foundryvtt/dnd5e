@@ -1,4 +1,4 @@
-import { ItemDataModel } from "../abstract.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import SpellcastingField from "./fields/spellcasting-field.mjs";
@@ -90,7 +90,7 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
 
   /** @inheritDoc */
   async getSheetData(context) {
-    context.subtitles = [{ label: context.itemType }];
+    context.subtitles = [{ label: game.i18n.localize(CONFIG.Item.typeLabels.subclass) }];
     context.singleDescription = true;
     context.parts = ["dnd5e.details-subclass", "dnd5e.details-spellcasting"];
   }
@@ -100,12 +100,12 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onCreate(data, options, userId) {
-    await super._onCreate(data, options, userId);
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
     const actor = this.parent.actor;
     if ( !actor || (userId !== game.user.id) ) return;
     if ( !actor.system.attributes?.spellcasting && this.parent.spellcasting?.ability ) {
-      await actor.update({ "system.attributes.spellcasting": this.parent.spellcasting.ability });
+      actor.update({ "system.attributes.spellcasting": this.parent.spellcasting.ability });
     }
   }
 }

@@ -1,0 +1,993 @@
+_id: dmgDragonScaleMa
+name: Dragon Scale Mail
+type: equipment
+folder: 1kn4uV4dTVVduLjA
+img: icons/equipment/chest/breastplate-banded-steel.webp
+system:
+  activities:
+    bXwjIvHcsOYbGkj6:
+      type: enchant
+      name: Select Dragon Type
+      _id: bXwjIvHcsOYbGkj6
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: GTBlnwp18lMmlhNY
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - cPxO25ckNFWtuPOT
+            item: []
+        - _id: oAMZPSz9ScJ9kzJS
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - 7pZPJW8286U9Tg7k
+            item: []
+        - _id: YnovzwTfQAEO8okl
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - QZXLvBG314EsIM0W
+            item: []
+        - _id: SXYzllaQnbyxFGJu
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - Dp2k2G8cSCRIb3bp
+            item: []
+        - _id: 7R5dtsUNiWZhXhS3
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - jn9U4aMx0EjCXD2Y
+            item: []
+        - _id: kwIXULk6aDknIZnv
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - nPEOMehkECBedpCX
+            item: []
+        - _id: 4MsmIVyXTFt4AKuD
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - GDfu0ASHkIc3ZYpz
+            item: []
+        - _id: WnwsmlBDChjhXgAj
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - wodSF9vN42I3xmPq
+            item: []
+        - _id: wVh8ceMKvVud2qyr
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - YCUy12OF1A6oWyEt
+            item: []
+        - _id: QzV7iJWMlEePDrjN
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - 8Y80BGFPEux1Ifdz
+            item: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant:
+        identifier: ''
+      restrictions:
+        allowMagical: true
+        categories:
+          - medium
+        properties: []
+        type: equipment
+      img: ''
+      appliedEffects:
+        - GTBlnwp18lMmlhNY
+        - oAMZPSz9ScJ9kzJS
+        - YnovzwTfQAEO8okl
+        - SXYzllaQnbyxFGJu
+        - 7R5dtsUNiWZhXhS3
+        - kwIXULk6aDknIZnv
+        - 4MsmIVyXTFt4AKuD
+        - WnwsmlBDChjhXgAj
+        - wVh8ceMKvVud2qyr
+        - QzV7iJWMlEePDrjN
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Armor (Scale Mail), Very Rare (Requires
+      Attunement)</em></p><p><em>Dragon Scale Mail</em> is made of the scales of
+      one kind of dragon. Sometimes dragons collect their cast-off scales and
+      gift them. Other times, hunters carefully preserve the hide of a dead
+      dragon. In either case, <em>Dragon Scale Mail</em> is highly
+      valued.</p><p>While wearing this armor, you gain a +1 bonus to Armor
+      Class, you have Advantage on saving throws against the breath weapons of
+      Dragons, and you have Resistance to one damage type determined by the kind
+      of dragon that provided the scales (see the accompanying
+      table).</p><p>Additionally, you can focus your senses as a Magic action to
+      discern the distance and direction to the closest dragon within 30 miles
+      of yourself that is of the same type as the armor. This action can't be
+      used again until the next dawn.</p><details><summary>Resistance
+      Table</summary><table><thead><tr><th><p>Dragon</p></th><th><p>Resistance</p></th></tr></thead><tbody><tr><td><p>Black</p></td><td><p>Acid</p></td></tr><tr><td><p>Gold</p></td><td><p>Fire</p></td></tr><tr><td><p>Blue</p></td><td><p>Lightning</p></td></tr><tr><td><p>Green</p></td><td><p>Poison</p></td></tr><tr><td><p>Brass</p></td><td><p>Fire</p></td></tr><tr><td><p>Red</p></td><td><p>Fire</p></td></tr><tr><td><p>Bronze</p></td><td><p>Lightning</p></td></tr><tr><td><p>Silver</p></td><td><p>Cold</p></td></tr><tr><td><p>Copper</p></td><td><p>Acid</p></td></tr><tr><td><p>White</p></td><td><p>Cold</p></td></tr></tbody></table></details><section
+      class="secret" id="secret-maFaWTt3fehLniiP"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Select Dragon Type</strong> activity can
+      be used to select the type of dragon for this armor. It includes the +1
+      bonus and an Active Effect that provides the Resistance.</p></section>
+    chat: ''
+  identifier: dragon-scale-mail
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 45
+    units: lb
+  price:
+    value: 40050
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: 14
+    magicalBonus: 1
+    dex: 2
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: medium
+    baseItem: scalemail
+  properties:
+    - mgc
+    - stealthDisadvantage
+  strength: null
+  proficient: null
+effects:
+  - type: enchantment
+    name: Black Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    disabled: true
+    _id: GTBlnwp18lMmlhNY
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Black {}
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730906604476
+      modifiedTime: 1730906943635
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDragonScaleMa.GTBlnwp18lMmlhNY'
+  - name: Black Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    _id: cPxO25ckNFWtuPOT
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: acid
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730906720405
+      modifiedTime: 1730906949555
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDragonScaleMa.cPxO25ckNFWtuPOT'
+  - type: enchantment
+    name: Gold Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    disabled: true
+    _id: oAMZPSz9ScJ9kzJS
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Gold {}
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907007337
+      modifiedTime: 1730907220690
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDragonScaleMa.oAMZPSz9ScJ9kzJS'
+  - name: Gold Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907049849
+      modifiedTime: 1730907059342
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: 7pZPJW8286U9Tg7k
+    _key: '!items.effects!dmgDragonScaleMa.7pZPJW8286U9Tg7k'
+  - name: Blue Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: lightning
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907061306
+      modifiedTime: 1730907074872
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: QZXLvBG314EsIM0W
+    _key: '!items.effects!dmgDragonScaleMa.QZXLvBG314EsIM0W'
+  - name: Green Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907078172
+      modifiedTime: 1730907087876
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: Dp2k2G8cSCRIb3bp
+    _key: '!items.effects!dmgDragonScaleMa.Dp2k2G8cSCRIb3bp'
+  - name: Brass Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907089950
+      modifiedTime: 1730907098947
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: jn9U4aMx0EjCXD2Y
+    _key: '!items.effects!dmgDragonScaleMa.jn9U4aMx0EjCXD2Y'
+  - name: Red Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907101068
+      modifiedTime: 1730907112695
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: nPEOMehkECBedpCX
+    _key: '!items.effects!dmgDragonScaleMa.nPEOMehkECBedpCX'
+  - name: Bronze Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: lightning
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907114481
+      modifiedTime: 1730907124058
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: GDfu0ASHkIc3ZYpz
+    _key: '!items.effects!dmgDragonScaleMa.GDfu0ASHkIc3ZYpz'
+  - name: Silver Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907141206
+      modifiedTime: 1730907148147
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: wodSF9vN42I3xmPq
+    _key: '!items.effects!dmgDragonScaleMa.wodSF9vN42I3xmPq'
+  - name: Copper Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: acid
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907150316
+      modifiedTime: 1730907158635
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: YCUy12OF1A6oWyEt
+    _key: '!items.effects!dmgDragonScaleMa.YCUy12OF1A6oWyEt'
+  - name: White Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907160927
+      modifiedTime: 1730907169982
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: 8Y80BGFPEux1Ifdz
+    _key: '!items.effects!dmgDragonScaleMa.8Y80BGFPEux1Ifdz'
+  - type: enchantment
+    name: Blue Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    disabled: true
+    _id: YnovzwTfQAEO8okl
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Blue {}
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907354703
+      modifiedTime: 1730907378723
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDragonScaleMa.YnovzwTfQAEO8okl'
+  - type: enchantment
+    name: Green Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    disabled: true
+    _id: SXYzllaQnbyxFGJu
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Green {}
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907381407
+      modifiedTime: 1730907395385
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDragonScaleMa.SXYzllaQnbyxFGJu'
+  - type: enchantment
+    name: Brass Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    disabled: true
+    _id: 7R5dtsUNiWZhXhS3
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Fire {}
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907401396
+      modifiedTime: 1730907676252
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDragonScaleMa.7R5dtsUNiWZhXhS3'
+  - type: enchantment
+    name: Red Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    disabled: true
+    _id: kwIXULk6aDknIZnv
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Red {}
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907421298
+      modifiedTime: 1730907445483
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDragonScaleMa.kwIXULk6aDknIZnv'
+  - type: enchantment
+    name: Bronze Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    disabled: true
+    _id: 4MsmIVyXTFt4AKuD
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Bronze {}
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907449061
+      modifiedTime: 1730907464647
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDragonScaleMa.4MsmIVyXTFt4AKuD'
+  - type: enchantment
+    name: Silver Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    disabled: true
+    _id: WnwsmlBDChjhXgAj
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Silver {}
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907466606
+      modifiedTime: 1730907481777
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDragonScaleMa.WnwsmlBDChjhXgAj'
+  - type: enchantment
+    name: Copper Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    disabled: true
+    _id: wVh8ceMKvVud2qyr
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: Copper {}
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907484287
+      modifiedTime: 1730907531144
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDragonScaleMa.wVh8ceMKvVud2qyr'
+  - type: enchantment
+    name: White Scale
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    disabled: true
+    _id: QzV7iJWMlEePDrjN
+    system: {}
+    changes:
+      - key: name
+        mode: 5
+        value: White {}
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730907500840
+      modifiedTime: 1730907523266
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgDragonScaleMa.QzV7iJWMlEePDrjN'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect:
+        - cPxO25ckNFWtuPOT
+        - 7pZPJW8286U9Tg7k
+        - QZXLvBG314EsIM0W
+        - Dp2k2G8cSCRIb3bp
+        - jn9U4aMx0EjCXD2Y
+        - nPEOMehkECBedpCX
+        - GDfu0ASHkIc3ZYpz
+        - wodSF9vN42I3xmPq
+        - YCUy12OF1A6oWyEt
+        - 8Y80BGFPEux1Ifdz
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712699372
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!dmgDragonScaleMa'

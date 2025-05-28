@@ -1,0 +1,861 @@
+_id: phbCreatingAChar
+name: Character Creation
+pages:
+  - sort: 100000
+    name: Choose a Character Sheet
+    type: text
+    _id: 8Dkn6nfrJruZzH83
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>You’ll record the main details of your character on a character
+        sheet. Throughout this chapter, we use the term “character sheet” to
+        mean whatever you use to track your character’s details, whether it’s a
+        printed character sheet (like the one shown on the following pages), a
+        digital character sheet like the one on D&amp;D Beyond, or plain paper.
+        Choose whichever style of sheet works for you, and then embark on
+        creating a character!</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: null
+      modifiedTime: 1745592134168
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCreatingAChar.8Dkn6nfrJruZzH83'
+  - sort: 200000
+    name: Create Your Character
+    type: text
+    _id: l4eqkEUGLVS2jBhO
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: "<p>Here are the steps to make a character; each step is explored in detail in this chapter:</p><ol><li><strong>Choose a Class. </strong>Every adventurer is a member of a class. A class broadly describes a character’s vocation, special talents, and favored tactics.</li><li><strong>Determine Origin.</strong> A character’s origin includes two elements: background and species. How did the character spend the years leading up to a life of adventure? Who are the character’s ancestors? You can also choose your character’s languages.</li><li><strong>Determine Ability Scores.</strong> Much of what your character does in the game depends on the character’s six abilities.</li><li><strong>Choose an Alignment.</strong> Alignment is a shorthand for your character’s moral compass.</li><li><strong>Fill in Details.</strong> Using the choices you’ve made, fill in the remaining details on your character sheet.</li></ol><section class=\"fvtt advice\"><figure class=\"icon\"><img src=\"icons/vtt-512.png\" /></figure><article><h3>Building Your Character in Foundry</h3><p>It's easy to build a character directly in your character sheet on Foundry. Just do the following:</p><ol><li>Toggle on the \"Edit\" mode in the top-left.</li><li><p>On the <span class=\"reference\"><em class=\"fas fa-cog\">\_</em> Details Tab</span> click on <span class=\"reference\">Add Species</span> in the right column underneath your Saving Throws and choose your Species in the Compendium Browser by checking the box to the right and pressing <span class=\"reference\">Select</span>.</p><ul><li>You can select filters on the left-hand side. Clicking once includes, clicking a second time excludes, and clicking a third time reverts it to unchecked.</li></ul></li><li><p>Click on <span class=\"reference\">Add Background</span> underneath your Species and make a choice in the Compendium Browser.</p></li><li><p>Change to the <span class=\"reference\"><em class=\"fas fa-list\">\_</em> Features</span> tab and click on <span class=\"reference\">Add Class</span> and make a choice in the Compendium Browser.</p></li><li><p>Once you reach the level that grants your subclass you can return to the <span class=\"reference\"><em class=\"fas fa-list\">\_</em> Features</span> tab and click on the <span class=\"reference\"><em class=\"fa-solid fa-circle-plus\" inert>\_</em></span> icon to select your subclass.</p></li></ol><p>Whenever you make a choice or level up you will be walked through the Advancement system which tells you what features you're being granted, allows you to make choices, and roll for your Hit Points (or take the average).</p></article></section>"
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745504756557
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCreatingAChar.l4eqkEUGLVS2jBhO'
+  - sort: 300000
+    name: 'Step 1: Choose a Class'
+    type: text
+    _id: 5ay66aAVgkgRH7qH
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Choose a class, and write it on your character sheet. The Class
+        Overview table summarizes the classes. See
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCharacterClas]{Classes}
+        for the classes’ details.</p><table><caption>Class
+        Overview</caption><thead><tr><th><p>Class</p></th><th><p>Likes
+        ...</p></th><th><p>Primary
+        Ability</p></th><th><p>Complexity</p></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbBarbarian0000]{Barbarian}</p></td><td><p>Battle</p></td><td><p>Strength</p></td><td><p>Average</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbBard000000000]{Bard}</p></td><td><p>Performing</p></td><td><p>Charisma</p></td><td><p>High</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbCleric0000000]{Cleric}</p></td><td><p>Gods</p></td><td><p>Wisdom</p></td><td><p>Average</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbDruid00000000]{Druid}</p></td><td><p>Nature</p></td><td><p>Wisdom</p></td><td><p>High</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbFighter000000]{Fighter}</p></td><td><p>Weapons</p></td><td><p>Strength<br
+        />or
+        Dexterity</p></td><td><p>Low</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbMonk000000000]{Monk}</p></td><td><p>Unarmed
+        combat</p></td><td><p>Dexterity<br />and
+        Wisdom</p></td><td><p>High</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbPaladin000000]{Paladin}</p></td><td><p>Defense</p></td><td><p>Strength<br
+        />and
+        Charisma</p></td><td><p>Average</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbRanger0000000]{Ranger}</p></td><td><p>Survival</p></td><td><p>Dexterity<br
+        />and
+        Wisdom</p></td><td><p>Average</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbRogue00000000]{Rogue}</p></td><td><p>Stealth</p></td><td><p>Dexterity</p></td><td><p>Low</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbSorcerer00000]{Sorcerer}</p></td><td><p>Power</p></td><td><p>Charisma</p></td><td><p>High</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbWarlock000000]{Warlock}</p></td><td><p>Occult
+        lore</p></td><td><p>Charisma</p></td><td><p>High</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbWizard0000000]{Wizard}</p></td><td><p>Spellbooks</p></td><td><p>Intelligence</p></td><td><p>Average</p></td></tr></tbody></table><h2>Write
+        Your Level</h2><p>Write your character’s level on your character sheet.
+        Typically, a character starts at level 1 and advances in level by
+        adventuring and gaining Experience Points (XP).</p><p><em><strong>Write
+        Your XP.</strong></em> Also record your Experience Points. A level 1
+        character has 0 XP.</p><p><em><strong>Starting at a Higher
+        Level.</strong></em> Your GM might start you at a higher level. If you
+        start at level 3 or higher, write your chosen subclass on your character
+        sheet. See the
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCreatingAChar.JournalEntryPage.DE7Ff0cOkQgid3fG]{Starting
+        at Higher Levels} section in Character Creation for more
+        information.</p><h2>Note Armor Training</h2><p>Your class might give you
+        training with certain categories of armor. Note your armor training on
+        your character sheet. Armor training with a kind of armor means you can
+        wear that armor effectively, gaining defensive bonuses from it. The
+        categories of armor are described in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbEquipment0000]{Equipment}.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745622942985
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCreatingAChar.5ay66aAVgkgRH7qH'
+  - sort: 400000
+    name: 'Step 2: Character Origin'
+    type: text
+    _id: t1WP9VEevo4TOTXw
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Determining your character’s origin involves choosing a
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbBackgroundDes]{background},
+        a
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpeciesDescri]{species},
+        and two languages.</p><p>A character’s background represents the place
+        and occupation that were most formative for the character. The
+        combination of background, species, and languages provides fertile soil
+        for your imagination as you ponder your character’s earliest
+        days.</p><h2>Choose a Background</h2><p>Choose your character’s
+        background, and write it on your character sheet. You can choose any of
+        the backgrounds detailed in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbBackgroundDes]{Character
+        Origins}, and your GM might offer additional backgrounds as
+        options.</p><p>The background you choose influences step 3, when you
+        determine your character’s ability scores. If you’re having trouble
+        choosing, the Ability Scores and Backgrounds table shows which
+        backgrounds benefit which ability scores. Look for your class’s primary
+        ability there.</p><table><caption>Ability Scores and
+        Backgrounds</caption><thead><tr><th><p>Ability</p></th><th><p>Backgrounds</p></th></tr></thead><tbody><tr><td><p>Strength</p></td><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbbgSoldier0000]{Soldier}</p></td></tr><tr><td><p>Dexterity</p></td><td><p><span>@UUID[Compendium.dnd5e.origins24.Item.phbbgSoldier0000]{Soldier}</span></p></td></tr><tr><td><p>Constitution</p></td><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbbgSoldier0000]{Soldier}</p></td></tr><tr><td><p>Intelligence</p></td><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbbgAcolyte0000]{Acolyte}</p></td></tr><tr><td><p>Wisdom</p></td><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbbgAcolyte0000]{Acolyte}</p></td></tr><tr><td><p>Charisma</p></td><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbbgAcolyte0000]{Acolyte}</p></td></tr></tbody></table><p><em><strong>Record
+        Your Feat.</strong></em> A background gives you a feat, which grants
+        your character particular capabilities. Feats are detailed in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000]{Feats}.
+        Write the feat on your character sheet.</p><p><em><strong>Note
+        Proficiencies.</strong></em> Your background gives proficiency in two
+        skills and with one tool. Record this information on your character
+        sheet.</p><p>Your class also gives proficiencies. Check your class
+        description in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCharacterClas]{Classes}
+        and note the proficiencies on your character sheet.</p><p>On the sample
+        character sheet, you can indicate proficiency in skills and saving
+        throws by marking the circle next to them.</p><p>The features table in
+        your class description shows your Proficiency Bonus (described in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbD20Tests00000.JournalEntryPage.zU9fgQbLaVbJvPRX]{Playing
+        the Game}), which is +2 for a level 1 character. Note this number on
+        your character sheet. You’ll fill in other numbers connected to these
+        proficiencies in step 5.</p><h2>Choose Starting Equipment</h2><p>Your
+        background and class both provide starting equipment. Any coins that you
+        gain at this step can be immediately spent on equipment from
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbEquipment0000]{Equipment}.
+        In addition, you can have one trinket at no cost (see the Trinkets table
+        at the end of this chapter).</p><p>Record your chosen equipment on your
+        character sheet. Equipment is described in "Equipment", but for now you
+        can just write it all down and look up the specifics in that chapter
+        later. There’s also space on the sample character sheet to note any
+        coins you have left after purchasing your equipment, as well as treasure
+        you acquire on your adventures.</p><h2>Choose a Species</h2><p>Choose a
+        species for your character. The following species options are detailed
+        in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpeciesDescri]{Character
+        Origins}:
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpeciesDescri.JournalEntryPage.4zCNgk0JSKVzv9Y9]{Dwarf},
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpeciesDescri.JournalEntryPage.h9oGyt2Wh9mp0xbg]{Elf},
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpeciesDescri.JournalEntryPage.I5mX89tfojsyQmdA]{Halfling},
+        and
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpeciesDescri.JournalEntryPage.8t4u8CWYbxubXflR]{Human}.
+        Once you’ve chosen a species, write it on your character sheet. Then
+        record your species’ traits.</p><p>Your character’s size and Speed are
+        determined by the character’s species; record these in the appropriate
+        places on your character sheet as well (you may write just the first
+        letter of your size).</p><h2>Imagine Your Past and Present</h2><p>Let
+        your character’s background and species inspire how you imagine their
+        past. That past fed into the character’s present. With that in mind,
+        consider answers to the following questions as your
+        character:</p><ul><li>Who raised you?</li><li>Who was your dearest
+        childhood friend?</li><li>Did you grow up with a pet?</li><li>Have you
+        fallen in love? If so, with whom?</li><li>Did you join an organization,
+        such as a guild or religion? If so, are you still a member of
+        it?</li><li>What elements of your past inspire you to go on adventures
+        now?</li></ul><h2>Choose Languages</h2><p>Your character knows at least
+        three languages: Common plus two languages you roll or choose from the
+        Standard Languages table. Knowledge of a language means your character
+        can communicate in it, read it, and write it. Your class and other
+        features might also give you languages.</p><p>The Standard Languages
+        table lists languages that are widespread on D&amp;D worlds. Every
+        player character knows Common, which originated in the planar metropolis
+        of Sigil, the hub of the multiverse. The other standard languages
+        originated with the first members of the most prominent species in the
+        worlds of D&amp;D and have since spread widely.</p><p>Use the
+        @UUID[Compendium.dnd5e.tables24.RollTable.phbStandardLangu]{Standard
+        Languages} roll table to roll for your languages.</p><table
+        id="standard-languages"><caption>Standard
+        Languages</caption><thead><tr><th><p>1d12</p></th><th><p>Language</p></th><th><p>Origin</p></th></tr></thead><tbody><tr><td><p>--</p></td><td><p>Common</p></td><td><p>Sigil</p></td></tr><tr><td><p>1</p></td><td><p>Common
+        Sign
+        Language</p></td><td><p>Sigil</p></td></tr><tr><td><p>2</p></td><td><p>Draconic</p></td><td><p>Dragons</p></td></tr><tr><td><p>3-4</p></td><td><p>Dwarvish</p></td><td><p>Dwarves</p></td></tr><tr><td><p>5-6</p></td><td><p>Elvish</p></td><td><p>Elves</p></td></tr><tr><td><p>7</p></td><td><p>Giant</p></td><td><p>Giants</p></td></tr><tr><td><p>8</p></td><td><p>Gnomish</p></td><td><p>Gnomes</p></td></tr><tr><td><p>9</p></td><td><p>Goblin</p></td><td><p>Goblinoids</p></td></tr><tr><td><p>10-11</p></td><td><p>Halfling</p></td><td><p>Halflings</p></td></tr><tr><td><p>12</p></td><td><p>Orc</p></td><td><p>Orcs</p></td></tr></tbody></table><p>The
+        Rare Languages table lists languages that are either secret or derived
+        from other planes of exis- tence and thus less widespread in the worlds
+        of the Material Plane. Some features let a character learn a rare
+        language.</p><table id="rare-languages"><caption>Rare
+        Languages</caption><thead><tr><th><p>Language</p></th><th><p>Origin</p></th></tr></thead><tbody><tr><td><p>Abyssal</p></td><td><p>Demons
+        of the
+        Abyss</p></td></tr><tr><td><p>Celestial</p></td><td><p>Celestials</p></td></tr><tr><td><p>Deep
+        Speech</p></td><td><p>Aberrations</p></td></tr><tr><td><p>Druidic</p></td><td><p>Druidic
+        circles</p></td></tr><tr><td><p>Infernal</p></td><td><p>Devils of the
+        Nine Hells</p></td></tr><tr><td><p>Primordial
+        *</p></td><td><p>Elementals</p></td></tr><tr><td><p>Sylvan</p></td><td><p>The
+        Feywild</p></td></tr><tr><td><p>Thieves’ Cant</p></td><td><p>Various
+        criminal guilds</p></td></tr><tr><td><p>Undercommon</p></td><td><p>The
+        Underdark</p></td></tr></tbody></table><p><em>* Primordial includes the
+        Aquan, Auran, Ignan, and Terran dialects. Creatures that know one of
+        these dialects can communicate with those that know a different
+        one.</em></p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745507418012
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCreatingAChar.t1WP9VEevo4TOTXw'
+  - sort: 500000
+    name: 'Step 3: Ability Scores'
+    type: text
+    _id: 9o8NbQ1Ph2xCxlQh
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>To determine your character’s ability scores, you first generate a
+        set of six numbers using the instructions below and then assign them to
+        your six abilities.
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbPlayingTheGam.JournalEntryPage.sIPPXW1mYE3O4xdc]{Playing
+        the Game} explains what each ability means.</p><table
+        id="ability-score-point-costs" class="right three"><caption>Ability
+        Score Point
+        Costs</caption><thead><tr><th><p>Score</p></th><th><p>Cost</p></th></tr></thead><tbody><tr><td><p>8</p></td><td><p>0</p></td></tr><tr><td><p>9</p></td><td><p>1</p></td></tr><tr><td><p>10</p></td><td><p>2</p></td></tr><tr><td><p>11</p></td><td><p>3</p></td></tr><tr><td><p>12</p></td><td><p>4</p></td></tr><tr><td><p>13</p></td><td><p>5</p></td></tr><tr><td><p>14</p></td><td><p>7</p></td></tr><tr><td><p>15</p></td><td><p>9</p></td></tr></tbody></table><h2>Generate
+        Your Scores</h2><p>Determine your ability scores by using one of the
+        following three methods. Your GM might prefer you to use a particular
+        one.</p><p><em><strong>Standard Array.</strong></em> Use the following
+        six scores for your abilities: 15, 14, 13, 12, 10,
+        8.</p><p><em><strong>Random Generation.</strong></em> Roll [[/r
+        4d6kh3]]{4d6} (this rolls 4d6 and keeps the top 3 results) and record
+        the total of the highest three dice. Do this five more times, so you
+        have six numbers.</p><p><em><strong>Point Cost.</strong></em> You have
+        27 points to spend on your ability scores. The cost of each score is
+        shown on the Ability Score Point Costs table. For example, a score of 14
+        costs 7 of your 27 points.</p><h2>Assign Ability Scores</h2><p>Once
+        you’ve generated six scores, assign them to Strength, Dexterity,
+        Constitution, Intelligence, Wisdom, and Charisma, keeping in mind your
+        class’s primary ability. Fill in the ability modifiers as well.</p><p>If
+        you’re using the Standard Array option, consult the Standard Array by
+        Class table for suggestions on where to assign scores for your
+        character’s class. The table puts the highest scores in a class’s main
+        abilities. If you used a different method to generate the scores, you
+        may still use this table to guide where you place your highest and
+        lowest scores.</p><table id="standard-array-class"><caption>Standard
+        Array by
+        Class</caption><thead><tr><th><p>Class</p></th><th><p>Str.</p></th><th><p>Dex.</p></th><th><p>Con.</p></th><th><p>Int.</p></th><th><p>Wis.</p></th><th><p>Cha.</p></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.classes24.Item.phbbrbBarbarian0]{Barbarian}</p></td><td><p>15</p></td><td><p>13</p></td><td><p>14</p></td><td><p>10</p></td><td><p>12</p></td><td><p>8</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.classes24.Item.phbbrdBard000000]{Bard}</p></td><td><p>8</p></td><td><p>14</p></td><td><p>12</p></td><td><p>13</p></td><td><p>10</p></td><td><p>15</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.classes24.Item.phbclcCleric0000]{Cleric}</p></td><td><p>14</p></td><td><p>8</p></td><td><p>13</p></td><td><p>10</p></td><td><p>15</p></td><td><p>12</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.classes24.Item.phbdrdDruid00000]{Druid}</p></td><td><p>8</p></td><td><p>12</p></td><td><p>14</p></td><td><p>13</p></td><td><p>15</p></td><td><p>10</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.classes24.Item.phbftrFighter000]{Fighter}</p></td><td><p>15</p></td><td><p>14</p></td><td><p>13</p></td><td><p>8</p></td><td><p>10</p></td><td><p>12</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.classes24.Item.phbmnkMonk000000]{Monk}</p></td><td><p>12</p></td><td><p>15</p></td><td><p>13</p></td><td><p>10</p></td><td><p>14</p></td><td><p>8</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.classes24.Item.phbpdnPaladin000]{Paladin}</p></td><td><p>15</p></td><td><p>10</p></td><td><p>13</p></td><td><p>8</p></td><td><p>12</p></td><td><p>14</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.classes24.Item.phbrgrRanger0000]{Ranger}</p></td><td><p>12</p></td><td><p>15</p></td><td><p>13</p></td><td><p>8</p></td><td><p>14</p></td><td><p>10</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.classes24.Item.phbrgeRogue00000]{Rogue}</p></td><td><p>12</p></td><td><p>15</p></td><td><p>13</p></td><td><p>14</p></td><td><p>10</p></td><td><p>8</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.classes24.Item.phbscrSorcerer00]{Sorcerer}</p></td><td><p>10</p></td><td><p>13</p></td><td><p>14</p></td><td><p>8</p></td><td><p>12</p></td><td><p>15</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.classes24.Item.phbwlkWarlock000]{Warlock}</p></td><td><p>8</p></td><td><p>14</p></td><td><p>13</p></td><td><p>12</p></td><td><p>10</p></td><td><p>15</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.classes24.Item.phbwzdWizard0000]{Wizard}</p></td><td><p>8</p></td><td><p>12</p></td><td><p>13</p></td><td><p>15</p></td><td><p>14</p></td><td><p>10</p></td></tr></tbody></table><h2>Adjust
+        Ability Scores</h2><p>After assigning your ability scores, adjust them
+        according to your background. Your background lists three abilities;
+        increase one of those scores by 2 and a different one by 1, or increase
+        all three by 1. None of these increases can raise a score above
+        20.</p><p>Some players like to increase their class’s primary ability,
+        while others prefer to increase a low score.</p><h2>Determine Ability
+        Modifiers</h2><p>Finally, determine your ability modifiers using the
+        Ability Scores and Modifiers table. Write the modifier next to each of
+        your scores.</p><table id="ability-scores-modifiers"><caption>Ability
+        Scores and
+        Modifiers</caption><thead><tr><th><p>Score</p></th><th><p>Modifier</p></th></tr></thead><tbody><tr><td><p>3</p></td><td><p>−4</p></td></tr><tr><td><p>4–5</p></td><td><p>−3</p></td></tr><tr><td><p>6–7</p></td><td><p>−2</p></td></tr><tr><td><p>8–9</p></td><td><p>−1</p></td></tr><tr><td><p>10–11</p></td><td><p>+0</p></td></tr><tr><td><p>12–13</p></td><td><p>+1</p></td></tr><tr><td><p>14–15</p></td><td><p>+2</p></td></tr><tr><td><p>16–17</p></td><td><p>+3</p></td></tr><tr><td><p>18–19</p></td><td><p>+4</p></td></tr><tr><td><p>20</p></td><td><p>+5</p></td></tr></tbody></table>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745507948790
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCreatingAChar.9o8NbQ1Ph2xCxlQh'
+  - sort: 600000
+    name: 'Step 4: Alignment'
+    type: text
+    _id: 6ThVICG0QSRy7L0F
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Choose your character’s alignment from the options below, and note it
+        on your character sheet.</p><p>D&amp;D assumes that player characters
+        aren’t of an evil alignment. Check with your GM before making an evil
+        character.</p><aside class="notable"><h3>Unaligned Creatures</h3><p>Most
+        creatures that lack the capacity for rational thought don’t have
+        alignments; they are unaligned. Sharks are savage predators, for
+        example, but they aren’t evil; they are unaligned.</p></aside><h2>The
+        Nine Alignments</h2><p>A creature’s alignment broadly describes its
+        ethical attitudes and ideals. Alignment is a combination of two factors:
+        one identifies morality (good, evil, or neutral), and the other
+        describes attitudes toward order (lawful, chaotic, or
+        neutral).</p><p>The summaries of the alignments below describe the
+        typical behavior of a creature with that alignment; individuals can vary
+        from that behavior.</p><p><em><strong>Lawful Good (LG).</strong></em>
+        Lawful Good creatures endeavor to do the right thing as expected by
+        society. Someone who fights injustice and protects the innocent without
+        hesitation is probably Lawful Good.</p><p><em><strong>Neutral Good
+        (NG).</strong></em> Neutral Good creatures do the best they can, working
+        within rules but not feeling bound by them. A kindly person who helps
+        others according to their needs is probably Neutral
+        Good.</p><p><em><strong>Chaotic Good (CG).</strong></em> Chaotic Good
+        creatures act as their conscience directs with little regard for what
+        others expect. A rebel who waylays a cruel baron’s tax collectors and
+        uses the stolen money to help the poor is probably Chaotic
+        Good.</p><p><em><strong>Lawful Neutral (LN).</strong></em> Lawful
+        Neutral individuals act in accordance with law, tradition, or personal
+        codes. Someone who follows a disciplined rule of life—and isn’t swayed
+        either by the demands of those in need or by the temptations of evil—is
+        probably Lawful Neutral.</p><p><em><strong>Neutral (N).</strong></em>
+        Neutral is the alignment of those who prefer to avoid moral questions
+        and don’t take sides, doing what seems best at the time. Someone who’s
+        bored by moral debate is probably Neutral.</p><p><em><strong>Chaotic
+        Neutral (CN).</strong></em> Chaotic Neutral creatures follow their
+        whims, valuing their personal freedom above all else. A scoundrel who
+        wanders the land living by their wits is probably Chaotic
+        Neutral.</p><p><em><strong>Lawful Evil (LE).</strong></em> Lawful Evil
+        creatures methodically take what they want within the limits of a code
+        of tradition, loyalty, or order. An aristocrat exploiting citizens while
+        scheming for power is probably Lawful Evil.</p><p><em><strong>Neutral
+        Evil (NE).</strong></em> Neutral Evil is the alignment of those who are
+        untroubled by the harm they cause as they pursue their desires. A
+        criminal who robs and murders as they please is probably Neutral
+        Evil.</p><p><em><strong>Chaotic Evil (CE).</strong></em> Chaotic Evil
+        creatures act with arbitrary violence, spurred by their hatred or
+        bloodlust. A villain pursuing schemes of vengeance and havoc is probably
+        Chaotic Evil.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745622993213
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCreatingAChar.6ThVICG0QSRy7L0F'
+  - sort: 700000
+    name: 'Step 5: Character Creation Details'
+    type: text
+    _id: O1kCtOyXyxlJ1hz9
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Now fill in the rest of your character sheet.</p><h2>Record Class
+        Features</h2><p>Look at your class’s feature table in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCharacterClas]{Classes},
+        and write down the level 1 features. The class features are detailed in
+        that same chapter.</p><p>Some class features offer choices. Make sure to
+        read all your features and make any offered choices.</p><h2>Fill In
+        Numbers</h2><p>Note these numbers on your character
+        sheet.</p><p><em><strong>Saving Throws.</strong></em> For the saving
+        throws you have proficiency in, add your Proficiency Bonus to the
+        appropriate ability modifier and note the total. Some players also like
+        to note the modifier for saving throws they’re not proficient in, which
+        is just the relevant ability
+        modifier.</p><p><em><strong>Skills.</strong></em> For skills you have
+        proficiency in, add your Proficiency Bonus to the ability modifier
+        associated with that skill, and note the total. You might also wish to
+        note the modifier for skills you’re not proficient in, which is just the
+        relevant ability modifier.</p><p><em><strong>Passive
+        Perception.</strong></em> Sometimes your GM will determine whether your
+        character notices something without asking you to make a Wisdom
+        (Perception) check; the GM uses your Passive Perception instead. Passive
+        Perception is a score that reflects a general awareness of your
+        surroundings when you’re not actively looking for something. Use this
+        formula to determine your Passive Perception score:</p><p
+        class="List-Styles_List-Item-Centered"
+        style="text-align:center"><strong>Passive Perception</strong> = 10 +
+        Wisdom (Perception) check modifier</p><p>Include all modifiers that
+        apply to your Wisdom (Perception) checks. For example, if your character
+        has a Wisdom of 15 and proficiency in the Perception skill, you have a
+        Passive Perception of 14 (10 + 2 for your Wisdom modifier + 2 for
+        proficiency).</p><p><em><strong>Hit Points.</strong></em> Your class and
+        Constitution modifier determine your Hit Point maximum at level 1, as
+        shown on the Level 1 Hit Points by Class table.</p><table><caption>Level
+        1 Hit Points by
+        Class</caption><thead><tr><th><p>Class</p></th><th><p>Hit Point
+        Maximum</p></th></tr></thead><tbody><tr><td><p>Barbarian</p></td><td><p>12
+        + Con. modifier</p></td></tr><tr><td><p>Fighter, Paladin, or
+        Ranger</p></td><td><p>10 + Con. modifier</p></td></tr><tr><td><p>Bard,
+        Cleric, Druid, Monk, Rogue, or Warlock</p></td><td><p>8 + Con.
+        modifier</p></td></tr><tr><td><p>Sorcerer or Wizard</p></td><td><p>6 +
+        Con. modifier</p></td></tr></tbody></table><p>The character sheet
+        includes room to note your current Hit Points when you take damage, as
+        well as any Temporary Hit Points you might gain. There’s also space to
+        track Death Saving Throws.</p><p><em><strong>Hit Point
+        Dice.</strong></em> Your class’s description tells you the die type of
+        your character’s Hit Point Dice (or Hit Dice for short); write this on
+        your character sheet. At level 1, your character has 1 Hit Die. You can
+        spend Hit Dice during a Short Rest to recover Hit Points. Your character
+        sheet also includes space to note how many Hit Dice you’ve
+        spent.</p><p><em><strong>Initiative.</strong></em> Write your Dexterity
+        modifier in the space for Initiative on your character
+        sheet.</p><p><em><strong>Armor Class.</strong></em> Without armor or a
+        shield, your base Armor Class is 10 plus your Dexterity modifier. If
+        your starting equipment includes armor or a Shield (or both), calculate
+        your AC using the rules in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbEquipment0000]{Equipment}.
+        A class feature might give you a different way to calculate your
+        AC.</p><p><em><strong>Attacks.</strong></em> In the Weapons &amp; Damage
+        Cantrips section of the character sheet, write your starting weapons.
+        The attack roll bonus for a weapon with which you have proficiency is
+        one of the following unless a weapon’s property says otherwise:</p><p
+        style="text-align:center"><strong>Melee attack bonus</strong> = Strength
+        modifier + Proficiency Bonus</p><p
+        style="text-align:center"><strong>Ranged attack bonus</strong> =
+        Dexterity modifier + Proficiency Bonus</p><p>Look up the damage and
+        properties of your weapons in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbEquipment0000]{Equipment}.
+        You add the same ability modifier you use for attacks with a weapon to
+        your damage rolls with that
+        weapon.</p><p><em><strong>Spellcasting.</strong></em> Note both the
+        saving throw DC for your spells and the attack bonus for attacks you
+        make with them, using these formulas:</p><p
+        style="text-align:center"><strong>Spell save DC</strong> = 8 +
+        spellcasting ability modifier + Proficiency Bonus</p><p
+        style="text-align:center"><strong>Spell attack bonus</strong> =
+        spellcasting ability modifier + Proficiency Bonus</p><p>Your
+        spellcasting ability modifier for a spell is determined by whatever
+        feature gives you the ability to cast the spell.</p><p><em><strong>Spell
+        Slots, Cantrips, and Prepared Spells.</strong></em> If your class gives
+        you the Spellcasting or Pact Magic feature, your class features table
+        shows the number of spell slots you have available, how many cantrips
+        you know, and how many spells you can prepare. Choose your cantrips and
+        prepared spells, and note them—along with your number of spell slots—on
+        your character sheet.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745510339537
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCreatingAChar.O1kCtOyXyxlJ1hz9'
+  - sort: 700000
+    name: Level Advancement
+    type: text
+    _id: Vz5QcYKA74tWkDqy
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>While going on adventures, your character gains experience,
+        represented by Experience Points (XP). A character who reaches a
+        specified Experience Point total advances in capability. This
+        advancement is called gaining a level.</p><p>The Character Advancement
+        table lists the XP you need to advance to a level and the Proficiency
+        Bonus for a character of that level. When your XP total equals or
+        exceeds a number in the Experience Points column, you reach the
+        corresponding level.</p><table
+        id="character-advancement"><caption>Character
+        Advancement</caption><thead><tr><th><p>Level</p></th><th><p>Experience
+        Points</p></th><th><p>Proficiency
+        Bonus</p></th></tr></thead><tbody><tr><td><p>1</p></td><td><p>0</p></td><td><p>+2</p></td></tr><tr><td><p>2</p></td><td><p>300</p></td><td><p>+2</p></td></tr><tr><td><p>3</p></td><td><p>900</p></td><td><p>+2</p></td></tr><tr><td><p>4</p></td><td><p>2,700</p></td><td><p>+2</p></td></tr><tr><td><p>5</p></td><td><p>6,500</p></td><td><p>+3</p></td></tr><tr><td><p>6</p></td><td><p>14,000</p></td><td><p>+3</p></td></tr><tr><td><p>7</p></td><td><p>23,000</p></td><td><p>+3</p></td></tr><tr><td><p>8</p></td><td><p>34,000</p></td><td><p>+3</p></td></tr><tr><td><p>9</p></td><td><p>48,000</p></td><td><p>+4</p></td></tr><tr><td><p>10</p></td><td><p>64,000</p></td><td><p>+4</p></td></tr><tr><td><p>11</p></td><td><p>85,000</p></td><td><p>+4</p></td></tr><tr><td><p>12</p></td><td><p>100,000</p></td><td><p>+4</p></td></tr><tr><td><p>13</p></td><td><p>120,000</p></td><td><p>+5</p></td></tr><tr><td><p>14</p></td><td><p>140,000</p></td><td><p>+5</p></td></tr><tr><td><p>15</p></td><td><p>165,000</p></td><td><p>+5</p></td></tr><tr><td><p>16</p></td><td><p>195,000</p></td><td><p>+5</p></td></tr><tr><td><p>17</p></td><td><p>225,000</p></td><td><p>+6</p></td></tr><tr><td><p>18</p></td><td><p>265,000</p></td><td><p>+6</p></td></tr><tr><td><p>19</p></td><td><p>305,000</p></td><td><p>+6</p></td></tr><tr><td><p>20</p></td><td><p>355,000</p></td><td><p>+6</p></td></tr></tbody></table>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCreatingAChar.Vz5QcYKA74tWkDqy'
+  - sort: 700000
+    name: Gaining a Level
+    type: text
+    _id: iHbj5aJvc1T7i5YI
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>When you gain a level, follow these steps:</p><ol><li><strong>Choose
+        a Class.</strong> Most characters advance in the same class. However,
+        you might decide to gain a level in another class using the rules in the
+        @UUID[.vcs4jfEKRxPCsgXm]{Multiclassing} section later in this
+        chapter.</li><li><strong>Adjust Hit Points and Hit Point Dice.</strong>
+        Each time you gain a level, you gain an additional Hit Die. Roll that
+        die, add your Constitution modifier to the roll, and add the total
+        (minimum of 1) to your Hit Point maximum. Instead of rolling, you can
+        use the fixed value shown in the Fixed Hit Points by Class
+        table.</li><li><strong>Record New Class Features.</strong> Look at your
+        class features table in
+        @UUID[Compendium.dnd5e.content24.JournalEntry.phbCharacterClas.JournalEntryPage.jlSMyO89AI0ZtQjd]{Classes},
+        and note the features you gain at your new level in that class. Make any
+        choices offered by a new feature.</li><li><strong>Adjust Proficiency
+        Bonus.</strong> A character’s Proficiency Bonus increases at certain
+        levels, as shown in the Character Advancement table and your class
+        features table in Classes. When your Proficiency Bonus increases,
+        increase all the numbers on your character sheet that include your
+        Proficiency Bonus.</li><li><strong>Adjust Ability Modifiers.</strong> If
+        you choose a feat that increases one or more of your ability scores,
+        your ability modifier also changes if the new score is an even number.
+        When that happens, adjust all the numbers on your character sheet that
+        use that ability modifier. When your Constitution modifier increases by
+        1, your Hit Point maximum increases by 1 for each level you have
+        attained. For example, if a character reaches level 8 and increases
+        their Constitution score from 17 to 18, the Constitution modifier
+        increases to +4. The character’s Hit Point maximum then increases by 8,
+        in addition to the Hit Points gained for reaching level
+        8.</li></ol><table id="fixed-hit-points-by-class"><caption>Fixed Hit
+        Points by Class</caption><thead><tr><th><p>Class</p></th><th><p>Hit
+        Points per
+        Level</p></th></tr></thead><tbody><tr><td><p>Barbarian</p></td><td><p>7
+        + Con. modifier</p></td></tr><tr><td><p>Fighter, Paladin, or
+        Ranger</p></td><td><p>6 + Con. modifier</p></td></tr><tr><td><p>Bard,
+        Cleric, Druid, Monk, Rogue, or Warlock</p></td><td><p>5 + Con.
+        modifier</p></td></tr><tr><td><p>Sorcerer or Wizard</p></td><td><p>4 +
+        Con. modifier</p></td></tr></tbody></table><aside
+        class="notable"><h3>Bonus Feats at Level 20</h3><p>A GM can use feats as
+        a form of advancement after characters reach level 20 to provide greater
+        power to characters who have no more levels to gain. With this approach,
+        each character gains one feat of their choice for every 30,000 XP the
+        character earns above 355,000 XP. Epic Boon feats are especially
+        appropriate for these bonus feats, but a player can choose any feat for
+        which their level 20 character qualifies.</p></aside>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745510488991
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCreatingAChar.iHbj5aJvc1T7i5YI'
+  - sort: 700000
+    name: Tiers of Play
+    type: text
+    _id: wkg7ZTl7O5iGTXrM
+    system: {}
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>With each new level, characters acquire new capabilities that equip
+        them to handle greater challenges. As characters advance in level, the
+        tone of the game also changes, and the stakes of the campaign get
+        higher. It’s helpful to think of a character’s (and a campaign’s) arc in
+        terms of four tiers of play, describing the journey from a level 1
+        character just beginning an adventuring career to the epic heights of
+        level 20. These tiers don’t have any rules associated with them; they
+        point to the fact that the play experience evolves as characters gain
+        levels.</p><h3>Tier 1 (Levels 1–4)</h3><p>In tier 1, characters are
+        apprentice adventurers, though they are already set apart from the
+        broader populace by virtue of their extraordinary abilities. They learn
+        their starting class features and choose a subclass. The threats they
+        face usually pose a danger to local farmsteads or villages.</p><h3>Tier
+        2 (Levels 5–10)</h3><p>In tier 2, characters are full-fledged
+        adventurers. Spellcasters gain iconic spells such as
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplFireball00]{Fireball},
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplLightningB]{Lightning Bolt},
+        and @UUID[Compendium.dnd5e.spells24.Item.phbsplRaiseDead0]{Raise Dead}.
+        Most weapon-focused classes gain the ability to make multiple attacks in
+        a round. The characters now face dangers that threaten cities and
+        kingdoms.</p><h3>Tier 3 (Levels 11–16)</h3><p>In tier 3, characters have
+        reached a level of power that makes them special among adventurers. At
+        level 11, many spell­casters learn reality-altering spells. Other
+        characters gain features that allow them to make more attacks or to do
+        more impressive things with those attacks. These adventurers often
+        confront threats to whole regions.</p><h3>Tier 4 (Levels
+        17–20)</h3><p>At tier 4, characters achieve the pinnacle of their class
+        features, becoming heroic archetypes. The fate of the world or even the
+        order of the multiverse might hang in the balance during their
+        adventures.</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags:
+      dnd5e:
+        tocHidden: true
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745623046352
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCreatingAChar.wkg7ZTl7O5iGTXrM'
+  - sort: 700000
+    name: Starting at Higher Levels
+    type: text
+    _id: DE7Ff0cOkQgid3fG
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>Your GM might start your group’s characters at a level higher than 1.
+        It is particularly recommended to start at level 3 if your group is
+        composed of seasoned D&amp;D players.</p><h2>Creating Your
+        Character</h2><p>Creating a higher-level character uses the same
+        character-creation steps outlined in this chapter and the rules for
+        advancing beyond level 1 provided in the @UUID[.Vz5QcYKA74tWkDqy]{Level
+        Advancement} section<em>.</em> You begin with the minimum amount of XP
+        required to reach your starting level. For example, if the GM starts you
+        at level 10, you have 64,000 XP.</p><h2>Starting Equipment</h2><p>The DM
+        decides whether your character starts with more than the standard
+        equipment for a level 1 character, possibly even one or more magic
+        items. The Starting Equipment at Higher Levels table is a guide for the
+        DM.</p><p>Also, check with your GM about what equipment is available for
+        you to buy with your starting money. For example, the firearms described
+        in chapter 6 are too expensive for level 1 characters, but they might be
+        available for purchase if your GM allows
+        them.</p><table><caption>Starting Equipment at Higher
+        Levels</caption><thead><tr><th><p>Starting
+        Level</p></th><th><p>Equipment and Money</p></th><th><p>Magic
+        Items</p></th></tr></thead><tbody><tr><td><p>2–4</p></td><td><p>Normal
+        starting equipment</p></td><td><p>1
+        Common</p></td></tr><tr><td><p>5–10</p></td><td><p>[[/award
+        1d10*25+500gp]] plus normal starting equipment</p></td><td><p>1 Common,
+        1 Uncommon</p></td></tr><tr><td><p>11–16</p></td><td><p>[[/award
+        1d10*250+5000gp]] plus normal starting equipment</p></td><td><p>2
+        Common, 3 Uncommon, 1
+        Rare</p></td></tr><tr><td><p>17–20</p></td><td><p>[[/award
+        1d10*250+20000gp]] plus normal starting equipment</p></td><td><p>2
+        Common, 4 Uncommon, 3 Rare, 1 Very Rare</p></td></tr></tbody></table>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745623082647
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCreatingAChar.DE7Ff0cOkQgid3fG'
+  - sort: 700000
+    name: Multiclassing
+    type: text
+    _id: vcs4jfEKRxPCsgXm
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: "<p>Multiclassing allows you to gain levels in multiple classes. With this rule, you have the option of gaining a level in a new class whenever you advance in level instead of gaining a level in your current class. Doing so lets you mix the abilities of those classes to realize a character concept that might not be reflected in a single class.</p><h2>Prerequisites</h2><p>To qualify for a new class, you must have a score of at least 13 in the primary ability of the new class and your current classes. For example, a Barbarian who decides to multiclass into the Druid class must have Strength and Wisdom scores of 13 or higher, since Strength is the primary ability for Barbarians and Wisdom is the primary ability for Druids.</p><h2>Experience Points</h2><p>The Experience Point cost to gain a level is based on your total character level, not your level in a particular class, as shown in the Character Advancement table in this chapter. For example, if you are a level 6 Cleric / level 1 Fighter, you must gain enough XP to reach level 8 before you can take your second level as a Fighter or your seventh level as a Cleric.</p><h2>Hit Points and Hit Point Dice</h2><p>You gain the Hit Points from your new class as described for levels after 1. You gain the level 1 Hit Points for a class only when your total character level is 1.</p><p>Add together the Hit Dice granted by all your classes to form your pool of Hit Dice. If these dice are the same die type, you can pool them together. For example, both the Fighter and the Paladin have a d10 Hit Die, so if you are a level 5 Fighter / level 5 Paladin, you have ten d10 Hit Dice. If your classes give you Hit Dice of different types, track them separately. If you are a level 5 Cleric / level 5 Paladin, for example, you have five d8 Hit Dice and five d10 Hit Dice.</p><h2>Proficiency Bonus</h2><p>Your Proficiency Bonus is based on your total character level, not your level in a particular class, as shown in the Character Advancement table. For example, if you are a level 3 Fighter / level 2 Rogue, you have the Proficiency Bonus of a level 5 character, which is +3.</p><h2>Proficiencies</h2><p>When you gain your first level in a class other than your initial class, you gain only some of the new class’s starting proficiencies, as detailed in each class’s description in Classes.</p><h2>Class Features</h2><p>When you gain a new level in a class, you get its features for that level. A few features have additional rules when you’re multiclassing. Check the information about multiclassing included in each of your classes’ descriptions.</p><p>Special rules apply to Extra Attack, Spellcasting, and features (such as Unarmored Defense) that give you alternative ways to calculate your Armor Class.</p><h3>Armor Class</h3><p>If you have multiple ways to calculate your Armor Class, you can benefit from only one at a time. For example, a Monk/Sorcerer with a Monk’s Unarmored Defense feature and a Sorcerer’s Draconic Resilience feature must choose only one of those features as a way to calculate Armor Class.</p><h3>Extra Attack</h3><p>If you gain the Extra Attack feature from more than one class, the features don’t stack. You can’t make more than two attacks with this feature unless you have a feature that says you can (such as the Fighter’s Two Extra Attacks feature).</p><p>Similarly, the Warlock’s Thirsting Blade invocation, which grants you the Extra Attack feature with your pact weapon, doesn’t give you additional attacks if you also have Extra Attack.</p><h3>Spellcasting</h3><p>Your capacity for spellcasting depends partly on your combined levels in all your spellcasting classes and partly on your individual levels in those classes. Once you have the Spellcasting feature from more than one class, use the rules below. If you multiclass but have the Spellcasting feature from only one class, follow the rules for that class.</p><p><em><strong>Spells Prepared.</strong></em> You determine what spells you can prepare for each class individually, as if you were a single-classed member of that class. If you are a level 4 Ranger / level 3 Sorcerer, for example, you can prepare five level 1 Ranger spells, and you can prepare six Sorcerer spells of level 1 or 2 (as well as four Sorcerer cantrips).</p><p>Each spell you prepare is associated with one of your classes, and you use the spellcasting ability of that class when you cast the spell.</p><p><em><strong>Cantrips.</strong></em> If a cantrip of yours increases in power at higher levels, the increase is based on your total character level, not your level in a particular class, unless the spell says otherwise.</p><p><em><strong>Spell Slots. </strong></em>You determine your available spell slots by adding together the following:</p><ul><li>All your levels in the Bard, Cleric, Druid, Sorcerer, and Wizard classes</li><li>Half your levels (round up) in the Paladin and Ranger classes</li></ul><p>Then look up this total level in the Level column of the Multiclass Spellcaster table. You use the slots for that level to cast spells of an appropriate level from any class whose Spellcasting feature you have.</p><p>This table might give you spell slots of a higher level than the spells you prepare. You can use those slots but only to cast your lower-level spells. If a lower-level spell that you cast, like @UUID[Compendium.dnd5e.spells24.Item.phbsplBurningHan]{Burning Hands}, has an enhanced effect when cast at a higher level, you can use the enhanced effect as normal.</p><p>For example, if you are a level\_4 Ranger / level 3 Sorcerer, you count as a level 5 character when determining your spell slots, counting all your levels as a Sorcerer and half your Ranger levels. As shown in the Multiclass Spellcaster table, you have four level 1 spell slots, three level 2 slots, and two level 3 slots. However, you can’t prepare any level 3 spells, nor can you prepare any level 2 Ranger spells. You can use the spell slots of those levels to cast the spells you do prepare—and potentially enhance their effects.</p><p><em><strong>Pact Magic.</strong></em> If you have the Pact Magic feature from the Warlock class and the Spellcasting feature, you can use the spell slots you gain from Pact Magic to cast spells you have prepared from classes with the Spellcasting feature, and you can use the spell slots you gain from the Spellcasting feature to cast Warlock spells you have prepared.</p><table><caption><p>Multiclass Spellcaster: <br />Spell Slots per Spell Level</p></caption><thead><tr><th><p>Level</p></th><th><p>1</p></th><th><p>2</p></th><th><p>3</p></th><th><p>4</p></th><th><p>5</p></th><th><p>6</p></th><th><p>7</p></th><th><p>8</p></th><th><p>9</p></th></tr></thead><tbody><tr><td><p>1</p></td><td><p>2</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>2</p></td><td><p>3</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>3</p></td><td><p>4</p></td><td><p>2</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>4</p></td><td><p>4</p></td><td><p>3</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>5</p></td><td><p>4</p></td><td><p>3</p></td><td><p>2</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>6</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>7</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>1</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>8</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>2</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>9</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>1</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>10</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>2</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>11</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>2</p></td><td><p>1</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>12</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>2</p></td><td><p>1</p></td><td><p>—</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>13</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>2</p></td><td><p>1</p></td><td><p>1</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>14</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>2</p></td><td><p>1</p></td><td><p>1</p></td><td><p>—</p></td><td><p>—</p></td></tr><tr><td><p>15</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>2</p></td><td><p>1</p></td><td><p>1</p></td><td><p>1</p></td><td><p>—</p></td></tr><tr><td><p>16</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>2</p></td><td><p>1</p></td><td><p>1</p></td><td><p>1</p></td><td><p>—</p></td></tr><tr><td><p>17</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>2</p></td><td><p>1</p></td><td><p>1</p></td><td><p>1</p></td><td><p>1</p></td></tr><tr><td><p>18</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>1</p></td><td><p>1</p></td><td><p>1</p></td><td><p>1</p></td></tr><tr><td><p>19</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>2</p></td><td><p>1</p></td><td><p>1</p></td><td><p>1</p></td></tr><tr><td><p>20</p></td><td><p>4</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>3</p></td><td><p>2</p></td><td><p>2</p></td><td><p>1</p></td><td><p>1</p></td></tr></tbody></table>"
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1745510701025
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCreatingAChar.vcs4jfEKRxPCsgXm'
+  - sort: 700000
+    name: Trinkets
+    type: text
+    _id: 2nJWForKrOIXzELQ
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>When you make your character, you can roll once on the Trinkets table
+        to gain a Tiny trinket, a simple item lightly touched by mystery. The DM
+        might also use this table. It can help stock a room in a dungeon or fill
+        a creature’s
+        pockets.</p><p>@Embed[Compendium.dnd5e.tables24.RollTable.phbStartingTrink
+        rollable]</p>
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1735934152108
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbCreatingAChar.2nJWForKrOIXzELQ'
+folder: 8wtuPBu0Fflhc8Vk
+flags:
+  dnd5e:
+    type: chapter
+    showPages: true
+    position: 2
+    navigation:
+      previous: phbConditions000
+      next: phbCharacterClas
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425888740
+  modifiedTime: 1745677864850
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+categories: []
+_key: '!journal!phbCreatingAChar'

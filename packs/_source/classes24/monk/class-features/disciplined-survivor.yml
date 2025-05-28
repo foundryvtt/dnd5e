@@ -1,0 +1,107 @@
+_id: phbmnkDiscipline
+name: Disciplined Survivor
+type: feat
+folder: kK77WX8hVJHRQRda
+img: icons/skills/wounds/injury-pain-body-orange.webp
+system:
+  description:
+    value: >-
+      <p>Your physical and mental discipline grant you proficiency in all saving
+      throws.</p><p>Additionally, whenever you make a saving throw and fail, you
+      can expend 1 Focus Point to reroll it, and you must use the new
+      roll.</p><section class="secret"
+      id="secret-VLGTfBDBcfExjSXG"><p><strong>Foundry Note</strong></p><p>You
+      will automatically be granted the additional Saving Throw proficiencies as
+      you level up.</p><p>Use this feature to expend 1 Focus
+      Point.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 14
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    P38SXEOizo5QaG8h:
+      type: utility
+      name: Consume Focus Point
+      _id: P38SXEOizo5QaG8h
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: disciplined-survivor
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866307724
+  modifiedTime: 1745256762987
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 500000
+ownership:
+  default: 0
+_key: '!items!phbmnkDiscipline'

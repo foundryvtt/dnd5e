@@ -1,0 +1,105 @@
+_id: phbmmoTransmuted
+name: Transmuted Spell
+type: feat
+img: icons/magic/symbols/elements-air-earth-fire-water.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Cost: 1 Sorcery Point</p></blockquote><p>When you cast a
+      spell that deals a type of damage from the following list, you can spend 1
+      Sorcery Point to change that damage type to one of the other listed types:
+      Acid, Cold, Fire, Lightning, Poison, Thunder.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: metamagic
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    FT1V43gRA47fCA51:
+      type: utility
+      name: Transmuted Spell
+      _id: FT1V43gRA47fCA51
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: >-
+          When you cast a spell that deals Acid, Cold, Fire, Lightning, Poison,
+          or Thunder damage
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: Compendium.dnd5e.classes24.Item.phbscrFontOfMagi
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: transmuted-spell
+effects: []
+folder: 6RKLEZHPbdWG3fZe
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866286897
+  modifiedTime: 1745256762847
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbmmoTransmuted'

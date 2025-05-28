@@ -1,0 +1,144 @@
+_id: phbinvOnewithSha
+name: One with Shadows
+type: feat
+img: icons/magic/unholy/silhouette-robe-evil-power.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 5+ Warlock</p></blockquote><p>While
+      you're in an area of &amp;Reference[Dim Light] or
+      &amp;Reference[Darkness], you can cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplInvisibili]{Invisibility} on
+      yourself without expending a spell slot.</p><section class="secret"
+      id="secret-SvwkLQLYzHCKzuss"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Cast</strong> activity can be used in place of the Invisibility
+      spell and includes an Active Effect that sets the Invisible status
+      effect.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 5
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        override: false
+        concentration: true
+        value: '1'
+      effects:
+        - _id: 9svfDetqjhsFP3ey
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        prompt: false
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+  enchant: {}
+  identifier: one-with-shadows
+effects:
+  - name: Invisible
+    origin: Compendium.dnd5e.spells24.Item.phbsplInvisibili
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/statuses/invisible.svg
+    _id: 9svfDetqjhsFP3ey
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>The spell ends early immediately after the target makes an attack roll,
+      deals damage, or casts a spell.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - invisible
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbinvOnewithSha.9svfDetqjhsFP3ey'
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256762447
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvOnewithSha'

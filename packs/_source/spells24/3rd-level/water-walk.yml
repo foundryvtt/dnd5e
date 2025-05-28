@@ -1,0 +1,158 @@
+name: Water Walk
+system:
+  description:
+    value: >-
+      <p>This spell grants the ability to move across any liquid surface—such as
+      water, acid, mud, snow, quicksand, or lava—as if it were harmless solid
+      ground (creatures crossing molten lava can still take damage from the
+      heat). Up to ten willing creatures of your choice within range gain this
+      ability for the duration.</p><p>An affected target must take a Bonus
+      Action to pass from the liquid's surface into the liquid itself and vice
+      versa, but if the target falls into the liquid, the target passes through
+      the surface into the liquid below.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: willing
+      count: '10'
+      choice: false
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    value: '30'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  materials:
+    value: a piece of cork
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: WAJx0fqTCcBPRDUJ
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: water-walk
+_id: phbsplWaterWalk0
+type: spell
+img: icons/creatures/amphibians/frog-water-teal.webp
+effects:
+  - name: Water Walking
+    origin: Compendium.dnd5e.spells24.Item.phbsplWaterWalk0
+    duration:
+      rounds: 1
+      startTime: null
+      seconds: 3600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/creatures/amphibians/frog-water-teal.webp
+    _id: WAJx0fqTCcBPRDUJ
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>An affected target must take a Bonus Action to pass from the liquid’s
+      surface into the liquid itself and vice versa, but if the target falls
+      into the liquid, the target passes through the surface into the liquid
+      below.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplWaterWalk0.WAJx0fqTCcBPRDUJ'
+folder: HCovEE4VoPGlIbKi
+sort: 100013
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425977593
+  modifiedTime: 1745256800001
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplWaterWalk0'

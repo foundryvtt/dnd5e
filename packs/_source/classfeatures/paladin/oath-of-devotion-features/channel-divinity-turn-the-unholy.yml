@@ -1,0 +1,116 @@
+_id: ZdwGlsJNtc7pGFCd
+name: 'Channel Divinity: Turn the Unholy'
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>As an action, you present your holy symbol and speak a prayer censuring
+      fiends and undead, using your Channel Divinity. Each fiend or undead that
+      can see or hear you within 30 feet of you must make a Wisdom saving throw.
+      If the creature fails its saving throw, it is turned for 1 minute or until
+      it takes damage.</p><p>A turned creature must spend its turns trying to
+      move as far away from you as it can, and it can't willingly move to a
+      space within 30 feet of you. It also can't take reactions. For its action,
+      it can use only the Dash action or try to escape from an effect that
+      prevents it from moving. If there's nowhere to move, the creature can use
+      the Dodge action.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: channelDivinity
+  requirements: Oath of Devotion 3
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: Compendium.dnd5e.classfeatures.Item.8M7uOPhbTxoxxJSo
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: cha
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: channel-divinity-turn-the-unholy
+flags: {}
+img: icons/magic/fire/explosion-embers-evade-silhouette.webp
+effects: []
+folder: W9eAXfvupEhLWmZ4
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037385286
+  modifiedTime: 1725992288749
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ZdwGlsJNtc7pGFCd'

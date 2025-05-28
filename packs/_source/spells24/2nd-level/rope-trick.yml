@@ -1,0 +1,116 @@
+name: Rope Trick
+system:
+  description:
+    value: >-
+      <p>You touch a rope. One end of it hovers upward until the rope hangs
+      perpendicular to the ground or the rope reaches a ceiling. At the rope's
+      upper end, an Invisible 3-foot-by-5-foot portal opens to an
+      extra­dimensional space that lasts until the spell ends. That space can be
+      reached by climbing the rope, which can be pulled into or dropped out of
+      it.</p><p>The space can hold up to eight Medium or smaller creatures.
+      Attacks, spells, and other effects can't pass into or out of the space,
+      but creatures inside it can see through the portal. Anything inside the
+      space drops out when the spell ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: object
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a segment of rope
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: rope-trick
+_id: phbsplRopeTrick0
+type: spell
+img: icons/sundries/survival/rope-wrapped-purple.webp
+effects: []
+folder: 3SjcO2acsFnWegp4
+sort: 1000000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425969426
+  modifiedTime: 1745256797735
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplRopeTrick0'

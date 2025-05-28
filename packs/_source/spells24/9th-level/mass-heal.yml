@@ -1,0 +1,130 @@
+name: Mass Heal
+system:
+  description:
+    value: >-
+      <p>A flood of healing energy flows from you into creatures around you. You
+      restore up to 700 Hit Points, divided as you choose among any number of
+      creatures that you can see within range. Creatures healed by this spell
+      also have the &amp;Reference[Blinded], &amp;Reference[Deafened], and
+      &amp;Reference[Poisoned] conditions removed from them.</p><section
+      id="secret-B4SsHM2Uk0rl4qtz" class="secret"><p>Foundry Note</p><p>The
+      <strong>Heal</strong> activity is configured to restore 700 Hit Points to
+      the selected creature. This spell's healing pool should be divided among
+      the target creatures manually.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 9
+  school: abj
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    eCa5jzMXR0Pgp3ZV:
+      type: heal
+      _id: eCa5jzMXR0Pgp3ZV
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: null
+        denomination: ''
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+          mode: ''
+        bonus: '700'
+      name: ''
+      img: ''
+      appliedEffects: []
+  identifier: mass-heal
+_id: phbsplMassHeal00
+type: spell
+img: icons/magic/life/heart-shadow-red.webp
+effects: []
+folder: iG0Zia8jh6uK39TB
+sort: 112500
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425962868
+  modifiedTime: 1740680102671
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMassHeal00'

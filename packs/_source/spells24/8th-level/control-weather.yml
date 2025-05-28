@@ -1,0 +1,178 @@
+name: Control Weather
+system:
+  description:
+    value: >-
+      <p>You take control of the weather within 5 miles of you for the duration.
+      You must be outdoors to cast this spell, and it ends early if you go
+      indoors.</p><p>When you cast the spell, you change the current weather
+      conditions, which are determined by the DM. You can change precipitation,
+      temperature, and wind. It takes 1d4 × 10 minutes for the new conditions to
+      take effect. Once they do so, you can change the conditions again. When
+      the spell ends, the weather gradually returns to normal.</p><p>When you
+      change the weather conditions, find a current condition on the following
+      tables and change its stage by one, up or down. When changing the wind,
+      you can change its
+      direction.</p><details><summary><strong>Precipitation</strong></summary><table><thead><tr><td>Stage</td><td>Condition</td></tr></thead><tbody><tr><td>1</td><td>Clear</td></tr><tr><td>2</td><td>Light
+      clouds</td></tr><tr><td>3</td><td>Overcast or ground
+      fog</td></tr><tr><td>4</td><td>Rain, hail, or
+      snow</td></tr><tr><td>5</td><td>Torrential rain, driving hail, or
+      blizzard</td></tr></tbody></table></details><details><summary><strong>Temperature</strong></summary><table><thead><tr><td>Stage</td><td>Condition</td></tr></thead><tbody><tr><td>1</td><td>Heat
+      wave</td></tr><tr><td>2</td><td>Hot</td></tr><tr><td>3</td><td>Warm</td></tr><tr><td>4</td><td>Cool</td></tr><tr><td>5</td><td>Cold</td></tr><tr><td>6</td><td>Freezing</td></tr></tbody></table></details><details><summary><strong>Wind</strong></summary><table><thead><tr><td>Stage</td><td>Condition</td></tr></thead><tbody><tr><td>1</td><td>Calm</td></tr><tr><td>2</td><td>Moderate
+      wind</td></tr><tr><td>3</td><td>Strong
+      wind</td></tr><tr><td>4</td><td>Gale</td></tr><tr><td>5</td><td>Storm</td></tr></tbody></table></details>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 10
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: weather within 5 miles
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 8
+  school: trs
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: burning incense
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    VFttNSDq3q1qOwDJ:
+      type: utility
+      _id: VFttNSDq3q1qOwDJ
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: Weather Change Delay
+        formula: 10 * 1d4[minutes]
+      name: Cast and Control
+      img: ''
+      appliedEffects: []
+    ucJPCYAaXqiukPF9:
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: true
+        value: '8'
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        formula: 10 * 1d4[minutes]
+        name: Weather Change Delay
+      name: Change Conditions
+      _id: ucJPCYAaXqiukPF9
+      img: systems/dnd5e/icons/svg/statuses/concentrating.svg
+      appliedEffects: []
+  identifier: control-weather
+_id: phbsplControlWea
+type: spell
+img: icons/magic/air/weather-clouds-rainbow.webp
+effects: []
+folder: M5CvwK9zVtzx6Dnn
+sort: 106250
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425947807
+  modifiedTime: 1745256789335
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplControlWea'

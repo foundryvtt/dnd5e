@@ -1,0 +1,186 @@
+_id: dmgCloakOfArachn
+name: Cloak of Arachnida
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/back/mantle-collared-black.webp
+system:
+  activities:
+    TRS8OLuMXbCYKVLS:
+      type: cast
+      _id: TRS8OLuMXbCYKVLS
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cube
+          size: '40'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: space
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '2'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplWeb0000000
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Very Rare (Requires
+      Attunement)</em></p></div><p>This fine garment is made of black silk
+      interwoven with faint, silvery threads. While wearing it, you gain the
+      following benefits.</p><p><strong>Poison Resistance.</strong> You have
+      Resistance to Poison damage.</p><p><strong>Spider Climb.</strong> You have
+      a Climb Speed equal to your Speed and can move up, down, and across
+      vertical surfaces and along ceilings, while leaving your hands
+      free.</p><p><strong>Spider Walk.</strong> You can't be caught in webs of
+      any sort and can move through webs as if they were Difficult
+      Terrain.</p><p><strong>Web.</strong> You can cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWeb0000000]{Web}</em> (save
+      DC 13). The web created by the spell fills twice its normal area. Once
+      used, this property can't be used again until the next dawn.</p>
+    chat: ''
+  identifier: cloak-of-arachnida
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  rarity: veryRare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Spider Movement and Resistance
+    img: icons/creatures/invertebrates/spider-skull-green.webp
+    _id: 6ZKscgdcc55OsAuN
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 4
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p><strong>Poison Resistance.</strong> You have Resistance to Poison
+      damage.</p><p><strong>Spider Climb.</strong> You have a Climb Speed equal
+      to your Speed and can move up, down, and across vertical surfaces and
+      along ceilings, while leaving your hands free.</p><p><strong>Spider
+      Walk.</strong> You can’t be caught in webs of any sort and can move
+      through webs as if they were Difficult Terrain.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1728946973777
+      modifiedTime: 1728947113494
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgCloakOfArachn.6ZKscgdcc55OsAuN'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256803537
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7500000
+ownership:
+  default: 0
+_key: '!items!dmgCloakOfArachn'

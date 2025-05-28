@@ -96,21 +96,23 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    */
   buildEffectsList() {
     for ( const effect of this.effects ) {
+      effect.updateDuration();
       const li = document.createElement("li");
       li.classList.add("effect");
       li.dataset.id = effect.id;
       li.innerHTML = `
-        <img class="gold-icon" alt="${effect.name}" src="${effect.img}">
+        <img class="gold-icon">
         <div class="name-stacked">
-          <span class="title">${effect.name}</span>
+          <span class="title"></span>
           <span class="subtitle">${effect.duration.label}</span>
         </div>
         <button class="apply-effect" type="button" data-action="applyEffect"
-                data-tooltip="DND5E.EffectsApplyTokens"
-                aria-label="${game.i18n.localize("DND5E.EffectsApplyTokens")}">
+                data-tooltip aria-label="${game.i18n.localize("DND5E.EffectsApplyTokens")}">
           <i class="fas fa-reply-all fa-flip-horizontal" inert></i>
         </button>
       `;
+      Object.assign(li.querySelector(".gold-icon"), { alt: effect.name, src: effect.img });
+      li.querySelector(".name-stacked .title").append(effect.name);
       this.effectsList.append(li);
       li.addEventListener("click", this._onApplyEffect.bind(this));
     }
@@ -130,14 +132,16 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     li.classList.add("target");
     li.dataset.targetUuid = uuid;
     li.innerHTML = `
-      <img class="gold-icon" alt="${name}" src="${actor.img}">
+      <img class="gold-icon">
       <div class="name-stacked">
-        <span class="title">${name}</span>
+        <span class="title"></span>
       </div>
       <div class="checkbox">
         <dnd5e-checkbox name="${uuid}"${checked}${disabled}></dnd5e-checkbox>
       </div>
     `;
+    Object.assign(li.querySelector(".gold-icon"), { alt: name, src: actor.img });
+    li.querySelector(".name-stacked .title").append(name);
 
     return li;
   }

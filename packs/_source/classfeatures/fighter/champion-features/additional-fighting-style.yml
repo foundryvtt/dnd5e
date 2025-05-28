@@ -1,0 +1,51 @@
+_id: kYJsED0rqqqUcgKz
+name: Additional Fighting Style
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>Choose a second fighting style class feature from the
+      following:</p><p>@UUID[Compendium.dnd5e.classfeatures.Item.8YwPFv3UAPjWVDNf]{Archery}</p><p>@UUID[Compendium.dnd5e.classfeatures.Item.zSlV0O2rQMdoq6pB]{Defense}</p><p>@UUID[Compendium.dnd5e.classfeatures.Item.hCop9uJrWhF1QPb4]{Dueling}</p><p>@UUID[Compendium.dnd5e.classfeatures.Item.3Nc6u9pyStByuJsm]{Great
+      Weapon
+      Fighting}</p><p>@UUID[Compendium.dnd5e.classfeatures.Item.06NVMYf58Z76O85O]{Protection}</p><p>@UUID[Compendium.dnd5e.classfeatures.Item.mHcSjcHJ8oZu3hkb]{Two
+      Weapon Fighting}</p><p>The choice must be different to the one made at
+      level 1.</p><p>You can drag your choice from the above onto your character
+      sheet and it will automatically update.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  requirements: Champion 10
+  properties: []
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: additional-fighting-style
+folder: sGTtP8NsRFDOc0tP
+sort: 0
+flags: {}
+img: icons/skills/melee/weapons-crossed-swords-purple.webp
+effects: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037387589
+  modifiedTime: 1725992289583
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!kYJsED0rqqqUcgKz'

@@ -1,0 +1,114 @@
+_id: BP3GCwa66IAw1yTG
+name: Daylight
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A 60-foot-radius sphere of light spreads out from a point you choose
+      within range. The sphere is bright light and sheds dim light for an
+      additional 60 feet.</p><p>If you chose a point on an object you are
+      holding or one that isn't being worn or carried, the light shines from the
+      object and moves with it. Completely covering the affected object with an
+      opaque object, such as a bowl or a helm, blocks the light.</p><p>If any of
+      this spell's area overlaps with an area of darkness created by a spell of
+      3rd level or lower, the spell that created the darkness is dispelled.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '60'
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: daylight
+sort: 0
+flags: {}
+img: icons/magic/light/beam-rays-yellow.webp
+effects: []
+folder: 5Si35RRLLaaoWvC3
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037350429
+  modifiedTime: 1725992717954
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!BP3GCwa66IAw1yTG'

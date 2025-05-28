@@ -1,0 +1,175 @@
+_id: E9G4jALlSA96fKAN
+name: Iron Bands of Binding
+type: consumable
+img: icons/commodities/metal/clasp-steel-braid.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This rusty iron sphere measures 3 inches in diameter and weighs 1
+      pound. You can use an action to speak the command word and throw the
+      sphere at a Huge or smaller creature you can see within 60 feet of you. As
+      the sphere moves through the air, it opens into a tangle of metal
+      bands.</p>
+
+      <p>Make a ranged attack roll with an attack bonus equal to your Dexterity
+      modifier plus your proficiency bonus. On a hit, the target is restrained
+      until you take a bonus action to speak the command word again to release
+      it. Doing so, or missing with the attack, causes the bands to contract and
+      become a sphere once more.</p>
+
+      <p>A creature, including the one restrained, can use an action to make a
+      DC 20 Strength check to break the iron bands. On a success, the item is
+      destroyed, and the restrained creature is freed. If the check fails, any
+      further attempts made by that creature automatically fail until 24 hours
+      have elapsed.</p>
+
+      <p>Once the bands are used, they can't be used again until the next
+      dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '1'
+    recovery:
+      - period: day
+        type: recoverAll
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: true
+        formula: d20 + @attributes.prof + @mod
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: Command word. Target creature must be Huge or smaller.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: dex
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - number: null
+            denomination: null
+            bonus: ''
+            types: []
+            custom:
+              enabled: true
+              formula: d20 + @attributes.prof + @mod
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: iron-bands-of-binding
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 3000000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037136255
+  modifiedTime: 1725992495884
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!E9G4jALlSA96fKAN'

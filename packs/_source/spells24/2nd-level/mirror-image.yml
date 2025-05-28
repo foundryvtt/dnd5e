@@ -1,0 +1,230 @@
+name: Mirror Image
+system:
+  description:
+    value: >-
+      <p>Three illusory duplicates of yourself appear in your space. Until the
+      spell ends, the duplicates move with you and mimic your actions, shifting
+      position so it's impossible to track which image is real.</p><p>Each time
+      a creature hits you with an attack roll during the spell's duration, roll
+      a [[/r (@flags.dnd-players-handbook.mirrorImages)d6kh1cs&gt;2#Duplicate
+      destroyed]]{d6 for each} of your remaining duplicates. If any of the d6s
+      rolls a 3 or higher, one of the duplicates is hit instead of you, and the
+      duplicate is destroyed. The duplicates otherwise ignore all other damage
+      and effects. The spell ends when all three duplicates are
+      destroyed.</p><p>A creature is unaffected by this spell if it has the
+      &amp;Reference[blinded apply=false] condition, &amp;Reference[blindsight],
+      or &amp;Reference[truesight].</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: self
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: ill
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: VUqQIaiZoIzxUdf1
+        - _id: XcTQl9DhT9lC3bxI
+        - _id: uMsGEsbEZ2hckOKW
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: (@flags.dnd-players-handbook.mirrorImages)d6kh
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: mirror-image
+_id: phbsplMirrorImag
+type: spell
+img: icons/magic/defensive/illusion-evasion-echo-purple.webp
+effects:
+  - name: Duplicate A
+    origin: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/sundries/flags/banner-pink.webp
+    _id: VUqQIaiZoIzxUdf1
+    type: base
+    system: {}
+    changes:
+      - key: flags.dnd-players-handbook.mirrorImages
+        mode: 2
+        value: '1'
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplMirrorImag.VUqQIaiZoIzxUdf1'
+  - name: Duplicate B
+    origin: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/sundries/flags/banner-green.webp
+    _id: XcTQl9DhT9lC3bxI
+    type: base
+    system: {}
+    changes:
+      - key: flags.dnd-players-handbook.mirrorImages
+        mode: 2
+        value: '1'
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplMirrorImag.XcTQl9DhT9lC3bxI'
+  - name: Duplicate C
+    origin: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/sundries/flags/banner-blue.webp
+    _id: uMsGEsbEZ2hckOKW
+    type: base
+    system: {}
+    changes:
+      - key: flags.dnd-players-handbook.mirrorImages
+        mode: 2
+        value: '1'
+        priority: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplMirrorImag.uMsGEsbEZ2hckOKW'
+folder: 3SjcO2acsFnWegp4
+sort: 5700000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425964208
+  modifiedTime: 1745256796285
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplMirrorImag'

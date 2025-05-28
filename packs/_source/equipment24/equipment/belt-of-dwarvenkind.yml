@@ -1,0 +1,151 @@
+_id: dmgBeltOfDwarven
+name: Belt of Dwarvenkind
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/waist/belt-armored-steel.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Rare (Requires
+      Attunement)</em></p></div><p>While wearing this belt, you gain the
+      following benefits:</p><div
+      class="def-block"><p><strong>Dwarvish.</strong> You know
+      Dwarvish.</p><p><strong>Friend of Dwarvenkind.</strong> You have Advantage
+      on Charisma (Persuasion) checks made to interact with dwarves and
+      duergar.</p><p><strong>Toughness.</strong> Your Constitution increases by
+      2, to a maximum of 20.</p></div><p>In addition, while attuned to the belt,
+      you have a 50 percent chance each day at dawn of growing a full beard if
+      you can grow one, or a thicker beard if you already have one.</p><p>If you
+      aren't a dwarf or duergar, you gain the following additional benefits
+      while wearing the belt:</p><div
+      class="def-block"><p><strong>Darkvision.</strong> You have Darkvision with
+      a range of 60 feet.</p><p><strong>Resilience.</strong> You have Resistance
+      to Poison damage. You also have Advantage on saving throws you make to
+      avoid or end the Poisoned condition.</p></div>
+    chat: ''
+  identifier: belt-of-dwarvenkind
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Dwarvenkind Benefits
+    img: systems/dnd5e/icons/svg/items/race.svg
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.languages.value
+        mode: 2
+        value: dwarvish
+        priority: null
+      - key: system.abilities.con.value
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.attributes.senses.darkvision
+        mode: 4
+        value: '60'
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+      - key: system.abilities.con.value
+        mode: 3
+        value: '20'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <div class="def-block"><p><strong>Dwarvish.</strong> You know
+      Dwarvish.</p><p><strong>Friend of Dwarvenkind.</strong> You have Advantage
+      on Charisma (Persuasion) checks made to interact with dwarves and
+      duergar.</p><p><strong>Toughness.</strong> Your Constitution increases by
+      2, to a maximum of 20.</p><p>If you aren’t a dwarf or duergar, you gain
+      the following additional benefits while wearing the belt:</p><div
+      class="def-block"><p><strong>Darkvision.</strong> You have Darkvision with
+      a range of 60 feet.</p><p><strong>Resilience.</strong> You have Resistance
+      to Poison damage. You also have Advantage on saving throws you make to
+      avoid or end the Poisoned condition.</p></div></div>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.4
+      createdTime: 1728593452153
+      modifiedTime: 1730834807662
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: HNruvcSEl25DRvjj
+    _key: '!items.effects!dmgBeltOfDwarven.HNruvcSEl25DRvjj'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745431704598
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 3100000
+ownership:
+  default: 0
+_key: '!items!dmgBeltOfDwarven'

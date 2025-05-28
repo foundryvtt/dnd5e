@@ -1,0 +1,188 @@
+_id: GJ2WYm3SQFR0winH
+name: Antipathy/Sympathy
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell attracts or repels creatures of your choice. You target
+      something within range, either a Huge or smaller object or creature or an
+      area that is no larger than a 200-foot cube. Then specify a kind of
+      intelligent creature, such as red dragons, goblins, or vampires. You
+      invest the target with an aura that either attracts or repels the
+      specified creatures for the duration. Choose antipathy or sympathy as the
+      aura's effect.</p><p><strong>Antipathy.</strong> The enchantment causes
+      creatures of the kind you designated to feel an intense urge to leave the
+      area and avoid the target. When such a creature can see the target or
+      comes within 60 feet of it, the creature must succeed on a Wisdom saving
+      throw or become &amp;Reference[frightened]. The creature remains
+      frightened while it can see the target or is within 60 feet of it. While
+      frightened by the target, the creature must use its movement to move to
+      the nearest safe spot from which it can't see the target. If the creature
+      moves more than 60 feet from the target and can't see it, the creature is
+      no longer frightened, but the creature becomes frightened again if it
+      regains sight of the target or moves within 60 feet of
+      it.</p><p><strong>Sympathy.</strong> The enchantment causes the specified
+      creatures to feel an intense urge to approach the target while within 60
+      feet of it or able to see it. When such a creature can see the target or
+      comes within 60 feet of it, the creature must succeed on a Wisdom saving
+      throw or use its movement on each of its turns to enter the area or move
+      within reach of the target. When the creature has done so, it can't
+      willingly move away from the target.</p><p>If the target damages or
+      otherwise harms an affected creature, the affected creature can make a
+      Wisdom saving throw to end the effect, as described
+      below.</p><p><strong>Ending the Effect.</strong> If an affected creature
+      ends its turn while not within 60 feet of the target or able to see it,
+      the creature makes a Wisdom saving throw. On a successful save, the
+      creature is no longer affected by the target and recognizes the feeling of
+      repugnance or attraction as magical. In addition, a creature affected by
+      the spell is allowed another Wisdom saving throw every 24 hours while the
+      spell persists.</p><p>A creature that successfully saves against this
+      effect is immune to it for 1 minute, after which time it can be affected
+      again.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: hour
+    condition: ''
+    value: 1
+  duration:
+    value: '10'
+    units: day
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 8
+  school: enc
+  materials:
+    value: >-
+      Either a lump of alum soaked in vinegar for the antipathy effect or a drop
+      of honey for the sympathy effect.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Cz824xQ2Z4BYuSa9
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: antipathy-sympathy
+sort: 0
+flags: {}
+img: icons/magic/control/fear-fright-monster-grin-green.webp
+effects:
+  - name: Antipathy
+    origin: Compendium.dnd5e.spells.Item.GJ2WYm3SQFR0winH
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: Cz824xQ2Z4BYuSa9
+    changes: []
+    description: >-
+      <p>While Frightened by the target, the creature must use its movement to
+      move to the nearest safe spot from which it can't see the target. If the
+      creature moves more than 60 feet from the target and can't see it, the
+      creature is no longer frightened, but the creature becomes frightened
+      again if it regains sight of the target or moves within 60 feet of it.</p>
+    transfer: false
+    statuses:
+      - frightened
+    flags: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/control/fear-fright-monster-grin-green.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!GJ2WYm3SQFR0winH.Cz824xQ2Z4BYuSa9'
+folder: x1XTiOgx4DJ34wc5
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037351931
+  modifiedTime: 1725992718400
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!GJ2WYm3SQFR0winH'

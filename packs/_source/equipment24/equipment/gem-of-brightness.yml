@@ -1,0 +1,294 @@
+_id: dmgGemOfBrightne
+name: Gem of Brightness
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/gems/gem-faceted-octagon-yellow.webp
+system:
+  activities:
+    JqueOuWlVu4CcNRP:
+      type: utility
+      name: First Command Word
+      _id: JqueOuWlVu4CcNRP
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    zSCMjUyMs03rTkuH:
+      type: save
+      name: Second Command Word
+      _id: zSCMjUyMs03rTkuH
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 05Lok63szRXdAafx
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      img: ''
+      appliedEffects: []
+    Hp7wMeMuSpJoTVd1:
+      type: save
+      name: Third Command Word
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 05Lok63szRXdAafx
+          onSave: false
+      range:
+        override: false
+        value: ''
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      _id: Hp7wMeMuSpJoTVd1
+      img: ''
+      appliedEffects:
+        - 05Lok63szRXdAafx
+  uses:
+    spent: 0
+    recovery: []
+    max: '50'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon</em></p><p>This prism has 50 charges. While
+      you are holding it, you can take a Magic action and use one of three
+      command words to cause one of the following effects:</p><p><strong>First
+      Command Word.</strong> The gem sheds Bright Light in a 30-foot radius and
+      Dim Light for an additional 30 feet. This effect doesn't expend a charge.
+      It lasts until you take a Bonus Action to repeat the command word or until
+      you use another function of the gem.</p><p><strong>Second Command
+      Word.</strong> You expend 1 charge and cause the gem to fire a brilliant
+      beam of light at one creature you can see within 60 feet of yourself. The
+      creature must succeed on a DC 15 Constitution saving throw or have the
+      &amp;Reference[Blinded apply=false] condition for 1 minute. The creature
+      repeats the save at the end of each of its turns, ending the effect on
+      itself on a success.</p><p><strong>Third Command Word.</strong> You expend
+      5 charges and cause the gem to flare with intense light in a 30-foot Cone.
+      Each creature in the Cone makes a saving throw as if struck by the beam
+      created with the second command word.</p><p>When all of the gem's charges
+      are expended, the gem becomes a nonmagical jewel worth 50 GP.</p>
+    chat: ''
+  identifier: gem-of-brightness
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects:
+  - name: Blinded by Brilliance
+    img: icons/commodities/gems/gem-faceted-octagon-yellow.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgGemOfBrightne
+    transfer: false
+    _id: 05Lok63szRXdAafx
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - blinded
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730729662573
+      modifiedTime: 1730729694845
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgGemOfBrightne.05Lok63szRXdAafx'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712700355
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 15400000
+ownership:
+  default: 0
+_key: '!items!dmgGemOfBrightne'

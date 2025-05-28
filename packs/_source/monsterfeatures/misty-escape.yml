@@ -1,0 +1,58 @@
+_id: hMC7XCkDbzVMZ0QG
+name: Misty Escape
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <section class="secret"><p>When it drops to <strong>0 hit points</strong>
+      outside its resting place, the [[lookup @name lowercase]] transforms into
+      a cloud of mist (as in the Shapechanger trait) instead of falling
+      unconscious, provided that it isn't in sunlight or running water. If it
+      can't transform, it is destroyed.</p><p>While it has <strong>0 hit
+      points</strong> in mist form, it can't revert to its [[lookup @name
+      lowercase]] form, and it must reach its resting place within 2 hours or be
+      destroyed. Once in its resting place, it reverts to its [[lookup @name
+      lowercase]] form. It is then paralyzed until it regains at least <strong>1
+      hit point</strong>. After spending 1 hour in its resting place with
+      <strong>0 hit points</strong>, it regains <strong>1 hit
+      point</strong>.</p></section><p>A slain [[lookup @name lowercase]]
+      transforms into a cloud of mist (as in the Shapechanger trait) instead of
+      falling unconscious.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: monster
+    subtype: ''
+  requirements: ''
+  activities: {}
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  identifier: misty-escape
+flags: {}
+img: icons/magic/air/fog-gas-smoke-swirling-gray.webp
+effects: []
+folder: null
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725304974760
+  modifiedTime: 1725992573822
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!hMC7XCkDbzVMZ0QG'

@@ -1,0 +1,171 @@
+_id: dmgMalice0000000
+name: Malice
+type: consumable
+img: icons/magic/air/fog-gas-smoke-orange.webp
+system:
+  activities:
+    gxoIlOMbBGjkqcWz:
+      type: save
+      name: Use Poison
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: pzgyNngTSSV4O7ym
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      _id: gxoIlOMbBGjkqcWz
+      img: ''
+      appliedEffects:
+        - pzgyNngTSSV4O7ym
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Inhaled Poison</em></p><p>A creature subjected to Malice must
+      succeed on a DC 15 Constitution saving throw or have the
+      &amp;Reference[Poisoned apply=false] condition for 1 hour. The creature
+      also has the &amp;Reference[Blinded apply=false] condition while Poisoned
+      in this way.</p>
+    chat: ''
+  identifier: malice
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 250
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: poison
+    subtype: inhaled
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties: []
+effects:
+  - name: Poisoned and Blinded
+    img: icons/magic/air/fog-gas-smoke-orange.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgMalice0000000
+    transfer: false
+    _id: pzgyNngTSSV4O7ym
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - blinded
+      - poisoned
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.equipment24.Item.dmgAssassinsBloo.ActiveEffect.zpDCMRInMzrnRAAd
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1730740929229
+      modifiedTime: 1730740978435
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!dmgMalice0000000.pzgyNngTSSV4O7ym'
+folder: bRhjJ3GivNsz0GTF
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1728419101980
+  modifiedTime: 1745256806240
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!dmgMalice0000000'

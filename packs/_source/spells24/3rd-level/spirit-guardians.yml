@@ -1,0 +1,247 @@
+name: Spirit Guardians
+system:
+  description:
+    value: >-
+      <p>Protective spirits flit around you in a 15-foot Emanation for the
+      duration. If you are good or neutral, their spectral form appears angelic
+      or fey (your choice). If you are evil, they appear fiendish.</p><p>When
+      you cast this spell, you can designate creatures to be unaffected by it.
+      Any other creature's Speed is halved in the Emanation, and whenever the
+      Emanation enters a creature's space and whenever a creature enters the
+      Emanation or ends its turn there, the creature must make a Wisdom saving
+      throw. On a failed save, the creature takes 3d8 Radiant damage (if you are
+      good or neutral) or 3d8 Necrotic damage (if you are evil). On a successful
+      save, the creature takes half as much damage. A creature makes this save
+      only once per turn.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> The damage increases by 1d8 for each spell slot level above
+      3.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: true
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ft
+      type: radius
+      size: '15'
+      contiguous: false
+      count: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a prayer scroll
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: true
+      effects:
+        - _id: Q3CLqX7crfusAxkj
+          onSave: true
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '15'
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: '8'
+            bonus: ''
+            types:
+              - necrotic
+              - radiant
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 200000
+      name: Emanation Save
+      img: ''
+      appliedEffects:
+        - Q3CLqX7crfusAxkj
+    Rw9xP3RWH9K4eDya:
+      type: utility
+      name: Cast
+      _id: Rw9xP3RWH9K4eDya
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      roll:
+        prompt: false
+        visible: false
+  identifier: spirit-guardians
+_id: phbsplSpiritGuar
+type: spell
+img: icons/magic/light/orb-hands-humanoid-yellow.webp
+effects:
+  - name: Half Speed
+    origin: Compendium.dnd5e.spells24.Item.phbsplSpiritGuar
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 600
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/magic/movement/abstract-ribbons-red-orange.webp
+    _id: Q3CLqX7crfusAxkj
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 1
+        value: '0.5'
+        priority: null
+      - key: system.attributes.movement.fly
+        mode: 1
+        value: '0.5'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 1
+        value: '0.5'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 1
+        value: '0.5'
+        priority: null
+      - key: system.attributes.movement.burrow
+        mode: 1
+        value: '0.5'
+        priority: null
+    description: <p>The creature's speed is halved while within the Emanation.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!phbsplSpiritGuar.Q3CLqX7crfusAxkj'
+folder: HCovEE4VoPGlIbKi
+sort: 101563
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425972143
+  modifiedTime: 1745256798662
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplSpiritGuar'

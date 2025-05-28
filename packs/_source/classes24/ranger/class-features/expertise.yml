@@ -1,0 +1,52 @@
+_id: phbrgrExpertise0
+name: Expertise
+type: feat
+folder: h5OUzaJcZzsNsOGc
+img: icons/magic/symbols/chevron-elipse-circle-blue.webp
+system:
+  description:
+    value: >-
+      <p>Choose two of your skill proficiencies with which you lack Expertise.
+      You gain Expertise in those skills.</p><section class="secret"
+      id="secret-8Sp7JCTIzt2U5K6u"><p><strong>Foundry Note</strong></p><p>You
+      will be prompted with a choice when you reach this level.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 9
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: expertise
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735932734523
+  modifiedTime: 1745256764793
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgrExpertise0'

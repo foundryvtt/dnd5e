@@ -1,0 +1,143 @@
+_id: phbinvArmorofSha
+name: Armor of Shadows
+type: feat
+img: icons/magic/control/control-influence-rally-purple.webp
+system:
+  description:
+    value: >-
+      <p>You can cast
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplMageArmor0]{Mage Armor} on
+      yourself without expending a spell slot.</p><section
+      id="secret-G6Bmiw5YEqEfBh2e" class="secret"><p><strong>Foundry
+      Note</strong></p><p>The <strong>Mage Armor</strong> activity is configured
+      with the spell's effect and duration, including an Active Effect to set
+      the spell's provided AC formula.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities:
+    XKx7cpBQ8AvRs6Kl:
+      type: utility
+      name: Mage Armor
+      _id: XKx7cpBQ8AvRs6Kl
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '8'
+      effects:
+        - _id: 3UaxEJx1X9kDrR65
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  enchant: {}
+  identifier: armor-of-shadows
+effects:
+  - _id: 3UaxEJx1X9kDrR65
+    changes:
+      - key: system.attributes.ac.calc
+        mode: 5
+        value: mage
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: 28800
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.classes24.Item.phbinvArmorofSha
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Mage Armor
+    description: <p>The target's base AC becomes 13 + its Dexterity modifier.</p>
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.CKZTpZlxj7hjjo2H.ActiveEffect.cfwMU7LuOJ619Lny
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/equipment/chest/breastplate-helmet-metal.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbinvArmorofSha.3UaxEJx1X9kDrR65'
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256761967
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvArmorofSha'

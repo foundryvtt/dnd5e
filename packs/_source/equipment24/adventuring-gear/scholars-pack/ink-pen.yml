@@ -1,0 +1,75 @@
+name: Ink Pen
+system:
+  description:
+    value: <p>Using Ink, an Ink Pen is used to write or draw.</p>
+    chat: ''
+  price:
+    value: 2
+    denomination: cp
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagScholarsPac
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities: {}
+  identifier: ink-pen
+_id: x9BzTUcsOj6K6OJE
+type: equipment
+folder: uDk4FBYfcP2JnX6t
+img: icons/tools/scribal/pen-steel-grey-brown.webp
+effects: []
+sort: 67188
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726532967386
+  modifiedTime: 1745256815068
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!x9BzTUcsOj6K6OJE'

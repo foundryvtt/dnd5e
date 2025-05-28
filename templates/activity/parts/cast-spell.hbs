@@ -1,0 +1,18 @@
+<ul class="separated-list spell-details">
+    <li>
+        {{#if spell}}
+        <div class="details flexrow">
+            <img class="gold-icon" src="{{ spell.img }}" alt="{{ spell.name }}">
+            {{{ contentLink }}}
+            <div class="list-controls flexrow">
+                <button type="button" class="unbutton control-button" data-action="removeSpell"
+                        data-tooltip aria-label="{{ localize 'DND5E.CAST.Action.RemoveSpell' }}">
+                    <i class="fa-solid fa-trash" inert></i>
+                </button>
+            </div>
+        </div>
+        {{else}}
+        {{ formInput fields.spell.fields.uuid value=source.spell.uuid }}
+        {{/if}}
+    </li>
+</ul>

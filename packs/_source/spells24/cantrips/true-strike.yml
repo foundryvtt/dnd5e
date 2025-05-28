@@ -1,0 +1,345 @@
+name: True Strike
+system:
+  description:
+    value: >-
+      <p>Guided by a flash of magical insight, you make one attack with the
+      weapon used in the spell's casting. The attack uses your spellcasting
+      ability for the attack and damage rolls instead of using Strength or
+      Dexterity. If the attack deals damage, it can be Radiant damage or the
+      weapon's normal damage type (your choice).</p><p><strong>Cantrip
+      Upgrade.</strong> Whether you deal Radiant damage or the weapon's normal
+      damage type, the attack deals extra Radiant damage when you reach levels 5
+      (1d6), 11 (2d6), and 17 (3d6).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: div
+  properties:
+    - somatic
+    - material
+  materials:
+    value: a weapon with which you have proficiency and that is worth 1+ CP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    4TlVwMTDg8tqME2z:
+      type: enchant
+      _id: 4TlVwMTDg8tqME2z
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: SouQfUgwb9LlUraq
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - CiLsaHBi9F6eIXUS
+            effect: []
+            item: []
+        - _id: Zsx8UvC9DmdrA1E1
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - cGNXKjpoRima6wjQ
+            effect: []
+            item: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      enchant: {}
+      restrictions:
+        allowMagical: true
+        categories: []
+        properties: []
+        type: weapon
+      name: Enchant Weapon
+      img: ''
+      appliedEffects:
+        - SouQfUgwb9LlUraq
+        - Zsx8UvC9DmdrA1E1
+    CiLsaHBi9F6eIXUS:
+      type: attack
+      name: Spellcasting Attack
+      _id: CiLsaHBi9F6eIXUS
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+        ability: spellcasting
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      img: systems/dnd5e/icons/svg/damage/bludgeoning.svg
+      appliedEffects: []
+    cGNXKjpoRima6wjQ:
+      type: attack
+      name: Spellcasting Attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: weapon
+        ability: spellcasting
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      _id: cGNXKjpoRima6wjQ
+      img: systems/dnd5e/icons/svg/damage/piercing.svg
+      appliedEffects: []
+  identifier: true-strike
+_id: phbsplTrueStrike
+type: spell
+img: icons/magic/unholy/hand-weapon-glow-black-green.webp
+effects:
+  - type: enchantment
+    name: True Strike
+    img: icons/magic/unholy/hand-weapon-glow-black-green.webp
+    disabled: false
+    _id: SouQfUgwb9LlUraq
+    system: {}
+    changes:
+      - key: system.damage.base.types
+        mode: 2
+        value: radiant
+        priority: null
+      - key: name
+        mode: 5
+        value: '{} (True Strike)'
+        priority: null
+      - key: system.damage.parts
+        mode: 2
+        value: '[["(floor((@details.level + 1) / 6))d6", "radiant"]]'
+        priority: null
+      - key: activities[attack].attack.ability
+        mode: 5
+        value: spellcasting
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725569956584
+      modifiedTime: 1725572087216
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!phbsplTrueStrike.SouQfUgwb9LlUraq'
+  - type: enchantment
+    name: Ranged Weapon
+    img: icons/skills/ranged/arrow-strike-glowing-teal.webp
+    disabled: false
+    system: {}
+    changes:
+      - key: system.damage.base.types
+        mode: 2
+        value: radiant
+        priority: null
+      - key: name
+        mode: 5
+        value: '{} (True Strike)'
+        priority: null
+      - key: system.damage.base.bonus
+        mode: 2
+        value: (floor((@details.level + 1) / 6))d6[radiant]
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplTrueStrike.ActiveEffect.SouQfUgwb9LlUraq
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725572096560
+      modifiedTime: 1725572184460
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: Zsx8UvC9DmdrA1E1
+    _key: '!items.effects!phbsplTrueStrike.Zsx8UvC9DmdrA1E1'
+folder: 4FhsY9FJQd7h7MZb
+sort: 100025
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - CiLsaHBi9F6eIXUS
+        - cGNXKjpoRima6wjQ
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425976371
+  modifiedTime: 1745256799544
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplTrueStrike'

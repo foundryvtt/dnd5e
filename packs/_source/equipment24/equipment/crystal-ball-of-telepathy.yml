@@ -1,0 +1,176 @@
+_id: dmgTelepathyCrys
+name: Crystal Ball of Telepathy
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/commodities/treasure/crystal-ball-blue-purple.webp
+system:
+  activities:
+    YB7AXMI2tqqNAlCG:
+      type: cast
+      _id: YB7AXMI2tqqNAlCG
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '5'
+        properties: []
+        uuid: Compendium.dnd5e.spells24.Item.phbsplScrying000
+      name: ''
+      img: ''
+    M05Q5IeuXKLQsEyw:
+      type: cast
+      _id: M05Q5IeuXKLQsEyw
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '2'
+        properties:
+          - concentration
+        uuid: Compendium.dnd5e.spells24.Item.phbsplSuggestion
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <div><p><em>Wondrous Item, Legendary (Requires
+      Attunement)</em></p></div><p>While touching this crystal orb, you can cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScrying000]{Scrying}</em>
+      (save DC 17) with it. In addition, you can communicate telepathically with
+      creatures you can see within 30 feet of the spell's sensor. You can also
+      cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplSuggestion]{Suggestion}</em>
+      (save DC 17) through the sensor on one of those creatures. You don't need
+      to concentrate on this <em>Suggestion</em> to maintain it during its
+      duration, but it ends if <em>Scrying</em> ends. You can't cast
+      <em>Suggestion</em> in this way again until the next dawn.</p>
+    chat: ''
+  identifier: telepathy-crystal-ball-of
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256809455
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 35800000
+ownership:
+  default: 0
+_key: '!items!dmgTelepathyCrys'

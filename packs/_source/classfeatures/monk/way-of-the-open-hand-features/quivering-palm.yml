@@ -1,0 +1,127 @@
+_id: h1gM8SH3BNRtFevE
+name: Quivering Palm
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>At 17th level, you gain the ability to set up lethal vibrations in
+      someone's body. When you hit a creature with an unarmed strike, you can
+      spend 3 ki points to start these imperceptible vibrations, which last for
+      a number of days equal to your monk level. The vibrations are harmless
+      unless you use your action to end them. To do so, you and the target must
+      be on the same plane of existence. When you use this action, the creature
+      must make a Constitution saving throw. If it fails, it is reduced to 0 hit
+      points. If it succeeds, it takes 10d10 necrotic damage.</p><p>You can have
+      only one creature under the effect of this feature at a time. You can
+      choose to end the vibrations harmlessly without using an action.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  type:
+    value: class
+    subtype: ki
+  requirements: Way of the Open Hand 17
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: Only ending the vibrations harmfully requires an action.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: Compendium.dnd5e.classfeatures.Item.10b6z2W1txNkrGP7
+            value: '3'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 10
+            denomination: 10
+            bonus: ''
+            types:
+              - necrotic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: wis
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: quivering-palm
+flags: {}
+img: icons/magic/symbols/rune-sigil-black-pink.webp
+effects: []
+folder: MXzsbYUTe9IwCyHP
+sort: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037386823
+  modifiedTime: 1725992289302
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!h1gM8SH3BNRtFevE'

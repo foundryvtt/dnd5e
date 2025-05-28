@@ -1,0 +1,127 @@
+_id: A4RsPuSvB9wFtz1j
+name: Dimension Door
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You teleport yourself from your current location to any other spot
+      within range. You arrive at exactly the spot desired. It can be a place
+      you can see, one you can visualize, or one you can describe by stating
+      distance and direction, such as "200 feet straight downward" or "upward to
+      the northwest at a 45-degree angle, 300 feet."</p><p>You can bring along
+      objects as long as their weight doesn't exceed what you can carry. You can
+      also bring one willing creature of your size or smaller who is carrying
+      gear up to its carrying capacity. The creature must be within 5 feet of
+      you when you cast this spell.</p><p>If you would arrive in a place already
+      occupied by an object or a creature, you and any creature traveling with
+      you each take 4d6 force damage, and the spell fails to teleport you.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: self
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '500'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: 4
+            denomination: 6
+            bonus: ''
+            types:
+              - force
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: dimension-door
+sort: 0
+flags: {}
+img: icons/magic/air/air-burst-spiral-large-pink.webp
+effects: []
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037349790
+  modifiedTime: 1725992717754
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!A4RsPuSvB9wFtz1j'

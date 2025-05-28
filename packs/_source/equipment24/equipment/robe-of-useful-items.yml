@@ -1,0 +1,400 @@
+_id: dmgRobeOfUsefulI
+name: Robe of Useful Items
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/equipment/back/cloak-simple-tan.webp
+system:
+  activities:
+    CewswcciLrV7wBVN:
+      type: utility
+      _id: CewswcciLrV7wBVN
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '2'
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Bullseye Lantern
+      img: ''
+      appliedEffects: []
+    gzkM1WvNfpmo48YP:
+      type: utility
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '2'
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Dagger
+      _id: gzkM1WvNfpmo48YP
+      img: ''
+      appliedEffects: []
+    8714LxXzxWUgz2iy:
+      type: utility
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '2'
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Mirror
+      _id: 8714LxXzxWUgz2iy
+      img: ''
+      appliedEffects: []
+    A0T4ezb8ANRXbNFn:
+      type: utility
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '2'
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Pole
+      _id: A0T4ezb8ANRXbNFn
+      img: ''
+      appliedEffects: []
+    oWCkue5qnRqcQGQE:
+      type: utility
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '2'
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Rope (Coiled)
+      _id: oWCkue5qnRqcQGQE
+      img: ''
+      appliedEffects: []
+    GEjvz3xtYjhD50U4:
+      type: utility
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '2'
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Sack
+      _id: GEjvz3xtYjhD50U4
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon</em></p><p>This robe has cloth patches of
+      various shapes and colors covering it. While wearing the robe, you can
+      take a Magic action to detach one of the patches, causing it to become the
+      object or creature it represents. Once the last patch is removed, the robe
+      becomes an ordinary garment.</p><p>The robe has two of each of the
+      following
+      patches:</p><ul><li>@UUID[Compendium.dnd5e.equipment24.Item.KZUoiZrigDbovEu7]{Bullseye
+      Lantern} (filled and lit)</li>
+      <li>@UUID[Compendium.dnd5e.equipment24.Item.phbwepDagger0000]{Dagger}</li>
+      <li>@UUID[Compendium.dnd5e.equipment24.Item.phbagMirror00000]{Mirror}</li>
+      <li>@UUID[Compendium.dnd5e.equipment24.Item.phbagPole0000000]{Pole}</li>
+      <li>@UUID[Compendium.dnd5e.equipment24.Item.x8jC9e00t4cUYiKR]{Rope}
+      (coiled)</li><li>@UUID[Compendium.dnd5e.equipment24.Item.phbagSack0000000]{Sack}</li></ul><p>In
+      addition, the robe has [[/r 4d4]] other patches. The GM chooses the
+      patches or determines them randomly by rolling on the following
+      table.</p><details><summary>Table</summary><p>@Embed[Compendium.dnd5e.tables24.RollTable.dmgRobeOfUsefulI
+      rollable]</p></details><section class="secret"
+      id="secret-xQk1DSLrx4a4jmWy"><p><strong>Foundry Note</strong></p><p>This
+      item includes activities for each of the always present patches above
+      which include limited uses for tracking how many are left. They can be
+      duplicated and renamed for the additional patches after rolling for the
+      results.</p></section>
+    chat: ''
+  identifier: robe-of-useful-items
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712703012
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 32700000
+ownership:
+  default: 0
+_key: '!items!dmgRobeOfUsefulI'

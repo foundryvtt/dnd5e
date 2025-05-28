@@ -1,0 +1,89 @@
+_id: phbbrbFeralInsti
+name: Feral Instinct
+type: feat
+img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+system:
+  description:
+    value: >-
+      <p>Your instincts are so honed that you have Advantage on Initiative
+      rolls.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 7
+    repeatable: false
+  properties: []
+  requirements: Barbarian
+  activities: {}
+  enchant: {}
+  identifier: feral-instinct
+effects:
+  - _id: CaV1VYMaVjjPceJs
+    changes:
+      - key: system.attributes.init.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.classes24.Item.phbbrbFeralInsti
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Feral Instinct
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.classfeatures.Item.NlXslw4yAqmKZWtN.ActiveEffect.q7TkJQX7PeVOzTQH
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!phbbrbFeralInsti.CaV1VYMaVjjPceJs'
+folder: p6WDpW0gzmKfhGad
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940469
+  modifiedTime: 1745256759830
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrbFeralInsti'

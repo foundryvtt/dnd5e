@@ -4,12 +4,28 @@
 
 /**
  * Format a Challenge Rating using the proper fractional symbols.
- * @param {number} value  CR value for format.
+ * @param {number} value                   CR value to format.
+ * @param {object} [options={}]
+ * @param {boolean} [options.narrow=true]  Use narrow fractions (e.g. ⅛) rather than wide ones (e.g. 1/8).
  * @returns {string}
  */
-export function formatCR(value) {
+export function formatCR(value, { narrow=true }={}) {
   if ( value === null ) return "—";
-  return { 0.125: "⅛", 0.25: "¼", 0.5: "½" }[value] ?? formatNumber(value);
+  const fractions = narrow ? { 0.125: "⅛", 0.25: "¼", 0.5: "½" } : { 0.125: "1/8", 0.25: "1/4", 0.5: "1/2" };
+  return fractions[value] ?? formatNumber(value);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Form a number using the provided length unit.
+ * @param {number} value         The length to format.
+ * @param {string} unit          Length unit as defined in `CONFIG.DND5E.movementUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatLength(value, unit, options={}) {
+  return _formatSystemUnits(value, unit, CONFIG.DND5E.movementUnits[unit], options);
 }
 
 /* -------------------------------------------- */
@@ -31,10 +47,14 @@ export function formatModifier(mod) {
  * @param {number} value    The value to format.
  * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
  * @param {boolean} [options.numerals]  Format the number as roman numerals.
+ * @param {boolean} [options.ordinal]   Use ordinal formatting.
+ * @param {boolean} [options.words]     Write out number as full word, if possible.
  * @returns {string}
  */
-export function formatNumber(value, { numerals, ...options }={}) {
+export function formatNumber(value, { numerals, ordinal, words, ...options }={}) {
+  if ( words && game.i18n.has(`DND5E.NUMBER.${value}`, false) ) return game.i18n.localize(`DND5E.NUMBER.${value}`);
   if ( numerals ) return _formatNumberAsNumerals(value);
+  if ( ordinal ) return _formatNumberAsOrdinal(value, options);
   const formatter = new Intl.NumberFormat(game.i18n.lang, options);
   return formatter.format(value);
 }
@@ -66,6 +86,34 @@ function _formatNumberAsNumerals(n) {
 /* -------------------------------------------- */
 
 /**
+ * Format a number using an ordinal format.
+ * @param {number} n        The number to format.
+ * @param {object} options  Options forwarded to `formatNumber`.
+ * @returns {string}
+ */
+function _formatNumberAsOrdinal(n, options={}) {
+  const pr = getPluralRules({ type: "ordinal" }).select(n);
+  const number = formatNumber(n, options);
+  return game.i18n.has(`DND5E.ORDINAL.${pr}`) ? game.i18n.format(`DND5E.ORDINAL.${pr}`, { number }) : number;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Produce a number with the parts wrapped in their own spans.
+ * @param {number} value      A number for format.
+ * @param {object} [options]  Formatting options.
+ * @returns {string}
+ */
+export function formatNumberParts(value, options) {
+  if ( options.numerals ) throw new Error("Cannot segment numbers when formatted as numerals.");
+  return new Intl.NumberFormat(game.i18n.lang, options).formatToParts(value)
+    .reduce((str, { type, value }) => `${str}<span class="${type}">${value}</span>`, "");
+}
+
+/* -------------------------------------------- */
+
+/**
  * A helper for using Intl.NumberFormat within handlebars for format a range.
  * @param {number} min      The lower end of the range.
  * @param {number} max      The upper end of the range.
@@ -86,6 +134,104 @@ export function formatRange(min, max, options) {
  */
 export function formatText(value) {
   return new Handlebars.SafeString(value?.replaceAll("\n", "<br>") ?? "");
+}
+
+/* -------------------------------------------- */
+
+/**
+ * A helper function that formats a time in a human-readable format.
+ * @param {number} value         Time to display.
+ * @param {string} unit          Units as defined in `CONFIG.DND5E.timeUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatTime(value, unit, options={}) {
+  options.maximumFractionDigits ??= 0;
+  options.unitDisplay ??= "long";
+  const config = CONFIG.DND5E.timeUnits[unit];
+  if ( config?.counted ) {
+    if ( (options.unitDisplay === "narrow") && game.i18n.has(`${config.counted}.narrow`) ) {
+      return game.i18n.format(`${config.counted}.narrow`, { number: formatNumber(value, options) });
+    } else {
+      const pr = new Intl.PluralRules(game.i18n.lang);
+      return game.i18n.format(`${config.counted}.${pr.select(value)}`, { number: formatNumber(value, options) });
+    }
+  }
+  try {
+    return formatNumber(value, { ...options, style: "unit", unit });
+  } catch(err) {
+    return formatNumber(value, options);
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Form a number using the provided volume unit.
+ * @param {number} value         The volume to format.
+ * @param {string} unit          Volume unit as defined in `CONFIG.DND5E.volumeUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatVolume(value, unit, options={}) {
+  return _formatSystemUnits(value, unit, CONFIG.DND5E.volumeUnits[unit], options);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Form a number using the provided weight unit.
+ * @param {number} value         The weight to format.
+ * @param {string} unit          Weight unit as defined in `CONFIG.DND5E.weightUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatWeight(value, unit, options={}) {
+  return _formatSystemUnits(value, unit, CONFIG.DND5E.weightUnits[unit], options);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Format a number using one of core's built-in unit types.
+ * @param {number} value                   Value to display.
+ * @param {string} unit                    Name of the unit to use.
+ * @param {UnitConfiguration} config       Configuration data for the unit.
+ * @param {object} [options={}]            Formatting options passed to `formatNumber`.
+ * @param {boolean} [options.parts=false]  Format to parts.
+ * @returns {string}
+ */
+function _formatSystemUnits(value, unit, config, { parts=false, ...options }={}) {
+  options.unitDisplay ??= "short";
+  if ( config?.counted ) {
+    const localizationKey = `${config.counted}.${options.unitDisplay}.${getPluralRules().select(value)}`;
+    return game.i18n.format(localizationKey, { number: formatNumber(value, options) });
+  }
+  unit = config?.formattingUnit ?? unit;
+  if ( isValidUnit(unit) ) {
+    options.style ??= "unit";
+    options.unit ??= unit;
+  }
+  return (parts ? formatNumberParts : formatNumber)(value, options);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Cached store of Intl.PluralRules instances.
+ * @type {Record<string, Intl.PluralRules>}
+ */
+const _pluralRules = {};
+
+/**
+ * Get a PluralRules object, fetching from cache if possible.
+ * @param {object} [options={}]
+ * @param {string} [options.type=cardinal]
+ * @returns {Intl.PluralRules}
+ */
+export function getPluralRules({ type="cardinal" }={}) {
+  _pluralRules[type] ??= new Intl.PluralRules(game.i18n.lang, { type });
+  return _pluralRules[type];
 }
 
 /* -------------------------------------------- */
@@ -231,6 +377,20 @@ export function staticID(id) {
 /*  Keybindings Helper                          */
 /* -------------------------------------------- */
 
+const { MODIFIER_CODES: CODES, MODIFIER_KEYS } = (foundry.helpers?.interaction?.KeyboardManager ?? KeyboardManager);
+
+/**
+ * Track which KeyboardEvent#code presses associate with each modifier.
+ * Added support for treating Meta separate from Control.
+ * @enum {string[]}
+ */
+const MODIFIER_CODES = {
+  Alt: CODES.Alt,
+  Control: CODES.Control.filter(k => k.startsWith("Control")),
+  Meta: CODES.Control.filter(k => !k.startsWith("Control")),
+  Shift: CODES.Shift
+};
+
 /**
  * Based on the provided event, determine if the keys are pressed to fulfill the specified keybinding.
  * @param {Event} event    Triggering event.
@@ -242,16 +402,35 @@ export function areKeysPressed(event, action) {
   const activeModifiers = {};
   const addModifiers = (key, pressed) => {
     activeModifiers[key] = pressed;
-    KeyboardManager.MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
+    MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
   };
-  addModifiers(KeyboardManager.MODIFIER_KEYS.CONTROL, event.ctrlKey || event.metaKey);
-  addModifiers(KeyboardManager.MODIFIER_KEYS.SHIFT, event.shiftKey);
-  addModifiers(KeyboardManager.MODIFIER_KEYS.ALT, event.altKey);
+  addModifiers(MODIFIER_KEYS.ALT, event.altKey);
+  addModifiers(MODIFIER_KEYS.CONTROL, event.ctrlKey);
+  addModifiers("Meta", event.metaKey);
+  addModifiers(MODIFIER_KEYS.SHIFT, event.shiftKey);
   return game.keybindings.get("dnd5e", action).some(b => {
     if ( game.keyboard.downKeys.has(b.key) && b.modifiers.every(m => activeModifiers[m]) ) return true;
     if ( b.modifiers.length ) return false;
     return activeModifiers[b.key];
   });
+}
+
+/* -------------------------------------------- */
+/*  Logging                                     */
+/* -------------------------------------------- */
+
+/**
+ * Log a console message with the "D&D 5e" prefix and styling.
+ * @param {string} message                    Message to display.
+ * @param {object} [options={}]
+ * @param {string} [options.color="#6e0000"]  Color to use for the log.
+ * @param {any[]} [options.extras=[]]         Extra options passed to the logging method.
+ * @param {string} [options.level="log"]      Console logging method to call.
+ */
+export function log(message, { color="#6e0000", extras=[], level="log" }={}) {
+  console[level](
+    `%cD&D 5e | %c${message}`, `color: ${color}; font-variant: small-caps`, "color: revert", ...extras
+  );
 }
 
 /* -------------------------------------------- */
@@ -403,7 +582,7 @@ export function getTargetDescriptors() {
  * @returns {Token5e[]}
  */
 export function getSceneTargets() {
-  let targets = canvas.tokens.controlled.filter(t => t.actor);
+  let targets = canvas.tokens?.controlled.filter(t => t.actor) ?? [];
   if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
   return targets;
 }
@@ -413,20 +592,98 @@ export function getSceneTargets() {
 /* -------------------------------------------- */
 
 /**
+ * Convert the provided length to another unit.
+ * @param {number} value                   The length being converted.
+ * @param {string} from                    The initial units.
+ * @param {string} to                      The final units.
+ * @param {object} [options={}]
+ * @param {boolean} [options.strict=true]  Throw an error if either unit isn't found.
+ * @returns {number}
+ */
+export function convertLength(value, from, to, { strict=true }={}) {
+  const message = unit => `Length unit ${unit} not defined in CONFIG.DND5E.movementUnits`;
+  return _convertSystemUnits(value, from, to, CONFIG.DND5E.movementUnits, { message, strict });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Convert the provided time value to another unit. If no final unit is provided, then will convert it to the largest
+ * unit that can still represent the value as a whole number.
+ * @param {number} value                    The time being converted.
+ * @param {string} from                     The initial unit as defined in `CONFIG.DND5E.timeUnits`.
+ * @param {object} [options={}]
+ * @param {boolean} [options.combat=false]  Use combat units when auto-selecting units, rather than normal units.
+ * @param {boolean} [options.strict=true]   Throw an error if from unit isn't found.
+ * @param {string} [options.to]             The final units, if explicitly provided.
+ * @returns {{ value: number, unit: string }}
+ */
+export function convertTime(value, from, { combat=false, strict=true, to }={}) {
+  const base = value * (CONFIG.DND5E.timeUnits[from]?.conversion ?? 1);
+  if ( !to ) {
+    // Find unit with largest conversion value that can still display the value
+    const unitOptions = Object.entries(CONFIG.DND5E.timeUnits)
+      .reduce((arr, [key, v]) => {
+        if ( ((v.combat ?? false) === combat) && ((base % v.conversion === 0) || (base >= v.conversion * 2)) ) {
+          arr.push({ key, conversion: v.conversion });
+        }
+        return arr;
+      }, [])
+      .sort((lhs, rhs) => rhs.conversion - lhs.conversion);
+    to = unitOptions[0]?.key ?? from;
+  }
+
+  const message = unit => `Time unit ${unit} not defined in CONFIG.DND5E.timeUnits`;
+  return { value: _convertSystemUnits(value, from, to, CONFIG.DND5E.timeUnits, { message, strict }), unit: to };
+}
+
+/* -------------------------------------------- */
+
+/**
  * Convert the provided weight to another unit.
- * @param {number} value  The weight being converted.
- * @param {string} from   The initial units.
- * @param {string} to     The final units.
+ * @param {number} value                   The weight being converted.
+ * @param {string} from                    The initial unit as defined in `CONFIG.DND5E.weightUnits`.
+ * @param {string} to                      The final units.
+ * @param {object} [options={}]
+ * @param {boolean} [options.strict=true]  Throw an error if either unit isn't found.
  * @returns {number}      Weight in the specified units.
  */
-export function convertWeight(value, from, to) {
-  if ( from === to ) return value;
+export function convertWeight(value, from, to, { strict=true }={}) {
   const message = unit => `Weight unit ${unit} not defined in CONFIG.DND5E.weightUnits`;
-  if ( !CONFIG.DND5E.weightUnits[from] ) throw new Error(message(from));
-  if ( !CONFIG.DND5E.weightUnits[to] ) throw new Error(message(to));
-  return value
-    * CONFIG.DND5E.weightUnits[from].conversion
-    / CONFIG.DND5E.weightUnits[to].conversion;
+  return _convertSystemUnits(value, from, to, CONFIG.DND5E.weightUnits, { message, strict });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Convert from one unit to another using one of core's built-in unit types.
+ * @param {number} value                                Value to display.
+ * @param {string} from                                 The initial unit.
+ * @param {string} to                                   The final unit.
+ * @param {UnitConfiguration} config                    Configuration data for the unit.
+ * @param {object} options
+ * @param {function(string): string} [options.message]  Method used to produce the error message if unit not found.
+ * @param {boolean} [options.strict]                    Throw an error if either unit isn't found.
+ * @returns {string}
+ */
+function _convertSystemUnits(value, from, to, config, { message, strict }) {
+  if ( from === to ) return value;
+  if ( strict && !config[from] ) throw new Error(message(from));
+  if ( strict && !config[to] ) throw new Error(message(to));
+  return value * (config[from]?.conversion ?? 1) / (config[to]?.conversion ?? 1);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Default units to use depending on system setting.
+ * @param {"length"|"weight"} type  Type of units to select.
+ * @returns {string}
+ */
+export function defaultUnits(type) {
+  return CONFIG.DND5E.defaultUnits[type]?.[
+    game.settings.get("dnd5e", `metric${type.capitalize()}Units`) ? "metric" : "imperial"
+  ];
 }
 
 /* -------------------------------------------- */
@@ -447,6 +704,30 @@ export const validators = {
 };
 
 /* -------------------------------------------- */
+
+/**
+ * Determine whether the provided unit is usable within `Intl.NumberFormat`.
+ * @param {string} unit
+ * @returns {boolean}
+ */
+export function isValidUnit(unit) {
+  if ( unit?.includes("-per-") ) return unit.split("-per-").every(u => isValidUnit(u));
+  return Intl.supportedValuesOf("unit").includes(unit);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Test if a given string is serialized JSON, and parse it if so.
+ * @param {string} raw  The raw value.
+ * @returns {any}       The parsed value, or the original value if it was not serialized JSON.
+ */
+export function parseOrString(raw) {
+  try { return JSON.parse(raw); } catch {}
+  return raw;
+}
+
+/* -------------------------------------------- */
 /*  Handlebars Template Helpers                 */
 /* -------------------------------------------- */
 
@@ -462,8 +743,8 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/shared/active-effects.hbs",
     "systems/dnd5e/templates/shared/active-effects2.hbs",
     "systems/dnd5e/templates/shared/inventory.hbs",
-    "systems/dnd5e/templates/shared/inventory2.hbs",
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
+    "systems/dnd5e/templates/apps/parts/traits-list.hbs",
 
     // Actor Sheet Partials
     "systems/dnd5e/templates/actors/parts/actor-classes.hbs",
@@ -475,19 +756,16 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
     "systems/dnd5e/templates/actors/parts/actor-warnings-dialog.hbs",
     "systems/dnd5e/templates/actors/parts/biography-textbox.hbs",
+    "systems/dnd5e/templates/actors/tabs/character-bastion.hbs",
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
     "systems/dnd5e/templates/actors/tabs/character-details.hbs",
-    "systems/dnd5e/templates/actors/tabs/creature-features.hbs",
-    "systems/dnd5e/templates/actors/tabs/creature-spells.hbs",
+    "systems/dnd5e/templates/actors/tabs/creature-special-traits.hbs",
     "systems/dnd5e/templates/actors/tabs/group-members.hbs",
     "systems/dnd5e/templates/actors/tabs/npc-biography.hbs",
 
-    // Actor Sheet Item Summary Columns
-    "systems/dnd5e/templates/actors/parts/columns/column-feature-controls.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-formula.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-recovery.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-roll.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
+    // Chat Message Partials
+    "systems/dnd5e/templates/chat/parts/card-activities.hbs",
+    "systems/dnd5e/templates/chat/parts/card-deltas.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/details/details-background.hbs",
@@ -495,6 +773,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/details/details-consumable.hbs",
     "systems/dnd5e/templates/items/details/details-container.hbs",
     "systems/dnd5e/templates/items/details/details-equipment.hbs",
+    "systems/dnd5e/templates/items/details/details-facility.hbs",
     "systems/dnd5e/templates/items/details/details-feat.hbs",
     "systems/dnd5e/templates/items/details/details-loot.hbs",
     "systems/dnd5e/templates/items/details/details-mountable.hbs",
@@ -505,17 +784,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/details/details-subclass.hbs",
     "systems/dnd5e/templates/items/details/details-tool.hbs",
     "systems/dnd5e/templates/items/details/details-weapon.hbs",
-    "systems/dnd5e/templates/items/parts/item-action.hbs",
-    "systems/dnd5e/templates/items/parts/item-activation.hbs",
-    "systems/dnd5e/templates/items/parts/item-activities.hbs",
-    "systems/dnd5e/templates/items/parts/item-advancement.hbs",
-    "systems/dnd5e/templates/items/parts/item-advancement2.hbs",
-    "systems/dnd5e/templates/items/parts/item-description.hbs",
-    "systems/dnd5e/templates/items/parts/item-description2.hbs",
-    "systems/dnd5e/templates/items/parts/item-details.hbs",
-    "systems/dnd5e/templates/items/parts/item-mountable.hbs",
-    "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
-    "systems/dnd5e/templates/items/parts/item-source.hbs",
     "systems/dnd5e/templates/items/parts/item-summary.hbs",
     "systems/dnd5e/templates/items/parts/item-tooltip.hbs",
     "systems/dnd5e/templates/items/parts/spell-block.hbs",
@@ -527,6 +795,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/shared/fields/field-range.hbs",
     "systems/dnd5e/templates/shared/fields/field-targets.hbs",
     "systems/dnd5e/templates/shared/fields/field-uses.hbs",
+    "systems/dnd5e/templates/shared/fields/fieldlist.hbs",
 
     // Journal Partials
     "systems/dnd5e/templates/journal/parts/journal-legacy-traits.hbs",
@@ -534,20 +803,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",
 
     // Activity Partials
-    "systems/dnd5e/templates/activity/columns/activity-column-controls.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-formula.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-price.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-quantity.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-range.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-recovery.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-roll.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-school.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-target.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-time.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-uses.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-weight.hbs",
-    "systems/dnd5e/templates/activity/activity-row-summary.hbs",
-    "systems/dnd5e/templates/activity/activity-usage-notes.hbs",
+    "systems/dnd5e/templates/activity/parts/activity-usage-notes.hbs",
 
     // Advancement Partials
     "systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs",
@@ -561,7 +817,7 @@ export async function preloadHandlebarsTemplates() {
     paths[`dnd5e.${path.split("/").pop().replace(".hbs", "")}`] = path;
   }
 
-  return loadTemplates(paths);
+  return foundry.applications.handlebars.loadTemplates(paths);
 }
 
 /* -------------------------------------------- */
@@ -577,7 +833,7 @@ function dataset(object, options) {
   for ( let [key, value] of Object.entries(object ?? {}) ) {
     if ( value === undefined ) continue;
     key = key.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (a, b) => (b ? "-" : "") + a.toLowerCase());
-    entries.push(`data-${key}="${value}"`);
+    entries.push(`data-${key}="${Handlebars.escapeExpression(value)}"`);
   }
   return new Handlebars.SafeString(entries.join(" "));
 }
@@ -707,6 +963,7 @@ export function registerHandlebarsHelpers() {
     "dnd5e-itemContext": itemContext,
     "dnd5e-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
     "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
+    "dnd5e-numberParts": (context, options) => formatNumberParts(context, options.hash),
     "dnd5e-object": makeObject,
     "dnd5e-textFormat": formatText
   });
@@ -803,42 +1060,84 @@ function _localizeObject(obj, keys) {
 
 /**
  * A cache of already-fetched labels for faster lookup.
- * @type {Map<string, string>}
+ * @type {Record<string, Map<string, string>>}
  */
-const _attributeLabelCache = new Map();
+const _attributeLabelCache = {
+  activity: new Map(),
+  actor: new Map(),
+  item: new Map()
+};
 
 /**
- * Convert an attribute path to a human-readable label.
+ * Convert an attribute path to a human-readable label. Assumes paths are on an actor unless an reference item
+ * is provided.
  * @param {string} attr              The attribute path.
  * @param {object} [options]
  * @param {Actor5e} [options.actor]  An optional reference actor.
+ * @param {Item5e} [options.item]    An optional reference item.
  * @returns {string|void}
  */
-export function getHumanReadableAttributeLabel(attr, { actor }={}) {
+export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
+  if ( attr.startsWith("system.") ) attr = attr.slice(7);
+
   // Check any actor-specific names first.
-  if ( attr.startsWith("resources.") && actor ) {
+  if ( attr.match(/^resources\.(?:primary|secondary|tertiary)/) && actor ) {
     const key = attr.replace(/\.value$/, "");
     const resource = foundry.utils.getProperty(actor, `system.${key}`);
     if ( resource?.label ) return resource.label;
   }
 
   if ( (attr === "details.xp.value") && (actor?.type === "npc") ) {
-    return game.i18n.localize("DND5E.ExperiencePointsValue");
+    return game.i18n.localize("DND5E.ExperiencePoints.Value");
   }
 
   if ( attr.startsWith(".") && actor ) {
-    const item = fromUuidSync(attr, { relative: actor });
+    // TODO: Remove `strict: false` when https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
+    // Only necessary when opening the token config for an actor in a compendium
+    const item = fromUuidSync(attr, { relative: actor, strict: false });
     return item?.name ?? attr;
   }
 
   // Check if the attribute is already in cache.
-  let label = _attributeLabelCache.get(attr);
+  let label = item ? null : _attributeLabelCache.actor.get(attr);
   if ( label ) return label;
+  let name;
+  let type = "actor";
+
+  const getSchemaLabel = (attr, type, doc) => {
+    if ( doc ) return doc.system.schema.getField(attr)?.label;
+    for ( const model of Object.values(CONFIG[type].dataModels) ) {
+      const field = model.schema.getField(attr);
+      if ( field ) return field.label;
+    }
+  };
+
+  // Activity labels
+  if ( item && attr.startsWith("activities.") ) {
+    let [, activityId, ...keyPath] = attr.split(".");
+    const activity = item.system.activities?.get(activityId);
+    if ( !activity ) return attr;
+    attr = keyPath.join(".");
+    name = `${item.name}: ${activity.name}`;
+    type = "activity";
+    if ( _attributeLabelCache.activity.has(attr) ) label = _attributeLabelCache.activity.get(attr);
+    else if ( attr === "uses.spent" ) label = "DND5E.Uses";
+  }
+
+  // Item labels
+  else if ( item ) {
+    name = item.name;
+    type = "item";
+    if ( _attributeLabelCache.item.has(attr) ) label = _attributeLabelCache.item.get(attr);
+    else if ( attr === "hd.spent" ) label = "DND5E.HitDice";
+    else if ( attr === "uses.spent" ) label = "DND5E.Uses";
+    else label = getSchemaLabel(attr, "Item", item);
+  }
 
   // Derived fields.
-  if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
+  else if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
   else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
-  else if ( attr === "attributes.spelldc" ) label = "DND5E.SpellDC";
+  else if ( attr === "attributes.spell.dc" ) label = "DND5E.SpellDC";
 
   // Abilities.
   else if ( attr.startsWith("abilities.") ) {
@@ -857,7 +1156,7 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
     const [, key] = attr.split(".");
     if ( !/spell\d+/.test(key) ) label = `DND5E.SpellSlots${key.capitalize()}`;
     else {
-      const plurals = new Intl.PluralRules(game.i18n.lang, {type: "ordinal"});
+      const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
       const level = Number(key.slice(5));
       label = game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level });
     }
@@ -870,20 +1169,12 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   }
 
   // Attempt to find the attribute in a data model.
-  if ( !label ) {
-    const { CharacterData, NPCData, VehicleData, GroupData } = dnd5e.dataModels.actor;
-    for ( const model of [CharacterData, NPCData, VehicleData, GroupData] ) {
-      const field = model.schema.getField(attr);
-      if ( field ) {
-        label = field.label;
-        break;
-      }
-    }
-  }
+  if ( !label ) label = getSchemaLabel(attr, "Actor", actor);
 
   if ( label ) {
     label = game.i18n.localize(label);
-    _attributeLabelCache.set(attr, label);
+    _attributeLabelCache[type].set(attr, label);
+    if ( name ) label = `${name} ${label}`;
   }
 
   return label;
@@ -892,11 +1183,23 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
 /* -------------------------------------------- */
 
 /**
+ * Perform pre-localization on the contents of a SchemaField. Necessary because the `localizeSchema` method
+ * on `Localization` is private.
+ * @param {SchemaField} schema
+ * @param {string[]} prefixes
+ */
+export function localizeSchema(schema, prefixes) {
+  foundry.helpers.Localization.localizeDataModel({ schema }, { prefixes });
+}
+
+/* -------------------------------------------- */
+
+/**
  * Split a semi-colon-separated list and clean out any empty entries.
  * @param {string} input
- * @returns {string}
+ * @returns {string[]}
  */
-export function splitSemicolons(input) {
+export function splitSemicolons(input="") {
   return input.split(";").map(t => t.trim()).filter(t => t);
 }
 

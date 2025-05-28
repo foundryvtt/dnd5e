@@ -1,0 +1,67 @@
+_id: dmgsupBasicScrol
+name: Scroll
+type: consumable
+img: icons/sundries/scrolls/scroll-bound-blue-tan.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: ''
+    chat: ''
+  identifier: sup-basic-scroll
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: scroll
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects: []
+folder: TDK7YU58V9y3Kqjo
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730916930130
+  modifiedTime: 1740680131070
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -200000
+ownership:
+  default: 0
+_key: '!items!dmgsupBasicScrol'

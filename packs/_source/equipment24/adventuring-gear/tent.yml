@@ -1,0 +1,46 @@
+name: Tent
+system:
+  description:
+    value: <p>A Tent sleeps up to two Small or Medium creatures.</p>
+    chat: ''
+  price:
+    value: 2
+    denomination: gp
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 20
+    units: lb
+  rarity: ''
+  properties: []
+  type:
+    value: gear
+    subtype: ''
+  identifier: tent
+_id: phbagTent0000000
+type: loot
+folder: uDk4FBYfcP2JnX6t
+img: icons/environment/settlement/tent.webp
+effects: []
+sort: 6400000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425912516
+  modifiedTime: 1745256813070
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbagTent0000000'

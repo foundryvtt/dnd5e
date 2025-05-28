@@ -1,0 +1,133 @@
+_id: ImlCJQwR1VL40Qem
+name: Arcane Eye
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create an invisible, magical eye within range that hovers in the
+      air for the duration.</p><p>You mentally receive visual information from
+      the eye, which has normal vision and darkvision out to 30 feet. The eye
+      can look in every direction.</p><p>As an action, you can move the eye up
+      to 30 feet in any direction. There is no limit to how far away from you
+      the eye can move, but it can't enter another plane of existence. A solid
+      barrier blocks the eye's movement, but the eye can pass through an opening
+      as small as 1 inch in diameter.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: div
+  materials:
+    value: A bit of bat fur.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: summon
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      bonuses:
+        ac: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - name: ''
+          _id: ymTRUlo76wX36XFK
+          uuid: Compendium.dnd5e.monsters.Actor.tuHyePQ9GazMTyc0
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        identifier: ''
+        mode: ''
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: arcane-eye
+sort: 0
+flags: {}
+img: icons/magic/perception/eye-ringed-glow-angry-teal.webp
+effects: []
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037352502
+  modifiedTime: 1725992718628
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ImlCJQwR1VL40Qem'

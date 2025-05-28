@@ -1,0 +1,138 @@
+_id: dmgWellOfManyWor
+name: Well of Many Worlds
+type: equipment
+folder: U4xmShLy19Ry54zl
+img: icons/magic/movement/portal-vortex-orange.webp
+system:
+  activities:
+    BVBJgFx0q0sHLLbN:
+      type: utility
+      name: Unfold
+      _id: BVBJgFx0q0sHLLbN
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: circle
+          size: '6'
+          count: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: '1'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Legendary</em></p><p>This fine black cloth, soft as
+      silk, is folded up to the dimensions of a handkerchief. It unfolds into a
+      circular sheet 6 feet in diameter.</p><p>You can take a Magic action to
+      unfold the <em>Well of Many Worlds</em> and place it on a solid surface,
+      whereupon it forms a two-way, 6-foot-diameter, circular portal to another
+      world or plane of existence. Each time the item opens a portal, the DM
+      decides where it leads. The portal remains open until a creature within 5
+      feet of it takes a Magic action to close it by taking hold of the edges of
+      the cloth and folding it up.</p><p>Once the <em>Well of Many Worlds</em>
+      has opened a portal, it can't do so again for [[/r 1d8 # Hours]]
+      hours.</p>
+    chat: ''
+  identifier: well-of-many-worlds
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200000
+    denomination: gp
+  rarity: legendary
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wondrous
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712704939
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 37700000
+ownership:
+  default: 0
+_key: '!items!dmgWellOfManyWor'

@@ -1,0 +1,125 @@
+name: Tinderbox
+system:
+  description:
+    value: >-
+      <p>A Tinderbox is a small container holding flint, fire steel, and tinder
+      (usually dry cloth soaked in light oil) used to kindle a fire. Using it to
+      light a Candle, Lamp, Lantern, or Torch—or anything else with exposed
+      fuel—takes a Bonus Action. Lighting any other fire takes 1 minute.</p>
+    chat: ''
+  price:
+    value: 5
+    denomination: sp
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: phbagScholarsPac
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: trinket
+    baseItem: ''
+  properties: []
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  activities:
+    lshQ6ZeI69B0aRpu:
+      type: utility
+      name: Light
+      _id: lshQ6ZeI69B0aRpu
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  identifier: tinderbox
+_id: etKzfLUMWikSsi3R
+type: equipment
+folder: uDk4FBYfcP2JnX6t
+img: icons/sundries/lights/torch-black.webp
+effects: []
+sort: 65565
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1726532981404
+  modifiedTime: 1740680131203
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!etKzfLUMWikSsi3R'

@@ -1,0 +1,121 @@
+_id: Pyzmm8R7rVsNAPsd
+name: Mass Cure Wounds
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A wave of Healing energy washes out from a point of your choice within
+      range. Choose up to six creatures in a 30-foot-radius Sphere centered on
+      that point. Each target regains Hit Points equal to 3d8 + your
+      Spellcasting ability modifier. This spell has no effect on Undead or
+      constructs.</p><p><strong>At Higher Levels.</strong> When you cast this
+      spell using a spell slot of 6th level or higher, the Healing increases by
+      1d8 for each slot level above 5th.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '30'
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      healing:
+        number: 3
+        denomination: 8
+        bonus: '@mod'
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: ''
+        scaling:
+          mode: whole
+          number: 1
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: mass-cure-wounds
+sort: 0
+flags: {}
+img: icons/magic/life/heart-cross-strong-green.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037355655
+  modifiedTime: 1725992719688
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!Pyzmm8R7rVsNAPsd'

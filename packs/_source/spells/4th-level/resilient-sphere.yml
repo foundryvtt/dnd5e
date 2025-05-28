@@ -1,0 +1,127 @@
+_id: 1ADstb0Xec6HHRcU
+name: Resilient Sphere
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A sphere of shimmering force encloses a creature or object of Large
+      size or smaller within range. An unwilling creature must make a Dexterity
+      saving throw. On a failed save, the creature is enclosed for the
+      Duration.</p><p>Nothing—not physical Objects, energy, or other spell
+      effects—can pass through the barrier, in or out, though a creature in the
+      sphere can breathe there. The sphere is immune to all damage, and a
+      creature or object inside can't be damaged by attacks or Effects
+      originating from outside, nor can a creature inside the sphere damage
+      anything outside it.</p><p>The sphere is weightless and just large enough
+      to contain the creature or object inside. An enclosed creature can use its
+      action to push against the sphere's walls and thus roll the sphere at up
+      to half the creature's speed. Similarly, the globe can be picked up and
+      moved by other creatures.</p><p>A Disintegrate spell targeting the globe
+      destroys it without harming anything inside it.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: evo
+  materials:
+    value: >-
+      A hemispherical piece of clear crystal and a matching hemispherical piece
+      of gum arabic
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: resilient-sphere
+sort: 0
+flags: {}
+img: icons/magic/light/explosion-star-large-pink.webp
+effects: []
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037345454
+  modifiedTime: 1725992716405
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!1ADstb0Xec6HHRcU'

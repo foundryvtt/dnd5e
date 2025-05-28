@@ -1,0 +1,148 @@
+name: Goliath
+system:
+  description:
+    value: >-
+      <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspGoliath0000
+      inline classes="free-rules-embed"]</p><h3
+      data-anchor="goliath-traits">Goliath Traits</h3><p><strong>Creature Type:
+      </strong>Humanoid</p><p><strong>Size: </strong>Medium (about 7–8 feet
+      tall)</p><p><strong>Speed:</strong> 35 feet</p><p>As a Goliath, you have
+      these special traits.</p><p><strong>Giant Ancestry.</strong> You are
+      descended from Giants. Choose one of the following benefits—a supernatural
+      boon from your ancestry; you can use the chosen benefit a number of times
+      equal to your Proficiency Bonus, and you regain all expended uses when you
+      finish a Long Rest:</p><p><strong>Cloud's Jaunt (Cloud Giant). </strong>As
+      a Bonus Action, you magically teleport up to 30 feet to an unoccupied
+      space you can see.</p><p><strong>Fire's Burn (Fire Giant).</strong> When
+      you hit a target with an attack roll and deal damage to it, you can also
+      deal 1d10 Fire damage to that target.</p><p><strong>Frost's Chill (Frost
+      Giant).</strong> When you hit a target with an attack roll and deal damage
+      to it, you can also deal 1d6 Cold damage to that target and reduce its
+      Speed by 10 feet until the start of your next turn.</p><p><strong>Hill's
+      Tumble (Hill Giant). </strong>When you hit a Large or smaller creature
+      with an attack roll and deal damage to it, you can give that target the
+      &amp;Reference[Prone] condition.</p><p><strong>Stone's Endurance (Stone
+      Giant).</strong> When you take damage, you can take a Reaction to roll
+      1d12. Add your Constitution modifier to the number rolled and reduce the
+      damage by that total.</p><p><strong>Storm's Thunder (Storm
+      Giant).</strong> When you take damage from a creature within 60 feet of
+      you, you can take a Reaction to deal 1d8 Thunder damage to that
+      creature.</p><p><strong>Large Form.</strong> Starting at character level
+      5, you can change your size to Large as a Bonus Action if you're in a big
+      enough space. This transformation lasts for 10 minutes or until you end it
+      (no action required). For that duration, you have Advantage on Strength
+      checks, and your Speed increases by 10 feet. Once you use this trait, you
+      can't use it again until you finish a Long Rest.</p><p><strong>Powerful
+      Build.</strong> You have Advantage on any ability check you make to end
+      the Grappled condition. You also count as one size larger when determining
+      your carrying capacity.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    book: SRD 5.2
+    license: CC-BY-4.0
+  advancement:
+    - _id: LETPMtBLvmzWUUb0
+      type: Size
+      configuration:
+        sizes:
+          - med
+      level: 0
+      title: ''
+      hint: Medium (about 7-8 feet tall)
+      value: {}
+    - _id: PZxMcT5tVtvvf62P
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptGiantAnces
+            optional: false
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptPowerfulBu
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 0
+      title: Goliath Traits
+      hint: ''
+    - _id: LrdYfRLrRlgsZrNn
+      type: ItemChoice
+      configuration:
+        choices:
+          '0':
+            count: 1
+            replacement: false
+        allowDrops: false
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptCloudsJaun
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptFiresBurn0
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptFrostsChil
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptHillsTumbl
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptStonesEndu
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptStormsThun
+        spell: null
+        restriction:
+          type: race
+      value:
+        added: {}
+        replaced: {}
+      title: Giant Ancestry
+      hint: >-
+        You are descended from Giants. Choose one of the following benefits—a
+        supernatural boon from your ancestry; you can use the chosen benefit a
+        number of times equal to your Proficiency Bonus, and you regain all
+        expended uses when you finish a Long Rest.
+    - _id: 9cKoMls1KVDsdD4A
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.origins24.Item.phbsptLargeForm0
+        optional: false
+        spell: null
+      value: {}
+      level: 5
+      title: Goliath Traits
+      hint: ''
+  movement:
+    burrow: null
+    climb: null
+    fly: null
+    swim: null
+    walk: 35
+    units: null
+    hover: false
+  senses:
+    darkvision: null
+    blindsight: null
+    tremorsense: null
+    truesight: null
+    units: null
+    special: ''
+  type:
+    value: humanoid
+    custom: ''
+    subtype: Goliath
+  identifier: goliath
+_id: phbspGoliath0000
+type: race
+folder: Ulvo8nbygUegLa59
+img: icons/creatures/magical/construct-iron-stomping-yellow.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745340849458
+  modifiedTime: 1745687141161
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbspGoliath0000'

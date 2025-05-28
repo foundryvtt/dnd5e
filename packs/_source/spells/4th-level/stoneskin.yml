@@ -1,0 +1,162 @@
+_id: ReMbjfeOKoSj3O79
+name: Stoneskin
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell turns the flesh of a willing creature you touch as hard as
+      stone. Until the spell ends, the target has resistance to nonmagical
+      bludgeoning, piercing, and slashing damage.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: hour
+  target:
+    affects:
+      type: creature
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: abj
+  materials:
+    value: Diamond dust worth 100 gp, which the spell consumes
+    consumed: true
+    cost: 100
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: cSVCA9h5OEo5lfBE
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: stoneskin
+sort: 0
+flags: {}
+img: icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp
+effects:
+  - origin: Compendium.dnd5e.spells.ReMbjfeOKoSj3O79
+    duration:
+      startTime: null
+      seconds: 3600
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: true
+    _id: cSVCA9h5OEo5lfBE
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: bludgeoning
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: piercing
+        priority: null
+      - key: system.traits.dr.value
+        mode: 2
+        value: slashing
+        priority: null
+      - key: system.traits.dr.bypasses
+        mode: 2
+        value: mgc
+        priority: null
+    tint: '#ffffff'
+    transfer: false
+    flags: {}
+    name: Stoneskin
+    description: >-
+      <p>The target has resistance to nonmagical bludgeoning, piercing, and
+      slashing damage.</p>
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    img: icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!ReMbjfeOKoSj3O79.cSVCA9h5OEo5lfBE'
+folder: 5auWSClKMDUIV5Ni
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037356009
+  modifiedTime: 1725992719794
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!ReMbjfeOKoSj3O79'

@@ -1,0 +1,380 @@
+_id: dmgElementalGem0
+name: Elemental Gem
+type: consumable
+img: icons/commodities/gems/gem-rough-rose-teal.webp
+system:
+  activities:
+    NjDJ4RmiUfQN7MvR:
+      type: summon
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: unoccupied space as close to the broken gem as possible
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: 8PS0IkGkrw7OwRWq
+          uuid: Compendium.dnd5e.actors24.Actor.banHjKDMCegbUwYE
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: Blue Sapphire
+      _id: NjDJ4RmiUfQN7MvR
+    ZG4m47OoKFlymv0Y:
+      type: summon
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: unoccupied space as close to the broken gem as possible
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: 8PS0IkGkrw7OwRWq
+          uuid: Compendium.dnd5e.actors24.Actor.namJz755U1EhvEJa
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+      name: Emerald
+      _id: ZG4m47OoKFlymv0Y
+    OPaxNrL8JED6Tp17:
+      type: summon
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: unoccupied space as close to the broken gem as possible
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: 8PS0IkGkrw7OwRWq
+          uuid: Compendium.dnd5e.actors24.Actor.8SMQl75HLjhuSeau
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+      name: Red Corundum
+      _id: OPaxNrL8JED6Tp17
+    HZ4be2ByeBOCNgPn:
+      type: summon
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: unoccupied space as close to the broken gem as possible
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: 8PS0IkGkrw7OwRWq
+          uuid: Compendium.dnd5e.actors24.Actor.sApYLZj9PTZ40wJr
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        identifier: ''
+        mode: ''
+      name: Yellow Diamond
+      _id: HZ4be2ByeBOCNgPn
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p><em>Wondrous Item, Uncommon</em></p><p>This gem contains a mote of
+      elemental energy. When you take a Utilize action to break the gem, an
+      elemental is summoned, and the gem ceases to be magical. The elemental
+      appears in an unoccupied space as close to the broken gem as possible,
+      understands your languages, obeys your commands, and takes its turn
+      immediately after you on your Initiative count. The elemental disappears
+      after 1 hour, when it dies, or when you dismiss it as a Bonus Action. The
+      type of gem determines the elemental, as shown in the following
+      table.</p><table><thead><tr><td>Gem</td><td>Summoned
+      Elemental</td></tr></thead><tbody><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.dmgBlueElemental]{Blue
+      sapphire}</td><td>@UUID[Compendium.dnd5e.actors24.Actor.mmAirElemental00]{Air
+      Elemental}</td></tr><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.dmgEmeraldElemen]{Emerald}</td><td>@UUID[Compendium.dnd5e.actors24.Actor.mmWaterElemental]{Water
+      Elemental}</td></tr><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.dmgRedElementalG]{Red
+      corundum}</td><td>@UUID[Compendium.dnd5e.actors24.Actor.mmFireElemental0]{Fire
+      Elemental}</td></tr><tr><td>@UUID[Compendium.dnd5e.equipment24.Item.dmgYellowElement]{Yellow
+      diamond}</td><td>@UUID[Compendium.dnd5e.actors24.Actor.mmEarthElemental]{Earth
+      Elemental}</td></tr></tbody></table>
+    chat: ''
+  identifier: elemental-gem
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: trinket
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects: []
+folder: guHYjt0gjPLU2wCs
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1730306478823
+  modifiedTime: 1745712699626
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 200000
+ownership:
+  default: 0
+_key: '!items!dmgElementalGem0'

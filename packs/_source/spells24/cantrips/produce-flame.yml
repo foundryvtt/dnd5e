@@ -1,0 +1,185 @@
+name: Produce Flame
+system:
+  description:
+    value: >-
+      <p>A flickering flame appears in your hand and remains there for the
+      duration. While there, the flame emits no heat and ignites nothing, and it
+      sheds Bright Light in a 20-foot radius and Dim Light for an additional 20
+      feet. The spell ends if you cast it again.</p><p>Until the spell ends, you
+      can take a Magic action to hurl fire at a creature or an object within 60
+      feet of you. Make a ranged spell attack. On a hit, the target takes 1d8
+      Fire damage.</p><p><strong>Cantrip Upgrade.</strong> The damage increases
+      by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: bonus
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: self
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 0
+  school: con
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: always
+    prepared: false
+  activities:
+    MModRd17Oi6hhztj:
+      type: utility
+      name: Cast
+      _id: MModRd17Oi6hhztj
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      roll:
+        prompt: false
+        visible: false
+    tqKlIEdglRYdqHrp:
+      type: attack
+      name: Hurl Fire
+      _id: tqKlIEdglRYdqHrp
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creatureOrObject
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '8'
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: whole
+      img: ''
+      appliedEffects: []
+  identifier: produce-flame
+_id: phbsplProduceFla
+type: spell
+img: icons/magic/light/hand-sparks-glow-yellow.webp
+effects: []
+folder: 4FhsY9FJQd7h7MZb
+sort: 300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425967344
+  modifiedTime: 1745256797201
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!phbsplProduceFla'

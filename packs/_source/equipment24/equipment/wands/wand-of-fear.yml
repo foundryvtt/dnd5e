@@ -1,0 +1,252 @@
+_id: dmgWandOfFear000
+name: Wand of Fear
+type: equipment
+img: icons/weapons/staves/staff-animal-skull-horned.webp
+system:
+  activities:
+    vupCpdt2f2BEJG2R:
+      _id: vupCpdt2f2BEJG2R
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+    ebs3fzYC16cloMWS:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplCommand000
+        challenge:
+          attack: null
+          save: 15
+          override: true
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: ebs3fzYC16cloMWS
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    9c7SNgBZU2KJjgFg:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFear000000
+        challenge:
+          attack: null
+          save: 15
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: 9c7SNgBZU2KJjgFg
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '3'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d6 + 1
+    max: '7'
+  description:
+    value: >-
+      <p><em>Wand, Rare (Requires Attunement)</em></p><p>This wand has 7
+      charges.</p><p><em><strong>Spells.</strong></em> While holding the wand,
+      you can cast one of the spells (save DC 15) on the following table from
+      it. The table indicates how many charges you must expend to cast the
+      spell.</p><table><thead><tr><th><p>Spell</p></th><th><p>Charge
+      Cost</p></th><th></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]{Command}
+      ("flee" or "grovel"
+      only)</p></td><td><p>1</p></td><td></td></tr><tr><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplFear000000]{Fear}
+      (60-foot
+      Cone)</p></td><td><p>3</p></td><td></td></tr></tbody></table><p><em><strong>Regaining
+      Charges.</strong></em> The wand regains 1d6 + 1 expended charges daily at
+      dawn. If you expend the wand's last charge, roll [[/r 1d20]]. On a 1, the
+      wand crumbles into ashes and is destroyed.</p>
+    chat: ''
+  identifier: wand-of-fear
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: wand
+    baseItem: ''
+  ammunition: {}
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: null
+effects: []
+folder: rLoBplj1TIznxeWI
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745712704595
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: -150000
+ownership:
+  default: 0
+_key: '!items!dmgWandOfFear000'

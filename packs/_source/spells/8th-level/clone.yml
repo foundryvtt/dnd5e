@@ -1,0 +1,121 @@
+_id: h830iyqParFleNqR
+name: Clone
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>This spell grows an inert duplicate of a living creature as a safeguard
+      against death. This clone forms inside a sealed vessel and grows to full
+      size and maturity after 120 days; you can also choose to have the clone be
+      a younger version of the same creature. It remains inert and endures
+      indefinitely, as long as its vessel remains undisturbed.</p><p>At any time
+      after the clone matures, if the original creature dies, its soul transfers
+      to the clone, provided that the soul is free and willing to return. The
+      clone is physically identical to the original and has the same
+      personality, memories, and abilities, but none of the original's
+      equipment. The original creature's physical remains, if they still exist,
+      become inert and can't thereafter be restored to life, since the
+      creature's soul is elsewhere.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: hour
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    units: touch
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 8
+  school: nec
+  materials:
+    value: >-
+      A diamond worth at least 1,000 gp and at least 1 cubic inch of flesh of
+      the creature that is to be cloned, which the spell consumes, and a vessel
+      worth at least 2,000 gp that has a sealable lid and is large enough to
+      hold a Medium creature, such as a huge urn, coffin, mud-filled cyst in the
+      ground, or crystal container filled with salt water.
+    consumed: true
+    cost: null
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: clone
+sort: 0
+flags: {}
+img: icons/magic/control/debuff-energy-hold-yellow.webp
+effects: []
+folder: x1XTiOgx4DJ34wc5
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037362991
+  modifiedTime: 1725992722077
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!h830iyqParFleNqR'

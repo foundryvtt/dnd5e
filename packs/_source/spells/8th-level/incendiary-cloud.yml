@@ -1,0 +1,133 @@
+_id: pV04y1iXoWiom6bp
+name: Incendiary Cloud
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A swirling cloud of smoke shot through with white-hot embers appears in
+      a 20-foot-radius Sphere centered on a point within range. The cloud
+      spreads around corners and is heavily obscured. It lasts for the Duration
+      or until a wind of moderate or greater speed (at least 10 miles per hour)
+      disperses it.</p><p>When the cloud appears, each creature in it must make
+      a Dexterity saving throw. A creature takes 10d8 fire damage on a failed
+      save, or half as much damage on a successful one. A creature must also
+      make this saving throw when it enters the spell's area for the first time
+      on a turn or ends its turn there.</p><p>The cloud moves 10 feet directly
+      away from you in a direction that you choose at the start of each of your
+      turns.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '20'
+      contiguous: false
+  range:
+    value: '150'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 8
+  school: con
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 10
+            denomination: 8
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: incendiary-cloud
+sort: 0
+flags: {}
+img: icons/magic/air/fog-gas-smoke-swirling-orange.webp
+effects: []
+folder: x1XTiOgx4DJ34wc5
+_stats:
+  duplicateSource: null
+  coreVersion: '13.344'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037365408
+  modifiedTime: 1725992722856
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+_key: '!items!pV04y1iXoWiom6bp'
