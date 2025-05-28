@@ -73,11 +73,13 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* -------------------------------------------- */
 
-  /**
-   * Is this active effect currently suppressed?
-   * @type {boolean}
-   */
-  isSuppressed = false;
+  /** @inheritDoc */
+  get isSuppressed() {
+    if ( super.isSuppressed ) return true;
+    if ( this.type === "enchantment" ) return false;
+    if ( this.parent instanceof dnd5e.documents.Item5e ) return this.parent.areEffectsSuppressed;
+    return false;
+  }
 
   /* -------------------------------------------- */
 
@@ -302,14 +304,15 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* --------------------------------------------- */
 
   /**
-   * Determine whether this Active Effect is suppressed or not.
+   * @deprecated
+   * @ignore
    */
   determineSuppression() {
-    this.isSuppressed = false;
-    if ( this.type === "enchantment" ) return;
-    if ( this.parent instanceof dnd5e.documents.Item5e ) this.isSuppressed = this.parent.areEffectsSuppressed;
+    foundry.utils.logCompatibilityWarning(
+      "The `ActiveEffect5e#determineSuppression` method has been deprecated and is no longer necessary to call.",
+      { since: "DnD5e 5.1", until: "DnD5e 5.3" }
+    );
   }
-
   /* -------------------------------------------- */
   /*  Lifecycle                                   */
   /* -------------------------------------------- */
