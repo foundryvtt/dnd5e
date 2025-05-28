@@ -289,7 +289,8 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* --------------------------------------------- */
 
   /**
-   * Previously, determined whether this Active Effect is suppressed or not.
+   * @deprecated
+   * @ignore
    */
   determineSuppression() {
     foundry.utils.logCompatibilityWarning(
