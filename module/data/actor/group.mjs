@@ -284,6 +284,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       .map(({ actor }) => !config.targets || config.targets.includes(actor.id) ? actor : null)
       .filter(_ => _);
 
+    console.log(foundry.utils.deepClone(config));
     // Create a rest chat message
     if ( !config.autoRest ) {
       const restConfig = CONFIG.DND5E.restTypes[config.type];
@@ -295,9 +296,10 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
             icon: restConfig.icon ?? "fa-solid fa-bed",
             label: restConfig.label
           },
-          config: {
-            // TODO: Add tempHP & tempMaxHP options
+          data: {
             newDay: config.newDay === true,
+            recoverTemp: config.recoverTemp === true,
+            recoverTempMax: config.recoverTempMax === true,
             type: config.type
           },
           handler: "rest",

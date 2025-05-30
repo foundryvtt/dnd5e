@@ -117,21 +117,23 @@ export default class BaseRestDialog extends Dialog5e {
 
     const rest = CONFIG.DND5E.restTypes[this.config.type];
     if ( "recoverTemp" in rest ) context.hitPoints.push({
+      disabled: !!this.config.request,
       field: new BooleanField({
         label: game.i18n.localize("DND5E.REST.RecoverTempHP.Label")
       }),
       input: context.inputs.createCheckboxInput,
       name: "recoverTemp",
-      value: rest.recoverTemp
+      value: context.config.recoverTemp
     });
     if ( "recoverTempMax" in rest ) context.hitPoints.push({
+      disabled: !!this.config.request,
       field: new BooleanField({
         label: game.i18n.localize("DND5E.REST.RecoverTempMaxHP.Label"),
         hint: game.i18n.localize("DND5E.REST.RecoverTempMaxHP.Hint")
       }),
       input: context.inputs.createCheckboxInput,
       name: "recoverTempMax",
-      value: rest.recoverTempMax
+      value: context.config.recoverTempMax
     });
 
     if ( this.isPartyGroup ) {

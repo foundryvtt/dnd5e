@@ -2050,6 +2050,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {boolean} [autoHD]              Should hit dice be spent automatically during a short rest?
    * @property {number} [autoHDThreshold]      How many hit points should be missing before hit dice are
    *                                           automatically spent during a short rest.
+   * @property {boolean} [recoverTemp]         Reset temp HP to zero.
+   * @property {boolean} [recoverTempMax]      Reset temp max HP to zero.
    * @property {ChatMessage5e} [request]       Rest request chat message for which this rest was performed.
    */
 
@@ -2080,9 +2082,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.type === "vehicle" ) return;
     const clone = this.clone();
 
+    const restConfig = CONFIG.DND5E.restTypes.short;
     config = foundry.utils.mergeObject({
       type: "short", dialog: true, chat: true, newDay: false, advanceTime: false, autoHD: false, autoHDThreshold: 3,
-      duration: CONFIG.DND5E.restTypes.short.duration[game.settings.get("dnd5e", "restVariant")]
+      duration: CONFIG.DND5E.restTypes.short.duration[game.settings.get("dnd5e", "restVariant")],
+      recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax
     }, config);
 
     /**
@@ -2136,9 +2140,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.type === "vehicle" ) return;
     const clone = this.clone();
 
+    const restConfig = CONFIG.DND5E.restTypes.long;
     config = foundry.utils.mergeObject({
       type: "long", dialog: true, chat: true, newDay: true, advanceTime: false,
-      duration: CONFIG.DND5E.restTypes.long.duration[game.settings.get("dnd5e", "restVariant")]
+      duration: CONFIG.DND5E.restTypes.long.duration[game.settings.get("dnd5e", "restVariant")],
+      recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax
     }, config);
 
     /**
