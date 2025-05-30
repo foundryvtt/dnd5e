@@ -194,7 +194,8 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
       dnd5e: { animate: { ...animateFlags } },
       movement: updates.tokens.reduce((obj, { _id }) => {
         obj[_id] = {
-          constrainOptions: { ignoreWalls: true, ignoreCost: true }
+          constrainOptions: { ignoreWalls: true, ignoreCost: true },
+          showRuler: false
         };
         return obj;
       }, {})
@@ -359,7 +360,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
   static #animateFrame(doc, angle, pivot, elapsedMS, animation) {
     const pt = animation.time >= animation.duration ? 1 : animation.time / animation.duration;
 
-    if ( (pt !== 1) ) {
+    if ( pt !== 1 ) {
       const pa = animation.easing?.(pt) ?? pt;
       const pr = Math.toRadians(angle * pa);
       let from = {};
@@ -370,7 +371,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
       Object.assign(doc, RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, from, size));
     }
 
-    doc.object.draw();
+    doc.object.renderFlags.set({ refreshPosition: true, refreshRotation: true });
   }
 }
 
