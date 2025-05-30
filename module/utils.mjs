@@ -853,7 +853,6 @@ export function generateIcon(icon, { alt }={}) {
   if ( icon?.startsWith("fa") ) {
     element = document.createElement("i");
     element.className = icon;
-    element.ariaLabel = alt;
   } else if ( icon ) {
     element = document.createElement(icon.endsWith(".svg") ? "dnd5e-icon" : "img");
     element.src = icon;

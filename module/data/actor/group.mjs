@@ -286,15 +286,24 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
 
     // Create a rest chat message
     if ( !config.autoRest ) {
+      const restConfig = CONFIG.DND5E.restTypes[config.type];
       const messageData = {
         flavor: this.parent.createRestFlavor(config),
         speaker: ChatMessage.getSpeaker({ actor: this.parent, alias: this.parent.name }),
         system: {
-          newDay: config.newDay === true,
-          targets: targets.map(t => ({ actor: t })),
-          type: config.type
+          button: {
+            icon: restConfig.icon ?? "fa-solid fa-bed",
+            label: restConfig.label
+          },
+          config: {
+            // TODO: Add tempHP & tempMaxHP options
+            newDay: config.newDay === true,
+            type: config.type
+          },
+          handler: "rest",
+          targets: targets.map(t => ({ actor: t }))
         },
-        type: "restRequest"
+        type: "request"
       };
       await ChatMessage.create(messageData);
     }

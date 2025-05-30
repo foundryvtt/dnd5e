@@ -2,6 +2,7 @@ import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import { ConsumptionTargetData } from "./data/activity/fields/consumption-targets-field.mjs";
 import TransformationSetting from "./data/settings/transformation-setting.mjs";
 import * as activities from "./documents/activity/_module.mjs";
+import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
@@ -4666,6 +4667,18 @@ DND5E.defaultArtwork = {
     tool: "systems/dnd5e/icons/svg/items/tool.svg",
     weapon: "systems/dnd5e/icons/svg/items/weapon.svg"
   }
+};
+
+/* -------------------------------------------- */
+/*  Requests                                    */
+/* -------------------------------------------- */
+
+/**
+ * Handler functions for named request/response operations
+ * @type {Record<string, Function>}
+ */
+DND5E.requests = {
+  rest: Actor5e.handleRestRequest
 };
 
 /* -------------------------------------------- */

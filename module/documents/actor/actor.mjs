@@ -1043,13 +1043,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     };
 
     return ChatMessage.implementation.create({
-      content: await foundry.applications.handlebars.renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
-        buttons: [{
-          dataset: { ...dataset, type: "concentration", visbility: "all" },
-          buttonLabel: createRollLabel({ ...dataset, ...config }),
-          hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
-        }]
-      }),
+      content: await foundry.applications.handlebars.renderTemplate(
+        "systems/dnd5e/templates/chat/roll-request-card.hbs",
+        {
+          buttons: [{
+            dataset: { ...dataset, type: "concentration", visbility: "all" },
+            buttonLabel: createRollLabel({ ...dataset, ...config }),
+            hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
+          }]
+        }
+      ),
       whisper: game.users.filter(user => this.testUserPermission(user, "OWNER")),
       speaker: ChatMessage.implementation.getSpeaker({ actor: this })
     });
@@ -2035,7 +2038,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Configuration options for a rest.
    *
-   * @typedef {object} RestConfiguration
+   * @typedef RestConfiguration
    * @property {string} type                   Type of rest to perform.
    * @property {boolean} dialog                Present a dialog window which allows for rolling hit dice as part of the
    *                                           Short Rest and selecting whether a new day has occurred.
@@ -2053,12 +2056,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Results from a rest operation.
    *
-   * @typedef {object} RestResult
+   * @typedef RestResult
    * @property {string} type              Type of rest performed.
    * @property {Actor5e} clone            Clone of the actor before rest is performed.
    * @property {object} deltas
    * @property {number} deltas.hitPoints  Hit points recovered during the rest.
    * @property {number} deltas.hitDice    Hit dice recovered or spent during the rest.
+   * @property {ChatMessage5e} [message]  The created chat message.
    * @property {boolean} newDay           Whether a new day occurred during the rest.
    * @property {Roll[]} rolls             Any rolls that occurred during the rest process, not including hit dice.
    * @property {object} updateData        Updates applied to the actor.
@@ -2069,8 +2073,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Take a short rest, possibly spending hit dice and recovering resources, item uses, and relevant spell slots.
-   * @param {RestConfiguration} [config]  Configuration options for a short rest.
-   * @returns {Promise<RestResult>}       A Promise which resolves once the short rest workflow has completed.
+   * @param {Partial<RestConfiguration>} [config]  Configuration options for a short rest.
+   * @returns {Promise<RestResult>}                A Promise which resolves once the short rest workflow has completed.
    */
   async shortRest(config={}) {
     if ( this.type === "vehicle" ) return;
@@ -2098,7 +2102,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Display a Dialog for rolling hit dice
     if ( config.dialog ) {
       try {
-        foundry.utils.mergeObject(config, await ShortRestDialog.configure(this, config));
+        Object.assign(config, await ShortRestDialog.configure(this, config));
       } catch(err) { return; }
     }
 
@@ -2125,7 +2129,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Take a long rest, recovering hit points, hit dice, resources, item uses, and spell slots.
-   * @param {RestConfiguration} [config]  Configuration options for a long rest.
+   * @param {Partial<RestConfiguration>} [config]  Configuration options for a long rest.
    * @returns {Promise<RestResult>}       A Promise which resolves once the long rest workflow has completed.
    */
   async longRest(config={}) {
@@ -2149,7 +2153,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( config.dialog ) {
       try {
-        foundry.utils.mergeObject(config, await LongRestDialog.configure(this, config));
+        Object.assign(config, await LongRestDialog.configure(this, config));
       } catch(err) { return; }
     }
 
@@ -2164,6 +2168,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.longRest", this, config) === false ) return;
 
     return this._rest(config, { clone });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle resting an actor from a request.
+   * @param {Actor5e} actor               Actor to rest.
+   * @param {ChatMessage5e} request       Request chat message.
+   * @param {RestConfiguration} config    Configuration data for the rest requested.
+   * @returns {Promise<RestResult|null>}  Consolidated results of the rest workflow.
+   */
+  static async handleRestRequest(actor, request, config) {
+    const result = await actor[config.type === "short" ? "shortRest" : "longRest"]({
+      ...config, request, advanceBastionTurn: false, advanceTime: false
+    });
+    return result?.message ?? null;
   }
 
   /* -------------------------------------------- */
@@ -2225,7 +2245,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
 
     // Display a Chat Message summarizing the rest effects
-    if ( config.chat ) await this._displayRestResultMessage(config, result);
+    if ( config.chat ) result.message = await this._displayRestResultMessage(config, result);
 
     /**
      * A hook event that fires when the rest process is completed for an actor.

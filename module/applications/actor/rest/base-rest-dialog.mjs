@@ -25,7 +25,8 @@ export default class BaseRestDialog extends Dialog5e {
     },
     position: {
       width: 380
-    }
+    },
+    templates: ["systems/dnd5e/templates/actors/rest/rest-request.hbs"]
   };
 
   /* -------------------------------------------- */
@@ -156,7 +157,6 @@ export default class BaseRestDialog extends Dialog5e {
             value: restSettings.targets ? restSettings.targets?.has(m.actor.id) : true
           }))
       ];
-      await loadTemplates(["systems/dnd5e/templates/actors/rest/rest-request.hbs"]);
     }
 
     return context;
