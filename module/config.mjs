@@ -2,6 +2,7 @@ import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import { ConsumptionTargetData } from "./data/activity/fields/consumption-targets-field.mjs";
 import TransformationSetting from "./data/settings/transformation-setting.mjs";
 import * as activities from "./documents/activity/_module.mjs";
+import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
@@ -2921,6 +2922,8 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
  * @typedef {object} RestConfiguration
  * @property {Record<string, number>} duration      Duration of different rest variants in minutes.
  * @property {string} label                         Localized label for the rest type.
+ * @property {string} icon                          Icon representing this rest type. Can be either a set of FontAwesome
+ *                                                  classes or an image path.
  * @property {string[]} [activationPeriods]         Activation types that should be displayed in the chat card.
  * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?
  * @property {boolean} [recoverHitPoints]           Should hit points be recovered during this rest?
@@ -2942,6 +2945,7 @@ DND5E.restTypes = {
       epic: 1
     },
     label: "DND5E.REST.Short.Label",
+    icon: "fa-solid fa-utensils",
     activationPeriods: ["shortRest"],
     recoverPeriods: ["sr"],
     recoverSpellSlotTypes: new Set(["pact"])
@@ -2953,6 +2957,7 @@ DND5E.restTypes = {
       epic: 60
     },
     label: "DND5E.REST.Long.Label",
+    icon: "fa-solid fa-campground",
     activationPeriods: ["longRest"],
     recoverHitDice: true,
     recoverHitPoints: true,
@@ -4662,6 +4667,18 @@ DND5E.defaultArtwork = {
     tool: "systems/dnd5e/icons/svg/items/tool.svg",
     weapon: "systems/dnd5e/icons/svg/items/weapon.svg"
   }
+};
+
+/* -------------------------------------------- */
+/*  Requests                                    */
+/* -------------------------------------------- */
+
+/**
+ * Handler functions for named request/response operations
+ * @type {Record<string, Function>}
+ */
+DND5E.requests = {
+  rest: Actor5e.handleRestRequest
 };
 
 /* -------------------------------------------- */

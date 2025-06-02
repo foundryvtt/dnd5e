@@ -20,6 +20,7 @@
 "TYPES.ActiveEffect.enchantmentPl": "Enchantments",
 
 "TYPES.ChatMessage": {
+  "request": "Request Message",
   "rest": "Rest Message",
   "turn": "Combat Turn Message"
 },
@@ -1118,6 +1119,13 @@
   "Activities": "Activities",
   "Deltas": {
     "Recovery": "Recovery"
+  },
+  "REQUEST": {
+    "Action": {
+      "Handle": "Handle Request"
+    },
+    "Complete": "Request Fulfilled",
+    "PartyMembers": "Party Members"
   },
   "TURN": {
     "NoCombatant": "Combatant no longer exists!"
@@ -3196,6 +3204,13 @@
   "RecoverTempMaxHP": {
     "Hint": "Remove any adjustments to a character's maximum Hit Points.",
     "Label": "Recover Max HP"
+  },
+  "Request": {
+    "AutoRest": {
+      "Hint": "Automatically perform the rest for selected party actors, rather than sending a rest request to players.",
+      "Label": "Auto Rest"
+    },
+    "Label": "Rest Request"
   },
   "Short": {
     "Abbreviation": "SR",

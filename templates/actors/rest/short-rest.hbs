@@ -6,18 +6,14 @@
     {{#if fields.length}}
     <fieldset>
         <legend>{{ localize "DND5E.REST.Configuration" }}</legend>
-        {{#each fields}}
-        {{ formField field name=name value=value input=input options=options rootId=../partId }}
-        {{/each}}
+        {{> "dnd5e.fieldlist" fields }}
     </fieldset>
     {{/if}}
 
     {{#if hitPoints.length}}
     <fieldset>
         <legend>{{ localize "DND5E.HitPoints" }}</legend>
-        {{#each hitPoints}}
-        {{ formField field name=name value=value input=input options=options rootId=../partId }}
-        {{/each}}
+        {{> "dnd5e.fieldlist" hitPoints }}
     </fieldset>
     {{/if}}
 
@@ -41,5 +37,9 @@
         {{ localize "DND5E.REST.HitDice.None" }}
     </div>
     {{/if}}
+    {{/if}}
+
+    {{#if request}}
+    {{> "systems/dnd5e/templates/actors/rest/rest-request.hbs" }}
     {{/if}}
 </section>
