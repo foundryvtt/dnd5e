@@ -797,6 +797,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/shared/fields/field-targets.hbs",
     "systems/dnd5e/templates/shared/fields/field-uses.hbs",
     "systems/dnd5e/templates/shared/fields/fieldlist.hbs",
+    "systems/dnd5e/templates/shared/fields/formlist.hbs",
 
     // Journal Partials
     "systems/dnd5e/templates/journal/parts/journal-legacy-traits.hbs",
