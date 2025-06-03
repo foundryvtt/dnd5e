@@ -223,7 +223,7 @@ export default class CreatureTemplate extends CommonTemplate {
     skillData.ability = ability;
     const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
     const originalSkill = originalSkills?.[skillId];
-    if ( originalSkill?.value > skillData.value ) {
+    if ( originalSkill?.value >= 1 ) {
       skillData.merged = true;
       skillData.value = originalSkill?.value;
     }

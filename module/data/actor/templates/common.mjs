@@ -142,13 +142,13 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     for ( const [id, abl] of Object.entries(this.abilities) ) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
       const originalAbility = originalSaves?.[id];
-      if ( originalAbility?.proficient > abl.proficient ) {
+      if ( originalAbility?.proficient ) {
         abl.merged = true;
         abl.proficient = originalAbility?.proficient;
       }
 
-      const calculatedProf = this.calculateAbilityCheckProficiency(0, id, originalAbility);
-      abl.checkProf = originalAbility?.checkProf?.multiplier > calculatedProf.mulitplier
+      const calculatedProf = this.calculateAbilityCheckProficiency(0, id);
+      abl.checkProf = originalAbility?.checkProf?.multiplier > calculatedProf.multiplier
         ? originalAbility.checkProf.clone() : calculatedProf;
       const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
 
