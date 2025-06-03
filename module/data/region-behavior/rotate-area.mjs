@@ -54,6 +54,9 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
       lights: new SchemaField({
         ids: new SetField(new DocumentIdField())
       }),
+      regions: new SchemaField({
+        ids: new SetField(new DocumentIdField())
+      }),
       sounds: new SchemaField({
         ids: new SetField(new DocumentIdField())
       }),
@@ -173,6 +176,11 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
       tiles: Array.from(this.tiles.ids).map(t => calculateRotationUpdate(this.scene.tiles.get(t))).filter(_ => _),
       tokens: Array.from(this.region.tokens).map(({ object: token }) => calculateRotationUpdate(token)),
       lights: Array.from(this.lights.ids).map(l => calculateRotationUpdate(this.scene.lights.get(l))).filter(_ => _),
+      regions: [this.region.id, ...this.regions.ids].map(r => {
+        const region = this.scene.regions.get(r);
+        return region
+          ? RotateAreaRegionBehaviorType.#rotateRegionShapes(this.scene.regions.get(r), angle, radians, pivot) : null;
+      }).filter(_ => _),
       sounds: Array.from(this.sounds.ids).map(l => calculateRotationUpdate(this.scene.sounds.get(l))).filter(_ => _)
     };
     let walls = Array.from(this.walls.ids).map(w => this.scene.walls.get(w)?.object).filter(_ => _);
@@ -205,6 +213,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     setTimeout(() => {
       canvas.scene.updateEmbeddedDocuments("AmbientLight", updates.lights);
       canvas.scene.updateEmbeddedDocuments("AmbientSound", updates.sounds);
+      canvas.scene.updateEmbeddedDocuments("Region", updates.regions);
       canvas.scene.updateEmbeddedDocuments("Wall", updates.walls);
     }, duration / 2);
     // TODO: See how performant it is to animate wall movement
@@ -267,6 +276,45 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     if ( doc instanceof TileDocument ) return { width: doc.width, height: doc.height };
     if ( doc instanceof TokenDocument ) return { width: doc.object.w, height: doc.object.h };
     else return { width: 0, height: 0 };
+  }
+
+  /* ---------------------------------------- */
+
+  /**
+   * Create updates needed to rotate a region's shapes.
+   * @param {Region} region    The region to rotate.
+   * @param {Degrees} angle    Rotation amount in degrees.
+   * @param {Radians} radians  Rotation amount in radians.
+   * @param {Point} pivot      Center point for the rotation.
+   * @returns {object}         Update data for the region.
+   */
+  static #rotateRegionShapes(region, angle, radians, pivot) {
+    const shapes = region.toObject().shapes;
+    for ( const shape of shapes ) {
+      const { x, y, width, height } = shape;
+      switch ( shape.type ) {
+        case foundry.data.RectangleShapeData.TYPE:
+          Object.assign(shape, this.#calculatePosition(
+            radians, pivot, { x: x + (width / 2), y: y + (height / 2) }, { width, height }
+          ));
+          break;
+        case foundry.data.CircleShapeData.TYPE:
+        case foundry.data.EllipseShapeData.TYPE:
+          Object.assign(shape, this.#calculatePosition(radians, pivot, { x, y }));
+          break;
+        case foundry.data.PolygonShapeData.TYPE:
+          const iterator = Iterator.from(shape.points);
+          shape.points = [];
+          let frag;
+          while ( !(frag = iterator.next()).done ) {
+            const { x, y } = this.#calculatePosition(radians, pivot, { x: frag.value, y: iterator.next().value });
+            shape.points.push(x, y);
+          }
+          break;
+      }
+      shape.rotation += angle;
+    }
+    return { _id: region.id, shapes };
   }
 
   /* ---------------------------------------- */
