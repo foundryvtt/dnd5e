@@ -3225,6 +3225,9 @@
       "Full": "{name} takes a short rest spending {dice} to recover {health}.",
       "Short": "{name} takes a short rest."
     }
+  },
+  "Warning": {
+    "OnlyByRequest": "Rests can only be performed at the request of the GM."
   }
 },
 
@@ -5059,6 +5062,10 @@
     "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings."
   },
   "PERMISSIONS": {
+    "AllowRests": {
+      "Hint": "Allow players to rest directly from their character's sheets. When disabled, players will only be able to rest when the GM makes a request from the party.",
+      "Name": "Allow Individual Rests"
+    },
     "AllowSummoning": {
       "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work.",
       "Name": "Allow Summoning"

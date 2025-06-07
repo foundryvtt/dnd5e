@@ -296,6 +296,7 @@ export default class NPCActorSheet extends BaseActorSheet {
       context.showInitiativeScore = game.settings.get("dnd5e", "rulesVersion") === "modern";
     }
     context.showLoyalty = context.important && game.settings.get("dnd5e", "loyaltyScore") && game.user.isGM;
+    context.showRests = game.user.isGM || (this.actor.isOwner && game.settings.get("dnd5e", "allowRests"));
 
     return context;
   }

@@ -241,6 +241,7 @@
                 <div class="left">
 
                     <div class="sheet-header-buttons">
+                        {{#if showRests}}
                         <button type="button" class="gold-button" data-action="rest" data-type="short"
                                 data-tooltip="DND5E.REST.Short.Label"
                                 aria-label="{{ localize 'DND5E.REST.Short.Label' }}">
@@ -251,6 +252,7 @@
                                 aria-label="{{ localize 'DND5E.REST.Long.Label' }}">
                             <i class="fas fa-campground" inert></i>
                         </button>
+                        {{/if}}
                     </div>
 
                     <div class="proficiency">
