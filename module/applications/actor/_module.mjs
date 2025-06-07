@@ -2,6 +2,7 @@ export {default as CharacterActorSheet} from "./character-sheet.mjs";
 export {default as EncounterActorSheet} from "./encounter-sheet.mjs";
 export {default as GroupActorSheet} from "./group-sheet.mjs";
 export {default as NPCActorSheet} from "./npc-sheet.mjs";
+export {default as PartyRequestDialog} from "./party-request-dialog.mjs";
 export {default as TransformDialog} from "./transform-dialog.mjs";
 export {default as VehicleActorSheet} from "./vehicle-sheet.mjs";
 

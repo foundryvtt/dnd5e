@@ -1,3 +1,4 @@
+import PartyRequestDialog from "../../applications/actor/party-request-dialog.mjs";
 import { defaultUnits } from "../../utils.mjs";
 import MovementField from "../shared/movement-field.mjs";
 import GroupSystemFlags from "./group-system-flags.mjs";
@@ -274,6 +275,21 @@ export default class GroupData extends GroupTemplate {
       type: "request"
     });
     return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Send a request to the members of this group.
+   * @param {string} handler            Specific rest handler as defined in `CONFIG.DND5E.requests`.
+   * @param {object} [messageData={}]   Additional data used to create the chat message.
+   * @param {object} [options={}]       Additional options passed to the dialog.
+   * @returns {Promise<ChatMessage5e>}  Promise that resolves to the created request chat message.
+   * @throws if dialog is closed
+   */
+  sendRequest(handler, messageData={}, options={}) {
+    foundry.utils.setProperty(options, "request.group", this.parent);
+    return PartyRequestDialog.sendRequest(handler, messageData, options);
   }
 
   /* -------------------------------------------- */
