@@ -284,7 +284,6 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       .map(({ actor }) => !config.targets || config.targets.includes(actor.id) ? actor : null)
       .filter(_ => _);
 
-    console.log(foundry.utils.deepClone(config));
     // Create a rest chat message
     if ( !config.autoRest ) {
       const restConfig = CONFIG.DND5E.restTypes[config.type];
