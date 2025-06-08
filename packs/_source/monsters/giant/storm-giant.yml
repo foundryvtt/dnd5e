@@ -837,10 +837,10 @@ items:
       description:
         value: >-
           <p>The giant hurls a magical lightning bolt at a point it can see
-          within 500 feet of it. </p><p>Each creature within 10 feet of that
-          point must make a  <strong>DC 17 Dexterity</strong> saving throw,
-          taking <strong>54 (12d8) <em>lightning damage</em></strong> on a
-          failed save, or half as much damage on a successful one.</p>
+          within 500 feet of it.</p><p>Each creature within 10 feet of that
+          point must make a [[/save]] saving throw, taking [[/damage average]]
+          damage on a failed save, or half as much damage on a successful
+          one.</p>
         chat: >-
           <p>The Storm Giant attacks with its Lightning Strike. Each creature
           within 10 feet of that point must make a <strong>Dexterity</strong>
@@ -998,11 +998,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676843
+      modifiedTime: 1749402719371
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.k0g8uqoYdJ4LVxcn'
