@@ -493,33 +493,30 @@ items:
           is Intelligence (spell save DC 17, +9 to hit with spell attacks). The
           archmage can cast [[/item .A3q2gTNqG6fvNGrv]]{disguise self} and
           [[/item .1N8dDMMgZ1h1YJ3B]]{invisibility} at will and has the
-          following wizard spells prepared:</p><p>• <strong>Cantrips</strong>
-          (at will): [[/item .EOmsUcFQJTfG2oio]]{fire bolt}, [[/item
-          .Bnn9Nzajixvow9xi]]{light}, [[/item .Utk1OQRwYkMkFRD3]]{mage hand},
-          [[/item .udsLtG0BugXHR2JQ]]{prestidigitation}, [[/item
-          .XvbiNhNqXXIFisIy]]{shocking grasp}</p><p>• <strong>1st level</strong>
-          (4 slots): [[/item .ghXTfe7sgCbgf1Q8]]{detect magic}, [[/item
-          .3OZnNhunvRtPOQmH]]{identify}, <strong>[[/item
-          .CKZTpZlxj7hjjo2H]]{mage armor}*</strong>, [[/item
-          .41JIhpDyM9Anm7cs]]{magic missile}</p><p>• <strong>2nd level</strong>
-          (3 slots): [[/item .ppWAAEul0QHtm4er]]{detect thoughts}, [[/item
+          following wizard spells prepared:</p><p>Cantrips (at will): [[/item
+          .EOmsUcFQJTfG2oio]]{fire bolt}, [[/item .Bnn9Nzajixvow9xi]]{light},
+          [[/item .Utk1OQRwYkMkFRD3]]{mage hand}, [[/item
+          .udsLtG0BugXHR2JQ]]{prestidigitation}, [[/item
+          .XvbiNhNqXXIFisIy]]{shocking grasp}</p><p>1st level (4 slots): [[/item
+          .ghXTfe7sgCbgf1Q8]]{detect magic}, [[/item
+          .3OZnNhunvRtPOQmH]]{identify}, [[/item .CKZTpZlxj7hjjo2H]]{mage
+          armor}*, [[/item .41JIhpDyM9Anm7cs]]{magic missile}</p><p>2nd level (3
+          slots): [[/item .ppWAAEul0QHtm4er]]{detect thoughts}, [[/item
           .X4c8xCkmF8U9HUMz]]{mirror image}, [[/item .wqfAVANuQonNBgnL]]{misty
-          step}</p><p>•<strong> 3rd leve</strong>l (3 slots): [[/item
+          step}</p><p>3rd level (3 slots): [[/item
           .Ek45cBpVXvJdv1Qy]]{counterspell},[[/item .yfbK8gZqESlaoY5t]]{fly},
-          [[/item .IyikgTEOTv701jgQ]]{lightning bolt}</p><p>•<strong> 4th level
-          </strong>(3 slots): [[/item .pxpb2eOB6bv4phAf]]{banishment}, [[/item
-          .avD5XUtkBPQQR97c]]{fire shield},<strong> [[/item
-          .ReMbjfeOKoSj3O79]]{stoneskin}*</strong></p><p>•<strong> 5th
-          level</strong> (3 slots): [[/item .RpKjTlYASrfqUPVA]]{cone of cold},
-          [[/item .fVbCxFRaORalHB20]]{scrying}, [[/item .o9ZCvuD2B1OTcubb]]{wall
-          of force}</p><p>•<strong> 6th level </strong>(1 slot): [[/item
-          .WmQpxfjZwF3MGUby]]{globe of invulnerability}</p><p>•<strong> 7th
-          level </strong>(1 slot): [[/item .L4J89JXqbKs6puEV]]{teleport}</p><p>•
-          <strong>8th level</strong> (1 slot): <strong>[[/item
-          .bllEWfm9xfEKynhv]]{mind blank}*</strong></p><p>• <strong>9th level
-          </strong>(1 slot):<strong> [[/item .JYuRBwxpoFhXduvD]]{time stop}*
-          </strong></p><p><strong>*-The archmage casts these spells on itself
-          before combat.</strong></p>
+          [[/item .IyikgTEOTv701jgQ]]{lightning bolt}</p><p>4th level (3 slots):
+          [[/item .pxpb2eOB6bv4phAf]]{banishment}, [[/item
+          .avD5XUtkBPQQR97c]]{fire shield}, [[/item
+          .ReMbjfeOKoSj3O79]]{stoneskin}*</p><p>5th level (3 slots): [[/item
+          .RpKjTlYASrfqUPVA]]{cone of cold}, [[/item
+          .fVbCxFRaORalHB20]]{scrying}, [[/item .o9ZCvuD2B1OTcubb]]{wall of
+          force}</p><p>6th level (1 slot): [[/item .WmQpxfjZwF3MGUby]]{globe of
+          invulnerability}</p><p>7th level (1 slot): [[/item
+          .L4J89JXqbKs6puEV]]{teleport}</p><p>8th level (1 slot): [[/item
+          .bllEWfm9xfEKynhv]]{mind blank}*</p><p>9th level (1 slot): [[/item
+          .JYuRBwxpoFhXduvD]]{time stop}*</p><p>*-The archmage casts these
+          spells on itself before combat.</p>
         chat: >-
           <p>The archmage is an spellcaster. Its spellcasting ability is
           Intelligence.</p>
@@ -553,11 +550,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745447015603
+      modifiedTime: 1749402943740
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!B7lBOr1AahNZs4a6.gSrKQbka5aLxlcJz'
@@ -568,8 +565,8 @@ items:
     system:
       description:
         value: >-
-          <p>The archmage has<strong> advantage </strong>on saving throws
-          against spells and other magical effects.</p>
+          <p>The archmage has advantage on saving throws against spells and
+          other magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -601,12 +598,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749402955593
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!B7lBOr1AahNZs4a6.Wa6dckSFp3pY8yH5'
   - _id: vgTunE3gLps5Q595

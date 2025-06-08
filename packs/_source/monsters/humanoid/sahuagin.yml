@@ -489,9 +489,8 @@ items:
     system:
       description:
         value: >-
-          <p>A gleaming steel point mouted atop a stout wooden haft, the spear
-          may be wielded in one hand or two and can puncture through the
-          heaviest armor with deadly force.</p>
+          <p>[[/attack extended]]. [[/damage extended]] or [[/damage average
+          attackMode=twoHanded]] damage if used with two hands.</p>
         chat: ''
       source:
         custom: ''
@@ -633,21 +632,22 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: spear
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403644372
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.UqpaWsGVgiCMSZEw'
   - _id: NSdAR332o65ZE3hC
@@ -797,18 +797,18 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553129
+      modifiedTime: 1749403591826
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.NSdAR332o65ZE3hC'
@@ -819,9 +819,8 @@ items:
     system:
       description:
         value: >-
-          <p>The sahuagin has<strong> advantage </strong>on melee attack rolls
-          against any creature that doesn't have all its<strong> hit
-          points</strong>.</p>
+          <p>The sahuagin has advantage on melee attack rolls against any
+          creature that doesn't have all its hit points.</p>
         chat: ''
       source:
         custom: ''
@@ -853,12 +852,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.B2kZOyrB7poB4liR
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403585082
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.uyWDYVSAJuCfayLE'
   - _id: VJlDAg21VwBOjbuR
@@ -1008,18 +1007,18 @@ items:
       identifier: claws
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553129
+      modifiedTime: 1749403591826
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.VJlDAg21VwBOjbuR'
@@ -1165,11 +1164,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273657050
+      modifiedTime: 1749403592637
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.1aEgtsYuxz12hFn3'
@@ -1180,8 +1179,8 @@ items:
     system:
       description:
         value: >-
-          <p>The sahuagin can magically command any shark <strong>within 120
-          feet</strong> of it, using a limited telepathy.</p>
+          <p>The sahuagin can magically command any shark within 120 feet of it,
+          using a limited telepathy.</p>
         chat: ''
       source:
         custom: ''
@@ -1213,12 +1212,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.UYorz1ZrfuoTRknp
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403589978
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.SQqFFwf2ADQmLaVO'
 effects: []

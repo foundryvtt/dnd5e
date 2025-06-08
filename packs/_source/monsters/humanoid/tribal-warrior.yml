@@ -565,10 +565,9 @@ items:
     system:
       description:
         value: >-
-          <p>The warrior has<strong> advantage </strong>on an attack roll
-          against a creature if at least one of the warrior's allies is within
-          <strong>5 ft.</strong> of the creature and the ally isn't
-          incapacitated.</p>
+          <p>The warrior has advantage on an attack roll against a creature if
+          at least one of the warrior's allies is within 5 ft. of the creature
+          and the ally isn't incapacitated.</p>
         chat: ''
       source:
         custom: ''
@@ -600,12 +599,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403737746
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nREPw9g94Bsb9sIl.d0AIrKneA8GKmDE1'
   - _id: KO6Ez3XWFM4iH4zB
@@ -615,9 +614,9 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]], or <strong>5 (1d8 + 1)
-          <em>piercing damage</em></strong> if used with two hands to make a
-          melee attack.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
+          attackMode=twoHanded]] damage if used with two hands to make a melee
+          attack.</p>
         chat: <p>The Tribal Warrior attacks with their Spear.</p>
       source:
         custom: ''
@@ -759,6 +758,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: spear
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -768,11 +768,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173385696
+      modifiedTime: 1749403754594
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nREPw9g94Bsb9sIl.KO6Ez3XWFM4iH4zB'

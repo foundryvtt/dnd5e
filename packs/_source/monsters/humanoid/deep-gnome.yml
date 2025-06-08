@@ -569,8 +569,8 @@ items:
     system:
       description:
         value: >-
-          <p>The gnome has<strong> advantage </strong>on Dexterity (Stealth)
-          checks made to hide in rocky terrain.</p>
+          <p>The gnome has advantage on Dexterity (Stealth) checks made to hide
+          in rocky terrain.</p>
         chat: ''
       source:
         custom: ''
@@ -602,12 +602,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.j1cPfWFNvxGoex9Z
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403058335
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.8Yo6JM2NfjkpC8Hz'
   - _id: JCSej95QR8svWsYz
@@ -617,8 +617,8 @@ items:
     system:
       description:
         value: >-
-          <p>The gnome has<strong> advantage </strong>on Intelligence, Wisdom,
-          and Charisma saving throws against magic.</p>
+          <p>The gnome has advantage on Intelligence, Wisdom, and Charisma
+          saving throws against magic.</p>
         chat: ''
       source:
         custom: ''
@@ -650,12 +650,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.0gl43AC57cvJaW7D
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403063377
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.JCSej95QR8svWsYz'
   - _id: AqLTSMp6MlcNK666
@@ -884,10 +884,9 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a  <strong>DC 12 Constitution</strong> saving throw or be
-          poisoned for 1 minute. The target can repeat the saving throw at the
-          end of each of its turns, ending the effect on itself on a
-          success.</p>
+          succeed on a [[/save]] saving throw or be &amp;Reference[poisoned] for
+          1 minute. The target can repeat the saving throw at the end of each of
+          its turns, ending the effect on itself on a success.</p>
         chat: >-
           <p>The Deep Gnome (Svirfneblin) attacks with its Poisoned Dart. The
           target must make a <strong>Constitution</strong> saving throw. The
@@ -1079,19 +1078,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 1
-                denomination: 4
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -1102,20 +1089,25 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: poisoned-dart
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173385501
+      modifiedTime: 1749403134872
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.YuhirWYJsQfL6zo5'
