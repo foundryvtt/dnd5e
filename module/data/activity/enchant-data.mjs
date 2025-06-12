@@ -41,7 +41,7 @@ export default class EnchantActivityData extends BaseActivityData {
         riders: new SchemaField({
           activity: new SetField(new DocumentIdField()),
           effect: new SetField(new DocumentIdField()),
-          item: new SetField(new DocumentUUIDField())
+          item: new SetField(new DocumentUUIDField({ type: "Item" }))
         })
       })),
       enchant: new SchemaField({

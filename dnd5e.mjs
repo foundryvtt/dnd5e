@@ -574,12 +574,8 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
   const units = utils.defaultUnits("length");
   if ( (units !== dnd5e.grid.units) && !foundry.utils.getProperty(createData, "grid.distance")
     && !foundry.utils.getProperty(createData, "grid.units") ) {
-    const C = CONFIG.DND5E.movementUnits;
     doc.updateSource({
-      grid: {
-        // TODO: Replace with `convertLength` method once added
-        distance: dnd5e.grid.distance * (C[dnd5e.grid.units]?.conversion ?? 1) / (C[units]?.conversion ?? 1), units
-      }
+      grid: { distance: utils.convertLength(dnd5e.grid.distance, dnd5e.grid.units, units, { strict: false }), units }
     });
   }
 });

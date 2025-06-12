@@ -267,11 +267,6 @@ export default class TraitConfig extends AdvancementConfig {
       delete configuration.count;
     }
 
-    // TODO: Remove when https://github.com/foundryvtt/foundryvtt/issues/7706 is resolved
-    choicesCollection.forEach(c => {
-      if ( !c.pool ) return;
-      c.pool = Array.from(c.pool);
-    });
     configuration.choices = choicesCollection;
     configuration.grants ??= Array.from(this.config.grants);
 
