@@ -109,7 +109,18 @@ export default class MovementSensesConfig extends BaseConfigSheet {
     if ( context.fields.hover ) extras.push({
       field: context.fields.hover,
       input: context.inputs.createCheckboxInput,
-      value: context.data.hover
+      value: context.data.hover,
+      localize: true
+    });
+    if ( context.fields.ignoredDifficultTerrain ) extras.push({
+      field: context.fields.ignoredDifficultTerrain,
+      value: context.data.ignoredDifficultTerrain,
+      options: [
+        { value: "all", label: game.i18n.localize("DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.All"), rule: true },
+        { value: "nonmagical", label: game.i18n.localize("DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Nonmagical") },
+        ...Object.entries(CONFIG.DND5E.difficultTerrainTypes).map(([value, label]) => ({ value, label }))
+      ],
+      localize: true
     });
     return extras;
   }

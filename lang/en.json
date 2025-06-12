@@ -55,6 +55,7 @@
 "TYPES.Item.weaponPl": "Weapons",
 
 "TYPES.RegionBehavior": {
+  "dnd5e.difficultTerrain": "Difficult Terrain",
   "dnd5e.rotateArea": "Rotate Area"
 },
 
@@ -3098,6 +3099,25 @@
 "DND5E.RecoveryFormula": "Recovery Formula",
 
 "DND5E.REGIONBEHAVIORS": {
+  "DIFFICULTTERRAIN": {
+    "FIELDS": {
+      "ignoredDispositions": {
+        "hint": "Tokens with these dispositions will not be affected by this difficult terrain.",
+        "label": "Ignored Dispositions"
+      },
+      "type": {
+        "hint": "Type that best describes the source of this difficult terrain, if any.",
+        "label": "Type"
+      }
+    },
+    "Type": {
+      "All": "All Types",
+      "Magical": "Magical Effect",
+      "Nonmagical": "Nonmagical",
+      "Rocks": "Rubble or Rocks",
+      "Snow": "Ice or Snow"
+    }
+  },
   "ROTATEAREA": {
     "Action": {
       "AddPosition": "Add Position",
@@ -3295,6 +3315,7 @@
 "DND5E.MovementAir": "Air",
 "DND5E.MovementSpeeds": "Movement Speeds",
 "DND5E.MovementUnits": "Units",
+"DND5E.MovementIgnoredDifficultTerrain": "Ignored Difficult Terrain",
 
 "DND5E.SAVE": {
   "Title": {

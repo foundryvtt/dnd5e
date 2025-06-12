@@ -74,6 +74,7 @@ Hooks.once("init", function() {
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
   CONFIG.Token.rulerClass = canvas.TokenRuler5e;
+  CONFIG.Token.movement.TerrainData = dataModels.TerrainData5e;
   CONFIG.User.documentClass = documents.User5e;
   CONFIG.time.roundTime = 6;
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";

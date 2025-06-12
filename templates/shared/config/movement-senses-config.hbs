@@ -3,7 +3,7 @@
         {{#each types}}{{ formField field value=value placeholder=placeholder localize=true }}{{/each}}
         {{#if (or fields.units extras.length)}}<hr>{{/if}}
         {{#if fields.units}}{{ formField fields.units value=data.units options=unitsOptions localize=true }}{{/if}}
-        {{#each extras}}{{ formField field value=value input=input localize=true }}{{/each}}
+        {{> "dnd5e.fieldlist" extras }}
     </fieldset>
     {{#if fields.special}}
     <fieldset class="card">
