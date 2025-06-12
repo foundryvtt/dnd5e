@@ -1,4 +1,4 @@
-import { formatNumber } from "../../utils.mjs";
+import { formatNumber, getPluralLocalizationKey } from "../../utils.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
@@ -476,9 +476,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
     // Experience & Epic Boons
     if ( context.system.details.xp.boonsEarned !== undefined ) {
-      const pluralRules = new Intl.PluralRules(game.i18n.lang);
       context.epicBoonsEarned = game.i18n.format(
-        `DND5E.ExperiencePoints.Boons.${pluralRules.select(context.system.details.xp.boonsEarned ?? 0)}`,
+        getPluralLocalizationKey(context.system.details.xp.boonsEarned, pr => `DND5E.ExperiencePoints.Boons.${pr}`),
         { number: formatNumber(context.system.details.xp.boonsEarned ?? 0, { signDisplay: "always" }) }
       );
     }
@@ -518,7 +517,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
     context.portrait = this._preparePortrait(context);
 
     // Death Saves
-    const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
     context.death = {
       open: this._deathTrayOpen
     };
@@ -534,7 +532,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
         context.death[deathSave].push({
           n, filled,
           tooltip: i18nKey,
-          label: game.i18n.localize(`${i18nKey}N.${plurals.select(n)}`),
+          label: game.i18n.localize(getPluralLocalizationKey(n, pr => `${i18nKey}N.${pr}`, { type: "ordinal" })),
           classes: classes.join(" ")
         });
       }
@@ -734,11 +732,10 @@ export default class CharacterActorSheet extends BaseActorSheet {
         img: CONFIG.DND5E.spellcastingTypes[id]?.img || CONFIG.DND5E.spellcastingTypes.pact.img
       };
 
-      const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
       const isSR = CONFIG.DND5E.spellcastingTypes.leveled.shortRest;
       return {
         uses, level,
-        title: game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level }),
+        title: game.i18n.format(getPluralLocalizationKey(level, pr => `DND5E.SpellSlotsN.${pr}`), { n: level }),
         subtitle: game.i18n.localize(`DND5E.Abbreviation${isSR ? "SR" : "LR"}`),
         img: CONFIG.DND5E.spellcastingTypes.leveled.img.replace("{id}", id)
       };
