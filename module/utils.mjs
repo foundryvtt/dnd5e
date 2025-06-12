@@ -187,8 +187,8 @@ export function formatTime(value, unit, options={}) {
     if ( (options.unitDisplay === "narrow") && game.i18n.has(`${config.counted}.narrow`) ) {
       return game.i18n.format(`${config.counted}.narrow`, { number: formatNumber(value, options) });
     } else {
-      const pr = new Intl.PluralRules(game.i18n.lang);
-      return game.i18n.format(`${config.counted}.${pr.select(value)}`, { number: formatNumber(value, options) });
+      const localizationKey = getPluralLocalizationKey(value, pr => `${config.counted}.${pr}`);
+      return game.i18n.format(localizationKey, { number: formatNumber(value, options) });
     }
   }
   try {
@@ -238,7 +238,7 @@ export function formatWeight(value, unit, options={}) {
 function _formatSystemUnits(value, unit, config, { parts=false, ...options }={}) {
   options.unitDisplay ??= "short";
   if ( config?.counted ) {
-    const localizationKey = `${config.counted}.${options.unitDisplay}.${getPluralRules().select(value)}`;
+    const localizationKey = getPluralLocalizationKey(value, pr => `${config.counted}.${options.unitDisplay}.${pr}`);
     return game.i18n.format(localizationKey, { number: formatNumber(value, options) });
   }
   unit = config?.formattingUnit ?? unit;
@@ -260,12 +260,30 @@ const _pluralRules = {};
 /**
  * Get a PluralRules object, fetching from cache if possible.
  * @param {object} [options={}]
+ * @param {string} [options.lang]
  * @param {string} [options.type=cardinal]
  * @returns {Intl.PluralRules}
  */
-export function getPluralRules({ type="cardinal" }={}) {
-  _pluralRules[type] ??= new Intl.PluralRules(game.i18n.lang, { type });
-  return _pluralRules[type];
+export function getPluralRules({ lang=game.i18n.lang, type="cardinal" }={}) {
+  const key = `${lang}_${type}`;
+  _pluralRules[key] ??= new Intl.PluralRules(lang, { type });
+  return _pluralRules[key];
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Get a pluralized localization key using the provided formatting function which properly falls back to English
+ * if the currently language is missing the key.
+ * @param {number} value         Counted value.
+ * @param {Function} format      Method that takes a plural rule value and returns the full localization key.
+ * @param {object} [options={}]  Options passed to `getPluralRules`.
+ * @returns {string}
+ */
+export function getPluralLocalizationKey(value, format, options={}) {
+  const localizationKey = format(getPluralRules(options).select(value ?? 0));
+  if ( game.i18n.has(localizationKey) ) return localizationKey;
+  return format(getPluralRules({ ...options, lang: "en" }).select(value ?? 0));
 }
 
 /* -------------------------------------------- */

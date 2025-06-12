@@ -1,7 +1,7 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
 import Item5e from "../../../documents/item.mjs";
 import {
-  formatLength, formatNumber, getPluralRules, parseInputDelta, simplifyBonus, splitSemicolons, staticID
+  formatLength, formatNumber, getPluralLocalizationKey, parseInputDelta, simplifyBonus, splitSemicolons, staticID
 } from "../../../utils.mjs";
 
 import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
@@ -589,7 +589,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const label = temp
           ? game.i18n.localize("DND5E.SpellSlotTemporary")
           : filled
-            ? game.i18n.format(`DND5E.SpellSlotN.${getPluralRules({ type: "ordinal" }).select(n)}`, { n })
+            ? game.i18n.format(getPluralLocalizationKey(n, pr => `DND5E.SpellSlotN.${pr}`, { type: "ordinal" }), { n })
             : game.i18n.localize("DND5E.SpellSlotExpended");
         const classes = ["pip"];
         if ( filled ) classes.push("filled");

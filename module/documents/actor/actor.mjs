@@ -10,7 +10,7 @@ import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import {
-  convertTime, defaultUnits, formatLength, formatNumber, formatTime, simplifyBonus, staticID
+  convertTime, defaultUnits, formatLength, formatNumber, formatTime, getPluralLocalizationKey, simplifyBonus, staticID
 } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
@@ -2325,12 +2325,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     else message = `DND5E.REST.${length}.Result.Short`;
 
     // Create a chat message
-    const pr = new Intl.PluralRules(game.i18n.lang);
     let chatData = {
       content: game.i18n.format(message, {
         name: this.name,
-        dice: game.i18n.format(`DND5E.HITDICE.Counted.${pr.select(dhd)}`, { number: formatNumber(dhd) }),
-        health: game.i18n.format(`DND5E.HITPOINTS.Counted.${pr.select(dhp)}`, { number: formatNumber(dhp) })
+        dice: game.i18n.format(
+          getPluralLocalizationKey(dhd, pr => `DND5E.HITDICE.Counted.${pr}`), { number: formatNumber(dhd) }
+        ),
+        health: game.i18n.format(
+          getPluralLocalizationKey(dhp, pr => `DND5E.HITPOINTS.Counted.${pr}`), { number: formatNumber(dhp) }
+        )
       }),
       flavor: this.createRestFlavor(config, result),
       type: "rest",

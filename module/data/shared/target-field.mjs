@@ -1,4 +1,6 @@
-import { defaultUnits, formatLength, formatNumber, getPluralRules, prepareFormulaValue } from "../../utils.mjs";
+import {
+  defaultUnits, formatLength, formatNumber, getPluralLocalizationKey, prepareFormulaValue
+} from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { BooleanField, SchemaField, StringField } = foundry.data.fields;
@@ -63,8 +65,6 @@ export default class TargetField extends SchemaField {
       this.target.template.height = null;
     }
 
-    const pr = getPluralRules();
-
     // Generate the template label
     const templateConfig = CONFIG.DND5E.areaTargetTypes[this.target.template.type];
     if ( templateConfig ) {
@@ -74,7 +74,8 @@ export default class TargetField extends SchemaField {
         parts.push(formatLength(this.target.template.size, this.target.template.units));
       }
       this.target.template.label = game.i18n.format(
-        `${templateConfig.counted}.${pr.select(this.target.template.count || 1)}`, { number: parts.filterJoin(" ") }
+        getPluralLocalizationKey(this.target.template.count || 1, pr => `${templateConfig.counted}.${pr}`),
+        { number: parts.filterJoin(" ") }
       ).trim().capitalize();
     } else this.target.template.label = "";
 
@@ -82,13 +83,17 @@ export default class TargetField extends SchemaField {
     const affectsConfig = CONFIG.DND5E.individualTargetTypes[this.target.affects.type];
     this.target.affects.labels = {
       sheet: affectsConfig?.counted ? game.i18n.format(
-        `${affectsConfig.counted}.${this.target.affects.count ? pr.select(this.target.affects.count) : "other"}`, {
+        this.target.affects.count
+          ? getPluralLocalizationKey(this.target.affects.count, pr => `${affectsConfig.counted}.${pr}`)
+          : `${affectsConfig.counted}.other`,
+        {
           number: this.target.affects.count ? formatNumber(this.target.affects.count)
             : game.i18n.localize(`DND5E.TARGET.Count.${this.target.template.type ? "Every" : "Any"}`)
         }
       ).trim().capitalize() : (affectsConfig?.label ?? ""),
       statblock: game.i18n.format(
-        `${affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted"}.${pr.select(this.target.affects.count || 1)}`,
+        getPluralLocalizationKey(this.target.affects.count || 1, pr =>
+          `${affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted"}.${pr}`),
         { number: formatNumber(this.target.affects.count || 1, { words: true }) }
       )
     };
