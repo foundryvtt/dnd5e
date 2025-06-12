@@ -1,4 +1,6 @@
-import { defaultUnits, formatLength, formatNumber, getPluralRules, prepareFormulaValue } from "../../utils.mjs";
+import {
+  defaultUnits, formatLength, formatNumber, getPluralLocalizationKey, prepareFormulaValue
+} from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { BooleanField, SchemaField, StringField } = foundry.data.fields;
@@ -49,8 +51,6 @@ export default class TargetField extends SchemaField {
    * @returns {TargetLabels}
    */
   static getLabels({ capitalize=false, dimensions, target }) {
-    const pr = getPluralRules();
-
     /**
      * Combine a count with its localized target type.
      * @param {string} count                        Formatted count.
@@ -77,7 +77,8 @@ export default class TargetField extends SchemaField {
         parts.push(formatLength(target.template.size, target.template.units));
       }
       template.statblock = fmt(
-        parts.filterJoin(" "), `${templateConfig.counted}.${pr.select(target.template.count || 1)}`,
+        parts.filterJoin(" "),
+        getPluralLocalizationKey(target.template.count || 1, pr => `${templateConfig.counted}.${pr}`),
         { capitalize }
       ).capitalize();
 
@@ -93,10 +94,10 @@ export default class TargetField extends SchemaField {
           })
         ));
 
-      template.description = _loc(`${templateConfig.counted}.${pr.select(target.template.count || 1)}Sized`, {
-        number: formatNumber(target.template.count, { words: true }),
-        sizes: template.size
-      });
+      template.description = _loc(
+        getPluralLocalizationKey(target.template.count || 1, pr => `${templateConfig.counted}.${pr}Sized`),
+        { number: formatNumber(target.template.count, { words: true }), sizes: template.size }
+      );
 
       template.type = templateConfig.label;
     }
@@ -108,13 +109,21 @@ export default class TargetField extends SchemaField {
     const described = special ? "DND5E.TARGET.Type.Special.Counted" : counted;
     const affects = {
       description: count
-        ? fmt(formatNumber(count, { words: true }), `${described}.${pr.select(count)}`, { special })
+        ? fmt(
+          formatNumber(count, { words: true }),
+          getPluralLocalizationKey(count, pr => `${described}.${pr}`),
+          { special }
+        )
         : _loc(`${described}.${target.template.type ? "each" : "any"}`, { special }),
       sheet: affectsConfig?.counted ? fmt(
         count ? formatNumber(count) : _loc(`DND5E.TARGET.Count.${target.template.type ? "Every" : "Any"}`),
-        `${affectsConfig.counted}.${count ? pr.select(count) : "other"}`, { capitalize }
+        getPluralLocalizationKey(count, pr => `${affectsConfig.counted}.${pr}`),
+        { capitalize }
       ).capitalize() : (affectsConfig?.label ?? ""),
-      statblock: fmt(formatNumber(count || 1, { words: true }), `${counted}.${pr.select(count || 1)}`)
+      statblock: fmt(
+        formatNumber(count || 1, { words: true }),
+        getPluralLocalizationKey(count || 1, pr => `${counted}.${pr}`)
+      )
     };
 
     return { affects, template };

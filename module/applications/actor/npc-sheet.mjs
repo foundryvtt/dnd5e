@@ -1,4 +1,4 @@
-import { formatNumber, getPluralRules, simplifyBonus, splitSemicolons } from "../../utils.mjs";
+import { formatNumber, getPluralLocalizationKey, simplifyBonus, splitSemicolons } from "../../utils.mjs";
 import { createCheckboxInput } from "../fields.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
 import HabitatConfig from "./config/habitat-config.mjs";
@@ -269,7 +269,6 @@ export default class NPCActorSheet extends BaseActorSheet {
     context.classes = context.itemCategories.classes;
 
     // Legendary Actions & Resistances
-    const plurals = getPluralRules({ type: "ordinal" });
     const resources = context.source.resources;
     for ( const res of ["legact", "legres"] ) {
       const { max, value } = resources[res];
@@ -281,7 +280,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         return {
           n: max - n, filled,
           tooltip: `DND5E.${i18n}.Label`,
-          label: _loc(`DND5E.${i18n}.Ordinal.${plurals.select(n)}`, { n }),
+          label: _loc(getPluralLocalizationKey(n, pr => `DND5E.${i18n}.Ordinal.${pr}`, { type: "ordinal" }), { n }),
           classes: classes.join(" ")
         };
       });
