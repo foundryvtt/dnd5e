@@ -184,6 +184,11 @@ export default class PhysicalItemTemplate extends SystemDataModel {
    * Prepare physical item properties.
    */
   preparePhysicalData() {
+    const unitSystem = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
+    Object.assign(
+      this.weight, convertWeight(this.weight.value, this.weight.units, { type: unitSystem, legacy: false })
+    );
+
     if ( !("gp" in CONFIG.DND5E.currencies) ) return;
     const { value, denomination } = this.price;
     const { conversion } = CONFIG.DND5E.currencies[denomination] ?? {};
@@ -292,7 +297,9 @@ export default class PhysicalItemTemplate extends SystemDataModel {
    */
   totalWeightIn(units) {
     const weight = this.totalWeight;
-    if ( weight instanceof Promise ) return weight.then(w => convertWeight(w, this.weight.units, units));
-    return convertWeight(weight, this.weight.units, units);
+    if ( weight instanceof Promise ) {
+      return weight.then(w => convertWeight(w, this.weight.units, { to: units, legacy: false }).value);
+    }
+    return convertWeight(weight, this.weight.units, { to: units, legacy: false }).value;
   }
 }
