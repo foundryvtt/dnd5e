@@ -756,6 +756,20 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef UnitConversionOptions
+ * @property {boolean} [strict]    Throw an error if either unit isn't found.
+ * @property {string} [to]         The final unit. If neither this nor the unit system is provided then will convert to
+ *                                 the largest unit that can represent the value as an integer.
+ * @property {boolean} [truncate]  Select the largest unit that can represent the value, discarding any
+ *                                 remainder, rather than the largest that represents it exactly.
+ * @property {string} [type]       Target measurement system. If provided without target unit then the value will be
+ *                                 converted to the closest equivalent unit in the specified measurement system
+ *                                 (e.g. "mi" > "km").
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef UnitValue5e
  * @property {string} units
  * @property {number} value
