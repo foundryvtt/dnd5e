@@ -280,8 +280,8 @@ export default class AttributesFields {
       weight += convertWeight(
         numCoins / currencyPerWeight,
         config.baseUnits.default[unitSystem],
-        baseUnits[unitSystem]
-      );
+        { to: baseUnits[unitSystem], legacy: false }
+      ).value;
     }
 
     // Determine the Encumbrance size class
@@ -415,7 +415,7 @@ export default class AttributesFields {
     const units = this.attributes.movement.units ??= defaultUnits("length");
     let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
-    reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
+    reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, { to: units, legacy: false }).value;
     for ( const type in CONFIG.DND5E.movementTypes ) {
       let speed = Math.max(0, this.attributes.movement[type] - reduction);
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;

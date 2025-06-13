@@ -171,7 +171,8 @@ export function registerSystemSettings() {
     scope: "world",
     config: true,
     type: Boolean,
-    default: false
+    default: false,
+    requiresReload: true
   });
 
   // Metric Volume Weights
@@ -181,7 +182,8 @@ export function registerSystemSettings() {
     scope: "world",
     config: true,
     type: Boolean,
-    default: false
+    default: false,
+    requiresReload: true
   });
 
   // Metric Unit Weights
@@ -191,7 +193,8 @@ export function registerSystemSettings() {
     scope: "world",
     config: true,
     type: Boolean,
-    default: false
+    default: false,
+    requiresReload: true
   });
 
   // Strict validation
