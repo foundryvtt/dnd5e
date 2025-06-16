@@ -264,6 +264,7 @@ export function isValidDieModifier(mod) {
  * @returns {number|void}
  */
 export function parseInputDelta(input, target) {
+  target = target?._source ?? target;
   let value = input.value;
   if ( ["+", "-"].includes(value[0]) ) {
     const delta = parseFloat(value);
