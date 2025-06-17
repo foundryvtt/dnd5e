@@ -478,7 +478,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -490,6 +489,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: KjxsSFx9xv2HLtMX
     name: Claw
@@ -641,19 +646,20 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107550536
+      modifiedTime: 1747956347839
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!AnseLn7HwuP97grf.KjxsSFx9xv2HLtMX'
   - _id: iFHGL8wlqBtZAdHr
     name: Sting
@@ -663,10 +669,9 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a  <strong>DC 14 Constitution</strong> saving throw or
-          become poisoned for 1 minute. The target can repeat the saving throw
-          at the end of each of its turns, ending the effect on itself on a
-          success .</p>
+          succeed on a [[/save]] saving throw or become &amp;Reference[poisoned]
+          for 1 minute. The target can repeat the saving throw at the end of
+          each of its turns, ending the effect on itself on a success .</p>
         chat: >-
           <p>The Bone Devil attacks with its Sting. the target must make a
           <strong>Constitution</strong> saving throw. The target can repeat the
@@ -870,19 +875,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 8
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -893,21 +886,27 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: sting
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745107550536
+      modifiedTime: 1747956381241
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!AnseLn7HwuP97grf.iFHGL8wlqBtZAdHr'
   - _id: aj4Bg2H8CNydNhMB
     name: Devil Sight
@@ -943,18 +942,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.UjbgbOnd6ltjagZm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.UjbgbOnd6ltjagZm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!AnseLn7HwuP97grf.aj4Bg2H8CNydNhMB'
   - _id: hQXiIJrlHh2rb2k9
     name: Magic Resistance
@@ -992,18 +990,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!AnseLn7HwuP97grf.hQXiIJrlHh2rb2k9'
   - _id: sC1dqjfFZKnDmhec
     name: Multiattack
@@ -1095,18 +1092,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273655459
+      modifiedTime: 1747956348705
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!AnseLn7HwuP97grf.sC1dqjfFZKnDmhec'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1116,10 +1112,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171210131
   modifiedTime: 1744916254420
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!AnseLn7HwuP97grf'

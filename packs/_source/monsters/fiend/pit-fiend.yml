@@ -478,7 +478,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -490,6 +489,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: wkqjn4bqhPIUUo7k
     name: Fear Aura
@@ -498,13 +503,12 @@ items:
     system:
       description:
         value: >-
-          <p>Any creature hostile to the pit fiend that starts its turn
-          <strong>within 20 feet</strong> of the pit fiend must make a
-          <strong>DC 21 Wisdom saving throw</strong>, unless the pit fiend is
-          incapacitated. On a failed save, the creature is frightened until the
-          start of its next turn. If a creature's saving throw is successful,
-          the creature is immune to the pit fiend's Fear Aura for the next 24
-          hours.</p>
+          <p>Any creature hostile to the pit fiend that starts its turn within
+          20 feet of the pit fiend must make a [[/save]] saving throw, unless
+          the pit fiend is incapacitated. On a failed save, the creature is
+          &amp;Reference[frightened] until the start of its next turn. If a
+          creature's saving throw is successful, the creature is immune to the
+          pit fiend's Fear Aura for the next 24 hours.</p>
         chat: >-
           <p>Any creature hostile to the pit fiend that starts its turn
           <strong>within 20 feet</strong> of the pit fiend must make a
@@ -524,13 +528,14 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
           type: save
           activation:
-            type: special
+            type: ''
             value: null
             condition: ''
             override: false
@@ -582,6 +587,9 @@ items:
               calculation: ''
               formula: '21'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -592,17 +600,20 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.MLVEyA7VcWu9uXqV
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.MLVEyA7VcWu9uXqV
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676943
+      modifiedTime: 1747957309086
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.wkqjn4bqhPIUUo7k'
   - _id: 2MKXiCJeOrUJIEto
     name: Magic Resistance
@@ -611,8 +622,8 @@ items:
     system:
       description:
         value: >-
-          <p>The pit fiend has<strong> advantage </strong>on saving throws
-          against spells and other magical effects.</p>
+          <p>The pit fiend has advantage on saving throws against spells and
+          other magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -640,18 +651,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747957270896
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.2MKXiCJeOrUJIEto'
   - _id: TT2YmAw82Sj1WNKn
     name: Magic Weapons
@@ -687,18 +697,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.TT2YmAw82Sj1WNKn'
   - _id: 2Wh1GHIIzBfCm8md
     name: Innate Spellcasting
@@ -743,18 +752,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015780
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.2Wh1GHIIzBfCm8md'
   - _id: BFv56pkQ54pdTkYM
     name: Multiattack
@@ -848,18 +856,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656170
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.BFv56pkQ54pdTkYM'
   - _id: GjIQl7UOQUtsrj2v
     name: Bite
@@ -1093,8 +1100,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       dnd5e:
         riders:
           activity: []
@@ -1102,12 +1107,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745174970089
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.GjIQl7UOQUtsrj2v'
   - _id: RkuPEGbAXHhxfNWJ
     name: Claw
@@ -1266,12 +1272,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745174923823
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.RkuPEGbAXHhxfNWJ'
   - _id: gpjBebqxqbQA35st
     name: Mace
@@ -1437,18 +1444,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.Ajyq6nGwF7FtLhDQ
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.Ajyq6nGwF7FtLhDQ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551751
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.gpjBebqxqbQA35st'
   - _id: Gh1DbMpJiaTlTwWp
     name: Tail
@@ -1606,12 +1612,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551751
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.Gh1DbMpJiaTlTwWp'
   - _id: ghXTfe7sgCbgf1Q8
     name: Detect Magic
@@ -1715,21 +1722,20 @@ items:
           sort: 0
       identifier: detect-magic
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
+    flags: {}
     img: icons/magic/light/explosion-star-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.ghXTfe7sgCbgf1Q8'
   - _id: ztgcdrWPshKRpFd0
     name: Fireball
@@ -1851,21 +1857,20 @@ items:
           sort: 0
       identifier: fireball
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ztgcdrWPshKRpFd0
+    flags: {}
     img: icons/magic/fire/projectile-fireball-smoke-large-orange.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ztgcdrWPshKRpFd0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.ztgcdrWPshKRpFd0'
   - _id: l9Ju5KE7bbn3WpTm
     name: Hold Monster
@@ -1983,21 +1988,20 @@ items:
           sort: 0
       identifier: hold-monster
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.l9Ju5KE7bbn3WpTm
+    flags: {}
     img: icons/magic/control/debuff-chains-ropes-red.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.l9Ju5KE7bbn3WpTm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.l9Ju5KE7bbn3WpTm'
   - _id: X3DrXgxjwI2dvkD6
     name: Wall of Fire
@@ -2132,21 +2136,20 @@ items:
           sort: 0
       identifier: wall-of-fire
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.X3DrXgxjwI2dvkD6
+    flags: {}
     img: icons/magic/air/fog-gas-smoke-swirling-orange.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.X3DrXgxjwI2dvkD6
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.X3DrXgxjwI2dvkD6'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -2156,10 +2159,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171231220
   modifiedTime: 1744916164430
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!RCv5y7iWlfNxkinx'

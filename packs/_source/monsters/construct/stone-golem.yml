@@ -477,7 +477,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -489,6 +488,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: FWww5Mv4eoxXAADH
     name: Immutable Form
@@ -526,18 +531,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.MFuiImIvLzYA3osc
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.MFuiImIvLzYA3osc
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!z3gSIXHHWYaHjfBT.FWww5Mv4eoxXAADH'
   - _id: kf6ELkKrSnpD2fwD
     name: Magic Resistance
@@ -575,18 +579,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447760126
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!z3gSIXHHWYaHjfBT.kf6ELkKrSnpD2fwD'
   - _id: GGgxGpYSCDYiflMA
     name: Magic Weapons
@@ -622,18 +625,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!z3gSIXHHWYaHjfBT.GGgxGpYSCDYiflMA'
   - _id: Ym2CUTgDPucdmj1W
     name: Multiattack
@@ -722,18 +724,17 @@ items:
     sort: 200000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447764639
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!z3gSIXHHWYaHjfBT.Ym2CUTgDPucdmj1W'
   - _id: DelAxHnRbNHC6OoV
     name: Slam
@@ -889,12 +890,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447765235
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!z3gSIXHHWYaHjfBT.DelAxHnRbNHC6OoV'
   - _id: 9aTwUWuZQLhMxjcD
     name: Slow
@@ -1007,18 +1009,17 @@ items:
     sort: 300000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.BDnjS1sQi2pdARh8
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.BDnjS1sQi2pdARh8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447781846
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!z3gSIXHHWYaHjfBT.9aTwUWuZQLhMxjcD'
 effects: []
 folder: pucbjwWBrVMweiOd
@@ -1028,10 +1029,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171267148
   modifiedTime: 1745447792269
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!z3gSIXHHWYaHjfBT'

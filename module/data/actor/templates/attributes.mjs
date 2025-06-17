@@ -349,7 +349,7 @@ export default class AttributesFields {
     hp.max = (hp.max ?? 0) + base + bonus;
     if ( this.parent.hasConditionEffect("halfHealth") ) hp.max = Math.floor(hp.max * 0.5);
 
-    hp.effectiveMax = hp.max + (hp.tempmax ?? 0);
+    hp.effectiveMax = Math.max(hp.max + (hp.tempmax ?? 0), 0);
     hp.value = Math.min(hp.value, hp.effectiveMax);
     hp.damage = hp.effectiveMax - hp.value;
     hp.pct = Math.clamp(hp.effectiveMax ? (hp.value / hp.effectiveMax) * 100 : 0, 0, 100);

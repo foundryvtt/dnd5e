@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: Jwx7Sfs5m3RDWckF
     name: Fey Ancestry
@@ -486,8 +491,8 @@ items:
     system:
       description:
         value: >-
-          <p>The drow has<strong> advantage </strong>on saving throws against
-          being charmed, and magic can't put the drow to sleep.</p>
+          <p>The drow has advantage on saving throws against being charmed, and
+          magic can't put the drow to sleep.</p>
         chat: ''
       source:
         custom: ''
@@ -515,18 +520,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.LvSBjRKoCAKaAnQy
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LvSBjRKoCAKaAnQy
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403096263
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.Jwx7Sfs5m3RDWckF'
   - _id: A4OySWt5j3QXyAPW
     name: Innate Spellcasting
@@ -570,18 +574,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015491
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.A4OySWt5j3QXyAPW'
   - _id: Up2YzkDn0uBKQj6K
     name: Sunlight Sensitivity
@@ -590,9 +593,8 @@ items:
     system:
       description:
         value: >-
-          <p>While in sunlight, the drow has<strong> disadvantage </strong>on
-          attack rolls, as well as on Wisdom (Perception) checks that rely on
-          sight.</p>
+          <p>While in sunlight, the drow has disadvantage on attack rolls, as
+          well as on Wisdom (Perception) checks that rely on sight.</p>
         chat: ''
       source:
         custom: ''
@@ -620,18 +622,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.F14aW2Ke3I5ZtSg4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.F14aW2Ke3I5ZtSg4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403101585
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.Up2YzkDn0uBKQj6K'
   - _id: G2nFsJdp1Q3gshyr
     name: Shortsword
@@ -784,18 +785,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107549815
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.G2nFsJdp1Q3gshyr'
   - _id: LqnhZjRtRqhLIFTm
     name: Hand Crossbow
@@ -805,9 +805,9 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a  <strong>DC 13 Constitution</strong> saving throw or be
-          poisoned for 1 hour. If the saving throw fails by 5 or more, the
-          target is also unconscious while poisoned in this way. The target
+          succeed on a [[/save]] saving throw or be &amp;Reference[poisoned] for
+          1 hour. If the saving throw fails by 5 or more, the target is also
+          &amp;Reference[unconscious] while poisoned in this way. The target
           wakes up if it takes damage or if another creature takes an action to
           shake it awake.</p>
         chat: >-
@@ -1019,8 +1019,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.qaSro7kFhxD6INbZ
       dnd5e:
         riders:
           activity: []
@@ -1028,12 +1026,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.qaSro7kFhxD6INbZ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173487038
+      modifiedTime: 1749403124953
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.LqnhZjRtRqhLIFTm'
   - _id: S684g3gtaxOsMxME
     name: Chain Shirt
@@ -1100,18 +1099,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.p2zChy24ZJdVqMSH
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.p2zChy24ZJdVqMSH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.S684g3gtaxOsMxME'
   - _id: S7VbUetIfVT7B6Eq
     name: Darkness
@@ -1226,21 +1224,20 @@ items:
           sort: 0
       identifier: darkness
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq
+    flags: {}
     img: icons/magic/perception/eye-ringed-glow-angry-red.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.S7VbUetIfVT7B6Eq'
   - _id: nqBDWkVOfcGZt4YU
     name: Faerie Fire
@@ -1355,21 +1352,20 @@ items:
           sort: 0
       identifier: faerie-fire
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.nqBDWkVOfcGZt4YU
+    flags: {}
     img: icons/magic/fire/projectile-meteor-salvo-strong-teal.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.nqBDWkVOfcGZt4YU
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.nqBDWkVOfcGZt4YU'
   - _id: CAxSzHWizrafT033
     name: Dancing Lights
@@ -1474,21 +1470,20 @@ items:
           sort: 0
       identifier: dancing-lights
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.CAxSzHWizrafT033
+    flags: {}
     img: icons/magic/fire/projectile-meteor-salvo-strong-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.CAxSzHWizrafT033
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.CAxSzHWizrafT033'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1498,10 +1493,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171199159
   modifiedTime: 1745173511182
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!1vaBSMUfOy6JPJ14'

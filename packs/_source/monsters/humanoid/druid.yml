@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 07sdy4qaaW4MaB8W
     name: Spellcasting
@@ -523,18 +528,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744141612084
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!K15Yl8JmB5iPircc.07sdy4qaaW4MaB8W'
   - _id: KUP8WEfLxlcY7K2x
     name: Quarterstaff
@@ -815,12 +819,13 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.monsters.Actor.K15Yl8JmB5iPircc.Item.udSiVp4nSrGBSvG1.ActiveEffect.QPsqj6jfS0iXSrTs
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: 1744141902433
           modifiedTime: 1744142295936
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!K15Yl8JmB5iPircc.KUP8WEfLxlcY7K2x.siLjGctswI3gx3B2
     folder: null
@@ -828,8 +833,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.g2dWN7PQiMRYWzyk
       dnd5e:
         riders:
           activity: []
@@ -837,12 +840,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.g2dWN7PQiMRYWzyk
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744142941675
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!K15Yl8JmB5iPircc.KUP8WEfLxlcY7K2x'
   - _id: SbSvZKkJASyk8jKo
     name: Druidcraft
@@ -958,21 +962,20 @@ items:
           sort: 0
       identifier: druidcraft
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.SbSvZKkJASyk8jKo
+    flags: {}
     img: icons/magic/nature/vines-thorned-glow-teal.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.SbSvZKkJASyk8jKo
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!K15Yl8JmB5iPircc.SbSvZKkJASyk8jKo'
   - _id: eCPQuQkIabFKTl9u
     name: Produce Flame
@@ -1098,21 +1101,20 @@ items:
           sort: 0
       identifier: produce-flame
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.eCPQuQkIabFKTl9u
+    flags: {}
     img: icons/magic/fire/explosion-fireball-medium-orange.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.eCPQuQkIabFKTl9u
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!K15Yl8JmB5iPircc.eCPQuQkIabFKTl9u'
   - name: Entangle
     type: spell
@@ -1218,9 +1220,7 @@ items:
           sort: 0
       identifier: entangle
     effects: []
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe
+    flags: {}
     _id: gMrWeG8fMDPRFiVe
     folder: null
     sort: 0
@@ -1229,12 +1229,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!K15Yl8JmB5iPircc.gMrWeG8fMDPRFiVe'
   - _id: B0pnIcc52O6G8hi8
     name: Longstrider
@@ -1332,21 +1333,20 @@ items:
           sort: 0
       identifier: longstrider
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.B0pnIcc52O6G8hi8
+    flags: {}
     img: icons/magic/air/wind-stream-blue-gray.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.B0pnIcc52O6G8hi8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!K15Yl8JmB5iPircc.B0pnIcc52O6G8hi8'
   - _id: aL1F8fvYLtNzUbKu
     name: Speak with Animals
@@ -1448,21 +1448,20 @@ items:
           sort: 0
       identifier: speak-with-animals
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.aL1F8fvYLtNzUbKu
+    flags: {}
     img: icons/magic/nature/wolf-paw-glow-small-teal-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.aL1F8fvYLtNzUbKu
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!K15Yl8JmB5iPircc.aL1F8fvYLtNzUbKu'
   - _id: WTbOQBsarsL1LuXJ
     name: Thunderwave
@@ -1583,21 +1582,20 @@ items:
           sort: 0
       identifier: thunderwave
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.WTbOQBsarsL1LuXJ
+    flags: {}
     img: icons/magic/lightning/bolt-forked-teal.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.WTbOQBsarsL1LuXJ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!K15Yl8JmB5iPircc.WTbOQBsarsL1LuXJ'
   - _id: X8w9EzYLGc4vQ1H2
     name: Animal Messenger
@@ -1713,21 +1711,20 @@ items:
           sort: 0
       identifier: animal-messenger
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.X8w9EzYLGc4vQ1H2
+    flags: {}
     img: icons/magic/nature/wolf-paw-glow-small-teal-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.X8w9EzYLGc4vQ1H2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!K15Yl8JmB5iPircc.X8w9EzYLGc4vQ1H2'
   - _id: JPwIEfgUPVebr5AH
     name: Barkskin
@@ -1855,12 +1852,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         img: icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp
         type: base
         system: {}
@@ -1871,18 +1869,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.JPwIEfgUPVebr5AH
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.spells.JPwIEfgUPVebr5AH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!K15Yl8JmB5iPircc.JPwIEfgUPVebr5AH'
   - _id: udSiVp4nSrGBSvG1
     name: Shillelagh
@@ -2110,24 +2107,26 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!K15Yl8JmB5iPircc.udSiVp4nSrGBSvG1.QPsqj6jfS0iXSrTs
     folder: Z8kZlnggh1PtuF3Y
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.VzgFzcmocr1X1cp4
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: 1744141670539
       modifiedTime: 1744141670539
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!K15Yl8JmB5iPircc.udSiVp4nSrGBSvG1'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -2137,10 +2136,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171221276
   modifiedTime: 1744141765490
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!K15Yl8JmB5iPircc'

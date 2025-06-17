@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: qnFVVlRzucX7BNga
     name: Leather Armor
@@ -541,18 +546,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!O3ABqI55Ir1du1Xa.qnFVVlRzucX7BNga'
   - _id: PQGwUNCJ7EkJAE8V
     name: Keen Hearing and Sight
@@ -595,12 +599,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744052052908
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!O3ABqI55Ir1du1Xa.PQGwUNCJ7EkJAE8V'
   - _id: YO57HtdvpuGxJANB
     name: Multiattack
@@ -608,7 +613,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The scout makes two melee attacks or two ranged attacks.</p>
+        value: >-
+          <p>The scout makes two [[/item .YDoOa6D6QDoR2Htu]]{melee} attacks or
+          two [[/item .E2fYrhLigMeVH09l]]{ranged} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -689,18 +696,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1744132986913
+      modifiedTime: 1749403691381
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!O3ABqI55Ir1du1Xa.YO57HtdvpuGxJANB'
   - _id: YDoOa6D6QDoR2Htu
     name: Shortsword
@@ -859,8 +865,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       dnd5e:
         riders:
           activity: []
@@ -868,12 +872,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744132985302
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!O3ABqI55Ir1du1Xa.YDoOa6D6QDoR2Htu'
   - _id: E2fYrhLigMeVH09l
     name: Longbow
@@ -1031,18 +1036,17 @@ items:
     sort: 300000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.3cymOVja8jXbzrdT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744132985302
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!O3ABqI55Ir1du1Xa.E2fYrhLigMeVH09l'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1052,10 +1056,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171227806
   modifiedTime: 1744052139226
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!O3ABqI55Ir1du1Xa'

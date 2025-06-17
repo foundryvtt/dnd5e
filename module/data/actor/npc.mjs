@@ -391,6 +391,8 @@ export default class NPCData extends CreatureTemplate {
     this.details.xp.value = this.parent.getCRExp(this.details.cr === null ? null : this.details.cr + lairAdjustment);
 
     // Legendary Resistances/Actions
+    this.resources.legact.lr = true;
+    this.resources.legres.lr = true;
     if ( this.resources.legact.max ) this.resources.legact.max += lairAdjustment;
     if ( this.resources.legres.max ) this.resources.legres.max += lairAdjustment;
 

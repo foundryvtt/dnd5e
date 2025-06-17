@@ -818,6 +818,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     uses.hasRecharge = uses.max && (uses.recovery?.[0]?.period === "recharge");
     uses.isOnCooldown = uses.hasRecharge && (uses.value < 1);
     uses.hasUses = uses.max;
+    uses.prop = "uses.value";
 
     return {
       _id, labels, name, range, uses,
@@ -879,6 +880,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     ctx.uses.hasRecharge = item.hasRecharge;
     ctx.uses.hasUses = item.hasLimitedUses;
     ctx.uses.isOnCooldown = item.isOnCooldown;
+    ctx.uses.prop = "system.uses.value";
   }
 
   /* -------------------------------------------- */
@@ -1804,7 +1806,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
 
     // Let specific item types apply any changes from a drop event
-    CONFIG.Item.dataModels[itemData.type]?.onDrop?.(event, itemData);
+    CONFIG.Item.dataModels[itemData.type]?.onDropCreate?.(event, this.actor, itemData);
 
     return itemData;
   }
@@ -1818,7 +1820,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _onDropResetData(event, itemData) {
     if ( !itemData.system ) return;
-    ["attuned", "equipped", "prepared"].forEach(k => delete itemData.system[k]);
+    ["attuned", "equipped", "preparation.prepared"].forEach(k => foundry.utils.deleteProperty(itemData.system, k));
   }
 
   /* -------------------------------------------- */

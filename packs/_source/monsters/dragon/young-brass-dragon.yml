@@ -467,7 +467,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -479,6 +478,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: dYJy66Ftt58qpTUi
     name: Bite
@@ -631,18 +636,17 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745451010621
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!FzvZ6xl3U9GoL9ju.dYJy66Ftt58qpTUi'
   - _id: h8ocFdixa3iZVj0m
     name: Breath Weapons
@@ -828,8 +832,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       dnd5e:
         riders:
           activity: []
@@ -837,12 +839,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745451239220
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!FzvZ6xl3U9GoL9ju.h8ocFdixa3iZVj0m'
   - _id: YHom7FFObzrKEBLQ
     name: Claw
@@ -999,12 +1002,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745451010621
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!FzvZ6xl3U9GoL9ju.YHom7FFObzrKEBLQ'
   - _id: oyNvUJRyGRVF22t8
     name: Multiattack
@@ -1096,18 +1100,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745451011333
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!FzvZ6xl3U9GoL9ju.oyNvUJRyGRVF22t8'
 effects: []
 folder: PNekSR74iAZ5dJwZ
@@ -1117,10 +1120,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171216952
   modifiedTime: 1745451107051
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!FzvZ6xl3U9GoL9ju'

@@ -471,7 +471,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -483,6 +482,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 8uUyRr6Ho7Yvx8pP
     name: Animate Trees
@@ -583,18 +588,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.j6F0v4guYhRYWddT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.j6F0v4guYhRYWddT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676791
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.8uUyRr6Ho7Yvx8pP'
   - _id: skQsBSPby8pLZSLI
     name: False Appearance
@@ -632,18 +636,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.skQsBSPby8pLZSLI'
   - _id: BLz58sp79C2HvinU
     name: Multiattack
@@ -732,18 +735,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656063
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.BLz58sp79C2HvinU'
   - _id: eTROJriR9B5abIZy
     name: Treant - Rock
@@ -900,12 +902,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385401
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.eTROJriR9B5abIZy'
   - _id: RMsSkfIx97Hnqf37
     name: Siege Monster
@@ -941,18 +944,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.cSA0EbjlxCbst4gJ
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cSA0EbjlxCbst4gJ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.RMsSkfIx97Hnqf37'
   - _id: lisZZTaupqInGEi1
     name: Slam
@@ -1108,12 +1110,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551521
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!NB6wUgVqeOQtsQKu.lisZZTaupqInGEi1'
 effects: []
 folder: KY8fajTNVVOIT8yT
@@ -1123,10 +1126,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171226982
   modifiedTime: 1726171443938
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!NB6wUgVqeOQtsQKu'

@@ -96,6 +96,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    */
   buildEffectsList() {
     for ( const effect of this.effects ) {
+      effect.updateDuration();
       const li = document.createElement("li");
       li.classList.add("effect");
       li.dataset.id = effect.id;
@@ -183,7 +184,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       }, effectFlags));
     }
 
-    if ( !game.user.isGM && concentration && !concentration.actor?.isOwner ) {
+    if ( !game.user.isGM && concentration && !concentration.isOwner ) {
       throw new Error(game.i18n.localize("DND5E.EffectApplyWarningConcentration"));
     }
 

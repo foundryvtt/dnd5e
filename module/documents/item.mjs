@@ -606,9 +606,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     for ( const activity of this.system.activities ) {
       if ( !("activation" in activity) ) continue;
       const activationLabels = activity.activationLabels;
-      if ( activationLabels ) activations.push(
-        { ...activationLabels, concentrationDuration: activity.labels.concentrationDuration }
-      );
+      if ( activationLabels ) activations.push({
+        ...activationLabels,
+        concentrationDuration: activity.labels.concentrationDuration,
+        ritualActivation: activity.labels.ritualActivation
+      });
       if ( activity.type === "attack" ) {
         const { toHit, modifier } = activity.labels;
         attacks.push({ toHit, modifier });
@@ -618,6 +620,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( activations.length ) {
       Object.assign(this.labels, activations[0]);
       delete activations[0].concentrationDuration;
+      delete activations[0].ritualActivation;
     }
     if ( attacks.length ) Object.assign(this.labels, attacks[0]);
   }
@@ -1569,7 +1572,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       },
       callback: html => {
         const form = html.querySelector("form");
-        const fd = new FormDataExtended(form);
+        const fd = new foundry.applications.ux.FormDataExtended(form);
         const createData = foundry.utils.mergeObject(data, fd.object, { inplace: false });
         if ( !createData.folder ) delete createData.folder;
         if ( !createData.name?.trim() ) createData.name = this.defaultName();

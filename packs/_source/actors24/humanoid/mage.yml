@@ -497,7 +497,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -553,6 +552,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Wand
     system:
@@ -619,12 +624,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbafcWand000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: zOYs3VFfobRJRpOh
     sort: 0
     _key: '!actors.items!mmMage0000000000.zOYs3VFfobRJRpOh'
@@ -717,12 +723,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -864,12 +871,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmArcaneBurst000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 1
@@ -1351,12 +1359,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 2
@@ -1456,12 +1465,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMistyStep00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 3
@@ -1586,12 +1596,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.BtkwckQJktc8hRh0.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1604,12 +1615,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMistyStep0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: BtkwckQJktc8hRh0
     _key: '!actors.items!mmMage0000000000.BtkwckQJktc8hRh0'
   - _id: mmProtectiveMagi
@@ -1759,12 +1771,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmProtectiveMagi
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 4
@@ -1899,12 +1912,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.AlYAtKsfv1ecczpO.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -1917,12 +1931,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCounterspe
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: AlYAtKsfv1ecczpO
     _key: '!actors.items!mmMage0000000000.AlYAtKsfv1ecczpO'
   - name: Shield
@@ -2056,12 +2071,13 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.spells.Item.z1mx84ONwkXKUZd7.ActiveEffect.6pbotGIvqQkraPva
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         img: icons/equipment/shield/heater-steel-crystal-red.webp
         type: base
         system: {}
@@ -2098,12 +2114,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.YmZroxEDsVyUTwxp.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2116,12 +2133,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplShield0000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: YmZroxEDsVyUTwxp
     _key: '!actors.items!mmMage0000000000.YmZroxEDsVyUTwxp'
   - name: Detect Magic
@@ -2257,12 +2275,13 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.jdJ9mSsHzJRBSwJK.BHw91lQmVgdx39WZ
       - _id: dnd5espellchange
@@ -2291,12 +2310,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.jdJ9mSsHzJRBSwJK.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2312,12 +2332,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: jdJ9mSsHzJRBSwJK
     _key: '!actors.items!mmMage0000000000.jdJ9mSsHzJRBSwJK'
   - name: Light
@@ -2469,12 +2490,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.bX7FoTCn4c1G1k5F.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -2487,12 +2509,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLight00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: bX7FoTCn4c1G1k5F
     _key: '!actors.items!mmMage0000000000.bX7FoTCn4c1G1k5F'
   - name: Mage Armor
@@ -2620,12 +2643,13 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.spells.Item.CKZTpZlxj7hjjo2H.ActiveEffect.cfwMU7LuOJ619Lny
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         img: icons/equipment/chest/breastplate-helmet-metal.webp
         type: base
         system: {}
@@ -2658,12 +2682,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.kJxdj680Yr2u1vqp.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2679,12 +2704,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMageArmor0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: kJxdj680Yr2u1vqp
     _key: '!actors.items!mmMage0000000000.kJxdj680Yr2u1vqp'
   - name: Mage Hand
@@ -2837,12 +2863,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.yBlKwkM3UNW4t3z0.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -2858,12 +2885,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMageHand00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: yBlKwkM3UNW4t3z0
     _key: '!actors.items!mmMage0000000000.yBlKwkM3UNW4t3z0'
   - name: Prestidigitation
@@ -2998,12 +3026,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.NBBMY4cvPDELwanu.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -3016,12 +3045,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplPrestidigi
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: NBBMY4cvPDELwanu
     _key: '!actors.items!mmMage0000000000.NBBMY4cvPDELwanu'
   - name: Fireball
@@ -3170,12 +3200,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.7jrIuiiNO4BRkRCO.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -3188,12 +3219,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFireball00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 7jrIuiiNO4BRkRCO
     _key: '!actors.items!mmMage0000000000.7jrIuiiNO4BRkRCO'
   - name: Invisibility
@@ -3324,12 +3356,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.gYeuuG0rUMIaWuTJ.9svfDetqjhsFP3ey
       - _id: dnd5espellchange
@@ -3358,12 +3391,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.gYeuuG0rUMIaWuTJ.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -3376,12 +3410,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplInvisibili
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: gYeuuG0rUMIaWuTJ
     _key: '!actors.items!mmMage0000000000.gYeuuG0rUMIaWuTJ'
   - name: Cone of Cold
@@ -3522,12 +3557,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.Kcbgq6wAMhP5M8dq.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -3540,12 +3576,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplConeofCold
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: Kcbgq6wAMhP5M8dq
     _key: '!actors.items!mmMage0000000000.Kcbgq6wAMhP5M8dq'
   - name: Fly
@@ -3681,12 +3718,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.1hWmQp1lkTFED6qg.EHFLuTHqI6cXn1zb
       - _id: dnd5espellchange
@@ -3715,12 +3753,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMage0000000000.1hWmQp1lkTFED6qg.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -3733,12 +3772,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFly0000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712722859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 1hWmQp1lkTFED6qg
     _key: '!actors.items!mmMage0000000000.1hWmQp1lkTFED6qg'
 effects:
@@ -3768,12 +3808,13 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells.Item.CKZTpZlxj7hjjo2H.ActiveEffect.cfwMU7LuOJ619Lny
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     img: icons/equipment/chest/breastplate-helmet-metal.webp
     type: base
     system: {}
@@ -3783,12 +3824,13 @@ folder: oq65o5ZsauMtb1JY
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415931803
   modifiedTime: 1745712722898
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

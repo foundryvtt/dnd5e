@@ -155,7 +155,7 @@ export default class EnchantmentApplicationElement extends HTMLElement {
       ui.notifications.error("DND5E.ENCHANT.Warning.ConcentrationEnded", { console: false, localize: true });
       return;
     }
-    if ( !game.user.isGM && concentration && !concentration.actor?.isOwner ) {
+    if ( !game.user.isGM && concentration && !concentration.isOwner ) {
       ui.notifications.error("DND5E.EffectApplyWarningConcentration", { console: false, localize: true });
       return;
     }

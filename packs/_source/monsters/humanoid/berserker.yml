@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: vdaEgOdpIO2o7GNX
     name: Hide Armor
@@ -541,18 +546,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.n1V07puo0RQxPGuF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.n1V07puo0RQxPGuF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!kz1t6xeXVwODpYb2.vdaEgOdpIO2o7GNX'
   - _id: Qzj9HKnvRGhYoggC
     name: Reckless
@@ -618,30 +622,30 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: 1744135358115
           modifiedTime: 1744135431645
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!kz1t6xeXVwODpYb2.Qzj9HKnvRGhYoggC.WqXUqzRbXoMjF2MJ
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.4v3xxn1jEEMRzLBG
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4v3xxn1jEEMRzLBG
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744135320648
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!kz1t6xeXVwODpYb2.Qzj9HKnvRGhYoggC'
   - _id: RrHhFZOd6QT75V3W
     name: Greataxe
@@ -801,8 +805,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.1Lxk6kmoRhG8qQ0u
       dnd5e:
         riders:
           activity: []
@@ -810,12 +812,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.1Lxk6kmoRhG8qQ0u
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744135489725
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!kz1t6xeXVwODpYb2.RrHhFZOd6QT75V3W'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -825,10 +828,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171252938
   modifiedTime: 1744135509959
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!kz1t6xeXVwODpYb2'

@@ -471,7 +471,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -483,6 +482,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 2n8ByeQNl7QkjNVA
     name: Heated Body
@@ -492,8 +497,7 @@ items:
       description:
         value: >-
           <p>A creature that touches the salamander or hits it with a melee
-          attack while within 5 ft. of it takes <strong>7 (2d6) <em>fire
-          damage</em></strong>.</p>
+          attack while within 5 ft. of it takes [[/damage average]] damage.</p>
         chat: >-
           <p>A creature that touches the salamander or hits it with a melee
           attack while within 5 ft. of it takes <em>fire damage</em>.</p>
@@ -588,18 +592,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.iFNpsEMJT66eLoat
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iFNpsEMJT66eLoat
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676907
+      modifiedTime: 1747955396739
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!yVNPVJIBpQ2Mp3Xa.2n8ByeQNl7QkjNVA'
   - _id: 2y0o9wGzCVoBBuDZ
     name: Heated Weapons
@@ -608,9 +611,8 @@ items:
     system:
       description:
         value: >-
-          <p>Any metal melee weapon the salamander wields deals an extra
-          <strong>3 (1d6) <em>fire damage</em></strong> on a hit (included in
-          the attack).</p>
+          <p>Any metal melee weapon the salamander wields deals an extra 3 (1d6)
+          fire damage on a hit (included in the attack).</p>
         chat: >-
           <p>Any metal melee weapon the salamander wields deals an extra
           <em>fire damage</em> on a hit (included in the attack).</p>
@@ -640,18 +642,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.i3viKtKcSVeWLJFJ
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.i3viKtKcSVeWLJFJ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676907
+      modifiedTime: 1747955407863
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!yVNPVJIBpQ2Mp3Xa.2y0o9wGzCVoBBuDZ'
   - _id: H9TCRB3zfkFwk192
     name: Multiattack
@@ -743,18 +744,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273657680
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!yVNPVJIBpQ2Mp3Xa.H9TCRB3zfkFwk192'
   - _id: rvRy41yt9zowrAr1
     name: Tail
@@ -934,12 +934,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745108431042
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!yVNPVJIBpQ2Mp3Xa.rvRy41yt9zowrAr1'
   - _id: SKwOsrThcwqMXCZv
     name: Spear
@@ -1110,8 +1111,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
       dnd5e:
         riders:
           activity: []
@@ -1119,12 +1118,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745175926415
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!yVNPVJIBpQ2Mp3Xa.SKwOsrThcwqMXCZv'
 effects: []
 folder: IB448xVSBvtqitzs
@@ -1134,10 +1134,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171266675
   modifiedTime: 1745108442850
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!yVNPVJIBpQ2Mp3Xa'

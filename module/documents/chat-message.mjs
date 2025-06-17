@@ -496,7 +496,7 @@ export default class ChatMessage5e extends ChatMessage {
     const aggregatedRolls = CONFIG.DND5E.aggregateDamageDisplay ? aggregateDamageRolls(rolls) : rolls;
     let { formula, total, breakdown } = aggregatedRolls.reduce((obj, r) => {
       obj.formula.push(CONFIG.DND5E.aggregateDamageDisplay ? r.formula : ` + ${r.formula}`);
-      obj.total += r.total;
+      obj.total += Math.max(0, r.total);
       obj.breakdown.push(this._simplifyDamageRoll(r));
       return obj;
     }, { formula: [], total: 0, breakdown: [] });
@@ -555,7 +555,7 @@ export default class ChatMessage5e extends ChatMessage {
       const damageApplication = document.createElement("damage-application");
       damageApplication.classList.add("dnd5e2");
       damageApplication.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({
-        value: roll.total,
+        value: Math.max(0, roll.total),
         type: roll.options.type,
         properties: new Set(roll.options.properties ?? [])
       }));
@@ -572,7 +572,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _simplifyDamageRoll(roll) {
-    const aggregate = { type: roll.options.type, total: roll.total, constant: 0, dice: [] };
+    const aggregate = { type: roll.options.type, total: Math.max(0, roll.total), constant: 0, dice: [] };
     let hasMultiplication = false;
     for ( let i = roll.terms.length - 1; i >= 0; ) {
       const term = roll.terms[i--];
@@ -825,7 +825,7 @@ export default class ChatMessage5e extends ChatMessage {
    */
   applyChatCardDamage(li, multiplier) {
     const damages = aggregateDamageRolls(this.rolls, { respectProperties: true }).map(roll => ({
-      value: roll.total * (roll.options.type in CONFIG.DND5E.healingTypes ? -1 : 1),
+      value: Math.max(0, roll.total) * (roll.options.type in CONFIG.DND5E.healingTypes ? -1 : 1),
       type: roll.options.type,
       properties: new Set(roll.options.properties ?? [])
     }));

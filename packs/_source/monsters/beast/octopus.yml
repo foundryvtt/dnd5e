@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: SLnyx0Ta2ksVM9QL
     name: Tentacles
@@ -635,18 +640,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.nKpLMXS9E10TSGhU
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nKpLMXS9E10TSGhU
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741122417975
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3UUNbGiG2Yf1ZPxM.SLnyx0Ta2ksVM9QL'
   - _id: TKztZERtXehbxu2q
     name: Hold Breath
@@ -684,18 +688,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.lwC6jwy9bXberyWo
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lwC6jwy9bXberyWo
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!3UUNbGiG2Yf1ZPxM.TKztZERtXehbxu2q'
   - _id: ODM4yi5BKpC4Hohw
     name: Underwater Camouflage
@@ -733,18 +736,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.M9XqZZGoTKawAsCl
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.M9XqZZGoTKawAsCl
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!3UUNbGiG2Yf1ZPxM.ODM4yi5BKpC4Hohw'
   - _id: LZOszBNIg9oMej4l
     name: Water Breathing
@@ -780,18 +782,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.c4Q6NDCLJSNcNc9T
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.c4Q6NDCLJSNcNc9T
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!3UUNbGiG2Yf1ZPxM.LZOszBNIg9oMej4l'
   - _id: 8qYBpaA8c3BuBujY
     name: Ink Cloud
@@ -894,18 +895,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.bojUXmNOZ2rJVujD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bojUXmNOZ2rJVujD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676522
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3UUNbGiG2Yf1ZPxM.8qYBpaA8c3BuBujY'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -915,10 +915,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171200368
   modifiedTime: 1741122420299
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!3UUNbGiG2Yf1ZPxM'

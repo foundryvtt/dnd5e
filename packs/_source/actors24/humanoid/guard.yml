@@ -495,7 +495,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -551,6 +550,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Spear
     system:
@@ -711,12 +716,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepSpear00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720729
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmGuard000000000.aAcbmB8xbSuqUL9V'
   - name: Chain Shirt
     system:
@@ -780,12 +786,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmChainShirt
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720729
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 1MnlCW9tszC5MxMK
     sort: 0
     _key: '!actors.items!mmGuard000000000.1MnlCW9tszC5MxMK'
@@ -853,12 +860,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmShield0000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720729
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: umFXCQvaIVnsc3iv
     sort: 0
     _key: '!actors.items!mmGuard000000000.umFXCQvaIVnsc3iv'
@@ -867,12 +875,13 @@ folder: oq65o5ZsauMtb1JY
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415931803
   modifiedTime: 1745712720755
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

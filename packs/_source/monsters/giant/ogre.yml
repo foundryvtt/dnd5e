@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 1bqysUVTadmvi8nb
     name: Greatclub
@@ -631,18 +636,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.QRCsxkCwWNwswL9o
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.QRCsxkCwWNwswL9o
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552451
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!eIGowKTkEBC9gUzx.1bqysUVTadmvi8nb'
   - _id: tXgnd9qKOE2b7Wis
     name: Javelin
@@ -797,18 +801,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.DWLMnODrnHn8IbAG
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.DWLMnODrnHn8IbAG
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385519
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!eIGowKTkEBC9gUzx.tXgnd9qKOE2b7Wis'
   - _id: lJ2gJxLDBbFtLwdk
     name: Hide Armor
@@ -874,18 +877,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.n1V07puo0RQxPGuF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.n1V07puo0RQxPGuF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!eIGowKTkEBC9gUzx.lJ2gJxLDBbFtLwdk'
 effects: []
 folder: v8gFGdEluEFQdRQg
@@ -895,10 +897,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171244658
   modifiedTime: 1726171447163
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!eIGowKTkEBC9gUzx'

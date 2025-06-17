@@ -482,7 +482,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -494,6 +493,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: RAnyTfj3CGaiGK3W
     name: Consume Life
@@ -605,18 +610,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.r2nM5I77LnSvkLvD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.r2nM5I77LnSvkLvD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676865
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8KSVpQZyzius93ko.RAnyTfj3CGaiGK3W'
   - _id: 4wbSkOyE4ZqKLPQ6
     name: Ephemeral
@@ -652,18 +656,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.VrPyFE3Hhjh0QjIO
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VrPyFE3Hhjh0QjIO
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!8KSVpQZyzius93ko.4wbSkOyE4ZqKLPQ6'
   - _id: MGdIOXhRAQQRrAcO
     name: Incorporeal Movement
@@ -769,18 +772,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.LUHmtIDD1VTreFqI
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LUHmtIDD1VTreFqI
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676865
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8KSVpQZyzius93ko.MGdIOXhRAQQRrAcO'
   - _id: 3Sr6MrVgbTGw66Aa
     name: Variable Illumination
@@ -820,18 +822,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.iQGaWIinmYFPRF94
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iQGaWIinmYFPRF94
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!8KSVpQZyzius93ko.3Sr6MrVgbTGw66Aa'
   - _id: np6oHDOwHQFsSn5B
     name: Shock
@@ -996,12 +997,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745174130753
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8KSVpQZyzius93ko.np6oHDOwHQFsSn5B'
   - _id: vJR81iEOZYNMuAdz
     name: Invisibility
@@ -1093,18 +1095,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.dA5X2eQuOtHywpQF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.dA5X2eQuOtHywpQF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676865
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8KSVpQZyzius93ko.vJR81iEOZYNMuAdz'
 effects: []
 folder: FsvtTiIRh93utaoh
@@ -1114,10 +1115,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171207290
   modifiedTime: 1745174143582
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!8KSVpQZyzius93ko'

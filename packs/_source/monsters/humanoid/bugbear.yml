@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 0ZKRgrkQppv6MYIq
     name: Morningstar
@@ -631,18 +636,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.dX8AxCh9o0A9CkT3
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.dX8AxCh9o0A9CkT3
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745174894448
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!QtJairF0h18BRhEM.0ZKRgrkQppv6MYIq'
   - _id: CgwJLpd3sHn21cUQ
     name: Surprise Attack
@@ -746,18 +750,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.5DJYFjGQCz5aSl5e
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.5DJYFjGQCz5aSl5e
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!QtJairF0h18BRhEM.CgwJLpd3sHn21cUQ'
   - _id: BsMLwJ3gDd0jADY3
     name: Brute
@@ -795,18 +798,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.q8w1UF9woZDGIwvS
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.q8w1UF9woZDGIwvS
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!QtJairF0h18BRhEM.BsMLwJ3gDd0jADY3'
   - _id: SvFPSD4QGfNEvB0c
     name: Hide Armor
@@ -872,18 +874,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.n1V07puo0RQxPGuF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.n1V07puo0RQxPGuF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!QtJairF0h18BRhEM.SvFPSD4QGfNEvB0c'
   - _id: sSs3hSzkKBMNBgTs
     name: Shield
@@ -949,18 +950,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!QtJairF0h18BRhEM.sSs3hSzkKBMNBgTs'
   - _id: xwZYlJUYOv2J044p
     name: Javelin
@@ -1122,8 +1122,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.DWLMnODrnHn8IbAG
       dnd5e:
         riders:
           activity: []
@@ -1131,12 +1129,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.DWLMnODrnHn8IbAG
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745174878816
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!QtJairF0h18BRhEM.xwZYlJUYOv2J044p'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1146,10 +1145,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171230689
   modifiedTime: 1745174909100
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!QtJairF0h18BRhEM'

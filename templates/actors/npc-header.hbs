@@ -144,29 +144,29 @@
                             {{/if}}
                         </div>
                         <input type="text" name="system.attributes.hp.value" data-dtype="Number" placeholder="0"
-                               value="{{ value }}" inputmode="numeric" pattern="[+=\-]?\d*" hidden>
+                               value="{{ value }}" inputmode="numeric" pattern="^[+=\-]?\d*" hidden>
                     </div>
                     {{#if showDeathSaves}}
                     <div class="tmp">
                         <input type="text" name="system.attributes.hp.temp" data-dtype="Number" inputmode="numeric"
-                               placeholder="{{ localize 'DND5E.TMP' }}" value="{{ temp }}" pattern="[+=\-]?\d*">
+                               placeholder="{{ localize 'DND5E.TMP' }}" value="{{ temp }}" pattern="^[+=\-]?\d*">
                     </div>
                     {{/if}}
                 </div>
                 {{/with}}
 
                 {{!-- Temp & Tempmax --}}
-                {{#with system.attributes.hp}}
+                {{#with system._source.attributes.hp}}
                 <div class="meter sectioned split">
                     <div class="temp">
                         <input type="text" name="system.attributes.hp.temp" data-dtype="Number" inputmode="numeric"
                                placeholder="{{ localize 'DND5E.TMP' }}" value="{{#if temp}}{{ temp }}{{/if}}"
-                               pattern="[+=\-]?\d*">
+                               pattern="^[+=\-]?\d*">
                     </div>
                     <div class="tempmax">
                         <input type="text" name="system.attributes.hp.tempmax" data-dtype="Number"
                                inputmode="numeric" placeholder="+{{ localize 'DND5E.Max' }}"
-                               value="{{#if tempmax}}{{ tempmax }}{{/if}}" pattern="[+=\-]?\d*">
+                               value="{{#if tempmax}}{{ tempmax }}{{/if}}" pattern="^[+=\-]?\d*">
                     </div>
                 </div>
                 {{/with}}

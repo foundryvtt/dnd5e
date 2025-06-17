@@ -476,7 +476,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -488,6 +487,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: bUkTkdnQ3XbRcXkD
     name: Innate Spellcasting
@@ -533,18 +538,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447016003
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.bUkTkdnQ3XbRcXkD'
   - _id: 9Gf1hal94HjuAHMN
     name: Plane Shift (self only)
@@ -727,18 +731,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.9Gf1hal94HjuAHMN'
   - _id: OMZ6qNK1bdpI8ryh
     name: Magic Resistance
@@ -747,8 +750,8 @@ items:
     system:
       description:
         value: >-
-          <p>The hag has<strong> advantage </strong>on saving throws against
-          spells and other magical effects.</p>
+          <p>The hag has advantage on saving throws against spells and other
+          magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -776,18 +779,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747957153574
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.OMZ6qNK1bdpI8ryh'
   - _id: Um3cK4i4ZQSTqodb
     name: Claws (Hag Form Only)
@@ -944,12 +946,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107554139
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.Um3cK4i4ZQSTqodb'
   - _id: ftmaVOSJXvHPhraJ
     name: Change Shape
@@ -958,11 +961,10 @@ items:
     system:
       description:
         value: >-
-          <p>The hag magically <strong>polymorphs</strong> into a
-          <strong>Small</strong> or <strong>Medium female humanoid, or back into
-          her true form</strong>. Her statistics are the same in each form.
-          <strong>Any equipment she is wearing or carrying isn't
-          transformed</strong>. She reverts to her true form if she dies.</p>
+          <p>The hag magically polymorphs into a Small or Medium female
+          humanoid, or back into her true form. Her statistics are the same in
+          each form. Any equipment she is wearing or carrying isn't transformed.
+          She reverts to her true form if she dies.</p>
         chat: ''
       source:
         custom: ''
@@ -1043,18 +1045,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747957160662
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.ftmaVOSJXvHPhraJ'
   - _id: 0blKOND2AnsMsZa6
     name: Etherealness
@@ -1062,7 +1063,10 @@ items:
     img: icons/magic/unholy/barrier-shield-glowing-pink.webp
     system:
       description:
-        value: ''
+        value: >-
+          <p>The hag magically enters the Ethereal Plane from the Material
+          Plane, or vice versa. To do so, the hag must have a
+          <em>heartstone</em> in her possession.</p>
         chat: >-
           <section class="secret"><p></p></section><p>The hag magically enters
           the Ethereal Plane from the Material Plane, or vice versa. To do so,
@@ -1146,18 +1150,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.rDoNJnKdY47x8MD4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.rDoNJnKdY47x8MD4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676758
+      modifiedTime: 1747957200757
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.0blKOND2AnsMsZa6'
   - _id: tYZggJHgAbixP5rs
     name: Nightmare Haunting
@@ -1268,18 +1271,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.VbBHypDc0eLWbsNE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VbBHypDc0eLWbsNE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676758
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.tYZggJHgAbixP5rs'
   - _id: ghXTfe7sgCbgf1Q8
     name: Detect Magic
@@ -1383,21 +1385,20 @@ items:
           sort: 0
       identifier: detect-magic
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
+    flags: {}
     img: icons/magic/light/explosion-star-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.ghXTfe7sgCbgf1Q8'
   - _id: 41JIhpDyM9Anm7cs
     name: Magic Missile
@@ -1505,21 +1506,20 @@ items:
           sort: 0
       identifier: magic-missile
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.41JIhpDyM9Anm7cs
+    flags: {}
     img: icons/magic/fire/projectile-meteor-salvo-light-pink.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.41JIhpDyM9Anm7cs
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.41JIhpDyM9Anm7cs'
   - _id: ODhLKBxLnvvLOnw1
     name: Ray of Enfeeblement
@@ -1688,21 +1688,20 @@ items:
           sort: 0
       identifier: ray-of-enfeeblement
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ODhLKBxLnvvLOnw1
+    flags: {}
     img: icons/magic/light/beam-rays-teal.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ODhLKBxLnvvLOnw1
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.ODhLKBxLnvvLOnw1'
   - _id: KhwiSi9fwVfUPtku
     name: Sleep
@@ -1836,18 +1835,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.KhwiSi9fwVfUPtku
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.spells.KhwiSi9fwVfUPtku
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.KhwiSi9fwVfUPtku'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1857,10 +1855,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171266109
   modifiedTime: 1726171451880
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!xvh2UOKv1bh03Gih'
