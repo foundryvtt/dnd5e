@@ -162,6 +162,7 @@ export default class EnchantmentApplicationElement extends HTMLElement {
 
     const effectData = effect.toObject();
     effectData.origin = this.enchantmentActivity.uuid;
+    effectData.changes = await effect.replaceChangeValues(effectData.changes, { target: droppedItem });
     const applied = await ActiveEffect.create(effectData, {
       parent: droppedItem, keepOrigin: true, chatMessageOrigin: this.chatMessage.id
     });
