@@ -109,8 +109,8 @@ system:
           - str
           - dex
         dc:
-          calculation: str
-          formula: ''
+          calculation: ''
+          formula: 8 + max(@abilities.str.mod, @abilities.dex.mod) + @prof
       _id: Sl673lS0oweTsTHf
       img: ''
       appliedEffects:
@@ -270,7 +270,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1735866307724
-  modifiedTime: 1750440831015
+  modifiedTime: 1750442964195
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
