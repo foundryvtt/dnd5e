@@ -18,7 +18,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migrations                             */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -35,7 +35,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   }
 
   /* -------------------------------------------- */
-  /*  Methods                                     */
+  /*  Data Preparation                            */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -105,6 +105,35 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const dts = CONFIG.DND5E.actorSizes[size].dynamicTokenScale ?? 1;
     this.texture.scaleX = this._source.texture.scaleX * dts;
     this.texture.scaleY = this._source.texture.scaleY * dts;
+  }
+
+  /* -------------------------------------------- */
+  /*  Movement                                    */
+  /* -------------------------------------------- */
+
+  /**
+   * Set up the cost functions for all movement types.
+   */
+  static registerMovementCosts() {
+    for ( const type of ["walk", "fly", "swim", "burrow", "climb"] ) {
+      CONFIG.Token.movement.actions[type].getCostFunction = (...args) => this.getMovementCostFunction(type, ...args);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return the movement cost function for a specific movement type.
+   * @param {string} type
+   * @param {TokenDocument5e} token
+   * @param {TokenMeasureMovementPathOptions} options
+   * @returns {TokenMovementCostFunction}
+   */
+  static getMovementCostFunction(type, token, options) {
+    const actorMovement = token.actor?.system.attributes?.movement ?? {};
+    if ( !(type in actorMovement) || actorMovement[type] ) return cost => cost;
+    if ( CONFIG.DND5E.movementTypes[type]?.walkFallback ) return (cost, _from, _to, distance) => cost + distance;
+    return () => Infinity;
   }
 
   /* -------------------------------------------- */

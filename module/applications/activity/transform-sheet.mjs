@@ -71,7 +71,7 @@ export default class TransformSheet extends ActivitySheet {
     context.creatureTypeOptions = Object.entries(CONFIG.DND5E.creatureTypes)
       .map(([value, { label }]) => ({ value, label }));
     context.movementTypeOptions = Object.entries(CONFIG.DND5E.movementTypes)
-      .map(([value, label]) => ({ value, label }));
+      .map(([value, { label }]) => ({ value, label }));
 
     context.profiles = context.source.profiles.map((data, index) => ({
       data, index,

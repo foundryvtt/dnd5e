@@ -2481,18 +2481,37 @@ preLocalize("healingTypes", { keys: ["label"] });
 /* -------------------------------------------- */
 
 /**
- * The valid units of measure for movement distances in the game system.
- * By default this uses the imperial units of feet and miles.
- * @enum {string}
+ * @typedef MovementConfig
+ * @property {string} label            Localized label for the movement type.
+ * @property {boolean} [walkFallback]  When this special movement type runs out, can the actor fall back to using their
+ *                                     walk speed at 2x cost?
+ */
+
+/**
+ * Types of movement supported by creature actors in the system.
+ * @enum {MovementConfig}
  */
 DND5E.movementTypes = {
-  burrow: "DND5E.MovementBurrow",
-  climb: "DND5E.MovementClimb",
-  fly: "DND5E.MovementFly",
-  swim: "DND5E.MovementSwim",
-  walk: "DND5E.MovementWalk"
+  burrow: {
+    label: "DND5E.MovementBurrow"
+  },
+  climb: {
+    label: "DND5E.MovementClimb",
+    walkFallback: true
+  },
+  fly: {
+    label: "DND5E.MovementFly"
+  },
+  swim: {
+    label: "DND5E.MovementSwim",
+    walkFallback: true
+  },
+  walk: {
+    label: "DND5E.MovementWalk"
+  }
 };
-preLocalize("movementTypes", { sort: true });
+preLocalize("movementTypes", { key: "label", sort: true });
+patchConfig("movementTypes", "label", { since: "DnD5e 5.1", until: "DnD5e 5.3" });
 
 /* -------------------------------------------- */
 /*  Measurement                                 */
