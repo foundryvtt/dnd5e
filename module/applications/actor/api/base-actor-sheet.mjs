@@ -1694,13 +1694,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const { uuid } =
       TextEditor$1.implementation.getDragEventData(event);
 
-    item.flags = {
-      ...(item.flags ?? {}),
-      dnd5e: {
-        ...(item.flags?.dnd5e ?? {}),
-        sourceId: item.flags?.dnd5e?.sourceId ?? uuid
-      }
-    };
+    await item.setFlag("dnd5e", "sourceId", item.flags?.dnd5e?.sourceId ?? uuid);
+
     const behavior = this.#dropBehavior;
     if ( !this.actor.isOwner || (behavior === "none") ) return;
 
@@ -1722,7 +1717,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( !this.actor.isOwner || (behavior === "none") || (folder.type !== "Item") ) return;
 
     const items = await Promise.all(folder.contents.map(async item => {
-      if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
+      if ( !(item instanceof Item) ) {
+        const { uuid } = item;
+        item = await fromUuid(uuid);
+        await item.setFlag("dnd5e", "sourceId", item.flags?.dnd5e?.sourceId ?? uuid);
+      }
       return item;
     }));
     return this._onDropCreateItems(event, items);
