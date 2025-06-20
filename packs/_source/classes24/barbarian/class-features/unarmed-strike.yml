@@ -109,9 +109,13 @@ system:
           - str
           - dex
         dc:
-          calculation: ''
+          calculation: str
           formula: 8 + @abilities.str.mod + @prof
       _id: 56xkATs6DZLyRJH7
+      img: ''
+      appliedEffects:
+        - I62g7t7ytl0V3dTE
+        - l2B6aDyEF8l9FCME
   uses:
     spent: 0
     recovery: []
@@ -263,11 +267,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.345'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735865940469
-  modifiedTime: 1745256760156
+  modifiedTime: 1750440886064
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
