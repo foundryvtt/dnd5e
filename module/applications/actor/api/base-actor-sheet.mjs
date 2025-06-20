@@ -1691,13 +1691,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /** @override */
   async _onDropItem(event, item) {
-
-    if (!item._stats?.compendiumSource) {
-      const { uuid } =
-            TextEditor.implementation.getDragEventData(event);
-      item = item.clone({ "item._stats.compendiumSource": uuid }, { keepId: true });
-    }
-
     const behavior = this.#dropBehavior;
     if ( !this.actor.isOwner || (behavior === "none") ) return;
 
@@ -1719,17 +1712,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( !this.actor.isOwner || (behavior === "none") || (folder.type !== "Item") ) return;
 
     const items = await Promise.all(folder.contents.map(async item => {
-      if ( !(item instanceof Item) ) {
-
-        const { uuid } = item;
-        item = await fromUuid(uuid);
-
-        if (!item._stats?.compendiumSource) {
-          const { uuid } =
-            TextEditor.implementation.getDragEventData(event);
-          return item.clone({ "item._stats.compendiumSource": uuid }, { keepId: true });
-        }
-      }
+      if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
       return item;
     }));
     return this._onDropCreateItems(event, items);
@@ -1746,6 +1729,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   async _onDropCreateItems(event, items, behavior) {
+    items = items.map(item => item.clone({ "_stats.compendiumSource": item._stats?.compendiumSource ?? item.uuid }, { keepId: true }));
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
