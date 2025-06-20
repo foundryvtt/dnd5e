@@ -1691,6 +1691,16 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /** @override */
   async _onDropItem(event, item) {
+    const { uuid: sourceId } =
+      TextEditor$1.implementation.getDragEventData(event);
+
+    item.flags = {
+      ...(item.flags ?? {}),
+      dnd5e: {
+        ...(item.flags?.dnd5e ?? {}),
+        sourceId
+      }
+    };
     const behavior = this.#dropBehavior;
     if ( !this.actor.isOwner || (behavior === "none") ) return;
 
