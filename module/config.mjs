@@ -2535,8 +2535,7 @@ DND5E.defaultUnits = {
 
 /**
  * The valid units of measure for movement distances in the game system.
- * By default this uses the imperial units of feet and miles.
- * @enum {string}
+ * @enum {UnitConfiguration}
  */
 DND5E.movementUnits = {
   ft: {
