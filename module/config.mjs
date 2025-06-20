@@ -1223,6 +1223,7 @@ preLocalize("activityConsumptionTypes", { key: "label" });
  * @property {number} hitDie                  Default hit die denomination for NPCs of this size.
  * @property {number} [token=1]               Default token size.
  * @property {number} [capacityMultiplier=1]  Multiplier used to calculate carrying capacities.
+ * @property {number} numerical               Numerical representation of size
  */
 
 /**
@@ -1235,39 +1236,45 @@ DND5E.actorSizes = {
     abbreviation: "DND5E.SizeTinyAbbr",
     hitDie: 4,
     token: 0.5,
-    capacityMultiplier: 0.5
+    capacityMultiplier: 0.5,
+    numerical: 0
   },
   sm: {
     label: "DND5E.SizeSmall",
     abbreviation: "DND5E.SizeSmallAbbr",
     hitDie: 6,
-    dynamicTokenScale: 0.8
+    dynamicTokenScale: 0.8,
+    numerical: 1
   },
   med: {
     label: "DND5E.SizeMedium",
     abbreviation: "DND5E.SizeMediumAbbr",
-    hitDie: 8
+    hitDie: 8,
+    numerical: 2
   },
   lg: {
     label: "DND5E.SizeLarge",
     abbreviation: "DND5E.SizeLargeAbbr",
     hitDie: 10,
     token: 2,
-    capacityMultiplier: 2
+    capacityMultiplier: 2,
+    numerical: 3
   },
   huge: {
     label: "DND5E.SizeHuge",
     abbreviation: "DND5E.SizeHugeAbbr",
     hitDie: 12,
     token: 3,
-    capacityMultiplier: 4
+    capacityMultiplier: 4,
+    numerical: 4
   },
   grg: {
     label: "DND5E.SizeGargantuan",
     abbreviation: "DND5E.SizeGargantuanAbbr",
     hitDie: 20,
     token: 4,
-    capacityMultiplier: 8
+    capacityMultiplier: 8,
+    numerical: 5
   }
 };
 preLocalize("actorSizes", { keys: ["label", "abbreviation"] });
@@ -4558,6 +4565,12 @@ DND5E.characterFlags = {
   halflingLucky: {
     name: "DND5E.FlagsHalflingLucky",
     hint: "DND5E.FlagsHalflingLuckyHint",
+    section: "DND5E.RacialTraits",
+    type: Boolean
+  },
+  halflingNimbleness: {
+    name: "DND5E.FlagsHalflingNimbleness",
+    hint: "DND5E.FlagsHalflingNimblenessHint",
     section: "DND5E.RacialTraits",
     type: Boolean
   },

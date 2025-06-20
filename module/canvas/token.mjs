@@ -18,6 +18,41 @@ export default class Token5e extends foundry.canvas.placeables.Token {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  findMovementPath(waypoints, options) {
+    waypoints = this.document.getCompleteMovementPath(waypoints);
+    for ( const waypoint of waypoints ) {
+      delete waypoint.terrain;
+      delete waypoint.intermediate;
+    }
+    return super.findMovementPath(waypoints, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  _getMovementCostFunction(options) {
+    const costFunction = super._getMovementCostFunction(options);
+    if ( !game.settings.get("dnd5e", "movementAutomation") ) return costFunction;
+    return (from, to, distance, segment) => {
+      const cost = costFunction(from, to, distance, segment);
+
+      // Check if blocked
+      if ( this.layer.isOccupiedGridSpaceBlocking(to, this) ) return Infinity;
+
+      // Terrain already difficult, no stacking
+      if ( segment.terrain?.difficultTerrain ) return cost;
+
+      // Check difficult due to occupied tokens
+      if ( !this.layer.isOccupiedGridSpaceDifficult(to, this) ) return cost;
+
+      // Difficult terrain due to occupied grid space
+      return cost + distance;
+    };
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   _drawBar(number, bar, data) {
     if ( data.attribute === "attributes.hp" ) return this._drawHPBar(number, bar, data);

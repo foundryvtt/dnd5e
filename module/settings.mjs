@@ -76,6 +76,16 @@ export function registerSystemSettings() {
     requiresReload: true
   });
 
+  // Movement automation
+  game.settings.register("dnd5e", "movementAutomation", {
+    name: "SETTINGS.DND5E.MOVEMENTAUTOMATION.Name",
+    hint: "SETTINGS.DND5E.MOVEMENTAUTOMATION.Hint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
+  });
+
   // Allow rotating square templates
   game.settings.register("dnd5e", "gridAlignedSquareTemplates", {
     name: "SETTINGS.5eGridAlignedSquareTemplatesN",

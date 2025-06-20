@@ -2490,6 +2490,8 @@
 "DND5E.FlagsElvenAccuracyHint": "Roll an extra d20 with advantage to Dex, Int, Wis, or Cha.",
 "DND5E.FlagsHalflingLucky": "Halfling Lucky",
 "DND5E.FlagsHalflingLuckyHint": "Reroll ones when rolling d20 checks.",
+"DND5E.FlagsHalflingNimbleness": "Halfling Nimbleness",
+"DND5E.FlagsHalflingNimblenessHint": "Movement through larger creatures is not blocked.",
 "DND5E.FlagsAlert": "Alert Feat",
 "DND5E.FlagsAlertHint": "Proficient in Initiative rolls.",
 "DND5E.FlagsAlertHintLegacy": "Provides +5 to Initiative.",
@@ -5126,6 +5128,10 @@
       "Name": "Use Metric Weight Units",
       "Hint": "Replaces all reference to lbs with kgs and updates the encumbrance calculations to use metric weight units."
     }
+  },
+  "MOVEMENTAUTOMATION": {
+    "Name": "Enable Movement Automation",
+    "Hint": "Enable tokens blocking/increasing cost of movement."
   },
   "NPCS": {
     "Name": "NPCs",
