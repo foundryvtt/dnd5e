@@ -1694,7 +1694,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const { uuid } =
       TextEditor$1.implementation.getDragEventData(event);
 
-    await item.setFlag("dnd5e", "sourceId", item.flags?.dnd5e?.sourceId ?? uuid);
+    item.flags = {
+      ...(item.flags ?? {}),
+      dnd5e: {
+        ...(item.flags?.dnd5e ?? {}),
+        sourceId: item.flags?.dnd5e?.sourceId ?? uuid
+      }
+    };
 
     const behavior = this.#dropBehavior;
     if ( !this.actor.isOwner || (behavior === "none") ) return;
@@ -1720,7 +1726,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( !(item instanceof Item) ) {
         const { uuid } = item;
         item = await fromUuid(uuid);
-        await item.setFlag("dnd5e", "sourceId", item.flags?.dnd5e?.sourceId ?? uuid);
+        item.flags = {
+          ...(item.flags ?? {}),
+          dnd5e: {
+            ...(item.flags?.dnd5e ?? {}),
+            sourceId: item.flags?.dnd5e?.sourceId ?? uuid
+          }
+        };
       }
       return item;
     }));
