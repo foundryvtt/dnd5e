@@ -1691,16 +1691,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /** @override */
   async _onDropItem(event, item) {
-    const { uuid } =
-      TextEditor$1.implementation.getDragEventData(event);
 
-    item.flags = {
-      ...(item.flags ?? {}),
-      dnd5e: {
-        ...(item.flags?.dnd5e ?? {}),
-        sourceId: item.flags?.dnd5e?.sourceId ?? uuid
-      }
-    };
+    if (!item.getFlag("dnd5e", "sourceId")) {
+      const { uuid } =
+            TextEditor.implementation.getDragEventData(event);
+      item = item.clone({ "flags.dnd5e.sourceId": uuid }, { keepId: true });
+    }
 
     const behavior = this.#dropBehavior;
     if ( !this.actor.isOwner || (behavior === "none") ) return;
@@ -1724,15 +1720,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     const items = await Promise.all(folder.contents.map(async item => {
       if ( !(item instanceof Item) ) {
+
         const { uuid } = item;
         item = await fromUuid(uuid);
-        item.flags = {
-          ...(item.flags ?? {}),
-          dnd5e: {
-            ...(item.flags?.dnd5e ?? {}),
-            sourceId: item.flags?.dnd5e?.sourceId ?? uuid
-          }
-        };
+
+        if (!item.getFlag("dnd5e", "sourceId")) {
+          return item.clone({ "flags.dnd5e.sourceId": uuid }, { keepId: true });
+        }
       }
       return item;
     }));
