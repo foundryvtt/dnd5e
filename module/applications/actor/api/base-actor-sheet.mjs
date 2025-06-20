@@ -1692,10 +1692,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   async _onDropItem(event, item) {
 
-    if (!item.getFlag("dnd5e", "sourceId")) {
+    if (!item._stats?.compendiumSource) {
       const { uuid } =
             TextEditor.implementation.getDragEventData(event);
-      item = item.clone({ "flags.dnd5e.sourceId": uuid }, { keepId: true });
+      item = item.clone({ "item._stats.compendiumSource": uuid }, { keepId: true });
     }
 
     const behavior = this.#dropBehavior;
@@ -1724,8 +1724,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const { uuid } = item;
         item = await fromUuid(uuid);
 
-        if (!item.getFlag("dnd5e", "sourceId")) {
-          return item.clone({ "flags.dnd5e.sourceId": uuid }, { keepId: true });
+        if (!item._stats?.compendiumSource) {
+          const { uuid } =
+            TextEditor.implementation.getDragEventData(event);
+          return item.clone({ "item._stats.compendiumSource": uuid }, { keepId: true });
         }
       }
       return item;
