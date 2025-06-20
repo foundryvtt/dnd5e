@@ -21,10 +21,6 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /** @inheritdoc */
   findMovementPath(waypoints, options) {
     waypoints = this.document.getCompleteMovementPath(waypoints);
-    for ( const waypoint of waypoints ) {
-      delete waypoint.terrain;
-      delete waypoint.intermediate;
-    }
     return super.findMovementPath(waypoints, options);
   }
 
