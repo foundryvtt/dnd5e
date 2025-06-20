@@ -1,6 +1,12 @@
 export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
-  isOccupiedGridSpaceBlocking(waypoint, token) {
-    const found = this._getRelevantOccupyingTokens(waypoint, token);
+  /**
+   * Determine whether the provided grid space is being occupied by a token which should block the provided token
+   * @param {GridOffset3D} gridSpace  The grid space to check
+   * @param {Token5e} token           The token being moved
+   * @returns {boolean} Whether the moving token should be blocked
+   */
+  isOccupiedGridSpaceBlocking(gridSpace, token) {
+    const found = this._getRelevantOccupyingTokens(gridSpace, token);
     const tokenSize = CONFIG.DND5E.actorSizes[token.actor?.system.traits.size]?.numerical ?? 2;
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     const halflingNimbleness = token.actor?.getFlag("dnd5e", "halflingNimbleness");
@@ -23,8 +29,15 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
     });
   }
 
-  isOccupiedGridSpaceDifficult(waypoint, token) {
-    const found = this._getRelevantOccupyingTokens(waypoint, token);
+  /**
+   * Determine whether the provided grid space is being occupied by a token which should cause difficult terrain for
+   * the provided token
+   * @param {GridOffset3D} gridSpace  The grid space to check
+   * @param {Token5e} token           The token being moved
+   * @returns {boolean} Whether the moving token should suffer difficult terrain
+   */
+  isOccupiedGridSpaceDifficult(gridSpace, token) {
+    const found = this._getRelevantOccupyingTokens(gridSpace, token);
     const tokenSize = CONFIG.DND5E.actorSizes[token.actor?.system.traits.size]?.numerical ?? 2;
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     const halflingNimbleness = token.actor?.getFlag("dnd5e", "halflingNimbleness");
@@ -47,9 +60,17 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
     });
   }
 
-  _getRelevantOccupyingTokens(waypoint, token) {
+  /**
+   * Determine the set of tokens occupying the provided grid space which may be relevant for blocking/difficult terrain
+   * considerations
+   * @param {GridOffset3D} gridSpace  The grid space to check
+   * @param {Token5e} token           The token being moved
+   * @returns {Set<Token5e>} The set of potentially relevant tokens occupying the provided grid space
+   * @private
+   */
+  _getRelevantOccupyingTokens(gridSpace, token) {
     const grid = canvas.grid;
-    const topLeft = grid.getTopLeftPoint(waypoint);
+    const topLeft = grid.getTopLeftPoint(gridSpace);
     const rect = new PIXI.Rectangle(topLeft.x, topLeft.y, grid.sizeX, grid.sizeY);
     const found = game.canvas.tokens.quadtree.getObjects(rect);
     return found.filter(t => {
@@ -58,7 +79,7 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
 
       // Ignore different elevation
       const { k: occupiedElevation } = grid.getOffset(t.document);
-      if ( occupiedElevation !== waypoint.k ) return false;
+      if ( occupiedElevation !== gridSpace.k ) return false;
 
       // Ensure space is actually occupied, not merely touching border of rectangle
       const gridSpaces = t.document.getOccupiedGridSpaceOffsets().map(coord => grid.getTopLeftPoint(coord));
