@@ -6,8 +6,10 @@ import { formatNumber } from "../../utils.mjs";
 
 /**
  * Extension of the core calendar with extra formatters.
+ * @template {TimeComponents} Components
  */
 export default class CalendarData5e extends foundry.data.CalendarData {
+
   /* -------------------------------------------- */
   /*  Calendar Helper Methods                     */
   /* -------------------------------------------- */
@@ -88,20 +90,22 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Prepared date parts passed to the localization.
-   * @param {CalendarData} calendar      The configured calendar
-   * @param {TimeComponents} components  Time components to format
+   * @param {CalendarData} calendar  The configured calendar.
+   * @param {Components} components  Time components to format.
    * @returns {CalendarFormattingContext}
    */
   static dateFormattingParts(calendar, components) {
     const month = calendar.months.values[components.month];
     return {
       // Year
-      Y: components.year.paddedString(4),
+      y: components.year + calendar.years.yearZero,
+      yyyy: (components.year + calendar.years.yearZero).paddedString(4),
 
       // Month
       b: month.abbreviation,
       B: game.i18n.localize(month.name),
-      m: month.ordinal.paddedString(2),
+      m: month.ordinal,
+      mm: month.ordinal.paddedString(2),
 
       // Week
       // a: Day of week abbreviation (e.g. Mon, Tue)
@@ -109,7 +113,8 @@ export default class CalendarData5e extends foundry.data.CalendarData {
       // W: week number of the year
 
       // Day
-      d: (components.dayOfMonth + 1).paddedString(2),
+      d: components.dayOfMonth + 1,
+      dd: (components.dayOfMonth + 1).paddedString(2),
       D: formatNumber(components.dayOfMonth + 1, { ordinal: true }),
       j: (components.day + 1).paddedString(3),
       w: String(components.dayOfWeek + 1),
@@ -128,11 +133,69 @@ export default class CalendarData5e extends foundry.data.CalendarData {
   /* -------------------------------------------- */
 
   /**
+   * Format the date to approximate value based on season (e.g. "Early Spring", "Mid-Winter").
+   * @param {CalendarData} calendar  The configured calendar.
+   * @param {Components} components  Time components to format.
+   * @param {object} options         Additional formatting options.
+   * @returns {string}               The returned string format.
+   */
+  static formatApproximateDate(calendar, components, options) {
+    const season = calendar.seasons.values[components.season];
+    let day = components.day;
+    let seasonStart = season.dayStart;
+    let seasonEnd = season.dayEnd;
+    let days = 0;
+    for ( const month of calendar.months.values ) {
+      if ( (seasonStart !== null) && (seasonEnd !== null) ) break;
+      if ( season.monthStart === month.ordinal ) seasonStart = days;
+      if ( season.monthEnd === month.ordinal ) seasonEnd = days;
+      days += components.leapYear ? month.leapDays ?? month.days : month.days;
+    }
+    if ( seasonEnd < seasonStart ) seasonEnd += calendar.days.daysPerYear;
+    if ( day < seasonStart ) day += calendar.days.daysPerYear;
+    const seasonPercent = (day - seasonStart) / (seasonEnd - seasonStart);
+    let formatter = "Mid";
+    if ( seasonPercent <= 0.33 ) formatter = "Early";
+    else if ( seasonPercent >= 0.66 ) formatter = "Late";
+    return game.i18n.format(`DND5E.CALENDAR.Formatters.ApproximateDate.${formatter}Season`, {
+      season: game.i18n.localize(season.name)
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Format the time to approximate value (e.g. "Dawn", "Noon", "Night").
+   * @param {CalendarData} calendar  The configured calendar.
+   * @param {Components} components  Time components to format.
+   * @param {object} options         Additional formatting options.
+   * @returns {string}               The returned string format.
+   */
+  static formatApproximateTime(calendar, components, options) {
+    const day = calendar.progressDay(components);
+    const night = calendar.progressNight(components);
+    let formatter;
+    if ( (night > 0.96) && (day < 0.04) ) formatter = "Sunrise";
+    else if ( (day > 0.96) && (night < 0.04) ) formatter = "Sunset";
+    else if ( (day > 0.45) && (day < 0.55) ) formatter = "Noon";
+    else if ( (night > 0.45) && (night < 0.55) ) formatter = "Midnight";
+    else if ( (night > 0.84) && (day < 0) ) formatter = "Dawn";
+    else if ( (day > 1) && (night < 0.16) ) formatter = "Dusk";
+    else if ( (day > 0) && (day < 0.5) ) formatter = "Morning";
+    else if ( (day > 0.5) && (day <= 0.85) ) formatter = "Afternoon";
+    else if ( (day > 0.85) && (night < 0) ) formatter = "Evening";
+    else formatter = "Night";
+    return game.i18n.localize(`DND5E.CALENDAR.Formatters.ApproximateTime.${formatter}`);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Format the time to a value including hours and minutes.
-   * @param {CalendarData} calendar      The configured calendar.
-   * @param {TimeComponents} components  Time components to format.
-   * @param {object} options             Additional formatting options.
-   * @returns {string}                   The returned string format.
+   * @param {CalendarData} calendar  The configured calendar.
+   * @param {Components} components  Time components to format.
+   * @param {object} options         Additional formatting options.
+   * @returns {string}               The returned string format.
    */
   static formatHoursMinutes(calendar, components, options) {
     return CalendarData5e.formatLocalized(
@@ -144,10 +207,10 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Format the time to a value including hours, minutes, and seconds.
-   * @param {CalendarData} calendar      The configured calendar.
-   * @param {TimeComponents} components  Time components to format.
-   * @param {object} options             Additional formatting options.
-   * @returns {string}                   The returned string format.
+   * @param {CalendarData} calendar  The configured calendar.
+   * @param {Components} components  Time components to format.
+   * @param {object} options         Additional formatting options.
+   * @returns {string}               The returned string format.
    */
   static formatHoursMinutesSeconds(calendar, components, options) {
     return CalendarData5e.formatLocalized(
@@ -159,11 +222,11 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Format the date using the provided localization key and the default formatting parts.
-   * @param {string} localizationKey     Key to use for localization.
-   * @param {CalendarData} calendar      The configured calendar.
-   * @param {TimeComponents} components  Time components to format.
-   * @param {object} options             Additional formatting options.
-   * @returns {string}                   The returned string format.
+   * @param {string} localizationKey  Key to use for localization.
+   * @param {CalendarData} calendar   The configured calendar.
+   * @param {Components} components   Time components to format.
+   * @param {object} options          Additional formatting options.
+   * @returns {string}                The returned string format.
    */
   static formatLocalized(localizationKey, calendar, components, options) {
     return game.i18n.format(localizationKey, CalendarData5e.dateFormattingParts(calendar, components));
@@ -173,10 +236,10 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Format the date to a value including month and day.
-   * @param {CalendarData} calendar      The configured calendar.
-   * @param {TimeComponents} components  Time components to format.
-   * @param {object} options             Additional formatting options.
-   * @returns {string}                   The returned string format.
+   * @param {CalendarData} calendar   The configured calendar.
+   * @param {Components} components  Time components to format.
+   * @param {object} options         Additional formatting options.
+   * @returns {string}               The returned string format.
    */
   static formatMonthDay(calendar, components, options) {
     return CalendarData5e.formatLocalized(
@@ -188,10 +251,10 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
   /**
    * Format the date to a value including month, day, and year.
-   * @param {CalendarData} calendar      The configured calendar.
-   * @param {TimeComponents} components  Time components to format.
-   * @param {object} options             Additional formatting options.
-   * @returns {string}                   The returned string format.
+   * @param {CalendarData} calendar  The configured calendar.
+   * @param {Components} components  Time components to format.
+   * @param {object} options         Additional formatting options.
+   * @returns {string}               The returned string format.
    */
   static formatMonthDayYear(calendar, components, options) {
     return CalendarData5e.formatLocalized(

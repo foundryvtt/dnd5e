@@ -1134,6 +1134,25 @@
   },
   "Formatters": {
     "Date": "Date Formatters",
+    "ApproximateDate": {
+      "EarlySeason": "Early {season}",
+      "Label": "Approximate Date",
+      "LateSeason": "Late {season}",
+      "MidSeason": "Mid-{season}"
+    },
+    "ApproximateTime": {
+      "Afternoon": "Afternoon",
+      "Dawn": "Dawn",
+      "Dusk": "Dusk",
+      "Evening": "Evening",
+      "Label": "Approximate Time",
+      "Midnight": "Midnight",
+      "Morning": "Morning",
+      "Night": "Night",
+      "Noon": "Noon",
+      "Sunrise": "Sunrise",
+      "Sunset": "Sunset"
+    },
     "HoursMinutes": {
       "Format": "{H}:{M}",
       "Label": "Hours & Minutes"
@@ -1147,12 +1166,150 @@
       "Label": "Month & Day"
     },
     "MonthDayYear": {
-      "Format": "{B} {D}, {Y}",
+      "Format": "{B} {D}, {y}",
       "Label": "Month, Day, & Year"
     },
     "Time": "Time Formatters"
   },
-  "Gregorian": "Gregorian Calendar"
+  "Gregorian": "Gregorian Calendar",
+  "Greyhawk": {
+    "Day": {
+      "Starday": "Starday",
+      "Sunday": "Sunday",
+      "Moonday": "Moonday",
+      "Godsday": "Godsday",
+      "Waterday": "Waterday",
+      "Earthday": "Earthday",
+      "Freeday": "Freeday"
+    },
+    "Festival": {
+      "Needfest": "Needfest",
+      "Growfest": "Growfest",
+      "Richfest": "Richfest",
+      "Brewfest": "Brewfest"
+    },
+    "Formatters": {
+      "MonthDay": "{B} {d}",
+      "MonthDayYear": "{B} {d}, {y}"
+    },
+    "Month": {
+      "Fireseek": "Fireseek",
+      "Readying": "Readying",
+      "Coldeven": "Coldeven",
+      "Planting": "Planting",
+      "Flocktime": "Flocktime",
+      "Wealsun": "Wealsun",
+      "Reaping": "Reaping",
+      "Godmonth": "Godmonth",
+      "Harvester": "Harvester",
+      "Patchwall": "Patchwall",
+      "Readyreat": "Ready’reat",
+      "Sunsebb": "Sunsebb"
+    },
+    "Name": "Calendar of Greyhawk",
+    "Season": {
+      "Spring": "Spring",
+      "Summer": "Summer",
+      "Fall": "Fall",
+      "Winter": "Winter"
+    }
+  },
+  "Harptos": {
+    "Day": {
+      "One": "one-day",
+      "Two": "two-day",
+      "Three": "three-day",
+      "Four": "four-day",
+      "Five": "five-day",
+      "Six": "six-day",
+      "Seven": "seven-day",
+      "Eight": "eight-day",
+      "Nine": "nine-day",
+      "Ten": "ten-day"
+    },
+    "Festival": {
+      "Midwinter": "Midwinter",
+      "Greengrass": "Greengrass",
+      "Midsummer": "Midsummer",
+      "Shieldmeet": "Shieldmeet",
+      "Highharvesttide": "Highharvesttide",
+      "FeastOfTheMoon": "The Feast of the Moon"
+    },
+    "Formatters": {
+      "DayMonth": "{d} {B}",
+      "DayMonthYear": "{d} {B}, {y} DR",
+      "FestivalDayYear": "{day}, {Y} DR"
+    },
+    "Month": {
+      "Hammer": "Hammer",
+      "HammerCommon": "Deepwinter",
+      "Alturiak": "Alturiak",
+      "AlturiakCommon": "The Claw of Winter",
+      "Ches": "Ches",
+      "ChesCommon": "The Claw of the Sunsets",
+      "Tarsakh": "Tarsakh",
+      "TarsakhCommon": "The Claw of the Storms",
+      "Mirtul": "Mirtul",
+      "MirtulCommon": "The Melting",
+      "Kythorn": "Kythorn",
+      "KythornCommon": "The Time of Flowers",
+      "Flamerule": "Flamerule",
+      "FlameruleCommon": "Summertide",
+      "Eleasias": "Eleasias",
+      "EleasiasCommon": "Highsun",
+      "Eleint": "Eleint",
+      "EleintCommon": "The Fading",
+      "Marpenoth": "Marpenoth",
+      "MarpenothCommon": "Leaffall",
+      "Uktar": "Uktar",
+      "UktarCommon": "The Rotting",
+      "Nightal": "Nightal",
+      "NightalCommon": "The Drawing Down"
+    },
+    "Name": "Calendar of Harptos (Forgotten Realms)",
+    "Season": {
+      "Spring": "Spring",
+      "Summer": "Summer",
+      "Fall": "Fall",
+      "Winter": "Winter"
+    }
+  },
+  "Khorvaire": {
+    "Day": {
+      "Sul": "Sul",
+      "Mol": "Mol",
+      "Zol": "Zol",
+      "Wir": "Wir",
+      "Zor": "Zor",
+      "Far": "Far",
+      "Sar": "Sar"
+    },
+    "Formatters": {
+      "DayMonth": "{d} {B}",
+      "DayMonthYear": "{d} {B} {y} YK"
+    },
+    "Month": {
+      "Zarantyr": "Zarantyr",
+      "Olarune": "Olarune",
+      "Therendor": "Therendor",
+      "Eyre": "Eyre",
+      "Dravago": "Dravago",
+      "Nymm": "Nymm",
+      "Lharvion": "Lharvion",
+      "Barrakas": "Barrakas",
+      "Rhaan": "Rhaan",
+      "Sypheros": "Sypheros",
+      "Aryth": "Aryth",
+      "Vult": "Vult"
+    },
+    "Name": "Calendar of Khorvaire (Eberron)",
+    "Season": {
+      "Spring": "Spring",
+      "Summer": "Summer",
+      "Autumn": "Autumn",
+      "Winter": "Winter"
+    }
+  }
 },
 
 "DND5E.CAST": {
