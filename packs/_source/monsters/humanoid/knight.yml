@@ -566,7 +566,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The knight makes two melee attacks.</p>
+        value: >-
+          <p>The knight makes two [[/item .iPLa96izrYFiVtaO]]{melee}
+          attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -651,12 +653,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403495205
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!D5UqYD1EnTrJaMTO.46b7R0DbKIsxvWcv'
   - _id: iPLa96izrYFiVtaO
@@ -1111,9 +1113,9 @@ items:
     system:
       description:
         value: >-
-          <p>The knight adds 2 to its <strong>AC</strong> against one melee
-          Attack that would hit it. To do so, the knight must see the attacker
-          and be wielding a melee weapon.</p>
+          <p>The knight adds 2 to its AC against one melee Attack that would hit
+          it. To do so, the knight must see the attacker and be wielding a melee
+          weapon.</p>
         chat: >-
           <p>The knight adds 2 to its <strong>AC</strong> against one melee
           Attack that would hit it.</p>
@@ -1200,11 +1202,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676771
+      modifiedTime: 1749403505538
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!D5UqYD1EnTrJaMTO.AxY9pWHDr2M1SPCC'
@@ -1215,8 +1217,8 @@ items:
     system:
       description:
         value: >-
-          <p>The knight has<strong> advantage </strong>on saving throws against
-          being frightened.</p>
+          <p>The knight has advantage on saving throws against being
+          frightened.</p>
         chat: ''
       source:
         custom: ''
@@ -1248,12 +1250,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.108q5fJnnBRoLKfe
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403477970
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!D5UqYD1EnTrJaMTO.Sp9AkcXsLCN09C9v'
 effects: []

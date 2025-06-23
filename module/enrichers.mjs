@@ -1407,7 +1407,7 @@ async function rollAction(event) {
     const chatData = {
       user: game.user.id,
       content: await foundry.applications.handlebars.renderTemplate(
-        "systems/dnd5e/templates/chat/request-card.hbs", { buttons }
+        "systems/dnd5e/templates/chat/roll-request-card.hbs", { buttons }
       ),
       flavor: game.i18n.localize("EDITOR.DND5E.Inline.RollRequest"),
       speaker: MessageClass.getSpeaker({user: game.user})

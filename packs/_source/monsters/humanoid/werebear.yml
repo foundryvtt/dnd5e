@@ -519,7 +519,8 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -587,11 +588,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676923
+      modifiedTime: 1749403785051
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oRBnO5OHoOZzlCOr.D8QWBbYLFAT7uIiz'
@@ -602,8 +603,8 @@ items:
     system:
       description:
         value: >-
-          <p>The werebear has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on smell.</p>
+          <p>The werebear has advantage on Wisdom (Perception) checks that rely
+          on smell.</p>
         chat: ''
       source:
         custom: ''
@@ -635,12 +636,12 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403769469
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oRBnO5OHoOZzlCOr.rzLcynHQQj04Ue4B'
   - _id: COcc6eoG6ScS4wGz
@@ -650,9 +651,10 @@ items:
     system:
       description:
         value: >-
-          <p>In bear form, the werebear makes two claw attacks. In humanoid
-          form, it makes two greataxe attacks. In hybrid form, it can attack
-          like a bear or a humanoid.</p>
+          <p>In bear form, the werebear makes two [[/item
+          .pEYcOjAF2fovrXRP]]{claw} attacks. In humanoid form, it makes two
+          [[/item .UeXfHUO5RZp72PIs]]{greataxe} attacks. In hybrid form, it can
+          attack like a bear or a humanoid.</p>
         chat: ''
       source:
         custom: ''
@@ -737,12 +739,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403841561
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oRBnO5OHoOZzlCOr.COcc6eoG6ScS4wGz'
   - _id: h9XO0f5Un3EhJqHm
@@ -752,9 +754,9 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
-          a humanoid, it must succeed on a  <strong>DC 14 Constitution</strong>
-          saving throw or be cursed with were bear lycanthropy.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a humanoid, it must succeed on a [[/save]] saving throw or be cursed
+          with were bear lycanthropy.</p>
         chat: >-
           <p>The Werebear attacks with its Bite. If the target is a humanoid, it
           must make a <strong>Constitution</strong> saving throw.</p>
@@ -964,11 +966,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745107553437
+      modifiedTime: 1749403800029
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oRBnO5OHoOZzlCOr.h9XO0f5Un3EhJqHm'

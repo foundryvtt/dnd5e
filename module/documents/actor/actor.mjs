@@ -1038,13 +1038,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     };
 
     return ChatMessage.implementation.create({
-      content: await foundry.applications.handlebars.renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
-        buttons: [{
-          dataset: { ...dataset, type: "concentration", visbility: "all" },
-          buttonLabel: createRollLabel({ ...dataset, ...config }),
-          hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
-        }]
-      }),
+      content: await foundry.applications.handlebars.renderTemplate(
+        "systems/dnd5e/templates/chat/roll-request-card.hbs",
+        {
+          buttons: [{
+            dataset: { ...dataset, type: "concentration", visbility: "all" },
+            buttonLabel: createRollLabel({ ...dataset, ...config }),
+            hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
+          }]
+        }
+      ),
       whisper: game.users.filter(user => this.testUserPermission(user, "OWNER")),
       speaker: ChatMessage.implementation.getSpeaker({ actor: this })
     });
@@ -2030,7 +2033,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Configuration options for a rest.
    *
-   * @typedef {object} RestConfiguration
+   * @typedef RestConfiguration
    * @property {string} type                   Type of rest to perform.
    * @property {boolean} dialog                Present a dialog window which allows for rolling hit dice as part of the
    *                                           Short Rest and selecting whether a new day has occurred.
@@ -2042,17 +2045,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {boolean} [autoHD]              Should hit dice be spent automatically during a short rest?
    * @property {number} [autoHDThreshold]      How many hit points should be missing before hit dice are
    *                                           automatically spent during a short rest.
+   * @property {boolean} [recoverTemp]         Reset temp HP to zero.
+   * @property {boolean} [recoverTempMax]      Reset temp max HP to zero.
+   * @property {ChatMessage5e} [request]       Rest request chat message for which this rest was performed.
    */
 
   /**
    * Results from a rest operation.
    *
-   * @typedef {object} RestResult
+   * @typedef RestResult
    * @property {string} type              Type of rest performed.
    * @property {Actor5e} clone            Clone of the actor before rest is performed.
    * @property {object} deltas
    * @property {number} deltas.hitPoints  Hit points recovered during the rest.
    * @property {number} deltas.hitDice    Hit dice recovered or spent during the rest.
+   * @property {ChatMessage5e} [message]  The created chat message.
    * @property {boolean} newDay           Whether a new day occurred during the rest.
    * @property {Roll[]} rolls             Any rolls that occurred during the rest process, not including hit dice.
    * @property {object} updateData        Updates applied to the actor.
@@ -2063,16 +2070,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Take a short rest, possibly spending hit dice and recovering resources, item uses, and relevant spell slots.
-   * @param {RestConfiguration} [config]  Configuration options for a short rest.
-   * @returns {Promise<RestResult>}       A Promise which resolves once the short rest workflow has completed.
+   * @param {Partial<RestConfiguration>} [config]  Configuration options for a short rest.
+   * @returns {Promise<RestResult>}                A Promise which resolves once the short rest workflow has completed.
    */
   async shortRest(config={}) {
     if ( this.type === "vehicle" ) return;
     const clone = this.clone();
 
+    const restConfig = CONFIG.DND5E.restTypes.short;
     config = foundry.utils.mergeObject({
       type: "short", dialog: true, chat: true, newDay: false, advanceTime: false, autoHD: false, autoHDThreshold: 3,
-      duration: CONFIG.DND5E.restTypes.short.duration[game.settings.get("dnd5e", "restVariant")]
+      duration: CONFIG.DND5E.restTypes.short.duration[game.settings.get("dnd5e", "restVariant")],
+      recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax
     }, config);
 
     /**
@@ -2092,7 +2101,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Display a Dialog for rolling hit dice
     if ( config.dialog ) {
       try {
-        foundry.utils.mergeObject(config, await ShortRestDialog.configure(this, config));
+        Object.assign(config, await ShortRestDialog.configure(this, config));
       } catch(err) { return; }
     }
 
@@ -2119,16 +2128,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Take a long rest, recovering hit points, hit dice, resources, item uses, and spell slots.
-   * @param {RestConfiguration} [config]  Configuration options for a long rest.
+   * @param {Partial<RestConfiguration>} [config]  Configuration options for a long rest.
    * @returns {Promise<RestResult>}       A Promise which resolves once the long rest workflow has completed.
    */
   async longRest(config={}) {
     if ( this.type === "vehicle" ) return;
     const clone = this.clone();
 
+    const restConfig = CONFIG.DND5E.restTypes.long;
     config = foundry.utils.mergeObject({
       type: "long", dialog: true, chat: true, newDay: true, advanceTime: false,
-      duration: CONFIG.DND5E.restTypes.long.duration[game.settings.get("dnd5e", "restVariant")]
+      duration: CONFIG.DND5E.restTypes.long.duration[game.settings.get("dnd5e", "restVariant")],
+      recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax
     }, config);
 
     /**
@@ -2143,7 +2154,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( config.dialog ) {
       try {
-        foundry.utils.mergeObject(config, await LongRestDialog.configure(this, config));
+        Object.assign(config, await LongRestDialog.configure(this, config));
       } catch(err) { return; }
     }
 
@@ -2158,6 +2169,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.longRest", this, config) === false ) return;
 
     return this._rest(config, { clone });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle resting an actor from a request.
+   * @param {Actor5e} actor               Actor to rest.
+   * @param {ChatMessage5e} request       Request chat message.
+   * @param {RestConfiguration} config    Configuration data for the rest requested.
+   * @returns {Promise<RestResult|null>}  Consolidated results of the rest workflow.
+   */
+  static async handleRestRequest(actor, request, config) {
+    const result = await actor[config.type === "short" ? "shortRest" : "longRest"]({
+      ...config, request, advanceBastionTurn: false, advanceTime: false
+    });
+    return result?.message ?? null;
   }
 
   /* -------------------------------------------- */
@@ -2180,10 +2207,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         hitPoints: 0,
         hitDice: 0
       },
-      updateData: {},
-      updateItems: [],
       newDay: config.newDay === true,
-      rolls: []
+      request: config.request,
+      rolls: [],
+      updateData: {},
+      updateItems: []
     }, result);
     result.clone ??= this.clone();
     if ( "dhp" in result ) result.deltas.hitPoints = result.dhp;
@@ -2218,7 +2246,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
 
     // Display a Chat Message summarizing the rest effects
-    if ( config.chat ) await this._displayRestResultMessage(config, result);
+    if ( config.chat ) result.message = await this._displayRestResultMessage(config, result);
 
     /**
      * A hook event that fires when the rest process is completed for an actor.
@@ -2248,18 +2276,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   async _displayRestResultMessage(config, result) {
-    let { dhd, dhp, newDay } = result;
+    let { dhd, dhp } = result;
     if ( config.type === "short" ) dhd *= -1;
     const diceRestored = dhd !== 0;
     const healthRestored = dhp !== 0;
     const longRest = config.type === "long";
     const length = longRest ? "Long" : "Short";
-
     const typeConfig = CONFIG.DND5E.restTypes[config.type] ?? {};
-    const duration = convertTime(config.duration, "minute");
-    const parts = [formatTime(duration.value, duration.unit)];
-    if ( newDay ) parts.push(game.i18n.localize("DND5E.REST.NewDay.Label").toLowerCase());
-    const restFlavor = `${typeConfig.label} (${game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
 
     // Determine the chat message to display
     let message;
@@ -2276,18 +2299,35 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         dice: game.i18n.format(`DND5E.HITDICE.Counted.${pr.select(dhd)}`, { number: formatNumber(dhd) }),
         health: game.i18n.format(`DND5E.HITPOINTS.Counted.${pr.select(dhp)}`, { number: formatNumber(dhp) })
       }),
-      flavor: game.i18n.localize(restFlavor),
+      flavor: this.createRestFlavor(config, result),
       type: "rest",
       rolls: result.rolls,
       speaker: ChatMessage.getSpeaker({ actor: this, alias: this.name }),
       system: {
         activations: ActivationsField.getActivations(this, typeConfig?.activationPeriods ?? []),
         deltas: ActorDeltasField.getDeltas(result.clone, { actor: result.updateData, item: result.updateItems }),
+        request: config.request,
         type: result.type
       }
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return ChatMessage.create(chatData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Generate rest flavor text based on the provided configuration.
+   * @param {RestConfiguration} config  Rest configuration.
+   * @param {RestResult} [result]       Result of the rest operation.
+   * @returns {string}
+   */
+  createRestFlavor(config, result) {
+    const typeConfig = CONFIG.DND5E.restTypes[config.type] ?? {};
+    const duration = convertTime(config.duration, "minute");
+    const parts = [formatTime(duration.value, duration.unit)];
+    if ( result?.newDay ?? config.newDay ) parts.push(game.i18n.localize("DND5E.REST.NewDay.Label").toLowerCase());
+    return `${typeConfig.label} (${game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
   }
 
   /* -------------------------------------------- */

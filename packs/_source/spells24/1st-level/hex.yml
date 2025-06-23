@@ -92,14 +92,14 @@ system:
         override: false
       damage:
         critical:
-          allow: false
+          allow: true
           bonus: ''
         parts:
           - custom:
               enabled: false
               formula: ''
             number: 1
-            denomination: '6'
+            denomination: 6
             bonus: ''
             types:
               - necrotic
@@ -397,11 +397,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.345'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1724425958706
-  modifiedTime: 1745256794703
+  modifiedTime: 1750441411562
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHex0000000'

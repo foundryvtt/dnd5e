@@ -631,18 +631,18 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552150
+      modifiedTime: 1749402732213
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZHAFrnCwCz17dmLc.R7DpgLP3aFNmAgOc'
@@ -794,18 +794,18 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552150
+      modifiedTime: 1749402732213
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZHAFrnCwCz17dmLc.ahGwFmyt6nItUOAK'
@@ -816,8 +816,8 @@ items:
     system:
       description:
         value: >-
-          <p>The troll has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on smell.</p>
+          <p>The troll has advantage on Wisdom (Perception) checks that rely on
+          smell.</p>
         chat: ''
       source:
         custom: ''
@@ -849,12 +849,12 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749402737095
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZHAFrnCwCz17dmLc.N3vrbUmlL4FEARJ8'
   - _id: BA9WmovILanbvacP
@@ -951,11 +951,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273656360
+      modifiedTime: 1749402733017
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZHAFrnCwCz17dmLc.BA9WmovILanbvacP'
@@ -966,11 +966,10 @@ items:
     system:
       description:
         value: >-
-          <p>The troll regains <strong>10 hit points</strong> at the start of
-          its turn. If the troll takes <strong>acid</strong> or <strong><em>fire
-          damage</em></strong>, this trait doesn't function at the start of the
-          troll's next turn. The troll dies only if it starts its turn with
-          <strong>0 hit points</strong> and doesn't regenerate.</p>
+          <p>The troll regains 10 hit points at the start of its turn. If the
+          troll takes acid or fire damage, this trait doesn't function at the
+          start of the troll's next turn. The troll dies only if it starts its
+          turn with 0 hit points and doesn't regenerate.</p>
         chat: >-
           <p>The troll regains <strong>10 hit points</strong> at the start of
           its turn.</p>
@@ -995,7 +994,7 @@ items:
           _id: dnd5eactivity000
           type: heal
           activation:
-            type: ''
+            type: turnStart
             value: null
             condition: ''
             override: false
@@ -1052,6 +1051,9 @@ items:
               number: null
               formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -1061,15 +1063,19 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676796
+      modifiedTime: 1749402751614
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ZHAFrnCwCz17dmLc.yWYB2iyRA61AjcVJ'

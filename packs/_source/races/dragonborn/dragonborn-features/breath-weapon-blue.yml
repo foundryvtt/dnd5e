@@ -46,11 +46,8 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
         scaling:
           allowed: false
           max: ''
@@ -79,7 +76,7 @@ system:
           units: ft
         affects:
           count: ''
-          type: ''
+          type: creature
           choice: false
           special: ''
         prompt: true
@@ -87,41 +84,46 @@ system:
       damage:
         onSave: half
         parts:
-          - number: null
+          - custom:
+              enabled: true
+              formula: '@scale.dragonborn.breath-weapon'
+            number: null
             denomination: null
             bonus: ''
             types:
               - lightning
-            custom:
-              enabled: true
-              formula: '@scale.dragonborn.breath-weapon'
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
       save:
-        ability: con
+        ability:
+          - dex
         dc:
           calculation: con
           formula: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
   enchant: {}
   prerequisites:
     level: null
   identifier: breath-weapon-blue
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
 img: icons/magic/lightning/bolt-blue.webp
 effects: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.345'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.1.0
   createdTime: 1725037392801
-  modifiedTime: 1725992703396
+  modifiedTime: 1750440605479
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

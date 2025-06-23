@@ -497,9 +497,9 @@ items:
         value: >-
           <p>If the wereboar moves at least 15 feet straight toward a target and
           then hits it with its tusks on the same turn, the target takes an
-          extra <strong>7 (2d6) <em>slashing damage</em></strong>. </p><p>If the
-          target is a creature, it must succeed on a  <strong>DC 13
-          Strength</strong> saving throw or be knocked prone.</p>
+          extra [[/damage average]] damage.</p><p>If the target is a creature,
+          it must succeed on a [[/save]] saving throw or be knocked
+          &amp;Reference[prone].</p>
         chat: >-
           <p>If the wereboar moves at least 15 feet straight toward a target and
           then hits it with its tusks on the same turn, the target takes extra
@@ -658,11 +658,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676932
+      modifiedTime: 1749403874190
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.TizBVS6hRuBa8JYY'
@@ -774,9 +774,8 @@ items:
     system:
       description:
         value: >-
-          <p>If the wereboar <strong>takes 14 damage</strong> or less that would
-          reduce it to <strong>0 hit points</strong>, it is reduced to <strong>1
-          hit point</strong> instead.</p>
+          <p>If the wereboar takes 14 damage or less that would reduce it to 0
+          hit points, it is reduced to 1 hit point instead.</p>
         chat: >-
           <p>If the wereboar takes damage that would reduce it to <strong>0 hit
           points</strong>, it is reduced to <strong>1 hit point</strong>
@@ -813,11 +812,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.8FX2KlWyBAKEYGzs
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676932
+      modifiedTime: 1749403880536
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.NwivB5zd15WhthVJ'
@@ -828,11 +827,11 @@ items:
     system:
       description:
         value: >-
-          <p>The wereboar can use its action to <strong>polymorph</strong> into
-          a boar-humanoid hybrid or into a boar, or back into its true form,
-          which is humanoid. </p><p>Its statistics, other than its AC, are the
-          same in each form. Any equipment it is wearing or carrying isn't
-          transformed. It reverts to its true form if it dies.</p>
+          <p>The wereboar can use its action to polymorph into a boar-humanoid
+          hybrid or into a boar, or back into its true form, which is
+          humanoid.</p><p>Its statistics, other than its AC, are the same in
+          each form. Any equipment it is wearing or carrying isn't transformed.
+          It reverts to its true form if it dies.</p>
         chat: >-
           <p>The wereboar can use its action to <strong>polymorph</strong>, or
           return to its true form.</p>
@@ -851,7 +850,8 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -919,11 +919,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676932
+      modifiedTime: 1749403893492
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.zzskoOXzAiMDZfbc'
@@ -934,9 +934,9 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
-          a humanoid, it must succeed on a  <strong>DC 12 Constitution</strong>
-          saving throw or be cursed with wereboar lycanthropy.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a humanoid, it must succeed on a [[/save]] saving throw or be cursed
+          with wereboar lycanthropy.</p>
         chat: >-
           <p>The Wereboar attacks with its Tusks. If the target is a humanoid,
           it must make a <strong>Constitution</strong> saving throw.</p>
@@ -1146,11 +1146,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745107551134
+      modifiedTime: 1749403904135
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.3TD2NpdjIDJxeLl9'

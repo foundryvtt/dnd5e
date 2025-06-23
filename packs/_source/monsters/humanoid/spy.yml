@@ -616,7 +616,7 @@ items:
           _id: dnd5eactivity000
           type: damage
           activation:
-            type: special
+            type: ''
             value: null
             condition: ''
             override: false
@@ -664,19 +664,18 @@ items:
               allow: false
               bonus: ''
             parts:
-              - number: 2
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
                 denomination: 6
                 bonus: ''
                 types:
                   - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -686,16 +685,20 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.9uKShqfuA73duQsT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403702442
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!13K3XK2A3wwxVKLD.TEgU7pKAAA0f35Yw'
   - _id: NAmhPf8w89iV8CsY

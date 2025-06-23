@@ -568,8 +568,8 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]], or <strong>9 (1d10 + 4)
-          <em>slashing damage</em></strong> in Small or Medium form.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
+          activity=aKQQjgpq0XwCcMGK]] damage in Small or Medium form.</p>
         chat: <p>The Oni attacks with its Glaive.</p>
       source:
         custom: ''
@@ -708,24 +708,106 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: Attack (large)
+          img: ''
+          appliedEffects: []
+        aKQQjgpq0XwCcMGK:
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '10'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 10
+                bonus: '@mod'
+                types:
+                  - slashing
+          sort: 0
+          name: Attack (small)
+          _id: aKQQjgpq0XwCcMGK
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: glaive
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.rOG1OM2ihgPjOvFW
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173385319
+      modifiedTime: 1749402619120
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!L1w8yBkInMscfJ3F.FC0FNE8O4rnbth8s'
@@ -877,18 +959,18 @@ items:
       identifier: claw-oni-form-only
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107551323
+      modifiedTime: 1749402494828
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!L1w8yBkInMscfJ3F.q7J7PERrJb2vxtlt'
@@ -955,7 +1037,8 @@ items:
     system:
       description:
         value: >-
-          <p>The oni makes two attacks, either with its claws or its [[/item
+          <p>The oni makes two attacks, either with its [[/item
+          .q7J7PERrJb2vxtlt]]{claws} or its [[/item
           .FC0FNE8O4rnbth8s]]{glaive}.</p>
         chat: ''
       source:
@@ -1041,11 +1124,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745273655851
+      modifiedTime: 1749402524260
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!L1w8yBkInMscfJ3F.7YSwI62Budsr6HzO'
@@ -1056,8 +1139,8 @@ items:
     system:
       description:
         value: >-
-          <p>The oni regains <strong>10 hit points</strong> at the start of its
-          turn if it has at least <strong>1 hit point</strong>.</p>
+          <p>The oni regains 10 hit points at the start of its turn if it has at
+          least 1 hit point.</p>
         chat: >-
           <p>The oni regains <strong>10 hit points</strong> at the start of its
           turn.</p>
@@ -1082,7 +1165,7 @@ items:
           _id: dnd5eactivity000
           type: heal
           activation:
-            type: ''
+            type: turnStart
             value: null
             condition: ''
             override: false
@@ -1139,6 +1222,9 @@ items:
               number: null
               formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -1148,15 +1234,19 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676784
+      modifiedTime: 1749402468251
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!L1w8yBkInMscfJ3F.8liUuXPhjNLKYMMx'
@@ -1166,7 +1256,7 @@ items:
     img: icons/weapons/swords/sword-runed-glowing.webp
     system:
       description:
-        value: <p>the oni's weapon attacks are magical.</p>
+        value: <p>The oni's weapon attacks are magical.</p>
         chat: ''
       source:
         custom: ''
@@ -1198,12 +1288,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749402491378
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!L1w8yBkInMscfJ3F.HJDOmnRX2zQuXraB'
   - _id: QGNzJqfTHnbhjzFN
@@ -1213,14 +1303,12 @@ items:
     system:
       description:
         value: >-
-          <p>The oni magically <strong>polymorphs</strong> into a
-          <strong>Small</strong> or<strong> Medium humanoid</strong>, into
-          <strong>a Large giant</strong>, or <strong>back into its true
-          form</strong>. Other than its size, its statistics are the same in
-          each form.<strong> The only equipment that is transformed is its
-          glaive</strong>, which shrinks so that it can be wielded in humanoid
-          form. If the oni dies, it reverts to its true form, and its glaive
-          reverts to its normal size.</p>
+          <p>The oni magically polymorphs into a Small or Medium humanoid, into
+          a Large giant, or back into its true form. Other than its size, its
+          statistics are the same in each form. The only equipment that is
+          transformed is its glaive, which shrinks so that it can be wielded in
+          humanoid form. If the oni dies, it reverts to its true form, and its
+          glaive reverts to its normal size.</p>
         chat: ''
       source:
         custom: ''
@@ -1298,19 +1386,19 @@ items:
       identifier: change-shape
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749402634275
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!L1w8yBkInMscfJ3F.QGNzJqfTHnbhjzFN'
   - _id: S7VbUetIfVT7B6Eq

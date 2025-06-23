@@ -41,8 +41,7 @@ export default class DurationField extends SchemaField {
       let duration = CONFIG.DND5E.timePeriods[this.duration.units] ?? "";
       if ( this.duration.value ) duration = `${this.duration.value} ${duration.toLowerCase()}`;
       labels.duration = duration;
-      // TODO: Allow activities to indicate they require concentration regardless of the base item
-      labels.concentrationDuration = this.properties?.has("concentration")
+      labels.concentrationDuration = this.duration.concentration || this.properties?.has("concentration")
         ? game.i18n.format("DND5E.ConcentrationDuration", { duration }) : duration;
     }
 

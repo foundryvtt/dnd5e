@@ -613,7 +613,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The scout makes two melee attacks or two ranged attacks.</p>
+        value: >-
+          <p>The scout makes two [[/item .YDoOa6D6QDoR2Htu]]{melee} attacks or
+          two [[/item .E2fYrhLigMeVH09l]]{ranged} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -698,11 +700,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1744132986913
+      modifiedTime: 1749403691381
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!O3ABqI55Ir1du1Xa.YO57HtdvpuGxJANB'

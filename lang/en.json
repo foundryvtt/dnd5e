@@ -20,6 +20,7 @@
 "TYPES.ActiveEffect.enchantmentPl": "Enchantments",
 
 "TYPES.ChatMessage": {
+  "request": "Request Message",
   "rest": "Rest Message",
   "turn": "Combat Turn Message"
 },
@@ -52,6 +53,10 @@
 "TYPES.Item.toolPl": "Tools",
 "TYPES.Item.weapon": "Weapon",
 "TYPES.Item.weaponPl": "Weapons",
+
+"TYPES.RegionBehavior": {
+  "dnd5e.rotateArea": "Rotate Area"
+},
 
 "DND5E.title": "Dungeon & Dragons Fifth Edition",
 "DND5E.AbbreviationCR": "CR",
@@ -1114,6 +1119,13 @@
   "Activities": "Activities",
   "Deltas": {
     "Recovery": "Recovery"
+  },
+  "REQUEST": {
+    "Action": {
+      "Handle": "Handle Request"
+    },
+    "Complete": "Request Fulfilled",
+    "PartyMembers": "Party Members"
   },
   "TURN": {
     "NoCombatant": "Combatant no longer exists!"
@@ -3072,6 +3084,75 @@
 "DND5E.RechargeShort": "Recharge after a Short or Long Rest",
 "DND5E.Recovery": "Recovery",
 "DND5E.RecoveryFormula": "Recovery Formula",
+
+"DND5E.REGIONBEHAVIORS": {
+  "ROTATEAREA": {
+    "Action": {
+      "AddPosition": "Add Position",
+      "DeletePosition": "Delete Position",
+      "RotateToPosition": "Rotate to Position"
+    },
+    "DirectionMode": {
+      "Clockwise": "Clockwise",
+      "CounterClockwise": "Counter Clockwise",
+      "Longest": "Longest",
+      "Shortest": "Shortest"
+    },
+    "FIELDS": {
+      "directionMode": {
+        "label": "Direction Mode",
+        "hint": "How the rotation direction is decided when moving to the next position."
+      },
+      "lights": {
+        "ids": {
+          "label": "Lights"
+        }
+      },
+      "positions": {
+        "label": "Positions",
+        "element": {
+          "angle": {
+            "label": "Angle"
+          }
+        }
+      },
+      "sounds": {
+        "ids": {
+          "label": "Ambient Sounds"
+        }
+      },
+      "tiles": {
+        "ids": {
+          "label": "Tiles"
+        }
+      },
+      "time": {
+        "mode": {
+          "label": "Speed Mode",
+          "hint": "How the rotation speed is determined from the rotation time, either the same regardless of the distance moved (fixed) or dependant on the distance rotated (variable)."
+        },
+        "value": {
+          "label": "Rotation Time",
+          "hint": "Time in miliseconds to rotate to the next position (in fixed mode) or to rotate 90˚ (in variable mode)."
+        }
+      },
+      "walls": {
+        "ids": {
+          "label": "Walls"
+        },
+        "link": {
+          "label": "Link Walls",
+          "hint": "Rotate any wall segments attached to the ones specified."
+        }
+      }
+    },
+    "SpeedMode": {
+      "Fixed": "Fixed (total rotation time)",
+      "Variable": "Variable (time to rotate 90˚)"
+    }
+  }
+},
+
 "DND5E.Remaining": "Remaining",
 "DND5E.RequiredMaterials": "Required Materials",
 "DND5E.Requirements": "Requirements",
@@ -3123,6 +3204,13 @@
   "RecoverTempMaxHP": {
     "Hint": "Remove any adjustments to a character's maximum Hit Points.",
     "Label": "Recover Max HP"
+  },
+  "Request": {
+    "AutoRest": {
+      "Hint": "Automatically perform the rest for selected party actors, rather than sending a rest request to players.",
+      "Label": "Auto Rest"
+    },
+    "Label": "Rest Request"
   },
   "Short": {
     "Abbreviation": "SR",
@@ -3261,22 +3349,23 @@
 "DND5E.SenseUnits": "Units",
 "DND5E.SenseSpecial": "Special Senses",
 "DND5E.Shape": "Shape",
-"DND5E.SheetClassCharacter": "Default 5e Character Sheet",
-"DND5E.SheetClassCharacterLegacy": "Legacy 5e Character Sheet",
-"DND5E.SheetClassClassSummary": "Default 5e Class Summary Sheet",
-"DND5E.SheetClassContainer": "Default 5e Container Sheet",
-"DND5E.SheetClassContainerLegacy": "Legacy 5e Container Sheet",
-"DND5E.SheetClassGroup": "Default 5e Group Sheet",
-"DND5E.SheetClassItem": "Default 5e Item Sheet",
-"DND5E.SheetClassItemLegacy": "Legacy 5e Item Sheet",
-"DND5E.SheetClassJournalEntry": "Default 5e Journal Entry Sheet",
-"DND5E.SheetClassMapLocation": "Default 5e Map Location Sheet",
-"DND5E.SheetClassNPC": "Default 5e NPC Sheet",
-"DND5E.SheetClassNPCLegacy": "Legacy 5e NPC Sheet",
-"DND5E.SheetClassRule": "Default 5e Rule Sheet",
-"DND5E.SheetClassSpellList": "Default 5e Spell List Sheet",
-"DND5E.SheetClassToken": "Default 5e Token Sheet",
-"DND5E.SheetClassVehicle": "Default 5e Vehicle Sheet",
+
+"DND5E.SheetClass": {
+  "Character": "Default 5e Character Sheet",
+  "ClassSummary": "Default 5e Class Summary Sheet",
+  "Container": "Default 5e Container Sheet",
+  "Group": "Default 5e Group Sheet",
+  "Item": "Default 5e Item Sheet",
+  "JournalEntry": "Default 5e Journal Entry Sheet",
+  "MapLocation": "Default 5e Map Location Sheet",
+  "NPC": "Default 5e NPC Sheet",
+  "RotateArea": "Default 5e Rotate Area Sheet",
+  "Rule": "Default 5e Rule Sheet",
+  "SpellList": "Default 5e Spell List Sheet",
+  "Token": "Default 5e Token Sheet",
+  "Vehicle": "Default 5e Vehicle Sheet"
+},
+
 "DND5E.SheetModeEdit": "Edit",
 "DND5E.SheetModePlay": "Play",
 "DND5E.SavingThrow": "Saving Throw",

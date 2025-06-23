@@ -154,6 +154,7 @@ export default class Combat5e extends Combat {
    */
   async _recoverUses(types) {
     for ( const combatant of this.combatants ) {
+      if ( combatant.defeated ) continue;
       const periods = Object.entries(types).filter(([, v]) => (v === true) || (v === combatant)).map(([k]) => k);
       if ( periods.length ) await combatant.recoverCombatUses(periods);
     }

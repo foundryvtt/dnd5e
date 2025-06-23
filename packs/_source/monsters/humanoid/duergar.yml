@@ -645,9 +645,8 @@ items:
     system:
       description:
         value: >-
-          <p>The duergar has<strong> advantage </strong>on saving throws against
-          poison, spells, and illusions, as well as to resist being charmed or
-          paralyzed.</p>
+          <p>The duergar has advantage on saving throws against poison, spells,
+          and illusions, as well as to resist being charmed or paralyzed.</p>
         chat: ''
       source:
         custom: ''
@@ -679,12 +678,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WHnLJRaXfIW7Z28t
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403180595
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!iGBdQA3IuKsurcUy.7ePnUuyCcRkB5GHo'
   - _id: kN6uf2h2Em4ol6Tz
@@ -856,8 +855,8 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]], or <strong>11 (2d8 + 2)
-          <em>piercing damage</em></strong> while enlarged.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
+          activity=efBWBI6TxtxVoljw]] damage while enlarged.</p>
         chat: <p>The Duergar attacks with its War Pick.</p>
       source:
         custom: ''
@@ -889,8 +888,8 @@ items:
         spent: 0
       damage:
         versatile:
-          number: 2
-          denomination: 8
+          number: null
+          denomination: null
           bonus: ''
           types: []
           custom:
@@ -920,8 +919,7 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - ver
+      properties: []
       proficient: 1
       unidentified:
         description: ''
@@ -935,7 +933,7 @@ items:
           _id: dnd5eactivity000
           type: attack
           activation:
-            type: ''
+            type: action
             value: null
             condition: ''
             override: false
@@ -993,24 +991,105 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
+        efBWBI6TxtxVoljw:
+          type: attack
+          activation:
+            type: action
+            value: null
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: 8
+                bonus: '@mod'
+                types:
+                  - piercing
+          sort: 0
+          _id: efBWBI6TxtxVoljw
+          name: Attack (enlarged)
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: war-pick
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.2YdfjN1PIIrSHZii
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173385604
+      modifiedTime: 1749403380070
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!iGBdQA3IuKsurcUy.tCtnqPPKQ9NxIDqd'
@@ -1021,8 +1100,8 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]], or <strong>9 (2d6 + 2)
-          <em>piercing damage</em></strong> while enlarged.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
+          activity=qmX3Tp3KYUdZPgB1]] damage while enlarged.</p>
         chat: <p>The Duergar attacks with its Javelin.</p>
       source:
         custom: ''
@@ -1145,38 +1224,120 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
+        qmX3Tp3KYUdZPgB1:
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '30'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: 6
+                bonus: '@mod'
+                types:
+                  - piercing
+          sort: 0
+          _id: qmX3Tp3KYUdZPgB1
+          name: Attack (enlarged)
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: javelin
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.DWLMnODrnHn8IbAG
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173385604
+      modifiedTime: 1749403313374
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!iGBdQA3IuKsurcUy.fHe3YshNib2lsJ45'

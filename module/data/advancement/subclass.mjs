@@ -12,7 +12,7 @@ export class SubclassValueData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       document: new LocalDocumentField(foundry.documents.BaseItem),
-      uuid: new DocumentUUIDField()
+      uuid: new DocumentUUIDField({ type: "Item" })
     };
   }
 }

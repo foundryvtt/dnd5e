@@ -414,8 +414,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     if ( !this.item.system.advancement ) return {};
 
     const advancement = {};
-    const configMode = !this.item.parent || this.advancementConfigurationMode;
-    // TODO: `advancementConfigurationMode` isn't used anymore, how is this handled now?
+    const configMode = !this.item.parent || (this._mode === ItemSheet5e.MODES.EDIT);
     const legacyDisplay = this.options.legacyDisplay;
     const maxLevel = !configMode ? (this.item.system.levels ?? this.item.class?.system.levels
       ?? this.item.parent.system.details?.level ?? -1) : -1;

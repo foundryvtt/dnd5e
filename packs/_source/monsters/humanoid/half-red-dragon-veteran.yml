@@ -1180,9 +1180,9 @@ items:
       description:
         value: >-
           <p>The veteran exhales fire in a 15-foot cone. Each creature in that
-          area must make a  <strong>DC 15 Dexterity</strong> saving throw,
-          taking <strong>24 (7d6) <em>fire damage</em></strong> on a failed
-          save, or half as much damage on a successful one.</p>
+          area must make a [[/save]] saving throw, taking [[/damage average]]
+          damage on a failed save, or half as much damage on a successful
+          one.</p>
         chat: >-
           <p>The veteran exhales fire in a 15-foot cone. Each creature in that
           area must make a <strong>Dexterity</strong> saving throw.</p>
@@ -1293,11 +1293,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676911
+      modifiedTime: 1749403465427
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5TmstVMURpVtmNR3.68Y4sNHbVetQN3wa'

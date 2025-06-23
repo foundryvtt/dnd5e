@@ -491,8 +491,8 @@ items:
     system:
       description:
         value: >-
-          <p>The drow has<strong> advantage </strong>on saving throws against
-          being charmed, and magic can't put the drow to sleep.</p>
+          <p>The drow has advantage on saving throws against being charmed, and
+          magic can't put the drow to sleep.</p>
         chat: ''
       source:
         custom: ''
@@ -524,12 +524,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LvSBjRKoCAKaAnQy
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403096263
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.Jwx7Sfs5m3RDWckF'
   - _id: A4OySWt5j3QXyAPW
@@ -593,9 +593,8 @@ items:
     system:
       description:
         value: >-
-          <p>While in sunlight, the drow has<strong> disadvantage </strong>on
-          attack rolls, as well as on Wisdom (Perception) checks that rely on
-          sight.</p>
+          <p>While in sunlight, the drow has disadvantage on attack rolls, as
+          well as on Wisdom (Perception) checks that rely on sight.</p>
         chat: ''
       source:
         custom: ''
@@ -627,12 +626,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.F14aW2Ke3I5ZtSg4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403101585
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.Up2YzkDn0uBKQj6K'
   - _id: G2nFsJdp1Q3gshyr
@@ -806,9 +805,9 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a  <strong>DC 13 Constitution</strong> saving throw or be
-          poisoned for 1 hour. If the saving throw fails by 5 or more, the
-          target is also unconscious while poisoned in this way. The target
+          succeed on a [[/save]] saving throw or be &amp;Reference[poisoned] for
+          1 hour. If the saving throw fails by 5 or more, the target is also
+          &amp;Reference[unconscious] while poisoned in this way. The target
           wakes up if it takes damage or if another creature takes an action to
           shake it awake.</p>
         chat: >-
@@ -1027,11 +1026,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.qaSro7kFhxD6INbZ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173487038
+      modifiedTime: 1749403124953
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.LqnhZjRtRqhLIFTm'

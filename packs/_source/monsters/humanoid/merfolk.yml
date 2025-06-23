@@ -537,9 +537,9 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]], or <strong>4 (1d8)
-          <em>piercing damage</em></strong> if used with two hands to make a
-          melee attack.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
+          attackMode=twoHanded]] damage if used with two hands to make a melee
+          attack.</p>
         chat: <p>The Merfolk attacks with its Spear.</p>
       source:
         custom: ''
@@ -691,11 +691,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173587773
+      modifiedTime: 1749403562628
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KUpbXdn1XmHEeOPk.sN28gnBGF2TVdd53'
