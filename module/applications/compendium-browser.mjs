@@ -481,11 +481,16 @@ export default class CompendiumBrowser extends Application5e {
     const { max, min } = this.options.selection;
 
     context.displaySelection = this.displaySelection;
-    context.invalid = (value < (min || -Infinity)) || (value > (max || Infinity)) ? "invalid" : "";
+    context.invalid = (value < (min || -Infinity)) || (value > (max || Infinity));
     const suffix = this.#selectionLocalizationSuffix;
     context.summary = suffix ? game.i18n.format(
       `DND5E.CompendiumBrowser.Selection.Summary.${suffix}`, { max, min, value }
     ) : value;
+    const pr = new Intl.PluralRules(game.i18n.lang);
+    context.invalidTooltip = game.i18n.format(`DND5E.CompendiumBrowser.Selection.Warning.${suffix}`, {
+      max, min, value,
+      document: game.i18n.localize(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)
+    });
     return context;
   }
 
