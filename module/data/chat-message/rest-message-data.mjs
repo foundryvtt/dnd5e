@@ -64,7 +64,7 @@ export default class RestMessageData extends ChatMessageDataModel {
       content: await TextEditor.enrichHTML(this.parent.content, { rollData: this.parent.getRollData() })
     };
 
-    if ( context.actor?.isOwner ) {
+    if ( context.actor?.testUserPermission(game.user, "OBSERVER") ) {
       context.activities = ActivationsField.processActivations.call(this.activations, this.actor);
       context.deltas = ActorDeltasField.processDeltas.call(this.deltas, this.actor, this.parent.rolls);
     }
