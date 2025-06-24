@@ -1535,7 +1535,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const title = game.i18n.format("DOCUMENT.Create", { type: label });
     const name = data.name || game.i18n.format("DOCUMENT.New", { type: label });
     let type = data.type || CONFIG[this.documentName]?.defaultType;
-    if ( !types.includes(type) ) type = types[0];
     const content = await foundry.applications.handlebars.renderTemplate(
       "systems/dnd5e/templates/apps/document-create.hbs",
       {

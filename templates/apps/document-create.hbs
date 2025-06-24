@@ -19,7 +19,8 @@
                 <img src="{{ icon }}" alt="{{ label }}">
                 {{/if}}
                 <span>{{ label }}</span>
-                <input type="radio" name="type" value="{{ type }}" required {{ disabled disabled }}>
+                <input type="radio" name="type" value="{{ type }}" required {{checked (eq type ../type)}}
+                       {{ disabled disabled }}>
             </label>
         </li>
         {{/each}}
