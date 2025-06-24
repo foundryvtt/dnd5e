@@ -277,7 +277,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     for ( const target of this.targetList.querySelectorAll("[data-target-uuid]") ) {
       const token = fromUuidSync(target.dataset.targetUuid);
       const options = this.getTargetOptions(target.dataset.targetUuid);
-      await token?.applyDamage(this.damages, options);
+      await token?.applyDamage(this.damages, { ...options, isDelta: true });
     }
     this.open = false;
   }

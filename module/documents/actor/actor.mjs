@@ -665,7 +665,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( attribute === "attributes.hp" ) {
       const hp = this.system.attributes.hp;
       const delta = isDelta ? (-1 * value) : (hp.value + hp.temp) - value;
-      return this.applyDamage(delta);
+      return this.applyDamage(delta, { isDelta });
     } else if ( attribute.startsWith(".") ) {
       const item = fromUuidSync(attribute, { relative: this });
       let newValue = item?.system.uses?.value ?? 0;
@@ -711,6 +711,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {boolean|Set<string>} [ignore.modification]   Should this actor's damage modification be ignored?
    * @property {boolean} [invertHealing=true]  Automatically invert healing types to it heals, rather than damages.
    * @property {"damage"|"healing"} [only]     Apply only damage or healing parts. Untyped rolls will always be applied.
+   * @property {boolean} [isDelta]             Whether the damage is coming from a relative change.
    */
 
   /**
