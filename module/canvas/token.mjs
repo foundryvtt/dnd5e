@@ -29,7 +29,10 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /** @inheritdoc */
   _getMovementCostFunction(options) {
     const costFunction = super._getMovementCostFunction(options);
-    if ( !game.settings.get("dnd5e", "movementAutomation") ) return costFunction;
+    const disableAutomationKey = foundry.helpers.interaction.KeyboardManager.MODIFIER_KEYS.Alt;
+    if ( !game.settings.get("dnd5e", "movementAutomation")
+       || game.keyboard.isModifierActive(disableAutomationKey) ) return costFunction;
+
     return (from, to, distance, segment) => {
       const cost = costFunction(from, to, distance, segment);
 

@@ -218,6 +218,11 @@ Hooks.once("init", function() {
 
   // Set up token movement actions
   documents.TokenDocument5e.registerMovementActions();
+
+  // Custom movement cost aggregator
+  CONFIG.Token.movement.costAggregator = (results, distance, segment) => {
+    return Math.max(...results.map(i => i.cost));
+  };
 });
 
 /* -------------------------------------------- */
