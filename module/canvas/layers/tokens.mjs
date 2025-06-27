@@ -14,6 +14,9 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
       // Friendly tokens never block movement
       if ( token.document.disposition === t.document.disposition ) return false;
 
+      // Dead creatures never block movement, as they are objects
+      if ( t.actor?.statuses.has("dead") ) return false;
+
       const occupiedSize = CONFIG.DND5E.actorSizes[t.actor?.system.traits.size]?.numerical ?? 2;
       // In modern rules, Tiny creatures can be moved through
       if ( modernRules && occupiedSize === 0 ) return false;
@@ -54,9 +57,13 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
       // Halfling Nimbleness means a creature 1 size greater (normally would block) causes difficult terrain
       if ( halflingNimbleness && occupiedSize === tokenSize + 1 ) return true;
 
-      // Friendly means legacy, therefore difficult. Otherwise, a size difference of 2 or more is
-      // difficult terrain regardless of ruleset
-      return friendlyToken || Math.abs(tokenSize - occupiedSize) >= 2;
+      // Tokens which may normally have blocked movement should still be considered difficult terrain
+      const mayHaveBlocked = modernRules && t.actor?.statuses.has("incapacitated");
+
+      // Friendly means legacy, therefore difficult. A size difference of 2 or more is difficult terrain regardless of
+      // ruleset. Modern ruleset incapacitated tokens should still be difficult even if within one size category.
+      // Dead creatures (objects) may be difficult terrain, for now that is the default treatment.
+      return friendlyToken || Math.abs(tokenSize - occupiedSize) >= 2 || mayHaveBlocked || t.actor?.statuses.has("dead");
     });
   }
 
