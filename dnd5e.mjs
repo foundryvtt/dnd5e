@@ -30,7 +30,6 @@ import { default as registry } from "./module/registry.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
 import * as utils from "./module/utils.mjs";
 import DragDrop5e from "./module/drag-drop.mjs";
-import TokenLayer5e from "./module/canvas/layers/tokens.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -63,7 +62,7 @@ Hooks.once("init", function() {
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
   CONFIG.ActiveEffect.legacyTransferral = false;
   CONFIG.Actor.documentClass = documents.Actor5e;
-  CONFIG.Canvas.layers.tokens.layerClass = TokenLayer5e;
+  CONFIG.Canvas.layers.tokens.layerClass = canvas.layers.TokenLayer5e;
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
   CONFIG.Combatant.documentClass = documents.Combatant5e;
@@ -223,6 +222,9 @@ Hooks.once("init", function() {
   CONFIG.Token.movement.costAggregator = (results, distance, segment) => {
     return Math.max(...results.map(i => i.cost));
   };
+
+  // Custom token ruler
+  CONFIG.Token.rulerClass = canvas.TokenRuler5e;
 });
 
 /* -------------------------------------------- */
