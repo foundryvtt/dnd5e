@@ -35,11 +35,12 @@ export default class Token5e extends foundry.canvas.placeables.Token {
 
     const ignoredDifficultTerrain = this.actor?.system.attributes.movement.ignoredDifficultTerrain ?? new Set();
     const ignoreDifficult = ["all", "nonmagical"].some(i => ignoredDifficultTerrain.has(i));
+    const unconstrainedMovement = game.user.isGM && ui.controls.controls.tokens.tools.unconstrainedMovement.active;
     return (from, to, distance, segment) => {
       const cost = costFunction(from, to, distance, segment);
 
       // Check if blocked
-      if ( this.layer.isOccupiedGridSpaceBlocking(to, this) ) return Infinity;
+      if ( !unconstrainedMovement && this.layer.isOccupiedGridSpaceBlocking(to, this) ) return Infinity;
 
       // Terrain already difficult, no stacking
       if ( segment.terrain?.difficultTerrain ) return cost;
