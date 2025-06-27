@@ -2082,8 +2082,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async shortRest(config={}) {
     if ( this.type === "vehicle" ) return;
-    const clone = this.clone();
+    if ( !game.user.isGM && !game.settings.get("dnd5e", "allowRests") && !config.request ) {
+      ui.notifications.warn("DND5E.REST.Warning.OnlyByRequest", { localize: true, log: false });
+      return;
+    }
 
+    const clone = this.clone();
     const restConfig = CONFIG.DND5E.restTypes.short;
     config = foundry.utils.mergeObject({
       type: "short", dialog: true, chat: true, newDay: false, advanceTime: false, autoHD: false, autoHDThreshold: 3,
@@ -2140,8 +2144,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async longRest(config={}) {
     if ( this.type === "vehicle" ) return;
-    const clone = this.clone();
+    if ( !game.user.isGM && !game.settings.get("dnd5e", "allowRests") && !config.request ) {
+      ui.notifications.warn("DND5E.REST.Warning.OnlyByRequest", { localize: true, log: false });
+      return;
+    }
 
+    const clone = this.clone();
     const restConfig = CONFIG.DND5E.restTypes.long;
     config = foundry.utils.mergeObject({
       type: "long", dialog: true, chat: true, newDay: true, advanceTime: false,

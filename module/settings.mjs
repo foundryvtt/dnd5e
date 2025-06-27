@@ -144,6 +144,16 @@ export function registerSystemSettings() {
     }
   });
 
+  // Allow Rests from Sheet
+  game.settings.register("dnd5e", "allowRests", {
+    name: "SETTINGS.DND5E.PERMISSIONS.AllowRests.Name",
+    hint: "SETTINGS.DND5E.PERMISSIONS.AllowRests.Hint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
+  });
+
   // Allow Polymorphing
   game.settings.register("dnd5e", "allowPolymorphing", {
     name: "SETTINGS.DND5E.PERMISSIONS.AllowTransformation.Name",

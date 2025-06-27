@@ -482,7 +482,10 @@ export default class CharacterActorSheet extends BaseActorSheet {
         { number: formatNumber(context.system.details.xp.boonsEarned ?? 0, { signDisplay: "always" }) }
       );
     }
+
+    // Visibility
     context.showExperience = game.settings.get("dnd5e", "levelingMode") !== "noxp";
+    context.showRests = game.user.isGM || (this.actor.isOwner && game.settings.get("dnd5e", "allowRests"));
 
     return context;
   }
