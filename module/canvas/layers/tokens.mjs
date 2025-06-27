@@ -1,8 +1,8 @@
 export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
   /**
    * Determine whether the provided grid space is being occupied by a token which should block the provided token
-   * @param {GridOffset3D} gridSpace  The grid space to check
-   * @param {Token5e} token           The token being moved
+   * @param {GridOffset3D | TokenFindMovementPathWaypoint} gridSpace  The grid space to check
+   * @param {Token5e} token                                           The token being moved
    * @returns {boolean} Whether the moving token should be blocked
    */
   isOccupiedGridSpaceBlocking(gridSpace, token) {
@@ -35,8 +35,8 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
   /**
    * Determine whether the provided grid space is being occupied by a token which should cause difficult terrain for
    * the provided token
-   * @param {GridOffset3D} gridSpace  The grid space to check
-   * @param {Token5e} token           The token being moved
+   * @param {GridOffset3D | TokenFindMovementPathWaypoint} gridSpace  The grid space to check
+   * @param {Token5e} token                                           The token being moved
    * @returns {boolean} Whether the moving token should suffer difficult terrain
    */
   isOccupiedGridSpaceDifficult(gridSpace, token) {
@@ -70,8 +70,8 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
   /**
    * Determine the set of tokens occupying the provided grid space which may be relevant for blocking/difficult terrain
    * considerations
-   * @param {GridOffset3D} gridSpace  The grid space to check
-   * @param {Token5e} token           The token being moved
+   * @param {GridOffset3D | TokenFindMovementPathWaypoint} gridSpace  The grid space to check
+   * @param {Token5e} token                                           The token being moved
    * @returns {Set<Token5e>} The set of potentially relevant tokens occupying the provided grid space
    * @private
    */
@@ -86,7 +86,7 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
 
       // Ignore different elevation
       const { k: occupiedElevation } = grid.getOffset(t.document);
-      if ( occupiedElevation !== gridSpace.k ) return false;
+      if ( occupiedElevation !== (gridSpace.k ?? gridSpace.elevation) ) return false;
 
       // Ensure space is actually occupied, not merely touching border of rectangle
       const gridSpaces = t.document.getOccupiedGridSpaceOffsets().map(coord => grid.getTopLeftPoint(coord));
