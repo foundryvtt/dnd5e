@@ -1165,7 +1165,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
-    const buildConfig = this._buildSkillToolConfig.bind(this, type);
+    const hostActor = this.isPolymorphed && this.flags?.dnd5e?.transformOptions?.mergeSkills && (type === "skill")
+      ? game.actors.get(this.flags.dnd5e?.originalActor) : null;
+    const buildConfig = this._buildSkillToolConfig.bind(this, type, hostActor);
 
     const rollConfig = foundry.utils.mergeObject({
       ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig?.ability),
@@ -1238,17 +1240,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Configure a roll config for each roll performed as part of the skill or tool check process. Will be called once
    * per roll in the process each time an option is changed in the roll configuration interface.
    * @param {"skill"|"tool"} type                          Type of roll.
+   * @param {Actor5e|null} hostActor                       The original actor from which this one was transformed.
    * @param {D20RollProcessConfiguration} process          Configuration for the entire rolling process.
    * @param {D20RollConfiguration} config                  Configuration for a specific roll.
    * @param {FormDataExtended} [formData]                  Any data entered into the rolling prompt.
    * @param {number} index                                 Index of the roll within all rolls being prepared.
    */
-  _buildSkillToolConfig(type, process, config, formData, index) {
+  _buildSkillToolConfig(type, hostActor, process, config, formData, index) {
     const relevant = type === "skill" ? this.system.skills?.[process.skill] : this.system.tools?.[process.tool];
     const rollData = this.getRollData();
     const abilityId = formData?.get("ability") ?? process.ability;
     const ability = this.system.abilities?.[abilityId];
-    const prof = this.system.calculateAbilityCheckProficiency(relevant?.effectValue ?? 0, abilityId);
+    let prof = this.system.calculateAbilityCheckProficiency(relevant?.effectValue ?? 0, abilityId);
+    const originalProf = hostActor?.system.calculateAbilityCheckProficiency?.(
+      hostActor?.system.skills[process.skill]?.value, abilityId);
+    if ( originalProf?.multiplier > prof.multiplier ) prof = originalProf;
 
     let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
       mod: ability?.mod,
