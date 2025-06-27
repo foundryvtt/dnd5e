@@ -29,10 +29,12 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /** @inheritdoc */
   _getMovementCostFunction(options) {
     const costFunction = super._getMovementCostFunction(options);
-    const disableAutomationKey = foundry.helpers.interaction.KeyboardManager.MODIFIER_KEYS.Alt;
+    const disableAutomationKey = foundry.helpers.interaction.KeyboardManager.MODIFIER_KEYS.ALT;
     if ( !game.settings.get("dnd5e", "movementAutomation")
-       || game.keyboard.isModifierActive(disableAutomationKey) ) return costFunction;
+      || game.keyboard.isModifierActive(disableAutomationKey) ) return costFunction;
 
+    const ignoredDifficultTerrain = this.actor?.system.attributes.movement.ignoredDifficultTerrain ?? new Set();
+    const ignoreDifficult = ["all", "nonmagical"].some(i => ignoredDifficultTerrain.has(i));
     return (from, to, distance, segment) => {
       const cost = costFunction(from, to, distance, segment);
 
@@ -41,6 +43,9 @@ export default class Token5e extends foundry.canvas.placeables.Token {
 
       // Terrain already difficult, no stacking
       if ( segment.terrain?.difficultTerrain ) return cost;
+
+      // If ignoring all/nonmagical, don't consider tokens difficult terrain
+      if ( ignoreDifficult ) return cost;
 
       // Check difficult due to occupied tokens
       if ( !this.layer.isOccupiedGridSpaceDifficult(to, this) ) return cost;
