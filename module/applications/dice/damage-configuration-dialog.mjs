@@ -81,10 +81,9 @@ export default class DamageRollConfigurationDialog extends RollConfigurationDial
 
   /** @override */
   _finalizeRolls(action) {
-    const isCritical = action === "critical";
-    this.config.isCritical = isCritical;
+    this.config.isCritical = action === "critical";
     return this.rolls.map(roll => {
-      roll.options.isCritical = isCritical;
+      roll.options.isCritical = this.config.isCritical;
       roll.configureDamage({ critical: this.config.critical });
       return roll;
     });
