@@ -80,11 +80,13 @@ export default class EquippableItemTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Ensure items that cannot be attuned are not marked as attuned.
+   * Ensure items that cannot be attuned are not marked as attuned,
+   * and that contained items are unequipped if the container is unequipped.
    */
   prepareFinalEquippableData() {
     if ( this.validProperties.has("mgc") && !this.properties.has("mgc") ) this.attunement = "";
     if ( !this.attunement ) this.attuned = false;
+    if ( this.parent.container?.system.equipped === false ) this.equipped = false;
   }
 
   /* -------------------------------------------- */
