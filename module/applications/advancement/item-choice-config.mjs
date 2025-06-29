@@ -111,7 +111,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
     const pool = [];
     for ( const item of (configuration.pool ?? this.advancement.configuration.pool) ) {
       if ( this.advancement._validateItemType(await fromUuid(item.uuid), {
-        type: configuration.type, restriction: configuration.restriction ?? {}, strict: false
+        type: false, strict: false
       }) ) pool.push(item);
     }
     configuration.pool = pool;
@@ -125,6 +125,6 @@ export default class ItemChoiceConfig extends AdvancementConfig {
 
   /** @inheritDoc */
   _validateDroppedItem(event, item) {
-    this.advancement._validateItemType(item);
+    this.advancement._validateItemType(item, { type: false });
   }
 }

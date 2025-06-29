@@ -151,9 +151,9 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   /**
    * Verify that the provided item can be used with this advancement based on the configuration.
    * @param {Item5e} item                   Item that needs to be tested.
-   * @param {object} config
-   * @param {string} config.type            Type restriction on this advancement.
-   * @param {object} config.restriction     Additional restrictions to be applied.
+   * @param {object} [config={}]
+   * @param {string|false} [config.type]    Type restriction on this advancement, or `false` to not validate type.
+   * @param {object} [config.restriction]   Additional restrictions to be applied.
    * @param {boolean} [config.strict=true]  Should an error be thrown when an invalid type is encountered?
    * @returns {boolean}                     Is this type valid?
    * @throws {Error}                        An error if the item is invalid and strict is `true`.
