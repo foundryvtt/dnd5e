@@ -24,9 +24,9 @@ export default class Token5e extends foundry.canvas.placeables.Token {
     // Get all grid spaces as waypoints so that running into a blocking token stops us immediately before it
     waypoints = this.document.getCompleteMovementPath(waypoints);
 
-    // Keep explicit waypoints (includes last), keep first waypoint, keep waypoints immediately before a blocking token
+    // Keep explicit waypoints, keep first & last waypoints, keep waypoints immediately before a blocking token
     waypoints = waypoints.filter((waypoint, i) => {
-      if ( i === 0 ) return true;
+      if ( i === 0 || i === waypoints.length - 1 ) return true;
       return waypoint.explicit || this.layer.isOccupiedGridSpaceBlocking(waypoints[i + 1], this);
     });
     return super.findMovementPath(waypoints, options);
