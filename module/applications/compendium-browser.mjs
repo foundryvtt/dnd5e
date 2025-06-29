@@ -1,8 +1,8 @@
 import * as Filter from "../filter.mjs";
 import SourceField from "../data/shared/source-field.mjs";
+import { getPluralRules } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
-import { getPluralRules } from "../utils.mjs";
 
 /**
  * @typedef {ApplicationConfiguration} CompendiumBrowserConfiguration
