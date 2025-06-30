@@ -109,24 +109,43 @@ export default class FeatData extends ItemDataModel.mixin(
             return d;
           }, { include: [], exclude: [] });
 
-          const makeFilter = (values, operator) => ({
-            o: operator,  v: [
-              ...values.map(ability => ({
+          if ( include.length ) {
+            const includeFilter = {
+              o: "OR", v: [],
+            };
+            includeFilter.v.push(...include.map(ability=>({
+              k: "system.advancement", o: "has", v: { k: `configuration.fixed.${ability}`, o: "gt", v: 0 }
+            })));
+            includeFilter.v.push({
+              k: "system.advancement", o: "has", v: {
+                o: "AND", v: [
+                  { k: `configuration.points`, o: "gt", v: 0 },
+                  { o: "NOT", v: { k: `configuration.locked`, o: "hasall", v: include } }
+                ]
+              },
+            });
+            filters.push(includeFilter);
+          }
+          if ( exclude.length ) {
+            const excludeFilter = {
+              o: "AND", v: [],
+            };
+            excludeFilter.v.push(...exclude.map(ability=>({
+              o: "NOT", v: {
                 k: "system.advancement", o: "has", v: { k: `configuration.fixed.${ability}`, o: "gt", v: 0 }
-              })),
-              {
+            }})));
+            excludeFilter.v.push({
+              o: "NOT", v: {
                 k: "system.advancement", o: "has", v: {
                   o: "AND", v: [
-                    { k: "configuration.points", o: "gt", v: 0 },
-                    { o: "NOT", v: { k: "configuration.locked", o: "hasall", v: values } }
+                    { k: `configuration.points`, o: "gt", v: 0 },
+                    { o: "NOT", v: { k: `configuration.locked`, o: "hasall", v: exclude } }
                   ]
-                }
-              }
-            ]
-          });
-
-          if ( include.length ) filters.push(makeFilter(include, "OR"));
-          if ( exclude.length ) filters.push(makeFilter(exclude, "AND"));
+                },
+              },
+            });
+            filters.push(excludeFilter);
+          }
         }
       }]
     ]);
