@@ -67,10 +67,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
       { rule: true },
       ...Object.entries(CONFIG.DND5E.spellLevels).map(([value, label]) => ({ value, label }))
     ];
-    context.listRestrictionOptions = [
-      { value: "", label: "" },
-      ...dnd5e.registry.spellLists.options
-    ];
+    context.listRestrictionOptions = dnd5e.registry.spellLists.options;
     context.showContainerWarning = context.items.some(i => i.index?.type === "container");
     context.showSpellConfig = this.advancement.configuration.type === "spell";
     context.showRequireSpellSlot = !this.advancement.configuration.spell?.preparation

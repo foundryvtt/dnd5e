@@ -121,7 +121,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
         i.checked = this.selected.has(i.uuid);
         i.disabled = !i.checked && context.choices.full;
         const validLevel = (i.system.prerequisites?.level ?? -Infinity) <= this.level;
-        const validSpell = validateSpellLevel && (i.system.level <= maxSlot);
+        const validSpell = !validateSpellLevel || (i.system.level <= maxSlot);
         const available = !previouslySelected.has(i.uuid) || i.system.prerequisites?.repeatable;
         if ( available && validLevel && validSpell ) items.push(i);
       }
@@ -256,7 +256,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     let spells;
 
     // For advancements on classes or subclasses, use the largest slot available for that class
-    if ( spellcasting ) {
+    if ( spellcasting?.type ) {
       const progression = { slot: 0, pact: 0 };
       const maxSpellLevel = CONFIG.DND5E.SPELL_SLOT_TABLE[CONFIG.DND5E.SPELL_SLOT_TABLE.length - 1].length;
       spells = Object.fromEntries(Array.fromRange(maxSpellLevel, 1).map(l => [`spell${l}`, {}]));

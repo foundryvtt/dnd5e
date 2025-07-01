@@ -2,7 +2,7 @@ import MappingField from "../fields/mapping-field.mjs";
 import SpellConfigurationData from "./spell-config.mjs";
 
 const {
-  ArrayField, BooleanField, EmbeddedDataField, ForeignDocumentField, NumberField, SchemaField, StringField
+  ArrayField, BooleanField, EmbeddedDataField, ForeignDocumentField, NumberField, SchemaField, SetField, StringField
 } = foundry.data.fields;
 
 /**
@@ -28,7 +28,7 @@ const {
  * @property {ItemChoicePoolEntry[]} pool                     Items that can be chosen.
  * @property {object} restriction
  * @property {"available"|number} restriction.level           Level of spell allowed.
- * @property {string} restriction.list                        Spell list from which a spell must be selected.
+ * @property {Set<string>} restriction.list                   Spell lists from which a spell must be selected.
  * @property {string} restriction.subtype                     Item sub-type allowed.
  * @property {string} restriction.type                        Specific item type allowed.
  * @property {SpellConfigurationData} spell                   Mutations applied to spell items.
@@ -56,7 +56,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
       pool: new ArrayField(new SchemaField({ uuid: new StringField() })),
       restriction: new SchemaField({
         level: new StringField(),
-        list: new StringField(),
+        list: new SetField(new StringField()),
         subtype: new StringField(),
         type: new StringField()
       }),
