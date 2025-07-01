@@ -6,7 +6,9 @@ import ActivationsField from "../../data/chat-message/fields/activations-field.m
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
-import { convertTime, defaultUnits, formatNumber, formatTime, simplifyBonus, staticID } from "../../utils.mjs";
+import {
+  convertTime, defaultUnits, formatLength, formatNumber, formatTime, simplifyBonus, staticID
+} from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
@@ -2540,12 +2542,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _prepareMovementAttribution() {
     const { movement } = this.system.attributes;
     const units = movement.units || defaultUnits("length");
+    const unit = CONFIG.DND5E.movementUnits[units]?.formattingUnit;
+    const formatValue = value => `<span class="value">${
+      unit ? formatLength(value ?? 0, unit, { parts: true })
+        : `${value ?? 0} <span class="units">${units}</span>`
+    }</span>`;
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, label]) => {
       const value = movement[k];
       if ( value || (k === "walk") ) html += `
         <div class="row">
           <i class="fas ${k}"></i>
-          <span class="value">${value ?? 0} <span class="units">${units}</span></span>
+          ${formatValue(value)}
           <span class="label">${label}</span>
         </div>
       `;
