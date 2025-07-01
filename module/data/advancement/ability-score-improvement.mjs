@@ -7,8 +7,9 @@ const { NumberField, SetField, StringField } = foundry.data.fields;
  * Data model for the Ability Score Improvement advancement configuration.
  *
  * @property {number} cap                    Maximum number of points that can be assigned to a single score.
- * @property {Set<string>} locked            Abilities that cannot be changed by this advancement.
  * @property {Object<string, number>} fixed  Number of points automatically assigned to a certain score.
+ * @property {Set<string>} locked            Abilities that cannot be changed by this advancement.
+ * @property {number} max                    Override for the maximum ability score.
  * @property {number} points                 Number of points that can be assigned to any score.
  */
 export class AbilityScoreImprovementConfigurationData extends foundry.abstract.DataModel {
@@ -24,6 +25,7 @@ export class AbilityScoreImprovementConfigurationData extends foundry.abstract.D
       cap: new NumberField({ integer: true, min: 1, initial: 2 }),
       fixed: new MappingField(new NumberField({ nullable: false, integer: true, initial: 0 })),
       locked: new SetField(new StringField()),
+      max: new NumberField({ integer: true, min: 1 }),
       points: new NumberField({ integer: true, min: 0, initial: 0 })
     };
   }
