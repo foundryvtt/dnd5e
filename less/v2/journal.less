@@ -58,12 +58,12 @@
   }
 
   /* Edit Button */
-  &.journal-entry .edit-container .editor-edit {
+  &.journal-entry .edit-container :is(.editor-edit, button) {
     background: transparent;
     border: none;
     box-shadow: none;
 
-    > i::before { content: "\f52d"; }
+    > i::before, &::before { --fa: "\f52d"; }
   }
 
   /* ProseMirror */
@@ -133,6 +133,35 @@
     }
   }
 
+  &.application {
+    color: var(--color-text-dark-primary);
+
+    &.journal-entry .edit-container button { color: var(--color-text-emphatic); }
+
+    .journal-sidebar input {
+      --input-placeholder-color: var(--dnd5e-color-blue-gray-3);
+      outline: none;
+      border: 1px solid transparent;
+      transition: all 250ms ease;
+
+      &:hover, &:focus {
+        border-color: var(--dnd5e-color-gold);
+        box-shadow: 0 0 6px var(--dnd5e-color-gold);
+      }
+    }
+
+    .action-buttons {
+      .previous, .next {
+        border: none;
+        flex: 0 0 var(--button-size);
+      }
+
+      .create {
+        --button-background-color: transparent;
+        --button-text-color: var(--color-light-3);
+      }
+    }
+  }
 }
 
 /* ----------------------------------------- */
@@ -153,6 +182,45 @@
   h1, h2, h3, h4, h5, h6 {
     color: revert-layer;
     text-shadow: revert-layer;
+  }
+}
+
+.dnd5e2.journal-entry-page.application {
+  &:not(.minimized) .window-header {
+    --color-header-background: var(--color-dark-3);
+    margin-block-end: unset;
+
+    .window-title, .window-icon { color: var(--color-light-1); }
+    button { border-color: transparent; }
+
+    .window-title {
+      position: unset;
+      inset: unset;
+      text-align: unset;
+      font-size: var(--font-size-13);
+    }
+  }
+
+  .window-content {
+    padding: 0;
+    gap: 0;
+  }
+
+  &.text {
+    .journal-header { gap: 1rem; }
+    .journal-footer { display: none; }
+  }
+
+  .controls-dropdown .header-control button {
+    background: none;
+    text-transform: unset;
+    border: none;
+    font-size: var(--font-size-12);
+    font-family: var(--font-body);
+    font-weight: normal;
+    transition: all 250ms ease;
+
+    &:hover { background: var(--color-warm-2); }
   }
 }
 

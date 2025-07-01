@@ -1,4 +1,4 @@
-<section class="description tab {{ tab.cssClass }} {{#if singleDescription}}single-description{{/if}}"
+<section class="description tab {{ tab.cssClass }} {{#if singleDescription}}single-description{{/if}} {{#if (or editingDescription (and singleDescription editable))}}editing{{/if}}"
          data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
     {{#if editingDescription}}
     <prose-mirror name="{{ editingDescription.target }}" value="{{ editingDescription.value }}"
