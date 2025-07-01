@@ -13,9 +13,13 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
   /** @override */
   static defineSchema() {
     return {
-      type: new StringField({ choices: () => CONFIG.DND5E.difficultTerrainTypes }),
+      types: new SetField(new StringField({ choices: () => CONFIG.DND5E.difficultTerrainTypes })),
       ignoredDispositions: new SetField(new NumberField({
-        choices: foundry.applications.sheets.TokenConfig.TOKEN_DISPOSITIONS
+        choices: () => {
+          const dispositions = { ...foundry.applications.sheets.TokenConfig.TOKEN_DISPOSITIONS };
+          delete dispositions[CONST.TOKEN_DISPOSITIONS.SECRET];
+          return dispositions;
+        }
       }))
     };
   }
@@ -78,7 +82,8 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
   _getTerrainEffects(token, segment) {
     const ignoredTypes = token.actor?.system.attributes?.movement?.ignoredDifficultTerrain ?? new Set();
     if ( this.ignoredDispositions.has(token.disposition) || ignoredTypes.has("all")
-      || ignoredTypes.has(this.type) || (ignoredTypes.has("nonmagical") && (this.type !== "magical")) ) return [];
+      || (this.types.size && !this.types.difference(ignoredTypes).size)
+      || (ignoredTypes.has("nonmagical") && !this.types.has("magical")) ) return [];
     return [{ name: "difficultTerrain" }];
   }
 }
