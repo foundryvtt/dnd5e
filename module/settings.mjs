@@ -636,6 +636,9 @@ export function applyLegacyRules() {
   DND5E.conditionEffects.initiativeDisadvantage.delete("incapacitated");
   DND5E.conditionEffects.initiativeDisadvantage.delete("surprised");
 
+  // Incapacitated creatures within 2 size categories still cannot be moved through in legacy
+  delete DND5E.conditionTypes.incapacitated.neverBlockMovement;
+
   // Adjust references.
   Object.assign(DND5E.rules, LEGACY.RULES);
   for ( const [cat, value] of Object.entries(LEGACY.REFERENCES) ) {

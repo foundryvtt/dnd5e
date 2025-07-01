@@ -19,16 +19,10 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  findMovementPath(waypoints, options) {
-
-    // Get all grid spaces as waypoints so that running into a blocking token stops us immediately before it
-    waypoints = this.document.getCompleteMovementPath(waypoints);
-
-    // Drop all intermediate waypoints except those immediately before a blocking token
-    waypoints = waypoints.filter((waypoint, i) => {
-      return !waypoint.intermediate || this.layer.isOccupiedGridSpaceBlocking(waypoints[i + 1], this);
-    });
-    return super.findMovementPath(waypoints, options);
+  _getDragConstrainOptions() {
+    const unconstrainedMovement = game.user.isGM
+      && ui.controls.controls.tokens.tools.unconstrainedMovement.active;
+    return { ...super._getDragConstrainOptions(), ignoreTokens: unconstrainedMovement };
   }
 
   /* -------------------------------------------- */
@@ -42,12 +36,9 @@ export default class Token5e extends foundry.canvas.placeables.Token {
 
     const ignoredDifficultTerrain = this.actor?.system.attributes.movement.ignoredDifficultTerrain ?? new Set();
     const ignoreDifficult = ["all", "nonmagical"].some(i => ignoredDifficultTerrain.has(i));
-    const unconstrainedMovement = game.user.isGM && ui.controls.controls.tokens.tools.unconstrainedMovement.active;
+    const preview = options?.preview && !game.user.isGM;
     return (from, to, distance, segment) => {
       const cost = costFunction(from, to, distance, segment);
-
-      // Check if blocked
-      if ( !unconstrainedMovement && this.layer.isOccupiedGridSpaceBlocking(to, this) ) return Infinity;
 
       // Terrain already difficult, no stacking
       if ( segment.terrain?.difficultTerrain ) return cost;
@@ -56,11 +47,53 @@ export default class Token5e extends foundry.canvas.placeables.Token {
       if ( ignoreDifficult ) return cost;
 
       // Check difficult due to occupied tokens
-      if ( !this.layer.isOccupiedGridSpaceDifficult(to, this) ) return cost;
+      if ( !this.layer.isOccupiedGridSpaceDifficult(to, this, {preview}) ) return cost;
 
       // Difficult terrain due to occupied grid space
       return cost + distance;
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  constrainMovementPath(waypoints, options) {
+    let { preview=false, ignoreTokens=false } = options; // Custom constrain option to ignore tokens
+
+    if ( ignoreTokens ) return super.constrainMovementPath(waypoints, options);
+
+    // Ignore preview if token vision is disabled or the current user is a GM
+    if ( !canvas.visibility.tokenVision || game.user.isGM ) preview = false;
+
+    let blocked = false;
+    let constrained = false;
+
+    // Check if blocked by token, then check if constrained
+    const checkBlockedConstrained = () => {
+      const completePath = this.document.getCompleteMovementPath(waypoints);
+      const blockedIndex = completePath.findIndex(waypoint =>
+        this.layer.isOccupiedGridSpaceBlocking(waypoint, this, {preview}));
+      blocked = blockedIndex >= 0;
+
+      if ( blocked ) {
+        waypoints = completePath.slice(0, blockedIndex - 1).filter(waypoint => !waypoint.intermediate);
+        waypoints.push(completePath.at(blockedIndex - 1));
+      }
+
+      [waypoints, constrained] = super.constrainMovementPath(waypoints, options);
+    };
+
+    checkBlockedConstrained();
+
+    // If constrained, ensure we check for being blocked in the new path (repeat as necessary)
+    if (constrained) {
+      let numOldWaypoints;
+      do {
+        numOldWaypoints = waypoints.filter(w => !w.unreachable).length;
+        checkBlockedConstrained();
+      } while (numOldWaypoints !== waypoints.filter(w => !w.unreachable).length);
+    }
+    return [waypoints, constrained || blocked];
   }
 
   /* -------------------------------------------- */

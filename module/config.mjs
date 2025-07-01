@@ -3963,7 +3963,8 @@ DND5E.conditionTypes = {
   incapacitated: {
     name: "DND5E.ConIncapacitated",
     img: "systems/dnd5e/icons/svg/statuses/incapacitated.svg",
-    reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.4i3G895hy99piand"
+    reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.4i3G895hy99piand",
+    neverBlockMovement: true
   },
   invisible: {
     name: "DND5E.ConInvisible",
@@ -4103,7 +4104,8 @@ DND5E.statusEffects = {
     name: "EFFECT.DND5E.StatusDead",
     img: "systems/dnd5e/icons/svg/statuses/dead.svg",
     special: "DEFEATED",
-    order: 1
+    order: 1,
+    neverBlockMovement: true
   },
   dodging: {
     name: "EFFECT.DND5E.StatusDodging",
@@ -4111,7 +4113,8 @@ DND5E.statusEffects = {
   },
   ethereal: {
     name: "EFFECT.DND5E.StatusEthereal",
-    img: "systems/dnd5e/icons/svg/statuses/ethereal.svg"
+    img: "systems/dnd5e/icons/svg/statuses/ethereal.svg",
+    neverBlockMovement: true
   },
   flying: {
     name: "EFFECT.DND5E.StatusFlying",
