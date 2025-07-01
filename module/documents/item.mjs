@@ -113,16 +113,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * The item that is ultimately responsible for adding this item through the advancement system.
-   * @type {Item5e|void}
-   */
-  get advancementRootItem() {
-    return this.parent?.items.get(this.getFlag("dnd5e", "advancementRoot")?.split(".")?.[0]);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Should deletion of this item be allowed? Doesn't prevent programatic deletion, but affects UI controls.
    * @type {boolean}
    */

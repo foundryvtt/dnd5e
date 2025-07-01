@@ -14,6 +14,7 @@ import Application5e from "../api/application.mjs";
  * @property {object} [class]             Contains data on class if step was triggered by class level change.
  * @property {Item5e} [class.item]        Class item that caused this advancement step.
  * @property {number} [class.level]       Level the class should be during this step.
+ * @property {number} [level]             Character level at this step, if different than flow's level.
  * @property {boolean} [automatic=false]  Should the manager attempt to apply this step without user interaction?
  * @property {boolean} [synthetic=false]  Was this step created as a result of an item introduced or deleted?
  */
@@ -395,8 +396,8 @@ export default class AdvancementManager extends Application5e {
     const pushSteps = (flows, data) => this.steps.push(...flows.map(flow => ({ flow, ...data })));
     const getItemFlows = (characterLevel, classLevel) => this.clone.items.contents.flatMap(i => {
       if ( ["class", "subclass", "race"].includes(i.type) ) return [];
-      if ( ["class", "subclass"].includes(i.advancementRootItem?.type) ) {
-        if ( i.advancementRootItem !== classItem ) return [];
+      if ( ["class", "subclass"].includes(i.system.advancementRootItem?.type) && i.system.advancementClassLinked ) {
+        if ( i.system.advancementRootItem !== classItem ) return [];
         else return this.constructor.flowsForLevel(i, classLevel);
       }
       return this.constructor.flowsForLevel(i, characterLevel);
@@ -406,7 +407,9 @@ export default class AdvancementManager extends Application5e {
     for ( let offset = 1; offset <= levelDelta; offset++ ) {
       const classLevel = classItem.system.levels + offset;
       const characterLevel = (this.actor.system.details.level ?? 0) + offset;
-      const stepData = { type: "forward", class: {item: classItem, level: classLevel} };
+      const stepData = {
+        type: "forward", class: { item: classItem, level: classLevel }, level: characterLevel
+      };
       pushSteps(this.constructor.flowsForLevel(raceItem, characterLevel), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem, classLevel), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem.subclass, classLevel), stepData);
@@ -417,7 +420,9 @@ export default class AdvancementManager extends Application5e {
     for ( let offset = 0; offset > levelDelta; offset-- ) {
       const classLevel = classItem.system.levels + offset;
       const characterLevel = (this.actor.system.details.level ?? 0) + offset;
-      const stepData = { type: "reverse", class: {item: classItem, level: classLevel}, automatic: true };
+      const stepData = {
+        type: "reverse", class: {item: classItem, level: classLevel}, automatic: true, level: characterLevel
+      };
       pushSteps(getItemFlows(characterLevel, classLevel).reverse(), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem.subclass, classLevel).reverse(), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem, classLevel).reverse(), stepData);
@@ -428,7 +433,8 @@ export default class AdvancementManager extends Application5e {
     // Ensure the class level ends up at the appropriate point
     this.steps.push({
       type: "forward", automatic: true,
-      class: { item: classItem, level: classItem.system.levels += levelDelta }
+      class: { item: classItem, level: classItem.system.levels += levelDelta },
+      level: (this.actor.system.details.level ?? 0) + levelDelta
     });
 
     return this;
@@ -467,8 +473,7 @@ export default class AdvancementManager extends Application5e {
    * @returns {number}       Working level.
    */
   static currentLevel(item, actor) {
-    if ( ["class", "subclass"].includes(item.advancementRootItem?.type) ) item = item.advancementRootItem;
-    return item.system.levels ?? item.class?.system.levels ?? actor.system.details.level ?? 0;
+    return item.system.advancementLevel ?? actor.system.details.level ?? 0;
   }
 
   /* -------------------------------------------- */
@@ -705,8 +710,10 @@ export default class AdvancementManager extends Application5e {
       let handledLevel = 0;
       for ( let idx = this.#stepIndex; idx < this.steps.length; idx++ ) {
         // Find spots where the level increases
-        const thisLevel = this.steps[idx].flow?.level ?? this.steps[idx].class?.level;
-        const nextLevel = this.steps[idx + 1]?.flow?.level ?? this.steps[idx + 1]?.class?.level;
+        const getLevel = step => (item.system.advancementClassLinked ? undefined : step?.level)
+          ?? step?.flow?.level ?? step?.class?.level;
+        const thisLevel = getLevel(this.steps[idx]);
+        const nextLevel = getLevel(this.steps[idx + 1]);
         if ( (thisLevel < handledLevel) || (thisLevel === nextLevel) ) continue;
 
         // Determine if there is any advancement to be done for the added item to this level
