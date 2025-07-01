@@ -98,64 +98,87 @@ system:
   properties: []
   requirements: Druid
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    FsDnynyqno8XNHgf:
+      type: transform
+      _id: FsDnynyqno8XNHgf
+      sort: 0
       activation:
         type: bonus
-        value: 1
-        condition: ''
         override: false
+        condition: ''
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
       description:
         chatFlavor: ''
       duration:
-        value: (floor(@classes.druid.levels / 2))
-        units: hour
-        special: ''
-        override: false
+        units: inst
         concentration: false
+        override: false
       effects: []
       range:
         units: self
-        special: ''
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: ''
-          type: self
           choice: false
+          type: self
           special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: Wild Shape
+      profiles:
+        - cr: '0.25'
+          name: CR ¼
+          _id: xUPf0uISOwKy3mhO
+          sizes: []
+          types:
+            - beast
+          movement:
+            - fly
+          level:
+            min: 4
+            max: 5
+        - cr: '0.5'
+          name: CR ½
+          _id: yu86xk21fVzHg9r5
+          sizes: []
+          types:
+            - beast
+          movement:
+            - fly
+          level:
+            min: 6
+            max: 7
+        - cr: '1'
+          name: CR 1
+          _id: ZFqKHYlY9JhLYnx0
+          sizes: []
+          types:
+            - beast
+          movement: []
+          level:
+            min: 8
+            max: null
+      settings: null
+      transform:
+        customize: false
+        identifier: druid
+        preset: wildshape
+      name: ''
       img: systems/dnd5e/icons/svg/abilities/intelligence.svg
   enchant: {}
   identifier: wild-shape
@@ -167,11 +190,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.345'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866366918
-  modifiedTime: 1745256761362
+  modifiedTime: 1751411542968
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1200000
