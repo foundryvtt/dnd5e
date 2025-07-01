@@ -2481,7 +2481,7 @@ preLocalize("healingTypes", { keys: ["label"] });
 /* -------------------------------------------- */
 
 /**
- * @typedef MovementConfig
+ * @typedef MovementTypeConfig
  * @property {string} label            Localized label for the movement type.
  * @property {boolean} [walkFallback]  When this special movement type runs out, can the actor fall back to using their
  *                                     walk speed at 2x cost?
@@ -2489,7 +2489,7 @@ preLocalize("healingTypes", { keys: ["label"] });
 
 /**
  * Types of movement supported by creature actors in the system.
- * @enum {MovementConfig}
+ * @enum {MovementTypeConfig}
  */
 DND5E.movementTypes = {
   burrow: {

@@ -214,8 +214,8 @@ Hooks.once("init", function() {
   // Exhaustion handling
   documents.ActiveEffect5e.registerHUDListeners();
 
-  // Set up token movement costs
-  documents.TokenDocument5e.registerMovementCosts();
+  // Set up token movement actions
+  documents.TokenDocument5e.registerMovementActions();
 });
 
 /* -------------------------------------------- */

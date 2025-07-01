@@ -112,24 +112,26 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /* -------------------------------------------- */
 
   /**
-   * Set up the cost functions for all movement types.
+   * Set up the system's movement action customization.
    */
-  static registerMovementCosts() {
-    for ( const type of ["walk", "fly", "swim", "burrow", "climb"] ) {
-      CONFIG.Token.movement.actions[type].getCostFunction = (...args) => this.getMovementCostFunction(type, ...args);
+  static registerMovementActions() {
+    for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      const actionConfig = CONFIG.Token.movement.actions[type];
+      if ( !actionConfig ) continue;
+      actionConfig.getCostFunction = (...args) => this.getMovementActionCostFunction(type, ...args);
     }
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Return the movement cost function for a specific movement type.
+   * Return the movement action cost function for a specific movement type.
    * @param {string} type
    * @param {TokenDocument5e} token
    * @param {TokenMeasureMovementPathOptions} options
-   * @returns {TokenMovementCostFunction}
+   * @returns {TokenMovementActionCostFunction}
    */
-  static getMovementCostFunction(type, token, options) {
+  static getMovementActionCostFunction(type, token, options) {
     const actorMovement = token.actor?.system.attributes?.movement ?? {};
     if ( !(type in actorMovement) || actorMovement[type] ) return cost => cost;
     if ( CONFIG.DND5E.movementTypes[type]?.walkFallback ) return (cost, _from, _to, distance) => cost + distance;
