@@ -63,7 +63,7 @@ export default class SubclassAdvancement extends Advancement {
     if ( !itemData ) {
       itemData = await this.createItemData(data.uuid);
       delete itemData.flags?.dnd5e?.advancementOrigin;
-      delete itemData.flags?.dnd5e?.ultimateOrigin;
+      delete itemData.flags?.dnd5e?.advancementRoot;
       foundry.utils.setProperty(itemData, "system.classIdentifier", this.item.identifier);
     }
     if ( itemData ) {

@@ -265,9 +265,7 @@ export default class AdvancementManager extends Application5e {
     }
 
     // All other items, just create some flows up to current character level (or class level for subclasses)
-    let targetLevel = manager.clone.system.details.level ?? 0;
-    if ( clonedItem.type === "subclass" ) targetLevel = clonedItem.class?.system.levels ?? 0;
-    Array.fromRange(targetLevel + 1)
+    Array.fromRange(manager.currentLevel(clonedItem, manager.clone) + 1)
       .flatMap(l => this.flowsForLevel(clonedItem, l))
       .forEach(flow => manager.steps.push({ type: "forward", flow }));
 
@@ -357,7 +355,7 @@ export default class AdvancementManager extends Application5e {
     }
 
     // All other items, just create some flows down from current character level
-    Array.fromRange((manager.clone.system.details.level ?? 0) + 1)
+    Array.fromRange(manager.currentLevel(clonedItem, manager.clone) + 1)
       .flatMap(l => this.flowsForLevel(clonedItem, l))
       .reverse()
       .forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
@@ -395,8 +393,12 @@ export default class AdvancementManager extends Application5e {
   createLevelChangeSteps(classItem, levelDelta) {
     const raceItem = this.clone.system?.details?.race instanceof Item ? this.clone.system.details.race : null;
     const pushSteps = (flows, data) => this.steps.push(...flows.map(flow => ({ flow, ...data })));
-    const getItemFlows = characterLevel => this.clone.items.contents.flatMap(i => {
+    const getItemFlows = (characterLevel, classLevel) => this.clone.items.contents.flatMap(i => {
       if ( ["class", "subclass", "race"].includes(i.type) ) return [];
+      if ( ["class", "subclass"].includes(i.advancementRootItem?.type) ) {
+        if ( i.advancementRootItem !== classItem ) return [];
+        else return this.constructor.flowsForLevel(i, classLevel);
+      }
       return this.constructor.flowsForLevel(i, characterLevel);
     });
 
@@ -408,7 +410,7 @@ export default class AdvancementManager extends Application5e {
       pushSteps(this.constructor.flowsForLevel(raceItem, characterLevel), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem, classLevel), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem.subclass, classLevel), stepData);
-      pushSteps(getItemFlows(characterLevel), stepData);
+      pushSteps(getItemFlows(characterLevel, classLevel), stepData);
     }
 
     // Level decreased
@@ -416,7 +418,7 @@ export default class AdvancementManager extends Application5e {
       const classLevel = classItem.system.levels + offset;
       const characterLevel = (this.actor.system.details.level ?? 0) + offset;
       const stepData = { type: "reverse", class: {item: classItem, level: classLevel}, automatic: true };
-      pushSteps(getItemFlows(characterLevel).reverse(), stepData);
+      pushSteps(getItemFlows(characterLevel, classLevel).reverse(), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem.subclass, classLevel).reverse(), stepData);
       pushSteps(this.constructor.flowsForLevel(classItem, classLevel).reverse(), stepData);
       pushSteps(this.constructor.flowsForLevel(raceItem, characterLevel).reverse(), stepData);
@@ -465,6 +467,7 @@ export default class AdvancementManager extends Application5e {
    * @returns {number}       Working level.
    */
   static currentLevel(item, actor) {
+    if ( ["class", "subclass"].includes(item.advancementRootItem?.type) ) item = item.advancementRootItem;
     return item.system.levels ?? item.class?.system.levels ?? actor.system.details.level ?? 0;
   }
 

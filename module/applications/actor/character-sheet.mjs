@@ -852,7 +852,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
     super._prepareItemFeature(item, ctx);
 
-    const [originId] = (item.getFlag("dnd5e", "ultimateOrigin") ?? item.getFlag("dnd5e", "advancementOrigin"))
+    const [originId] = (item.getFlag("dnd5e", "advancementRoot") ?? item.getFlag("dnd5e", "advancementOrigin"))
       ?.split(".") ?? [];
     const group = this.actor.items.get(originId);
     ctx.groups.origin = "other";

@@ -113,6 +113,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
+   * The item that is ultimately responsible for adding this item through the advancement system.
+   * @type {Item5e|void}
+   */
+  get advancementRootItem() {
+    return this.parent?.items.get(this.getFlag("dnd5e", "advancementRoot")?.split(".")?.[0]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Should deletion of this item be allowed? Doesn't prevent programatic deletion, but affects UI controls.
    * @type {boolean}
    */
@@ -340,11 +350,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Retrieve scale values for current level from advancement data.
-   * @type {object}
+   * @type {Record<string, ScaleValueType>}
    */
   get scaleValues() {
     if ( !this.advancement.byType.ScaleValue ) return {};
-    const level = this.type === "class" ? this.system.levels : this.type === "subclass" ? this.class?.system.levels
+    const item = ["class", "subclass"].includes(this.advancementRootItem?.type) ? this.advancementRootItem : this;
+    const level = item.type === "class" ? item.system.levels : item.type === "subclass" ? item.class?.system.levels
       : this.parent?.system.details.level ?? 0;
     return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
       obj[advancement.identifier] = advancement.valueForLevel(level);
