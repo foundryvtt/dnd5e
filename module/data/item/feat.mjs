@@ -1,6 +1,7 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
@@ -25,6 +26,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {string} enchant.max                   Maximum number of items that can have this enchantment.
  * @property {string} enchant.period                Frequency at which the enchantment can be swapped.
  * @property {object} prerequisites
+ * @property {Set<string>} prerequisites.items      Items that must be taken first before this item.
  * @property {number} prerequisites.level           Character or class level required to choose this feature.
  * @property {boolean} prerequisites.repeatable     Can this item be selected more than once?
  * @property {Set<string>} properties               General properties of a feature item.
@@ -55,6 +57,7 @@ export default class FeatData extends ItemDataModel.mixin(
         period: new StringField()
       }),
       prerequisites: new SchemaField({
+        items: new SetField(new IdentifierField()),
         level: new NumberField({ integer: true, min: 0 }),
         repeatable: new BooleanField()
       }),
@@ -196,7 +199,7 @@ export default class FeatData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migrations                             */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -249,7 +252,7 @@ export default class FeatData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Getters                                     */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /** @override */
@@ -297,6 +300,58 @@ export default class FeatData extends ItemDataModel.mixin(
    */
   get proficiencyMultiplier() {
     return 1;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Validate the prerequisites specified on this item.
+   * @param {Actor5e} actor                        Actor against which the prerequisites should be checked.
+   * @param {object} [options={}]
+   * @param {number} [options.level]               Level to validate. Falls back to character level.
+   * @param {boolean} [options.showMessage=false]  Show a UI message if the validation fails.
+   * @param {boolean} [options.throwError=false]   Throw an error if validation fails.
+   * @returns {true|string[]}  True if the item is valid or a list of invalid descriptions if validation failed.
+   */
+  validatePrerequisites(actor, { level=actor.system?.details?.level, showMessage=false, throwError=false }={}) {
+    const messages = [];
+
+    // Check to ensure the item doesn't already exist on actor if it is not repeatable
+    if ( !this.prerequisites.repeatable && actor.sourcedItems?.get(this.parent.uuid)?.size ) {
+      messages.push(game.i18n.localize("DND5E.Prerequisites.Warning.NotRepeatable"));
+    }
+
+    // If a feature has item pre-requisites, make sure the other items exist on the actor
+    const someExist = !this.prerequisites.items.size || Array.from(this.prerequisites.items)
+      .some(i => actor.identifiedItems.get(i)?.size);
+    if ( !someExist ) {
+      messages.push(game.i18n.format("DND5E.Prerequisites.Warning.MissingItem", {
+        items: game.i18n.getListFormatter({ type: "disjunction" }).format(Array.from(this.prerequisites.items))
+      }));
+    }
+
+    // If a feature has a level pre-requisite, make sure it is less than or equal to current level
+    if ( (this.prerequisites?.level ?? -Infinity) > (level ?? Infinity) ) {
+      messages.push(game.i18n.format("DND5E.Prerequisites.Warning.InvalidLevel", {
+        level: this.prerequisites.level
+      }));
+    }
+
+    if ( !messages.length ) return true;
+
+    if ( showMessage || throwError ) {
+      const message = game.i18n.format("DND5E.Prerequisites.Warning.Message", {
+        actor: actor.name,
+        requirements: game.i18n.getListFormatter().format(messages),
+        type: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type]).toLowerCase()
+      });
+      if ( showMessage ) ui.notifications.warn(message);
+      if ( throwError ) throw new Error(message);
+    }
+
+    return messages;
   }
 
   /* -------------------------------------------- */

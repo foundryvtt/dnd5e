@@ -31,8 +31,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Mapping of item identifiers to the items.
+   * @type {IdentifiedItemsMap<string, Set<Item5e>>}
+   */
+  identifiedItems = this.identifiedItems;
+
+  /* -------------------------------------------- */
+
+  /**
    * Mapping of item compendium source UUIDs to the items.
-   * @type {Map<string, Item5e>}
+   * @type {SourcedItemsMap<string, Set<Item5e>>}
    */
   sourcedItems = this.sourcedItems;
 
@@ -237,6 +245,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
+    this.identifiedItems = new IdentifiedItemsMap();
     this.sourcedItems = new SourcedItemsMap();
     this._embeddedPreparation = true;
     super.prepareEmbeddedDocuments();
@@ -3471,6 +3480,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const ids = new Set(documents.map(d => d.getRelativeUUID(this)));
     const favorites = this.system.favorites.filter(f => !ids.has(f.id));
     return this.update({ "system.favorites": favorites });
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * @extends {Map<string, Set<Item5e>>}
+ */
+class IdentifiedItemsMap extends Map {
+  /** @inheritDoc */
+  get(key, { type }={}) {
+    const result = super.get(key);
+    if ( !result?.size || !type ) return result;
+    return result.filter(i => i.type === type);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  set(key, value) {
+    if ( !this.has(key) ) super.set(key, new Set());
+    this.get(key).add(value);
+    return this;
   }
 }
 

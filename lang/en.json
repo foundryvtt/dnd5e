@@ -347,7 +347,6 @@
     },
     "Title": "Ability Score Improvement",
     "Warning": {
-      "Level": "Must be at least level {level} to take this feat.",
       "Type": "Only features with the \"feat\" type can be selected."
     }
   },
@@ -433,10 +432,8 @@
     },
     "Title": "Choose Items",
     "Warning": {
-      "FeatureLevel": "Must be at least level {level} to take this feature.",
       "InvalidType": "Only {type} items can be selected for this choice.",
       "NoOriginal": "Previously selected choice no longer available for replacement.",
-      "PreviouslyChosen": "This item has already been chosen at a previous level.",
       "SpellLevelAvailable": "Only {level} or lower spells can be chosen for this advancement.",
       "SpellLevelSpecific": "Only {level} spells can be chosen for this advancement.",
       "SpellList": "Only spells available on the {lists} spell list can be chosen for this advancement."
@@ -3008,16 +3005,26 @@
   "Header": "Feature Prerequisites",
   "FIELDS": {
     "prerequisites": {
+      "items": {
+        "hint": "Identifiers for items that the character must have before selecting this item.",
+        "label": "Required Items"
+      },
       "label": "Prerequisites",
       "level": {
-        "label": "Required Level",
-        "hint": "Character or class level required to select this feature when levelling up."
+        "hint": "Character or class level required to select this feature when levelling up.",
+        "label": "Required Level"
       },
       "repeatable": {
         "hint": "This feature can be chosen more than once.",
         "label": "Repeatable"
       }
     }
+  },
+  "Warning": {
+    "InvalidLevel": "must be at least level {level}",
+    "Message": "{actor} {requirements} in order to take this {type}.",
+    "MissingItem": "must have previously taken {items}",
+    "NotRepeatable": "must not have taken this before"
   }
 },
 "DND5E.Price": "Price",

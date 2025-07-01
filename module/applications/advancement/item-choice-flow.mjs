@@ -120,10 +120,10 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       if ( i ) {
         i.checked = this.selected.has(i.uuid);
         i.disabled = !i.checked && context.choices.full;
-        const validLevel = (i.system.prerequisites?.level ?? -Infinity) <= this.level;
+        const validFeature = !i.system.validatePrerequisites
+          || (i.system.validatePrerequisites(this.advancement.actor, { level: this.level }) === true);
         const validSpell = !validateSpellLevel || (i.system.level <= maxSlot);
-        const available = !previouslySelected.has(i.uuid) || i.system.prerequisites?.repeatable;
-        if ( available && validLevel && validSpell ) items.push(i);
+        if ( validFeature && validSpell ) items.push(i);
       }
       return items;
     }, []);
@@ -202,24 +202,11 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     // If the item is already been marked as selected, no need to go further
     if ( this.selected.has(item.uuid) ) return false;
 
-    // Check to ensure the dropped item hasn't been selected at a lower level
-    if ( item.system.prerequisites?.repeatable !== true ) {
-      for ( const [level, data] of Object.entries(this.advancement.value.added ?? {}) ) {
-        if ( level >= this.level ) continue;
-        if ( Object.values(data).includes(item.uuid) ) {
-          ui.notifications.error("DND5E.ADVANCEMENT.ItemChoice.Warning.PreviouslyChosen", { localize: true });
-          return null;
-        }
-      }
-    }
-
-    // If a feature has a level pre-requisite, make sure it is less than or equal to current level
-    if ( (item.system.prerequisites?.level ?? -Infinity) > this.level ) {
-      ui.notifications.error(game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Warning.FeatureLevel", {
-        level: item.system.prerequisites.level
-      }));
-      return null;
-    }
+    // Validate against feature prerequisites if present
+    const isValid = item.system.validatePrerequisites?.(this.advancement.actor, {
+      level: this.level, showMessage: true
+    }) ?? true;
+    if ( isValid !== true ) return null;
 
     // If spell level is restricted to available level, ensure the spell is of the appropriate level
     const spellLevel = this.advancement.configuration.restriction.level;
