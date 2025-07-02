@@ -23,6 +23,12 @@
 
     .window-resizable-handle { filter: invert(1); }
 
+    &.titlebar:not(.minimized) .window-header {
+      --color-header-background: none;
+      .window-title, .window-icon { color: var(--color-text-dark-primary); }
+      button { border-color: var(--dnd5e-color-blue-gray-1); }
+    }
+
     .card .header {
       background: linear-gradient(to right, #491d25, #311b1f);
       &.disabled { background: linear-gradient(to right, var(--color-border-dark-4), var(--color-border-dark-3)); }

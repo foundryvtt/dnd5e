@@ -1050,6 +1050,21 @@
     slide-toggle { transform: scale(.9); }
   }
 
+  &.titlebar:not(.minimized) .window-header {
+    --color-header-background: var(--color-dark-3);
+    margin-block-end: unset;
+
+    .window-title, .window-icon { color: var(--color-light-1); }
+    button { border-color: transparent; }
+
+    .window-title {
+      position: unset;
+      inset: unset;
+      text-align: unset;
+      font-size: var(--font-size-13);
+    }
+  }
+
   .window-content {
     background: transparent;
     margin-block-start: -8px;

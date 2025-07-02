@@ -37,7 +37,9 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
    * @param {HTMLElement} element         The page application's rendered element.
    */
   static onRenderJournalPageSheet(page, element) {
-    if ( page.document.parent?.sheet instanceof JournalEntrySheet5e ) element.classList.add("dnd5e2", "dnd5e2-journal");
+    if ( page.document.parent?.sheet instanceof JournalEntrySheet5e ) {
+      element.classList.add("dnd5e2", "dnd5e2-journal", "titlebar");
+    }
   }
 
   /* -------------------------------------------- */
