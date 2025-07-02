@@ -2,16 +2,18 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
   /** @inheritdoc */
   _getWaypointStyle(waypoint) {
     let modifiedWaypoint = waypoint;
-    if ( !waypoint.unreachable && waypoint.next?.unreachable ) {
+    if ( !waypoint.explicit && !waypoint.unreachable && waypoint.next?.unreachable ) {
       modifiedWaypoint = { ...waypoint, explicit: true };
     }
-    return super._getWaypointStyle(modifiedWaypoint);
+    const style = super._getWaypointStyle(modifiedWaypoint);
+    if ( waypoint !== modifiedWaypoint ) style.alpha = (style.alpha ?? 1) * 0.5;
+    return style;
   }
 
   /** @inheritdoc */
   _getWaypointLabelContext(waypoint, state) {
     let modifiedWaypoint = waypoint;
-    if ( !waypoint.unreachable && waypoint.next?.unreachable ) {
+    if ( !waypoint.explicit && !waypoint.unreachable && waypoint.next?.unreachable ) {
       modifiedWaypoint = { ...waypoint, explicit: true };
     }
     return super._getWaypointLabelContext(modifiedWaypoint, state);

@@ -1,10 +1,10 @@
 export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
   /**
    * Determine whether the provided grid space is being occupied by a token which should block the provided token
-   * @param {GridOffset3D | TokenFindMovementPathWaypoint} gridSpace  The grid space to check
+   * @param {GridOffset3D} gridSpace  The grid space to check
    * @param {Token5e} token                                           The token being moved
-   * @param {object} options                                          Additional options
-   * @param {boolean} options.preview                                 Whether the movement in question is previewed
+   * @param {object} [options]                                          Additional options
+   * @param {boolean} [options.preview=false]                                 Whether the movement in question is previewed
    * @returns {boolean} Whether the moving token should be blocked
    */
   isOccupiedGridSpaceBlocking(gridSpace, token, {preview=false}={}) {
@@ -22,10 +22,10 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
 
       const occupiedSize = CONFIG.DND5E.actorSizes[t.actor?.system.traits.size]?.numerical ?? 2;
       // In modern rules, Tiny creatures can be moved through
-      if ( modernRules && occupiedSize === 0 ) return false;
+      if ( modernRules && (occupiedSize === 0) ) return false;
 
       // Halfling Nimbleness means no larger creature can block
-      if ( halflingNimbleness && occupiedSize > tokenSize ) return false;
+      if ( halflingNimbleness && (occupiedSize > tokenSize) ) return false;
 
       // A size difference of less than 2 should block (adjust for Halfling Nimbleness)
       return (Math.abs(tokenSize - occupiedSize) < 2);
@@ -35,10 +35,10 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
   /**
    * Determine whether the provided grid space is being occupied by a token which should cause difficult terrain for
    * the provided token
-   * @param {GridOffset3D | TokenFindMovementPathWaypoint} gridSpace  The grid space to check
+   * @param {GridOffset3D} gridSpace  The grid space to check
    * @param {Token5e} token                                           The token being moved
-   * @param {object} options                                          Additional options
-   * @param {boolean} options.preview                                 Whether the movement in question is previewed
+   * @param {object} [options]                                          Additional options
+   * @param {boolean} [options.preview=false]                                 Whether the movement in question is previewed
    * @returns {boolean} Whether the moving token should suffer difficult terrain
    */
   isOccupiedGridSpaceDifficult(gridSpace, token, {preview=false}={}) {
@@ -55,10 +55,10 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
       const occupiedSize = CONFIG.DND5E.actorSizes[t.actor?.system.traits.size]?.numerical ?? 2;
 
       // In modern rules, Tiny creatures are not difficult terrain
-      if ( modernRules && occupiedSize === 0 ) return false;
+      if ( modernRules && (occupiedSize === 0) ) return false;
 
       // Halfling Nimbleness means a creature 1 size greater (normally would block) causes difficult terrain
-      if ( halflingNimbleness && occupiedSize === tokenSize + 1 ) return true;
+      if ( halflingNimbleness && (occupiedSize === tokenSize + 1) ) return true;
 
       // Tokens which may normally have blocked movement should still be considered difficult terrain
       const mayHaveBlocked = neverBlockStatuses.some(status => t.actor?.statuses.has(status));
@@ -66,25 +66,26 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
       // Friendly means legacy, therefore difficult. A size difference of 2 or more is difficult terrain regardless of
       // ruleset. Modern ruleset incapacitated tokens should still be difficult even if within one size category.
       // Dead creatures (objects) may be difficult terrain, for now that is the default treatment.
-      return friendlyToken || Math.abs(tokenSize - occupiedSize) >= 2 || mayHaveBlocked || t.actor?.statuses.has("dead");
+      return friendlyToken || (Math.abs(tokenSize - occupiedSize) >= 2) || mayHaveBlocked || t.actor?.statuses.has("dead");
     });
   }
 
   /**
    * Determine the set of tokens occupying the provided grid space which may be relevant for blocking/difficult terrain
    * considerations
-   * @param {GridOffset3D | TokenFindMovementPathWaypoint} gridSpace  The grid space to check
+   * @param {GridOffset3D} gridSpace  The grid space to check
    * @param {Token5e} token                                           The token being moved
-   * @param {object} options                                          Additional options
-   * @param {boolean} options.preview                                 Whether the movement in question is previewed
+   * @param {object} [options]                                          Additional options
+   * @param {boolean} [options.preview=false]                                 Whether the movement in question is previewed
    * @returns {Set<Token5e>} The set of potentially relevant tokens occupying the provided grid space
-   * @private
    */
   #getRelevantOccupyingTokens(gridSpace, token, {preview=false}={}) {
     const grid = canvas.grid;
-    gridSpace = grid.getOffset(gridSpace);
+    if ( grid.isGridless ) return [];
     const topLeft = grid.getTopLeftPoint(gridSpace);
     const rect = new PIXI.Rectangle(topLeft.x, topLeft.y, grid.sizeX, grid.sizeY);
+    const lowerElevation = gridSpace.k * grid.distance;
+    const upperElevation = (gridSpace.k + 1) * grid.distance;
     const found = game.canvas.tokens.quadtree.getObjects(rect);
     return found.filter(t => {
       // Ignore self
@@ -97,12 +98,12 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
       if ( t.document.disposition === CONST.TOKEN_DISPOSITIONS.SECRET ) return false;
 
       // Ignore different elevation
-      const { k: occupiedElevation } = grid.getOffset(t.document);
-      if ( occupiedElevation !== (gridSpace.k) ) return false;
+      const occupiedElevation = t.document._source.elevation;
+      if ( (occupiedElevation >= lowerElevation) && (occupiedElevation < upperElevation) ) return false;
 
       // Ensure space is actually occupied, not merely touching border of rectangle
       const gridSpaces = t.document.getOccupiedGridSpaceOffsets(t.document._source);
-      return gridSpaces.some(coord => coord.i === gridSpace.i && coord.j === gridSpace.j);
+      return gridSpaces.some(coord => (coord.i === gridSpace.i) && (coord.j === gridSpace.j));
     });
   }
 }
