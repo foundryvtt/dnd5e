@@ -28,9 +28,11 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
       if ( halflingNimbleness && (occupiedSize > tokenSize) ) return false;
 
       // A size difference of less than 2 should block (adjust for Halfling Nimbleness)
-      return (Math.abs(tokenSize - occupiedSize) < 2);
+      return Math.abs(tokenSize - occupiedSize) < 2;
     });
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Determine whether the provided grid space is being occupied by a token which should cause difficult terrain for
@@ -68,6 +70,8 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
       return friendlyToken || (Math.abs(tokenSize - occupiedSize) >= 2) || mayHaveBlocked;
     });
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Determine the set of tokens occupying the provided grid space which may be relevant for blocking/difficult terrain

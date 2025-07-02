@@ -1,5 +1,5 @@
 export default class TokenRuler5e extends foundry.canvas.placeables.tokens.TokenRuler {
-  /** @inheritdoc */
+  /** @inheritDoc */
   _getWaypointStyle(waypoint) {
     if ( !waypoint.explicit && waypoint.next && waypoint.previous && waypoint.actionConfig.visualize
       && waypoint.next.actionConfig.visualize && (waypoint.action === waypoint.next.action)
@@ -8,6 +8,8 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
     const scale = canvas.dimensions.uiScale;
     return {radius: 6 * scale, color: user?.color ?? 0x000000, alpha: waypoint.explicit ? 1 : 0.5};
   }
+
+  /* -------------------------------------------- */
 
   /** @override */
   _getWaypointLabelContext(waypoint, state) {

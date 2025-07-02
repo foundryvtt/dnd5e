@@ -1223,7 +1223,7 @@ preLocalize("activityConsumptionTypes", { key: "label" });
  * @property {number} hitDie                  Default hit die denomination for NPCs of this size.
  * @property {number} [token=1]               Default token size.
  * @property {number} [capacityMultiplier=1]  Multiplier used to calculate carrying capacities.
- * @property {number} numerical               Numerical representation of size
+ * @property {number} numerical               Numerical representation of size.
  */
 
 /**

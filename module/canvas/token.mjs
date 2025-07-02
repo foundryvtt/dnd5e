@@ -18,7 +18,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _getDragConstrainOptions() {
     const unconstrainedMovement = game.user.isGM
       && ui.controls.controls.tokens.tools.unconstrainedMovement.active;
@@ -27,7 +27,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   _getMovementCostFunction(options) {
     const costFunction = super._getMovementCostFunction(options);
     if ( !game.settings.get("dnd5e", "movementAutomation") ) return costFunction;
@@ -54,7 +54,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @inheritDoc */
   constrainMovementPath(waypoints, options) {
     let { preview=false, ignoreTokens=false } = options; // Custom constrain option to ignore tokens
 
