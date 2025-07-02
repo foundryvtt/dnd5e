@@ -65,35 +65,44 @@ export default class Token5e extends foundry.canvas.placeables.Token {
     // Ignore preview if token vision is disabled or the current user is a GM
     if ( !canvas.visibility.tokenVision || game.user.isGM ) preview = false;
 
-    let blocked = false;
+    let path = waypoints;
     let constrained = false;
 
-    // Check if blocked by token, then check if constrained
-    const checkBlockedConstrained = () => {
-      const completePath = this.document.getCompleteMovementPath(waypoints);
-      const blockedIndex = completePath.findIndex(waypoint =>
-        this.layer.isOccupiedGridSpaceBlocking(waypoint, this, {preview}));
-      blocked = blockedIndex >= 0;
-
+    for ( let k = 0; k < 10; k++ ) {
+    
+      // Apply blocking constraints
+      const completePath = this.document.getCompleteMovementPath(path);
+      let blockedIndex;
+      for ( let i = 1; i < completePath.length; i++ ) {
+        const waypoint = completePath[i];
+        const occupiedGridSpaces = this.document.getOccupiedGridSpaceOffsets(waypoint);
+        if ( occupiedGridSpaces.some(gridSpace => this.layer.isOccupiedGridSpaceBlocking(gridSpace, this, {preview})) ) {
+          blockedIndex = i;
+          break;
+        }
+      }
+      const blocked = blockedIndex >= 1;
       if ( blocked ) {
-        waypoints = completePath.slice(0, blockedIndex - 1).filter(waypoint => !waypoint.intermediate);
-        waypoints.push(completePath.at(blockedIndex - 1));
+        path = completePath.slice(0, blockedIndex - 1).filter(waypoint => !waypoint.intermediate);
+        path.push(completePath.at(blockedIndex - 1));
+        constrained = true;
       }
 
-      [waypoints, constrained] = super.constrainMovementPath(waypoints, options);
-    };
-
-    checkBlockedConstrained();
-
-    // If constrained, ensure we check for being blocked in the new path (repeat as necessary)
-    if (constrained) {
-      let numOldWaypoints;
-      do {
-        numOldWaypoints = waypoints.filter(w => !w.unreachable).length;
-        checkBlockedConstrained();
-      } while (numOldWaypoints !== waypoints.filter(w => !w.unreachable).length);
+      // Test wall/cost constraints in the first iteration always and in later iterations only if the path changed due to blocking
+      if ( (k === 0) || blocked ) {
+        const [constrainedPath, wasConstrained] = super.constrainMovementPath(path, options);
+        path = constrainedPath;
+        if ( !wasConstrained ) return [path, constrained]; // No change: path is valid
+        constrained = true;
+      }
+      
+      // In a later iteration if there was no change due to blocking, we found a valid path
+      else if ( !blocked ) return [path, constrained];
     }
-    return [waypoints, constrained || blocked];
+    
+    // After 10 failed attempts to find a valid path, remove the last waypoints and constrain this path
+    [path] = this.constrainMovementPath(waypoints.slice(0, -1), options);
+    return [path, true];
   }
 
   /* -------------------------------------------- */
