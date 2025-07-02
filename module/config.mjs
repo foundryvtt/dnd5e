@@ -3855,15 +3855,16 @@ DND5E.consumableResources = [
 
 /**
  * @typedef {object} _StatusEffectConfig5e
- * @property {string} img               Image used to represent the condition on the token.
- * @property {number} [order]           Order status to the start of the token HUD, rather than alphabetically.
- * @property {string} [reference]       UUID of a journal entry with details on this condition.
- * @property {string} [special]         Set this condition as a special status effect under this name.
- * @property {string[]} [riders]        Additional conditions, by id, to apply as part of this condition.
- * @property {string} [exclusiveGroup]  Any status effects with the same group will not be able to be applied at the
- *                                      same time through the token HUD (multiple statuses applied through other
- *                                      effects can still coexist).
- * @property {number} [coverBonus]      A bonus this condition provides to AC and dexterity saving throws.
+ * @property {string} img                    Image used to represent the condition on the token.
+ * @property {number} [order]                Order status to the start of the token HUD, rather than alphabetically.
+ * @property {string} [reference]            UUID of a journal entry with details on this condition.
+ * @property {string} [special]              Set this condition as a special status effect under this name.
+ * @property {string[]} [riders]             Additional conditions, by id, to apply as part of this condition.
+ * @property {string} [exclusiveGroup]       Any status effects with the same group will not be able to be applied at
+ *                                           the same time through the token HUD (multiple statuses applied through
+ *                                           other effects can still coexist).
+ * @property {number} [coverBonus]           A bonus this condition provides to AC and dexterity saving throws.
+ * @property {boolean} [neverBlockMovement]  If true, a token with this status will not block movement for other tokens.
  */
 
 /**

@@ -1,10 +1,10 @@
 export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
   /**
    * Determine whether the provided grid space is being occupied by a token which should block the provided token
-   * @param {GridOffset3D} gridSpace  The grid space to check
-   * @param {Token5e} token                                           The token being moved
-   * @param {object} [options]                                          Additional options
-   * @param {boolean} [options.preview=false]                                 Whether the movement in question is previewed
+   * @param {GridOffset3D} gridSpace            The grid space to check
+   * @param {Token5e} token                     The token being moved
+   * @param {object} [options]                  Additional options
+   * @param {boolean} [options.preview=false]   Whether the movement in question is previewed
    * @returns {boolean} Whether the moving token should be blocked
    */
   isOccupiedGridSpaceBlocking(gridSpace, token, {preview=false}={}) {
@@ -35,10 +35,10 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
   /**
    * Determine whether the provided grid space is being occupied by a token which should cause difficult terrain for
    * the provided token
-   * @param {GridOffset3D} gridSpace  The grid space to check
-   * @param {Token5e} token                                           The token being moved
-   * @param {object} [options]                                          Additional options
-   * @param {boolean} [options.preview=false]                                 Whether the movement in question is previewed
+   * @param {GridOffset3D} gridSpace            The grid space to check
+   * @param {Token5e} token                     The token being moved
+   * @param {object} [options]                  Additional options
+   * @param {boolean} [options.preview=false]   Whether the movement in question is previewed
    * @returns {boolean} Whether the moving token should suffer difficult terrain
    */
   isOccupiedGridSpaceDifficult(gridSpace, token, {preview=false}={}) {
@@ -64,19 +64,18 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
       const mayHaveBlocked = neverBlockStatuses.some(status => t.actor?.statuses.has(status));
 
       // Friendly means legacy, therefore difficult. A size difference of 2 or more is difficult terrain regardless of
-      // ruleset. Modern ruleset incapacitated tokens should still be difficult even if within one size category.
-      // Dead creatures (objects) may be difficult terrain, for now that is the default treatment.
-      return friendlyToken || (Math.abs(tokenSize - occupiedSize) >= 2) || mayHaveBlocked || t.actor?.statuses.has("dead");
+      // ruleset. Toknes which would have blocked if not for a certain status should be difficult.
+      return friendlyToken || (Math.abs(tokenSize - occupiedSize) >= 2) || mayHaveBlocked;
     });
   }
 
   /**
    * Determine the set of tokens occupying the provided grid space which may be relevant for blocking/difficult terrain
    * considerations
-   * @param {GridOffset3D} gridSpace  The grid space to check
-   * @param {Token5e} token                                           The token being moved
-   * @param {object} [options]                                          Additional options
-   * @param {boolean} [options.preview=false]                                 Whether the movement in question is previewed
+   * @param {GridOffset3D} gridSpace            The grid space to check
+   * @param {Token5e} token                     The token being moved
+   * @param {object} [options]                  Additional options
+   * @param {boolean} [options.preview=false]   Whether the movement in question is previewed
    * @returns {Set<Token5e>} The set of potentially relevant tokens occupying the provided grid space
    */
   #getRelevantOccupyingTokens(gridSpace, token, {preview=false}={}) {
@@ -99,7 +98,7 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
 
       // Ignore different elevation
       const occupiedElevation = t.document._source.elevation;
-      if ( (occupiedElevation >= lowerElevation) && (occupiedElevation < upperElevation) ) return false;
+      if ( (occupiedElevation < lowerElevation) || (occupiedElevation >= upperElevation) ) return false;
 
       // Ensure space is actually occupied, not merely touching border of rectangle
       const gridSpaces = t.document.getOccupiedGridSpaceOffsets(t.document._source);

@@ -69,14 +69,14 @@ export default class Token5e extends foundry.canvas.placeables.Token {
     let constrained = false;
 
     for ( let k = 0; k < 10; k++ ) {
-    
+
       // Apply blocking constraints
       const completePath = this.document.getCompleteMovementPath(path);
       let blockedIndex;
       for ( let i = 1; i < completePath.length; i++ ) {
         const waypoint = completePath[i];
         const occupiedGridSpaces = this.document.getOccupiedGridSpaceOffsets(waypoint);
-        if ( occupiedGridSpaces.some(gridSpace => this.layer.isOccupiedGridSpaceBlocking(gridSpace, this, {preview})) ) {
+        if ( occupiedGridSpaces.some(space => this.layer.isOccupiedGridSpaceBlocking(space, this, {preview})) ) {
           blockedIndex = i;
           break;
         }
@@ -88,18 +88,19 @@ export default class Token5e extends foundry.canvas.placeables.Token {
         constrained = true;
       }
 
-      // Test wall/cost constraints in the first iteration always and in later iterations only if the path changed due to blocking
+      // Test wall/cost constraints in the first iteration always and in later
+      // iterations only if the path changed due to blocking
       if ( (k === 0) || blocked ) {
         const [constrainedPath, wasConstrained] = super.constrainMovementPath(path, options);
         path = constrainedPath;
         if ( !wasConstrained ) return [path, constrained]; // No change: path is valid
         constrained = true;
       }
-      
+
       // In a later iteration if there was no change due to blocking, we found a valid path
       else if ( !blocked ) return [path, constrained];
     }
-    
+
     // After 10 failed attempts to find a valid path, remove the last waypoints and constrain this path
     [path] = this.constrainMovementPath(waypoints.slice(0, -1), options);
     return [path, true];
