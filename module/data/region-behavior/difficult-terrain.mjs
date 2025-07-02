@@ -1,4 +1,4 @@
-const { NumberField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
  * The data model for a region behavior that represents an area of difficult terrain.
@@ -12,15 +12,12 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
 
   /** @override */
   static defineSchema() {
+    const dispositions = { ...foundry.applications.sheets.TokenConfig.TOKEN_DISPOSITIONS };
+    delete dispositions[CONST.TOKEN_DISPOSITIONS.SECRET];
     return {
+      magical: new BooleanField(),
       types: new SetField(new StringField({ choices: () => CONFIG.DND5E.difficultTerrainTypes })),
-      ignoredDispositions: new SetField(new NumberField({
-        choices: () => {
-          const dispositions = { ...foundry.applications.sheets.TokenConfig.TOKEN_DISPOSITIONS };
-          delete dispositions[CONST.TOKEN_DISPOSITIONS.SECRET];
-          return dispositions;
-        }
-      }))
+      ignoredDispositions: new SetField(new NumberField({ choices: dispositions }))
     };
   }
 
@@ -83,7 +80,8 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
     const ignoredTypes = token.actor?.system.attributes?.movement?.ignoredDifficultTerrain ?? new Set();
     if ( this.ignoredDispositions.has(token.disposition) || ignoredTypes.has("all")
       || (this.types.size && !this.types.difference(ignoredTypes).size)
-      || (ignoredTypes.has("nonmagical") && !this.types.has("magical")) ) return [];
+      || (ignoredTypes.has("magical") && this.magical)
+      || (ignoredTypes.has("nonmagical") && !this.magical) ) return [];
     return [{ name: "difficultTerrain" }];
   }
 }

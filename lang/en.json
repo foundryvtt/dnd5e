@@ -3105,6 +3105,10 @@
         "hint": "Tokens with these dispositions will not be affected by this difficult terrain.",
         "label": "Ignored Dispositions"
       },
+      "magical": {
+        "hint": "This difficult terrain is created by a magical effect.",
+        "label": "Magical"
+      },
       "types": {
         "hint": "Types that best describe the source of this difficult terrain, if any.",
         "label": "Types"
@@ -3112,7 +3116,7 @@
     },
     "Type": {
       "All": "All Types",
-      "Magical": "Magical Effect",
+      "Magical": "Magical",
       "Nonmagical": "Nonmagical",
       "Rocks": "Rubble or Rocks",
       "Snow": "Ice or Snow"

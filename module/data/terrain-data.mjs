@@ -9,7 +9,7 @@ export default class TerrainData5e extends foundry.data.TerrainData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
-      difficultTerrain: new BooleanField({ required: true })
+      difficultTerrain: new BooleanField()
     };
   }
 
@@ -19,20 +19,12 @@ export default class TerrainData5e extends foundry.data.TerrainData {
   static resolveTerrainEffects(effects) {
     let data = super.resolveTerrainEffects(effects);
     if ( !effects.some(e => e.name === "difficultTerrain") ) return data;
-    if ( data ) data.updateSource({ difficultTerrain: true });
-    else data = new this({ difficultTerrain: true });
+    if ( !data ) return new this({ difficulty: 2, difficultTerrain: true });
+
+    let difficulty = data.difficulty + 1;
+    if ( !Number.isFinite(difficulty) ) difficulty = null;
+    data.updateSource({ difficulty, difficultTerrain: true });
     return data;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  static getMovementCostFunction(token, options) {
-    return (from, to, distance, segment) => {
-      let finalDistance = distance * (segment.terrain?.difficulty ?? 1);
-      if ( segment.terrain?.difficultTerrain ) finalDistance += distance;
-      return finalDistance;
-    };
   }
 
   /* -------------------------------------------- */
