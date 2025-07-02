@@ -85,27 +85,28 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
     const rect = new PIXI.Rectangle(topLeft.x, topLeft.y, grid.sizeX, grid.sizeY);
     const lowerElevation = gridSpace.k * grid.distance;
     const upperElevation = (gridSpace.k + 1) * grid.distance;
-    const found = game.canvas.tokens.quadtree.getObjects(rect);
-    return found.filter(t => {
-      // Ignore self
-      if ( t === token ) return false;
+    return game.canvas.tokens.quadtree.getObjects(rect, {
+      collisionTest: ({ t }) => {
+        // Ignore self
+        if ( t === token ) return false;
 
-      // Always ignore hidden tokens
-      if ( t.document.hidden ) return false;
+        // Always ignore hidden tokens
+        if ( t.document.hidden ) return false;
 
-      // If preview movement, don't reveal blocked or difficult terrain for non-visible tokens
-      if ( preview && !t.visible ) return false;
+        // If preview movement, don't reveal blocked or difficult terrain for non-visible tokens
+        if ( preview && !t.visible ) return false;
 
-      // Always ignore secret tokens
-      if ( t.document.disposition === CONST.TOKEN_DISPOSITIONS.SECRET ) return false;
+        // Always ignore secret tokens
+        if ( t.document.disposition === CONST.TOKEN_DISPOSITIONS.SECRET ) return false;
 
-      // Ignore different elevation
-      const occupiedElevation = t.document._source.elevation;
-      if ( (occupiedElevation < lowerElevation) || (occupiedElevation >= upperElevation) ) return false;
+        // Ignore different elevation
+        const occupiedElevation = t.document._source.elevation;
+        if ( (occupiedElevation < lowerElevation) || (occupiedElevation >= upperElevation) ) return false;
 
-      // Ensure space is actually occupied, not merely touching border of rectangle
-      const gridSpaces = t.document.getOccupiedGridSpaceOffsets(t.document._source);
-      return gridSpaces.some(coord => (coord.i === gridSpace.i) && (coord.j === gridSpace.j));
+        // Ensure space is actually occupied, not merely touching border of rectangle
+        const gridSpaces = t.document.getOccupiedGridSpaceOffsets(t.document._source);
+        return gridSpaces.some(coord => (coord.i === gridSpace.i) && (coord.j === gridSpace.j));
+      }
     });
   }
 }
