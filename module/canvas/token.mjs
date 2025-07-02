@@ -30,13 +30,11 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /** @inheritdoc */
   _getMovementCostFunction(options) {
     const costFunction = super._getMovementCostFunction(options);
-    const disableAutomationKey = foundry.helpers.interaction.KeyboardManager.MODIFIER_KEYS.ALT;
-    if ( !game.settings.get("dnd5e", "movementAutomation")
-      || game.keyboard.isModifierActive(disableAutomationKey) ) return costFunction;
+    if ( !game.settings.get("dnd5e", "movementAutomation") ) return costFunction;
 
     const ignoredDifficultTerrain = this.actor?.system.attributes.movement.ignoredDifficultTerrain ?? new Set();
     const ignoreDifficult = ["all", "nonmagical"].some(i => ignoredDifficultTerrain.has(i));
-    const preview = options?.preview && !game.user.isGM;
+    const preview = options?.preview && canvas.visibility.tokenVision && !game.user.isGM;
     return (from, to, distance, segment) => {
       const cost = costFunction(from, to, distance, segment);
 

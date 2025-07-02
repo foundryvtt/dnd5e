@@ -90,6 +90,9 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
       // Ignore self
       if ( t === token ) return false;
 
+      // Always ignore hidden tokens
+      if ( t.document.hidden ) return false;
+
       // If preview movement, don't reveal blocked or difficult terrain for non-visible tokens
       if ( preview && !t.visible ) return false;
 
