@@ -77,9 +77,9 @@ export function registerSystemSettings() {
   });
 
   // Movement automation
-  game.settings.register("dnd5e", "movementAutomation", {
-    name: "SETTINGS.DND5E.MOVEMENTAUTOMATION.Name",
-    hint: "SETTINGS.DND5E.MOVEMENTAUTOMATION.Hint",
+  game.settings.register("dnd5e", "tokenBlocking", {
+    name: "SETTINGS.DND5E.AUTOMATION.TokenBlocking.Name",
+    hint: "SETTINGS.DND5E.AUTOMATION.TokenBlocking.Hint",
     scope: "world",
     config: true,
     default: true,

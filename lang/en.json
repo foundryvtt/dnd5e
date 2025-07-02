@@ -5064,6 +5064,12 @@
 "SETTINGS.5eGridAlignedSquareTemplatesL": "When square templates are created as the result of casting a spell or using an item, they will be locked to the grid alignment and unable to be rotated.",
 "SETTINGS.5eGridAlignedSquareTemplatesN": "Grid-Aligned Square Templates",
 "SETTINGS.DND5E": {
+  "AUTOMATION": {
+    "TokenBlocking": {
+      "Name": "Enable Token-Blocking Movement Automation",
+      "Hint": "Enable tokens blocking/increasing cost of movement."
+    }
+  },
   "BLOODIED": {
     "Name": "Bloodied Status",
     "Hint": "Configure whether the bloodied status is tracked automatically and its visibility.",
@@ -5128,10 +5134,6 @@
       "Name": "Use Metric Weight Units",
       "Hint": "Replaces all reference to lbs with kgs and updates the encumbrance calculations to use metric weight units."
     }
-  },
-  "MOVEMENTAUTOMATION": {
-    "Name": "Enable Movement Automation",
-    "Hint": "Enable tokens blocking/increasing cost of movement."
   },
   "NPCS": {
     "Name": "NPCs",

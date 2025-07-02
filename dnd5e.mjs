@@ -73,6 +73,7 @@ Hooks.once("init", function() {
   CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
+  CONFIG.Token.rulerClass = canvas.TokenRuler5e;
   CONFIG.User.documentClass = documents.User5e;
   CONFIG.time.roundTime = 6;
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
@@ -222,9 +223,6 @@ Hooks.once("init", function() {
   CONFIG.Token.movement.costAggregator = (results, distance, segment) => {
     return Math.max(...results.map(i => i.cost));
   };
-
-  // Custom token ruler
-  CONFIG.Token.rulerClass = canvas.TokenRuler5e;
 });
 
 /* -------------------------------------------- */
