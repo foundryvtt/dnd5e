@@ -210,47 +210,45 @@
   }
 }
 
-.journal-entry-page.sheet:is(.class-journal, .spells) {
-
+.journal-entry-page.sheet:is(.class, .spells) {
   &:not(.minimized, .minimizing, .maximized) {
     min-block-size: 600px;
     min-inline-size: 400px;
   }
 
   .standard-form { gap: 8px; }
+}
 
-  form {
+.journal-entry-page.sheet.class {
+  .form-group {
+    align-items: start;
+    &:has(button[data-action="launchTextEditor"]) .form-fields { flex: 0 0 125px; }
+    button[data-action="launchTextEditor"] { flex: 1; }
+  }
 
-    .form-group {
-      align-items: start;
-      &:has(button.launch-text-editor) .form-fields { flex: 0 0 125px; }
-      button.launch-text-editor { flex: unset; }
+  .items-list .item {
+    align-items: center;
+    padding-block: 0.35em;
+    padding-inline: 2px;
+    margin: 0;
+
+    .item-controls {
+      flex: 0;
+      flex-wrap: nowrap;
+      gap: 8px;
     }
+  }
+}
 
-    .items-list .item {
-      align-items: center;
-      padding-block: 0.35em;
-      padding-inline: 2px;
-      margin: 0;
+.journal-entry-page.class {
+  .core-traits {
+    caption, th { text-align: start; }
+    th, td { padding-inline: 8px; }
+  }
 
-      .item-controls {
-        flex: 0;
-        flex-wrap: nowrap;
-        gap: 8px;
-      }
-    }
-    .items-list .item:not(:last-of-type) {
-      border-bottom: 1px solid var(--dnd5e-color-faint);
-    }
-
-    h3 {
-      justify-content: space-between;
-      a {
-        flex: 0;
-        padding-inline-end: 12px;
-        font-size: var(--font-size-14);
-      }
-    }
+  .features-table {
+    th[scope="col"] { padding-inline: 0.25em; }
+    td:is(.level, .prof, .scale, .spell-slots) { text-align: center; }
   }
 }
 
