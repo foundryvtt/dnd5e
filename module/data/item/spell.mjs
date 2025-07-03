@@ -74,6 +74,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: true,
     hasEffects: true
   }, { inplace: false }));
 
