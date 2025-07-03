@@ -398,7 +398,7 @@ export default class AdvancementManager extends Application5e {
       if ( ["class", "subclass", "race"].includes(i.type) ) return [];
       if ( ["class", "subclass"].includes(i.system.advancementRootItem?.type) && i.system.advancementClassLinked ) {
         if ( i.system.advancementRootItem !== classItem ) return [];
-        else return this.constructor.flowsForLevel(i, classLevel);
+        return this.constructor.flowsForLevel(i, classLevel);
       }
       return this.constructor.flowsForLevel(i, characterLevel);
     });
