@@ -163,6 +163,10 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClass.Container"
   });
 
+  DocumentSheetConfig.registerSheet(JournalEntry, "dnd5e", applications.journal.JournalEntrySheet5e, {
+    makeDefault: true,
+    label: "DND5E.SheetClass.JournalEntry"
+  });
   DocumentSheetConfig.registerSheet(JournalEntry, "dnd5e", applications.journal.JournalSheet5e, {
     makeDefault: false,
     canConfigure: false,
@@ -184,10 +188,6 @@ Hooks.once("init", function() {
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalSpellListPageSheet, {
     label: "DND5E.SheetClass.SpellList",
     types: ["spells"]
-  });
-  DocumentSheetConfig.registerSheet(JournalEntry, "dnd5e", applications.journal.JournalEntrySheet5e, {
-    makeDefault: true,
-    label: "DND5E.SheetClass.JournalEntry"
   });
 
   DocumentSheetConfig.unregisterSheet(RegionBehavior, "core", foundry.applications.sheets.RegionBehaviorConfig, {

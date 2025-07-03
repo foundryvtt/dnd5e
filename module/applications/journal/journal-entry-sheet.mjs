@@ -99,7 +99,7 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
    * @returns {HTMLLIElement}
    */
   static #makeNavigation(doc, dir) {
-    const li = document.createElement("li")
+    const li = document.createElement("li");
     if ( !doc ) return li;
     const anchor = document.createElement("a");
     anchor.classList.add("content-link");
