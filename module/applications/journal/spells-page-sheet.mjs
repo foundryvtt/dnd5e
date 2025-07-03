@@ -19,9 +19,9 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
     embedRendering: false,
     grouping: null,
     actions: {
-      "add-unlinked": JournalSpellListPageSheet.#onAddUnlinked,
+      addUnlinked: JournalSpellListPageSheet.#onAddUnlinked,
       delete: JournalSpellListPageSheet.#onDelete,
-      "edit-unlinked": JournalSpellListPageSheet.#onEditUnlinked
+      editUnlinked: JournalSpellListPageSheet.#onEditUnlinked
     }
   };
 
@@ -91,7 +91,6 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
     left.classList.add("left", "flexcol", "standard-form");
     this.element.querySelector(".window-content").insertAdjacentElement("afterbegin", left);
     left.append(...this.element.querySelectorAll('[data-application-part="config"], [data-application-part="header"]'));
-    this.element.querySelector("prose-mirror").open = true; // FIXME: Workaround for core bug.
   }
 
   /* -------------------------------------------- */
@@ -106,6 +105,15 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
     if ( this.isView ) {
       this.element.querySelector('[name="grouping"]')?.addEventListener("change", this._onChangeGroup.bind(this));
     }
+
+    // FIXME: Workaround for core bug.
+    else if ( options.parts.includes("config") ) {
+      const editor = foundry.applications.elements.HTMLProseMirrorElement.create({
+        name: "system.description.value",
+        value: this.document.system._source.description.value
+      });
+      this.element.querySelector('[data-application-part="config"]').append(editor);
+    }
   }
 
   /* -------------------------------------------- */
@@ -113,7 +121,6 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    context.isFirstRender = options.isFirstRender;
     context.CONFIG = CONFIG.DND5E;
     context.system = context.document.system;
     context.embedRendering = this.options.embedRendering ?? false;
@@ -225,13 +232,6 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  _canDragDrop() {
-    return this.isEditable;
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Handle adding an unlinked spell.
    * @this {JournalSpellListPageSheet}
@@ -263,30 +263,6 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async _onDrop(event) {
-    const data = TextEditor.getDragEventData(event);
-    let spells;
-    switch ( data?.type ) {
-      case "Folder":
-        spells = (await Folder.implementation.fromDropData(data))?.contents;
-        break;
-      case "Item":
-        spells = [await Item.implementation.fromDropData(data)];
-        break;
-      default: return false;
-    }
-
-    const spellUuids = this.document.system.spells;
-    spells = spells.filter(item => (item.type === "spell") && !spellUuids.has(item.uuid));
-    if ( !spells.length ) return false;
-
-    spells.forEach(i => spellUuids.add(i.uuid));
-    await this.document.update({"system.spells": Array.from(spellUuids)});
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Handle editing an unlinked spell.
    * @this {JournalSpellListPageSheet}
@@ -308,5 +284,38 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
   _onChangeGroup(event) {
     this.grouping = (event.target.value === this.document.system.grouping) ? null : event.target.value;
     this.document.parent.sheet.render();
+  }
+
+  /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _canDragDrop() {
+    return this.isEditable;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDrop(event) {
+    const data = TextEditor.getDragEventData(event);
+    let spells;
+    switch ( data?.type ) {
+      case "Folder":
+        spells = (await Folder.implementation.fromDropData(data))?.contents;
+        break;
+      case "Item":
+        spells = [await Item.implementation.fromDropData(data)];
+        break;
+      default: return false;
+    }
+
+    const spellUuids = this.document.system.spells;
+    spells = spells.filter(item => (item.type === "spell") && !spellUuids.has(item.uuid));
+    if ( !spells.length ) return false;
+
+    spells.forEach(i => spellUuids.add(i.uuid));
+    await this.document.update({"system.spells": Array.from(spellUuids)});
   }
 }
