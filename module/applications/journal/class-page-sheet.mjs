@@ -4,44 +4,50 @@ import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import JournalEditor from "./journal-editor.mjs";
 
+const { JournalEntryPageHandlebarsSheet } = foundry.applications.sheets.journal;
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Journal entry page that displays an automatically generated summary of a class along with additional description.
  */
-export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalPageSheet {
-
-  /** @override */
-  static _warnedAppV1 = true;
-
-  /* --------------------------------------------- */
+export default class JournalClassPageSheet extends JournalEntryPageHandlebarsSheet {
 
   /** @inheritDoc */
-  static get defaultOptions() {
-    const options = foundry.utils.mergeObject(super.defaultOptions, {
-      dragDrop: [{dropSelector: ".drop-target"}],
-      height: "auto",
-      width: 500,
-      submitOnChange: true
-    });
-    options.classes.push("class-journal");
-    return options;
-  }
+  static DEFAULT_OPTIONS = {
+    actions: {
+      deleteItem: JournalClassPageSheet.#onDeleteItem,
+      launchTextEditor: JournalClassPageSheet.#onLaunchTextEditor
+    },
+    classes: ["class"],
+    includeTOC: true,
+    position: {
+      width: 600
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static EDIT_PARTS = {
+    header: super.EDIT_PARTS.header,
+    config: {
+      classes: ["standard-form"],
+      template: "systems/dnd5e/templates/journal/page-{type}-edit.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static VIEW_PARTS = {
+    content: {
+      root: true,
+      template: "systems/dnd5e/templates/journal/page-{type}-view.hbs"
+    }
+  };
 
   /* -------------------------------------------- */
   /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get template() {
-    return `systems/dnd5e/templates/journal/page-${this.document.type}-${this.isEditable ? "edit" : "view"}.hbs`;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  toc = {};
-
   /* -------------------------------------------- */
 
   /**
@@ -57,8 +63,28 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getData(options) {
-    const context = super.getData(options);
+  _configureRenderParts(options) {
+    const parts = super._configureRenderParts(options);
+    Object.values(parts).forEach(p => p.template = p.template.replace("{type}", this.type));
+    return parts;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    new CONFIG.ux.DragDrop({
+      permissions: { drop: this._canDragDrop.bind(this) },
+      callbacks: { drop: this._onDrop.bind(this) }
+    }).bind(this.element);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
     context.system = context.document.system;
     context.systemFields = this.document.system.schema.fields;
 
@@ -70,7 +96,7 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
     ];
 
     context.title = Object.fromEntries(
-      Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1])
+      Array.fromRange(4, 1).map(n => [`level${n}`, context.source.title.level + n - 1])
     );
     context.type = this.type;
 
@@ -170,8 +196,8 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
     const descriptions = await Promise.all(Object.entries(page.system.description ?? {})
       .map(async ([id, text]) => {
         const enriched = await TextEditor.enrichHTML(text, {
-          relativeTo: this.object,
-          secrets: this.object.isOwner
+          relativeTo: this.document,
+          secrets: this.document.isOwner
         });
         return [id, enriched];
       })
@@ -501,67 +527,49 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _renderInner(...args) {
-    const html = await super._renderInner(...args);
-    this.toc = JournalEntryPage.buildTOC(html.get());
-    return html;
-  }
-
-  /* -------------------------------------------- */
   /*  Event Handlers                              */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-    html[0].querySelectorAll(".item-delete").forEach(e => {
-      e.addEventListener("click", this._onDeleteItem.bind(this));
-    });
-    html[0].querySelectorAll(".launch-text-editor").forEach(e => {
-      e.addEventListener("click", this._onLaunchTextEditor.bind(this));
-    });
-  }
-
   /* -------------------------------------------- */
 
   /**
    * Handle deleting a dropped item.
-   * @param {Event} event  The triggering click event.
-   * @returns {JournalClassSummary5ePageSheet}
+   * @this {JournalClassPageSheet}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  async _onDeleteItem(event) {
-    event.preventDefault();
-    const container = event.currentTarget.closest("[data-item-uuid]");
+  static async #onDeleteItem(event, target) {
+    const container = target.closest("[data-item-uuid]");
     const uuidToDelete = container?.dataset.itemUuid;
     if ( !uuidToDelete ) return;
     switch ( container.dataset.itemType ) {
       case "linked":
-        await this.document.update({"system.item": ""});
-        return this.render();
+        await this.document.update({ "system.item": "" });
+        break;
       case "subclass":
         const itemSet = this.document.system.subclassItems;
         itemSet.delete(uuidToDelete);
-        await this.document.update({"system.subclassItems": Array.from(itemSet)});
-        return this.render();
+        await this.document.update({ "system.subclassItems": Array.from(itemSet) });
+        break;
     }
+    this.render();
   }
 
   /* -------------------------------------------- */
 
   /**
    * Handle launching the individual text editing window.
-   * @param {Event} event  The triggering click event.
+   * @this {JournalClassPageSheet}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  _onLaunchTextEditor(event) {
-    event.preventDefault();
-    const textKeyPath = event.currentTarget.dataset.target;
+  static #onLaunchTextEditor(event, target) {
+    const textKeyPath = target.dataset.target;
     const label = event.target.closest(".form-group").querySelector("label");
     const editor = new JournalEditor({ document: this.document, textKeyPath, window: { title: label?.innerText } });
-    editor.render(true);
+    editor.render({ force: true });
   }
 
+  /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

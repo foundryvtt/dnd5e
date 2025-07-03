@@ -17,7 +17,7 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
     this.element.querySelectorAll(".action-buttons :is(.previous, .next)").forEach(el => {
       el.classList.add("inline-control");
     });
-    return this.constructor._injectNavigation(this.document, this.element);
+    if ( options.parts.includes("pages") ) this.constructor._injectNavigation(this.document, this.element);
   }
 
   /* -------------------------------------------- */
