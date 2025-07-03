@@ -246,14 +246,16 @@
     }
 
     &.single-description {
-      padding-right: 5px;
+      padding-right: 9px;
       scrollbar-gutter: auto;
+    }
 
-      > .editor {
-        padding-right: 6px;
-        scrollbar-width: thin;
-        scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
-      }
+    &.editing {
+      scrollbar-gutter: auto;
+      margin-inline: -12px;
+      padding-inline: 0;
+
+      .pills { padding-inline: 12px; }
     }
   }
 
@@ -388,14 +390,19 @@
     flex: 1;
     overflow: hidden;
 
+    menu { border-radius: 0; }
+
     .editor-container {
       overflow: hidden auto;
-      margin-right: 0;
+      scrollbar-gutter: stable;
+      margin: 0 4px 0 16px;
+      padding-right: 4px;
     }
 
     .editor-content {
       position: unset;
       min-height: 300px;
+      padding: 0;
     }
 
     code-mirror {

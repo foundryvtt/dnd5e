@@ -870,18 +870,22 @@
       }
     }
 
-    code-mirror .cm-scroller {
-      scrollbar-width: thin;
-      scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
+    code-mirror {
+      &:has(.cm-content:focus)::after { content: unset; }
 
-      &::-webkit-scrollbar-track {
-        box-shadow: none;
-        border-radius: 0;
-      }
+      .cm-scroller {
+        scrollbar-width: thin;
+        scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
 
-      &::-webkit-scrollbar-thumb {
-        border: none;
-        background: var(--dnd5e-color-scrollbar);
+        &::-webkit-scrollbar-track {
+          box-shadow: none;
+          border-radius: 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border: none;
+          background: var(--dnd5e-color-scrollbar);
+        }
       }
     }
   }
@@ -980,7 +984,7 @@
     overflow: visible;
     justify-content: flex-end;
     margin-block-end: calc(var(--font-size-24) + 6px);
-    background: none;
+    --color-header-background: none;
 
     &:has(h2:not(:empty)) { margin-block-end: calc(var(--font-size-24) + 12px); }
 
@@ -1044,6 +1048,21 @@
 
     dnd5e-icon.window-icon { display: block; }
     slide-toggle { transform: scale(.9); }
+  }
+
+  &.titlebar:not(.minimized) .window-header {
+    --color-header-background: var(--color-dark-3);
+    margin-block-end: unset;
+
+    .window-title, .window-icon { color: var(--color-light-1); }
+    button { border-color: transparent; }
+
+    .window-title {
+      position: unset;
+      inset: unset;
+      text-align: unset;
+      font-size: var(--font-size-13);
+    }
   }
 
   .window-content {

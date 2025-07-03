@@ -1,5 +1,4 @@
-/* TODO: Add .dnd5e2-journal when dark mode journal sheets are implemented */
-.theme-dark :where(.dnd5e2):not(.chat-card, .dnd5e-tooltip, .content),
+.theme-dark :where(.dnd5e2, .dnd5e2-journal.application):not(.chat-card, .dnd5e-tooltip, .content),
 .dnd5e2.dnd5e-theme-dark {
   --dnd5e-color-table-row-odd: var(--dnd5e-color-iron-gray);
   --dnd5e-color-table-row-even: color-mix(in oklab, var(--dnd5e-color-table-row-odd), black 10%);
@@ -15,6 +14,8 @@
   --dnd5e-statblock-text-header: var(--color-text-dark-primary);
   --dnd5e-statblock-text-primary: var(--color-text-dark-primary);
   --dnd5e-statblock-text-secondary: color-mix(in oklab, var(--color-text-dark-primary), transparent 25%);
+
+  h1, h2, h3, h4, h5, h6 { color: var(--color-text-emphatic); }
 
   table {
     --table-background-color: var(--dnd5e-color-blue-gray-1);

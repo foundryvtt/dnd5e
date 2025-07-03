@@ -163,9 +163,15 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClass.Container"
   });
 
-  DocumentSheetConfig.registerSheet(JournalEntry, "dnd5e", applications.journal.JournalSheet5e, {
+  DocumentSheetConfig.registerSheet(JournalEntry, "dnd5e", applications.journal.JournalEntrySheet5e, {
     makeDefault: true,
     label: "DND5E.SheetClass.JournalEntry"
+  });
+  DocumentSheetConfig.registerSheet(JournalEntry, "dnd5e", applications.journal.JournalSheet5e, {
+    makeDefault: false,
+    canConfigure: false,
+    canBeDefault: false,
+    label: "DND5E.SheetClass.JournalEntrySheetLegacy"
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalClassPageSheet, {
     label: "DND5E.SheetClass.ClassSummary",
@@ -557,11 +563,7 @@ Hooks.on("getItemContextOptions", documents.Item5e.addDirectoryContextOptions);
 
 Hooks.on("renderCompendiumDirectory", (app, html) => applications.CompendiumBrowser.injectSidebarButton(html));
 
-Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
-Hooks.on(
-  "renderJournalEntryPageProseMirrorSheet",
-  applications.journal.JournalSheet5e.onRenderJournalEntryPageProseMirrorSheet
-);
+Hooks.on("renderJournalEntryPageSheet", applications.journal.JournalEntrySheet5e.onRenderJournalPageSheet);
 
 Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffectConfig);
 

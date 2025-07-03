@@ -1,47 +1,31 @@
+const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal;
+
 /**
  * Journal entry page that displays a controls for editing map markers.
  */
-export default class JournalMapLocationPageSheet extends foundry.appv1.sheets.JournalTextPageSheet {
-
+export default class JournalMapLocationPageSheet extends JournalEntryPageProseMirrorSheet {
   /** @override */
-  static _warnedAppV1 = true;
-
-  /* --------------------------------------------- */
-
-  /** @inheritDoc */
-  static get defaultOptions() {
-    const options = super.defaultOptions;
-    options.classes.push("map");
-    return options;
-  }
+  static DEFAULT_OPTIONS = {
+    classes: ["map"]
+  };
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  get template() {
-    return `templates/journal/page-text-${this.isEditable ? "edit" : "view"}.html`;
-  }
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    const code = this.document.system.code ?? "";
 
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _renderInner(...args) {
-    const jQuery = await super._renderInner(...args);
-    const editingHeader = jQuery[0].querySelector(".journal-header");
-    const viewingHeader = jQuery[0].querySelector(":is(h1, h2, h3)");
-
-    if ( editingHeader ) {
+    if ( this.isView ) {
+      this.element.querySelector(".journal-page-header :first-child").dataset.mapLocationCode = code;
+    } else {
+      const header = this.element.querySelector(".journal-header");
+      const name = header.querySelector("input");
+      const div = document.createElement("div");
       const input = document.createElement("input");
-      input.name = "system.code";
-      input.type = "text";
-      input.value = this.document.system.code ?? "";
-      editingHeader.insertAdjacentElement("afterbegin", input);
+      Object.assign(input, { name: "system.code", type: "text", value: code });
+      div.append(input, name);
+      header.insertAdjacentElement("afterbegin", div);
     }
-
-    else if ( viewingHeader && this.document.system.code ) {
-      viewingHeader.dataset.mapLocationCode = this.document.system.code;
-    }
-
-    return jQuery;
   }
 }
