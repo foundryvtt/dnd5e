@@ -82,8 +82,13 @@ export function registerSystemSettings() {
     hint: "SETTINGS.DND5E.AUTOMATION.TokenBlocking.Hint",
     scope: "world",
     config: true,
-    default: true,
-    type: Boolean
+    default: "all",
+    type: String,
+    choices: {
+      all: "SETTINGS.DND5E.AUTOMATION.TokenBlocking.All",
+      noBlocking: "SETTINGS.DND5E.AUTOMATION.TokenBlocking.NoBlocking",
+      none: "SETTINGS.DND5E.AUTOMATION.TokenBlocking.None"
+    }
   });
 
   // Allow rotating square templates

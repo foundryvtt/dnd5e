@@ -8,7 +8,7 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
    * @returns {boolean} Whether the moving token should be blocked
    */
   isOccupiedGridSpaceBlocking(gridSpace, token, {preview=false}={}) {
-    const found = this.#getRelevantOccupyingTokens(gridSpace, token);
+    const found = this.#getRelevantOccupyingTokens(gridSpace, token, {preview});
     const tokenSize = CONFIG.DND5E.actorSizes[token.actor?.system.traits.size]?.numerical ?? 2;
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     const halflingNimbleness = token.actor?.getFlag("dnd5e", "halflingNimbleness");
@@ -27,7 +27,7 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
       // Halfling Nimbleness means no larger creature can block
       if ( halflingNimbleness && (occupiedSize > tokenSize) ) return false;
 
-      // A size difference of less than 2 should block (adjust for Halfling Nimbleness)
+      // A size difference of less than 2 should block
       return Math.abs(tokenSize - occupiedSize) < 2;
     });
   }
@@ -35,8 +35,8 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
   /* -------------------------------------------- */
 
   /**
-   * Determine whether the provided grid space is being occupied by a token which should cause difficult terrain for
-   * the provided token
+   * Determine whether the provided grid space is being occupied by a token which should at least cause difficult
+   * terrain for the provided token
    * @param {GridOffset3D} gridSpace            The grid space to check
    * @param {Token5e} token                     The token being moved
    * @param {object} [options]                  Additional options
@@ -44,11 +44,8 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
    * @returns {boolean} Whether the moving token should suffer difficult terrain
    */
   isOccupiedGridSpaceDifficult(gridSpace, token, {preview=false}={}) {
-    const found = this.#getRelevantOccupyingTokens(gridSpace, token);
-    const tokenSize = CONFIG.DND5E.actorSizes[token.actor?.system.traits.size]?.numerical ?? 2;
+    const found = this.#getRelevantOccupyingTokens(gridSpace, token, {preview});
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
-    const halflingNimbleness = token.actor?.getFlag("dnd5e", "halflingNimbleness");
-    const neverBlockStatuses = CONFIG.statusEffects.filter(s => s.neverBlockMovement).map(s => s.id);
     return found.some(t => {
       const friendlyToken = token.document.disposition === t.document.disposition;
 
@@ -59,15 +56,8 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
       // In modern rules, Tiny creatures are not difficult terrain
       if ( modernRules && (occupiedSize === 0) ) return false;
 
-      // Halfling Nimbleness means a creature 1 size greater (normally would block) causes difficult terrain
-      if ( halflingNimbleness && (occupiedSize === tokenSize + 1) ) return true;
-
-      // Tokens which may normally have blocked movement should still be considered difficult terrain
-      const mayHaveBlocked = neverBlockStatuses.some(status => t.actor?.statuses.has(status));
-
-      // Friendly means legacy, therefore difficult. A size difference of 2 or more is difficult terrain regardless of
-      // ruleset. Toknes which would have blocked if not for a certain status should be difficult.
-      return friendlyToken || (Math.abs(tokenSize - occupiedSize) >= 2) || mayHaveBlocked;
+      // Any token which has not been filtered out by this point should at least be difficult terrain, if not blocking
+      return true;
     });
   }
 

@@ -5067,7 +5067,10 @@
   "AUTOMATION": {
     "TokenBlocking": {
       "Name": "Enable Token-Blocking Movement Automation",
-      "Hint": "Enable tokens blocking/increasing cost of movement."
+      "Hint": "Enable tokens blocking/increasing cost of movement.",
+      "All": "Tokens can block and be difficult terrain",
+      "NoBlocking": "Tokens can only be difficult terrain",
+      "None": "Tokens cannot block or be difficult terrain"
     }
   },
   "BLOODIED": {
