@@ -138,6 +138,7 @@ export function registerSystemSettings() {
     default: "older",
     type: String,
     choices: {
+      manual: "SETTINGS.DND5E.COLLAPSETRAYS.Manual",
       never: "SETTINGS.DND5E.COLLAPSETRAYS.Never",
       older: "SETTINGS.DND5E.COLLAPSETRAYS.Older",
       always: "SETTINGS.DND5E.COLLAPSETRAYS.Always"
