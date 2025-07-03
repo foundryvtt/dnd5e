@@ -219,7 +219,9 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
         Hooks.onError("EffectApplicationElement._applyEffectToToken", err, { notify: "warn", log: "warn" });
       }
     }
-    this.querySelector(".collapsible").dispatchEvent(new PointerEvent("click", { bubbles: true, cancelable: true }));
+    if ( game.settings.get("dnd5e", "autoCollapseChatTrays") !== "manual" ) {
+      this.querySelector(".collapsible").dispatchEvent(new PointerEvent("click", { bubbles: true, cancelable: true }));
+    }
   }
 
   /* -------------------------------------------- */

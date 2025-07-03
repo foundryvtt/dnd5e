@@ -156,7 +156,8 @@ export default class ChatMessage5e extends ChatMessage {
     let collapse;
     switch ( game.settings.get("dnd5e", "autoCollapseChatTrays") ) {
       case "always": collapse = true; break;
-      case "never": collapse = false; break;
+      case "never":
+      case "manual": collapse = false; break;
       // Collapse chat message trays older than 5 minutes
       case "older": collapse = this.timestamp < Date.now() - (5 * 60 * 1000); break;
     }
