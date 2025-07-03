@@ -3,30 +3,52 @@ import Items5e from "../../data/collection/items-collection.mjs";
 import SpellsUnlinkedConfig from "./spells-unlinked-config.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
+const { JournalEntryPageHandlebarsSheet } = foundry.applications.sheets.journal;
 
 /**
- * Journal entry page the displays a list of spells for a class, subclass, background, or something else.
+ * Journal entry page that displays a list of spells for a class, subclass, background, or something else.
  */
-export default class JournalSpellListPageSheet extends foundry.appv1.sheets.JournalPageSheet {
+export default class JournalSpellListPageSheet extends JournalEntryPageHandlebarsSheet {
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["spells"],
+    position: {
+      width: 700
+    },
+    displayAsTable: false,
+    embedRendering: false,
+    grouping: null,
+    actions: {
+      "add-unlinked": JournalSpellListPageSheet.#onAddUnlinked,
+      delete: JournalSpellListPageSheet.#onDelete,
+      "edit-unlinked": JournalSpellListPageSheet.#onEditUnlinked
+    }
+  };
+
+  /* -------------------------------------------- */
 
   /** @override */
-  static _warnedAppV1 = true;
+  static EDIT_PARTS = {
+    header: super.EDIT_PARTS.header,
+    config: {
+      classes: ["standard-form"],
+      template: "systems/dnd5e/templates/journal/spell/config.hbs"
+    },
+    list: {
+      classes: ["right", "spell-list"],
+      template: "systems/dnd5e/templates/journal/spell/list.hbs"
+    }
+  };
 
-  /* --------------------------------------------- */
+  /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  static get defaultOptions() {
-    const options = foundry.utils.mergeObject(super.defaultOptions, {
-      dragDrop: [{dropSelector: "form"}],
-      submitOnChange: true,
-      width: 700,
-      displayAsTable: false,
-      embedRendering: false,
-      grouping: null
-    });
-    options.classes.push("spells");
-    return options;
-  }
+  /** @override */
+  static VIEW_PARTS = {
+    content: {
+      root: true,
+      template: "systems/dnd5e/templates/journal/spell/view.hbs"
+    }
+  };
 
   /* -------------------------------------------- */
 
@@ -47,25 +69,60 @@ export default class JournalSpellListPageSheet extends foundry.appv1.sheets.Jour
   grouping = null;
 
   /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
-  get template() {
-    if ( this.options.displayAsTable ) return "systems/dnd5e/templates/journal/page-spell-list-table.hbs";
-    return `systems/dnd5e/templates/journal/page-spell-list-${this.isEditable ? "edit" : "view"}.hbs`;
+  _configureRenderParts(options) {
+    const parts = super._configureRenderParts(options);
+    if ( ("content" in parts) && this.options.displayAsTable ) {
+      parts.content.template = "systems/dnd5e/templates/journal/spell/table.hbs";
+    }
+    return parts;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getData(options) {
-    const context = super.getData(options);
+  async _onFirstRender(context, options) {
+    await super._onFirstRender(context, options);
+    if ( this.isView ) return;
+    const left = document.createElement("div");
+    left.classList.add("left", "flexcol", "standard-form");
+    this.element.querySelector(".window-content").insertAdjacentElement("afterbegin", left);
+    left.append(...this.element.querySelectorAll('[data-application-part="config"], [data-application-part="header"]'));
+    this.element.querySelector("prose-mirror").open = true; // FIXME: Workaround for core bug.
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    new CONFIG.ux.DragDrop({
+      permissions: { drop: this._canDragDrop.bind(this) },
+      callbacks: { drop: this._onDrop.bind(this) }
+    }).bind(this.element);
+    if ( this.isView ) {
+      this.element.querySelector('[name="grouping"]')?.addEventListener("change", this._onChangeGroup.bind(this));
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    context.isFirstRender = options.isFirstRender;
     context.CONFIG = CONFIG.DND5E;
     context.system = context.document.system;
     context.embedRendering = this.options.embedRendering ?? false;
 
-    context.title = Object.fromEntries(Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1]));
+    context.title = Object.fromEntries(Array.fromRange(4, 1).map(n => {
+      return [`level${n}`, context.source.title.level + n - 1];
+    }));
 
-    context.description = await TextEditor.enrichHTML(context.system.description.value, { relativeTo: this });
+    context.description = await TextEditor.enrichHTML(context.system.description.value, { relativeTo: this.document });
     if ( context.description === "<p></p>" ) context.description = "";
 
     context.GROUPING_MODES = this.constructor.GROUPING_MODES;
@@ -110,7 +167,7 @@ export default class JournalSpellListPageSheet extends foundry.appv1.sheets.Jour
   /**
    * Load indices with necessary information for spells.
    * @param {string} grouping  Grouping mode to respect.
-   * @returns {object[]}
+   * @returns {Promise<object[]>}
    */
   async prepareSpells(grouping) {
     let fields;
@@ -169,22 +226,6 @@ export default class JournalSpellListPageSheet extends foundry.appv1.sheets.Jour
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  activateListeners(jQuery) {
-    super.activateListeners(jQuery);
-    const [html] = jQuery;
-
-    html.querySelector('[name="grouping"]')?.addEventListener("change", event => {
-      this.grouping = (event.target.value === this.document.system.grouping) ? null : event.target.value;
-      this.object.parent.sheet.render();
-    });
-    html.querySelectorAll("[data-action]").forEach(e => {
-      e.addEventListener("click", this._onAction.bind(this));
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   _canDragDrop() {
     return this.isEditable;
   }
@@ -192,33 +233,31 @@ export default class JournalSpellListPageSheet extends foundry.appv1.sheets.Jour
   /* -------------------------------------------- */
 
   /**
-   * Handle performing an action.
-   * @param {PointerEvent} event  This triggering click event.
+   * Handle adding an unlinked spell.
+   * @this {JournalSpellListPageSheet}
    */
-  async _onAction(event) {
-    event.preventDefault();
-    const { action } = event.target.dataset;
+  static async #onAddUnlinked() {
+    await this.document.update({ "system.unlinkedSpells": [...this.document.system.unlinkedSpells, {}] });
+    const id = this.document.system._source.unlinkedSpells.at(-1)._id;
+    new SpellsUnlinkedConfig({ document: this.document, unlinkedId: id }).render({ force: true });
+  }
 
-    const { itemUuid, unlinkedId } = event.target.closest(".item")?.dataset ?? {};
-    switch ( action ) {
-      case "add-unlinked":
-        await this.document.update({"system.unlinkedSpells": [...this.document.system.unlinkedSpells, {}]});
-        const id = this.document.toObject().system.unlinkedSpells.pop()._id;
-        new SpellsUnlinkedConfig({ document: this.document, unlinkedId: id }).render(true);
-        break;
-      case "delete":
-        if ( itemUuid ) {
-          const spellSet = this.document.system.spells.filter(s => s !== itemUuid);
-          await this.document.update({"system.spells": Array.from(spellSet)});
-        } else if ( unlinkedId ) {
-          const unlinkedSet = this.document.system.unlinkedSpells.filter(s => s._id !== unlinkedId);
-          await this.document.update({"system.unlinkedSpells": Array.from(unlinkedSet)});
-        }
-        this.render();
-        break;
-      case "edit-unlinked":
-        if ( unlinkedId ) new SpellsUnlinkedConfig({ document: this.document, unlinkedId }).render(true);
-        break;
+  /* -------------------------------------------- */
+
+  /**
+   * Handle deleting a spell.
+   * @this {JournalSpellListPageSheet}
+   * @param {PointerEvent} event  The originating event.
+   * @param {HTMLElement} target  The action target.
+   */
+  static #onDelete(event, target) {
+    const { itemUuid, unlinkedId } = target.closest(".item")?.dataset ?? {};
+    if ( itemUuid ) {
+      const spellSet = this.document.system.spells.filter(s => s !== itemUuid);
+      this.document.update({ "system.spells": Array.from(spellSet) });
+    } else if ( unlinkedId ) {
+      const unlinkedSet = this.document.system.unlinkedSpells.filter(s => s._id !== unlinkedId);
+      this.document.update({ "system.unlinkedSpells": Array.from(unlinkedSet) });
     }
   }
 
@@ -244,6 +283,30 @@ export default class JournalSpellListPageSheet extends foundry.appv1.sheets.Jour
 
     spells.forEach(i => spellUuids.add(i.uuid));
     await this.document.update({"system.spells": Array.from(spellUuids)});
-    this.render();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle editing an unlinked spell.
+   * @this {JournalSpellListPageSheet}
+   * @param {PointerEvent} event  The originating event.
+   * @param {HTMLElement} target  The action target.
+   */
+  static #onEditUnlinked(event, target) {
+    const { unlinkedId } = target.closest(".item")?.dataset ?? {};
+    if ( unlinkedId ) new SpellsUnlinkedConfig({ document: this.document, unlinkedId }).render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle changing the grouping.
+   * @param {Event} event  The triggering event.
+   * @protected
+   */
+  _onChangeGroup(event) {
+    this.grouping = (event.target.value === this.document.system.grouping) ? null : event.target.value;
+    this.document.parent.sheet.render();
   }
 }

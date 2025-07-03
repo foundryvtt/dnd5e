@@ -91,7 +91,7 @@ export default class SpellListJournalPageData extends foundry.abstract.TypeDataM
     if ( config.table ) config.grouping = "level";
 
     const sheet = new JournalSpellListPageSheet(this.parent, {
-      editable: false, displayAsTable: config.table, embedRendering: true, grouping: config.grouping
+      mode: "view", displayAsTable: config.table, embedRendering: true, grouping: config.grouping
     });
     const rendered = await sheet._renderInner(await sheet.getData());
     config.classes = config.classes ? `spells ${config.classes ?? ""}` : "spells";
