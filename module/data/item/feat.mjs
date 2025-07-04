@@ -96,7 +96,40 @@ export default class FeatData extends ItemDataModel.mixin(
           keyPath: "system.type.subtype"
         }
       }],
-      ["properties", this.compendiumBrowserPropertiesFilter("feat")]
+      ["properties", this.compendiumBrowserPropertiesFilter("feat")],
+      ["abilityScoreImprovement", {
+        label: "DND5E.ADVANCEMENT.AbilityScoreImprovement.Title",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.abilities
+        },
+        createFilter: (filters, value, def) => {
+          const { include, exclude } = Object.entries(value).reduce((d, [key, value]) => {
+            if ( value === 1 ) d.include.push(key);
+            else if ( value === -1 ) d.exclude.push(key);
+            return d;
+          }, { include: [], exclude: [] });
+
+          const makeFilter = values => ({
+            o: "OR", v: [
+              ...values.map(ability => ({
+                k: "system.advancement", o: "has", v: { k: `configuration.fixed.${ability}`, o: "gt", v: 0 }
+              })),
+              {
+                k: "system.advancement", o: "has", v: {
+                  o: "AND", v: [
+                    { k: "configuration.points", o: "gt", v: 0 },
+                    { o: "NOT", v: { k: "configuration.locked", o: "hasall", v: values } }
+                  ]
+                }
+              }
+            ]
+          });
+
+          if ( include.length ) filters.push(makeFilter(include));
+          if ( exclude.length ) filters.push({ o: "NOT", v: makeFilter(exclude) });
+        }
+      }]
     ]);
   }
 
