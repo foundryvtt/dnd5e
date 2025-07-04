@@ -4,7 +4,7 @@
 export default class JournalRulePageSheet extends foundry.applications.sheets.journal.JournalEntryPageProseMirrorSheet {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["rule"]
+    classes: ["text", "rule"]
   };
 
   /* -------------------------------------------- */

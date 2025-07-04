@@ -573,6 +573,74 @@
     }
   }
 
+  .card.table {
+    &.items, &.levels {
+      display: grid;
+      gap: 0;
+
+      > * { grid-column: 1 / -1; }
+      .header, .items-list, .items-list > li, .levels-list, .levels-list > li {
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-columns: subgrid;
+      }
+      .header {
+        margin-inline: -10px;
+        padding-block: 3px 2px;
+        padding-inline: 10px;
+        border-radius: 0;
+      }
+
+      .items-list, .levels-list > li {
+        margin: 0 -.75em;
+        padding: 6px .75em;
+
+        &:nth-child(odd) { background: var(--dnd5e-color-table-row-odd); }
+        &:nth-child(even) { background: var(--dnd5e-color-table-row-even); }
+      }
+    }
+
+    &.items {
+      grid-template-columns: [name] 1fr [controls] 20px;
+      .items-list {
+        container-type: normal;
+        gap: 0;
+
+        > li {
+          margin: 0 -.75em;
+          padding: 6px .75em;
+
+          &:nth-child(odd) { background: var(--dnd5e-color-table-row-odd); }
+          &:nth-child(even) { background: var(--dnd5e-color-table-row-even); }
+        }
+      }
+      .item-optional { display: inline-flex; }
+      .item-name { grid-column: name; }
+
+      .item-controls {
+        grid-column: controls;
+        font-size: var(--font-size-11);
+        text-align: right;
+        flex-wrap: nowrap;
+        gap: 4px;
+      }
+
+      .name-header { padding-inline-start: 16px; }
+    }
+
+    &.levels {
+      grid-template-columns: [level] max-content [count] 1fr;
+      gap: 4px 6px;
+      .header > span { text-align: center; }
+      .level-header, .level-level { grid-column: level; }
+      .count-header, .level-count { grid-column: count; }
+      .level-level {
+        align-content: center;
+        text-align: center;
+      }
+    }
+  }
+
   /* ---------------------------------- */
   /*  Meters                            */
   /* ---------------------------------- */

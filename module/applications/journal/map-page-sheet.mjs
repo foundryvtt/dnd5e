@@ -6,7 +6,7 @@ const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal
 export default class JournalMapLocationPageSheet extends JournalEntryPageProseMirrorSheet {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["map"]
+    classes: ["text", "map"]
   };
 
   /* -------------------------------------------- */

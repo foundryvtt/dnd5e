@@ -1,0 +1,34 @@
+<div>
+    <fieldset class="table card items">
+        <legend>{{ localize "TYPES.Item.spellPl" }}</legend>
+        <div class="header">
+            <button type="button" class="unbutton control-button" data-action="addUnlinked" data-tooltip
+                    aria-label="{{ localize "JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Add" }}">
+                <i class="fas fa-plus" inert></i>
+            </button>
+        </div>
+        <ol class="items-list">
+            {{#each spells}}
+            <li class="item flexrow" data-item-uuid="{{ spell.uuid }}" data-unlinked-id="{{ unlinked._id }}">
+                <div class="item-name">{{{ display }}}</div>
+                <div class="item-controls flexrow">
+                    {{#if unlinked}}
+                    <a class="item-control" data-action="editUnlinked" data-tooltip
+                       aria-label="{{ localize 'JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Edit' }}">
+                        <i class="fa-solid fa-cog" inert></i>
+                    </a>
+                    {{/if}}
+                    <a class="item-control" data-action="delete" data-tooltip
+                       aria-label="{{ localize 'DND5E.ItemDelete' }}">
+                        <i class="fa-solid fa-trash" inert></i>
+                    </a>
+                </div>
+            </li>
+            {{else}}
+            <li class="empty hint">
+                {{ localize "JOURNALENTRYPAGE.DND5E.SpellList.DropHint" }}
+            </li>
+            {{/each}}
+        </ol>
+    </fieldset>
+</div>
