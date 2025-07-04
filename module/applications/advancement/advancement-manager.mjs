@@ -266,7 +266,7 @@ export default class AdvancementManager extends Application5e {
     }
 
     // All other items, just create some flows up to current character level (or class level for subclasses)
-    Array.fromRange(manager.currentLevel(clonedItem, manager.clone) + 1)
+    Array.fromRange(this.currentLevel(clonedItem, manager.clone) + 1)
       .flatMap(l => this.flowsForLevel(clonedItem, l))
       .forEach(flow => manager.steps.push({ type: "forward", flow }));
 
@@ -356,7 +356,7 @@ export default class AdvancementManager extends Application5e {
     }
 
     // All other items, just create some flows down from current character level
-    Array.fromRange(manager.currentLevel(clonedItem, manager.clone) + 1)
+    Array.fromRange(this.currentLevel(clonedItem, manager.clone) + 1)
       .flatMap(l => this.flowsForLevel(clonedItem, l))
       .reverse()
       .forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
