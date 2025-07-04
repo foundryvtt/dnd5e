@@ -252,6 +252,13 @@ export default class FeatData extends ItemDataModel.mixin(
   /*  Getters                                     */
   /* -------------------------------------------- */
 
+  /** @override */
+  get advancementClassLinked() {
+    return this.type.value !== "feat";
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Properties displayed in chat.
    * @type {string[]}

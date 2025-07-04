@@ -35,6 +35,39 @@ export default class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Can this item's advancement level be taken from an associated class?
+   * @type {boolean}
+   */
+  get advancementClassLinked() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The level at which this item's advancement is applied.
+   * @type {number}
+   */
+  get advancementLevel() {
+    let item = this.parent;
+    if ( ["class", "subclass"].includes(this.advancementRootItem?.type)
+      && this.advancementClassLinked ) item = item.advancementRootItem;
+    return item.system.levels ?? item.class?.system.levels ?? item.actor?.system.details.level ?? 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The item that is ultimately responsible for adding this item through the advancement system.
+   * @type {Item5e|void}
+   */
+  get advancementRootItem() {
+    return this.parent?.actor?.items.get(this.parent.getFlag("dnd5e", "advancementRoot")?.split(".")?.[0]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Modes that can be used when making an attack with this item.
    * @type {FormSelectOption[]}
    */

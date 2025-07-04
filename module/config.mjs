@@ -4617,7 +4617,7 @@ DND5E.activityTypes = {
  * @property {boolean} [hidden]                  Should this advancement type be hidden in the selection dialog?
  */
 
-const _ALL_ITEM_TYPES = ["background", "class", "race", "subclass"];
+const _ALL_ITEM_TYPES = ["background", "class", "feat", "race", "subclass"];
 
 /**
  * Advancement types that can be added to items.
