@@ -550,7 +550,6 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
         await this.document.update({ "system.subclassItems": Array.from(itemSet) });
         break;
     }
-    this.render();
   }
 
   /* -------------------------------------------- */
@@ -589,12 +588,12 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     switch ( type ) {
       case "linked":
         await this.document.update({"system.item": item.uuid});
-        return this.render();
+        break;
       case "subclass":
         const itemSet = this.document.system.subclassItems;
         itemSet.add(item.uuid);
         await this.document.update({"system.subclassItems": Array.from(itemSet)});
-        return this.render();
+        break;
       default:
         return false;
     }
