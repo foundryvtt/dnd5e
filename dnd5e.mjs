@@ -529,7 +529,6 @@ Hooks.once("ready", function() {
   if ( CONFIG.DND5E.calendar.application ) {
     CONFIG.DND5E.calendar.instance = new CONFIG.DND5E.calendar.application();
     CONFIG.DND5E.calendar.instance.render({ force: true });
-    Hooks.on("updateWorldTime", CONFIG.DND5E.calendar.application.onUpdateWorldTime);
   }
 
   // Determine whether a system migration is required and feasible
@@ -619,6 +618,11 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
       grid: { distance: utils.convertLength(dnd5e.grid.distance, dnd5e.grid.units, units, { strict: false }), units }
     });
   }
+});
+
+Hooks.on("updateWorldTime", (...args) => {
+  dataModels.calendar.CalendarData5e.onUpdateWorldTime(...args);
+  if ( CONFIG.DND5E.calendar.application ) CONFIG.DND5E.calendar.application.onUpdateWorldTime(...args);
 });
 
 /* -------------------------------------------- */
