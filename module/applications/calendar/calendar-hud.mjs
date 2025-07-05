@@ -162,8 +162,9 @@ export default class CalendarHUD extends BaseCalendarHUD {
 
   /**
    * Adjust the date, time, and progress in the core part without a full re-render to allow animation.
+   * @param {CalendarTimeDeltas} [deltas={}]  Information on the time change deltas.
    */
-  async renderCore() {
+  async renderCore(deltas={}) {
     const prefs = game.settings.get("dnd5e", "calendarPreferences");
     const dateFormatter = CONFIG.DND5E.calendar.formatters.find(f => f.value === prefs.formatters.date);
     this.element.querySelector(".calendar-date").innerText = dateFormatter ? game.time.calendar.format(
@@ -175,10 +176,18 @@ export default class CalendarHUD extends BaseCalendarHUD {
     ) : "";
 
     const widget = this.element.querySelector(".calendar-widget");
-    const getProgress = type => type in game.time.calendar ? game.time.calendar[type]()
-      : CalendarData5e.prototype[type].call(game.time.calendar);
-    widget.style.setProperty("--calendar-day-progress", getProgress("progressDay"));
-    widget.style.setProperty("--calendar-night-progress", getProgress("progressNight"));
+    const adjustProgress = (variable, type, delta=0) => {
+      const currentProgress = Number(widget.style.getPropertyValue(variable));
+      const modulo = (n, d) => ((n % d) + d) % d;
+      const partialProgress = modulo((currentProgress + 0.5), 2) - 0.5;
+      const targetProgress = type in game.time.calendar ? game.time.calendar[type]()
+        : CalendarData5e.prototype[type].call(game.time.calendar);
+      const difference = targetProgress - partialProgress;
+      const newProgress = currentProgress + difference + (delta * 2);
+      widget.style.setProperty(variable, newProgress);
+    };
+    adjustProgress("--calendar-day-progress", "progressDay", deltas.midnights);
+    adjustProgress("--calendar-night-progress", "progressNight", deltas.middays);
   }
 
   /* -------------------------------------------- */
@@ -234,7 +243,6 @@ export default class CalendarHUD extends BaseCalendarHUD {
 
   /** @override */
   static onUpdateWorldTime(worldTime, deltaTime, options, userId) {
-    CONFIG.DND5E.calendar.instance?.renderCore();
-    // TODO: Use the delta time to ensure the animation runs in the correct direction
+    CONFIG.DND5E.calendar.instance?.renderCore(options.dnd5e?.deltas);
   }
 }
