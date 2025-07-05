@@ -6,7 +6,7 @@
 @property --calendar-night-progress {
   syntax: "<number>";
   inherits: true;
-  initial-value: 0;
+  initial-value: 1;
 }
 
 #calendar-hud {
@@ -104,7 +104,12 @@
     }
   }
   .calendar-sun {
-    rotate: calc(var(--calendar-day-progress) * -.28turn);
+    --calendar-sun-adjustment-factor: 0.45;
+    --_offset: ~"mod(calc(var(--calendar-day-progress) + 0.5), 2)";
+    --_adjusted-distance: calc(var(--calendar-sun-adjustment-factor) * (1 - var(--_offset)));
+    --_sun-progress: calc(var(--calendar-day-progress) + var(--_adjusted-distance));
+
+    rotate: calc(var(--_sun-progress) * -.5turn);
     opacity: ~"calc(1 + sin((var(--calendar-day-progress) * pi)))";
     transition: opacity var(--calendar-animation), rotate var(--calendar-animation);
 
@@ -113,27 +118,40 @@
       position: absolute;
     }
     &::before {
-      block-size: 120px;
-      inline-size: 120px;
-      inset-inline-end: -50px;
-      inset-block-start: -43px;
+      block-size: 100%;
+      inline-size: 100%;
+      inset-inline-start: 50%;
       background:
         radial-gradient(20px 10px, rgb(252 249 214 / .7), transparent),
         radial-gradient(30px 20px, rgb(248 243 161 / .5), transparent),
         radial-gradient(35px 25px, rgb(250 188 90 / .3), transparent),
         radial-gradient(40px 30px, rgb(234 158 111 / .2), transparent);
+      rotate: calc(var(--_sun-progress) * .5turn);
       opacity: ~"calc(1 - sin((var(--calendar-day-progress) * pi)))";
-      rotate: calc(var(--calendar-day-progress) * .28turn);
       transition: opacity var(--calendar-animation), rotate var(--calendar-animation);
     }
     &::after {
       block-size: var(--calendar-sun-size);
       inline-size: var(--calendar-sun-size);
-      right: 8.5px;
-      top: 15px;
+      inset-block-end: calc(var(--calendar-sun-size) * -0.5 + 50%);
+      inset-inline-end: calc(var(--calendar-sun-size) * -0.5);
       background: yellow;
       border-radius: 100%;
       outline-offset: 5px;
+    }
+  }
+
+  &.debug {
+    opacity: 1;
+    .calendar-widget { overflow: visible; }
+    .calendar-sun {
+      opacity: 1;
+      outline: 1px solid white;
+      &::before {
+        opacity: 1;
+        outline: 1px solid greenyellow;
+      }
+      &::after { outline: 1px solid red; }
     }
   }
 }

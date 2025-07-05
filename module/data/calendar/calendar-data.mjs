@@ -9,6 +9,20 @@ export default class CalendarData5e extends foundry.data.CalendarData {
   /* -------------------------------------------- */
 
   /**
+   * Calculate the decimal hours since the start of the day.
+   * @param {number|Components} [time]  The time to use, by default the current world time.
+   * @param {CalendarData} [calendar]   Calendar to use, by default the current world calendar.
+   * @returns {number}                  Number of hours since the start of the day as a decimal.
+   */
+  static hoursOfDay(time=game.time.components, calendar=game.time.calendar) {
+    const components = typeof time === "number" ? this.timeToComponents(time) : time;
+    const minutes = components.minute + (components.second / calendar.days.secondsPerMinute);
+    return components.hour + (minutes / calendar.days.minutesPerHour);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the number of hours in a given day.
    * @param {number|Components} [time]  The time to use, by default the current world time.
    * @returns {number}                  Number of hours between sunrise and sunset.
@@ -26,7 +40,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
    */
   progressDay(time=game.time.components) {
     const components = typeof time === "number" ? this.timeToComponents(time) : time;
-    return (components.hour - this.sunrise(time)) / this.daylightHours(time);
+    return (CalendarData5e.hoursOfDay(components) - this.sunrise(time)) / this.daylightHours(time);
   }
 
   /* -------------------------------------------- */
@@ -39,8 +53,8 @@ export default class CalendarData5e extends foundry.data.CalendarData {
   progressNight(time=game.time.components) {
     const components = typeof time === "number" ? this.timeToComponents(time) : time;
     const daylightHours = this.daylightHours(time);
-    let hour = components.hour;
-    if ( components.hour < daylightHours ) hour += this.days.hoursPerDay;
+    let hour = CalendarData5e.hoursOfDay(components);
+    if ( hour < daylightHours ) hour += this.days.hoursPerDay;
     return (hour - this.sunset(time)) / daylightHours;
   }
 
@@ -196,5 +210,44 @@ export default class CalendarData5e extends foundry.data.CalendarData {
     return CalendarData5e.formatLocalized(
       "DND5E.CALENDAR.Formatters.MonthDayYear.Format", calendar, components, options
     );
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * @typedef CalendarTimeDeltas
+   * @property {number} midnights  Number of times midnight has been passed during a time change.
+   * @property {number} middays    Number of times noon has been passed during a time change.
+   * @property {number} sunrises   Number of sunrises that occurred during a time change.
+   * @property {number} sunsets    Number of sunsets that occurred during a time change.
+   */
+
+  /**
+   * Inject additional information into time update.
+   * @param {number} worldTime
+   * @param {number} deltaTime
+   * @param {object} options
+   * @param {string} userId
+   */
+  static onUpdateWorldTime(worldTime, deltaTime, options, userId) {
+    const previousTime = game.time.calendar.timeToComponents(game.time.worldTime - deltaTime);
+    const previousHour = CalendarData5e.hoursOfDay(previousTime);
+    const nowTime = game.time.components;
+    const nowHour = CalendarData5e.hoursOfDay(nowTime);
+    const passedHour = hour => {
+      if ( (previousHour < hour) && (nowHour > hour) ) return 1;
+      if ( (previousHour > hour) && (nowHour < hour) ) return -1;
+      return 0;
+    };
+
+    const days = nowTime.day - previousTime.day;
+    foundry.utils.setProperty(options, "dnd5e.deltas", {
+      midnights: days,
+      middays: days + passedHour(game.time.calendar.days.hoursPerDay / 2),
+      sunrises: ("sunrise" in game.time.calendar) ? days + passedHour(game.time.calendar.sunrise(nowTime)) : null,
+      sunsets: ("sunset" in game.time.calendar) ? days + passedHour(game.time.calendar.sunset(nowTime)) : null
+    });
   }
 }
