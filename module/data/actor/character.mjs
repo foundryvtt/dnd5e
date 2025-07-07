@@ -205,7 +205,8 @@ export default class CharacterData extends CreatureTemplate {
     this.attributes.attunement.value = 0;
 
     for ( const item of this.parent.items ) {
-      const canAttune = !item.system.validProperties?.has?.("mgc") || item.system.properties?.has?.("mgc");
+      const canAttune = (!item.system.validProperties?.has?.("mgc") || item.system.properties?.has?.("mgc"))
+        && item.system.attunement;
       if ( item.system.attuned && canAttune ) this.attributes.attunement.value += 1;
       if ( item.type === "class" ) this.details.level += item.system.levels;
     }
