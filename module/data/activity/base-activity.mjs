@@ -582,6 +582,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       writable: false
     });
 
+    // TODO: Temporarily add parent to consumption targets & damage parts added by enchantment
+    // Can be removed once https://github.com/foundryvtt/foundryvtt/issues/12528 is implemented
+    if ( this.consumption?.targets ) this.consumption.targets = this.consumption.targets.map(c => {
+      if ( c.parent ) return c;
+      return c.clone({}, { parent: this });
+    });
+    if ( this.damage?.parts ) this.damage.parts = this.damage.parts.map(c => {
+      if ( c.parent ) return c;
+      return c.clone({}, { parent: this });
+    });
+
     if ( this.activation ) ActivationField.prepareData.call(this, rollData, this.labels);
     if ( this.duration ) DurationField.prepareData.call(this, rollData, this.labels);
     if ( this.range ) RangeField.prepareData.call(this, rollData, this.labels);
