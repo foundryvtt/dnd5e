@@ -458,6 +458,7 @@ export default class CompendiumBrowser extends Application5e {
     await super._preparePartContext(partId, context, options);
     switch ( partId ) {
       case "documentClass":
+      case "search":
       case "types":
       case "filters": return this._prepareSidebarContext(partId, context, options);
       case "results": return this._prepareResultsContext(context, options);
@@ -527,7 +528,11 @@ export default class CompendiumBrowser extends Application5e {
     context.isLocked.documentClass = ("documentClass" in this.options.filters.locked) || context.isLocked.types;
     const types = foundry.utils.getProperty(options, "dnd5e.browser.types") ?? [];
 
-    if ( partId === "types" ) {
+    if ( partId === "search" ) {
+      context.name = this.#filters.name;
+    }
+
+    else if ( partId === "types" ) {
       context.showTypes = (types.length !== 1) || (types[0] === "physical");
       context.types = CONFIG[context.filters.documentClass].documentClass.compendiumBrowserTypes({
         chosen: context.filters.types
