@@ -383,7 +383,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     return [
       this.parent.labels.level,
       this.parent.labels.components.vsm + (this.parent.labels.materials ? ` (${this.parent.labels.materials})` : ""),
-      ...this.parent.labels.components.tags
+      ...this.parent.labels.components.tags,
+      this.parent.labels.duration
     ];
   }
 
