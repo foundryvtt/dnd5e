@@ -43,6 +43,8 @@
   }
 
   .window-content {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     font-family: var(--dnd5e-font-roboto);
     font-size: var(--font-size-13);
     border-radius: 5px;
@@ -180,13 +182,14 @@
     border: var(--dnd5e-border-gold);
 
     .header {
-      background: linear-gradient(to right, var(--dnd5e-color-hd-1), var(--dnd5e-color-hd-2));
+      background: linear-gradient(to right, var(--dnd5e-card-header-1), var(--dnd5e-card-header-2));
       color: white;
       border-radius: 3px 3px 0 0;
       border-bottom: var(--dnd5e-border-gold);
 
       &.disabled {
-        background: linear-gradient(to right, var(--color-border-dark-3), var(--color-border-light-2));
+        background: linear-gradient(to right, var(--dnd5e-card-header-disabled-1), var(--dnd5e-card-header-disabled-2));
+        pointer-events: all;
       }
 
       h3 {
@@ -201,7 +204,7 @@
       }
 
       .radio-button {
-        background: var(--dnd5e-color-light-gray);
+        background: var(--dnd5e-background-alt-1);
         &[aria-pressed="true"]::before { background: var(--dnd5e-color-gold); }
       }
     }
@@ -217,14 +220,14 @@
         flex-direction: column;
         align-items: center;
         padding: 0 .5rem;
-        border-right: 1px solid var(--color-border-light-1);
+        border-right: var(--dnd5e-border-separator-faint);
 
         &:last-child { border: none; }
 
         .label {
           font-family: var(--dnd5e-font-roboto-condensed);
           font-size: var(--font-size-10);
-          color: var(--color-text-dark-5);
+          color: var(--color-text-secondary);
           text-transform: uppercase;
         }
 
@@ -234,7 +237,7 @@
           font-size: var(--font-size-16);
         }
 
-        .sign { color: var(--color-text-light-6); }
+        .sign { color: var(--color-text-tertiary); }
       }
     }
   }
@@ -259,7 +262,8 @@
   h3 {
     padding-bottom: 4px;
     margin-bottom: 6px;
-    border-bottom: 1px solid var(--dnd5e-color-black);
+    border-bottom: var(--dnd5e-border-heading-3);
+    color: var(--dnd5e-heading-3-color);
 
     &.icon {
       display: flex;
@@ -278,13 +282,13 @@
 
       > dnd5e-icon {
         font-size: var(--font-size-14);
-        --icon-fill: var(--color-text-dark-primary);
+        --icon-fill: var(--dnd5e-heading-3-color);
       }
 
       > a, > button {
         margin-left: auto;
         font-size: var(--font-size-12);
-        color: var(--color-text-light-6);
+        color: var(--color-text-tertiary);
       }
     }
   }
@@ -295,7 +299,6 @@
   }
 
   .pill-lg {
-    --gold-icon-size: 32px;
     background: var(--dnd5e-background-card);
     border: var(--dnd5e-border-gold);
     border-radius: 5px;
@@ -309,8 +312,8 @@
     position: relative;
 
     &.empty {
-      border: 2px dashed var(--dnd5e-color-black);
-      color: var(--dnd5e-color-black);
+      border: var(--pill-empty-border);
+      color: var(--pill-empty-text-color);
       border-radius: 4px;
       display: grid;
       place-content: center;
@@ -324,8 +327,9 @@
       position: absolute;
       inset: 0;
       background: var(--underlay) no-repeat center / cover;
+      opacity: var(--pill-underlay-opacity, 1);
+      mix-blend-mode: var(--pill-underlay-blend-mode);
       filter: grayscale(1);
-      mix-blend-mode: overlay;
       pointer-events: none;
       border-radius: 5px;
     }
@@ -344,21 +348,25 @@
       font-weight: bold;
       font-size: var(--font-size-11);
       text-transform: uppercase;
-      border: 1px solid var(--color-border-dark-5);
+      border: var(--pill-border);
       border-radius: 3px;
-      background: var(--dnd5e-color-card);
+      background: var(--dnd5e-background-card);
       padding: .1875rem .375rem;
       display: flex;
       gap: .25rem;
       margin: 0;
 
-      &.green, &.maroon { color: var(--color-text-light-0); }
-      &.green { background-color: var(--dnd5e-color-green); }
-      &.maroon { background-color: var(--dnd5e-color-maroon); }
+      &.green, &.maroon {
+        color: var(--pill-colored-text-color);
+        border: var(--pill-colored-border);
+      }
+
+      &.green { background-color: var(--pill-background-green); }
+      &.maroon { background-color: var(--pill-background-maroon); }
 
       &.transparent, &.pill-sm {
-        color: #4e4e4e;
-        border: 1px dotted var(--color-border-dark-5);
+        color: var(--pill-transparent-color);
+        border: var(--pill-border-dotted);
         background-color: transparent;
       }
 
@@ -368,7 +376,7 @@
         gap: 3px;
       }
 
-      > .separator { color: var(--color-text-light-6); }
+      > .separator { color: var(--color-text-tertiary); }
     }
   }
 
@@ -405,6 +413,7 @@
   }
 
   .gold-icon {
+    --gold-icon-size: 32px;
     block-size: var(--gold-icon-size);
     inline-size: var(--gold-icon-size);
     flex: 0 0 var(--gold-icon-size);
@@ -412,7 +421,7 @@
     border: 2px solid var(--dnd5e-color-gold);
     box-shadow: 0 0 4px var(--dnd5e-shadow-45);
     border-radius: 0;
-    background-color: var(--dnd5e-color-light-gray);
+    background-color: var(--dnd5e-gold-icon-background);
     object-fit: cover;
     object-position: top;
   }
@@ -430,7 +439,7 @@
     .subtitle {
       font-family: var(--dnd5e-font-roboto);
       font-size: var(--font-size-10);
-      color: var(--color-text-dark-5);
+      color: var(--color-text-secondary);
     }
   }
 
@@ -447,8 +456,10 @@
 
       > i {
         font-size: var(--font-size-11);
-        color: var(--color-text-dark-5);
+        color: var(--color-text-secondary);
       }
+
+      > span { color: var(--color-text-title); }
     }
   }
 
@@ -537,7 +548,7 @@
 
     .materials, .condition {
       font-size: var(--font-size-11);
-      color: var(--color-text-dark-5);
+      color: var(--color-text-secondary);
     }
   }
 
@@ -549,7 +560,7 @@
     padding: 6px 0 0;
     margin-bottom: -4px;
     font-size: var(--font-size-10);
-    color: var(--color-text-dark-5);
+    color: var(--color-text-secondary);
 
     img {
       height: 1em;
@@ -654,7 +665,6 @@
   }
 
   .meter {
-    --meter-background: var(--dnd5e-color-light-gray);
     border: 1px solid var(--dnd5e-color-gold);
     border-radius: 4px;
     background: var(--meter-background);
@@ -716,7 +726,7 @@
       flex: 0 0 var(--slot-size);
       height: var(--slot-size);
       width: var(--slot-size);
-      border: var(--dnd5e-border-gold);
+      border: var(--dnd5e-slot-border);
       border-radius: 3px;
       overflow: hidden;
       background: var(--dnd5e-background-card);
@@ -765,7 +775,7 @@
       height: 100%;
       max-width: unset;
       object-fit: cover;
-      background: var(--dnd5e-color-iron-gray);
+      background: var(--dnd5e-background-alt-2);
     }
   }
 
@@ -781,8 +791,8 @@
     > li:not(.empty) {
       position: relative;
       padding: 8px;
-      background: var(--dnd5e-background-card);
-      border: 2px solid var(--dnd5e-color-gold);
+      background: var(--separated-list-item-background-color);
+      border: 1px solid var(--separated-list-item-border-color);
       border-radius: 4px;
       box-shadow: 0 0 4px var(--dnd5e-shadow-45);
 
@@ -835,27 +845,9 @@
   /*  System Badge                      */
   /* ---------------------------------- */
 
-  &.sidebar-heading {
-    margin: 6px 0;
-    padding: 3px 8px;
-    border-top: 1px solid var(--color-border-dark-4);
-    border-bottom: 1px solid var(--color-border-dark-4);
-    background: var(--dnd5e-highlight-10);
-    display: flex;
-    align-items: center;
+  &.sidebar-info {
+    h4 { --color-text-primary: var(--color-light-2); }
 
-    h2 {
-      font-size: var(--font-size-16);
-      background: none;
-      border: none;
-      padding: 0;
-      margin: 0;
-      font-family: var(--font-primary);
-      font-weight: normal;
-    }
-  }
-
-  &.sidebar-heading, &.sidebar-info {
     ul.links {
       flex: 1;
       list-style: none;
@@ -869,7 +861,7 @@
     }
   }
 
-  &.system-badge {
+  .system-badge {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1039,12 +1031,9 @@
 
 .dnd5e2.application {
   --color-scrollbar: var(--dnd5e-color-scrollbar);
-
-  background: url("ui/texture-gray1.webp") no-repeat top left,
-    url("ui/texture-gray2.webp") no-repeat bottom right,
-    var(--dnd5e-color-parchment);
+  background: var(--dnd5e-application-background);
   border: var(--dnd5e-border-gold);
-  color: var(--color-text-dark-primary);
+  color: var(--color-text-primary);
   line-height: normal;
 
   &:not(.minimized) .window-header {
@@ -1059,7 +1048,7 @@
     h1, h2 {
       position: absolute;
       inset-inline: 0;
-      color: var(--color-text-dark-primary);
+      color: var(--color-text-primary);
       font-family: var(--dnd5e-font-roboto-slab);
       font-weight: bold;
       text-align: center;
@@ -1080,7 +1069,7 @@
 
     .window-icon {
       --icon-size: 20px;
-      --icon-fill: var(--color-text-dark-5);
+      --icon-fill: var(--color-text-secondary);
       margin-right: auto;
       color: var(--icon-fill);
       font-size: calc(var(--icon-size) * .75);
@@ -1099,7 +1088,11 @@
     h2 { display: none; }
     .header-control {
       all: revert-layer;
-      &:hover, &:focus { background: transparent; }
+      --button-background-color: transparent;
+      --button-hover-background-color: transparent;
+      padding: 0;
+
+      &:hover, &:focus, &:focus-visible { box-shadow: 0 0 6px var(--color-shadow-primary); }
     }
   }
 
@@ -1119,23 +1112,19 @@
   }
 
   &.titlebar:not(.minimized) .window-header {
-    --color-header-background: var(--color-dark-3);
     margin-block-end: unset;
-
-    .window-title, .window-icon { color: var(--color-light-1); }
-    button { border-color: transparent; }
 
     .window-title {
       position: unset;
       inset: unset;
       text-align: unset;
       font-size: var(--font-size-13);
+      font-weight: normal;
     }
   }
 
   .window-content {
     background: transparent;
-    margin-block-start: -8px;
     padding-block-start: 8px;
     padding-block-end: 14px;
     padding-inline: 14px;
@@ -1183,6 +1172,8 @@
     gap: 8px;
   }
 
+  &:not(.titlebar) .window-content { margin-block-start: -8px; }
+
   /* Tabs */
   .sheet-tabs {
     font-family: var(--dnd5e-font-roboto);
@@ -1197,12 +1188,12 @@
       flex: 1;
       padding: 0;
       line-height: 1;
-      color: var(--color-text-dark-5);
+      color: var(--color-text-secondary);
 
       label { padding-bottom: 1px; }
 
       &.active {
-        color: var(--color-text-dark-primary);
+        color: var(--color-text-primary);
         text-shadow: none;
         label, span { border-bottom: 3px solid var(--dnd5e-color-gold); }
       }
@@ -1273,9 +1264,6 @@ dialog.dnd5e2.application {
 }
 
 .dnd5e2.dialog-lg {
-  background: url("ui/texture1.webp") no-repeat top center / auto 770px,
-    var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
-
   .window-resize-handle {
     inset: auto 0 0 auto;
     z-index: 1;
@@ -1321,7 +1309,7 @@ dialog.dnd5e2.application {
       font-weight: bold;
     }
 
-    .sign { color: var(--color-text-light-6); }
+    .sign { color: var(--color-text-tertiary); }
   }
 }
 
@@ -1381,11 +1369,12 @@ dialog.dnd5e2.application {
 
       .label {
         --icon-size: 20px;
+        --icon-fill: var(--activity-icon-color);
 
         display: flex;
         align-items: center;
         gap: 8px;
-        color: var(--color-text-dark-5);
+        color: var(--color-text-secondary);
         font-style: italic;
         font-size: var(--font-size-12);
       }
@@ -1460,7 +1449,7 @@ dialog.dnd5e2.application {
     .armor-value { grid-column: armorValue; }
     .magical-bonus { grid-column: magicalBonus; }
     .armor-value, .magical-bonus {
-      &.empty { color: var(--color-text-light-6); }
+      &.empty { color: var(--color-text-tertiary); }
     }
   }
 }
@@ -1577,7 +1566,7 @@ dialog.dnd5e2.application {
           left: 10px;
           font-size: var(--font-size-10);
           font-weight: bold;
-          color: var(--color-text-dark-5);
+          color: var(--color-text-secondary);
         }
       }
 
@@ -1618,6 +1607,7 @@ dialog.dnd5e2.application {
     align-items: center;
     justify-content: center;
     font-size: var(--font-size-18);
+    --icon-fill: var(--activity-icon-color);
 
     > div {
       display: flex;
@@ -1643,7 +1633,7 @@ dialog.dnd5e2.application {
       grid-template-columns: 30px 1fr;
       span { text-align: start; }
       &[aria-pressed="true"] {
-        background: color-mix(in oklab, var(--dnd5e-background-card), var(--dnd5e-color-gold) 10%);
+        --button-background-color: var(--button-toggle-depressed-color);
         box-shadow: inset 0 0 8px var(--dnd5e-shadow-15);
       }
     }
@@ -1737,7 +1727,7 @@ dialog.dnd5e2.application {
           font-size: var(--font-size-10);
           font-weight: bold;
           top: 3px;
-          color: var(--color-text-dark-5);
+          color: var(--color-text-secondary);
         }
       }
     }
@@ -1779,8 +1769,8 @@ dialog.dnd5e2.application {
     grid-template-columns: [icon] 16px [name] 2fr [proficiency] 1fr;
     .trait-list li {
       dnd5e-icon, i {
-        --icon-fill: var(--color-text-light-6);
-        color: var(--color-text-light-6);
+        --icon-fill: var(--damage-icon-color);
+        color: var(--damage-icon-color);
       }
 
       > i {
@@ -1819,7 +1809,7 @@ dialog.dnd5e2.application {
     text-align: center;
     background: none;
 
-    &:hover, &:focus { box-shadow: none; }
+    &:hover, &:focus, &:focus-visible { box-shadow: none; }
   }
 
   ol {
@@ -1848,7 +1838,7 @@ dialog.dnd5e2.application {
     }
 
     dnd5e-icon, img {
-      --icon-fill: var(--color-text-dark-primary);
+      --icon-fill: var(--color-text-primary);
       --icon-size: 32px;
       width: 32px;
       height: 32px;
@@ -1897,7 +1887,6 @@ dialog.dnd5e2.application {
     --icon-size: 18px;
 
     .condition {
-      --border-style: 1px dashed var(--color-border-light-1);
       display: flex;
       gap: .5rem;
       padding: .5625rem .75rem;
@@ -1906,17 +1895,17 @@ dialog.dnd5e2.application {
       border: none;
       border-bottom: var(--border-style);
       border-right: var(--border-style);
-      color: var(--color-text-light-6);
+      color: var(--color-text-tertiary);
       background: unset;
-      --icon-fill: var(--color-text-light-6);
+      --icon-fill: var(--color-text-tertiary);
       --icon-stroke: var(--dnd5e-color-card);
 
       &.active {
-        color: var(--color-text-dark-primary);
-        --icon-fill: var(--color-text-dark-primary);
+        color: var(--color-text-primary);
+        --icon-fill: var(--color-text-primary);
       }
 
-      &:hover { background: var(--dnd5e-color-parchment); }
+      &:hover { background: var(--dnd5e-condition-hover); }
       .icon { display: grid; }
 
       > i {
@@ -1977,66 +1966,6 @@ dialog.dnd5e2.application {
   }
 }
 
-/* ---------------------------------- */
-/*  Context Menus                     */
-/* ---------------------------------- */
-
-#context-menu.dnd5e2 {
-  position: fixed;
-  z-index: var(--z-index-tooltip);
-  background: var(--dnd5e-background-card);
-  border-radius: 3px;
-  box-shadow: 0 3px 6px var(--dnd5e-shadow-45);
-  font-family: var(--dnd5e-font-roboto);
-  font-size: var(--font-size-13);
-  border: none;
-  color: var(--color-text-dark-primary);
-  width: max-content;
-  min-width: 145px;
-
-  .context-item {
-    border: none;
-    padding: 0 .75rem;
-    margin: 0;
-    cursor: var(--cursor-pointer);
-    display: flex;
-    align-items: baseline;
-    line-height: 32px;
-    gap: 5px;
-    transition: all 250ms ease;
-
-    &:hover {
-      color: var(--color-text-dark-primary);
-      text-shadow: none;
-      background: var(--dnd5e-color-parchment);
-      border: none;
-    }
-
-    i {
-      font-size: var(--font-size-11);
-      color: var(--color-text-dark-5);
-      margin: 0;
-    }
-
-    dnd5e-icon {
-      --icon-fill: var(--color-text-dark-5);
-      margin-right: 5px;
-    }
-  }
-
-  .context-items > .context-item {
-    &:first-child { border-radius: 3px 3px 0 0; }
-    &:last-child { border-radius: 0 0 3px 3px; }
-  }
-
-  .context-group { border: none; }
-
-  .context-group:first-child > ol > .context-item:first-child { border-radius: 3px 3px 0 0; }
-  .context-group:last-child > ol > .context-item:last-child { border-radius: 0 0 3px 3px; }
-
-  [data-group-id]:has(li)::before { border-block-start: 1px solid var(--color-border-light-1); }
-}
-
 /* Disable pointer events on the target while the context menu is open as a workaround for core tooltip logic not
    accommodating fixed position context menus */
 
@@ -2047,17 +1976,24 @@ dialog.dnd5e2.application {
 /* ---------------------------------- */
 
 #prosemirror-dropdown {
-  --dropdown-background: var(--dnd5e-background-card);
+  --dropdown-background: var(--dnd5e-color-card);
   --dropdown-border: transparent;
   --color-control-hover: var(--dnd5e-color-parchment);
 
   ul { box-shadow: 0 3px 6px var(--dnd5e-shadow-45); }
-  li.divider { border-color: var(--color-border-light-1); }
+  li.divider { border-color: #ddd; }
+
+  &.theme-dark {
+    --dropdown-background: var(--dnd5e-color-blue-gray-2);
+    --dropdown-border: transparent;
+    --color-control-hover: var(--dnd5e-color-blue-gray-3);
+    color: var(--color-text-light-6);
+
+    li.divider { border-color: var(--dnd5e-color-blue-gray-3); }
+  }
 }
 
 :is(.dnd5e2, .dnd5e2-journal) .prosemirror menu {
-  --color-hover-bg: var(--dnd5e-background-card);
-
   .pm-dropdown {
     background: none;
     &:hover { background: var(--color-hover-bg); }
@@ -2085,24 +2021,6 @@ dialog.dnd5e2.application {
       color: var(--color-form-label-hover);
     }
   }
-}
-
-/* ---------------------------------- */
-/*  Window Handles                    */
-/* ---------------------------------- */
-
-:is(.dnd5e2, .dnd5e2-journal) .window-resizable-handle {
-  border-radius: 0;
-  border: none;
-  color: var(--dnd5e-color-black);
-  overflow: hidden;
-  width: 11px;
-  height: 11px;
-  cursor: nwse-resize;
-  opacity: .7;
-  background: transparent url('ui/resize-handle.webp') no-repeat center / contain;
-
-  > i { display: none; }
 }
 
 /* ---------------------------------- */

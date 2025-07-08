@@ -1,6 +1,5 @@
 import ItemSheet5e from "../item/item-sheet.mjs";
 import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
-import ContextMenu5e from "../context-menu.mjs";
 
 /**
  * @import { FilterState5e } from "../components/item-list-controls.mjs";
@@ -92,17 +91,6 @@ export default function PrimarySheetMixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    _attachFrameListeners() {
-      new ContextMenu5e(this.element, '.header-control[data-action="toggleControls"]', [], {
-        eventName: "click", fixed: true, jQuery: false,
-        onOpen: () => ui.context.menuItems = Array.from(this._getHeaderControlContextEntries())
-      });
-      super._attachFrameListeners();
-    }
-
-    /* -------------------------------------------- */
-
-    /** @inheritDoc */
     _configureRenderOptions(options) {
       super._configureRenderOptions(options);
 
@@ -122,33 +110,6 @@ export default function PrimarySheetMixin(Base) {
         if ( tab?.condition && !tab.condition(this.document) ) delete parts[key];
       }
       return parts;
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Translate header controls to context menu entries.
-     * @returns {Generator<ContextMenuEntry>}
-     * @yields {ContextMenuEntry}
-     * @protected
-     */
-    *_getHeaderControlContextEntries() {
-      for ( const { icon, label, action, onClick } of this._headerControlButtons() ) {
-        let handler = this.options.actions[action];
-        if ( typeof handler === "object" ) {
-          if ( handler.buttons && !handler.buttons.includes(0) ) continue;
-          handler = handler.handler;
-        }
-        yield {
-          name: label,
-          icon: `<i class="${icon}" inert></i>`,
-          callback: li => {
-            if ( onClick ) onClick(window.event);
-            else if ( handler ) handler.call(this, window.event, li);
-            else this._onClickAction(window.event, li);
-          }
-        };
-      }
     }
 
     /* -------------------------------------------- */
@@ -362,7 +323,7 @@ export default function PrimarySheetMixin(Base) {
       element.dataset.tooltip = `
         <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
       `;
-      element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip";
+      element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light";
       element.dataset.tooltipDirection ??= "LEFT";
     }
 

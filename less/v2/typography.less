@@ -7,14 +7,14 @@
   a.roll-link-group .roll-link,
   a.roll-link-group.roll-link,
   :is(.roll-link-group, .reference-link) a {
-    --content-link-text-color: var(--color-text-dark-primary);
+    --content-link-text-color: var(--color-text-primary);
     background: transparent;
     border: none;
     text-decoration: underline currentcolor;
     text-underline-offset: 2px;
 
     > i {
-      color: var(--color-text-dark-primary);
+      color: var(--color-text-primary);
       opacity: 0.75;
       transition: opacity 250ms ease;
       margin-right: 0.25em;
@@ -45,7 +45,7 @@
       font-weight: bold;
       margin: 0 4px 0 2px;
       font-size: var(--font-size-10);
-      color: var(--color-text-light-6);
+      color: var(--color-text-tertiary);
     }
   }
 
@@ -57,6 +57,7 @@
     background: url("../../icons/svg/d20-black.svg") no-repeat center / contain;
     vertical-align: middle;
     font-size: inherit;
+    filter: var(--dnd5e-roll-icon-filter, none);
 
     &::before { content: unset; }
   }
@@ -103,7 +104,7 @@
 
   /* Tables */
   table {
-    --table-background-color: var(--dnd5e-color-card);
+    background: var(--table-background-color);
     border-color: var(--dnd5e-color-table-border);
     border-radius: 0;
     margin: 0.5em 0;
@@ -121,8 +122,8 @@
     thead {
       background: linear-gradient(
         to right,
-        var(--dnd5e-color-hd-1),
-        var(--dnd5e-color-hd-2)
+        var(--dnd5e-color-table-header-1),
+        var(--dnd5e-color-table-header-2)
       );
       color: var(--color-text-light-0);
       text-align: center;
@@ -193,7 +194,7 @@
 
     .statblock-title,
     .statblock-actions-title {
-      border-block-end: 1px solid currentcolor;
+      border-block-end: 1px solid var(--dnd5e-statblock-title-border);
       font-variant: small-caps;
       break-after: avoid;
     }
@@ -246,6 +247,7 @@
         dt {
           color: var(--dnd5e-statblock-text-header);
           text-shadow: none;
+          font-weight: bold;
         }
       }
       .abilities {
@@ -333,6 +335,8 @@
 
   :is(.journal-entry-content, .journal-page-content, .editor-content, .card-content, .item-summary) {
     font-family: var(--dnd5e-font-roboto-condensed);
+
+    h1, h2, h3, h4, h5, h6 { color: var(--color-text-emphatic); }
 
     h1, h2, h3, h4 {
       margin: 0 0 .5rem;

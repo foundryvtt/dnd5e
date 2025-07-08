@@ -4,11 +4,19 @@
 export default class JournalEntrySheet5e extends foundry.applications.sheets.journal.JournalEntrySheet {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["dnd5e2-journal"]
+    classes: ["dnd5e2", "dnd5e2-journal", "titlebar"]
   };
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _createContextMenu(handler, selector, options={}) {
+    options.fixed = true;
+    return super._createContextMenu(handler, selector, options);
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -38,7 +46,7 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
    */
   static onRenderJournalPageSheet(page, element) {
     if ( page.document.parent?.sheet instanceof JournalEntrySheet5e ) {
-      element.classList.add("dnd5e2", "dnd5e2-journal", "titlebar");
+      element.classList.add("dnd5e2", "dnd5e2-journal", "titlebar", "dialog-lg");
     }
   }
 

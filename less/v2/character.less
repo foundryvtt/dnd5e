@@ -6,13 +6,8 @@
   --dnd5e-sheet-header-height: 170px;
   --dnd5e-sheet-header-right-width: 280px;
   --dnd5e-sheet-sidebar-width: 230px;
-  background: var(--dnd5e-color-parchment);
   box-shadow: none;
 
-  &.minimized {
-    background: url("../../ui/denim075.png");
-    box-shadow: 0 0 20px var(--color-shadow-dark);
-  }
   &:not(.minimized, .minimizing, .maximizing) {
     min-width: 800px;
     min-height: 700px;
@@ -26,7 +21,16 @@
     overflow: visible;
   }
 
-  .window-header .header-control { border-color: transparent; }
+  &:not(.minimized) .window-content::before {
+    content: var(--dnd5e-character-background-content, none);
+    background: var(--dnd5e-character-background-image) no-repeat top center / cover;
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 300px;
+    border-radius: 5px 5px 0 0;
+    opacity: .5;
+    mask-image: linear-gradient(to bottom, black, transparent);
+  }
 
   /* ---------------------------------- */
   /*  Sheet Header                      */
@@ -34,12 +38,13 @@
 
   .sheet-header {
     flex: 0 0 var(--dnd5e-sheet-header-height);
-    background: transparent url("ui/official/banner-character.jpg") no-repeat center / cover;
+    background: var(--dnd5e-character-header-image) no-repeat center / cover;
     border: none;
     border-radius: 5px 5px 0 0;
     display: grid;
     grid-template-columns: 1fr var(--dnd5e-sheet-header-right-width);
     align-items: center;
+    position: relative;
 
     .document-name {
       color: var(--color-text-light-0);
@@ -218,8 +223,7 @@
     flex: 1;
     border-radius: 5px;
     position: relative;
-    background: url("ui/texture1.webp") no-repeat top center / auto 770px,
-      url("ui/texture2.webp") no-repeat bottom center / auto 704px;
+    background: var(--dnd5e-character-body-image);
 
     /* Main Content */
     .main-content {
@@ -260,7 +264,7 @@
         border-radius: 3px;
         border: none;
         position: relative;
-        background: var(--dnd5e-color-iron-gray);
+        background: var(--dnd5e-background-alt-2);
         transform-style: preserve-3d;
         transform: translateZ(1px);
         z-index: 1;
@@ -271,7 +275,7 @@
         .card-tab {
           display: grid;
           place-content: center;
-          background: var(--dnd5e-color-iron-gray);
+          background: var(--dnd5e-background-alt-2);
           cursor: var(--cursor-pointer);
           box-shadow: 0 0 6px var(--color-shadow-dark);
 
@@ -547,7 +551,7 @@
             display: flex;
             align-items: center;
             gap: .5rem;
-            border-top: 1px solid var(--color-border-light-1);
+            border-top: var(--dnd5e-border-separator-faint);
             padding-top: .375rem;
             margin-top: .375rem;
 
@@ -565,13 +569,14 @@
                 }
               }
 
-              &.suppressed { color: var(--color-text-light-6); }
+              &.suppressed { color: var(--color-text-tertiary); }
             }
           }
 
           .drop {
-            border: 2px dashed black;
+            border: 2px dashed var(--drop-region-border-color);
             border-radius: 4px;
+            color: var(--drop-region-text-color);
             padding: .625rem .5rem;
             font-size: var(--font-size-13);
             opacity: .25;
@@ -629,7 +634,7 @@
                   text-align: center;
                 }
 
-                .separator, .max { color: var(--color-text-light-6); }
+                .separator, .max { color: var(--color-text-tertiary); }
 
                 input {
                   background: none;
@@ -649,7 +654,7 @@
                 }
               }
 
-              &.disabled i, .sign, .passive { color: var(--color-text-light-6); }
+              &.disabled i, .sign, .passive { color: var(--color-text-tertiary); }
 
               .passive {
                 font-size: var(--font-size-13);
@@ -659,7 +664,7 @@
 
             .secondary {
               text-align: center;
-              color: var(--color-text-dark-5);
+              color: var(--color-text-secondary);
               font-size: var(--font-size-10);
             }
           }
@@ -715,7 +720,7 @@
 
           .config-button {
             font-size: var(--font-size-11);
-            color: var(--color-text-light-6);
+            color: var(--color-text-tertiary);
             width: 20px;
             text-align: center;
           }
@@ -726,12 +731,12 @@
         position: absolute;
         inset: .875rem 1.6875rem auto auto;
         font-size: var(--font-size-11);
-        color: var(--color-text-light-6);
+        color: var(--color-text-tertiary);
       }
 
       .ability {
         font-size: var(--font-size-12);
-        color: var(--color-text-dark-5);
+        color: var(--dnd5e-ability-color);
         width: 30px;
         padding-top: 2px;
       }
@@ -754,14 +759,14 @@
         font-weight: bold;
         text-align: center;
 
-        > .sign { color: var(--color-text-light-6); }
+        > .sign { color: var(--color-text-tertiary); }
       }
 
       .passive {
         width: 20px;
         height: 11px;
         font-size: var(--font-size-11);
-        color: var(--color-text-dark-5);
+        color: var(--color-text-secondary);
         text-align: center;
       }
     }
@@ -823,6 +828,8 @@
       position: relative;
       transition: box-shadow 250ms ease;
 
+      .name .title { color: var(--color-text-title); }
+
       &.race, &.background {
         cursor: var(--cursor-pointer);
         &:hover:not(:has(a:hover)) { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
@@ -835,13 +842,12 @@
       }
 
       &.texture {
-        --background-color: color-mix(in oklab, var(--dnd5e-color-parchment), white);
-        background-blend-mode: color-burn;
+        background-blend-mode: var(--pill-background-blend-mode);
 
-        &.type { background: url("ui/official/pill-texture-type.webp") no-repeat right, var(--background-color); }
-        &.race { background: url("ui/official/pill-texture-race.webp") no-repeat right, var(--background-color); }
+        &.type { background: url("ui/official/pill-texture-type.webp") no-repeat right, var(--pill-background-color); }
+        &.race { background: url("ui/official/pill-texture-race.webp") no-repeat right, var(--pill-background-color); }
         &.background {
-          background: url("ui/official/pill-texture-background.webp") no-repeat right, var(--background-color);
+          background: url("ui/official/pill-texture-background.webp") no-repeat right, var(--pill-background-color);
         }
 
         &::before {
@@ -861,7 +867,7 @@
 
       > .creature-type { background: transparent no-repeat center / cover; }
 
-      [data-action] { color: var(--color-text-dark-5); }
+      [data-action] { color: var(--color-text-secondary); }
 
       .actor-size {
         width: fit-content;
@@ -944,7 +950,7 @@
         border: var(--dnd5e-border-gold);
         border-radius: 4px;
         box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-        background-color: var(--dnd5e-color-light-gray);
+        background-color: var(--dnd5e-background-alt-1);
 
         a {
           display: flex;
@@ -1034,7 +1040,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: transparent url("ui/ability-score-tab.svg") no-repeat top center / contain;
+        background: transparent var(--dnd5e-ability-tab) no-repeat top center / contain;
         z-index: -1;
       }
 
@@ -1053,46 +1059,29 @@
         }
       }
 
-      .sign { color: var(--color-text-light-6); }
-
-      .label {
-        text-transform: uppercase;
-        font-size: var(--font-size-11);
-        color: var(--dnd5e-color-gold);
-      }
-
-      .mod {
-        font-weight: bold;
-        color: var(--dnd5e-color-black);
-        font-size: var(--font-size-16);
-        padding: 3px 0;
-
-        > button {
-          color: inherit;
-          font-size: inherit;
-          font-weight: inherit;
-        }
+      .mod > button {
+        color: inherit;
+        font-size: inherit;
+        font-weight: inherit;
       }
 
       .score {
         width: 50px;
         height: 23px;
         padding: 4px;
-        text-align: center;
-        font-size: var(--font-size-13);
         color: var(--dnd5e-color-gold);
         background: var(--dnd5e-color-black);
         border-radius: 3px;
         margin-top: -2px;
 
         > input {
+          --input-background-color: transparent;
           padding: 4px;
           color: var(--dnd5e-color-gold);
           width: 50px;
           height: 23px;
           border-radius: 3px;
           border: 1px solid transparent;
-          text-align: center;
 
           &:hover, &:focus {
             border: 1px solid var(--dnd5e-color-gold);
@@ -1158,7 +1147,7 @@
 
       .prepared .value {
         &.max-preparations { font-size: var(--font-size-14); }
-        .separator, .max { color: var(--color-text-light-6) }
+        .separator, .max { color: var(--color-text-tertiary) }
       }
     }
   }
@@ -1226,7 +1215,7 @@
 
         .value {
           min-height: 1em;
-          border-bottom: 1px solid var(--color-text-dark-primary);
+          border-bottom: 1px solid var(--color-text-primary);
         }
       }
     }
@@ -1311,7 +1300,7 @@
         border: none;
         box-shadow: none;
         font-style: italic;
-        color: var(--color-text-dark-5);
+        color: var(--color-text-secondary);
       }
     }
 
@@ -1322,7 +1311,7 @@
       height: 100%;
       max-width: unset;
       object-fit: cover;
-      background: var(--dnd5e-color-iron-gray);
+      background: var(--dnd5e-background-alt-2);
     }
 
     /* Facilities */
@@ -1415,7 +1404,7 @@
           height: 100%;
           display: block;
           background: url("icons/svg/facilities/maintain.svg") no-repeat center / cover;
-          filter: invert(1);
+          filter: var(--dnd5e-slot-filter);
           opacity: .15;
         }
       }
@@ -1488,7 +1477,7 @@
           height: 100%;
           object-fit: cover;
           object-position: top;
-          background-color: var(--dnd5e-color-light-gray);
+          background-color: var(--dnd5e-background-alt-1);
           margin: 0;
         }
       }

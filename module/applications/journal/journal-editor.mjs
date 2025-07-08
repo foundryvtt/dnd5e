@@ -15,7 +15,7 @@ export default class JournalEditor extends DocumentSheet5e {
 
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["journal-editor", "dnd5e2-journal"],
+    classes: ["journal-editor", "dnd5e2-journal", "titlebar", "dialog-lg"],
     window: {
       resizable: true
     },

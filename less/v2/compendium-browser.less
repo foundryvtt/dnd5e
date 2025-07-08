@@ -1,19 +1,28 @@
 .dnd5e2.compendium-browser {
   --icon-size: 32px;
   border: none;
-  background: none;
 
   .window-resize-handle {
     inset: auto 0 0 auto;
     z-index: 1;
   }
 
+  .mode-toggle {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    display: flex;
+    align-items: end;
+    gap: 4px;
+    z-index: 1;
+    font-family: var(--dnd5e-font-roboto-condensed);
+  }
+
   &:not(.minimized) .window-content {
     --header-size: calc(var(--header-height) + var(--font-size-24) + 6px);
   }
+
   .window-content {
-    background: url("ui/texture1.webp") no-repeat top center / auto 770px,
-      var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
     display: grid;
     grid-template-areas:
       "sidebar results"
@@ -37,29 +46,13 @@
     }
 
     h2 {
-      color: var(--color-text-dark-primary);
+      color: var(--color-text-primary);
       text-shadow: none;
       font-size: var(--font-size-24);
       font-family: var(--dnd5e-font-roboto-slab);
       font-weight: bold;
       text-align: center;
       margin: 0 0 10px 0;
-    }
-
-    .mode-toggle {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      z-index: 1;
-      font-family: var(--dnd5e-font-roboto-condensed);
-
-      slide-toggle {
-        --slide-toggle-track-color-unchecked: var(--dnd5e-background-25);
-        --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
-      }
     }
   }
 
@@ -159,6 +152,8 @@
     .filter {
       > label { line-height: 1; }
 
+      .filter-header label > span { color: var(--filter-header-label-color); }
+
       &.filter-set:has(> .collapsible-content > .wrapper:empty) { display: none; }
 
       &.filter-set .filter-choice, &.filter-boolean > label { cursor: var(--cursor-pointer); }
@@ -183,11 +178,12 @@
         > label {
           font-weight: normal;
           font-size: var(--font-size-11);
+          color: var(--filter-range-label-color);
         }
 
         .sep {
           --icon-size: 16px;
-          --icon-fill: var(--color-text-light-6);
+          --icon-fill: var(--color-text-secondary);
           height: var(--form-field-height);
           display: inline-grid;
           place-content: center;
@@ -224,7 +220,7 @@
       text-align: center;
       padding: 20px;
       font-size: 18px;
-      color: var(--color-text-light-6);
+      color: var(--color-text-tertiary);
       > i { height: 16px; }
     }
 
@@ -332,7 +328,7 @@
       .value {
         font-family: var(--dnd5e-font-roboto);
         font-weight: bold;
-        color: var(--color-text-dark-5);
+        color: var(--color-text-secondary);
         font-size: var(--font-size-12);
       }
     }

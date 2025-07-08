@@ -45,15 +45,13 @@
 
   button {
     --button-focus-outline-color: none;
-    --button-hover-background-color: var(--dnd5e-background-card);
-    --button-text-color: var(--color-text-dark-primary);
-    --button-hover-text-color: var(--color-text-dark-primary);
-    --button-hover-border-color: var(--dnd5e-color-gold);
-    background: var(--dnd5e-background-card);
+    --button-text-color: var(--color-text-primary);
+    --button-hover-text-color: var(--color-text-primary);
+    --button-background-color: var(--dnd5e-background-card);
+    --button-hover-background-color: var(--button-background-color);
     font-size: var(--font-size-13);
     text-transform: uppercase;
     padding: 3px;
-    border: 1px solid var(--color-border-light-2);
     box-shadow: 0 0 8px var(--dnd5e-shadow-15);
     display: flex;
     align-items: center;
@@ -61,18 +59,17 @@
     gap: .25rem;
     min-height: unset;
 
-    &:not(.fas, .far, .fa-solid, .fa-regular, .fa-light, .fa-duotone, .fa-thin) {
+    &:not(.icon) {
       font-family: var(--dnd5e-font-roboto);
       font-weight: bold;
     }
     &:disabled {
+      --button-text-color: var(--color-text-inactive);
+      --button-hover-text-color: var(--color-text-inactive);
       cursor: var(--cursor-default);
-      color: var(--color-text-dark-inactive);
     }
     &:hover:not(:disabled), &:focus {
-      background: var(--dnd5e-background-card);
       box-shadow: 0 0 5px var(--color-shadow-primary);
-      color: var(--color-text-dark-primary);
     }
   }
 
@@ -142,11 +139,6 @@
       width: 100%;
 
       &:focus { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
-      &::placeholder {
-        --input-placeholder-color: var(--color-text-light-6);
-        opacity: unset;
-        color: var(--input-placeholder-color);
-      }
     }
 
     input[type="number"] {
@@ -161,7 +153,7 @@
     span {
       text-align: center;
       font-size: var(--font-size-10);
-      color: var(--color-text-dark-5);
+      color: var(--color-text-secondary);
     }
 
     input { text-align: center; }
@@ -180,7 +172,6 @@
   /* Fieldset */
 
   fieldset {
-    --color-fieldset-border: var(--color-border-light-tertiary);
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -192,7 +183,7 @@
       text-transform: uppercase;
       font-weight: bold;
       font-size: var(--font-size-11);
-      color: var(--color-text-dark-5);
+      color: var(--fieldset-legend-color);
       padding: 0 6px;
 
       > label.checkbox {
@@ -208,7 +199,7 @@
       padding: 6px;
       font-style: italic;
       text-align: center;
-      color: var(--color-text-dark-5);
+      color: var(--color-text-secondary);
     }
 
     &.card {
@@ -237,12 +228,14 @@
         font-size: var(--font-size-12);
         font-weight: bold;
       }
+
+
     }
 
     &:disabled {
       .form-group label, .hint {
-        --color-form-hint: var(--color-text-light-6);
-        color: var(--color-text-light-6);
+        --color-form-hint: var(--color-text-tertiary);
+        color: var(--color-text-tertiary);
       }
     }
   }
@@ -288,7 +281,7 @@
             content: "\f059";
             font-family: var(--font-awesome);
             font-weight: normal;
-            color: var(--color-text-dark-5);
+            color: var(--hint-icon-color);
           }
         }
       }
@@ -376,11 +369,18 @@
 
       & + .full-width { margin-top: 2px; }
     }
+
+    &.card {
+      background: var(--separated-list-item-background-color);
+      border-color: var(--separated-list-item-border-color);
+    }
   }
+
+  .form-footer button { --button-size: var(--input-height); }
 
   /* Hints */
   :is(.form-group, fieldset) .hint {
-    --color-form-hint: var(--color-text-dark-5);
+    --color-form-hint: var(--color-text-secondary);
     --color-form-hint-hover: var(--color-form-hint);
     font-size: var(--font-size-11);
     margin: 4px 0 0;
@@ -388,21 +388,27 @@
 
   /* Form Fields */
   textarea, select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
-    --input-border-color: transparent;
+    --input-box-shadow: none;
+    --input-text-color: var(--color-text-primary);
     transition: all 250ms ease, block-size, inline-size;
     line-height: normal;
     outline: none;
 
     &:focus { outline: none; }
-    &:focus-visible, &:hover {
-      --input-border-color: var(--dnd5e-color-gold);
-      box-shadow: 0 0 6px var(--dnd5e-color-gold);
+    &:enabled {
+      &:focus-visible, &:hover {
+        border-color: var(--input-hover-border-color);
+        box-shadow: 0 0 6px var(--dnd5e-color-gold);
+      }
+    }
+
+    &:disabled {
+      background: var(--input-disabled-background-color);
     }
   }
   select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
     --input-height: var(--form-field-height);
     padding: 0 6px;
-    background: var(--input-background-color);
   }
   textarea {
     border: 1px solid var(--input-border-color);
@@ -412,17 +418,10 @@
   }
 
   :is(.form-group, fieldset) :is(select, input):not([type="range"]) {
-    --input-text-color: var(--color-text-dark-primary);
-    color: var(--input-text-color);
-    border: 1px solid var(--input-border-color);
     font-size: var(--font-size-11);
   }
 
-  input::placeholder, textarea::placeholder {
-    --input-placeholder-color: var(--color-text-light-6);
-    opacity: unset;
-    color: var(--input-placeholder-color);
-  }
+  input::placeholder, textarea::placeholder { opacity: unset; }
 
   input.full-width {
     flex: 0 0 100%;
@@ -465,7 +464,7 @@
   .form-fields.range-fields {
     .sep {
       --icon-size: 16px;
-      --icon-fill: var(--color-text-light-6);
+      --icon-fill: var(--color-text-tertiary);
     }
   }
 
@@ -476,10 +475,12 @@
       --range-track-border-color: transparent;
       border: none;
 
-      &:hover, &:focus-visible {
-        --range-track-border-color: var(--dnd5e-color-gold);
-        &::-moz-range-track { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
-        &::-webkit-slider-runnable-track { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+      &:not([disabled]) {
+        &:hover, &:focus-visible {
+          --range-track-border-color: var(--dnd5e-color-gold);
+          &::-moz-range-track { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+          &::-webkit-slider-runnable-track { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+        }
       }
 
       &::-moz-range-thumb { transition: all 250ms ease; }
@@ -505,11 +506,9 @@
   }
 
   /* Checkboxes */
-  dnd5e-checkbox {
-    &[disabled]:not([checked]) {
-      --checkbox-border-color: var(--color-text-light-6);
-      --checkbox-empty-color: transparent;
-    }
+  input[type=checkbox] {
+    --checkbox-background-color: var(--dnd5e-color-gold);
+    --checkbox-checked-color: var(--dnd5e-color-gold);
   }
 
   /* Radio Buttons */
@@ -562,7 +561,7 @@
     padding: 0;
     width: unset;
     display: inline-block;
-    color: var(--color-text-dark-5);
+    color: var(--color-text-secondary);
 
     &:focus-visible, &:hover {
       box-shadow: none;
@@ -570,6 +569,9 @@
       background: none;
     }
   }
+
+  button.config-button { color: var(--color-text-secondary); }
+  button.control-button { color: var(--control-button-text-color); }
 
   .form-fields > .control-button, .form-fields .field-group > .control-button {
     &:not(.middle) { align-self: end; }
@@ -584,7 +586,7 @@
 
     .pip {
       --pip-size: 16px;
-      background: var(--dnd5e-color-light-gray);
+      background: var(--dnd5e-background-alt-1);
       border: 2px solid var(--dnd5e-color-gold);
       border-radius: 100%;
       width: var(--pip-size);
@@ -600,7 +602,7 @@
 
       &:not(:disabled):is(:hover, :focus) {
         box-shadow: 0 0 6px var(--dnd5e-color-gold);
-        background: var(--dnd5e-color-light-gray);
+        background: var(--dnd5e-background-alt-1);
         &.filled { background: var(--dnd5e-color-gold); }
       }
     }
@@ -610,8 +612,7 @@
 /* App V2 Standard Form */
 .dnd5e2 .standard-form,
 .dnd5e2.standard-form {
-  --color-fieldset-border: var(--color-border-light-tertiary);
-  --color-form-label: var(--color-text-dark-primary);
+  --color-form-label: var(--color-text-primary);
   --color-form-label-hover: var(--color-form-label);
   --input-height: 26px;
   gap: 0;
@@ -631,8 +632,6 @@
   fieldset { padding: revert; }
   .hint { line-height: 16px; }
 
-  :is(select, input):not([type="range"]) { --input-text-color: var(--color-text-dark-primary); }
-
   :where(button:not(.icon, .fa-solid, .fas)) {
     height: unset;
     &:not(.copy-button, .unbutton, .reveal) { line-height: 28px; }
@@ -640,7 +639,7 @@
 
   :is(document-tags, multi-select) .tags.input-element-tags .tag {
     padding: 1px 4px;
-    color: var(--color-text-dark-primary);
+    color: var(--color-text-primary);
     height: unset;
     opacity: unset;
   }
