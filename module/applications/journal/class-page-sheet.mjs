@@ -95,9 +95,6 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       { value: "2014", label: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.Style.Legacy") }
     ];
 
-    context.title = Object.fromEntries(
-      Array.fromRange(4, 1).map(n => [`level${n}`, context.source.title.level + n - 1])
-    );
     context.type = this.type;
 
     const linked = await fromUuid(this.document.system.item);
