@@ -931,8 +931,6 @@
     }
 
     code-mirror {
-      &:has(.cm-content:focus)::after { content: unset; }
-
       .cm-scroller {
         scrollbar-width: thin;
         scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
@@ -949,6 +947,12 @@
       }
     }
   }
+
+  /* -------------------------------------------- */
+  /*  CodeMirror                                  */
+  /* -------------------------------------------- */
+
+  code-mirror:focus-within::after { content: unset; }
 
   /* ---------------------------------- */
   /*  Bastions                          */
