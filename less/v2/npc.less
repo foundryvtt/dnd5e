@@ -27,7 +27,7 @@
   /*  Outer Window                      */
   /* ---------------------------------- */
 
-  .window-header .header-elements {
+  &:not(.minimized) .window-header .header-elements {
     flex: none;
     color: var(--color-text-primary);
     font-family: var(--dnd5e-font-roboto-condensed);
@@ -58,7 +58,7 @@
     }
   }
 
-  .window-content {
+  &:not(.minimized).window-content {
     display: flex;
     flex-direction: column;
     padding-block: 4px 0;
