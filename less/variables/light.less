@@ -138,7 +138,13 @@
     --checkbox-empty-color: transparent;
   }
 
-  .prosemirror menu { --color-hover-bg: var(--dnd5e-color-card); }
+  .prosemirror menu {
+    --color-hover-bg: var(--dnd5e-color-card);
+    --menu-background: rgb(0 0 0 / 10%);
+    --button-text-color: var(--color-text-primary);
+    --color-form-label-hover: var(--color-dark-1);
+    button.active { --color-form-label-hover: var(--color-dark-1); }
+  }
 
   /* Journals */
   --dnd5e-journal-content-background: var(--dnd5e-background-texture-paper-red);
