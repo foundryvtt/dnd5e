@@ -50,7 +50,7 @@
             <input type="hidden" name="startingEquipment.{{ id }}.sort" value="{{ entry.sort }}" data-dtype="Number">
         </li>
         {{/each}}
-        <li class="dnd5e2" data-depth="{{ depth }}">
+        <li data-depth="{{ depth }}">
             <button type="button" data-action="add-entry">
                 <i class="fa-solid fa-plus" inert></i>
                 {{ localize "DND5E.StartingEquipment.Action.AddEntry" }}

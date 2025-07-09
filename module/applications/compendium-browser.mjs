@@ -78,7 +78,7 @@ export default class CompendiumBrowser extends Application5e {
   /** @override */
   static DEFAULT_OPTIONS = {
     id: "compendium-browser-{id}",
-    classes: ["compendium-browser", "vertical-tabs"],
+    classes: ["compendium-browser", "vertical-tabs", "dialog-lg"],
     tag: "form",
     window: {
       title: "DND5E.CompendiumBrowser.Title",
@@ -418,6 +418,14 @@ export default class CompendiumBrowser extends Application5e {
       const tab = this.constructor.TABS.find(t => t.tab === this.options.tab);
       if ( tab ) foundry.utils.setProperty(options, "dnd5e.browser.types", tab.types);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onFirstRender(context, options) {
+    await super._onFirstRender(context, options);
+    this.element.append(this.element.querySelector('[data-application-part="header"]'));
   }
 
   /* -------------------------------------------- */

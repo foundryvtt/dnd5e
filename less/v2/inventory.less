@@ -25,8 +25,8 @@
       font-weight: bold;
 
       .fa-sun, .separator { color: var(--dnd5e-color-gold); }
-      .config-button { color: var(--color-text-light-6); }
-      .max { color: var(--color-text-dark-5); }
+      .config-button { color: var(--color-text-tertiary); }
+      .max { color: var(--color-text-secondary); }
 
       input.max {
         width: 22px;
@@ -62,7 +62,7 @@
         border: none;
         background: none;
         --icon-size: 13px;
-        --icon-fill: var(--dnd5e-color-light-gray);
+        --icon-fill: var(--dnd5e-background-alt-1);
         box-shadow: none;
         filter: drop-shadow(0 0 1px var(--dnd5e-color-black));
 
@@ -97,6 +97,7 @@
 
   /* Sections / Categories */
   .items-section {
+    border: var(--dnd5e-inventory-border);
 
     .items-header, .item {
       &[hidden] { display: none; }
@@ -132,12 +133,11 @@
         .name { flex: 1; }
 
         .tags {
-          opacity: .25;
+          opacity: var(--tag-opacity);
           font-size: var(--font-size-14);
           display: flex;
           align-items: center;
           gap: .25rem;
-          --icon-fill: var(--dnd5e-color-black);
         }
 
         > .concentration {
@@ -172,7 +172,7 @@
 
       .item-detail.empty::after {
         content: "–";
-        color: var(--color-text-light-6);
+        color: var(--color-text-tertiary);
         font-weight: normal;
       }
 
@@ -186,7 +186,7 @@
 
         &.activity-image {
           --icon-size: 24px;
-          --icon-fill: var(--color-text-dark-primary);
+          --icon-fill: var(--activity-icon-color);
           width: 24px;
           height: 24px;
           min-width: 24px;
@@ -202,7 +202,7 @@
 
         i {
           font-size: var(--font-size-9);
-          color: var(--color-text-light-6);
+          color: var(--color-text-tertiary);
         }
       }
 
@@ -244,7 +244,7 @@
         .max, input { width: 20px; }
         .separator { color: var(--dnd5e-color-gold); }
         .max {
-          color: var(--color-text-dark-5);
+          color: var(--color-text-secondary);
           text-align: start;
         }
         input { text-align: end; }
@@ -285,7 +285,7 @@
 
         &.item-detail { font-weight: bold; }
         .value { font-size: var(--font-size-14); }
-        .sign { color: var(--color-text-light-6); }
+        .sign { color: var(--color-text-tertiary); }
 
         .ability {
           text-transform: uppercase;
@@ -303,7 +303,7 @@
         .integer { font-weight: bold; }
 
         .unit {
-          color: var(--color-text-light-6);
+          color: var(--color-text-tertiary);
           font-size: var(--font-size-12);
         }
       }
@@ -316,7 +316,7 @@
 
         dnd5e-icon {
           font-size: var(--font-size-14);
-          --icon-fill: var(--color-text-dark-5);
+          --icon-fill: var(--color-text-secondary);
         }
 
         .row {
@@ -337,9 +337,7 @@
         width: 150px;
         border: none;
 
-        &.item-detail {
-          color: var(--color-text-dark-5);
-        }
+        &.item-detail { color: var(--color-text-secondary); }
       }
 
       /* Item Controls */
@@ -348,21 +346,21 @@
         align-items: stretch;
         justify-content: center;
         gap: 4px;
-        color: var(--color-text-light-6);
+        color: var(--item-control-color);
         padding: 0 38px 0 4px;
         position: relative;
 
-        > .control-button {
-          color: var(--color-text-light-6);
-        }
+        > .control-button { color: var(--item-control-color); }
 
         .item-control {
           display: flex;
           align-items: center;
           font-size: var(--font-size-11);
-          color: var(--color-text-light-6);
+          color: var(--item-control-color);
+
+          &.always-interactive { color: var(--item-control-interactive-color); }
+          &.active { color: var(--item-control-active-color); }
         }
-        .item-control.active { color: var(--dnd5e-color-black); }
 
         &.item-detail .radio-button {
           background: none;
@@ -388,7 +386,7 @@
       .item-header.effect-controls {
         padding-right: .75rem;
         justify-content: end;
-        color: var(--color-text-light-0);
+        color: var(--item-control-header-color);
         align-items: center;
       }
 
@@ -397,7 +395,7 @@
         font-family: var(--dnd5e-font-roboto);
         font-size: var(--font-size-11);
         padding: 1px 8px 8px;
-        background: var(--dnd5e-color-parchment);
+        background: var(--item-summary-background);
         .item-properties { padding-top: 7px; }
         > * + .item-properties { padding-top: 0; }
       }
@@ -434,10 +432,10 @@
 
     .activities .activity-row {
       position: relative;
-      border-top: 1px dotted #ddd;
+      border-top: var(--activity-row-border);
       padding-left: 20px;
 
-      &:last-child { border-bottom: 1px dotted #ddd; }
+      &:last-child { border-bottom: var(--activity-row-border); }
 
       &::before {
         content: "┗";
@@ -445,21 +443,21 @@
         inset: 9px auto auto 5px;
         font-size: var(--font-size-12);
         font-weight: bold;
-        color: var(--color-text-light-6);
+        color: var(--activity-row-indent-color);
       }
     }
   }
 
   .effect-name .duration, &.effect-tooltip .duration {
     padding: .25rem;
-    border: 1px dashed var(--color-border-light-1);
+    border: var(--dnd5e-border-dashed-faint);
     border-radius: 4px;
     font-family: var(--dnd5e-font-roboto-condensed);
     text-transform: uppercase;
     font-size: var(--font-size-11);
-    color: var(--color-text-dark-5);
+    color: var(--color-text-secondary);
 
-    .separator, .least-significant { color: var(--color-text-light-6); }
+    .separator, .least-significant { color: var(--color-text-tertiary); }
   }
 }
 
@@ -504,9 +502,9 @@
   }
 
   button {
+    --button-text-color: var(--color-text-secondary);
     border-radius: 4px;
     width: 30px;
-    color: var(--color-text-dark-5);
   }
 }
 
@@ -522,9 +520,13 @@
 /*  Edit Mode                         */
 /* ---------------------------------- */
 
-.dnd5e2 .editable .inventory-element {
-  .middle .attunement { padding-right: 0; }
-  .items-section .pips { display: none; }
+.dnd5e2 {
+  &.editable, .editable {
+    .inventory-element .items-section {
+      .pips { display: none; }
+      .item-controls .item-control { color: var(--item-control-interactive-color); }
+    }
+  }
 }
 
 /* ---------------------------------- */
@@ -573,11 +575,6 @@
     margin-bottom: .25rem;
 
     span:has(+ slide-toggle:not([checked])), slide-toggle[checked] + span { font-weight: bold; }
-
-    slide-toggle {
-      --slide-toggle-track-color-unchecked: var(--dnd5e-color-olive);
-      --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
-    }
   }
 
   .destinations {
@@ -593,6 +590,7 @@
       padding: 4px;
       align-items: center;
       cursor: var(--cursor-pointer);
+      --icon-fill: var(--color-text-primary);
     }
     input {
       flex: unset;
@@ -605,7 +603,7 @@
       grid-column: 1 / -1;
       text-align: center;
       text-wrap: pretty;
-      color: var(--color-text-dark-5);
+      color: var(--color-text-secondary);
     }
     .no-destinations {
       font-weight: bold;

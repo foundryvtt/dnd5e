@@ -1,3 +1,5 @@
+import ContextMenu5e from "../context-menu.mjs";
+
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
@@ -68,6 +70,33 @@ export default function ApplicationV2Mixin(Base) {
       if ( options.isFirstRender && this.hasFrame ) {
         options.window ||= {};
         options.window.subtitle ||= this.subtitle;
+      }
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Translate header controls to context menu entries.
+     * @returns {Generator<ContextMenuEntry>}
+     * @yields {ContextMenuEntry}
+     * @protected
+     */
+    *_getHeaderControlContextEntries() {
+      for ( const { icon, label, action, onClick } of this._headerControlButtons() ) {
+        let handler = this.options.actions[action];
+        if ( typeof handler === "object" ) {
+          if ( handler.buttons && !handler.buttons.includes(0) ) continue;
+          handler = handler.handler;
+        }
+        yield {
+          name: label,
+          icon: `<i class="${icon}" inert></i>`,
+          callback: li => {
+            if ( onClick ) onClick(window.event);
+            else if ( handler ) handler.call(this, window.event, li);
+            else this._onClickAction(window.event, li);
+          }
+        };
       }
     }
 
@@ -208,6 +237,10 @@ export default function ApplicationV2Mixin(Base) {
 
     /** @inheritDoc */
     _attachFrameListeners() {
+      new ContextMenu5e(this.element, '.header-control[data-action="toggleControls"]', [], {
+        eventName: "click", fixed: true, jQuery: false,
+        onOpen: () => ui.context.menuItems = Array.from(this._getHeaderControlContextEntries())
+      });
       super._attachFrameListeners();
       this.element.addEventListener("plugins", this._onConfigurePlugins.bind(this));
     }

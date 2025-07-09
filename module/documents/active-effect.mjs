@@ -853,7 +853,7 @@ export default class ActiveEffect5e extends ActiveEffect {
           properties: properties.map(p => game.i18n.localize(p))
         }
       ),
-      classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip"]
+      classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip", "themed", "theme-light"]
     };
   }
 

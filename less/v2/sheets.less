@@ -14,8 +14,6 @@
 
     /* Edit Mode Toggle */
     > slide-toggle {
-      --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
-      --slide-toggle-track-color-unchecked: var(--dnd5e-color-light-gray);
       flex: none;
       margin-inline-end: auto;
 
@@ -25,15 +23,13 @@
         &::before {
           content: "\f0ad";
           font-family: var(--font-awesome);
-          color: var(--dnd5e-color-light-gray);
+          color: var(--dnd5e-background-alt-1);
           font-weight: bold;
           font-size: var(--font-size-9);
         }
       }
 
-      &[checked] .slide-toggle-thumb::before {
-        color: var(--dnd5e-color-gold);
-      }
+      &[checked] .slide-toggle-thumb::before { color: var(--dnd5e-color-gold); }
     }
   }
   &.minimized slide-toggle { display: none; }
@@ -51,9 +47,9 @@
     display: flex;
 
     input, select {
-      --input-placeholder-color: var(--color-text-light-6);
+      --input-placeholder-color: var(--color-text-tertiary);
       --input-height: var(--form-field-height, 26px);
-      background: rgb(0 0 0 / 45%);
+      --input-background-color: rgb(0 0 0 / 45%);
       border: 1px solid transparent;
       transition: all 250ms ease;
       line-height: unset;

@@ -41,7 +41,7 @@ export function renderSettings(html) {
   section.classList.add("dnd5e2", "sidebar-info");
   section.innerHTML = `
     <h4 class="divider">${game.i18n.localize("WORLD.FIELDS.system.label")}</h4>
-    <div class="dnd5e2 system-badge">
+    <div class="system-badge">
       <img src="systems/dnd5e/ui/official/dnd-badge-32.webp" data-tooltip="${dnd5e.title}" alt="${dnd5e.title}">
       <span class="system-info">${dnd5e.version}</span>
     </div>

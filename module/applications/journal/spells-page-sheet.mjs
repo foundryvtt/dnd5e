@@ -13,7 +13,7 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
   static DEFAULT_OPTIONS = {
     classes: ["spells"],
     position: {
-      width: 700
+      width: 750
     },
     displayAsTable: false,
     embedRendering: false,
@@ -124,10 +124,6 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
     context.CONFIG = CONFIG.DND5E;
     context.system = context.document.system;
     context.embedRendering = this.options.embedRendering ?? false;
-
-    context.title = Object.fromEntries(Array.fromRange(4, 1).map(n => {
-      return [`level${n}`, context.source.title.level + n - 1];
-    }));
 
     context.description = await TextEditor.enrichHTML(context.system.description.value, { relativeTo: this.document });
     if ( context.description === "<p></p>" ) context.description = "";

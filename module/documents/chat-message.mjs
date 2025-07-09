@@ -177,7 +177,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _displayChatActionButtons(html) {
-    const chatCard = html.querySelector(".dnd5e.chat-card, .dnd5e2.chat-card");
+    const chatCard = html.querySelector(".chat-card");
     if ( chatCard ) {
       const flavor = html.querySelector(".flavor-text");
       if ( flavor?.innerText === html.querySelector(".item-name")?.innerText ) flavor?.remove();
@@ -267,6 +267,9 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _enrichChatCard(html) {
+    html.querySelectorAll(".dnd5e2").forEach(el => el.classList.remove("dnd5e2")); // Legacy
+    html.classList.add("dnd5e2");
+
     // Header matter
     const actor = this.getAssociatedActor();
 
@@ -438,7 +441,6 @@ export default class ChatMessage5e extends ChatMessage {
     const targets = this.getFlag("dnd5e", "targets");
     if ( !targets?.length ) return;
     const tray = document.createElement("div");
-    tray.classList.add("dnd5e2");
     tray.innerHTML = `
       <div class="card-tray targets-tray collapsible collapsed">
         <label class="roboto-upper">
@@ -447,7 +449,7 @@ export default class ChatMessage5e extends ChatMessage {
           <i class="fas fa-caret-down" inert></i>
         </label>
         <div class="collapsible-content">
-          <ul class="dnd5e2 unlist evaluation wrapper"></ul>
+          <ul class="unlist evaluation wrapper"></ul>
         </div>
       </div>
     `;
@@ -554,7 +556,6 @@ export default class ChatMessage5e extends ChatMessage {
 
     if ( game.user.isGM ) {
       const damageApplication = document.createElement("damage-application");
-      damageApplication.classList.add("dnd5e2");
       damageApplication.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({
         value: Math.max(0, roll.total),
         type: roll.options.type,
@@ -614,7 +615,6 @@ export default class ChatMessage5e extends ChatMessage {
 
     // Create the enchantment tray
     const enchantmentApplication = document.createElement("enchantment-application");
-    enchantmentApplication.classList.add("dnd5e2");
     const afterElement = html.querySelector(".card-footer");
     if ( afterElement ) afterElement.insertAdjacentElement("beforebegin", enchantmentApplication);
     else html.querySelector(".chat-card")?.append(enchantmentApplication);
@@ -678,7 +678,6 @@ export default class ChatMessage5e extends ChatMessage {
     if ( !effects?.length ) return;
 
     const effectApplication = document.createElement("effect-application");
-    effectApplication.classList.add("dnd5e2");
     effectApplication.effects = effects;
     html.querySelector(".message-content").appendChild(effectApplication);
   }
