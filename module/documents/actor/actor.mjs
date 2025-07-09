@@ -1104,11 +1104,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
+    const alternate = type === "skill" ? this.system.tools?.[config.tool] : this.system.skills?.[config.skill];
     const abilityId = relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
     const ability = this.system.abilities?.[abilityId];
     const hostActor = this.isPolymorphed && this.flags?.dnd5e?.transformOptions?.mergeSkills && (type === "skill")
       ? game.actors.get(this.flags.dnd5e?.originalActor) : null;
     const buildConfig = this._buildSkillToolConfig.bind(this, type, hostActor);
+    const doubleProf = !!relevant?.prof.hasProficiency && !!alternate?.prof.hasProficiency;
 
     const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
       `abilities.${abilityId}.check.roll.mode`,
@@ -1116,7 +1118,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     ]);
 
     const rollConfig = foundry.utils.mergeObject({
-      advantage, disadvantage,
+      advantage: advantage || doubleProf, disadvantage,
       ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig?.ability),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")
@@ -1193,10 +1195,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _buildSkillToolConfig(type, hostActor, process, config, formData, index) {
     const relevant = type === "skill" ? this.system.skills?.[process.skill] : this.system.tools?.[process.tool];
+    const alternate = type === "skill" ? this.system.tools?.[process.tool] : this.system.skills?.[process.skill];
     const rollData = this.getRollData();
     const abilityId = formData?.get("ability") ?? process.ability;
     const ability = this.system.abilities?.[abilityId];
-    let prof = this.system.calculateAbilityCheckProficiency(relevant?.effectValue ?? 0, abilityId);
+    let prof = this.system.calculateAbilityCheckProficiency(
+      Math.max(relevant?.effectValue ?? 0, alternate?.effectValue ?? 0), abilityId
+    );
     const originalProf = hostActor?.system.calculateAbilityCheckProficiency?.(
       hostActor?.system.skills[process.skill]?.value, abilityId);
     if ( originalProf?.multiplier > prof.multiplier ) prof = originalProf;
