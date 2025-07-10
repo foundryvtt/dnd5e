@@ -15,6 +15,7 @@ export default class SpellcastingField extends SchemaField {
   constructor(fields={}, options={}) {
     fields = {
       progression: new StringField({
+        required: true,
         initial: "none",
         blank: false,
         label: "DND5E.SpellProgression"
