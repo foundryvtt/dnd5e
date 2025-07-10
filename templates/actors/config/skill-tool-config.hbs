@@ -25,8 +25,6 @@
     {{!-- Rolls --}}
     <fieldset class="card">
         <legend>{{ localize "DND5E.ROLL.Section" label=label }}</legend>
-        {{ formField fields.roll.fields.mode name=(concat prefix "roll.mode") value=data.roll.mode
-                     options=advantageModeOptions localize=true rootId=partId }}
         <div class="form-group split-group">
             <label>{{ localize "DND5E.ROLL.Range.Label" }}</label>
             <div class="form-fields">
@@ -38,6 +36,8 @@
                              hint=false classes="label-top" rootId=partId }}
             </div>
         </div>
+        {{ formField fields.roll.fields.mode name=(concat prefix "roll.mode") value=data.roll.mode
+                     options=advantageModeOptions localize=true rootId=partId }}
     </fieldset>
 
     {{!-- Global Skill Bonuses --}}

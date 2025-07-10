@@ -30,8 +30,6 @@
     {{!-- Check Rolls --}}
     <fieldset class="card">
         <legend>{{ localize "DND5E.ROLL.Section" label=checkLabel }}</legend>
-        {{ formField fields.check.fields.roll.fields.mode name=(concat prefix "check.roll.mode")
-                     value=data.check.roll.mode options=advantageModeOptions localize=true rootId=partId }}
         <div class="form-group split-group">
             <label>{{ localize "DND5E.ROLL.Range.Label" }}</label>
             <div class="form-fields">
@@ -43,13 +41,13 @@
                              label=(localize "DND5E.Maximum") hint=false classes="label-top" rootId=partId }}
             </div>
         </div>
+        {{ formField fields.check.fields.roll.fields.mode name=(concat prefix "check.roll.mode")
+                     value=data.check.roll.mode options=advantageModeOptions localize=true rootId=partId }}
     </fieldset>
 
     {{!-- Save Rolls --}}
     <fieldset class="card">
         <legend>{{ localize "DND5E.ROLL.Section" label=saveLabel }}</legend>
-        {{ formField fields.save.fields.roll.fields.mode name=(concat prefix "save.roll.mode")
-                     value=data.save.roll.mode options=advantageModeOptions localize=true rootId=partId }}
         <div class="form-group split-group">
             <label>{{ localize "DND5E.ROLL.Range.Label" }}</label>
             <div class="form-fields">
@@ -61,6 +59,8 @@
                              label=(localize "DND5E.Maximum") hint=false classes="label-top" rootId=partId }}
             </div>
         </div>
+        {{ formField fields.save.fields.roll.fields.mode name=(concat prefix "save.roll.mode")
+                     value=data.save.roll.mode options=advantageModeOptions localize=true rootId=partId }}
     </fieldset>
 
     {{!-- Global Bonuses --}}
