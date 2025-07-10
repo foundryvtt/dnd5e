@@ -128,6 +128,11 @@ export default class JournalSpellListPageSheet extends JournalEntryPageHandlebar
     context.description = await TextEditor.enrichHTML(context.system.description.value, { relativeTo: this.document });
     if ( context.description === "<p></p>" ) context.description = "";
 
+    context.title = {
+      ...context.title,
+      ...Object.fromEntries(Array.fromRange(4, 1).map(n => [`level${n}`, context.title.level + n - 1]))
+    };
+
     context.GROUPING_MODES = this.constructor.GROUPING_MODES;
     context.grouping = this.grouping || this.options.grouping || context.system.grouping;
 
