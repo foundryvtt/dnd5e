@@ -4,4 +4,8 @@
                  placeholder=(localize "None") rootId=partId }}
     {{ formField configuration.fields.max name="configuration.max" value=configuration.data.max
                  rootId=partId }}
+    {{#if advancement.isEpicBoon}}
+    {{ formField configuration.fields.recommendation name="configuration.recommendation"
+                 value=configuration.data.recommendation rootId=partId }}
+    {{/if}}
 </fieldset>
