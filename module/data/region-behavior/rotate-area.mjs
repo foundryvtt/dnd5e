@@ -160,7 +160,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     // Prepare update data for each rotated document type
     const updates = {
       tiles: Array.from(this.tiles.ids).map(t => calculateRotationUpdate(this.scene.tiles.get(t))).filter(_ => _),
-      tokens: Array.from(this.region.tokens).map(({ object: token }) => calculateRotationUpdate(token)),
+      tokens: Array.from(this.region.tokens).map(t => calculateRotationUpdate(t)),
       lights: Array.from(this.lights.ids).map(l => calculateRotationUpdate(this.scene.lights.get(l))).filter(_ => _),
       regions: [this.region.id, ...this.regions.ids].map(r => {
         const region = this.scene.regions.get(r);
@@ -239,7 +239,14 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
    * @returns {Point}
    */
   static #placeableCenter(doc) {
-    if ( doc instanceof foundry.abstract.Document ) doc = doc.object;
+    if ( doc instanceof TokenDocument ) return doc.getCenterPoint();
+    if ( doc instanceof foundry.abstract.Document ) {
+      if ( doc.object ) doc = doc.object;
+      else {
+        const size = this.#placeableSize(doc);
+        return { x: doc.x + (size.width / 2), y: doc.y + (size.height / 2) };
+      }
+    }
     if ( "center" in doc ) return doc.center;
     return { x: doc.x, y: doc.y };
   }
@@ -267,7 +274,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
   static #placeableSize(doc) {
     if ( !(doc instanceof foundry.abstract.Document) ) doc = doc.document;
     if ( doc instanceof TileDocument ) return { width: doc.width, height: doc.height };
-    if ( doc instanceof TokenDocument ) return { width: doc.object.w, height: doc.object.h };
+    if ( doc instanceof TokenDocument ) return doc.getSize();
     else return { width: 0, height: 0 };
   }
 
@@ -363,7 +370,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
    */
   async updateRotatateArea(changes, options) {
     const animationDetails = foundry.utils.getProperty(options, "dnd5e.rotateArea");
-    if ( animationDetails ) {
+    if ( animationDetails && (canvas.scene === this.scene) ) {
       const { angle, duration, pivot } = animationDetails;
       this.#animateRotation(angle, pivot, duration);
     }
