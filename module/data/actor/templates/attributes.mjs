@@ -171,6 +171,9 @@ export default class AttributesFields {
       }, { label: "DND5E.Concentration" }),
       loyalty: new SchemaField({
         value: new NumberField({ integer: true, min: 0, max: 20, label: "DND5E.Loyalty" })
+      }),
+      piety: new SchemaField({
+        value: new NumberField({ integer: true, min: 1, nullable: false })
       })
     };
   }

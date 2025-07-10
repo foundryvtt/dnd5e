@@ -26,6 +26,8 @@
  * @property {number} concentration.limit         The amount of items this actor can concentrate on.
  * @property {object} loyalty
  * @property {number} loyalty.value               The creature's loyalty score.
+ * @property {object} piety
+ * @property {number} piety.value                 The creature's piety score.
  */
 
 /**
