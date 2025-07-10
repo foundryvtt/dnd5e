@@ -4511,6 +4511,16 @@ DND5E.ENCOUNTER_DIFFICULTY = [
 DND5E.epicBoonInterval = 30000;
 
 /* -------------------------------------------- */
+/*   Piety                                      */
+/* -------------------------------------------- */
+
+/**
+ * @enum {string}
+ */
+DND5E.deities = {};
+preLocalize("deities");
+
+/* -------------------------------------------- */
 
 /**
  * Trait configuration information.
