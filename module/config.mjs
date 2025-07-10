@@ -1971,6 +1971,9 @@ DND5E.featureTypes = {
       epicBoon: "DND5E.Feature.Feat.EpicBoon"
     }
   },
+  pietyTrait: {
+    label: "DND5E.Feature.PietyTrait"
+  },
   supernaturalGift: {
     label: "DND5E.Feature.SupernaturalGift.Label",
     subtypes: {
