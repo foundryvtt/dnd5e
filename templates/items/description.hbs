@@ -1,5 +1,5 @@
 <section class="description tab {{ tab.cssClass }} {{#if singleDescription}}single-description{{/if}}
-         {{~#if (or editingDescription (and singleDescription editable))}}editing{{/if}}"
+         {{~#if (or editingDescription (and singleDescription editable))}} editing{{/if}}"
          data-tab="{{ tab.id }}" data-group="{{ tab.group }}"
          {{~#if singleDescription}} data-target="system.description.value"{{/if}}>
     {{#if editingDescription}}
