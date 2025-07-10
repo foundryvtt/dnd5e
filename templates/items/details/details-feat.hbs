@@ -30,8 +30,11 @@
 <fieldset>
     <legend>{{ localize "DND5E.PIETY.Label" }}</legend>
 
-    {{!-- THRESHOLD --}}
+    {{!-- Threshold --}}
     {{ formField fields.piety.fields.threshold value=source.piety.threshold }}
+
+    {{!-- Deity --}}
+    {{ formField fields.piety.fields.deity value=source.piety.deity choices=CONFIG.deities }}
 </fieldset>
 {{/if}}
 

@@ -50,6 +50,7 @@ export default class FeatData extends ItemDataModel.mixin(
         period: new StringField()
       }),
       piety: new SchemaField({
+        deity: new StringField({ required: true }),
         threshold: new NumberField({ integer: true, nullable: false, initial: 3, min: 1 })
       }),
       prerequisites: new SchemaField({
