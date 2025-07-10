@@ -178,8 +178,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
       lights: Array.from(this.lights.ids).map(l => calculateRotationUpdate(this.scene.lights.get(l))).filter(_ => _),
       regions: [this.region.id, ...this.regions.ids].map(r => {
         const region = this.scene.regions.get(r);
-        return region
-          ? RotateAreaRegionBehaviorType.#rotateRegionShapes(this.scene.regions.get(r), angle, radians, pivot) : null;
+        return region ? RotateAreaRegionBehaviorType.#rotateRegionShapes(region, angle, radians, pivot) : null;
       }).filter(_ => _),
       sounds: Array.from(this.sounds.ids).map(l => calculateRotationUpdate(this.scene.sounds.get(l))).filter(_ => _)
     };
@@ -196,8 +195,8 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     });
 
     // Handle tile and token updates immediately to allow animation
-    await canvas.scene.updateEmbeddedDocuments("Tile", updates.tiles, { dnd5e: { animate: { ...animateFlags } } });
-    await canvas.scene.updateEmbeddedDocuments("Token", updates.tokens, {
+    await this.scene.updateEmbeddedDocuments("Tile", updates.tiles, { dnd5e: { animate: { ...animateFlags } } });
+    await this.scene.updateEmbeddedDocuments("Token", updates.tokens, {
       animate: false,
       dnd5e: { animate: { ...animateFlags } },
       movement: updates.tokens.reduce((obj, { _id }) => {
@@ -211,10 +210,10 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
 
     // Delay light, sound, and wall updates until the halfway point of the animation
     setTimeout(() => {
-      canvas.scene.updateEmbeddedDocuments("AmbientLight", updates.lights);
-      canvas.scene.updateEmbeddedDocuments("AmbientSound", updates.sounds);
-      canvas.scene.updateEmbeddedDocuments("Region", updates.regions);
-      canvas.scene.updateEmbeddedDocuments("Wall", updates.walls);
+      this.scene.updateEmbeddedDocuments("AmbientLight", updates.lights);
+      this.scene.updateEmbeddedDocuments("AmbientSound", updates.sounds);
+      this.scene.updateEmbeddedDocuments("Region", updates.regions);
+      this.scene.updateEmbeddedDocuments("Wall", updates.walls);
     }, duration / 2);
     // TODO: See how performant it is to animate wall movement
 
