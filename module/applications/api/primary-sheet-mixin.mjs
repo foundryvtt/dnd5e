@@ -390,6 +390,18 @@ export default function PrimarySheetMixin(Base) {
 
     /* -------------------------------------------- */
 
+    /** @override */
+    _onRevealSecret(event) {
+      if ( super._onRevealSecret(event) ) return;
+      const target = event.target.closest("[data-target]")?.dataset.target;
+      if ( !target ) return;
+      const content = foundry.utils.getProperty(this.document, target);
+      const modified = event.target.toggleRevealed(content);
+      this.document.update({ [target]: modified });
+    }
+
+    /* -------------------------------------------- */
+
     /**
      * Handle opening a document sheet.
      * @this {PrimarySheet5e}
