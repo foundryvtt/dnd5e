@@ -80,6 +80,8 @@ export default class AttributesFields {
    * @property {number} concentration.limit         The amount of items this actor can concentrate on.
    * @property {object} loyalty
    * @property {number} loyalty.value               The creature's loyalty score.
+   * @property {object} piety
+   * @property {number} piety.value                 The creature's piety score.
    */
   static get creature() {
     return {
@@ -102,6 +104,9 @@ export default class AttributesFields {
       }, { label: "DND5E.Concentration" }),
       loyalty: new SchemaField({
         value: new NumberField({ integer: true, min: 0, max: 20, label: "DND5E.Loyalty" })
+      }),
+      piety: new SchemaField({
+        value: new NumberField({ integer: true, min: 1, nullable: false })
       })
     };
   }
