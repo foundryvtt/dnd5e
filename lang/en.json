@@ -3121,6 +3121,11 @@
           }
         }
       },
+      "regions": {
+        "ids": {
+          "label": "Regions"
+        }
+      },
       "sounds": {
         "ids": {
           "label": "Ambient Sounds"
@@ -3154,6 +3159,9 @@
     "SpeedMode": {
       "Fixed": "Fixed (total rotation time)",
       "Variable": "Variable (time to rotate 90˚)"
+    },
+    "Warning": {
+      "RecursiveRegion": "Cannot rotate same region that contains the behavior."
     }
   }
 },

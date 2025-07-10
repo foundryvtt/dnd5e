@@ -100,4 +100,17 @@ export default class RotateAreaConfig extends foundry.applications.sheets.Region
     const position = Number(target.closest("[data-index]")?.dataset.index);
     this.document.system.rotateTo({ position });
   }
+
+  /* -------------------------------------------- */
+  /*  Form Handling                               */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _prepareSubmitData(event, form, formData, updateData) {
+    const submitData = super._prepareSubmitData(event, form, formData, updateData);
+    if ( submitData.system?.regions?.ids?.includes(this.document.parent.id) ) {
+      throw new Error(game.i18n.localize("DND5E.REGIONBEHAVIORS.ROTATEAREA.Warning.RecursiveRegion"));
+    }
+    return submitData;
+  }
 }
