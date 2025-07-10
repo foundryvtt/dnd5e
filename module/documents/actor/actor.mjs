@@ -16,7 +16,6 @@ import SystemDocumentMixin from "../mixins/document.mjs";
 import Proficiency from "./proficiency.mjs";
 import SelectChoices from "./select-choices.mjs";
 import * as Trait from "./trait.mjs";
-import BasicRoll from "../../dice/basic-roll.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -1187,7 +1186,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
-    rollConfig.rolls = [BasicRoll.mergeConfigs({
+    rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
       options: {
         maximum: Math.min(relevant?.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity),
         minimum: Math.max(relevant?.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
@@ -1266,7 +1265,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       hostActor?.system.skills[process.skill]?.value, abilityId);
     if ( originalProf?.multiplier > prof.multiplier ) prof = originalProf;
 
-    let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+    let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: prof?.hasProficiency ? prof.term : null,
       [`${config[type]}Bonus`]: relevant?.bonuses?.check,
@@ -1379,7 +1378,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const abilityConfig = CONFIG.DND5E.abilities[config.ability];
 
     const rollData = this.getRollData();
-    let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+    let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: ability?.[`${type}Prof`].hasProficiency ? ability[`${type}Prof`].term : null,
       [`${config.ability}${type.capitalize()}Bonus`]: ability?.bonuses[type],
@@ -1398,7 +1397,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), name, "d20Test"];
     rollConfig.rolls = [
-      BasicRoll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
+      CONFIG.Dice.D20Roll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
     ].concat(config.rolls ?? []);
     rollConfig.rolls.forEach(({ parts, data }) => this.addRollExhaustion(parts, data));
     rollConfig.subject = this;
@@ -1488,7 +1487,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const rollConfig = foundry.utils.mergeObject({ target: 10 }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "deathSave"];
     rollConfig.rolls = [
-      BasicRoll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
+      CONFIG.Dice.D20Roll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
     ].concat(config.rolls ?? []);
 
     const dialogConfig = foundry.utils.deepClone(dialog);
@@ -1608,34 +1607,26 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const conc = this.system.attributes?.concentration;
     if ( !conc ) throw new Error("You may not make a Concentration Saving Throw with this Actor.");
 
-    const abilityId = (conc.ability in CONFIG.DND5E.abilities) ? conc.ability
-      : CONFIG.DND5E.defaultAbilities.concentration;
-    const ability = this.system.abilities?.[abilityId];
-
-    const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
-      `abilities.${abilityId}.save.roll.mode`,
-      "attributes.concentration.roll.mode"
-    ]);
-
     let data = {};
     const parts = [];
     const options = {
-      advantage, disadvantage,
-      maximum: Math.min(conc.roll.max ?? Infinity, ability?.save.roll.max ?? Infinity),
-      minimum: Math.max(conc.roll.min ?? -Infinity, ability?.save.roll.min ?? -Infinity)
+      advantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+      disadvantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+      maximum: conc.roll.max,
+      minimum: conc.roll.min
     };
 
     // Concentration bonus
     if ( conc.bonuses.save ) parts.push(conc.bonuses.save);
 
     const rollConfig = foundry.utils.mergeObject({
-      ability: abilityId,
+      ability: (conc.ability in CONFIG.DND5E.abilities) ? conc.ability : CONFIG.DND5E.defaultAbilities.concentration,
       isConcentration: true,
       target: 10
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "concentration"];
     rollConfig.rolls = [
-      BasicRoll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
+      CONFIG.Dice.D20Roll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
     ].concat(config.rolls ?? []);
 
     const dialogConfig = foundry.utils.mergeObject({
@@ -1709,7 +1700,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const ability = this.system.abilities?.[abilityId];
 
     const rollData = this.getRollData();
-    let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+    let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: init?.mod,
       prof: init.prof.hasProficiency ? init.prof.term : null,
       initiativeBonus: init.bonus,

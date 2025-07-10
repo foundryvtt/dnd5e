@@ -281,4 +281,18 @@ export default class D20Roll extends BasicRoll {
     const { number, faces, ...data } = this.terms[0];
     this.terms[0] = new CONFIG.Dice.D20Die({ ...data, number, faces });
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static mergeOptions(original={}, other={}) {
+    const merged = super.mergeOptions(original, other);
+    merged.advantage = original.advantage || other.advantage;
+    merged.disadvantage = original.disadvantage || other.disadvantage;
+    merged.maximum = Math.min(original.maximum ?? Infinity, other.maximum ?? Infinity);
+    merged.minimum = Math.max(original.minimum ?? -Infinity, other.minimum ?? -Infinity);
+    return merged;
+  }
 }
