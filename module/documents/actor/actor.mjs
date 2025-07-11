@@ -3251,8 +3251,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       if ( Number.isInteger(changes.total) && (changes.total !== 0) ) {
         this._displayTokenEffect(changes);
-        if ( !game.settings.get("dnd5e", "disableConcentration") && (userId === game.userId) && (changes.total < 0)
-          && (options.dnd5e?.concentrationCheck !== false) && (curr.value < curr.effectiveMax) ) {
+        if ( !game.settings.get("dnd5e", "disableConcentration") && (userId === game.userId)
+          && (options.dnd5e?.concentrationCheck !== false)
+          && (changes.total < 0) && ((changes.temp < 0) || (curr.value < curr.effectiveMax)) ) {
           this.challengeConcentration({ dc: this.getConcentrationDC(-changes.total) });
         }
 
