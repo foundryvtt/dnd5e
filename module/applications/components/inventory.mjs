@@ -258,6 +258,7 @@ export default class InventoryElement extends HTMLElement {
 
     for ( const control of this.querySelectorAll(".item-action[data-action]") ) {
       control.addEventListener("click", event => {
+        if ( event.currentTarget.ariaDisabled === "true" ) return;
         void this._onAction(event.currentTarget, event.currentTarget.dataset.action, { event });
       });
     }
