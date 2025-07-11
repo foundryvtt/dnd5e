@@ -26,6 +26,12 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
 
   const migrationData = await getMigrationData();
   await migrateSettings();
+  let hasErrors = false;
+  const logError = (err, type, name) => {
+    err.message = `Failed dnd5e system migration for ${type} ${name}: ${err.message}`;
+    console.error(err);
+    hasErrors = true;
+  };
 
   // Migrate World Actors
   const actors = game.actors.map(a => [a, true])
@@ -53,8 +59,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
         });
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Actor ${actor.name}: ${err.message}`;
-      console.error(err);
+      logError(err, "Actor", actor.name);
     }
     incrementProgress();
   }
@@ -81,8 +86,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
         });
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Item ${item.name}: ${err.message}`;
-      console.error(err);
+      logError(err, "Item", item.name);
     }
     incrementProgress();
   }
@@ -96,8 +100,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
         await m.update(updateData, {enforceTypes: false, render: false});
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Macro ${m.name}: ${err.message}`;
-      console.error(err);
+      logError(err, "Macro", m.name);
     }
     incrementProgress();
   }
@@ -111,8 +114,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
         await table.update(updateData, { enforceTypes: false, render: false });
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for RollTable ${table.name}: ${err.message}`;
-      console.error(err);
+      logError(err, "RollTable", table.name);
     }
     incrementProgress();
   }
@@ -126,8 +128,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
         await s.update(updateData, {enforceTypes: false, render: false});
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Scene ${s.name}: ${err.message}`;
-      console.error(err);
+      logError(err, "Scene", s.name);
     }
 
     // Migrate ActorDeltas individually in order to avoid issues with ActorDelta bulk updates.
@@ -159,8 +160,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
           });
         }
       } catch(err) {
-        err.message = `Failed dnd5e system migration for ActorDelta [${token.id}]: ${err.message}`;
-        console.error(err);
+        logError(err, "ActorDelta", `[${token.id}]`);
       }
       incrementProgress();
     }
@@ -175,6 +175,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
 
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
+  progress.element?.classList.add(hasErrors ? "warning" : "success");
   progress.update({ message: "MIGRATION.5eComplete", format: { version }, pct: 1 });
 }
 
