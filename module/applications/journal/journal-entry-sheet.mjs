@@ -69,7 +69,7 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
         descriptor.number = numbering.number;
         adjustment += numbering.adjustment ?? 0;
       }
-      else page.number += adjustment;
+      else descriptor.number += adjustment;
     }
   }
 
