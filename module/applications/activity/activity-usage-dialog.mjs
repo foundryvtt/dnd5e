@@ -1,4 +1,4 @@
-import { filteredKeys, formatNumber, simplifyBonus } from "../../utils.mjs";
+import { filteredKeys, formatNumber, getPluralLocalizationKey, simplifyBonus } from "../../utils.mjs";
 import Dialog5e from "../api/dialog.mjs";
 
 const { BooleanField, NumberField, StringField } = foundry.data.fields;
@@ -243,7 +243,6 @@ export default class ActivityUsageDialog extends Dialog5e {
       .find(t => (t.type === "attribute") && (t.target === "resources.legact.value"));
     if ( (this.activity.activation.type === "legendary") && this.actor.system.resources?.legact
       && this._shouldDisplay("consume.action") && !containsLegendaryConsumption ) {
-      const pr = new Intl.PluralRules(game.i18n.lang);
       const value = (this.config.consume !== false) && (this.config.consume?.action !== false);
       const warn = (this.actor.system.resources.legact.value < this.activity.activation.value) && value;
       context.fields.push({
@@ -253,11 +252,15 @@ export default class ActivityUsageDialog extends Dialog5e {
           }),
           hint: game.i18n.format("DND5E.CONSUMPTION.Type.Action.PromptHint", {
             available: game.i18n.format(
-              `DND5E.ACTIVATION.Type.Legendary.Counted.${pr.select(this.actor.system.resources.legact.value)}`,
+              getPluralLocalizationKey(this.actor.system.resources.legact.value, pr =>
+                `DND5E.ACTIVATION.Type.Legendary.Counted.${pr}`
+              ),
               { number: `<strong>${formatNumber(this.actor.system.resources.legact.value)}</strong>` }
             ),
             cost: game.i18n.format(
-              `DND5E.ACTIVATION.Type.Legendary.Counted.${pr.select(this.activity.activation.value)}`,
+              getPluralLocalizationKey(this.activity.activation.value, pr =>
+                `DND5E.ACTIVATION.Type.Legendary.Counted.${pr}`
+              ),
               { number: `<strong>${formatNumber(this.activity.activation.value)}</strong>` }
             )
           })

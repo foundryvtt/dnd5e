@@ -1,5 +1,5 @@
 import Item5e from "../../documents/item.mjs";
-import { formatCR, formatNumber } from "../../utils.mjs";
+import { formatCR, formatNumber, getPluralLocalizationKey } from "../../utils.mjs";
 import Award from "../award.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import ActorSheetMixin from "./deprecated/sheet-mixin.mjs";
@@ -109,13 +109,16 @@ export default class GroupActorSheet extends ActorSheetMixin(foundry.appv1?.shee
    */
   #getSummary(stats) {
     const formatter = game.i18n.getListFormatter({ style: "long", type: "conjunction" });
-    const rule = new Intl.PluralRules(game.i18n.lang);
     const members = [];
     if ( stats.nMembers ) {
-      members.push(`${stats.nMembers} ${game.i18n.localize(`DND5E.Group.Member.${rule.select(stats.nMembers)}`)}`);
+      members.push(game.i18n.format(
+        getPluralLocalizationKey(stats.nMembers, pr => `DND5E.Group.Member.${pr}`), { n: stats.nMembers }
+      ));
     }
     if ( stats.nVehicles ) {
-      members.push(`${stats.nVehicles} ${game.i18n.localize(`DND5E.Group.Vehicle.${rule.select(stats.nVehicles)}`)}`);
+      members.push(game.i18n.format(
+        getPluralLocalizationKey(stats.nVehicles, pr => `DND5E.Group.Vehicle.${pr}`), { n: stats.nVehicles }
+      ));
     }
     if ( !members.length ) return game.i18n.localize("DND5E.GroupSummaryEmpty");
     return game.i18n.format("DND5E.GroupSummary", {members: formatter.format(members)});
