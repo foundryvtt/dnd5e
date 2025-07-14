@@ -322,7 +322,10 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     context.spellProgression = { ...CONFIG.DND5E.spellProgression };
     if ( (game.settings.get("dnd5e", "rulesVersion") === "modern")
       && (this.item.system.spellcasting?.progression !== "artificer") ) delete context.spellProgression.artificer;
-    context.spellProgression = Object.entries(context.spellProgression).map(([value, label]) => ({ value, label }));
+    context.spellProgression = Object.entries(context.spellProgression).map(([value, config]) => {
+      const group = CONFIG.DND5E.spellcasting[config.type]?.label ?? "";
+      return { group, value, label: config.label };
+    });
 
     // Limited Uses
     context.data = { uses: context.source.uses };

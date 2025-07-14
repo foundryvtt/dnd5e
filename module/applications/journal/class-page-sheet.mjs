@@ -292,27 +292,50 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
 
   /**
    * Build out the spell progression data.
-   * @param {Item5e} item  Class item belonging to this journal.
-   * @returns {object}     Prepared spell progression table.
+   * @param {Item5e} item    Class item belonging to this journal.
+   * @returns {object|null}  Prepared spell progression table.
    * @protected
    */
   async _getSpellProgression(item) {
     const spellcasting = foundry.utils.deepClone(item.spellcasting);
     if ( !spellcasting || (spellcasting.progression === "none") ) return null;
 
+    const spellcastingModel = CONFIG.DND5E.spellcasting[spellcasting.type];
     const table = { rows: [] };
 
-    if ( spellcasting.type === "leveled" ) {
-      const spells = {};
-      const maxSpellLevel = CONFIG.DND5E.SPELL_SLOT_TABLE[CONFIG.DND5E.SPELL_SLOT_TABLE.length - 1].length;
-      Array.fromRange(maxSpellLevel, 1).forEach(l => spells[`spell${l}`] = {});
+    if ( spellcastingModel?.isSingleLevel ) {
+      const spellSlotKey = spellcastingModel.getSpellSlotKey();
+      const spells = { [spellSlotKey]: {} };
+
+      table.headers = [[
+        { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots") },
+        { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotLevel") }
+      ]];
+      table.cols = [{class: "spellcasting", span: 2}];
+
+      // Loop through each level, gathering "Spell Slots" & "Slot Level" for each one
+      for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
+        const progression = { [spellSlotKey]: 0 };
+        spellcasting.levels = level;
+        Actor5e.computeClassProgression(progression, item, { spellcasting });
+        Actor5e.prepareSpellcastingSlots(spells, spellcasting.type, progression);
+        table.rows.push(spells[spellSlotKey].max ? [
+          { class: "spell-slots", content: spells[spellSlotKey].max },
+          { class: "slot-level", content: spells[spellSlotKey].level.ordinalString() }
+        ] : null);
+      }
+    } else if ( spellcastingModel?.slots ) {
+      const maxSpellLevel = Object.keys(CONFIG.DND5E.spellLevels).length - 1;
+      const spells = Object.fromEntries(Array.fromRange(maxSpellLevel, 1).map(l => {
+        return [spellcastingModel.getSpellSlotKey(l), {}];
+      }));
 
       let largestSlot;
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1).reverse() ) {
         const progression = { slot: 0 };
         spellcasting.levels = level;
         Actor5e.computeClassProgression(progression, item, { spellcasting });
-        Actor5e.prepareSpellcastingSlots(spells, "leveled", progression);
+        Actor5e.prepareSpellcastingSlots(spells, spellcasting.type, progression);
 
         if ( !largestSlot ) largestSlot = Object.values(spells).reduce((slot, { max, level }) => {
           if ( !max ) return slot;
@@ -337,42 +360,16 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       table.rows.reverse();
     }
 
-    else if ( spellcasting.type === "pact" ) {
-      const spells = { pact: {} };
-
-      table.headers = [[
-        { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots") },
-        { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotLevel") }
-      ]];
-      table.cols = [{class: "spellcasting", span: 2}];
-
-      // Loop through each level, gathering "Spell Slots" & "Slot Level" for each one
-      for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
-        const progression = { pact: 0 };
-        spellcasting.levels = level;
-        Actor5e.computeClassProgression(progression, item, { spellcasting });
-        Actor5e.prepareSpellcastingSlots(spells, "pact", progression);
-        table.rows.push(spells.pact.max ? [
-          { class: "spell-slots", content: spells.pact.max },
-          { class: "slot-level", content: spells.pact.level.ordinalString() }
-        ] : null);
-      }
-    }
-
-    else {
-      /**
-       * A hook event that fires to generate the table for custom spellcasting types.
-       * The actual hook names include the spellcasting type (e.g. `dnd5e.buildPsionicSpellcastingTable`).
-       * @param {object} table                          Table definition being built. *Will be mutated.*
-       * @param {Item5e} item                           Class for which the spellcasting table is being built.
-       * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
-       * @function dnd5e.buildSpellcastingTable
-       * @memberof hookEvents
-       */
-      Hooks.callAll(
-        `dnd5e.build${spellcasting.type.capitalize()}SpellcastingTable`, table, item, spellcasting
-      );
-    }
+    /**
+     * A hook event that fires to generate the table for custom spellcasting types.
+     * The actual hook names include the spellcasting type (e.g. `dnd5e.buildPsionicSpellcastingTable`).
+     * @param {object} table                          Table definition being built. *Will be mutated.*
+     * @param {Item5e} item                           Class for which the spellcasting table is being built.
+     * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
+     * @function dnd5e.buildSpellcastingTable
+     * @memberof hookEvents
+     */
+    Hooks.callAll(`dnd5e.build${spellcasting.type.capitalize()}SpellcastingTable`, table, item, spellcasting);
 
     return table;
   }

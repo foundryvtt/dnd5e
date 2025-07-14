@@ -204,6 +204,9 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClass.Token"
   });
 
+  // Spellcasting
+  dataModels.spellcasting.SpellcastingModel.fromConfig();
+
   // Preload Handlebars helpers & partials
   utils.registerHandlebarsHelpers();
   utils.preloadHandlebarsTemplates();
@@ -231,17 +234,11 @@ function _configureTrackableAttributes() {
     ]
   };
 
-  const altSpells = Object.entries(DND5E.spellPreparationModes).reduce((acc, [k, v]) => {
-    if ( !["prepared", "always"].includes(k) && v.upcast ) acc.push(`spells.${k}`);
-    return acc;
-  }, []);
-
   const creature = {
     bar: [
       ...common.bar,
       "attributes.hp",
-      ...altSpells,
-      ...Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).map(l => `spells.spell${l}`)
+      ..._trackedSpellAttributes()
     ],
     value: [
       ...common.value,
@@ -274,15 +271,26 @@ function _configureTrackableAttributes() {
 /* -------------------------------------------- */
 
 /**
+ * Get all trackable spell slot attributes.
+ * @returns {Set<string>}
+ * @internal
+ */
+function _trackedSpellAttributes() {
+  return Object.entries(DND5E.spellcasting).reduce((acc, [k, v]) => {
+    if ( v.slots ) Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).forEach(l => {
+      acc.add(`spells.${v.getSpellSlotKey(l)}`);
+    });
+    return acc;
+  }, new Set());
+}
+
+/* -------------------------------------------- */
+
+/**
  * Configure which attributes are available for item consumption.
  * @internal
  */
 function _configureConsumableAttributes() {
-  const altSpells = Object.entries(DND5E.spellPreparationModes).reduce((acc, [k, v]) => {
-    if ( !["prepared", "always"].includes(k) && v.upcast ) acc.push(`spells.${k}.value`);
-    return acc;
-  }, []);
-
   CONFIG.DND5E.consumableResources = [
     ...Object.keys(DND5E.abilities).map(ability => `abilities.${ability}.value`),
     "attributes.ac.flat",
@@ -294,8 +302,7 @@ function _configureConsumableAttributes() {
     "details.xp.value",
     "resources.primary.value", "resources.secondary.value", "resources.tertiary.value",
     "resources.legact.value", "resources.legres.value",
-    ...altSpells,
-    ...Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).map(level => `spells.spell${level}.value`)
+    ..._trackedSpellAttributes()
   ];
 }
 

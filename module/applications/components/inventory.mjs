@@ -397,12 +397,13 @@ export default class InventoryElement extends HTMLElement {
       callback: li => this._onAction(li, "toggleCharge"),
       group: "state"
     }, {
-      name: `DND5E.ContextMenuAction${item.system.preparation?.prepared ? "Unprepare" : "Prepare"}`,
+      name: `DND5E.ContextMenuAction${item.system.prepared ? "Unprepare" : "Prepare"}`,
       icon: '<i class="fa-solid fa-sun fa-fw"></i>',
       condition: () => {
-        const isPrepared = ("preparation" in item.system) && (item.system.preparation.mode === "prepared");
+        const isPrepared = CONFIG.DND5E.spellcasting[item.system.method]?.prepares;
+        const isAlways = item.system.prepared === CONFIG.DND5E.spellPreparationStates.always.value;
         const canEdit = item.isOwner && !compendiumLocked;
-        return !item.hasRecharge && isPrepared && canEdit && !item.getFlag("dnd5e", "cachedFor");
+        return !item.hasRecharge && isPrepared && !isAlways && canEdit && !item.getFlag("dnd5e", "cachedFor");
       },
       callback: li => this._onAction(li, "prepare"),
       group: "state"
@@ -459,7 +460,7 @@ export default class InventoryElement extends HTMLElement {
     const { itemId } = target.closest("[data-item-id]")?.dataset ?? {};
     const { activityId } = target.closest("[data-activity-id]")?.dataset ?? {};
     const item = await this.getItem(itemId);
-    if ( !item ) return;
+    if ( !item || (target.ariaDisabled === "true") ) return;
     const activity = item.system.activities?.get(activityId);
 
     switch ( action ) {
@@ -786,7 +787,7 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   _onTogglePrepared(item) {
-    return item.update({ "system.preparation.prepared": !item.system.preparation?.prepared });
+    return item.update({ "system.prepared": Boolean(!item.system.prepared) });
   }
 
   /* -------------------------------------------- */

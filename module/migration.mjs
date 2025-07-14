@@ -483,7 +483,7 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
 
     // Prepared, Equipped, and Proficient for NPC actors
     if ( actorData.type === "npc" ) {
-      if (foundry.utils.getProperty(itemData.system, "preparation.prepared") === false) itemUpdate["system.preparation.prepared"] = true;
+      if (foundry.utils.getProperty(itemData.system, "prepared") === false) itemUpdate["system.prepared"] = 1;
       if (foundry.utils.getProperty(itemData.system, "equipped") === false) itemUpdate["system.equipped"] = true;
     }
 

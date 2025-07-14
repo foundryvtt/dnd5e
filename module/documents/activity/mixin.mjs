@@ -514,10 +514,12 @@ export default function ActivityMixin(Base) {
         else if ( Number.isFinite(linkedDelta) ) config.scaling ??= linkedDelta;
 
         if ( this.requiresSpellSlot ) {
-          const mode = this.item.system.preparation.mode;
+          const { level, method } = this.item.system;
+          const model = CONFIG.DND5E.spellcasting[method];
           config.spell ??= {};
-          config.spell.slot ??= linked?.spell?.level ? `spell${linked.spell.level}`
-            : (mode in this.actor.system.spells) ? mode : `spell${this.item.system.level}`;
+          config.spell.slot ??= linked?.spell?.level
+            ? `spell${linked.spell.level}`
+            : (model?.getSpellSlotKey(level) ?? `spell${level}`);
           const scaling = (this.actor.system.spells?.[config.spell.slot]?.level ?? 0) - this.item.system.level;
           if ( scaling > 0 ) config.scaling ??= scaling;
         }
@@ -671,10 +673,10 @@ export default function ActivityMixin(Base) {
       // Handle spell slot consumption
       else if ( ((config.consume === true) || config.consume.spellSlot)
         && this.requiresSpellSlot && this.consumption.spellSlot ) {
-        const mode = this.item.system.preparation.mode;
-        const isLeveled = ["always", "prepared"].includes(mode);
+        const { method } = this.item.system.preparation;
+        const spellcasting = CONFIG.DND5E.spellcasting[method];
         const effectiveLevel = this.item.system.level + (config.scaling ?? 0);
-        const slot = config.spell?.slot ?? (isLeveled ? `spell${effectiveLevel}` : mode);
+        const slot = config.spell?.slot ?? spellcasting?.getSpellSlotKey(effectiveLevel) ?? method;
         const slotData = this.actor.system.spells?.[slot];
         if ( slotData ) {
           if ( slotData.value ) {

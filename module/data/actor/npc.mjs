@@ -489,7 +489,7 @@ export default class NPCData extends CreatureTemplate {
    * @returns {number}
    */
   cantripLevel(spell) {
-    if ( spell.system.preparation.mode === "innate" ) return this.details.cr;
+    if ( spell.system.method === "innate" ) return this.details.cr;
     return this.details.level ? this.details.level : this.attributes.spell.level;
   }
 

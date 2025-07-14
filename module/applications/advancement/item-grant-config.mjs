@@ -43,8 +43,14 @@ export default class ItemGrantConfig extends AdvancementConfig {
     context.abilityOptions = Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }));
     context.showContainerWarning = context.items.some(i => i.index?.type === "container");
     context.showSpellConfig = context.items.some(i => i.index?.type === "spell");
-    context.showRequireSpellSlot = !this.advancement.configuration.spell?.preparation
-      || CONFIG.DND5E.spellPreparationModes[this.advancement.configuration.spell?.preparation]?.upcast;
+
+    const { spell } = this.advancement.configuration;
+    const model = CONFIG.DND5E.spellcasting[spell?.method];
+    context.showRequireSpellSlot = !spell?.method || model?.slots;
+    context.canPrepare = model?.prepares;
+    context.spellcastingMethods = Object.values(CONFIG.DND5E.spellcasting).map(({ key, label }) => {
+      return { label, value: key };
+    });
 
     return context;
   }

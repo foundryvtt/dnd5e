@@ -583,8 +583,11 @@
         "ability": {
           "label": "Ability"
         },
-        "preparation": {
-          "label": "Preparation Mode"
+        "method": {
+          "label": "Spellcasting Method"
+        },
+        "prepared": {
+          "label": "Preparation"
         },
         "uses": {
           "max": {
@@ -2935,6 +2938,7 @@
 "DND5E.MaxClassLevelMinimumWarn": "Class must have at least one level.",
 "DND5E.Maximum": "Maximum",
 "DND5E.Minimum": "Minimum",
+"DND5E.Method": "Method",
 "DND5E.Modifier": "Modifier",
 "DND5E.ModuleArtConfigH": "Configure which module-provided art should be used.",
 "DND5E.ModuleArtConfigL": "Configure Art",
@@ -3004,6 +3008,7 @@
 "DND5E.PersonalityTraits": "Personality Traits",
 "DND5E.Portrait": "Portrait",
 "DND5E.Prepared": "Prepared",
+"DND5E.Preparation": "Preparation",
 "DND5E.Prerequisites": {
   "Header": "Feature Prerequisites",
   "FIELDS": {
@@ -3529,6 +3534,60 @@
 "DND5E.SpellcasterLevel": "Spellcaster Level",
 "DND5E.SpellCastingHeader": "Spell Casting",
 "DND5E.Spellcasting": "Spellcasting",
+
+"DND5E.SPELLCASTING": {
+  "METHODS": {
+    "AtWill": {
+      "label": "At-Will"
+    },
+    "Innate": {
+      "label": "Innate Spellcasting"
+    },
+    "Ritual": {
+      "label": "Ritual Only"
+    },
+    "Spell": {
+      "label": "Class Spellcasting",
+      "Full": {
+        "label": "Full Caster"
+      },
+      "Half": {
+        "label": "Half Caster"
+      },
+      "Third": {
+        "label": "Third Caster"
+      },
+      "Artificer": {
+        "label": "Artificer"
+      }
+    },
+    "Pact": {
+      "abbr": "Pact",
+      "label": "Pact Magic",
+      "Full": {
+        "label": "Pact Magic"
+      }
+    }
+  },
+  "SLOTS": {
+    "spell0": "Cantrips",
+    "spell1": "1st Level",
+    "spell2": "2nd Level",
+    "spell3": "3rd Level",
+    "spell4": "4th Level",
+    "spell5": "5th Level",
+    "spell6": "6th Level",
+    "spell7": "7th Level",
+    "spell8": "8th Level",
+    "spell9": "9th Level"
+  },
+  "STATES": {
+    "Unprepared": "Not Prepared",
+    "Prepared": "Prepared",
+    "AlwaysPrepared": "Always Prepared"
+  }
+},
+
 "DND5E.SpellcastingClass": "{class} Spellcasting",
 "DND5E.SpellComponent": "Spell Component",
 "DND5E.SpellComponents": "Spell Components",
@@ -3556,7 +3615,7 @@
 "DND5E.SpellLevel7": "7th Level",
 "DND5E.SpellLevel8": "8th Level",
 "DND5E.SpellLevel9": "9th Level",
-"DND5E.SpellLevelSlot": "{level} ({n} Slots)",
+"DND5E.SpellLevelSpell": "{level} ({n} Slots)",
 "DND5E.SpellLevelPact": "Pact Slot [Level {level}] ({n} Slots)",
 "DND5E.SpellMaterials": "Spellcasting Materials",
 "DND5E.SpellMaterialsConsumed": "Consume Materials",
@@ -3573,7 +3632,7 @@
 "DND5E.SpellPreparation": {
   "Label": "Spell Preparation",
   "Formula": "Preparation Formula",
-  "Mode": "Spell Preparation Mode"
+  "Method": "Spellcasting Method"
 },
 "DND5E.SpellSourceClass": "Source Class",
 "DND5E.SpellPrepared": "Prepared",

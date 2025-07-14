@@ -163,8 +163,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canScale() {
-    return this.consumption.scaling.allowed || (this.isSpell && this.item.system.level > 0
-      && CONFIG.DND5E.spellPreparationModes[this.item.system.preparation.mode]?.upcast);
+    return this.consumption.scaling.allowed || (this.isSpell && (this.item.system.level > 0)
+      && CONFIG.DND5E.spellcasting[this.item.system.method]?.slots);
   }
 
   /* -------------------------------------------- */

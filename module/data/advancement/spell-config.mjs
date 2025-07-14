@@ -1,13 +1,14 @@
 import FormulaField from "../fields/formula-field.mjs";
 
-const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 export default class SpellConfigurationData extends foundry.abstract.DataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
       ability: new SetField(new StringField()),
-      preparation: new StringField(),
+      method: new StringField(),
+      prepared: new NumberField({ required: true, nullable: false, integer: true, min: 0, initial: 0 }),
       uses: new SchemaField({
         max: new FormulaField({ deterministic: true }),
         per: new StringField(),
@@ -34,9 +35,20 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
 
   /** @inheritDoc */
   static migrateData(source) {
-    if ( foundry.utils.getType(source.ability) === "string" ) {
-      source.ability = source.ability ? [source.ability] : [];
+    if ( foundry.utils.getType(source.ability) === "string" ) source.ability = source.ability ? [source.ability] : [];
+    if ( !("preparation" in source) ) return;
+    const { preparation } = source;
+    if ( preparation === "always" ) {
+      if ( !("method" in source) ) source.method = "spell";
+      if ( !("prepared" in source) ) source.prepared = 2;
+    } else {
+      if ( !("method" in source) ) {
+        if ( preparation === "prepared" ) source.method = "spell";
+        else if ( preparation ) source.method = preparation;
+      }
+      if ( !("prepared" in source) ) source.prepared = 0;
     }
+    delete source.preparation;
   }
 
   /* -------------------------------------------- */
@@ -53,13 +65,14 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
     ability = this.ability.size ? this.ability.has(ability) ? ability : this.ability.first() : null;
     if ( ability ) foundry.utils.setProperty(itemData, "system.ability", ability);
 
-    if ( this.preparation ) {
-      foundry.utils.setProperty(itemData, "system.preparation.mode", this.preparation);
-      const notAtWill = (this.preparation !== "atwill") && (this.preparation !== "innate");
+    if ( this.method ) {
+      foundry.utils.setProperty(itemData, "system.method", this.method);
+      foundry.utils.setProperty(itemData, "system.prepared", this.prepared);
+      const model = CONFIG.DND5E.spellcasting[this.method];
       const hasClass = (this.item?.type === "class") || (this.item?.type === "subclass");
 
       // Set source class.
-      if ( notAtWill && hasClass ) {
+      if ( model.slots && hasClass ) {
         const identifier = this.item.type === "class" ? this.item.identifier : this.item.system.classIdentifier;
         if ( identifier ) foundry.utils.setProperty(itemData, "system.sourceClass", identifier);
       }
@@ -70,8 +83,8 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
       itemData.system.uses.recovery ??= [];
       itemData.system.uses.recovery.push({ period: this.uses.per, type: "recoverAll" });
 
-      const preparationConfig = CONFIG.DND5E.spellPreparationModes[itemData.system.preparation?.mode];
-      const createForwardActivity = !this.uses.requireSlot && preparationConfig?.upcast;
+      const spellcasting = CONFIG.DND5E.spellcasting[itemData.system.method];
+      const createForwardActivity = !this.uses.requireSlot && spellcasting?.slots;
 
       for ( const activity of Object.values(itemData.system.activities ?? {}) ) {
         if ( !activity.consumption?.spellSlot ) continue;
