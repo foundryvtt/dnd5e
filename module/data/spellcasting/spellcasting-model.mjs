@@ -120,6 +120,10 @@ export class SlotSpellcasting extends SpellcastingModel {
     return {
       ...super.defineSchema(),
       cantrips: new BooleanField(),
+      exclusive: new SchemaField({
+        slots: new BooleanField(),
+        spells: new BooleanField()
+      }),
       prepares: new BooleanField(),
       progression: new TypedObjectField(new SchemaField({
         divisor: new NumberField({ required: true, nullable: false, integer: true, positive: true, initial: 1 }),

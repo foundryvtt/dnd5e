@@ -386,13 +386,16 @@ export default class ActivityUsageDialog extends Dialog5e {
       const minimumLevel = this.item.system.level ?? 1;
       const maximumLevel = Object.values(this.actor.system.spells)
         .reduce((max, d) => d.max ? Math.max(max, d.level) : max, 0);
+      const spellMethod = CONFIG.DND5E.spellcasting[this.item.system.method];
 
       const consumeSlot = (this.config.consume === true) || this.config.consume?.spellSlot;
       let spellSlotValue = this.actor.system.spells[this.config.spell?.slot]?.value || !consumeSlot
         ? this.config.spell.slot : null;
       const spellSlotOptions = Object.entries(this.actor.system.spells).map(([value, slot]) => {
         if ( !slot.max || (slot.level < minimumLevel) || (slot.level > maximumLevel) || !slot.type ) return null;
+        if ( spellMethod?.exclusive.spells && (this.item.system.method !== slot.type) ) return null;
         const model = CONFIG.DND5E.spellcasting[slot.type];
+        if ( model?.exclusive.slots && (this.item.system.method !== slot.type) ) return null;
         const label = game.i18n.format(`DND5E.SpellLevel${slot.type.capitalize()}`, {
           level: model?.isSingleLevel ? slot.level : slot.label,
           n: slot.value
@@ -404,7 +407,7 @@ export default class ActivityUsageDialog extends Dialog5e {
       }).filter(_ => _);
 
       context.spellSlots = {
-        field: new StringField({ label: game.i18n.localize("DND5E.SpellCastUpcast") }),
+        field: new StringField({ required: true, blank: false, label: game.i18n.localize("DND5E.SpellCastUpcast") }),
         name: "spell.slot",
         value: spellSlotValue,
         options: spellSlotOptions

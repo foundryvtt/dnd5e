@@ -3111,6 +3111,13 @@ const pactCastingProgression = DND5E.pactCastingProgression = {
  *                                                                       actor sheet's spells tab, ascending.
  * @property {boolean} [cantrips]                                        Whether this spellcasting method includes
  *                                                                       cantrips.
+ * @property {object} [exclusive]                                        Exclusivity options.
+ * @property {boolean} [exclusive.slots]                                 Whether the slots provided by this spellcasting
+ *                                                                       method may only be used to cast spells that use
+ *                                                                       this spellcasting method.
+ * @property {boolean} [exclusive.spells]                                Whether spells that use this spellcasting
+ *                                                                       method may only be cast with slots provided by
+ *                                                                       this spellcasting method.
  * @property {boolean} [prepares]                                        Whether spells using this method are variably
  *                                                                       available for casting. In 2024 this term was
  *                                                                       unified to 'prepares', but 2014 uses different
