@@ -79,10 +79,7 @@ export class SpellcastingModel extends foundry.abstract.DataModel {
   static fromConfig() {
     const { spellcasting } = CONFIG.DND5E;
 
-    // Give other packages a chance to define spellcasting.
-    Hooks.callAll("dnd5e.initSpellcasting", spellcasting);
-
-    // Map progressions to spellcasting for faster lookup;
+    // Map progressions to spellcasting for faster lookup.
     CONFIG.DND5E.spellProgression = { none: { label: "DND5E.SpellNone" } };
 
     // Initialize models.
@@ -206,7 +203,7 @@ export class SlotSpellcasting extends SpellcastingModel {
    * @param {number} [count]                          Number of classes with this type of spellcasting.
    */
   computeProgression(progression, actor, cls, spellcasting, count) {
-    const prog = this.progression[spellcasting.progression];
+    const prog = this.progression?.[spellcasting?.progression];
     if ( !prog ) return;
     const rounding = prog.roundUp ? Math.ceil : Math.floor;
     progression[this.key] += rounding(spellcasting.levels / (prog.divisor ?? 1));
@@ -300,7 +297,7 @@ export class SingleLevelSpellcasting extends SlotSpellcasting {
    * @returns {boolean}
    */
   static #validateTableKey(k) {
-    return Number.isNumeric(k);
+    return Number.isNumeric(k) && (Number(k) > 0);
   }
 
   /* -------------------------------------------- */

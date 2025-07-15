@@ -92,7 +92,7 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
       /** @deprecated since 5.1 */
       case "system.preparation.mode":
         foundry.utils.logCompatibilityWarning("system.preparation.mode is deprecated. Please instead use "
-          + "system.method to set the spellcasting method, or system.prepared to set the preparation state..",
+          + "system.method to set the spellcasting method, or system.prepared to set the preparation state.",
         { since: "DnD5e 5.1", until: "DnD5e 5.4", once: true });
         change.key = "system.method";
         if ( change.value === "always" ) {

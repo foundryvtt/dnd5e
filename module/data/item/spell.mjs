@@ -388,6 +388,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     context.spellcastingMethods = Object.values(CONFIG.DND5E.spellcasting).map(({ key, label }) => {
       return { label, value: key };
     });
+    if ( this.method && !(this.method in CONFIG.DND5E.spellcasting) ) {
+      context.spellcastingMethods.push({ label: this.method, value: this.method });
+    }
   }
 
   /* -------------------------------------------- */

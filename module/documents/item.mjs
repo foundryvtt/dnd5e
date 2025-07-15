@@ -383,7 +383,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Spellcasting details for a class or subclass.
    *
    * @typedef {object} SpellcastingDescription
-   * @property {string} type              Spellcasting method as defined in ``CONFIG.DND5E.spellcasting`.
+   * @property {string} type              Spellcasting method as defined in `CONFIG.DND5E.spellcasting`.
    * @property {string|null} progression  Progression within the specified spellcasting type if supported.
    * @property {string} ability           Ability used when casting spells from this class or subclass.
    * @property {number|null} levels       Number of levels of this class or subclass's class if embedded.

@@ -51,6 +51,9 @@ export default class ItemGrantConfig extends AdvancementConfig {
     context.spellcastingMethods = Object.values(CONFIG.DND5E.spellcasting).map(({ key, label }) => {
       return { label, value: key };
     });
+    if ( spell?.method && !(spell.method in CONFIG.DND5E.spellcasting) ) {
+      context.spellcastingMethods.push({ label: spell.method, value: spell.method });
+    }
 
     return context;
   }

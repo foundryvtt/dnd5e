@@ -787,7 +787,7 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   _onTogglePrepared(item) {
-    return item.update({ "system.prepared": Boolean(!item.system.prepared) });
+    return item.update({ "system.prepared": Number(!item.system.prepared) });
   }
 
   /* -------------------------------------------- */

@@ -204,9 +204,6 @@ Hooks.once("init", function() {
     label: "DND5E.SheetClass.Token"
   });
 
-  // Spellcasting
-  dataModels.spellcasting.SpellcastingModel.fromConfig();
-
   // Preload Handlebars helpers & partials
   utils.registerHandlebarsHelpers();
   utils.preloadHandlebarsTemplates();
@@ -483,6 +480,9 @@ Hooks.once("i18nInit", () => {
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
   Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
   foundry.helpers.Localization.localizeDataModel(dataModels.settings.TransformationSetting);
+
+  // Spellcasting
+  dataModels.spellcasting.SpellcastingModel.fromConfig();
 });
 
 /* -------------------------------------------- */
