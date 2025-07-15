@@ -721,9 +721,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
   async _getFavoriteData(type, id) {
     // Spell slots
     if ( type === "slots" ) {
-      const [method] = id.match(/^\D+/) ?? [];
+      const { value, max, level, type: method } = this.actor.system.spells?.[id] ?? {};
       const model = CONFIG.DND5E.spellcasting[method];
-      const { value, max, level } = this.actor.system.spells[id] ?? {};
       const uses = { value, max, name: `system.spells.${id}.value` };
       if ( !model || model.isSingleLevel ) return {
         uses, level, method,

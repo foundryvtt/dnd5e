@@ -332,7 +332,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
 
       let largestSlot;
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1).reverse() ) {
-        const progression = { slot: 0 };
+        const progression = { [spellcasting.type]: 0 };
         spellcasting.levels = level;
         Actor5e.computeClassProgression(progression, item, { spellcasting });
         Actor5e.prepareSpellcastingSlots(spells, spellcasting.type, progression);
@@ -361,7 +361,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     }
 
     /**
-     * A hook event that fires to generate the table for custom spellcasting types.
+     * A hook event that fires to generate the table for spellcasting types.
      * The actual hook names include the spellcasting type (e.g. `dnd5e.buildPsionicSpellcastingTable`).
      * @param {object} table                          Table definition being built. *Will be mutated.*
      * @param {Item5e} item                           Class for which the spellcasting table is being built.

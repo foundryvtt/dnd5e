@@ -139,8 +139,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       + "place of preparation.mode and SpellData#prepared in place of preparation.prepared.",
     { since: "DnD5e 5.1", until: "DnD5e 5.4" });
     if ( this.prepared === 2 ) return { mode: "always", prepared: 1 };
-    if ( this.method === "spell" ) return { mode: "prepared", prepared: this.prepared };
-    return { mode: this.method, prepared: this.prepared };
+    if ( this.method === "spell" ) return { mode: "prepared", prepared: Boolean(this.prepared) };
+    return { mode: this.method, prepared: Boolean(this.prepared) };
   }
 
   /* -------------------------------------------- */
@@ -207,7 +207,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /**
    * Migrate preparation data.
-   * @since 5.1
+   * @since 5.1.0
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migratePreparation(source) {
