@@ -19,6 +19,96 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _getDragConstrainOptions() {
+    const unconstrainedMovement = game.user.isGM
+      && ui.controls.controls.tokens.tools.unconstrainedMovement.active;
+    return { ...super._getDragConstrainOptions(), ignoreTokens: unconstrainedMovement };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _getMovementCostFunction(options) {
+    const costFunction = super._getMovementCostFunction(options);
+    if ( game.settings.get("dnd5e", "disableMovementAutomation") ) return costFunction;
+
+    const ignoredDifficultTerrain = this.actor?.system.attributes?.movement?.ignoredDifficultTerrain ?? new Set();
+    const ignoreDifficult = ["all", "nonmagical"].some(i => ignoredDifficultTerrain.has(i));
+    const preview = options?.preview && canvas.visibility.tokenVision && !game.user.isGM;
+    return (from, to, distance, segment) => {
+      const cost = costFunction(from, to, distance, segment);
+
+      // Terrain already difficult, no stacking
+      if ( segment.terrain?.difficultTerrain ) return cost;
+
+      // If ignoring all/nonmagical, don't consider tokens difficult terrain
+      if ( ignoreDifficult ) return cost;
+
+      // Check difficult due to occupied tokens
+      if ( !this.layer.isOccupiedGridSpaceDifficult(to, this, {preview}) ) return cost;
+
+      // Difficult terrain due to occupied grid space
+      return cost + distance;
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  constrainMovementPath(waypoints, options) {
+    let { preview=false, ignoreTokens=false } = options; // Custom constrain option to ignore tokens
+
+    ignoreTokens ||= game.settings.get("dnd5e", "disableMovementAutomation");
+
+    if ( ignoreTokens ) return super.constrainMovementPath(waypoints, options);
+
+    // Ignore preview if token vision is disabled or the current user is a GM
+    if ( !canvas.visibility.tokenVision || game.user.isGM ) preview = false;
+
+    let path = waypoints;
+    let constrained = false;
+
+    for ( let k = 0; k < 10; k++ ) {
+
+      // Apply blocking constraints
+      const completePath = this.document.getCompleteMovementPath(path);
+      let blockedIndex;
+      for ( let i = 1; i < completePath.length; i++ ) {
+        const waypoint = completePath[i];
+        const occupiedGridSpaces = this.document.getOccupiedGridSpaceOffsets(waypoint);
+        if ( occupiedGridSpaces.some(space => this.layer.isOccupiedGridSpaceBlocking(space, this, {preview})) ) {
+          blockedIndex = i;
+          break;
+        }
+      }
+      const blocked = blockedIndex >= 1;
+      if ( blocked ) {
+        path = completePath.slice(0, blockedIndex - 1).filter(waypoint => !waypoint.intermediate);
+        path.push(completePath.at(blockedIndex - 1));
+        constrained = true;
+      }
+
+      // Test wall/cost constraints in the first iteration always and in later
+      // iterations only if the path changed due to blocking
+      if ( (k === 0) || blocked ) {
+        const [constrainedPath, wasConstrained] = super.constrainMovementPath(path, options);
+        path = constrainedPath;
+        if ( !wasConstrained ) return [path, constrained]; // No change: path is valid
+        constrained = true;
+      }
+
+      // In a later iteration if there was no change due to blocking, we found a valid path
+      else if ( !blocked ) return [path, constrained];
+    }
+
+    // After 10 failed attempts to find a valid path, remove the last waypoints and constrain this path
+    [path] = this.constrainMovementPath(waypoints.slice(0, -1), options);
+    return [path, true];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _drawBar(number, bar, data) {
     if ( data.attribute === "attributes.hp" ) return this._drawHPBar(number, bar, data);
     return super._drawBar(number, bar, data);

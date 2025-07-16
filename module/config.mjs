@@ -1223,6 +1223,7 @@ preLocalize("activityConsumptionTypes", { key: "label" });
  * @property {number} hitDie                  Default hit die denomination for NPCs of this size.
  * @property {number} [token=1]               Default token size.
  * @property {number} [capacityMultiplier=1]  Multiplier used to calculate carrying capacities.
+ * @property {number} numerical               Numerical representation of size.
  */
 
 /**
@@ -1235,39 +1236,45 @@ DND5E.actorSizes = {
     abbreviation: "DND5E.SizeTinyAbbr",
     hitDie: 4,
     token: 0.5,
-    capacityMultiplier: 0.5
+    capacityMultiplier: 0.5,
+    numerical: 0
   },
   sm: {
     label: "DND5E.SizeSmall",
     abbreviation: "DND5E.SizeSmallAbbr",
     hitDie: 6,
-    dynamicTokenScale: 0.8
+    dynamicTokenScale: 0.8,
+    numerical: 1
   },
   med: {
     label: "DND5E.SizeMedium",
     abbreviation: "DND5E.SizeMediumAbbr",
-    hitDie: 8
+    hitDie: 8,
+    numerical: 2
   },
   lg: {
     label: "DND5E.SizeLarge",
     abbreviation: "DND5E.SizeLargeAbbr",
     hitDie: 10,
     token: 2,
-    capacityMultiplier: 2
+    capacityMultiplier: 2,
+    numerical: 3
   },
   huge: {
     label: "DND5E.SizeHuge",
     abbreviation: "DND5E.SizeHugeAbbr",
     hitDie: 12,
     token: 3,
-    capacityMultiplier: 4
+    capacityMultiplier: 4,
+    numerical: 4
   },
   grg: {
     label: "DND5E.SizeGargantuan",
     abbreviation: "DND5E.SizeGargantuanAbbr",
     hitDie: 20,
     token: 4,
-    capacityMultiplier: 8
+    capacityMultiplier: 8,
+    numerical: 5
   }
 };
 preLocalize("actorSizes", { keys: ["label", "abbreviation"] });
@@ -3848,15 +3855,16 @@ DND5E.consumableResources = [
 
 /**
  * @typedef {object} _StatusEffectConfig5e
- * @property {string} img               Image used to represent the condition on the token.
- * @property {number} [order]           Order status to the start of the token HUD, rather than alphabetically.
- * @property {string} [reference]       UUID of a journal entry with details on this condition.
- * @property {string} [special]         Set this condition as a special status effect under this name.
- * @property {string[]} [riders]        Additional conditions, by id, to apply as part of this condition.
- * @property {string} [exclusiveGroup]  Any status effects with the same group will not be able to be applied at the
- *                                      same time through the token HUD (multiple statuses applied through other
- *                                      effects can still coexist).
- * @property {number} [coverBonus]      A bonus this condition provides to AC and dexterity saving throws.
+ * @property {string} img                    Image used to represent the condition on the token.
+ * @property {number} [order]                Order status to the start of the token HUD, rather than alphabetically.
+ * @property {string} [reference]            UUID of a journal entry with details on this condition.
+ * @property {string} [special]              Set this condition as a special status effect under this name.
+ * @property {string[]} [riders]             Additional conditions, by id, to apply as part of this condition.
+ * @property {string} [exclusiveGroup]       Any status effects with the same group will not be able to be applied at
+ *                                           the same time through the token HUD (multiple statuses applied through
+ *                                           other effects can still coexist).
+ * @property {number} [coverBonus]           A bonus this condition provides to AC and dexterity saving throws.
+ * @property {boolean} [neverBlockMovement]  If true, a token with this status will not block movement for other tokens.
  */
 
 /**
@@ -3956,7 +3964,8 @@ DND5E.conditionTypes = {
   incapacitated: {
     name: "DND5E.ConIncapacitated",
     img: "systems/dnd5e/icons/svg/statuses/incapacitated.svg",
-    reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.4i3G895hy99piand"
+    reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.4i3G895hy99piand",
+    neverBlockMovement: true
   },
   invisible: {
     name: "DND5E.ConInvisible",
@@ -4096,7 +4105,8 @@ DND5E.statusEffects = {
     name: "EFFECT.DND5E.StatusDead",
     img: "systems/dnd5e/icons/svg/statuses/dead.svg",
     special: "DEFEATED",
-    order: 1
+    order: 1,
+    neverBlockMovement: true
   },
   dodging: {
     name: "EFFECT.DND5E.StatusDodging",
@@ -4104,7 +4114,8 @@ DND5E.statusEffects = {
   },
   ethereal: {
     name: "EFFECT.DND5E.StatusEthereal",
-    img: "systems/dnd5e/icons/svg/statuses/ethereal.svg"
+    img: "systems/dnd5e/icons/svg/statuses/ethereal.svg",
+    neverBlockMovement: true
   },
   flying: {
     name: "EFFECT.DND5E.StatusFlying",
@@ -4558,6 +4569,12 @@ DND5E.characterFlags = {
   halflingLucky: {
     name: "DND5E.FlagsHalflingLucky",
     hint: "DND5E.FlagsHalflingLuckyHint",
+    section: "DND5E.RacialTraits",
+    type: Boolean
+  },
+  halflingNimbleness: {
+    name: "DND5E.FlagsHalflingNimbleness",
+    hint: "DND5E.FlagsHalflingNimblenessHint",
     section: "DND5E.RacialTraits",
     type: Boolean
   },

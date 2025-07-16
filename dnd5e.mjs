@@ -62,6 +62,7 @@ Hooks.once("init", function() {
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
   CONFIG.ActiveEffect.legacyTransferral = false;
   CONFIG.Actor.documentClass = documents.Actor5e;
+  CONFIG.Canvas.layers.tokens.layerClass = CONFIG.Token.layerClass = canvas.layers.TokenLayer5e;
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
   CONFIG.Combatant.documentClass = documents.Combatant5e;
@@ -72,6 +73,7 @@ Hooks.once("init", function() {
   CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
+  CONFIG.Token.rulerClass = canvas.TokenRuler5e;
   CONFIG.User.documentClass = documents.User5e;
   CONFIG.time.roundTime = 6;
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
@@ -216,6 +218,11 @@ Hooks.once("init", function() {
 
   // Set up token movement actions
   documents.TokenDocument5e.registerMovementActions();
+
+  // Custom movement cost aggregator
+  CONFIG.Token.movement.costAggregator = (results, distance, segment) => {
+    return Math.max(...results.map(i => i.cost));
+  };
 });
 
 /* -------------------------------------------- */

@@ -2490,6 +2490,8 @@
 "DND5E.FlagsElvenAccuracyHint": "Roll an extra d20 with advantage to Dex, Int, Wis, or Cha.",
 "DND5E.FlagsHalflingLucky": "Halfling Lucky",
 "DND5E.FlagsHalflingLuckyHint": "Reroll ones when rolling d20 checks.",
+"DND5E.FlagsHalflingNimbleness": "Halfling Nimbleness",
+"DND5E.FlagsHalflingNimblenessHint": "Movement through larger creatures is not blocked.",
 "DND5E.FlagsAlert": "Alert Feat",
 "DND5E.FlagsAlertHint": "Proficient in Initiative rolls.",
 "DND5E.FlagsAlertHintLegacy": "Provides +5 to Initiative.",
@@ -5062,6 +5064,12 @@
 "SETTINGS.5eGridAlignedSquareTemplatesL": "When square templates are created as the result of casting a spell or using an item, they will be locked to the grid alignment and unable to be rotated.",
 "SETTINGS.5eGridAlignedSquareTemplatesN": "Grid-Aligned Square Templates",
 "SETTINGS.DND5E": {
+  "AUTOMATION": {
+    "Movement": {
+      "Name": "Disable Movement Automation",
+      "Hint": "Do not apply difficult terrain movement penalties, or prevent creatures from moving through each other according to the rules version."
+    }
+  },
   "BLOODIED": {
     "Name": "Bloodied Status",
     "Hint": "Configure whether the bloodied status is tracked automatically and its visibility.",

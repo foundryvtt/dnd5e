@@ -76,6 +76,16 @@ export function registerSystemSettings() {
     requiresReload: true
   });
 
+  // Movement automation
+  game.settings.register("dnd5e", "disableMovementAutomation", {
+    name: "SETTINGS.DND5E.AUTOMATION.Movement.Name",
+    hint: "SETTINGS.DND5E.AUTOMATION.Movement.Hint",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Allow rotating square templates
   game.settings.register("dnd5e", "gridAlignedSquareTemplates", {
     name: "SETTINGS.5eGridAlignedSquareTemplatesN",
@@ -625,6 +635,9 @@ export function applyLegacyRules() {
   DND5E.conditionEffects.initiativeAdvantage.delete("invisible");
   DND5E.conditionEffects.initiativeDisadvantage.delete("incapacitated");
   DND5E.conditionEffects.initiativeDisadvantage.delete("surprised");
+
+  // Incapacitated creatures within 2 size categories still cannot be moved through in legacy
+  delete DND5E.conditionTypes.incapacitated.neverBlockMovement;
 
   // Adjust references.
   Object.assign(DND5E.rules, LEGACY.RULES);
