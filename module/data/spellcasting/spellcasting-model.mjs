@@ -80,7 +80,7 @@ export class SpellcastingModel extends foundry.abstract.DataModel {
     const { spellcasting } = CONFIG.DND5E;
 
     // Map progressions to spellcasting for faster lookup.
-    CONFIG.DND5E.spellProgression = { none: { label: "DND5E.SpellNone" } };
+    CONFIG.DND5E.spellProgression = { none: { label: game.i18n.localize("DND5E.SpellNone") } };
 
     // Initialize models.
     Object.entries(spellcasting).forEach(([key, config]) => {
