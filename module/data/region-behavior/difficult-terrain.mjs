@@ -16,7 +16,7 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
     delete dispositions[CONST.TOKEN_DISPOSITIONS.SECRET];
     return {
       magical: new BooleanField(),
-      types: new SetField(new StringField({ choices: () => CONFIG.DND5E.difficultTerrainTypes })),
+      types: new SetField(new StringField()),
       ignoredDispositions: new SetField(new NumberField({ choices: dispositions }))
     };
   }

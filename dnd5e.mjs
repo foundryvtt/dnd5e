@@ -194,7 +194,11 @@ Hooks.once("init", function() {
   });
 
   DocumentSheetConfig.unregisterSheet(RegionBehavior, "core", foundry.applications.sheets.RegionBehaviorConfig, {
-    types: ["dnd5e.rotateArea"]
+    types: ["dnd5e.difficultTerrain", "dnd5e.rotateArea"]
+  });
+  DocumentSheetConfig.registerSheet(RegionBehavior, "dnd5e", applications.regionBehavior.DifficultTerrainConfig, {
+    label: "DND5E.SheetClass.DifficultTerrain",
+    types: ["dnd5e.difficultTerrain"]
   });
   DocumentSheetConfig.registerSheet(RegionBehavior, "dnd5e", applications.regionBehavior.RotateAreaConfig, {
     label: "DND5E.SheetClass.RotateArea",
