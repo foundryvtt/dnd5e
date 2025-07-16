@@ -1,3 +1,4 @@
+import ChatTrayElement from "./chat-tray-element.mjs";
 /**
  * Adds functionality to a custom HTML element for displaying a target selector and displaying targets.
  * @param {typeof HTMLElement} Base  The base class being mixed.
@@ -5,6 +6,11 @@
  */
 export default function TargetedApplicationMixin(Base) {
   return class TargetedApplicationElement extends Base {
+    connectedCallback() {
+      if (this instanceof ChatTrayElement) {
+        this.addEventListener('toggle', this.buildTargetsList.bind(this));
+      }
+    }
 
     /* -------------------------------------------- */
     /*  Properties                                  */
@@ -95,6 +101,7 @@ export default function TargetedApplicationMixin(Base) {
      * Build a list of targeted tokens based on current mode & replace any existing targets.
      */
     buildTargetsList() {
+      if ( this.open === false ) return;
       if ( !this.targetList ) throw new Error("Must create a element to contain the target list.");
       const targetedTokens = new Map();
       switch ( this.targetingMode ) {

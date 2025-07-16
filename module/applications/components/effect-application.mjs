@@ -55,6 +55,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   /* -------------------------------------------- */
 
   connectedCallback() {
+    super.connectedCallback();
     // Fetch the associated chat message
     const messageId = this.closest("[data-message-id]")?.dataset.messageId;
     this.chatMessage = game.messages.get(messageId);
