@@ -137,8 +137,9 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @returns {TokenMovementActionCostFunction}
    */
   static getMovementActionCostFunction(type, token, options) {
+    const noAutomation = game.settings.get("dnd5e", "disableMovementAutomation");
     const actorMovement = token.actor?.system.attributes?.movement ?? {};
-    if ( !(type in actorMovement) || actorMovement[type] ) return cost => cost;
+    if ( noAutomation || !(type in actorMovement) || actorMovement[type] ) return cost => cost;
     if ( CONFIG.DND5E.movementTypes[type]?.walkFallback ) return (cost, _from, _to, distance) => cost + distance;
     return () => Infinity;
   }
