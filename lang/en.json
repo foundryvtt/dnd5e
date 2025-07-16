@@ -55,6 +55,7 @@
 "TYPES.Item.weaponPl": "Weapons",
 
 "TYPES.RegionBehavior": {
+  "dnd5e.difficultTerrain": "Difficult Terrain",
   "dnd5e.rotateArea": "Rotate Area"
 },
 
@@ -3098,6 +3099,29 @@
 "DND5E.RecoveryFormula": "Recovery Formula",
 
 "DND5E.REGIONBEHAVIORS": {
+  "DIFFICULTTERRAIN": {
+    "FIELDS": {
+      "ignoredDispositions": {
+        "hint": "Tokens with these dispositions will not be affected by this difficult terrain.",
+        "label": "Ignored Dispositions"
+      },
+      "magical": {
+        "hint": "This difficult terrain is created by a magical effect.",
+        "label": "Magical"
+      },
+      "types": {
+        "hint": "Types that best describe the source of this difficult terrain, if any.",
+        "label": "Types"
+      }
+    },
+    "Type": {
+      "All": "All Types",
+      "Magical": "Magical",
+      "Nonmagical": "Nonmagical",
+      "Rocks": "Rubble or Rocks",
+      "Snow": "Ice or Snow"
+    }
+  },
   "ROTATEAREA": {
     "Action": {
       "AddPosition": "Add Position",
@@ -3295,6 +3319,7 @@
 "DND5E.MovementAir": "Air",
 "DND5E.MovementSpeeds": "Movement Speeds",
 "DND5E.MovementUnits": "Units",
+"DND5E.MovementIgnoredDifficultTerrain": "Ignored Difficult Terrain",
 
 "DND5E.SAVE": {
   "Title": {
@@ -3377,6 +3402,7 @@
   "Character": "Default 5e Character Sheet",
   "ClassSummary": "Default 5e Class Summary Sheet",
   "Container": "Default 5e Container Sheet",
+  "DifficultTerrain": "Default 5e Difficult Terrain Sheet",
   "Group": "Default 5e Group Sheet",
   "Item": "Default 5e Item Sheet",
   "JournalEntry": "Default 5e Journal Entry Sheet",

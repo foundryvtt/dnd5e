@@ -74,6 +74,7 @@ Hooks.once("init", function() {
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
   CONFIG.Token.rulerClass = canvas.TokenRuler5e;
+  CONFIG.Token.movement.TerrainData = dataModels.TerrainData5e;
   CONFIG.User.documentClass = documents.User5e;
   CONFIG.time.roundTime = 6;
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
@@ -193,7 +194,11 @@ Hooks.once("init", function() {
   });
 
   DocumentSheetConfig.unregisterSheet(RegionBehavior, "core", foundry.applications.sheets.RegionBehaviorConfig, {
-    types: ["dnd5e.rotateArea"]
+    types: ["dnd5e.difficultTerrain", "dnd5e.rotateArea"]
+  });
+  DocumentSheetConfig.registerSheet(RegionBehavior, "dnd5e", applications.regionBehavior.DifficultTerrainConfig, {
+    label: "DND5E.SheetClass.DifficultTerrain",
+    types: ["dnd5e.difficultTerrain"]
   });
   DocumentSheetConfig.registerSheet(RegionBehavior, "dnd5e", applications.regionBehavior.RotateAreaConfig, {
     label: "DND5E.SheetClass.RotateArea",

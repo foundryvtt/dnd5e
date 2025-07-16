@@ -2462,9 +2462,6 @@ preLocalize("damageTypes", { keys: ["label"], sort: true });
  * @type {boolean}
  */
 DND5E.aggregateDamageDisplay = true;
-
-/* -------------------------------------------- */
-/*  Movement                                    */
 /* -------------------------------------------- */
 
 /**
@@ -2484,6 +2481,24 @@ DND5E.healingTypes = {
   }
 };
 preLocalize("healingTypes", { keys: ["label"] });
+
+/* -------------------------------------------- */
+/*  Movement                                    */
+/* -------------------------------------------- */
+
+/**
+ * Types of terrain that can cause difficult terrain.
+ * @enum {{ label: string }}
+ */
+DND5E.difficultTerrainTypes = {
+  rocks: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Rocks"
+  },
+  snow: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Snow"
+  }
+};
+preLocalize("difficultTerrainTypes", { key: "label", sort: true });
 
 /* -------------------------------------------- */
 
