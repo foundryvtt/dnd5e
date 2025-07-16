@@ -4,6 +4,7 @@ import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
+import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import {
@@ -15,7 +16,6 @@ import SystemDocumentMixin from "../mixins/document.mjs";
 import Proficiency from "./proficiency.mjs";
 import SelectChoices from "./select-choices.mjs";
 import * as Trait from "./trait.mjs";
-import BasicRoll from "../../dice/basic-roll.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -1095,22 +1095,28 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
+    const abilityId = relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
+    const ability = this.system.abilities?.[abilityId];
     const hostActor = this.isPolymorphed && this.flags?.dnd5e?.transformOptions?.mergeSkills && (type === "skill")
       ? game.actors.get(this.flags.dnd5e?.originalActor) : null;
     const buildConfig = this._buildSkillToolConfig.bind(this, type, hostActor);
 
+    const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
+      `abilities.${abilityId}.check.roll.mode`,
+      `${type}s.${type === "skill" ? config.skill : config.tool}.roll.mode`
+    ]);
+
     const rollConfig = foundry.utils.mergeObject({
+      advantage, disadvantage,
       ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig?.ability),
-      advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-      disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
-    rollConfig.rolls = [BasicRoll.mergeConfigs({
+    rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
       options: {
-        maximum: relevant?.roll.max,
-        minimum: relevant?.roll.min
+        maximum: Math.min(relevant?.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity),
+        minimum: Math.max(relevant?.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
       }
     }, config.rolls?.shift())].concat(config.rolls ?? []);
     rollConfig.subject = this;
@@ -1123,7 +1129,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }, dialog);
 
-    const abilityLabel = CONFIG.DND5E.abilities[relevant?.ability ?? skillConfig?.ability ?? ""]?.label;
+    const abilityLabel = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
 
     const messageConfig = foundry.utils.mergeObject({
       create: true,
@@ -1186,7 +1192,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       hostActor?.system.skills[process.skill]?.value, abilityId);
     if ( originalProf?.multiplier > prof.multiplier ) prof = originalProf;
 
-    let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+    let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: prof?.hasProficiency ? prof.term : null,
       [`${config[type]}Bonus`]: relevant?.bonuses?.check,
@@ -1299,21 +1305,26 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const abilityConfig = CONFIG.DND5E.abilities[config.ability];
 
     const rollData = this.getRollData();
-    let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+    let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: ability?.[`${type}Prof`].hasProficiency ? ability[`${type}Prof`].term : null,
       [`${config.ability}${type.capitalize()}Bonus`]: ability?.bonuses[type],
       [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
       cover: (config.ability === "dex") && (type === "save") ? this.system.attributes?.ac?.cover : null
     }, rollData);
-    const options = {};
+    const options = {
+      advantage: ability?.[type]?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+      disadvantage: ability?.[type]?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+      maximum: ability?.[type]?.roll.max,
+      minimum: ability?.[type]?.roll.min
+    };
 
     const rollConfig = foundry.utils.mergeObject({
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), name, "d20Test"];
     rollConfig.rolls = [
-      BasicRoll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
+      CONFIG.Dice.D20Roll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
     ].concat(config.rolls ?? []);
     rollConfig.rolls.forEach(({ parts, data }) => this.addRollExhaustion(parts, data));
     rollConfig.subject = this;
@@ -1403,7 +1414,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const rollConfig = foundry.utils.mergeObject({ target: 10 }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "deathSave"];
     rollConfig.rolls = [
-      BasicRoll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
+      CONFIG.Dice.D20Roll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
     ].concat(config.rolls ?? []);
 
     const dialogConfig = foundry.utils.deepClone(dialog);
@@ -1542,7 +1553,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "concentration"];
     rollConfig.rolls = [
-      BasicRoll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
+      CONFIG.Dice.D20Roll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
     ].concat(config.rolls ?? []);
 
     const dialogConfig = foundry.utils.mergeObject({
@@ -1616,7 +1627,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const ability = this.system.abilities?.[abilityId];
 
     const rollData = this.getRollData();
-    let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+    let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: init?.mod,
       prof: init.prof.hasProficiency ? init.prof.term : null,
       initiativeBonus: init.bonus,
@@ -1625,8 +1636,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       alert: flags.initiativeAlert && (game.settings.get("dnd5e", "rulesVersion") === "legacy") ? 5 : null
     }, rollData);
 
-    if ( init.roll.mode === 1 ) options.advantage ??= true;
-    else if ( init.roll.mode === -1 ) options.disadvantage ??= true;
+    const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
+      `abilities.${abilityId}.check.roll.mode`,
+      "attributes.init.roll.mode"
+    ]);
 
     // Add exhaustion reduction
     this.addRollExhaustion(parts, data);
@@ -1640,6 +1653,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && (this.type === "npc"));
 
     options = foundry.utils.mergeObject({
+      advantage, disadvantage,
       fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? game.i18n.localize("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,

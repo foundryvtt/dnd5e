@@ -13,8 +13,6 @@
     {{!-- Rolls --}}
     <fieldset class="card">
         <legend>{{ localize "DND5E.ROLL.Section" label=(localize "DND5E.Initiative") }}</legend>
-        {{ formField fields.roll.fields.mode value=data.roll.mode options=advantageModeOptions localize=true
-                     rootId=partId }}
         <div class="form-group split-group">
             <label>{{ localize "DND5E.ROLL.Range.Label" }}</label>
             <div class="form-fields">
@@ -24,6 +22,8 @@
                              label=(localize "DND5E.Maximum") hint=false classes="label-top" rootId=partId }}
             </div>
         </div>
+        {{ formField fields.roll.fields.mode value=data.roll.mode options=advantageModeOptions localize=true
+                     rootId=partId }}
     </fieldset>
 
     {{!-- Global Bonus --}}

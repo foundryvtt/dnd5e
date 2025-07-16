@@ -104,7 +104,8 @@ export default class D20Die extends Die {
    * @param {number} [values.maximum]
    */
   applyRange(values) {
-    for ( const [key, value] of Object.entries(values) ) {
+    for ( let [key, value] of Object.entries(values) ) {
+      if ( !Number.isFinite(value) ) value = undefined;
       this.options[key] = value;
       const mod = key.substring(0, 3);
       this.modifiers.findSplice(m => m.startsWith(mod));

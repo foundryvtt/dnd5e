@@ -36,6 +36,8 @@
                              hint=false classes="label-top" rootId=partId }}
             </div>
         </div>
+        {{ formField fields.roll.fields.mode name=(concat prefix "roll.mode") value=data.roll.mode
+                     options=advantageModeOptions localize=true rootId=partId }}
     </fieldset>
 
     {{!-- Global Skill Bonuses --}}
