@@ -43,7 +43,7 @@ export default class AdvancementManager extends Application5e {
 
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["advancement", "manager"],
+    classes: ["advancement", "manager", "themed", "theme-light"], // TODO: Remove when flows converted to App V2.
     window: {
       icon: "fa-solid fa-forward",
       title: "DND5E.ADVANCEMENT.Manager.Title.Default"

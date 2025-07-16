@@ -552,8 +552,12 @@ Hooks.once("ready", function() {
 /*  System Styling                              */
 /* -------------------------------------------- */
 
-Hooks.on("renderPause", (app, [html]) => {
+Hooks.on("renderGamePause", (app, html) => {
   html.classList.add("dnd5e2");
+  const container = document.createElement("div");
+  container.classList.add("flexcol");
+  container.append(...html.children);
+  html.append(container);
   const img = html.querySelector("img");
   img.src = "systems/dnd5e/ui/official/ampersand.svg";
   img.className = "";

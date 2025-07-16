@@ -254,6 +254,8 @@
 }
 
 .dnd5e2.journal-entry-page.application {
+  &.titlebar .window-title { visibility: hidden; }
+
   &.text {
     .journal-header { gap: 1rem; }
     .journal-footer { display: none; }
@@ -465,9 +467,11 @@
 }
 
 .table-of-contents:is(.app, .application) {
+  .window-header { background: var(--color-header-background); }
+
   .window-content {
     background: var(--dnd5e-sheet-background);
-    color: var(--color-text-primary);
+    color: var(--color-text-dark-primary);
   }
 }
 

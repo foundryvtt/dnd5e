@@ -979,10 +979,22 @@
   /* ---------------------------------- */
 
   &#pause {
-    background: none;
-    animation: pulsate 3s infinite ease-in-out;
+    &.paused { display: block; }
+    animation: none;
 
-    img { opacity: .75; }
+    > div {
+      position: absolute;
+      inset: 0;
+      justify-content: center;
+      animation: pulsate 3s infinite ease-in-out;
+    }
+
+    img {
+      opacity: .75;
+      position: absolute;
+      width: 100%;
+      height: 160px;
+    }
 
     figcaption {
       color: var(--color-text-light-0);
@@ -993,6 +1005,7 @@
       letter-spacing: 2px;
       padding: 0;
       margin: 0;
+      position: relative;
     }
   }
 
