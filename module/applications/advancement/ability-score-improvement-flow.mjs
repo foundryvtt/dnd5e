@@ -90,12 +90,14 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
     let recommendation = this.advancement.isEpicBoon ? fromUuidSync(this.advancement.configuration.recommendation)
       : null;
-    if ( recommendation ) recommendation = {
-      ...recommendation,
-      checked: this.feat?.uuid === recommendation.uuid,
-      locked: this.feat && (this.feat.uuid !== recommendation.uuid),
-      uuid: recommendation.uuid
-    };
+    if ( recommendation ) {
+      const { img, name, uuid } = recommendation;
+      recommendation = {
+        img, name, uuid,
+        checked: this.feat?.uuid === uuid,
+        locked: this.feat && (this.feat.uuid !== uuid),
+      };
+    }
 
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     const pluralRules = new Intl.PluralRules(game.i18n.lang);
