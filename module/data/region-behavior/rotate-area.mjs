@@ -138,27 +138,12 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
       return false;
     }
 
-    // Determine rotation angle and time
+    // Determine rotation angle, time, and pivot point
     const angle = this.#travelAngle(this.status.angle, targetAngle);
     const radians = Math.toRadians(angle);
     const duration = Math.max(this.time.mode === "fixed" ? this.time.value
       : this.time.value * (Math.abs(angle) / 90), 500);
-
-    // Update status to indicate rotation is occurring
-    await this.parent.update({ "system.status": { angle: targetAngle, position, rotating: true } });
-
-    const { promise, resolve } = Promise.withResolvers();
-    setTimeout(async () => {
-      await this.parent.update({ "system.status.rotating": false });
-      resolve(true);
-    }, duration);
-
-    // TODO: Better calculate the rotation center point and/or allow setting it explicitly
-    const pivot = foundry.utils.polygonCentroid(this.region.polygons[0].points);
-    const animateFlags = {
-      angle, duration, pivot,
-      moveDelta: true
-    };
+    const pivot = RotateAreaRegionBehaviorType.#shapeCenter(this.region.shapes[0]);
 
     const calculateRotationUpdate = placeable => {
       if ( !placeable ) return null;
@@ -168,13 +153,14 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
       return {
         _id: placeable.id,
         ...RotateAreaRegionBehaviorType.#calculatePosition(radians, pivot, center, size),
-        rotation: rotation !== undefined && !placeable.document?.lockRotation ? rotation + angle : undefined
+        rotation: rotation !== undefined ? rotation + angle : rotation
       };
     };
 
+    // Prepare update data for each rotated document type
     const updates = {
       tiles: Array.from(this.tiles.ids).map(t => calculateRotationUpdate(this.scene.tiles.get(t))).filter(_ => _),
-      tokens: Array.from(this.region.tokens).map(({ object: token }) => calculateRotationUpdate(token)),
+      tokens: Array.from(this.region.tokens).map(t => calculateRotationUpdate(t)),
       lights: Array.from(this.lights.ids).map(l => calculateRotationUpdate(this.scene.lights.get(l))).filter(_ => _),
       regions: [this.region.id, ...this.regions.ids].map(r => {
         const region = this.scene.regions.get(r);
@@ -194,30 +180,36 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
       return { _id: wall.id, c: [first.x, first.y, second.x, second.y] };
     });
 
-    // Handle tile and token updates immediately to allow animation
-    await this.scene.updateEmbeddedDocuments("Tile", updates.tiles, { dnd5e: { animate: { ...animateFlags } } });
-    await this.scene.updateEmbeddedDocuments("Token", updates.tokens, {
-      animate: false,
-      dnd5e: { animate: { ...animateFlags } },
-      movement: updates.tokens.reduce((obj, { _id }) => {
-        obj[_id] = {
-          constrainOptions: { ignoreWalls: true, ignoreCost: true },
-          showRuler: false
-        };
-        return obj;
-      }, {})
-    });
+    // Update status to indicate rotation is occurring and trigger visible animation
+    await this.parent.update(
+      { "system.status": { angle: targetAngle, position, rotating: true } },
+      { dnd5e: { rotateArea: { angle, duration, pivot } } }
+    );
 
-    // Delay light, sound, and wall updates until the halfway point of the animation
-    setTimeout(() => {
-      this.scene.updateEmbeddedDocuments("AmbientLight", updates.lights);
-      this.scene.updateEmbeddedDocuments("AmbientSound", updates.sounds);
-      this.scene.updateEmbeddedDocuments("Region", updates.regions);
-      this.scene.updateEmbeddedDocuments("Wall", updates.walls);
-    }, duration / 2);
+    // Wait for the visible animation to complete before performing document updates
+    await new Promise(resolve => setTimeout(resolve, duration));
+
+    // Update all rotated documents
+    await Promise.all([
+      this.parent.update({ "system.status.rotating": false }),
+      this.scene.updateEmbeddedDocuments("AmbientLight", updates.lights),
+      this.scene.updateEmbeddedDocuments("AmbientSound", updates.sounds),
+      this.scene.updateEmbeddedDocuments("Region", updates.regions),
+      this.scene.updateEmbeddedDocuments("Tile", updates.tiles),
+      this.scene.updateEmbeddedDocuments("Token", updates.tokens, {
+        animate: false,
+        movement: updates.tokens.reduce((obj, { _id }) => {
+          obj[_id] = {
+            constrainOptions: { ignoreWalls: true, ignoreCost: true },
+            showRuler: false
+          };
+          return obj;
+        }, {})
+      }),
+      this.scene.updateEmbeddedDocuments("Wall", updates.walls)
+    ]);
+
     // TODO: See how performant it is to animate wall movement
-
-    return promise;
   }
 
   /* ---------------------------------------- */
@@ -240,12 +232,19 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
   /* ---------------------------------------- */
 
   /**
-   * Size of the placeable used for position adjustment.
+   * Center of the placeable used for position adjustment.
    * @param {CanvasDocument|PlaceableObject} doc
    * @returns {Point}
    */
   static #placeableCenter(doc) {
-    if ( doc instanceof foundry.abstract.Document ) doc = doc.object;
+    if ( doc instanceof TokenDocument ) return doc.getCenterPoint();
+    if ( doc instanceof foundry.abstract.Document ) {
+      if ( doc.object ) doc = doc.object;
+      else {
+        const size = this.#placeableSize(doc);
+        return { x: doc.x + (size.width / 2), y: doc.y + (size.height / 2) };
+      }
+    }
     if ( "center" in doc ) return doc.center;
     return { x: doc.x, y: doc.y };
   }
@@ -253,7 +252,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
   /* ---------------------------------------- */
 
   /**
-   * Size of the placeable used for position adjustment.
+   * Current rotation value of a placeable.
    * @param {CanvasDocument|PlaceableObject} doc
    * @returns {Degrees}
    */
@@ -273,7 +272,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
   static #placeableSize(doc) {
     if ( !(doc instanceof foundry.abstract.Document) ) doc = doc.document;
     if ( doc instanceof TileDocument ) return { width: doc.width, height: doc.height };
-    if ( doc instanceof TokenDocument ) return { width: doc.object.w, height: doc.object.h };
+    if ( doc instanceof TokenDocument ) return doc.getSize();
     else return { width: 0, height: 0 };
   }
 
@@ -319,6 +318,27 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
   /* ---------------------------------------- */
 
   /**
+   * Center of a specific region shape.
+   * @param {ShapeData} shape
+   * @returns {Point}
+   */
+  static #shapeCenter(shape) {
+    switch ( shape.type ) {
+      case foundry.data.RectangleShapeData.TYPE:
+        return { x: shape.x + (shape.width / 2), y: shape.y + (shape.width / 2) };
+      case foundry.data.CircleShapeData.TYPE:
+      case foundry.data.EllipseShapeData.TYPE:
+        return { x: shape.x, y: shape.y };
+      case foundry.data.PolygonShapeData.TYPE:
+        return foundry.utils.polygonCentroid(shape.points);
+      default:
+        throw new Error(`Unrecognized shape type: ${shape.type}.`);
+    }
+  }
+
+  /* ---------------------------------------- */
+
+  /**
    * Determine the direction to rotate and the final rotation angle based on the direction mode.
    * @param {Degrees} start  Starting angle.
    * @param {Degrees} end    Ending angle.
@@ -342,87 +362,74 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
   /* ---------------------------------------- */
 
   /**
-   * Stores previous position for animation.
-   * @param {CanvasDocument} doc
+   * Animate rotation in response to changes to behavior.
    * @param {object} changes
    * @param {object} options
    */
-  static preUpdatePlaceable(doc, changes, options) {
-    if ( foundry.utils.getProperty(options, "dnd5e.animate.moveDelta") && ( ("x" in changes) && ("y" in changes) ) ) {
-      foundry.utils.setProperty(options, `dnd5e.animate.moveOrigin.${doc.id}`, { x: doc.x, y: doc.y });
+  async updateRotatateArea(changes, options) {
+    const animationDetails = foundry.utils.getProperty(options, "dnd5e.rotateArea");
+    if ( animationDetails && (canvas.scene === this.scene) ) {
+      const { angle, duration, pivot } = animationDetails;
+      this.#animateRotation(angle, pivot, duration);
     }
   }
 
   /* ---------------------------------------- */
 
   /**
-   * Animate placeable movement.
-   * @param {CanvasDocument} doc
-   * @param {object} changes
-   * @param {object} options
+   * Handle animating the rotation of the region.
+   * @param {Degrees} angle
+   * @param {Point} pivot
+   * @param {number} duration
    */
-  static updatePlaceable(doc, changes, options) {
-    const originalPosition = foundry.utils.getProperty(options, `dnd5e.animate.moveOrigin.${doc.id}`);
-    const angle = foundry.utils.getProperty(options, "dnd5e.animate.angle");
-    const pivot = foundry.utils.getProperty(options, "dnd5e.animate.pivot");
-    if ( !angle ) return;
-    const duration = foundry.utils.getProperty(options, "dnd5e.animate.duration") ?? 500;
-    foundry.canvas.animation.CanvasAnimation.animate([
-      {
-        attribute: "x",
-        parent: doc,
-        from: originalPosition?.x ?? doc.x,
-        to: doc.x
-      },
-      {
-        attribute: "y",
-        parent: doc,
-        from: originalPosition?.y ?? doc.y,
-        to: doc.y
-      },
-      {
-        attribute: "rotation",
-        parent: doc,
-        from: doc.rotation - angle,
-        to: doc.rotation
-      }
-    ], {
+  #animateRotation(angle, pivot, duration) {
+    const animatables = [
+      ...this.region.tokens, ...Array.from(this.tiles.ids).map(t => this.scene.tiles.get(t))
+    ].reduce((map, doc) => {
+      if ( doc ) map.set(doc, {
+        center: RotateAreaRegionBehaviorType.#placeableCenter(doc),
+        rotation: RotateAreaRegionBehaviorType.#placeableRotation(doc),
+        size: RotateAreaRegionBehaviorType.#placeableSize(doc)
+      });
+      return map;
+    }, new Map());
+
+    foundry.canvas.animation.CanvasAnimation.animate([], {
       duration,
       easing: foundry.canvas.animation.CanvasAnimation.easeInOutCosine,
-      priority: PIXI.UPDATE_PRIORITY.HIGH,
-      ontick: (e, a) => RotateAreaRegionBehaviorType.#animateFrame(doc, angle, pivot, e, a)
+      priority: PIXI.UPDATE_PRIORITY.OBJECTS + 1,
+      ontick: (e, a) => RotateAreaRegionBehaviorType.#animateFrame(animatables, angle, pivot, e, a)
     });
   }
 
   /* ---------------------------------------- */
 
   /**
-   * Handle manually updating animation per-frame.
-   * @param {CanvasDocument} doc
+   * Handle manually updating animation on tokens per-frame to ensure vision animates.
+   * @param {Map<CanvasDocument, { center: Point, rotation: Degrees, size: Size }>} animatables
    * @param {Degrees} angle
    * @param {Point} pivot
    * @param {number} elapsedMS               The incremental time in MS which has elapsed (uncapped).
    * @param {CanvasAnimationData} animation  The animation which is being performed.
    */
-  static #animateFrame(doc, angle, pivot, elapsedMS, animation) {
+  static #animateFrame(animatables, angle, pivot, elapsedMS, animation) {
     const pt = animation.time >= animation.duration ? 1 : animation.time / animation.duration;
 
-    if ( pt !== 1 ) {
+    if ( pt <= 1 ) {
       const pa = animation.easing?.(pt) ?? pt;
       const pr = Math.toRadians(angle * pa);
-      let from = {};
-      animation.attributes.forEach(a => from[a.attribute] = a.from);
-      const size = RotateAreaRegionBehaviorType.#placeableSize(doc);
-      from.x += size.width / 2;
-      from.y += size.height / 2;
-      Object.assign(doc, RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, from, size));
+      for ( const [doc, { center, rotation, size }] of animatables.entries() ) {
+        const updates = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, center, size);
+        updates.rotation = rotation + (angle * pa);
+        Object.assign(doc, updates);
+        if ( doc instanceof TokenDocument ) {
+          doc.object._onAnimationUpdate(updates);
+        } else {
+          doc.object.renderFlags.set({ refreshPosition: true, refreshRotation: true });
+        }
+      }
     }
-
-    doc.object.renderFlags.set({ refreshPosition: true, refreshRotation: true });
   }
 }
 
-Hooks.on("preUpdateToken", RotateAreaRegionBehaviorType.preUpdatePlaceable);
-Hooks.on("preUpdateTile", RotateAreaRegionBehaviorType.preUpdatePlaceable);
-Hooks.on("updateTile", RotateAreaRegionBehaviorType.updatePlaceable);
-Hooks.on("updateToken", RotateAreaRegionBehaviorType.updatePlaceable);
+Hooks.on("updateRegionBehavior", (doc, changes, options) => doc.system?.updateRotatateArea?.(changes, options));
