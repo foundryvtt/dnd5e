@@ -158,27 +158,23 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     };
 
     // Prepare update data for each rotated document type
+    const docs = this.#getAnimatables();
     const updates = {
-      tiles: Array.from(this.tiles.ids).map(t => calculateRotationUpdate(this.scene.tiles.get(t))).filter(_ => _),
-      tokens: Array.from(this.region.tokens).map(t => calculateRotationUpdate(t)),
-      lights: Array.from(this.lights.ids).map(l => calculateRotationUpdate(this.scene.lights.get(l))).filter(_ => _),
-      regions: [this.region.id, ...this.regions.ids].map(r => {
-        const region = this.scene.regions.get(r);
-        return region ? RotateAreaRegionBehaviorType.#rotateRegionShapes(region, angle, radians, pivot) : null;
-      }).filter(_ => _),
-      sounds: Array.from(this.sounds.ids).map(l => calculateRotationUpdate(this.scene.sounds.get(l))).filter(_ => _)
+      tiles: docs.tiles.map(t => calculateRotationUpdate(t)),
+      tokens: docs.tokens.map(t => calculateRotationUpdate(t)),
+      lights: docs.lights.map(l => calculateRotationUpdate(l)),
+      regions: docs.regions.map(r => RotateAreaRegionBehaviorType.#rotateRegionShapes(r, angle, radians, pivot)),
+      sounds: docs.sounds.map(s => calculateRotationUpdate(s)),
+      walls: docs.walls.map(wall => {
+        const first = RotateAreaRegionBehaviorType.#calculatePosition(radians, pivot, {
+          x: wall.c[0], y: wall.c[1]
+        });
+        const second = RotateAreaRegionBehaviorType.#calculatePosition(radians, pivot, {
+          x: wall.c[2], y: wall.c[3]
+        });
+        return { _id: wall.id, c: [first.x, first.y, second.x, second.y] };
+      })
     };
-    let walls = Array.from(this.walls.ids).map(w => this.scene.walls.get(w)?.object).filter(_ => _);
-    if ( this.walls.link ) walls = walls.flatMap(w => w.getLinkedSegments().walls);
-    updates.walls = walls.map(wall => {
-      const first = RotateAreaRegionBehaviorType.#calculatePosition(radians, pivot, {
-        x: wall.document.c[0], y: wall.document.c[1]
-      });
-      const second = RotateAreaRegionBehaviorType.#calculatePosition(radians, pivot, {
-        x: wall.document.c[2], y: wall.document.c[3]
-      });
-      return { _id: wall.id, c: [first.x, first.y, second.x, second.y] };
-    });
 
     // Update status to indicate rotation is occurring and trigger visible animation
     await this.parent.update(
@@ -208,8 +204,6 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
       }),
       this.scene.updateEmbeddedDocuments("Wall", updates.walls)
     ]);
-
-    // TODO: See how performant it is to animate wall movement
   }
 
   /* ---------------------------------------- */
@@ -227,6 +221,27 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
   static #calculatePosition(angle, pivot, center, size={ width: 0, height: 0 }) {
     const vector = new Ray(pivot, center).shiftAngle(angle);
     return { x: vector.B.x - (size.width / 2), y: vector.B.y - (size.height / 2) };
+  }
+
+  /* ---------------------------------------- */
+
+  /**
+   * Retrieve and object with canvas documents for anything rotated.
+   * @returns {Record<string, CanvasDocument>}
+   */
+  #getAnimatables() {
+    const animatables = {
+      tiles: Array.from(this.tiles.ids).map(t => this.scene.tiles.get(t)).filter(_ => _),
+      tokens: Array.from(this.region.tokens),
+      lights: Array.from(this.lights.ids).map(l => this.scene.lights.get(l)).filter(_ => _),
+      regions: [this.region.id, ...this.regions.ids].map(r => this.scene.regions.get(r)).filter(_ => _),
+      sounds: Array.from(this.sounds.ids).map(l => this.scene.sounds.get(l)).filter(_ => _),
+      walls: Array.from(this.walls.ids).map(w => this.scene.walls.get(w)).filter(_ => _)
+    };
+    if ( this.walls.link ) {
+      animatables.walls = animatables.walls.flatMap(w => w.object.getLinkedSegments().walls.map(w => w.document));
+    }
+    return animatables;
   }
 
   /* ---------------------------------------- */
@@ -383,16 +398,17 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
    * @param {number} duration
    */
   #animateRotation(angle, pivot, duration) {
-    const animatables = [
-      ...this.region.tokens, ...Array.from(this.tiles.ids).map(t => this.scene.tiles.get(t))
-    ].reduce((map, doc) => {
-      if ( doc ) map.set(doc, {
-        center: RotateAreaRegionBehaviorType.#placeableCenter(doc),
-        rotation: RotateAreaRegionBehaviorType.#placeableRotation(doc),
-        size: RotateAreaRegionBehaviorType.#placeableSize(doc)
-      });
-      return map;
-    }, new Map());
+    const docs = this.#getAnimatables();
+    const animatables = [...docs.lights, ...docs.sounds, ...docs.tiles, ...docs.tokens]
+      .reduce((map, doc) => {
+        map.set(doc, {
+          center: RotateAreaRegionBehaviorType.#placeableCenter(doc),
+          rotation: RotateAreaRegionBehaviorType.#placeableRotation(doc),
+          size: RotateAreaRegionBehaviorType.#placeableSize(doc)
+        });
+        return map;
+      }, new Map());
+    docs.walls.forEach(wall => animatables.set(wall, { points: Array.from(wall.c) }));
 
     foundry.canvas.animation.CanvasAnimation.animate([], {
       duration,
@@ -406,7 +422,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
 
   /**
    * Handle manually updating animation on tokens per-frame to ensure vision animates.
-   * @param {Map<CanvasDocument, { center: Point, rotation: Degrees, size: Size }>} animatables
+   * @param {Map<CanvasDocument, { center: Point, points: number[], rotation: Degrees, size: Size }>} animatables
    * @param {Degrees} angle
    * @param {Point} pivot
    * @param {number} elapsedMS               The incremental time in MS which has elapsed (uncapped).
@@ -418,14 +434,26 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     if ( pt <= 1 ) {
       const pa = animation.easing?.(pt) ?? pt;
       const pr = Math.toRadians(angle * pa);
-      for ( const [doc, { center, rotation, size }] of animatables.entries() ) {
-        const updates = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, center, size);
-        updates.rotation = rotation + (angle * pa);
-        Object.assign(doc, updates);
-        if ( doc instanceof TokenDocument ) {
-          doc.object._onAnimationUpdate(updates);
+      for ( const [doc, { center, points, rotation, size }] of animatables.entries() ) {
+        if ( doc instanceof WallDocument ) {
+          const first = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, { x: points[0], y: points[1] });
+          const second = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, { x: points[2], y: points[3] });
+          doc.c = [first.x, first.y, second.x, second.y];
+          doc.object.renderFlags.set({ refreshLine: true });
+          if ( game.settings.get("core", "visionAnimation") ) {
+            doc.object.initializeEdge();
+            canvas.perception.update({
+              refreshEdges: true, initializeLighting: true, initializeVision: true, initializeSounds: true
+            });
+          }
         } else {
-          doc.object.renderFlags.set({ refreshPosition: true, refreshRotation: true });
+          const updates = RotateAreaRegionBehaviorType.#calculatePosition(pr, pivot, center, size);
+          updates.rotation = rotation + (angle * pa);
+          Object.assign(doc, updates);
+          if ( doc instanceof AmbientLightDocument ) doc.object.initializeLightSource();
+          else if ( doc instanceof AmbientSoundDocument ) doc.object.initializeSoundSource();
+          else if ( doc instanceof TileDocument ) doc.object.renderFlags.set({ refreshTransform: true });
+          else if ( doc instanceof TokenDocument ) doc.object._onAnimationUpdate(updates);
         }
       }
     }
