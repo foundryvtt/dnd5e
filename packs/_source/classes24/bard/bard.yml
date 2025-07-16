@@ -132,6 +132,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 4
@@ -160,6 +161,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 8
@@ -188,6 +190,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 12
@@ -205,6 +208,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 16
@@ -219,17 +223,6 @@ system:
         spell: null
       value: {}
       level: 18
-      title: Class Features
-    - _id: p9Z7MByDAXpGiec6
-      type: ItemGrant
-      configuration:
-        items:
-          - uuid: Compendium.dnd5e.classes24.Item.phbbrdEpicBoon00
-            optional: false
-        optional: false
-        spell: null
-      value: {}
-      level: 19
       title: Class Features
     - _id: G2PRnWVCjP5c3Cm7
       type: ItemGrant
@@ -363,36 +356,6 @@ system:
       type: HitPoints
       configuration: {}
       value: {}
-    - _id: pTnTJmmD3svAD9Jk
-      type: ItemChoice
-      configuration:
-        choices:
-          '19':
-            count: 1
-            replacement: false
-        allowDrops: true
-        type: feat
-        pool:
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofEnergyR
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFate000
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFortitu
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofIrresis
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofRecover
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSkill00
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpeed00
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpellRe
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonoftheNigh
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofTruesig
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofCombatP
-        spell: null
-        restriction:
-          type: feat
-      value:
-        added: {}
-        replaced: {}
-      title: Epic Boon
-      hint: ''
     - _id: tOHyKfroR3MU9nUq
       type: ItemGrant
       configuration:
@@ -404,11 +367,12 @@ system:
         optional: false
         spell:
           ability: []
-          preparation: always
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: spell
+          prepared: 2
       value: {}
       level: 20
       title: Words of Creation
@@ -527,6 +491,26 @@ system:
       title: Tool Proficiencies
       hint: ''
       classRestriction: secondary
+    - type: AbilityScoreImprovement
+      _id: TW8tZRiPnGbJ0hCU
+      configuration:
+        cap: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked: []
+        points: 2
+        recommendation: Compendium.dnd5e.feats24.Item.phbBoonofSpellRe
+        max: null
+      value:
+        type: asi
+      level: 19
+      title: ''
+      hint: ''
   spellcasting:
     progression: full
     ability: cha
@@ -545,11 +529,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866377962
-  modifiedTime: 1745517454864
+  modifiedTime: 1752705712593
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

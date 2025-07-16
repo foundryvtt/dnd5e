@@ -249,17 +249,6 @@ system:
       value: {}
       level: 18
       title: Class Features
-    - _id: UG6PnYnXzKvKJj9V
-      type: ItemGrant
-      configuration:
-        items:
-          - uuid: Compendium.dnd5e.classes24.Item.phbmnkEpicBoon00
-            optional: false
-        optional: false
-        spell: null
-      value: {}
-      level: 19
-      title: Class Features
     - _id: DOmTqz4RzFr3Scvj
       type: ItemGrant
       configuration:
@@ -284,6 +273,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 4
@@ -301,6 +291,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 8
@@ -318,6 +309,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 12
@@ -335,6 +327,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 16
@@ -352,6 +345,7 @@ system:
           cha: 0
         locked: []
         points: 0
+        recommendation: null
       value:
         type: asi
       level: 20
@@ -420,37 +414,6 @@ system:
         chosen: []
       level: 14
       title: Disciplined Survivor
-      hint: ''
-    - _id: jIIj459PUnyTg5X2
-      type: ItemChoice
-      configuration:
-        choices:
-          '19':
-            count: 1
-            replacement: false
-        allowDrops: true
-        type: feat
-        pool:
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofCombatP
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofEnergyR
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFate000
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFortitu
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofIrresis
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofRecover
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSkill00
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpeed00
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpellRe
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonoftheNigh
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofTruesig
-        spell: null
-        restriction:
-          type: feat
-          subtype: ''
-      value:
-        added: {}
-        replaced: {}
-      title: Epic Boon
       hint: ''
     - _id: OGo9kMbx7cFuGx00
       type: Subclass
@@ -581,6 +544,26 @@ system:
       value: {}
       title: Focus Points
       hint: ''
+    - type: AbilityScoreImprovement
+      _id: dokQUBtDxJjjzJIt
+      configuration:
+        cap: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked: []
+        points: 2
+        recommendation: Compendium.dnd5e.feats24.Item.phbBoonofIrresis
+        max: null
+      value:
+        type: asi
+      level: 19
+      title: ''
+      hint: ''
   spellcasting:
     progression: none
     ability: ''
@@ -600,11 +583,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866307724
-  modifiedTime: 1745517441315
+  modifiedTime: 1752705841415
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
