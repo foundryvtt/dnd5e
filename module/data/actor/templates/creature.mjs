@@ -57,7 +57,7 @@ export default class CreatureTemplate extends CommonTemplate {
       }),
       tools: new MappingField(new RollConfigField({
         value: new NumberField({
-          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 1, label: "DND5E.ProficiencyLevel"
+          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
         }),
         ability: "int",
         bonuses: new SchemaField({
