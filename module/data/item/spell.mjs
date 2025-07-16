@@ -257,12 +257,10 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const uuid = this.parent._stats.compendiumSource ?? this.parent.uuid;
     Object.defineProperty(labels, "classes", {
       get() {
-        return game.i18n.getListFormatter({ style: "narrow" }).format(
-          Array.from(dnd5e.registry.spellLists.forSpell(uuid))
-            .filter(list => list.metadata.type === "class")
-            .map(list => list.name)
-            .sort((lhs, rhs) => lhs.localeCompare(rhs, game.i18n.lang))
-        );
+        return Array.from(dnd5e.registry.spellLists.forSpell(uuid))
+          .filter(list => list.metadata.type === "class")
+          .map(list => list.name)
+          .sort((lhs, rhs) => lhs.localeCompare(rhs, game.i18n.lang));
       },
       configurable: true
     });
@@ -318,12 +316,11 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @inheritDoc */
   async getSheetData(context) {
-    context.properties.active = this.parent.labels?.components?.tags;
+    context.properties.active = [...(this.parent.labels?.components?.tags ?? []), ...(context.labels.classes ?? [])];
     context.subtitles = [
       { label: context.labels.level },
       { label: context.labels.school },
-      { label: CONFIG.DND5E.spellcasting[this.method]?.label },
-      { label: context.labels.classes, classes: "full-width" }
+      { label: CONFIG.DND5E.spellcasting[this.method]?.label }
     ];
 
     context.parts = ["dnd5e.details-spell", "dnd5e.field-uses"];
