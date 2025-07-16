@@ -1,9 +1,35 @@
 <section class="flexcol">
     <fieldset class="card">
+
+        {{!-- Standard Types --}}
         {{#each types}}{{ formField field value=value placeholder=placeholder localize=true }}{{/each}}
+
+        {{!-- Custom Types --}}
+        {{#if fields.custom}}
+        {{#each custom}}
+        <div class="form-group" data-index="{{ @index }}">
+            <div class="form-label-field">
+                {{ formInput fields.label name=(concat prefix ".label") value=data.label }}
+            </div>
+            <div class="form-fields">
+                {{ formInput fields.value name=(concat prefix ".value") value=data.value }}
+                <button type="button" class="control-button unbutton" data-action="deleteCustom">
+                    <i class="fa-solid fa-trash" inert></i>
+                </button>
+            </div>
+        </div>
+        {{/each}}
+        <button type="button" class="gold-button" data-action="addCustom" data-tooltip=""
+                aria-label="{{ localize '' }}">
+            <i class="fa-solid fa-plus" inert></i>
+        </button>
+        {{/if}}
+
+        {{!-- Extra Fields --}}
         {{#if (or fields.units extras.length)}}<hr>{{/if}}
         {{#if fields.units}}{{ formField fields.units value=data.units options=unitsOptions localize=true }}{{/if}}
         {{#each extras}}{{ formField field value=value input=input localize=true }}{{/each}}
+
     </fieldset>
     {{#if fields.special}}
     <fieldset class="card">
