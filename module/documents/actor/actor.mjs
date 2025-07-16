@@ -31,8 +31,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Mapping of item identifiers to the items.
+   * @type {IdentifiedItemsMap<string, Set<Item5e>>}
+   */
+  identifiedItems = this.identifiedItems;
+
+  /* -------------------------------------------- */
+
+  /**
    * Mapping of item compendium source UUIDs to the items.
-   * @type {Map<string, Item5e>}
+   * @type {SourcedItemsMap<string, Set<Item5e>>}
    */
   sourcedItems = this.sourcedItems;
 
@@ -237,6 +245,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
+    this.identifiedItems = new IdentifiedItemsMap();
     this.sourcedItems = new SourcedItemsMap();
     this._embeddedPreparation = true;
     super.prepareEmbeddedDocuments();
@@ -3472,6 +3481,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     foundry.utils.logCompatibilityWarning("Actor.preparePactSlots is deprecated. Please use "
       + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
     CONFIG.DND5E.spellcasting.pact.prepareSlots(spells, actor, progression);
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * @extends {Map<string, Set<Item5e>>}
+ */
+class IdentifiedItemsMap extends Map {
+  /** @inheritDoc */
+  get(key, { type }={}) {
+    const result = super.get(key);
+    if ( !result?.size || !type ) return result;
+    return result.filter(i => i.type === type);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  set(key, value) {
+    if ( !this.has(key) ) super.set(key, new Set());
+    this.get(key).add(value);
+    return this;
   }
 }
 

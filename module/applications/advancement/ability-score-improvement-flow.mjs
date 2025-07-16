@@ -157,8 +157,15 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       }
     };
     const result = await CompendiumBrowser.selectOne({ filters, tab: "feats" });
-    if ( result ) this.feat = await fromUuid(result);
-    this.render();
+    if ( !result ) return;
+
+    // TODO: Remove this unnecessary check when https://github.com/foundryvtt/dnd5e/issues/5139 is implemented
+    const item = await fromUuid(result);
+    const isValid = item.system.validatePrerequisites?.(this.advancement.actor, { showMessage: true });
+    if ( isValid === true ) {
+      this.feat = item;
+      this.render();
+    }
   }
 
   /* -------------------------------------------- */
@@ -243,13 +250,8 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       return null;
     }
 
-    // If a feat has a level pre-requisite, make sure it is less than or equal to current character level
-    if ( (item.system.prerequisites?.level ?? -Infinity) > this.advancement.actor.system.details.level ) {
-      ui.notifications.error(game.i18n.format("DND5E.ADVANCEMENT.AbilityScoreImprovement.Warning.Level", {
-        level: item.system.prerequisites.level
-      }));
-      return null;
-    }
+    const isValid = item.system.validatePrerequisites?.(this.advancement.actor, { showMessage: true });
+    if ( isValid !== true ) return null;
 
     this.feat = item;
     this.render();
