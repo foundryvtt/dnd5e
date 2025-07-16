@@ -503,8 +503,8 @@ export default function PrimarySheetMixin(Base) {
     static sortItemsPriority(a, b) {
       return a.system.linkedActivity?.item?.name.localeCompare(b.system.linkedActivity?.item?.name, game.i18n.lang)
         || ((a.system.level ?? 0) - (b.system.level ?? 0))
-        || a.system.preparation?.mode?.localeCompare(b.system.preparation?.mode, "en")
-        || ((b.system.preparation?.prepared ?? 0) - (a.system.preparation?.prepared ?? 0))
+        || ((a.system.prepared ?? 0) - (b.system.prepared ?? 0))
+        || (a.system.method ?? "").compare(b.system.method ?? "")
         || a.name.localeCompare(b.name, game.i18n.lang);
     }
 

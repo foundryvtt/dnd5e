@@ -385,29 +385,34 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !this.system.spells ) return;
 
     // Translate the list of classes into spellcasting progression
-    const progression = { slot: 0, pact: 0 };
+    const progression = Object.values(CONFIG.DND5E.spellcasting).reduce((acc, model) => {
+      if ( model.slots ) acc[model.key] = 0;
+      return acc;
+    }, {});
     const types = {};
 
     // Grab all classes with spellcasting
     const classes = this.itemTypes.class.filter(cls => {
       const type = cls.spellcasting.type;
       if ( !type ) return false;
-      types[type] ??= 0;
-      types[type] += 1;
+      types[type] = (types[type] ?? 0) + 1;
       return true;
     });
 
-    for ( const cls of classes ) this.constructor.computeClassProgression(
-      progression, cls, { actor: this, count: types[cls.spellcasting.type] }
-    );
-
-    if ( this.type === "npc" ) {
-      if ( progression.slot || progression.pact ) {
-        this.system.attributes.spell.level = progression.slot || progression.pact;
-      } else progression.slot = this.system.attributes.spell.level ?? 0;
+    for ( const cls of classes ) {
+      this.constructor.computeClassProgression(progression, cls, { actor: this, count: types[cls.spellcasting.type] });
     }
 
-    for ( const type of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
+    if ( this.type === "npc" ) {
+      const level = Object.values(progression).find(_ => _);
+      if ( level ) this.system.attributes.spell.level = level;
+      else progression.spell = this.system.attributes.spell.level ?? 0;
+    }
+
+    for ( const [type, model] of Object.entries(CONFIG.DND5E.spellcasting) ) {
+      if ( !model.slots ) continue;
+      // Assume spellcasting methods without progression are based on character level rather than class level.
+      if ( foundry.utils.isEmpty(model.progression) ) model.computeProgression(progression, this);
       this.constructor.prepareSpellcastingSlots(this.system.spells, type, progression, { actor: this });
     }
   }
@@ -425,7 +430,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   static computeClassProgression(progression, cls, {actor, spellcasting, count=1}={}) {
     const type = cls.spellcasting.type;
-    spellcasting = spellcasting ?? cls.spellcasting;
+    spellcasting ??= cls.spellcasting;
 
     /**
      * A hook event that fires while computing the spellcasting progression for each class on each actor.
@@ -442,47 +447,26 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const allowed = Hooks.call(
       `dnd5e.compute${type.capitalize()}Progression`, progression, actor, cls, spellcasting, count
     );
+    if ( allowed === false ) return;
+    const model = CONFIG.DND5E.spellcasting[type];
 
-    if ( allowed && (type === "pact") ) {
-      this.computePactProgression(progression, actor, cls, spellcasting, count);
-    } else if ( allowed && (type === "leveled") ) {
+    // Check for deprecated overrides.
+    if ( model.isSingleLevel ) {
+      if ( foundry.utils.getDefiningClass(this, "computePactProgression") !== Actor5e ) {
+        foundry.utils.logCompatibilityWarning("Actor5e.computePactProgression is deprecated. Please use "
+          + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+        this.computePactProgression(progression, actor, cls, spellcasting, count);
+        return;
+      }
+    } else if ( foundry.utils.getDefiningClass(this, "computeLeveledProgression") !== Actor5e ) {
+      foundry.utils.logCompatibilityWarning("Actor5e.computeLeveledProgression is deprecated. Please use "
+        + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
       this.computeLeveledProgression(progression, actor, cls, spellcasting, count);
+      return;
     }
-  }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Contribute to the actor's spellcasting progression for a class with leveled spellcasting.
-   * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
-   * @param {Actor5e|void} actor                    Actor for whom the data is being prepared, if any.
-   * @param {Item5e} cls                            Class for whom this progression is being computed.
-   * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
-   * @param {number} count                          Number of classes with this type of spellcasting.
-   */
-  static computeLeveledProgression(progression, actor, cls, spellcasting, count) {
-    const prog = CONFIG.DND5E.spellcastingTypes.leveled.progression[spellcasting.progression];
-    if ( !prog ) return;
-    const rounding = prog.roundUp ? Math.ceil : Math.floor;
-    progression.slot += rounding(spellcasting.levels / prog.divisor ?? 1);
-    // Single-classed, non-full progression rounds up, rather than down.
-    if ( (count === 1) && (prog.divisor > 1) && progression.slot ) {
-      progression.slot = Math.ceil(spellcasting.levels / prog.divisor);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Contribute to the actor's spellcasting progression for a class with pact spellcasting.
-   * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
-   * @param {Actor5e|void} actor                    Actor for whom the data is being prepared, if any.
-   * @param {Item5e} cls                            Class for whom this progression is being computed.
-   * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
-   * @param {number} count                          Number of classes with this type of spellcasting.
-   */
-  static computePactProgression(progression, actor, cls, spellcasting, count) {
-    progression.pact += spellcasting.levels;
+    // Otherwise proceed with calculation.
+    model.computeProgression(progression, actor, cls, spellcasting, count);
   }
 
   /* -------------------------------------------- */
@@ -507,83 +491,26 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @memberof hookEvents
      */
     const allowed = Hooks.call(`dnd5e.prepare${type.capitalize()}Slots`, spells, actor, progression);
+    if ( allowed === false ) return;
+    const model = CONFIG.DND5E.spellcasting[type];
 
-    if ( allowed && (type === "pact") ) this.preparePactSlots(spells, actor, progression);
-    else if ( allowed && (type === "leveled") ) this.prepareLeveledSlots(spells, actor, progression);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare leveled spell slots using progression data.
-   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-   * @param {Actor5e|void} actor   Actor for whom the data is being prepared, if any.
-   * @param {object} progression   Spellcasting progression data.
-   */
-  static prepareLeveledSlots(spells, actor, progression) {
-    const levels = Math.clamp(progression.slot, 0, CONFIG.DND5E.maxLevel);
-    const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
-    for ( const level of Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1) ) {
-      const slot = spells[`spell${level}`] ??= { value: 0 };
-      slot.label = CONFIG.DND5E.spellLevels[level];
-      slot.level = level;
-      slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level - 1] ?? 0;
-      slot.type = "leveled";
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare non-leveled spell slots using progression data.
-   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-   * @param {Actor5e|void} actor   Actor for whom the data is being prepared, if any.
-   * @param {object} progression   Spellcasting progression data.
-   * @param {string} key           The internal key for these spell slots on the actor.
-   * @param {object} table         The table used for determining the progression of slots.
-   */
-  static prepareAltSlots(spells, actor, progression, key, table) {
-    // Spell data:
-    // - x.level: Slot level for casting
-    // - x.max: Total number of slots
-    // - x.value: Currently available slots
-    // - x.override: Override number of available spell slots
-
-    let keyLevel = Math.clamp(progression[key], 0, CONFIG.DND5E.maxLevel);
-    spells[key] ??= {};
-    spells[key].type = key;
-    const override = Number.isNumeric(spells[key].override) ? parseInt(spells[key].override) : null;
-
-    // Slot override
-    if ( (keyLevel === 0) && (actor?.type === "npc") && (override !== null) ) {
-      keyLevel = actor.system.attributes.spell.level;
+    // Check for deprecated overrides.
+    if ( model.isSingleLevel ) {
+      if ( foundry.utils.getDefiningClass(this, "preparePactSlots") !== Actor5e ) {
+        foundry.utils.logCompatibilityWarning("Actor5e.computePactSlots is deprecated. Please use "
+          + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+        this.preparePactSlots(spells, actor, progression);
+        return;
+      }
+    } else if ( foundry.utils.getDefiningClass(this, "prepareLeveledSlots") !== Actor5e ) {
+      foundry.utils.logCompatibilityWarning("Actor5e.prepareLeveledSlots is deprecated. Please use "
+        + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+      this.prepareLeveledSlots(spells, actor, progression);
+      return;
     }
 
-    const [, keyConfig] = Object.entries(table).reverse().find(([l]) => Number(l) <= keyLevel) ?? [];
-    if ( keyConfig ) {
-      spells[key].level = keyConfig.level;
-      if ( override === null ) spells[key].max = keyConfig.slots;
-      else spells[key].max = Math.max(override, 1);
-      spells[key].value = Math.min(spells[key].value, spells[key].max);
-    }
-
-    else {
-      spells[key].max = override || 0;
-      spells[key].level = (spells[key].max > 0) ? 1 : 0;
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Convenience method for preparing pact slots specifically.
-   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-   * @param {Actor5e|void} actor   Actor for whom the data is being prepared, if any.
-   * @param {object} progression   Spellcasting progression data.
-   */
-  static preparePactSlots(spells, actor, progression) {
-    this.prepareAltSlots(spells, actor, progression, "pact", CONFIG.DND5E.pactCastingProgression);
-    spells.pact.label = game.i18n.localize("DND5E.PactMagic");
+    // Otherwise proceed with calculation.
+    model.prepareSlots(spells, actor, progression);
   }
 
   /* -------------------------------------------- */
@@ -2464,14 +2391,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _getRestSpellRecovery({ recoverShort, recoverLong, ...config }={}, result={}) {
     const restConfig = CONFIG.DND5E.restTypes[config.type];
     if ( !this.system.spells ) return;
-
-    let types = restConfig.recoverSpellSlotTypes;
-    if ( !types ) {
-      types = new Set();
-      for ( const [key, { shortRest }] of Object.entries(CONFIG.DND5E.spellcastingTypes) ) {
-        if ( recoverLong || (recoverShort && shortRest) ) types.add(key);
-      }
-    }
+    const types = restConfig.recoverSpellSlotTypes;
+    if ( !types?.size ) return;
     for ( const [key, slot] of Object.entries(this.system.spells) ) {
       if ( !types.has(slot.type) ) continue;
       result.updateData[`system.spells.${key}.value`] = slot.max;
@@ -3472,6 +3393,71 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const ids = new Set(documents.map(d => d.getRelativeUUID(this)));
     const favorites = this.system.favorites.filter(f => !ids.has(f.id));
     return this.update({ "system.favorites": favorites });
+  }
+
+  /* -------------------------------------------- */
+  /*  Deprecations                                */
+  /* -------------------------------------------- */
+
+  /**
+   * @deprecated since 5.1
+   * @ignore
+   */
+  static computeLeveledProgression(progression, actor, cls, spellcasting, count) {
+    foundry.utils.logCompatibilityWarning("Actor5e.computeLeveledProgression is deprecated. Please use "
+      + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    CONFIG.DND5E.spellcasting.spell.computeProgression(progression, actor, cls, spellcasting, count);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @deprecated since 5.1
+   * @ignore
+   */
+  static computePactProgression(progression, actor, cls, spellcasting, count) {
+    foundry.utils.logCompatibilityWarning("Actor5e.computePactProgression is deprecated. Please use "
+      + "SpellcastingModel#computeProgression instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    CONFIG.DND5E.spellcasting.pact.computeProgression(progression, actor, cls, spellcasting, count);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @deprecated since 5.1
+   * @ignore
+   */
+  static prepareAltSlots(spells, actor, progression, key, table) {
+    foundry.utils.logCompatibilityWarning("Actor.prepareAltSlots is deprecated. Please use "
+      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    const model = CONFIG.DND5E.spellcasting[key];
+    if ( !model ) return;
+    if ( table ) model.table = table;
+    model.prepareSlots(spells, actor, progression);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @deprecated since 5.1
+   * @ignore
+   */
+  static prepareLeveledSlots(spells, actor, progression) {
+    foundry.utils.logCompatibilityWarning("Actor.prepareLeveledSlots is deprecated. Please use "
+      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    CONFIG.DND5E.spellcasting.spell.prepareSlots(spells, actor, progression);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @deprecated since 5.1
+   * @ignore
+   */
+  static preparePactSlots(spells, actor, progression) {
+    foundry.utils.logCompatibilityWarning("Actor.preparePactSlots is deprecated. Please use "
+      + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    CONFIG.DND5E.spellcasting.pact.prepareSlots(spells, actor, progression);
   }
 }
 

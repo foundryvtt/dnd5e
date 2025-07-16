@@ -70,8 +70,18 @@ export default class ItemChoiceConfig extends AdvancementConfig {
     context.listRestrictionOptions = dnd5e.registry.spellLists.options;
     context.showContainerWarning = context.items.some(i => i.index?.type === "container");
     context.showSpellConfig = this.advancement.configuration.type === "spell";
-    context.showRequireSpellSlot = !this.advancement.configuration.spell?.preparation
-      || CONFIG.DND5E.spellPreparationModes[this.advancement.configuration.spell?.preparation]?.upcast;
+
+    const { spell } = this.advancement.configuration;
+    const model = CONFIG.DND5E.spellcasting[spell?.method];
+    context.showRequireSpellSlot = !spell?.method || model?.slots;
+    context.canPrepare = model?.prepares;
+    context.spellcastingMethods = Object.values(CONFIG.DND5E.spellcasting).map(({ key, label }) => {
+      return { label, value: key };
+    });
+    if ( spell?.method && !(spell.method in CONFIG.DND5E.spellcasting) ) {
+      context.spellcastingMethods.push({ label: spell.method, value: spell.method });
+    }
+
     context.typeOptions = [
       { value: "", label: game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.FIELDS.type.Any") },
       { rule: true },

@@ -77,6 +77,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
     if ( "pool" in source ) {
       source.pool = source.pool.map(i => foundry.utils.getType(i) === "string" ? { uuid: i } : i);
     }
+    if ( source.spell ) SpellConfigurationData.migrateData(source.spell);
     return source;
   }
 }

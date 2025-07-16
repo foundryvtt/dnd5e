@@ -2961,7 +2961,7 @@ DND5E.restTypes = {
     recoverHitDice: true,
     recoverHitPoints: true,
     recoverPeriods: ["lr", "sr"],
-    recoverSpellSlotTypes: new Set(["leveled", "pact"]),
+    recoverSpellSlotTypes: new Set(["spell", "pact"]),
     recoverTemp: true,
     recoverTempMax: true
   }
@@ -3052,28 +3052,11 @@ preLocalize("attackTypes", { key: "label" });
 /* -------------------------------------------- */
 
 /**
- * Spell lists that will be registered by the system during init.
- * @type {string[]}
- */
-DND5E.SPELL_LISTS = Object.freeze([
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.wwia6Wwo4BgE9GSI",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.LhvuDQEyrCdg5EfU",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.8yD9Jgp404hfZ9ie",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.VfZ5mH2ZuyFq82Ga",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.sSzagq8GvYXpfmfs",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.6AnqLUowgdsqMFvz"
-]);
-
-/* -------------------------------------------- */
-
-/**
  * Define the standard slot progression by character level.
  * The entries of this array represent the spell slot progression for a full spell-caster.
- * @type {number[][]}
+ * @type {SpellcastingTable5e}
  */
-DND5E.SPELL_SLOT_TABLE = [
+const SPELL_SLOT_TABLE = DND5E.SPELL_SLOT_TABLE = [
   [2],
   [3],
   [4, 2],
@@ -3099,18 +3082,10 @@ DND5E.SPELL_SLOT_TABLE = [
 /* -------------------------------------------- */
 
 /**
- * Configuration data for pact casting progression.
- *
- * @typedef {object} PactProgressionConfig
- * @property {number} slots  Number of spell slots granted.
- * @property {number} level  Level of spells that can be cast.
- */
-
-/**
  * Define the pact slot & level progression by pact caster level.
- * @enum {PactProgressionConfig}
+ * @type {SpellcastingTableSingle5e}
  */
-DND5E.pactCastingProgression = {
+const pactCastingProgression = DND5E.pactCastingProgression = {
   1: { slots: 1, level: 1 },
   2: { slots: 2, level: 1 },
   3: { slots: 2, level: 2 },
@@ -3124,126 +3099,223 @@ DND5E.pactCastingProgression = {
 /* -------------------------------------------- */
 
 /**
- * Configuration data for spell preparation modes.
- *
- * @typedef {object} SpellPreparationModeConfiguration
- * @property {string} label           Localized name of this spell preparation type.
- * @property {boolean} [upcast]       Whether this preparation mode allows for upcasting.
- * @property {boolean} [cantrips]     Whether this mode allows for cantrips in a spellbook.
- * @property {number} [order]         The sort order of this mode in a spellbook.
- * @property {boolean} [prepares]     Whether this preparation mode prepares spells.
+ * @typedef SpellcastingMethod5e
+ * @property {string} label                                              The human-readable label.
+ * @property {"none"|"single"|"multi"} [type="none"]                     "none" - No spell slots.
+ *                                                                       "single" - Spell slots of a single level only.
+ *                                                                       "multi" - Spell slots of multiple levels.
+ * @property {SpellcastingTable5e|SpellcastingTableSingle5e} [table]     The spell slot progression table.
+ * @property {string} [img]                                              The icon to use if this spellcasting method is
+ *                                                                       favorited.
+ * @property {number} order                                              The ordering of this spellcasting method on an
+ *                                                                       actor sheet's spells tab, ascending.
+ * @property {boolean} [cantrips]                                        Whether this spellcasting method includes
+ *                                                                       cantrips.
+ * @property {object} [exclusive]                                        Exclusivity options.
+ * @property {boolean} [exclusive.slots]                                 Whether the slots provided by this spellcasting
+ *                                                                       method may only be used to cast spells that use
+ *                                                                       this spellcasting method.
+ * @property {boolean} [exclusive.spells]                                Whether spells that use this spellcasting
+ *                                                                       method may only be cast with slots provided by
+ *                                                                       this spellcasting method.
+ * @property {boolean} [prepares]                                        Whether spells using this method are variably
+ *                                                                       available for casting. In 2024 this term was
+ *                                                                       unified to 'prepares', but 2014 uses different
+ *                                                                       nomenclature for different classes.
+ * @property {Record<string, SpellcastingProgression5e>} [progression]   Spell slot progressions available for this
+ *                                                                       method.
  */
 
 /**
- * Various different ways a spell can be prepared.
- * @enum {SpellPreparationModeConfiguration}
+ * @typedef {number[][]} SpellcastingTable5e
  */
-DND5E.spellPreparationModes = {
-  prepared: {
-    label: "DND5E.SpellPrepPrepared",
-    upcast: true,
-    prepares: true
-  },
-  pact: {
-    label: "DND5E.PactMagic",
-    upcast: true,
-    cantrips: true,
-    order: 0.5
-  },
-  always: {
-    label: "DND5E.SpellPrepAlways",
-    upcast: true,
-    prepares: true
-  },
+
+/**
+ * @typedef {Record<number, SpellcastingTableEntry5e>} SpellcastingTableSingle5e
+ */
+
+/**
+ * @typedef SpellcastingTableEntry5e
+ * @property {number} slots  The number of slots available.
+ * @property {number} level  The level of the slots.
+ */
+
+/**
+ * @typedef SpellcastingProgression5e
+ * @property {string} label       The human-readable label.
+ * @property {number} divisor     How much this progression mode contributes to the base progression of the spellcasting
+ *                                method.
+ * @property {boolean} [roundUp]  Whether to round up or down when determining contribution.
+ */
+
+/**
+ * Available spellcasting methods.
+ * @type {Record<string, SpellcastingMethod5e>}
+ */
+DND5E.spellcasting = {
   atwill: {
-    label: "DND5E.SpellPrepAtWill",
+    label: "DND5E.SPELLCASTING.METHODS.AtWill.label",
     order: -30
   },
   innate: {
-    label: "DND5E.SpellPrepInnate",
+    label: "DND5E.SPELLCASTING.METHODS.Innate.label",
     order: -20
   },
   ritual: {
-    label: "DND5E.SpellPrepRitual",
+    label: "DND5E.SPELLCASTING.METHODS.Ritual.label",
     order: -10
-  }
-};
-preLocalize("spellPreparationModes", { key: "label" });
-
-/* -------------------------------------------- */
-
-/**
- * Configuration data for different types of spellcasting supported.
- *
- * @typedef {object} SpellcastingTypeConfiguration
- * @property {string} label                               Localized label.
- * @property {string} img                                 Image used when rendered as a favorite on the sheet.
- * @property {boolean} [shortRest]                        Are these spell slots additionally restored on a short rest?
- * @property {Object<string, SpellcastingProgressionConfiguration>} [progression]  Any progression modes for this type.
- */
-
-/**
- * Configuration data for a spellcasting progression mode.
- *
- * @typedef {object} SpellcastingProgressionConfiguration
- * @property {string} label             Localized label.
- * @property {number} [divisor=1]       Value by which the class levels are divided to determine spellcasting level.
- * @property {boolean} [roundUp=false]  Should fractional values should be rounded up by default?
- */
-
-/**
- * Different spellcasting types and their progression.
- * @type {SpellcastingTypeConfiguration}
- */
-DND5E.spellcastingTypes = {
-  leveled: {
-    label: "DND5E.SpellProgLeveled",
+  },
+  pact: {
+    label: "DND5E.SPELLCASTING.METHODS.Pact.label",
+    type: "single",
+    cantrips: true,
+    prepares: true,
+    order: 10,
+    img: "icons/magic/unholy/silhouette-robe-evil-power.webp",
+    table: pactCastingProgression,
+    progression: {
+      pact: {
+        label: "DND5E.SPELLCASTING.METHODS.Pact.Full.label",
+        divisor: 1
+      }
+    }
+  },
+  spell: {
+    label: "DND5E.SPELLCASTING.METHODS.Spell.label",
+    type: "multi",
+    cantrips: true,
+    prepares: true,
+    order: 20,
     img: "systems/dnd5e/icons/spell-tiers/{id}.webp",
+    table: SPELL_SLOT_TABLE,
     progression: {
       full: {
-        label: "DND5E.SpellProgFull",
+        label: "DND5E.SPELLCASTING.METHODS.Spell.Full.label",
         divisor: 1
       },
       half: {
-        label: "DND5E.SpellProgHalf",
+        label: "DND5E.SPELLCASTING.METHODS.Spell.Half.label",
         divisor: 2,
         roundUp: true
       },
       third: {
-        label: "DND5E.SpellProgThird",
+        label: "DND5E.SPELLCASTING.METHODS.Spell.Third.label",
         divisor: 3
       },
       artificer: {
-        label: "DND5E.SpellProgArt",
+        label: "DND5E.SPELLCASTING.METHODS.Spell.Artificer.label",
         divisor: 2,
         roundUp: true
       }
     }
-  },
-  pact: {
-    label: "DND5E.SpellProgPact",
-    img: "icons/magic/unholy/silhouette-robe-evil-power.webp",
-    shortRest: true
   }
 };
-preLocalize("spellcastingTypes", { key: "label", sort: true });
-preLocalize("spellcastingTypes.leveled.progression", { key: "label" });
+preLocalize("spellcasting", { key: "label" });
+preLocalize("spellcasting.spell.progression", { key: "label" });
+preLocalize("spellcasting.pact.progression", { key: "label" });
 
 /* -------------------------------------------- */
 
 /**
- * Ways in which a class can contribute to spellcasting levels.
- * @enum {string}
+ * @typedef SpellcastingPreparationState5e
+ * @property {string} label  The human-readable label.
+ * @property {number} value  A unique number representing this state.
  */
-DND5E.spellProgression = {
-  none: "DND5E.SpellNone",
-  full: "DND5E.SpellProgFull",
-  half: "DND5E.SpellProgHalf",
-  third: "DND5E.SpellProgThird",
-  pact: "DND5E.SpellProgPact",
-  artificer: "DND5E.SpellProgArt"
+
+/**
+ * Spell preparation states.
+ * @type {Record<string, SpellcastingPreparationState5e>}
+ */
+DND5E.spellPreparationStates = {
+  unprepared: {
+    label: "DND5E.SPELLCASTING.STATES.Unprepared",
+    value: 0
+  },
+  prepared: {
+    label: "DND5E.SPELLCASTING.STATES.Prepared",
+    value: 1
+  },
+  always: {
+    label: "DND5E.SPELLCASTING.STATES.AlwaysPrepared",
+    value: 2
+  }
 };
-preLocalize("spellProgression", { key: "label" });
+preLocalize("spellPreparationStates", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
+ * Spell lists that will be registered by the system during init.
+ * @type {string[]}
+ */
+DND5E.SPELL_LISTS = Object.freeze([
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.wwia6Wwo4BgE9GSI",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.LhvuDQEyrCdg5EfU",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.8yD9Jgp404hfZ9ie",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.VfZ5mH2ZuyFq82Ga",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.sSzagq8GvYXpfmfs",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.6AnqLUowgdsqMFvz"
+]);
+
+/* -------------------------------------------- */
+
+/**
+ * @deprecated since 5.1
+ * @ignore
+ */
+DND5E.spellPreparationModes = new Proxy(DND5E.spellcasting, {
+  get(target, prop, receiver) {
+    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellPreparationModes is deprecated, use CONFIG.DND5E.spellcasting"
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    if ( (prop === "prepared") || (prop === "always") ) prop = "spell";
+    return Reflect.get(target, prop, receiver);
+  },
+
+  set(target, prop, value, receiver) {
+    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellPreparationModes is deprecated, use CONFIG.DND5E.spellcasting"
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    if ( (prop === "prepared") || (prop === "always") ) prop = "spell";
+    return Reflect.set(target, prop, value, receiver);
+  }
+});
+
+/* -------------------------------------------- */
+
+/**
+ * @deprecated since 5.1
+ * @ignore
+ */
+DND5E.spellcastingTypes = new Proxy(DND5E.spellcasting, {
+  get(target, prop, receiver) {
+    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellcastingTypes is deprecated, use CONFIG.DND5E.spellcasting"
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    if ( prop === "leveled" ) prop = "spell";
+    return Reflect.get(target, prop, receiver);
+  },
+
+  set(target, prop, value, receiver) {
+    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellcastingTypes is deprecated, use CONFIG.DND5E.spellcasting"
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    if ( prop === "leveled" ) prop = "spell";
+    return Reflect.set(target, prop, value, receiver);
+  }
+});
+
+/* -------------------------------------------- */
+
+/**
+ * @ignore
+ */
+DND5E.spellProgression = new Proxy({}, {
+  set() {
+    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellProgression is read-only. Spell progressions must be set "
+      + "on CONFIG.DND5E.spellcasting instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    return true;
+  }
+});
+
 
 /* -------------------------------------------- */
 

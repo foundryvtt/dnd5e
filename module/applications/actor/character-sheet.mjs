@@ -697,7 +697,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
         effectId: type === "effect" ? favorite.id : null,
         parentId: (type === "effect") && (favorite.parent !== favorite.target) ? favorite.parent.id: null,
         activityId: type === "activity" ? favorite.id : null,
-        preparationMode: (type === "slots") ? (/spell\d+/.test(id) ? "prepared" : id) : null,
         key: (type === "skill") || (type === "tool") ? id : null,
         toggle: toggle === undefined ? null : { applicable: true, value: toggle },
         quantity: quantity > 1 ? quantity : "",
@@ -722,25 +721,25 @@ export default class CharacterActorSheet extends BaseActorSheet {
   async _getFavoriteData(type, id) {
     // Spell slots
     if ( type === "slots" ) {
-      const { value, max, level } = this.actor.system.spells[id] ?? {};
+      const { value, max, level, type: method } = this.actor.system.spells?.[id] ?? {};
+      const model = CONFIG.DND5E.spellcasting[method];
       const uses = { value, max, name: `system.spells.${id}.value` };
-      if ( !/spell\d+/.test(id) ) return {
-        uses, level,
+      if ( !model || model.isSingleLevel ) return {
+        uses, level, method,
         title: game.i18n.localize(`DND5E.SpellSlots${id.capitalize()}`),
         subtitle: [
           game.i18n.localize(`DND5E.SpellLevel${level}`),
-          game.i18n.localize(`DND5E.Abbreviation${CONFIG.DND5E.spellcastingTypes[id]?.shortRest ? "SR" : "LR"}`)
+          game.i18n.localize(`DND5E.Abbreviation${model?.isSR ? "SR" : "LR"}`)
         ],
-        img: CONFIG.DND5E.spellcastingTypes[id]?.img || CONFIG.DND5E.spellcastingTypes.pact.img
+        img: model?.img || CONFIG.DND5E.spellcasting.pact.img
       };
 
       const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
-      const isSR = CONFIG.DND5E.spellcastingTypes.leveled.shortRest;
       return {
-        uses, level,
+        uses, level, method,
         title: game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level }),
-        subtitle: game.i18n.localize(`DND5E.Abbreviation${isSR ? "SR" : "LR"}`),
-        img: CONFIG.DND5E.spellcastingTypes.leveled.img.replace("{id}", id)
+        subtitle: game.i18n.localize(`DND5E.Abbreviation${model.isSR ? "SR" : "LR"}`),
+        img: model.img.replace("{id}", id)
       };
     }
 
@@ -1123,14 +1122,14 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
   /** @inheritDoc */
   _onDragStart(event) {
-    const modes = CONFIG.DND5E.spellPreparationModes;
+    const methods = CONFIG.DND5E.spellcasting;
     const { key } = event.target.closest("[data-key]")?.dataset ?? {};
-    const { level, preparationMode } = event.target.closest("[data-level]")?.dataset ?? {};
+    const { level, method } = event.target.closest("[data-level]")?.dataset ?? {};
     const isSlots = event.target.closest("[data-favorite-id]") || event.target.classList.contains("items-header");
     let type;
     if ( key in CONFIG.DND5E.skills ) type = "skill";
     else if ( key in CONFIG.DND5E.tools ) type = "tool";
-    else if ( modes[preparationMode]?.upcast && (level !== "0") && isSlots ) type = "slots";
+    else if ( methods[method]?.slots && (level !== "0") && isSlots ) type = "slots";
     if ( !type ) return super._onDragStart(event);
 
     // Add another deferred deactivation to catch the second pointerenter event that seems to be fired on Firefox.
@@ -1138,7 +1137,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     game.tooltip.deactivate();
 
     const dragData = { dnd5e: { action: "favorite", type } };
-    if ( type === "slots" ) dragData.dnd5e.id = (preparationMode === "prepared") ? `spell${level}` : preparationMode;
+    if ( type === "slots" ) dragData.dnd5e.id = methods[method].getSpellSlotKey(Number(level));
     else dragData.dnd5e.id = key;
     event.dataTransfer.setData("application/json", JSON.stringify(dragData));
     event.dataTransfer.effectAllowed = "link";
