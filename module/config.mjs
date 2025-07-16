@@ -273,6 +273,18 @@ preLocalize("skills", { key: "label", sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Base passive score and the amount by which the passive skill scores are modified when that skill has
+ * advantage or disadvantage.
+ * @type {{ base: number, modifier: number }}
+ */
+DND5E.skillPassive = {
+  base: 10,
+  modifier: 5
+};
+
+/* -------------------------------------------- */
+
+/**
  * Character alignment options.
  * @enum {string}
  */

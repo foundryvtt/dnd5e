@@ -1,4 +1,5 @@
 import { simplifyBonus } from "../../../utils.mjs";
+import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
@@ -251,7 +252,11 @@ export default class CreatureTemplate extends CommonTemplate {
     // Compute passive bonus
     const passive = flags.observantFeat && CONFIG.DND5E.characterFlags.observantFeat.skills.includes(skillId) ? 5 : 0;
     const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
-    skillData.passive = 10 + skillData.mod + skillData.bonus + skillData.prof.flat + passive + passiveBonus;
+    const advantageMode = AdvantageModeField.combineFields(this, [
+      `abilities.${ability}.check.roll.mode`, `skills.${skillId}.roll.mode`
+    ])?.mode ?? 0;
+    skillData.passive = CONFIG.DND5E.skillPassive.base + skillData.mod + skillData.bonus + skillData.prof.flat
+      + passive + passiveBonus + (advantageMode * CONFIG.DND5E.skillPassive.modifier);
 
     return skillData;
   }
