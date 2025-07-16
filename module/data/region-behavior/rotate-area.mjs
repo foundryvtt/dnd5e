@@ -187,29 +187,27 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
     );
 
     // Wait for the visible animation to complete before performing document updates
-    const { promise: animationComplete, resolve } = Promise.withResolvers();
-    setTimeout(async () => {
-      resolve(true);
-      await this.parent.update({ "system.status.rotating": false });
-    }, duration);
-    await animationComplete;
+    await new Promise(resolve => setTimeout(resolve, duration));
 
     // Update all rotated documents
-    await this.scene.updateEmbeddedDocuments("AmbientLight", updates.lights);
-    await this.scene.updateEmbeddedDocuments("AmbientSound", updates.sounds);
-    await this.scene.updateEmbeddedDocuments("Region", updates.regions);
-    await this.scene.updateEmbeddedDocuments("Tile", updates.tiles);
-    await this.scene.updateEmbeddedDocuments("Token", updates.tokens, {
-      animate: false,
-      movement: updates.tokens.reduce((obj, { _id }) => {
-        obj[_id] = {
-          constrainOptions: { ignoreWalls: true, ignoreCost: true },
-          showRuler: false
-        };
-        return obj;
-      }, {})
-    });
-    await this.scene.updateEmbeddedDocuments("Wall", updates.walls);
+    await Promise.all([
+      this.parent.update({ "system.status.rotating": false }),
+      this.scene.updateEmbeddedDocuments("AmbientLight", updates.lights),
+      this.scene.updateEmbeddedDocuments("AmbientSound", updates.sounds),
+      this.scene.updateEmbeddedDocuments("Region", updates.regions),
+      this.scene.updateEmbeddedDocuments("Tile", updates.tiles),
+      this.scene.updateEmbeddedDocuments("Token", updates.tokens, {
+        animate: false,
+        movement: updates.tokens.reduce((obj, { _id }) => {
+          obj[_id] = {
+            constrainOptions: { ignoreWalls: true, ignoreCost: true },
+            showRuler: false
+          };
+          return obj;
+        }, {})
+      }),
+      this.scene.updateEmbeddedDocuments("Wall", updates.walls)
+    ]);
 
     // TODO: See how performant it is to animate wall movement
   }
