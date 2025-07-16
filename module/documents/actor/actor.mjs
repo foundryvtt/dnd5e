@@ -2199,6 +2199,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     result.dhd = result.deltas.hitDice;
     result.longRest = result.type === "long";
 
+    if ( CONFIG.DND5E.restTypes[result.type]?.exhaustionDelta && !result.clone.hasConditionEffect("malnourished") ) {
+      const path = "system.attributes.exhaustion";
+      const value = foundry.utils.getProperty(result.clone, path) ?? 0;
+      const delta = CONFIG.DND5E.restTypes[result.type].exhaustionDelta;
+      foundry.utils.mergeObject(result.updateData, { [path]: Math.max(0, value - delta) });
+    }
+
     /**
      * A hook event that fires after rest result is calculated, but before any updates are performed.
      * @function dnd5e.preRestCompleted

@@ -2977,6 +2977,7 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
  * @property {string} icon                          Icon representing this rest type. Can be either a set of FontAwesome
  *                                                  classes or an image path.
  * @property {string[]} [activationPeriods]         Activation types that should be displayed in the chat card.
+ * @property {number} [exhaustionDelta]             The number of levels of exhaustion to deduct during this rest.
  * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?
  * @property {boolean} [recoverHitPoints]           Should hit points be recovered during this rest?
  * @property {string[]} [recoverPeriods]            What recovery periods should be applied when this rest is taken. The
@@ -3008,6 +3009,7 @@ DND5E.restTypes = {
       gritty: 10_080,
       epic: 60
     },
+    exhaustionDelta: 1,
     label: "DND5E.REST.Long.Label",
     icon: "fa-solid fa-campground",
     activationPeriods: ["longRest"],
@@ -4082,6 +4084,7 @@ DND5E.conditionEffects = {
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
   petrification: new Set(["petrified"]),
   halfHealth: new Set(["exhaustion-4"]),
+  malnourished: new Set(["malnutrition"]),
   abilityCheckDisadvantage: new Set(["poisoned", "exhaustion-1"]),
   abilitySaveDisadvantage: new Set(["exhaustion-3"]),
   attackDisadvantage: new Set(["poisoned", "exhaustion-3"]),
