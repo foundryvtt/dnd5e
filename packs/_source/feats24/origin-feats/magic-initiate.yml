@@ -38,7 +38,7 @@ system:
     subtype: origin
   prerequisites:
     level: null
-    repeatable: false
+    repeatable: true
   properties: []
   requirements: ''
   activities: {}
@@ -59,11 +59,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866663151
-  modifiedTime: 1745256780499
+  modifiedTime: 1752707203959
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbftMagicInitia'
