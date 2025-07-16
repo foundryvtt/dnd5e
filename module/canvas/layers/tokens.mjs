@@ -7,8 +7,8 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
    * @param {boolean} [options.preview=false]   Whether the movement in question is previewed
    * @returns {boolean} Whether the moving token should be blocked
    */
-  isOccupiedGridSpaceBlocking(gridSpace, token, {preview=false}={}) {
-    const found = this.#getRelevantOccupyingTokens(gridSpace, token, {preview});
+  isOccupiedGridSpaceBlocking(gridSpace, token, { preview=false }={}) {
+    const found = this.#getRelevantOccupyingTokens(gridSpace, token, { preview });
     const tokenSize = CONFIG.DND5E.actorSizes[token.actor?.system.traits.size]?.numerical ?? 2;
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     const halflingNimbleness = token.actor?.getFlag("dnd5e", "halflingNimbleness");
@@ -43,8 +43,8 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
    * @param {boolean} [options.preview=false]   Whether the movement in question is previewed
    * @returns {boolean} Whether the moving token should suffer difficult terrain
    */
-  isOccupiedGridSpaceDifficult(gridSpace, token, {preview=false}={}) {
-    const found = this.#getRelevantOccupyingTokens(gridSpace, token, {preview});
+  isOccupiedGridSpaceDifficult(gridSpace, token, { preview=false }={}) {
+    const found = this.#getRelevantOccupyingTokens(gridSpace, token, { preview });
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     return found.some(t => {
       const friendlyToken = token.document.disposition === t.document.disposition;
@@ -72,7 +72,7 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
    * @param {boolean} [options.preview=false]   Whether the movement in question is previewed
    * @returns {Set<Token5e>} The set of potentially relevant tokens occupying the provided grid space
    */
-  #getRelevantOccupyingTokens(gridSpace, token, {preview=false}={}) {
+  #getRelevantOccupyingTokens(gridSpace, token, { preview=false }={}) {
     const grid = canvas.grid;
     if ( grid.isGridless ) return [];
     const topLeft = grid.getTopLeftPoint(gridSpace);

@@ -30,9 +30,9 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /** @inheritDoc */
   _getMovementCostFunction(options) {
     const costFunction = super._getMovementCostFunction(options);
-    if ( game.settings.get("dnd5e", "tokenBlocking") === "none" ) return costFunction;
+    if ( game.settings.get("dnd5e", "disableMovementAutomation") ) return costFunction;
 
-    const ignoredDifficultTerrain = this.actor?.system.attributes.movement.ignoredDifficultTerrain ?? new Set();
+    const ignoredDifficultTerrain = this.actor?.system.attributes?.movement?.ignoredDifficultTerrain ?? new Set();
     const ignoreDifficult = ["all", "nonmagical"].some(i => ignoredDifficultTerrain.has(i));
     const preview = options?.preview && canvas.visibility.tokenVision && !game.user.isGM;
     return (from, to, distance, segment) => {
@@ -58,7 +58,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   constrainMovementPath(waypoints, options) {
     let { preview=false, ignoreTokens=false } = options; // Custom constrain option to ignore tokens
 
-    ignoreTokens ||= (game.settings.get("dnd5e", "tokenBlocking") !== "all");
+    ignoreTokens ||= game.settings.get("dnd5e", "disableMovementAutomation");
 
     if ( ignoreTokens ) return super.constrainMovementPath(waypoints, options);
 
