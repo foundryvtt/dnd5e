@@ -3299,6 +3299,9 @@ DND5E.spellcastingTypes = new Proxy(DND5E.spellcasting, {
     foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellcastingTypes is deprecated, use CONFIG.DND5E.spellcasting"
       + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
     if ( prop === "leveled" ) prop = "spell";
+    if ( !("type" in value) ) value.type = "single";
+    if ( !("table" in value) ) value.table = DND5E.pactCastingProgression;
+    if ( !("progression" in value) ) value.progression = { [prop]: { label: value.label } };
     return Reflect.set(target, prop, value, receiver);
   }
 });
