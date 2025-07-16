@@ -45,6 +45,17 @@ export default class EnchantActivity extends ActivityMixin(EnchantActivityData) 
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Existing enchantment applied by this activity on this activity's item.
+   * @type {ActiveEffect5e}
+   */
+  get existingEnchantment() {
+    return this.enchant.self
+      ? this.item.effects.find(e => e.isAppliedEnchantment && (e.origin === this.uuid)) : undefined;
+  }
+
+  /* -------------------------------------------- */
   /*  Activation                                  */
   /* -------------------------------------------- */
 
@@ -56,20 +67,10 @@ export default class EnchantActivity extends ActivityMixin(EnchantActivityData) 
   /** @inheritDoc */
   _prepareUsageConfig(config) {
     config = super._prepareUsageConfig(config);
-    config.enchantmentProfile ??= this.availableEnchantments[0]?._id;
+    const existingProfile = this.existingEnchantment?.flags.dnd5e?.enchantmentProfile;
+    config.enchantmentProfile ??= this.item.effects.has(existingProfile) ? existingProfile
+      : this.availableEnchantments[0]?._id;
     return config;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _prepareUsageScaling(usageConfig, messageConfig, item) {
-    await super._prepareUsageScaling(usageConfig, messageConfig, item);
-
-    // Store selected enchantment profile in message flag
-    if ( usageConfig.enchantmentProfile ) foundry.utils.setProperty(
-      messageConfig, "data.flags.dnd5e.use.enchantmentProfile", usageConfig.enchantmentProfile
-    );
   }
 
   /* -------------------------------------------- */
@@ -80,7 +81,87 @@ export default class EnchantActivity extends ActivityMixin(EnchantActivityData) 
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _finalizeMessageConfig(usageConfig, messageConfig, results) {
+    super._finalizeMessageConfig(usageConfig, messageConfig, results);
+
+    // Store selected enchantment profile in message flag
+    if ( usageConfig.enchantmentProfile ) foundry.utils.setProperty(
+      messageConfig, "data.flags.dnd5e.use.enchantmentProfile", usageConfig.enchantmentProfile
+    );
+
+    // Don't display message if just auto-disabling existing enchantment
+    if ( this.existingEnchantment?.flags.dnd5e?.enchantmentProfile === usageConfig.enchantmentProfile ) {
+      messageConfig.create = false;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _triggerSubsequentActions(config, results) {
+    if ( !this.enchant.self ) return;
+
+    // If enchantment from this activity already exists, remove it
+    const existingEnchantment = this.existingEnchantment;
+    if ( existingEnchantment ) await existingEnchantment?.delete({ chatMessageOrigin: results.message?.id });
+
+    // If no existing enchantment, or existing enchantment profile doesn't match provided one, create new enchantment
+    if ( !existingEnchantment || (existingEnchantment.flags.dnd5e?.enchantmentProfile !== config.enchantmentProfile) ) {
+      const concentration = results.effects.find(e => e.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING));
+      this.applyEnchantment(config.enchantmentProfile, this.item, {
+        chatMessage: results.message, concentration, strict: false
+      });
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Apply an enchantment to the provided item.
+   * @param {string} profile            ID of the enchantment profile to apply.
+   * @param {Item5e} item               Item to which to apply the enchantment.
+   * @param {object} [options={}]
+   * @param {ChatMessage5e} [options.chatMessage]     Chat message used to make the enchantment, if applicable.
+   * @param {ActiveEffect5e} [options.concentration]  Concentration active effect to associate with this enchantment.
+   * @param {boolean} [options.strict]  Display UI errors and prevent creation if enchantment isn't allowed.
+   * @returns {ActiveEffect5e|null}     Created enchantment effect if the process was successful.
+   */
+  async applyEnchantment(profile, item, { chatMessage, concentration, strict=true }={}) {
+    const effect = this.item.effects.get(profile);
+    if ( !effect ) return null;
+
+    // Validate against the enchantment's restraints on the origin item
+    if ( strict ) {
+      const errors = this.canEnchant(item);
+      if ( errors?.length ) {
+        errors.forEach(err => ui.notifications.error(err.message, { console: false }));
+        return null;
+      }
+    }
+
+    // If concentration is required, ensure it is still being maintained & GM is present
+    if ( !game.user.isGM && concentration && !concentration.isOwner ) {
+      if ( strict ) {
+        ui.notifications.error("DND5E.EffectApplyWarningConcentration", { console: false, localize: true });
+        return null;
+      } else {
+        concentration = null;
+      }
+    }
+
+    const applied = await ActiveEffect.create(
+      effect.clone({
+        origin: this.uuid, "flags.dnd5e.enchantmentProfile": profile
+      }).toObject(),
+      { parent: item, keepOrigin: true, chatMessageOrigin: chatMessage?.id }
+    );
+    if ( concentration ) await concentration.addDependent(applied);
+  }
+
   /* -------------------------------------------- */
 
   /**
