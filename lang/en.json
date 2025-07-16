@@ -317,24 +317,28 @@
     },
     "FIELDS": {
       "cap": {
-        "label": "Point Cap",
-        "hint": "Maximum number of points a player can assign to a single score."
+        "hint": "Maximum number of points a player can assign to a single score.",
+        "label": "Point Cap"
+      },
+      "fixed": {
+        "hint": "Abilities that are improved by a fixed amount and cannot be manually improved during the process.",
+        "label": "Fixed Improvement"
       },
       "locked": {
-        "label": "Locked",
         "hint": "Ability cannot be improved.",
+        "label": "Locked",
         "locked": "Ability cannot be improved.",
         "unlocked": "Ability may be improved."
       },
-      "fixed": {
-        "label": "Fixed Improvement",
-        "hint": "Abilities that are improved by a fixed amount and cannot be manually improved during the process."
+      "max": {
+        "hint": "Increase the maximum score from what is allowed on the actor.",
+        "label": "Maximum"
       },
       "points": {
-        "label": "Points",
-        "hint": "Number of points that can be assigned to any unlocked ability score.",
         "decrease": "Decrease Points",
-        "increase": "Increase Points"
+        "hint": "Number of points that can be assigned to any unlocked ability score.",
+        "increase": "Increase Points",
+        "label": "Points"
       }
     },
     "Hint": "Allow the player to increase one or more ability scores or take an optional feat.",

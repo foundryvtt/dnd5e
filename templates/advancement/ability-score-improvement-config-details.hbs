@@ -2,4 +2,6 @@
     <legend>{{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.Details" }}</legend>
     {{ formField configuration.fields.cap name="configuration.cap" value=configuration.data.cap
                  placeholder=(localize "None") rootId=partId }}
+    {{ formField configuration.fields.max name="configuration.max" value=configuration.data.max
+                 rootId=partId }}
 </fieldset>

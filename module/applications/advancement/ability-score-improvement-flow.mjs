@@ -69,9 +69,10 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       const assignment = this.assignments[key] ?? 0;
       const fixed = this.advancement.configuration.fixed[key] ?? 0;
       const locked = this.advancement.configuration.locked.has(key);
-      const value = Math.min(ability.value + fixed + assignment, ability.max);
-      const max = locked ? value : Math.min(value + points.available, ability.max);
-      const min = Math.min(ability.value + fixed, ability.max);
+      const abilityMax = Math.max(ability.max, this.advancement.configuration.max ?? -Infinity);
+      const value = Math.min(ability.value + fixed + assignment, abilityMax);
+      const max = locked ? value : Math.min(value + points.available, abilityMax);
+      const min = Math.min(ability.value + fixed, abilityMax);
       obj[key] = {
         key, max, min, value,
         name: `abilities.${key}`,
@@ -80,7 +81,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         delta: (value - ability.value) ? formatter.format(value - ability.value) : null,
         showDelta: true,
         isDisabled: lockImprovement,
-        isLocked: !!locked || (ability.value >= ability.max),
+        isLocked: !!locked || (ability.value >= abilityMax),
         canIncrease: (value < max) && ((fixed + assignment) < points.cap) && !locked && !lockImprovement,
         canDecrease: (value > (ability.value + fixed)) && !locked && !lockImprovement
       };
