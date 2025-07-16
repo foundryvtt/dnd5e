@@ -8,7 +8,7 @@ export default function TargetedApplicationMixin(Base) {
   return class TargetedApplicationElement extends Base {
     connectedCallback() {
       if (this instanceof ChatTrayElement) {
-        this.addEventListener('toggle', this.buildTargetsList.bind(this));
+        this.addEventListener("toggle", this.buildTargetsList.bind(this));
       }
     }
 
