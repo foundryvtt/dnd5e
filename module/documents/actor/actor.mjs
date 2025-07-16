@@ -1709,8 +1709,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       alert: flags.initiativeAlert && (game.settings.get("dnd5e", "rulesVersion") === "legacy") ? 5 : null
     }, rollData);
 
-    if ( init.roll.mode === 1 ) options.advantage ??= true;
-    else if ( init.roll.mode === -1 ) options.disadvantage ??= true;
+    const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
+      `abilities.${abilityId}.check.roll.mode`,
+      "attributes.init.roll.mode"
+    ]);
 
     // Add exhaustion reduction
     this.addRollExhaustion(parts, data);
@@ -1724,6 +1726,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && (this.type === "npc"));
 
     options = foundry.utils.mergeObject({
+      advantage, disadvantage,
       fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? game.i18n.localize("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
