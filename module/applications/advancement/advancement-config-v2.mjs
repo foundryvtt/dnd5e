@@ -80,8 +80,8 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
       fields: this.advancement.schema.fields,
       source: this.advancement._source,
       default: {
-        title: this.advancement.constructor.metadata.title,
-        icon: this.advancement.constructor.metadata.icon,
+        title: this.advancement._defaultTitle,
+        icon: this.advancement._defaultIcon,
         hint: ""
       },
       levels,

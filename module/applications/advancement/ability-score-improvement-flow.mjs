@@ -88,10 +88,21 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       return obj;
     }, {});
 
+    let recommendation = this.advancement.isEpicBoon ? fromUuidSync(this.advancement.configuration.recommendation)
+      : null;
+    if ( recommendation ) {
+      const { img, name, uuid } = recommendation;
+      recommendation = {
+        img, name, uuid,
+        checked: this.feat?.uuid === uuid,
+        locked: this.feat && (this.feat.uuid !== uuid),
+      };
+    }
+
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     const pluralRules = new Intl.PluralRules(game.i18n.lang);
     return foundry.utils.mergeObject(super.getData(), {
-      abilities, lockImprovement, points,
+      abilities, lockImprovement, points, recommendation,
       feat: this.feat,
       pointCap: game.i18n.format(
         `DND5E.ADVANCEMENT.AbilityScoreImprovement.CapDisplay.${pluralRules.select(points.cap)}`, { points: points.cap }
@@ -120,7 +131,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onChangeInput(event) {
+  async _onChangeInput(event) {
     super._onChangeInput(event);
     const input = event.currentTarget;
     if ( input.name === "asi-selected" ) {
@@ -129,6 +140,9 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         if ( this.feat?.isASI ) this.assignments = {};
         this.feat = null;
       }
+    } else if ( input.name === "recommendation-selected" ) {
+      if ( input.checked ) this.feat = await fromUuid(this.advancement.configuration.recommendation);
+      else this.feat = null;
     } else {
       const key = input.closest("[data-score]").dataset.score;
       if ( isNaN(input.valueAsNumber) ) this.assignments[key] = 0;

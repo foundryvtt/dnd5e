@@ -118,17 +118,6 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
   /* -------------------------------------------- */
 
   /**
-   * List of levels in which this advancement object should be displayed. Will be a list of class levels if this
-   * advancement is being applied to classes or subclasses, otherwise a list of character levels.
-   * @returns {number[]}
-   */
-  get levels() {
-    return this.level !== undefined ? [this.level] : [];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Should this advancement be applied to a class based on its class restriction setting? This will always return
    * true for advancements that are not within an embedded class item.
    * @type {boolean}
@@ -142,6 +131,39 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * The default icon that will be used if one isn't specified.
+   * @type {string}
+   * @protected
+   */
+  get _defaultIcon() {
+    return this.constructor.metadata.icon;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The default title that will be used if one isn't specified.
+   * @type {string}
+   * @protected
+   */
+  get _defaultTitle() {
+    return this.constructor.metadata.title;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * List of levels in which this advancement object should be displayed. Will be a list of class levels if this
+   * advancement is being applied to classes or subclasses, otherwise a list of character levels.
+   * @returns {number[]}
+   */
+  get levels() {
+    return this.level !== undefined ? [this.level] : [];
+  }
+
+  /* -------------------------------------------- */
   /*  Preparation Methods                         */
   /* -------------------------------------------- */
 
@@ -149,8 +171,8 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
    * Prepare data for the Advancement.
    */
   prepareData() {
-    this.title = this.title || this.constructor.metadata.title;
-    this.icon = this.icon || this.constructor.metadata.icon;
+    this.title = this.title || this._defaultTitle;
+    this.icon = this.icon || this._defaultIcon;
   }
 
   /* -------------------------------------------- */

@@ -254,7 +254,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       for ( const advancement of item.advancement.byLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
           case "AbilityScoreImprovement":
-            features.push(game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.Title"));
+            features.push(advancement._defaultTitle);
             continue;
           case "ItemGrant":
             if ( advancement.configuration.optional ) continue;
@@ -460,9 +460,13 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       features.push(...advancement.configuration.items.map(f => prepareFeature(f, advancement.level)));
     }
 
-    const asiLevels = (item.advancement.byType.AbilityScoreImprovement ?? []).map(a => a.level).sort((a, b) => a - b);
-    if ( asiLevels.length ) {
-      const [firstLevel, ...otherLevels] = asiLevels;
+    const asi = (item.advancement.byType.AbilityScoreImprovement ?? []).reduce((obj, advancement) => {
+      if ( advancement.isEpicBoon ) obj.boons.push(advancement);
+      else obj.levels.push(advancement.level);
+      return obj;
+    }, { levels: [], boons: [] });
+    if ( asi.levels.length ) {
+      const [firstLevel, ...otherLevels] = asi.levels.sort((a, b) => a - b);
       const name = game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.Name");
       features.push({
         description: game.i18n.format(
@@ -477,10 +481,22 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
               .format(otherLevels.map(l => formatNumber(l, { ordinal: true })))
           }
         ),
-        level: asiLevels[0],
+        level: asi.levels[0],
         name: modernStyle ? game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
           name: name, level: formatNumber(firstLevel)
         }) : name
+      });
+    }
+    for ( const advancement of asi.boons ) {
+      const recommendation = await fromUuid(advancement.configuration.recommendation);
+      features.push({
+        description: game.i18n.format("DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.DescriptionEpic", {
+          recommendation: recommendation?.toAnchor().outerHTML ?? "—"
+        }),
+        level: advancement.level,
+        name: game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
+          name: advancement._defaultTitle, level: formatNumber(advancement.level)
+        })
       });
     }
 
