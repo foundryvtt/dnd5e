@@ -46,16 +46,18 @@ export default class SpellSlotsConfig extends BaseConfigSheet {
 
     const models = Object.entries(CONFIG.DND5E.spellcasting).sort(([a]) => a === "spell" ? -1 : 0);
     context.overrides = models.reduce((arr, [method, model]) => {
-      if ( !model.slots || !spellcastingMethods.has(method) ) return arr;
+      if ( !model.slots ) return arr;
       for ( let i = model.isSingleLevel ? maxLevel : 1; i <= maxLevel; i++ ) {
         const key = model.getSpellSlotKey(i);
+        const value = source[key]?.override;
+        if ( !value && !spellcastingMethods.has(method) ) continue;
         arr.push({
+          value,
           label: model.isSingleLevel
             ? game.i18n.localize(`DND5E.SPELLCASTING.METHODS.${method.capitalize()}.abbr`)
             : model.getLabel({ level: i }),
           name: `system.spells.${key}.override`,
-          placeholder: spells[key]?.max ?? 0,
-          value: source[key]?.override
+          placeholder: spells[key]?.max ?? 0
         });
       }
       return arr;

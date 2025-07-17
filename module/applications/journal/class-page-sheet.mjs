@@ -345,7 +345,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
         const hasSlots = Object.values(spells).some(slot => slot.max > 0);
         const row = hasSlots ? Array.fromRange(largestSlot, 1).map(spellLevel => ({
           class: "spell-slots",
-          content: spells[`spell${spellLevel}`]?.max || "&mdash;"
+          content: spells[spellcastingModel.getSpellSlotKey(spellLevel)]?.max || "&mdash;"
         })) : null;
 
         table.rows.push(row);
