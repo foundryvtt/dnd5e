@@ -495,7 +495,7 @@ export class ScaleValueTypeUsage extends ScaleValueTypeNumber {
   static defineSchema() {
     return {
       value: new NumberField({ nullable: true, integer: true, min: 0 }),
-      per: new StringField({ blank: false })
+      period: new StringField({ blank: false })
     };
   }
 
@@ -525,7 +525,7 @@ export class ScaleValueTypeUsage extends ScaleValueTypeNumber {
 
   /** @inheritdoc */
   get display() {
-    return `${this.value}/${CONFIG.DND5E.limitedUsePeriods[this.per]?.abbreviation ?? ""}`;
+    return `${this.value}/${CONFIG.DND5E.limitedUsePeriods[this.period]?.abbreviation ?? ""}`;
   }
 
   /* -------------------------------------------- */
@@ -535,8 +535,8 @@ export class ScaleValueTypeUsage extends ScaleValueTypeNumber {
   /** @inheritDoc */
   static getFields(level, value, lastValue) {
     const fields = super.getFields(level, value, lastValue);
-    fields.per.options = [
-      { value: "", label: fields.per.placeholder, rule: true },
+    fields.period.options = [
+      { value: "", label: fields.period.placeholder, rule: true },
       ...CONFIG.DND5E.limitedUsePeriods.recoveryOptions.filter(r => r.value !== "recharge")
     ];
     return fields;
@@ -546,7 +546,7 @@ export class ScaleValueTypeUsage extends ScaleValueTypeNumber {
 
   /** @inheritDoc */
   static getPlaceholder(name, lastValue) {
-    if ( (name === "per") && lastValue?.per ) return CONFIG.DND5E.limitedUsePeriods[lastValue.per]?.label;
+    if ( (name === "period") && lastValue?.period ) return CONFIG.DND5E.limitedUsePeriods[lastValue.period]?.label;
     return super.getPlaceholder(name, lastValue);
   }
 }
