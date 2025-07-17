@@ -35,7 +35,7 @@ export default class AdvancementManager extends Application5e {
   constructor(actor, options={}) {
     super(options);
     this.actor = actor;
-    this.clone = actor.clone();
+    this.clone = actor.clone({}, { keepId: true });
     if ( this.options.showVisualizer ) this.#visualizer = new AdvancementVisualizer({ manager: this });
   }
 
