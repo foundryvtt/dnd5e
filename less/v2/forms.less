@@ -340,7 +340,7 @@
 
       .form-group {
         flex-wrap: nowrap;
-        &:not(.label-top) { gap: 4px; }
+        &:not(.label-top, .checkbox) { gap: 4px; }
         > * { flex: unset; }
       }
 
@@ -529,7 +529,11 @@
     font-size: var(--font-size-11);
   }
 
-  .form-group.checkbox { justify-content: space-evenly; }
+  .form-group.checkbox {
+    justify-content: space-evenly;
+    flex: none;
+    gap: 8px;
+  }
 
   /* Checkbox Grid */
   .checkbox-grid {
@@ -617,7 +621,7 @@
   --input-height: 26px;
   gap: 0;
 
-  .form-group:not(.label-top) {
+  .form-group:not(.label-top, .checkbox) {
     gap: 0;
 
     > label {

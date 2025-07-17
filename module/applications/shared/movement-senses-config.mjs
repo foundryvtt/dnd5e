@@ -106,12 +106,12 @@ export default class MovementSensesConfig extends BaseConfigSheet {
    */
   _prepareExtraFields(context) {
     const extras = [];
-    if ( context.fields.hover ) extras.push({
+    if ( context.fields.hover ) context.hover = {
       field: context.fields.hover,
       input: context.inputs.createCheckboxInput,
       value: context.data.hover,
       localize: true
-    });
+    };
     if ( context.fields.ignoredDifficultTerrain ) extras.push({
       field: context.fields.ignoredDifficultTerrain,
       value: context.data.ignoredDifficultTerrain,
