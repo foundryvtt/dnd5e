@@ -76,7 +76,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
       for ( let i = 1; i < completePath.length; i++ ) {
         const waypoint = completePath[i];
         const occupiedGridSpaces = this.document.getOccupiedGridSpaceOffsets(waypoint);
-        const elevationOffset = Math.floor(waypoint.elevation / canvas.grid.distance);
+        const elevationOffset = Math.floor((waypoint.elevation / canvas.grid.distance) + 1e-8);
         if ( occupiedGridSpaces.some(space =>
           this.layer.isOccupiedGridSpaceBlocking({...space, k: elevationOffset}, this, {preview}))
         ) {
