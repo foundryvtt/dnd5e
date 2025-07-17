@@ -110,7 +110,7 @@
 /**
  * @typedef ScaleValueUsesTypeData
  * @property {number} value           Number of uses.
- * @property {string} per             Usage refresh period.
+ * @property {string} period          Usage refresh period.
  */
 
 /**
