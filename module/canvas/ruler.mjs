@@ -58,4 +58,45 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
 
     return context;
   }
+
+  /** @override */
+  _getSegmentStyle(waypoint) {
+    const style = super._getSegmentStyle(waypoint);
+    return this.#getSpeedBasedStyle(waypoint, style);
+  }
+
+  /** @override */
+  _getGridHighlightStyle(waypoint, offset) {
+    const style = super._getGridHighlightStyle(waypoint, offset);
+    return this.#getSpeedBasedStyle(waypoint, style);
+  }
+
+  /**
+   * Modify segment or grid-highlighting style based on movement speed
+   * @param {TokenRulerWaypoint} waypoint The waypoint
+   * @param {object} style                The default styling of the segment/grid-highlight
+   * @returns {object} The adjusted style, or existing style if no adjustment is necessary
+   */
+  #getSpeedBasedStyle(waypoint, style) {
+    // If movement automation disabled, or if showing a different client's measurement, use default style
+    const noAutomation = game.settings.get("dnd5e", "disableMovementAutomation");
+    const isSameClient = game.user.id in this.token._plannedMovement;
+    if ( noAutomation || !isSameClient ) return style;
+
+    // Get actor's movement speed for currently selected token movement action
+    const movement = this.token.actor.system.attributes?.movement;
+    if (!movement) return style;
+    let currActionSpeed = movement[waypoint.action] ?? 0;
+
+    // If current action can fall back to walk, treat "max" speed as maximum between current & walk
+    if (CONFIG.DND5E.movementTypes[waypoint.action]?.walkFallback) {
+      currActionSpeed = Math.max(currActionSpeed, movement.walk);
+    }
+
+    // Color `normal` if <= max speed, else `double` if <= double max speed, else `triple`
+    const { normal, double, triple } = CONFIG.DND5E.tokenRulerColors;
+    const colors = [normal, double, triple];
+    style.color = colors[Math.clamp(Math.floor((waypoint.measurement.cost - 0.1) / currActionSpeed), 0, 2)];
+    return style;
+  }
 }
