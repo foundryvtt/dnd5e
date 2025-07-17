@@ -385,12 +385,23 @@ export class SpellList {
   /* -------------------------------------------- */
 
   /**
+   * Identifiers for all the available & unlinked spells in this list.
+   * @returns {Promise<string>}
+   */
+  get identifiers() {
+    return [...this.indexes.map(s => s.system?.identifier), ...this.#unlinked.map(u => u.identifier)].filter(_ => _);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Indexes for the available spells sorted by name.
    * @returns {object[]}
    */
   get indexes() {
     return Array.from(this.#spells.keys())
       .map(s => fromUuidSync(s))
+      .filter(_ => _)
       .sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
   }
 
