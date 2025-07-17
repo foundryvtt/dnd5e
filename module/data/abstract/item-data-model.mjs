@@ -51,7 +51,7 @@ export default class ItemDataModel extends SystemDataModel {
   get advancementLevel() {
     let item = this.parent;
     if ( ["class", "subclass"].includes(this.advancementRootItem?.type)
-      && this.advancementClassLinked ) item = item.advancementRootItem;
+      && this.advancementClassLinked ) item = this.advancementRootItem;
     return item.system.levels ?? item.class?.system.levels ?? item.actor?.system.details.level ?? 0;
   }
 
