@@ -1,3 +1,4 @@
+import { ScaleValueTypeUsage } from "../../data/advancement/scale-value.mjs";
 import { formatNumber, formatRange, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
@@ -45,6 +46,12 @@ export default class UsesField extends SchemaField {
 
     const periods = [];
     for ( const recovery of this.uses.recovery ) {
+      recovery.isScaleValue = recovery.period.startsWith("@scale");
+      if ( recovery.isScaleValue ) {
+        const scaleValue = foundry.utils.getProperty(rollData, recovery.period.replace("@", ""));
+        if ( scaleValue?.period ) recovery.period = scaleValue.period;
+      }
+
       if ( recovery.period === "recharge" ) {
         recovery.formula ??= "6";
         recovery.type = "recoverAll";
@@ -79,6 +86,48 @@ export default class UsesField extends SchemaField {
         range: min === 6 ? formatNumber(6) : formatRange(min, 6)
       })
     }));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recovery options for an item.
+   * @param {Item5e} item   Item for which the recovery options will be created.
+   * @param {string} value  Current recovery value.
+   * @returns {FormSelectOption[]|null}
+   */
+  static recoveryOptions(item, value) {
+    // For non-embedded items with a scale value, just show text input
+    if ( !item.isEmbedded && value.startsWith("@scale") ) return null;
+    const recoveryOptions = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;
+
+    // For embedded items, build a list of uses scale values to display
+    if ( item.isEmbedded ) {
+      const usesScaleValues = [];
+      for ( const [itemIdentifier, scaleValues] of Object.entries(item.actor.system.scale ?? {}) ) {
+        for ( const [scaleIdentifier, scaleValue] of Object.entries(scaleValues) ) {
+          if ( scaleValue instanceof ScaleValueTypeUsage ) usesScaleValues.push({
+            value: `@scale.${itemIdentifier}.${scaleIdentifier}`,
+            label: scaleValue.parent.title
+          });
+        }
+      }
+      if ( value.startsWith("@scale") && !usesScaleValues.find(s => s.value === value) ) return null;
+      recoveryOptions.push(
+        { rule: true },
+        ...usesScaleValues.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang))
+      );
+    }
+
+    // Not embedded, just show single Scale Value option that transform input into freeform text box
+    else {
+      recoveryOptions.push(
+        { rule: true },
+        { value: "@scale", label: game.i18n.localize("DND5E.ADVANCEMENT.ScaleValue.Title") }
+      );
+    }
+
+    return recoveryOptions;
   }
 
   /* -------------------------------------------- */

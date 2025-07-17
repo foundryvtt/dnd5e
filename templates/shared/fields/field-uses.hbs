@@ -37,7 +37,7 @@
         <div class="form-fields">
 
             {{!-- Period --}}
-            {{ formField fields.period name=(concat prefix "period") value=source.period options=@root.recoveryPeriods
+            {{ formField fields.period name=(concat prefix "period") value=source.period options=periodOptions
                          label="DND5E.Period" localize=true hint=false classes="label-top" rootId=@root.partId }}
 
             {{!-- Type --}}
