@@ -155,6 +155,10 @@
       .number-header, .level-number { grid-column: number; }
       .faces-header, .level-faces { grid-column: faces; }
     }
+    &[data-type="usage"] {
+      grid-template-columns: [level] max-content [value] 1fr [period] 2fr;
+      .period-header, .level-period { grid-column: period; }
+    }
     input, select {
       font-weight: bold;
       color: var(--color-text-dark-primary);
