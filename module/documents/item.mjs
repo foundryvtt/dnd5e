@@ -1156,9 +1156,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       name: "DND5E.Scroll.CreateScroll",
       icon: '<i class="fa-solid fa-scroll"></i>',
       callback: async li => {
-        let spell = game.items.get(li.dataset.documentId ?? li.dataset.entryId);
+        let spell = game.items.get(li.dataset.entryId);
         if ( app.collection instanceof foundry.documents.collections.CompendiumCollection ) {
-          spell = game.items.get(li.dataset.documentId ?? li.dataset.entryId);
+          spell = await app.collection.getDocument(li.dataset.entryId);
         }
         const scroll = await Item5e.createScrollFromSpell(spell);
         if ( scroll ) Item5e.create(scroll);
