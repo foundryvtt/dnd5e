@@ -1,6 +1,7 @@
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { parseOrString, staticID } from "../utils.mjs";
+import Item5e from "./item.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -455,15 +456,12 @@ export default class ActiveEffect5e extends ActiveEffect {
     // Create Items
     let createdItems = [];
     if ( this.parent.isEmbedded ) {
-      const riderItems = await Promise.all(profile.riders.item.map(async uuid => {
-        const itemData = (await fromUuid(uuid))?.toObject();
-        if ( itemData ) {
-          delete itemData._id;
-          foundry.utils.setProperty(itemData, "flags.dnd5e.enchantment", { origin: this.uuid });
+      const riderItems = await Item5e.createWithContents(
+        (await Promise.all(profile.riders.item.map(uuid => fromUuid(uuid)))).filter(_ => _), {
+          transformAll: item => item.clone({ "flags.dnd5e.enchantment.origin": this.uuid }, { keepId: true })
         }
-        return itemData;
-      }));
-      createdItems = await this.parent.actor.createEmbeddedDocuments("Item", riderItems.filter(i => i));
+      );
+      createdItems = await this.parent.actor.createEmbeddedDocuments("Item", riderItems, { keepId: true });
     }
 
     if ( createdActivities.length || createdEffects.length || createdItems.length ) {
