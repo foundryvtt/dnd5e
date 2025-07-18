@@ -3,10 +3,10 @@
 
     {{!-- Type --}}
     {{ formField fields.type.fields.value value=source.type.value choices=CONFIG.facilities.types labelAttr="label"
-                 blank=false }}
+                 blank=false localize=true }}
 
     {{!-- Sub-Type --}}
-    {{ formField fields.type.fields.subtype value=source.type.subtype choices=facilitySubtypes }}
+    {{ formField fields.type.fields.subtype value=source.type.subtype choices=facilitySubtypes localize=true }}
 
     {{!-- Size --}}
     {{ formField fields.size value=source.size choices=CONFIG.facilities.sizes labelAttr="label" }}
