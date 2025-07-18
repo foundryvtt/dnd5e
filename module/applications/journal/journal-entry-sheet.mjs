@@ -108,7 +108,7 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
    */
   static #makeNavigation(doc, dir) {
     const li = document.createElement("li");
-    if ( !doc ) return li;
+    if ( !doc?.testUserPermission(game.user, "OBSERVER") ) return li;
     const anchor = document.createElement("a");
     anchor.classList.add("content-link");
     if ( dir === "up" ) anchor.classList.add("parent");
