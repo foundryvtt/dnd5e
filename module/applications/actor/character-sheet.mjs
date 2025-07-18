@@ -892,13 +892,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-
-    if ( !this.actor.limited ) {
-      this._renderAttunement(context, options);
-      this._renderSpellbook(context, options);
-    }
+  async _onFirstRender(context, options) {
+    await super._onFirstRender(context, options);
 
     // Apply special context menus for items outside inventory elements
     const featuresElement = this.element.querySelector(`[data-tab="features"] ${this.options.elements.inventory}`);
@@ -911,6 +906,18 @@ export default class CharacterActorSheet extends BaseActorSheet {
       this.element, ".containers [data-item-id]", [],
       { onOpen: (...args) => featuresElement._onOpenContextMenu(...args), jQuery: false }
     );
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+
+    if ( !this.actor.limited ) {
+      this._renderAttunement(context, options);
+      this._renderSpellbook(context, options);
+    }
 
     // Show death tray at 0 HP
     const renderContext = options.renderContext ?? options.action;

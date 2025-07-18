@@ -558,15 +558,21 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-
+  _attachFrameListeners() {
+    super._attachFrameListeners();
     new ContextMenu5e(this.element, ".advancement-item[data-id]", [], {
       onOpen: target => dnd5e.documents.advancement.Advancement.onContextMenu(this.item, target), jQuery: false
     });
     new ContextMenu5e(this.element, ".activity[data-activity-id]", [], {
       onOpen: target => dnd5e.documents.activity.UtilityActivity.onContextMenu(this.item, target), jQuery: false
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
 
     new CONFIG.ux.DragDrop({
       dragSelector: ":is(.advancement-item, [data-activity-id], [data-effect-id], [data-item-id])",
