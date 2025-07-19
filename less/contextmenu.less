@@ -80,5 +80,17 @@
         color: var(--dnd5e-color-gold);
       }
     }
+    &.activeX {
+      font-weight: bold;
+      position: relative;
+
+      &::after {
+        content: "\f00d";
+        font-family: var(--font-awesome);
+        position: absolute;
+        right: .5rem;
+        color: var(--dnd5e-color-gold);
+      }
+    }
   }
 }

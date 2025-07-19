@@ -2046,7 +2046,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const schoolFilter = spellSchools.intersection(filters);
     const spellcastingClasses = new Set(Object.keys(this.actor.spellcastingClasses));
     const classFilter = spellcastingClasses.intersection(filters);
-    const actionFilter = new Set(actions).intersection(filters);
 
     return items.filter(item => {
 
@@ -2055,30 +2054,43 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( filtered !== undefined ) return filtered;
 
       // Action usage
-      if ( actionFilter.size ) {
+      for ( const f of actions ) {
+        if ( !filters.has(f) && !filters.has(`!${f}`) ) continue;
         if ( item.type === "spell" ) {
-          if ( !actionFilter.has(item.system.activation.type) ) return false;
+          if ( filters.has(f) && (item.system.activation.type !== f) ) return false;
+          if ( filters.has(`!${f}`) && (item.system.activation.type === f) ) return false;
+          continue;
         }
-        else if ( !item.system.activities?.size
-          || !item.system.activities.some(a => actionFilter.has(a.activation?.type)) ) return false;
+        if ( !item.system.activities?.size ) return false;
+        if ( filters.has(f) && item.system.activities.every(a => a.activation?.type !== f) ) return false;
+        if ( filters.has(`!${f}`) && item.system.activities.every(a => a.activation?.type === f) ) return false;
       }
 
       // Spell-specific filters
       if ( filters.has("ritual") && !item.system.properties?.has("ritual") ) return false;
+      if ( filters.has("!ritual") && item.system.properties?.has("ritual") ) return false;
       if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
+      if ( filters.has("!concentration") && item.system.properties?.has("concentration") ) return false;
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
+      if ( filters.has(`!${item.system.school}`) ) return false;
       if ( classFilter.size && !classFilter.has(item.system.classIdentifier) ) return false;
+      if ( filters.has(`!${item.system.classIdentifier}`) ) return false;
       if ( filters.has("prepared") ) return item.system.canPrepare && item.system.prepared;
+      if ( filters.has("!prepared") ) return item.system.canPrepare && !item.system.prepared;
 
       // Equipment-specific filters
       if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
+      if ( filters.has("!equipped") && (item.system.equipped === true) ) return false;
+
       if ( filters.has("mgc") && !item.system.properties?.has("mgc") ) return false;
+      if ( filters.has("!mgc") && item.system.properties?.has("mgc") ) return false;
 
       // Recovery
       for ( const f of recoveries ) {
-        if ( !filters.has(f) ) continue;
+        if ( !filters.has(f) && !filters.has(`!${f}`)) continue;
         if ( !item.system.uses?.recovery.length ) return false;
-        if ( item.system.uses.recovery.every(r => r.period !== f) ) return false;
+        if ( filters.has(f) && item.system.uses.recovery.every(r => r.period !== f) ) return false;
+        if ( filters.has(`!${f}`) && item.system.uses.recovery.every(r => r.period === f) ) return false;
       }
 
       return true;
