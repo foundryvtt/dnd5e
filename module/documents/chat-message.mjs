@@ -455,8 +455,8 @@ export default class ChatMessage5e extends ChatMessage {
     `;
     const evaluation = tray.querySelector("ul");
     const rows = targets.map(({ name, ac, uuid }) => {
-      if ( !game.user.isGM && (visibility !== "all") ) ac = "";
       const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
+      if ( !game.user.isGM && (visibility !== "all") ) ac = "";
       const li = document.createElement("li");
       Object.assign(li.dataset, { uuid, miss: isMiss });
       li.className = `target ${isMiss ? "miss" : "hit"}`;
