@@ -927,7 +927,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       const target = this.item.system.activities.get(targetId);
       if ( !target || (target === source) ) return;
       const siblings = this.item.system.activities.filter(a => a._id !== id);
-      const sortUpdates = SortingHelpers.performIntegerSort(source, { target, siblings });
+      const sortUpdates = foundry.utils.SortingHelpers.performIntegerSort(source, { target, siblings });
       const updateData = Object.fromEntries(sortUpdates.map(({ target, update }) => {
         return [target._id, { sort: update.sort }];
       }));
