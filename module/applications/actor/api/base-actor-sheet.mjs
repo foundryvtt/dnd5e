@@ -1856,7 +1856,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _filterItems(items, filters) {
-    const actions = ["action", "bonus", "reaction"];
+    const actions = ["action", "bonus", "reaction", "lair", "legendary"];
     const recoveries = ["lr", "sr"];
     const spellSchools = new Set(Object.keys(CONFIG.DND5E.spellSchools));
     const schoolFilter = spellSchools.intersection(filters);
