@@ -44,12 +44,6 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  _initialize(options) {
-    super._initialize(options);
-    return this.prepareData();
-  }
-
   static ERROR = AdvancementError;
 
   /* -------------------------------------------- */

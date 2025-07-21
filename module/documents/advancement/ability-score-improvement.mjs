@@ -79,7 +79,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   get isEpicBoon() {
     return (this.level >= AbilityScoreImprovementAdvancement.EPIC_BOON_LEVEL)
       && (this.item.type === "class")
-      && (this.item.system?.source?.rules ? (this.item.system.source.rules === "2024")
+      && (this.item.system.source?.rules ? (this.item.system.source.rules === "2024")
         : (game.settings.get("dnd5e", "rulesVersion") === "modern"));
   }
 
