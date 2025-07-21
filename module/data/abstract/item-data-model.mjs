@@ -222,7 +222,7 @@ export default class ItemDataModel extends SystemDataModel {
       return { days: Math.ceil(valueInGP * mundane.days), gold: Math.floor(valueInGP * mundane.gold) };
     }
 
-    const base = await Trait.getBaseItem(type.identifier ?? "", { fullItem: true });
+    const base = await Trait.getBaseItem(type?.identifier ?? "", { fullItem: true });
     if ( base && (baseItem !== "none") ) {
       if ( baseItem === "buy" ) gold += base.system.price.valueInGP ?? 0;
       else {
