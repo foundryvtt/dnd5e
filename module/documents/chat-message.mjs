@@ -131,6 +131,7 @@ export default class ChatMessage5e extends ChatMessage {
 
     await this._enrichChatCard(html);
     this._collapseTrays(html);
+    dnd5e.enrichers.activateChatListeners(this, html);
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
