@@ -547,7 +547,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       hover: CONFIG.DND5E.proficiencyLevels[entry.value],
       label: (property === "skills") ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, { trait: "tool" }),
       source: context.source[property]?.[key]
-    }));
+    })).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
   }
 
   /* -------------------------------------------- */
