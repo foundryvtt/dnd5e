@@ -133,6 +133,7 @@ export default class ChatMessage5e extends ChatMessage {
     this._collapseTrays(html);
     this._activateActivityListeners(html);
     dnd5e.bastion._activateChatListeners(this, html);
+    dnd5e.enrichers.activateChatListeners(this, html);
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
