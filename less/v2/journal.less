@@ -190,8 +190,9 @@
 
     .action-buttons {
       .previous, .next {
-        border: none;
+        --button-background-color: transparent;
         flex: 0 0 var(--button-size);
+        transition: background-color 250ms ease;
       }
 
       .create {
@@ -203,7 +204,9 @@
       }
     }
 
-    &:not(.expanded) .create { display: none; }
+    &:not(.expanded) {
+      .create, .lock-mode { display: none; }
+    }
 
     .journal-entry-content {
       background: var(--dnd5e-journal-content-background, unset);
@@ -220,6 +223,7 @@
     font-family: var(--font-body);
     font-weight: normal;
     transition: all 250ms ease;
+    justify-content: start;
   }
 }
 
