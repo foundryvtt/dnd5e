@@ -1,13 +1,13 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
-import AdvancementField from "../fields/advancement-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
+import AdvancementTemplate from "./templates/advancement.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 
-const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { ItemTypeData } from "./fields/item-type-field.mjs";
@@ -16,10 +16,10 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
 /**
  * Data definition for Feature items.
  * @mixes ActivitiesTemplate
+ * @mixes AdvancementTemplate
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  *
- * @property {Advancement[]} advancement            Advancement objects for this feature.
  * @property {number} cover                         Amount of cover this feature affords to its crew on a vehicle.
  * @property {boolean} crewed                       Is this vehicle feature currently crewed?
  * @property {object} enchant
@@ -34,7 +34,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {Omit<ItemTypeData, "baseItem">} type  Feature type and subtype.
  */
 export default class FeatData extends ItemDataModel.mixin(
-  ActivitiesTemplate, ItemDescriptionTemplate, ItemTypeTemplate
+  ActivitiesTemplate, AdvancementTemplate, ItemDescriptionTemplate, ItemTypeTemplate
 ) {
 
   /* -------------------------------------------- */
@@ -49,7 +49,6 @@ export default class FeatData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       cover: new NumberField({ min: 0, max: 1 }),
       crewed: new BooleanField(),
       enchant: new SchemaField({

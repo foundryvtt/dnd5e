@@ -1,20 +1,17 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
-import AdvancementField from "../fields/advancement-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import SpellcastingField from "./fields/spellcasting-field.mjs";
+import AdvancementTemplate from "./templates/advancement.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
-
-const { ArrayField } = foundry.data.fields;
 
 /**
  * Data definition for Subclass items.
  * @mixes ItemDescriptionTemplate
  *
- * @property {object[]} advancement    Advancement objects for this subclass.
  * @property {string} classIdentifier  Identifier slug for the class with which this subclass should be associated.
  * @property {SpellcastingField} spellcasting  Details on subclass's spellcasting ability.
  */
-export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTemplate) {
+export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplate, ItemDescriptionTemplate) {
 
   /* -------------------------------------------- */
   /*  Model Configuration                         */
@@ -28,7 +25,6 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       classIdentifier: new IdentifierField({
         required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint"
       }),

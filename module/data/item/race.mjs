@@ -3,20 +3,19 @@ import { defaultUnits, formatLength, splitSemicolons } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
 import { CreatureTypeField, MovementField, SensesField } from "../shared/_module.mjs";
+import AdvancementTemplate from "./templates/advancement.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
-
-const { ArrayField } = foundry.data.fields;
 
 /**
  * Data definition for Race items.
+ * @mixes AdvancementTemplate
  * @mixes ItemDescriptionTemplate
  *
- * @property {object[]} advancement    Advancement objects for this race.
  * @property {MovementField} movement
  * @property {SensesField} senses
  * @property {CreatureType} type
  */
-export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplate) {
+export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, ItemDescriptionTemplate) {
 
   /* -------------------------------------------- */
   /*  Model Configuration                         */
@@ -30,7 +29,6 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       movement: new MovementField({ special: false }, { initialUnits: defaultUnits("length") }),
       senses: new SensesField({}, { initialUnits: defaultUnits("length") }),
       type: new CreatureTypeField({ swarm: false }, { initial: { value: "humanoid" } })
@@ -163,11 +161,8 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async _preCreate(data, options, user) {
-    if ( (await super._preCreate(data, options, user)) === false ) return false;
-    if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
-
+  /** @override */
+  _advancementToCreate(options) {
     const toCreate = [
       { type: "Size" },
       { type: "Trait", configuration: { grants: ["languages:standard:common"] } }
@@ -175,11 +170,15 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
     if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
       toCreate.unshift({ type: "AbilityScoreImprovement" });
     }
-    this.parent.updateSource({"system.advancement": toCreate.map(c => {
-      const config = CONFIG.DND5E.advancementTypes[c.type];
-      const cls = config.documentClass ?? config;
-      return new cls(c, { parent: this.parent }).toObject();
-    })});
+    return toCreate;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    await this.preCreateAdvancement(data, options);
   }
 
   /* -------------------------------------------- */
