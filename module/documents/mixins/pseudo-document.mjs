@@ -233,13 +233,13 @@ export default function PseudoDocumentMixin(Base) {
      */
     async deleteDialog(options={}) {
       const type = game.i18n.localize(this.metadata.label);
-      return Dialog.confirm({
-        title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name || this.title}`,
+      return foundry.applications.api.Dialog.confirm({
+        window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name || this.title}` },
         content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.format("SIDEBAR.DeleteWarning", {
           type
         })}</p>`,
-        yes: this.delete.bind(this),
-        options: options
+        yes: { callback: this.delete.bind(this) },
+        ...options
       });
     }
 

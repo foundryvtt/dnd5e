@@ -572,25 +572,30 @@ export default class AdvancementManager extends Application5e {
   /** @inheritDoc */
   async close(options={}) {
     if ( !options.skipConfirmation ) {
-      return new Dialog({
-        title: `${game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Title")}: ${this.actor.name}`,
+      return new foundry.applications.api.Dialog({
+        window: {
+          title: `${game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Title")}: ${this.actor.name}`
+        },
+        position: { width: 400 },
         content: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Message"),
-        buttons: {
-          close: {
-            icon: '<i class="fas fa-times" inert></i>',
+        buttons: [
+          {
+            action: "abort",
+            icon: "fas fa-times",
             label: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Action.Stop"),
+            default: true,
             callback: () => {
               this.#visualizer?.close();
               super.close(options);
             }
           },
-          continue: {
-            icon: '<i class="fas fa-chevron-right" inert></i>',
+          {
+            action: "continue",
+            icon: "fas fa-chevron-right",
             label: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Action.Continue")
           }
-        },
-        default: "close"
-      }).render(true);
+        ]
+      }).render({ force: true });
     }
     this.#visualizer?.close();
     await super.close(options);
@@ -825,9 +830,9 @@ export default class AdvancementManager extends Application5e {
    * @returns {Promise}
    */
   async #restart(event) {
-    const restart = await Dialog.confirm({
-      title: game.i18n.localize("DND5E.ADVANCEMENT.Manager.RestartPrompt.Title"),
-      content: game.i18n.localize("DND5E.ADVANCEMENT.Manager.RestartPrompt.Message")
+    const restart = await foundry.applications.api.Dialog.confirm({
+      window: { title: game.i18n.localize("DND5E.ADVANCEMENT.Manager.RestartPrompt.Title") },
+      content: `<p>${game.i18n.localize("DND5E.ADVANCEMENT.Manager.RestartPrompt.Message")}</p>`
     });
     if ( !restart ) return;
     // While there is still a renderable step.

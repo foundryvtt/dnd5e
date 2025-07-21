@@ -645,7 +645,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    * Add modifications to the core ActiveEffect config.
    * @param {ActiveEffectConfig} app           The ActiveEffect config.
    * @param {HTMLElement} html                 The ActiveEffect config element.
-   * @param {ApplicationRenderContext} object  The app's rendering context.
+   * @param {ApplicationRenderContext} context The app's rendering context.
    */
   static onRenderActiveEffectConfig(app, html, context) {
     const element = new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {}).toFormGroup({
@@ -749,30 +749,29 @@ export default class ActiveEffect5e extends ActiveEffect {
       return;
     }
     const choices = effects.reduce((acc, effect) => {
-      const data = effect.getFlag("dnd5e", "item.data");
-      acc[effect.id] = data?.name ?? actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless");
+      const data = effect.getFlag("dnd5e", "item");
+      acc[effect.id] = data?.name ?? actor.items.get(data?.id)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless");
       return acc;
     }, {});
     const options = HandlebarsHelpers.selectOptions(choices, { hash: { sort: true } });
     const content = `
-    <form class="dnd5e">
-      <p>${game.i18n.localize("DND5E.ConcentratingEndChoice")}</p>
-      <div class="form-group">
-        <label>${game.i18n.localize("DND5E.SOURCE.FIELDS.source.label")}</label>
-        <div class="form-fields">
-          <select name="source">${options}</select>
-        </div>
+    <p>${game.i18n.localize("DND5E.ConcentratingEndChoice")}</p>
+    <div class="form-group">
+      <label>${game.i18n.localize("DND5E.SOURCE.FIELDS.source.label")}</label>
+      <div class="form-fields">
+        <select name="source">${options}</select>
       </div>
-    </form>`;
-    Dialog.prompt({
-      content: content,
-      callback: ([html]) => {
-        const source = new foundry.applications.ux.FormDataExtended(html.querySelector("FORM")).object.source;
-        if ( source ) actor.endConcentration(source);
-      },
-      rejectClose: false,
-      title: game.i18n.localize("DND5E.Concentration"),
-      label: game.i18n.localize("DND5E.Confirm")
+    </div>`;
+    foundry.applications.api.Dialog.prompt({
+      content,
+      window: { title: game.i18n.localize("DND5E.Concentration") },
+      ok: {
+        label: game.i18n.localize("DND5E.Confirm"),
+        callback: (event, button, dialog) => {
+          const source = new foundry.applications.ux.FormDataExtended(button.form).object.source;
+          if ( source ) actor.endConcentration(source);
+        }
+      }
     });
   }
 
