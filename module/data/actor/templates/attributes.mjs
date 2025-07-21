@@ -421,7 +421,7 @@ export default class AttributesFields {
     let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
-    for ( const type in Object.keys(CONFIG.DND5E.movementTypes) ) {
+    for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
       let speed = Math.max(0, this.attributes.movement[type] - reduction);
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
       else {
