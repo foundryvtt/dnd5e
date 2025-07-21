@@ -2813,7 +2813,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( settings.keep.has("type") ) d.system.details.type = o.system.details.type;
 
       // Keep HP & HD
-      if ( settings.keep.has("hp") ) d.system.attributes.hp = { ...this.system.attributes.hp };
+      if ( settings.keep.has("hp") ) d.system.attributes.hp = {
+        ...o.system.attributes.hp,
+        max: this.system.attributes.hp.max
+      };
 
       // Keep damage resistances
       if ( settings.keep.has("resistances") ) {
@@ -2829,7 +2832,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       // Set armor class
       const minimumAC = simplifyBonus(settings.minimumAC, rollData);
-      if ( minimumAC > target.system.attributes.ac.value ) {
+      if ( minimumAC > source.system.attributes.ac.value ) {
         d.system.attributes.ac.calc = "natural";
         d.system.attributes.ac.flat = minimumAC;
       }
