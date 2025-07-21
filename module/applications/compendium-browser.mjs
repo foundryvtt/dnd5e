@@ -577,7 +577,10 @@ export default class CompendiumBrowser extends Application5e {
         arr.push(foundry.utils.mergeObject(data, {
           key, sort,
           value: context.filters.additional?.[key],
-          locked: this.options.filters.locked?.additional?.[key]
+          locked: data.type === "range" ? {
+            min: context.filters.additional?.[key]?.min !== undefined,
+            max: context.filters.additional?.[key]?.max !== undefined
+          } : this.options.filters.locked?.additional?.[key] !== undefined
         }, { inplace: false }));
         return arr;
       }, []);
