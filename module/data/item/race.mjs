@@ -169,9 +169,12 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
     if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
 
     const toCreate = [
-      { type: "AbilityScoreImprovement" }, { type: "Size" },
+      { type: "Size" },
       { type: "Trait", configuration: { grants: ["languages:standard:common"] } }
     ];
+    if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
+      toCreate.unshift({ type: "AbilityScoreImprovement" });
+    }
     this.parent.updateSource({"system.advancement": toCreate.map(c => {
       const config = CONFIG.DND5E.advancementTypes[c.type];
       const cls = config.documentClass ?? config;
