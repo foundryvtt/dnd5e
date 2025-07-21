@@ -643,17 +643,19 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Add modifications to the core ActiveEffect config.
-   * @param {ActiveEffectConfig} app   The ActiveEffect config.
-   * @param {jQuery|HTMLElement} html  The ActiveEffect config element.
+   * @param {ActiveEffectConfig} app           The ActiveEffect config.
+   * @param {HTMLElement} html                 The ActiveEffect config element.
+   * @param {ApplicationRenderContext} object  The app's rendering context.
    */
-  static onRenderActiveEffectConfig(app, html) {
+  static onRenderActiveEffectConfig(app, html, context) {
     const element = new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {}).toFormGroup({
       label: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.label"),
       hint: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.hint")
     }, {
       name: "flags.dnd5e.riders.statuses",
       value: app.document.getFlag("dnd5e", "riders.statuses") ?? [],
-      options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name }))
+      options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name })),
+      disabled: !context.editable
     });
     html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")?.after(element);
   }
@@ -662,7 +664,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Adjust exhaustion icon display to match current level.
-   * @param {Application} app            The TokenHUD application.
+   * @param {Application} app   The TokenHUD application.
    * @param {HTMLElement} html  The TokenHUD HTML.
    */
   static onTokenHUDRender(app, html) {
