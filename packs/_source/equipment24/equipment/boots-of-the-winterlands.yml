@@ -98,6 +98,50 @@ effects:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgBootsOfTheWin.QMx1VWIiJ0XZHepP'
+  - name: Winter Strider
+    img: icons/magic/water/barrier-ice-crystal-wall-faceted-blue.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgBootsOfTheWin
+    _id: jm5ygTiAc2Vn7LNY
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.ignoredDifficultTerrain
+        mode: 2
+        value: ice
+        priority: null
+      - key: system.attributes.movement.ignoredDifficultTerrain
+        mode: 2
+        value: snow
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>You ignore Difficult Terrain created by ice or snow.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 5.1.0
+      createdTime: 1753118928666
+      modifiedTime: 1753118997627
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!dmgBootsOfTheWin.jm5ygTiAc2Vn7LNY'
 flags:
   dnd5e:
     riders:

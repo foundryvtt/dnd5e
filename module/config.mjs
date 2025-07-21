@@ -2503,8 +2503,20 @@ preLocalize("healingTypes", { keys: ["label"] });
  * @enum {{ label: string }}
  */
 DND5E.difficultTerrainTypes = {
+  ice: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Ice"
+  },
+  liquid: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Liquid"
+  },
+  plants: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Plants"
+  },
   rocks: {
     label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Rocks"
+  },
+  slope: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Slope"
   },
   snow: {
     label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Snow"

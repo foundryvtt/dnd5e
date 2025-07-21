@@ -360,6 +360,10 @@ system:
       walk: 40
       units: null
       hover: false
+      ignoredDifficultTerrain:
+        - ice
+        - snow
+      special: ''
     attunement:
       max: 3
     senses:
@@ -1701,11 +1705,11 @@ folder: xmXOrBADA4LyJOGl
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1745415505941
-  modifiedTime: 1745712712855
+  modifiedTime: 1753119299704
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
