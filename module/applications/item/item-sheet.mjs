@@ -9,7 +9,7 @@ import EffectsElement from "../components/effects.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import CreatureTypeConfig from "../shared/creature-type-config.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
-import SourceConfig from "../source-config.mjs";
+import SourceConfig from "../shared/source-config.mjs";
 import StartingEquipmentConfig from "./config/starting-equipment-config.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
