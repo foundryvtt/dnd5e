@@ -611,7 +611,7 @@ export function applyLegacyRules() {
   const DND5E = CONFIG.DND5E;
 
   // Set half-casters to round down.
-  delete DND5E.spellcasting.leveled.progressions.half.roundUp;
+  DND5E.spellcasting.spell.progression.half.roundUp = false;
 
   // Adjust Wild Shape and Polymorph presets.
   for ( const preset of ["polymorph", "wildshape"] ) {
