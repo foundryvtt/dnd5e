@@ -5,7 +5,7 @@ import EffectsElement from "../../components/effects.mjs";
 import MovementSensesConfig from "../../shared/movement-senses-config.mjs";
 import CreatureTypeConfig from "../../shared/creature-type-config.mjs";
 
-import SourceConfig from "../../source-config.mjs";
+import SourceConfig from "../../shared/source-config.mjs";
 
 import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../../advancement/advancement-manager.mjs";
