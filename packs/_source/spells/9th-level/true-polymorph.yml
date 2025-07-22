@@ -132,19 +132,74 @@ system:
         spent: 0
         recovery: []
       sort: 0
+    7K2q8LlTG7EVWGfl:
+      type: transform
+      sort: 0
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      profiles:
+        - cr: '@target.cr'
+          name: ''
+          _id: LHLfS5BSpourwoiO
+          sizes: []
+          types: []
+          movement: []
+          level:
+            min: null
+            max: null
+      settings: null
+      transform:
+        customize: false
+        preset: polymorph
+      name: ''
+      _id: 7K2q8LlTG7EVWGfl
+      img: ''
   identifier: true-polymorph
 sort: 0
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
 img: icons/magic/control/debuff-energy-snare-purple-pink.webp
 effects: []
 folder: KL6ZY4VRMjojGrL4
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.1.0
   createdTime: 1725037355728
-  modifiedTime: 1725992719711
+  modifiedTime: 1753221658554
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!QbQZKoXOgHWN06aa'
