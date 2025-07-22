@@ -574,13 +574,17 @@ export default class CompendiumBrowser extends Application5e {
           case "set": sort = 3; break;
         }
 
+        const generateLocked = data => {
+          if ( foundry.utils.getType(data) === "Object" ) {
+            return Object.fromEntries(Object.entries(data).map(([k, v]) => [k, generateLocked(v)]));
+          }
+          return data !== undefined;
+        };
+
         arr.push(foundry.utils.mergeObject(data, {
           key, sort,
           value: context.filters.additional?.[key],
-          locked: data.type === "range" ? {
-            min: context.filters.additional?.[key]?.min !== undefined,
-            max: context.filters.additional?.[key]?.max !== undefined
-          } : this.options.filters.locked?.additional?.[key] !== undefined
+          locked: generateLocked(this.options.filters.locked?.additional?.[key])
         }, { inplace: false }));
         return arr;
       }, []);
