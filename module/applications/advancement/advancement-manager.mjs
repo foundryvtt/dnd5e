@@ -580,7 +580,7 @@ export default class AdvancementManager extends Application5e {
         content: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Message"),
         buttons: [
           {
-            action: "abort",
+            action: "stop",
             icon: "fas fa-times",
             label: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Action.Stop"),
             default: true,
