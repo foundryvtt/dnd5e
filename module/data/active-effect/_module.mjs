@@ -1,7 +1,12 @@
 import EnchantmentData from "./enchantment.mjs";
+import StandardEffectData from "./standard.mjs";
 
-export { EnchantmentData };
+export {
+  EnchantmentData,
+  StandardEffectData
+};
 
 export const config = {
-  enchantment: EnchantmentData
+  enchantment: EnchantmentData,
+  standard: StandardEffectData
 };
