@@ -211,7 +211,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migratePreparation(source) {
-    if ( !("preparation" in source) ) return;
+    if ( source.preparation === undefined ) return;
     if ( source.preparation.mode === "always" ) {
       if ( !("method" in source) ) source.method = "spell";
       if ( !("prepared" in source) ) source.prepared = 2;
