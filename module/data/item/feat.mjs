@@ -36,7 +36,7 @@ export default class FeatData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.FEATURE", "DND5E.ENCHANTMENT", "DND5E.Prerequisites", "DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.FEATURE", "DND5E.Prerequisites", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
