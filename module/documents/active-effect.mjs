@@ -156,6 +156,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
     }
 
+    else if ( data.type === "base" ) {
+      data.type = "standard";
+      foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
+    }
+
     return super._initializeSource(data, options);
   }
 
@@ -164,6 +169,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   static migrateData(data) {
     data = super.migrateData(data);
+
     for ( const change of data.changes ?? [] ) {
       if ( change.key === "flags.dnd5e.initiativeAdv" ) {
         change.key = "system.attributes.init.roll.mode";
@@ -171,6 +177,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         change.value = 1;
       }
     }
+
+    if ( data.flags?.dnd5e?.riders?.statuses && !data.system?.rider?.statuses ) {
+      foundry.utils.setProperty(data, "system.rider.statuses", data.flags.dnd5e.riders.statuses);
+      delete data.flags.dnd5e.riders.statuses;
+    }
+
     return data;
   }
 
@@ -369,6 +381,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       { since: "DnD5e 5.1", until: "DnD5e 5.3" }
     );
   }
+
   /* -------------------------------------------- */
   /*  Lifecycle                                   */
   /* -------------------------------------------- */
@@ -429,11 +442,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @returns {Promise<ActiveEffect5e[]>}      Created rider effects.
    */
   async createRiderConditions() {
-    const riders = new Set();
-
-    for ( const status of this.getFlag("dnd5e", "riders.statuses") ?? [] ) {
-      riders.add(status);
-    }
+    const riders = new Set(this.system.riders?.statuses ?? []);
 
     for ( const status of this.statuses ) {
       const r = CONFIG.statusEffects.find(e => e.id === status)?.riders ?? [];
@@ -713,16 +722,25 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @param {ApplicationRenderContext} context The app's rendering context.
    */
   static onRenderActiveEffectConfig(app, html, context) {
-    const element = new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {}).toFormGroup({
-      label: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.label"),
-      hint: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.hint")
-    }, {
-      name: "flags.dnd5e.riders.statuses",
-      value: app.document.getFlag("dnd5e", "riders.statuses") ?? [],
+    if ( app.document.system.onRenderActiveEffectConfig?.(app, html, context) === false ) return;
+    const fields = app.document.system.schema.fields;
+    const magicalField = fields.magical?.toFormGroup({}, {
+      value: app.document.system._source.magical,
+      disabled: !context.editable
+    });
+    const statusesField = fields.rider?.fields?.statuses?.toFormGroup({}, {
+      value: app.document.system._source.rider?.statuses ?? [],
       options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name })),
       disabled: !context.editable
     });
-    html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")?.after(element);
+    const detailsTab = html.querySelector("[data-application-part=details]");
+    const statuses = detailsTab.querySelector("& > .form-group:has([name=statuses])");
+    if ( statuses ) {
+      if ( magicalField ) statuses?.before(magicalField);
+      if ( statusesField ) statuses?.after(statusesField);
+    } else {
+      detailsTab.append(magicalField, statusesField);
+    }
 
     // Add tooltip with link to wiki for effects/enchantments
     const helpIconElement = document.createElement("i");

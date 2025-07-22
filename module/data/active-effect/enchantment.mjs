@@ -1,15 +1,31 @@
 import { DamageData } from "../shared/damage-field.mjs";
 
 const { ActiveEffectTypeDataModel } = foundry.data;
+const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
 const { TypeDataModel } = foundry.abstract;
 
 /**
  * System data model for enchantment active effects.
  */
 export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeDataModel) {
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT", "DND5E.EFFECT.RIDER"];
+
+  /* -------------------------------------------- */
+
   /** @override */
   static defineSchema() {
-    return ActiveEffectTypeDataModel ? super.defineSchema() : {};
+    return {
+      ...(ActiveEffectTypeDataModel ? super.defineSchema() : {}),
+      magical: new BooleanField({ initial: true }),
+      rider: new SchemaField({
+        statuses: new SetField(new StringField())
+      })
+    };
   }
 
   /* -------------------------------------------- */
@@ -111,5 +127,20 @@ export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeD
         change.key = "system.prepared";
         break;
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners & Handlers                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Add modifications to the core ActiveEffect config.
+   * @param {ActiveEffectConfig} app           The ActiveEffect config.
+   * @param {HTMLElement} html                 The ActiveEffect config element.
+   * @param {ApplicationRenderContext} object  The app's rendering context.
+   */
+  onRenderActiveEffectConfig(app, html, context) {
+    const toRemove = html.querySelectorAll('.form-group:has([name="transfer"], [name="statuses"])');
+    toRemove.forEach(f => f.remove());
   }
 }

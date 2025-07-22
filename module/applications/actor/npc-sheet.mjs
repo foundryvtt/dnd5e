@@ -90,7 +90,7 @@ export default class NPCActorSheet extends BaseActorSheet {
     { tab: "features", label: "DND5E.Features", icon: "fas fa-list" },
     { tab: "inventory", label: "DND5E.Inventory", svg: "systems/dnd5e/icons/svg/backpack.svg" },
     { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
-    { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
+    { tab: "effects", label: "DND5E.EFFECT.Tab", icon: "fas fa-bolt" },
     { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" },
     { tab: "specialTraits", label: "DND5E.SpecialTraits", icon: "fas fa-star" }
   ];
