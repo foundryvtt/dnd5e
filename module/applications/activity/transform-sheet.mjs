@@ -73,6 +73,10 @@ export default class TransformSheet extends ActivitySheet {
     context.movementTypeOptions = Object.entries(CONFIG.DND5E.movementTypes)
       .map(([value, { label }]) => ({ value, label }));
 
+    context.profileModes = [
+      { value: "", label: game.i18n.localize("DND5E.TRANSFORM.FIELDS.transform.mode.Direct") },
+      { value: "cr", label: game.i18n.localize("DND5E.TRANSFORM.FIELDS.transform.mode.CR") }
+    ];
     context.profiles = context.source.profiles.map((data, index) => ({
       data, index,
       collapsed: this.expandedSections.get(`profiles.${data._id}`) ? "" : "collapsed",

@@ -4297,6 +4297,9 @@
         "types": {
           "hint": "List of creature types from which the source creature can be selected.",
           "label": "Creature Types"
+        },
+        "uuid": {
+          "label": "Linked Actor"
         }
       },
       "label": "Transform Profiles"
@@ -4314,9 +4317,8 @@
       "mode": {
         "label": "Mode",
         "hint": "Sets how the transformation source creatures are selected.",
-        "Appearance": "Appearance Only",
-        "Default": "Compendium Browser",
-        "Direct": "Direct Link"
+        "CR": "By Challenge Rating",
+        "Direct": "By Direct Link"
       },
       "preset": {
         "label": "Preset"
