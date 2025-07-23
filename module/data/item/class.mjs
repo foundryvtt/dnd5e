@@ -251,12 +251,12 @@ export default class ClassData extends ItemDataModel.mixin(
   _advancementToCreate(options) {
     return [
       { type: "HitPoints" },
+      { type: "Subclass", level: 3 },
       { type: "AbilityScoreImprovement", level: 4 },
       { type: "AbilityScoreImprovement", level: 8 },
       { type: "AbilityScoreImprovement", level: 12 },
       { type: "AbilityScoreImprovement", level: 16 },
-      { type: "AbilityScoreImprovement", level: 19 },
-      { type: "ItemGrant", title: game.i18n.localize("DND5E.ADVANCEMENT.Defaults.ClassFeatures"), level: 1 }
+      { type: "AbilityScoreImprovement", level: 19 }
     ];
   }
 
