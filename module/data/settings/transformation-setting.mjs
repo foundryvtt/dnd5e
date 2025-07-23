@@ -11,6 +11,7 @@ const { BooleanField, SetField, StringField } = foundry.data.fields;
  * @property {string} [minimumAC]         Formula for minimum armor class for transformed creature.
  * @property {Set<string>} other
  * @property {string} [preset]
+ * @property {Set<string>} [spellLists]   Spell lists to keep if actor has matching item.
  * @property {string} [tempFormula]       Formula for temp HP that will be added during transformation.
  * @property {boolean} [transformTokens]
  */
@@ -34,6 +35,7 @@ export default class TransformationSetting extends foundry.abstract.DataModel {
       minimumAC: new FormulaField({ deterministic: true }),
       other: new SetField(new StringField(), { initial: () => TransformationSetting.#initial("other") }),
       preset: new StringField({ initial: null, nullable: true }),
+      spellLists: new SetField(new StringField()),
       tempFormula: new FormulaField({ determinstic: true }),
       transformTokens: new BooleanField({ initial: true })
     };
@@ -99,7 +101,7 @@ export default class TransformationSetting extends foundry.abstract.DataModel {
    * Create a transformation setting object from an old TransformationOptions object.
    * @param {TransformationOptions} options
    * @returns {TransformationSetting}
-   * @deprecated since DnD5e 4.4, targeted for removal in DnD5e 5.0
+   * @deprecated since DnD5e 4.4, targeted for removal in DnD5e 5.2
    */
   static _fromDeprecatedConfig(options) {
     const settings = {};
@@ -148,7 +150,7 @@ export default class TransformationSetting extends foundry.abstract.DataModel {
   /**
    * Convert a transformation setting to an old config object.
    * @returns {TransformationOptions}
-   * @deprecated since DnD5e 4.4, targeted for removal in DnD5e 5.0
+   * @deprecated since DnD5e 4.4, targeted for removal in DnD5e 5.2
    */
   _toDeprecatedConfig() {
     const { effects, keep, merge, other, ...remainder } = this.toObject();
@@ -184,12 +186,8 @@ export default class TransformationSetting extends foundry.abstract.DataModel {
     }, new Set());
 
     const otherSettings = Object.entries(TransformationSetting.schema.fields)
-      .map(([name, field]) => name !== "preset" && !TransformationSetting.BOOLEAN_CATEGORIES.includes(name) ? ({
-        field,
-        name: `${prefix}${name}`,
-        value: this[name],
-        input: field instanceof BooleanField ? createCheckboxInput : undefined
-      }) : null)
+      .map(([name, field]) => name !== "preset" && !TransformationSetting.BOOLEAN_CATEGORIES.includes(name)
+        ? this.createFormField(name, field, { prefix }) : null)
       .filter(_ => _);
 
     return TransformationSetting.BOOLEAN_CATEGORIES.map(cat => ({
@@ -208,5 +206,26 @@ export default class TransformationSetting extends foundry.abstract.DataModel {
         ...(cat === "other" ? otherSettings : [])
       ]
     }));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a field entry for form rendering for a non-boolean field.
+   * @param {string} name              Name of the field.
+   * @param {DataField} field          Underlying data field.
+   * @param {object} options
+   * @param {string} [options.prefix]  Prefix before the field name.
+   * @returns {object}
+   */
+  createFormField(name, field, { prefix="" }) {
+    const descriptor = {
+      field,
+      name: `${prefix}${name}`,
+      input: field instanceof BooleanField ? createCheckboxInput : undefined,
+      value: this[name]
+    };
+    if ( name === "spellLists" ) descriptor.options = dnd5e.registry.spellLists.options;
+    return descriptor;
   }
 }

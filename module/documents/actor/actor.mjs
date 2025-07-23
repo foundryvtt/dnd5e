@@ -2870,6 +2870,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( settings.keep.has("languages") ) d.system.traits.languages = o.system.traits.languages;
 
       // Keep specific items from the original data
+      const spellIdentifiers = settings.spellLists.size ? new Set(
+        Array.from(settings.spellLists)
+          .map(id => dnd5e.registry.spellLists.forType(...id.split(":")))
+          .filter(list => this.identifiedItems.get(list?.metadata.identifier, list?.metadata.type)?.size)
+          .flatMap(list => Array.from(list.identifiers))
+      ) : null;
       const profDiff = source.system.attributes.prof - this.system.attributes.prof;
       d.items = d.items.map(i => {
         if ( settings.keep.has("class") && ((i.type === "feat") || (i.type === "weapon")) ) {
@@ -2884,7 +2890,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           case "class":
           case "subclass": return settings.keep.has("class") || settings.keep.has("hp");
           case "feat": return settings.keep.has("feats");
-          case "spell": return settings.keep.has("spells");
+          case "spell": return spellIdentifiers?.has(i.system.identifier)
+            || (!spellIdentifiers && settings.keep.has("spells"));
           case "race": return settings.keep.has("type");
           default: return settings.keep.has("items");
         }
