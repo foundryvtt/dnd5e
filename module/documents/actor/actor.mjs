@@ -1236,20 +1236,23 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   rollAbility(config={}, dialog={}, message={}) {
     const abilityId = config.ability;
     const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
-    new Dialog({
-      title: `${game.i18n.format("DND5E.AbilityPromptTitle", { ability: label })}: ${this.name}`,
+    new foundry.applications.api.Dialog({
+      window: { title: `${game.i18n.format("DND5E.AbilityPromptTitle", { ability: label })}: ${this.name}` },
+      position: { width: 400 },
       content: `<p>${game.i18n.format("DND5E.AbilityPromptText", { ability: label })}</p>`,
-      buttons: {
-        test: {
+      buttons: [
+        {
+          action: "test",
           label: game.i18n.localize("DND5E.ActionAbil"),
           callback: () => this.rollAbilityCheck(config, dialog, message)
         },
-        save: {
+        {
+          action: "save",
           label: game.i18n.localize("DND5E.ActionSave"),
           callback: () => this.rollSavingThrow(config, dialog, message)
         }
-      }
-    }).render(true);
+      ]
+    }).render({ force: true });
   }
 
   /* -------------------------------------------- */

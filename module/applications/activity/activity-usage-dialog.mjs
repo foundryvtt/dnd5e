@@ -208,7 +208,9 @@ export default class ActivityUsageDialog extends Dialog5e {
       if ( existingConcentration.length ) {
         const optional = existingConcentration.length < (this.actor.system.attributes?.concentration?.limit ?? 0);
         context.fields.push({
-          field: new StringField({ label: game.i18n.localize("DND5E.ConcentratingEnd") }),
+          field: new StringField({
+            required: true, label: game.i18n.localize("DND5E.ConcentratingEnd"), blank: optional
+          }),
           name: "concentration.end",
           value: this.config.concentration?.end,
           options: optional ? [{ value: "", label: "—" }, ...existingConcentration] : existingConcentration
