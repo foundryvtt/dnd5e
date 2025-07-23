@@ -8,11 +8,7 @@ system:
       creature within 60 feet of you succeeds on or fails a D20 Test, you can
       roll 2d4 and apply the total rolled as a bonus or penalty to the d20 roll.
       Once you use this benefit, you can't use it again until you roll
-      Initiative or finish a Short or Long Rest.</p><section
-      id="secret-zl5SPZXJtl1mEKOl" class="secret"><p><strong>Foundry
-      Note</strong></p><p>The <strong>Improve Fate</strong> activity includes a
-      roll and automatically restores a use after a Short or Long Rest. It does
-      not automatically refresh after you roll Initiative though.</p></section>
+      Initiative or finish a Short or Long Rest.</p>
     chat: ''
   source:
     custom: ''
@@ -25,6 +21,8 @@ system:
     spent: 0
     recovery:
       - period: sr
+        type: recoverAll
+      - period: initiative
         type: recoverAll
   type:
     value: feat
@@ -131,7 +129,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1735865940774
-  modifiedTime: 1752706695866
+  modifiedTime: 1753301831301
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbBoonofFate000'

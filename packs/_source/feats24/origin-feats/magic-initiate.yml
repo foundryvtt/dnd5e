@@ -19,9 +19,7 @@ system:
       spells you chose for this feat with a different spell of the same level
       from the chosen spell list.</p><p><strong>Repeatable.</strong> You can
       take this feat more than once, but you must choose a different spell list
-      each time.</p><section id="secret-7JQCSgnGrtu9huzf"
-      class="secret"><p><strong>Foundry Note</strong></p><p>The spells have to
-      be added to your sheet with the above changes manually.</p></section>
+      each time.</p>
     chat: ''
   source:
     custom: ''
@@ -44,6 +42,71 @@ system:
   activities: {}
   enchant: {}
   identifier: magic-initiate
+  advancement:
+    - type: ItemChoice
+      _id: ElkyDafWSUXOkPdJ
+      configuration:
+        allowDrops: true
+        choices:
+          '0':
+            count: 2
+            replacement: false
+        pool: []
+        restriction:
+          list:
+            - class.cleric
+            - class.druid
+            - class.wizard
+          level: '0'
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          method: ''
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          prepared: 0
+        type: spell
+      value:
+        added: {}
+        replaced: {}
+      title: Two Cantrips
+      hint: ''
+    - type: ItemChoice
+      configuration:
+        allowDrops: true
+        choices:
+          '0':
+            count: 1
+            replacement: false
+        pool: []
+        restriction:
+          list:
+            - class.cleric
+            - class.druid
+            - class.wizard
+          level: '1'
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          method: ''
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          prepared: 0
+        type: spell
+      value:
+        added: {}
+        replaced: {}
+      title: Level 1 Spell
+      hint: ''
+      _id: ZbKHs2FVCkJVNW8p
 _id: phbftMagicInitia
 type: feat
 img: icons/magic/symbols/chevron-elipse-circle-blue.webp
@@ -63,7 +126,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1735866663151
-  modifiedTime: 1752707203959
+  modifiedTime: 1753301671211
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbftMagicInitia'
