@@ -80,6 +80,7 @@ export default class TransformSheet extends ActivitySheet {
     context.profiles = context.source.profiles.map((data, index) => ({
       data, index,
       collapsed: this.expandedSections.get(`profiles.${data._id}`) ? "" : "collapsed",
+      document: data.uuid ? fromUuidSync(data.uuid) : null,
       fields: this.activity.schema.fields.profiles.element.fields,
       prefix: `profiles.${index}.`,
       source: context.source.profiles[index] ?? data
@@ -110,6 +111,14 @@ export default class TransformSheet extends ActivitySheet {
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onRender() {
+    super._onRender();
+    this.element.querySelector(".activity-profiles").addEventListener("drop", this.#onDrop.bind(this));
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -168,5 +177,34 @@ export default class TransformSheet extends ActivitySheet {
     else if ( (submitData.transform?.customize === false) && this.activity.settings ) submitData.settings = null;
 
     await super._processSubmitData(event, submitData);
+  }
+
+  /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping actors onto the sheet.
+   * @param {Event} event  Triggering drop event.
+   */
+  async #onDrop(event) {
+    // Try to extract the data
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
+
+    // Handle dropping linked items
+    if ( data?.type !== "Actor" ) return;
+    const actor = await Actor.implementation.fromDropData(data);
+
+    // If dropped onto existing profile, add or replace link
+    const profileId = event.target.closest("[data-profile-id]")?.dataset.profileId;
+    if ( profileId ) {
+      const profiles = this.activity.toObject().profiles;
+      const profile = profiles.find(p => p._id === profileId);
+      profile.uuid = actor.uuid;
+      this.activity.update({ profiles });
+    }
+
+    // Otherwise create a new profile
+    else this.activity.update({ profiles: [...this.activity.toObject().profiles, { uuid: actor.uuid }] });
   }
 }

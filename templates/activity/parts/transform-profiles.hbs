@@ -36,9 +36,15 @@
             {{ formField fields.cr name=(concat prefix "cr") value=data.cr localize=true hint=false classes="label-top"
                          label="DND5E.TRANSFORM.FIELDS.profiles.element.cr.abbr" }}
 
-            {{ else }}
+            {{else if document}}
 
-            {{ formInput fields.uuid name=(concat prefix "uuid") value=data.uuid }}
+            {{!-- UUID --}}
+            {{{ dnd5e-linkForUuid data.uuid }}}
+
+            {{else~}}
+
+            {{!-- Drop Area --}}
+            <div class="drop-area">{{ localize "DND5E.TRANSFORM.Profile.DropHint" }}</div>
 
             {{/if}}
 
