@@ -124,6 +124,8 @@
   --color-fieldset-border: var(--dnd5e-color-blue-gray-3);
   --control-button-text-color: var(--dnd5e-color-gold);
   --hint-icon-color: var(--dnd5e-color-gold);
+  --multi-select-tag-background: var(--dnd5e-color-blue-gray-2);
+  --multi-select-tag-border: var(--dnd5e-color-blue-gray-1);
 
   button {
     --button-border-color: var(--dnd5e-color-blue-gray-1);
@@ -145,6 +147,10 @@
 
   fieldset.card {
     input:not([type=range]), select { --input-background-color: var(--dnd5e-background-25); }
+    .input-element-tags .tag {
+      --multi-select-tag-background: var(--dnd5e-background-25);
+      --multi-select-tag-border: var(--dnd5e-color-blue-gray-3);
+    }
   }
 
   dnd5e-checkbox[disabled]:not([checked]) {

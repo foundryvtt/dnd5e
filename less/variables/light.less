@@ -120,6 +120,8 @@
   --color-fieldset-border: var(--color-border-light-tertiary);
   --control-button-text-color: var(--color-text-dark-5);
   --hint-icon-color: var(--color-text-dark-5);
+  --multi-select-tag-background: var(--dnd5e-color-card);
+  --multi-select-tag-border: var(--dnd5e-color-gold);
 
   button {
     --button-border-color: var(--color-border-light-2);
@@ -150,6 +152,11 @@
     --button-text-color: var(--color-text-primary);
     --color-form-label-hover: var(--color-dark-1);
     button.active { --color-form-label-hover: var(--color-dark-1); }
+  }
+
+  fieldset.card .input-element-tags .tag {
+    --multi-select-tag-background: var(--dnd5e-color-card);
+    --multi-select-tag-border: var(--dnd5e-color-gold);
   }
 
   /* Journals */
