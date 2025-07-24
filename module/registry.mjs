@@ -269,6 +269,14 @@ class SpellListRegistry {
   /* -------------------------------------------- */
 
   /**
+   * IDs of compendiums that have been re-indexed during loading.
+   * @type {Set<string>}
+   */
+  static #compendiumsIndexed = new Set();
+
+  /* -------------------------------------------- */
+
+  /**
    * UUIDs of spell lists in the process of being loaded.
    * @type {Set<string>}
    */
@@ -351,10 +359,16 @@ class SpellListRegistry {
     }));
 
     const list = type.get(page.system.identifier);
-    list.contribute(page).forEach(uuid => {
+    await Promise.all(Array.from(list.contribute(page)).map(uuid => {
       if ( !SpellListRegistry.#bySpell.has(uuid) ) SpellListRegistry.#bySpell.set(uuid, new Set());
       SpellListRegistry.#bySpell.get(uuid).add(list);
-    });
+      const { collection } = foundry.utils.parseUuid(uuid);
+      if ( (collection instanceof CompendiumCollection) && !this.#compendiumsIndexed.has(collection.metadata.id) ) {
+        this.#compendiumsIndexed.add(collection.metadata.id);
+        this.#loading.add(collection.metadata.id);
+        return collection.getIndex().then(this.#loading.delete(collection.metadata.id));
+      }
+    }));
 
     this.#loading.delete(uuid);
     if ( this.ready ) RegistryStatus.set("spellLists", true);
