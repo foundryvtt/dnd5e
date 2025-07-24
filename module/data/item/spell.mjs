@@ -103,20 +103,18 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
         createFilter: (filters, value, def) => {
           let include = new Set();
           let exclude = new Set();
-          for ( const [type, identifiers] of Object.entries(value ?? {}) ) {
-            for ( const [identifier, v] of Object.entries(identifiers) ) {
-              const list = dnd5e.registry.spellLists.forType(type, identifier);
-              if ( !list || (v === 0) ) continue;
-              if ( v === 1 ) include = include.union(list.uuids);
-              else if ( v === -1 ) exclude = exclude.union(list.uuids);
-            }
+          for ( const [k, v] of Object.entries(value ?? {}) ) {
+            const list = dnd5e.registry.spellLists.forType(...k.split(":"));
+            if ( !list || (v === 0) ) continue;
+            if ( v === 1 ) include = include.union(list.uuids);
+            else if ( v === -1 ) exclude = exclude.union(list.uuids);
           }
           if ( include.size ) filters.push({ k: "uuid", o: "in", v: include });
           if ( exclude.size ) filters.push({ o: "NOT", v: { k: "uuid", o: "in", v: exclude } });
         },
         config: {
           choices: dnd5e.registry.spellLists.options.reduce((obj, entry) => {
-            const list = dnd5e.registry.spellLists.forType(...entry.value.split("."));
+            const list = dnd5e.registry.spellLists.forType(...entry.value.split(":"));
             if ( list?.uuids.size ) obj[entry.value] = entry.label;
             return obj;
           }, {})

@@ -54,9 +54,9 @@ system:
         pool: []
         restriction:
           list:
-            - class.cleric
-            - class.druid
-            - class.wizard
+            - class:cleric
+            - class:druid
+            - class:wizard
           level: '0'
         spell:
           ability:
@@ -85,9 +85,9 @@ system:
         pool: []
         restriction:
           list:
-            - class.cleric
-            - class.druid
-            - class.wizard
+            - class:cleric
+            - class:druid
+            - class:wizard
           level: '1'
         spell:
           ability:

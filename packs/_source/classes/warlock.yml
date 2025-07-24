@@ -160,10 +160,11 @@ system:
         optional: false
         spell:
           ability: []
-          preparation: ''
           uses:
             max: ''
             per: ''
+            requireSlot: false
+          prepared: 0
       value: {}
       level: 1
       title: Features
@@ -176,10 +177,11 @@ system:
         optional: false
         spell:
           ability: []
-          preparation: ''
           uses:
             max: ''
             per: ''
+            requireSlot: false
+          prepared: 0
       value: {}
       level: 2
       title: Features
@@ -192,10 +194,11 @@ system:
         optional: false
         spell:
           ability: []
-          preparation: ''
           uses:
             max: ''
             per: ''
+            requireSlot: false
+          prepared: 0
       value: {}
       level: 3
       title: Features
@@ -208,10 +211,11 @@ system:
         optional: false
         spell:
           ability: []
-          preparation: ''
           uses:
             max: ''
             per: ''
+            requireSlot: false
+          prepared: 0
       value: {}
       level: 11
       title: Features
@@ -224,10 +228,11 @@ system:
         optional: false
         spell:
           ability: []
-          preparation: ''
           uses:
             max: ''
             per: ''
+            requireSlot: false
+          prepared: 0
       value: {}
       level: 20
       title: Features
@@ -293,14 +298,16 @@ system:
           - uuid: Compendium.dnd5e.classfeatures.snsjxGfmzWfZR5Nh
         spell:
           ability: []
-          preparation: ''
           uses:
             max: ''
             per: ''
+            requireSlot: false
+          prepared: 0
         restriction:
           type: class
           subtype: eldritchInvocation
           level: ''
+          list: []
       value:
         added: {}
         replaced: {}
@@ -324,14 +331,16 @@ system:
           - uuid: Compendium.dnd5e.classfeatures.MYM908WLZ1lVvA1u
         spell:
           ability: []
-          preparation: ''
           uses:
             max: ''
             per: ''
+            requireSlot: false
+          prepared: 0
         restriction:
           type: class
           subtype: pact
           level: ''
+          list: []
       value:
         added: {}
         replaced: {}
@@ -348,14 +357,18 @@ system:
         pool: []
         spell:
           ability: []
-          preparation: atwill
           uses:
             max: '1'
             per: lr
+            requireSlot: false
+          method: atwill
+          prepared: 0
         restriction:
           type: ''
           subtype: ''
           level: '6'
+          list:
+            - class:warlock
       value:
         added: {}
         replaced: {}
@@ -373,14 +386,18 @@ system:
         pool: []
         spell:
           ability: []
-          preparation: atwill
           uses:
             max: '1'
             per: lr
+            requireSlot: false
+          method: atwill
+          prepared: 0
         restriction:
           type: ''
           subtype: ''
           level: '7'
+          list:
+            - class:warlock
       value:
         added: {}
         replaced: {}
@@ -398,14 +415,18 @@ system:
         pool: []
         spell:
           ability: []
-          preparation: atwill
           uses:
             max: '1'
             per: lr
+            requireSlot: false
+          method: atwill
+          prepared: 0
         restriction:
           type: ''
           subtype: ''
           level: '8'
+          list:
+            - class:warlock
       value:
         added: {}
         replaced: {}
@@ -423,14 +444,18 @@ system:
         pool: []
         spell:
           ability: []
-          preparation: atwill
           uses:
             max: '1'
             per: lr
+            requireSlot: false
+          method: atwill
+          prepared: 0
         restriction:
           type: ''
           subtype: ''
           level: '9'
+          list:
+            - class:warlock
       value:
         added: {}
         replaced: {}
@@ -503,6 +528,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 4
@@ -520,6 +546,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 8
@@ -537,6 +564,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 12
@@ -554,6 +582,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 16
@@ -572,6 +601,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 19
@@ -579,13 +609,16 @@ system:
     - _id: vibumq2vxjl9tmk4
       type: Subclass
       configuration: {}
-      value: {}
+      value:
+        document: null
+        uuid: null
       level: 1
       title: Otherworldly Patron
   spellcasting:
     progression: pact
     ability: cha
-    preparation: {}
+    preparation:
+      formula: ''
   startingEquipment:
     - type: OR
       _id: RPQn8qHHgFuv8iuq
@@ -694,11 +727,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.1.0
   createdTime: 1725037370732
-  modifiedTime: 1725992280452
+  modifiedTime: 1753389144716
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!7WJp9vhi6F6SlAFa'

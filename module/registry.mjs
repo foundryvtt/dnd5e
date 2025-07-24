@@ -285,7 +285,7 @@ class SpellListRegistry {
       const lists = this.#byType.get(type);
       if ( !lists ) return [];
       return Array.from(lists.entries())
-        .map(([value, list]) => ({ value: `${type}.${value}`, label: list.name, group, type }))
+        .map(([value, list]) => ({ value: `${type}:${value}`, label: list.name, group, type }))
         .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
     }).flat();
   }
