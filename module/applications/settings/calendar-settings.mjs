@@ -20,7 +20,7 @@ export default class CalendarSettingsConfig extends BaseSettingsConfig {
   /** @override */
   static PARTS = {
     config: {
-      template: "systems/dnd5e/templates/settings/calendar-config.hbs"
+      template: "systems/dnd5e/templates/settings/base-config.hbs"
     },
     preferences: {
       template: "systems/dnd5e/templates/settings/calendar-preferences.hbs"
@@ -72,30 +72,6 @@ export default class CalendarSettingsConfig extends BaseSettingsConfig {
         name: `calendarConfig.${name}`,
         value: data[name]
       }));
-    const timeOptions = Object.entries(CONFIG.DND5E.timeUnits)
-      .filter(([, config]) => config.timeComponent)
-      .map(([value, { label }]) => ({ value, label }));
-    context.buttons = Object.entries(CalendarConfigSetting.schema.fields.buttons.fields).map(([name, field]) => ({
-      fields: [
-        {
-          classes: "label-top",
-          field: field.fields.value,
-          label: game.i18n.localize("DND5E.CALENDAR.FIELDS.buttons.value"),
-          name: `calendarConfig.buttons.${name}.value`,
-          value: data.buttons[name].value
-        },
-        {
-          classes: "label-top",
-          field: field.fields.units,
-          label: game.i18n.localize("DND5E.CALENDAR.FIELDS.buttons.units"),
-          name: `calendarConfig.buttons.${name}.units`,
-          options: timeOptions,
-          value: data.buttons[name].units
-        }
-      ],
-      label: field.label,
-      prefix: `calendarConfig.${name}.`
-    }));
     return context;
   }
 

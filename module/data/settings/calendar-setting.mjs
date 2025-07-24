@@ -12,18 +12,8 @@ export class CalendarConfigSetting extends foundry.abstract.DataModel {
 
   /** @override */
   static defineSchema() {
-    const buttonSchema = (value, units) => ({
-      value: new NumberField({ required: true, integer: true, initial: value }),
-      units: new StringField({ required: true, initial: units })
-    });
     return {
-      enabled: new BooleanField({ required: true }),
-      buttons: new SchemaField({
-        reverseFar: new SchemaField(buttonSchema(8, "hour")),
-        reverseShort: new SchemaField(buttonSchema(1, "hour")),
-        advanceShort: new SchemaField(buttonSchema(1, "hour")),
-        advanceFar: new SchemaField(buttonSchema(8, "hour"))
-      })
+      enabled: new BooleanField({ required: true })
     };
   }
 }
