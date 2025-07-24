@@ -60,6 +60,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   static DEFAULT_OPTIONS = {
     actions: {
+      editImage: BaseActorSheet.#onEditImage,
       inspectWarning: BaseActorSheet.#inspectWarning,
       openWarnings: BaseActorSheet.#openWarnings,
       rest: BaseActorSheet.#rest,
@@ -497,11 +498,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
     const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
     const defaultArtwork = Actor.implementation.getDefaultArtwork(this.actor._source)?.img;
+    const src = (showTokenPortrait ? token.texture.src : this.actor.img) ?? defaultArtwork;
     return {
+      src,
       token: showTokenPortrait,
-      src: showTokenPortrait ? token.texture.src : this.actor.img ?? defaultArtwork,
-      // TODO: Not sure the best way to update the parent texture from this sheet if this is a token actor.
-      path: showTokenPortrait ? this.actor.isToken ? "" : "prototypeToken.texture.src" : "img"
+      path: showTokenPortrait ? this.actor.isToken ? "token.texture.src" : "prototypeToken.texture.src" : "img",
+      type: showTokenPortrait ? "imagevideo" : "image",
+      isVideo: foundry.helpers.media.VideoHelper.hasVideoExtension(src)
     };
   }
 
@@ -1116,6 +1119,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       this.element.classList.toggle("sidebar-collapsed", sidebarCollapsed);
     }
 
+    // Play video elements.
+    this.element.querySelectorAll("video").forEach(v => {
+      if ( v.paused ) v.play();
+    });
+
     // Display warnings
     const warnings = this.element.querySelector(".window-header .preparation-warnings");
     warnings?.toggleAttribute("hidden", (!game.user.isGM && this.actor.limited)
@@ -1288,6 +1296,63 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         target.updateActivity(activityId, { "uses.spent": activity.uses.max - result });
       }
       else target.update({ [input.dataset.name]: result });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle editing an image via the file browser.
+   * @this {BaseActorSheet}
+   * @param {PointerEvent} event  The triggering event.
+   * @param {HTMLElement} target  The action target.
+   * @returns {Promise<void>}
+   */
+  static async #onEditImage(event, target) {
+    const attr = target.dataset.edit;
+    const current = foundry.utils.getProperty(this.document._source, attr);
+    const defaultArtwork = this.document.constructor.getDefaultArtwork?.(this.document._source) ?? {};
+    const defaultImage = foundry.utils.getProperty(defaultArtwork, attr);
+    const fp = new CONFIG.ux.FilePicker({
+      current,
+      type: target.dataset.type,
+      redirectToRoot: defaultImage ? [defaultImage] : [],
+      callback: path => {
+        const isVideo = foundry.helpers.media.VideoHelper.hasVideoExtension(path);
+        if ( ((target instanceof HTMLVideoElement) && isVideo) || ((target instanceof HTMLImageElement) && !isVideo) ) {
+          target.src = path;
+        } else {
+          const repl = document.createElement(isVideo ? "video" : "img");
+          Object.assign(repl.dataset, target.dataset);
+          if ( isVideo ) Object.assign(repl, {
+            autoplay: true, muted: true, disablePictureInPicture: true, loop: true, playsInline: true
+          });
+          repl.src = path;
+          target.replaceWith(repl);
+        }
+        this._onEditPortrait(attr, path);
+      },
+      position: {
+        top: this.position.top + 40,
+        left: this.position.left + 10
+      }
+    });
+    await fp.browse();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle editing the portrait.
+   * @param {string} target  The target property being edited.
+   * @param {string} path    The image or video path.
+   * @protected
+   */
+  async _onEditPortrait(target, path) {
+    if ( target.startsWith("token.") ) await this.token.update({ [target.slice(6)]: path });
+    else {
+      const submit = new Event("submit", { cancelable: true });
+      this.form.dispatchEvent(submit);
     }
   }
 
@@ -1562,6 +1627,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         submitData.flags.dnd5e[`-=${key}`] = null;
       }
     }
+
+    // Correctly process data-edit video elements.
+    form.querySelectorAll("video[data-edit]").forEach(v => {
+      foundry.utils.setProperty(submitData, v.dataset.edit, v.src);
+    });
 
     return submitData;
   }

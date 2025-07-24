@@ -19,9 +19,17 @@
 
         <div class="portrait {{#if portrait.token}}token{{/if}}">
 
-            <img src="{{ portrait.src }}" alt="{{ actor.name }}"
-                 {{~#if (and editable portrait.path)}} data-action="editImage" data-edit="{{ portrait.path }}"
-                 {{~else}} data-action="showArtwork"{{/if}}>
+            {{#with portrait}}
+            {{#if isVideo}}
+            <video src="{{ src }}" autoplay muted disablepictureinpicture loop playsinline
+                   {{#if @root.editable}}data-action="editImage"{{else}}data-action="showArtwork"{{/if}}
+                   {{#if (and @root.editable path)}}data-edit="{{ path }}" data-type="{{ type }}"{{/if}}></video>
+            {{else}}
+            <img src="{{ src }}" alt="{{ @root.actor.name }}"
+                 {{#if @root.editable}}data-action="editImage"{{else}}data-action="showArtwork"{{/if}}
+                 {{#if (and @root.editable path)}}data-edit="{{ path }}" data-type="{{ type }}"{{/if}}>
+            {{/if}}
+            {{/with}}
 
             {{#if showDeathSaves}}
             <div class="death-saves">

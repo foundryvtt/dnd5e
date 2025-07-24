@@ -314,7 +314,7 @@
           width: 100%;
           cursor: var(--cursor-pointer);
 
-          > img {
+          > img, > video {
             display: block;
             object-fit: cover;
             object-position: top center;
@@ -349,7 +349,7 @@
           &.token {
             &::after { display: none; }
 
-            > img {
+            > img, > video {
               object-fit: contain;
               object-position: center;
               border-radius: 0;
@@ -1470,7 +1470,7 @@
         box-shadow: 0 0 6px var(--dnd5e-color-black);
         overflow: hidden;
 
-        > img {
+        > img, > video {
           border: none;
           width: 100%;
           height: 100%;
