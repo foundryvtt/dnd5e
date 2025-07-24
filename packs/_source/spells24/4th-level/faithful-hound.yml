@@ -130,6 +130,8 @@ system:
     rules: '2024'
     license: CC-BY-4.0
     book: SRD 5.2
+    page: ''
+    custom: ''
   activation:
     type: action
     value: null
@@ -165,7 +167,7 @@ system:
       count: '1'
       type: space
       special: ''
-  identifier: mordenkainens-faithful-hound
+  identifier: faithful-hound
 _id: phbFaithfulHound
 type: spell
 folder: qi3IbnEwap7mRw4b
@@ -181,11 +183,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1725576013801
-  modifiedTime: 1740680090657
+  modifiedTime: 1753380712868
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbFaithfulHound'

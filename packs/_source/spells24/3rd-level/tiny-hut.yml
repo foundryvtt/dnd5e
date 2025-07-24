@@ -21,6 +21,7 @@ system:
     rules: '2024'
     license: CC-BY-4.0
     book: SRD 5.2
+    page: ''
   activation:
     type: minute
     condition: ''
@@ -100,7 +101,7 @@ system:
         spent: 0
         recovery: []
       sort: 0
-  identifier: leomunds-tiny-hut
+  identifier: tiny-hut
 _id: phbsplLeomundsTi
 type: spell
 img: icons/environment/settlement/hut.webp
@@ -116,11 +117,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1724425961075
-  modifiedTime: 1745256795390
+  modifiedTime: 1753380812382
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplLeomundsTi'
