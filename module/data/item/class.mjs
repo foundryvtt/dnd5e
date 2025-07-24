@@ -84,6 +84,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
 
   /** @inheritDoc */
   prepareBaseData() {
+    super.prepareBaseData();
     this.spellcasting.preparation.value = 0;
   }
 
