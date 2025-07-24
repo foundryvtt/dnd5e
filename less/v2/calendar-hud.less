@@ -36,10 +36,32 @@
     display: flex;
     gap: var(--calendar-gap);
     align-items: center;
+    position: relative;
+
+    .dropdown {
+      position: absolute;
+      padding: var(--calendar-gap);
+      gap: var(--calendar-gap);
+      transition-behavior: allow-discrete;
+      transition-duration: var(--ui-fade-duration);
+      transition-property: opacity, display;
+    }
+    &[data-application-part="startButtons"] .dropdown { inset-inline-end: calc(var(--calendar-gap) * -1); }
+    &[data-application-part="endButtons"] .dropdown { inset-inline-start: calc(var(--calendar-gap) * -1); }
+    &:not(:hover, :focus-visible) .dropdown {
+      opacity: 0;
+      visibility: hidden;
+    }
   }
   .calendar-button {
-    width: 24px;
-    height: 24px;
+    block-size: 24px;
+    inline-size: 24px;
+
+    & .calendar-button {
+      block-size: unset;
+      inline-size: unset;
+      button { font-size: var(--font-size-12); }
+    }
 
     button {
       block-size: 100%;

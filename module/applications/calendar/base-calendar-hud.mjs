@@ -7,10 +7,8 @@ export default class BaseCalendarHUD extends Application5e {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     actions: {
-      advanceFar: BaseCalendarHUD.#advanceTime,
-      advanceShort: BaseCalendarHUD.#advanceTime,
-      reverseFar: BaseCalendarHUD.#advanceTime,
-      reverseShort: BaseCalendarHUD.#advanceTime
+      advance: BaseCalendarHUD.#advanceTime,
+      reverse: BaseCalendarHUD.#advanceTime
     },
     id: "calendar-hud",
     window: {
@@ -31,6 +29,8 @@ export default class BaseCalendarHUD extends Application5e {
     return (game.settings.get("dnd5e", "calendarConfig")?.enabled || false)
       && (game.settings.get("dnd5e", "calendarPreferences")?.visible || false);
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Should the calendar HUD be displayed for the current user?
@@ -75,9 +75,9 @@ export default class BaseCalendarHUD extends Application5e {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static #advanceTime(event, target) {
-    const config = game.settings.get("dnd5e", "calendarConfig").buttons[target.dataset.action];
+    const { value, unit } = target.dataset;
     game.time.advance({
-      [config.units]: target.dataset.action.startsWith("reverse") ? -config.value : config.value
+      [unit]: target.dataset.action.startsWith("reverse") ? -Number(value) : Number(value)
     });
   }
 

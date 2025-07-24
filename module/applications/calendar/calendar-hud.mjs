@@ -5,9 +5,13 @@ import BaseCalendarHUD from "./base-calendar-hud.mjs";
 /**
  * @typedef CalendarHUDButton
  * @property {string} [action]                    The action name triggered by clicking the button.
- * @property {string} icon                        SVG icon path or font-awesome icon class for the button.
- * @property {string} label                       Label used for the button.
+ * @property {Omit<CalendarHUDButton, "additional"|"position">[]} [additional]  Additional buttons that appear when
+ *                                                the button is hovered.
+ * @property {object} [dataset]                   Additional data to attach to the button.
+ * @property {string} [icon]                      SVG icon path or font-awesome icon class for the button.
+ * @property {string} [label]                     Label used for the button.
  * @property {"start"|"end"} position             Should this be displayed before or after the interface.
+ * @property {string} [tooltip]                   Tooltip displayed on hover.
  * @property {(event: PointerEvent) => void|Promise<void>} [onClick]  A custom click handler function.
  * @property {boolean|(() => boolean)} [visible]  Is the control button visible for the current client.
  */
@@ -44,60 +48,74 @@ export default class CalendarHUD extends BaseCalendarHUD {
   };
 
   /* -------------------------------------------- */
+
+  /**
+   * Default time periods to display for controlling time.
+   * @type {{ value: number, unit: string }}
+   */
+  static TIME_CONTROL_VALUES = [
+    { value: 7, unit: "day" },
+    { value: 1, unit: "day" },
+    { value: 8, unit: "hour" },
+    { value: 30, unit: "minute" },
+    { value: 1, unit: "minute" }
+  ];
+
+  /* -------------------------------------------- */
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
+  /**
+   * Build the list of default calendar buttons.
+   * @returns {CalendarHUDButton[]}
+   * @protected
+   */
   _getCalendarButtons() {
     const config = game.settings.get("dnd5e", "calendarConfig");
     return [
       {
-        action: "reverseShort",
-        icon: "fa-solid fa-angle-left",
-        label: game.i18n.format("DND5E.CALENDAR.Action.ReverseTime", {
-          amount: formatTime(config.buttons.reverseShort.value, config.buttons.reverseShort.units).titleCase()
-        }),
-        position: "start",
-        visible: game.user.isGM
-      },
-      {
-        action: "reverseFar",
+        action: "reverse",
+        dataset: { value: 1, unit: "hour" },
         icon: "fa-solid fa-angles-left",
-        label: game.i18n.format("DND5E.CALENDAR.Action.ReverseTime", {
-          amount: formatTime(config.buttons.reverseFar.value, config.buttons.reverseFar.units).titleCase()
-        }),
         position: "start",
-        visible: game.user.isGM
+        tooltip: game.i18n.format("DND5E.CALENDAR.Action.ReverseTime", { amount: formatTime(1, "hour").titleCase() }),
+        visible: game.user.isGM,
+        additional: CalendarHUD.TIME_CONTROL_VALUES.map(({ value, unit }) => ({
+          action: "reverse",
+          dataset: { value, unit },
+          label: `-${formatTime(value, unit, { unitDisplay: "narrow" })}`,
+          tooltip: game.i18n.format("DND5E.CALENDAR.Action.ReverseTime", {
+            amount: formatTime(value, unit).titleCase()
+          })
+        }))
       },
       {
         action: "openCharacterSheet",
         icon: "fa-solid fa-user",
-        label: game.i18n.localize("DND5E.CALENDAR.Action.OpenCharacterSheet"),
         position: "start",
+        tooltip: game.i18n.localize("DND5E.CALENDAR.Action.OpenCharacterSheet"),
         visible: !!game.user.character
       },
       {
-        action: "advanceShort",
-        icon: "fa-solid fa-angle-right",
-        label: game.i18n.format("DND5E.CALENDAR.Action.AdvanceTime", {
-          amount: formatTime(config.buttons.advanceShort.value, config.buttons.advanceShort.units).titleCase()
-        }),
-        position: "end",
-        visible: game.user.isGM
-      },
-      {
-        action: "advanceFar",
+        action: "advance",
         icon: "fa-solid fa-angles-right",
-        label: game.i18n.format("DND5E.CALENDAR.Action.AdvanceTime", {
-          amount: formatTime(config.buttons.advanceFar.value, config.buttons.advanceFar.units).titleCase()
-        }),
         position: "end",
-        visible: game.user.isGM
+        tooltip: game.i18n.format("DND5E.CALENDAR.Action.AdvanceTime", { amount: formatTime(1, "hour").titleCase() }),
+        visible: game.user.isGM,
+        additional: CalendarHUD.TIME_CONTROL_VALUES.map(({ value, unit }) => ({
+          action: "advance",
+          dataset: { value, unit },
+          label: `+${formatTime(value, unit, { unitDisplay: "narrow" })}`,
+          tooltip: game.i18n.format("DND5E.CALENDAR.Action.AdvanceTime", {
+            amount: formatTime(value, unit).titleCase()
+          })
+        }))
       },
       {
         action: "openPartySheet",
         icon: "fa-solid fa-users",
-        label: game.i18n.localize("DND5E.CALENDAR.Action.OpenPartySheet"),
         position: "end",
+        tooltip: game.i18n.localize("DND5E.CALENDAR.Action.OpenPartySheet"),
         visible: game.settings.get("dnd5e", "primaryParty")?.actor
           ?.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED)
       }
@@ -137,9 +155,15 @@ export default class CalendarHUD extends BaseCalendarHUD {
       parentClassHooks: false
     });
 
+    const prepareCalendarButton = (data, index, parent) => ({
+      ...data, index,
+      additional: data.additional ? data.additional.map((a, i) => prepareCalendarButton(a, i, data)) : undefined,
+      tooltipDirection: (parent?.position ?? data.position) === "start" ? "LEFT" : "RIGHT"
+    });
+
     context.buttons = controls
       .filter(b => typeof b.visible === "function" ? b.visible.call(this) : b.visible ?? true)
-      .map((b, index) => ({ ...b, index }));
+      .map(prepareCalendarButton);
   }
 
   /* -------------------------------------------- */
@@ -199,13 +223,21 @@ export default class CalendarHUD extends BaseCalendarHUD {
     await super._onRender(context, options);
     await this.renderCore();
 
-    for ( const button of this.element.querySelectorAll(".calendar-button button") ) {
-      const match = context.buttons[parseInt(button.dataset.index)];
-      if ( typeof match?.onClick === "function" ) {
+    const addButtonEvent = (button, config) => {
+      if ( typeof config?.onClick === "function" ) {
         button.addEventListener("click", event => {
           event.preventDefault();
-          match.onClick(event);
+          config.onClick(event);
         });
+      }
+    };
+
+    for ( const button of this.element.querySelectorAll(".calendar-buttons > .calendar-button > button") ) {
+      const config = context.buttons[parseInt(button.dataset.index)];
+      addButtonEvent(button, config);
+      for ( const additionalButton of button.parentElement.querySelectorAll(".calendar-button > button") ) {
+        const additionalConfig = config?.additional?.[parseInt(additionalButton.dataset.index)];
+        addButtonEvent(additionalButton, additionalConfig);
       }
     }
   }
