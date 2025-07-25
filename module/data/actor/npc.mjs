@@ -592,6 +592,9 @@ export default class NPCData extends CreatureTemplate {
    * @returns {object}
    */
   async _prepareEmbedContext() {
+    const rulesVersion = this.source.rules
+      ?? (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014");
+
     const formatter = game.i18n.getListFormatter({ type: "unit" });
     const prepareMeasured = (value, units, label) => label ? `${label} ${formatLength(value, units)}`
       : formatLength(value, units);
@@ -617,11 +620,23 @@ export default class NPCData extends CreatureTemplate {
       return custom ? `${standard} (${custom})` : standard;
     };
 
+    const xp = rulesVersion === "2024"
+      ? `${game.i18n.format(`DND5E.ExperiencePoints.StatBlock.${
+        (this.resources.lair.value) && (this.details.cr !== null) ? "Lair" : "Standard"}`, {
+        value: formatNumber(this.parent.getCRExp(this.details.cr)),
+        lair: formatNumber(this.parent.getCRExp(this.details.cr + 1))
+      })}; ${game.i18n.localize("DND5E.ProficiencyBonusAbbr")} ${
+        formatNumber(this.attributes.prof, { signDisplay: "always" })}`
+      : game.i18n.format("DND5E.ExperiencePoints.Format", {
+        value: formatNumber(this.parent.getCRExp(this.details.cr))
+      });
+
     const context = {
-      abilityTables: Array.fromRange(3).map(_ => ({ abilities: [] })),
+      abilityTables: rulesVersion === "2024" ? Array.fromRange(3).map(_ => ({ abilities: [] })) : null,
       actionSections: {
         trait: {
           label: game.i18n.localize("DND5E.NPC.SECTIONS.Traits"),
+          hideLabel: rulesVersion === "2014",
           actions: []
         },
         action: {
@@ -642,16 +657,19 @@ export default class NPCData extends CreatureTemplate {
           actions: []
         }
       },
+      CONFIG: CONFIG.DND5E,
+      definitions: {
+        lower: [],
+        upper: []
+      },
       document: this.parent,
+      rulesVersion,
       summary: {
+        // Condition Immunities
+        conditionImmunities: prepareTrait(this.traits.ci, "ci"),
+
         // Challenge Rating (e.g. `23 (XP 50,000; PB +7`))
-        cr: `${formatCR(this.details.cr, { narrow: false })} (${
-          game.i18n.format(`DND5E.ExperiencePoints.StatBlock.${
-            (this.resources.lair.value) && (this.details.cr !== null) ? "Lair" : "Standard"}`, {
-            value: formatNumber(this.parent.getCRExp(this.details.cr)),
-            lair: formatNumber(this.parent.getCRExp(this.details.cr + 1))
-          })}; ${game.i18n.localize("DND5E.ProficiencyBonusAbbr")} ${
-          formatNumber(this.attributes.prof, { signDisplay: "always" })})`,
+        cr: `${formatCR(this.details.cr, { narrow: false })} (${xp})`,
 
         // Gear
         gear: formatter.format(
@@ -666,7 +684,7 @@ export default class NPCData extends CreatureTemplate {
         languages: [
           formatter.format(this.traits.languages.labels.languages),
           formatter.format(this.traits.languages.labels.ranged)
-        ].filterJoin("; ") || game.i18n.localize("None"),
+        ].filterJoin("; ") || (rulesVersion === "2024" ? game.i18n.localize("None") : "—"),
 
         // Senses (e.g. `Blindsight 60 ft., Darkvision 120 ft.; Passive Perception 27`)
         senses: [
@@ -699,13 +717,9 @@ export default class NPCData extends CreatureTemplate {
       system: this
     };
 
-    for ( const [index, [key, { abbreviation }]] of Object.entries(CONFIG.DND5E.abilities).entries() ) {
-      context.abilityTables[index % 3].abilities.push({ ...this.abilities[key], label: abbreviation.capitalize() });
-    }
-
     for ( const type of ["vulnerabilities", "resistances", "immunities"] ) {
       const entries = [];
-      for ( const category of ["damage", "condition"] ) {
+      for ( const category of rulesVersion === "2024" ? ["damage", "condition"] : ["damage"] ) {
         if ( (category === "condition") && (type !== "immunities") ) continue;
         const trait = `${category[0]}${type[0]}`;
         const data = this.traits[trait];
@@ -726,6 +740,63 @@ export default class NPCData extends CreatureTemplate {
         }));
       }
       if ( entries.length ) context.summary[type] = entries.join("; ");
+    }
+
+    const { summary, system } = context;
+    if ( rulesVersion === "2024" ) {
+      for ( const [index, [key, { abbreviation }]] of Object.entries(CONFIG.DND5E.abilities).entries() ) {
+        context.abilityTables[index % 3].abilities.push({ ...this.abilities[key], label: abbreviation.capitalize() });
+      }
+
+      context.definitions.upper = [
+        { label: "DND5E.AC", classes: "half-width", definitions: [system.attributes.ac.value] },
+        { label: "DND5E.Initiative", classes: "half-width", definitions: [summary.initiative] },
+        { label: "DND5E.HP", definitions: system.attributes.hp.formula ? [
+          system.attributes.hp.max, `(${system.attributes.hp.formula})`
+        ] : [system.attributes.hp.max] },
+        { label: "DND5E.Speed", definitions: [summary.speed] }
+      ];
+      context.definitions.lower = [
+        summary.skills ? { label: "DND5E.Skills", definitions: [summary.skills] } : null,
+        summary.gear ? { label: "DND5E.Gear", definitions: [summary.gear] } : null,
+        summary.vulnerabilities ? { label: "DND5E.Vulnerabilities", definitions: [summary.vulnerabilities] } : null,
+        summary.resistances ? { label: "DND5E.Resistances", definitions: [summary.resistances] } : null,
+        summary.immunities ? { label: "DND5E.Immunities", definitions: [summary.immunities] } : null,
+        { label: "DND5E.Senses", definitions: [summary.senses] },
+        { label: "DND5E.Languages", definitions: [summary.languages] },
+        { label: "DND5E.AbbreviationCR", definitions: [summary.cr] }
+      ].filter(_ => _);
+    }
+
+    else {
+      const toLowerCase = def => {
+        def.definitions = def.definitions.map(d => String(d).toLowerCase());
+        return def;
+      };
+      context.definitions.upper = [
+        { label: "DND5E.ArmorClass", definitions: system.attributes.ac.label ? [
+          system.attributes.ac.value, `(${system.attributes.ac.label})`
+        ] : [system.attributes.ac.value] },
+        { label: "DND5E.HitPoints", definitions: system.attributes.hp.formula ? [
+          system.attributes.hp.max, `(${system.attributes.hp.formula})`
+        ] : [system.attributes.hp.max] },
+        { label: "DND5E.Speed", definitions: [summary.speed] }
+      ].map(d => toLowerCase(d));
+      context.definitions.lower = [
+        summary.saves ? { label: "DND5E.ClassSaves", definitions: [summary.saves] } : null,
+        summary.skills ? { label: "DND5E.Skills", definitions: [summary.skills] } : null,
+        summary.vulnerabilities ? { label: "DND5E.DamVuln", definitions: [summary.vulnerabilities] } : null,
+        summary.resistances ? { label: "DND5E.DamRes", definitions: [summary.resistances] } : null,
+        summary.immunities ? { label: "DND5E.DamImm", definitions: [summary.immunities] } : null,
+        summary.conditionImmunities
+          ? { label: "DND5E.TraitCIPlural.other", definitions: [summary.conditionImmunities] } : null,
+        { label: "DND5E.Senses", definitions: [summary.senses] },
+        { label: "DND5E.Languages", definitions: [summary.languages] },
+        { label: "DND5E.Challenge", classes: "half-width", definitions: [summary.cr] },
+        { label: "DND5E.ProficiencyBonus", classes: "half-width", definitions: [
+          formatNumber(this.attributes.prof, { signDisplay: "always" })
+        ] }
+      ].filter(_ => _).map(d => toLowerCase(d));
     }
 
     for ( const item of this.parent.items ) {

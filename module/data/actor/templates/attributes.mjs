@@ -180,6 +180,8 @@ export default class AttributesFields {
       AdvantageModeField.setMode(this, "skills.ste.roll.mode", -1);
     }
 
+    ac.label = !["custom", "flat"].includes(ac.calc) ? CONFIG.DND5E.armorClasses[ac.calc]?.label : null;
+
     // Determine base AC
     switch ( ac.calc ) {
 
@@ -206,6 +208,8 @@ export default class AttributesFields {
           ac.equippedArmor = armors[0];
         }
         else ac.dex = this.abilities.dex?.mod ?? 0;
+
+        if ( !ac.equippedArmor ) ac.label = null;
 
         rollData.attributes.ac = ac;
         try {
