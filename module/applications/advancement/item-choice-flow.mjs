@@ -177,7 +177,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     }
 
     const config = this.advancement.configuration;
-    const filters = { locked: { additional: { }, documentClass: "Item" } };
+    const filters = { locked: { additional: {}, documentClass: "Item" } };
 
     // Apply restrictions based on type
     if ( config.type ) {
