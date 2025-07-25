@@ -953,8 +953,8 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _preCreate(data, options, userId) {
-    await super._preCreate(data, options, userId);
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
     if ( !foundry.utils.hasProperty(data, "flags.core.canPopout") ) {
       this.updateSource({ "flags.core.canPopout": true });
     }
