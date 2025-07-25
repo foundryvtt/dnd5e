@@ -280,7 +280,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         const classes = ["pip"];
         if ( filled ) classes.push("filled");
         return {
-          n, filled,
+          n: max - n, filled,
           tooltip: `DND5E.${i18n}.Label`,
           label: game.i18n.format(`DND5E.${i18n}.Ordinal.${plurals.select(n)}`, { n }),
           classes: classes.join(" ")

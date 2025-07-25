@@ -363,7 +363,7 @@
                 {{#if system.resources.legact.max}}
                 <div class="legact">
                     <span class="label roboto-upper">{{ localize "DND5E.LegendaryAction.Label" }}</span>
-                    <div class="pips" data-prop="system.resources.legact.value">
+                    <div class="pips" data-prop="system.resources.legact.spent">
                         {{#each legact}}
                             {{> ".pip" }}
                         {{/each}}
@@ -373,7 +373,7 @@
                 {{#if system.resources.legres.max}}
                 <div class="legres">
                     <span class="label roboto-upper">{{ localize "DND5E.LegendaryResistance.Label" }}</span>
-                    <div class="pips" data-prop="system.resources.legres.value">
+                    <div class="pips" data-prop="system.resources.legres.spent">
                         {{#each legres}}
                             {{> ".pip" }}
                         {{/each}}

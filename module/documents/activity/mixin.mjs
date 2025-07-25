@@ -622,7 +622,7 @@ export default function ActivityMixin(Base) {
             }));
             errors.push(err);
           } else {
-            updates.actor["system.resources.legact.value"] = legendary.value - count;
+            updates.actor["system.resources.legact.spent"] = legendary.spent + count;
           }
         }
       }
