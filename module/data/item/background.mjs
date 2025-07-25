@@ -1,18 +1,17 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
-import AdvancementField from "../fields/advancement-field.mjs";
+import AdvancementTemplate from "./templates/advancement.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
 
-const { ArrayField } = foundry.data.fields;
-
 /**
  * Data definition for Background items.
+ * @mixes AdvancementTemplate
  * @mixes ItemDescriptionTemplate
  * @mixes StartingEquipmentTemplate
- *
- * @property {object[]} advancement  Advancement objects for this background.
  */
-export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionTemplate, StartingEquipmentTemplate) {
+export default class BackgroundData extends ItemDataModel.mixin(
+  AdvancementTemplate, ItemDescriptionTemplate, StartingEquipmentTemplate
+) {
 
   /* -------------------------------------------- */
   /*  Model Configuration                         */
@@ -20,15 +19,6 @@ export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionT
 
   /** @override */
   static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static defineSchema() {
-    return this.mergeSchema(super.defineSchema(), {
-      advancement: new ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"})
-    });
-  }
 
   /* -------------------------------------------- */
 
@@ -58,6 +48,35 @@ export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionT
 
   /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _advancementToCreate(options) {
+    if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) return [
+      { type: "Trait", title: game.i18n.localize("DND5E.ADVANCEMENT.Defaults.BackgroundProficiencies") },
+      { type: "ItemGrant", title: game.i18n.localize("DND5E.ADVANCEMENT.Defaults.BackgroundFeature") }
+    ];
+
+    return [
+      { type: "AbilityScoreImprovement", configuration: { points: 3 } },
+      { type: "Trait", title: game.i18n.localize("DND5E.ADVANCEMENT.Defaults.BackgroundProficiencies") },
+      {
+        type: "Trait",
+        title: game.i18n.localize("DND5E.ADVANCEMENT.Defaults.ChooseLanguages"),
+        configuration: { grants: ["languages:standard:common"] }
+      },
+      { type: "ItemGrant", title: game.i18n.localize("DND5E.ADVANCEMENT.Defaults.BackgroundFeat") }
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    await this.preCreateAdvancement(data, options);
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
