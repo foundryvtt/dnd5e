@@ -3041,10 +3041,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       tokenUpdate.detectionModes = prototypeTokenData.detectionModes;
 
       await this.sheet.close();
-      const token = await TokenDocument.implementation.create(tokenUpdate, { parent: canvas.scene, render: true });
-      await canvas.scene?.deleteEmbeddedDocuments("Token", [this.token._id], {
-        replacements: { [this.token._id]: token.uuid }
-      });
+      const token = await TokenDocument.implementation.create(tokenUpdate, { parent: this.token.parent, render: true });
+      await this.token.delete({ replacements: { [this.token._id]: token.uuid } });
       if ( isOriginalActor ) {
         await this.unsetFlag("dnd5e", "isPolymorphed");
         await this.unsetFlag("dnd5e", "previousActorIds");
