@@ -2011,6 +2011,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    *                                           automatically spent during a short rest.
    * @property {boolean} [recoverTemp]         Reset temp HP to zero.
    * @property {boolean} [recoverTempMax]      Reset temp max HP to zero.
+   * @property {number} [exhaustionDelta]      A delta exhaustion to apply to creatures undergoing this rest.
    * @property {ChatMessage5e} [request]       Rest request chat message for which this rest was performed.
    */
 
@@ -2110,8 +2111,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const restConfig = CONFIG.DND5E.restTypes.long;
     config = foundry.utils.mergeObject({
       type: "long", dialog: true, chat: true, newDay: true, advanceTime: false,
-      duration: CONFIG.DND5E.restTypes.long.duration[game.settings.get("dnd5e", "restVariant")],
-      recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax
+      duration: restConfig.duration[game.settings.get("dnd5e", "restVariant")],
+      recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax,
+      exhaustionDelta: restConfig.exhaustionDelta
     }, config);
 
     /**
@@ -2199,11 +2201,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     result.dhd = result.deltas.hitDice;
     result.longRest = result.type === "long";
 
-    if ( CONFIG.DND5E.restTypes[result.type]?.exhaustionDelta && !result.clone.hasConditionEffect("malnourished") ) {
+    if ( config.exhaustionDelta && !result.clone.hasConditionEffect("malnourished")
+      && !result.clone.hasConditionEffect("dehydrated") ) {
       const path = "system.attributes.exhaustion";
       const value = foundry.utils.getProperty(result.clone, path) ?? 0;
-      const delta = CONFIG.DND5E.restTypes[result.type].exhaustionDelta;
-      foundry.utils.mergeObject(result.updateData, { [path]: Math.max(0, value - delta) });
+      foundry.utils.mergeObject(result.updateData, { [path]: Math.max(0, value + config.exhaustionDelta) });
     }
 
     /**
