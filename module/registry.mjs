@@ -277,7 +277,7 @@ class SpellListRegistry {
   /* -------------------------------------------- */
 
   /**
-   * UUIDs of spell lists in the process of being loaded.
+   * UUIDs of spell lists or IDs of compendiums in the process of being loaded.
    * @type {Set<string>}
    */
   static #loading = new Set();
