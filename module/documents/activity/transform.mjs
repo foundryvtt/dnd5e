@@ -116,7 +116,7 @@ export default class TransformActivity extends ActivityMixin(TransformActivityDa
   async _finalizeUsage(config, results) {
     const profile = this.profiles.find(p => p._id === config.transform?.profile);
     if ( profile ) {
-      const uuid = await this.queryActor(profile);
+      const uuid = !this.transform.mode ? profile.uuid : await this.queryActor(profile);
       if ( uuid ) {
         if ( results.message instanceof ChatMessage ) results.message.setFlag("dnd5e", "transform.uuid", uuid);
         else foundry.utils.setProperty(results.message, "flags.dnd5e.transform.uuid", uuid);
