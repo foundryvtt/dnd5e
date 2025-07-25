@@ -35,7 +35,7 @@ const {
  * @property {boolean} transform.customize     Should any customized settings be respected or should the default
  *                                             settings for the selected profile be used instead.
  * @property {string} transform.identifier     Class identifier that will be used to determine applicable level.
- * @property {string} transform.mode           Method of determining what type of creature to transform into.
+ * @property {""|"cr"} transform.mode          Method of determining what type of creature to transform into.
  * @property {string} transform.preset         Transformation preset to use.
  */
 export default class TransformActivityData extends BaseActivityData {
