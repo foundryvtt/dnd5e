@@ -106,16 +106,16 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
           for ( const [k, v] of Object.entries(value ?? {}) ) {
             const list = dnd5e.registry.spellLists.forType(...k.split(":"));
             if ( !list || (v === 0) ) continue;
-            if ( v === 1 ) include = include.union(list.uuids);
-            else if ( v === -1 ) exclude = exclude.union(list.uuids);
+            if ( v === 1 ) include = include.union(list.identifiers);
+            else if ( v === -1 ) exclude = exclude.union(list.identifiers);
           }
-          if ( include.size ) filters.push({ k: "uuid", o: "in", v: include });
-          if ( exclude.size ) filters.push({ o: "NOT", v: { k: "uuid", o: "in", v: exclude } });
+          if ( include.size ) filters.push({ k: "system.identifier", o: "in", v: include });
+          if ( exclude.size ) filters.push({ o: "NOT", v: { k: "system.identifier", o: "in", v: exclude } });
         },
         config: {
           choices: dnd5e.registry.spellLists.options.reduce((obj, entry) => {
             const list = dnd5e.registry.spellLists.forType(...entry.value.split(":"));
-            if ( list?.uuids.size ) obj[entry.value] = entry.label;
+            if ( list?.identifiers.size ) obj[entry.value] = entry.label;
             return obj;
           }, {})
         }

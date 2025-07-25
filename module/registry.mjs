@@ -269,7 +269,15 @@ class SpellListRegistry {
   /* -------------------------------------------- */
 
   /**
-   * UUIDs of spell lists in the process of being loaded.
+   * IDs of compendiums that have been re-indexed during loading.
+   * @type {Set<string>}
+   */
+  static #compendiumsIndexed = new Set();
+
+  /* -------------------------------------------- */
+
+  /**
+   * UUIDs of spell lists or IDs of compendiums in the process of being loaded.
    * @type {Set<string>}
    */
   static #loading = new Set();
@@ -351,10 +359,16 @@ class SpellListRegistry {
     }));
 
     const list = type.get(page.system.identifier);
-    list.contribute(page).forEach(uuid => {
+    await Promise.all(Array.from(list.contribute(page)).map(uuid => {
       if ( !SpellListRegistry.#bySpell.has(uuid) ) SpellListRegistry.#bySpell.set(uuid, new Set());
       SpellListRegistry.#bySpell.get(uuid).add(list);
-    });
+      const { collection } = foundry.utils.parseUuid(uuid);
+      if ( (collection instanceof CompendiumCollection) && !this.#compendiumsIndexed.has(collection.metadata.id) ) {
+        this.#compendiumsIndexed.add(collection.metadata.id);
+        this.#loading.add(collection.metadata.id);
+        return collection.getIndex().then(this.#loading.delete(collection.metadata.id));
+      }
+    }));
 
     this.#loading.delete(uuid);
     if ( this.ready ) RegistryStatus.set("spellLists", true);
@@ -385,12 +399,26 @@ export class SpellList {
   /* -------------------------------------------- */
 
   /**
+   * Identifiers for all the available & unlinked spells in this list.
+   * @type {Set<string>}
+   */
+  get identifiers() {
+    return new Set([
+      ...this.indexes.map(s => s.system?.identifier),
+      ...this.#unlinked.map(u => u.identifier)
+    ].filter(_ => _));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Indexes for the available spells sorted by name.
-   * @returns {object[]}
+   * @type {object[]}
    */
   get indexes() {
     return Array.from(this.#spells.keys())
       .map(s => fromUuidSync(s))
+      .filter(_ => _)
       .sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang));
   }
 

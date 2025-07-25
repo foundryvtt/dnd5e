@@ -9,6 +9,7 @@ const { ArrayField, DocumentIdField, HTMLField, NumberField, SchemaField, SetFie
  *
  * @typedef {object} UnlinkedSpellConfiguration
  * @property {string} _id            Unique ID for this entry.
+ * @property {string} identifier     Identifier of this spell.
  * @property {string} name           Name of the spell.
  * @property {object} system
  * @property {number} system.level   Spell level.
@@ -38,25 +39,26 @@ export default class SpellListJournalPageData extends foundry.abstract.TypeDataM
       type: new StringField({
         initial: "class", label: "JOURNALENTRYPAGE.DND5E.SpellList.Type.Label"
       }),
-      identifier: new IdentifierField({label: "DND5E.Identifier"}),
+      identifier: new IdentifierField({ label: "DND5E.Identifier" }),
       grouping: new StringField({
         initial: "level", choices: this.GROUPING_MODES,
         label: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Label",
         hint: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Hint"
       }),
       description: new SchemaField({
-        value: new HTMLField({textSearch: true, label: "DND5E.Description"})
+        value: new HTMLField({ textSearch: true, label: "DND5E.Description" })
       }),
-      spells: new SetField(new StringField(), {label: "DND5E.ItemTypeSpellPl"}),
+      spells: new SetField(new StringField(), { label: "DND5E.ItemTypeSpellPl" }),
       unlinkedSpells: new ArrayField(new SchemaField({
-        _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
-        name: new StringField({required: true, label: "Name"}),
+        _id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
+        identifier: new IdentifierField({ label: "DND5E.Identifier" }),
+        name: new StringField({ required: true, label: "Name" }),
         system: new SchemaField({
-          level: new NumberField({min: 0, integer: true, label: "DND5E.Level"}),
-          school: new StringField({label: "DND5E.School"})
+          level: new NumberField({ min: 0, integer: true, label: "DND5E.Level" }),
+          school: new StringField({ label: "DND5E.School" })
         }),
         source: new SourceField({license: false, revision: false, rules: false, uuid: new StringField()})
-      }), {label: "JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Label"})
+      }), { label: "JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Label" })
     };
   }
 
@@ -77,7 +79,10 @@ export default class SpellListJournalPageData extends foundry.abstract.TypeDataM
 
   /** @inheritDoc */
   prepareDerivedData() {
-    this.unlinkedSpells.forEach(s => SourceField.prepareData.call(s.source, s.source?.uuid));
+    this.unlinkedSpells.forEach(s => {
+      s.identifier ??= s.name.replaceAll(/(\w+)([\\|/])(\w+)/g, "$1-$3").slugify({ strict: true });
+      SourceField.prepareData.call(s.source, s.source?.uuid);
+    });
   }
 
   /* -------------------------------------------- */

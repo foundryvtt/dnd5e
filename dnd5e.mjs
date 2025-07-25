@@ -68,7 +68,7 @@ Hooks.once("init", function() {
   CONFIG.Combatant.documentClass = documents.Combatant5e;
   CONFIG.CombatantGroup.documentClass = documents.CombatantGroup5e;
   CONFIG.Item.collection = dataModels.collection.Items5e;
-  CONFIG.Item.compendiumIndexFields.push("system.container");
+  CONFIG.Item.compendiumIndexFields.push("system.container", "system.identifier");
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
