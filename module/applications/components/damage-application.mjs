@@ -41,6 +41,13 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get shouldBuildTargetList() {
+    return this.open && this.visible;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Options for each application target.
    * @type {Map<string, DamageApplicationOptions>}
@@ -62,7 +69,6 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
   /* -------------------------------------------- */
 
   connectedCallback() {
-    super.connectedCallback();
     // Fetch the associated chat message
     const messageId = this.closest("[data-message-id]")?.dataset.messageId;
     this.chatMessage = game.messages.get(messageId);
@@ -331,5 +337,19 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     const token = fromUuidSync(uuid);
     const entry = this.targetList.querySelector(`[data-target-uuid="${token.uuid}"]`);
     this.refreshListEntry(token, entry, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onOpen() {
+    this.buildTargetsList();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onVisible() {
+    this.buildTargetsList();
   }
 }

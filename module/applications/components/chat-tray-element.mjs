@@ -18,8 +18,22 @@ export default class ChatTrayElement extends HTMLElement {
   }
 
   set open(open) {
-    if ( open ) this.setAttribute("open", "");
-    else this.removeAttribute("open");
+    this.toggleAttribute("open", open);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether the tray is visible in the chat log.
+   * @returns {boolean}
+   */
+  get visible() {
+    return this.hasAttribute("visible");
+  }
+
+  set visible(visible) {
+    this.toggleAttribute("visible", visible);
+    if ( visible ) this._onVisible();
   }
 
   /* -------------------------------------------- */
@@ -51,6 +65,7 @@ export default class ChatTrayElement extends HTMLElement {
    */
   _handleToggleOpen(open) {
     this.dispatchEvent(new Event("toggle"));
+    if ( open ) this._onOpen();
 
     this.querySelector(".collapsible")?.classList.toggle("collapsed", !open);
 
@@ -58,4 +73,20 @@ export default class ChatTrayElement extends HTMLElement {
     const popout = this.closest(".chat-popout");
     if ( popout ) popout.style.height = "";
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Optionally perform some action when this element is toggled open.
+   * @protected
+   */
+  _onOpen() {}
+
+  /* -------------------------------------------- */
+
+  /**
+   * Optionally perform some action when this element becomes visible.
+   * @protected
+   */
+  _onVisible() {}
 }
