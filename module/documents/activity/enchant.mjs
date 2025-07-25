@@ -122,13 +122,13 @@ export default class EnchantActivity extends ActivityMixin(EnchantActivityData) 
 
   /**
    * Apply an enchantment to the provided item.
-   * @param {string} profile            ID of the enchantment profile to apply.
-   * @param {Item5e} item               Item to which to apply the enchantment.
+   * @param {string} profile                  ID of the enchantment profile to apply.
+   * @param {Item5e} item                     Item to which to apply the enchantment.
    * @param {object} [options={}]
    * @param {ChatMessage5e} [options.chatMessage]     Chat message used to make the enchantment, if applicable.
    * @param {ActiveEffect5e} [options.concentration]  Concentration active effect to associate with this enchantment.
-   * @param {boolean} [options.strict]  Display UI errors and prevent creation if enchantment isn't allowed.
-   * @returns {ActiveEffect5e|null}     Created enchantment effect if the process was successful.
+   * @param {boolean} [options.strict]        Display UI errors and prevent creation if enchantment isn't allowed.
+   * @returns {Promise<ActiveEffect5e|null>}  Created enchantment effect if the process was successful.
    */
   async applyEnchantment(profile, item, { chatMessage, concentration, strict=true }={}) {
     const effect = this.item.effects.get(profile);
