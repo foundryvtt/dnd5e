@@ -106,7 +106,8 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
       if ( skill ) await actor.rollSkill({ ...rollData, skill }, {}, messageData);
       else if ( tool ) {
         rollData.tool = tool;
-        if ( (this.item.type === "tool") && !this.check.associated.size ) {
+        if ( (this.item.type === "tool")
+          && (!this.item.system.type.baseItem || (tool === this.item.system.type.baseItem)) ) {
           rollData.bonus = this.item.system.bonus;
           rollData.prof = this.item.system.prof;
           rollData.item = this.item;

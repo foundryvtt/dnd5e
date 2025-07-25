@@ -856,10 +856,6 @@ DND5E.tools = {
  */
 DND5E.toolIds = new Proxy(DND5E.tools, {
   get(target, prop) {
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.toolIds` is deprecated, use `CONFIG.DND5E.tools` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
     return target[prop]?.id ?? target[prop];
   }
 });
