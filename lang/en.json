@@ -1954,6 +1954,10 @@
       "identifier": {
         "label": "Class Identifier",
         "hint": "Identifier used to determine whether the character level or a specific class level should be used for enchantment level limits."
+      },
+      "self": {
+        "label": "Automatically Enchant Self",
+        "hint": "Automatically apply selected enchantment to the item containing this activity when it is used, and remove it when the activity is used again."
       }
     },
     "restrictions": {
@@ -1990,6 +1994,7 @@
       "Create": "Create Enchantment",
       "Delete": "Delete Enchantment"
     },
+    "Active": "{name} (active)",
     "Empty": "No associated enchantments. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing enchantment from the drop-down."
   },
   "Warning": {
@@ -4776,11 +4781,11 @@
       },
       "prompt": {
         "label": "Roll Prompt",
-        "hint": "Should the roll configuration dialog be displayed when rolling?"
+        "hint": "Display the roll configuration dialog when rolling."
       },
       "visible": {
         "label": "Visible to All",
-        "hint": "Should the rolling button be visible to all players?"
+        "hint": "Display the rolling button in chat for all players."
       }
     }
   }

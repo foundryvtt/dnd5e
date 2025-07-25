@@ -85,6 +85,19 @@ export default class EnchantSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _prepareIdentityContext(context) {
+    context = await super._prepareIdentityContext(context);
+    context.behaviorFields.unshift({
+      field: context.fields.enchant.fields.self,
+      value: context.source.enchant.self,
+      input: context.inputs.createCheckboxInput
+    });
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _getTabs() {
     const tabs = super._getTabs();
     tabs.effect.label = "DND5E.ENCHANT.SECTIONS.Enchanting";
