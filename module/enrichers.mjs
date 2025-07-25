@@ -45,12 +45,8 @@ async function enrichString(match, options) {
   let { type, config, label } = match.groups;
   config = parseConfig(config, { multiple: ["damage", "heal", "healing"].includes(type) });
   config._input = match[0];
-  if ( Number.isNumeric(config.rules) ) {
-    config._rules = String(config.rules);
-    delete config.rules;
-  } else {
-    config._rules = _getRulesVersion(options);
-  }
+  config._rules = getRulesVersion(config, options);
+  delete config.rules;
   switch ( type.toLowerCase() ) {
     case "attack": return enrichAttack(config, label, options);
     case "award": return enrichAward(config, label, options);
@@ -97,12 +93,14 @@ function parseConfig(match="", { multiple=false }={}) {
 /* -------------------------------------------- */
 
 /**
- * Determine the appropriate rules version based on the provided document or system setting.
- * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
- * @returns {string}
+ * Determine the appropriate rules version based on the config override, provided item's parent's rule version,
+ * provided document's rule version, or the system setting (in that order).
+ * @param {object} [config={}]              Config object for the enrichment.
+ * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
+ * @returns {"2014"|"2024"}
  */
-function _getRulesVersion(options) {
-  // Select from actor data first, then item data, and then fall back to system setting
+export function getRulesVersion(config={}, options={}) {
+  if ( Number.isNumeric(config.rules) ) return String(config.rules);
   return options.relativeTo?.parent?.system?.source?.rules
     || options.relativeTo?.system?.source?.rules
     || (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014");

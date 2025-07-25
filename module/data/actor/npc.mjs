@@ -1,6 +1,7 @@
 import Actor5e from "../../documents/actor/actor.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
+import { getRulesVersion } from "../../enrichers.mjs";
 import { defaultUnits, formatCR, formatLength, formatNumber, getPluralRules, splitSemicolons } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
@@ -560,7 +561,8 @@ export default class NPCData extends CreatureTemplate {
     }
     if ( !config.statblock ) return super.toEmbed(config, options);
 
-    const context = await this._prepareEmbedContext();
+    const rulesVersion = getRulesVersion(config, { ...options, relativeTo: this.parent });
+    const context = await this._prepareEmbedContext(rulesVersion);
     context.name = config.label || this.parent.name;
     if ( config.cite && !config.inline ) {
       config.cite = false;
@@ -589,12 +591,10 @@ export default class NPCData extends CreatureTemplate {
 
   /**
    * Prepare the context information for the embed template rendering.
+   * @param {"2014"|"2024"} rulesVersion  Version of the stat block styling to use.
    * @returns {object}
    */
-  async _prepareEmbedContext() {
-    const rulesVersion = this.source.rules
-      ?? (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014");
-
+  async _prepareEmbedContext(rulesVersion) {
     const formatter = game.i18n.getListFormatter({ type: "unit" });
     const prepareMeasured = (value, units, label) => label ? `${label} ${formatLength(value, units)}`
       : formatLength(value, units);
