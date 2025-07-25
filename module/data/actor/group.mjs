@@ -370,6 +370,17 @@ export default class GroupData extends GroupTemplate {
 
     return false;
   }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    if ( this.parent._stats?.compendiumSource?.startsWith("Compendium.") ) return;
+    this.parent.updateSource({ "prototypeToken.actorLink": true });
+  }
 }
 
 /* -------------------------------------------- */

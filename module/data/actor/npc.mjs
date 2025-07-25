@@ -447,13 +447,32 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    await TraitsFields.preCreateSize.call(this, data, options, user);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _preUpdate(changes, options, user) {
     if ( (await super._preUpdate(changes, options, user)) === false ) return false;
+    await AttributesFields.preUpdateHP.call(this, changes, options, user);
+    await TraitsFields.preUpdateSize.call(this, changes, options, user);
+
     for ( const k of ["legact", "legres"] ) {
       if ( !foundry.utils.hasProperty(changes, `system.resources.${k}.value`) ) continue;
       const spent = this.resources[k].max - changes.system.resources[k].value;
       foundry.utils.setProperty(changes, `system.resources.${k}.spent`, spent);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    AttributesFields.onUpdateHP.call(this, changed, options, userId);
   }
 
   /* -------------------------------------------- */
