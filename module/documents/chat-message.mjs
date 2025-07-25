@@ -341,7 +341,7 @@ export default class ChatMessage5e extends ChatMessage {
           ? (activity?.getActionLabel(roll.attackMode) ?? "")
           : (item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]));
       const flavor = document.createElement("div");
-      flavor.classList.add("dnd5e2", "chat-card");
+      flavor.classList.add("chat-card");
       flavor.innerHTML = `
         <section class="card-header description ${isCritical ? "critical" : ""}">
           <header class="summary">
@@ -633,7 +633,7 @@ export default class ChatMessage5e extends ChatMessage {
     if ( (actor?.type !== "npc") || (roll?.type !== "save") || this.rolls.some(r => r.isSuccess) ) return;
 
     const content = document.createElement("div");
-    content.classList.add("dnd5e2", "chat-card");
+    content.classList.add("chat-card");
 
     // If message has the `forceSuccess` flag, mark it as resisted
     if ( roll.forceSuccess ) content.insertAdjacentHTML("beforeend", `

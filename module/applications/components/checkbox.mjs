@@ -181,7 +181,7 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
 
   /** @override */
   _adoptStyleSheet(sheet) {
-    this.#shadowRoot.adoptedStyleSheets = [sheet];
+    if ( this.constructor.useShadowRoot ) this.#shadowRoot.adoptedStyleSheets = [sheet];
   }
 
   /* -------------------------------------------- */

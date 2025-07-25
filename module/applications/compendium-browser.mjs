@@ -423,14 +423,6 @@ export default class CompendiumBrowser extends Application5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onFirstRender(context, options) {
-    await super._onFirstRender(context, options);
-    this.element.append(this.element.querySelector('[data-application-part="header"]'));
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     context.filters = this.currentFilters;
