@@ -860,9 +860,7 @@ export default function ActivityMixin(Base) {
         data: {
           content: await foundry.applications.handlebars.renderTemplate(this.metadata.usage.chatCard, context),
           speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
-          flags: {
-            core: { canPopout: true }
-          }
+          title: `${this.item.name} - ${this.name}`
         }
       }, message);
 

@@ -306,7 +306,7 @@
     border: none;
     inset: 0 0 auto 0;
     z-index: 1;
-    padding: 7px 6px 0 0;
+    padding: 7px 6px 0 8px;
     background: none;
 
     :is(a, button).header-button, .header-control {
@@ -332,6 +332,10 @@
       flex: 0 0 15px;
       &:hover { text-shadow: 0 0 8px red; }
     }
+  }
+  &:not(.minimized) .window-header .window-title {
+    block-size: 1px;
+    visibility: hidden;
   }
 
   .window-content {

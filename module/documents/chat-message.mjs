@@ -953,6 +953,16 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _preCreate(data, options, userId) {
+    await super._preCreate(data, options, userId);
+    if ( !foundry.utils.hasProperty(data, "flags.core.canPopout") ) {
+      this.updateSource({ "flags.core.canPopout": true });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     dnd5e.registry.messages.untrack(this);

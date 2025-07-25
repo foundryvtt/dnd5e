@@ -726,10 +726,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           "systems/dnd5e/templates/chat/item-card.hbs", context
         ),
         flags: {
-          "core.canPopout": true,
           "dnd5e.item": { id: this.id, uuid: this.uuid, type: this.type }
         },
-        speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token })
+        speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
+        title: this.name
       },
       rollMode: game.settings.get("core", "rollMode")
     }, message);
