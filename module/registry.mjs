@@ -363,7 +363,10 @@ class SpellListRegistry {
       if ( !SpellListRegistry.#bySpell.has(uuid) ) SpellListRegistry.#bySpell.set(uuid, new Set());
       SpellListRegistry.#bySpell.get(uuid).add(list);
       const { collection } = foundry.utils.parseUuid(uuid);
-      if ( (collection instanceof CompendiumCollection) && !this.#compendiumsIndexed.has(collection.metadata.id) ) {
+      if (
+        (collection instanceof foundry.documents.collections.CompendiumCollection)
+        && !this.#compendiumsIndexed.has(collection.metadata.id)
+      ) {
         this.#compendiumsIndexed.add(collection.metadata.id);
         this.#loading.add(collection.metadata.id);
         return collection.getIndex().then(this.#loading.delete(collection.metadata.id));
