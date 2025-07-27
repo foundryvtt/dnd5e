@@ -199,6 +199,9 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     return new Proficiency(this.attributes.prof, multiplier, roundDown);
   }
   
+
+  /* -------------------------------------------- */
+
   calculateToolProficiency(multiplier, ability) {
     let roundDown = true;
     if ( multiplier == 1 && this.parent.flags.dnd5e?.toolExpertise) multiplier = 2;
