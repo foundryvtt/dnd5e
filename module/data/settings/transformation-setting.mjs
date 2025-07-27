@@ -185,7 +185,9 @@ export default class TransformationSetting extends foundry.abstract.DataModel {
 
     const otherSettings = Object.entries(TransformationSetting.schema.fields)
       .map(([name, field]) => name !== "preset" && !TransformationSetting.BOOLEAN_CATEGORIES.includes(name) ? ({
-        field, name, value: this[name],
+        field,
+        name: `${prefix}${name}`,
+        value: this[name],
         input: field instanceof BooleanField ? createCheckboxInput : undefined
       }) : null)
       .filter(_ => _);
