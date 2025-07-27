@@ -1248,7 +1248,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const rollData = this.getRollData();
     const abilityId = formData?.get("ability") ?? process.ability;
     const ability = this.system.abilities?.[abilityId];
-    const prof = this.system.calculateAbilityCheckProficiency(relevant?.effectValue ?? 0, abilityId);
+    const prof = type === "skill" ? this.system.calculateAbilityCheckProficiency(relevant?.effectValue ?? 0, abilityId) : this.system.calculateToolProficiency(relevant?.effectValue ?? 0, abilityId);
 
     let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
       mod: ability?.mod,
