@@ -970,7 +970,7 @@ export default class ActorSheet5e extends ActorSheetMixin(foundry.appv1?.sheets?
   async _onDropSingleItem(itemData, event) {
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
-      ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
+      ui.notifications.warn(game.i18n.format("DND5E.ACTOR.Warning.InvalidItem", {
         itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
         actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
       }));
@@ -998,7 +998,7 @@ export default class ActorSheet5e extends ActorSheetMixin(foundry.appv1?.sheets?
       const dataModel = CONFIG.Item.dataModels[itemData.type];
       const singleton = dataModel?.metadata.singleton ?? false;
       if ( singleton && this.actor.itemTypes[itemData.type].length ) {
-        ui.notifications.error(game.i18n.format("DND5E.ActorWarningSingleton", {
+        ui.notifications.error(game.i18n.format("DND5E.ACTOR.Warning.Singleton", {
           itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
           actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
         }));

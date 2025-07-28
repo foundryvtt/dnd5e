@@ -154,6 +154,11 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClass.Group"
   });
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.EncounterActorSheet, {
+    types: ["encounter"],
+    makeDefault: true,
+    label: "DND5E.SheetClass.Encounter"
+  });
 
   DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
   DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ItemSheet5e, {
@@ -598,8 +603,9 @@ Hooks.on("renderJournalEntryPageSheet", applications.journal.JournalEntrySheet5e
 Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffectConfig);
 
 Hooks.on("renderDocumentSheetConfig", (app, html) => {
-  if ( (app.options.document instanceof foundry.documents.Actor) && (app.options.document.type === "group") ) {
-    applications.actor.GroupActorSheet.addDocumentSheetConfigOptions(app, html);
+  const { document } = app.options;
+  if ( (document instanceof Actor) && document.system.isGroup ) {
+    applications.actor.MultiActorSheet.addDocumentSheetConfigOptions(app, html);
   }
 });
 

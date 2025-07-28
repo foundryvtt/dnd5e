@@ -190,10 +190,12 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
     const actor = this.parent.actor;
     if ( (actor?.type !== "character") || !this.metadata?.singleton ) return;
     if ( actor.itemTypes[data.type]?.length ) {
-      ui.notifications.error(game.i18n.format("DND5E.ActorWarningSingleton", {
-        itemType: game.i18n.localize(CONFIG.Item.typeLabels[data.type]),
-        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
-      }));
+      ui.notifications.error("DND5E.ACTOR.Warning.Singleton", {
+        format: {
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[data.type]),
+          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
+        }
+      });
       return false;
     }
   }

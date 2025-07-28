@@ -1,12 +1,11 @@
-import BaseActorSheet from "./api/base-actor-sheet.mjs";
-import ContextMenu5e from "../context-menu.mjs";
 import { convertWeight } from "../../utils.mjs";
+import MultiActorSheet from "./api/multi-actor-sheet.mjs";
 import Award from "../award.mjs";
 
 /**
  * Extension of the base actor sheet for group actors.
  */
-export default class GroupActorSheet extends BaseActorSheet {
+export default class GroupActorSheet extends MultiActorSheet {
   /** @override */
   static DEFAULT_OPTIONS = {
     classes: ["group", "vertical-tabs"],
@@ -16,9 +15,6 @@ export default class GroupActorSheet extends BaseActorSheet {
     },
     actions: {
       award: GroupActorSheet.#onAward,
-      editDescription: GroupActorSheet.#onEditDescription,
-      placeMembers: GroupActorSheet.#onPlaceMembers,
-      removeMember: GroupActorSheet.#onRemoveMember,
       roll: GroupActorSheet.#onRoll
     },
     tab: "members"
@@ -71,14 +67,6 @@ export default class GroupActorSheet extends BaseActorSheet {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
-  /**
-   * Description currently being edited.
-   * @type {string|null}
-   */
-  editingDescriptionTarget = null;
-
-  /* -------------------------------------------- */
-
   /** @override */
   tabGroups = {
     primary: "members"
@@ -91,33 +79,6 @@ export default class GroupActorSheet extends BaseActorSheet {
   /** @override */
   async _configureInventorySections(sections) {
     sections.forEach(s => s.minWidth = 200);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare rendering context for the biography tab.
-   * @param {ApplicationRenderContext} context  Context being prepared.
-   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
-   * @returns {ApplicationRenderContext}
-   * @protected
-   */
-  async _prepareBiographyContext(context, options) {
-    if ( this.actor.limited ) return context;
-
-    const enrichmentOptions = {
-      secrets: this.actor.isOwner, relativeTo: this.actor, rollData: context.rollData
-    };
-    context.enriched = {
-      summary: await CONFIG.ux.TextEditor.enrichHTML(this.actor.system.description.summary, enrichmentOptions),
-      full: await CONFIG.ux.TextEditor.enrichHTML(this.actor.system.description.full, enrichmentOptions)
-    };
-    if ( this.editingDescriptionTarget ) context.editingDescription = {
-      target: this.editingDescriptionTarget,
-      value: foundry.utils.getProperty(this.actor._source, this.editingDescriptionTarget)
-    };
-
-    return context;
   }
 
   /* -------------------------------------------- */
@@ -156,7 +117,7 @@ export default class GroupActorSheet extends BaseActorSheet {
    * Prepare members context.
    * @param {ApplicationRenderContext} context     Shared context provided by _prepareContext.
    * @param {HandlebarsRenderOptions} options      Options which configure application rendering behavior.
-   * @returns {ApplicationRenderContext}
+   * @returns {Promise<ApplicationRenderContext>}
    * @protected
    */
   async _prepareMembersContext(context, options) {
@@ -193,7 +154,7 @@ export default class GroupActorSheet extends BaseActorSheet {
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     switch ( partId ) {
-      case "biography": return this._prepareBiographyContext(context, options);
+      case "biography": return this._prepareDescriptionContext(context, options);
       case "header": return this._prepareHeaderContext(context, options);
       case "inventory": return this._prepareInventoryContext(context, options);
       case "members": return this._prepareMembersContext(context, options);
@@ -238,25 +199,6 @@ export default class GroupActorSheet extends BaseActorSheet {
       max: convertWeight(max, baseUnits[systemUnits], defaultUnits[systemUnits]),
       value: convertWeight(value, baseUnits[systemUnits], defaultUnits[systemUnits])
     };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare portrait context for members.
-   * @param {Actor5e} actor   The actor instance.
-   * @param {object} context  The render context.
-   * @protected
-   */
-  async _prepareMemberPortrait(actor, context) {
-    const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait");
-    const token = actor.isToken ? actor.token : actor.prototypeToken;
-    let src = showTokenPortrait ? token.texture.src : actor.img;
-    if ( showTokenPortrait && token?.randomImg ) {
-      const images = await actor.getTokenImages();
-      src = images[Math.floor(Math.random() * images.length)];
-    }
-    context.portrait = { src, isVideo: foundry.helpers.media.VideoHelper.hasVideoExtension(src) };
   }
 
   /* -------------------------------------------- */
@@ -313,35 +255,12 @@ export default class GroupActorSheet extends BaseActorSheet {
   }
 
   /* -------------------------------------------- */
-  /*  Life-Cycle Handlers                         */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _attachFrameListeners() {
-    super._attachFrameListeners();
-    new ContextMenu5e(this.element, ".member[data-uuid]", this._getEntryContextOptions(), { jQuery: false });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    if ( this.editingDescriptionTarget ) {
-      this.element.querySelectorAll("prose-mirror").forEach(editor => editor.addEventListener("save", () => {
-        this.editingDescriptionTarget = null;
-        this.render();
-      }));
-    }
-  }
-
-  /* -------------------------------------------- */
   /*  Event Listeners & Handlers                  */
   /* -------------------------------------------- */
 
   /**
-   * Handle distributing pooled XP.
-   * @this {GroupActorSheet}
+   * Handle distributing XP & currency.
+   * @this {MultiActorSheet}
    */
   static #onAward() {
     new Award({
@@ -352,57 +271,12 @@ export default class GroupActorSheet extends BaseActorSheet {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  async _onDropActor(event, actor) {
-    await this.actor.system.addMember(actor);
-    return actor;
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   async _onDropItem(event, item) {
     const { uuid } = event.target.closest("[data-uuid]")?.dataset ?? {};
     const target = await fromUuid(uuid);
     if ( target instanceof foundry.documents.Actor ) return target.sheet._onDropCreateItems(event, [item]);
     return super._onDropItem(event, item);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle expanding the description editor.
-   * @this {GroupActorSheet}
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Button that was clicked.
-   */
-  static #onEditDescription(event, target) {
-    if ( target.ariaDisabled ) return;
-    this.editingDescriptionTarget = target.dataset.target;
-    this.render();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle placing group members.
-   * @this {GroupActorSheet}
-   */
-  static #onPlaceMembers() {
-    this.actor.system.placeMembers();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle removing a group member.
-   * @this {GroupActorSheet}
-   * @param {PointerEvent} event  The triggering event.
-   * @param {HTMLElement} target  The action target.
-   * @returns {Promise<Actor5e>}
-   */
-  static async #onRemoveMember(event, target) {
-    return this.actor.system.removeMember(await fromUuid(target.closest(".member[data-uuid]")?.dataset.uuid));
   }
 
   /* -------------------------------------------- */
@@ -419,73 +293,5 @@ export default class GroupActorSheet extends BaseActorSheet {
     const { uuid } = target.closest("[data-uuid]")?.dataset ?? {};
     const actor = await fromUuid(uuid);
     actor?.rollSkill({ event, skill: key, pace: this.actor.system.attributes.movement.pace });
-  }
-
-  /* -------------------------------------------- */
-  /*  Methods                                     */
-  /* -------------------------------------------- */
-
-  /**
-   * Get context menu entries for group members.
-   * @returns {ContextMenuEntry[]}
-   * @protected
-   */
-  _getEntryContextOptions() {
-    return [{
-      name: "DND5E.Group.Action.View",
-      icon: '<i class="fa-solid fa-eye"></i>',
-      callback: async li => (await fromUuid(li.dataset.uuid))?.sheet.render(true)
-    }, {
-      name: "DND5E.Group.Action.Remove",
-      icon: '<i class="fa-solid fa-xmark"></i>',
-      callback: async li => this.actor.system.removeMember(await fromUuid(li.dataset.uuid))
-    }];
-  }
-
-  /* -------------------------------------------- */
-  /*  Sheet Configuration                         */
-  /* -------------------------------------------- */
-
-  /**
-   * Augment the DocumentSheetConfig with additional options.
-   * @param {DocumentSheetConfig} app  The application.
-   * @param {HTMLElement} html         The rendered HTML.
-   */
-  static addDocumentSheetConfigOptions(app, html) {
-    const { document: doc } = app.options;
-    const showTokenPortrait = doc.getFlag("dnd5e", "showTokenPortrait");
-    const artOptions = {
-      false: game.i18n.localize("DND5E.Group.Config.Art.portraits"),
-      true: game.i18n.localize("DND5E.Group.Config.Art.tokens")
-    };
-    const fieldset = document.createElement("fieldset");
-    fieldset.innerHTML = `
-      <legend>${game.i18n.localize("DND5E.Group.Config.Legend")}</legend>
-      <div class="form-group">
-        <label>${game.i18n.localize("DND5E.Group.Config.Art.Label")}</label>
-        <div class="form-fields">
-          <select name="flags.dnd5e.showTokenPortrait" data-dtype="Boolean">
-            ${foundry.applications.handlebars.selectOptions(artOptions, { hash: { selected: showTokenPortrait } })}
-          </select>
-        </div>
-      </div>
-    `;
-    html.querySelector("fieldset").insertAdjacentElement("afterend", fieldset);
-    html.removeEventListener("submit", this._applyDocumentSheetConfigOptions);
-    html.addEventListener("submit", this._applyDocumentSheetConfigOptions);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle persisting additional sheet configuration options.
-   * @param {SubmitEvent} event  The form submission event.
-   * @protected
-   */
-  static _applyDocumentSheetConfigOptions(event) {
-    const app = foundry.applications.instances.get(event.target.id);
-    if ( !app?.document ) return;
-    const submitData = foundry.utils.expandObject(new foundry.applications.ux.FormDataExtended(event.target).object);
-    if ( "flags" in submitData ) app.document.update({ flags: submitData.flags });
   }
 }

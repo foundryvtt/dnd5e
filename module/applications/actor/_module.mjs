@@ -1,11 +1,13 @@
 export {default as CharacterActorSheet} from "./character-sheet.mjs";
 export {default as ActorSheet5eVehicle} from "./vehicle-sheet.mjs";
+export {default as EncounterActorSheet} from "./encounter-sheet.mjs";
 export {default as GroupActorSheet} from "./group-sheet.mjs";
 export {default as NPCActorSheet} from "./npc-sheet.mjs";
 export {default as TransformDialog} from "./transform-dialog.mjs";
 
 export {default as BaseActorSheet} from "./api/base-actor-sheet.mjs";
 export {default as BaseConfigSheetV2} from "./api/base-config-sheet.mjs";
+export {default as MultiActorSheet} from "./api/multi-actor-sheet.mjs";
 
 export {default as AbilityConfig} from "./config/ability-config.mjs";
 export {default as ArmorClassConfig} from "./config/armor-class-config.mjs";

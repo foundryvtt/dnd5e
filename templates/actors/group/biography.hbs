@@ -1,7 +1,8 @@
-<section class="tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+<section class="tab {{ tab.cssClass }} {{#if editingDescription}}editing{{/if}}" data-tab="{{ tab.id }}"
+         data-group="{{ tab.group }}">
 
     {{#if editingDescription}}
-    <prose-mirror name="{{ editingDescription.target }}" value="{{ editingDescription.value }}"
+    <prose-mirror name="{{ editingDescription.target }}" value="{{ editingDescription.value }}" class="sized"
                   document-uuid="{{ actor.uuid }}"></prose-mirror>
     {{else}}
 

@@ -398,40 +398,6 @@
     }
   }
 
-  .editor.prosemirror {
-    flex: 1;
-    overflow: hidden;
-
-    menu { border-radius: 0; }
-
-    .editor-container {
-      overflow: hidden auto;
-      scrollbar-gutter: stable;
-      margin: 0 4px 0 16px;
-      padding-right: 4px;
-    }
-
-    .editor-content {
-      position: unset;
-      min-height: 300px;
-      padding: 0;
-    }
-
-    code-mirror {
-      min-height: 300px;
-      display: flex;
-      flex-direction: column;
-
-      .cm-editor { overflow: auto; }
-      .cm-scroller { position: relative; }
-    }
-
-    > textarea {
-      flex: none;
-      min-height: 300px;
-    }
-  }
-
   /* Container Contents */
   .inventory-element {
     .top .containers { justify-content: end; }

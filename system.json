@@ -31,14 +31,17 @@
       "character": {
         "htmlFields": ["details.biography.value", "details.biography.public", "bastion.description"]
       },
+      "encounter": {
+        "htmlFields": ["description.full", "description.summary"]
+      },
+      "group": {
+        "htmlFields": ["description.full", "description.summary"]
+      },
       "npc": {
         "htmlFields": ["details.biography.value", "details.biography.public"]
       },
       "vehicle": {
         "htmlFields": ["details.biography.value", "details.biography.public"]
-      },
-      "group": {
-        "htmlFields": ["description.full", "description.summary"]
       }
     },
     "ChatMessage": {
@@ -521,7 +524,7 @@
         "SRD 5.2": "SOURCE.BOOK.SRD52"
       }
     },
-    "needsMigrationVersion": "4.4.0",
+    "needsMigrationVersion": "5.1.0",
     "compatibleMigrationVersion": "0.8",
     "hotReload": {
       "extensions": ["css", "hbs", "json"],
