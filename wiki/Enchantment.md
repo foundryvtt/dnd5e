@@ -1,4 +1,4 @@
-![Up to date as of 4.3.0](https://img.shields.io/static/v1?label=dnd5e&message=4.3.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 Enchantments are a special type of Active Effect that makes changes on the item to which they are added, rather than the actor like normal Active Effects. They are configured in much the same way as normal Active Effects, but rely on different attribute keys that are documented below.
 
@@ -257,33 +257,33 @@ system.capacity.value
 | ------------------- | ----------- | -------------------- | ---------- |
 | `system.properties` | Add         | `weightlessContents` | No         |
 
-### Common Usage Examples
+### Spell Usage Examples
 
-This documents the Usage section on item sheets, common to many item types.
+This documents the Usage section on spells.
 
 ```
 system.activation.type
-                  cost
+                  value
                   condition
-       target.value
-              width
-              units
-              type
-              prompt
-       range.value
-             long
-             units
        duration.value
                 units
-       uses.value
-            max
-            per
+                special
+       range.value
+             units
+             special
+       target.template.count
+                       contiguous
+                       type
+                       size
+                       width
+                       height
+                       units
+              affects.count
+                      type
+                      choice
+                      special
+       uses.max
             recovery
-            prompt
-       consume.type
-               target
-               amount
-               scale
 ```
 
 #### Double the Normal and Long Range
@@ -295,63 +295,39 @@ system.activation.type
 
 #### Add Charges to be Used By Additional Items
 
-| Attribute Key        | Change Mode | Effect Value | Roll Data? |
-| -------------------- | ----------- | ------------ | ---------- |
-| `system.uses.max`    | Override    | `[formula]`  | Yes        |
-| `system.uses.per`    | Override    | `charges`    | No         |
-| `system.uses.prompt` | Override    | `false`      | No         |
+| Attribute Key          | Change Mode | Effect Value                               | Roll Data? |
+| ---------------------- | ----------- | ------------------------------------------ | ---------- |
+| `system.uses.max`      | Override    | `[formula]`                                | Yes        |
+| `system.uses.recovery` | Add         | `{ "period": "lr", "type": "recoverAll" }` | No         |
 
 > <details>
-> <summary>Uses Per Values</summary>
+> <summary>Recovery Period Values</summary>
 >
-> | Uses Per   | Abbreviation |
-> | ---------- | ------------ |
-> | Short Rest | `sr`         |
-> | Long Rest  | `lr`         |
-> | Day        | `day`        |
-> | Charges    | `charges`    |
-> | Dawn       | `dawn`       |
-> | Dusk       | `dusk`       |
+> | Uses Per            | Abbreviation |
+> | ------------------- | ------------ |
+> | Short Rest          | `sr`         |
+> | Long Rest           | `lr`         |
+> | Day                 | `day`        |
+> | Dawn                | `dawn`       |
+> | Dusk                | `dusk`       |
+> | Start of Initiative | `initiative` |
+> | Start of Turn       | `turnStart`  |
+> | End of Turn         | `turnEnd`    |
+> | Every Turn          | `turn`       |
 >
 > Source: `CONFIG.DND5E.limitedUsePeriods`
 > </details>
-
-> [!warning]
-> **Never** alter the `system.uses.value` attributes with an enchantment as this **will** cause issues.
 
 ### Common Action Examples
 
 This documents the Action section on item sheets, common to many item types.
 
 ```
-system.actionType
-       ability
-       attack.bonus
-              flat
-       critical.threshold
-                damage
-       damage.bonus
+system.damage.bonus
               parts
               types
-              versatile
-       formula
-       save.ability
-            dc
-            scaling
        chatFlavor
 ```
-
-#### Set Critical Hit Threshold
-
-| Attribute Key               | Change Mode | Effect Value | Roll Data? |
-| --------------------------- | ----------- | ------------ | ---------- |
-| `system.critical.threshold` | Downgrade   | `[number]`   | No         |
-
-#### Add Extra Critical Hit Damage
-
-| Attribute Key            | Change Mode | Effect Value | Roll Data? |
-| ------------------------ | ----------- | ------------ | ---------- |
-| `system.critical.damage` | Add         | `[formula]`  | Yes        |
 
 #### Add Extra Damage
 

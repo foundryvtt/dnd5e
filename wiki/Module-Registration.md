@@ -1,4 +1,4 @@
-![Up to date as of 4.3.0](https://img.shields.io/static/v1?label=dnd5e&message=4.3.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 The system includes a number of features allowing modules and worlds to register information for the system directly in their manifests, rather than requiring separate scripts.
 

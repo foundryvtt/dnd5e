@@ -1,4 +1,4 @@
-![Up to date as of 5.0.0](https://img.shields.io/static/v1?label=dnd5e&message=5.0.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 # Frequently Asked Questions
 
@@ -30,7 +30,8 @@ This rule affects a number of things in the system including:
  - Former Half Progression for spell slots that rounds down
  - Initial DC & attack to hit for player-crafted spell scrolls
  - Language organization & presence of "Common Sign Language"
- - Wild Shape transformation preset
+ - Wild Shape & Polymorph transformation presets
+ - Initiative advantage applied by invisible effect & initiative disadvantage applied by incapacitated & surprised effects
  - Initiative score display on NPC sheets
  - Presentation & wording of Ability Score Improvement (feat first in modern, ASI first in legacy)
  - Several wording changes
@@ -38,6 +39,7 @@ This rule affects a number of things in the system including:
    - Exotic Languages -> Rare Languages
    - Race -> Species
    - Radius -> Emmanation
+ - Default rules version for newly created actors & items (see below)
 
 ![NPC Rules Version](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/settings/npc-rules-version.jpg)
 

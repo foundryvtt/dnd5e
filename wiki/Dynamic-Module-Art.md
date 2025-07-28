@@ -1,6 +1,7 @@
-![Up to date as of 5.0.0](https://img.shields.io/static/v1?label=dnd5e&message=5.0.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
-**Note**: The system's module art system has been deprecated and replaced with Foundry's implementation.
+> [!Note]
+> The system's module art system has been deprecated and replaced with Foundry's implementation.
 
 ## Migrate to Core's system
 Migrating to the core compendium art system is very simple and only requires adjusting the flags in your `module.json` by moving your flags into a `compendiumArtMappings.dnd5e` object and renaming `dnd5e-art` to `mapping` and `dnd5e-art-credit` to just `credit`:
