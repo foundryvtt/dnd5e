@@ -497,6 +497,10 @@
 }
 
 /* Damage & Effects Trays */
+.message.dnd5e2:not(:nth-last-child(-n + 5)) :is(.card-tray, .effects-tray, .targets-tray) {
+  content-visibility: auto;
+}
+
 .dnd5e2 :is(.card-tray, .effects-tray, .targets-tray) {
   margin-top: .125rem;
   &.damage-tray, &.effects-tray { margin-block-start: 8px; }

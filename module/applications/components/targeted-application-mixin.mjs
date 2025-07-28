@@ -5,7 +5,6 @@
  */
 export default function TargetedApplicationMixin(Base) {
   return class TargetedApplicationElement extends Base {
-
     /* -------------------------------------------- */
     /*  Properties                                  */
     /* -------------------------------------------- */
@@ -15,6 +14,16 @@ export default function TargetedApplicationMixin(Base) {
      * @type {number|null}
      */
     selectedTokensHook = null;
+
+    /* -------------------------------------------- */
+
+    /**
+     * Whether to rebuild the target list.
+     * @type {boolean|void}
+     * @abstract
+     */
+    // eslint-disable-next-line getter-return
+    get shouldBuildTargetList() {}
 
     /* -------------------------------------------- */
 
@@ -95,6 +104,7 @@ export default function TargetedApplicationMixin(Base) {
      * Build a list of targeted tokens based on current mode & replace any existing targets.
      */
     buildTargetsList() {
+      if ( this.shouldBuildTargetList === false ) return;
       if ( !this.targetList ) throw new Error("Must create a element to contain the target list.");
       const targetedTokens = new Map();
       switch ( this.targetingMode ) {

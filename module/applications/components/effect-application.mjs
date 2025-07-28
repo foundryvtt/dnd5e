@@ -34,6 +34,13 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get shouldBuildTargetList() {
+    return this.open && this.visible;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Checked status for application targets.
    * @type {Map<string, boolean>}
@@ -234,5 +241,19 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const uuid = event.target.closest("[data-target-uuid]")?.dataset.targetUuid;
     if ( !uuid ) return;
     this.#targetOptions.set(uuid, event.target.checked);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onOpen() {
+    this.buildTargetsList();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onVisible() {
+    this.buildTargetsList();
   }
 }
