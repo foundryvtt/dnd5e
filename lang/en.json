@@ -2914,6 +2914,7 @@
   "Description": "Legendary Action Uses: {uses}. Immediately after another creature’s turn, the {name} can expend a use to take one of the following actions. The {name} regains all expended uses at the start of each of its turns.",
   "DescriptionLegacy": "The {name} can take {usesNamed}, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature’s turn. The {name} regains spent legendary actions at the start of its turn.",
   "Label": "Legendary Action",
+  "LabelPl": "Legendary Actions",
   "LairUses": "{normal} ({lair} in Lair)",
   "Max": "Maximum Legendary Actions",
   "Ordinal": {
@@ -2922,7 +2923,8 @@
     "few": "{n}rd Legendary Action",
     "other": "{n}th Legendary Action"
   },
-  "Remaining": "Remaining Legendary Actions"
+  "Remaining": "Remaining Legendary Actions",
+  "Spent": "Spent Legendary Actions"
 },
 
 "DND5E.LegendaryResistance": {
@@ -2930,6 +2932,7 @@
     "Resist": "Legendary Resistance"
   },
   "Label": "Legendary Resistance",
+  "LabelPl": "Legendary Resistances",
   "Max": "Maximum Legendary Resistances",
   "Ordinal": {
     "one": "{n}st Legendary Resistance",
@@ -2938,7 +2941,8 @@
     "other": "{n}th Legendary Resistance"
   },
   "Remaining": "Remaining Legendary Resistances",
-  "Resisted": "Used Legendary Resistance"
+  "Resisted": "Used Legendary Resistance",
+  "Spent": "Spent Legendary Resistances"
 },
 
 "DND5E.Level": "Level",

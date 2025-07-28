@@ -54,11 +54,11 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {number} details.cr                 NPC's challenge rating.
  * @property {object} resources
  * @property {object} resources.legact           NPC's legendary actions.
- * @property {number} resources.legact.value     Currently available legendary actions.
  * @property {number} resources.legact.max       Maximum number of legendary actions.
+ * @property {number} resources.legact.spent     Spent legendary actions.
  * @property {object} resources.legres           NPC's legendary resistances.
- * @property {number} resources.legres.value     Currently available legendary resistances.
  * @property {number} resources.legres.max       Maximum number of legendary resistances.
+ * @property {number} resources.legres.spent     Spent legendary resistances.
  * @property {object} resources.lair             NPC's lair actions.
  * @property {boolean} resources.lair.value      This creature can possess a lair (2024) or take lair actions (2014).
  * @property {number} resources.lair.initiative  Initiative count when lair actions are triggered.
@@ -148,21 +148,19 @@ export default class NPCData extends CreatureTemplate {
       }, {label: "DND5E.Details"}),
       resources: new SchemaField({
         legact: new SchemaField({
-          value: new NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegendaryAction.Remaining"
-          }),
           max: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegendaryAction.Max"
+          }),
+          spent: new NumberField({
+            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegendaryAction.Spent"
           })
         }, {label: "DND5E.LegendaryAction.Label"}),
         legres: new SchemaField({
-          value: new NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0,
-            label: "DND5E.LegendaryResistance.Remaining"
-          }),
           max: new NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0,
-            label: "DND5E.LegendaryResistance.Max"
+            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegendaryResistance.Max"
+          }),
+          spent: new NumberField({
+            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegendaryResistance.Spent"
           })
         }, {label: "DND5E.LegendaryResistance.Label"}),
         lair: new SchemaField({
@@ -256,6 +254,8 @@ export default class NPCData extends CreatureTemplate {
   static _migrateData(source) {
     super._migrateData(source);
     NPCData.#migrateEnvironment(source);
+    NPCData.#migrateLegendaries(source, "legact");
+    NPCData.#migrateLegendaries(source, "legres");
     NPCData.#migrateSource(source);
     NPCData.#migrateSpellLevel(source);
     NPCData.#migrateTypeData(source);
@@ -271,6 +271,21 @@ export default class NPCData extends CreatureTemplate {
   static #migrateEnvironment(source) {
     const custom = source.details?.environment;
     if ( (typeof custom === "string") && !("habitat" in source.details) ) source.details.habitat = { custom };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convert legendary action & resistance `value` to `spent`.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   * @param {string} prop    The property to migrate.
+   * @since 5.1.0
+   */
+  static #migrateLegendaries(source, prop) {
+    const resource = source.resources?.[prop];
+    if ( !resource || !("max" in resource) || !("value" in resource) || ("spent" in resource) ) return;
+    source.resources[prop].spent = resource.max - resource.value;
+    delete resource.value;
   }
 
   /* -------------------------------------------- */
@@ -460,6 +475,10 @@ export default class NPCData extends CreatureTemplate {
     };
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
 
+    // Legendary Actions & Resistances
+    const { legact, legres } = this.resources;
+    legact.value = Math.clamp(legact.max - legact.spent, 0, legact.max);
+    legres.value = Math.clamp(legres.max - legres.spent, 0, legres.max);
     this.resources.legact.label = this.getLegendaryActionsDescription();
   }
 
@@ -468,15 +487,12 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _preUpdate(changed, options, user) {
-    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
-    for ( const key of ["legact", "legres"] ) {
-      const max = foundry.utils.getProperty(changed, `system.resources.${key}.max`);
-      if ( (max !== undefined) && !foundry.utils.hasProperty(changed, `system.resources.${key}.value`) ) {
-        const delta = max - foundry.utils.getProperty(this, `resources.${key}.max`);
-        const value = foundry.utils.getProperty(this, `resources.${key}.value`);
-        foundry.utils.setProperty(changed, `system.resources.${key}.value`, value + delta);
-      }
+  async _preUpdate(changes, options, user) {
+    if ( (await super._preUpdate(changes, options, user)) === false ) return false;
+    for ( const k of ["legact", "legres"] ) {
+      if ( !foundry.utils.hasProperty(changes, `system.resources.${k}.value`) ) continue;
+      const spent = this.resources[k].max - changes.system.resources[k].value;
+      foundry.utils.setProperty(changes, `system.resources.${k}.spent`, spent);
     }
   }
 
@@ -534,7 +550,7 @@ export default class NPCData extends CreatureTemplate {
   async recoverCombatUses(periods, results) {
     // Reset legendary actions at the start of a combat encounter or at the end of the creature's turn
     if ( this.resources.legact.max && (periods.includes("encounter") || periods.includes("turnEnd")) ) {
-      results.actor["system.resources.legact.value"] = this.resources.legact.max;
+      results.actor["system.resources.legact.spent"] = 0;
     }
   }
 
@@ -548,7 +564,7 @@ export default class NPCData extends CreatureTemplate {
     if ( this.resources.legres.value === 0 ) throw new Error("No legendary resistances remaining.");
     if ( message.flags.dnd5e?.roll?.type !== "save" ) throw new Error("Chat message must contain a save roll.");
     if ( message.flags.dnd5e?.roll?.forceSuccess ) throw new Error("Save has already been resisted.");
-    await this.parent.update({ "system.resources.legres.value": this.resources.legres.value - 1 });
+    await this.parent.update({ "system.resources.legres.spent": this.resources.legres.spent + 1 });
     await message.setFlag("dnd5e", "roll.forceSuccess", true);
   }
 
