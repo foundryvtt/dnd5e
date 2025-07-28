@@ -1,5 +1,4 @@
 import FormulaField from "../fields/formula-field.mjs";
-import IdentifierField from "../fields/identifier-field.mjs";
 import TransformationSetting from "../settings/transformation-setting.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
@@ -34,7 +33,6 @@ const {
  * @property {object} transform
  * @property {boolean} transform.customize     Should any customized settings be respected or should the default
  *                                             settings for the selected profile be used instead.
- * @property {string} transform.identifier     Class identifier that will be used to determine applicable level.
  * @property {""|"cr"} transform.mode          Method of determining what type of creature to transform into.
  * @property {string} transform.preset         Transformation preset to use.
  */
@@ -59,7 +57,6 @@ export default class TransformActivityData extends BaseActivityData {
       settings: new EmbeddedDataField(TransformationSetting, { nullable: true, initial: null }),
       transform: new SchemaField({
         customize: new BooleanField(),
-        identifier: new IdentifierField(),
         mode: new StringField({ initial: "cr" }),
         preset: new StringField()
       })
@@ -87,19 +84,6 @@ export default class TransformActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Determine the level used to determine profile limits, based on the spell level for spells or either the
-   * character or class level, depending on whether `classIdentifier` is set.
-   * @type {number}
-   */
-  get relevantLevel() {
-    const keyPath = (this.item.type === "spell") && (this.item.system.level > 0) ? "item.level"
-      : this.transform.identifier ? `classes.${this.transform.identifier}.levels` : "details.level";
-    return foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
-  }
-
-  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -113,5 +97,19 @@ export default class TransformActivityData extends BaseActivityData {
       ...(CONFIG.DND5E.transformation.presets[this.transform.preset]?.settings ?? {}),
       preset: this.transform.preset
     });
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    super.migrateData(source);
+    if ( source.transform?.identifier ) {
+      foundry.utils.setProperty(source, "visibility.identifier", source.transform.identifier);
+      delete source.transform.identifier;
+    }
+    return source;
   }
 }

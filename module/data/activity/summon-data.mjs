@@ -1,5 +1,4 @@
 import FormulaField from "../fields/formula-field.mjs";
-import IdentifierField from "../fields/identifier-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
 const {
@@ -40,7 +39,6 @@ const {
  * @property {boolean} match.saves          Match the save DC on summoned actor's abilities to the summoner.
  * @property {SummonsProfile[]} profiles    Information on creatures that can be summoned.
  * @property {object} summon
- * @property {string} summon.identifier     Class identifier that will be used to determine applicable level.
  * @property {""|"cr"} summon.mode          Method of determining what type of creature is summoned.
  * @property {boolean} summon.prompt        Should the player be prompted to place the summons?
  */
@@ -78,7 +76,6 @@ export default class SummonActivityData extends BaseActivityData {
         uuid: new DocumentUUIDField()
       })),
       summon: new SchemaField({
-        identifier: new IdentifierField(),
         mode: new StringField(),
         prompt: new BooleanField({ initial: true })
       })
@@ -122,19 +119,6 @@ export default class SummonActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /**
-   * Determine the level used to determine profile limits, based on the spell level for spells or either the
-   * character or class level, depending on whether `classIdentifier` is set.
-   * @type {number}
-   */
-  get relevantLevel() {
-    const keyPath = (this.item.type === "spell") && (this.item.system.level > 0) ? "item.level"
-      : this.summon.identifier ? `classes.${this.summon.identifier}.levels` : "details.level";
-    return foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Creatures summoned by this activity.
    * @type {Actor5e[]}
    */
@@ -146,6 +130,18 @@ export default class SummonActivityData extends BaseActivityData {
 
   /* -------------------------------------------- */
   /*  Data Migrations                             */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    super.migrateData(source);
+    if ( source.summon?.identifier ) {
+      foundry.utils.setProperty(source, "visibility.identifier", source.summon.identifier);
+      delete source.summon.identifier;
+    }
+    return source;
+  }
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -160,9 +156,11 @@ export default class SummonActivityData extends BaseActivityData {
       },
       profiles: source.system.summons?.profiles ?? [],
       summon: {
-        identifier: source.system.summons?.classIdentifier ?? "",
         mode: source.system.summons?.mode ?? "",
         prompt: source.system.summons?.prompt ?? true
+      },
+      visibility: {
+        identifier: source.system.summons?.classIdentifier ?? ""
       }
     });
   }
