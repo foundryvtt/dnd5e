@@ -14,7 +14,7 @@
         <multi-select name="appliedEffects" class="hidden-tags">
             {{ selectOptions allEnchantments }}
         </multi-select>
-        <ul class="separated-list enchantments unlist">
+        <ul class="separated-list enchantments flexcol unlist">
             {{#each appliedEffects}}
             <li data-index="{{ index }}" data-effect-id="{{ effect.id }}" data-expand-id="effects.{{ effect.id }}">
                 {{> ".enchantment" }}
