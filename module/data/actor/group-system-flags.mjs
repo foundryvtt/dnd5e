@@ -16,7 +16,8 @@ export default class GroupSystemFlags extends foundry.abstract.DataModel {
       restSettings: new SchemaField({
         autoRest: new BooleanField(),
         targets: new SetField(new DocumentIdField())
-      }, { required: false, initial: null })
+      }, { required: false, nullable: true, initial: null }),
+      showTokenPortrait: new BooleanField()
     };
   }
 }

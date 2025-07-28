@@ -2568,6 +2568,38 @@ preLocalize("movementTypes", { key: "label", sort: true });
 patchConfig("movementTypes", "label", { since: "DnD5e 5.1", until: "DnD5e 5.3" });
 
 /* -------------------------------------------- */
+
+/**
+ * @typedef TravelPaceConfig
+ * @property {string} label       The human-readable label.
+ * @property {number} standard    The standard pace value in miles per day.
+ * @property {number} multiplier  The speed up or slow down factor for this travel pace.
+ */
+
+/**
+ * Available travel paces.
+ * @type {Readonly<Record<string, TravelPaceConfig>>}
+ */
+DND5E.travelPace = Object.freeze({
+  slow: {
+    label: "DND5E.Travel.Pace.Slow",
+    standard: 18,
+    multiplier: 2 / 3
+  },
+  normal: {
+    label: "DND5E.Travel.Pace.Normal",
+    standard: 24,
+    multiplier: 1
+  },
+  fast: {
+    label: "DND5E.Travel.Pace.Fast",
+    standard: 30,
+    multiplier: 4 / 3
+  }
+});
+preLocalize("travelPace", { key: "label" });
+
+/* -------------------------------------------- */
 /*  Measurement                                 */
 /* -------------------------------------------- */
 
@@ -2604,6 +2636,8 @@ DND5E.defaultUnits = {
  *                                       https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers. Only
  *                                       required if the formatting name doesn't match the unit key.
  * @property {"imperial"|"metric"} type  Whether this is an "imperial" or "metric" unit.
+ * @property {"day"|"round"} [travelResolution]  Whether the distance is per-round or per-day when used in the context
+ *                                               of overland travel.
  */
 
 /**
@@ -2616,28 +2650,32 @@ DND5E.movementUnits = {
     abbreviation: "DND5E.UNITS.DISTANCE.Foot.Abbreviation",
     conversion: 1,
     formattingUnit: "foot",
-    type: "imperial"
+    type: "imperial",
+    travelResolution: "round"
   },
   mi: {
     label: "DND5E.UNITS.DISTANCE.Mile.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Mile.Abbreviation",
     conversion: 5_280,
     formattingUnit: "mile",
-    type: "imperial"
+    type: "imperial",
+    travelResolution: "day"
   },
   m: {
     label: "DND5E.UNITS.DISTANCE.Meter.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Meter.Abbreviation",
     conversion: 10 / 3, // D&D uses a simplified 5ft -> 1.5m conversion.
     formattingUnit: "meter",
-    type: "metric"
+    type: "metric",
+    travelResolution: "round"
   },
   km: {
     label: "DND5E.UNITS.DISTANCE.Kilometer.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Kilometer.Abbreviation",
     conversion: 10_000 / 3, // Matching simplified conversion
     formattingUnit: "kilometer",
-    type: "metric"
+    type: "metric",
+    travelResolution: "day"
   }
 };
 preLocalize("movementUnits", { keys: ["label", "abbreviation"] });

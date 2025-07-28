@@ -53,7 +53,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       template: "systems/dnd5e/templates/actors/tabs/character-inventory.hbs",
       templates: [
         "systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs",
-        "systems/dnd5e/templates/inventory/encumbrance.hbs"
+        "systems/dnd5e/templates/inventory/encumbrance.hbs", "systems/dnd5e/templates/inventory/containers.hbs"
       ],
       scrollable: [""]
     },

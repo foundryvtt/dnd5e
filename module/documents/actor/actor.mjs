@@ -226,6 +226,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.system.modelProvider !== dnd5e ) return super.prepareData();
     this._clearCachedValues();
     this._preparationWarnings = [];
+    this.labels = {};
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
     this._prepareSpellcasting();
@@ -282,7 +283,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     if ( (this.system.modelProvider !== dnd5e) || (this.type === "group") ) return;
-    this.labels = {};
   }
 
   /* -------------------------------------------- */

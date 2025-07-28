@@ -180,8 +180,8 @@ export default class NPCActorSheet extends BaseActorSheet {
       secrets: this.actor.isOwner, relativeTo: this.actor, rollData: context.rollData
     };
     context.enriched = {
-      public: await TextEditor.enrichHTML(this.actor.system.details.biography.public, enrichmentOptions),
-      value: await TextEditor.enrichHTML(this.actor.system.details.biography.value, enrichmentOptions)
+      public: await CONFIG.ux.TextEditor.enrichHTML(this.actor.system.details.biography.public, enrichmentOptions),
+      value: await CONFIG.ux.TextEditor.enrichHTML(this.actor.system.details.biography.value, enrichmentOptions)
     };
     if ( this.editingDescriptionTarget ) context.editingDescription = {
       target: this.editingDescriptionTarget,
@@ -428,7 +428,7 @@ export default class NPCActorSheet extends BaseActorSheet {
       level: spellcaster?.system.levels ?? attributes.spell.level,
       ability: {
         ability, mod,
-        label: CONFIG.DND5E.abilities[ability]?.abbreviation
+        label: CONFIG.DND5E.abilities[ability]?.label
       },
       attack: mod + attributes.prof + attackBonus,
       save: spellAbility?.dc ?? 0,

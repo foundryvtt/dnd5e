@@ -132,14 +132,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /* -------------------------------------------- */
 
   /**
-   * Temporary stored copy of the drop behavior.
-   * @type {string|null}
-   */
-  #dropBehavior = null;
-
-  /* -------------------------------------------- */
-
-  /**
    * Key path to the sidebar collapsed flag for the current tab.
    * @type {string}
    * @internal
@@ -1713,12 +1705,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /** @inheritDoc */
   async _onDrop(event) {
-    this.#dropBehavior = this._dropBehavior(event);
-    try {
-      await super._onDrop(event);
-    } finally {
-      this.#dropBehavior = null;
-    }
+    event._behavior = this._dropBehavior(event);
+    await super._onDrop(event);
   }
 
   /* -------------------------------------------- */
@@ -1742,25 +1730,23 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /** @override */
   async _onDropItem(event, item) {
-    const behavior = this.#dropBehavior;
-    if ( !this.actor.isOwner || (behavior === "none") ) return;
+    if ( !this.actor.isOwner || (event._behavior === "none") ) return;
 
     // Handle moving out of container & item sorting
-    if ( (behavior === "move") && (this.actor.uuid === item.parent?.uuid) ) {
+    if ( (event._behavior === "move") && (this.actor.uuid === item.parent?.uuid) ) {
       if ( item.system.container !== null ) await item.update({ "system.container": null });
       return this._onSortItem(event, item);
     }
 
-    return this._onDropCreateItems(event, [item], behavior);
+    return this._onDropCreateItems(event, [item]);
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   async _onDropFolder(event, data) {
-    const behavior = this.#dropBehavior;
     const folder = await Folder.implementation.fromDropData(data);
-    if ( !this.actor.isOwner || (behavior === "none") || (folder.type !== "Item") ) return;
+    if ( !this.actor.isOwner || (event._behavior === "none") || (folder.type !== "Item") ) return;
 
     const items = await Promise.all(folder.contents.map(async item => {
       if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
@@ -1773,13 +1759,14 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /**
    * Handle the final creation of dropped Item data on the Actor.
-   * @param {DragEvent} event           The concluding DragEvent which provided the drop data.
-   * @param {Item5e[]} items            The items requested for creation.
-   * @param {DropEffectValue} behavior  The specific drop behavior.
+   * @param {DragEvent} event             The concluding DragEvent which provided the drop data.
+   * @param {Item5e[]} items              The items requested for creation.
+   * @param {DropEffectValue} [behavior]  The specific drop behavior.
    * @returns {Promise<Item5e[]>}
    * @protected
    */
   async _onDropCreateItems(event, items, behavior) {
+    behavior ??= event._behavior;
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {

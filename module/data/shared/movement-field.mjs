@@ -1,3 +1,5 @@
+import { convertLength } from "../../utils.mjs";
+
 const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
@@ -20,11 +22,11 @@ export default class MovementField extends foundry.data.fields.SchemaField {
   constructor(fields={}, { initialUnits=null, ...options }={}) {
     const numberConfig = { required: true, nullable: true, min: 0, step: 0.1, initial: null };
     fields = {
-      burrow: new NumberField({ ...numberConfig, label: "DND5E.MovementBurrow" }),
-      climb: new NumberField({ ...numberConfig, label: "DND5E.MovementClimb" }),
-      fly: new NumberField({ ...numberConfig, label: "DND5E.MovementFly" }),
-      swim: new NumberField({ ...numberConfig, label: "DND5E.MovementSwim" }),
-      walk: new NumberField({ ...numberConfig, label: "DND5E.MovementWalk" }),
+      burrow: new NumberField({ ...numberConfig, label: "DND5E.MovementBurrow", speed: true }),
+      climb: new NumberField({ ...numberConfig, label: "DND5E.MovementClimb", speed: true }),
+      fly: new NumberField({ ...numberConfig, label: "DND5E.MovementFly", speed: true }),
+      swim: new NumberField({ ...numberConfig, label: "DND5E.MovementSwim", speed: true }),
+      walk: new NumberField({ ...numberConfig, label: "DND5E.MovementWalk", speed: true }),
       special: new StringField(),
       units: new StringField({
         required: true, nullable: true, blank: false, initial: initialUnits, label: "DND5E.MovementUnits"
@@ -35,5 +37,34 @@ export default class MovementField extends foundry.data.fields.SchemaField {
     };
     Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);
     super(fields, { label: "DND5E.Movement", ...options });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare movement data.
+   * @this {MovementData}
+   * @param {DataField} field  The movement field.
+   */
+  static prepareData(field) {
+    this.paces = {};
+    const { pace, units } = this;
+    const paceConfig = CONFIG.DND5E.travelPace[pace];
+    const unitConfig = CONFIG.DND5E.movementUnits[units];
+    if ( !unitConfig ) return;
+    Object.entries(this).forEach(([k, v]) => {
+      if ( !field.getField(k)?.options.speed ) return;
+      let perDay = v;
+      if ( unitConfig.travelResolution === "round" ) {
+        const inFeet = convertLength(v, units, "ft");
+        perDay = Math.round(inFeet * .8);
+      }
+      if ( pace ) {
+        const isStandard = (unitConfig.type === "imperial") && (perDay === CONFIG.DND5E.travelPace.normal.standard);
+        if ( isStandard ) this.paces[k] = paceConfig?.standard ?? perDay;
+        else this.paces[k] = Math.floor(perDay * (paceConfig?.multiplier ?? 1));
+      }
+      else this.paces[k] = perDay;
+    });
   }
 }
