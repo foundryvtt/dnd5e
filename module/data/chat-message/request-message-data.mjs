@@ -70,7 +70,10 @@ export default class RequestMessageData extends ChatMessageDataModel {
       targets: this.targets.map(t => {
         if ( !t.actor ) return null;
         const visible = game.user.isGM || (!!t.user && (game.user === t.user)) || (!t.user && t.actor.isOwner);
-        return { actor: t.actor, completed: t.result !== null, visible };
+        const { result } = t;
+        const completed = result !== null;
+        const total = result?.rolls[0]?.total;
+        return { actor: t.actor, completed, total, visible };
       }).filter(_ => _)
     };
   }
@@ -87,7 +90,7 @@ export default class RequestMessageData extends ChatMessageDataModel {
    */
   static async #handleRequest(event, target) {
     const actor = fromUuidSync(target.closest("[data-uuid]").dataset.uuid);
-    const result = await CONFIG.DND5E.requests[this.handler](actor, this.parent, this.data);
+    const result = await CONFIG.DND5E.requests[this.handler](actor, this.parent, this.data, { event });
     if ( result instanceof ChatMessage ) {
       result.setFlag("dnd5e", "requestResult", { actorId: actor.id, requestId: this.parent.id });
     }

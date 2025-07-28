@@ -4897,7 +4897,8 @@ DND5E.defaultArtwork = {
  * @type {Record<string, Function>}
  */
 DND5E.requests = {
-  rest: Actor5e.handleRestRequest
+  rest: Actor5e.handleRestRequest,
+  skill: Actor5e.handleSkillCheckRequest
 };
 
 /* -------------------------------------------- */

@@ -222,6 +222,7 @@ export default class BasicRoll extends Roll {
       message[message.create !== false ? "document" : "data"] = await this.toMessage(
         rolls, message.data, { create: message.create, rollMode: message.rollMode }
       );
+      if ( message.document ) rolls.forEach(r => r.parent = message.document);
     }
 
     return message.document;
