@@ -1,4 +1,4 @@
-![Up to date as of 4.0.0](https://img.shields.io/static/v1?label=dnd5e&message=4.0.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 The Enchant activity allows for applying [enchantments](Enchantment.md) to items. These enchantments can modify the stats of an item (such as *Magic Weapon* giving a mundane weapon a +1 magical bonus), carry effects that apply to an actor (such as the *Fire Rune* granting a player double proficiency on tool checks), and carry items that are added to the actor (such as the *Arcane Propulsive Armor* give the player a set of gauntlets that can be used to attack).
 
@@ -15,10 +15,14 @@ Any player may drop an item in this area to enchant that item and the enchanted 
 
 The chat card tracks how many items have been enchanted out of the maximum allowed (though the maximum is not enforced). This maximum item count can be defined on the Enchant activity by specifying the targets in the "Targeting" tab.
 
+When an enchantment has the "Automatically Enchant Self" option selected no dropping is necessary, the enchantment will be automatically applied to whichever item contains the activity, allowing items to easily modify themselves.
+
 
 ## Configuring Enchanting
 
-After creating the Enchant activity the configuration sheet will open. In addition to the standard activity options (see the [Activities Overview](Activities.md) for more details), Enchant also includes the "Enchanting" tab with details on enchantments and restrictions.
+After creating the Enchant activity the configuration sheet will open. In addition to the standard activity options (see the [Activities Overview](Activities.md) for more details) Enchant also includes a "Automatically Enchant Self" behavior option to automatically apply the enchantment to the containing item when used.
+
+![Enchant Sheet - Identity Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enchantment/enchant-identity.jpg)
 
 ### Enchantments
 

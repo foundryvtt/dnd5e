@@ -1,4 +1,4 @@
-![Up to date as of 4.0.0](https://img.shields.io/static/v1?label=dnd5e&message=4.0.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 The activities system is a new method for adding things that can be done by an item. It replaces the older method of defining a single action for an item with a much more flexible system.
 
@@ -25,6 +25,7 @@ There are a variety of activity types offered by the DnD5e system, and modules c
 - [Heal](Activity-Type-Heal.md): Heal a creature
 - [Save](Activity-Type-Save.md): Impose a saving throw roll and roll damage
 - [Summon](Activity-Type-Summon.md): Summon a new creature to the scene
+- [Transform](Activity-Type-Transform.md): Change an actor using the stats of another
 - [Utility](Activity-Type-Utility.md): Make an arbitrary roll or just indicate something happened
 
 
