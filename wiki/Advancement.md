@@ -1,4 +1,4 @@
-![Up to date as of 4.2.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 ## Advancement System
 
@@ -30,8 +30,8 @@ The [hit points advancement](Advancement-Type-Hit-Points) keeps track of hit poi
 ### Scale Value
 [Scale values](Advancement-Type-Scale-Value) are formula values that change arbitrarily depending on the level of the class or subclass to which they belong. These values are then made available to be used in roll formulas or elsewhere in the system. A few examples of this include a Bard's inspiration die size, a Rogue's sneak attack value, or a Cleric's channel divinity uses.
 
-### Size *(race only)*
-The [size](Advancement-Type-Size) advancement stores a list of sizes that can be selected when selecting a race.
+### Size *(species only)*
+The [size](Advancement-Type-Size) advancement stores a list of sizes that can be selected when selecting a species.
 
 ### Subclass *(class only)*
 The [subclass](Advancement-Type-Subclass) advancement gives players the chance to select a subclass.
@@ -71,14 +71,20 @@ The `order` value in the `Advancement#metadata` object determines in which order
 
 You can set your ordering value between any of these numbers to position your advancement in the list.
 
-#### `AdvancementConfig` Class
+#### `AdvancementConfigV2` Class
 
-A subclass of `AdvancementConfig` is needed when a custom advancement type needs to present custom configuration options to the user. If no custom config application is provided, the default config window will be shown to allow for customization of the advancement's base settings.
+A subclass of `AdvancementConfigV2` is needed when a custom advancement type needs to present custom configuration options to the user. If no custom config application is provided, the default config window will be shown to allow for customization of the advancement's base settings.
 
-Any custom config templates should contain the base advancement controls partial so those controls are always available:
+When subclassing the config app, the default `config` part should always be included to provide the standard advancement configuration options such as name and icon:
 
-```html
-{{> "dnd5e.advancement-controls"}}
+```javascript
+  /** @inheritDoc */
+  static PARTS = {
+    ...super.PARTS,
+    myPart: {
+      template: "modules/path/to/my/template.hbs"
+    }
+  };
 ```
 
 #### `AdvancementFlow` Class
@@ -105,5 +111,7 @@ Hooks.once("init", () => {
 Advancements are looked up by their type. For example, an advancement of type 'MyModuleCustom' will be loaded by the `MyModuleCustomAdvancement` class, if it can be found.
 
 Advancement registration should be done during a module's `"init"` or `"setup"` hooks to ensure that the custom type is available during item preparation.
+
+For certain special or one-off advancement types the `hidden` option can be used in the config. This hides the advancement type when using the advancement creation dialog, but still allows the advancement to be configured and used if it is already on an item.
 
 If at any point a module that introduces a custom advancement is disabled, the system will simply skip preparing that advancement while retaining the underlying data in case the advancement is ever re-added.

@@ -1,4 +1,4 @@
-![Up to date as of 4.2.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 The Choose Items advancement is designed for any feature that gives the player a choice of options to add to their character at a certain level. This covers features with a limited set of options such as Fighting Style and more open ended features such as Magical Secrets.
 
@@ -8,9 +8,9 @@ The Choose Items advancement is designed for any feature that gives the player a
 
 The Choose Items configuration is split into three columns. The first column contains the standard advancement configuration plus additional options that control what items can be chosen by the player.
 
-The "Allow Drops" option controls whether players can choose their own items through drag & drop, or if they can only choose from the items pre-configured on the advancement. Beneath that is the "Item Type" dropdown that allows for limiting the items that can be selected. Selecting certain item types will cause additional options to appear for further refining the types allowed.
+The "Allow Drops" option controls whether players can choose their own items through the compendium browser or drag & drop, or if they can only choose from the items pre-configured on the advancement. Beneath that is the "Item Type" dropdown that allows for limiting the items that can be selected. Selecting certain item types will cause additional options to appear for further refining the types allowed.
 
-If the "Item Type" is set to "Spell" then an additional set of controls appear. The "Spell Level" allows for restricting what levels of spells can be chosen when added manually by the player. It can be restricted to a specific spell level or allow for selecting any spell that the character can cast. The remaining controls affect the spells that are added to the sheet. More information on using these controls is available on the [Grant Items advancement guide](Advancement-Type-Grant-Items).
+If the "Item Type" is set to "Spell" then an additional set of controls appear. The "Spell Level" allows for restricting what levels of spells can be chosen when added manually by the player. It can be restricted to a specific spell level or allow for selecting any spell that the character can cast. The "Spell Lists" allows restricting the spell selection to only spells included on certain spell lists. The remaining controls affect the spells that are added to the sheet. More information on using these controls is available on the [Grant Items advancement guide](Advancement-Type-Grant-Items).
 
 The second column is the pool of items available for selection. Dropping items here will add them to the list, and they can be removed by clicking the delete entry trashcan next to each item. Some advancements, like Eldritch Invocations, might have a large list of items filled here, while others, such as Magical Secrets won't include any items at all.
 
@@ -22,7 +22,9 @@ Each level also includes a checkbox that controls whether previous choices can b
 
 ![Choose Items Flow](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/item-choice-flow.jpg)
 
-The Choose Items advancement will present a list of items that can be chosen for a given level, allowing for as many items to be checked as the player is allowed to select. If additional items are allowed, then they can be dropped onto the advancement window and will be added to the bottom of the list. Any dropped items can be removed using the delete button next to them. Details on all items can be viewed by clicking on their names.
+The Choose Items advancement will present a list of items that can be chosen for a given level, allowing for as many items to be checked as the player is allowed to select. If additional items are allowed, then a link to the compendium browser will be included and items added this way will be added to the bottom of the list. Any additional items can be removed using the delete button next to them. Details on all items can be viewed by clicking on their names.
+
+![Choose Items Compendium Browser](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/item-choice-compendium-browser.jpg)
 
 After the first level for which a choice was made, previous choices will be listed at the top of the window grouped by level. If replacements are allowed for a level, then a radio button will appear to these previous choices that can be used to indicate which should be replaced. Selecting the replacement will only be available once an item to replace is selected.
 
@@ -40,7 +42,7 @@ The `choices` object contains objects grouped by level that include the `count` 
 
 The `pool` property is an array of objects that include a `uuid` property indicating the item that can be chosen.
 
-The `restriction` object contains `type`, indicating the item category (in this case "Class Features"), `subtype` indicating the subtype within that (in this case only "Hunter's Prey" features), and `level` indicating the allowed spell level if spells are selected.
+The `restriction` object contains `type`, indicating the item category (in this case "Class Features"), `subtype` indicating the subtype within that (in this case only "Hunter's Prey" features), `level` indicating the allowed spell level if spells are selected, and `list` includes the IDs of spell lists to restrict the choices to.
 
 The `spell` property is an object with spell configuration which is detailed in the [Grant Items advancement guide](Advancement-Type-Grant-Items).
 
@@ -60,7 +62,8 @@ The `type` property contains the general item type allowed, such as classes, wea
   restriction: {
     type: "class",
     subtype: "huntersPrey",
-    level: ""
+    level: "",
+    list: []
   },
   spell: null,
   type: "feat"

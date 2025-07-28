@@ -1,4 +1,4 @@
-![Up to date as of 4.2.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 The Subclass advancement allows for indicating the level at which a class takes it subclass and providing a custom subclass name (such as "Martial Archetype") that will be used in the class journal. This advancement can only be added to classes and each class can only have a single advancement of this type.
 
