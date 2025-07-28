@@ -254,7 +254,8 @@ export default class NPCData extends CreatureTemplate {
   static _migrateData(source) {
     super._migrateData(source);
     NPCData.#migrateEnvironment(source);
-    NPCData.#migrateLegendaries(source);
+    NPCData.#migrateLegendaries(source, "legact");
+    NPCData.#migrateLegendaries(source, "legres");
     NPCData.#migrateSource(source);
     NPCData.#migrateSpellLevel(source);
     NPCData.#migrateTypeData(source);
@@ -277,15 +278,14 @@ export default class NPCData extends CreatureTemplate {
   /**
    * Convert legendary action & resistance `value` to `spent`.
    * @param {object} source  The candidate source data from which the model will be constructed.
+   * @param {string} prop    The property to migrate.
    * @since 5.1.0
    */
-  static #migrateLegendaries(source) {
-    for ( const k of ["legact", "legres"] ) {
-      if ( !foundry.utils.hasProperty(source, `resources.${k}.value`)
-        || !foundry.utils.hasProperty(source, `resources.${k}.max`) ) continue;
-      foundry.utils.setProperty(source, `resources.${k}.spent`, source.resources[k].max - source.resources[k].value);
-      delete source.resources[k].value;
-    }
+  static #migrateLegendaries(source, prop) {
+    const resource = source.resources?.[prop];
+    if ( !resource || !("max" in resource) || !("value" in resource) || ("spent" in resource) ) return;
+    source.resources[prop].spent = resource.max - resource.value;
+    delete resource.value;
   }
 
   /* -------------------------------------------- */
@@ -476,9 +476,9 @@ export default class NPCData extends CreatureTemplate {
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
 
     // Legendary Actions & Resistances
-    const clampValue = source => Math.clamp(source.max - source.spent, 0, source.max);
-    this.resources.legact.value = clampValue(this.resources.legact);
-    this.resources.legres.value = clampValue(this.resources.legres);
+    const { legact, legres } = this.resources;
+    legact.value = Math.clamp(legact.max - legact.spent, 0, legact.max);
+    legres.value = Math.clamp(legres.max - legres.spent, 0, legres.max);
     this.resources.legact.label = this.getLegendaryActionsDescription();
   }
 
