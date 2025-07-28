@@ -16,6 +16,7 @@ system:
     license: CC-BY-4.0
     book: SRD 5.2
     revision: 2
+    page: ''
   activation:
     type: action
     condition: ''
@@ -117,7 +118,7 @@ system:
         identifier: ''
       name: Create Spectral Sword
       img: systems/dnd5e/icons/svg/properties/magical.svg
-  identifier: mordenkainens-sword
+  identifier: arcane-sword
 _id: phbswdMordenkain
 type: spell
 img: icons/weapons/swords/sword-flanged-lightning.webp
@@ -133,11 +134,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1724425964789
-  modifiedTime: 1745256800365
+  modifiedTime: 1753380735486
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbswdMordenkain'

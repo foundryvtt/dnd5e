@@ -37,24 +37,31 @@ export default class SpellSlotsConfig extends BaseConfigSheet {
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
 
-    const source = this.document._source.system.spells;
     const { spells } = this.document.system;
-    context.overrides = Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1).map(level => ({
-      value: source[`spell${level}`]?.override,
-      label: CONFIG.DND5E.spellLevels[level],
-      name: `system.spells.spell${level}.override`,
-      placeholder: spells[`spell${level}`]?.max ?? 0
-    }));
+    const source = this.document._source.system.spells;
+    const maxLevel = Object.keys(CONFIG.DND5E.spellLevels).length - 1;
+    const spellcastingMethods = new Set(["spell", ...Object.values(this.document.spellcastingClasses).map(cls => {
+      return cls.system.spellcasting.type;
+    })]);
 
-    for ( const k of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
-      const hasSpell = this.document.items.some(i => i.type === "spell" && i.system.preparation.mode === k);
-      if ( parseInt(spells[k]?.level) || hasSpell ) context.overrides.push({
-        label: CONFIG.DND5E.spellPreparationModes[k].label,
-        value: source[k]?.override,
-        name: `system.spells.${k}.override`,
-        placeholder: spells[k]?.max ?? 0
-      });
-    }
+    const models = Object.entries(CONFIG.DND5E.spellcasting).sort(([a]) => a === "spell" ? -1 : 0);
+    context.overrides = models.reduce((arr, [method, model]) => {
+      if ( !model.slots ) return arr;
+      for ( let i = model.isSingleLevel ? maxLevel : 1; i <= maxLevel; i++ ) {
+        const key = model.getSpellSlotKey(i);
+        const value = source[key]?.override;
+        if ( !value && !spellcastingMethods.has(method) ) continue;
+        arr.push({
+          value,
+          label: model.isSingleLevel
+            ? game.i18n.localize(`DND5E.SPELLCASTING.METHODS.${method.capitalize()}.abbr`)
+            : model.getLabel({ level: i }),
+          name: `system.spells.${key}.override`,
+          placeholder: spells[key]?.max ?? 0
+        });
+      }
+      return arr;
+    }, []);
 
     return context;
   }

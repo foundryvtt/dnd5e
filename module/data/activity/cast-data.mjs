@@ -33,7 +33,7 @@ export default class CastActivityData extends BaseActivityData {
         level: new NumberField(),
         properties: new SetField(new StringField(), { initial: ["vocal", "somatic", "material"] }),
         spellbook: new BooleanField({ initial: true }),
-        uuid: new DocumentUUIDField()
+        uuid: new DocumentUUIDField({ type: "Item" })
       })
     };
   }

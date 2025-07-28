@@ -369,7 +369,9 @@ export default class Bastion {
   #onDragItem(event, item, updates={}) {
     // TODO: Need some way to mark the item as 'claimed' when it is dropped onto an Actor sheet.
     if ( !foundry.utils.isEmpty(updates) ) item.updateSource(updates);
-    event.dataTransfer.setData("text/plain", JSON.stringify({ data: game.items.fromCompendium(item), type: "Item" }));
+    event.dataTransfer.setData("text/plain", JSON.stringify({
+      data: game.items.fromCompendium(item, { keepId: true }), type: "Item"
+    }));
   }
 
   /* -------------------------------------------- */

@@ -55,7 +55,7 @@
         object-position: top;
         border: none;
         flex: none;
-        background: var(--dnd5e-color-light-gray);
+        background: var(--dnd5e-background-alt-1);
       }
     }
 
@@ -72,12 +72,12 @@
       font-family: var(--dnd5e-font-roboto-slab);
       font-size: var(--font-size-16);
       font-weight: bold;
-      color: var(--color-text-dark-primary);
+      color: var(--color-text-primary);
     }
 
     .subtitle {
       font-size: var(--font-size-11);
-      color: var(--color-text-dark-5);
+      color: var(--color-text-secondary);
     }
 
     .message-metadata {
@@ -86,7 +86,7 @@
       flex: none;
     }
 
-    time { color: var(--color-text-dark-5); }
+    time { color: var(--color-text-secondary); }
 
     .flavor-text {
       margin-block-start: 4px;
@@ -144,7 +144,7 @@
       display: grid;
       place-content: center;
       padding: 0 .8125rem;
-      color: var(--color-text-dark-5);
+      color: var(--color-text-secondary);
       font-size: var(--font-size-16);
       transition: all 250ms ease;
     }
@@ -190,7 +190,7 @@
     overflow: hidden;
 
     .tooltip-part {
-      border-bottom: 1px solid var(--color-border-light-1);
+      border-bottom: var(--dnd5e-border-separator-heavy);
       padding: .125rem 0;
 
       &:last-child {
@@ -229,7 +229,7 @@
 
           .sign {
             font-weight: normal;
-            color: var(--color-text-light-6);
+            color: var(--color-text-tertiary);
             margin-right: 2px;
           }
         }
@@ -253,7 +253,7 @@
         .label {
           font-family: var(--dnd5e-font-roboto-condensed);
           font-size: var(--font-size-10);
-          color: var(--color-text-dark-5);
+          color: var(--color-text-secondary);
           text-transform: uppercase;
           text-align: center;
         }
@@ -265,7 +265,7 @@
         }
 
         .sign {
-          color: var(--color-text-light-6);
+          color: var(--color-text-tertiary);
           font-weight: normal;
           margin-right: 2px;
         }
@@ -294,6 +294,16 @@
 }
 
 /* ---------------------------------- */
+/*  Chat Notifications                */
+/* ---------------------------------- */
+
+#chat-notifications {
+  .chat-message {
+    .chat-control { display: none; }
+  }
+}
+
+/* ---------------------------------- */
 /*  Chat Popouts                      */
 /* ---------------------------------- */
 
@@ -306,7 +316,7 @@
     border: none;
     inset: 0 0 auto 0;
     z-index: 1;
-    padding: 7px 6px 0 0;
+    padding: 7px 6px 0 8px;
     background: none;
 
     :is(a, button).header-button, .header-control {
@@ -332,6 +342,10 @@
       flex: 0 0 15px;
       &:hover { text-shadow: 0 0 8px red; }
     }
+  }
+  &:not(.minimized) .window-header .window-title {
+    block-size: 1px;
+    visibility: hidden;
   }
 
   .window-content {
@@ -360,7 +374,7 @@
 /*  Item Cards                        */
 /* ---------------------------------- */
 
-.dnd5e2.chat-card {
+.dnd5e2 .chat-card {
   display: flex;
   flex-direction: column;
   gap: .375rem;
@@ -391,7 +405,7 @@
 
       > i {
         font-size: var(--font-size-14);
-        color: var(--color-text-dark-5);
+        color: var(--color-text-secondary);
         margin-right: 8px;
         transition: all 250ms ease;
       }
@@ -468,11 +482,11 @@
   p.supplement {
     margin: 0;
     font-size: var(--font-size-11);
-    color: var(--color-text-dark-5);
+    color: var(--color-text-secondary);
     padding: 0 .25rem;
 
     > strong {
-      color: var(--color-text-dark-primary);
+      color: var(--color-text-primary);
       text-transform: uppercase;
       font-size: var(--font-size-10);
       margin-right: .25rem;
@@ -483,8 +497,11 @@
 }
 
 /* Damage & Effects Trays */
-.dnd5e2 :is(.card-tray, .effects-tray),
-.dnd5e2.card-tray {
+.message.dnd5e2:not(:nth-last-child(-n + 5)) :is(.card-tray, .effects-tray, .targets-tray) {
+  content-visibility: auto;
+}
+
+.dnd5e2 :is(.card-tray, .effects-tray, .targets-tray) {
   margin-top: .125rem;
   &.damage-tray, &.effects-tray { margin-block-start: 8px; }
   &.targets-tray {
@@ -501,7 +518,7 @@
     font-size: var(--font-size-11);
 
     > span { flex: none; }
-    > i:first-of-type { color: var(--color-text-light-6); }
+    > i:first-of-type { color: var(--color-text-tertiary); }
     .fa-caret-down { transition: all 250ms ease; }
 
     &::before, &::after {
@@ -538,7 +555,7 @@
       align-items: center;
       padding-bottom: .25rem;
       margin-bottom: .25rem;
-      border-bottom: 1px solid var(--color-border-light-1);
+      border-bottom: var(--dnd5e-border-separator-faint);
 
       &:last-child {
         padding: 0;
@@ -727,7 +744,7 @@ enchantment-application {
 /*  Target Evaluations                */
 /* ---------------------------------- */
 
-:is(.chat-popout, #chat-log, .chat-log) .message .dnd5e2.evaluation {
+:is(.chat-popout, #chat-log, .chat-log) .message .evaluation {
   display: flex;
   flex-direction: column;
   gap: .25rem;
@@ -790,20 +807,27 @@ enchantment-application {
 /*  Rest & Turn Cards                 */
 /* ---------------------------------- */
 
-.dnd5e2.chat-card {
+.dnd5e2 .chat-card {
   section > strong:first-child {
     display: block;
     margin-block-start: 1em;
   }
-  .activities ul {
+  ul.action-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
     margin-block-start: 8px;
 
     li {
-      --gold-icon-size: 32px;
       gap: 8px;
+      align-items: center;
     }
 
     a.rollable:hover .subtitle { text-shadow: none; }
+    .status {
+      flex: 0 0 30px;
+      text-align: center;
+    }
   }
   .deltas ul {
     .delta {

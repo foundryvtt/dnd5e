@@ -1,6 +1,4 @@
-<form class="{{ cssClass }} flexcol drop-target" autocomplete="off">
-    {{> journalEntryPageHeader }}
-
+<section>
     <div class="form-group">
         <label>{{ localize "JOURNALENTRYPAGE.DND5E.Subclass.FIELDS.item.label" }}</label>
         <div class="form-fields">
@@ -9,7 +7,8 @@
                 <li class="item flexrow" data-item-uuid="{{ document.system.item }}" data-item-type="linked">
                     <div class="item-name">{{{ dnd5e-linkForUuid document.system.item }}}</div>
                     <div class="item-controls flexrow">
-                        <a class="item-control item-delete" data-tooltip aria-label="{{ localize 'DND5E.ItemDelete' }}">
+                        <a class="item-control" data-action="deleteItem" data-tooltip
+                           aria-label="{{ localize 'DND5E.ItemDelete' }}">
                             <i class="fa-solid fa-trash" inert></i>
                         </a>
                     </div>
@@ -26,10 +25,10 @@
     <div class="form-group">
         <label>{{ localize "JOURNALENTRYPAGE.DND5E.Subclass.FIELDS.description.value.label" }}</label>
         <div class="form-fields">
-            <button class="launch-text-editor" data-target="system.description.value">
-                <i class="fas fa-edit" inert></i> {{ localize "JOURNALENTRYPAGE.DND5E.EditDescription" }}
+            <button data-action="launchTextEditor" data-target="system.description.value">
+                <i class="fa-solid fa-edit" inert></i> {{ localize "JOURNALENTRYPAGE.DND5E.EditDescription" }}
             </button>
         </div>
         <p class="hint">{{ localize "JOURNALENTRYPAGE.DND5E.Subclass.FIELDS.description.value.hint" }}</p>
     </div>
-</form>
+</section>

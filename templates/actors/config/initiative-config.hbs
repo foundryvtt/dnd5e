@@ -22,6 +22,8 @@
                              label=(localize "DND5E.Maximum") hint=false classes="label-top" rootId=partId }}
             </div>
         </div>
+        {{ formField fields.roll.fields.mode value=data.roll.mode options=advantageModeOptions localize=true
+                     rootId=partId }}
     </fieldset>
 
     {{!-- Global Bonus --}}

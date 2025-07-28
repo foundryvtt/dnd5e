@@ -18,7 +18,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migrations                             */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -35,7 +35,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   }
 
   /* -------------------------------------------- */
-  /*  Methods                                     */
+  /*  Data Preparation                            */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -52,6 +52,8 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       const hp = this.actor.system.attributes.hp || {};
       data.value += (hp.temp || 0);
       data.max = Math.max(0, hp.effectiveMax);
+    } else if ( ["resources.legact", "resources.legres"].includes(data?.attribute) ) {
+      data.editable = true;
     }
     return data;
   }
@@ -105,6 +107,43 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const dts = CONFIG.DND5E.actorSizes[size].dynamicTokenScale ?? 1;
     this.texture.scaleX = this._source.texture.scaleX * dts;
     this.texture.scaleY = this._source.texture.scaleY * dts;
+  }
+
+  /* -------------------------------------------- */
+  /*  Movement                                    */
+  /* -------------------------------------------- */
+
+  /**
+   * Set up the system's movement action customization.
+   */
+  static registerMovementActions() {
+    for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      const actionConfig = CONFIG.Token.movement.actions[type];
+      if ( !actionConfig ) continue;
+      actionConfig.getAnimationOptions = token => {
+        const actorMovement = token.actor?.system.attributes?.movement ?? {};
+        if ( !(type in actorMovement) || actorMovement[type] ) return {};
+        return { movementSpeed: CONFIG.Token.movement.defaultSpeed / 2 };
+      };
+      actionConfig.getCostFunction = (...args) => this.getMovementActionCostFunction(type, ...args);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Return the movement action cost function for a specific movement type.
+   * @param {string} type
+   * @param {TokenDocument5e} token
+   * @param {TokenMeasureMovementPathOptions} options
+   * @returns {TokenMovementActionCostFunction}
+   */
+  static getMovementActionCostFunction(type, token, options) {
+    const noAutomation = game.settings.get("dnd5e", "disableMovementAutomation");
+    const actorMovement = token.actor?.system.attributes?.movement ?? {};
+    if ( noAutomation || !(type in actorMovement) || actorMovement[type] ) return cost => cost;
+    if ( CONFIG.DND5E.movementTypes[type]?.walkFallback ) return (cost, _from, _to, distance) => cost + distance;
+    return () => Infinity;
   }
 
   /* -------------------------------------------- */

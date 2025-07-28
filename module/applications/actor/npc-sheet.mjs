@@ -280,7 +280,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         const classes = ["pip"];
         if ( filled ) classes.push("filled");
         return {
-          n, filled,
+          n: max - n, filled,
           tooltip: `DND5E.${i18n}.Label`,
           label: game.i18n.format(`DND5E.${i18n}.Ordinal.${plurals.select(n)}`, { n }),
           classes: classes.join(" ")
@@ -296,6 +296,7 @@ export default class NPCActorSheet extends BaseActorSheet {
       context.showInitiativeScore = game.settings.get("dnd5e", "rulesVersion") === "modern";
     }
     context.showLoyalty = context.important && game.settings.get("dnd5e", "loyaltyScore") && game.user.isGM;
+    context.showRests = game.user.isGM || (this.actor.isOwner && game.settings.get("dnd5e", "allowRests"));
 
     return context;
   }
@@ -353,15 +354,18 @@ export default class NPCActorSheet extends BaseActorSheet {
     context.tools = this._prepareSkillsTools(context, "tools");
 
     // Speed
-    context.speed = Object.entries(CONFIG.DND5E.movementTypes).map(([k, label]) => {
-      const value = attributes.movement[k];
-      if ( !value ) return null;
-      const data = { label, value };
-      if ( (k === "fly") && attributes.movement.hover ) data.icons = [{
-        icon: "fas fa-cloud", label: game.i18n.localize("DND5E.MovementHover")
-      }];
-      return data;
-    }).filter(_ => _);
+    context.speed = [
+      ...Object.entries(CONFIG.DND5E.movementTypes).map(([k, { label }]) => {
+        const value = attributes.movement[k];
+        if ( !value ) return null;
+        const data = { label, value };
+        if ( (k === "fly") && attributes.movement.hover ) data.icons = [{
+          icon: "fas fa-cloud", label: game.i18n.localize("DND5E.MovementHover")
+        }];
+        return data;
+      }),
+      ...splitSemicolons(attributes.movement.special).map(label => ({ label }))
+    ].filter(_ => _);
 
     // Traits
     context.traits = this._prepareTraits(context);

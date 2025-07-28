@@ -4,7 +4,8 @@ import TransformationSetting from "../settings/transformation-setting.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, EmbeddedDataField, NumberField, SchemaField, SetField, StringField
+  ArrayField, BooleanField, DocumentIdField, DocumentUUIDField, EmbeddedDataField,
+  NumberField, SchemaField, SetField, StringField
 } = foundry.data.fields;
 
 /**
@@ -14,6 +15,7 @@ const {
 /**
  * @typedef TransformProfile
  * @property {string} _id            Unique ID for this profile.
+ * @property {string} cr             Formula for the CR of creature to transform into if in CR mode.
  * @property {object} level
  * @property {number} level.min      Minimum level at which this profile can be used.
  * @property {number} level.max      Maximum level at which this profile can be used.
@@ -21,6 +23,7 @@ const {
  * @property {string} name           Display name for this profile.
  * @property {Set<string>} sizes     Allowed creature sizes, or blank to allow all sizes.
  * @property {Set<string>} types     Allowed creature types, or blank to allow all types.
+ * @property {string} uuid           UUID of the actor to transform into if in direct mode.
  */
 
 /**
@@ -32,6 +35,7 @@ const {
  * @property {boolean} transform.customize     Should any customized settings be respected or should the default
  *                                             settings for the selected profile be used instead.
  * @property {string} transform.identifier     Class identifier that will be used to determine applicable level.
+ * @property {""|"cr"} transform.mode          Method of determining what type of creature to transform into.
  * @property {string} transform.preset         Transformation preset to use.
  */
 export default class TransformActivityData extends BaseActivityData {
@@ -49,12 +53,14 @@ export default class TransformActivityData extends BaseActivityData {
         movement: new SetField(new StringField()),
         name: new StringField(),
         sizes: new SetField(new StringField()),
-        types: new SetField(new StringField())
+        types: new SetField(new StringField()),
+        uuid: new DocumentUUIDField({ type: "Actor" })
       })),
       settings: new EmbeddedDataField(TransformationSetting, { nullable: true, initial: null }),
       transform: new SchemaField({
         customize: new BooleanField(),
         identifier: new IdentifierField(),
+        mode: new StringField({ initial: "cr" }),
         preset: new StringField()
       })
     };

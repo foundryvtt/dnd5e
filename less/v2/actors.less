@@ -1,16 +1,6 @@
 .dnd5e2.sheet.actor {
 
   /* ---------------------------------- */
-  /*  Outer Window                      */
-  /* ---------------------------------- */
-
-  .window-resizable-handle {
-    bottom: 1px;
-    right: 1px;
-    padding: 0;
-  }
-
-  /* ---------------------------------- */
   /*  Navigation                        */
   /* ---------------------------------- */
 
@@ -39,6 +29,34 @@
     .main-content {
       /* Tabbed Content */
       .tab-body .tab:not(.active) { display: none; }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Ability Scores                    */
+  /* ---------------------------------- */
+
+  .ability-scores .ability-score {
+    .sign { color: var(--color-text-tertiary); }
+
+    .label {
+      text-transform: uppercase;
+      font-size: var(--font-size-11);
+      color: var(--dnd5e-color-gold);
+      font-weight: bold;
+    }
+
+    .mod {
+      font-weight: bold;
+      color: var(--dnd5e-ability-mod-color);
+      font-size: var(--font-size-16);
+      padding: 3px 0;
+    }
+
+    .score {
+      text-align: center;
+      font-size: var(--font-size-13);
+      > input { text-align: center; }
     }
   }
 
@@ -256,7 +274,7 @@
     }
   }
 
-  .tab.biography code-mirror .cm-scroller {
+  .tab[data-tab=biography] code-mirror .cm-scroller {
     position: absolute;
     inset: 0;
   }
@@ -289,6 +307,7 @@
     li {
       padding: 6px 8px;
       border-bottom: 1px dotted var(--dnd5e-color-gold);
+      border-bottom: var(--dnd5e-border-separator-warning);
       &:last-child { border: none; }
 
       a:hover {
@@ -299,7 +318,7 @@
       &.warning::before, &.error::before {
         font-family: var(--font-awesome);
         font-weight: bold;
-        color: var(--color-text-dark-5);
+        color: var(--color-text-secondary);
         margin-right: 2px;
       }
 
@@ -313,10 +332,13 @@
   /* ---------------------------------- */
 
   &.minimized {
+    box-shadow: 0 0 20px var(--color-shadow-dark);
     background: url("../../ui/denim075.png");
     border: unset;
 
     &::after { content: unset; }
+    .window-header .header-elements { display: none; }
+    .window-content { display: none; }
 
     > header {
       align-items: center;

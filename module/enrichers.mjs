@@ -45,7 +45,8 @@ async function enrichString(match, options) {
   let { type, config, label } = match.groups;
   config = parseConfig(config, { multiple: ["damage", "heal", "healing"].includes(type) });
   config._input = match[0];
-  config._rules = _getRulesVersion(options);
+  config._rules = getRulesVersion(config, options);
+  delete config.rules;
   switch ( type.toLowerCase() ) {
     case "attack": return enrichAttack(config, label, options);
     case "award": return enrichAward(config, label, options);
@@ -92,12 +93,14 @@ function parseConfig(match="", { multiple=false }={}) {
 /* -------------------------------------------- */
 
 /**
- * Determine the appropriate rules version based on the provided document or system setting.
- * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
- * @returns {string}
+ * Determine the appropriate rules version based on the config override, provided item's parent's rule version,
+ * provided document's rule version, or the system setting (in that order).
+ * @param {object} [config={}]              Config object for the enrichment.
+ * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
+ * @returns {"2014"|"2024"}
  */
-function _getRulesVersion(options) {
-  // Select from actor data first, then item data, and then fall back to system setting
+export function getRulesVersion(config={}, options={}) {
+  if ( Number.isNumeric(config.rules) ) return String(config.rules);
   return options.relativeTo?.parent?.system?.source?.rules
     || options.relativeTo?.system?.source?.rules
     || (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014");
@@ -300,7 +303,7 @@ async function enrichAward(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-type="check" data-ability="dex">
- *   <i class="fa-solid fa-dice-d20" inert></i> Dexterity check
+ *   <i class="fa-solid fa-dice-d20" inert></i> Dexterity
  * </a>
  * ```
  *
@@ -309,7 +312,7 @@ async function enrichAward(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-type="check" data-skill="acr" data-dc="20">
- *   <i class="fa-solid fa-dice-d20" inert></i> DC 20 Dexterity (Acrobatics) check
+ *   <i class="fa-solid fa-dice-d20" inert></i> DC 20 Dexterity (Acrobatics)
  * </a>
  * ```
  *
@@ -318,7 +321,7 @@ async function enrichAward(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-type="check" data-ability="str" data-skill="acr">
- *   <i class="fa-solid fa-dice-d20" inert></i> Strength (Acrobatics) check
+ *   <i class="fa-solid fa-dice-d20" inert></i> Strength (Acrobatics)
  * </a>
  * ```
  *
@@ -327,8 +330,18 @@ async function enrichAward(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-type="check" data-ability="int" data-tool="thief">
- *   <i class="fa-solid fa-dice-d20" inert></i> Intelligence (Thieves' Tools) check
+ *   <i class="fa-solid fa-dice-d20" inert></i> Intelligence (Thieves' Tools)
  * </a>
+ * ```
+ *
+ * @example Create a skill check with a tool (when using the Modern rules):
+ * ```[[/check slt thief]]```
+ * ```[[/check skill=slt tool=thief]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="check" data-skill="slt" data-using-tool="thief">
+ *   <i class="fa-solid fa-dice-d20" inert></i> Dexterity (Sleight of Hand)
+ * </a> check using Thieves' Tools
  * ```
  *
  * @example Formulas used for DCs will be resolved using data provided to the description (not the roller):
@@ -336,7 +349,7 @@ async function enrichAward(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-type="check" data-ability="cha" data-dc="15">
- *   <i class="fa-solid fa-dice-d20" inert></i> DC 15 Charisma check
+ *   <i class="fa-solid fa-dice-d20" inert></i> DC 15 Charisma
  * </a>
  * ```
  *
@@ -438,13 +451,16 @@ async function enrichCheck(config, label, options) {
     }
   }
 
+  let usingTool;
   for ( const tool of config.tool ) {
     const toolConfig = CONFIG.DND5E.tools[slugify(tool)];
     const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(tool)];
     const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID.id, { indexOnly: true }) : null;
     if ( toolIndex ) {
       const ability = config.ability || toolConfig?.ability;
-      if ( ability ) {
+      if ( config.skill.length && (config.tool.length === 1) && (config._rules === "2024") ) {
+        usingTool = { key: tool, label: toolIndex.name };
+      } else if ( ability ) {
         if ( !groups.has(ability) ) groups.set(ability, []);
         groups.get(ability).push({ key: tool, type: "tool", label: toolIndex.name });
       } else {
@@ -498,11 +514,20 @@ async function enrichCheck(config, label, options) {
         parts.push(createRollLink(createRollLabel({ ...associatedConfig, ability }), associatedConfig).outerHTML);
       }
     }
+
+    if ( usingTool ) {
+      config.format = "long";
+      config.usingTool = usingTool.key;
+    }
     label = formatter.format(parts);
     if ( config.dc && !config.hideDC ) {
       label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
     }
     label = game.i18n.format(`EDITOR.DND5E.Inline.Check${config.format === "long" ? "Long" : "Short"}`, { check: label });
+    if ( usingTool ) label = game.i18n.format("EDITOR.DND5E.Inline.CheckUsing", {
+      check: label, tool: usingTool.label
+    });
+
     const template = document.createElement("template");
     template.innerHTML = label;
     return createRequestLink(template, {
@@ -534,7 +559,7 @@ function createCheckRequestButtons(dataset) {
     ...skills.map(skill => createRequestButton({
       ability: CONFIG.DND5E.skills[skill].ability, ...baseDataset, format: "short", skill, type: "skill"
     })),
-    ...tools.map(tool => createRequestButton({
+    ...dataset.usingTool ? [] : tools.map(tool => createRequestButton({
       ability: CONFIG.DND5E.tools[tool]?.ability, ...baseDataset, format: "short", tool, type: "tool"
     }))
   ];
@@ -1383,7 +1408,7 @@ async function rollAction(event) {
             await actor.rollSavingThrow(options);
             break;
           case "skill":
-            await actor.rollSkill({ skill, ...options });
+            await actor.rollSkill({ skill, tool: dataset.usingTool, ...options });
             break;
           case "tool":
             await actor.rollToolCheck({ tool, ...options });
@@ -1407,7 +1432,7 @@ async function rollAction(event) {
     const chatData = {
       user: game.user.id,
       content: await foundry.applications.handlebars.renderTemplate(
-        "systems/dnd5e/templates/chat/request-card.hbs", { buttons }
+        "systems/dnd5e/templates/chat/roll-request-card.hbs", { buttons }
       ),
       flavor: game.i18n.localize("EDITOR.DND5E.Inline.RollRequest"),
       speaker: MessageClass.getSpeaker({user: game.user})

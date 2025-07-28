@@ -1,41 +1,30 @@
-const TextEditor = foundry.applications.ux.TextEditor.implementation;
-
 /**
  * Journal entry page that displays a controls for editing rule page tooltip & type.
  */
-export default class JournalRulePageSheet extends foundry.appv1.sheets.JournalTextPageSheet {
+export default class JournalRulePageSheet extends foundry.applications.sheets.journal.JournalEntryPageProseMirrorSheet {
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["text", "rule"]
+  };
+
+  /* -------------------------------------------- */
 
   /** @override */
-  static _warnedAppV1 = true;
-
-  /* --------------------------------------------- */
-
-  /** @inheritDoc */
-  static get defaultOptions() {
-    const options = super.defaultOptions;
-    options.classes.push("rule");
-    return options;
-  }
+  static EDIT_PARTS = {
+    header: super.EDIT_PARTS.header,
+    content: super.EDIT_PARTS.content,
+    tooltip: {
+      template: "systems/dnd5e/templates/journal/page-rule-edit.hbs"
+    },
+    footer: super.EDIT_PARTS.footer
+  };
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  get template() {
-    return this.isEditable
-      ? "systems/dnd5e/templates/journal/page-rule-edit.hbs"
-      : "templates/journal/page-text-view.html";
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getData(options) {
-    const context = await super.getData(options);
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
     context.CONFIG = CONFIG.DND5E;
-    context.enrichedTooltip = await TextEditor.enrichHTML(this.object.system.tooltip, {
-      relativeTo: this.object,
-      secrets: this.object.isOwner
-    });
     return context;
   }
 }

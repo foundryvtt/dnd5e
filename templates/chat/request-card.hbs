@@ -1,10 +1,27 @@
-<div class="dnd5e2 chat-card request-card">
-    <div class="card-buttons">
-        {{#each buttons}}
-        <button {{ dnd5e-dataset dataset }}>
-            <span class="visible-dc">{{{ buttonLabel }}}</span>
-            <span class="hidden-dc">{{{ hiddenLabel }}}</span>
-        </button>
-        {{/each}}
-    </div>
+<div class="chat-card rest-card">
+    {{{ content }}}
+    <section class="targets">
+        <strong class="roboto-condensed-upper">{{ localize "DND5E.CHATMESSAGE.REQUEST.PartyMembers" }}</strong>
+        <ul class="action-list unlist">
+            {{#each targets}}
+            <li class="flexrow" data-uuid="{{ actor.uuid }}">
+                <img class="gold-icon" src="{{ actor.img }}" alt="{{ actor.name }}">
+                <span class="name-stacked">
+                    <span class="title">{{ actor.name }}</span>
+                </span>
+                <div class="status">
+                    {{#if completed}}
+                    <i class="fa-solid fa-check" data-tooltip
+                       aria-label="{{ localize 'DND5E.CHATMESSAGE.REQUEST.Complete' }}"></i>
+                    {{else if visible}}
+                    <button type="button" class="gold-button" data-tooltip="{{ @root.button.label }}"
+                            aria-label="{{ @root.button.label }}" data-action="handleRequest">
+                        {{ dnd5e-icon @root.button.icon fallback="fa-solid fa-hand-point-up" }}
+                    </button>
+                    {{/if}}
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </section>
 </div>

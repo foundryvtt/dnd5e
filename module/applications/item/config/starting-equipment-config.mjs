@@ -270,7 +270,7 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
     if ( target && (target !== dragEntry) ) {
       updateData ??= {};
       const siblings = this.document.system.startingEquipment.filter(s => s._id !== dragEntry._id);
-      const sortUpdates = SortingHelpers.performIntegerSort(dragEntry, { target, siblings, sortBefore });
+      const sortUpdates = foundry.utils.SortingHelpers.performIntegerSort(dragEntry, { target, siblings, sortBefore });
       for ( const update of sortUpdates ) {
         updateData[`startingEquipment.${update.target._id}.sort`] = update.update.sort;
       }

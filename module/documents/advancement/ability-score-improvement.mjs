@@ -31,7 +31,23 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Level above which any ASI will be considered an Epic Boon when using the modern rules.
+   * @type {number}
+   */
+  static EPIC_BOON_LEVEL = 19;
+
+  /* -------------------------------------------- */
   /*  Preparation Methods                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get _defaultTitle() {
+    if ( this.isEpicBoon ) return game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.TitleEpic");
+    return super._defaultTitle;
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -52,6 +68,19 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   get allowFeat() {
     return (this.item.type === "class") && (game.settings.get("dnd5e", "allowFeats")
       || game.settings.get("dnd5e", "rulesVersion") === "modern");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Should this be considered an epic boon feat?
+   * @type {boolean}
+   */
+  get isEpicBoon() {
+    return (this.level >= AbilityScoreImprovementAdvancement.EPIC_BOON_LEVEL)
+      && (this.item.type === "class")
+      && (this.item.system.source?.rules ? (this.item.system.source.rules === "2024")
+        : (game.settings.get("dnd5e", "rulesVersion") === "modern"));
   }
 
   /* -------------------------------------------- */
@@ -101,7 +130,11 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     const formatter = new Intl.NumberFormat(game.i18n.lang, { signDisplay: "always" });
-    if ( configMode ) {
+    if ( configMode && this.isEpicBoon ) {
+      return dnd5e.utils.linkForUuid(this.configuration.recommendation);
+    }
+
+    else if ( configMode ) {
       const entries = Object.entries(this.configuration.fixed).map(([key, value]) => {
         if ( !value ) return null;
         const name = CONFIG.DND5E.abilities[key]?.label ?? key;
@@ -147,7 +180,8 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
         const ability = this.actor.system.abilities[key];
         const source = this.actor.system.toObject().abilities[key] ?? {};
         if ( !ability || !this.canImprove(key) ) continue;
-        assignments[key] = Math.min(assignments[key], ability.max - source.value);
+        const max = Math.max(ability.max, this.configuration.max ?? -Infinity);
+        assignments[key] = Math.min(assignments[key], max - source.value);
         if ( assignments[key] ) updates[`system.abilities.${key}.value`] = source.value + assignments[key];
         else delete assignments[key];
       }

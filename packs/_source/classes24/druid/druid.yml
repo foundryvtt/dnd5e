@@ -120,11 +120,11 @@ system:
         optional: false
         spell:
           ability: []
-          preparation: ''
           uses:
             max: ''
             per: ''
             requireSlot: false
+          prepared: 0
       value: {}
       level: 1
       title: Class Features
@@ -186,17 +186,6 @@ system:
       value: {}
       level: 18
       title: Class Features
-    - _id: 93lkhOhVgIxNXWir
-      type: ItemGrant
-      configuration:
-        items:
-          - uuid: Compendium.dnd5e.classes24.Item.phbdrdEpicBoon00
-            optional: false
-        optional: false
-        spell: null
-      value: {}
-      level: 19
-      title: Class Features
     - _id: K72jypxSpzVJRXDh
       type: ItemGrant
       configuration:
@@ -221,6 +210,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 4
@@ -238,6 +228,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 8
@@ -255,6 +246,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 12
@@ -272,6 +264,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 16
@@ -398,11 +391,12 @@ system:
         optional: false
         spell:
           ability: []
-          preparation: always
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: spell
+          prepared: 2
       value: {}
       level: 1
       title: Druidic Spells
@@ -423,6 +417,7 @@ system:
         restriction:
           type: class
           subtype: ''
+          list: []
       value:
         added: {}
         replaced: {}
@@ -445,6 +440,7 @@ system:
         spell: null
         restriction:
           type: class
+          list: []
       value:
         added: {}
         replaced: {}
@@ -452,36 +448,6 @@ system:
       hint: >-
         The might of the elements flows through you. You gain one of the
         following options of your choice.
-    - _id: 8HY05Ii0VPXoZqV9
-      type: ItemChoice
-      configuration:
-        choices:
-          '19':
-            count: 1
-            replacement: false
-        allowDrops: true
-        type: feat
-        pool:
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofEnergyR
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFate000
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFortitu
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofIrresis
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofRecover
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSkill00
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpeed00
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpellRe
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonoftheNigh
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofTruesig
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofCombatP
-        spell: null
-        restriction:
-          type: feat
-      value:
-        added: {}
-        replaced: {}
-      title: Epic Boon
-      hint: ''
     - _id: W0d3c6X31SgnFFYM
       type: ScaleValue
       configuration:
@@ -603,6 +569,26 @@ system:
       level: 1
       title: Druidic
       hint: You know Druidic, the secret language of Druids.
+    - type: AbilityScoreImprovement
+      _id: gLRZK2OjtSnWNVJv
+      configuration:
+        cap: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked: []
+        points: 2
+        recommendation: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
+        max: null
+      value:
+        type: asi
+      level: 19
+      title: ''
+      hint: ''
   spellcasting:
     progression: full
     ability: wis
@@ -621,11 +607,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866366918
-  modifiedTime: 1745517448540
+  modifiedTime: 1752705792156
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

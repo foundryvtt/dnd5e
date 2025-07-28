@@ -3,7 +3,7 @@ import IdentifierField from "../fields/identifier-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, SetField, StringField
+  ArrayField, BooleanField, DocumentIdField, DocumentUUIDField, NumberField, SchemaField, SetField, StringField
 } = foundry.data.fields;
 
 /**
@@ -75,7 +75,7 @@ export default class SummonActivityData extends BaseActivityData {
         }),
         name: new StringField(),
         types: new SetField(new StringField()),
-        uuid: new StringField()
+        uuid: new DocumentUUIDField()
       })),
       summon: new SchemaField({
         identifier: new IdentifierField(),

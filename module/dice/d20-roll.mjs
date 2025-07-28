@@ -118,11 +118,15 @@ export default class D20Roll extends BasicRoll {
 
     // Determine advantage mode
     for ( const roll of config.rolls ?? [] ) {
-      const advantage = roll.options.advantage || config.advantage || keys.advantage;
-      const disadvantage = roll.options.disadvantage || config.disadvantage || keys.disadvantage;
-      if ( advantage && !disadvantage ) roll.options.advantageMode = this.ADV_MODE.ADVANTAGE;
-      else if ( !advantage && disadvantage ) roll.options.advantageMode = this.ADV_MODE.DISADVANTAGE;
-      else roll.options.advantageMode = this.ADV_MODE.NORMAL;
+      if ( keys.normal && keys.advantage ) roll.options.advantageMode = this.ADV_MODE.ADVANTAGE;
+      else if ( keys.normal && keys.disadvantage ) roll.options.advantageMode = this.ADV_MODE.DISADVANTAGE;
+      else {
+        const advantage = roll.options.advantage || config.advantage || keys.advantage;
+        const disadvantage = roll.options.disadvantage || config.disadvantage || keys.disadvantage;
+        if ( advantage && !disadvantage ) roll.options.advantageMode = this.ADV_MODE.ADVANTAGE;
+        else if ( !advantage && disadvantage ) roll.options.advantageMode = this.ADV_MODE.DISADVANTAGE;
+        else roll.options.advantageMode = this.ADV_MODE.NORMAL;
+      }
     }
   }
 
@@ -276,5 +280,19 @@ export default class D20Roll extends BasicRoll {
     if ( !(this.terms[0] instanceof foundry.dice.terms.Die) ) return;
     const { number, faces, ...data } = this.terms[0];
     this.terms[0] = new CONFIG.Dice.D20Die({ ...data, number, faces });
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static mergeOptions(original={}, other={}) {
+    const merged = super.mergeOptions(original, other);
+    merged.advantage = original.advantage || other.advantage;
+    merged.disadvantage = original.disadvantage || other.disadvantage;
+    merged.maximum = Math.min(original.maximum ?? Infinity, other.maximum ?? Infinity);
+    merged.minimum = Math.max(original.minimum ?? -Infinity, other.minimum ?? -Infinity);
+    return merged;
   }
 }

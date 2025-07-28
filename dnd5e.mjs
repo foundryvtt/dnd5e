@@ -62,16 +62,19 @@ Hooks.once("init", function() {
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
   CONFIG.ActiveEffect.legacyTransferral = false;
   CONFIG.Actor.documentClass = documents.Actor5e;
+  CONFIG.Canvas.layers.tokens.layerClass = CONFIG.Token.layerClass = canvas.layers.TokenLayer5e;
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
   CONFIG.Combatant.documentClass = documents.Combatant5e;
   CONFIG.CombatantGroup.documentClass = documents.CombatantGroup5e;
   CONFIG.Item.collection = dataModels.collection.Items5e;
-  CONFIG.Item.compendiumIndexFields.push("system.container");
+  CONFIG.Item.compendiumIndexFields.push("system.container", "system.identifier");
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
+  CONFIG.Token.rulerClass = canvas.TokenRuler5e;
+  CONFIG.Token.movement.TerrainData = dataModels.TerrainData5e;
   CONFIG.User.documentClass = documents.User5e;
   CONFIG.time.roundTime = 6;
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
@@ -121,6 +124,8 @@ Hooks.once("init", function() {
   CONFIG.ChatMessage.dataModels = dataModels.chatMessage.config;
   CONFIG.Item.dataModels = dataModels.item.config;
   CONFIG.JournalEntryPage.dataModels = dataModels.journal.config;
+  Object.assign(CONFIG.RegionBehavior.dataModels, dataModels.regionBehavior.config);
+  Object.assign(CONFIG.RegionBehavior.typeIcons, dataModels.regionBehavior.icons);
 
   // Add fonts
   _configureFonts();
@@ -131,61 +136,79 @@ Hooks.once("init", function() {
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.CharacterActorSheet, {
     types: ["character"],
     makeDefault: true,
-    label: "DND5E.SheetClassCharacter"
+    label: "DND5E.SheetClass.Character"
   });
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.NPCActorSheet, {
     types: ["npc"],
     makeDefault: true,
-    label: "DND5E.SheetClassNPC"
+    label: "DND5E.SheetClass.NPC"
   });
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eVehicle, {
     types: ["vehicle"],
     makeDefault: true,
-    label: "DND5E.SheetClassVehicle"
+    label: "DND5E.SheetClass.Vehicle"
   });
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.GroupActorSheet, {
     types: ["group"],
     makeDefault: true,
-    label: "DND5E.SheetClassGroup"
+    label: "DND5E.SheetClass.Group"
   });
 
   DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
   DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,
-    label: "DND5E.SheetClassItem"
+    label: "DND5E.SheetClass.Item"
   });
   DocumentSheetConfig.unregisterSheet(Item, "dnd5e", applications.item.ItemSheet5e, { types: ["container"] });
   DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ContainerSheet, {
     makeDefault: true,
     types: ["container"],
-    label: "DND5E.SheetClassContainer"
+    label: "DND5E.SheetClass.Container"
   });
 
-  DocumentSheetConfig.registerSheet(JournalEntry, "dnd5e", applications.journal.JournalSheet5e, {
+  DocumentSheetConfig.registerSheet(JournalEntry, "dnd5e", applications.journal.JournalEntrySheet5e, {
     makeDefault: true,
-    label: "DND5E.SheetClassJournalEntry"
+    label: "DND5E.SheetClass.JournalEntry"
+  });
+  DocumentSheetConfig.registerSheet(JournalEntry, "dnd5e", applications.journal.JournalSheet5e, {
+    makeDefault: false,
+    canConfigure: false,
+    canBeDefault: false,
+    label: "DND5E.SheetClass.JournalEntrySheetLegacy"
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalClassPageSheet, {
-    label: "DND5E.SheetClassClassSummary",
+    label: "DND5E.SheetClass.ClassSummary",
     types: ["class", "subclass"]
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalMapLocationPageSheet, {
-    label: "DND5E.SheetClassMapLocation",
+    label: "DND5E.SheetClass.MapLocation",
     types: ["map"]
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalRulePageSheet, {
-    label: "DND5E.SheetClassRule",
+    label: "DND5E.SheetClass.Rule",
     types: ["rule"]
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalSpellListPageSheet, {
-    label: "DND5E.SheetClassSpellList",
+    label: "DND5E.SheetClass.SpellList",
     types: ["spells"]
+  });
+
+  DocumentSheetConfig.unregisterSheet(RegionBehavior, "core", foundry.applications.sheets.RegionBehaviorConfig, {
+    types: ["dnd5e.difficultTerrain", "dnd5e.rotateArea"]
+  });
+  DocumentSheetConfig.registerSheet(RegionBehavior, "dnd5e", applications.regionBehavior.DifficultTerrainConfig, {
+    label: "DND5E.SheetClass.DifficultTerrain",
+    types: ["dnd5e.difficultTerrain"]
+  });
+  DocumentSheetConfig.registerSheet(RegionBehavior, "dnd5e", applications.regionBehavior.RotateAreaConfig, {
+    label: "DND5E.SheetClass.RotateArea",
+    types: ["dnd5e.rotateArea"]
   });
 
   CONFIG.Token.prototypeSheetClass = applications.PrototypeTokenConfig5e;
   DocumentSheetConfig.unregisterSheet(TokenDocument, "core", foundry.applications.sheets.TokenConfig);
   DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
-    label: "DND5E.SheetClassToken"
+    label: "DND5E.SheetClass.Token"
   });
 
   // Preload Handlebars helpers & partials
@@ -197,6 +220,14 @@ Hooks.once("init", function() {
 
   // Exhaustion handling
   documents.ActiveEffect5e.registerHUDListeners();
+
+  // Set up token movement actions
+  documents.TokenDocument5e.registerMovementActions();
+
+  // Custom movement cost aggregator
+  CONFIG.Token.movement.costAggregator = (results, distance, segment) => {
+    return Math.max(...results.map(i => i.cost));
+  };
 });
 
 /* -------------------------------------------- */
@@ -215,17 +246,11 @@ function _configureTrackableAttributes() {
     ]
   };
 
-  const altSpells = Object.entries(DND5E.spellPreparationModes).reduce((acc, [k, v]) => {
-    if ( !["prepared", "always"].includes(k) && v.upcast ) acc.push(`spells.${k}`);
-    return acc;
-  }, []);
-
   const creature = {
     bar: [
       ...common.bar,
       "attributes.hp",
-      ...altSpells,
-      ...Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).map(l => `spells.spell${l}`)
+      ..._trackedSpellAttributes()
     ],
     value: [
       ...common.value,
@@ -258,15 +283,26 @@ function _configureTrackableAttributes() {
 /* -------------------------------------------- */
 
 /**
+ * Get all trackable spell slot attributes.
+ * @returns {Set<string>}
+ * @internal
+ */
+function _trackedSpellAttributes() {
+  return Object.entries(DND5E.spellcasting).reduce((acc, [k, v]) => {
+    if ( v.slots ) Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).forEach(l => {
+      acc.add(`spells.${v.getSpellSlotKey(l)}`);
+    });
+    return acc;
+  }, new Set());
+}
+
+/* -------------------------------------------- */
+
+/**
  * Configure which attributes are available for item consumption.
  * @internal
  */
 function _configureConsumableAttributes() {
-  const altSpells = Object.entries(DND5E.spellPreparationModes).reduce((acc, [k, v]) => {
-    if ( !["prepared", "always"].includes(k) && v.upcast ) acc.push(`spells.${k}.value`);
-    return acc;
-  }, []);
-
   CONFIG.DND5E.consumableResources = [
     ...Object.keys(DND5E.abilities).map(ability => `abilities.${ability}.value`),
     "attributes.ac.flat",
@@ -278,8 +314,7 @@ function _configureConsumableAttributes() {
     "details.xp.value",
     "resources.primary.value", "resources.secondary.value", "resources.tertiary.value",
     "resources.legact.value", "resources.legres.value",
-    ...altSpells,
-    ...Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).map(level => `spells.spell${level}.value`)
+    ..._trackedSpellAttributes()
   ];
 }
 
@@ -460,6 +495,9 @@ Hooks.once("i18nInit", () => {
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
   Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
   foundry.helpers.Localization.localizeDataModel(dataModels.settings.TransformationSetting);
+
+  // Spellcasting
+  dataModels.spellcasting.SpellcastingModel.fromConfig();
 });
 
 /* -------------------------------------------- */
@@ -483,6 +521,7 @@ Hooks.once("ready", function() {
 
   // Register items by type
   dnd5e.registry.classes.initialize();
+  dnd5e.registry.subclasses.initialize();
 
   // Chat message listeners
   documents.ChatMessage5e.activateListeners();
@@ -513,8 +552,12 @@ Hooks.once("ready", function() {
 /*  System Styling                              */
 /* -------------------------------------------- */
 
-Hooks.on("renderPause", (app, [html]) => {
+Hooks.on("renderGamePause", (app, html) => {
   html.classList.add("dnd5e2");
+  const container = document.createElement("div");
+  container.classList.add("flexcol");
+  container.append(...html.children);
+  html.append(container);
   const img = html.querySelector("img");
   img.src = "systems/dnd5e/ui/official/ampersand.svg";
   img.className = "";
@@ -538,6 +581,7 @@ Hooks.on("renderChatLog", (app, html, data) => {
 Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners(html));
 
 Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(message));
+Hooks.on("updateChatMessage", dataModels.chatMessage.RequestMessageData.onUpdateResultMessage);
 
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 
@@ -546,11 +590,7 @@ Hooks.on("getItemContextOptions", documents.Item5e.addDirectoryContextOptions);
 
 Hooks.on("renderCompendiumDirectory", (app, html) => applications.CompendiumBrowser.injectSidebarButton(html));
 
-Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
-Hooks.on(
-  "renderJournalEntryPageProseMirrorSheet",
-  applications.journal.JournalSheet5e.onRenderJournalEntryPageProseMirrorSheet
-);
+Hooks.on("renderJournalEntryPageSheet", applications.journal.JournalEntrySheet5e.onRenderJournalPageSheet);
 
 Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffectConfig);
 
@@ -563,12 +603,8 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
   const units = utils.defaultUnits("length");
   if ( (units !== dnd5e.grid.units) && !foundry.utils.getProperty(createData, "grid.distance")
     && !foundry.utils.getProperty(createData, "grid.units") ) {
-    const C = CONFIG.DND5E.movementUnits;
     doc.updateSource({
-      grid: {
-        // TODO: Replace with `convertLength` method once added
-        distance: dnd5e.grid.distance * (C[dnd5e.grid.units]?.conversion ?? 1) / (C[units]?.conversion ?? 1), units
-      }
+      grid: { distance: utils.convertLength(dnd5e.grid.distance, dnd5e.grid.units, units, { strict: false }), units }
     });
   }
 });

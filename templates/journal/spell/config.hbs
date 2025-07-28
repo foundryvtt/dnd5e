@@ -1,0 +1,34 @@
+<section>
+    <div class="form-group">
+        <label>{{ localize "JOURNALENTRYPAGE.DND5E.SpellList.Type.Label" }}</label>
+        <div class="form-fields">
+            <select name="system.type">
+                {{ selectOptions CONFIG.spellListTypes selected=system.type }}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>{{ localize "DND5E.Identifier" }}</label>
+        <div class="form-fields">
+            <input type="text" name="system.identifier" value="{{system.identifier}}">
+        </div>
+        <p class="hint">{{ localize "JOURNALENTRYPAGE.DND5E.SpellList.IdentifierHint" }}
+    </div>
+
+    <div class="form-group">
+        <label>{{ localize "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Label" }}</label>
+        <div class="form-fields">
+            <select name="system.grouping">
+                {{ selectOptions GROUPING_MODES selected=system.grouping localize=true }}
+            </select>
+        </div>
+        <p class="hint">
+            {{ localize "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Hint" }}
+        </p>
+    </div>
+
+    <div class="form-group">
+        <label>{{ localize "DND5E.Description" }}</label>
+    </div>
+</section>

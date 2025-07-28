@@ -110,8 +110,12 @@ system:
           - str
           - dex
         dc:
-          calculation: ''
+          calculation: str
           formula: 8 + @abilitis.str.mod + @prof
+      img: ''
+      appliedEffects:
+        - bdG1d6kwc7F8Gbfg
+        - SfM8X3xktY0PR0Kz
   uses:
     spent: 0
     recovery: []
@@ -261,11 +265,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.345'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1726850216075
-  modifiedTime: 1745256810518
+  modifiedTime: 1750440923906
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

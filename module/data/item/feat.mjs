@@ -1,12 +1,13 @@
-import { ItemDataModel } from "../abstract.mjs";
-import AdvancementField from "../fields/advancement-field.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
+import AdvancementTemplate from "./templates/advancement.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 
-const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { ItemTypeData } from "./fields/item-type-field.mjs";
@@ -15,16 +16,17 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
 /**
  * Data definition for Feature items.
  * @mixes ActivitiesTemplate
+ * @mixes AdvancementTemplate
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  *
- * @property {Advancement[]} advancement            Advancement objects for this feature.
  * @property {number} cover                         Amount of cover this feature affords to its crew on a vehicle.
  * @property {boolean} crewed                       Is this vehicle feature currently crewed?
  * @property {object} enchant
  * @property {string} enchant.max                   Maximum number of items that can have this enchantment.
  * @property {string} enchant.period                Frequency at which the enchantment can be swapped.
  * @property {object} prerequisites
+ * @property {Set<string>} prerequisites.items      Items that must be taken first before this item.
  * @property {number} prerequisites.level           Character or class level required to choose this feature.
  * @property {boolean} prerequisites.repeatable     Can this item be selected more than once?
  * @property {Set<string>} properties               General properties of a feature item.
@@ -32,7 +34,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {Omit<ItemTypeData, "baseItem">} type  Feature type and subtype.
  */
 export default class FeatData extends ItemDataModel.mixin(
-  ActivitiesTemplate, ItemDescriptionTemplate, ItemTypeTemplate
+  ActivitiesTemplate, AdvancementTemplate, ItemDescriptionTemplate, ItemTypeTemplate
 ) {
 
   /* -------------------------------------------- */
@@ -47,7 +49,6 @@ export default class FeatData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       cover: new NumberField({ min: 0, max: 1 }),
       crewed: new BooleanField(),
       enchant: new SchemaField({
@@ -55,6 +56,7 @@ export default class FeatData extends ItemDataModel.mixin(
         period: new StringField()
       }),
       prerequisites: new SchemaField({
+        items: new SetField(new IdentifierField()),
         level: new NumberField({ integer: true, min: 0 }),
         repeatable: new BooleanField()
       }),
@@ -68,6 +70,7 @@ export default class FeatData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: true,
     hasEffects: true
   }, { inplace: false }));
 
@@ -95,7 +98,40 @@ export default class FeatData extends ItemDataModel.mixin(
           keyPath: "system.type.subtype"
         }
       }],
-      ["properties", this.compendiumBrowserPropertiesFilter("feat")]
+      ["properties", this.compendiumBrowserPropertiesFilter("feat")],
+      ["abilityScoreImprovement", {
+        label: "DND5E.ADVANCEMENT.AbilityScoreImprovement.Title",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.abilities
+        },
+        createFilter: (filters, value, def) => {
+          const { include, exclude } = Object.entries(value).reduce((d, [key, value]) => {
+            if ( value === 1 ) d.include.push(key);
+            else if ( value === -1 ) d.exclude.push(key);
+            return d;
+          }, { include: [], exclude: [] });
+
+          const makeFilter = values => ({
+            o: "OR", v: [
+              ...values.map(ability => ({
+                k: "system.advancement", o: "has", v: { k: `configuration.fixed.${ability}`, o: "gt", v: 0 }
+              })),
+              {
+                k: "system.advancement", o: "has", v: {
+                  o: "AND", v: [
+                    { k: "configuration.points", o: "gt", v: 0 },
+                    { o: "NOT", v: { k: "configuration.locked", o: "hasall", v: values } }
+                  ]
+                }
+              }
+            ]
+          });
+
+          if ( include.length ) filters.push(makeFilter(include));
+          if ( exclude.length ) filters.push({ o: "NOT", v: makeFilter(exclude) });
+        }
+      }]
     ]);
   }
 
@@ -162,7 +198,7 @@ export default class FeatData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migrations                             */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -215,7 +251,14 @@ export default class FeatData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Getters                                     */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get advancementClassLinked() {
+    return this.type.value !== "feat";
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -256,6 +299,58 @@ export default class FeatData extends ItemDataModel.mixin(
    */
   get proficiencyMultiplier() {
     return 1;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Validate the prerequisites specified on this item.
+   * @param {Actor5e} actor                        Actor against which the prerequisites should be checked.
+   * @param {object} [options={}]
+   * @param {number} [options.level]               Level to validate. Falls back to character level.
+   * @param {boolean} [options.showMessage=false]  Show a UI message if the validation fails.
+   * @param {boolean} [options.throwError=false]   Throw an error if validation fails.
+   * @returns {true|string[]}  True if the item is valid or a list of invalid descriptions if validation failed.
+   */
+  validatePrerequisites(actor, { level=actor.system?.details?.level, showMessage=false, throwError=false }={}) {
+    const messages = [];
+
+    // Check to ensure the item doesn't already exist on actor if it is not repeatable
+    if ( !this.prerequisites.repeatable && actor.sourcedItems?.get(this.parent.uuid)?.size ) {
+      messages.push(game.i18n.localize("DND5E.Prerequisites.Warning.NotRepeatable"));
+    }
+
+    // If a feature has item pre-requisites, make sure the other items exist on the actor
+    const someExist = !this.prerequisites.items.size || Array.from(this.prerequisites.items)
+      .some(i => actor.identifiedItems.get(i)?.size);
+    if ( !someExist ) {
+      messages.push(game.i18n.format("DND5E.Prerequisites.Warning.MissingItem", {
+        items: game.i18n.getListFormatter({ type: "disjunction" }).format(Array.from(this.prerequisites.items))
+      }));
+    }
+
+    // If a feature has a level pre-requisite, make sure it is less than or equal to current level
+    if ( (this.prerequisites?.level ?? -Infinity) > (level ?? Infinity) ) {
+      messages.push(game.i18n.format("DND5E.Prerequisites.Warning.InvalidLevel", {
+        level: this.prerequisites.level
+      }));
+    }
+
+    if ( !messages.length ) return true;
+
+    if ( showMessage || throwError ) {
+      const message = game.i18n.format("DND5E.Prerequisites.Warning.Message", {
+        actor: actor.name,
+        requirements: game.i18n.getListFormatter().format(messages),
+        type: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type]).toLowerCase()
+      });
+      if ( showMessage ) ui.notifications.warn(message);
+      if ( throwError ) throw new Error(message);
+    }
+
+    return messages;
   }
 
   /* -------------------------------------------- */

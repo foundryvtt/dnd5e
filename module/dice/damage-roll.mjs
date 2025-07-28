@@ -106,9 +106,11 @@ export default class DamageRoll extends BasicRoll {
     dialog.configure ??= Object.values(keys).every(k => !k);
 
     // Determine critical mode
+    config.isCritical ||= keys.critical;
+    config.isCritical &&= !keys.normal;
     for ( const roll of config.rolls ) {
       roll.options ??= {};
-      roll.options.isCritical ??= (config.isCritical || keys.critical) && !keys.normal;
+      roll.options.isCritical ??= config.isCritical;
     }
   }
 

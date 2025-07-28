@@ -43,21 +43,20 @@
     </div>
     {{/if}}
 
-    {{!-- Preparation Mode --}}
+    {{!-- Spellcasting --}}
     <div class="form-group">
-        <label>{{ localize "DND5E.SpellPreparation.Mode" }}</label>
+        <label>{{ localize "DND5E.SpellPreparation.Method" }}</label>
         <div class="form-fields">
 
-            {{!-- Prepared --}}
-            {{#if (eq source.preparation.mode "prepared")}}
-            {{ formInput fields.preparation.fields.prepared value=source.preparation.prepared
-                         dataset=(dnd5e-object tooltip="DND5E.Prepared") input=inputs.createCheckboxInput
-                         ariaLabel=(localize "DND5E.Prepared") }}
-            {{/if}}
+            {{!-- Method --}}
+            {{ formField fields.method value=source.method options=spellcastingMethods label="DND5E.Method"
+                         classes="label-top" localize=true }}
 
-            {{!-- Mode --}}
-            {{ formInput fields.preparation.fields.mode value=source.preparation.mode
-                         choices=CONFIG.spellPreparationModes labelAttr="label" }}
+            {{!-- Prepared --}}
+            {{#if canPrepare}}
+            {{ formField fields.prepared value=source.prepared choices=CONFIG.spellPreparationStates labelAttr="label"
+                         valueAttr="value" label="DND5E.Preparation" classes="label-top" localize=true }}
+            {{/if}}
         </div>
     </div>
 

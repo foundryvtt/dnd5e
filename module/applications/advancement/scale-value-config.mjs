@@ -41,7 +41,8 @@ export default class ScaleValueConfig extends AdvancementConfig {
     const config = this.advancement.configuration;
     const type = TYPES[config.type];
 
-    context.distanceOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, label]) => ({ value, label }));
+    context.distanceOptions = Object.entries(CONFIG.DND5E.movementUnits)
+      .map(([value, { label }]) => ({ value, label }));
     context.identifier = {
       placeholder: config.identifier || this.advancement.title?.slugify()
         || this.advancement.constructor.metadata.title.slugify()

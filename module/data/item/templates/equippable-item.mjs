@@ -1,4 +1,4 @@
-import SystemDataModel from "../../abstract.mjs";
+import SystemDataModel from "../../abstract/system-data-model.mjs";
 
 const { BooleanField, StringField } = foundry.data.fields;
 
@@ -80,11 +80,15 @@ export default class EquippableItemTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Ensure items that cannot be attuned are not marked as attuned.
+   * Ensure items that cannot be attuned are not marked as attuned. If attuned and on an actor type that
+   * tracks attunement, increase that actor's attunement count.
    */
   prepareFinalEquippableData() {
     if ( this.validProperties.has("mgc") && !this.properties.has("mgc") ) this.attunement = "";
     if ( !this.attunement ) this.attuned = false;
+    if ( this.attuned && this.parent.actor?.system.attributes?.attunement ) {
+      this.parent.actor.system.attributes.attunement.value += 1;
+    }
   }
 
   /* -------------------------------------------- */

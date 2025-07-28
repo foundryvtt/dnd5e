@@ -797,6 +797,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/shared/fields/field-targets.hbs",
     "systems/dnd5e/templates/shared/fields/field-uses.hbs",
     "systems/dnd5e/templates/shared/fields/fieldlist.hbs",
+    "systems/dnd5e/templates/shared/fields/formlist.hbs",
 
     // Journal Partials
     "systems/dnd5e/templates/journal/parts/journal-legacy-traits.hbs",
@@ -837,6 +838,31 @@ function dataset(object, options) {
     entries.push(`data-${key}="${Handlebars.escapeExpression(value)}"`);
   }
   return new Handlebars.SafeString(entries.join(" "));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Create an icon element dynamically based on the provided icon string, supporting FontAwesome class strings
+ * or paths to SVG or other image types.
+ * @param {string} icon           Icon class or path.
+ * @param {object} [options={}]
+ * @param {string} [options.alt]  Alt text for the icon.
+ * @returns {HTMLElement|null}
+ */
+export function generateIcon(icon, { alt }={}) {
+  let element;
+  if ( icon?.startsWith("fa") ) {
+    element = document.createElement("i");
+    element.className = icon;
+  } else if ( icon ) {
+    element = document.createElement(icon.endsWith(".svg") ? "dnd5e-icon" : "img");
+    element.src = icon;
+  } else {
+    return null;
+  }
+  if ( alt ) element[element.tagName === "IMG" ? "alt" : "ariaLabel"] = alt;
+  return element;
 }
 
 /* -------------------------------------------- */
@@ -958,6 +984,11 @@ export function registerHandlebarsHelpers() {
     getProperty: foundry.utils.getProperty,
     "dnd5e-concealSection": concealSection,
     "dnd5e-dataset": dataset,
+    "dnd5e-icon": (icon, { hash: options }) => {
+      let element = generateIcon(icon, options);
+      if ( !element && options.fallback ) element = generateIcon(options.fallback, options);
+      return element ? new Handlebars.SafeString(element.outerHTML) : "";
+    },
     "dnd5e-formatCR": formatCR,
     "dnd5e-formatModifier": formatModifier,
     "dnd5e-groupedSelectOptions": groupedSelectOptions,
@@ -1145,6 +1176,12 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
     const [, key] = attr.split(".");
     label = game.i18n.format("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
   }
+
+  // Resources
+  else if ( attr === "resources.legact.spent" ) label = "DND5E.LegendaryAction.LabelPl";
+  else if ( attr === "resources.legact.value" ) label = "DND5E.LegendaryAction.Remaining";
+  else if ( attr === "resources.legres.spent" ) label = "DND5E.LegendaryResistance.LabelPl";
+  else if ( attr === "resources.legres.value" ) label = "DND5E.LegendaryResistance.Remaining";
 
   // Skills.
   else if ( attr.startsWith("skills.") ) {

@@ -444,18 +444,22 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
 
       // Match attacks
       if ( this.match.attacks && item.system.hasAttack ) {
-        const ability = this.ability ?? this.item.abilityMod ?? rollData.attributes?.spellcasting;
-        const actionType = item.system.activities.getByType("attack")[0].actionType;
-        const typeMapping = { mwak: "msak", rwak: "rsak" };
-        const parts = [
-          rollData.abilities?.[ability]?.mod,
-          prof,
-          rollData.bonuses?.[typeMapping[actionType] ?? actionType]?.attack
-        ].filter(p => p);
+        let attack = this.flat?.attack;
+        if ( attack === undefined ) {
+          const ability = this.ability ?? this.item.abilityMod ?? rollData.attributes?.spellcasting;
+          const actionType = item.system.activities.getByType("attack")[0].actionType;
+          const typeMapping = { mwak: "msak", rwak: "rsak" };
+          const parts = [
+            rollData.abilities?.[ability]?.mod,
+            prof,
+            rollData.bonuses?.[typeMapping[actionType] ?? actionType]?.attack
+          ].filter(p => p);
+          attack = parts.join(" + ");
+        }
         changes.push({
           key: "activities[attack].attack.bonus",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: parts.join(" + ")
+          value: attack
         }, {
           key: "activities[attack].attack.flat",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
@@ -465,10 +469,13 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
 
       // Match saves
       if ( this.match.saves && item.hasSave ) {
-        let dc = rollData.abilities?.[this.ability]?.dc ?? rollData.attributes.spell.dc;
-        if ( this.item.type === "spell" ) {
-          const ability = this.item.system.availableAbilities?.first();
-          if ( ability ) dc = rollData.abilities[ability]?.dc ?? dc;
+        let dc = this.flat?.save;
+        if ( dc === undefined ) {
+          dc = rollData.abilities?.[this.ability]?.dc ?? rollData.attributes.spell.dc;
+          if ( this.item.type === "spell" ) {
+            const ability = this.item.system.availableAbilities?.first();
+            if ( ability ) dc = rollData.abilities[ability]?.dc ?? dc;
+          }
         }
         changes.push({
           key: "activities[save].save.dc.formula",

@@ -137,7 +137,9 @@ export default class TraitConfig extends AdvancementConfig {
       options: await Trait.choices(this.trait, { chosen, prefixed: true, any: this.selected !== -1 }),
       selected: this.trait,
       selectedHeader: `${CONFIG.DND5E.traits[this.trait].labels.localization}.other`,
-      typeField: new StringField({ label: game.i18n.localize("DND5E.ADVANCEMENT.Trait.TraitType") }),
+      typeField: new StringField({
+        required: true, blank: false, label: game.i18n.localize("DND5E.ADVANCEMENT.Trait.TraitType")
+      }),
       typeOptions: Object.entries(CONFIG.DND5E.traits)
         .filter(([, config]) => ((this.config.mode === "default") || (this.config.mode === "mastery"
           ? config.mastery : config.expertise)) && (config.dataType !== Number))
@@ -267,11 +269,6 @@ export default class TraitConfig extends AdvancementConfig {
       delete configuration.count;
     }
 
-    // TODO: Remove when https://github.com/foundryvtt/foundryvtt/issues/7706 is resolved
-    choicesCollection.forEach(c => {
-      if ( !c.pool ) return;
-      c.pool = Array.from(c.pool);
-    });
     configuration.choices = choicesCollection;
     configuration.grants ??= Array.from(this.config.grants);
 

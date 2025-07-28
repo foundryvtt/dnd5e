@@ -218,8 +218,10 @@ export default class BasicRoll extends Roll {
     const messageId = config.event?.target.closest("[data-message-id]")?.dataset.messageId;
     if ( messageId ) foundry.utils.setProperty(message.data, "flags.dnd5e.originatingMessage", messageId);
 
-    if ( rolls?.length && (config.evaluate !== false) && (message.create !== false) ) {
-      message.document = await this.toMessage(rolls, message.data, { rollMode: message.rollMode });
+    if ( rolls?.length && (config.evaluate !== false) ) {
+      message[message.create !== false ? "document" : "data"] = await this.toMessage(
+        rolls, message.data, { create: message.create, rollMode: message.rollMode }
+      );
     }
 
     return message.document;
@@ -433,7 +435,7 @@ export default class BasicRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Merge two roll configurations.
+   * Merge two roll configurations in place.
    * @param {Partial<BasicRollConfiguration>} original  The initial configuration that will be merged into.
    * @param {Partial<BasicRollConfiguration>} other     The configuration to merge.
    * @returns {Partial<BasicRollConfiguration>}         The original instance.
@@ -450,10 +452,21 @@ export default class BasicRoll extends Roll {
     }
 
     if ( other.options ) {
-      original.options ??= {};
-      foundry.utils.mergeObject(original.options, other.options);
+      original.options = this.mergeOptions(original.options, other.options);
     }
 
     return original;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Merge two roll options objects.
+   * @param {Partial<BasicRollOptions>} [original]  The initial options that will be merged into.
+   * @param {Partial<BasicRollOptions>} [other]     The options to merge.
+   * @returns {Partial<BasicRollOptions>}           The merged version.
+   */
+  static mergeOptions(original={}, other={}) {
+    return foundry.utils.mergeObject(original, other, { inplace: false });
   }
 }

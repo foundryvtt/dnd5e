@@ -18,6 +18,7 @@ system:
     rules: '2024'
     license: CC-BY-4.0
     book: SRD 5.2
+    page: ''
   activation:
     type: action
     condition: ''
@@ -108,7 +109,7 @@ system:
       appliedEffects:
         - MpToumiJ2o3S16K7
         - UhFtBDEZEDpVgz9G
-  identifier: ottos-irresistible-dance
+  identifier: irresistible-dance
 _id: phbsplOttosIrres
 type: spell
 img: icons/magic/control/voodoo-doll-pain-damage-green.webp
@@ -199,11 +200,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1724425965394
-  modifiedTime: 1745256796626
+  modifiedTime: 1753380719688
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplOttosIrres'

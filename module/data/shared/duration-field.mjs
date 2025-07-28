@@ -1,4 +1,4 @@
-import { prepareFormulaValue } from "../../utils.mjs";
+import { formatTime, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
@@ -38,12 +38,11 @@ export default class DurationField extends SchemaField {
     } else this.duration.value = null;
 
     if ( labels && this.duration.units ) {
-      let duration = CONFIG.DND5E.timePeriods[this.duration.units] ?? "";
-      if ( this.duration.value ) duration = `${this.duration.value} ${duration.toLowerCase()}`;
-      labels.duration = duration;
-      // TODO: Allow activities to indicate they require concentration regardless of the base item
-      labels.concentrationDuration = this.properties?.has("concentration")
-        ? game.i18n.format("DND5E.ConcentrationDuration", { duration }) : duration;
+      if ( this.duration.value && (this.duration.units in CONFIG.DND5E.timeUnits) ) {
+        labels.duration = formatTime(this.duration.value, this.duration.units);
+      } else labels.duration = CONFIG.DND5E.timePeriods[this.duration.units] ?? "";
+      labels.concentrationDuration = this.duration.concentration || this.properties?.has("concentration")
+        ? game.i18n.format("DND5E.ConcentrationDuration", { duration: labels.duration }) : labels.duration;
     }
 
     Object.defineProperty(this.duration, "getEffectData", {

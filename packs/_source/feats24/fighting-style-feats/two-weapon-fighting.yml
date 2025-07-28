@@ -26,6 +26,8 @@ system:
   prerequisites:
     level: null
     repeatable: false
+    items:
+      - fighting-style
   properties: []
   requirements: ''
   activities: {}
@@ -46,11 +48,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866298107
-  modifiedTime: 1745256780410
+  modifiedTime: 1752706634209
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbfstTwoWeaponF'

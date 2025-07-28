@@ -22,6 +22,7 @@ const {
  *
  * @property {object} enchant
  * @property {string} enchant.identifier    Class identifier that will be used to determine applicable level.
+ * @property {string} enchant.self          Automatically apply enchantment to item containing this activity when used.
  * @property {object} restrictions
  * @property {boolean} restrictions.allowMagical    Allow enchantments to be applied to items that are already magical.
  * @property {Set<string>} restrictions.categories  Item categories to restrict to.
@@ -41,11 +42,12 @@ export default class EnchantActivityData extends BaseActivityData {
         riders: new SchemaField({
           activity: new SetField(new DocumentIdField()),
           effect: new SetField(new DocumentIdField()),
-          item: new SetField(new DocumentUUIDField())
+          item: new SetField(new DocumentUUIDField({ type: "Item" }))
         })
       })),
       enchant: new SchemaField({
-        identifier: new IdentifierField()
+        identifier: new IdentifierField(),
+        self: new BooleanField()
       }),
       restrictions: new SchemaField({
         allowMagical: new BooleanField(),

@@ -94,6 +94,20 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( options.pack || options.parent?.pack ) Hooks.callAll("dnd5e.initializeItemSource", this, data, options);
 
+    if ( data.type === "spell" ) {
+      return super._initializeSource(new Proxy(data, {
+        set(target, prop, value, receiver) {
+          if ( prop === "preparation" ) console.trace(value);
+          return Reflect.set(target, prop, value, receiver);
+        },
+
+        defineProperty(target, prop, attributes) {
+          if ( prop === "preparation" ) console.trace(attributes);
+          return Reflect.defineProperty(target, prop, attributes);
+        }
+      }), options);
+    }
+
     return super._initializeSource(data, options);
   }
 
@@ -340,11 +354,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Retrieve scale values for current level from advancement data.
-   * @type {object}
+   * @type {Record<string, ScaleValueType>}
    */
   get scaleValues() {
     if ( !this.advancement.byType.ScaleValue ) return {};
-    const level = this.type === "class" ? this.system.levels : this.type === "subclass" ? this.class?.system.levels
+    const item = ["class", "subclass"].includes(this.advancementRootItem?.type) ? this.advancementRootItem : this;
+    const level = item.type === "class" ? item.system.levels : item.type === "subclass" ? item.class?.system.levels
       : this.parent?.system.details.level ?? 0;
     return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
       obj[advancement.identifier] = advancement.valueForLevel(level);
@@ -365,25 +380,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Does this item scale with any kind of consumption?
-   * @type {string|null}
-   */
-  get usageScaling() {
-    // TODO: Re-implement on activity
-    const { level, preparation, consume } = this.system;
-    const isLeveled = (this.type === "spell") && (level > 0);
-    if ( isLeveled && CONFIG.DND5E.spellPreparationModes[preparation.mode]?.upcast ) return "slot";
-    else if ( isLeveled && this.hasResource && consume.scale ) return "resource";
-    return null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Spellcasting details for a class or subclass.
    *
    * @typedef {object} SpellcastingDescription
-   * @property {string} type              Spellcasting type as defined in ``CONFIG.DND5E.spellcastingTypes`.
+   * @property {string} type              Spellcasting method as defined in `CONFIG.DND5E.spellcasting`.
    * @property {string|null} progression  Progression within the specified spellcasting type if supported.
    * @property {string} ability           Ability used when casting spells from this class or subclass.
    * @property {number|null} levels       Number of levels of this class or subclass's class if embedded.
@@ -498,6 +498,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
     for ( const activity of this.system.activities ?? [] ) activity.prepareData();
+    for ( const advancement of this.system.advancement ?? [] ) advancement.prepareData();
     if ( !this.actor || this.actor._embeddedPreparation ) this.applyActiveEffects();
   }
 
@@ -725,10 +726,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           "systems/dnd5e/templates/chat/item-card.hbs", context
         ),
         flags: {
-          "core.canPopout": true,
           "dnd5e.item": { id: this.id, uuid: this.uuid, type: this.type }
         },
-        speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token })
+        speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
+        title: this.name
       },
       rollMode: game.settings.get("core", "rollMode")
     }, message);
@@ -1156,9 +1157,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       name: "DND5E.Scroll.CreateScroll",
       icon: '<i class="fa-solid fa-scroll"></i>',
       callback: async li => {
-        let spell = game.items.get(li.dataset.documentId ?? li.dataset.entryId);
+        let spell = game.items.get(li.dataset.entryId);
         if ( app.collection instanceof foundry.documents.collections.CompendiumCollection ) {
-          spell = game.items.get(li.dataset.documentId ?? li.dataset.entryId);
+          spell = await app.collection.getDocument(li.dataset.entryId);
         }
         const scroll = await Item5e.createScrollFromSpell(spell);
         if ( scroll ) Item5e.create(scroll);
@@ -1535,7 +1536,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const title = game.i18n.format("DOCUMENT.Create", { type: label });
     const name = data.name || game.i18n.format("DOCUMENT.New", { type: label });
     let type = data.type || CONFIG[this.documentName]?.defaultType;
-    if ( !types.includes(type) ) type = types[0];
     const content = await foundry.applications.handlebars.renderTemplate(
       "systems/dnd5e/templates/apps/document-create.hbs",
       {

@@ -37,6 +37,199 @@ system:
   activities: {}
   enchant: {}
   identifier: mystic-arcanum
+  advancement:
+    - type: ItemChoice
+      title: Mystic Arcanum (6th level)
+      _id: vU3Qgfor0qryKp5Q
+      configuration:
+        allowDrops: true
+        choices:
+          '11':
+            count: 1
+            replacement: false
+          '12':
+            count: null
+            replacement: true
+          '13':
+            count: null
+            replacement: true
+          '14':
+            count: null
+            replacement: true
+          '15':
+            count: null
+            replacement: true
+          '16':
+            count: null
+            replacement: true
+          '17':
+            count: null
+            replacement: true
+          '18':
+            count: null
+            replacement: true
+          '19':
+            count: null
+            replacement: true
+          '20':
+            count: null
+            replacement: true
+        pool: []
+        restriction:
+          list:
+            - class:warlock
+          level: '6'
+        spell:
+          ability: []
+          method: atwill
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          prepared: 0
+        type: spell
+      value:
+        added: {}
+        replaced: {}
+      hint: >-
+        Choose one level 6 Warlock spell as this arcanum. You can cast your
+        arcanum spell without expending a spell slot, and you must finish a Long
+        Rest before you can cast it this way again.
+    - type: ItemChoice
+      title: Mystic Arcanum (7th level)
+      configuration:
+        allowDrops: true
+        choices:
+          '13':
+            count: 1
+            replacement: false
+          '14':
+            count: null
+            replacement: true
+          '15':
+            count: null
+            replacement: true
+          '16':
+            count: null
+            replacement: true
+          '17':
+            count: null
+            replacement: true
+          '18':
+            count: null
+            replacement: true
+          '19':
+            count: null
+            replacement: true
+          '20':
+            count: null
+            replacement: true
+        pool: []
+        restriction:
+          list:
+            - class:warlock
+          level: '7'
+        spell:
+          ability: []
+          method: atwill
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          prepared: 0
+        type: spell
+      value:
+        added: {}
+        replaced: {}
+      hint: >-
+        Choose one level 7 Warlock spell as this arcanum. You can cast your
+        arcanum spell without expending a spell slot, and you must finish a Long
+        Rest before you can cast it this way again.
+      _id: QYz2YofPZodLOxWE
+    - type: ItemChoice
+      title: Mystic Arcanum (8th level)
+      configuration:
+        allowDrops: true
+        choices:
+          '15':
+            count: 1
+            replacement: false
+          '16':
+            count: null
+            replacement: true
+          '17':
+            count: null
+            replacement: true
+          '18':
+            count: null
+            replacement: true
+          '19':
+            count: null
+            replacement: true
+          '20':
+            count: null
+            replacement: true
+        pool: []
+        restriction:
+          list:
+            - class:warlock
+          level: '8'
+        spell:
+          ability: []
+          method: atwill
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          prepared: 0
+        type: spell
+      value:
+        added: {}
+        replaced: {}
+      hint: >-
+        Choose one level 8 Warlock spell as this arcanum. You can cast your
+        arcanum spell without expending a spell slot, and you must finish a Long
+        Rest before you can cast it this way again.
+      _id: IpPxk9slDo87T3Pj
+    - type: ItemChoice
+      title: Mystic Arcanum (9th level)
+      configuration:
+        allowDrops: true
+        choices:
+          '17':
+            count: 1
+            replacement: false
+          '18':
+            count: null
+            replacement: true
+          '19':
+            count: null
+            replacement: true
+          '20':
+            count: null
+            replacement: true
+        pool: []
+        restriction:
+          list:
+            - class:warlock
+          level: '9'
+        spell:
+          ability: []
+          method: atwill
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          prepared: 0
+        type: spell
+      value:
+        added: {}
+        replaced: {}
+      hint: >-
+        Choose one level 9 Warlock spell as this arcanum. You can cast your
+        arcanum spell without expending a spell slot, and you must finish a Long
+        Rest before you can cast it this way again.
+      _id: 1KvdZINFnTrQEsqx
 effects: []
 flags:
   dnd5e:
@@ -45,11 +238,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866281378
-  modifiedTime: 1745256768263
+  modifiedTime: 1753389468976
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

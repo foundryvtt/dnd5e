@@ -4,12 +4,7 @@ system:
     value: >-
       <p>You gain proficiency in any combination of three skills or tools of
       your choice.</p><p><strong>Repeatable.</strong> You can take this feat
-      more than once.</p><section class="secret"
-      id="secret-36vceWBnGWiMkySr"><p><strong>Foundry Note</strong></p><p>This
-      feature does not automatically grant the proficiencies. You can toggle the
-      "Edit" mode in the <strong>"</strong>Details" tab of your sheet and click
-      on the circles next to the Skills to choose your
-      proficiencies.</p></section>
+      more than once.</p>
     chat: ''
   source:
     custom: ''
@@ -26,12 +21,28 @@ system:
     subtype: origin
   prerequisites:
     level: null
-    repeatable: false
+    repeatable: true
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: skilled
+  advancement:
+    - type: Trait
+      _id: Mm4MAeZK89zGqmyH
+      configuration:
+        allowReplacements: false
+        choices:
+          - count: 3
+            pool:
+              - skills:*
+              - tool:*
+        grants: []
+        mode: default
+      level: 0
+      title: ''
+      hint: ''
+      value: {}
 _id: phbftSkilled0000
 type: feat
 img: icons/commodities/treasure/medal-ribbon-blue.webp
@@ -47,11 +58,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866698093
-  modifiedTime: 1745256780555
+  modifiedTime: 1753301724714
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbftSkilled0000'

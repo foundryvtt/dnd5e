@@ -2,7 +2,7 @@ import MappingField from "../fields/mapping-field.mjs";
 import SpellConfigurationData from "./spell-config.mjs";
 
 const {
-  ArrayField, BooleanField, EmbeddedDataField, ForeignDocumentField, NumberField, SchemaField, StringField
+  ArrayField, BooleanField, EmbeddedDataField, ForeignDocumentField, NumberField, SchemaField, SetField, StringField
 } = foundry.data.fields;
 
 /**
@@ -27,9 +27,10 @@ const {
  * @property {Record<number, ItemChoiceLevelConfig>} choices  Choices & config for specific levels.
  * @property {ItemChoicePoolEntry[]} pool                     Items that can be chosen.
  * @property {object} restriction
- * @property {string} restriction.type                        Specific item type allowed.
- * @property {string} restriction.subtype                     Item sub-type allowed.
  * @property {"available"|number} restriction.level           Level of spell allowed.
+ * @property {Set<string>} restriction.list                   Spell lists from which a spell must be selected.
+ * @property {string} restriction.subtype                     Item sub-type allowed.
+ * @property {string} restriction.type                        Specific item type allowed.
  * @property {SpellConfigurationData} spell                   Mutations applied to spell items.
  * @property {string} type                                    Type of item allowed, if it should be restricted.
  */
@@ -55,6 +56,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
       pool: new ArrayField(new SchemaField({ uuid: new StringField() })),
       restriction: new SchemaField({
         level: new StringField(),
+        list: new SetField(new StringField()),
         subtype: new StringField(),
         type: new StringField()
       }),
@@ -75,6 +77,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
     if ( "pool" in source ) {
       source.pool = source.pool.map(i => foundry.utils.getType(i) === "string" ? { uuid: i } : i);
     }
+    if ( source.spell ) SpellConfigurationData.migrateData(source.spell);
     return source;
   }
 }

@@ -69,9 +69,10 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       const assignment = this.assignments[key] ?? 0;
       const fixed = this.advancement.configuration.fixed[key] ?? 0;
       const locked = this.advancement.configuration.locked.has(key);
-      const value = Math.min(ability.value + fixed + assignment, ability.max);
-      const max = locked ? value : Math.min(value + points.available, ability.max);
-      const min = Math.min(ability.value + fixed, ability.max);
+      const abilityMax = Math.max(ability.max, this.advancement.configuration.max ?? -Infinity);
+      const value = Math.min(ability.value + fixed + assignment, abilityMax);
+      const max = locked ? value : Math.min(value + points.available, abilityMax);
+      const min = Math.min(ability.value + fixed, abilityMax);
       obj[key] = {
         key, max, min, value,
         name: `abilities.${key}`,
@@ -80,17 +81,28 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         delta: (value - ability.value) ? formatter.format(value - ability.value) : null,
         showDelta: true,
         isDisabled: lockImprovement,
-        isLocked: !!locked || (ability.value >= ability.max),
+        isLocked: !!locked || (ability.value >= abilityMax),
         canIncrease: (value < max) && ((fixed + assignment) < points.cap) && !locked && !lockImprovement,
         canDecrease: (value > (ability.value + fixed)) && !locked && !lockImprovement
       };
       return obj;
     }, {});
 
+    let recommendation = this.advancement.isEpicBoon ? fromUuidSync(this.advancement.configuration.recommendation)
+      : null;
+    if ( recommendation ) {
+      const { img, name, uuid } = recommendation;
+      recommendation = {
+        img, name, uuid,
+        checked: this.feat?.uuid === uuid,
+        locked: this.feat && (this.feat.uuid !== uuid),
+      };
+    }
+
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     const pluralRules = new Intl.PluralRules(game.i18n.lang);
     return foundry.utils.mergeObject(super.getData(), {
-      abilities, lockImprovement, points,
+      abilities, lockImprovement, points, recommendation,
       feat: this.feat,
       pointCap: game.i18n.format(
         `DND5E.ADVANCEMENT.AbilityScoreImprovement.CapDisplay.${pluralRules.select(points.cap)}`, { points: points.cap }
@@ -119,7 +131,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onChangeInput(event) {
+  async _onChangeInput(event) {
     super._onChangeInput(event);
     const input = event.currentTarget;
     if ( input.name === "asi-selected" ) {
@@ -128,6 +140,9 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         if ( this.feat?.isASI ) this.assignments = {};
         this.feat = null;
       }
+    } else if ( input.name === "recommendation-selected" ) {
+      if ( input.checked ) this.feat = await fromUuid(this.advancement.configuration.recommendation);
+      else this.feat = null;
     } else {
       const key = input.closest("[data-score]").dataset.score;
       if ( isNaN(input.valueAsNumber) ) this.assignments[key] = 0;
@@ -157,8 +172,15 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       }
     };
     const result = await CompendiumBrowser.selectOne({ filters, tab: "feats" });
-    if ( result ) this.feat = await fromUuid(result);
-    this.render();
+    if ( !result ) return;
+
+    // TODO: Remove this unnecessary check when https://github.com/foundryvtt/dnd5e/issues/5139 is implemented
+    const item = await fromUuid(result);
+    const isValid = item.system.validatePrerequisites?.(this.advancement.actor, { showMessage: true });
+    if ( isValid === true ) {
+      this.feat = item;
+      this.render();
+    }
   }
 
   /* -------------------------------------------- */
@@ -243,13 +265,8 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       return null;
     }
 
-    // If a feat has a level pre-requisite, make sure it is less than or equal to current character level
-    if ( (item.system.prerequisites?.level ?? -Infinity) > this.advancement.actor.system.details.level ) {
-      ui.notifications.error(game.i18n.format("DND5E.ADVANCEMENT.AbilityScoreImprovement.Warning.Level", {
-        level: item.system.prerequisites.level
-      }));
-      return null;
-    }
+    const isValid = item.system.validatePrerequisites?.(this.advancement.actor, { showMessage: true });
+    if ( isValid !== true ) return null;
 
     this.feat = item;
     this.render();

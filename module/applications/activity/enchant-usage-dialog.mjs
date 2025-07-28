@@ -25,12 +25,18 @@ export default class EnchantUsageDialog extends ActivityUsageDialog {
 
     const enchantments = this.activity.availableEnchantments;
     if ( (enchantments.length > 1) && this._shouldDisplay("create.enchantment") ) {
+      const existingProfile = this.activity.existingEnchantment?.flags.dnd5e?.enchantmentProfile;
       context.hasCreation = true;
       context.enchantment = {
-        field: new StringField({ label: game.i18n.localize("DND5E.ENCHANTMENT.Label") }),
+        field: new StringField({ required: true, blank: false, label: game.i18n.localize("DND5E.ENCHANTMENT.Label") }),
         name: "enchantmentProfile",
         value: this.config.enchantmentProfile,
-        options: enchantments.map(e => ({ value: e._id, label: e.effect.name }))
+        options: enchantments.map(e => ({
+          value: e._id,
+          label: e._id === existingProfile
+            ? game.i18n.format("DND5E.ENCHANT.Enchantment.Active", { name: e.effect.name })
+            : e.effect.name
+        }))
       };
     } else if ( enchantments.length ) {
       context.enchantment = enchantments[0]?._id ?? false;

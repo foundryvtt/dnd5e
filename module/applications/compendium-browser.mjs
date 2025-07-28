@@ -1,5 +1,6 @@
 import * as Filter from "../filter.mjs";
 import SourceField from "../data/shared/source-field.mjs";
+import { getPluralRules } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
@@ -64,10 +65,12 @@ export default class CompendiumBrowser extends Application5e {
       this._applyModeFilters(this.options.mode);
     }
 
-    const isAdvanced = this._mode === this.constructor.MODES.ADVANCED;
-    const tab = this.constructor.TABS.find(t => t.tab === this.options.tab);
-    if ( !tab || (!!tab.advanced !== isAdvanced) ) this.options.tab = isAdvanced ? "actors" : "classes";
-    this._applyTabFilters(this.options.tab);
+    if ( foundry.utils.isEmpty(this.options.filters.locked) ) {
+      const isAdvanced = this._mode === this.constructor.MODES.ADVANCED;
+      const tab = this.constructor.TABS.find(t => t.tab === this.options.tab);
+      if ( !tab || (!!tab.advanced !== isAdvanced) ) this.options.tab = isAdvanced ? "actors" : "classes";
+      this._applyTabFilters(this.options.tab);
+    }
   }
 
   /* -------------------------------------------- */
@@ -75,7 +78,7 @@ export default class CompendiumBrowser extends Application5e {
   /** @override */
   static DEFAULT_OPTIONS = {
     id: "compendium-browser-{id}",
-    classes: ["compendium-browser", "vertical-tabs"],
+    classes: ["compendium-browser", "vertical-tabs", "dialog-lg"],
     tag: "form",
     window: {
       title: "DND5E.CompendiumBrowser.Title",
@@ -455,6 +458,7 @@ export default class CompendiumBrowser extends Application5e {
     await super._preparePartContext(partId, context, options);
     switch ( partId ) {
       case "documentClass":
+      case "search":
       case "types":
       case "filters": return this._prepareSidebarContext(partId, context, options);
       case "results": return this._prepareResultsContext(context, options);
@@ -479,11 +483,16 @@ export default class CompendiumBrowser extends Application5e {
     const { max, min } = this.options.selection;
 
     context.displaySelection = this.displaySelection;
-    context.invalid = (value < (min || -Infinity)) || (value > (max || Infinity)) ? "invalid" : "";
+    context.invalid = (value < (min || -Infinity)) || (value > (max || Infinity));
     const suffix = this.#selectionLocalizationSuffix;
     context.summary = suffix ? game.i18n.format(
       `DND5E.CompendiumBrowser.Selection.Summary.${suffix}`, { max, min, value }
     ) : value;
+    const pr = getPluralRules();
+    context.invalidTooltip = game.i18n.format(`DND5E.CompendiumBrowser.Selection.Warning.${suffix}`, {
+      max, min, value,
+      document: game.i18n.localize(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)
+    });
     return context;
   }
 
@@ -519,7 +528,11 @@ export default class CompendiumBrowser extends Application5e {
     context.isLocked.documentClass = ("documentClass" in this.options.filters.locked) || context.isLocked.types;
     const types = foundry.utils.getProperty(options, "dnd5e.browser.types") ?? [];
 
-    if ( partId === "types" ) {
+    if ( partId === "search" ) {
+      context.name = this.#filters.name;
+    }
+
+    else if ( partId === "types" ) {
       context.showTypes = (types.length !== 1) || (types[0] === "physical");
       context.types = CONFIG[context.filters.documentClass].documentClass.compendiumBrowserTypes({
         chosen: context.filters.types
@@ -553,10 +566,17 @@ export default class CompendiumBrowser extends Application5e {
           case "set": sort = 3; break;
         }
 
+        const generateLocked = data => {
+          if ( foundry.utils.getType(data) === "Object" ) {
+            return Object.fromEntries(Object.entries(data).map(([k, v]) => [k, generateLocked(v)]));
+          }
+          return data !== undefined;
+        };
+
         arr.push(foundry.utils.mergeObject(data, {
           key, sort,
           value: context.filters.additional?.[key],
-          locked: this.options.filters.locked?.additional?.[key]
+          locked: generateLocked(this.options.filters.locked?.additional?.[key])
         }, { inplace: false }));
         return arr;
       }, []);
@@ -950,7 +970,7 @@ export default class CompendiumBrowser extends Application5e {
     const { max, min } = this.options.selection;
     if ( (value < (min || -Infinity)) || (value > (max || Infinity)) ) {
       const suffix = this.#selectionLocalizationSuffix;
-      const pr = new Intl.PluralRules(game.i18n.lang);
+      const pr = getPluralRules();
       throw new Error(game.i18n.format(`DND5E.CompendiumBrowser.Selection.Warning.${suffix}`, {
         max, min, value,
         document: game.i18n.localize(`DND5E.CompendiumBrowser.Selection.Warning.Document.${pr.select(max || min)}`)

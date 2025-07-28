@@ -116,7 +116,7 @@ export default class TransformActivity extends ActivityMixin(TransformActivityDa
   async _finalizeUsage(config, results) {
     const profile = this.profiles.find(p => p._id === config.transform?.profile);
     if ( profile ) {
-      const uuid = await this.queryActor(profile);
+      const uuid = !this.transform.mode ? profile.uuid : await this.queryActor(profile);
       if ( uuid ) {
         if ( results.message instanceof ChatMessage ) results.message.setFlag("dnd5e", "transform.uuid", uuid);
         else foundry.utils.setProperty(results.message, "flags.dnd5e.transform.uuid", uuid);
@@ -133,12 +133,9 @@ export default class TransformActivity extends ActivityMixin(TransformActivityDa
    * @returns {Promise<string|null>}    UUID of the actor to transform into or `null` if canceled.
    */
   async queryActor(profile) {
-    const locked = {
-      documentClass: "Actor",
-      types: new Set(["npc"]),
-      additional: {
-        cr: { max: simplifyBonus(profile.cr, this.getRollData({ deterministic: true })) }
-      }
+    const locked = { documentClass: "Actor", types: new Set(["npc"]) };
+    if ( profile.cr !== "" ) locked.additional = {
+      cr: { max: simplifyBonus(profile.cr, this.getRollData({ deterministic: true })) }
     };
     const makeFilter = (data, key, negative) => locked.additional[key] = Array.from(data).reduce((obj, type) => {
       obj[type] = negative ? -1 : 1;

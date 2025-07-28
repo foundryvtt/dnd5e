@@ -36,7 +36,7 @@
 
         <div>
             {{!-- Resting & Special Traits --}}
-            {{#if actor.isOwner}}
+            {{#if showRests}}
             <div class="sheet-header-buttons">
                 <button type="button" class="short-rest gold-button" data-action="rest" data-type="short"
                         data-tooltip="DND5E.REST.Short.Label" aria-label="{{ localize 'DND5E.REST.Short.Label' }}">

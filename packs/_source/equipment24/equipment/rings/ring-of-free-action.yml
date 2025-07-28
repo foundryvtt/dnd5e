@@ -56,7 +56,47 @@ system:
     - mgc
   strength: null
   proficient: null
-effects: []
+effects:
+  - name: Free Action
+    img: icons/equipment/finger/ring-shield-silver.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgRingOfFreeAct
+    _id: 4dTBPTD5GinKr7kC
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.ignoredDifficultTerrain
+        mode: 2
+        value: all
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>Difficult Terrain doesn't cost you extra movement.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 5.1.0
+      createdTime: 1753119218372
+      modifiedTime: 1753119243789
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!dmgRingOfFreeAct.4dTBPTD5GinKr7kC'
 flags:
   dnd5e:
     riders:

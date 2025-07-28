@@ -66,8 +66,8 @@ export default function ActorSheetMixin(Base) {
       const allowed = new Set(["copy", "move"]);
       const s = foundry.utils.parseUuid(data.uuid);
       const t = foundry.utils.parseUuid(this.document.uuid);
-      const sCompendium = s.collection instanceof CompendiumCollection;
-      const tCompendium = t.collection instanceof CompendiumCollection;
+      const sCompendium = s.collection instanceof foundry.documents.collections.CompendiumCollection;
+      const tCompendium = t.collection instanceof foundry.documents.collections.CompendiumCollection;
 
       // If either source or target are within a compendium, but not inside the same compendium, move not allowed
       if ( (sCompendium || tCompendium) && (s.collection !== t.collection) ) allowed.delete("move");

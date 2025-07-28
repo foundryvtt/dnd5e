@@ -1,7 +1,0 @@
-<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
-    {{> "systems/dnd5e/templates/activity/parts/activity-identity.hbs" }}
-    <fieldset>
-        <legend>{{ localize "DND5E.ACTIVITY.SECTIONS.Behavior" }}</legend>
-        {{ formField fields.spell.fields.spellbook value=source.spell.spellbook input=inputs.createCheckboxInput }}
-    </fieldset>
-</section>

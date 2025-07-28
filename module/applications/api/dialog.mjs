@@ -7,6 +7,7 @@ export default class Dialog5e extends Application5e {
   /** @override */
   static DEFAULT_OPTIONS = {
     tag: "dialog",
+    templates: [],
     window: {
       contentTag: "form",
       contentClasses: ["standard-form"],
@@ -28,6 +29,17 @@ export default class Dialog5e extends Application5e {
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _configureRenderParts(options) {
+    const parts = super._configureRenderParts(options);
+    if ( parts.content && this.options.templates?.length ) {
+      parts.content.templates = [...(parts.content.templates ?? []), ...this.options.templates];
+    }
+    return parts;
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */

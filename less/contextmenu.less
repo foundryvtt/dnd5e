@@ -10,4 +10,75 @@
       border-block-start: 1px solid rgb(255 255 255 / 0.15);
     }
   }
+
+  &.dnd5e2 {
+    position: fixed;
+    z-index: var(--z-index-tooltip);
+    background: var(--dnd5e-background-card);
+    border-radius: 3px;
+    box-shadow: 0 3px 6px var(--dnd5e-shadow-45);
+    font-family: var(--dnd5e-font-roboto);
+    font-size: var(--font-size-13);
+    border: none;
+    color: var(--color-text-primary);
+    width: max-content;
+    min-width: 145px;
+
+    .context-item {
+      border: none;
+      padding: 0 .75rem;
+      margin: 0;
+      cursor: var(--cursor-pointer);
+      display: flex;
+      align-items: baseline;
+      line-height: 32px;
+      gap: 5px;
+      transition: all 250ms ease;
+
+      &:hover {
+        color: var(--color-text-primary);
+        text-shadow: none;
+        background: var(--context-entry-hover-background);
+        border: none;
+      }
+
+      i {
+        font-size: var(--font-size-11);
+        color: var(--color-text-secondary);
+        margin: 0;
+      }
+
+      dnd5e-icon {
+        --icon-fill: var(--color-text-secondary);
+        margin-right: 5px;
+      }
+    }
+
+    .context-items > .context-item {
+      &:first-child { border-radius: 3px 3px 0 0; }
+      &:last-child { border-radius: 0 0 3px 3px; }
+    }
+
+    .context-group { border: none; }
+
+    .context-group:first-child > ol > .context-item:first-child { border-radius: 3px 3px 0 0; }
+    .context-group:last-child > ol > .context-item:last-child { border-radius: 0 0 3px 3px; }
+
+    [data-group-id]:has(li)::before { border-block-start: var(--dnd5e-border-separator-heavy); }
+  }
+
+  .filter-item {
+    &.active {
+      font-weight: bold;
+      position: relative;
+
+      &::after {
+        content: "\f00c";
+        font-family: var(--font-awesome);
+        position: absolute;
+        right: .5rem;
+        color: var(--dnd5e-color-gold);
+      }
+    }
+  }
 }

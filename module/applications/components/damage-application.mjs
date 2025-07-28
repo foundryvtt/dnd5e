@@ -41,6 +41,13 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get shouldBuildTargetList() {
+    return this.open && this.visible;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Options for each application target.
    * @type {Map<string, DamageApplicationOptions>}
@@ -277,9 +284,11 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     for ( const target of this.targetList.querySelectorAll("[data-target-uuid]") ) {
       const token = fromUuidSync(target.dataset.targetUuid);
       const options = this.getTargetOptions(target.dataset.targetUuid);
-      await token?.applyDamage(this.damages, options);
+      await token?.applyDamage(this.damages, { ...options, isDelta: true });
     }
-    this.open = false;
+    if ( game.settings.get("dnd5e", "autoCollapseChatTrays") !== "manual" ) {
+      this.open = false;
+    }
   }
 
   /* -------------------------------------------- */
@@ -328,5 +337,19 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     const token = fromUuidSync(uuid);
     const entry = this.targetList.querySelector(`[data-target-uuid="${token.uuid}"]`);
     this.refreshListEntry(token, entry, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onOpen() {
+    this.buildTargetsList();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onVisible() {
+    this.buildTargetsList();
   }
 }

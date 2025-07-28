@@ -163,8 +163,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canScale() {
-    return this.consumption.scaling.allowed || (this.isSpell && this.item.system.level > 0
-      && CONFIG.DND5E.spellPreparationModes[this.item.system.preparation.mode]?.upcast);
+    return this.consumption.scaling.allowed || (this.isSpell && (this.item.system.level > 0)
+      && CONFIG.DND5E.spellcasting[this.item.system.method]?.slots);
   }
 
   /* -------------------------------------------- */
@@ -580,6 +580,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       configurable: false,
       enumerable: false,
       writable: false
+    });
+
+    // TODO: Temporarily add parent to consumption targets & damage parts added by enchantment
+    // Can be removed once https://github.com/foundryvtt/foundryvtt/issues/12528 is implemented
+    if ( this.consumption?.targets ) this.consumption.targets = this.consumption.targets.map(c => {
+      if ( c.parent ) return c;
+      return c.clone({}, { parent: this });
+    });
+    if ( this.damage?.parts ) this.damage.parts = this.damage.parts.map(c => {
+      if ( c.parent ) return c;
+      return c.clone({}, { parent: this });
     });
 
     if ( this.activation ) ActivationField.prepareData.call(this, rollData, this.labels);

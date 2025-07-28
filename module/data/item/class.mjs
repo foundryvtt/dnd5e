@@ -1,31 +1,34 @@
 import TraitAdvancement from "../../documents/advancement/trait.mjs";
-import { ItemDataModel } from "../abstract.mjs";
-import AdvancementField from "../fields/advancement-field.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import SpellcastingField from "./fields/spellcasting-field.mjs";
+import AdvancementTemplate from "./templates/advancement.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
 
-const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Class items.
+ * @mixes AdvancementTemplate
  * @mixes ItemDescriptionTemplate
  * @mixes StartingEquipmentTemplate
  *
+ * @property {object} hd                        Object describing hit dice properties.
+ * @property {string} hd.additional             Additional hit dice beyond the level of the class.
+ * @property {string} hd.denomination           Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
+ * @property {number} hd.spent                  Number of hit dice consumed.
  * @property {number} levels                    Current number of levels in this class.
  * @property {object} primaryAbility
  * @property {Set<string>} primaryAbility.value List of primary abilities used by this class.
  * @property {boolean} primaryAbility.all       If multiple abilities are selected, does multiclassing require all of
  *                                              them to be 13 or just one.
- * @property {object} hd                        Object describing hit dice properties.
- * @property {string} hd.additional             Additional hit dice beyond the level of the class.
- * @property {string} hd.denomination           Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
- * @property {number} hd.spent                  Number of hit dice consumed.
- * @property {object[]} advancement             Advancement objects for this class.
+ * @property {Set<string>} properties           General properties of a class item.
  * @property {SpellcastingField} spellcasting   Details on class's spellcasting ability.
  */
-export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTemplate, StartingEquipmentTemplate) {
+export default class ClassData extends ItemDataModel.mixin(
+  AdvancementTemplate, ItemDescriptionTemplate, StartingEquipmentTemplate
+) {
 
   /* -------------------------------------------- */
   /*  Model Configuration                         */
@@ -39,11 +42,6 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      levels: new NumberField({ required: true, nullable: false, integer: true, min: 0, initial: 1 }),
-      primaryAbility: new SchemaField({
-        value: new SetField(new StringField()),
-        all: new BooleanField({ initial: true })
-      }),
       hd: new SchemaField({
         additional: new FormulaField({ deterministic: true, required: true }),
         denomination: new StringField({
@@ -52,7 +50,12 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
         }),
         spent: new NumberField({ required: true, nullable: false, integer: true, initial: 0, min: 0 })
       }),
-      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
+      levels: new NumberField({ required: true, nullable: false, integer: true, min: 0, initial: 1 }),
+      primaryAbility: new SchemaField({
+        value: new SetField(new StringField()),
+        all: new BooleanField({ initial: true })
+      }),
+      properties: new SetField(new StringField()),
       spellcasting: new SpellcastingField()
     });
   }
@@ -71,7 +74,8 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
           if ( value === -1 ) filters.push(filter);
           else filters.push({ o: "NOT", v: filter });
         }
-      }]
+      }],
+      ["properties", this.compendiumBrowserPropertiesFilter("class")]
     ]);
   }
 
@@ -81,6 +85,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
 
   /** @inheritDoc */
   prepareBaseData() {
+    super.prepareBaseData();
     this.spellcasting.preparation.value = 0;
   }
 
@@ -241,6 +246,29 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
 
   /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _advancementToCreate(options) {
+    return [
+      { type: "HitPoints" },
+      { type: "Subclass", level: 3 },
+      { type: "AbilityScoreImprovement", level: 4 },
+      { type: "AbilityScoreImprovement", level: 8 },
+      { type: "AbilityScoreImprovement", level: 12 },
+      { type: "AbilityScoreImprovement", level: 16 },
+      { type: "AbilityScoreImprovement", level: 19 }
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    await this.preCreateAdvancement(data, options);
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */

@@ -1,5 +1,5 @@
 import TokenPlacement from "../../canvas/token-placement.mjs";
-import { ActorDataModel } from "../abstract.mjs";
+import ActorDataModel from "../abstract/actor-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
 import GroupSystemFlags from "./group-system-flags.mjs";
@@ -7,12 +7,22 @@ import GroupSystemFlags from "./group-system-flags.mjs";
 const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { RestConfiguration, RestResult } from "../../documents/actor/actor.mjs";
+ */
+
+/**
  * Metadata associated with members in this group.
- * @typedef {object} GroupMemberData
+ * @typedef GroupMemberData
  * @property {Actor5e} actor              Associated actor document.
  * @property {object} quantity
  * @property {number} quantity.value      Number of this actor in the group (for encounter or crew types).
  * @property {string} [quantity.formula]  Formula used for re-rolling actor quantities in encounters.
+ */
+
+/**
+ * @typedef {RestConfiguration} GroupRestConfiguration
+ * @param {boolean} [autoRest]  Automatically perform rest for group members rather than creating request message.
+ * @param {string[]} [targets]  IDs of actors to rest. If not provided, then all group actors will be rested.
  */
 
 /**
@@ -265,18 +275,47 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
 
   /**
    * Initiate a rest for all members of this group.
-   * @param {RestConfiguration} config  Configuration data for the rest.
-   * @param {RestResult} result         Results of the rest operation being built.
-   * @returns {boolean}                 Returns `false` to prevent regular rest process from completing.
+   * @param {GroupRestConfiguration} config  Configuration data for the rest.
+   * @param {RestResult} result              Results of the rest operation being built.
+   * @returns {boolean}                      Returns `false` to prevent regular rest process from completing.
    */
   async rest(config, result) {
+    const targets = this.members
+      .map(({ actor }) => !config.targets || config.targets.includes(actor.id) ? actor : null)
+      .filter(_ => _);
+
+    // Create a rest chat message
+    if ( !config.autoRest ) {
+      const restConfig = CONFIG.DND5E.restTypes[config.type];
+      const messageData = {
+        flavor: this.parent.createRestFlavor(config),
+        speaker: ChatMessage.getSpeaker({ actor: this.parent, alias: this.parent.name }),
+        system: {
+          button: {
+            icon: restConfig.icon ?? "fa-solid fa-bed",
+            label: restConfig.label
+          },
+          data: {
+            newDay: config.newDay === true,
+            recoverTemp: config.recoverTemp === true,
+            recoverTempMax: config.recoverTempMax === true,
+            type: config.type
+          },
+          handler: "rest",
+          targets: targets.map(t => ({ actor: t }))
+        },
+        type: "request"
+      };
+      await ChatMessage.create(messageData);
+    }
+
     const results = new Map();
-    for ( const member of this.members ) {
+    for ( const actor of targets ) {
       results.set(
-        member.actor,
-        await member.actor[config.type === "short" ? "shortRest" : "longRest"]({
+        actor,
+        config.autoRest ? await actor[config.type === "short" ? "shortRest" : "longRest"]({
           ...config, dialog: false, advanceBastionTurn: false, advanceTime: false
-        }) ?? null
+        }) ?? null : null
       );
     }
 

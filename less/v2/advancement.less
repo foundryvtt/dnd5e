@@ -25,62 +25,6 @@
     }
   }
 
-  .card:is(.items, .levels) {
-    display: grid;
-    gap: 0;
-
-    > * { grid-column: 1 / -1; }
-    .header, .items-list, .items-list > li, .levels-list, .levels-list > li {
-      display: grid;
-      grid-column: 1 / -1;
-      grid-template-columns: subgrid;
-    }
-    .header {
-      margin-inline: -10px;
-      padding-block: 3px 2px;
-      padding-inline: 10px;
-      border-radius: 0;
-    }
-
-    .items-list, .levels-list > li {
-      margin: 0 -.75em;
-      padding: 6px .75em;
-
-      &:nth-child(odd) { background: var(--dnd5e-color-table-row-odd); }
-      &:nth-child(even) { background: var(--dnd5e-color-table-row-even); }
-    }
-  }
-  .card.items {
-    grid-template-columns: [name] 1fr [controls] 20px;
-    .items-list {
-      container-type: normal;
-      gap: 0;
-
-      > li {
-        margin: 0 -.75em;
-        padding: 6px .75em;
-
-        &:nth-child(odd) { background: var(--dnd5e-color-table-row-odd); }
-        &:nth-child(even) { background: var(--dnd5e-color-table-row-even); }
-      }
-    }
-    .item-optional { display: inline-flex; }
-    .item-name { grid-column: name; }
-    .item-controls { grid-column: controls; }
-    .name-header { padding-inline-start: 16px; }
-  }
-  .card.levels {
-    grid-template-columns: [level] max-content [count] 1fr;
-    gap: 4px 6px;
-    .header > span { text-align: center; }
-    .level-header, .level-level { grid-column: level; }
-    .count-header, .level-count { grid-column: count; }
-    .level-level {
-      align-content: center;
-      text-align: center;
-    }
-  }
-
   .centered { text-align: center; }
   .drop-area {
     border: 1px dashed var(--color-border-light-2);
@@ -211,11 +155,11 @@
       .number-header, .level-number { grid-column: number; }
       .faces-header, .level-faces { grid-column: faces; }
     }
-    select option[value=""] { color: var(--color-text-light-6); }
+    select option[value=""] { color: var(--color-text-tertiary); }
     .new-scale-value select { font-weight: bold; }
     li.level:not(.new-scale-value) select {
-      color: var(--color-text-light-6);
-      option:not([value=""]) { color: var(--color-text-dark-primary); }
+      color: var(--color-text-tertiary);
+      option:not([value=""]) { color: var(--color-text-primary); }
     }
   }
 }
@@ -242,14 +186,14 @@
     > .step {
       h3 {
         padding-block-end: 0;
-        color: var(--color-text-dark-primary);
+        color: var(--color-text-primary);
         font-family: var(--dnd5e-font-roboto-condensed);
         font-size: var(--font-size-20);
         text-shadow: none;
       }
       &.dnd5e {
         h4 {
-          color: var(--color-text-dark-primary);
+          color: var(--color-text-primary);
           font-family: var(--dnd5e-font-roboto);
           text-shadow: none;
         }
@@ -356,7 +300,7 @@
 
 .dnd5e2.advancement-migration {
   --icon-size: 32px;
-  --gold-icon-size: 32px;
+
   .items {
     grid-template-columns: [name] 1fr [controls] 30px;
     .item, .item-name { gap: 8px; }

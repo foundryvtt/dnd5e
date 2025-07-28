@@ -9,7 +9,7 @@ import EffectsElement from "../components/effects.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import CreatureTypeConfig from "../shared/creature-type-config.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
-import SourceConfig from "../source-config.mjs";
+import SourceConfig from "../shared/source-config.mjs";
 import StartingEquipmentConfig from "./config/starting-equipment-config.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
@@ -322,7 +322,14 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     context.spellProgression = { ...CONFIG.DND5E.spellProgression };
     if ( (game.settings.get("dnd5e", "rulesVersion") === "modern")
       && (this.item.system.spellcasting?.progression !== "artificer") ) delete context.spellProgression.artificer;
-    context.spellProgression = Object.entries(context.spellProgression).map(([value, label]) => ({ value, label }));
+    context.spellProgression = Object.entries(context.spellProgression).map(([value, config]) => {
+      const group = CONFIG.DND5E.spellcasting[config.type]?.label ?? "";
+      return { group, value, label: config.label };
+    });
+    const { progression } = this.item.system.spellcasting ?? {};
+    if ( progression && !(progression in CONFIG.DND5E.spellProgression) ) {
+      context.spellProgression.push({ value: progression, label: progression });
+    }
 
     // Limited Uses
     context.data = { uses: context.source.uses };
@@ -414,8 +421,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     if ( !this.item.system.advancement ) return {};
 
     const advancement = {};
-    const configMode = !this.item.parent || this.advancementConfigurationMode;
-    // TODO: `advancementConfigurationMode` isn't used anymore, how is this handled now?
+    const configMode = !this.item.parent || (this._mode === ItemSheet5e.MODES.EDIT);
     const legacyDisplay = this.options.legacyDisplay;
     const maxLevel = !configMode ? (this.item.system.levels ?? this.item.class?.system.levels
       ?? this.item.parent.system.details?.level ?? -1) : -1;
@@ -552,15 +558,21 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-
+  _attachFrameListeners() {
+    super._attachFrameListeners();
     new ContextMenu5e(this.element, ".advancement-item[data-id]", [], {
       onOpen: target => dnd5e.documents.advancement.Advancement.onContextMenu(this.item, target), jQuery: false
     });
     new ContextMenu5e(this.element, ".activity[data-activity-id]", [], {
       onOpen: target => dnd5e.documents.activity.UtilityActivity.onContextMenu(this.item, target), jQuery: false
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
 
     new CONFIG.ux.DragDrop({
       dragSelector: ":is(.advancement-item, [data-activity-id], [data-effect-id], [data-item-id])",
@@ -921,7 +933,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       const target = this.item.system.activities.get(targetId);
       if ( !target || (target === source) ) return;
       const siblings = this.item.system.activities.filter(a => a._id !== id);
-      const sortUpdates = SortingHelpers.performIntegerSort(source, { target, siblings });
+      const sortUpdates = foundry.utils.SortingHelpers.performIntegerSort(source, { target, siblings });
       const updateData = Object.fromEntries(sortUpdates.map(({ target, update }) => {
         return [target._id, { sort: update.sort }];
       }));

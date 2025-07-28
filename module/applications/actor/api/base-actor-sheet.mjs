@@ -60,6 +60,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   static DEFAULT_OPTIONS = {
     actions: {
+      editImage: BaseActorSheet.#onEditImage,
       inspectWarning: BaseActorSheet.#inspectWarning,
       openWarnings: BaseActorSheet.#openWarnings,
       rest: BaseActorSheet.#rest,
@@ -254,7 +255,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       arr.push({
         name, reference,
         id: k,
-        icon: existing?.img ?? img,
+        img: existing?.img ?? img,
         disabled: existing ? disabled : true
       });
       return arr;
@@ -359,8 +360,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       else if ( config.type === Number ) flag.field = new NumberField(fieldOptions);
       else flag.field = new StringField(fieldOptions);
 
-      sections[config.section] ??= [];
-      sections[config.section].push(flag);
+      if ( !config.deprecated || flag.value ) {
+        sections[config.section] ??= [];
+        sections[config.section].push(flag);
+      }
     }
 
     // Global Bonuses
@@ -495,11 +498,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
     const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
     const defaultArtwork = Actor.implementation.getDefaultArtwork(this.actor._source)?.img;
+    const src = (showTokenPortrait ? token.texture.src : this.actor.img) ?? defaultArtwork;
     return {
+      src,
       token: showTokenPortrait,
-      src: showTokenPortrait ? token.texture.src : this.actor.img ?? defaultArtwork,
-      // TODO: Not sure the best way to update the parent texture from this sheet if this is a token actor.
-      path: showTokenPortrait ? this.actor.isToken ? "" : "prototypeToken.texture.src" : "img"
+      path: showTokenPortrait ? this.actor.isToken ? "token.texture.src" : "prototypeToken.texture.src" : "img",
+      type: showTokenPortrait ? "imagevideo" : "image",
+      isVideo: foundry.helpers.media.VideoHelper.hasVideoExtension(src)
     };
   }
 
@@ -545,7 +550,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       hover: CONFIG.DND5E.proficiencyLevels[entry.value],
       label: (property === "skills") ? CONFIG.DND5E.skills[key]?.label : Trait.keyLabel(key, { trait: "tool" }),
       source: context.source[property]?.[key]
-    }));
+    })).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
   }
 
   /* -------------------------------------------- */
@@ -558,34 +563,36 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _prepareSpellbook(context) {
     const spellbook = {};
-
-    // Define section and label mappings
-    const sections = Object.entries(CONFIG.DND5E.spellPreparationModes).reduce((acc, [k, {order}]) => {
-      if ( Number.isNumeric(order) ) acc[k] = Number(order);
-      return acc;
-    }, {});
-
-    const levels = context.actor.system.spells;
     const columns = customElements.get(this.options.elements.inventory).mapColumns([
       "school", "time", "range", "target", "roll", { id: "uses", order: 650, priority: 300 },
       { id: "formula", priority: 200 }, "controls"
     ]);
 
-    // Format a spellbook entry for a certain indexed level
-    const registerSection = (slot, i, label, { prepMode="prepared" }={}) => {
-      const section = spellbook[i] = {
-        label, slot, columns,
-        id: slot,
-        dataset: { type: "spell", level: prepMode in sections ? 1 : i, preparationMode: prepMode },
-        draggable: true,
-        order: i,
+    /**
+     * Register a section in the spellbook.
+     * @param {string} key                  The section's unique identifier.
+     * @param {number} [level]              The level of spells in this section. Only relevant for spellcasting methods
+     *                                      that provide multi-level slots.
+     * @param {SpellcastingModel} [config]  The spellcasting model, if any.
+     */
+    const registerSection = (key, level, config) => {
+      level = config?.slots ? level : 1;
+      if ( key in spellbook ) return;
+      const label = config?.getLabel({ level }) ?? game.i18n.localize("DND5E.CAST.SECTIONS.Spellbook");
+      const method = config?.key ?? key;
+      const order = level === 0 ? 0 : (config?.order ?? 1000);
+      const usesSlots = config?.slots && level;
+      const section = spellbook[key] = {
+        label, columns, order, usesSlots,
+        id: method,
+        slot: key,
         items: [],
-        usesSlots: i > 0,
-        minWidth: 220
+        minWidth: 220,
+        draggable: true,
+        dataset: { level, method, type: "spell" }
       };
-      if ( !section.usesSlots ) return;
-
-      const spells = foundry.utils.getProperty(this.actor.system.spells, section.slot);
+      if ( !usesSlots ) return;
+      const spells = foundry.utils.getProperty(this.actor.system.spells, key);
       const maxSlots = spells.override ?? spells.max ?? 0;
       section.pips = Array.fromRange(Math.max(maxSlots, spells.value ?? 0), 1).map(n => {
         const filled = spells.value >= n;
@@ -602,62 +609,33 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       });
     };
 
-    // Determine the maximum spell level which has a slot
-    const maxLevel = Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1).reduce((max, i) => {
-      const level = levels[`spell${i}`];
-      if ( level && (level.max || level.override ) && ( i > max ) ) max = i;
-      return max;
-    }, 0);
-
-    // Level-based spellcasters have cantrips and leveled slots
-    if ( maxLevel > 0 ) {
-      registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
-      for ( let lvl = 1; lvl <= maxLevel; lvl++ ) {
-        const sl = `spell${lvl}`;
-        registerSection(sl, lvl, CONFIG.DND5E.spellLevels[lvl], levels[sl]);
-      }
-    }
-
-    // Create spellbook sections for all alternative spell preparation modes that have spell slots.
-    for ( const [k, v] of Object.entries(CONFIG.DND5E.spellPreparationModes) ) {
-      if ( !(k in levels) || !v.upcast || !levels[k].max ) continue;
-      if ( !spellbook["0"] && v.cantrips ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
-      const l = levels[k];
-      const level = game.i18n.localize(`DND5E.SpellLevel${l.level}`);
-      const label = `${v.label} — ${level}`;
-      registerSection(k, sections[k], label, { prepMode: k });
+    // Register sections for the available spellcasting methods this character has.
+    for ( const spellcasting of Object.values(CONFIG.DND5E.spellcasting) ) {
+      const levels = spellcasting.getAvailableLevels?.(this.actor) ?? [];
+      if ( !levels.length ) continue;
+      if ( spellcasting.cantrips ) registerSection("spell0", 0, CONFIG.DND5E.spellcasting.spell);
+      levels.forEach(l => registerSection(spellcasting.getSpellSlotKey(l), l, spellcasting));
     }
 
     // Iterate over every spell item, adding spells to the spellbook by section
     (context.itemCategories.spells ?? []).forEach(spell => {
-      const mode = spell.system.preparation.mode || "prepared";
-      let s = spell.system.level || 0;
-      const sl = `spell${s}`;
+      let method = spell.system.method;
+      if ( !(method in CONFIG.DND5E.spellcasting) ) method = "innate";
+      const spellcasting = CONFIG.DND5E.spellcasting[method];
+      const level = spell.system.level || 0;
+      method = spellcasting?.getSpellSlotKey?.(level) ?? method;
 
       // Spells from items
       if ( spell.getFlag("dnd5e", "cachedFor") ) {
-        s = "item";
-        if ( !spell.system.linkedActivity?.displayInSpellbook ) return;
-        if ( !spellbook[s] ) {
-          registerSection(null, s, game.i18n.localize("DND5E.CAST.SECTIONS.Spellbook"));
-          spellbook[s].order = 1000;
-        }
-      }
-
-      // Specialized spellcasting modes (if they exist)
-      else if ( mode in sections ) {
-        s = sections[mode];
-        if ( !spellbook[s] ) {
-          const config = CONFIG.DND5E.spellPreparationModes[mode];
-          registerSection(mode, s, config.label, { prepMode: mode });
-        }
+        method = "item";
+        registerSection(method);
       }
 
       // Sections for higher-level spells which the caster does not have any slots for.
-      else if ( !spellbook[s] ) registerSection(sl, s, CONFIG.DND5E.spellLevels[s]);
+      else registerSection(method, level, spellcasting);
 
       // Add the spell to the relevant heading
-      spellbook[s].items.push(spell);
+      spellbook[method].items.push(spell);
     });
 
     // Sort the spellbook by section level
@@ -977,21 +955,16 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
 
     // Prepared
-    const mode = item.system.preparation?.mode;
-    const config = CONFIG.DND5E.spellPreparationModes[mode] ?? {};
-    if ( config.prepares && !linked ) {
-      const isAlways = mode === "always";
-      const prepared = isAlways || item.system.preparation.prepared;
+    const { method, prepared } = item.system;
+    const config = CONFIG.DND5E.spellcasting[method];
+    if ( config?.prepares && !linked ) {
+      const isAlways = prepared === CONFIG.DND5E.spellPreparationStates.always.value;
       ctx.preparation = {
         applicable: true,
         disabled: !item.isOwner || isAlways,
         cls: prepared ? "active" : "",
-        icon: `<i class="fa-${prepared ? "solid" : "regular"} fa-${isAlways ? "certificate" : "sun"}"></i>`,
-        title: isAlways
-          ? CONFIG.DND5E.spellPreparationModes.always.label
-          : prepared
-            ? CONFIG.DND5E.spellPreparationModes.prepared.label
-            : game.i18n.localize("DND5E.SpellUnprepared")
+        icon: `<i class="fa-${prepared ? "solid" : "regular"} fa-${isAlways ? "certificate" : "sun"}" inert></i>`,
+        title: CONFIG.DND5E.spellPreparationStates[isAlways ? "always" : prepared ? "prepared" : "unprepared"].label
       };
     }
     else ctx.preparation = { applicable: false };
@@ -1048,7 +1021,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     for ( const { usesSlots, pips, slot, dataset } of Object.values(context.spellbook) ) {
       if ( !usesSlots ) continue;
       const query = `[data-application-part="spells"] .items-section[data-level="${
-        dataset.level}"][data-preparation-mode="${dataset.preparationMode}"] .items-header`;
+        dataset.level}"][data-method="${dataset.method}"] .items-header`;
       const header = this.element.querySelector(query);
       if ( !header ) continue;
       if ( context.editable ) {
@@ -1145,6 +1118,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       const sidebarCollapsed = !!game.user.getFlag("dnd5e", this._sidebarCollapsedKeyPath);
       this.element.classList.toggle("sidebar-collapsed", sidebarCollapsed);
     }
+
+    // Play video elements.
+    this.element.querySelectorAll("video").forEach(v => {
+      if ( v.paused ) v.play();
+    });
 
     // Display warnings
     const warnings = this.element.querySelector(".window-header .preparation-warnings");
@@ -1318,6 +1296,63 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         target.updateActivity(activityId, { "uses.spent": activity.uses.max - result });
       }
       else target.update({ [input.dataset.name]: result });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle editing an image via the file browser.
+   * @this {BaseActorSheet}
+   * @param {PointerEvent} event  The triggering event.
+   * @param {HTMLElement} target  The action target.
+   * @returns {Promise<void>}
+   */
+  static async #onEditImage(event, target) {
+    const attr = target.dataset.edit;
+    const current = foundry.utils.getProperty(this.document._source, attr);
+    const defaultArtwork = this.document.constructor.getDefaultArtwork?.(this.document._source) ?? {};
+    const defaultImage = foundry.utils.getProperty(defaultArtwork, attr);
+    const fp = new CONFIG.ux.FilePicker({
+      current,
+      type: target.dataset.type,
+      redirectToRoot: defaultImage ? [defaultImage] : [],
+      callback: path => {
+        const isVideo = foundry.helpers.media.VideoHelper.hasVideoExtension(path);
+        if ( ((target instanceof HTMLVideoElement) && isVideo) || ((target instanceof HTMLImageElement) && !isVideo) ) {
+          target.src = path;
+        } else {
+          const repl = document.createElement(isVideo ? "video" : "img");
+          Object.assign(repl.dataset, target.dataset);
+          if ( isVideo ) Object.assign(repl, {
+            autoplay: true, muted: true, disablePictureInPicture: true, loop: true, playsInline: true
+          });
+          repl.src = path;
+          target.replaceWith(repl);
+        }
+        this._onEditPortrait(attr, path);
+      },
+      position: {
+        top: this.position.top + 40,
+        left: this.position.left + 10
+      }
+    });
+    await fp.browse();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle editing the portrait.
+   * @param {string} target  The target property being edited.
+   * @param {string} path    The image or video path.
+   * @protected
+   */
+  async _onEditPortrait(target, path) {
+    if ( target.startsWith("token.") ) await this.token.update({ [target.slice(6)]: path });
+    else {
+      const submit = new Event("submit", { cancelable: true });
+      this.form.dispatchEvent(submit);
     }
   }
 
@@ -1536,9 +1571,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   static #togglePip(event, target) {
     const n = Number(target.closest("[data-n]")?.dataset.n);
     const prop = target.dataset.prop ?? target.closest("[data-prop]")?.dataset.prop;
-    if ( !n || Number.isNaN(n) || !prop ) return;
+    if ( !Number.isNumeric(n) || !prop ) return;
     let value = foundry.utils.getProperty(this.actor, prop);
-    if ( value === n ) value--;
+    if ( (value === n) && prop.endsWith(".value") ) value--;
+    else if ( (value === n) && prop.endsWith(".spent") ) value++;
     else value = n;
     this.submit({ updateData: { [prop]: value } });
   }
@@ -1592,6 +1628,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         submitData.flags.dnd5e[`-=${key}`] = null;
       }
     }
+
+    // Correctly process data-edit video elements.
+    form.querySelectorAll("video[data-edit]").forEach(v => {
+      foundry.utils.setProperty(submitData, v.dataset.edit, v.src);
+    });
 
     return submitData;
   }
@@ -1820,7 +1861,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _onDropResetData(event, itemData) {
     if ( !itemData.system ) return;
-    ["attuned", "equipped", "preparation.prepared"].forEach(k => foundry.utils.deleteProperty(itemData.system, k));
+    ["attuned", "equipped", "prepared"].forEach(k => foundry.utils.deleteProperty(itemData.system, k));
   }
 
   /* -------------------------------------------- */
@@ -1886,8 +1927,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _filterItems(items, filters) {
-    const alwaysPrepared = ["innate", "always"];
-    const actions = ["action", "bonus", "reaction"];
+    const actions = ["action", "bonus", "reaction", "lair", "legendary"];
     const recoveries = ["lr", "sr"];
     const spellSchools = new Set(Object.keys(CONFIG.DND5E.spellSchools));
     const schoolFilter = spellSchools.intersection(filters);
@@ -1916,10 +1956,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
       if ( classFilter.size && !classFilter.has(item.system.sourceClass) ) return false;
-      if ( filters.has("prepared") ) {
-        if ( alwaysPrepared.includes(item.system.preparation?.mode) ) return true;
-        return item.system.preparation?.prepared;
-      }
+      if ( filters.has("prepared") ) return item.system.canPrepare && item.system.prepared;
 
       // Equipment-specific filters
       if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;

@@ -21,7 +21,9 @@ export default class SourceField extends SchemaField {
       custom: new StringField(),
       license: new StringField(),
       revision: new NumberField({ initial: 1 }),
-      rules: new StringField({ initial: "2024" }),
+      rules: new StringField({
+        initial: () => game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014"
+      }),
       ...fields
     };
     Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);

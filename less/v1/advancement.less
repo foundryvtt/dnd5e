@@ -343,8 +343,10 @@
     }
     label.flexrow {
       justify-content: space-between;
-      input[type=checkbox] { flex: none; }
+      dnd5e-checkbox { margin-inline: 6px; }
     }
+    .item-name + .item-name { margin-block-start: 4px; }
+    .pill-lg { margin-block-start: 12px; }
   }
 
   form[data-type="ScaleValue"] {

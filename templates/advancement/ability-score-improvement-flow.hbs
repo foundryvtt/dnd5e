@@ -24,6 +24,17 @@
     <div class="feat-section flexcol">
         {{#if showImprovement}}<h3>{{ localize "DND5E.Feature.Feat.Label" }}</h3>{{/if}}
 
+        {{#with recommendation}}
+        <div class="pill-lg {{#if locked}}locked{{/if}}" data-uuid="{{ uuid }}">
+            <img class="gold-icon" data-action="viewItem" src="{{ img }}" alt="{{ name }}">
+            <div class="name-stacked">
+                <div class="title">{{ localize name }}</div>
+            </div>
+            <dnd5e-checkbox class="item-control" name="recommendation-selected" {{ checked checked }}
+                            {{ disabled locked }}></dnd5e-checkbox>
+        </div>
+        {{/with}}
+
         {{#if showASIFeat}}
         <div class="pill-lg {{#if lockImprovement}}locked{{/if}}">
             <img class="gold-icon" src="icons/skills/melee/weapons-crossed-swords-white-blue.webp"
@@ -36,7 +47,7 @@
         </div>
         {{/if}}
 
-        {{#unless feat.isASI}}
+        {{#unless (or feat.isASI or (eq feat.uuid recommendation.uuid))}}
         <div class="pill-lg {{#unless feat}}roboto-upper empty{{/unless}}"
              {{~#if feat}} data-uuid="{{ feat.uuid }}"{{else}} data-action="browse"{{/if}}>
             {{#if feat}}

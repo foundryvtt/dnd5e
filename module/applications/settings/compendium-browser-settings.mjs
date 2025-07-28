@@ -209,12 +209,11 @@ export default class CompendiumBrowserSettingsConfig extends Application5e {
       checked: indeterminate || all,
       entries: Array.from(packs.map(id => {
         const { collection, title, metadata } = game.packs.get(id);
-        const { packageName, name } = metadata;
+        const { packageName, flags } = metadata;
         let tag = "";
         // Special case handling for D&D SRD.
         if ( packageName === "dnd5e" ) {
-          // TODO: Use a flag for this.
-          tag = name.endsWith("24") ? "5.2" : "5.1";
+          tag = flags?.dnd5e?.sourceBook?.replace("SRD ", "");
         }
         return {
           tag, title,

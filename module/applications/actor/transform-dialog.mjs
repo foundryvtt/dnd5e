@@ -177,10 +177,11 @@ export default class TransformDialog extends Dialog5e {
       const config = foundry.utils.getProperty(CONFIG.DND5E.transformation, field.name);
       if ( !config?.disables?.length ) return;
       const names = config.disables.map(d => d.includes("*") ? `[name^="${d.replace("*", "")}"]` : `[name="${d}"]`);
-      const selector = `dnd5e-checkbox:is(${names.join(",")}):not([name="${field.name}"])`;
+      const selector = `:is(${names.join(",")}):not([name="${field.name}"])`;
       this.element.querySelectorAll(selector).forEach(element => {
         element.disabled = field.value;
-        if ( element.disabled ) element.checked = false;
+        if ( element.disabled && element.tagName === "DND5E-CHECKBOX" ) element.checked = false;
+        else if ( element.disabled ) element.value = "";
       });
     };
     if ( changed ) handleDisable(changed);
