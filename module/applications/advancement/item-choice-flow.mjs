@@ -201,6 +201,14 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       };
     }
 
+    // Apply restrictions based on spell list
+    if ( (config.type === "spell") && config.restriction.list.size ) {
+      filters.locked.additional.spelllist = config.restriction.list.reduce((obj, list) => {
+        obj[list] = 1;
+        return obj;
+      }, {});
+    }
+
     const result = await CompendiumBrowser.select({ filters, selection: { min: 1, max: max - current } });
     if ( !result?.size ) return;
 
