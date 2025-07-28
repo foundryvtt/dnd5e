@@ -169,14 +169,15 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     event.preventDefault();
 
     // Determine how many items can be selected
-    const max = this.advancement.configuration.choices[this.level]?.count ?? 0;
+    const config = this.advancement.configuration;
+    let max = config.choices[this.level].count ?? 0;
+    if ( config.choices[this.level].replacement && this.advancement.actor.items.has(this.replacement) ) max++;
     const current = this.selected.size;
     if ( current >= max ) {
       ui.notifications.warn("DND5E.ADVANCEMENT.ItemChoice.Warning.MaxSelected", { localize: true });
       return;
     }
 
-    const config = this.advancement.configuration;
     const filters = { locked: { additional: {}, documentClass: "Item" } };
 
     // Apply restrictions based on type
