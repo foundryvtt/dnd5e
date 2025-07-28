@@ -1,4 +1,4 @@
-![Up to date as of 3.3.0](https://img.shields.io/static/v1?label=dnd5e&message=3.3.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 The D&D system provides several new journal page types with specialized functionality.
 
@@ -11,6 +11,8 @@ The *Class Summary* and *Subclass Summary* journal page types provide automatica
 The automatic generation on these pages is based on data provided through advancement, so a class or subclass must have the appropriate advancement setup. Hit points will be calculated based on the selected hit die size, proficiencies will be derived from Trait advancements at first level, and equipment from the Starting Equipment configuration. The table will show all features granted at various levels as well as scale values and spellcasting details.
 
 A description can be provided in the editor that will appear at the start of the entry. *Class Summary* pages can also take additional descriptive text that will appear beneath the three sections at the beginning. Optionally subclasses can be added to the *Class Summary* page and they will be displayed below the class.
+
+There are a few formatting differences between the older style books and the modern modern ones. To take these changes into account, these journal pages will automatically adjust based on the rules version specified on the provided class. If a different formatting is desired, the *Style* option can be used to override the default formatting.
 
 ## Map Location
 
@@ -48,9 +50,9 @@ The *Spell List* journal page type provides an easy way to display a list of spe
 
 ![Spell List Page](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/journal/pages-spell-list.jpg)
 
-When creating a spell list any spells offered by the SRD or the current module can be dragged to the spell list. For modules referencing spells that might not be available, the plus control on the sidebar can be used to add an unlinked spell profile. This needs to contain the name, level, and school of the spell for proper organization. It can also contain information on the book where the spell can be found. The "Original Source" field takes a UUID of the spell, which will result in a link to that spell being displayed if the module that provides it is found. Otherwise its placeholder name will be displayed.
+When creating a spell list any spells offered by the SRD or the current module can be dragged to the spell list. For modules referencing spells that might not be available, the plus control on the sidebar can be used to add an unlinked spell profile. This needs to contain the name, identifier, level, and school of the spell for proper organization. It can also contain information on the book where the spell can be found. The "Original Source" field takes a UUID of the spell, which will result in a link to that spell being displayed if the module that provides it is found. Otherwise its placeholder name will be displayed.
 
-Spell lists have a type and identifier, which will enable features in the future for viewing merged spell lists from several sources through the compendium browser.
+Spell lists have a type and identifier, which enables viewing merged spell lists from several sources through the compendium browser as well as limiting choices through the [Choose Items advancement](Advancement-Type-Item-Choice.md) to certain spell lists.
 
 The default grouping mode can also be specified, though the viewer can always change how they view the list. Grouping can be performed by spell level, by spell school, or by the first letter of the spell's name.
 
