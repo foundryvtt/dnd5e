@@ -16,6 +16,7 @@ const {
  * @mixin
  */
 export default class StartingEquipmentTemplate extends SystemDataModel {
+  /** @inheritDoc */
   static defineSchema() {
     return {
       startingEquipment: new ArrayField(new EmbeddedDataField(EquipmentEntryData), {required: true}),

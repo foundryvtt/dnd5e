@@ -9,9 +9,6 @@
         </legend>
         {{#with fields.transform.fields as |fields|}}
         {{ formField fields.mode value=../source.transform.mode options=../profileModes rootId=@root.partId }}
-        {{#unless @root.activity.isSpell}}
-        {{ formField fields.identifier value=../source.transform.identifier rootId=@root.partId }}
-        {{/unless}}
         {{/with}}
         <ul class="separated-list flexcol unlist">
             {{#each profiles}}

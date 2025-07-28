@@ -46,6 +46,16 @@ export default class EquippableItemTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * This item is capable of being attuned.
+   * @type {boolean}
+   */
+  get canAttune() {
+    return ["required", "optional"].includes(this.attunement);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Chat properties for equippable items.
    * @type {string[]}
    */

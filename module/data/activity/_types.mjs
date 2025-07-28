@@ -32,6 +32,14 @@
  * @property {boolean} target.override           Override target values inferred from item.
  * @property {boolean} target.prompt             Should the player be prompted to place the template?
  * @property {UsesData} uses                     Uses available to this activity.
+ * @property {object} visibility
+ * @property {string} visibility.identifier      Class identifier that will be used to determine applicable level.
+ * @property {object} visibility.level
+ * @property {number} visibility.level.min       Minimum level at which this activity can be used.
+ * @property {number} visibility.level.max       Maximum level at which this activity can be used.
+ * @property {boolean} visibility.requireAttunement      Not usable if item requires attunement and isn't attuned.
+ * @property {boolean} visibility.requireIdentification  Not usable or visible if item isn't identified.
+ * @property {boolean} visibility.requireMagic           Not usable if magic isn't available.
  */
 
 /**
@@ -164,7 +172,6 @@
  * @property {boolean} match.saves          Match the save DC on summoned actor's abilities to the summoner.
  * @property {SummonsProfile[]} profiles    Information on creatures that can be summoned.
  * @property {object} summon
- * @property {string} summon.identifier     Class identifier that will be used to determine applicable level.
  * @property {""|"cr"} summon.mode          Method of determining what type of creature is summoned.
  * @property {boolean} summon.prompt        Should the player be prompted to place the summons?
  */
@@ -189,7 +196,6 @@
  * @property {object} transform
  * @property {boolean} transform.customize         Should any customized settings be respected or should the default
  *                                                 settings for the selected profile be used instead.
- * @property {string} transform.identifier         Class identifier that will be used to determine applicable level.
  * @property {""|"cr"} transform.mode              Method of determining what type of creature to transform into.
  * @property {string} transform.preset             Transformation preset to use.
  */
