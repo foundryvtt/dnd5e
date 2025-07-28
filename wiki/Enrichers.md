@@ -1,4 +1,4 @@
-![Up to date as of 4.2.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 The dnd5e system adds a number of useful enrichers that can be used within journals or in item or actor descriptions. These enrichers will generate text based on the standard formatting used throughout 5e releases and provide rolls and related behavior that properly hooks into the system.
 
@@ -63,11 +63,13 @@ The enricher is also helpful when building items for NPC stat blocks, because it
 | `attackMode` | Choice  |     ✔︎     |           |
 | `format`     | Choice  |     ✔︎     |           |
 | `formula`    | Formula |     ✔︎     |     ✔︎     |
+| `rules`      | Choice  |           |           |
 
 - `activity`: Specify a specific activity by ID on the same item as this enricher
 - `attackMode`: Specify an attack mode to use
 - `format`: Display mode of either `short`, `long`, or `extended`
 - `formula`: The formula used when rolling to hit
+- `rules`: Rules version to use (either `2014` or `2024`), which only affects the presentation when using the `extended` format option
 
 
 #### Potential Issues
@@ -100,6 +102,8 @@ Using the `passive` option on a check enricher displays a passive description an
 The `[[/check]]`, `[[/skill]]`, `[[/tool]]` starting terms are all interchangeable, and the final roll will be presented based on the inputs given. So `[[/check dexterity athletics]]` will perform a dexterity check using a character's athletics proficiency if present.
 
 For skill or tool checks, the ability is optional. If one is provided then the person rolling have that ability selected by default even if it isn't the default on their sheet. Otherwise they will use whatever ability is set for that skill on their character sheet.
+
+When using the modern rules, a single tool can be combined with one or more skills to allow players to roll those skill checks using the tool. This provides the player with proficiency if they are proficient in either the skill or the tool, or advantage on the roll if they are proficient in both. This displays as "[Dexterity (Sleight of Hand)] check using Thieves' Tools".
 
 When used on an item, the enricher can also look up its ability, related proficiencies, and DC from a [check activity](Activity-Type-Check). This can be done by explicitly specifying the activity by ID (e.g. `[[/check activity=RLQlsLo5InKHZadn]]`) or by leaving the enricher blank and letting it located the first check activity on the item (e.g. `[[/check]]`).
 
@@ -141,6 +145,10 @@ The check enricher offers two different formats that can be used depending on th
 [[/skill ability=str skill=dec/per dc=15]]
 [[/skill strength deception persuasion 15]]
 
+// Example: Use a tool when making a skill check
+[[/check skill=sur tool=navg]]
+[[/check skill=sur tool=navg rules=2024]]
+
 // Example: Passive check
 [[/skill skill=perception dc=15 passive=true]]
 [[/skill DC 15 passive Perception]]
@@ -166,6 +174,7 @@ The check enricher offers two different formats that can be used depending on th
 | `activity` | ID      |           |           |
 | `dc`       | Formula |		 ✔︎     |           |
 | `format`   | Choice  |     ✔︎     |           |
+| `rules`    | Choice  |           |           |
 | `skill`    | Choice  |		 ✔︎     |           |
 | `tool`     | Choice  |		 ✔︎     |           |
 
@@ -173,6 +182,7 @@ The check enricher offers two different formats that can be used depending on th
 - `activity`: ID of an activity on the same item from which the details should be derived
 - `dc`: Specific number or formula used for the DC. Formula must not contain dice values. Can only be used inferred with a number, formulas must contains the `dc=` prefix and spaces in formula must be surrounded by quotation marks
 - `format`: Display mode of either `short` or `long`
+- `rules`: Rules version to use (either `2014` or `2024`), which only affects the behavior when using a skill and tool together
 - `skill` or `tool`: Skill or tool to roll. If ability isn't specified, then the default ability for that skill will be used
 
 > <details>
@@ -315,6 +325,7 @@ When inferring an activity, the `heal` form will fetch the first [heal activity]
 | `average`    | Boolean |           |           |     ✔︎     |
 | `format`     | Choice  |     ✔︎     |           |     ✔︎     |
 | `formula`    | Formula |     ✔︎     |     ✔︎     |           |
+| `rules`      | Choice  |           |           |           |
 | `type`       | Choice  |     ✔︎     |           |           |
 
 **Note**: The global column indicates options that can be specified within any damage part, but will apply to the whole enriched content (so `[[/damage 1d4 fire & 1d6 bludgeoning average]]` and `[[/damage 1d4 fire average & 1d6 bludgeoning]]` are the same).
@@ -324,6 +335,7 @@ When inferring an activity, the `heal` form will fetch the first [heal activity]
 - `average`: Display the calculated average damage along side the roll in the enriched text (e.g. `7 (2d6) bludgeoning`)
 - `format`: Display mode of either `short`, `long`, or `extended`
 - `formula`: Formula used for the damage roll
+- `rules`: Rules version to use (either `2014` or `2024`), which only affects the presentation when using the `extended` format option
 - `type`: One or more types of damage or healing
 
 #### Potential Issues
@@ -353,7 +365,7 @@ A Relative ID can contain a reference to an owned Item either by an ID, or a rel
 
 The activity name can also be used when referring to an item using its ID in the same manner as above with item name.
 
-![Item Enricher](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-item.png)
+![Item Enricher](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-item.jpg)
 
 
 ## Lookup Enrichers
@@ -423,7 +435,7 @@ Using the enricher is very simple, simply type `&Reference` with the name of the
 | Name       | Format  | Inferred  | Assembled |
 | ---------- | ------- | --------- | --------- |
 | `apply`    | Boolean |           |           |
-| Varies     | Choices |     ✔︎     |     ✔︎     |
+| Varies     | Choice  |     ✔︎     |     ✔︎     |
 
 - `apply`: Usable only when referencing a condition to prevent the apply condition button from appearing
 - The rule can be referenced explicitly by rule category if necessary, but it is usually sufficient to just put in the name of the rule being referenced
