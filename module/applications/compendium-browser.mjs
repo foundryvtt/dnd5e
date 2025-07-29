@@ -978,7 +978,7 @@ export default class CompendiumBrowser extends Application5e {
     }
 
     /**
-     * Hook event that calls when a compendium browser is submitted with selected items.
+     * Hook event that fires when a compendium browser is submitted with selected items.
      * @function dnd5e.compendiumBrowserSelection
      * @memberof hookEvents
      * @param {CompendiumBrowser} browser  Compendium Browser application being submitted.
