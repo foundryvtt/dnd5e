@@ -59,17 +59,23 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
     return context;
   }
 
+  /* -------------------------------------------- */
+
   /** @override */
   _getSegmentStyle(waypoint) {
     const style = super._getSegmentStyle(waypoint);
     return this.#getSpeedBasedStyle(waypoint, style);
   }
 
+  /* -------------------------------------------- */
+
   /** @override */
   _getGridHighlightStyle(waypoint, offset) {
     const style = super._getGridHighlightStyle(waypoint, offset);
     return this.#getSpeedBasedStyle(waypoint, style);
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Modify segment or grid-highlighting style based on movement speed
@@ -85,11 +91,11 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
 
     // Get actor's movement speed for currently selected token movement action
     const movement = this.token.actor.system.attributes?.movement;
-    if (!movement) return style;
+    if ( !movement ) return style;
     let currActionSpeed = movement[waypoint.action] ?? 0;
 
     // If current action can fall back to walk, treat "max" speed as maximum between current & walk
-    if (CONFIG.DND5E.movementTypes[waypoint.action]?.walkFallback) {
+    if ( CONFIG.DND5E.movementTypes[waypoint.action]?.walkFallback ) {
       currActionSpeed = Math.max(currActionSpeed, movement.walk);
     }
 
