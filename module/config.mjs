@@ -1319,6 +1319,18 @@ DND5E.tokenRingColors = {
 /* -------------------------------------------- */
 
 /**
+ * Colors used to denote movement speed on ruler segments & grid highlighting
+ * @enum {number}
+ */
+DND5E.tokenRulerColors = {
+  normal: 0x33BC4E,
+  double: 0xF1D836,
+  triple: 0xE72124
+};
+
+/* -------------------------------------------- */
+
+/**
  * Configuration data for a map marker style. Options not included will fall back to the value set in `default` style.
  * Any additional styling options added will be passed into the custom marker class and be available for rendering.
  *
