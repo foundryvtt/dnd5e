@@ -101,8 +101,10 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
 
     // Color `normal` if <= max speed, else `double` if <= double max speed, else `triple`
     const { normal, double, triple } = CONFIG.DND5E.tokenRulerColors;
-    const colors = [normal, double, triple];
-    style.color = colors[Math.clamp(Math.floor((waypoint.measurement.cost - 0.1) / currActionSpeed), 0, 2)];
+    const increment = (waypoint.measurement.cost - .1) / currActionSpeed;
+    if ( increment <= 1 ) style.color = normal;
+    else if ( increment <= 2 ) style.color = double;
+    else style.color = triple;
     return style;
   }
 }
