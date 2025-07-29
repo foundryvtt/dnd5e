@@ -491,16 +491,23 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /**
    * Prepare actor portrait for display.
    * @param {ApplicationRenderContext} context  Context being prepared.
-   * @returns {object}
+   * @returns {Promise<object>}
    * @protected
    */
-  _preparePortrait(context) {
+  async _preparePortrait(context) {
     const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
     const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
     const defaultArtwork = Actor.implementation.getDefaultArtwork(this.actor._source)?.img;
-    const src = (showTokenPortrait ? token.texture.src : this.actor.img) ?? defaultArtwork;
+    let action = "editImage";
+    let texture = token?.texture.src;
+    if ( showTokenPortrait && token?.randomImg ) {
+      const images = await this.actor.getTokenImages();
+      texture = images[Math.floor(Math.random() * images.length)];
+      action = "configurePrototypeToken";
+    }
+    const src = (showTokenPortrait ? texture : this.actor.img) ?? defaultArtwork;
     return {
-      src,
+      src, action,
       token: showTokenPortrait,
       path: showTokenPortrait ? this.actor.isToken ? "token.texture.src" : "prototypeToken.texture.src" : "img",
       type: showTokenPortrait ? "imagevideo" : "image",
@@ -1460,9 +1467,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @param {HTMLElement} target  Button that was clicked.
    */
   static #showArtwork(event, target) {
-    const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
-    const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
-    const img = showTokenPortrait ? token.texture.src : this.actor.img;
+    const img = target.src;
     new foundry.applications.apps.ImagePopout({
       src: img,
       uuid: this.actor.uuid,
@@ -1633,6 +1638,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     form.querySelectorAll("video[data-edit]").forEach(v => {
       foundry.utils.setProperty(submitData, v.dataset.edit, v.src);
     });
+
+    // Prevent wildcard textures from being clobbered.
+    const proto = submitData.prototypeToken;
+    if ( proto ) {
+      const randomImg = proto.randomImg ?? this.actor.prototypeToken.randomImg;
+      if ( randomImg ) delete submitData.prototypeToken;
+    }
 
     return submitData;
   }

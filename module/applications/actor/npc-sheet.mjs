@@ -256,7 +256,7 @@ export default class NPCActorSheet extends BaseActorSheet {
    * @protected
    */
   async _prepareHeaderContext(context, options) {
-    context.portrait = this._preparePortrait(context);
+    context.portrait = await this._preparePortrait(context);
 
     if ( this.actor.limited ) {
       const enrichmentOptions = { relativeTo: this.actor, rollData: context.rollData };

@@ -465,7 +465,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    */
   async _prepareHeaderContext(context, options) {
     if ( this.actor.limited ) {
-      context.portrait = this._preparePortrait(context);
+      context.portrait = await this._preparePortrait(context);
       return context;
     }
 
@@ -515,7 +515,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    */
   async _prepareSidebarContext(context, options) {
     const { attributes } = this.actor.system;
-    context.portrait = this._preparePortrait(context);
+    context.portrait = await this._preparePortrait(context);
 
     // Death Saves
     const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });

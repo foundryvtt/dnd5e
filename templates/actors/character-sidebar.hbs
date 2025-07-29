@@ -29,11 +29,11 @@
             {{#with portrait}}
             {{#if isVideo}}
             <video src="{{ src }}" autoplay muted disablepictureinpicture loop playsinline
-                   {{#if @root.editable}}data-action="editImage"{{else}}data-action="showArtwork"{{/if}}
+                   {{#if @root.editable}}data-action="{{ action }}"{{else}}data-action="showArtwork"{{/if}}
                    {{#if (and @root.editable path)}}data-edit="{{ path }}" data-type="{{ type }}"{{/if}}></video>
             {{else}}
             <img src="{{ src }}" alt="{{ @root.actor.name }}"
-                 {{#if @root.editable}}data-action="editImage"{{else}}data-action="showArtwork"{{/if}}
+                 {{#if @root.editable}}data-action="{{ action }}"{{else}}data-action="showArtwork"{{/if}}
                  {{#if (and @root.editable path)}}data-edit="{{ path }}" data-type="{{ type }}"{{/if}}>
             {{/if}}
             {{/with}}
