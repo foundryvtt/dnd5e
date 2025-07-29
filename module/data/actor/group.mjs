@@ -1,3 +1,4 @@
+import PartyRequestDialog from "../../applications/actor/party-request-dialog.mjs";
 import TokenPlacement from "../../canvas/token-placement.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
@@ -267,6 +268,21 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       if ( roll.total > 0 ) member.quantity.value = roll.total;
     }));
     return this.parent.update({"system.members": membersCollection});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Send a request to the members of this group.
+   * @param {string} handler            Specific rest handler as defined in `CONFIG.DND5E.requests`.
+   * @param {object} [messageData={}]   Additional data used to create the chat message.
+   * @param {object} [options={}]       Additional options passed to the dialog.
+   * @returns {Promise<ChatMessage5e>}  Promise that resolves to the created request chat message.
+   * @throws if dialog is closed
+   */
+  sendRequest(handler, messageData={}, options={}) {
+    foundry.utils.setProperty(options, "request.group", this.parent);
+    return PartyRequestDialog.sendRequest(handler, messageData, options);
   }
 
   /* -------------------------------------------- */
