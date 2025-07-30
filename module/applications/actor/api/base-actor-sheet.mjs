@@ -1578,8 +1578,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const prop = target.dataset.prop ?? target.closest("[data-prop]")?.dataset.prop;
     if ( !Number.isNumeric(n) || !prop ) return;
     let value = foundry.utils.getProperty(this.actor, prop);
-    if ( (value === n) && prop.endsWith(".value") ) value--;
-    else if ( (value === n) && prop.endsWith(".spent") ) value++;
+    if ( (value === n) && prop.endsWith(".spent") ) value++;
+    else if ( value === n ) value--;
     else value = n;
     this.submit({ updateData: { [prop]: value } });
   }
