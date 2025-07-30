@@ -3123,7 +3123,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       },
       condition: li => {
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
-        const primary = game.settings.get("dnd5e", "primaryParty")?.actor;
+        const primary = game.actors.party;
         return game.user.isGM && (actor?.type === "group")
           && (actor.system.type.value === "party") && (actor !== primary);
       },
@@ -3136,8 +3136,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       },
       condition: li => {
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
-        const primary = game.settings.get("dnd5e", "primaryParty")?.actor;
-        return game.user.isGM && (actor === primary);
+        return game.user.isGM && (actor === game.actors.party);
       },
       group: "system"
     });
@@ -3150,7 +3149,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {HTMLElement} html
    */
   static onRenderActorDirectory(html) {
-    const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+    const primaryParty = game.actors.party;
     if ( primaryParty ) {
       const element = html?.querySelector(`[data-entry-id="${primaryParty.id}"]`);
       element?.classList.add("primary-party");
