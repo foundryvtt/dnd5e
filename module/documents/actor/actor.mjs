@@ -693,11 +693,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {number} amount                     Amount of damage that will be applied.
      * @param {object} updates                    Distinct updates to be performed on the actor.
      * @param {DamageApplicationOptions} options  Additional damage application options.
+     * @param {Array} damages                     The calculated damages Array.
      * @returns {boolean}                         Explicitly return `false` to prevent damage application.
      * @function dnd5e.preApplyDamage
      * @memberof hookEvents
      */
-    if ( Hooks.call("dnd5e.preApplyDamage", this, amount, updates, options) === false ) return this;
+    if ( Hooks.call("dnd5e.preApplyDamage", this, amount, updates, options, damages) === false ) return this;
 
     // Delegate damage application to a hook
     // TODO: Replace this in the future with a better modifyTokenAttribute function in the core
@@ -715,10 +716,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {Actor5e} actor                     Actor that has been damaged.
      * @param {number} amount                     Amount of damage that has been applied.
      * @param {DamageApplicationOptions} options  Additional damage application options.
+     * @param {Array} damages                     The calculated damages Array.
      * @function dnd5e.applyDamage
      * @memberof hookEvents
      */
-    Hooks.callAll("dnd5e.applyDamage", this, amount, options);
+    Hooks.callAll("dnd5e.applyDamage", this, amount, options, damages);
 
     return this;
   }
