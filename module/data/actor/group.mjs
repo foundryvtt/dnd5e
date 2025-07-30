@@ -352,7 +352,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
    */
   _onUpdate(changed, options, userId) {
     if ( !foundry.utils.hasProperty(changed, "system.type.value") || (game.user !== game.users.activeGM)
-      || (game.settings.get("dnd5e", "primaryParty")?.actor !== this.parent)
+      || (game.actors.party !== this.parent)
       || (foundry.utils.getProperty(changed, "system.type.value") === "party") ) return;
     game.settings.set("dnd5e", "primaryParty", { actor: null });
   }
