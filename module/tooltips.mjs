@@ -19,8 +19,10 @@ export default class Tooltips5e {
    * @type {HTMLElement}
    */
   get tooltip() {
-    return document.getElementById("tooltip");
+    return this.#tooltip;
   }
+
+  #tooltip = document.getElementById("tooltip");
 
   /* -------------------------------------------- */
   /*  Methods                                     */
@@ -189,18 +191,19 @@ export default class Tooltips5e {
 
     const pos = this.tooltip.getBoundingClientRect();
     const dirs = TooltipManager.TOOLTIP_DIRECTIONS;
+    const { innerHeight, innerWidth } = this.tooltip.ownerDocument.defaultView;
     switch ( direction ) {
       case dirs.UP:
         if ( pos.y - TooltipManager.TOOLTIP_MARGIN_PX <= 0 ) direction = dirs.DOWN;
         break;
       case dirs.DOWN:
-        if ( pos.y + this.tooltip.offsetHeight > window.innerHeight ) direction = dirs.UP;
+        if ( pos.y + this.tooltip.offsetHeight > innerHeight ) direction = dirs.UP;
         break;
       case dirs.LEFT:
         if ( pos.x - TooltipManager.TOOLTIP_MARGIN_PX <= 0 ) direction = dirs.RIGHT;
         break;
       case dirs.RIGHT:
-        if ( pos.x + this.tooltip.offsetWidth > window.innerWith ) direction = dirs.LEFT;
+        if ( pos.x + this.tooltip.offsetWidth > innerWidth ) direction = dirs.LEFT;
         break;
     }
 
