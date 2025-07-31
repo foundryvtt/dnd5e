@@ -4898,6 +4898,7 @@ DND5E.defaultArtwork = {
  * @param {ChatMessage5e} request       The request message.
  * @param {object} config               Additional request configuration.
  * @param {RequestOptions5e} [options]  Additional options provided at fulfillment time.
+ * @returns {Promise<ChatMessage5e>}    Result chat message that will be associated with request.
  */
 
 /**
