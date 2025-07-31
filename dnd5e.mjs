@@ -595,6 +595,12 @@ Hooks.on("renderJournalEntryPageSheet", applications.journal.JournalEntrySheet5e
 
 Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffectConfig);
 
+Hooks.on("renderDocumentSheetConfig", (app, html) => {
+  if ( (app.options.document instanceof foundry.documents.Actor) && (app.options.document.type === "group") ) {
+    applications.actor.GroupActorSheet.addDocumentSheetConfigOptions(app, html);
+  }
+});
+
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
 Hooks.on("renderCombatTracker", (app, html, data) => app.renderGroups(html));

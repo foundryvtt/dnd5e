@@ -26,6 +26,8 @@
   /* ---------------------------------- */
 
   .sheet-body {
+    mask-image: linear-gradient(to bottom, transparent, black 8px);
+
     .main-content {
       /* Tabbed Content */
       .tab-body .tab:not(.active) { display: none; }
@@ -71,7 +73,7 @@
 
       .progress::before {
         background: linear-gradient(to right, var(--dnd5e-color-hp-1) 0%, var(--dnd5e-color-hp-2) 100%);
-        border-inline-end: var(--border-width) solid var(--dnd5e-color-hp-3);
+        border-inline-end: none;
       }
       .temp-positive .label :is(.max, .bonus) { color: color-mix(in oklab, currentcolor, blue 25%); }
       .temp-negative .label :is(.max, .bonus) { color: color-mix(in oklab, currentcolor, red 25%); }
@@ -83,7 +85,18 @@
 
       &.progress::before {
         background: linear-gradient(to right, var(--dnd5e-color-hd-1) 0%, var(--dnd5e-color-hd-2) 100%);
-        border-inline-end: var(--border-width) solid var(--dnd5e-color-hd-3);
+        border-inline-end: none;
+      }
+    }
+
+    &.hit-points, &.hit-dice {
+      &.progress::before, .progress::before {
+        block-size: unset;
+        clip-path: unset;
+        box-shadow: inset 0 1px 0 1px var(--dnd5e-highlight-40);
+        inset: 1px auto 1px 1px;
+        inline-size: calc(var(--bar-percentage) - 2px);
+        border-radius: 2px;
       }
     }
 
@@ -247,6 +260,67 @@
     justify-content: space-between;
     align-items: center;
     padding-right: .5rem;
+  }
+
+  /* ---------------------------------- */
+  /*  Inventory                         */
+  /* ---------------------------------- */
+
+  .tab[data-tab=inventory] {
+
+    .top {
+      display: flex;
+      align-items: start;
+      gap: 1rem;
+    }
+
+    /* Containers */
+    .containers {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(39px, max-content));
+      gap: .5rem;
+
+      .container {
+        max-width: 78px;
+        max-height: 78px;
+        aspect-ratio: 1;
+        border: var(--dnd5e-border-gold);
+        border-radius: 4px;
+        box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+        background-color: var(--dnd5e-background-alt-1);
+
+        a {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+
+          &:hover {
+            text-shadow: none;
+          }
+
+          .meter {
+            flex: 0 0 6px;
+            border: none;
+            border-radius: 3px 3px 0 0;
+
+            &.progress::before {
+              --border-width: 1px;
+              box-shadow: none;
+              clip-path: none;
+            }
+          }
+
+          img {
+            flex: 1;
+            border: none;
+            object-fit: cover;
+            border-radius: 0 0 3px 3px;
+            min-height: 0;
+          }
+        }
+      }
+    }
   }
 
   /* ---------------------------------- */

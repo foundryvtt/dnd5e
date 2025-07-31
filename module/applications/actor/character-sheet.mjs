@@ -53,7 +53,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       template: "systems/dnd5e/templates/actors/tabs/character-inventory.hbs",
       templates: [
         "systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs",
-        "systems/dnd5e/templates/inventory/encumbrance.hbs"
+        "systems/dnd5e/templates/inventory/encumbrance.hbs", "systems/dnd5e/templates/inventory/containers.hbs"
       ],
       scrollable: [""]
     },
@@ -131,13 +131,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
   ];
 
   /* -------------------------------------------- */
-
-  /** @override */
-  tabGroups = {
-    primary: "details"
-  };
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -156,6 +149,13 @@ export default class CharacterActorSheet extends BaseActorSheet {
     effects: { name: "", properties: new Set() },
     inventory: { name: "", properties: new Set() },
     spells: { name: "", properties: new Set() }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  tabGroups = {
+    primary: "details"
   };
 
   /* -------------------------------------------- */

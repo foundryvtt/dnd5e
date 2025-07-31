@@ -1,0 +1,34 @@
+<section class="tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+
+    <section class="sidebar">
+        {{#each members}}
+        <div class="encumbrance card" data-uuid="{{ uuid }}">
+            {{> "systems/dnd5e/templates/inventory/encumbrance.hbs" }}
+            <div class="stats">
+                <div class="portrait">
+                    <img src="{{ img }}" alt="{{ name }}">
+                </div>
+                <div class="pane">
+                    <strong class="name">
+                        <a class="rollable" data-action="showDocument" data-uuid="{{ uuid }}">{{ name }}</a>
+                    </strong>
+                    <ul class="currency pills unlist">
+                        {{#each system.currency}}
+                        {{#if this}}
+                        <li class="pill transparent">
+                            <span class="currency {{ @key }}"></span>
+                            <span class="label">{{ dnd5e-numberFormat this }}</span>
+                        </li>
+                        {{/if}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </section>
+
+    <section class="body">
+        {{> "systems/dnd5e/templates/inventory/inventory.hbs" }}
+    </section>
+</section>

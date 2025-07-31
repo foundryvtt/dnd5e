@@ -124,6 +124,12 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       ],
       localize: true
     });
+    if ( context.fields.pace ) extras.push({
+      field: context.fields.pace,
+      value: context.data.pace,
+      options: Object.entries(CONFIG.DND5E.travelPace).map(([value, { label }]) => ({ value, label })),
+      localize: true
+    });
     return extras;
   }
 }

@@ -2099,6 +2099,7 @@
   "Current": "Current XP",
   "Format": "{value} XP",
   "Label": "Experience Points",
+  "Pool": "XP Pool",
   "Progress": "Progress to next Level",
   "StatBlock": {
     "Standard": "XP {value}",
@@ -2554,7 +2555,23 @@
 "DND5E.GroupSummaryEmpty": "Empty group",
 "DND5E.GroupControls": "Controls",
 "DND5E.Group": {
+  "Action": {
+    "Remove": "Remove Member",
+    "View": "View Member"
+  },
+  "Config": {
+    "Art": {
+      "Label": "Member Art",
+      "portraits": "Portraits",
+      "tokens": "Tokens"
+    },
+    "Legend": "Group Sheet Options"
+  },
   "Challenge": "Challenge",
+  "Distribute": {
+    "noxp": "Distribute pooled currency",
+    "xp": "Distribute pooled XP & currency"
+  },
   "Member": {
     "one": "Member",
     "other": "Members"
@@ -2661,6 +2678,9 @@
   "Counted": {
     "one": "{number} hit point",
     "other": "{number} hit points"
+  },
+  "DT": {
+    "Abbr": "DT"
   }
 },
 
@@ -2684,6 +2704,7 @@
 "DND5E.HPFormulaRollMessage": "Roll Hit Point Formula",
 
 "DND5E.HITDICE": {
+  "Abbreviation": "HD",
   "Action": {
     "Decrease": "Decrease",
     "Increase": "Increase"
@@ -2946,6 +2967,7 @@
 },
 
 "DND5E.Level": "Level",
+"DND5E.LevelAvg": "Avg. Level",
 "DND5E.LevelPl": "Levels",
 "DND5E.LevelActionDecrease": "Level Down",
 "DND5E.LevelActionIncrease": "Level Up",
@@ -3530,6 +3552,7 @@
 "DND5E.SkillSlt": "Sleight of Hand",
 "DND5E.SkillSte": "Stealth",
 "DND5E.SkillSur": "Survival",
+"DND5E.SkillRoll": "Roll {ability} ({skill}) Check",
 "DND5E.SkillPromptTitle": "{ability} ({skill}) Check",
 "DND5E.SkillConfigureTitle": "Configure {skill}",
 "DND5E.SkillConfigure": "Configure Skill",
@@ -3777,6 +3800,7 @@
 "DND5E.SubclassMismatchWarn": "{name} subclass has no matching class with identifier '{class}'.",
 "DND5E.SubclassName": "Subclass Name",
 "DND5E.Subtype": "Subtype",
+"DND5E.Summary": "Summary",
 
 "DND5E.SUMMON": {
   "Title": "Summon",
@@ -4502,6 +4526,15 @@
     "NoPermission": "Transformation permission haven't been granted to players.",
     "OriginalActor": "No original actor was found with ID '{reference}'.",
     "SourceActor": "No actor found to transform into."
+  }
+},
+
+"DND5E.Travel": {
+  "Label": "Travel Pace",
+  "Pace": {
+    "Fast": "Fast",
+    "Normal": "Normal",
+    "Slow": "Slow"
   }
 },
 

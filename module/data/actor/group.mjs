@@ -2,6 +2,7 @@ import TokenPlacement from "../../canvas/token-placement.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
+import MovementField from "../shared/movement-field.mjs";
 import GroupSystemFlags from "./group-system-flags.mjs";
 
 const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -40,6 +41,8 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
  * @property {number} attributes.movement.land   Base movement speed over land.
  * @property {number} attributes.movement.water  Base movement speed over water.
  * @property {number} attributes.movement.air    Base movement speed through the air.
+ * @property {"slow"|"normal"|"fast"} attributes.movement.pace  Travel pace.
+ * @property {string} attributes.movement.unit   The length units.
  * @property {object} details
  * @property {object} details.xp
  * @property {number} details.xp.value           XP currently available to be distributed to a party.
@@ -53,7 +56,7 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
  *  }
  * });
  */
-export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
+export default class GroupData extends ActorDataModel.mixin(CurrencyTemplate) {
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
@@ -73,9 +76,24 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       }), { label: "DND5E.GroupMembers" }),
       attributes: new SchemaField({
         movement: new SchemaField({
-          land: new NumberField({ nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementLand" }),
-          water: new NumberField({ nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementWater" }),
-          air: new NumberField({ nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementAir" })
+          land: new NumberField({
+            nullable: false, min: 0, step: 0.1, initial: 0, speed: true, label: "DND5E.MovementLand"
+          }),
+          water: new NumberField({
+            nullable: false, min: 0, step: 0.1, initial: 0, speed: true, label: "DND5E.MovementWater"
+          }),
+          air: new NumberField({
+            nullable: false, min: 0, step: 0.1, initial: 0, speed: true, label: "DND5E.MovementAir"
+          }),
+          pace: new StringField({
+            required: true, blank: false, initial: "normal", choices: () => CONFIG.DND5E.travelPace,
+            label: "DND5E.Travel.Label"
+          }),
+          units: new StringField({
+            required: true, nullable: true, blank: false, label: "DND5E.MovementUnits", initial: () => {
+              return game.settings.get("dnd5e", "metricLengthUnits") ? "km" : "mi";
+            }
+          })
         })
       }, { label: "DND5E.Attributes" }),
       details: new SchemaField({
@@ -110,6 +128,18 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
    */
   get playerCharacters() {
     return this.members.map(m => m.actor).filter(a => a.type === "character");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate the party's average level for the purpose determining encounter XP budget.
+   * @type {number}
+   */
+  get level() {
+    const pcs = this.playerCharacters;
+    if ( !pcs.length ) return 0;
+    return Math.round(pcs.reduce((acc, a) => acc + a.system.details.level, 0) / pcs.length);
   }
 
   /* -------------------------------------------- */
@@ -178,6 +208,8 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       configurable: true,
       enumerable: false
     });
+    this.parent.labels.pace = CONFIG.DND5E.travelPace[this.attributes.movement.pace]?.label;
+    MovementField.prepareData.call(this.attributes.movement, this.schema.getField("attributes.movement"));
   }
 
   /* -------------------------------------------- */
@@ -270,6 +302,39 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Request a group ability check with a given skill.
+   * @param {Partial<SkillToolRollProcessConfiguration>} config  Roll configuration.
+   * @returns {Promise<false|void>}
+   */
+  async rollSkill(config) {
+    if ( !config.skill ) return;
+    const skillConfig = CONFIG.DND5E.skills[config.skill];
+    const ability = config.ability ?? skillConfig?.ability ?? "";
+    const skillLabel = skillConfig?.label ?? "";
+    const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
+    await foundry.documents.ChatMessage.implementation.create({
+      flavor: game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
+      speaker: ChatMessage.getSpeaker({ actor: this.parent, alias: this.parent.name }),
+      system: {
+        button: {
+          icon: "fa-solid fa-d20",
+          label: game.i18n.localize("DND5E.SkillRoll", { skill: skillLabel, ability: abilityLabel })
+        },
+        data: { ...config },
+        handler: "skill",
+        targets: this.members.flatMap(({ actor }) => {
+          if ( actor.system.skills ) return { actor };
+          return [];
+        })
+      },
+      type: "request"
+    });
+    return false;
+  }
+
+  /* -------------------------------------------- */
   /*  Resting                                     */
   /* -------------------------------------------- */
 
@@ -355,5 +420,20 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       || (game.actors.party !== this.parent)
       || (foundry.utils.getProperty(changed, "system.type.value") === "party") ) return;
     game.settings.set("dnd5e", "primaryParty", { actor: null });
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * @deprecated
+ * @since 5.1.0
+ */
+export class GroupActor extends GroupData {
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning("GroupActor is deprecated. Please use GroupData instead.", {
+      since: "DnD5e 5.1", until: "DND5e 5.3"
+    });
+    super(...args);
   }
 }

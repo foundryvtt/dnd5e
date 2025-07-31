@@ -96,13 +96,6 @@ export default class NPCActorSheet extends BaseActorSheet {
   ];
 
   /* -------------------------------------------- */
-
-  /** @override */
-  tabGroups = {
-    primary: "features"
-  };
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -111,6 +104,13 @@ export default class NPCActorSheet extends BaseActorSheet {
    * @type {string|null}
    */
   editingDescriptionTarget = null;
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  tabGroups = {
+    primary: "features"
+  };
 
   /* -------------------------------------------- */
 
@@ -428,7 +428,7 @@ export default class NPCActorSheet extends BaseActorSheet {
       level: spellcaster?.system.levels ?? attributes.spell.level,
       ability: {
         ability, mod,
-        label: CONFIG.DND5E.abilities[ability]?.abbreviation
+        label: CONFIG.DND5E.abilities[ability]?.label
       },
       attack: mod + attributes.prof + attackBonus,
       save: spellAbility?.dc ?? 0,
