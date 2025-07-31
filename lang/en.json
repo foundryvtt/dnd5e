@@ -2568,7 +2568,10 @@
     "Legend": "Group Sheet Options"
   },
   "Challenge": "Challenge",
-  "Distribute": "Distribute pooled XP & currency",
+  "Distribute": {
+    "noxp": "Distribute pooled currency",
+    "xp": "Distribute pooled XP & currency"
+  },
   "Member": {
     "one": "Member",
     "other": "Members"
