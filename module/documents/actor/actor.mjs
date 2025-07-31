@@ -1026,6 +1026,23 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Handle rolling a skill as part of a requested group check.
+   * @param {Actor5e} actor                                      The actor.
+   * @param {ChatMessage5e} request                              The request message.
+   * @param {Partial<SkillToolRollProcessConfiguration>} config  Roll configuration.
+   * @param {RequestOptions5e} [requestOptions]
+   * @returns {Promise<ChatMessage5e|null>}
+   */
+  static async handleSkillCheckRequest(actor, request, config, { event }={}) {
+    const data = {};
+    foundry.utils.setProperty(data, "flags.dnd5e.requestResult", { actorId: actor.id, requestId: request.id });
+    const [roll] = (await actor.rollSkill({ ...config, event }, {}, { data })) ?? [];
+    return roll?.parent ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Roll an ability check with a skill.
    * @param {Partial<SkillToolRollProcessConfiguration>} config  Configuration information for the roll.
    * @param {Partial<SkillToolRollDialogConfiguration>} dialog   Configuration for the roll dialog.
@@ -1033,6 +1050,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
    */
   async rollSkill(config={}, dialog={}, message={}) {
+    if ( (typeof this.system.rollSkill === "function")
+      && (await this.system.rollSkill(config, dialog, message) === false) ) return null;
+    if ( !this.system.skills ) return null;
     const skillLabel = CONFIG.DND5E.skills[config.skill]?.label ?? "";
     const ability = this.system.skills[config.skill]?.ability ?? CONFIG.DND5E.skills[config.skill]?.ability ?? "";
     const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
@@ -2149,10 +2169,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Handle resting an actor from a request.
-   * @param {Actor5e} actor               Actor to rest.
-   * @param {ChatMessage5e} request       Request chat message.
-   * @param {RestConfiguration} config    Configuration data for the rest requested.
-   * @returns {Promise<RestResult|null>}  Consolidated results of the rest workflow.
+   * @param {Actor5e} actor                  Actor to rest.
+   * @param {ChatMessage5e} request          Request chat message.
+   * @param {RestConfiguration} config       Configuration data for the rest requested.
+   * @returns {Promise<ChatMessage5e|null>}
    */
   static async handleRestRequest(actor, request, config) {
     const result = await actor[config.type === "short" ? "shortRest" : "longRest"]({
@@ -2291,6 +2311,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         type: result.type
       }
     };
+    if ( config.request ) foundry.utils.setProperty(chatData, "flags.dnd5e.requestResult", {
+      actorId: this.id, requestId: config.request.id
+    });
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return ChatMessage.create(chatData);
   }

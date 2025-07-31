@@ -827,6 +827,27 @@ enchantment-application {
     .status {
       flex: 0 0 30px;
       text-align: center;
+
+      &.success, &.failure {
+        flex-basis: 60px;
+        display: flex;
+        align-items: center;
+
+        .total, i {
+          flex: 0 0 30px;
+          text-align: center;
+        }
+
+        i { height: 14px; }
+      }
+
+      &.success { color: var(--dnd5e-color-success); }
+      &.failure { color: var(--dnd5e-color-failure); }
+    }
+
+    .total {
+      font-weight: bold;
+      font-family: var(--dnd5e-font-roboto-condensed);
     }
   }
   .deltas ul {

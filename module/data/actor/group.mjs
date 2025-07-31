@@ -319,7 +319,7 @@ export default class GroupData extends ActorDataModel.mixin(CurrencyTemplate) {
       speaker: ChatMessage.getSpeaker({ actor: this.parent, alias: this.parent.name }),
       system: {
         button: {
-          icon: "fa-solid fa-d20",
+          icon: "fa-solid fa-dice-d20",
           label: game.i18n.localize("DND5E.SkillRoll", { skill: skillLabel, ability: abilityLabel })
         },
         data: { ...config },

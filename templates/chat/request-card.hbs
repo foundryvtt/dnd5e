@@ -10,7 +10,9 @@
                     <span class="title">{{ actor.name }}</span>
                 </span>
                 <div class="status">
-                    {{#if completed}}
+                    {{#if total includeZero=true}}
+                    <span class="total">{{ total }}</span>
+                    {{else if completed}}
                     <i class="fa-solid fa-check" data-tooltip
                        aria-label="{{ localize 'DND5E.CHATMESSAGE.REQUEST.Complete' }}"></i>
                     {{else if visible}}

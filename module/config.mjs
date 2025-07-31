@@ -4893,11 +4893,26 @@ DND5E.defaultArtwork = {
 /* -------------------------------------------- */
 
 /**
+ * @callback RequestCallback5e
+ * @param {Actor5e} actor               The actor fulfilling the request.
+ * @param {ChatMessage5e} request       The request message.
+ * @param {object} config               Additional request configuration.
+ * @param {RequestOptions5e} [options]  Additional options provided at fulfillment time.
+ * @returns {Promise<ChatMessage5e>}    Result chat message that will be associated with request.
+ */
+
+/**
+ * @typedef RequestOptions5e
+ * @property {Event} [event]  The event forwarded from the user clicking the request button.
+ */
+
+/**
  * Handler functions for named request/response operations
- * @type {Record<string, Function>}
+ * @type {Record<string, RequestCallback5e>}
  */
 DND5E.requests = {
-  rest: Actor5e.handleRestRequest
+  rest: Actor5e.handleRestRequest,
+  skill: Actor5e.handleSkillCheckRequest
 };
 
 /* -------------------------------------------- */
