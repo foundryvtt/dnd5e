@@ -149,7 +149,7 @@ export default class GroupData extends ActorDataModel.mixin(CurrencyTemplate) {
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
-    GroupActor.#migrateMembers(source);
+    GroupData.#migrateMembers(source);
   }
 
   /* -------------------------------------------- */
