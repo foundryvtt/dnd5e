@@ -1030,12 +1030,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {Actor5e} actor                                      The actor.
    * @param {ChatMessage5e} request                              The request message.
    * @param {Partial<SkillToolRollProcessConfiguration>} config  Roll configuration.
-   * @param {object} [requestOptions]
-   * @param {Event} [requestOptions.event]                       The triggering event for this roll.
+   * @param {RequestOptions5e} [requestOptions]
    * @returns {Promise<ChatMessage5e|null>}
    */
   static async handleSkillCheckRequest(actor, request, config, { event }={}) {
-    const [roll] = (await actor.rollSkill({ ...config, event })) ?? [];
+    const data = {};
+    foundry.utils.setProperty(data, "flags.dnd5e.requestResult", { actorId: actor.id, requestId: request.id });
+    const [roll] = (await actor.rollSkill({ ...config, event }, {}, { data })) ?? [];
     return roll?.parent ?? null;
   }
 
@@ -2310,6 +2311,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         type: result.type
       }
     };
+    if ( config.request ) foundry.utils.setProperty(chatData, "flags.dnd5e.requestResult", {
+      actorId: this.id, requestId: config.request.id
+    });
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return ChatMessage.create(chatData);
   }

@@ -57,6 +57,34 @@ export default class RequestMessageData extends ChatMessageDataModel {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
+  /**
+   * Highlight successes and failures in the results, if applicable.
+   * @param {HTMLElement} element  The rendered chat card.
+   * @protected
+   */
+  _highlightSuccessFailure(element) {
+    for ( const item of element.querySelectorAll(".targets [data-uuid]") ) {
+      const { uuid } = item.dataset;
+      const { result } = this.targets.find(t => t.actor.uuid === uuid) ?? {};
+      const [roll] = result?.rolls ?? [];
+      if ( !result?.shouldDisplayChallenge || (!roll?.isSuccess && !roll?.isFailure) ) continue;
+      const status = item.querySelector(".status");
+      status.classList.toggle("success", roll.isSuccess);
+      status.classList.toggle("failure", roll.isFailure);
+      status.append(foundry.applications.fields.createFontAwesomeIcon(roll.isSuccess ? "check" : "xmark"));
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onRender(element) {
+    super._onRender(element);
+    this._highlightSuccessFailure(element);
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   async _prepareContext() {
     return {
@@ -91,7 +119,7 @@ export default class RequestMessageData extends ChatMessageDataModel {
   static async #handleRequest(event, target) {
     const actor = fromUuidSync(target.closest("[data-uuid]").dataset.uuid);
     const result = await CONFIG.DND5E.requests[this.handler](actor, this.parent, this.data, { event });
-    if ( result instanceof ChatMessage ) {
+    if ( (result instanceof ChatMessage) && !result.getFlag("dnd5e", "requestResult") ) {
       result.setFlag("dnd5e", "requestResult", { actorId: actor.id, requestId: this.parent.id });
     }
   }
@@ -99,7 +127,18 @@ export default class RequestMessageData extends ChatMessageDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Handle associating a newly created rest result message with an actor and updating this message.
+   * Handle associating a newly created request result message with an actor and updating this message.
+   * @param {ChatMessage5e} message  The created chat message.
+   */
+  static onCreateMessage(message) {
+    const flag = message.getFlag("dnd5e", "requestResult");
+    if ( flag && (game.users.activeGM === game.user) ) RequestMessageData.#updateRequestTargets(message, flag);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle associating an updated request result message with an actor and updating this message.
    * @param {ChatMessage5e} message
    * @param {object} changes
    * @param {object} options
@@ -107,10 +146,21 @@ export default class RequestMessageData extends ChatMessageDataModel {
    */
   static onUpdateResultMessage(message, changes, options, userId) {
     const flag = foundry.utils.getProperty(changes, "flags.dnd5e.requestResult");
-    if ( !flag || (game.users.activeGM !== game.user) ) return;
+    if ( flag && (game.users.activeGM === game.user) ) RequestMessageData.#updateRequestTargets(message, flag);
+  }
 
-    const actor = game.actors.get(flag.actorId);
-    const request = game.messages.get(flag.requestId);
+  /* -------------------------------------------- */
+
+  /**
+   * Update target information when a request result is processed.
+   * @param {ChatMessage5e} message    The message fulfilling a request.
+   * @param {object} result
+   * @param {string} result.actorId    The UUID of the actor fulfilling the request.
+   * @param {string} result.requestId  The ID of the original request message.
+   */
+  static #updateRequestTargets(message, result) {
+    const actor = game.actors.get(result.actorId);
+    const request = game.messages.get(result.requestId);
     if ( !actor || !request ) return;
 
     const index = request.system.targets.findIndex(t => t.actor === actor);
