@@ -131,13 +131,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
   ];
 
   /* -------------------------------------------- */
-
-  /** @override */
-  tabGroups = {
-    primary: "details"
-  };
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -156,6 +149,13 @@ export default class CharacterActorSheet extends BaseActorSheet {
     effects: { name: "", properties: new Set() },
     inventory: { name: "", properties: new Set() },
     spells: { name: "", properties: new Set() }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  tabGroups = {
+    primary: "details"
   };
 
   /* -------------------------------------------- */

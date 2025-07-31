@@ -24,6 +24,8 @@ export default class GroupActorSheet extends BaseActorSheet {
     tab: "members"
   };
 
+  /* -------------------------------------------- */
+
   /** @override */
   static PARTS = {
     header: {
@@ -40,7 +42,7 @@ export default class GroupActorSheet extends BaseActorSheet {
       template: "systems/dnd5e/templates/actors/group/inventory.hbs",
       templates: [
         "systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs",
-        "systems/dnd5e/templates/inventory/containers.hbs"
+        "systems/dnd5e/templates/inventory/containers.hbs", "systems/dnd5e/templates/inventory/encumbrance.hbs"
       ],
       scrollable: [".sidebar", ".body"]
     },
@@ -56,10 +58,9 @@ export default class GroupActorSheet extends BaseActorSheet {
     }
   };
 
-  /**
-   * Application tabs.
-   * @type {SheetTabDescriptor5e}
-   */
+  /* -------------------------------------------- */
+
+  /** @override */
   static TABS = [
     { tab: "members", label: "DND5E.Group.Member.other", icon: "fa-solid fa-swords"},
     { tab: "inventory", label: "DND5E.Inventory", svg: "systems/dnd5e/icons/svg/backpack.svg" },
@@ -122,22 +123,6 @@ export default class GroupActorSheet extends BaseActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Prepare render context for player characters.
-   * @param {Actor5e} actor                    The player character actor.
-   * @param {object} context                   The render context.
-   * @param {HandlebarsRenderOptions} options  Options which configure application rendering behavior.
-   * @returns {Promise<void>}
-   * @protected
-   */
-  async _prepareCharacterContext(actor, context, options) {
-    const { originalClass } = context.system.details;
-    const cls = actor.items.get(originalClass);
-    if ( cls ) context.underlay = `var(--underlay-${cls.identifier})`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Prepare the header context.
    * @param {ApplicationRenderContext} context     Shared context provided by _prepareContext.
    * @param {HandlebarsRenderOptions} options      Options which configure application rendering behavior.
@@ -145,6 +130,7 @@ export default class GroupActorSheet extends BaseActorSheet {
    * @protected
    */
   async _prepareHeaderContext(context, options) {
+    context.showXP = game.settings.get("dnd5e", "levelingMode") !== "noxp";
     return context;
   }
 
@@ -162,6 +148,76 @@ export default class GroupActorSheet extends BaseActorSheet {
     }
     context.members.sort((a, b) => a.type.compare(b.type) || a.name.localeCompare(b.name, game.i18n.lang));
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare members context.
+   * @param {ApplicationRenderContext} context     Shared context provided by _prepareContext.
+   * @param {HandlebarsRenderOptions} options      Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  async _prepareMembersContext(context, options) {
+    context.sections = {
+      character: { members: [], hasStats: true },
+      npc: { members: [], label: "TYPES.Actor.npcPl", hasStats: true },
+      vehicle: { members: [], label: "TYPES.Actor.vehiclePl" }
+    };
+    for ( const { actor } of this.document.system.members ) {
+      const { id, type, img, name, system, uuid } = actor;
+      const section = context.sections[type];
+      if ( !section ) continue;
+      const member = { id, type, img, name, system, uuid };
+      member.classes = actor.itemTypes.class;
+      await this._prepareMemberPortrait(actor, member);
+      this._prepareMemberEncumbrance(actor, member);
+      this._prepareMemberSkills(actor, member);
+      switch ( type ) {
+        case "character": await this._prepareCharacterContext(actor, member, options); break;
+        case "npc": await this._prepareNPCContext(actor, member, options); break;
+        case "vehicle": await this._prepareVehicleContext(actor, member, options); break;
+      }
+      section.members.push(member);
+    }
+    Object.values(context.sections).forEach(s => {
+      s.members.sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
+    });
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
+    switch ( partId ) {
+      case "biography": return this._prepareBiographyContext(context, options);
+      case "header": return this._prepareHeaderContext(context, options);
+      case "inventory": return this._prepareInventoryContext(context, options);
+      case "members": return this._prepareMembersContext(context, options);
+      case "tabs": return this._prepareTabsContext(context, options);
+    }
+    return context;
+  }
+
+  /* -------------------------------------------- */
+  /*  Member Preparation Helpers                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare render context for player characters.
+   * @param {Actor5e} actor                    The player character actor.
+   * @param {object} context                   The render context.
+   * @param {HandlebarsRenderOptions} options  Options which configure application rendering behavior.
+   * @returns {Promise<void>}
+   * @protected
+   */
+  async _prepareCharacterContext(actor, context, options) {
+    const { originalClass } = context.system.details;
+    const cls = actor.items.get(originalClass);
+    if ( cls ) context.underlay = `var(--underlay-${cls.identifier})`;
   }
 
   /* -------------------------------------------- */
@@ -225,43 +281,6 @@ export default class GroupActorSheet extends BaseActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Prepare members context.
-   * @param {ApplicationRenderContext} context     Shared context provided by _prepareContext.
-   * @param {HandlebarsRenderOptions} options      Options which configure application rendering behavior.
-   * @returns {ApplicationRenderContext}
-   * @protected
-   */
-  async _prepareMembersContext(context, options) {
-    context.sections = {
-      character: { members: [], hasStats: true },
-      npc: { members: [], label: "TYPES.Actor.npcPl", hasStats: true },
-      vehicle: { members: [], label: "TYPES.Actor.vehiclePl" }
-    };
-    for ( const { actor } of this.document.system.members ) {
-      const { id, type, img, name, system, uuid } = actor;
-      const section = context.sections[type];
-      if ( !section ) continue;
-      const member = { id, type, img, name, system, uuid };
-      member.classes = actor.itemTypes.class;
-      await this._prepareMemberPortrait(actor, member);
-      this._prepareMemberEncumbrance(actor, member);
-      this._prepareMemberSkills(actor, member);
-      switch ( type ) {
-        case "character": await this._prepareCharacterContext(actor, member, options); break;
-        case "npc": await this._prepareNPCContext(actor, member, options); break;
-        case "vehicle": await this._prepareVehicleContext(actor, member, options); break;
-      }
-      section.members.push(member);
-    }
-    Object.values(context.sections).forEach(s => {
-      s.members.sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
-    });
-    return context;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Prepare render context for NPCs.
    * @param {Actor5e} actor                    The NPC actor.
    * @param {object} context                   The render context.
@@ -271,21 +290,6 @@ export default class GroupActorSheet extends BaseActorSheet {
    */
   async _prepareNPCContext(actor, context, options) {
     context.underlay = `var(--underlay-npc-${actor.system.details.type.value})`;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _preparePartContext(partId, context, options) {
-    context = await super._preparePartContext(partId, context, options);
-    switch ( partId ) {
-      case "biography": return this._prepareBiographyContext(context, options);
-      case "header": return this._prepareHeaderContext(context, options);
-      case "inventory": return this._prepareInventoryContext(context, options);
-      case "members": return this._prepareMembersContext(context, options);
-      case "tabs": return this._prepareTabsContext(context, options);
-    }
-    return context;
   }
 
   /* -------------------------------------------- */

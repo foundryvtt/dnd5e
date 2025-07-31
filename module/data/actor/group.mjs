@@ -2,9 +2,8 @@ import TokenPlacement from "../../canvas/token-placement.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
-import GroupSystemFlags from "./group-system-flags.mjs";
-import { convertLength } from "../../utils.mjs";
 import MovementField from "../shared/movement-field.mjs";
+import GroupSystemFlags from "./group-system-flags.mjs";
 
 const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
@@ -57,7 +56,7 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
  *  }
  * });
  */
-export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
+export default class GroupData extends ActorDataModel.mixin(CurrencyTemplate) {
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
@@ -199,9 +198,10 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
 
   /** @inheritDoc */
   prepareDerivedData() {
+    const system = this;
     Object.defineProperty(this.details.xp, "derived", {
       get() {
-        return this.type.value === "encounter" ? this.members.reduce((xp, { actor, quantity }) =>
+        return system.type.value === "encounter" ? system.members.reduce((xp, { actor, quantity }) =>
           xp + ((actor.system.details?.xp?.value ?? 0) * (quantity.value ?? 1))
         , 0) : null;
       },
@@ -420,5 +420,20 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       || (game.settings.get("dnd5e", "primaryParty")?.actor !== this.parent)
       || (foundry.utils.getProperty(changed, "system.type.value") === "party") ) return;
     game.settings.set("dnd5e", "primaryParty", { actor: null });
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * @deprecated
+ * @since 5.1.0
+ */
+export class GroupActor extends GroupData {
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning("GroupActor is deprecated. Please use GroupData instead.", {
+      since: "DnD5e 5.1", until: "DND5e 5.3"
+    });
+    super(...args);
   }
 }

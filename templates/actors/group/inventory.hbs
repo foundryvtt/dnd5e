@@ -3,17 +3,7 @@
     <section class="sidebar">
         {{#each members}}
         <div class="encumbrance card" data-uuid="{{ uuid }}">
-            {{#with encumbrance}}
-            <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
-                 aria-valuetext="{{ value }}" aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%">
-                <div class="label">
-                    <i class="fa-solid fa-weight-hanging" inert></i>
-                    <span class="value">{{ value }}</span>
-                    <span class="separator">&sol;</span>
-                    <span class="max">{{ max }}</span>
-                </div>
-            </div>
-            {{/with}}
+            {{> "systems/dnd5e/templates/inventory/encumbrance.hbs" }}
             <div class="stats">
                 <div class="portrait">
                     <img src="{{ img }}" alt="{{ name }}">

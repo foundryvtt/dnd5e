@@ -596,7 +596,7 @@ Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffe
 
 Hooks.on("renderDocumentSheetConfig", (app, html) => {
   if ( (app.options.document instanceof foundry.documents.Actor) && (app.options.document.type === "group") ) {
-    dnd5e.applications.actor.GroupActorSheet.addDocumentSheetConfigOptions(app, html);
+    applications.actor.GroupActorSheet.addDocumentSheetConfigOptions(app, html);
   }
 });
 

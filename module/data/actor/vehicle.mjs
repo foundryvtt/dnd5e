@@ -1,3 +1,4 @@
+import MovementField from "../shared/movement-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 import DamageTraitField from "./fields/damage-trait-field.mjs";
 import SimpleTraitField from "./fields/simple-trait-field.mjs";
@@ -5,7 +6,6 @@ import AttributesFields from "./templates/attributes.mjs";
 import CommonTemplate from "./templates/common.mjs";
 import DetailsFields from "./templates/details.mjs";
 import TraitsFields from "./templates/traits.mjs";
-import MovementField from "../shared/movement-field.mjs";
 
 const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 

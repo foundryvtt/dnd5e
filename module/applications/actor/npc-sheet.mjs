@@ -96,13 +96,6 @@ export default class NPCActorSheet extends BaseActorSheet {
   ];
 
   /* -------------------------------------------- */
-
-  /** @override */
-  tabGroups = {
-    primary: "features"
-  };
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -111,6 +104,13 @@ export default class NPCActorSheet extends BaseActorSheet {
    * @type {string|null}
    */
   editingDescriptionTarget = null;
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  tabGroups = {
+    primary: "features"
+  };
 
   /* -------------------------------------------- */
 
@@ -180,8 +180,8 @@ export default class NPCActorSheet extends BaseActorSheet {
       secrets: this.actor.isOwner, relativeTo: this.actor, rollData: context.rollData
     };
     context.enriched = {
-      public: await CONFIG.ux.TextEditor.enrichHTML(this.actor.system.details.biography.public, enrichmentOptions),
-      value: await CONFIG.ux.TextEditor.enrichHTML(this.actor.system.details.biography.value, enrichmentOptions)
+      public: await TextEditor.enrichHTML(this.actor.system.details.biography.public, enrichmentOptions),
+      value: await TextEditor.enrichHTML(this.actor.system.details.biography.value, enrichmentOptions)
     };
     if ( this.editingDescriptionTarget ) context.editingDescription = {
       target: this.editingDescriptionTarget,

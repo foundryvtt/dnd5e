@@ -78,12 +78,15 @@
             <div class="xp card">
                 <div class="header">
                     <h3>{{ localize "DND5E.AdvancementTitle" }}</h3>
+                    {{#if showXP}}
                     <button type="button" class="config-button unbutton" data-action="award" data-tooltip
                             aria-label="{{ localize "DND5E.Group.Distribute" }}">
                         <i class="fa-solid fa-trophy" inert></i>
                     </button>
+                    {{/if}}
                 </div>
                 <div class="info">
+                    {{#if showXP}}
                     <div>
                         <span class="label">{{ localize "DND5E.ExperiencePoints.Pool" }}</span>
                         <span class="value">
@@ -98,6 +101,7 @@
                             {{/if}}
                         </span>
                     </div>
+                    {{/if}}
                     <div>
                         <span class="label">{{ localize "DND5E.LevelAvg" }}</span>
                         <span class="value">{{ dnd5e-numberFormat system.level blank="—" useGrouping=false }}</span>
