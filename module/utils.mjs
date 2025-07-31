@@ -680,13 +680,12 @@ function _convertSystemUnits(value, from, to, config, { message, strict }) {
 
 /**
  * Default units to use depending on system setting.
- * @param {"length"|"weight"} type  Type of units to select.
+ * @param {"length"|"travel"|"volume"|"weight"} type  Type of units to select.
  * @returns {string}
  */
 export function defaultUnits(type) {
-  return CONFIG.DND5E.defaultUnits[type]?.[
-    game.settings.get("dnd5e", `metric${type.capitalize()}Units`) ? "metric" : "imperial"
-  ];
+  const settingKey = type === "travel" ? "metricLengthUnits" : `metric${type.capitalize()}Units`;
+  return CONFIG.DND5E.defaultUnits[type]?.[game.settings.get("dnd5e", settingKey) ? "metric" : "imperial"];
 }
 
 /* -------------------------------------------- */

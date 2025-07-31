@@ -1,4 +1,5 @@
 import TokenPlacement from "../../canvas/token-placement.mjs";
+import { defaultUnits } from "../../utils.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
@@ -90,9 +91,7 @@ export default class GroupData extends ActorDataModel.mixin(CurrencyTemplate) {
             label: "DND5E.Travel.Label"
           }),
           units: new StringField({
-            required: true, nullable: true, blank: false, label: "DND5E.MovementUnits", initial: () => {
-              return game.settings.get("dnd5e", "metricLengthUnits") ? "km" : "mi";
-            }
+            required: true, nullable: true, blank: false, label: "DND5E.MovementUnits", initial: defaultUnits("travel")
           })
         })
       }, { label: "DND5E.Attributes" }),

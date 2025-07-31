@@ -2612,6 +2612,10 @@ DND5E.defaultUnits = {
     imperial: "ft",
     metric: "m"
   },
+  travel: {
+    imperial: "mi",
+    metric: "km"
+  },
   volume: {
     imperial: "cubicFoot",
     metric: "liter"
