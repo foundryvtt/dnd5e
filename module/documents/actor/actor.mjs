@@ -1054,7 +1054,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       && (await this.system.rollSkill(config, dialog, message) === false) ) return null;
     if ( !this.system.skills ) return null;
     const skillLabel = CONFIG.DND5E.skills[config.skill]?.label ?? "";
-    const ability = this.system.skills[config.skill]?.ability ?? CONFIG.DND5E.skills[config.skill]?.ability ?? "";
+    const ability = config.ability ?? this.system.skills[config.skill]?.ability ?? CONFIG.DND5E.skills[config.skill]?.ability ?? "";
     const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
     const dialogConfig = foundry.utils.mergeObject({
       options: {
@@ -1125,7 +1125,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
     const alternate = type === "skill" ? this.system.tools?.[config.tool] : this.system.skills?.[config.skill];
-    const abilityId = relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
+    const abilityId = config.ability ?? relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
     const ability = this.system.abilities?.[abilityId];
     const hostActor = this.isPolymorphed && this.flags?.dnd5e?.transformOptions?.mergeSkills && (type === "skill")
       ? game.actors.get(this.flags.dnd5e?.originalActor) : null;
