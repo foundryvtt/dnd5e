@@ -85,8 +85,10 @@ export default class MovementSensesConfig extends BaseConfigSheet {
     }));
 
     context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
+    context.unitsOptions.blank = false;
     if ( (this.document.type === "character") || ((this.document.type === "npc") && placeholderData) ) {
       const automaticUnit = CONFIG.DND5E.movementUnits[placeholderData?.units ?? defaultUnits("length")]?.label ?? "";
+      context.unitsOptions.blank = true;
       context.unitsOptions.unshift(
         { value: "", label: game.i18n.format("DND5E.AutomaticValue", { value: automaticUnit.toLowerCase() }) },
         { rule: true }
