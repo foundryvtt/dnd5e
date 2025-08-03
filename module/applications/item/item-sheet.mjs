@@ -423,7 +423,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const advancement = {};
     const configMode = !this.item.parent || (this._mode === ItemSheet5e.MODES.EDIT);
     const legacyDisplay = this.options.legacyDisplay;
-    const maxLevel = !configMode ? (this.item.system.levels ?? this.item.class?.system.levels
+    const maxLevel = this.item.parent ? (this.item.system.levels ?? this.item.class?.system.levels
       ?? this.item.parent.system.details?.level ?? -1) : -1;
 
     // Improperly configured advancements
