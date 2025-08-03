@@ -310,7 +310,7 @@ export default class ContainerSheet extends ItemSheet5e {
     }
 
     // Perform the sort
-    const sortUpdates = foundry.utils.SortingHelpers.performIntegerSort(item, {target, siblings});
+    const sortUpdates = foundry.utils.performIntegerSort(item, {target, siblings});
     const updateData = sortUpdates.map(u => {
       const update = u.update;
       update._id = u.target.id;
