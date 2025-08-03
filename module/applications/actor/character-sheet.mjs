@@ -1305,7 +1305,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       else if ( f.id === srcId ) source = f;
       return f.id !== srcId;
     });
-    const updates = foundry.utils.SortingHelpers.performIntegerSort(source, { target, siblings });
+    const updates = foundry.utils.performIntegerSort(source, { target, siblings });
     const favorites = this.actor.system.favorites.reduce((map, f) => map.set(f.id, { ...f }), new Map());
     for ( const { target, update } of updates ) {
       const favorite = favorites.get(target.id);
