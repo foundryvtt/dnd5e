@@ -59,6 +59,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
     let { preview=false, ignoreTokens=false } = options; // Custom constrain option to ignore tokens
 
     ignoreTokens ||= game.settings.get("dnd5e", "disableMovementAutomation");
+    ignoreTokens ||= !this.actor?.system.isCreature;
 
     if ( ignoreTokens ) return super.constrainMovementPath(waypoints, options);
 

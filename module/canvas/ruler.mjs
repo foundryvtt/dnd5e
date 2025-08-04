@@ -90,8 +90,8 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
     if ( noAutomation || !isSameClient ) return style;
 
     // Get actor's movement speed for currently selected token movement action
-    const movement = this.token.actor.system.attributes?.movement;
-    if ( !movement ) return style;
+    const movement = this.token.actor?.system.attributes?.movement;
+    if ( !movement || !this.token.actor?.system.isCreature ) return style;
     let currActionSpeed = movement[waypoint.action] ?? 0;
 
     // If current action can fall back to walk, treat "max" speed as maximum between current & walk

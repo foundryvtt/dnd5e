@@ -102,6 +102,16 @@ export default class CreatureTemplate extends CommonTemplate {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Whether this Actor type represents a creature.
+   * @returns {boolean}
+   */
+  get isCreature() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
