@@ -3,6 +3,10 @@ import { convertLength } from "../../utils.mjs";
 const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @typedef {"slow"|"normal"|"fast"} TravelPace5e
+ */
+
+/**
  * @typedef {object} MovementData
  * @property {number} burrow                        Actor burrowing speed.
  * @property {number} climb                         Actor climbing speed.
@@ -37,6 +41,22 @@ export default class MovementField extends foundry.data.fields.SchemaField {
     };
     Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);
     super(fields, { label: "DND5E.Movement", ...options });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply rules for travel pace to the given skill.
+   * @param {TravelPace5e} pace  The travel pace.
+   * @param {string} skill       The skill.
+   * @returns {{ advantage: boolean, disadvantage: boolean }}
+   */
+  static getTravelPaceMode(pace, skill) {
+    const config = CONFIG.DND5E.skills[skill];
+    return {
+      advantage: config?.pace?.advantage?.has(pace) ?? false,
+      disadvantage: config?.pace?.disadvantage?.has(pace) ?? false
+    };
   }
 
   /* -------------------------------------------- */

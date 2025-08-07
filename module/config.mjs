@@ -7,6 +7,10 @@ import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
 
+/**
+ * @import { TravelPace5e } from "./data/shared/movement-field.mjs";
+ */
+
 // Namespace Configuration Values
 const DND5E = {};
 
@@ -134,6 +138,10 @@ DND5E.defaultAbilities = {
  * @property {string} ability      Key for the default ability used by this skill.
  * @property {string} fullKey      Fully written key used as alternate for enrichers.
  * @property {string} [reference]  Reference to a rule page describing this skill.
+ * @property {object} [pace]       Configuration for skills affected by travel pace.
+ * @property {Set<TravelPace5e>} [pace.advantage]     Grant advantage on this skill when traveling at the given paces.
+ * @property {Set<TravelPace5e>} [pace.disadvantage]  Grant disadvantage on this skill when traveling at the given
+ *                                                    paces.
  */
 
 /**
@@ -223,7 +231,11 @@ DND5E.skills = {
     ability: "wis",
     fullKey: "perception",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.zjEeHCUqfuprfzhY",
-    icon: "icons/magic/perception/eye-ringed-green.webp"
+    icon: "icons/magic/perception/eye-ringed-green.webp",
+    pace: {
+      advantage: new Set(["slow"]),
+      disadvantage: new Set(["fast"])
+    }
   },
   prf: {
     label: "DND5E.SkillPrf",
@@ -258,14 +270,21 @@ DND5E.skills = {
     ability: "dex",
     fullKey: "stealth",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.4MfrpERNiQXmvgCI",
-    icon: "icons/magic/perception/shadow-stealth-eyes-purple.webp"
+    icon: "icons/magic/perception/shadow-stealth-eyes-purple.webp",
+    pace: {
+      disadvantage: new Set(["normal", "fast"])
+    }
   },
   sur: {
     label: "DND5E.SkillSur",
     ability: "wis",
     fullKey: "survival",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.t3EzDU5b9BVAIEVi",
-    icon: "icons/magic/fire/flame-burning-campfire-yellow-blue.webp"
+    icon: "icons/magic/fire/flame-burning-campfire-yellow-blue.webp",
+    pace: {
+      advantage: new Set(["slow"]),
+      disadvantage: new Set(["fast"])
+    }
   }
 };
 preLocalize("skills", { key: "label", sort: true });
