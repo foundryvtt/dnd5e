@@ -554,6 +554,7 @@ Hooks.once("ready", function() {
 /* -------------------------------------------- */
 
 Hooks.on("renderGamePause", (app, html) => {
+  if ( Hooks.events.renderGamePause.length > 1 ) return;
   html.classList.add("dnd5e2");
   const container = document.createElement("div");
   container.classList.add("flexcol");
