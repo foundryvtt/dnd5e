@@ -23,6 +23,7 @@
   }
 
   .window-content {
+    overflow: hidden;
     padding: 0;
     gap: 0;
   }
@@ -95,19 +96,19 @@
       .tab-body {
         flex: 1;
         position: relative;
-
-        .tab {
-          max-height: ~"calc(min(max(70vh, 1000px), 95vh) - var(--dnd5e-sheet-header-height))";
-          overflow: hidden auto;
-          scrollbar-gutter: stable;
-          padding: 16px 4px 8px 16px;
-          margin-right: 4px;
-        }
       }
     }
   }
 
   .sheet-tabs { margin-top: 8px; }
+
+  .tab {
+    max-height: ~"calc(min(max(70vh, 1000px), 95vh) - var(--dnd5e-sheet-header-height))";
+    overflow: hidden auto;
+    scrollbar-gutter: stable;
+    padding: 16px 4px 8px 16px;
+    margin-right: 4px;
+  }
 
   /* -------------------------------------------- */
   /*  Group Members                               */
@@ -256,6 +257,12 @@
   /* -------------------------------------------- */
 
   .tab[data-tab=description] {
+    &.editing {
+      padding: 8px 0;
+      margin: 0;
+      scrollbar-gutter: auto;
+    }
+
     .middle, .bottom { padding: 0; }
 
     > .editor .editor-content {

@@ -29,6 +29,10 @@
 
     {{!-- Actions --}}
     <div class="right">
+        <button type="button" class="gold-button" data-action="rollQuantities" data-tooltip
+                aria-label="{{ localize "DND5E.QuantityRoll" }}">
+            <i class="fa-solid fa-dice-d20" inert></i>
+        </button>
         <button type="button" class="gold-button" data-action="placeMembers" data-tooltip
                 aria-label="{{ localize "DND5E.Group.PlaceMembers" }}">
             <i class="fa-solid fa-location-dot" inert></i>
@@ -36,10 +40,6 @@
         <button type="button" class="gold-button" data-action="award" data-tooltip
                 aria-label="{{ localize "DND5E.ENCOUNTER.Action.Award" }}">
             <i class="fa-solid fa-trophy" inert></i>
-        </button>
-        <button type="button" class="gold-button" data-action="rollQuantities" data-tooltip
-                aria-label="{{ localize "DND5E.QuantityRoll" }}">
-            <i class="fa-solid fa-dice-d20"></i>
         </button>
     </div>
 

@@ -67,11 +67,13 @@ export default class MultiActorSheet extends BaseActorSheet {
   async _prepareMemberPortrait(actor, context) {
     const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait");
     const token = actor.isToken ? actor.token : actor.prototypeToken;
+    const defaults = Actor.implementation.getDefaultArtwork(actor._source);
     let src = showTokenPortrait ? token.texture.src : actor.img;
     if ( showTokenPortrait && token?.randomImg ) {
       const images = await actor.getTokenImages();
       src = images[Math.floor(Math.random() * images.length)];
     }
+    if ( !src ) src = showTokenPortrait ? defaults.texture.src : defaults.img;
     context.portrait = { src, isVideo: foundry.helpers.media.VideoHelper.hasVideoExtension(src) };
   }
 
