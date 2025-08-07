@@ -6,6 +6,7 @@ import ActivationsField from "../../data/chat-message/fields/activations-field.m
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
+import MovementField from "../../data/shared/movement-field.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import {
   convertTime, defaultUnits, formatLength, formatNumber, formatTime, simplifyBonus, staticID
@@ -1093,11 +1094,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * @typedef {D20RollProcessConfiguration} SkillToolRollProcessConfiguration
-   * @property {string} [ability]  The ability to be rolled with the skill.
-   * @property {string} [bonus]    Additional bonus term added to the check.
-   * @property {Item5e} [item]     Tool item used for rolling.
-   * @property {string} [skill]    The skill to roll.
-   * @property {string} [tool]     The tool to roll.
+   * @property {string} [ability]     The ability to be rolled with the skill.
+   * @property {string} [bonus]       Additional bonus term added to the check.
+   * @property {Item5e} [item]        Tool item used for rolling.
+   * @property {string} [skill]       The skill to roll.
+   * @property {string} [tool]        The tool to roll.
+   * @property {TravelPace5e} [pace]  Whether a travel pace is being applied to the roll.
    */
 
   /**
@@ -1131,14 +1133,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       ? game.actors.get(this.flags.dnd5e?.originalActor) : null;
     const buildConfig = this._buildSkillToolConfig.bind(this, type, hostActor);
     const doubleProf = !!relevant?.prof.hasProficiency && !!alternate?.prof.hasProficiency;
+    const pace = MovementField.getTravelPaceMode(config.pace, config.skill);
 
     const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
       `abilities.${abilityId}.check.roll.mode`,
       `${type}s.${type === "skill" ? config.skill : config.tool}.roll.mode`
-    ]);
+    ], {
+      advantages: { count: Number(doubleProf) + Number(pace.advantage) },
+      disadvantages: { count: Number(pace.disadvantage) }
+    });
 
     const rollConfig = foundry.utils.mergeObject({
-      advantage: advantage || doubleProf, disadvantage,
+      advantage, disadvantage,
       ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig?.ability),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")

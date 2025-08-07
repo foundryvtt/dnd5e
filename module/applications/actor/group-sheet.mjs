@@ -62,7 +62,7 @@ export default class GroupActorSheet extends BaseActorSheet {
 
   /** @override */
   static TABS = [
-    { tab: "members", label: "DND5E.Group.Member.other", icon: "fa-solid fa-swords"},
+    { tab: "members", label: "DND5E.Group.Member.other", icon: "fa-solid fa-users"},
     { tab: "inventory", label: "DND5E.Inventory", svg: "systems/dnd5e/icons/svg/backpack.svg" },
     { tab: "biography", label: "DND5E.Biography", icon: "fa-solid fa-feather" }
   ];
@@ -418,7 +418,7 @@ export default class GroupActorSheet extends BaseActorSheet {
     if ( type !== "skill" ) return;
     const { uuid } = target.closest("[data-uuid]")?.dataset ?? {};
     const actor = await fromUuid(uuid);
-    actor?.rollSkill({ event, skill: key });
+    actor?.rollSkill({ event, skill: key, pace: this.actor.system.attributes.movement.pace });
   }
 
   /* -------------------------------------------- */

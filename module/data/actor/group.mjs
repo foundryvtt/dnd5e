@@ -42,7 +42,7 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
  * @property {number} attributes.movement.land   Base movement speed over land.
  * @property {number} attributes.movement.water  Base movement speed over water.
  * @property {number} attributes.movement.air    Base movement speed through the air.
- * @property {"slow"|"normal"|"fast"} attributes.movement.pace  Travel pace.
+ * @property {TravelPace5e} attributes.movement.pace  Travel pace.
  * @property {string} attributes.movement.unit   The length units.
  * @property {object} details
  * @property {object} details.xp
