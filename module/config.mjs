@@ -7,6 +7,10 @@ import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
 
+/**
+ * @import { TravelPace5e } from "./data/shared/movement-field.mjs";
+ */
+
 // Namespace Configuration Values
 const DND5E = {};
 

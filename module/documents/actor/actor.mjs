@@ -19,6 +19,10 @@ import SelectChoices from "./select-choices.mjs";
 import * as Trait from "./trait.mjs";
 
 /**
+ * @import { TravelPace5e } from "../../data/shared/movement-field.mjs";
+ */
+
+/**
  * Extend the base Actor class to implement additional system-specific logic.
  */
 export default class Actor5e extends SystemDocumentMixin(Actor) {

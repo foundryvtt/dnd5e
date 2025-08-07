@@ -10,6 +10,7 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
 
 /**
  * @import { RestConfiguration, RestResult } from "../../documents/actor/actor.mjs";
+ * @import { TravelPace5e } from "../shared/movement-field.mjs";
  */
 
 /**
