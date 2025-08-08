@@ -53,7 +53,10 @@
     min-height: 700px;
   }
 
-  .window-content { padding: var(--header-height) 0 0; }
+  .window-content {
+    gap: 0;
+    padding: var(--header-height) 0 0;
+  }
 
   nav.tabs { top: 90px; }
 
@@ -200,6 +203,7 @@
     gap: 0;
 
     h3 { padding-left: 12px; }
+    > section:first-child h3 { padding-top: 8px; }
   }
 
   menu.members {
