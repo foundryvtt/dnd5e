@@ -37,20 +37,32 @@ export default class MultiActorSheet extends BaseActorSheet {
    * @protected
    */
   async _prepareDescriptionContext(context, options) {
-    if ( this.actor.limited ) return context;
-
+    const { full, summary } = this.actor.system.description;
     const enrichmentOptions = {
       secrets: this.actor.isOwner, relativeTo: this.actor, rollData: context.rollData
     };
     context.enriched = {
-      summary: await CONFIG.ux.TextEditor.enrichHTML(this.actor.system.description.summary, enrichmentOptions),
-      full: await CONFIG.ux.TextEditor.enrichHTML(this.actor.system.description.full, enrichmentOptions)
+      label: "DND5E.Description",
+      summary: await CONFIG.ux.TextEditor.enrichHTML(summary, enrichmentOptions),
+      full: await CONFIG.ux.TextEditor.enrichHTML(full, enrichmentOptions)
     };
+    context.enriched.value = full ? context.enriched.full : context.enriched.summary;
     if ( this.editingDescriptionTarget ) context.editingDescription = {
       target: this.editingDescriptionTarget,
       value: foundry.utils.getProperty(this.actor._source, this.editingDescriptionTarget)
     };
 
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
+    switch ( partId ) {
+      case "biography": return this._prepareDescriptionContext(context, options); // Limited sheets.
+    }
     return context;
   }
 

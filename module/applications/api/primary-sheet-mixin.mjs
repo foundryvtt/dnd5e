@@ -201,8 +201,8 @@ export default function PrimarySheetMixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    async _preparePartContext(partId, options) {
-      const context = await super._preparePartContext(partId, options);
+    async _preparePartContext(partId, context, options) {
+      context = await super._preparePartContext(partId, context, options);
       context.tab = context.tabs[partId];
       return context;
     }

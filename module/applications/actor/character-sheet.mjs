@@ -287,6 +287,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       secrets: this.actor.isOwner, relativeTo: this.actor, rollData: context.rollData
     };
     context.enriched = {
+      label: "DND5E.Biography",
       value: await TextEditor.enrichHTML(this.actor.system.details.biography.value, enrichmentOptions)
     };
 
