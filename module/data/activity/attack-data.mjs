@@ -104,6 +104,12 @@ export default class AttackActivityData extends BaseActivityData {
       return this.item.system.availableAbilities;
     }
 
+    // Natural weapons also defer to the item if using any classification other than spell.
+    if ( this.item.system.availableAbilities && (this.item.system.type.value === "natural")
+      && (this.attack.type.classification !== "spell") ) {
+      return this.item.system.availableAbilities;
+    }
+
     // Spell attack not associated with a single class, use highest spellcasting ability on actor
     if ( this.attack.type.classification === "spell" ) return new Set(
       this.actor?.system.attributes?.spellcasting
