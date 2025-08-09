@@ -396,7 +396,8 @@ export default class AttackActivityData extends BaseActivityData {
     if ( this.item.type === "weapon" ) {
       // Ensure `@mod` is present in damage unless it is positive and an off-hand attack or damage is a flat value
       const isDeterministic = new Roll(roll.parts[0]).isDeterministic;
-      const includeMod = (!rollConfig.attackMode?.endsWith("offhand") || (roll.data.mod < 0)) && !isDeterministic;
+      const includeMod = (!rollConfig.attackMode?.endsWith("offhand") || (roll.data.mod < 0)) && !isDeterministic
+        && !((this.attack.type.classification === "spell") && (this.item.system.type.value === "natural"));
       if ( includeMod && !roll.parts.some(p => p.includes("@mod")) ) roll.parts.push("@mod");
 
       // Add magical bonus
