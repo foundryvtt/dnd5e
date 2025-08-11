@@ -193,7 +193,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         selectedTarget: ("validTargets" in typeConfig) && ((data.type === "itemUses") && data.target?.includes("."))
           ? (this.activity.actor?.sourcedItems?.get(data.target)?.first()?.id ?? data.target)
           : data.target,
-        targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem") : null,
+        targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem") : "",
         validTargets: showTextTarget ? null : target.validTargets
       };
     });

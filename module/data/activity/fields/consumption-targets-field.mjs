@@ -29,7 +29,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   /** @override */
   static defineSchema() {
     return {
-      type: new StringField(),
+      type: new StringField({ required: true, blank: false, initial: "activityUses" }),
       target: new StringField(),
       value: new FormulaField({ initial: "1" }),
       scaling: new SchemaField({
