@@ -412,12 +412,33 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get canConfigureScaling() {
+    return this.level > 0;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Whether the spell can be prepared.
    * @type {boolean}
    */
   get canPrepare() {
     return !!CONFIG.DND5E.spellcasting[this.method]?.prepares;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get canScale() {
+    return (this.level > 0) && !!CONFIG.DND5E.spellcasting[this.method]?.slots;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get canScaleDamage() {
+    return true;
   }
 
   /* -------------------------------------------- */
