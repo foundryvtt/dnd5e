@@ -609,8 +609,6 @@ Hooks.on("renderDocumentSheetConfig", (app, html) => {
   }
 });
 
-Hooks.on("renderActiveEffectConfig", (app, html, data) => app.document.onRenderActiveEffectConfig(html));
-
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
 Hooks.on("renderCombatTracker", (app, html, data) => app.renderGroups(html));

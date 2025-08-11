@@ -667,10 +667,8 @@ export default class ActiveEffect5e extends ActiveEffect {
         ? "https://github.com/foundryvtt/dnd5e/wiki/Enchantment"
         : "https://github.com/foundryvtt/dnd5e/wiki/Active-Effect-Guide"
     });
-    helpIconElement.setAttribute("data-tooltip", tooltipText);
-    helpIconElement.setAttribute("data-tooltip-direction", "RIGHT");
-    helpIconElement.setAttribute("data-locked", true);
-    const targetElement = html.querySelector("section:is([data-tab='effects'],[data-tab='changes']) .key");
+    Object.assign(helpIconElement.dataset, { tooltip: tooltipText, tooltipDirection: "RIGHT", locked: "" });
+    const targetElement = html.querySelector("section:is([data-tab='effects'], [data-tab='changes']) .key");
     if ( targetElement ) targetElement.insertAdjacentElement("beforeend", helpIconElement);
   }
 
