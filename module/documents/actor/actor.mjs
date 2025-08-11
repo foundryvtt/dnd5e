@@ -3109,12 +3109,23 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     Hooks.callAll("dnd5e.revertOriginalForm", this, options);
 
+    const transformOptions = this.getFlag("dnd5e", "transformOptions");
     const previousActorIds = this.getFlag("dnd5e", "previousActorIds") ?? [];
     const isOriginalActor = !previousActorIds.length;
     const isRendered = this.sheet.rendered;
 
     // Obtain a reference to the original actor
     const original = game.actors.get(this.getFlag("dnd5e", "originalActor"));
+
+    const update = {};
+    if ( transformOptions?.keep?.includes("hp") ) {
+      foundry.utils.setProperty(update, "system.attributes.hp.value", this.system.attributes.hp.value);
+    }
+    if ( transformOptions?.keep?.includes("spells") ) {
+      Object.entries(this.system.spells ?? {}).forEach(([k, v]) => {
+        if ( v.max ) update[`system.spells.${k}.value`] = v.value;
+      });
+    }
 
     // If we are reverting an unlinked token, grab the previous actorData, and create a new token
     if ( this.isToken ) {
@@ -3127,6 +3138,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
       const prototypeTokenData = (await baseActor.getTokenDocument()).toObject();
       const actorData = this.token.getFlag("dnd5e", "previousActorData");
+      foundry.utils.mergeObject(actorData, update);
       const tokenUpdate = this.token.toObject();
       actorData._id = tokenUpdate.delta._id;
       tokenUpdate.delta = actorData;
@@ -3193,6 +3205,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       this.sheet?.close();
     }
     if ( isRendered && options.renderSheet ) original.sheet?.render(isRendered);
+    if ( !foundry.utils.isEmpty(update) ) await original.update(update);
     return original;
   }
 
