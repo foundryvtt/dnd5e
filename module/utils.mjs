@@ -266,11 +266,12 @@ export function isValidDieModifier(mod) {
  * @returns {number|void}
  */
 export function parseInputDelta(input, target) {
-  target = target?._source ?? target;
+  const prop = input.dataset.name ?? input.name;
+  const current = foundry.utils.getProperty(target?._source ?? {}, prop) ?? foundry.utils.getProperty(target, prop);
   let value = input.value;
   if ( ["+", "-"].includes(value[0]) ) {
     const delta = parseFloat(value);
-    value = Number(foundry.utils.getProperty(target, input.dataset.name ?? input.name)) + delta;
+    value = Number(current) + delta;
   }
   else if ( value[0] === "=" ) value = Number(value.slice(1));
   if ( Number.isNaN(value) ) return;
