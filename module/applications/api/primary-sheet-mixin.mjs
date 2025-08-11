@@ -209,11 +209,12 @@ export default function PrimarySheetMixin(Base) {
        * A hook event that fires during preparation of sheet parts.
        * @function dnd5e.prepareSheetContext
        * @memberof hookEvents
-       * @param {string} partId   The ID of the part being prepared.
-       * @param {object} context  Preparation context that should be mutated.
-       * @param {object} options  Render options.
+       * @param {PrimarySheet5e} sheet  Sheet being rendered.
+       * @param {string} partId         The ID of the part being prepared.
+       * @param {object} context        Preparation context that should be mutated.
+       * @param {object} options        Render options.
        */
-      Hooks.callAll("dnd5e.prepareSheetContext", partId, context, options);
+      Hooks.callAll("dnd5e.prepareSheetContext", this, partId, context, options);
 
       return context;
     }
