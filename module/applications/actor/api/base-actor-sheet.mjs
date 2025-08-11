@@ -627,6 +627,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       // Spells from items
       if ( spell.getFlag("dnd5e", "cachedFor") ) {
         method = "item";
+        if ( !spell.system.linkedActivity?.displayInSpellbook ) return;
         registerSection(method);
       }
 
