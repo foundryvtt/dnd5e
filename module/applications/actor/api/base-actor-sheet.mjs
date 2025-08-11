@@ -851,9 +851,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Linked Uses
     const cachedFor = fromUuidSync(item.flags.dnd5e?.cachedFor, { relative: this.actor, strict: false });
-    if ( cachedFor ) ctx.linkedUses = cachedFor.consumption?.targets.find(t => t.type === "activityUses")
-      ? cachedFor.uses : cachedFor.consumption?.targets.find(t => t.type === "itemUses")
-        ? cachedFor.item.system.uses : null;
+    if ( cachedFor ) {
+      const targetItemUses = cachedFor.consumption?.targets.find(t => t.type === "itemUses");
+      ctx.linkedUses = cachedFor.consumption?.targets.find(t => t.type === "activityUses")
+        ? cachedFor.uses : targetItemUses
+          ? (this.actor.items.get(targetItemUses.target) ?? cachedFor.item).system.uses : null;
+    }
     ctx.uses = { ...(item.system.uses ?? {}) };
     ctx.uses.hasRecharge = item.hasRecharge;
     ctx.uses.hasUses = item.hasLimitedUses;
