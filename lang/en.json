@@ -6498,6 +6498,13 @@
       "Name": "Dexterity Tiebreaker",
       "Hint": "Append the raw Dexterity ability score to break ties in Initiative."
     },
+    "AutoApplyDowned": {
+      "Name": "Auto-Apply Downed Conditions",
+      "Hint": "Automatically apply \"Dead\" (for unimportant NPCs) or \"Unconscious\" (for others) when an actor is reduced to 0 HP in combat.",
+      "None": "Never auto-apply",
+      "DeadOnly": "Auto-apply \"Dead\"",
+      "All": "Auto-apply \"Dead\" and \"Unconscious\""
+    },
     "InitiativeScore": {
       "Name": "Initiative Score",
       "Hint": "Use a creature's initiative score (10 + bonus) rather than rolling for initiative.",
@@ -6528,6 +6535,9 @@
   "DEFAULTSKILLS": {
     "Name": "Default Skills",
     "Hint": "The default skills that appear on NPC sheets regardless of level of proficiency."
+  },
+  "EFFECTS": {
+    "Name": "Effects"
   },
   "ENCOUNTERS": {
     "Name": "Encounters",

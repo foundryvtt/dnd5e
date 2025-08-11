@@ -3607,6 +3607,28 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Handle applying/removing the dead/unconscious status.
+   * @param {DocumentModificationContext} options  Additional options supplied with the update.
+   * @returns {Promise<ActiveEffect|boolean|undefined>|void}
+   */
+  updateDowned(options) {
+    const autoApplyDowned = game.settings.get("dnd5e", "autoApplyDowned");
+    if ( autoApplyDowned === "none" ) return;
+    const hp = this.system.attributes?.hp;
+    if ( !hp ) return;
+    if ( hp.value ) return this.statuses.has("dead") ? this.toggleStatusEffect("dead", { active: false }) : undefined;
+    if ( !this.inCombat ) return;
+    const hasDeathSaves = this.type === "character" || (this.type === "npc" && this.system.traits.important);
+    if ( hasDeathSaves ) {
+      if ( autoApplyDowned === "all" ) return this.toggleStatusEffect("unconscious", { active: true, overlay: true });
+    } else if ( this.type === "npc" ) {
+      return this.toggleStatusEffect("dead", { active: true, overlay: true });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle applying/removing encumbrance statuses.
    * @param {DocumentModificationContext} options  Additional options supplied with the update.
    * @returns {Promise<ActiveEffect>|void}

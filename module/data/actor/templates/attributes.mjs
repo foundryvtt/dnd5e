@@ -656,7 +656,10 @@ export default class AttributesFields {
    */
   static async onUpdateHP(changed, options, userId) {
     if ( !changed.system?.attributes?.hp ) return;
-    if ( userId === game.userId ) await this.parent.updateBloodied(options);
+    if ( userId === game.userId ) {
+      await this.parent.updateBloodied(options);
+      await this.parent.updateDowned(options);
+    }
 
     const hp = options.dnd5e?.hp;
     if ( !hp || options.isRest || options.isAdvancement ) return;
