@@ -40,4 +40,6 @@ The "Transform Tokens" setting controls whether all associated linked tokens wil
 
 Once the transformation is no longer required the actor can be changed back using the "Revert Transformation" button in the header of the transformed actor's sheet. This will close the transformed sheet, re-open the original sheet, and change any tokens in the scene back to the original actor.
 
+If the "Keep Hit Points & Hit Dice" option was selected, then any changes to the hit points on the transformed actor will be carried back when they are reverted. Similarly, if the "Keep Spells" option was selected then any changes to available spell slots will be synchronized.
+
 **Note**: Because the core software doesn't have the ability to grant players permissions to delete actors, the transformed version of the actor will only be cleaned up if the "Revert Transformation" button is clicked by a GM. Otherwise it will remain in the actors sidebar.
