@@ -414,6 +414,20 @@ Fires when a sheet filters an item. Returning `false` will prevent item from bei
 | filters  | Set<string>                   | Filters applied to the Item.             |
 
 
+## Actor & Item Sheets
+
+### `dnd5e.prepareSheetContext`
+
+Fires during preparation of sheet parts.
+
+| Name     | Type                     | Description                                 |
+| -------- | ------------------------ | ------------------------------------------- |
+| sheet    | BaseActorSheet           | Sheet being rendered.                       |
+| partId   | string                   | The ID of the part being prepared.          |
+| context  | object                   | Preparation context that should be mutated. |
+| options  | object                   | Render options.                             |
+
+
 ## Advancement
 
 ### `dnd5e.preAdvancementManagerRender`
