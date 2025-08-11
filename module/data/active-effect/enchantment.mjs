@@ -1,7 +1,7 @@
 import { DamageData } from "../shared/damage-field.mjs";
 
 const { ActiveEffectTypeDataModel } = foundry.data;
-const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField } = foundry.data.fields;
 const { TypeDataModel } = foundry.abstract;
 
 /**
@@ -13,7 +13,7 @@ export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeD
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT", "DND5E.EFFECT.RIDER"];
+  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT"];
 
   /* -------------------------------------------- */
 
@@ -21,13 +21,12 @@ export default class EnchantmentData extends (ActiveEffectTypeDataModel ?? TypeD
   static defineSchema() {
     return {
       ...(ActiveEffectTypeDataModel ? super.defineSchema() : {}),
-      magical: new BooleanField({ initial: true }),
-      rider: new SchemaField({
-        statuses: new SetField(new StringField())
-      })
+      magical: new BooleanField({ initial: true })
     };
   }
 
+  /* -------------------------------------------- */
+  /*  Effect Application                          */
   /* -------------------------------------------- */
 
   /**
