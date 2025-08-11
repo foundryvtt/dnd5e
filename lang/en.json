@@ -5233,6 +5233,13 @@
       "All": "Use Score for Everyone",
       "None": "Always Roll for Initiative",
       "NPCs": "Use Score for GM NPCs"
+    },
+    "AutoApplyDowned": {
+      "Name": "Auto-Apply Downed Conditions",
+      "Hint": "Automatically apply \"Dead\" (for unimportant NPCs) or \"Unconscious\" (for others) when an actor is reduced to 0 HP in combat.",
+      "None": "Never auto-apply",
+      "DeadOnly": "Auto-apply \"Dead\"",
+      "All": "Auto-apply \"Dead\" and \"Unconscious\""
     }
   },
   "CRITICAL": {
@@ -5249,6 +5256,9 @@
   "DEFAULTSKILLS": {
     "Name": "Default Skills",
     "Hint": "The default skills that appear on NPC sheets regardless of level of proficiency."
+  },
+  "EFFECTS": {
+    "Name": "Effects"
   },
   "General": "General",
   "LOYALTY": {
