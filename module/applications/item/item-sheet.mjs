@@ -56,7 +56,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       template: "systems/dnd5e/templates/items/header.hbs"
     },
     tabs: {
-      template: "systems/dnd5e/templates/items/tabs.hbs",
+      template: "systems/dnd5e/templates/shared/horizontal-tabs.hbs",
       templates: ["templates/generic/tab-navigation.hbs"]
     },
     activities: {

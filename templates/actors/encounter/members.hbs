@@ -1,0 +1,99 @@
+<section data-group="{{ tab.group }}" data-tab="{{ tab.id }}" class="tab {{ tab.cssClass }} flex1">
+    {{#each members}}
+    <div class="member" data-uuid="{{ uuid }}" data-index="{{ index }}">
+        <div class="vitals card" {{#if underlay}}style="--underlay: {{ underlay }}"{{/if}}>
+            <div class="portrait">
+                {{#if portrait.isVideo}}
+                <video src="{{ portrait.src }}" autoplay muted playsinline disablepictureinpicture loop></video>
+                {{else}}
+                <img src="{{ portrait.src }}" alt="{{ name }}">
+                {{/if}}
+            </div>
+            <div class="name-stacked">
+                <a class="rollable title" data-action="showDocument" data-uuid="{{ uuid }}">{{ name }}</a>
+                <div class="subtitle">{{ subtitle }}</div>
+            </div>
+            {{#unless @root.editable}}
+            <div class="cr-badge badge" data-tooltip aria-label="{{ localize "DND5E.CRLabel" cr=cr }}">
+                {{ dnd5e-formatCR cr }}
+            </div>
+            {{/unless}}
+            {{#if showFormula}}
+            <div class="formula">
+                <div {{#if @root.editable}}class="editable"{{/if}}>
+                    <label aria-label="{{ localize "DND5E.QuantityFormula" }}">&lambda;</label>
+                    {{#if @root.editable}}
+                    <input type="text" class="uninput" data-name="quantity.formula" value="{{ quantity.formula }}">
+                    {{else}}
+                    <span class="value">{{ quantity.formula }}</span>
+                    {{/if}}
+                </div>
+            </div>
+            {{/if}}
+            {{#if showQuantity}}
+            <div class="quantity">
+                {{#if @root.editable}}
+                <button type="button" class="control-button adjustment-button unbutton" data-action="decrease"
+                        data-property="system.quantity.value">
+                    <i class="fa-solid fa-minus" inert></i>
+                </button>
+                <input type="text" class="slot uninput" inputmode="numeric" pattern="^[+=\-]?\d*" placeholder="0"
+                       data-dtype="Number" data-name="quantity.value" aria-label="{{ localize "DND5E.Quantity" }}"
+                       value="{{ quantity.value }}" min="0">
+                <button type="button" class="control-button adjustment-button unbutton" data-action="increase"
+                        data-property="system.quantity.value">
+                    <i class="fa-solid fa-plus" inert></i>
+                </button>
+                {{else}}
+                {{#if quantity.value}}<div class="slot">{{ quantity.value }}</div>
+                {{else}}<div class="slot empty"></div>{{/if}}
+                {{/if}}
+            </div>
+            {{/if}}
+            <div class="controls">
+                {{#if @root.editable}}
+                <button type="button" class="config-button unbutton" data-action="removeMember" data-tooltip
+                        aria-label="{{ localize "DND5E.Group.Action.Remove" }}">
+                    <i class="fa-solid fa-square-xmark" inert></i>
+                </button>
+                {{/if}}
+                {{#if showRoll}}
+                <button type="button" data-action="rollQuantity" data-tooltip data-tooltip-direction="RIGHT"
+                        aria-label="{{ quantity.formula }}">
+                    <i class="fa-solid fa-dice-d20" inert></i>
+                </button>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="pill-lg roboto-upper empty">
+        {{ localize "DND5E.ENCOUNTER.DropCreature" }}
+    </div>
+    {{/each}}
+
+    {{#with difficulty}}
+    <div class="bottom">
+        <div class="difficulty">
+            <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
+                 aria-valuetext="{{ value }}" aria-valuemax="{{ max }}"
+                 style="--bar-percentage: {{ pct }}%; --breakpoint-low: {{ stops.low }}%; --breakpoint-high: {{ stops.high }}%;">
+                <div class="label">
+                    <span class="value">
+                        {{ localize "DND5E.ExperiencePoints.Abbreviation" }}
+                        {{ dnd5e-numberFormat value }}
+                    </span>
+                </div>
+                {{#if stops.low}}
+                <i class="breakpoint breakpoint-low arrow-up" role="presentation"></i>
+                <i class="breakpoint breakpoint-low arrow-down" role="presentation"></i>
+                {{/if}}
+                {{#if stops.high}}
+                <i class="breakpoint breakpoint-high arrow-up" role="presentation"></i>
+                <i class="breakpoint breakpoint-high arrow-down" role="presentation"></i>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    {{/with}}
+</section>

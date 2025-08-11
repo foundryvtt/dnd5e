@@ -353,7 +353,7 @@ export default class InventoryElement extends HTMLElement {
       callback: () => item.displayCard()
     }];
 
-    if ( !this.actor || (this.actor.type === "group") ) return options;
+    if ( !this.actor || this.actor.system.isGroup ) return options;
     const favorited = this.actor.system.hasFavorite?.(item.getRelativeUUID(this.actor));
     const expanded = this.app.expandedSections ? this.app.expandedSections.get(item.id)
       : this.app._expanded.has(item.id); // TODO: Remove when V1 sheets are gone
@@ -497,7 +497,8 @@ export default class InventoryElement extends HTMLElement {
     if ( isNaN(value) ) return;
     value += action === "increase" ? 1 : -1;
     input.value = Math.clamp(value, min, max);
-    input.dispatchEvent(new Event("change"));
+    input._debouncedChange ??= foundry.utils.debounce(() => input.dispatchEvent(new Event("change")), 250);
+    input._debouncedChange();
   }
 
   /* -------------------------------------------- */

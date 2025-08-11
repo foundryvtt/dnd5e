@@ -9,12 +9,14 @@
 
 "TYPES.Actor.character": "Player Character",
 "TYPES.Actor.characterPl": "Player Characters",
+"TYPES.Actor.encounter": "Encounter",
+"TYPES.Actor.encounterPl": "Encounters",
+"TYPES.Actor.group": "Group",
+"TYPES.Actor.groupPl": "Groups",
 "TYPES.Actor.npc": "Non-Player Character",
 "TYPES.Actor.npcPl": "Non-Player Characters",
 "TYPES.Actor.vehicle": "Vehicle",
 "TYPES.Actor.vehiclePl": "Vehicles",
-"TYPES.Actor.group": "Group",
-"TYPES.Actor.groupPl": "Groups",
 
 "TYPES.ActiveEffect.enchantment": "Enchantment",
 "TYPES.ActiveEffect.enchantmentPl": "Enchantments",
@@ -292,8 +294,15 @@
   }
 },
 
-"DND5E.ActorWarningInvalidItem": "{itemType} items cannot be added to a {actorType}.",
-"DND5E.ActorWarningSingleton": "Only a single {itemType} can be added to a {actorType}.",
+"DND5E.ACTOR": {
+  "Warning": {
+    "CreateActor": "You must have 'Create New Actors' permission in order to summon directly from a compendium.",
+    "InvalidItem": "{itemType} items cannot be added to a {actorType}.",
+    "NoActor": "Actor cannot be found with UUID '{uuid}' to summon.",
+    "Singleton": "Only a single {itemType} can be added to a {actorType}."
+  }
+},
+
 "DND5E.ActiveEffectOverrideWarning": "This value is being modified by an Active Effect and cannot be edited. Disable the effect to edit it.",
 "DND5E.Add": "Add",
 "DND5E.AdditionalControls": "Additional Controls",
@@ -2051,6 +2060,23 @@
   }
 },
 
+"DND5E.ENCOUNTER": {
+  "Action": {
+    "Award": "Award XP & Currency"
+  },
+  "Difficulty": {
+    "high": "High Difficulty",
+    "low": "Low Difficulty",
+    "moderate": "Moderate Difficulty"
+  },
+  "DropCreature": "Drop Creature",
+  "Tab": {
+    "Description": "Description",
+    "Loot": "Loot",
+    "Members": "Members"
+  }
+},
+
 "DND5E.Environment": "Environment",
 
 "DND5E.EQUIPMENT": {
@@ -3471,6 +3497,7 @@
   "ClassSummary": "Default 5e Class Summary Sheet",
   "Container": "Default 5e Container Sheet",
   "DifficultTerrain": "Default 5e Difficult Terrain Sheet",
+  "Encounter": "Default 5e Encounter Sheet",
   "Group": "Default 5e Group Sheet",
   "Item": "Default 5e Item Sheet",
   "JournalEntry": "Default 5e Journal Entry Sheet",
@@ -3939,8 +3966,6 @@
     "EmptyDrop": "Click the <i class=\"fas fa-plus\"></i> button above to create a profile or drop a creature to summon here."
   },
   "Warning": {
-    "CreateActor": "You must have 'Create New Actors' permission in order to summon directly from a compendium.",
-    "NoActor": "Actor cannot be found with UUID '{uuid}' to summon.",
     "NoOwnership": "You must have ownership of '{actor}' in order to summon it.",
     "NoProfile": "Cannot find summoning profile {profileId} on '{item}'.",
     "Wildcard": "You must have 'Use File Browser' permissions to summon creatures with wildcard artwork."

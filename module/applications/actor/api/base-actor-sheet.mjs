@@ -1447,8 +1447,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   #saveSheetSize(position) {
     const { width, height } = position;
+    const prefs = {};
+    if ( width !== "auto" ) prefs.width = width;
+    if ( height !== "auto" ) prefs.height = height;
+    if ( foundry.utils.isEmpty(prefs) ) return;
     const key = `${this.actor.type}${this.actor.limited ? ":limited": ""}`;
-    game.user.setFlag("dnd5e", `sheetPrefs.${key}`, { width, height });
+    game.user.setFlag("dnd5e", `sheetPrefs.${key}`, prefs);
   }
 
   /* -------------------------------------------- */
@@ -1602,6 +1606,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     this.element.classList.toggle("sidebar-collapsed", collapsed);
     collapsed = this.element.classList.contains("sidebar-collapsed");
     const collapser = this.form.querySelector(".sidebar-collapser");
+    if ( !collapser ) return collapsed;
     const icon = collapser.querySelector("i");
     collapser.dataset.tooltip = `JOURNAL.View${collapsed ? "Expand" : "Collapse"}`;
     collapser.setAttribute("aria-label", game.i18n.localize(collapser.dataset.tooltip));
@@ -1804,10 +1809,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   async _onDropSingleItem(event, itemData) {
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
-      ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
-        itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
-      }));
+      ui.notifications.warn("DND5E.ACTOR.Warning.InvalidItem", {
+        format: {
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
+          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
+        }
+      });
       return false;
     }
 
@@ -1832,10 +1839,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       const dataModel = CONFIG.Item.dataModels[itemData.type];
       const singleton = dataModel?.metadata.singleton ?? false;
       if ( singleton && this.actor.itemTypes[itemData.type].length ) {
-        ui.notifications.error(game.i18n.format("DND5E.ActorWarningSingleton", {
-          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
-        }));
+        ui.notifications.error("DND5E.ACTOR.Warning.Singleton", {
+          format: {
+            itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
+            actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
+          }
+        });
         return false;
       }
 

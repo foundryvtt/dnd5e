@@ -1,10 +1,12 @@
 import CharacterData from "./character.mjs";
+import EncounterData from "./encounter.mjs";
 import {default as GroupData, GroupActor} from "./group.mjs";
 import NPCData from "./npc.mjs";
 import VehicleData from "./vehicle.mjs";
 
 export {
   CharacterData,
+  EncounterData,
   GroupActor, GroupData,
   NPCData,
   VehicleData
@@ -20,6 +22,7 @@ export {default as TraitsFields} from "./templates/traits.mjs";
 
 export const config = {
   character: CharacterData,
+  encounter: EncounterData,
   group: GroupData,
   npc: NPCData,
   vehicle: VehicleData

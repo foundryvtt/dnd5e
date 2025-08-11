@@ -194,6 +194,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   _initializeSource(source, options={}) {
+    if ( source instanceof foundry.abstract.DataModel ) source = source.toObject();
+
+    // Migrate encounter groups to their own Actor type.
+    if ( (source.type === "group") && (source.system?.type?.value === "encounter") ) {
+      source.type = "encounter";
+      foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
+    }
+
     source = super._initializeSource(source, options);
     const pack = game.packs.get(options.pack);
     if ( !source._id || !pack || !game.compendiumArt.enabled ) return source;
@@ -279,6 +287,61 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
 
+  /**
+   * Fetch an Actor by UUID and obtain a version of it in the World. If the Actor is inside a compendium, check if a
+   * version has already been imported before importing it again.
+   * @param {string} uuid                  The Actor's UUID.
+   * @param {object} [options]
+   * @param {object} [options.origin]      Optionally check if the Actor has a specific origin. If not supplied, any
+   *                                       Actor that matches the criteria will be returned.
+   * @param {string} [options.origin.key]  The origin property.
+   * @param {any} [options.origin.value]   The origin value.
+   * @returns {Promise<Actor5e>}
+   * @throws {Error}                       If the Actor cannot be found, or cannot be imported.
+   */
+  static async fetchExisting(uuid, options={}) {
+    const { origin } = options;
+    const actor = await fromUuid(uuid);
+    if ( !actor ) throw new Error(game.i18n.format("DND5E.ACTOR.Warning.NoActor", { uuid }));
+
+    const { actorLink } = actor.prototypeToken;
+    const matchesOrigin = !origin || (foundry.utils.getProperty(actor, origin.key) === origin.value);
+    if ( !actor.pack && (!actorLink || matchesOrigin) ) return actor;
+
+    // Search world actors to see if any had been previously imported for this purpose.
+    // Linked actors must match the origin to be considered.
+    const localActor = game.actors.find(a => {
+      const matchesOrigin = !origin || (foundry.utils.getProperty(actor, origin.key) === origin.value);
+      // Has been auto-imported by this process.
+      return (a.getFlag("dnd5e", "isAutoImported") || a.getFlag("dnd5e", "summonedCopy")) // Back-compat
+      // Sourced from the desired actor UUID.
+      && ((a._stats?.compendiumSource === uuid) || (a._stats?.duplicateSource === uuid))
+      // Unlinked or created from a specific source.
+      && (!a.prototypeToken.actorLink || matchesOrigin);
+    });
+    if ( localActor ) return localActor;
+
+    // Check permissions to create actors.
+    if ( !game.user.can("ACTOR_CREATE") ) throw new Error("DND5E.ACTOR.Warning.CreateActor");
+
+    // No suitable world actor was found, create one.
+    if ( actor.pack ) {
+      // Template actor resides only in a compendium, import the actor into the world.
+      return game.actors.importFromCompendium(game.packs.get(actor.pack), actor.id, {
+        "flags.dnd5e.isAutoImported": true
+      });
+    } else {
+      // A linked world actor was found. Create a copy to avoid affecting the original.
+      return actor.clone({
+        "flags.dnd5e.isAutoImported": true,
+        "_stats.compendiumSource": actor._stats.compendiumSource,
+        "_stats.duplicateSource": actor.uuid
+      }, { save: true });
+    }
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   prepareDerivedData() {
     const origin = this.getFlag("dnd5e", "summon.origin");
@@ -286,8 +349,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const { collection, primaryId } = foundry.utils.parseUuid(origin);
       dnd5e.registry.summons.track(collection?.get?.(primaryId)?.uuid, this.uuid);
     }
-
-    if ( (this.system.modelProvider !== dnd5e) || (this.type === "group") ) return;
   }
 
   /* -------------------------------------------- */
@@ -548,6 +609,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.type === "character" ) Object.assign(prototypeToken, {
       sight: { enabled: true }, actorLink: true, disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY
     });
+    if ( this.type === "group" ) prototypeToken.actorLink = true;
     this.updateSource({ prototypeToken });
   }
 
@@ -3157,8 +3219,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       condition: li => {
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
         const primary = game.actors.party;
-        return game.user.isGM && (actor?.type === "group")
-          && (actor.system.type.value === "party") && (actor !== primary);
+        return game.user.isGM && (actor?.type === "group") && (actor !== primary);
       },
       group: "system"
     }, {

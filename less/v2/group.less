@@ -4,36 +4,6 @@
 
 .dnd5e2.sheet.actor.group {
   --dnd5e-sheet-header-height: calc(var(--header-height) + 164px);
-  --underlay-barbarian: url("ui/official/classes/barbarian.webp");
-  --underlay-bard: url("ui/official/classes/bard.webp");
-  --underlay-cleric: url("ui/official/classes/cleric.webp");
-  --underlay-druid: url("ui/official/classes/druid.webp");
-  --underlay-fighter: url("ui/official/classes/fighter.webp");
-  --underlay-monk: url("ui/official/classes/monk.webp");
-  --underlay-paladin: url("ui/official/classes/paladin.webp");
-  --underlay-ranger: url("ui/official/classes/ranger.webp");
-  --underlay-rogue: url("ui/official/classes/rogue.webp");
-  --underlay-sorcerer: url("ui/official/classes/sorcerer.webp");
-  --underlay-warlock: url("ui/official/classes/warlock.webp");
-  --underlay-wizard: url("ui/official/classes/wizard.webp");
-  --underlay-npc-aberration: url("ui/official/npcs/aberration.webp");
-  --underlay-npc-beast: url("ui/official/npcs/beast.webp");
-  --underlay-npc-celestial: url("ui/official/npcs/celestial.webp");
-  --underlay-npc-construct: url("ui/official/npcs/construct.webp");
-  --underlay-npc-dragon: url("ui/official/npcs/dragon.webp");
-  --underlay-npc-elemental: url("ui/official/npcs/elemental.webp");
-  --underlay-npc-fey: url("ui/official/npcs/fey.webp");
-  --underlay-npc-fiend: url("ui/official/npcs/fiend.webp");
-  --underlay-npc-giant: url("ui/official/npcs/giant.webp");
-  --underlay-npc-humanoid: url("ui/official/npcs/humanoid.webp");
-  --underlay-npc-monstrosity: url("ui/official/npcs/monstrosity.webp");
-  --underlay-npc-ooze: url("ui/official/npcs/ooze.webp");
-  --underlay-npc-plant: url("ui/official/npcs/plant.webp");
-  --underlay-npc-undead: url("ui/official/npcs/undead.webp");
-  --underlay-vehicle-land: url("ui/official/vehicles/land.webp");
-  --underlay-vehicle-water: url("ui/official/vehicles/water.webp");
-  --underlay-vehicle-air: url("ui/official/vehicles/air.webp");
-  --underlay-vehicle-space: url("ui/official/vehicles/space.webp");
 
   &:not(.minimized)::before {
     content: var(--dnd5e-group-header-content, none);
@@ -212,11 +182,6 @@
     gap: 12px;
     padding: 16px 4px 16px 16px;
 
-    .member {
-      display: flex;
-      justify-content: center;
-    }
-
     &.stats {
       .member {
         display: grid;
@@ -229,35 +194,8 @@
 
     .vitals {
       flex-basis: 50%;
-      position: relative;
-      display: flex;
-      padding: 8px;
-      gap: 8px;
 
       > * { position: relative; }
-
-      &::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: var(--underlay, var(--underlay-npc-humanoid, var(--dnd5e-color-card))) top center / cover;
-        mask-image: linear-gradient(155deg, transparent 35%, black);
-        opacity: var(--group-underlay-opacity);
-        filter: var(--group-underlay-filter);
-        border-radius: 3px;
-      }
-
-      .portrait {
-        flex: 0 0 64px;
-
-        img, video {
-          width: 64px;
-          height: 64px;
-          object-fit: contain;
-          transform: scale(1.25);
-          margin-top: -10px;
-        }
-      }
 
       .bars {
         flex: 1;
@@ -305,12 +243,6 @@
       }
 
       .classes {
-        position: absolute;
-        inset: -8px 0 auto auto;
-        display: flex;
-        gap: 8px;
-        padding-inline: 8px;
-
         img {
           width: 24px;
           height: 24px;
@@ -321,16 +253,6 @@
           transition: all 250ms ease;
 
           &:hover { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
-        }
-
-        button {
-          background: var(--dnd5e-background-card);
-          color: var(--dnd5e-color-red);
-          width: 16px;
-          height: 15px;
-          font-size: 19px;
-          display: inline-grid;
-          place-content: center;
         }
       }
 
@@ -483,39 +405,80 @@
       }
     }
   }
+}
 
-  /* ---------------------------------- */
-  /*  Biography                         */
-  /* ---------------------------------- */
+/* ---------------------------------- */
+/*  Biography                         */
+/* ---------------------------------- */
 
-  [data-tab=biography] {
-    padding-block: 8px;
-    gap: 16px;
+.dnd5e2.sheet.actor {
+  &.group, &.encounter {
+    .tab[data-tab=biography], .tab[data-tab=description] {
+      padding-block: 8px;
+      gap: 16px;
 
-    :is(.middle, .bottom) {
-      padding-inline: 16px;
+      :is(.middle, .bottom) {
+        padding-inline: 16px;
 
-      > h3 {
-        margin-right: 24px;
-        position: relative;
+        > h3 {
+          margin-right: 24px;
+          position: relative;
 
-        .editor-edit {
-          position: absolute;
-          inset: auto auto -3px 100%;
-          font-size: var(--font-size-18);
-          color: var(--color-text-primary);
+          .editor-edit {
+            position: absolute;
+            inset: auto auto -3px 100%;
+            font-size: var(--font-size-18);
+            color: var(--color-text-primary);
+          }
+        }
+      }
+
+      > .editor {
+        flex: 1;
+
+        menu { border-radius: 0; }
+
+        .editor-content {
+          padding: 0 4px 0 16px;
+          margin-right: 4px;
         }
       }
     }
+  }
+}
 
-    > .editor {
-      flex: 1;
+/* -------------------------------------------- */
+/*  Limited                                     */
+/* -------------------------------------------- */
 
-      menu { border-radius: 0; }
+.dnd5e2.sheet.actor {
+  &.group.limited {
+    &:not(.minimized, .minimizing, .maximizing) {
+      min-width: 600px;
+      min-height: 650px;
+    }
+  }
 
-      .editor-content {
-        padding: 0 4px 0 16px;
-        margin-right: 4px;
+  &.group, &.encounter {
+    &.limited {
+      .window-content { padding: 0; }
+
+      .sheet-header {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .tab[data-tab=biography] {
+        h3 {
+          margin-right: 1.5rem;
+          position: relative;
+
+          i.fa-feather {
+            position: absolute;
+            inset: auto auto -1px 100%;
+            font-size: var(--font-size-18);
+          }
+        }
       }
     }
   }
