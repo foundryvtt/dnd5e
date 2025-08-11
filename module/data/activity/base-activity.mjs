@@ -153,7 +153,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canConfigureScaling() {
-    return this.consumption.scaling.allowed || (this.isSpell && (this.item.system.level > 0));
+    return this.consumption.scaling.allowed || this.item.system.canConfigureScaling;
   }
 
   /* -------------------------------------------- */
@@ -163,8 +163,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canScale() {
-    return this.consumption.scaling.allowed || (this.isSpell && (this.item.system.level > 0)
-      && CONFIG.DND5E.spellcasting[this.item.system.method]?.slots);
+    return this.consumption.scaling.allowed || this.item.system.canScale;
   }
 
   /* -------------------------------------------- */
@@ -174,7 +173,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canScaleDamage() {
-    return this.consumption.scaling.allowed || this.isScaledScroll || this.isSpell;
+    return this.consumption.scaling.allowed || this.isScaledScroll || this.item.system.canScaleDamage;
   }
 
   /* -------------------------------------------- */
