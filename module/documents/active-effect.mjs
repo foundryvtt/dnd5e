@@ -739,7 +739,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       if ( magicalField ) statuses?.before(magicalField);
       if ( statusesField ) statuses?.after(statusesField);
     } else {
-      detailsTab.append(magicalField, statusesField);
+      detailsTab.append(...[magicalField, statusesField].filter(_ => _));
     }
 
     // Add tooltip with link to wiki for effects/enchantments
