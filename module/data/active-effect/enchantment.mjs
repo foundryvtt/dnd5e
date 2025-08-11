@@ -1,6 +1,6 @@
 import { DamageData } from "../shared/damage-field.mjs";
 
-const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField } = foundry.data.fields;
 
 /**
  * System data model for enchantment active effects.
@@ -11,20 +11,19 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT", "DND5E.EFFECT.RIDER"];
+  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT"];
 
   /* -------------------------------------------- */
 
   /** @override */
   static defineSchema() {
     return {
-      magical: new BooleanField({ initial: true }),
-      rider: new SchemaField({
-        statuses: new SetField(new StringField())
-      })
+      magical: new BooleanField({ initial: true })
     };
   }
 
+  /* -------------------------------------------- */
+  /*  Effect Application                          */
   /* -------------------------------------------- */
 
   /**
