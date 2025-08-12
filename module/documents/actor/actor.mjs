@@ -2807,7 +2807,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     delete d.system.resources; // Don't change your resource pools
     delete d.system.currency; // Don't lose currency
     delete d.system.bonuses; // Don't lose global bonuses
-    if ( settings.keep.has("spells") ) delete d.system.attributes.spellcasting; // Keep spellcasting ability if retaining spells.
+    if ( settings.keep.has("spells") || settings.spellLists.size ) delete d.system.attributes.spellcasting; // Keep spellcasting ability if retaining spells.
 
     // Specific additional adjustments
     d.system.details.alignment = o.system.details.alignment; // Don't change alignment
@@ -2870,6 +2870,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( settings.keep.has("languages") ) d.system.traits.languages = o.system.traits.languages;
 
       // Keep specific items from the original data
+      const spellIdentifiers = settings.spellLists.size ? new Set(
+        Array.from(settings.spellLists)
+          .map(id => dnd5e.registry.spellLists.forType(...id.split(":")))
+          .filter(list => this.identifiedItems.get(list?.metadata.identifier, list?.metadata.type)?.size)
+          .flatMap(list => Array.from(list.identifiers))
+      ) : null;
       const profDiff = source.system.attributes.prof - this.system.attributes.prof;
       d.items = d.items.map(i => {
         if ( settings.keep.has("class") && ((i.type === "feat") || (i.type === "weapon")) ) {
@@ -2884,7 +2890,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           case "class":
           case "subclass": return settings.keep.has("class") || settings.keep.has("hp");
           case "feat": return settings.keep.has("feats");
-          case "spell": return settings.keep.has("spells");
+          case "spell": return spellIdentifiers?.has(i.system.identifier)
+            || (!spellIdentifiers && settings.keep.has("spells"));
           case "race": return settings.keep.has("type");
           default: return settings.keep.has("items");
         }
@@ -3121,7 +3128,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( transformOptions?.keep?.includes("hp") ) {
       foundry.utils.setProperty(update, "system.attributes.hp.value", this.system.attributes.hp.value);
     }
-    if ( transformOptions?.keep?.includes("spells") ) {
+    if ( transformOptions?.keep?.includes("spells") || transformOptions?.spellLists?.length ) {
       Object.entries(this.system.spells ?? {}).forEach(([k, v]) => {
         if ( v.max ) update[`system.spells.${k}.value`] = v.value;
       });

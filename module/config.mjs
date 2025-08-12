@@ -3392,7 +3392,15 @@ DND5E.SPELL_LISTS = Object.freeze([
   "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5",
   "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.VfZ5mH2ZuyFq82Ga",
   "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.sSzagq8GvYXpfmfs",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.6AnqLUowgdsqMFvz"
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.6AnqLUowgdsqMFvz",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLife000000",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLandArid00",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLandPolar0",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLandTemper",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLandTropic",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsDevotion00",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsDraconic00",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsFiend00000"
 ]);
 
 /* -------------------------------------------- */
@@ -3774,6 +3782,7 @@ DND5E.transformation = {
         keep: new Set(["bio", "class", "feats", "hp", "languages", "mental", "type"]),
         merge: new Set(["saves", "skills"]),
         minimumAC: "(13 + @abilities.wis.mod) * sign(@subclasses.moon.levels)",
+        spellLists: new Set(["subclass:moon"]),
         tempFormula: "max(@classes.druid.levels, @subclasses.moon.levels * 3)"
       }
     },
