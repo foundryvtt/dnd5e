@@ -588,7 +588,9 @@ export default class CompendiumBrowser extends Application5e {
           if ( Object.keys(groups).length > 1 ) Object.entries(groups).forEach(([group, choices]) => pushFilter({
             ...data,
             collapsed: data.config.collapseGroup?.(group),
-            label: `${game.i18n.localize(data.label)} (${group})`,
+            label: game.i18n.format("DND5E.CompendiumBrowser.Filters.Grouped", {
+              type: game.i18n.localize(data.label), group
+            }),
             config: { ...data.config, choices }
           }));
 
