@@ -573,11 +573,29 @@ export default class CompendiumBrowser extends Application5e {
           return data !== undefined;
         };
 
-        arr.push(foundry.utils.mergeObject(data, {
+        const pushFilter = data => arr.push(foundry.utils.mergeObject(data, {
           key, sort,
           value: context.filters.additional?.[key],
           locked: generateLocked(this.options.filters.locked?.additional?.[key])
         }, { inplace: false }));
+
+        if ( data.type === "set" ) {
+          const groups = Object.entries(data.config.choices).reduce((groups, [k, v]) => {
+            groups[v.group] ??= {};
+            groups[v.group][k] = v;
+            return groups;
+          }, {});
+          if ( Object.keys(groups).length > 1 ) Object.entries(groups).forEach(([group, choices]) => pushFilter({
+            ...data,
+            collapsed: data.config.collapseGroup?.(group),
+            label: `${game.i18n.localize(data.label)} (${group})`,
+            config: { ...data.config, choices }
+          }));
+
+          else pushFilter({ ...data, collapsed: data.collapseGroup?.(null) });
+        }
+        else pushFilter(data);
+
         return arr;
       }, []);
 

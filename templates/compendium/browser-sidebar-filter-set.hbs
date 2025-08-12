@@ -1,8 +1,8 @@
-<div class="filter filter-set collapsible" data-filter-id="{{ key }}">
+<div class="filter filter-set collapsible {{~#if collapsed}} collapsed{{/if}}" data-filter-id="{{ key }}">
     <div class="filter-header">
         <label data-action="toggleCollapse">
             <span class="roboto-upper">{{ localize label }}</span>
-            <i class="fa-solid fa-caret-down"></i>
+            <i class="fa-solid fa-caret-down" inert></i>
         </label>
     </div>
     <div class="collapsible-content">
