@@ -38,7 +38,7 @@ export default class RequestMessageData extends ChatMessageDataModel {
       data: new ObjectField(),
       handler: new StringField({ required: true, blank: false }),
       targets: new ArrayField(new SchemaField({
-        actor: new DocumentUUIDField({ type: "Actor" }),
+        actor: new DocumentUUIDField({ type: "Actor", validate: RequestMessageData.#validateActorUuid }),
         result: new ForeignDocumentField(foundry.documents.BaseChatMessage),
         user: new ForeignDocumentField(foundry.documents.BaseUser)
       }))
@@ -125,7 +125,7 @@ export default class RequestMessageData extends ChatMessageDataModel {
     const actor = await fromUuid(target.closest("[data-uuid]").dataset.uuid);
     const result = await CONFIG.DND5E.requests[this.handler](actor, this.parent, this.data, { event });
     if ( (result instanceof ChatMessage) && !result.getFlag("dnd5e", "requestResult") ) {
-      return result.setFlag("dnd5e", "requestResult", { actorUUID: actor.uuid, requestId: this.parent.id });
+      return result.setFlag("dnd5e", "requestResult", { actorUuid: actor.uuid, requestId: this.parent.id });
     }
   }
 
@@ -160,20 +160,34 @@ export default class RequestMessageData extends ChatMessageDataModel {
    * Update target information when a request result is processed.
    * @param {ChatMessage5e} message    The message fulfilling a request.
    * @param {object} result
-   * @param {string} result.actorUUID  The UUID of the actor fulfilling the request.
+   * @param {string} result.actorUuid  The UUID of the actor fulfilling the request.
    * @param {string} result.requestId  The ID of the original request message.
    */
   static async #updateRequestTargets(message, result) {
-    const actor = await fromUuid(result.actorUUID);
+    const actor = await fromUuid(result.actorUuid);
     const request = game.messages.get(result.requestId);
     if ( !actor || !request ) return;
 
-    const index = request.system.targets.findIndex(t => t.actor === result.actorUUID);
+    const index = request.system.targets.findIndex(t => t.actor === result.actorUuid);
     const target = request.system.targets[index];
     if ( !target ) return;
 
     const targetsData = request.system.toObject().targets ?? [];
     targetsData[index].result = message.id;
     request.update({ "system.targets": targetsData });
+  }
+
+  /* -------------------------------------------- */
+  /*  Validation                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure provided Actor UUIDs can be resolved synchronously.
+   * @param {string} uuid  The UUID.
+   */
+  static #validateActorUuid(uuid) {
+    if ( uuid.startsWith(".") || uuid.startsWith("Compendium.") ) {
+      throw new Error("Request Message target UUIDs may not be relative or inside a compendium.");
+    }
   }
 }

@@ -1102,7 +1102,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   static async handleSkillCheckRequest(actor, request, config, { event }={}) {
     const data = {};
-    foundry.utils.setProperty(data, "flags.dnd5e.requestResult", { actorUUID: actor.uuid, requestId: request.id });
+    foundry.utils.setProperty(data, "flags.dnd5e.requestResult", { actorUuid: actor.uuid, requestId: request.id });
     const [roll] = (await actor.rollSkill({ ...config, event }, {}, { data })) ?? [];
     return roll?.parent ?? null;
   }
@@ -2384,7 +2384,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     };
     if ( config.request ) foundry.utils.setProperty(chatData, "flags.dnd5e.requestResult", {
-      actorUUID: this.uuid, requestId: config.request.id
+      actorUuid: this.uuid, requestId: config.request.id
     });
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return ChatMessage.create(chatData);
