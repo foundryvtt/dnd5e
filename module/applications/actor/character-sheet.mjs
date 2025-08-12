@@ -297,7 +297,11 @@ export default class CharacterActorSheet extends BaseActorSheet {
     ].map(k => {
       const field = this.actor.system.schema.fields.details.fields[k];
       const name = `system.details.${k}`;
-      return { name, label: field.label, value: foundry.utils.getProperty(this.actor, name) ?? "" };
+      return {
+        name, label: field.label,
+        value: foundry.utils.getProperty(this.actor, name) ?? "",
+        source: foundry.utils.getProperty(this.actor._source, name) ?? ""
+      };
     });
 
     return context;
