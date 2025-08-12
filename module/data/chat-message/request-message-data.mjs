@@ -97,16 +97,15 @@ export default class RequestMessageData extends ChatMessageDataModel {
       content: await foundry.applications.ux.TextEditor.implementation.enrichHTML(
         this.parent.content, { rollData: this.parent.getRollData() }
       ),
-      targets: (await Promise.all(this.targets.map(async t => {
-        if ( !t.actor ) return null;
-        const actor = await fromUuid(t.actor);
+      targets: this.targets.map(t => {
+        const actor = fromUuidSync(t.actor);
         if ( !actor ) return null;
         const visible = game.user.isGM || (!!t.user && (game.user === t.user)) || (!t.user && actor.isOwner);
         const { result } = t;
         const completed = result !== null;
         const total = result?.rolls[0]?.total;
         return { actor, completed, total, visible };
-      }))).filter(_ => _)
+      }).filter(_ => _)
     };
   }
 
@@ -122,7 +121,7 @@ export default class RequestMessageData extends ChatMessageDataModel {
    * @returns {Promise<ChatMessage5e|void>}
    */
   static async #handleRequest(event, target) {
-    const actor = await fromUuid(target.closest("[data-uuid]").dataset.uuid);
+    const actor = fromUuidSync(target.closest("[data-uuid]").dataset.uuid);
     const result = await CONFIG.DND5E.requests[this.handler](actor, this.parent, this.data, { event });
     if ( (result instanceof ChatMessage) && !result.getFlag("dnd5e", "requestResult") ) {
       return result.setFlag("dnd5e", "requestResult", { actorUuid: actor.uuid, requestId: this.parent.id });
@@ -163,8 +162,8 @@ export default class RequestMessageData extends ChatMessageDataModel {
    * @param {string} result.actorUuid  The UUID of the actor fulfilling the request.
    * @param {string} result.requestId  The ID of the original request message.
    */
-  static async #updateRequestTargets(message, result) {
-    const actor = await fromUuid(result.actorUuid);
+  static #updateRequestTargets(message, result) {
+    const actor = fromUuidSync(result.actorUuid);
     const request = game.messages.get(result.requestId);
     if ( !actor || !request ) return;
 
