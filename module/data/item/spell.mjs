@@ -114,7 +114,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
         },
         config: {
           choices: dnd5e.registry.spellLists.options.reduce((obj, entry) => {
-            const list = dnd5e.registry.spellLists.forType(...entry.value.split(":"));
+            const [type, identifier] = entry.value.split(":");
+            if ( type === "subclass" ) return obj;
+            const list = dnd5e.registry.spellLists.forType(type, identifier);
             if ( list?.identifiers.size ) obj[entry.value] = entry.label;
             return obj;
           }, {})
