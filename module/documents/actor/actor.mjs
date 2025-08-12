@@ -2807,7 +2807,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     delete d.system.resources; // Don't change your resource pools
     delete d.system.currency; // Don't lose currency
     delete d.system.bonuses; // Don't lose global bonuses
-    if ( settings.keep.has("spells") ) delete d.system.attributes.spellcasting; // Keep spellcasting ability if retaining spells.
+    if ( settings.keep.has("spells") || settings.spellLists.size ) delete d.system.attributes.spellcasting; // Keep spellcasting ability if retaining spells.
 
     // Specific additional adjustments
     d.system.details.alignment = o.system.details.alignment; // Don't change alignment
@@ -3128,7 +3128,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( transformOptions?.keep?.includes("hp") ) {
       foundry.utils.setProperty(update, "system.attributes.hp.value", this.system.attributes.hp.value);
     }
-    if ( transformOptions?.keep?.includes("spells") ) {
+    if ( transformOptions?.keep?.includes("spells") || transformOptions?.spellLists?.length ) {
       Object.entries(this.system.spells ?? {}).forEach(([k, v]) => {
         if ( v.max ) update[`system.spells.${k}.value`] = v.value;
       });
