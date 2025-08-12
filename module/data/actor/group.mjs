@@ -266,7 +266,7 @@ export default class GroupData extends GroupTemplate {
         data: { ...config },
         handler: "skill",
         targets: this.members.flatMap(({ actor }) => {
-          if ( actor.system.skills ) return { actor };
+          if ( actor.system.skills ) return { actor: actor.uuid };
           return [];
         })
       },
@@ -308,7 +308,7 @@ export default class GroupData extends GroupTemplate {
             type: config.type
           },
           handler: "rest",
-          targets: targets.map(t => ({ actor: t }))
+          targets: targets.map(t => ({ actor: t.uuid }))
         },
         type: "request"
       };
