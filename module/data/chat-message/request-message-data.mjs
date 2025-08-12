@@ -67,7 +67,7 @@ export default class RequestMessageData extends ChatMessageDataModel {
       const { uuid } = item.dataset;
       const { result } = this.targets.find(t => t.actor.uuid === uuid) ?? {};
       const [roll] = result?.rolls ?? [];
-      if ( !result?.shouldDisplayChallenge || (!roll?.isSuccess && !roll?.isFailure) ) continue;
+      if ( !this.parent.shouldDisplayChallenge || (!roll?.isSuccess && !roll?.isFailure) ) continue;
       const status = item.querySelector(".status");
       status.classList.toggle("success", roll.isSuccess);
       status.classList.toggle("failure", roll.isFailure);
