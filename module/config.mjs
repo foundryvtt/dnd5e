@@ -3779,7 +3779,7 @@ DND5E.transformation = {
       label: "DND5E.TRANSFORM.Preset.WildShape.Label",
       settings: {
         effects: new Set(["otherOrigin", "origin", "feat", "spell", "class", "background"]),
-        keep: new Set(["bio", "class", "feats", "hp", "languages", "mental", "type"]),
+        keep: new Set(["bio", "class", "feats", "hp", "languages", "mental", "spells", "type"]),
         merge: new Set(["saves", "skills"]),
         minimumAC: "(13 + @abilities.wis.mod) * sign(@subclasses.moon.levels)",
         spellLists: new Set(["subclass:moon"]),
