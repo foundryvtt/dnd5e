@@ -1,4 +1,4 @@
-![Up to date as of 5.0.0](https://img.shields.io/static/v1?label=dnd5e&message=5.0.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 ## Rolling Process
 
@@ -50,6 +50,28 @@ A hook event that fires after a roll config has been built using the roll prompt
 | options.formData | [FormDataExtended]             | Any data entered into the rolling prompt.           |
 
 ## Actor
+
+### `dnd5e.compute___Progression` (`dnd5e.computeSpellProgression`, `dnd5e.computePactProgression`)
+
+A hook event that fires while computing the spellcasting progression for each class on each actor. A different version of the hook will be fired for each spellcasting method defined in `CONFIG.DND5E.spellcasting`. Returning `false` will prevent additional computation of this progression.
+
+| Name        | Type         | Description                                                       |
+| ----------- | ------------ | ----------------------------------------------------------------- |
+| spells      | object       | The `data.spells` object within actor's data. *Will be mutated.*  |
+| actor       | Actor5e|void | Actor for whom the data is being prepared, if any.                |
+| progression | object       | Spellcasting progression data.                                    |
+
+### `dnd5e.prepare___Slots` (`dnd5e.prepareSpellSlots`, `dnd5e.preparePactSlots`)
+
+A hook event that fires to convert the provided spellcasting progression into spell slots. A different version of the hook will be fired for each spellcasting method defined in `CONFIG.DND5E.spellcasting`. Returning `false` will prevent additional preparation of this progression.
+
+| Name         | Type                    | Description                                        |
+| ------------ | ----------------------- | -------------------------------------------------- |
+| progression  | object                  | Spellcasting progression data. *Will be mutated.*  |
+| actor        | Actor5e|void            | Actor for whom the data is being prepared.         |
+| cls          | Item5e                  | Class for whom this progression is being computed. |
+| spellcasting | SpellcastingDescription | Spellcasting descriptive object.                   |
+| count        | number                  | Number of classes with this type of spellcasting.  |
 
 ### `dnd5e.preRollAbilityCheck` & `dnd5e.preRollSavingThrow`
 
@@ -378,6 +400,34 @@ Fires to convert the provided spellcasting progression into spell slots. A diffe
 | actor       | Actor5e | Actor for whom the data is being prepared.    |
 | progression | object  | Spellcasting progression data.                |
 
+
+## Actor Sheets
+
+### `dnd5e.filterItem`
+
+Fires when a sheet filters an item. Returning `false` will prevent item from being displayed.
+
+| Name     | Type                          | Description                              |
+| -------- | ----------------------------- | ---------------------------------------- |
+| sheet    | BaseActorSheet|ContainerSheet | The sheet the item is being rendered on. |
+| item     | Item5e                        | The item being filtered.                 |
+| filters  | Set<string>                   | Filters applied to the Item.             |
+
+
+## Actor & Item Sheets
+
+### `dnd5e.prepareSheetContext`
+
+Fires during preparation of sheet parts.
+
+| Name     | Type                     | Description                                 |
+| -------- | ------------------------ | ------------------------------------------- |
+| sheet    | BaseActorSheet           | Sheet being rendered.                       |
+| partId   | string                   | The ID of the part being prepared.          |
+| context  | object                   | Preparation context that should be mutated. |
+| options  | object                   | Render options.                             |
+
+
 ## Advancement
 
 ### `dnd5e.preAdvancementManagerRender`
@@ -428,6 +478,19 @@ Fires after dnd5e-specific chat message modifications have completed.
 | ------- | ------------- | ----------------------------- |
 | message | ChatMessage5e | Chat message being rendered.  |
 | html    | HTMLElement   | HTML contents of the message. |
+
+
+## Compendium Browser
+
+### `dnd5e.compendiumBrowserSelection`
+
+Fires when a compendium browser is submitted with selected items.
+
+| Name     | Type              | Description                                     |
+| -------- | ----------------- | ----------------------------------------------- |
+| browser  | CompendiumBrowser | Compendium Browser application being submitted. |
+| selected | Set<string>       | Set of document UUIDs that are selected.        |
+
 
 ## Activities
 
@@ -644,6 +707,49 @@ Fires when summoning is complete.
 | options  | SummoningConfiguration | Configuration data for summoning behavior.     |
 
 
+## Combat
+
+### `dnd5e.preCombatRecovery`
+
+Fires before combat-related recovery changes. Returning `false` will prevent combat recovery from being performed.
+
+| Name      | Type                   | Description                        |
+| --------- | ---------------------- | ---------------------------------- |
+| combatant | Combatant5e            | Combatant that is being recovered. |
+| periods   | string[]               | Periods to be recovered.           |
+
+### `dnd5e.combatRecovery`
+
+Fires after combat-related recovery changes have been prepared, but before they have been applied to the actor. Returning `false` will prevent combat recovery from being performed.
+
+| Name      | Type                   | Description                                             |
+| --------- | ---------------------- | ------------------------------------------------------- |
+| combatant | Combatant5e            | Combatant that is being recovered.                      |
+| periods   | string[]               | Periods that were recovered.                            |
+| results   | CombatRecoveryResults  | Update that will be applied to the actor and its items. |
+
+### `dnd5e.preCreateCombatMessage`
+
+Fires before a combat state change chat message is created.
+
+| Name                 | Type        | Description                                      |
+| -------------------- | ----------- | ------------------------------------------------ |
+| combatant            | Combatant5e | Combatant for which the message will be created. |
+| messageConfig        | object      |                                                  |
+| messageConfig.create | boolean     | Should the chat message be posted?               |
+| messageConfig.data   | object      | Data for the created chat message.               |
+
+### `dnd5e.postCombatRecovery`
+
+Fires after combat-related recovery changes have been applied.
+
+| Name      | Type                | Description                        |
+| --------- | ------------------- | ---------------------------------- |
+| combatant | Combatant5e         | Combatant that is being recovered. |
+| periods   | string[]            | Periods that were recovered.       |
+| message   | ChatMessage5e|void  | Chat message created, if any.      |
+
+
 ## Items
 
 ### `dnd5e.preDisplayCard`
@@ -703,6 +809,7 @@ Fires after the item data for a scroll is created but before the item is returne
 | item            | Item5e\|object | The spell or item data to be made into a scroll. |
 | spellScrollData | object         | The final item data used to make the scroll.     |
 
+
 ## Item Sheet
 
 ### `dnd5e.dropItemSheetData`
@@ -715,15 +822,28 @@ Fires when some useful data is dropped onto an `ItemSheet5e`. Returning `false` 
 | sheet | ItemShee5e | The ItemSheet5e application.                   |
 | data  | object     | The data that has been dropped onto the sheet. |
 
+
 ## Journal Pages
 
-### `dnd5e.build___SpellcastingTable` (`dnd5e.buildLeveledSpellcastingTable` & `dnd5e.buildPactSpellcastingTable` by default)
+### `dnd5e.build___SpellcastingTable` (`dnd5e.buildSpellSpellcastingTable` & `dnd5e.buildPactSpellcastingTable` by default)
 
-Fires to generate the table for custom spellcasting types. A different version of the hook will be fired for each spellcasting type defined in `CONFIG.DND5E.spellcastingTypes`.
+Fires to generate the table for custom spellcasting types. A different version of the hook will be fired for each spellcasting method defined in `CONFIG.DND5E.spellcasting`.
 
 | Name         | Type                    | Description                                            |
 | ------------ | ----------------------- | ------------------------------------------------------ |
 | table        | object                  | Table definition being built.                          |
 | item         | Item5e                  | Class for which the spellcasting table is being built. |
 | spellcasting | SpellcastingDescription | Spellcasting descriptive object.                       |
+
+### `dnd5e.renderNPCStatBlock`
+
+Fires after an embedded NPC stat block is rendered.
+
+| Name     | Type                    | Description                               |
+| -------- | ----------------------- | ----------------------------------------- |
+| actor    | Actor5e                 | NPC being embedded.                       |
+| template | HTMLTemplateElement     | Template whose children will be embedded. |
+| config   | DocumentHTMLEmbedConfig | Configuration for embedding behavior.     |
+| options  | EnrichmentOptions       | Original enrichment options.              |
+
 

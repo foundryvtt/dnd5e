@@ -1,4 +1,4 @@
-![Up to date as of 4.1.0](https://img.shields.io/static/v1?label=dnd5e&message=4.1.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 The compendium browser is a new application for finding content from across multiple compendiums using searching and filtering. The browser can be accessed using the "Open Compendium Browser" button at the top of the Compendium Packs sidebar tab.
 

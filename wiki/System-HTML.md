@@ -1,9 +1,9 @@
-![Up to date as of 3.3.0](https://img.shields.io/static/v1?label=dnd5e&message=3.3.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 The D&D system provides several new CSS classes for formatting text. These styles can be applied to any text field by editing the Source HTML </> and following the examples below.
 
 ## Advice and Quest Blocks
-The `fvtt advice` and `fvtt quest` classes share the same format, displaying an image on the left with accompanying text in a boxed layout on the right.  
+The `fvtt advice` and `fvtt quest` classes share the same format, displaying an image on the left with accompanying text in a boxed layout on the right.
 Specify the image using the img src attribute within the figure block and the text within the article block.
 
 ```html
