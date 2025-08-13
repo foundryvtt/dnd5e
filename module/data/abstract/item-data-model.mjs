@@ -130,7 +130,8 @@ export default class ItemDataModel extends SystemDataModel {
    */
   get magicAvailable() {
     return (!("attuned" in this) || this.attuned || (this.attunement !== "required"))
-      && (!("properties" in this) || this.properties.has("mgc") || !this.validProperties.has("mgc"));
+      && (!("properties" in this) || this.properties.has("mgc") || !this.validProperties.has("mgc"))
+      && !this.parent.actor?.statuses.has("antimagic");
   }
 
   /* -------------------------------------------- */
