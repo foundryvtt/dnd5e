@@ -1,4 +1,4 @@
-![Up to date as of 4.3.1](https://img.shields.io/static/v1?label=dnd5e&message=4.3.1&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 > <details><summary>To explore the data model within Foundry to find the properties detailed below, here are a few approaches:</summary>
 >
@@ -64,6 +64,8 @@
 `@attributes.ac.cover` - Any cover effects for the actor, must be set by active effects or modules
 
 `@attributes.ac.value` - Final AC value, result of adding `ac.base + ac.shield + ac.bonus + ac.cover`
+
+`@attributes.ac.label` - Localized name of the armor calculation.
 
 
 #### Attunement
@@ -154,13 +156,15 @@
 
 #### Other Attributes
 
-`@attributes.prof` - Base, numerical proficiency value (does not reflect options like Proficiency Dice)
+`@attributes.prof` - Base, numerical proficiency value (does not reflect options like Proficiency Dice).
 
-`@attributes.spell.dc` - Spell save DC based on the selected spellcasting ability
+`@attributes.spell.dc` - Spell save DC based on the selected spellcasting ability.
 
-`@attributes.spell.mod` - Base ability modifier for the actor's selected spellcasting ability
+`@attributes.spell.mod` - Base ability modifier for the actor's selected spellcasting ability.
 
-`@attributes.spell.attack` - Spell attack bonus for the actor's selected spellcasting ability
+`@attributes.spell.attack` - Spell attack bonus for the actor's selected spellcasting ability.
+
+`@attributes.spell.abilityLabel` - Localized label for the actor's selected spellcasting ability.
 
 ### Classes
 
@@ -171,6 +175,8 @@
 `@classes.*.hd.denomination` - The hit die denomination of the class, e.g., 'd8'.
 
 `@classes.*.hd.spent` - How many hit dice this class has expended.
+
+`@subclasses.*.levels` - The current level of the class to which a certain subclass belongs.
 
 ### Currency
 
@@ -308,9 +314,23 @@
 
 `@spells.*.level` - The level of the relevant spell slots (e.g., the level of the pact slots, or the '3' in 'spell3').
 
+`@spells.*.label` - Localized label for the spellcasting level.
+
+### Status Effects
+
+***Note:** Replace the `*` in the following formulas with a status effect ID.*
+
+`@statuses.*` - `1` if actor has this status effect, otherwise nothing.
+
+`@statuses.concentrating` - The number of effects currently being concentrated upon by the actor.
+
+`@statuses.exhaustion` - The number of levels of exhaustion on the actor.
+
 ## Item Properties
 
-Items have roll data same as actors, but only while said item is owned by an actor (i.e., is placed on their sheet). The roll data of item is an extension of the actor's roll data, adding `@scaling` & `@item` as additional properties.
+Items have roll data same as actors, but only while said item is owned by an actor (i.e., is placed on their sheet). The roll data of item is an extension of the actor's roll data, adding `@activity`, `@mod`, `@scaling`, `@item` as additional properties.
+
+`@mod` - The current ability modifier that affects an activity's usage.
 
 `@scaling` - Current scaling of an activity when used (so a 3rd level spell cast at 3rd level would be `1`).
 
@@ -322,8 +342,10 @@ The most common `@item` properties are:
 
 `@item.uses.max` - The max Limited Uses of this item.
 
-`@item.save.dc` - The saving throw DC of this item.
-
 `@item.level` - The spell level of this item (for spells only).
 
 `@item.levels` - The class level of this item (for classes only).
+
+### Flags
+
+`@flags.*` - An arbitrary object added to the roll data object for convenience. There are no rules regarding the properties held here, as they are added as needed by the system, modules, or macros.
