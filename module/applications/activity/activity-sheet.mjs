@@ -2,6 +2,8 @@ import { ConsumptionTargetData } from "../../data/activity/fields/consumption-ta
 import UsesField from "../../data/shared/uses-field.mjs";
 import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * Default sheet for activities.
  */
