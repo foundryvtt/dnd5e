@@ -68,7 +68,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
       collection: "advancement",
       hint: "",
       icon: "icons/svg/upgrade.svg",
-      label: "DOCUMENT.DND5E.Advancement",
+      label: "DOCUMENT.Advancement",
       multiLevel: false,
       name: "Advancement",
       order: 100,
