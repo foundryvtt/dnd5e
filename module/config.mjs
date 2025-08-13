@@ -4214,6 +4214,17 @@ DND5E.neverBlockStatuses = new Set();
 /* -------------------------------------------- */
 
 /**
+ * Configuration for the special antimagic status effect.
+ * @type {{ name: string, img: string }}
+ */
+DND5E.antimagic = {
+  name: "EFFECT.DND5E.StatusAntimagic",
+  img: "systems/dnd5e/icons/svg/statuses/antimagic.svg"
+};
+
+/* -------------------------------------------- */
+
+/**
  * Configuration for the special bloodied status effect.
  * @type {{ name: string, icon: string, threshold: number }}
  */
