@@ -1,4 +1,4 @@
-![Up to date as of 5.0.0](https://img.shields.io/static/v1?label=dnd5e&message=5.0.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 The transformation system allows for modifying an actor using the stats of another. This is useful for features like Wild Shape and spells like Polymorph and Disguise Self. The changes performed can be simple cosmetic changes that alter the token and portrait artwork, or large changes that replaces the altered actors stats and features.
 
@@ -29,7 +29,9 @@ The *Merge* section allows for merging save and skill proficiencies. If this is 
 
 The *Active Effects* section gives fine-grained controls over what effects are still applied to the actor after transformation.
 
-Within the *Other Options* section, the "Temp Formula" allows for granting temporary HP to the newly transformed actor. Since this is a formula, it can use [Roll Data](Roll-Formulas.md) like usual, but it gains access to the roll data of both the original actor and the one being transformed into. Use the base values to access the original actor's stats (e.g. `@classes.druid.levels` to access the original actor's levels) and prefix it be `@source` for the actor being transformed into (e.g. `@source.details.cr` to grab the source actor's challenge rating).
+Within the *Other Options* section, the "Minimum Armor Class" field takes a formula that defines the minimum armor class that will be on the resulting actor. This supports a feature like the Circle of the Moon Druid's improved Wild Shape (which will apply using the default "Wild Shape" preset to any actor that has the right subclass).
+
+The "Temp Formula" allows for granting temporary HP to the newly transformed actor. Since this is a formula, it can use [Roll Data](Roll-Formulas.md) like usual, but it gains access to the roll data of both the original actor and the one being transformed into. Use the base values to access the original actor's stats (e.g. `@classes.druid.levels` to access the original actor's levels) and prefix it be `@source` for the actor being transformed into (e.g. `@source.details.cr` to grab the source actor's challenge rating).
 
 The "Transform Tokens" setting controls whether all associated linked tokens will be changed alongside the base actor. This should usually be checked.
 
@@ -37,5 +39,7 @@ The "Transform Tokens" setting controls whether all associated linked tokens wil
 ## Reverting
 
 Once the transformation is no longer required the actor can be changed back using the "Revert Transformation" button in the header of the transformed actor's sheet. This will close the transformed sheet, re-open the original sheet, and change any tokens in the scene back to the original actor.
+
+If the "Keep Hit Points & Hit Dice" option was selected, then any changes to the hit points on the transformed actor will be carried back when they are reverted. Similarly, if the "Keep Spells" option was selected then any changes to available spell slots will be synchronized.
 
 **Note**: Because the core software doesn't have the ability to grant players permissions to delete actors, the transformed version of the actor will only be cleaned up if the "Revert Transformation" button is clicked by a GM. Otherwise it will remain in the actors sidebar.
