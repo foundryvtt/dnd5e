@@ -1,4 +1,4 @@
-![Up to date as of 4.2.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 The Grant Items advancement allows for giving a character features, spells, or equipment (though it isn't designed for starting equipment).
 
@@ -14,12 +14,12 @@ The other way is using the checkboxes for each of the items in the list. Checkin
 
 ![Grant Items Configuration](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/item-grant-configuration-spells.jpg)
 
-When using the advancement to grant spells to a character, additional controls will appear that allow configuring the added spell. These controls allow for setting a specific ability modifier and preparation mode on the added spell, as well is giving it limited uses.
+When using the advancement to grant spells to a character, additional controls will appear that allow configuring the added spell. These controls allow for setting a specific ability modifier and preparation method on the added spell, as well is giving it limited uses.
 
-The way in which limited uses are added varies depending on the preparation mode and the "Require Slot" checkbox:
-- "Preparation Mode" is *Prepared*, *Always Prepared*, or *Pact Magic*, "Required Slot" is *unchecked*: A new [Forward activity](Activity-Type-Forward) will be added to the spell allowing it to be case a number of times and to be cast using spell slots as normal.
-- "Preparation Mode" is *Prepared*, *Always Prepared*, or *Pact Magic*, "Required Slot" is *checked*: The original spell casting activity will be modified with limited uses requiring both a limited use and a spell slot to be spent to cast the spell.
-- "Preparation Mode" is *At Will* or *Innate*: The original spell casting activity will be modified with limited uses allowing the spell to be cast that many times. The spell cannot be cast using a spell slot.
+The way in which limited uses are added varies depending on the preparation method and the "Require Slot" checkbox:
+- "Preparation Method" is *Spellcasting* or *Pact Magic*, "Required Slot" is *unchecked*: A new [Forward activity](Activity-Type-Forward) will be added to the spell allowing it to be case a number of times and to be cast using spell slots as normal.
+- "Preparation Method" is *Spellcasting* or *Pact Magic*, "Required Slot" is *checked*: The original spell casting activity will be modified with limited uses requiring both a limited use and a spell slot to be spent to cast the spell.
+- "Preparation Method" is *At Will*, *Innate*, or *Ritual Only*: The original spell casting activity will be modified with limited uses allowing the spell to be cast that many times. The spell cannot be cast using a spell slot.
 
 ## Usage
 
@@ -39,7 +39,7 @@ The Grant Items advancement contains the `items` property, an array of objects e
 
 The global `optional` boolean controls whether the whole advancement is optional.
 
-The `spell` object contains configuration data for granted spells, but can be `null` if no spell configuration is defined. It contains the `ability` property, a set of ability IDs, the `preparation` property indicating the preparation mode to apply, and a `uses` object containing the `max` formula and the `per` property, one of `CONFIG.DND5E.limitedUsePeriods`.
+The `spell` object contains configuration data for granted spells, but can be `null` if no spell configuration is defined. It contains the `ability` property, a set of ability IDs, the `method` property indicating the preparation method to apply, `prepared` indicates whether the spell is unprepared, prepared, or always prepared, and a `uses` object containing the `max` formula and the `per` property, one of `CONFIG.DND5E.limitedUsePeriods`.
 
 ```javascript
 {
@@ -51,10 +51,12 @@ The `spell` object contains configuration data for granted spells, but can be `n
   optional: false,
   spell: {
     ability: [],
-    preparation: "",
+    method: "",
+    prepared: 0,
     uses: {
       max: "",
-      per: ""
+      per: "",,
+      requireSlot: false
     }
   }
 }
@@ -62,13 +64,16 @@ The `spell` object contains configuration data for granted spells, but can be `n
 
 ### Value Schema
 
-The Grant Items advancement stores an object containing the locally created ID of items added and their original compendium UUIDs.
+The Grant Items advancement stores an `added` object containing the locally created ID of items added and their original compendium UUIDs. It also stores the selected `ability` if the spell configuration has an ability specified.
 
 ```javascript
 {
-  "DPN2Gfk8yi1Z5wp7": "Compendium.dnd5e.classfeatures.3sYPftQKnbbVnHrh",
-  "ohwfuwnvuoBWlSQr": "Compendium.dnd5e.classfeatures.DPN2Gfk8yi1Z5wp7",
-  "3sYPftQKnbbVnHrh": "Compendium.dnd5e.classfeatures.ohwfuwnvuoBWlSQr"
+  "ability": null,
+  "added": {
+    "DPN2Gfk8yi1Z5wp7": "Compendium.dnd5e.classfeatures.3sYPftQKnbbVnHrh",
+    "ohwfuwnvuoBWlSQr": "Compendium.dnd5e.classfeatures.DPN2Gfk8yi1Z5wp7",
+    "3sYPftQKnbbVnHrh": "Compendium.dnd5e.classfeatures.ohwfuwnvuoBWlSQr"
+  }
 }
 ```
 

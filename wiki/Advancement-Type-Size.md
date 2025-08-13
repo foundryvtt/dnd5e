@@ -1,4 +1,4 @@
-![Up to date as of 4.2.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 The Size advancement allows a species to set the creature size of a character and will present an option of sizes upon adding a species if more than one size is possible. This advancement can only be added to species and each species can only have a single advancement of this type.
 
