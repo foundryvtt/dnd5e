@@ -8,14 +8,20 @@
     {{!-- Ideals, Bonds, & Flaws --}}
     <div class="top flexrow">
 
+        {{#if (or editable system.details.ideal)}}
         {{~> "dnd5e.biography-textbox" name="system.details.ideal" value=system.details.ideal label="DND5E.Ideals"
             icon="fas fa-seedling" ~}}
+        {{/if}}
 
+        {{#if (or editable system.details.bond)}}
         {{~> "dnd5e.biography-textbox" name="system.details.bond" value=system.details.bond label="DND5E.Bonds"
             icon="fas fa-link" ~}}
+        {{/if}}
 
+        {{#if (or editable system.details.flaw)}}
         {{~> "dnd5e.biography-textbox" name="system.details.flaw" value=system.details.flaw label="DND5E.Flaws"
             icon="fas fa-heart-crack" ~}}
+        {{/if}}
 
     </div>
 

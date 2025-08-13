@@ -260,13 +260,13 @@ export default class CharacterData extends CreatureTemplate {
     const rollData = this.parent.getRollData({ deterministic: true });
     const { originalSaves, originalSkills } = this.parent.getOriginalStats();
 
+    AttributesFields.prepareExhaustionLevel.call(this);
     this.prepareAbilities({ rollData, originalSaves });
     this.prepareSkills({ rollData, originalSkills });
     this.prepareTools({ rollData });
     AttributesFields.prepareArmorClass.call(this, rollData);
     AttributesFields.prepareConcentration.call(this, rollData);
     AttributesFields.prepareEncumbrance.call(this, rollData);
-    AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareInitiative.call(this, rollData);
     AttributesFields.prepareMovement.call(this);
     AttributesFields.prepareConcentration.call(this, rollData);

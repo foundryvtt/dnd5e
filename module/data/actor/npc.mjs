@@ -590,7 +590,7 @@ export default class NPCData extends CreatureTemplate {
     );
 
     /**
-     * A hook event that fires after an embedded NPC stat block rendered.
+     * A hook event that fires after an embedded NPC stat block is rendered.
      * @function dnd5e.renderNPCStatBlock
      * @memberof hookEvents
      * @param {Actor5e} actor                   NPC being embedded.

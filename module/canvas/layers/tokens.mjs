@@ -14,6 +14,9 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
     const halflingNimbleness = token.actor?.getFlag("dnd5e", "halflingNimbleness");
     const neverBlockStatuses = CONFIG.statusEffects.filter(s => s.neverBlockMovement).map(s => s.id);
     return found.some(t => {
+      // Only creatures block movement.
+      if ( !t.actor?.system.isCreature ) return false;
+
       // Friendly tokens never block movement
       if ( token.document.disposition === t.document.disposition ) return false;
 
@@ -47,6 +50,9 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
     const found = this.#getRelevantOccupyingTokens(gridSpace, token, { preview });
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     return found.some(t => {
+      // Only consider creatures as difficult terrain for now.
+      if ( !t.actor?.system.isCreature ) return false;
+
       const friendlyToken = token.document.disposition === t.document.disposition;
 
       // In modern rules, friendly tokens are not difficult terrain

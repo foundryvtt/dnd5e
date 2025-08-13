@@ -85,8 +85,10 @@ export default class MovementSensesConfig extends BaseConfigSheet {
     }));
 
     context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
-    if ( (this.document.type === "pc") || ((this.document.type === "npc") && placeholderData) ) {
+    context.unitsOptions.blank = false;
+    if ( (this.document.type === "character") || ((this.document.type === "npc") && placeholderData) ) {
       const automaticUnit = CONFIG.DND5E.movementUnits[placeholderData?.units ?? defaultUnits("length")]?.label ?? "";
+      context.unitsOptions.blank = true;
       context.unitsOptions.unshift(
         { value: "", label: game.i18n.format("DND5E.AutomaticValue", { value: automaticUnit.toLowerCase() }) },
         { rule: true }
@@ -122,6 +124,12 @@ export default class MovementSensesConfig extends BaseConfigSheet {
         { rule: true },
         ...Object.entries(CONFIG.DND5E.difficultTerrainTypes).map(([value, { label }]) => ({ value, label }))
       ],
+      localize: true
+    });
+    if ( context.fields.pace ) extras.push({
+      field: context.fields.pace,
+      value: context.data.pace,
+      options: Object.entries(CONFIG.DND5E.travelPace).map(([value, { label }]) => ({ value, label })),
       localize: true
     });
     return extras;

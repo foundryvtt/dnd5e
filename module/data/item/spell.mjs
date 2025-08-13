@@ -114,10 +114,14 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
         },
         config: {
           choices: dnd5e.registry.spellLists.options.reduce((obj, entry) => {
-            const list = dnd5e.registry.spellLists.forType(...entry.value.split(":"));
-            if ( list?.identifiers.size ) obj[entry.value] = entry.label;
+            const [type, identifier] = entry.value.split(":");
+            const list = dnd5e.registry.spellLists.forType(type, identifier);
+            if ( list?.identifiers.size ) obj[entry.value] = {
+              label: entry.label, group: CONFIG.DND5E.spellListTypes[type]
+            };
             return obj;
-          }, {})
+          }, {}),
+          collapseGroup: group => group !== CONFIG.DND5E.spellListTypes.class
         }
       }],
       ["properties", this.compendiumBrowserPropertiesFilter("spell")]
@@ -412,12 +416,33 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get canConfigureScaling() {
+    return this.level > 0;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Whether the spell can be prepared.
    * @type {boolean}
    */
   get canPrepare() {
     return !!CONFIG.DND5E.spellcasting[this.method]?.prepares;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get canScale() {
+    return (this.level > 0) && !!CONFIG.DND5E.spellcasting[this.method]?.slots;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get canScaleDamage() {
+    return true;
   }
 
   /* -------------------------------------------- */

@@ -15,6 +15,15 @@ export default class TerrainData5e extends foundry.data.TerrainData {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  static getMovementCostFunction(token, options) {
+    return token.actor?.system.isCreature
+      ? super.getMovementCostFunction(token, options)
+      : (_from, _to, distance) => distance;
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   static resolveTerrainEffects(effects) {
     const noAutomation = game.settings.get("dnd5e", "disableMovementAutomation");

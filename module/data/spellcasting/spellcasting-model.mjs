@@ -268,7 +268,7 @@ export class SingleLevelSpellcasting extends SlotSpellcasting {
       table: new TypedObjectField(new SchemaField({
         slots: new NumberField({ required: true, nullable: false, integer: true, positive: true, initial: 1 }),
         level: new NumberField({ required: true, nullable: false, integer: true, positive: true, initial: 1 })
-      }, { validateKey: SingleLevelSpellcasting.#validateTableKey }))
+      }), { validateKey: SingleLevelSpellcasting.#validateTableKey })
     };
   }
 

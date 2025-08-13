@@ -1,4 +1,34 @@
 .dnd5e2.sheet.actor {
+  --underlay-barbarian: url("ui/official/classes/barbarian.webp");
+  --underlay-bard: url("ui/official/classes/bard.webp");
+  --underlay-cleric: url("ui/official/classes/cleric.webp");
+  --underlay-druid: url("ui/official/classes/druid.webp");
+  --underlay-fighter: url("ui/official/classes/fighter.webp");
+  --underlay-monk: url("ui/official/classes/monk.webp");
+  --underlay-paladin: url("ui/official/classes/paladin.webp");
+  --underlay-ranger: url("ui/official/classes/ranger.webp");
+  --underlay-rogue: url("ui/official/classes/rogue.webp");
+  --underlay-sorcerer: url("ui/official/classes/sorcerer.webp");
+  --underlay-warlock: url("ui/official/classes/warlock.webp");
+  --underlay-wizard: url("ui/official/classes/wizard.webp");
+  --underlay-npc-aberration: url("ui/official/npcs/aberration.webp");
+  --underlay-npc-beast: url("ui/official/npcs/beast.webp");
+  --underlay-npc-celestial: url("ui/official/npcs/celestial.webp");
+  --underlay-npc-construct: url("ui/official/npcs/construct.webp");
+  --underlay-npc-dragon: url("ui/official/npcs/dragon.webp");
+  --underlay-npc-elemental: url("ui/official/npcs/elemental.webp");
+  --underlay-npc-fey: url("ui/official/npcs/fey.webp");
+  --underlay-npc-fiend: url("ui/official/npcs/fiend.webp");
+  --underlay-npc-giant: url("ui/official/npcs/giant.webp");
+  --underlay-npc-humanoid: url("ui/official/npcs/humanoid.webp");
+  --underlay-npc-monstrosity: url("ui/official/npcs/monstrosity.webp");
+  --underlay-npc-ooze: url("ui/official/npcs/ooze.webp");
+  --underlay-npc-plant: url("ui/official/npcs/plant.webp");
+  --underlay-npc-undead: url("ui/official/npcs/undead.webp");
+  --underlay-vehicle-land: url("ui/official/vehicles/land.webp");
+  --underlay-vehicle-water: url("ui/official/vehicles/water.webp");
+  --underlay-vehicle-air: url("ui/official/vehicles/air.webp");
+  --underlay-vehicle-space: url("ui/official/vehicles/space.webp");
 
   /* ---------------------------------- */
   /*  Navigation                        */
@@ -26,6 +56,8 @@
   /* ---------------------------------- */
 
   .sheet-body {
+    mask-image: linear-gradient(to bottom, transparent, black 8px);
+
     .main-content {
       /* Tabbed Content */
       .tab-body .tab:not(.active) { display: none; }
@@ -71,7 +103,7 @@
 
       .progress::before {
         background: linear-gradient(to right, var(--dnd5e-color-hp-1) 0%, var(--dnd5e-color-hp-2) 100%);
-        border-inline-end: var(--border-width) solid var(--dnd5e-color-hp-3);
+        border-inline-end: none;
       }
       .temp-positive .label :is(.max, .bonus) { color: color-mix(in oklab, currentcolor, blue 25%); }
       .temp-negative .label :is(.max, .bonus) { color: color-mix(in oklab, currentcolor, red 25%); }
@@ -83,7 +115,18 @@
 
       &.progress::before {
         background: linear-gradient(to right, var(--dnd5e-color-hd-1) 0%, var(--dnd5e-color-hd-2) 100%);
-        border-inline-end: var(--border-width) solid var(--dnd5e-color-hd-3);
+        border-inline-end: none;
+      }
+    }
+
+    &.hit-points, &.hit-dice {
+      &.progress::before, .progress::before {
+        block-size: unset;
+        clip-path: unset;
+        box-shadow: inset 0 1px 0 1px var(--dnd5e-highlight-40);
+        inset: 1px auto 1px 1px;
+        inline-size: calc(var(--bar-percentage) - 2px);
+        border-radius: 2px;
       }
     }
 
@@ -238,6 +281,17 @@
   }
 
   /* ---------------------------------- */
+  /*  Badges                            */
+  /* ---------------------------------- */
+
+  .cr-badge {
+    width: 45px;
+    height: 45px;
+    background-image: url("ui/cr-badge.webp");
+    font-size: var(--font-size-18);
+  }
+
+  /* ---------------------------------- */
   /*  Spells                            */
   /* ---------------------------------- */
 
@@ -247,6 +301,67 @@
     justify-content: space-between;
     align-items: center;
     padding-right: .5rem;
+  }
+
+  /* ---------------------------------- */
+  /*  Inventory                         */
+  /* ---------------------------------- */
+
+  .tab[data-tab=inventory] {
+
+    .top {
+      display: flex;
+      align-items: start;
+      gap: 1rem;
+    }
+
+    /* Containers */
+    .containers {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(39px, max-content));
+      gap: .5rem;
+
+      .container {
+        max-width: 78px;
+        max-height: 78px;
+        aspect-ratio: 1;
+        border: var(--dnd5e-border-gold);
+        border-radius: 4px;
+        box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+        background-color: var(--dnd5e-background-alt-1);
+
+        a {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+
+          &:hover {
+            text-shadow: none;
+          }
+
+          .meter {
+            flex: 0 0 6px;
+            border: none;
+            border-radius: 3px 3px 0 0;
+
+            &.progress::before {
+              --border-width: 1px;
+              box-shadow: none;
+              clip-path: none;
+            }
+          }
+
+          img {
+            flex: 1;
+            border: none;
+            object-fit: cover;
+            border-radius: 0 0 3px 3px;
+            min-height: 0;
+          }
+        }
+      }
+    }
   }
 
   /* ---------------------------------- */
@@ -277,6 +392,66 @@
   .tab[data-tab=biography] code-mirror .cm-scroller {
     position: absolute;
     inset: 0;
+  }
+
+  /* ---------------------------------- */
+  /*  Group Members                     */
+  /* ---------------------------------- */
+
+  .tab[data-tab=members] .member {
+    display: flex;
+    justify-content: center;
+
+    .vitals {
+      position: relative;
+      display: flex;
+      padding: 8px;
+      gap: 8px;
+      min-height: 77px;
+
+      > * { position: relative; }
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--underlay, var(--underlay-npc-humanoid, var(--dnd5e-color-card))) top center / cover;
+        mask-image: linear-gradient(155deg, transparent 35%, black);
+        opacity: var(--group-underlay-opacity);
+        filter: var(--group-underlay-filter);
+        border-radius: 3px;
+      }
+
+      .portrait {
+        flex: 0 0 64px;
+
+        img, video {
+          width: 64px;
+          height: 64px;
+          object-fit: contain;
+          transform: scale(1.25);
+          margin-top: -10px;
+        }
+      }
+    }
+
+    .controls {
+      position: absolute;
+      inset: -8px 0 auto auto;
+      display: flex;
+      gap: 8px;
+      padding-inline: 8px;
+
+      [data-action=removeMember] {
+        background: var(--dnd5e-background-card);
+        color: var(--dnd5e-color-red);
+        width: 16px;
+        height: 15px;
+        font-size: 19px;
+        display: inline-grid;
+        place-content: center;
+      }
+    }
   }
 
   /* ---------------------------------- */

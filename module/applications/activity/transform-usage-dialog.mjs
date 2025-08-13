@@ -32,7 +32,9 @@ export default class TransformUsageDialog extends ActivityUsageDialog {
       }));
       context.hasCreation = true;
       context.transformFields = [{
-        field: new StringField({ label: game.i18n.localize("DND5E.TRANSFORM.Profile.Label") }),
+        field: new StringField({
+          required: true, blank: false, label: game.i18n.localize("DND5E.TRANSFORM.Profile.Label")
+        }),
         name: "transform.profile",
         value: this.config.transform?.profile,
         options
@@ -54,7 +56,14 @@ export default class TransformUsageDialog extends ActivityUsageDialog {
    */
   getProfileLabel(profile, rollData) {
     if ( profile.name ) return profile.name;
-    const cr = simplifyBonus(profile.cr, rollData);
-    return game.i18n.format("DND5E.TRANSFORM.Profile.ChallengeRatingLabel", { cr: formatCR(cr) });
+    switch ( this.activity.transform.mode ) {
+      case "cr":
+        const cr = simplifyBonus(profile.cr, rollData);
+        return game.i18n.format("DND5E.TRANSFORM.Profile.ChallengeRatingLabel", { cr: formatCR(cr) });
+      default:
+        const doc = fromUuidSync(profile.uuid);
+        if ( doc ) return doc.name;
+    }
+    return "—";
   }
 }

@@ -1,433 +1,297 @@
-import Item5e from "../../documents/item.mjs";
-import { formatCR, formatNumber } from "../../utils.mjs";
+import { convertWeight } from "../../utils.mjs";
+import MultiActorSheet from "./api/multi-actor-sheet.mjs";
 import Award from "../award.mjs";
-import MovementSensesConfig from "../shared/movement-senses-config.mjs";
-import ActorSheetMixin from "./deprecated/sheet-mixin.mjs";
-
-const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
- * A character sheet for group-type Actors.
- * The functionality of this sheet is sufficiently different from other Actor types that we extend the base
- * Foundry VTT ActorSheet instead of the ActorSheet5e abstraction used for character, npc, and vehicle types.
+ * Extension of the base actor sheet for group actors.
  */
-export default class GroupActorSheet extends ActorSheetMixin(foundry.appv1?.sheets?.ActorSheet ?? ActorSheet) {
-
-  /**
-   * IDs for items on the sheet that have been expanded.
-   * @type {Set<string>}
-   * @protected
-   */
-  _expanded = new Set();
+export default class GroupActorSheet extends MultiActorSheet {
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["group", "vertical-tabs"],
+    position: {
+      width: 700,
+      height: 700
+    },
+    actions: {
+      award: GroupActorSheet.#onAward,
+      roll: GroupActorSheet.#onRoll
+    },
+    tab: "members"
+  };
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "sheet", "actor", "group"],
-      template: "systems/dnd5e/templates/actors/group-sheet.hbs",
-      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "members"}],
-      scrollY: ["dnd5e-inventory .inventory-list"],
-      width: 620,
-      height: 620,
-      elements: {
-        inventory: "dnd5e-inventory"
-      }
-    });
+  /** @override */
+  static PARTS = {
+    header: {
+      template: "systems/dnd5e/templates/actors/group/header.hbs"
+    },
+    members: {
+      container: { classes: ["tab-body"], id: "tabs" },
+      template: "systems/dnd5e/templates/actors/group/members.hbs",
+      templates: ["systems/dnd5e/templates/actors/group/member.hbs"],
+      scrollable: [""]
+    },
+    inventory: {
+      container: { classes: ["tab-body"], id: "tabs" },
+      template: "systems/dnd5e/templates/actors/group/inventory.hbs",
+      templates: [
+        "systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs",
+        "systems/dnd5e/templates/inventory/containers.hbs", "systems/dnd5e/templates/inventory/encumbrance.hbs"
+      ],
+      scrollable: [".sidebar", ".body"]
+    },
+    biography: {
+      container: { classes: ["tab-body"], id: "tabs" },
+      template: "systems/dnd5e/templates/actors/group/biography.hbs",
+      scrollable: [""]
+    },
+    tabs: {
+      id: "tabs",
+      classes: ["tabs-right"],
+      template: "systems/dnd5e/templates/shared/sidebar-tabs.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static TABS = [
+    { tab: "members", label: "DND5E.Group.Member.other", icon: "fa-solid fa-users"},
+    { tab: "inventory", label: "DND5E.Inventory", svg: "systems/dnd5e/icons/svg/backpack.svg" },
+    { tab: "biography", label: "DND5E.Biography", icon: "fa-solid fa-feather" }
+  ];
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  tabGroups = {
+    primary: "members"
+  };
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _configureInventorySections(sections) {
+    sections.forEach(s => s.minWidth = 200);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * A set of item types that should be prevented from being dropped on this type of actor sheet.
-   * @type {Set<string>}
+   * Prepare the header context.
+   * @param {ApplicationRenderContext} context     Shared context provided by _prepareContext.
+   * @param {HandlebarsRenderOptions} options      Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
    */
-  static unsupportedItemTypes = new Set(["background", "race", "class", "subclass", "feat"]);
+  async _prepareHeaderContext(context, options) {
+    context.showXP = game.settings.get("dnd5e", "levelingMode") !== "noxp";
+    return context;
+  }
 
-  /* -------------------------------------------- */
-  /*  Context Preparation                         */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getData(options={}) {
-    const context = super.getData(options);
-    context.system = this.actor.system;
-    context.items = Array.from(this.actor.items);
-    context.config = CONFIG.DND5E;
-    context.isGM = game.user.isGM;
-
-    // Membership
-    const {sections, stats} = this.#prepareMembers();
-    Object.assign(context, stats);
-    context.sections = sections;
-
-    // Movement
-    context.movement = this.#prepareMovementSpeed();
-
-    // XP
-    if ( game.settings.get("dnd5e", "levelingMode") !== "noxp" ) context.xp = context.system.details.xp;
-
-    // Inventory
-    context.itemContext = {};
-    context.inventory = this.#prepareInventory(context);
-    context.elements = this.options.elements;
-    context.expandedData = {};
-    for ( const id of this._expanded ) {
-      const item = this.actor.items.get(id);
-      if ( item ) context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
+  async _prepareInventoryContext(context, options) {
+    context = await super._prepareInventoryContext(context, options);
+    context.members = [];
+    for ( const { actor } of this.document.system.members ) {
+      const { id, type, img, name, system, uuid } = actor;
+      const member = { id, type, img, name, system, uuid };
+      this._prepareMemberEncumbrance(actor, member);
+      context.members.push(member);
     }
-    context.inventoryFilters = false;
-    context.rollableClass = this.isEditable ? "rollable" : "";
-
-    // Biography HTML
-    context.descriptionFull = await TextEditor.enrichHTML(this.actor.system.description.full, {
-      secrets: this.actor.isOwner,
-      rollData: context.rollData,
-      relativeTo: this.actor
-    });
-
-    // Summary tag
-    context.summary = this.#getSummary(stats);
-
-    // Text labels
-    context.labels = {
-      currencies: Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, c]) => {
-        obj[k] = c.label;
-        return obj;
-      }, {})
-    };
+    context.members.sort((a, b) => a.type.compare(b.type) || a.name.localeCompare(b.name, game.i18n.lang));
     return context;
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Prepare a localized summary of group membership.
-   * @param {{nMembers: number, nVehicles: number}} stats     The number of members in the group
-   * @returns {string}                                        The formatted summary string
-   */
-  #getSummary(stats) {
-    const formatter = game.i18n.getListFormatter({ style: "long", type: "conjunction" });
-    const rule = new Intl.PluralRules(game.i18n.lang);
-    const members = [];
-    if ( stats.nMembers ) {
-      members.push(`${stats.nMembers} ${game.i18n.localize(`DND5E.Group.Member.${rule.select(stats.nMembers)}`)}`);
-    }
-    if ( stats.nVehicles ) {
-      members.push(`${stats.nVehicles} ${game.i18n.localize(`DND5E.Group.Vehicle.${rule.select(stats.nVehicles)}`)}`);
-    }
-    if ( !members.length ) return game.i18n.localize("DND5E.GroupSummaryEmpty");
-    return game.i18n.format("DND5E.GroupSummary", {members: formatter.format(members)});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare membership data for the sheet.
-   * @returns {{sections: object, stats: object}}
-   */
-  #prepareMembers() {
-    const stats = {
-      currentHP: 0,
-      maxHP: 0,
-      nMembers: 0,
-      nVehicles: 0
-    };
-    const sections = {
-      character: {label: `${CONFIG.Actor.typeLabels.character}Pl`, members: []},
-      npc: {label: `${CONFIG.Actor.typeLabels.npc}Pl`, members: []},
-      vehicle: {label: `${CONFIG.Actor.typeLabels.vehicle}Pl`, members: []}
-    };
-    const type = this.actor.system.type.value;
-    const displayXP = game.settings.get("dnd5e", "levelingMode") !== "noxp";
-    for ( const [index, memberData] of this.object.system.members.entries() ) {
-      const member = memberData.actor;
-      if ( !member ) continue;
-      const multiplier = type === "encounter" ? (memberData.quantity.value ?? 1) : 1;
-
-      const m = {
-        index,
-        ...memberData,
-        actor: member,
-        id: member.id,
-        name: member.name,
-        img: member.img,
-        hp: {},
-        displayHPValues: member.testUserPermission(game.user, "OBSERVER")
-      };
-
-      // HP bar
-      const hp = member.system.attributes.hp;
-      m.hp.current = hp.value + (hp.temp || 0);
-      m.hp.max = Math.max(0, hp.effectiveMax);
-      m.hp.pct = Math.clamp((m.hp.current / m.hp.max) * 100, 0, 100).toFixed(2);
-      m.hp.color = dnd5e.documents.Actor5e.getHPColor(m.hp.current, m.hp.max).css;
-      stats.currentHP += (m.hp.current * multiplier);
-      stats.maxHP += (m.hp.max * multiplier);
-
-      // Challenge
-      if ( member.type === "npc" ) {
-        m.cr = formatCR(member.system.details.cr);
-        if ( displayXP ) m.xp = formatNumber(member.system.details.xp.value * multiplier);
-      }
-
-      if ( member.type === "vehicle" ) stats.nVehicles += multiplier;
-      else stats.nMembers += multiplier;
-      sections[member.type].members.push(m);
-    }
-    for ( const [k, section] of Object.entries(sections) ) {
-      if ( !section.members.length ) delete sections[k];
-      else {
-        section.displayHPColumn = type !== "encounter";
-        section.displayQuantityColumn = type === "encounter";
-        section.displayChallengeColumn = (type === "encounter") && (k === "npc");
-      }
-    }
-    return {sections, stats};
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare movement speed data for rendering on the sheet.
-   * @returns {{secondary: string, primary: string}}
-   */
-  #prepareMovementSpeed() {
-    const movement = this.object.system.attributes.movement;
-    let speeds = [
-      [movement.land, `${game.i18n.localize("DND5E.MovementLand")} ${movement.land}`],
-      [movement.water, `${game.i18n.localize("DND5E.MovementWater")} ${movement.water}`],
-      [movement.air, `${game.i18n.localize("DND5E.MovementAir")} ${movement.air}`]
-    ];
-    speeds = speeds.filter(s => s[0]).sort((a, b) => b[0] - a[0]);
-    const primary = speeds.shift();
-    return {
-      primary: `${primary ? primary[1] : "0"}`,
-      secondary: speeds.map(s => s[1]).join(", ")
-    };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare inventory items for rendering on the sheet.
-   * @param {object} context  Prepared rendering context.
-   * @returns {Object<string,object>}
-   */
-  #prepareInventory(context) {
-
-    // Categorize as weapons, equipment, containers, and loot
-    const sections = {};
-    for ( const type of ["weapon", "equipment", "consumable", "container", "loot"] ) {
-      sections[type] = {label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], hasActions: false, dataset: {type}};
-    }
-
-    // Remove items in containers & sort remaining
-    context.items = context.items
-      .filter(i => !this.actor.items.has(i.system.container) && (i.type !== "spell"))
-      .sort((a, b) => (a.sort || 0) - (b.sort || 0));
-
-    // Classify items
-    for ( const item of context.items ) {
-      const ctx = context.itemContext[item.id] ??= {};
-      const {quantity} = item.system;
-      ctx.isStack = Number.isNumeric(quantity) && (quantity > 1);
-      ctx.canToggle = false;
-      ctx.isExpanded = this._expanded.has(item.id);
-      ctx.hasUses = item.hasLimitedUses;
-      if ( (item.type in sections) && (item.type !== "loot") ) sections[item.type].items.push(item);
-      else sections.loot.items.push(item);
-    }
-
-    return sections;
-  }
-
-  /* -------------------------------------------- */
-  /*  Rendering Workflow                          */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _render(force, options={}) {
-    for ( const member of this.object.system.members) {
-      if ( member.actor ) member.actor.apps[this.id] = this;
-    }
-    return super._render(force, options);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async close(options={}) {
-    for ( const member of this.object.system.members ) {
-      delete member.actor?.apps[this.id];
-    }
-    return super.close(options);
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Listeners and Handlers                */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-    html.find(".group-member .name").click(this._onClickMemberName.bind(this));
-    if ( this.isEditable ) {
-      // Input focus and update
-      const inputs = html.find("input");
-      inputs.focus(ev => ev.currentTarget.select());
-      inputs.addBack().find('[type="text"][data-dtype="Number"]').change(this._onChangeInputDelta.bind(this));
-      html.find(".action-button").click(this._onClickActionButton.bind(this));
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle clicks to action buttons on the group sheet.
-   * @param {PointerEvent} event      The initiating click event
+   * Prepare members context.
+   * @param {ApplicationRenderContext} context     Shared context provided by _prepareContext.
+   * @param {HandlebarsRenderOptions} options      Options which configure application rendering behavior.
+   * @returns {Promise<ApplicationRenderContext>}
    * @protected
    */
-  _onClickActionButton(event) {
-    event.preventDefault();
-    const button = event.currentTarget;
-    switch ( button.dataset.action ) {
-      case "award":
-        const award = new Award({
-          award: { savedDestinations: this.actor.getFlag("dnd5e", "awardDestinations") },
-          origin: this.object
-        });
-        award.render(true);
-        break;
-      case "longRest":
-        this.actor.longRest({ advanceTime: true });
-        break;
-      case "movementConfig":
-        new MovementSensesConfig({ document: this.actor, type: "movement" }).render({ force: true });
-        break;
-      case "placeMembers":
-        this.actor.system.placeMembers();
-        break;
-      case "removeMember":
-        const removeMemberId = button.closest("li.group-member").dataset.actorId;
-        this.actor.system.removeMember(removeMemberId);
-        break;
-      case "rollQuantities":
-        this.actor.system.rollQuantities();
-        break;
-      case "shortRest":
-        this.actor.shortRest({ advanceTime: true });
-        break;
+  async _prepareMembersContext(context, options) {
+    context.sections = {
+      character: { members: [], hasStats: true },
+      npc: { members: [], label: "TYPES.Actor.npcPl", hasStats: true },
+      vehicle: { members: [], label: "TYPES.Actor.vehiclePl" }
+    };
+    for ( const { actor } of this.document.system.members ) {
+      const { id, type, img, name, system, uuid } = actor;
+      const section = context.sections[type];
+      if ( !section ) continue;
+      const member = { id, type, img, name, system, uuid };
+      member.classes = actor.itemTypes.class;
+      await this._prepareMemberPortrait(actor, member);
+      this._prepareMemberEncumbrance(actor, member);
+      this._prepareMemberSkills(actor, member);
+      switch ( type ) {
+        case "character": await this._prepareCharacterContext(actor, member, options); break;
+        case "npc": await this._prepareNPCContext(actor, member, options); break;
+        case "vehicle": await this._prepareVehicleContext(actor, member, options); break;
+      }
+      section.members.push(member);
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle clicks on member names in the members list.
-   * @param {PointerEvent} event      The initiating click event
-   * @protected
-   */
-  _onClickMemberName(event) {
-    event.preventDefault();
-    const member = event.currentTarget.closest("li.group-member");
-    const actor = game.actors.get(member.dataset.actorId);
-    if ( actor ) actor.sheet.render(true, {focus: true});
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  async _onDropActor(event, data) {
-    if ( !this.isEditable ) return;
-    const cls = getDocumentClass("Actor");
-    const sourceActor = await cls.fromDropData(data);
-    if ( !sourceActor ) return;
-    return this.object.system.addMember(sourceActor);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  async _onDropItem(event, data) {
-    const behavior = this._dropBehavior(event, data);
-    if ( !this.actor.isOwner || (behavior === "none") ) return false;
-    const item = await Item.implementation.fromDropData(data);
-
-    // Handle moving out of container & item sorting
-    if ( (behavior === "move") && (this.actor.uuid === item.parent?.uuid) ) {
-      if ( item.system.container !== null ) await item.update({"system.container": null});
-      return this._onSortItem(event, item.toObject());
-    }
-
-    return this._onDropItemCreate(item, event, behavior);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  async _onDropFolder(event, data) {
-    if ( !this.actor.isOwner ) return [];
-    const folder = await Folder.implementation.fromDropData(data);
-    if ( folder.type !== "Item" ) return [];
-    const droppedItemData = await Promise.all(folder.contents.map(async item => {
-      if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
-      return item;
-    }));
-    return this._onDropItemCreate(droppedItemData, event);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  async _onDropItemCreate(itemData, event, behavior) {
-    let items = itemData instanceof Array ? itemData : [itemData];
-
-    // Filter out items already in containers to avoid creating duplicates
-    const containers = new Set(items.filter(i => i.type === "container").map(i => i._id));
-    items = items.filter(i => !containers.has(i.system.container));
-
-    // Create the owned items & contents as normal
-    const toCreate = await Item5e.createWithContents(items, {
-      transformFirst: item => this._onDropSingleItem(item.toObject(), event)
+    Object.values(context.sections).forEach(s => {
+      s.members.sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
     });
-    const created = await Item5e.createDocuments(toCreate, { pack: this.actor.pack, parent: this.actor, keepId: true });
-    if ( behavior === "move" ) items.forEach(i => fromUuid(i.uuid).then(d => d?.delete({ deleteContents: true })));
-    return created;
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
+    switch ( partId ) {
+      case "biography": return this._prepareDescriptionContext(context, options);
+      case "header": return this._prepareHeaderContext(context, options);
+      case "inventory": return this._prepareInventoryContext(context, options);
+      case "members": return this._prepareMembersContext(context, options);
+      case "tabs": return this._prepareTabsContext(context, options);
+    }
+    return context;
+  }
+
+  /* -------------------------------------------- */
+  /*  Member Preparation Helpers                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare render context for player characters.
+   * @param {Actor5e} actor                    The player character actor.
+   * @param {object} context                   The render context.
+   * @param {HandlebarsRenderOptions} options  Options which configure application rendering behavior.
+   * @returns {Promise<void>}
+   * @protected
+   */
+  async _prepareCharacterContext(actor, context, options) {
+    const { originalClass } = context.system.details;
+    const cls = actor.items.get(originalClass);
+    if ( cls ) context.underlay = `var(--underlay-${cls.identifier})`;
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handles dropping of a single item onto this group sheet.
-   * @param {object} itemData            The item data to create.
-   * @param {DragEvent} event            The concluding DragEvent which provided the drop data.
-   * @returns {Promise<object|boolean>}  The item data to create after processing, or false if the item should not be
-   *                                     created or creation has been otherwise handled.
+   * Prepare encumbrance context for members.
+   * @param {Actor5e} actor   The actor instance.
+   * @param {object} context  The render context.
    * @protected
    */
-  async _onDropSingleItem(itemData, event) {
+  _prepareMemberEncumbrance(actor, context) {
+    const { pct, max, value } = actor.system.attributes.encumbrance;
+    const defaultUnits = CONFIG.DND5E.encumbrance.baseUnits.default;
+    const baseUnits = CONFIG.DND5E.encumbrance.baseUnits[actor.type] ?? defaultUnits;
+    const systemUnits = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
+    context.encumbrance = {
+      pct,
+      max: convertWeight(max, baseUnits[systemUnits], defaultUnits[systemUnits]),
+      value: convertWeight(value, baseUnits[systemUnits], defaultUnits[systemUnits])
+    };
+  }
 
-    // Check to make sure items of this type are allowed on this actor
-    if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
-      ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
-        itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
-      }));
-      return false;
-    }
+  /* -------------------------------------------- */
 
-    // Create a Consumable spell scroll on the Inventory tab
-    if ( itemData.type === "spell" ) {
-      const scroll = await Item5e.createScrollFromSpell(itemData);
-      return scroll?.toObject?.();
-    }
+  /**
+   * Prepare skills context for members.
+   * @param {Actor5e} actor   The actor instance.
+   * @param {object} context  The render context.
+   * @protected
+   */
+  _prepareMemberSkills(actor, context) {
+    context.skills = Object.fromEntries(Object.entries(actor.system.skills ?? {}).map(([key, skill]) => {
+      const { ability, passive, total } = skill;
+      const label = game.i18n.format("DND5E.SkillRoll", {
+        ability: CONFIG.DND5E.abilities[ability]?.label,
+        skill: CONFIG.DND5E.skills[key]?.label
+      });
+      return [key, { label, passive, total }];
+    }));
+  }
 
-    // Stack identical consumables
-    const stacked = this._onDropStackConsumables(itemData);
-    if ( stacked ) return false;
+  /* -------------------------------------------- */
 
-    return itemData;
+  /**
+   * Prepare render context for NPCs.
+   * @param {Actor5e} actor                    The NPC actor.
+   * @param {object} context                   The render context.
+   * @param {HandlebarsRenderOptions} options  Options which configure application rendering behavior.
+   * @returns {Promise<void>}
+   * @protected
+   */
+  async _prepareNPCContext(actor, context, options) {
+    context.underlay = `var(--underlay-npc-${actor.system.details.type.value})`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare render context for vehicles.
+   * @param {Actor5e} actor                    The vehicle actor.
+   * @param {object} context                   The render context.
+   * @param {HandlebarsRenderOptions} options  Options which configure application rendering behavior.
+   * @returns {Promise<void>}
+   * @protected
+   */
+  async _prepareVehicleContext(actor, context, options) {
+    context.underlay = `var(--underlay-vehicle-${actor.system.vehicleType})`;
+    const { attributes } = actor.system;
+    context.properties = [];
+    if ( attributes.ac.value ) context.properties.push({ label: "DND5E.AC", value: attributes.ac.value });
+    if ( attributes.hp.dt ) context.properties.push({ label: "DND5E.HITPOINTS.DT.Abbr", value: attributes.hp.dt });
+    const speed = Math.max(...Object.values(attributes.movement.paces).map(p => p ?? -Infinity));
+    if ( Number.isFinite(speed) ) context.properties.push({ label: "DND5E.Speed", value: speed });
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners & Handlers                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle distributing XP & currency.
+   * @this {MultiActorSheet}
+   */
+  static #onAward() {
+    new Award({
+      award: { savedDestinations: this.actor.getFlag("dnd5e", "awardDestinations") },
+      origin: this.actor
+    }).render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDropItem(event, item) {
+    const { uuid } = event.target.closest("[data-uuid]")?.dataset ?? {};
+    const target = await fromUuid(uuid);
+    if ( target instanceof foundry.documents.Actor ) return target.sheet._onDropCreateItems(event, [item]);
+    return super._onDropItem(event, item);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle a roll for an individual group member.
+   * @this {GroupActorSheet}
+   * @param {PointerEvent} event  The triggering event.
+   * @param {HTMLElement} target  The action target.
+   */
+  static async #onRoll(event, target) {
+    const { type, key } = target.dataset;
+    if ( type !== "skill" ) return;
+    const { uuid } = target.closest("[data-uuid]")?.dataset ?? {};
+    const actor = await fromUuid(uuid);
+    actor?.rollSkill({ event, skill: key, pace: this.actor.system.attributes.movement.pace });
   }
 }

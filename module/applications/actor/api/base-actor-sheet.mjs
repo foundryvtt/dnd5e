@@ -132,14 +132,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /* -------------------------------------------- */
 
   /**
-   * Temporary stored copy of the drop behavior.
-   * @type {string|null}
-   */
-  #dropBehavior = null;
-
-  /* -------------------------------------------- */
-
-  /**
    * Key path to the sidebar collapsed flag for the current tab.
    * @type {string}
    * @internal
@@ -491,16 +483,23 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /**
    * Prepare actor portrait for display.
    * @param {ApplicationRenderContext} context  Context being prepared.
-   * @returns {object}
+   * @returns {Promise<object>}
    * @protected
    */
-  _preparePortrait(context) {
+  async _preparePortrait(context) {
     const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
     const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
     const defaultArtwork = Actor.implementation.getDefaultArtwork(this.actor._source)?.img;
-    const src = (showTokenPortrait ? token.texture.src : this.actor.img) ?? defaultArtwork;
+    let action = "editImage";
+    let texture = token?.texture.src;
+    if ( showTokenPortrait && token?.randomImg ) {
+      const images = await this.actor.getTokenImages();
+      texture = images[Math.floor(Math.random() * images.length)];
+      action = "configurePrototypeToken";
+    }
+    const src = (showTokenPortrait ? texture : this.actor.img) ?? defaultArtwork;
     return {
-      src,
+      src, action,
       token: showTokenPortrait,
       path: showTokenPortrait ? this.actor.isToken ? "token.texture.src" : "prototypeToken.texture.src" : "img",
       type: showTokenPortrait ? "imagevideo" : "image",
@@ -628,6 +627,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       // Spells from items
       if ( spell.getFlag("dnd5e", "cachedFor") ) {
         method = "item";
+        if ( !spell.system.linkedActivity?.displayInSpellbook ) return;
         registerSection(method);
       }
 
@@ -851,9 +851,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Linked Uses
     const cachedFor = fromUuidSync(item.flags.dnd5e?.cachedFor, { relative: this.actor, strict: false });
-    if ( cachedFor ) ctx.linkedUses = cachedFor.consumption?.targets.find(t => t.type === "activityUses")
-      ? cachedFor.uses : cachedFor.consumption?.targets.find(t => t.type === "itemUses")
-        ? cachedFor.item.system.uses : null;
+    if ( cachedFor ) {
+      const targetItemUses = cachedFor.consumption?.targets.find(t => t.type === "itemUses");
+      ctx.linkedUses = cachedFor.consumption?.targets.find(t => t.type === "activityUses")
+        ? cachedFor.uses : targetItemUses
+          ? (this.actor.items.get(targetItemUses.target) ?? cachedFor.item).system.uses : null;
+    }
     ctx.uses = { ...(item.system.uses ?? {}) };
     ctx.uses.hasRecharge = item.hasRecharge;
     ctx.uses.hasUses = item.hasLimitedUses;
@@ -1447,8 +1450,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   #saveSheetSize(position) {
     const { width, height } = position;
+    const prefs = {};
+    if ( width !== "auto" ) prefs.width = width;
+    if ( height !== "auto" ) prefs.height = height;
+    if ( foundry.utils.isEmpty(prefs) ) return;
     const key = `${this.actor.type}${this.actor.limited ? ":limited": ""}`;
-    game.user.setFlag("dnd5e", `sheetPrefs.${key}`, { width, height });
+    game.user.setFlag("dnd5e", `sheetPrefs.${key}`, prefs);
   }
 
   /* -------------------------------------------- */
@@ -1460,9 +1467,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @param {HTMLElement} target  Button that was clicked.
    */
   static #showArtwork(event, target) {
-    const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
-    const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
-    const img = showTokenPortrait ? token.texture.src : this.actor.img;
+    const img = target.src;
     new foundry.applications.apps.ImagePopout({
       src: img,
       uuid: this.actor.uuid,
@@ -1573,8 +1578,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const prop = target.dataset.prop ?? target.closest("[data-prop]")?.dataset.prop;
     if ( !Number.isNumeric(n) || !prop ) return;
     let value = foundry.utils.getProperty(this.actor, prop);
-    if ( (value === n) && prop.endsWith(".value") ) value--;
-    else if ( (value === n) && prop.endsWith(".spent") ) value++;
+    if ( (value === n) && prop.endsWith(".spent") ) value++;
+    else if ( value === n ) value--;
     else value = n;
     this.submit({ updateData: { [prop]: value } });
   }
@@ -1604,6 +1609,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     this.element.classList.toggle("sidebar-collapsed", collapsed);
     collapsed = this.element.classList.contains("sidebar-collapsed");
     const collapser = this.form.querySelector(".sidebar-collapser");
+    if ( !collapser ) return collapsed;
     const icon = collapser.querySelector("i");
     collapser.dataset.tooltip = `JOURNAL.View${collapsed ? "Expand" : "Collapse"}`;
     collapser.setAttribute("aria-label", game.i18n.localize(collapser.dataset.tooltip));
@@ -1633,6 +1639,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     form.querySelectorAll("video[data-edit]").forEach(v => {
       foundry.utils.setProperty(submitData, v.dataset.edit, v.src);
     });
+
+    // Prevent wildcard textures from being clobbered.
+    const proto = submitData.prototypeToken;
+    if ( proto ) {
+      const randomImg = proto.randomImg ?? this.actor.prototypeToken.randomImg;
+      if ( randomImg ) delete submitData.prototypeToken;
+    }
 
     return submitData;
   }
@@ -1701,12 +1714,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /** @inheritDoc */
   async _onDrop(event) {
-    this.#dropBehavior = this._dropBehavior(event);
-    try {
-      await super._onDrop(event);
-    } finally {
-      this.#dropBehavior = null;
-    }
+    event._behavior = this._dropBehavior(event);
+    await super._onDrop(event);
   }
 
   /* -------------------------------------------- */
@@ -1730,25 +1739,23 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /** @override */
   async _onDropItem(event, item) {
-    const behavior = this.#dropBehavior;
-    if ( !this.actor.isOwner || (behavior === "none") ) return;
+    if ( !this.actor.isOwner || (event._behavior === "none") ) return;
 
     // Handle moving out of container & item sorting
-    if ( (behavior === "move") && (this.actor.uuid === item.parent?.uuid) ) {
+    if ( (event._behavior === "move") && (this.actor.uuid === item.parent?.uuid) ) {
       if ( item.system.container !== null ) await item.update({ "system.container": null });
       return this._onSortItem(event, item);
     }
 
-    return this._onDropCreateItems(event, [item], behavior);
+    return this._onDropCreateItems(event, [item]);
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   async _onDropFolder(event, data) {
-    const behavior = this.#dropBehavior;
     const folder = await Folder.implementation.fromDropData(data);
-    if ( !this.actor.isOwner || (behavior === "none") || (folder.type !== "Item") ) return;
+    if ( !this.actor.isOwner || (event._behavior === "none") || (folder.type !== "Item") ) return;
 
     const items = await Promise.all(folder.contents.map(async item => {
       if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
@@ -1761,13 +1768,14 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /**
    * Handle the final creation of dropped Item data on the Actor.
-   * @param {DragEvent} event           The concluding DragEvent which provided the drop data.
-   * @param {Item5e[]} items            The items requested for creation.
-   * @param {DropEffectValue} behavior  The specific drop behavior.
+   * @param {DragEvent} event             The concluding DragEvent which provided the drop data.
+   * @param {Item5e[]} items              The items requested for creation.
+   * @param {DropEffectValue} [behavior]  The specific drop behavior.
    * @returns {Promise<Item5e[]>}
    * @protected
    */
   async _onDropCreateItems(event, items, behavior) {
+    behavior ??= event._behavior;
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
@@ -1804,10 +1812,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   async _onDropSingleItem(event, itemData) {
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
-      ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
-        itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-        actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
-      }));
+      ui.notifications.warn("DND5E.ACTOR.Warning.InvalidItem", {
+        format: {
+          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
+          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
+        }
+      });
       return false;
     }
 
@@ -1832,10 +1842,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       const dataModel = CONFIG.Item.dataModels[itemData.type];
       const singleton = dataModel?.metadata.singleton ?? false;
       if ( singleton && this.actor.itemTypes[itemData.type].length ) {
-        ui.notifications.error(game.i18n.format("DND5E.ActorWarningSingleton", {
-          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
-        }));
+        ui.notifications.error("DND5E.ACTOR.Warning.Singleton", {
+          format: {
+            itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
+            actorType: game.i18n.localize(CONFIG.Actor.typeLabels[this.actor.type])
+          }
+        });
         return false;
       }
 
@@ -1875,7 +1887,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @returns {Promise<Item5e>|null}           If a duplicate was found, returns the adjusted item stack.
    */
   _onDropStackConsumables(event, itemData, { container=null }={}) {
-    const droppedSourceId = itemData._stats?.compendiumSource ?? itemData.flags.core?.sourceId;
+    const droppedSourceId = itemData._stats?.compendiumSource ?? itemData.flags?.core?.sourceId;
     if ( itemData.type !== "consumable" || !droppedSourceId ) return null;
     const similarItem = this.actor.sourcedItems.get(droppedSourceId, { legacy: false })
       ?.filter(i => (i.system.container === container) && (i.name === itemData.name))?.first();

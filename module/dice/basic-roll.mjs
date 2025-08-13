@@ -222,6 +222,7 @@ export default class BasicRoll extends Roll {
       message[message.create !== false ? "document" : "data"] = await this.toMessage(
         rolls, message.data, { create: message.create, rollMode: message.rollMode }
       );
+      if ( message.document ) rolls.forEach(r => r.parent = message.document);
     }
 
     return message.document;
@@ -291,8 +292,8 @@ export default class BasicRoll extends Roll {
 
     // Prepare chat data
     messageData = foundry.utils.mergeObject({ sound: CONFIG.sounds.dice }, messageData);
-    messageData.rolls = rolls;
     this._prepareMessageData(rolls, messageData);
+    messageData.rolls = rolls.map(r => this.fromData(r.toJSON()));
 
     // Process the chat data
     const cls = getDocumentClass("ChatMessage");

@@ -6,6 +6,7 @@ import ActivationsField from "../../data/chat-message/fields/activations-field.m
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
+import MovementField from "../../data/shared/movement-field.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import {
   convertTime, defaultUnits, formatLength, formatNumber, formatTime, simplifyBonus, staticID
@@ -16,6 +17,10 @@ import SystemDocumentMixin from "../mixins/document.mjs";
 import Proficiency from "./proficiency.mjs";
 import SelectChoices from "./select-choices.mjs";
 import * as Trait from "./trait.mjs";
+
+/**
+ * @import { TravelPace5e } from "../../data/shared/movement-field.mjs";
+ */
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -189,6 +194,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   _initializeSource(source, options={}) {
+    if ( source instanceof foundry.abstract.DataModel ) source = source.toObject();
+
+    // Migrate encounter groups to their own Actor type.
+    if ( (source.type === "group") && (source.system?.type?.value === "encounter") ) {
+      source.type = "encounter";
+      foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
+    }
+
     source = super._initializeSource(source, options);
     const pack = game.packs.get(options.pack);
     if ( !source._id || !pack || !game.compendiumArt.enabled ) return source;
@@ -226,6 +239,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.system.modelProvider !== dnd5e ) return super.prepareData();
     this._clearCachedValues();
     this._preparationWarnings = [];
+    this.labels = {};
     super.prepareData();
     this.items.forEach(item => item.prepareFinalAttributes());
     this._prepareSpellcasting();
@@ -273,6 +287,61 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
 
+  /**
+   * Fetch an Actor by UUID and obtain a version of it in the World. If the Actor is inside a compendium, check if a
+   * version has already been imported before importing it again.
+   * @param {string} uuid                  The Actor's UUID.
+   * @param {object} [options]
+   * @param {object} [options.origin]      Optionally check if the Actor has a specific origin. If not supplied, any
+   *                                       Actor that matches the criteria will be returned.
+   * @param {string} [options.origin.key]  The origin property.
+   * @param {any} [options.origin.value]   The origin value.
+   * @returns {Promise<Actor5e>}
+   * @throws {Error}                       If the Actor cannot be found, or cannot be imported.
+   */
+  static async fetchExisting(uuid, options={}) {
+    const { origin } = options;
+    const actor = await fromUuid(uuid);
+    if ( !actor ) throw new Error(game.i18n.format("DND5E.ACTOR.Warning.NoActor", { uuid }));
+
+    const { actorLink } = actor.prototypeToken;
+    const matchesOrigin = !origin || (foundry.utils.getProperty(actor, origin.key) === origin.value);
+    if ( !actor.pack && (!actorLink || matchesOrigin) ) return actor;
+
+    // Search world actors to see if any had been previously imported for this purpose.
+    // Linked actors must match the origin to be considered.
+    const localActor = game.actors.find(a => {
+      const matchesOrigin = !origin || (foundry.utils.getProperty(actor, origin.key) === origin.value);
+      // Has been auto-imported by this process.
+      return (a.getFlag("dnd5e", "isAutoImported") || a.getFlag("dnd5e", "summonedCopy")) // Back-compat
+      // Sourced from the desired actor UUID.
+      && ((a._stats?.compendiumSource === uuid) || (a._stats?.duplicateSource === uuid))
+      // Unlinked or created from a specific source.
+      && (!a.prototypeToken.actorLink || matchesOrigin);
+    });
+    if ( localActor ) return localActor;
+
+    // Check permissions to create actors.
+    if ( !game.user.can("ACTOR_CREATE") ) throw new Error("DND5E.ACTOR.Warning.CreateActor");
+
+    // No suitable world actor was found, create one.
+    if ( actor.pack ) {
+      // Template actor resides only in a compendium, import the actor into the world.
+      return game.actors.importFromCompendium(game.packs.get(actor.pack), actor.id, {
+        "flags.dnd5e.isAutoImported": true
+      });
+    } else {
+      // A linked world actor was found. Create a copy to avoid affecting the original.
+      return actor.clone({
+        "flags.dnd5e.isAutoImported": true,
+        "_stats.compendiumSource": actor._stats.compendiumSource,
+        "_stats.duplicateSource": actor.uuid
+      }, { save: true });
+    }
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   prepareDerivedData() {
     const origin = this.getFlag("dnd5e", "summon.origin");
@@ -280,9 +349,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const { collection, primaryId } = foundry.utils.parseUuid(origin);
       dnd5e.registry.summons.track(collection?.get?.(primaryId)?.uuid, this.uuid);
     }
-
-    if ( (this.system.modelProvider !== dnd5e) || (this.type === "group") ) return;
-    this.labels = {};
   }
 
   /* -------------------------------------------- */
@@ -506,7 +572,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Check for deprecated overrides.
     if ( model.isSingleLevel ) {
       if ( foundry.utils.getDefiningClass(this, "preparePactSlots") !== Actor5e ) {
-        foundry.utils.logCompatibilityWarning("Actor5e.computePactSlots is deprecated. Please use "
+        foundry.utils.logCompatibilityWarning("Actor5e.preparePactSlots is deprecated. Please use "
           + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
         this.preparePactSlots(spells, actor, progression);
         return;
@@ -543,6 +609,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.type === "character" ) Object.assign(prototypeToken, {
       sight: { enabled: true }, actorLink: true, disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY
     });
+    if ( this.type === "group" ) prototypeToken.actorLink = true;
     this.updateSource({ prototypeToken });
   }
 
@@ -1026,6 +1093,23 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Handle rolling a skill as part of a requested group check.
+   * @param {Actor5e} actor                                      The actor.
+   * @param {ChatMessage5e} request                              The request message.
+   * @param {Partial<SkillToolRollProcessConfiguration>} config  Roll configuration.
+   * @param {RequestOptions5e} [requestOptions]
+   * @returns {Promise<ChatMessage5e|null>}
+   */
+  static async handleSkillCheckRequest(actor, request, config, { event }={}) {
+    const data = {};
+    foundry.utils.setProperty(data, "flags.dnd5e.requestResult", { actorUuid: actor.uuid, requestId: request.id });
+    const [roll] = (await actor.rollSkill({ ...config, event }, {}, { data })) ?? [];
+    return roll?.parent ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Roll an ability check with a skill.
    * @param {Partial<SkillToolRollProcessConfiguration>} config  Configuration information for the roll.
    * @param {Partial<SkillToolRollDialogConfiguration>} dialog   Configuration for the roll dialog.
@@ -1033,8 +1117,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
    */
   async rollSkill(config={}, dialog={}, message={}) {
+    if ( (typeof this.system.rollSkill === "function")
+      && (await this.system.rollSkill(config, dialog, message) === false) ) return null;
+    if ( !this.system.skills ) return null;
     const skillLabel = CONFIG.DND5E.skills[config.skill]?.label ?? "";
-    const ability = this.system.skills[config.skill]?.ability ?? CONFIG.DND5E.skills[config.skill]?.ability ?? "";
+    const ability = config.ability ?? this.system.skills[config.skill]?.ability ?? CONFIG.DND5E.skills[config.skill]?.ability ?? "";
     const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
     const dialogConfig = foundry.utils.mergeObject({
       options: {
@@ -1073,11 +1160,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * @typedef {D20RollProcessConfiguration} SkillToolRollProcessConfiguration
-   * @property {string} [ability]  The ability to be rolled with the skill.
-   * @property {string} [bonus]    Additional bonus term added to the check.
-   * @property {Item5e} [item]     Tool item used for rolling.
-   * @property {string} [skill]    The skill to roll.
-   * @property {string} [tool]     The tool to roll.
+   * @property {string} [ability]     The ability to be rolled with the skill.
+   * @property {string} [bonus]       Additional bonus term added to the check.
+   * @property {Item5e} [item]        Tool item used for rolling.
+   * @property {string} [skill]       The skill to roll.
+   * @property {string} [tool]        The tool to roll.
+   * @property {TravelPace5e} [pace]  Whether a travel pace is being applied to the roll.
    */
 
   /**
@@ -1105,20 +1193,24 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
     const alternate = type === "skill" ? this.system.tools?.[config.tool] : this.system.skills?.[config.skill];
-    const abilityId = relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
+    const abilityId = config.ability ?? relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
     const ability = this.system.abilities?.[abilityId];
     const hostActor = this.isPolymorphed && this.flags?.dnd5e?.transformOptions?.mergeSkills && (type === "skill")
       ? game.actors.get(this.flags.dnd5e?.originalActor) : null;
     const buildConfig = this._buildSkillToolConfig.bind(this, type, hostActor);
     const doubleProf = !!relevant?.prof.hasProficiency && !!alternate?.prof.hasProficiency;
+    const pace = MovementField.getTravelPaceMode(config.pace, config.skill);
 
     const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
       `abilities.${abilityId}.check.roll.mode`,
       `${type}s.${type === "skill" ? config.skill : config.tool}.roll.mode`
-    ]);
+    ], {
+      advantages: { count: Number(doubleProf) + Number(pace.advantage) },
+      disadvantages: { count: Number(pace.disadvantage) }
+    });
 
     const rollConfig = foundry.utils.mergeObject({
-      advantage: advantage || doubleProf, disadvantage,
+      advantage, disadvantage,
       ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig?.ability),
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")
@@ -2149,10 +2241,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Handle resting an actor from a request.
-   * @param {Actor5e} actor               Actor to rest.
-   * @param {ChatMessage5e} request       Request chat message.
-   * @param {RestConfiguration} config    Configuration data for the rest requested.
-   * @returns {Promise<RestResult|null>}  Consolidated results of the rest workflow.
+   * @param {Actor5e} actor                  Actor to rest.
+   * @param {ChatMessage5e} request          Request chat message.
+   * @param {RestConfiguration} config       Configuration data for the rest requested.
+   * @returns {Promise<ChatMessage5e|null>}
    */
   static async handleRestRequest(actor, request, config) {
     const result = await actor[config.type === "short" ? "shortRest" : "longRest"]({
@@ -2168,7 +2260,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    *
    * @param {RestConfiguration} config         Configuration data for the rest occurring.
    * @param {Partial<RestResult>} [result={}]  Results of the rest operation being built.
-   * @returns {Promise<RestResult>}  Consolidated results of the rest workflow.
+   * @returns {Promise<RestResult|void>}       Consolidated results of the rest workflow.
    * @private
    */
   async _rest(config, result={}) {
@@ -2291,6 +2383,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         type: result.type
       }
     };
+    if ( config.request ) foundry.utils.setProperty(chatData, "flags.dnd5e.requestResult", {
+      actorUuid: this.uuid, requestId: config.request.id
+    });
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return ChatMessage.create(chatData);
   }
@@ -2712,7 +2807,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     delete d.system.resources; // Don't change your resource pools
     delete d.system.currency; // Don't lose currency
     delete d.system.bonuses; // Don't lose global bonuses
-    if ( settings.keep.has("spells") ) delete d.system.attributes.spellcasting; // Keep spellcasting ability if retaining spells.
+    if ( settings.keep.has("spells") || settings.spellLists.size ) delete d.system.attributes.spellcasting; // Keep spellcasting ability if retaining spells.
 
     // Specific additional adjustments
     d.system.details.alignment = o.system.details.alignment; // Don't change alignment
@@ -2775,12 +2870,28 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( settings.keep.has("languages") ) d.system.traits.languages = o.system.traits.languages;
 
       // Keep specific items from the original data
-      d.items = d.items.concat(o.items.filter(i => {
+      const spellIdentifiers = settings.spellLists.size ? new Set(
+        Array.from(settings.spellLists)
+          .map(id => dnd5e.registry.spellLists.forType(...id.split(":")))
+          .filter(list => this.identifiedItems.get(list?.metadata.identifier, list?.metadata.type)?.size)
+          .flatMap(list => Array.from(list.identifiers))
+      ) : null;
+      const profDiff = source.system.attributes.prof - this.system.attributes.prof;
+      d.items = d.items.map(i => {
+        if ( settings.keep.has("class") && ((i.type === "feat") || (i.type === "weapon")) ) {
+          // Items gained from the source should use the source's proficiency bonus.
+          Object.values(i.system.activities).forEach(activity => {
+            if ( activity.type === "attack" ) activity.attack.bonus += ` ${profDiff < 0 ? "" : "+"}${profDiff}`;
+          });
+        }
+        return i;
+      }).concat(o.items.filter(i => {
         switch ( i.type ) {
           case "class":
           case "subclass": return settings.keep.has("class") || settings.keep.has("hp");
           case "feat": return settings.keep.has("feats");
-          case "spell": return settings.keep.has("spells");
+          case "spell": return spellIdentifiers?.has(i.system.identifier)
+            || (!spellIdentifiers && settings.keep.has("spells"));
           case "race": return settings.keep.has("type");
           default: return settings.keep.has("items");
         }
@@ -3005,12 +3116,23 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     Hooks.callAll("dnd5e.revertOriginalForm", this, options);
 
+    const transformOptions = this.getFlag("dnd5e", "transformOptions");
     const previousActorIds = this.getFlag("dnd5e", "previousActorIds") ?? [];
     const isOriginalActor = !previousActorIds.length;
     const isRendered = this.sheet.rendered;
 
     // Obtain a reference to the original actor
     const original = game.actors.get(this.getFlag("dnd5e", "originalActor"));
+
+    const update = {};
+    if ( transformOptions?.keep?.includes("hp") ) {
+      foundry.utils.setProperty(update, "system.attributes.hp.value", this.system.attributes.hp.value);
+    }
+    if ( transformOptions?.keep?.includes("spells") || transformOptions?.spellLists?.length ) {
+      Object.entries(this.system.spells ?? {}).forEach(([k, v]) => {
+        if ( v.max ) update[`system.spells.${k}.value`] = v.value;
+      });
+    }
 
     // If we are reverting an unlinked token, grab the previous actorData, and create a new token
     if ( this.isToken ) {
@@ -3023,6 +3145,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
       const prototypeTokenData = (await baseActor.getTokenDocument()).toObject();
       const actorData = this.token.getFlag("dnd5e", "previousActorData");
+      foundry.utils.mergeObject(actorData, update);
       const tokenUpdate = this.token.toObject();
       actorData._id = tokenUpdate.delta._id;
       tokenUpdate.delta = actorData;
@@ -3089,6 +3212,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       this.sheet?.close();
     }
     if ( isRendered && options.renderSheet ) original.sheet?.render(isRendered);
+    if ( !foundry.utils.isEmpty(update) ) await original.update(update);
     return original;
   }
 
@@ -3123,9 +3247,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       },
       condition: li => {
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
-        const primary = game.settings.get("dnd5e", "primaryParty")?.actor;
-        return game.user.isGM && (actor?.type === "group")
-          && (actor.system.type.value === "party") && (actor !== primary);
+        const primary = game.actors.party;
+        return game.user.isGM && (actor?.type === "group") && (actor !== primary);
       },
       group: "system"
     }, {
@@ -3136,8 +3259,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       },
       condition: li => {
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
-        const primary = game.settings.get("dnd5e", "primaryParty")?.actor;
-        return game.user.isGM && (actor === primary);
+        return game.user.isGM && (actor === game.actors.party);
       },
       group: "system"
     });
@@ -3150,7 +3272,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {HTMLElement} html
    */
   static onRenderActorDirectory(html) {
-    const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+    const primaryParty = game.actors.party;
     if ( primaryParty ) {
       const element = html?.querySelector(`[data-entry-id="${primaryParty.id}"]`);
       element?.classList.add("primary-party");

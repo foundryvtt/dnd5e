@@ -1,0 +1,46 @@
+<section class="sheet-header">
+
+    {{!-- Image --}}
+    <div class="left">
+        <div class="portrait">
+            <img src="{{ document.img }}" alt="{{ document.name }}"
+                {{#if editable}}data-action="editImage" data-edit="img"{{/if}}>
+        </div>
+    </div>
+
+    {{!-- Summary --}}
+    <div class="middle encounter-summary">
+
+        {{!-- Name --}}
+        {{#if editable}}
+        <input type="text" name="name" class="document-name uninput" value="{{ actor._source.name }}">
+        {{else}}
+        <div class="document-name">{{ document.name }}</div>
+        {{/if}}
+
+        {{!-- Difficulty --}}
+        <ul class="subtitles unlist">
+            {{#each subtitles}}
+            <li><span>{{ this }}</span></li>
+            {{/each}}
+        </ul>
+
+    </div>
+
+    {{!-- Actions --}}
+    <div class="right">
+        <button type="button" class="gold-button" data-action="rollQuantities" data-tooltip
+                aria-label="{{ localize "DND5E.QuantityRoll" }}">
+            <i class="fa-solid fa-dice-d20" inert></i>
+        </button>
+        <button type="button" class="gold-button" data-action="placeMembers" data-tooltip
+                aria-label="{{ localize "DND5E.Group.PlaceMembers" }}">
+            <i class="fa-solid fa-location-dot" inert></i>
+        </button>
+        <button type="button" class="gold-button" data-action="award" data-tooltip
+                aria-label="{{ localize "DND5E.ENCOUNTER.Action.Award" }}">
+            <i class="fa-solid fa-trophy" inert></i>
+        </button>
+    </div>
+
+</section>

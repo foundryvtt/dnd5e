@@ -53,7 +53,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       template: "systems/dnd5e/templates/actors/tabs/character-inventory.hbs",
       templates: [
         "systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs",
-        "systems/dnd5e/templates/inventory/encumbrance.hbs"
+        "systems/dnd5e/templates/inventory/encumbrance.hbs", "systems/dnd5e/templates/inventory/containers.hbs"
       ],
       scrollable: [""]
     },
@@ -131,13 +131,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
   ];
 
   /* -------------------------------------------- */
-
-  /** @override */
-  tabGroups = {
-    primary: "details"
-  };
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -156,6 +149,13 @@ export default class CharacterActorSheet extends BaseActorSheet {
     effects: { name: "", properties: new Set() },
     inventory: { name: "", properties: new Set() },
     spells: { name: "", properties: new Set() }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  tabGroups = {
+    primary: "details"
   };
 
   /* -------------------------------------------- */
@@ -287,6 +287,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       secrets: this.actor.isOwner, relativeTo: this.actor, rollData: context.rollData
     };
     context.enriched = {
+      label: "DND5E.Biography",
       value: await TextEditor.enrichHTML(this.actor.system.details.biography.value, enrichmentOptions)
     };
 
@@ -296,7 +297,11 @@ export default class CharacterActorSheet extends BaseActorSheet {
     ].map(k => {
       const field = this.actor.system.schema.fields.details.fields[k];
       const name = `system.details.${k}`;
-      return { name, label: field.label, value: foundry.utils.getProperty(this.actor, name) ?? "" };
+      return {
+        name, label: field.label,
+        value: foundry.utils.getProperty(this.actor, name) ?? "",
+        source: foundry.utils.getProperty(this.actor._source, name) ?? ""
+      };
     });
 
     return context;
@@ -465,7 +470,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    */
   async _prepareHeaderContext(context, options) {
     if ( this.actor.limited ) {
-      context.portrait = this._preparePortrait(context);
+      context.portrait = await this._preparePortrait(context);
       return context;
     }
 
@@ -515,7 +520,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    */
   async _prepareSidebarContext(context, options) {
     const { attributes } = this.actor.system;
-    context.portrait = this._preparePortrait(context);
+    context.portrait = await this._preparePortrait(context);
 
     // Death Saves
     const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
@@ -1305,7 +1310,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       else if ( f.id === srcId ) source = f;
       return f.id !== srcId;
     });
-    const updates = foundry.utils.SortingHelpers.performIntegerSort(source, { target, siblings });
+    const updates = foundry.utils.performIntegerSort(source, { target, siblings });
     const favorites = this.actor.system.favorites.reduce((map, f) => map.set(f.id, { ...f }), new Map());
     for ( const { target, update } of updates ) {
       const favorite = favorites.get(target.id);

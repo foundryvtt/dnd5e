@@ -7,6 +7,10 @@ import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
 
+/**
+ * @import { TravelPace5e } from "./data/shared/movement-field.mjs";
+ */
+
 // Namespace Configuration Values
 const DND5E = {};
 
@@ -134,6 +138,10 @@ DND5E.defaultAbilities = {
  * @property {string} ability      Key for the default ability used by this skill.
  * @property {string} fullKey      Fully written key used as alternate for enrichers.
  * @property {string} [reference]  Reference to a rule page describing this skill.
+ * @property {object} [pace]       Configuration for skills affected by travel pace.
+ * @property {Set<TravelPace5e>} [pace.advantage]     Grant advantage on this skill when traveling at the given paces.
+ * @property {Set<TravelPace5e>} [pace.disadvantage]  Grant disadvantage on this skill when traveling at the given
+ *                                                    paces.
  */
 
 /**
@@ -223,7 +231,11 @@ DND5E.skills = {
     ability: "wis",
     fullKey: "perception",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.zjEeHCUqfuprfzhY",
-    icon: "icons/magic/perception/eye-ringed-green.webp"
+    icon: "icons/magic/perception/eye-ringed-green.webp",
+    pace: {
+      advantage: new Set(["slow"]),
+      disadvantage: new Set(["fast"])
+    }
   },
   prf: {
     label: "DND5E.SkillPrf",
@@ -258,14 +270,21 @@ DND5E.skills = {
     ability: "dex",
     fullKey: "stealth",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.4MfrpERNiQXmvgCI",
-    icon: "icons/magic/perception/shadow-stealth-eyes-purple.webp"
+    icon: "icons/magic/perception/shadow-stealth-eyes-purple.webp",
+    pace: {
+      disadvantage: new Set(["normal", "fast"])
+    }
   },
   sur: {
     label: "DND5E.SkillSur",
     ability: "wis",
     fullKey: "survival",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.t3EzDU5b9BVAIEVi",
-    icon: "icons/magic/fire/flame-burning-campfire-yellow-blue.webp"
+    icon: "icons/magic/fire/flame-burning-campfire-yellow-blue.webp",
+    pace: {
+      advantage: new Set(["slow"]),
+      disadvantage: new Set(["fast"])
+    }
   }
 };
 preLocalize("skills", { key: "label", sort: true });
@@ -1314,6 +1333,18 @@ DND5E.tokenRingColors = {
   defeated: 0x000000,
   healing: 0x00FF00,
   temp: 0x33AAFF
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Colors used to denote movement speed on ruler segments & grid highlighting
+ * @enum {number}
+ */
+DND5E.tokenRulerColors = {
+  normal: 0x33BC4E,
+  double: 0xF1D836,
+  triple: 0xE72124
 };
 
 /* -------------------------------------------- */
@@ -2556,6 +2587,38 @@ preLocalize("movementTypes", { key: "label", sort: true });
 patchConfig("movementTypes", "label", { since: "DnD5e 5.1", until: "DnD5e 5.3" });
 
 /* -------------------------------------------- */
+
+/**
+ * @typedef TravelPaceConfig
+ * @property {string} label       The human-readable label.
+ * @property {number} standard    The standard pace value in miles per day.
+ * @property {number} multiplier  The speed up or slow down factor for this travel pace.
+ */
+
+/**
+ * Available travel paces.
+ * @type {Readonly<Record<string, TravelPaceConfig>>}
+ */
+DND5E.travelPace = Object.freeze({
+  slow: {
+    label: "DND5E.Travel.Pace.Slow",
+    standard: 18,
+    multiplier: 2 / 3
+  },
+  normal: {
+    label: "DND5E.Travel.Pace.Normal",
+    standard: 24,
+    multiplier: 1
+  },
+  fast: {
+    label: "DND5E.Travel.Pace.Fast",
+    standard: 30,
+    multiplier: 4 / 3
+  }
+});
+preLocalize("travelPace", { key: "label" });
+
+/* -------------------------------------------- */
 /*  Measurement                                 */
 /* -------------------------------------------- */
 
@@ -2567,6 +2630,10 @@ DND5E.defaultUnits = {
   length: {
     imperial: "ft",
     metric: "m"
+  },
+  travel: {
+    imperial: "mi",
+    metric: "km"
   },
   volume: {
     imperial: "cubicFoot",
@@ -2592,6 +2659,8 @@ DND5E.defaultUnits = {
  *                                       https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers. Only
  *                                       required if the formatting name doesn't match the unit key.
  * @property {"imperial"|"metric"} type  Whether this is an "imperial" or "metric" unit.
+ * @property {"day"|"round"} [travelResolution]  Whether the distance is per-round or per-day when used in the context
+ *                                               of overland travel.
  */
 
 /**
@@ -2604,28 +2673,32 @@ DND5E.movementUnits = {
     abbreviation: "DND5E.UNITS.DISTANCE.Foot.Abbreviation",
     conversion: 1,
     formattingUnit: "foot",
-    type: "imperial"
+    type: "imperial",
+    travelResolution: "round"
   },
   mi: {
     label: "DND5E.UNITS.DISTANCE.Mile.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Mile.Abbreviation",
     conversion: 5_280,
     formattingUnit: "mile",
-    type: "imperial"
+    type: "imperial",
+    travelResolution: "day"
   },
   m: {
     label: "DND5E.UNITS.DISTANCE.Meter.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Meter.Abbreviation",
     conversion: 10 / 3, // D&D uses a simplified 5ft -> 1.5m conversion.
     formattingUnit: "meter",
-    type: "metric"
+    type: "metric",
+    travelResolution: "round"
   },
   km: {
     label: "DND5E.UNITS.DISTANCE.Kilometer.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Kilometer.Abbreviation",
     conversion: 10_000 / 3, // Matching simplified conversion
     formattingUnit: "kilometer",
-    type: "metric"
+    type: "metric",
+    travelResolution: "day"
   }
 };
 preLocalize("movementUnits", { keys: ["label", "abbreviation"] });
@@ -3319,7 +3392,15 @@ DND5E.SPELL_LISTS = Object.freeze([
   "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5",
   "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.VfZ5mH2ZuyFq82Ga",
   "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.sSzagq8GvYXpfmfs",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.6AnqLUowgdsqMFvz"
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.6AnqLUowgdsqMFvz",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLife000000",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLandArid00",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLandPolar0",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLandTemper",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLandTropic",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsDevotion00",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsDraconic00",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsFiend00000"
 ]);
 
 /* -------------------------------------------- */
@@ -3701,6 +3782,7 @@ DND5E.transformation = {
         keep: new Set(["bio", "class", "feats", "hp", "languages", "mental", "type"]),
         merge: new Set(["saves", "skills"]),
         minimumAC: "(13 + @abilities.wis.mod) * sign(@subclasses.moon.levels)",
+        spellLists: new Set(["subclass:moon"]),
         tempFormula: "max(@classes.druid.levels, @subclasses.moon.levels * 3)"
       }
     },
@@ -4392,6 +4474,34 @@ DND5E.CR_EXP_LEVELS = [
 ];
 
 /**
+ * XP thresholds for encounter difficulty.
+ * @type {number[][]}
+ */
+DND5E.ENCOUNTER_DIFFICULTY = [
+  [0, 0, 0],
+  [50, 75, 100],
+  [100, 150, 200],
+  [150, 225, 400],
+  [250, 375, 500],
+  [500, 750, 1100],
+  [600, 1000, 1400],
+  [750, 1300, 1700],
+  [1000, 1700, 2100],
+  [1300, 2000, 2600],
+  [1600, 2300, 3100],
+  [1900, 2900, 4100],
+  [2200, 3700, 4700],
+  [2600, 4200, 5400],
+  [2900, 4900, 6200],
+  [3300, 5400, 7800],
+  [3800, 6100, 9800],
+  [4500, 7200, 11700],
+  [5000, 8700, 14200],
+  [5500, 10700, 17200],
+  [6400, 13200, 22000]
+];
+
+/**
  * Intervals above the maximum XP that result in an epic boon.
  * @type {number}
  */
@@ -4843,11 +4953,26 @@ DND5E.defaultArtwork = {
 /* -------------------------------------------- */
 
 /**
+ * @callback RequestCallback5e
+ * @param {Actor5e} actor               The actor fulfilling the request.
+ * @param {ChatMessage5e} request       The request message.
+ * @param {object} config               Additional request configuration.
+ * @param {RequestOptions5e} [options]  Additional options provided at fulfillment time.
+ * @returns {Promise<ChatMessage5e>}    Result chat message that will be associated with request.
+ */
+
+/**
+ * @typedef RequestOptions5e
+ * @property {Event} [event]  The event forwarded from the user clicking the request button.
+ */
+
+/**
  * Handler functions for named request/response operations
- * @type {Record<string, Function>}
+ * @type {Record<string, RequestCallback5e>}
  */
 DND5E.requests = {
-  rest: Actor5e.handleRestRequest
+  rest: Actor5e.handleRestRequest,
+  skill: Actor5e.handleSkillCheckRequest
 };
 
 /* -------------------------------------------- */

@@ -16,7 +16,9 @@
         {{/if}}
         {{/each}}
         {{#if (or fields.units extras.length)}}<hr>{{/if}}
-        {{#if fields.units}}{{ formField fields.units value=data.units options=unitsOptions localize=true }}{{/if}}
+        {{#if fields.units}}
+        {{ formField fields.units value=data.units options=unitsOptions localize=true blank=unitsOptions.blank }}
+        {{/if}}
         {{> "dnd5e.fieldlist" extras }}
     </fieldset>
     {{#if fields.special}}

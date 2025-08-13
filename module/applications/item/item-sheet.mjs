@@ -56,7 +56,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       template: "systems/dnd5e/templates/items/header.hbs"
     },
     tabs: {
-      template: "systems/dnd5e/templates/items/tabs.hbs",
+      template: "systems/dnd5e/templates/shared/horizontal-tabs.hbs",
       templates: ["templates/generic/tab-navigation.hbs"]
     },
     activities: {
@@ -423,7 +423,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const advancement = {};
     const configMode = !this.item.parent || (this._mode === ItemSheet5e.MODES.EDIT);
     const legacyDisplay = this.options.legacyDisplay;
-    const maxLevel = !configMode ? (this.item.system.levels ?? this.item.class?.system.levels
+    const maxLevel = this.item.parent ? (this.item.system.levels ?? this.item.class?.system.levels
       ?? this.item.parent.system.details?.level ?? -1) : -1;
 
     // Improperly configured advancements
@@ -933,7 +933,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       const target = this.item.system.activities.get(targetId);
       if ( !target || (target === source) ) return;
       const siblings = this.item.system.activities.filter(a => a._id !== id);
-      const sortUpdates = foundry.utils.SortingHelpers.performIntegerSort(source, { target, siblings });
+      const sortUpdates = foundry.utils.performIntegerSort(source, { target, siblings });
       const updateData = Object.fromEntries(sortUpdates.map(({ target, update }) => {
         return [target._id, { sort: update.sort }];
       }));

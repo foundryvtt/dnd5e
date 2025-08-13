@@ -658,6 +658,18 @@ export default class ActiveEffect5e extends ActiveEffect {
       disabled: !context.editable
     });
     html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")?.after(element);
+
+    // Add tooltip with link to wiki for effects/enchantments
+    const helpIconElement = document.createElement("i");
+    helpIconElement.classList.add("fa-solid", "fa-circle-question");
+    const tooltipText = game.i18n.format("DND5E.ACTIVEEFFECT.AttributeKeyTooltip", {
+      url: app.document.type === "enchantment"
+        ? "https://github.com/foundryvtt/dnd5e/wiki/Enchantment"
+        : "https://github.com/foundryvtt/dnd5e/wiki/Active-Effect-Guide"
+    });
+    Object.assign(helpIconElement.dataset, { tooltip: tooltipText, tooltipDirection: "RIGHT", locked: "" });
+    const targetElement = html.querySelector("section:is([data-tab='effects'], [data-tab='changes']) .key");
+    if ( targetElement ) targetElement.insertAdjacentElement("beforeend", helpIconElement);
   }
 
   /* -------------------------------------------- */

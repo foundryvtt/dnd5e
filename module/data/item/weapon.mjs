@@ -408,7 +408,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   get availableAbilities() {
     const melee = CONFIG.DND5E.defaultAbilities.meleeAttack;
     const ranged = CONFIG.DND5E.defaultAbilities.rangedAttack;
-    if ( this.properties.has("fin") ) return new Set([melee, ranged]);
+    if ( this.properties.has("fin") || (this.type.value === "natural") ) return new Set([melee, ranged]);
     if ( !this.attackType ) return null;
     return new Set([this.attackType === "melee" ? melee : ranged]);
   }

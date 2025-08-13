@@ -61,7 +61,9 @@ Hooks.once("init", function() {
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
   CONFIG.ActiveEffect.legacyTransferral = false;
+  CONFIG.Actor.collection = dataModels.collection.Actors5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
+  CONFIG.Adventure.documentClass = documents.Adventure5e;
   CONFIG.Canvas.layers.tokens.layerClass = CONFIG.Token.layerClass = canvas.layers.TokenLayer5e;
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
@@ -152,6 +154,11 @@ Hooks.once("init", function() {
     types: ["group"],
     makeDefault: true,
     label: "DND5E.SheetClass.Group"
+  });
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.EncounterActorSheet, {
+    types: ["encounter"],
+    makeDefault: true,
+    label: "DND5E.SheetClass.Encounter"
   });
 
   DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
@@ -553,6 +560,7 @@ Hooks.once("ready", function() {
 /* -------------------------------------------- */
 
 Hooks.on("renderGamePause", (app, html) => {
+  if ( Hooks.events.renderGamePause.length > 1 ) return;
   html.classList.add("dnd5e2");
   const container = document.createElement("div");
   container.classList.add("flexcol");
@@ -581,6 +589,7 @@ Hooks.on("renderChatLog", (app, html, data) => {
 Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners(html));
 
 Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(message));
+Hooks.on("createChatMessage", dataModels.chatMessage.RequestMessageData.onCreateMessage);
 Hooks.on("updateChatMessage", dataModels.chatMessage.RequestMessageData.onUpdateResultMessage);
 
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
@@ -593,6 +602,13 @@ Hooks.on("renderCompendiumDirectory", (app, html) => applications.CompendiumBrow
 Hooks.on("renderJournalEntryPageSheet", applications.journal.JournalEntrySheet5e.onRenderJournalPageSheet);
 
 Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffectConfig);
+
+Hooks.on("renderDocumentSheetConfig", (app, html) => {
+  const { document } = app.options;
+  if ( (document instanceof Actor) && document.system.isGroup ) {
+    applications.actor.MultiActorSheet.addDocumentSheetConfigOptions(app, html);
+  }
+});
 
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 

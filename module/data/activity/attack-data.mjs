@@ -104,6 +104,12 @@ export default class AttackActivityData extends BaseActivityData {
       return this.item.system.availableAbilities;
     }
 
+    // Natural weapons also defer to the item if using any classification other than spell.
+    if ( this.item.system.availableAbilities && (this.item.system.type.value === "natural")
+      && (this.attack.type.classification !== "spell") ) {
+      return this.item.system.availableAbilities;
+    }
+
     // Spell attack not associated with a single class, use highest spellcasting ability on actor
     if ( this.attack.type.classification === "spell" ) return new Set(
       this.actor?.system.attributes?.spellcasting
@@ -396,7 +402,8 @@ export default class AttackActivityData extends BaseActivityData {
     if ( this.item.type === "weapon" ) {
       // Ensure `@mod` is present in damage unless it is positive and an off-hand attack or damage is a flat value
       const isDeterministic = new Roll(roll.parts[0]).isDeterministic;
-      const includeMod = (!rollConfig.attackMode?.endsWith("offhand") || (roll.data.mod < 0)) && !isDeterministic;
+      const includeMod = (!rollConfig.attackMode?.endsWith("offhand") || (roll.data.mod < 0)) && !isDeterministic
+        && !((this.attack.type.classification === "spell") && (this.item.system.type.value === "natural"));
       if ( includeMod && !roll.parts.some(p => p.includes("@mod")) ) roll.parts.push("@mod");
 
       // Add magical bonus

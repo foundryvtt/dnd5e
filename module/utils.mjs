@@ -46,13 +46,15 @@ export function formatModifier(mod) {
  * A helper for using Intl.NumberFormat within handlebars.
  * @param {number} value    The value to format.
  * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
+ * @param {string} [options.blank]      Format a zero or otherwise empty value as the given string.
  * @param {boolean} [options.numerals]  Format the number as roman numerals.
  * @param {boolean} [options.ordinal]   Use ordinal formatting.
  * @param {boolean} [options.words]     Write out number as full word, if possible.
  * @returns {string}
  */
-export function formatNumber(value, { numerals, ordinal, words, ...options }={}) {
+export function formatNumber(value, { blank, numerals, ordinal, words, ...options }={}) {
   if ( words && game.i18n.has(`DND5E.NUMBER.${value}`, false) ) return game.i18n.localize(`DND5E.NUMBER.${value}`);
+  if ( !value && (typeof blank === "string") ) return blank;
   if ( numerals ) return _formatNumberAsNumerals(value);
   if ( ordinal ) return _formatNumberAsOrdinal(value, options);
   const formatter = new Intl.NumberFormat(game.i18n.lang, options);
@@ -264,11 +266,12 @@ export function isValidDieModifier(mod) {
  * @returns {number|void}
  */
 export function parseInputDelta(input, target) {
-  target = target?._source ?? target;
+  const prop = input.dataset.name ?? input.name;
+  const current = foundry.utils.getProperty(target?._source ?? {}, prop) ?? foundry.utils.getProperty(target, prop);
   let value = input.value;
   if ( ["+", "-"].includes(value[0]) ) {
     const delta = parseFloat(value);
-    value = Number(foundry.utils.getProperty(target, input.dataset.name ?? input.name)) + delta;
+    value = Number(current) + delta;
   }
   else if ( value[0] === "=" ) value = Number(value.slice(1));
   if ( Number.isNaN(value) ) return;
@@ -678,13 +681,12 @@ function _convertSystemUnits(value, from, to, config, { message, strict }) {
 
 /**
  * Default units to use depending on system setting.
- * @param {"length"|"weight"} type  Type of units to select.
+ * @param {"length"|"travel"|"volume"|"weight"} type  Type of units to select.
  * @returns {string}
  */
 export function defaultUnits(type) {
-  return CONFIG.DND5E.defaultUnits[type]?.[
-    game.settings.get("dnd5e", `metric${type.capitalize()}Units`) ? "metric" : "imperial"
-  ];
+  const settingKey = type === "travel" ? "metricLengthUnits" : `metric${type.capitalize()}Units`;
+  return CONFIG.DND5E.defaultUnits[type]?.[game.settings.get("dnd5e", settingKey) ? "metric" : "imperial"];
 }
 
 /* -------------------------------------------- */

@@ -1,22 +1,19 @@
-import TokenPlacement from "../../canvas/token-placement.mjs";
-import ActorDataModel from "../abstract/actor-data-model.mjs";
-import FormulaField from "../fields/formula-field.mjs";
-import CurrencyTemplate from "../shared/currency.mjs";
+import { defaultUnits } from "../../utils.mjs";
+import MovementField from "../shared/movement-field.mjs";
 import GroupSystemFlags from "./group-system-flags.mjs";
+import GroupTemplate from "./templates/group.mjs";
 
-const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * @import { RestConfiguration, RestResult } from "../../documents/actor/actor.mjs";
+ * @import { TravelPace5e } from "../shared/movement-field.mjs";
  */
 
 /**
  * Metadata associated with members in this group.
- * @typedef GroupMemberData
+ * @typedef PartyMemberData
  * @property {Actor5e} actor              Associated actor document.
- * @property {object} quantity
- * @property {number} quantity.value      Number of this actor in the group (for encounter or crew types).
- * @property {string} [quantity.formula]  Formula used for re-rolling actor quantities in encounters.
  */
 
 /**
@@ -27,55 +24,45 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
 
 /**
  * A data model and API layer which handles the schema and functionality of "group" type Actors in the dnd5e system.
- * @mixes CurrencyTemplate
+ * @extends {GroupTemplate}
  *
- * @property {object} type
- * @property {string} type.value                 Type of group represented (e.g. "Party", "Encounter", "Crew").
- * @property {object} description
- * @property {string} description.full           Description of this group.
- * @property {string} description.summary        Summary description (currently unused).
- * @property {GroupMemberData[]} members         Members in this group with associated metadata.
+ * @property {PartyMemberData[]} members         Members in this group with associated metadata.
  * @property {object} attributes
  * @property {object} attributes.movement
  * @property {number} attributes.movement.land   Base movement speed over land.
  * @property {number} attributes.movement.water  Base movement speed over water.
  * @property {number} attributes.movement.air    Base movement speed through the air.
+ * @property {TravelPace5e} attributes.movement.pace  Travel pace.
+ * @property {string} attributes.movement.unit   The length units.
  * @property {object} details
  * @property {object} details.xp
  * @property {number} details.xp.value           XP currently available to be distributed to a party.
- *
- * @example Create a new Group
- * const g = new dnd5e.documents.Actor5e({
- *  type: "group",
- *  name: "Test Group",
- *  system: {
- *    members: [{ actor: "3f3hoYFWUgDqBP4U" }]
- *  }
- * });
  */
-export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
+export default class GroupData extends GroupTemplate {
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new SchemaField({
-        value: new StringField({ initial: "party", label: "DND5E.Group.Type" })
-      }),
-      description: new SchemaField({
-        full: new HTMLField({ label: "DND5E.Description" }),
-        summary: new HTMLField({ label: "DND5E.DescriptionSummary" })
-      }),
       members: new ArrayField(new SchemaField({
-        actor: new ForeignDocumentField(foundry.documents.BaseActor),
-        quantity: new SchemaField({
-          value: new NumberField({ initial: 1, integer: true, min: 0, label: "DND5E.Quantity" }),
-          formula: new FormulaField({ label: "DND5E.QuantityFormula" })
-        })
+        actor: new ForeignDocumentField(foundry.documents.BaseActor)
       }), { label: "DND5E.GroupMembers" }),
       attributes: new SchemaField({
         movement: new SchemaField({
-          land: new NumberField({ nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementLand" }),
-          water: new NumberField({ nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementWater" }),
-          air: new NumberField({ nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementAir" })
+          land: new NumberField({
+            nullable: false, min: 0, step: 0.1, initial: 0, speed: true, label: "DND5E.MovementLand"
+          }),
+          water: new NumberField({
+            nullable: false, min: 0, step: 0.1, initial: 0, speed: true, label: "DND5E.MovementWater"
+          }),
+          air: new NumberField({
+            nullable: false, min: 0, step: 0.1, initial: 0, speed: true, label: "DND5E.MovementAir"
+          }),
+          pace: new StringField({
+            required: true, blank: false, initial: "normal", choices: () => CONFIG.DND5E.travelPace,
+            label: "DND5E.Travel.Label"
+          }),
+          units: new StringField({
+            required: true, nullable: true, blank: false, label: "DND5E.MovementUnits", initial: defaultUnits("travel")
+          })
         })
       }, { label: "DND5E.Attributes" }),
       details: new SchemaField({
@@ -97,6 +84,19 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
+  /**
+   * Return only group members that are creatures.
+   * @type {Actor5e[]}
+   */
+  get creatures() {
+    return this.members.reduce((acc, { actor }) => {
+      if ( actor?.system.isCreature ) acc.push(actor);
+      return acc;
+    }, []);
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   get transferDestinations() {
     return this.members.map(m => m.actor).filter(a => a.isOwner);
@@ -109,7 +109,22 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
    * @type {Actor5e[]}
    */
   get playerCharacters() {
-    return this.members.map(m => m.actor).filter(a => a.type === "character");
+    return this.members.reduce((acc, { actor }) => {
+      if ( actor?.type === "character" ) acc.push(actor);
+      return acc;
+    }, []);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate the party's average level for the purpose determining encounter XP budget.
+   * @type {number}
+   */
+  get level() {
+    const pcs = this.playerCharacters;
+    if ( !pcs.length ) return 0;
+    return Math.round(pcs.reduce((acc, a) => acc + a.system.details.level, 0) / pcs.length);
   }
 
   /* -------------------------------------------- */
@@ -119,7 +134,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
-    GroupActor.#migrateMembers(source);
+    GroupData.#migrateMembers(source);
   }
 
   /* -------------------------------------------- */
@@ -147,7 +162,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       if ( !member.actor ) {
         const id = this._source.members[index]?.actor;
         console.warn(`Actor "${id}" in group "${this.parent.id}" does not exist within the World.`);
-      } else if ( member.actor.type === "group" ) {
+      } else if ( member.actor?.system.isGroup ) {
         console.warn(`Group "${this.parent.id}" may not contain another Group "${member.actor.id}" as a member.`);
       } else if ( memberIds.has(member.actor.id) ) {
         console.warn(`Actor "${member.actor.id}" duplicated in Group "${this.parent.id}".`);
@@ -168,16 +183,8 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
 
   /** @inheritDoc */
   prepareDerivedData() {
-    const system = this;
-    Object.defineProperty(this.details.xp, "derived", {
-      get() {
-        return system.type.value === "encounter" ? system.members.reduce((xp, { actor, quantity }) =>
-          xp + ((actor.system.details?.xp?.value ?? 0) * (quantity.value ?? 1))
-        , 0) : null;
-      },
-      configurable: true,
-      enumerable: false
-    });
+    this.parent.labels.pace = CONFIG.DND5E.travelPace[this.attributes.movement.pace]?.label;
+    MovementField.prepareData.call(this.attributes.movement, this.schema.getField("attributes.movement"));
   }
 
   /* -------------------------------------------- */
@@ -190,9 +197,11 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
    * @returns {Promise<Actor5e>}      The updated group Actor
    */
   async addMember(actor) {
-    if ( actor.type === "group" ) throw new Error("You may not add a group within a group.");
+    if ( actor.system.isGroup ) {
+      throw new Error("You may not add a group within a group.");
+    }
     if ( actor.pack ) throw new Error("You may only add Actors to the group which exist within the World.");
-    if ( this.members.ids.has(actor.id) ) return;
+    if ( this.members.ids.has(actor.id) ) return this.parent;
     const membersCollection = this.toObject().members;
     membersCollection.push({ actor: actor.id });
     return this.parent.update({"system.members": membersCollection});
@@ -200,34 +209,16 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
 
   /* -------------------------------------------- */
 
-  /**
-   * Place all members in the group on the current scene.
-   */
-  async placeMembers() {
-    if ( !game.user.isGM || !canvas.scene ) return;
-    const minimized = !this.parent.sheet._minimized;
-    await this.parent.sheet.minimize();
-    const tokensData = [];
+  /** @override */
+  async getMembers() {
+    return this.members.map(({ actor, ...data }) => ({ actor, ...data }));
+  }
 
-    try {
-      const placements = await TokenPlacement.place({
-        tokens: Object.values(this.members).flatMap(({ actor, quantity }) =>
-          Array(this.type.value === "encounter" ? (quantity.value ?? 1) : 1).fill(actor.prototypeToken)
-        )
-      });
-      for ( const placement of placements ) {
-        const actor = placement.prototypeToken.actor;
-        const appendNumber = !placement.prototypeToken.actorLink && placement.prototypeToken.appendNumber;
-        delete placement.prototypeToken;
-        const tokenDocument = await actor.getTokenDocument(placement);
-        if ( appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);
-        tokensData.push(tokenDocument.toObject());
-      }
-    } finally {
-      if ( minimized ) this.parent.sheet.maximize();
-    }
+  /* -------------------------------------------- */
 
-    await canvas.scene.createEmbeddedDocuments("Token", tokensData);
+  /** @override */
+  async getPlaceableMembers() {
+    return this.getMembers();
   }
 
   /* -------------------------------------------- */
@@ -254,19 +245,34 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   /* -------------------------------------------- */
 
   /**
-   * Roll the quantity formulas for each member and replace their quantity. Any entries without formulas
-   * will not be modified.
-   * @returns {Promise<Actor5e>}
+   * Request a group ability check with a given skill.
+   * @param {Partial<SkillToolRollProcessConfiguration>} config  Roll configuration.
+   * @returns {Promise<false|void>}
    */
-  async rollQuantities() {
-    const membersCollection = this.toObject().members;
-    await Promise.all(membersCollection.map(async member => {
-      if ( !member.quantity?.formula ) return member;
-      const roll = new Roll(member.quantity.formula);
-      await roll.evaluate();
-      if ( roll.total > 0 ) member.quantity.value = roll.total;
-    }));
-    return this.parent.update({"system.members": membersCollection});
+  async rollSkill(config) {
+    if ( !config.skill ) return;
+    const skillConfig = CONFIG.DND5E.skills[config.skill];
+    const ability = config.ability ?? skillConfig?.ability ?? "";
+    const skillLabel = skillConfig?.label ?? "";
+    const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
+    await foundry.documents.ChatMessage.implementation.create({
+      flavor: game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
+      speaker: ChatMessage.getSpeaker({ actor: this.parent, alias: this.parent.name }),
+      system: {
+        button: {
+          icon: "fa-solid fa-dice-d20",
+          label: game.i18n.localize("DND5E.SkillRoll", { skill: skillLabel, ability: abilityLabel })
+        },
+        data: { ...config },
+        handler: "skill",
+        targets: this.members.flatMap(({ actor }) => {
+          if ( actor.system.skills ) return { actor: actor.uuid };
+          return [];
+        })
+      },
+      type: "request"
+    });
+    return false;
   }
 
   /* -------------------------------------------- */
@@ -302,7 +308,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
             type: config.type
           },
           handler: "rest",
-          targets: targets.map(t => ({ actor: t }))
+          targets: targets.map(t => ({ actor: t.uuid }))
         },
         type: "request"
       };
@@ -337,23 +343,19 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
 
     return false;
   }
+}
 
-  /* -------------------------------------------- */
-  /*  Socket Event Handlers                       */
-  /* -------------------------------------------- */
+/* -------------------------------------------- */
 
-  /**
-   * If type has been set to something other than "party" and this is currently the primary party, remove that setting.
-   * @param {object} changed   The differential data that was changed relative to the documents prior values
-   * @param {object} options   Additional options which modify the update request
-   * @param {string} userId    The id of the User requesting the document update
-   * @see {Document#_onUpdate}
-   * @protected
-   */
-  _onUpdate(changed, options, userId) {
-    if ( !foundry.utils.hasProperty(changed, "system.type.value") || (game.user !== game.users.activeGM)
-      || (game.settings.get("dnd5e", "primaryParty")?.actor !== this.parent)
-      || (foundry.utils.getProperty(changed, "system.type.value") === "party") ) return;
-    game.settings.set("dnd5e", "primaryParty", { actor: null });
+/**
+ * @deprecated
+ * @since 5.1.0
+ */
+export class GroupActor extends GroupData {
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning("GroupActor is deprecated. Please use GroupData instead.", {
+      since: "DnD5e 5.1", until: "DND5e 5.3"
+    });
+    super(...args);
   }
 }

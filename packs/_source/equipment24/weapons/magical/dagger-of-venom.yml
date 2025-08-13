@@ -62,7 +62,6 @@ system:
           - type: itemUses
             value: '1'
             target: ''
-            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -102,6 +101,7 @@ system:
         max: ''
       enchant:
         identifier: ''
+        self: true
       restrictions:
         allowMagical: true
         categories:
@@ -109,8 +109,8 @@ system:
         properties:
           - fin
           - lgt
-          - thr
           - mgc
+          - thr
         type: weapon
       name: Coat Blade with Poison
       img: ''
@@ -348,11 +348,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.347'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1727883376108
-  modifiedTime: 1745712698917
+  modifiedTime: 1754951968846
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7100000

@@ -155,7 +155,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
     // Fetch the actor that will be summoned
     const summonUuid = this.summon.mode === "cr" ? await this.queryActor(profile) : profile.uuid;
     if ( !summonUuid ) return;
-    const actor = await this.fetchActor(summonUuid);
+    const actor = await dnd5e.documents.Actor5e.fetchExisting(summonUuid, {
+      origin: { key: "flags.dnd5e.summon.origin", value: this.item?.uuid }
+    });
 
     // Verify ownership of actor
     if ( !actor.isOwner ) {
@@ -224,50 +226,6 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
     Hooks.callAll("dnd5e.postSummon", this, profile, createdTokens, options);
 
     return createdTokens;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * If actor to be summoned is in a compendium, create a local copy or use an already imported version if present.
-   * @param {string} uuid  UUID of actor that will be summoned.
-   * @returns {Actor5e}    Local copy of actor.
-   */
-  async fetchActor(uuid) {
-    const actor = await fromUuid(uuid);
-    if ( !actor ) throw new Error(game.i18n.format("DND5E.SUMMON.Warning.NoActor", { uuid }));
-
-    const actorLink = actor.prototypeToken.actorLink;
-    if ( !actor.pack && (!actorLink || actor.getFlag("dnd5e", "summon.origin") === this.item?.uuid )) return actor;
-
-    // Search world actors to see if any usable summoned actor instances are present from prior summonings.
-    // Linked actors must match the summoning origin (activity) to be considered.
-    const localActor = game.actors.find(a =>
-      // Has been cloned for summoning use
-      a.getFlag("dnd5e", "summonedCopy")
-      // Sourced from the desired actor UUID
-      && (a._stats?.compendiumSource === uuid)
-      // Unlinked or created from this activity's parent item specifically
-      && ((a.getFlag("dnd5e", "summon.origin") === this.item?.uuid) || !a.prototypeToken.actorLink)
-    );
-    if ( localActor ) return localActor;
-
-    // Check permissions to create actors before importing
-    if ( !game.user.can("ACTOR_CREATE") ) throw new Error(game.i18n.localize("DND5E.SUMMON.Warning.CreateActor"));
-
-    // No suitable world actor was found, create a new actor for this summoning instance.
-    if ( actor.pack ) {
-      // Template actor resides only in compendium, import the actor into the world and set the flag.
-      return game.actors.importFromCompendium(game.packs.get(actor.pack), actor.id, {
-        "flags.dnd5e.summonedCopy": true
-      });
-    } else {
-      // Template actor (linked) found in world, create a copy for this user's item.
-      return actor.clone({
-        "flags.dnd5e.summonedCopy": true,
-        "_stats.compendiumSource": actor.uuid
-      }, {save: true});
-    }
   }
 
   /* -------------------------------------------- */
@@ -642,5 +600,22 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
     } catch(err) {
       Hooks.onError("SummonsActivity#placeSummons", err, { log: "error", notify: "error" });
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Deprecations                                */
+  /* -------------------------------------------- */
+
+  /**
+   * @deprecated
+   * @since 5.1.0
+   * @ignore
+   */
+  fetchActor(uuid) {
+    foundry.utils.logCompatibilityWarning("SummonActivity#fetchActor is deprecated. "
+      + "Please use Actor5e.fetchExisting instead.", { since: "DnD5e 5.1", until: "DnD5e 5.3" });
+    return dnd5e.documents.Actor5e.fetchExisting(uuid, {
+      origin: { key: "flags.dnd5e.summon.origin", value: this.item?.uuid }
+    });
   }
 }

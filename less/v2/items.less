@@ -75,8 +75,10 @@
   .sheet-header {
     display: flex;
     padding: 0 12px;
+    margin-top: 8px;
     align-items: stretch;
     gap: 8px;
+    min-height: 104px;
 
     input, select { background: var(--dnd5e-background-5); }
 
@@ -103,8 +105,8 @@
       display: block;
       width: 96px;
       height: 96px;
-      border-radius: 100%;
-      border: 4px solid var(--dnd5e-color-gold);
+      border-radius: 8px;
+      border: 2px solid var(--dnd5e-color-gold);
       box-shadow: 0 0 4px var(--dnd5e-shadow-45);
       object-fit: cover;
       background: var(--dnd5e-background-alt-1);
@@ -393,40 +395,6 @@
       }
 
       .editor { padding: 0 6px; }
-    }
-  }
-
-  .editor.prosemirror {
-    flex: 1;
-    overflow: hidden;
-
-    menu { border-radius: 0; }
-
-    .editor-container {
-      overflow: hidden auto;
-      scrollbar-gutter: stable;
-      margin: 0 4px 0 16px;
-      padding-right: 4px;
-    }
-
-    .editor-content {
-      position: unset;
-      min-height: 300px;
-      padding: 0;
-    }
-
-    code-mirror {
-      min-height: 300px;
-      display: flex;
-      flex-direction: column;
-
-      .cm-editor { overflow: auto; }
-      .cm-scroller { position: relative; }
-    }
-
-    > textarea {
-      flex: none;
-      min-height: 300px;
     }
   }
 

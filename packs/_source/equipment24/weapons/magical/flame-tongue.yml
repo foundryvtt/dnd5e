@@ -114,6 +114,7 @@ system:
         max: ''
       enchant:
         identifier: ''
+        self: true
       restrictions:
         allowMagical: true
         categories:
@@ -265,7 +266,7 @@ effects:
     _key: '!items.effects!dmgFlameTongue00.VtBOwsAVipxkP2f5'
   - type: enchantment
     name: Ablaze
-    img: systems/dnd5e/icons/items/flame-tongue-longsword.webp
+    img: icons/weapons/swords/greatsword-crossguard-flanged-red.webp
     disabled: true
     _id: MHnAqxEXBhUbnjPq
     system: {}
@@ -292,15 +293,18 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.347'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.1.0
       createdTime: 1731004134526
-      modifiedTime: 1732647163594
+      modifiedTime: 1754952006310
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgFlameTongue00.MHnAqxEXBhUbnjPq'
@@ -313,11 +317,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.347'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1727883376108
-  modifiedTime: 1745433544359
+  modifiedTime: 1754951987831
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 8000000
