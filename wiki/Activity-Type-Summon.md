@@ -1,4 +1,4 @@
-![Up to date as of 4.0.0](https://img.shields.io/static/v1?label=dnd5e&message=4.0.0&color=informational)
+![Up to date as of 5.1.0](https://img.shields.io/static/v1?label=dnd5e&message=5.1.0&color=informational)
 
 The Summon activity is designed to automatically bring summoned creatures into your world. This allows for summoning based on a pre-determined list of creatures or allowing the player to select a creature to summon based on CR and creature type. This activity can modify the summoned creatures before they are brought into the world and includes an interface for players to place them as desired in the scene.
 
@@ -53,7 +53,7 @@ Profiles also have a *Display Name* which affects how that profile will be displ
 
 #### By Direct Link
 
-In **Direct Link** mode it is easy to add creatures by dragging and dropping them from the world or a compendium only the sheet. Dropping it directly onto an existing profile will associated that creature with that profile and dropping elsewhere will create a new profile for that creature.
+In **Direct Link** mode it is easy to add creatures by dragging and dropping them from the world or a compendium onto the sheet. Dropping it directly onto an existing profile will associate that creature with that profile and dropping elsewhere will create a new profile for that creature.
 
 ![Summon Sheet - Profiles Tab, Direct Link](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/summoning/summoning-profiles-direct-link.jpg)
 
