@@ -213,7 +213,7 @@ export default class ItemDataModel extends SystemDataModel {
           { relativeTo: this.parent, ...enrichmentOptions }
         ),
         chat: await TextEditor.enrichHTML(
-          activity?.description?.value || (isIdentified ? description.chat || description.value
+          activity?.description?.value || (isIdentified ? description.chat || (activity ? "" : description.value)
             : unidentified?.description) || "",
           { relativeTo: this.parent, ...enrichmentOptions }
         ),
