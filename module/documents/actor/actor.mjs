@@ -572,7 +572,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Check for deprecated overrides.
     if ( model.isSingleLevel ) {
       if ( foundry.utils.getDefiningClass(this, "preparePactSlots") !== Actor5e ) {
-        foundry.utils.logCompatibilityWarning("Actor5e.computePactSlots is deprecated. Please use "
+        foundry.utils.logCompatibilityWarning("Actor5e.preparePactSlots is deprecated. Please use "
           + "SpellcastingModel#prepareSlots instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
         this.preparePactSlots(spells, actor, progression);
         return;

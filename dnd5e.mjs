@@ -63,6 +63,7 @@ Hooks.once("init", function() {
   CONFIG.ActiveEffect.legacyTransferral = false;
   CONFIG.Actor.collection = dataModels.collection.Actors5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
+  CONFIG.Adventure.documentClass = documents.Adventure5e;
   CONFIG.Canvas.layers.tokens.layerClass = CONFIG.Token.layerClass = canvas.layers.TokenLayer5e;
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;

@@ -1887,7 +1887,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @returns {Promise<Item5e>|null}           If a duplicate was found, returns the adjusted item stack.
    */
   _onDropStackConsumables(event, itemData, { container=null }={}) {
-    const droppedSourceId = itemData._stats?.compendiumSource ?? itemData.flags.core?.sourceId;
+    const droppedSourceId = itemData._stats?.compendiumSource ?? itemData.flags?.core?.sourceId;
     if ( itemData.type !== "consumable" || !droppedSourceId ) return null;
     const similarItem = this.actor.sourcedItems.get(droppedSourceId, { legacy: false })
       ?.filter(i => (i.system.container === container) && (i.name === itemData.name))?.first();

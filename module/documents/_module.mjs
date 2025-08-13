@@ -3,6 +3,7 @@ export {default as ActiveEffect5e} from "./active-effect.mjs";
 export {default as Actor5e} from "./actor/actor.mjs";
 export * as activity from "./activity/_module.mjs";
 export * as advancement from "./advancement/_module.mjs";
+export {default as Adventure5e} from "./adventure.mjs";
 export {default as ChatMessage5e} from "./chat-message.mjs";
 export {default as Combat5e} from "./combat.mjs";
 export {default as Combatant5e} from "./combatant.mjs";
