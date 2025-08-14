@@ -827,19 +827,12 @@
 
     .pill-lg {
       position: relative;
-      transition: box-shadow 250ms ease;
 
       .name .title { color: var(--color-text-title); }
 
       &.race, &.background {
         cursor: var(--cursor-pointer);
         &:hover:not(:has(a:hover)) { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
-      }
-
-      &.empty:not(.disabled) {
-        cursor: var(--cursor-pointer);
-        transition: opacity 250ms ease;
-        &:hover { opacity: .5; }
       }
 
       &.texture {
