@@ -19,6 +19,25 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  findMovementPath(waypoints, options) {
+
+    // Normal behavior if movement automation is disabled
+    if ( game.settings.get("dnd5e", "disableMovementAutomation") ) return super.findMovementPath(waypoints, options);
+
+    // Get all grid spaces as waypoints so that running into a blocking token stops us immediately before it
+    waypoints = this.document.getCompleteMovementPath(waypoints);
+
+    // Drop all intermediate waypoints except those immediately before a blocking token
+    const grid = this.document.parent.grid;
+    waypoints = waypoints.filter((waypoint, i) => {
+      return !waypoint.intermediate || this.layer.isOccupiedGridSpaceBlocking(grid.getOffset(waypoints[i + 1]), this);
+    });
+    return super.findMovementPath(waypoints, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _getDragConstrainOptions() {
     const unconstrainedMovement = game.user.isGM
       && ui.controls.controls.tokens.tools.unconstrainedMovement.active;
