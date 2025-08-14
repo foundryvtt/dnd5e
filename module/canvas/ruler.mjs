@@ -6,7 +6,8 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
       && (waypoint.unreachable || !waypoint.next.unreachable) ) return { radius: 0 };
     const user = game.users.get(waypoint.userId);
     const scale = canvas.dimensions.uiScale;
-    return {radius: 6 * scale, color: user?.color ?? 0x000000, alpha: waypoint.explicit ? 1 : 0.5};
+    const style = {radius: 6 * scale, color: user?.color ?? 0x000000, alpha: waypoint.explicit ? 1 : 0.5};
+    return this.#getSpeedBasedStyle(waypoint, style);
   }
 
   /* -------------------------------------------- */
