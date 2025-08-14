@@ -311,7 +311,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Search world actors to see if any had been previously imported for this purpose.
     // Linked actors must match the origin to be considered.
     const localActor = game.actors.find(a => {
-      const matchesOrigin = !origin || (foundry.utils.getProperty(actor, origin.key) === origin.value);
+      const matchesOrigin = !origin || (foundry.utils.getProperty(a, origin.key) === origin.value);
       // Has been auto-imported by this process.
       return (a.getFlag("dnd5e", "isAutoImported") || a.getFlag("dnd5e", "summonedCopy")) // Back-compat
       // Sourced from the desired actor UUID.
