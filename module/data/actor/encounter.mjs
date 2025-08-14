@@ -144,7 +144,7 @@ export default class EncounterData extends GroupTemplate {
 
     return Array.from(members.entries().map(([id, { collection, ...data }]) => {
       return { actor: collection.get(id), ...data };
-    }));
+    }).filter(d => d.actor));
   }
 
   /* -------------------------------------------- */

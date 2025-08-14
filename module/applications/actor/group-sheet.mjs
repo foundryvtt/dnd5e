@@ -102,6 +102,7 @@ export default class GroupActorSheet extends MultiActorSheet {
     context = await super._prepareInventoryContext(context, options);
     context.members = [];
     for ( const { actor } of this.document.system.members ) {
+      if ( !actor ) continue;
       const { id, type, img, name, system, uuid } = actor;
       const member = { id, type, img, name, system, uuid };
       this._prepareMemberEncumbrance(actor, member);
@@ -127,6 +128,7 @@ export default class GroupActorSheet extends MultiActorSheet {
       vehicle: { members: [], label: "TYPES.Actor.vehiclePl" }
     };
     for ( const { actor } of this.document.system.members ) {
+      if ( !actor ) continue;
       const { id, type, img, name, system, uuid } = actor;
       const section = context.sections[type];
       if ( !section ) continue;
