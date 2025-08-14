@@ -833,7 +833,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Activities
     ctx.activities = item.system.activities
-      ?.filter(a => !item.getFlag("dnd5e", "riders.activity")?.includes(a.id))
+      ?.filter(a => a.canUse)
       ?.map(this._prepareActivity.bind(this));
 
     // Concentration
