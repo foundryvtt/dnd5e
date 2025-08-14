@@ -47,7 +47,7 @@
         </div>
         {{/if}}
 
-        {{#unless (or feat.isASI or (eq feat.uuid recommendation.uuid))}}
+        {{#unless (or feat.isASI or (and feat.uuid (eq feat.uuid recommendation.uuid)))}}
         <div class="pill-lg {{#unless feat}}roboto-upper empty{{/unless}}"
              {{~#if feat}} data-uuid="{{ feat.uuid }}"{{else}} data-action="browse"{{/if}}>
             {{#if feat}}
