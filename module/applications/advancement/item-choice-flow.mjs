@@ -26,7 +26,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
   pool;
 
   /**
-   * UUID of item to be replaced.
+   * ID of item to be replaced.
    * @type {string}
    */
   replacement;
@@ -92,6 +92,9 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
     context.previousLevels = {};
     const previouslySelected = new Set();
+    // FIXME: We should not offer options for replacement if replacing the item would render the character ineligible
+    // for items they had already picked *at earlier levels*. Becoming ineligible for an item that is pending addition
+    // at this level is already handled by _evaluatePrerequisites.
     for ( const level of Array.fromRange(this.level - 1, 1) ) {
       const added = this.advancement.value.added[level];
       if ( added ) context.previousLevels[level] = Object.entries(added).map(([id, uuid]) => {
@@ -116,13 +119,16 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     const spellLevel = this.advancement.configuration.restriction.level;
     const maxSlot = this._maxSpellSlotLevel();
     const validateSpellLevel = (this.advancement.configuration.type === "spell") && (spellLevel === "available");
+    const replaced = this.advancement.actor.items.get(this.replacement);
+    const removed = replaced ? [replaced] : [];
+    const added = [...this.dropped, ...this.pool.filter(item => this.selected.has(item.uuid))];
 
     context.items = [...this.pool, ...this.dropped].reduce((items, i) => {
       if ( i ) {
         i.checked = this.selected.has(i.uuid);
         i.disabled = !i.checked && context.choices.full;
         const validFeature = !i.system.validatePrerequisites
-          || (i.system.validatePrerequisites(this.advancement.actor, { level: this.level }) === true);
+          || (i.system.validatePrerequisites(this.advancement.actor, { added, removed, level: this.level }) === true);
         const validSpell = !validateSpellLevel || (i.system.level <= maxSlot);
         if ( validFeature && validSpell ) items.push(i);
       }
@@ -214,6 +220,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
     const items = await Promise.all(Array.from(result).map(uuid => fromUuid(uuid)));
     for ( const item of items ) {
+      if ( this.selected.has(item.uuid) ) continue;
       this.selected.add(item.uuid);
       if ( !this.pool.find(i => i.uuid === item.uuid) ) {
         this.dropped.push(item);
@@ -221,19 +228,21 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       }
     }
 
+    this._evaluatePrerequisites();
     this.render();
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onChangeInput(event) {
+  async _onChangeInput(event) {
     if ( event.target.tagName === "DND5E-CHECKBOX" ) {
       if ( event.target.checked ) this.selected.add(event.target.name);
       else this.selected.delete(event.target.name);
     }
     else if ( event.target.type === "radio" ) this.replacement = event.target.value;
     else if ( event.target.name === "ability" ) this.ability = event.target.value;
+    this._evaluatePrerequisites();
     this.render();
   }
 
@@ -250,6 +259,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     if ( !uuidToDelete ) return;
     this.dropped.findSplice(i => i.uuid === uuidToDelete);
     this.selected.delete(uuidToDelete);
+    this._evaluatePrerequisites();
     this.render();
   }
 
@@ -283,12 +293,6 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     // If the item is already been marked as selected, no need to go further
     if ( this.selected.has(item.uuid) ) return false;
 
-    // Validate against feature prerequisites if present
-    const isValid = item.system.validatePrerequisites?.(this.advancement.actor, {
-      level: this.level, showMessage: true
-    }) ?? true;
-    if ( isValid !== true ) return null;
-
     // If spell level is restricted to available level, ensure the spell is of the appropriate level
     const spellLevel = this.advancement.configuration.restriction.level;
     if ( (this.advancement.configuration.type === "spell") && spellLevel === "available" ) {
@@ -310,6 +314,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       item.dropped = true;
     }
 
+    this._evaluatePrerequisites();
     this.render();
   }
 
@@ -339,5 +344,35 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       if ( !max ) return slot;
       return Math.max(slot, level || -1);
     }, 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Evaluate selected item prerequisites and update state appropriately.
+   * @protected
+   */
+  _evaluatePrerequisites() {
+    const replaced = this.advancement.actor.items.get(this.replacement);
+    const removed = replaced ? [replaced] : [];
+    for ( let i = 0; i < 100; i++ ) {
+      const itemsBefore = this.selected.size;
+      const added = [...this.dropped, ...this.pool.filter(item => this.selected.has(item.uuid))];
+      this.dropped = this.dropped.filter(item => {
+        const isValid = item.system.validatePrerequisites?.(this.advancement.actor, {
+          added, removed, level: this.level, showMessage: true
+        }) ?? true;
+        if ( isValid !== true ) this.selected.delete(item.uuid);
+        return isValid === true;
+      });
+      for ( const item of this.pool ) {
+        if ( !this.selected.has(item.uuid) ) continue;
+        const isValid = item.system.validatePrerequisites?.(this.advancement.actor, {
+          added, removed, level: this.level, showMessage: true
+        }) ?? true;
+        if ( isValid !== true ) this.selected.delete(item.uuid);
+      }
+      if ( itemsBefore === this.selected.size ) break;
+    }
   }
 }
