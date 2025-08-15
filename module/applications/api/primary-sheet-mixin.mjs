@@ -1,3 +1,4 @@
+import CheckboxElement from "../components/checkbox.mjs";
 import ItemSheet5e from "../item/item-sheet.mjs";
 import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
 
@@ -422,6 +423,7 @@ export default function PrimarySheetMixin(Base) {
      */
     static async #showDocument(event, target) {
       if ( await this._showDocument(event, target) === false ) return;
+      if ( [HTMLInputElement, HTMLSelectElement, CheckboxElement].some(el => event.target instanceof el) ) return;
       const uuid = target.closest("[data-uuid]")?.dataset.uuid;
       const doc = await fromUuid(uuid);
       const mode = target.dataset.action === "showDocument" ? "PLAY" : "EDIT";
