@@ -105,7 +105,7 @@ export default class AttackActivityData extends BaseActivityData {
     }
 
     // Natural weapons also defer to the item if using any classification other than spell.
-    if ( this.item.system.availableAbilities && (this.item.system.type.value === "natural")
+    if ( this.item.system.availableAbilities && (this.item.system.type?.value === "natural")
       && (this.attack.type.classification !== "spell") ) {
       return this.item.system.availableAbilities;
     }

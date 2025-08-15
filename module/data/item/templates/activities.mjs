@@ -440,7 +440,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       const existingSpell = activity.cachedSpell;
       if ( existingSpell ) {
         const enchantment = existingSpell.effects.get(CastActivity.ENCHANTMENT_ID);
-        await enchantment.update({ changes: activity.getSpellChanges() });
+        await enchantment?.update({ changes: activity.getSpellChanges() });
       } else {
         const cached = await activity.getCachedSpellData();
         if ( cached ) cachedInserts.push(cached);

@@ -309,12 +309,16 @@ export default class FeatData extends ItemDataModel.mixin(
    * Validate the prerequisites specified on this item.
    * @param {Actor5e} actor                        Actor against which the prerequisites should be checked.
    * @param {object} [options={}]
+   * @param {Item5e[]} [options.added]             Items that are pending addition to the Actor.
    * @param {number} [options.level]               Level to validate. Falls back to character level.
+   * @param {Item5e[]} [options.removed]           Items that are pending removal from the Actor.
    * @param {boolean} [options.showMessage=false]  Show a UI message if the validation fails.
    * @param {boolean} [options.throwError=false]   Throw an error if validation fails.
    * @returns {true|string[]}  True if the item is valid or a list of invalid descriptions if validation failed.
    */
-  validatePrerequisites(actor, { level=actor.system?.details?.level, showMessage=false, throwError=false }={}) {
+  validatePrerequisites(actor, {
+    added=[], level=actor.system?.details?.level, removed=[], showMessage=false, throwError=false
+  }={}) {
     const messages = [];
 
     // Check to ensure the item doesn't already exist on actor if it is not repeatable
@@ -323,8 +327,11 @@ export default class FeatData extends ItemDataModel.mixin(
     }
 
     // If a feature has item pre-requisites, make sure the other items exist on the actor
-    const someExist = !this.prerequisites.items.size || Array.from(this.prerequisites.items)
-      .some(i => actor.identifiedItems.get(i)?.size);
+    const pendingAddition = new Set(added.map(i => i.system.identifier));
+    const pendingRemoval = new Set(removed.map(i => i.system.identifier));
+    const someExist = !this.prerequisites.items.size || Array.from(this.prerequisites.items).some(i => {
+      return (actor.identifiedItems.get(i)?.size || pendingAddition.has(i)) && !pendingRemoval.has(i);
+    });
     if ( !someExist ) {
       messages.push(game.i18n.format("DND5E.Prerequisites.Warning.MissingItem", {
         items: game.i18n.getListFormatter({ type: "disjunction" }).format(Array.from(this.prerequisites.items))

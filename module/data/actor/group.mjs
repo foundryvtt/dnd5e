@@ -211,7 +211,7 @@ export default class GroupData extends GroupTemplate {
 
   /** @override */
   async getMembers() {
-    return this.members.map(({ actor, ...data }) => ({ actor, ...data }));
+    return this.members.map(({ actor, ...data }) => ({ actor, ...data })).filter(d => d.actor);
   }
 
   /* -------------------------------------------- */

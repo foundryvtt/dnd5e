@@ -311,7 +311,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Search world actors to see if any had been previously imported for this purpose.
     // Linked actors must match the origin to be considered.
     const localActor = game.actors.find(a => {
-      const matchesOrigin = !origin || (foundry.utils.getProperty(actor, origin.key) === origin.value);
+      const matchesOrigin = !origin || (foundry.utils.getProperty(a, origin.key) === origin.value);
       // Has been auto-imported by this process.
       return (a.getFlag("dnd5e", "isAutoImported") || a.getFlag("dnd5e", "summonedCopy")) // Back-compat
       // Sourced from the desired actor UUID.
@@ -2807,7 +2807,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     delete d.system.resources; // Don't change your resource pools
     delete d.system.currency; // Don't lose currency
     delete d.system.bonuses; // Don't lose global bonuses
-    if ( settings.keep.has("spells") || settings.spellLists.size ) delete d.system.attributes.spellcasting; // Keep spellcasting ability if retaining spells.
+
+    if ( settings.keep.has("spells") || settings.spellLists.size ) {
+      // Keep spellcasting ability if retaining spells.
+      d.system.attributes.spellcasting = o.system.attributes.spellcasting;
+    }
 
     // Specific additional adjustments
     d.system.details.alignment = o.system.details.alignment; // Don't change alignment

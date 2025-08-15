@@ -498,7 +498,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
     for ( const activity of this.system.activities ?? [] ) activity.prepareData();
-    for ( const advancement of this.system.advancement ?? [] ) advancement.prepareData();
+    for ( const advancement of this.system.advancement ?? [] ) {
+      if ( !(advancement instanceof Advancement) ) continue;
+      advancement.prepareData();
+    }
     if ( !this.actor || this.actor._embeddedPreparation ) this.applyActiveEffects();
   }
 
@@ -684,9 +687,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( this.pack ) return;
 
     let event = config.event;
-    const activities = this.system.activities?.filter(a =>
-      !this.getFlag("dnd5e", "riders.activity")?.includes(a.id) && a.canUse
-    );
+    const activities = this.system.activities?.filter(a => a.canUse);
     if ( activities?.length ) {
       const { chooseActivity, ...activityConfig } = config;
       let usageConfig = activityConfig;

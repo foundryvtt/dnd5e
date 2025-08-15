@@ -86,7 +86,7 @@ export default function ActivityMixin(Base) {
      * @type {boolean}
      */
     get canUse() {
-      return true;
+      return !this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id);
     }
 
     /* -------------------------------------------- */
