@@ -2807,7 +2807,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     delete d.system.resources; // Don't change your resource pools
     delete d.system.currency; // Don't lose currency
     delete d.system.bonuses; // Don't lose global bonuses
-    if ( settings.keep.has("spells") || settings.spellLists.size ) delete d.system.attributes.spellcasting; // Keep spellcasting ability if retaining spells.
+
+    if ( settings.keep.has("spells") || settings.spellLists.size ) {
+      // Keep spellcasting ability if retaining spells.
+      d.system.attributes.spellcasting = o.system.attributes.spellcasting;
+    }
 
     // Specific additional adjustments
     d.system.details.alignment = o.system.details.alignment; // Don't change alignment
