@@ -121,7 +121,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       const actionConfig = CONFIG.Token.movement.actions[type];
       if ( !actionConfig ) continue;
       actionConfig.getAnimationOptions = token => {
-        const actorMovement = token.actor?.system.attributes?.movement ?? {};
+        const actorMovement = token?.actor?.system.attributes?.movement ?? {};
         if ( !(type in actorMovement) || actorMovement[type] ) return {};
         return { movementSpeed: CONFIG.Token.movement.defaultSpeed / 2 };
       };
