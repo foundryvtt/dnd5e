@@ -2,7 +2,8 @@ import MappingField from "../fields/mapping-field.mjs";
 import SpellConfigurationData from "./spell-config.mjs";
 
 const {
-  ArrayField, BooleanField, EmbeddedDataField, ForeignDocumentField, NumberField, SchemaField, SetField, StringField
+  ArrayField, BooleanField, EmbeddedDataField, ForeignDocumentField,
+  IntegerSortField, NumberField, SchemaField, SetField, StringField
 } = foundry.data.fields;
 
 /**
@@ -17,6 +18,7 @@ const {
  * Configuration data for an individual pool entry.
  *
  * @typedef {object} ItemChoicePoolEntry
+ * @property {number} sort       Manual sorting value for the entry.
  * @property {string} uuid  UUID of the item to present as a choice.
  */
 
@@ -31,6 +33,7 @@ const {
  * @property {Set<string>} restriction.list                   Spell lists from which a spell must be selected.
  * @property {string} restriction.subtype                     Item sub-type allowed.
  * @property {string} restriction.type                        Specific item type allowed.
+ * @property {string} sorting                                 Sorting mode for the item list.
  * @property {SpellConfigurationData} spell                   Mutations applied to spell items.
  * @property {string} type                                    Type of item allowed, if it should be restricted.
  */
@@ -53,13 +56,17 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
         count: new NumberField({integer: true, min: 0}),
         replacement: new BooleanField()
       })),
-      pool: new ArrayField(new SchemaField({ uuid: new StringField() })),
+      pool: new ArrayField(new SchemaField({
+        sort: new IntegerSortField(),
+        uuid: new StringField()
+      })),
       restriction: new SchemaField({
         level: new StringField(),
         list: new SetField(new StringField()),
         subtype: new StringField(),
         type: new StringField()
       }),
+      sorting: new StringField({ initial: "a", choices: Folder.SORTING_MODES }),
       spell: new EmbeddedDataField(SpellConfigurationData, { nullable: true, initial: null }),
       type: new StringField({ blank: false, nullable: true, initial: null })
     };

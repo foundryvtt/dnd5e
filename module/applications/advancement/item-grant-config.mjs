@@ -1,9 +1,9 @@
-import AdvancementConfig from "./advancement-config-v2.mjs";
+import ItemSharedConfig from "./item-shared-config.mjs";
 
 /**
  * Configuration application for item grants.
  */
-export default class ItemGrantConfig extends AdvancementConfig {
+export default class ItemGrantConfig extends ItemSharedConfig {
   /** @override */
   static DEFAULT_OPTIONS = {
     classes: ["item-grant"],
@@ -38,7 +38,9 @@ export default class ItemGrantConfig extends AdvancementConfig {
       data,
       fields: this.advancement.configuration.schema.fields.items.element.fields,
       index: fromUuidSync(data.uuid)
-    }));
+    })).sort((lhs, rhs) => context.manualSort
+      ? lhs.data.sort - rhs.data.sort
+      : lhs.index.name.localeCompare(rhs.index.name));
 
     context.abilityOptions = Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }));
     context.showContainerWarning = context.items.some(i => i.index?.type === "container");
@@ -66,14 +68,5 @@ export default class ItemGrantConfig extends AdvancementConfig {
   async prepareConfigurationUpdate(configuration) {
     if ( configuration.spell ) configuration.spell.ability ??= [];
     return configuration;
-  }
-
-  /* -------------------------------------------- */
-  /*  Drag & Drop                                 */
-  /* -------------------------------------------- */
-
-  /** @override */
-  _validateDroppedItem(event, item) {
-    this.advancement._validateItemType(item);
   }
 }
