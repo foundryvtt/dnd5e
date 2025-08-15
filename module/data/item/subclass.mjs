@@ -26,7 +26,7 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       classIdentifier: new IdentifierField({
-        required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint"
+        required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint", types: ["class"]
       }),
       spellcasting: new SpellcastingField()
     });
