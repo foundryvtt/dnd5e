@@ -189,6 +189,8 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
         filters.locked.additional.category = { [config.restriction.type]: 1 };
         if ( subtype ) filters.locked.additional.subtype = { [config.restriction.subtype]: 1 };
       }
+    } else {
+      filters.locked.types = this.advancement.constructor.VALID_TYPES;
     }
 
     // Apply restrictions based on level
