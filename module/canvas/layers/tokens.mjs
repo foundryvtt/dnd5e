@@ -90,6 +90,9 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
         // Ignore self
         if ( t === token ) return false;
 
+         // Ignore tokens when moving together
+        if ( canvas.tokens.controlled.includes(t) ) return false;
+
         // Always ignore hidden tokens
         if ( t.document.hidden ) return false;
 
