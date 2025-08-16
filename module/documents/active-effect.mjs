@@ -106,6 +106,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   get isSuppressed() {
     if ( super.isSuppressed ) return true;
+    if ( this.system.magical && this.parent.actor?.statuses.has("antimagic") ) return true;
     if ( this.type === "enchantment" ) return false;
     if ( this.parent instanceof dnd5e.documents.Item5e ) {
       if ( this.parent.areEffectsSuppressed ) return true;
