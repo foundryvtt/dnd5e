@@ -37,7 +37,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
     });
     return super.findMovementPath(waypoints, options);
   }
-  
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
