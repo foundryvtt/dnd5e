@@ -4515,11 +4515,21 @@ DND5E.epicBoonInterval = 30000;
 /* -------------------------------------------- */
 
 /**
- * @enum {string}
+ * @enum {{ label: string, alignment: string, symbol: string }}
  */
 DND5E.deities = {};
 preLocalize("deities");
 
+/* -------------------------------------------- */
+
+/**
+ * Thresholds at which a character gains a piety trait.
+ * @type {number[]}
+ */
+DND5E.pietyThresholds = [3, 10, 25, 50];
+
+/* -------------------------------------------- */
+/*   Traits                                     */
 /* -------------------------------------------- */
 
 /**

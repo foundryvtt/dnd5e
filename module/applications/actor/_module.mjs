@@ -20,6 +20,7 @@ export {default as HitDiceConfig} from "./config/hit-dice-config.mjs";
 export {default as HitPointsConfig} from "./config/hit-points-config.mjs";
 export {default as InitiativeConfig} from "./config/initiative-config.mjs";
 export {default as LanguagesConfig} from "./config/languages-config.mjs";
+export {default as PietyConfig} from "./config/piety-config.mjs";
 export {default as SkillToolConfig} from "./config/skill-tool-config.mjs";
 export {default as SkillsConfig} from "./config/skills-config.mjs";
 export {default as SpellSlotsConfig} from "./config/spell-slots-config.mjs";

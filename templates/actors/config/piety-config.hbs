@@ -1,0 +1,7 @@
+<section class="flexcol">
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.PIETY.Label" }}</legend>
+        {{ formField fields.value value=data.value localize=true rootId=partId label="DND5E.PIETY.FIELDS.value.label" hint="DND5E.PIETY.FIELDS.value.hint" }}
+        {{ formField fields.deity value=data.deity options=deityOptions localize=true rootId=partId label="DND5E.PIETY.FIELDS.deity.label" hint="DND5E.PIETY.FIELDS.deity.hint" }}
+    </fieldset>
+</section>

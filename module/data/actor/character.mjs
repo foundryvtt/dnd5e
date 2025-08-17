@@ -47,6 +47,7 @@ const {
  * @property {number} attributes.exhaustion               Number of levels of exhaustion.
  * @property {number} attributes.inspiration              Does this character have inspiration?
  * @property {object} piety
+ * @property {string} piety.deity                         The character's chosen deity.
  * @property {number} piety.value                         The creature's piety score.
  * @property {object} bastion
  * @property {string} bastion.name                        The name of the character's bastion.
@@ -135,6 +136,7 @@ export default class CharacterData extends CreatureTemplate {
         }, { label: "DND5E.DeathSave" }),
         inspiration: new BooleanField({ required: true, label: "DND5E.Inspiration" }),
         piety: new SchemaField({
+          deity: new StringField({ required: true }),
           value: new NumberField({ integer: true, min: 1, nullable: false, initial: 1 })
         })
       }, { label: "DND5E.Attributes" }),
@@ -232,6 +234,11 @@ export default class CharacterData extends CreatureTemplate {
     } else {
       xp.pct = 100;
     }
+
+    // Piety
+    const piety = this.attributes.piety;
+    const threshold = CONFIG.DND5E.pietyThresholds.find(t => t > piety.value) ?? piety.value;
+    piety.pct = Math.clamp(Math.round(piety.value / threshold * 100), 0, 100);
 
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);

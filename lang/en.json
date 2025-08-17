@@ -3105,7 +3105,18 @@
 "DND5E.PersonalityTraits": "Personality Traits",
 
 "DND5E.PIETY": {
-  "Label": "Piety"
+  "Configure": "Configure Piety",
+  "Label": "Piety",
+  "FIELDS": {
+    "deity": {
+      "label": "Deity",
+      "hint": "The deity that this character champions."
+    },
+    "value": {
+      "label": "Piety Score",
+      "hint": "This character's current piety score."
+    }
+  }
 },
 
 "DND5E.Portrait": "Portrait",
