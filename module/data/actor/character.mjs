@@ -46,6 +46,8 @@ const {
  * @property {number} attributes.death.failure            Number of failed death saves.
  * @property {number} attributes.exhaustion               Number of levels of exhaustion.
  * @property {number} attributes.inspiration              Does this character have inspiration?
+ * @property {object} piety
+ * @property {number} piety.value                         The creature's piety score.
  * @property {object} bastion
  * @property {string} bastion.name                        The name of the character's bastion.
  * @property {string} bastion.description                 Additional description and details for the character's
@@ -131,7 +133,10 @@ export default class CharacterData extends CreatureTemplate {
             save: new FormulaField({ required: true, label: "DND5E.DeathSaveBonus" })
           })
         }, { label: "DND5E.DeathSave" }),
-        inspiration: new BooleanField({ required: true, label: "DND5E.Inspiration" })
+        inspiration: new BooleanField({ required: true, label: "DND5E.Inspiration" }),
+        piety: new SchemaField({
+          value: new NumberField({ integer: true, min: 1, nullable: false, initial: 1 })
+        })
       }, { label: "DND5E.Attributes" }),
       bastion: new SchemaField({
         name: new StringField({ required: true }),
