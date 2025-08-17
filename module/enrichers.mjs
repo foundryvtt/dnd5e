@@ -960,6 +960,7 @@ function enrichLookup(config, fallback, options) {
   const data = activity ? activity.getRollData().activity : options.rollData
     ?? options.relativeTo?.getRollData?.() ?? {};
   let value = foundry.utils.getProperty(data, keyPath.substring(1)) ?? fallback;
+  if ( value !== undefined ) value = String(value);
   if ( value && style ) {
     if ( style === "capitalize" ) value = value.capitalize();
     else if ( style === "lowercase" ) value = value.toLowerCase();
