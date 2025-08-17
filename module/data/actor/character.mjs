@@ -189,6 +189,11 @@ export default class CharacterData extends CreatureTemplate {
       xp.pct = 100;
     }
 
+    // Piety
+    const piety = this.attributes.piety;
+    const threshold = CONFIG.DND5E.pietyThresholds.find(t => t > piety.value) ?? piety.value;
+    piety.pct = Math.clamp(Math.round(piety.value / threshold * 100), 0, 100);
+
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
     SensesField._shim(this.attributes.senses);
