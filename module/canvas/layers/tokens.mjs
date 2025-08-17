@@ -9,6 +9,19 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
    */
   isOccupiedGridSpaceBlocking(gridSpace, token, { preview=false }={}) {
     const found = this.#getRelevantOccupyingTokens(gridSpace, token, { preview });
+
+    /**
+     * Hook event that fires when determining whether a grid space is occupied by a token which should block movement
+     * for a provided token.
+     * @function dnd5e.determineOccupiedGridSpaceBlocking
+     * @memberof hookEvents
+     * @param {GridOffset3D} gridSpace  The grid space being checked.
+     * @param {Token5e} token           The token being moved.
+     * @param {object} options          Additional options.
+     * @param {boolean} options.preview Whether the movement in question is previewed.
+     * @param {Set<Token5e>} found      The found set of tokens which would block movement. *Will be mutated.*
+     */
+    Hooks.callAll("dnd5e.determineOccupiedGridSpaceBlocking", gridSpace, token, { preview }, found);
     const tokenSize = CONFIG.DND5E.actorSizes[token.actor?.system.traits.size]?.numerical ?? 2;
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     const halflingNimbleness = token.actor?.getFlag("dnd5e", "halflingNimbleness");
@@ -48,6 +61,19 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
    */
   isOccupiedGridSpaceDifficult(gridSpace, token, { preview=false }={}) {
     const found = this.#getRelevantOccupyingTokens(gridSpace, token, { preview });
+
+    /**
+     * Hook event that fires when determining whether a grid space is occupied by a token which should cause difficult
+     * terrain for a provided token.
+     * @function dnd5e.determineOccupiedGridSpaceDifficult
+     * @memberof hookEvents
+     * @param {GridOffset3D} gridSpace  The grid space being checked.
+     * @param {Token5e} token           The token being moved.
+     * @param {object} options          Additional options.
+     * @param {boolean} options.preview Whether the movement in question is previewed.
+     * @param {Set<Token5e>} found      The found set of tokens which would cause difficult terrain. *Will be mutated.*
+     */
+    Hooks.callAll("dnd5e.determineOccupiedGridSpaceDifficult", gridSpace, token, { preview }, found);
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     return found.some(t => {
       // Only consider creatures as difficult terrain for now.
