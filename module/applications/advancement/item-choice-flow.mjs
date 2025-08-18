@@ -95,7 +95,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     // FIXME: We should not offer options for replacement if replacing the item would render the character ineligible
     // for items they had already picked *at earlier levels*. Becoming ineligible for an item that is pending addition
     // at this level is already handled by _evaluatePrerequisites.
-    for ( const level of Array.fromRange(this.level - 1, 1) ) {
+    for ( const level of Array.fromRange(this.level) ) {
       const added = this.advancement.value.added[level];
       if ( added ) context.previousLevels[level] = Object.entries(added).map(([id, uuid]) => {
         const item = fromUuidSync(uuid);
