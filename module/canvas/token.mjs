@@ -21,8 +21,10 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /** @inheritDoc */
   findMovementPath(waypoints, options) {
 
-    // Normal behavior if movement automation is disabled
-    if ( game.settings.get("dnd5e", "disableMovementAutomation") ) return super.findMovementPath(waypoints, options);
+    // Normal behavior if movement automation is disabled or this.actor is not a creature
+    if ( game.settings.get("dnd5e", "disableMovementAutomation") || !this.document.actor?.system.isCreature ) {
+      return super.findMovementPath(waypoints, options);
+    }
 
     // Get all grid spaces as waypoints so that running into a blocking token stops us immediately before it
     waypoints = this.document.getCompleteMovementPath(waypoints);

@@ -1,7 +1,7 @@
 import BaseConfigSheet from "../api/base-config-sheet.mjs";
 
 /**
- * Configuration application for an actor's concentration checks.
+ * Configuration application for an actor's death saving throws.
  */
 export default class DeathConfig extends BaseConfigSheet {
   /** @override */
