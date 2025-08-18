@@ -16,7 +16,7 @@ export default class StandardEffectData extends foundry.abstract.TypeDataModel {
   /** @override */
   static defineSchema() {
     return {
-      magical: new BooleanField({ initial: true }),
+      magical: new BooleanField(),
       rider: new SchemaField({
         statuses: new SetField(new StringField())
       })

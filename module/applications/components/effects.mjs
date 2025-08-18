@@ -278,12 +278,15 @@ export default class EffectsElement extends HTMLElement {
     const isActor = this.document instanceof Actor;
     const isEnchantment = li.dataset.effectType.startsWith("enchantment");
     return this.document.createEmbeddedDocuments("ActiveEffect", [{
-      type: isEnchantment ? "enchantment" : "base",
+      type: isEnchantment ? "enchantment" : "standard",
       name: isActor ? game.i18n.localize("DND5E.EffectNew") : this.document.name,
       icon: isActor ? "icons/svg/aura.svg" : this.document.img,
       origin: isEnchantment ? undefined : this.document.uuid,
       "duration.rounds": li.dataset.effectType === "temporary" ? 1 : undefined,
-      disabled: ["inactive", "enchantmentInactive"].includes(li.dataset.effectType)
+      disabled: ["inactive", "enchantmentInactive"].includes(li.dataset.effectType),
+      system: {
+        magical: !isActor && this.document.system.properties?.has("mgc")
+      }
     }]);
   }
 
