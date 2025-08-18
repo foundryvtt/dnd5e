@@ -21,8 +21,8 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /** @inheritDoc */
   findMovementPath(waypoints, options) {
 
-    // Normal behavior if movement automation is disabled or this.actor is not a creature
-    if ( game.settings.get("dnd5e", "disableMovementAutomation") || !this.document.actor?.system.isCreature ) {
+    // Normal behavior if token blocking is disabled or this.actor is not a creature
+    if ( game.settings.get("dnd5e", "disableTokenBlocking") || !this.document.actor?.system.isCreature ) {
       return super.findMovementPath(waypoints, options);
     }
 
@@ -79,7 +79,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   constrainMovementPath(waypoints, options) {
     let { preview=false, ignoreTokens=false } = options; // Custom constrain option to ignore tokens
 
-    ignoreTokens ||= game.settings.get("dnd5e", "disableMovementAutomation");
+    ignoreTokens ||= game.settings.get("dnd5e", "disableTokenBlocking");
     ignoreTokens ||= !this.actor?.system.isCreature;
 
     if ( ignoreTokens ) return super.constrainMovementPath(waypoints, options);
