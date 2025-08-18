@@ -39,6 +39,16 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /* -------------------------------------------- */
 
+  /**
+   * Level that will be used to evaluate feature prerequisites.
+   * @type {number}
+   */
+  get featureLevel() {
+    return this.level || this.advancement.actor.system.details?.level;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -127,8 +137,9 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       if ( i ) {
         i.checked = this.selected.has(i.uuid);
         i.disabled = !i.checked && context.choices.full;
-        const validFeature = !i.system.validatePrerequisites
-          || (i.system.validatePrerequisites(this.advancement.actor, { added, removed, level: this.level }) === true);
+        const validFeature = !i.system.validatePrerequisites || (i.system.validatePrerequisites(
+          this.advancement.actor, { added, removed, level: this.featureLevel }
+        ) === true);
         const validSpell = !validateSpellLevel || (i.system.level <= maxSlot);
         if ( validFeature && validSpell ) items.push(i);
       }
@@ -201,7 +212,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
     // Apply restrictions based on level
     if ( config.type === "feat" ) {
-      filters.locked.arbitrary = [{ k: "system.prerequisites.level", o: "lte", v: this.level }];
+      filters.locked.arbitrary = [{ k: "system.prerequisites.level", o: "lte", v: this.featureLevel }];
     } else if ( (config.type === "spell") && (config.restriction.level !== "") ) {
       filters.locked.additional.level = {
         min: config.restriction.level === "available" ? undefined : Number(config.restriction.level),
@@ -362,7 +373,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       const added = [...this.dropped, ...this.pool.filter(item => this.selected.has(item.uuid))];
       this.dropped = this.dropped.filter(item => {
         const isValid = item.system.validatePrerequisites?.(this.advancement.actor, {
-          added, removed, level: this.level, showMessage: true
+          added, removed, level: this.featureLevel, showMessage: true
         }) ?? true;
         if ( isValid !== true ) this.selected.delete(item.uuid);
         return isValid === true;
