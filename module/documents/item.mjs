@@ -1064,6 +1064,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
 
+    const isPhysical = this.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate);
+    if ( this.parent?.system?.isGroup && !isPhysical ) return false;
+
     // Create identifier based on name
     if ( this.system.hasOwnProperty("identifier") && !data.system?.identifier ) {
       this.updateSource({ "system.identifier": this.identifier });

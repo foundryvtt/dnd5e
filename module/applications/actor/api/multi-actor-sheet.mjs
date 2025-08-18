@@ -1,3 +1,4 @@
+import PhysicalItemTemplate from "../../../data/item/templates/physical-item.mjs";
 import ContextMenu5e from "../../context-menu.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 
@@ -120,6 +121,22 @@ export default class MultiActorSheet extends BaseActorSheet {
   async _onDropActor(event, actor) {
     await this.actor.system.addMember(actor);
     return actor;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDropCreateItems(event, items, behavior) {
+    let foundNonPhysical = false;
+    items = items.filter(item => {
+      if ( !item.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate) ) {
+        foundNonPhysical = true;
+        return false;
+      }
+      return true;
+    });
+    if ( foundNonPhysical ) ui.notifications.warn("DND5E.Group.Warning.PhysicalItemOnly", { localize: true });
+    return super._onDropCreateItems(event, items, behavior);
   }
 
   /* -------------------------------------------- */
