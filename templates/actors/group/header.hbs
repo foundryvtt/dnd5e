@@ -41,7 +41,7 @@
 
             {{!-- Movement --}}
             <div class="movement card">
-                <div class="header">
+                <div class="header travel-pace">
                     <h3>{{ localize "DND5E.Travel.Label" }}</h3>
                     {{#if editable}}
                     <button type="button" class="config-button unbutton" data-action="showConfiguration"
@@ -49,7 +49,15 @@
                         <i class="fa-solid fa-cog" inert></i>
                     </button>
                     {{else}}
+                    <button type="button" class="unbutton config-button" data-action="changePace" data-increment="-1"
+                            data-tooltip aria-label="{{ localize "DND5E.Group.Action.ChangePace" }}">
+                        <i class="fa-solid fa-chevron-left" inert></i>
+                    </button>
                     <span class="pace subtitle">{{ labels.pace }}</span>
+                    <button type="button" class="unbutton config-button" data-action="changePace" data-increment="1"
+                            data-tooltip aria-label="{{ localize "DND5E.Group.Action.ChangePace" }}">
+                        <i class="fa-solid fa-chevron-right" inert></i>
+                    </button>
                     {{/if}}
                 </div>
                 <div class="info">
