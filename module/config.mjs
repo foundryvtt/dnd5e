@@ -4274,7 +4274,7 @@ DND5E.statusEffects = {
 
 /**
  * Configuration for the special bloodied status effect.
- * @type {{ name: string, icon: string, threshold: number }}
+ * @type {{ name: string, img: string, threshold: number }}
  */
 DND5E.bloodied = {
   name: "EFFECT.DND5E.StatusBloodied",
