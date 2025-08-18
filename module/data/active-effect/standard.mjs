@@ -19,7 +19,7 @@ export default class StandardEffectData extends (ActiveEffectTypeDataModel ?? Ty
   static defineSchema() {
     return {
       ...(ActiveEffectTypeDataModel ? super.defineSchema() : {}),
-      magical: new BooleanField({ initial: true }),
+      magical: new BooleanField(),
       rider: new SchemaField({
         statuses: new SetField(new StringField())
       })
