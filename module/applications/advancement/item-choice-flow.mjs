@@ -72,7 +72,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
   async getContext() {
     const context = {};
     this.selected ??= new Set(Object.values(this.advancement.value.added?.[this.level] ?? {}));
-    this.pool ??= await Promise.all(this.advancement.configuration.pool.map(i => fromUuid(i.uuid)));
+    this.pool ??= (await Promise.all(this.advancement.configuration.pool.map(i => fromUuid(i.uuid)))).filter(_ => _);
     if ( !this.dropped ) {
       this.dropped = [];
       for ( const data of this.retainedData?.items ?? [] ) {
