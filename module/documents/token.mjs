@@ -127,6 +127,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       };
       actionConfig.getCostFunction = (...args) => this.getMovementActionCostFunction(type, ...args);
     }
+    CONFIG.Token.movement.actions.crawl.getCostFunction = () => (cost, from, to, distance) => cost + distance;
   }
 
   /* -------------------------------------------- */
