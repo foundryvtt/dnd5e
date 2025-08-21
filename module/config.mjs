@@ -2547,6 +2547,9 @@ DND5E.difficultTerrainTypes = {
   },
   snow: {
     label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Snow"
+  },
+  web: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Webs"
   }
 };
 preLocalize("difficultTerrainTypes", { key: "label", sort: true });
