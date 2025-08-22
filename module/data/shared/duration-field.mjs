@@ -66,6 +66,7 @@ export default class DurationField extends SchemaField {
       case "minute": return { seconds: this.value * 60 };
       case "hour": return { seconds: this.value * 60 * 60 };
       case "day": return { seconds: this.value * 60 * 60 * 24 };
+      case "month": return { seconds: this.value * 60 * 60 * 24 * 30 };
       case "year": return { seconds: this.value * 60 * 60 * 24 * 365 };
       default: return {};
     }
