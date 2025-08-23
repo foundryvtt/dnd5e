@@ -84,6 +84,9 @@ export default class Token5e extends foundry.canvas.placeables.Token {
     ignoreTokens ||= !this.actor?.system.isCreature;
     ignoreTokens ||= this.actor?.statuses?.intersects(CONFIG.DND5E.neverBlockStatuses);
 
+    // Ignore tokens if path contains resize
+    ignoreTokens ||= waypoints.some(w => (w.width !== waypoints[0].width) || (w.height !== waypoints[0].height));
+
     if ( ignoreTokens ) return super.constrainMovementPath(waypoints, options);
 
     // Ignore preview if token vision is disabled or the current user is a GM
