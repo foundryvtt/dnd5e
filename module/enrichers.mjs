@@ -895,8 +895,8 @@ async function enrichDamage(configs, label, options) {
   }
 
   const link = document.createElement("a");
-  link.action = "roll"
   link.className = "roll-link-group";
+  link.dataset.action = "roll";
   _addDataset(link, { ...config, formulas, damageTypes });
   if ( config.average && (parts.length === 2) ) {
     link.innerHTML = game.i18n.format("EDITOR.DND5E.Inline.DamageDouble", { first: parts[0], second: parts[1] });
