@@ -4273,6 +4273,14 @@ DND5E.statusEffects = {
 /* -------------------------------------------- */
 
 /**
+ * Status effects that never block token movement. Populated during the setup process.
+ * @type {Set<string>}
+ */
+DND5E.neverBlockStatuses = new Set();
+
+/* -------------------------------------------- */
+
+/**
  * Configuration for the special bloodied status effect.
  * @type {{ name: string, img: string, threshold: number }}
  */
