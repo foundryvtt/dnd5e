@@ -25,6 +25,8 @@ export default class Combatant5e extends Combatant {
    * @returns {ChatMessage5e|void}
    */
   async createTurnMessage({ deltas, periods, rolls }={}) {
+    if ( !this.actor ) return;
+
     const messageConfig = {
       create: false,
       data: {
