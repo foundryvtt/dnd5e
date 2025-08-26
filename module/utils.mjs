@@ -637,11 +637,11 @@ export function getSceneTargets(actor) {
 /**
  * @typedef UnitConversionOptions
  * @property {boolean} [strict]  Throw an error if either unit isn't found.
- * @property {string} [to]       The final unit. If neither this nor the unit system is provided then will convert to
- *                               the largest unit that can represent the value as an integer.
- * @property {string} [type]     Target measurement system. If provided without target unit then the value will be
+ * @property {string} [system]   Target measurement system. If provided without target unit then the value will be
  *                               converted to the closest equivalent unit in the specified measurement system
  *                               (e.g. "mi" > "km").
+ * @property {string} [to]       The final unit. If neither this nor the unit system is provided then will convert to
+ *                               the largest unit that can represent the value as an integer.
  */
 
 /**
@@ -656,7 +656,7 @@ export function getSceneTargets(actor) {
 export function convertLength(value, from, options={}, _options={}) {
   if ( foundry.utils.getType(options) !== "Object" ) {
     foundry.utils.logCompatibilityWarning(
-      "The `to` parameter for `convertWeight` is now passed in to the options object.",
+      "The `to` parameter for `convertLength` is now passed in to the options object.",
       { since: "DnD5e 5.1", until: "DnD5e 5.3", once: true }
     );
     options = { ..._options, to: options };
@@ -743,47 +743,29 @@ export function convertWeight(value, from, options={}, _options={}) {
 /* -------------------------------------------- */
 
 /**
- * Cache of best unit conversions from one measurement system to another.
- * @type {Record<string, string>}
- */
-const _measurementSystemConversionCache = {};
-
-/**
  * Convert from one unit to another using one of core's built-in unit types.
  * @param {number} value                                Value to display.
  * @param {string} from                                 The initial unit.
- * @param {UnitConfiguration} config                    Configuration data for the unit.
+ * @param {Record<string, UnitConfiguration>} config    Configuration data for the available units.
  * @param {UnitConversionOptions} options
  * @param {function(string): string} [options.message]  Method used to produce the error message if unit not found.
  * @returns {{ value: number, unit: string }}
  */
-export function _convertSystemUnits(value, from, config, { message, strict, to, type }) {
-  if ( (from === to) || (!to && type && (config[from]?.type === type)) ) return { value, unit: from };
+export function _convertSystemUnits(value, from, config, { message, strict, system, to }) {
+  if ( (from === to) || (!to && system && (config[from]?.type === system)) ) return { value, unit: from };
   if ( strict && !config[from] ) throw new Error(message(from));
   if ( strict && to && !config[to] ) throw new Error(message(to));
+  if ( !config[from] ) return { value, unit: from ?? to };
 
   // If measurement system is provided and no target unit, convert to equivalent unit in other measurement system
-  if ( !to && type ) {
-    if ( !_measurementSystemConversionCache[from] ) {
-      const baseConversion = config[from]?.conversion ?? 1;
-      const unitOptions = Object.entries(config)
-        .reduce((arr, [key, v]) => {
-          if ( type === v.type ) arr.push({ key, difference: Math.abs(((v.conversion ?? 1) / baseConversion) - 1) });
-          return arr;
-        }, [])
-        .sort((lhs, rhs) => lhs.difference - rhs.difference);
-      to = unitOptions[0]?.key ?? from;
-      _measurementSystemConversionCache[from] = to;
-    }
-    to = _measurementSystemConversionCache[from];
-  }
+  if ( !to && system ) to = preferredUnit(from, { system, units: config });
 
   // If no target unit available, find largest unit in current measurement system that can represent number
   else if ( !to ) {
-    const base = value * (config[from]?.conversion ?? 1);
+    const base = value * (config[from].conversion ?? 1);
     const unitOptions = Object.entries(config)
       .reduce((arr, [key, v]) => {
-        if ( ((base % v.conversion === 0) || (base >= v.conversion * 2)) && (config[from]?.type === v.type) ) {
+        if ( ((base % v.conversion === 0) || (base >= v.conversion * 2)) && (config[from].type === v.type) ) {
           arr.push({ key, conversion: v.conversion });
         }
         return arr;
@@ -792,7 +774,8 @@ export function _convertSystemUnits(value, from, config, { message, strict, to, 
     to = unitOptions[0]?.key ?? from;
   }
 
-  return { value: value * (config[from]?.conversion ?? 1) / (config[to]?.conversion ?? 1), unit: to };
+  if ( !config[to] ) return { value, unit: from };
+  return { value: value * (config[from].conversion ?? 1) / (config[to]?.conversion ?? 1), unit: to };
 }
 
 /* -------------------------------------------- */
@@ -805,6 +788,46 @@ export function _convertSystemUnits(value, from, config, { message, strict, to, 
 export function defaultUnits(type) {
   const settingKey = type === "travel" ? "metricLengthUnits" : `metric${type.capitalize()}Units`;
   return CONFIG.DND5E.defaultUnits[type]?.[game.settings.get("dnd5e", settingKey) ? "metric" : "imperial"];
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Cache of best unit conversions from one measurement system to another.
+ * @type {Map<string, string>}
+ */
+const _measurementSystemConversionCache = new Map();
+
+/**
+ * Find the preferred unit from the config in the provided measurement system. Must provide either type or units.
+ * @param {string} from                                       Original unit to find closest unit in preferred system.
+ * @param {object} config
+ * @param {string} config.system                              Target measurement system.
+ * @param {string} [config.type]                              Type of unit to select.
+ * @param {Record<string, UnitConfiguration>} [config.units]  Configuration data for the available units.
+ * @returns {string}
+ */
+export function preferredUnit(from, { system, type, units }={}) {
+  if ( !units ) {
+    switch (type) {
+      case "length": units = CONFIG.DND5E.distanceUnits; break;
+      case "weight": units = CONFIG.DND5E.weightUnits; break;
+    }
+  }
+
+  if ( !_measurementSystemConversionCache.has(from) ) {
+    const baseConversion = Math.log10(units[from].conversion ?? 1);
+    const unitOptions = Object.entries(units)
+      .reduce((arr, [key, v]) => {
+        if ( system === v.type ) {
+          arr.push({ key, difference: Math.abs(Math.log10(v.conversion ?? 1) - baseConversion) });
+        }
+        return arr;
+      }, [])
+      .sort((lhs, rhs) => lhs.difference - rhs.difference);
+    _measurementSystemConversionCache.set(from, unitOptions[0]?.key ?? from);
+  }
+  return _measurementSystemConversionCache.get(from);
 }
 
 /* -------------------------------------------- */
