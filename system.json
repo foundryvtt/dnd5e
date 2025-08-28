@@ -51,36 +51,67 @@
     },
     "Item": {
       "weapon": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "equipment": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "consumable": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "tool": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "loot": {
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "race": {
+        "filePathFields": {
+          "advancement.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "background": {
+        "filePathFields": {
+          "advancement.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "class": {
+        "filePathFields": {
+          "advancement.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "subclass": {
+        "filePathFields": {
+          "advancement.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "spell": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "feat": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"],
+          "advancement.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "container": {
@@ -90,6 +121,9 @@
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "facility": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       }
     },
