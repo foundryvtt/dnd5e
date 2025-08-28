@@ -894,6 +894,7 @@ export default class ChatMessage5e extends ChatMessage {
    */
   static onRenderChatPopout(app, html) {
     html = html instanceof HTMLElement ? html : html[0];
+    if ( game.user.isGM ) html.dataset.gmUser = "";
     const close = html.querySelector(".header-button.close");
     if ( close ) {
       close.innerHTML = '<i class="fas fa-times"></i>';
@@ -910,7 +911,11 @@ export default class ChatMessage5e extends ChatMessage {
    * @param {HTMLElement|jQuery} html
    */
   static onRenderChatLog(html) {
-    if ( game.user.isGM ) html.dataset.gmUser = "";
+    if ( game.user.isGM ) {
+      html.dataset.gmUser = "";
+      const notifications = document.getElementById("chat-notifications");
+      if ( notifications ) notifications.dataset.gmUser = "";
+    }
     if ( !game.settings.get("dnd5e", "autoCollapseItemCards") ) {
       requestAnimationFrame(() => {
         // FIXME: Allow time for transitions to complete. Adding a transitionend listener does not appear to work, so
