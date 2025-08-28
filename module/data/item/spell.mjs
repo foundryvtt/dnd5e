@@ -292,8 +292,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getCardData(enrichmentOptions={}) {
-    const context = await super.getCardData(enrichmentOptions);
+  async getCardData(options) {
+    const context = await super.getCardData(options);
     context.isSpell = true;
     context.subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label].filterJoin(" &bull; ");
     const { activation, components, duration, range, target } = this.parent.labels;

@@ -10,7 +10,7 @@ import AppliedEffectField from "./fields/applied-effect-field.mjs";
 import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, FilePathField, IntegerSortField, SchemaField, StringField
+  ArrayField, BooleanField, DocumentIdField, FilePathField, HTMLField, IntegerSortField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
@@ -37,6 +37,7 @@ const {
  * @property {ConsumptionTargetData[]} consumption.targets  Collection of consumption targets.
  * @property {object} description
  * @property {string} description.chatFlavor     Extra text displayed in the activation chat message.
+ * @property {string} description.value          Full activity description displayed in chat.
  * @property {DurationField} duration            Duration of the effect.
  * @property {boolean} duration.concentration    Does this effect require concentration?
  * @property {boolean} duration.override         Override duration values inferred from item.
@@ -84,7 +85,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         targets: new ConsumptionTargetsField()
       }),
       description: new SchemaField({
-        chatFlavor: new StringField()
+        chatFlavor: new StringField(),
+        value: new HTMLField()
       }),
       duration: new DurationField({
         concentration: new BooleanField(),

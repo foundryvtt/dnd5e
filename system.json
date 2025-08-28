@@ -51,46 +51,91 @@
     },
     "Item": {
       "weapon": {
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
+        "htmlFields": [
+          "activities.*.description.value", "description.value", "description.chat", "unidentified.description"
+        ]
       },
       "equipment": {
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
+        "htmlFields": [
+          "activities.*.description.value", "description.value", "description.chat", "unidentified.description"
+        ]
       },
       "consumable": {
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
+        "htmlFields": [
+          "activities.*.description.value", "description.value", "description.chat", "unidentified.description"
+        ]
       },
       "tool": {
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
+        "htmlFields": [
+          "activities.*.description.value", "description.value", "description.chat", "unidentified.description"
+        ]
       },
       "loot": {
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "race": {
+        "filePathFields": {
+          "advancement.*.icon": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "background": {
+        "filePathFields": {
+          "advancement.*.icon": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "class": {
+        "filePathFields": {
+          "advancement.*.icon": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "subclass": {
+        "filePathFields": {
+          "advancement.*.icon": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "spell": {
-        "htmlFields": ["description.value", "description.chat"]
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
+        "htmlFields": ["activities.*.description.value", "description.value", "description.chat"]
       },
       "feat": {
-        "htmlFields": ["description.value", "description.chat"]
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"],
+          "advancement.*.icon": ["IMAGE"]
+        },
+        "htmlFields": ["activities.*.description.value", "description.value", "description.chat"]
       },
       "container": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "backpack": {
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "facility": {
-        "htmlFields": ["description.value", "description.chat"]
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
+        "htmlFields": ["activities.*.description.value", "description.value", "description.chat"]
       }
     },
     "JournalEntryPage": {
