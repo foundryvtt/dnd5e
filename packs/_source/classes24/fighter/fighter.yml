@@ -558,15 +558,9 @@ system:
         type: feat
         pool:
           - uuid: Compendium.dnd5e.feats24.Item.phbfstArchery000
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstBlindFight
           - uuid: Compendium.dnd5e.feats24.Item.phbfstDefense000
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstDueling000
           - uuid: Compendium.dnd5e.feats24.Item.phbfstGreatWeapo
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstIntercepti
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstProtection
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstThrownWeap
           - uuid: Compendium.dnd5e.feats24.Item.phbfstTwoWeaponF
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstUnarmedFig
         spell: null
         restriction:
           type: feat
@@ -683,11 +677,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.347'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.1.3
   createdTime: 1735866361253
-  modifiedTime: 1752705810010
+  modifiedTime: 1755622114129
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

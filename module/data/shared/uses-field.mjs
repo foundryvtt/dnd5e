@@ -35,8 +35,8 @@ export default class UsesField extends SchemaField {
       max: new FormulaField({ deterministic: true }),
       recovery: new ArrayField(
         new SchemaField({
-          period: new StringField({ initial: "lr" }),
-          type: new StringField({ initial: "recoverAll" }),
+          period: new StringField({ required: true, initial: "lr", blank: false }),
+          type: new StringField({ required: true, initial: "recoverAll", blank: false }),
           formula: new FormulaField()
         })
       ),

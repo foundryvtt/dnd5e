@@ -108,17 +108,6 @@ export default class EquippableItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Are the magical properties of this item, such as magical bonuses to armor & damage, available?
-   * @type {boolean}
-   */
-  get magicAvailable() {
-    const attunement = this.attuned || (this.attunement !== "required");
-    return attunement && this.properties.has("mgc") && this.validProperties.has("mgc");
-  }
-
-  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 

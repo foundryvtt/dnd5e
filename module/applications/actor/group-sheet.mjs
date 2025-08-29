@@ -15,6 +15,7 @@ export default class GroupActorSheet extends MultiActorSheet {
     },
     actions: {
       award: GroupActorSheet.#onAward,
+      changePace: GroupActorSheet.#onChangePace,
       roll: GroupActorSheet.#onRoll
     },
     tab: "members"
@@ -262,13 +263,30 @@ export default class GroupActorSheet extends MultiActorSheet {
 
   /**
    * Handle distributing XP & currency.
-   * @this {MultiActorSheet}
+   * @this {GroupActorSheet}
    */
   static #onAward() {
     new Award({
       award: { savedDestinations: this.actor.getFlag("dnd5e", "awardDestinations") },
       origin: this.actor
     }).render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle cycling travel pace.
+   * @this {GroupActorSheet}
+   * @param {PointerEvent} event  The triggering event.
+   * @param {HTMLElement} target  The action target.
+   */
+  static #onChangePace(event, target) {
+    const increment = Number(target.dataset.increment);
+    if ( Number.isNaN(increment) ) return;
+    const paces = Object.keys(CONFIG.DND5E.travelPace);
+    const current = paces.indexOf(this.actor.system._source.attributes.movement.pace);
+    const next = (((current + increment) % paces.length) + paces.length) % paces.length;
+    this.actor.update({ "system.attributes.movement.pace": paces[next] });
   }
 
   /* -------------------------------------------- */

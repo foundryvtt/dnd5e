@@ -397,7 +397,8 @@ export default class AdvancementManager extends Application5e {
     const getItemFlows = (characterLevel, classLevel) => this.clone.items.contents.flatMap(i => {
       if ( ["class", "subclass", "race"].includes(i.type) ) return [];
       if ( ["class", "subclass"].includes(i.system.advancementRootItem?.type) && i.system.advancementClassLinked ) {
-        if ( i.system.advancementRootItem !== classItem ) return [];
+        const rootClass = i.system.advancementRootItem.class ?? i.system.advancementRootItem;
+        if ( rootClass !== classItem ) return [];
         return this.constructor.flowsForLevel(i, classLevel);
       }
       return this.constructor.flowsForLevel(i, characterLevel);
