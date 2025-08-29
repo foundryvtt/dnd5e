@@ -11,7 +11,6 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
     const tokenSize = CONFIG.DND5E.actorSizes[token.actor?.system.traits.size]?.numerical ?? 2;
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     const halflingNimbleness = token.actor?.getFlag("dnd5e", "halflingNimbleness");
-    const neverBlockStatuses = CONFIG.statusEffects.filter(s => s.neverBlockMovement).map(s => s.id);
     const found = this.#getRelevantOccupyingTokens(gridSpace, token, { preview }).filter(t => {
       // Only creatures block movement.
       if ( !t.actor?.system.isCreature ) return false;
@@ -20,7 +19,7 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
       if ( token.document.disposition === t.document.disposition ) return false;
 
       // If creature has any statuses that should never block movement, don't block movement
-      if ( neverBlockStatuses.some(status => t.actor.statuses.has(status)) ) return false;
+      if ( t.actor.statuses.intersects(CONFIG.DND5E.neverBlockStatuses) ) return false;
 
       const occupiedSize = CONFIG.DND5E.actorSizes[t.actor.system.traits.size]?.numerical ?? 2;
       // In modern rules, Tiny creatures can be moved through

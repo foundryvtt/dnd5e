@@ -390,6 +390,7 @@ function _configureStatusEffects() {
     }
     effects.push(data);
     if ( special ) CONFIG.specialStatusEffects[special] = data.id;
+    if ( data.neverBlockMovement ) DND5E.neverBlockStatuses.add(data.id);
   };
   CONFIG.statusEffects = Object.entries(CONFIG.DND5E.statusEffects).reduce((arr, [id, data]) => {
     const original = CONFIG.statusEffects.find(s => s.id === id);
