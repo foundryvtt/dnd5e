@@ -1,7 +1,8 @@
 import { simplifyBonus } from "../../../utils.mjs";
+import CompatibilityStringField from "../../fields/compatibility-string-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 
-const { SchemaField, StringField } = foundry.data.fields;
+const { SchemaField } = foundry.data.fields;
 
 /**
  * Data field for class & subclass spellcasting information.
@@ -14,13 +15,13 @@ const { SchemaField, StringField } = foundry.data.fields;
 export default class SpellcastingField extends SchemaField {
   constructor(fields={}, options={}) {
     fields = {
-      progression: new StringField({
+      progression: new CompatibilityStringField({
         required: true,
         initial: "none",
         blank: false,
         label: "DND5E.SpellProgression"
       }),
-      ability: new StringField({ label: "DND5E.SpellAbility" }),
+      ability: new CompatibilityStringField({ label: "DND5E.SpellAbility" }),
       preparation: new SchemaField({
         formula: new FormulaField({ label: "DND5E.SpellPreparation.Formula" })
       }),
