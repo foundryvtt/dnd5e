@@ -2142,7 +2142,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     config = foundry.utils.mergeObject({
       type: "short", dialog: true, chat: true, newDay: false, advanceTime: false, autoHD: false, autoHDThreshold: 3,
       duration: CONFIG.DND5E.restTypes.short.duration[game.settings.get("dnd5e", "restVariant")],
-      recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax
+      recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax,
+      exhaustionDelta: restConfig.exhaustionDelta
     }, config);
 
     /**

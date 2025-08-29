@@ -106,6 +106,7 @@
           h3 { flex: 1; }
 
           .subtitle { padding-top: 1px; }
+          [data-action=showConfiguration] { margin-right: 8px; }
 
           [data-action=changePace] {
             width: 24px;
@@ -263,7 +264,7 @@
           border-radius: 4px;
           border: var(--dnd5e-border-gold);
           box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-          cursor: pointer;
+          cursor: var(--cursor-pointer);
           transition: all 250ms ease;
 
           &:hover { box-shadow: 0 0 6px var(--dnd5e-color-gold); }

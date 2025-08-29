@@ -395,9 +395,6 @@ export default class NPCData extends CreatureTemplate {
         this.details.level += classLevels;
         this.attributes.hd.max += classLevels;
       }
-
-      // Attuned items
-      else if ( item.system.attuned ) this.attributes.attunement.value += 1;
     }
 
     const lairAdjustment = Number(this.resources.lair.value && this.resources.lair.inside);
