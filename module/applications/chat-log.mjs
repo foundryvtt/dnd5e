@@ -1,14 +1,37 @@
 import ChatMessage5e from "../documents/chat-message.mjs";
+import DragDropApplicationMixin from "./mixins/drag-drop-mixin.mjs";
+import DragDrop5e from "../drag-drop.mjs";
+import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 
 /**
  * Custom implementation of the chat log to support saving tray states.
  */
-export default class ChatLog5e extends foundry.applications.sidebar.tabs.ChatLog {
+export default class ChatLog5e extends DragDropApplicationMixin(foundry.applications.sidebar.tabs.ChatLog) {
   /**
    * The active intersection observer.
    * @type {IntersectionObserver}
    */
   #intersections;
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _allowedDropBehaviors(event, data) {
+    return new Set(["move", "copy", "link"]);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _attachFrameListeners() {
+    super._attachFrameListeners();
+    new CONFIG.ux.DragDrop({
+      callbacks: {
+        dragover: this._onDragOver.bind(this),
+        drop: this._onDrop.bind(this)
+      }
+    }).bind(this.element);
+  }
 
   /* -------------------------------------------- */
 
@@ -45,6 +68,39 @@ export default class ChatLog5e extends foundry.applications.sidebar.tabs.ChatLog
       const tray = target.querySelector("damage-application, effect-application");
       if ( tray ) tray.visible = isIntersecting;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onDragOver(event) {
+    super._onDragOver(event);
+    const data = DragDrop5e.getPayload(event);
+    if ( data.type === "Item" ) this.element.classList.add("item-drop");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle drops onto the chat log.
+   * @param {DragEvent} event
+   */
+  async _onDrop(event) {
+    event.preventDefault();
+    const behavior = this._dropBehavior(event);
+    const data = CONFIG.ux.TextEditor.getDragEventData(event);
+    if ( data.type !== "Item" ) return;
+    const item = await Item.implementation.fromDropData(data);
+    const isPhysical = item.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate);
+    if ( !isPhysical ) return;
+    // TODO: Prompt for quantity.
+    await ChatMessage.implementation.create({
+      speaker: ChatMessage.implementation.getSpeaker({ actor: item.parent }),
+      system: {
+        items: [{ behavior, uuid: item.uuid }]
+      },
+      type: "award"
+    });
   }
 
   /* -------------------------------------------- */

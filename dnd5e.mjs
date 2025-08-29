@@ -592,6 +592,7 @@ Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners
 Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(message));
 Hooks.on("createChatMessage", dataModels.chatMessage.RequestMessageData.onCreateMessage);
 Hooks.on("updateChatMessage", dataModels.chatMessage.RequestMessageData.onUpdateResultMessage);
+Hooks.on("createItem", dataModels.chatMessage.AwardMessageData.onCreateItem);
 
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 

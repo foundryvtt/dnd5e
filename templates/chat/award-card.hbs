@@ -1,0 +1,20 @@
+<div class="chat-card award-card">
+    {{{ content }}}
+    <section class="items">
+        <strong class="roboto-condensed-upper">{{ localize "DOCUMENT.Items" }}</strong>
+        <ul class="action-list unlist">
+            {{#each items}}
+            <li class="draggable flexrow item-tooltip" data-item-uuid="{{ item.uuid }}">
+                <img class="gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
+                <span class="name-stacked">
+                    <span class="title">{{ item.name }}</span>
+                </span>
+                <span class="quantity">
+                    <span class="sign">&times;</span>
+                    <span class="value">{{ quantity }}</span>
+                </span>
+            </li>
+            {{/each}}
+        </ul>
+    </section>
+</div>

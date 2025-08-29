@@ -13,10 +13,20 @@ import DragDrop5e from "../../drag-drop.mjs";
 export default function DragDropApplicationMixin(Base) {
   return class DragDropApplication extends Base {
     /** @override */
+    _onDragEnd() {
+      document.querySelectorAll(".chat-sidebar").forEach(el => el.classList.remove("item-drop", "allow-drop"));
+    }
+
+    /* -------------------------------------------- */
+
+    /** @override */
     _onDragOver(event) {
       const data = DragDrop5e.getPayload(event);
       DragDrop5e.dropEffect = event.dataTransfer.dropEffect = (foundry.utils.getType(data) === "Object")
         ? this._dropBehavior(event, data) : "copy";
+      if ( data?.type === "Item" ) {
+        document.querySelectorAll(".chat-sidebar").forEach(el => el.classList.add("allow-drop"));
+      }
     }
 
     /* -------------------------------------------- */

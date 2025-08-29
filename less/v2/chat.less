@@ -480,6 +480,23 @@
   }
 }
 
+.chat-sidebar {
+  &.allow-drop { pointer-events: all; }
+
+  &.item-drop .chat-scroll::after {
+    content: "Drop Item";
+    display: grid;
+    place-content: center;
+    font-size: var(--font-size-30);
+    pointer-events: none;
+    position: absolute;
+    inset: 8px;
+    border: 4px dashed var(--dnd5e-color-gold);
+    border-radius: 8px;
+    background: rgb(0 0 0 / 50%);
+  }
+}
+
 .message {
   p.supplement {
     margin: 0;
@@ -845,6 +862,19 @@ enchantment-application {
 
       &.success { color: var(--dnd5e-color-success); }
       &.failure { color: var(--dnd5e-color-failure); }
+    }
+
+    .quantity {
+      flex: none;
+      color: var(--color-text-secondary);
+
+      .sign { font-size: var(--font-size-12); }
+
+      .value {
+        font-size: var(--font-size-14);
+        font-weight: bold;
+        font-family: var(--dnd5e-font-roboto-condensed);
+      }
     }
 
     .total {

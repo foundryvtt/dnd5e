@@ -136,6 +136,7 @@ export default class EnchantmentApplicationElement extends HTMLElement {
    */
   async _onDrop(event) {
     event.preventDefault();
+    event.stopPropagation();
     const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
     const droppedItem = await Item.implementation.fromDropData(data);
     if ( !droppedItem ) return;

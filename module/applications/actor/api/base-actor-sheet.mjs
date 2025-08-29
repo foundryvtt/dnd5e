@@ -1113,6 +1113,20 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   async _onRender(context, options) {
     await super._onRender(context, options);
 
+    new CONFIG.ux.DragDrop({
+      dragSelector: ".draggable",
+      permissions: {
+        dragstart: this._canDragStart.bind(this),
+        drop: this._canDragDrop.bind(this)
+      },
+      callbacks: {
+        dragend: this._onDragEnd.bind(this),
+        dragstart: this._onDragStart.bind(this),
+        dragover: this._onDragOver.bind(this),
+        drop: this._onDrop.bind(this)
+      }
+    }).bind(this.element);
+
     // Apply attribution & reference tooltips
     this.element.querySelectorAll("[data-attribution],[data-reference-tooltip]").forEach(e => this._applyTooltips(e));
 
@@ -1783,6 +1797,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       items = itemsWithoutAdvancement;
     }
 
+    const data = CONFIG.ux.TextEditor.getDragEventData(event);
+    const message = game.messages.get(data.messageId);
+    // TODO: Prompt for quantity.
+
     // Filter out items already in containers to avoid creating duplicates
     const containers = new Set(items.filter(i => i.type === "container").map(i => i._id));
     items = items.filter(i => !containers.has(i.system.container));
@@ -1794,7 +1812,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         return this._onDropSingleItem(event, item);
       }
     });
-    const created = await Item5e.createDocuments(toCreate, { pack: this.actor.pack, parent: this.actor, keepId: true });
+    const operation = { pack: this.actor.pack, parent: this.actor, keepId: true };
+    if ( message ) foundry.utils.setProperty(operation, "dnd5e.awardMessage", {
+      id: message.id,
+      item: data.uuid
+    });
+    const created = await Item5e.createDocuments(toCreate, operation);
     if ( behavior === "move" ) items.forEach(i => i.delete({ deleteContents: true }));
     return created;
   }
