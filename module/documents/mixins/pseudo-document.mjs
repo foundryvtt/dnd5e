@@ -233,13 +233,13 @@ export default function PseudoDocumentMixin(Base) {
      */
     async deleteDialog(options={}) {
       const type = game.i18n.localize(this.metadata.label);
-      return Dialog.confirm({
-        title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name || this.title}`,
-        content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.format("SIDEBAR.DeleteWarning", {
+      return foundry.applications.api.Dialog.confirm({
+        window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name || this.title}` },
+        content: `<p><strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", {
           type
         })}</p>`,
-        yes: this.delete.bind(this),
-        options: options
+        yes: { callback: this.delete.bind(this) },
+        ...options
       });
     }
 
@@ -308,9 +308,11 @@ export default function PseudoDocumentMixin(Base) {
           if ( !form.checkValidity() ) {
             throw new Error(game.i18n.format("DOCUMENT.DND5E.Warning.SelectType", { name: label }));
           }
-          const fd = new FormDataExtended(form);
+          const fd = new foundry.applications.ux.FormDataExtended(form);
           const createData = foundry.utils.mergeObject(data, fd.object, { inplace: false });
           if ( !createData.name?.trim() ) delete createData.name;
+          // TODO: Temp patch until advancement data is migrated (https://github.com/foundryvtt/dnd5e/issues/5782)
+          else if ( this.documentName === "Advancement" ) createData.title = createData.name;
           parent[`create${this.documentName}`](createData.type, createData);
         },
         rejectClose: false,

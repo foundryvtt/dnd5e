@@ -1,4 +1,4 @@
-import { ItemDataModel } from "../abstract.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
@@ -73,8 +73,7 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
         size: new StringField({ initial: "cramped", blank: false, nullable: false, required: true })
       }),
       craft: new SchemaField({
-        // TODO: Add type constraint when v12 support is dropped.
-        item: new DocumentUUIDField(),
+        item: new DocumentUUIDField({ type: "Item" }),
         quantity: new NumberField({ required: true, integer: true, positive: true, initial: 1, nullable: false })
       }),
       defenders: new SchemaField({
@@ -98,11 +97,11 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
       size: new StringField({ initial: "cramped", blank: false, nullable: false, required: true }),
       trade: new SchemaField({
         creatures: new SchemaField({
-          value: new ArrayField(new DocumentUUIDField()),
+          value: new ArrayField(new DocumentUUIDField({ type: "Actor" })),
           max: new NumberField({ required: true, integer: true, positive: true })
         }),
         pending: new SchemaField({
-          creatures: new ArrayField(new DocumentUUIDField()),
+          creatures: new ArrayField(new DocumentUUIDField({ type: "Actor" })),
           operation: new StringField({ required: true, nullable: true, options: ["buy", "sell"], initial: null }),
           stocked: new BooleanField({ required: true }),
           value: new NumberField({ required: true, min: 0, integer: true })

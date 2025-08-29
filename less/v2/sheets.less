@@ -14,8 +14,6 @@
 
     /* Edit Mode Toggle */
     > slide-toggle {
-      --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
-      --slide-toggle-track-color-unchecked: var(--dnd5e-color-light-gray);
       flex: none;
       margin-inline-end: auto;
 
@@ -25,21 +23,19 @@
         &::before {
           content: "\f0ad";
           font-family: var(--font-awesome);
-          color: var(--dnd5e-color-light-gray);
+          color: var(--dnd5e-background-alt-1);
           font-weight: bold;
           font-size: var(--font-size-9);
         }
       }
 
-      &[checked] .slide-toggle-thumb::before {
-        color: var(--dnd5e-color-gold);
-      }
+      &[checked] .slide-toggle-thumb::before { color: var(--dnd5e-color-gold); }
     }
   }
   &.minimized slide-toggle { display: none; }
 
   .window-content {
-    margin-top: -30px;
+    margin-top: calc(var(--header-height, 30px) * -1);
     padding-inline: 0;
   }
 
@@ -51,9 +47,9 @@
     display: flex;
 
     input, select {
-      --input-placeholder-color: var(--color-text-light-6);
+      --input-placeholder-color: var(--color-text-tertiary);
       --input-height: var(--form-field-height, 26px);
-      background: rgb(0 0 0 / 45%);
+      --input-background-color: rgb(0 0 0 / 45%);
       border: 1px solid transparent;
       transition: all 250ms ease;
       line-height: unset;
@@ -83,14 +79,14 @@
   }
 
   /* Encumbrance */
-  .encumbrance {
+  .encumbrance, .difficulty {
     display: flex;
     flex-direction: column;
     width: 230px;
 
     .meter {
-      --encumbrance-low: 33%;
-      --encumbrance-high: 66%;
+      --breakpoint-low: 33%;
+      --breakpoint-high: 66%;
       border-radius: 3px 3px 0 0;
       height: 25px;
       border: none;
@@ -113,8 +109,8 @@
         block-size: 0;
         inline-size: 0;
         border-inline: 3px solid transparent;
-        &.encumbrance-low { inset-inline-start: var(--encumbrance-low); }
-        &.encumbrance-high { inset-inline-start: var(--encumbrance-high); }
+        &.breakpoint-low { inset-inline-start: var(--breakpoint-low); }
+        &.breakpoint-high { inset-inline-start: var(--breakpoint-high); }
         &.arrow-up {
           inset-block-end: 0;
           border-block-end: 3px solid var(--dnd5e-color-gold);
@@ -126,6 +122,41 @@
         transform: translateX(-50%);
         z-index: 1;
       }
+    }
+  }
+
+  /* Editors */
+  .editor.prosemirror.sized {
+    flex: 1;
+    overflow: hidden;
+
+    menu { border-radius: 0; }
+
+    .editor-container {
+      overflow: hidden auto;
+      scrollbar-gutter: stable;
+      margin: 0 4px 0 16px;
+      padding-right: 4px;
+    }
+
+    .editor-content {
+      position: unset;
+      min-height: 300px;
+      padding: 0;
+    }
+
+    code-mirror {
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+
+      .cm-editor { overflow: auto; }
+      .cm-scroller { position: relative; }
+    }
+
+    > textarea {
+      flex: none;
+      min-height: 300px;
     }
   }
 

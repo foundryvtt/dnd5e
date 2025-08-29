@@ -151,9 +151,9 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   /**
    * Verify that the provided item can be used with this advancement based on the configuration.
    * @param {Item5e} item                   Item that needs to be tested.
-   * @param {object} config
-   * @param {string} config.type            Type restriction on this advancement.
-   * @param {object} config.restriction     Additional restrictions to be applied.
+   * @param {object} [config={}]
+   * @param {string|false} [config.type]    Type restriction on this advancement, or `false` to not validate type.
+   * @param {object} [config.restriction]   Additional restrictions to be applied.
    * @param {boolean} [config.strict=true]  Should an error be thrown when an invalid type is encountered?
    * @returns {boolean}                     Is this type valid?
    * @throws {Error}                        An error if the item is invalid and strict is `true`.
@@ -164,13 +164,15 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
     type ??= this.configuration.type;
     restriction ??= this.configuration.restriction;
 
+    const handleError = (localizationKey, data) => {
+      if ( strict ) throw new Error(game.i18n.format(localizationKey, data));
+      return false;
+    };
+
     // Type restriction is set and the item type does not match the selected type
     if ( type && (type !== item.type) ) {
       type = game.i18n.localize(CONFIG.Item.typeLabels[restriction]);
-      if ( strict ) {
-        throw new Error(game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Warning.InvalidType", { type: typeLabel }));
-      }
-      return false;
+      return handleError("DND5E.ADVANCEMENT.ItemChoice.Warning.InvalidType", { type: typeLabel });
     }
 
     // If additional type restrictions applied, make sure they are valid
@@ -180,22 +182,24 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
       let errorLabel;
       if ( restriction.type !== item.system.type.value ) errorLabel = typeConfig.label;
       else if ( subtype && (restriction.subtype !== item.system.type.subtype) ) errorLabel = subtype;
-      if ( errorLabel ) {
-        if ( strict ) {
-          throw new Error(game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Warning.InvalidType", { type: errorLabel }));
-        }
-        return false;
-      }
+      if ( errorLabel ) return handleError("DND5E.ADVANCEMENT.ItemChoice.Warning.InvalidType", { type: errorLabel });
     }
 
     // If spell level is restricted, ensure the spell is of the appropriate level
     const l = parseInt(restriction.level);
     if ( (type === "spell") && !Number.isNaN(l) && (item.system.level !== l) ) {
       const level = CONFIG.DND5E.spellLevels[l];
-      if ( strict ) {
-        throw new Error(game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellLevelSpecific", { level }));
-      }
-      return false;
+      return handleError("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellLevelSpecific", { level });
+    }
+
+    // If spell list is specified, ensure the spell is on that list
+    if ( (type === "spell") && restriction.list.size ) {
+      const lists = Array.from(restriction.list)
+        .map(l => dnd5e.registry.spellLists.forType(...l.split(":")))
+        .filter(_ => _);
+      if ( !lists.some(l => l.has(item)) ) return handleError("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellList", {
+        lists: game.i18n.getListFormatter({ type: "disjunction" }).format(lists.map(l => l.name))
+      });
     }
 
     return true;

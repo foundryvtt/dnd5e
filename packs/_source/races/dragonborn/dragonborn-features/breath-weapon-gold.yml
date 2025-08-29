@@ -46,11 +46,8 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
         scaling:
           allowed: false
           max: ''
@@ -79,7 +76,7 @@ system:
           units: ft
         affects:
           count: ''
-          type: ''
+          type: creature
           choice: false
           special: ''
         prompt: true
@@ -87,42 +84,48 @@ system:
       damage:
         onSave: half
         parts:
-          - number: null
+          - custom:
+              enabled: true
+              formula: '@scale.dragonborn.breath-weapon'
+            number: null
             denomination: null
             bonus: ''
             types:
               - fire
-            custom:
-              enabled: true
-              formula: '@scale.dragonborn.breath-weapon'
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
       save:
-        ability: con
+        ability:
+          - dex
         dc:
           calculation: con
           formula: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
   enchant: {}
   prerequisites:
     level: null
   identifier: breath-weapon-gold
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
 img: icons/magic/fire/beam-jet-stream-trails-orange.webp
 effects: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.345'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.1.0
   createdTime: 1725037392990
-  modifiedTime: 1725992703536
+  modifiedTime: 1750440661192
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 folder: TAw7621pFkXOkuYI
 _key: '!items!YPQQBZAuRiSwuBfh'

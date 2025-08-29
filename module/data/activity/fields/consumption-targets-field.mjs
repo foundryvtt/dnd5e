@@ -29,7 +29,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   /** @override */
   static defineSchema() {
     return {
-      type: new StringField(),
+      type: new StringField({ required: true, blank: false, initial: "activityUses" }),
       target: new StringField(),
       value: new FormulaField({ initial: "1" }),
       scaling: new SchemaField({
@@ -160,7 +160,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
         activity: this.activity.name, attribute: this.target, item: this.item.name
       })
     );
-    const current = foundry.utils.getProperty(this.actor, keyPath);
+    let current = foundry.utils.getProperty(this.actor, keyPath);
 
     let warningMessage;
     if ( (cost > 0) && !current ) warningMessage = "DND5E.CONSUMPTION.Warning.None";
@@ -170,7 +170,13 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       type: game.i18n.format("DND5E.CONSUMPTION.Type.Attribute.Warning", { attribute: this.target })
     }));
 
-    updates.actor[keyPath] = current - cost;
+    const adjustedKeyPath = keyPath.replace(/\.value$/, ".spent");
+    const isSpent = (keyPath !== adjustedKeyPath) && !foundry.utils.hasProperty(this.actor._source, keyPath)
+      && foundry.utils.hasProperty(this.actor._source, adjustedKeyPath);
+    if ( isSpent ) {
+      current = foundry.utils.getProperty(this.actor, adjustedKeyPath);
+      updates.actor[adjustedKeyPath] = current + cost;
+    } else updates.actor[keyPath] = current - cost;
   }
 
   /* -------------------------------------------- */

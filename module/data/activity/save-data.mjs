@@ -30,7 +30,7 @@ export default class SaveActivityData extends BaseActivityData {
     return {
       ...super.defineSchema(),
       damage: new SchemaField({
-        onSave: new StringField(),
+        onSave: new StringField({ required: true, blank: false, initial: "none" }),
         parts: new ArrayField(new DamageField())
       }),
       effects: new ArrayField(new AppliedEffectField({

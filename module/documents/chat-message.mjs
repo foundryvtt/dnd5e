@@ -156,7 +156,8 @@ export default class ChatMessage5e extends ChatMessage {
     let collapse;
     switch ( game.settings.get("dnd5e", "autoCollapseChatTrays") ) {
       case "always": collapse = true; break;
-      case "never": collapse = false; break;
+      case "never":
+      case "manual": collapse = false; break;
       // Collapse chat message trays older than 5 minutes
       case "older": collapse = this.timestamp < Date.now() - (5 * 60 * 1000); break;
     }
@@ -176,7 +177,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _displayChatActionButtons(html) {
-    const chatCard = html.querySelector(".dnd5e.chat-card, .dnd5e2.chat-card");
+    const chatCard = html.querySelector(".chat-card");
     if ( chatCard ) {
       const flavor = html.querySelector(".flavor-text");
       if ( flavor?.innerText === html.querySelector(".item-name")?.innerText ) flavor?.remove();
@@ -266,6 +267,9 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _enrichChatCard(html) {
+    html.querySelectorAll(".dnd5e2").forEach(el => el.classList.remove("dnd5e2")); // Legacy
+    html.classList.add("dnd5e2");
+
     // Header matter
     const actor = this.getAssociatedActor();
 
@@ -337,7 +341,7 @@ export default class ChatMessage5e extends ChatMessage {
           ? (activity?.getActionLabel(roll.attackMode) ?? "")
           : (item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]));
       const flavor = document.createElement("div");
-      flavor.classList.add("dnd5e2", "chat-card");
+      flavor.classList.add("chat-card");
       flavor.innerHTML = `
         <section class="card-header description ${isCritical ? "critical" : ""}">
           <header class="summary">
@@ -437,7 +441,6 @@ export default class ChatMessage5e extends ChatMessage {
     const targets = this.getFlag("dnd5e", "targets");
     if ( !targets?.length ) return;
     const tray = document.createElement("div");
-    tray.classList.add("dnd5e2");
     tray.innerHTML = `
       <div class="card-tray targets-tray collapsible collapsed">
         <label class="roboto-upper">
@@ -446,14 +449,14 @@ export default class ChatMessage5e extends ChatMessage {
           <i class="fas fa-caret-down" inert></i>
         </label>
         <div class="collapsible-content">
-          <ul class="dnd5e2 unlist evaluation wrapper"></ul>
+          <ul class="unlist evaluation wrapper"></ul>
         </div>
       </div>
     `;
     const evaluation = tray.querySelector("ul");
     const rows = targets.map(({ name, ac, uuid }) => {
-      if ( !game.user.isGM && (visibility !== "all") ) ac = "";
       const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
+      if ( !game.user.isGM && (visibility !== "all") ) ac = "";
       const li = document.createElement("li");
       Object.assign(li.dataset, { uuid, miss: isMiss });
       li.className = `target ${isMiss ? "miss" : "hit"}`;
@@ -496,7 +499,7 @@ export default class ChatMessage5e extends ChatMessage {
     const aggregatedRolls = CONFIG.DND5E.aggregateDamageDisplay ? aggregateDamageRolls(rolls) : rolls;
     let { formula, total, breakdown } = aggregatedRolls.reduce((obj, r) => {
       obj.formula.push(CONFIG.DND5E.aggregateDamageDisplay ? r.formula : ` + ${r.formula}`);
-      obj.total += r.total;
+      obj.total += Math.max(0, r.total);
       obj.breakdown.push(this._simplifyDamageRoll(r));
       return obj;
     }, { formula: [], total: 0, breakdown: [] });
@@ -553,9 +556,8 @@ export default class ChatMessage5e extends ChatMessage {
 
     if ( game.user.isGM ) {
       const damageApplication = document.createElement("damage-application");
-      damageApplication.classList.add("dnd5e2");
       damageApplication.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({
-        value: roll.total,
+        value: Math.max(0, roll.total),
         type: roll.options.type,
         properties: new Set(roll.options.properties ?? [])
       }));
@@ -572,7 +574,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _simplifyDamageRoll(roll) {
-    const aggregate = { type: roll.options.type, total: roll.total, constant: 0, dice: [] };
+    const aggregate = { type: roll.options.type, total: Math.max(0, roll.total), constant: 0, dice: [] };
     let hasMultiplication = false;
     for ( let i = roll.terms.length - 1; i >= 0; ) {
       const term = roll.terms[i--];
@@ -613,7 +615,6 @@ export default class ChatMessage5e extends ChatMessage {
 
     // Create the enchantment tray
     const enchantmentApplication = document.createElement("enchantment-application");
-    enchantmentApplication.classList.add("dnd5e2");
     const afterElement = html.querySelector(".card-footer");
     if ( afterElement ) afterElement.insertAdjacentElement("beforebegin", enchantmentApplication);
     else html.querySelector(".chat-card")?.append(enchantmentApplication);
@@ -632,7 +633,7 @@ export default class ChatMessage5e extends ChatMessage {
     if ( (actor?.type !== "npc") || (roll?.type !== "save") || this.rolls.some(r => r.isSuccess) ) return;
 
     const content = document.createElement("div");
-    content.classList.add("dnd5e2", "chat-card");
+    content.classList.add("chat-card");
 
     // If message has the `forceSuccess` flag, mark it as resisted
     if ( roll.forceSuccess ) content.insertAdjacentHTML("beforeend", `
@@ -677,7 +678,6 @@ export default class ChatMessage5e extends ChatMessage {
     if ( !effects?.length ) return;
 
     const effectApplication = document.createElement("effect-application");
-    effectApplication.classList.add("dnd5e2");
     effectApplication.effects = effects;
     html.querySelector(".message-content").appendChild(effectApplication);
   }
@@ -825,12 +825,12 @@ export default class ChatMessage5e extends ChatMessage {
    */
   applyChatCardDamage(li, multiplier) {
     const damages = aggregateDamageRolls(this.rolls, { respectProperties: true }).map(roll => ({
-      value: roll.total * (roll.options.type in CONFIG.DND5E.healingTypes ? -1 : 1),
+      value: Math.max(0, roll.total) * (roll.options.type in CONFIG.DND5E.healingTypes ? -1 : 1),
       type: roll.options.type,
       properties: new Set(roll.options.properties ?? [])
     }));
     return Promise.all(canvas.tokens.controlled.map(t => {
-      return t.actor?.applyDamage(damages, { multiplier });
+      return t.actor?.applyDamage(damages, { multiplier, isDelta: true });
     }));
   }
 
@@ -894,6 +894,7 @@ export default class ChatMessage5e extends ChatMessage {
    */
   static onRenderChatPopout(app, html) {
     html = html instanceof HTMLElement ? html : html[0];
+    if ( game.user.isGM ) html.dataset.gmUser = "";
     const close = html.querySelector(".header-button.close");
     if ( close ) {
       close.innerHTML = '<i class="fas fa-times"></i>';
@@ -910,7 +911,11 @@ export default class ChatMessage5e extends ChatMessage {
    * @param {HTMLElement|jQuery} html
    */
   static onRenderChatLog(html) {
-    if ( game.user.isGM ) html.dataset.gmUser = "";
+    if ( game.user.isGM ) {
+      html.dataset.gmUser = "";
+      const notifications = document.getElementById("chat-notifications");
+      if ( notifications ) notifications.dataset.gmUser = "";
+    }
     if ( !game.settings.get("dnd5e", "autoCollapseItemCards") ) {
       requestAnimationFrame(() => {
         // FIXME: Allow time for transitions to complete. Adding a transitionend listener does not appear to work, so
@@ -950,6 +955,16 @@ export default class ChatMessage5e extends ChatMessage {
 
   /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    if ( !foundry.utils.hasProperty(data, "flags.core.canPopout") ) {
+      this.updateSource({ "flags.core.canPopout": true });
+    }
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */

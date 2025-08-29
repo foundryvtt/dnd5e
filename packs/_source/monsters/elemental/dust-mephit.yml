@@ -469,7 +469,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -481,6 +480,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: v3i1DaUS4Bkc8Ser
     name: Death Burst
@@ -490,10 +495,10 @@ items:
       description:
         value: >-
           <p>When the mephit dies, it explodes in a burst of dust. Each creature
-          within <strong>5 ft.</strong> of it must then succeed on a <strong>DC
-          10 Constitution saving throw</strong> or be blinded for <strong>1
-          minute</strong>. A blinded creature can repeat the saving throw on
-          each of its turns, ending the effect on itself on a success.</p>
+          within 5 ft. of it must then succeed on a [[/save]] saving throw or be
+          &amp;Reference[blinded] for 1 minute. A blinded creature can repeat
+          the saving throw on each of its turns, ending the effect on itself on
+          a success.</p>
         chat: >-
           <p>When the mephit dies, it explodes in a burst of dust. Each creature
           within <strong>5 ft.</strong> of it must make a
@@ -506,7 +511,7 @@ items:
         rules: '2014'
         revision: 1
       uses:
-        max: '1'
+        max: ''
         recovery: []
         spent: 0
       type:
@@ -515,82 +520,16 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: special
-            value: null
-            condition: on death
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: '1'
-            units: minute
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
           activation:
-            type: special
+            type: ''
             value: null
             condition: on death
             override: false
           consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -606,21 +545,21 @@ items:
           effects: []
           range:
             value: '5'
-            units: ft
+            units: self
             special: ''
             override: false
           target:
             template:
               count: ''
               contiguous: false
-              type: ''
-              size: ''
+              type: radius
+              size: '5'
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -638,6 +577,9 @@ items:
               calculation: ''
               formula: '10'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -648,17 +590,20 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.net3yBKQoxl8bZ4r
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.net3yBKQoxl8bZ4r
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676711
+      modifiedTime: 1747955042559
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!BUCfQ7ihaXX75Vai.v3i1DaUS4Bkc8Ser'
   - _id: muKb2wMq6khBe1yH
     name: Innate Spellcasting
@@ -697,18 +642,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015643
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!BUCfQ7ihaXX75Vai.muKb2wMq6khBe1yH'
   - _id: lazTMrXNUpGCrKdR
     name: Claws
@@ -866,12 +810,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550638
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!BUCfQ7ihaXX75Vai.lazTMrXNUpGCrKdR'
   - _id: RTpPc5fs27dBqDuj
     name: Blinding Breath
@@ -880,11 +825,11 @@ items:
     system:
       description:
         value: >-
-          <p>The mephit exhales a 15-foot cone of blinding dust.</p><p>Each
-          creature in that area must succeed on a  <strong>DC 10
-          Dexterity</strong> saving throw or be blinded for 1 minute. A creature
-          can repeat the saving throw at the end of each of its turns, ending
-          the effect on itself on a success.</p>
+          <p>The mephit exhales a 15-foot cone of blinding dust. Each creature
+          in that area must succeed on a [[/save]] saving throw or be
+          &amp;Referrence[blinded] for 1 minute. A creature can repeat the
+          saving throw at the end of each of its turns, ending the effect on
+          itself on a success.</p>
         chat: >-
           <p>The mephit exhales a 15-foot cone of blinding dust. Each creature
           in that area must make a <strong>Dexterity</strong> saving throw. A
@@ -910,75 +855,6 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-              - type: activityUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: '1'
-            units: minute
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '15'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: cone
-              size: '15'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: '1'
-            recovery:
-              - period: recharge
-                type: recoverAll
-                formula: '6'
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -990,17 +866,8 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-              - type: activityUses
                 target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
             scaling:
               allowed: false
               max: ''
@@ -1030,18 +897,15 @@ items:
               units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
             override: false
           uses:
             spent: 0
-            max: '1'
-            recovery:
-              - period: recharge
-                type: recoverAll
-                formula: '6'
+            max: ''
+            recovery: []
           damage:
             onSave: half
             parts: []
@@ -1051,6 +915,9 @@ items:
               calculation: ''
               formula: '10'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -1061,17 +928,20 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.tHvaJB8tXSriVXRm
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.tHvaJB8tXSriVXRm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676711
+      modifiedTime: 1747955063473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!BUCfQ7ihaXX75Vai.RTpPc5fs27dBqDuj'
   - _id: KhwiSi9fwVfUPtku
     name: Sleep
@@ -1092,8 +962,8 @@ items:
           with the next lowest hit points. A creature's hit points must be equal
           to or less than the remaining total for that creature to be
           affected.</p><p>Undead and creatures immune to being charmed aren't
-          affected by this spell.</p><p><strong>Higher Levels.</strong> When you
-          cast this spell using a spell slot of 2nd level or higher, roll an
+          affected by this spell.</p><p><strong>At Higher Levels.</strong> When
+          you cast this spell using a spell slot of 2nd level or higher, roll an
           additional 2d8 for each slot level above 1st.</p>
         chat: ''
       source:
@@ -1205,18 +1075,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.KhwiSi9fwVfUPtku
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.spells.KhwiSi9fwVfUPtku
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BUCfQ7ihaXX75Vai.KhwiSi9fwVfUPtku'
 effects: []
 folder: IB448xVSBvtqitzs
@@ -1226,10 +1095,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171212022
   modifiedTime: 1726171441150
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!BUCfQ7ihaXX75Vai'

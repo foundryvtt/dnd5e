@@ -1,0 +1,33 @@
+<div>
+    {{#unless embedRendering}}
+    {{#if document.title.show}}
+    <header>
+        <h{{ title.level1 }}>{{ document.name }}</h{{ title.level1 }}>
+    </header>
+    {{/if}}
+
+    <label class="grouping">
+        {{ localize "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Label" }}
+        <select name="grouping">
+            {{ selectOptions GROUPING_MODES selected=grouping localize=true }}
+        </select>
+    </label>
+    {{/unless}}
+
+    {{{ description }}}
+
+    {{#each sections}}
+    <h{{ @root.title.level3 }}>{{ header }}</h{{ @root.title.level3 }}>
+    <ul>
+        {{#each spells}}
+        <li>{{{ display }}}</li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <ul>
+        {{#each spells}}
+        <li>{{{ display }}}</li>
+        {{/each}}
+    </ul>
+    {{/each}}
+</div>

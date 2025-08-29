@@ -26,7 +26,7 @@ system:
         concentration: false
         override: false
       effects:
-        - _id: 9lS2LxCve4hPYGMn
+        - _id: AYtAkgcEHRws0Qeo
       range:
         override: false
         units: touch
@@ -53,6 +53,9 @@ system:
         formula: ''
         name: ''
       _id: Bm8dAa2MyA5NhcPU
+      img: ''
+      appliedEffects:
+        - AYtAkgcEHRws0Qeo
   uses:
     spent: 0
     recovery: []
@@ -110,7 +113,47 @@ system:
     - mgc
   strength: null
   proficient: null
-effects: []
+effects:
+  - name: Ignore Difficult Terrain
+    img: icons/tools/smithing/horsehoe-worn-steel-grey.webp
+    origin: Compendium.dnd5e.equipment24.Item.dmgHorseshoesOfA
+    _id: AYtAkgcEHRws0Qeo
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.ignoredDifficultTerrain
+        mode: 2
+        value: all
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 5.1.0
+      createdTime: 1753119088835
+      modifiedTime: 1753119138361
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!dmgHorseshoesOfA.AYtAkgcEHRws0Qeo'
 flags:
   dnd5e:
     riders:
@@ -118,12 +161,13 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1727883376108
-  modifiedTime: 1745712700834
+  modifiedTime: 1753119142354
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 18800000
 ownership:
   default: 0

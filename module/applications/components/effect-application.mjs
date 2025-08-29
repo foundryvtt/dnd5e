@@ -34,6 +34,13 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get shouldBuildTargetList() {
+    return this.open && this.visible;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Checked status for application targets.
    * @type {Map<string, boolean>}
@@ -96,6 +103,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    */
   buildEffectsList() {
     for ( const effect of this.effects ) {
+      effect.updateDuration();
       const li = document.createElement("li");
       li.classList.add("effect");
       li.dataset.id = effect.id;
@@ -183,7 +191,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       }, effectFlags));
     }
 
-    if ( !game.user.isGM && concentration && !concentration.actor?.isOwner ) {
+    if ( !game.user.isGM && concentration && !concentration.isOwner ) {
       throw new Error(game.i18n.localize("DND5E.EffectApplyWarningConcentration"));
     }
 
@@ -218,7 +226,9 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
         Hooks.onError("EffectApplicationElement._applyEffectToToken", err, { notify: "warn", log: "warn" });
       }
     }
-    this.querySelector(".collapsible").dispatchEvent(new PointerEvent("click", { bubbles: true, cancelable: true }));
+    if ( game.settings.get("dnd5e", "autoCollapseChatTrays") !== "manual" ) {
+      this.querySelector(".collapsible").dispatchEvent(new PointerEvent("click", { bubbles: true, cancelable: true }));
+    }
   }
 
   /* -------------------------------------------- */
@@ -231,5 +241,19 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const uuid = event.target.closest("[data-target-uuid]")?.dataset.targetUuid;
     if ( !uuid ) return;
     this.#targetOptions.set(uuid, event.target.checked);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onOpen() {
+    this.buildTargetsList();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onVisible() {
+    this.buildTargetsList();
   }
 }

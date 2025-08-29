@@ -258,6 +258,7 @@ export default class InventoryElement extends HTMLElement {
 
     for ( const control of this.querySelectorAll(".item-action[data-action]") ) {
       control.addEventListener("click", event => {
+        if ( event.currentTarget.ariaDisabled === "true" ) return;
         void this._onAction(event.currentTarget, event.currentTarget.dataset.action, { event });
       });
     }
@@ -352,7 +353,7 @@ export default class InventoryElement extends HTMLElement {
       callback: () => item.displayCard()
     }];
 
-    if ( !this.actor || (this.actor.type === "group") ) return options;
+    if ( !this.actor || this.actor.system.isGroup ) return options;
     const favorited = this.actor.system.hasFavorite?.(item.getRelativeUUID(this.actor));
     const expanded = this.app.expandedSections ? this.app.expandedSections.get(item.id)
       : this.app._expanded.has(item.id); // TODO: Remove when V1 sheets are gone
@@ -396,12 +397,13 @@ export default class InventoryElement extends HTMLElement {
       callback: li => this._onAction(li, "toggleCharge"),
       group: "state"
     }, {
-      name: `DND5E.ContextMenuAction${item.system.preparation?.prepared ? "Unprepare" : "Prepare"}`,
+      name: `DND5E.ContextMenuAction${item.system.prepared ? "Unprepare" : "Prepare"}`,
       icon: '<i class="fa-solid fa-sun fa-fw"></i>',
       condition: () => {
-        const isPrepared = ("preparation" in item.system) && (item.system.preparation.mode === "prepared");
+        const isPrepared = CONFIG.DND5E.spellcasting[item.system.method]?.prepares;
+        const isAlways = item.system.prepared === CONFIG.DND5E.spellPreparationStates.always.value;
         const canEdit = item.isOwner && !compendiumLocked;
-        return !item.hasRecharge && isPrepared && canEdit && !item.getFlag("dnd5e", "cachedFor");
+        return !item.hasRecharge && isPrepared && !isAlways && canEdit && !item.getFlag("dnd5e", "cachedFor");
       },
       callback: li => this._onAction(li, "prepare"),
       group: "state"
@@ -458,7 +460,7 @@ export default class InventoryElement extends HTMLElement {
     const { itemId } = target.closest("[data-item-id]")?.dataset ?? {};
     const { activityId } = target.closest("[data-activity-id]")?.dataset ?? {};
     const item = await this.getItem(itemId);
-    if ( !item ) return;
+    if ( !item || (target.ariaDisabled === "true") ) return;
     const activity = item.system.activities?.get(activityId);
 
     switch ( action ) {
@@ -495,7 +497,8 @@ export default class InventoryElement extends HTMLElement {
     if ( isNaN(value) ) return;
     value += action === "increase" ? 1 : -1;
     input.value = Math.clamp(value, min, max);
-    input.dispatchEvent(new Event("change"));
+    input._debouncedChange ??= foundry.utils.debounce(() => input.dispatchEvent(new Event("change")), 250);
+    input._debouncedChange();
   }
 
   /* -------------------------------------------- */
@@ -785,7 +788,7 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   _onTogglePrepared(item) {
-    return item.update({ "system.preparation.prepared": !item.system.preparation?.prepared });
+    return item.update({ "system.prepared": Number(!item.system.prepared) });
   }
 
   /* -------------------------------------------- */

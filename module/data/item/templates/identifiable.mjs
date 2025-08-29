@@ -1,5 +1,5 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
-import SystemDataModel from "../../abstract.mjs";
+import SystemDataModel from "../../abstract/system-data-model.mjs";
 
 const { BooleanField, SchemaField, StringField, HTMLField } = foundry.data.fields;
 

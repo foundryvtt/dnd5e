@@ -93,7 +93,7 @@ system:
         override: false
       damage:
         critical:
-          allow: false
+          allow: true
           bonus: ''
         parts:
           - number: 1
@@ -110,10 +110,19 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      appliedEffects:
+        - maRUYUv77W8IGST3
   identifier: hunters-mark
 sort: 0
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
 img: icons/magic/perception/eye-ringed-glow-angry-small-red.webp
 effects:
   - name: Hunter's Mark
@@ -138,12 +147,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     img: icons/magic/perception/eye-ringed-glow-angry-small-red.webp
     type: base
     system: {}
@@ -152,10 +162,11 @@ effects:
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.345'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.1.0
   createdTime: 1725037345248
-  modifiedTime: 1725992716340
+  modifiedTime: 1750441443962
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!items!0xmXiPiuYws1OGcX'

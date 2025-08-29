@@ -4,44 +4,50 @@ import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import JournalEditor from "./journal-editor.mjs";
 
+const { JournalEntryPageHandlebarsSheet } = foundry.applications.sheets.journal;
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Journal entry page that displays an automatically generated summary of a class along with additional description.
  */
-export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalPageSheet {
-
-  /** @override */
-  static _warnedAppV1 = true;
-
-  /* --------------------------------------------- */
+export default class JournalClassPageSheet extends JournalEntryPageHandlebarsSheet {
 
   /** @inheritDoc */
-  static get defaultOptions() {
-    const options = foundry.utils.mergeObject(super.defaultOptions, {
-      dragDrop: [{dropSelector: ".drop-target"}],
-      height: "auto",
-      width: 500,
-      submitOnChange: true
-    });
-    options.classes.push("class-journal");
-    return options;
-  }
+  static DEFAULT_OPTIONS = {
+    actions: {
+      deleteItem: JournalClassPageSheet.#onDeleteItem,
+      launchTextEditor: JournalClassPageSheet.#onLaunchTextEditor
+    },
+    classes: ["class"],
+    includeTOC: true,
+    position: {
+      width: 600
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static EDIT_PARTS = {
+    header: super.EDIT_PARTS.header,
+    config: {
+      classes: ["standard-form"],
+      template: "systems/dnd5e/templates/journal/page-{type}-edit.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static VIEW_PARTS = {
+    content: {
+      root: true,
+      template: "systems/dnd5e/templates/journal/page-{type}-view.hbs"
+    }
+  };
 
   /* -------------------------------------------- */
   /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get template() {
-    return `systems/dnd5e/templates/journal/page-${this.document.type}-${this.isEditable ? "edit" : "view"}.hbs`;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  toc = {};
-
   /* -------------------------------------------- */
 
   /**
@@ -57,8 +63,28 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getData(options) {
-    const context = super.getData(options);
+  _configureRenderParts(options) {
+    const parts = super._configureRenderParts(options);
+    Object.values(parts).forEach(p => p.template = p.template.replace("{type}", this.type));
+    return parts;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    new CONFIG.ux.DragDrop({
+      permissions: { drop: this._canDragDrop.bind(this) },
+      callbacks: { drop: this._onDrop.bind(this) }
+    }).bind(this.element);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
     context.system = context.document.system;
     context.systemFields = this.document.system.schema.fields;
 
@@ -69,9 +95,10 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
       { value: "2014", label: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.Style.Legacy") }
     ];
 
-    context.title = Object.fromEntries(
-      Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1])
-    );
+    context.title = {
+      ...context.title,
+      ...Object.fromEntries(Array.fromRange(4, 1).map(n => [`level${n}`, context.title.level + n - 1]))
+    };
     context.type = this.type;
 
     const linked = await fromUuid(this.document.system.item);
@@ -170,8 +197,8 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
     const descriptions = await Promise.all(Object.entries(page.system.description ?? {})
       .map(async ([id, text]) => {
         const enriched = await TextEditor.enrichHTML(text, {
-          relativeTo: this.object,
-          secrets: this.object.isOwner
+          relativeTo: this.document,
+          secrets: this.document.isOwner
         });
         return [id, enriched];
       })
@@ -227,7 +254,7 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
       for ( const advancement of item.advancement.byLevel[level] ) {
         switch ( advancement.constructor.typeName ) {
           case "AbilityScoreImprovement":
-            features.push(game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.Title"));
+            features.push(advancement._defaultTitle);
             continue;
           case "ItemGrant":
             if ( advancement.configuration.optional ) continue;
@@ -265,27 +292,50 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
 
   /**
    * Build out the spell progression data.
-   * @param {Item5e} item  Class item belonging to this journal.
-   * @returns {object}     Prepared spell progression table.
+   * @param {Item5e} item    Class item belonging to this journal.
+   * @returns {object|null}  Prepared spell progression table.
    * @protected
    */
   async _getSpellProgression(item) {
     const spellcasting = foundry.utils.deepClone(item.spellcasting);
     if ( !spellcasting || (spellcasting.progression === "none") ) return null;
 
+    const spellcastingModel = CONFIG.DND5E.spellcasting[spellcasting.type];
     const table = { rows: [] };
 
-    if ( spellcasting.type === "leveled" ) {
-      const spells = {};
-      const maxSpellLevel = CONFIG.DND5E.SPELL_SLOT_TABLE[CONFIG.DND5E.SPELL_SLOT_TABLE.length - 1].length;
-      Array.fromRange(maxSpellLevel, 1).forEach(l => spells[`spell${l}`] = {});
+    if ( spellcastingModel?.isSingleLevel ) {
+      const spellSlotKey = spellcastingModel.getSpellSlotKey();
+      const spells = { [spellSlotKey]: {} };
+
+      table.headers = [[
+        { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots") },
+        { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotLevel") }
+      ]];
+      table.cols = [{class: "spellcasting", span: 2}];
+
+      // Loop through each level, gathering "Spell Slots" & "Slot Level" for each one
+      for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
+        const progression = { [spellSlotKey]: 0 };
+        spellcasting.levels = level;
+        Actor5e.computeClassProgression(progression, item, { spellcasting });
+        Actor5e.prepareSpellcastingSlots(spells, spellcasting.type, progression);
+        table.rows.push(spells[spellSlotKey].max ? [
+          { class: "spell-slots", content: spells[spellSlotKey].max },
+          { class: "slot-level", content: spells[spellSlotKey].level.ordinalString() }
+        ] : null);
+      }
+    } else if ( spellcastingModel?.slots ) {
+      const maxSpellLevel = Object.keys(CONFIG.DND5E.spellLevels).length - 1;
+      const spells = Object.fromEntries(Array.fromRange(maxSpellLevel, 1).map(l => {
+        return [spellcastingModel.getSpellSlotKey(l), {}];
+      }));
 
       let largestSlot;
       for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1).reverse() ) {
-        const progression = { slot: 0 };
+        const progression = { [spellcasting.type]: 0 };
         spellcasting.levels = level;
         Actor5e.computeClassProgression(progression, item, { spellcasting });
-        Actor5e.prepareSpellcastingSlots(spells, "leveled", progression);
+        Actor5e.prepareSpellcastingSlots(spells, spellcasting.type, progression);
 
         if ( !largestSlot ) largestSlot = Object.values(spells).reduce((slot, { max, level }) => {
           if ( !max ) return slot;
@@ -295,7 +345,7 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
         const hasSlots = Object.values(spells).some(slot => slot.max > 0);
         const row = hasSlots ? Array.fromRange(largestSlot, 1).map(spellLevel => ({
           class: "spell-slots",
-          content: spells[`spell${spellLevel}`]?.max || "&mdash;"
+          content: spells[spellcastingModel.getSpellSlotKey(spellLevel)]?.max || "&mdash;"
         })) : null;
 
         table.rows.push(row);
@@ -310,42 +360,16 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
       table.rows.reverse();
     }
 
-    else if ( spellcasting.type === "pact" ) {
-      const spells = { pact: {} };
-
-      table.headers = [[
-        { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots") },
-        { content: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlotLevel") }
-      ]];
-      table.cols = [{class: "spellcasting", span: 2}];
-
-      // Loop through each level, gathering "Spell Slots" & "Slot Level" for each one
-      for ( const level of Array.fromRange(CONFIG.DND5E.maxLevel, 1) ) {
-        const progression = { pact: 0 };
-        spellcasting.levels = level;
-        Actor5e.computeClassProgression(progression, item, { spellcasting });
-        Actor5e.prepareSpellcastingSlots(spells, "pact", progression);
-        table.rows.push(spells.pact.max ? [
-          { class: "spell-slots", content: spells.pact.max },
-          { class: "slot-level", content: spells.pact.level.ordinalString() }
-        ] : null);
-      }
-    }
-
-    else {
-      /**
-       * A hook event that fires to generate the table for custom spellcasting types.
-       * The actual hook names include the spellcasting type (e.g. `dnd5e.buildPsionicSpellcastingTable`).
-       * @param {object} table                          Table definition being built. *Will be mutated.*
-       * @param {Item5e} item                           Class for which the spellcasting table is being built.
-       * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
-       * @function dnd5e.buildSpellcastingTable
-       * @memberof hookEvents
-       */
-      Hooks.callAll(
-        `dnd5e.build${spellcasting.type.capitalize()}SpellcastingTable`, table, item, spellcasting
-      );
-    }
+    /**
+     * A hook event that fires to generate the table for spellcasting types.
+     * The actual hook names include the spellcasting type (e.g. `dnd5e.buildPsionicSpellcastingTable`).
+     * @param {object} table                          Table definition being built. *Will be mutated.*
+     * @param {Item5e} item                           Class for which the spellcasting table is being built.
+     * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
+     * @function dnd5e.buildSpellcastingTable
+     * @memberof hookEvents
+     */
+    Hooks.callAll(`dnd5e.build${spellcasting.type.capitalize()}SpellcastingTable`, table, item, spellcasting);
 
     return table;
   }
@@ -436,9 +460,13 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
       features.push(...advancement.configuration.items.map(f => prepareFeature(f, advancement.level)));
     }
 
-    const asiLevels = (item.advancement.byType.AbilityScoreImprovement ?? []).map(a => a.level).sort((a, b) => a - b);
-    if ( asiLevels.length ) {
-      const [firstLevel, ...otherLevels] = asiLevels;
+    const asi = (item.advancement.byType.AbilityScoreImprovement ?? []).reduce((obj, advancement) => {
+      if ( advancement.isEpicBoon ) obj.boons.push(advancement);
+      else obj.levels.push(advancement.level);
+      return obj;
+    }, { levels: [], boons: [] });
+    if ( asi.levels.length ) {
+      const [firstLevel, ...otherLevels] = asi.levels.sort((a, b) => a - b);
       const name = game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.Name");
       features.push({
         description: game.i18n.format(
@@ -453,10 +481,22 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
               .format(otherLevels.map(l => formatNumber(l, { ordinal: true })))
           }
         ),
-        level: asiLevels[0],
+        level: asi.levels[0],
         name: modernStyle ? game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
           name: name, level: formatNumber(firstLevel)
         }) : name
+      });
+    }
+    for ( const advancement of asi.boons ) {
+      const recommendation = await fromUuid(advancement.configuration.recommendation);
+      features.push({
+        description: game.i18n.format("DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.DescriptionEpic", {
+          recommendation: recommendation?.toAnchor().outerHTML ?? "—"
+        }),
+        level: advancement.level,
+        name: game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
+          name: advancement._defaultTitle, level: formatNumber(advancement.level)
+        })
       });
     }
 
@@ -501,50 +541,28 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _renderInner(...args) {
-    const html = await super._renderInner(...args);
-    this.toc = JournalEntryPage.buildTOC(html.get());
-    return html;
-  }
-
-  /* -------------------------------------------- */
   /*  Event Handlers                              */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-    html[0].querySelectorAll(".item-delete").forEach(e => {
-      e.addEventListener("click", this._onDeleteItem.bind(this));
-    });
-    html[0].querySelectorAll(".launch-text-editor").forEach(e => {
-      e.addEventListener("click", this._onLaunchTextEditor.bind(this));
-    });
-  }
-
   /* -------------------------------------------- */
 
   /**
    * Handle deleting a dropped item.
-   * @param {Event} event  The triggering click event.
-   * @returns {JournalClassSummary5ePageSheet}
+   * @this {JournalClassPageSheet}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  async _onDeleteItem(event) {
-    event.preventDefault();
-    const container = event.currentTarget.closest("[data-item-uuid]");
+  static async #onDeleteItem(event, target) {
+    const container = target.closest("[data-item-uuid]");
     const uuidToDelete = container?.dataset.itemUuid;
     if ( !uuidToDelete ) return;
     switch ( container.dataset.itemType ) {
       case "linked":
-        await this.document.update({"system.item": ""});
-        return this.render();
+        await this.document.update({ "system.item": "" });
+        break;
       case "subclass":
         const itemSet = this.document.system.subclassItems;
         itemSet.delete(uuidToDelete);
-        await this.document.update({"system.subclassItems": Array.from(itemSet)});
-        return this.render();
+        await this.document.update({ "system.subclassItems": Array.from(itemSet) });
+        break;
     }
   }
 
@@ -552,16 +570,19 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
 
   /**
    * Handle launching the individual text editing window.
-   * @param {Event} event  The triggering click event.
+   * @this {JournalClassPageSheet}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  _onLaunchTextEditor(event) {
-    event.preventDefault();
-    const textKeyPath = event.currentTarget.dataset.target;
+  static #onLaunchTextEditor(event, target) {
+    const textKeyPath = target.dataset.target;
     const label = event.target.closest(".form-group").querySelector("label");
     const editor = new JournalEditor({ document: this.document, textKeyPath, window: { title: label?.innerText } });
-    editor.render(true);
+    editor.render({ force: true });
   }
 
+  /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -581,12 +602,12 @@ export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalP
     switch ( type ) {
       case "linked":
         await this.document.update({"system.item": item.uuid});
-        return this.render();
+        break;
       case "subclass":
         const itemSet = this.document.system.subclassItems;
         itemSet.add(item.uuid);
         await this.document.update({"system.subclassItems": Array.from(itemSet)});
-        return this.render();
+        break;
       default:
         return false;
     }

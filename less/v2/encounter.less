@@ -1,0 +1,286 @@
+/* -------------------------------------------- */
+/*  Basic Structure                             */
+/* -------------------------------------------- */
+
+.dnd5e2.sheet.actor.encounter {
+
+  /* -------------------------------------------- */
+  /*  Outer Window                                */
+  /* -------------------------------------------- */
+
+  --dnd5e-sheet-header-height: 170px;
+
+  &:not(.minimized)::before {
+    content: var(--dnd5e-encounter-header-content, none);
+    background: var(--dnd5e-encounter-header-image) no-repeat top center / cover;
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 150px;
+    border-radius: 5px 5px 0 0;
+    opacity: .1;
+    mask-image: linear-gradient(to bottom, black, transparent);
+    filter: grayscale(1);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .window-content {
+    overflow: hidden;
+    padding: 0;
+    gap: 0;
+  }
+
+  /* -------------------------------------------- */
+  /*  Sheet Header                                */
+  /* -------------------------------------------- */
+
+  .sheet-header {
+    display: flex;
+    padding: 0 16px;
+    align-items: stretch;
+    gap: 8px;
+
+    > .left { flex: none; }
+
+    > .middle {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    > .right {
+      flex: 0 0 96px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .portrait {
+      width: 96px;
+      height: 96px;
+
+      img {
+        max-width: unset;
+        width: 100%;
+        height: 100%;
+        border: none;
+        margin: 0;
+        object-fit: contain;
+        border-radius: 8px;
+      }
+    }
+
+    .document-name {
+      --input-background-color: var(--npc-header-input-background);
+      text-align: center;
+      font-size: var(--font-size-32);
+      font-family: var(--dnd5e-font-modesto);
+      font-weight: bold;
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Sheet Body                                  */
+  /* -------------------------------------------- */
+
+  .sheet-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .tab-body {
+        flex: 1;
+        position: relative;
+      }
+    }
+  }
+
+  .sheet-tabs { margin-top: 8px; }
+
+  .tab {
+    max-height: ~"calc(min(max(70vh, 1000px), 95vh) - var(--dnd5e-sheet-header-height))";
+    overflow: hidden auto;
+    scrollbar-gutter: stable;
+    padding: 16px 4px 8px 16px;
+    margin-right: 4px;
+  }
+
+  /* -------------------------------------------- */
+  /*  Group Members                               */
+  /* -------------------------------------------- */
+
+  .tab[data-tab=members] {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .pill-lg.empty {
+      max-width: unset;
+      margin-inline: 16px;
+      margin-bottom: 8px;
+    }
+
+    .member { padding-inline: 16px; }
+
+    .card {
+      flex: 1;
+      padding-right: 16px;
+    }
+
+    .name-stacked {
+      flex: 1;
+      justify-content: center;
+
+      .title { font-size: var(--font-size-14); }
+      .subtitle { font-size: var(--font-size-12); }
+    }
+
+    .cr-badge {
+      align-self: center;
+      width: 36px;
+      height: 36px;
+      font-size: var(--font-size-14);
+    }
+
+    .formula {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      > div {
+        --input-text-color: var(--dnd5e-color-gold);
+        border-radius: 4px;
+        background: var(--dnd5e-color-black);
+        color: var(--dnd5e-color-gold);
+        padding: 8px;
+        transition: all 250ms ease;
+
+        label { font-weight: bold; }
+        &.editable {
+          &:hover, &:focus-within { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+        }
+
+        input {
+          --input-background-color: transparent;
+          width: 45px;
+          padding: 0;
+          text-align: center;
+
+          &:hover, &:focus { box-shadow: none; }
+        }
+
+        .value {
+          min-width: 45px;
+          text-align: center;
+          display: inline-block;
+        }
+      }
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .adjustment-button { color: var(--item-control-active-color); }
+    }
+
+    .slot {
+      --slot-size: 36px;
+      flex: 0 0 var(--slot-size);
+      height: var(--slot-size);
+      width: var(--slot-size);
+      border: var(--dnd5e-slot-border);
+      border-radius: 3px;
+      overflow: hidden;
+      background: var(--dnd5e-background-card);
+      box-shadow: inset 0 0 3px var(--dnd5e-shadow-45);
+      text-align: center;
+      line-height: 34px;
+      font-family: var(--dnd5e-font-roboto-condensed);
+      font-weight: bold;
+      font-size: var(--font-size-20);
+
+      &.empty::before {
+        content: "—";
+        color: var(--color-text-tertiary);
+      }
+    }
+
+    .controls [data-action=rollQuantity] {
+      --button-border-color: var(--group-control-border);
+      --button-hover-border-color: var(--group-control-hover-border);
+      width: 20px;
+      height: 20px;
+      font-size: var(--font-size-10);
+      margin-top: -2px;
+      color: var(--item-control-active-color);
+    }
+
+    .bottom {
+      width: 100%;
+      position: sticky;
+      bottom: -8px;
+      margin-top: auto;
+      display: flex;
+      gap: 6px;
+
+      .difficulty {
+        border: var(--dnd5e-border-gold);
+        border-radius: 3px;
+        box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+        flex: 1;
+      }
+
+      .meter { border-radius: 3px; }
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Inventory                                   */
+  /* -------------------------------------------- */
+
+  .tab[data-tab=inventory] {
+    padding: 8px 4px calc(1.5rem + 30px) 16px;
+    margin-right: 4px;
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+  }
+
+  /* -------------------------------------------- */
+  /*  Description                                 */
+  /* -------------------------------------------- */
+
+  .tab[data-tab=description] {
+    &.editing {
+      padding: 8px 0;
+      margin: 0;
+      scrollbar-gutter: auto;
+    }
+
+    .middle, .bottom { padding: 0; }
+
+    > .editor .editor-content {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Limited                                     */
+  /* -------------------------------------------- */
+
+  &.limited {
+    .tab[data-tab=biography] {
+      .bottom { padding: 0; }
+    }
+  }
+
+}

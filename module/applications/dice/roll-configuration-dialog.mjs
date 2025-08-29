@@ -397,7 +397,7 @@ export default class RollConfigurationDialog extends Dialog5e {
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
 
-    const formData = new FormDataExtended(this.form);
+    const formData = new foundry.applications.ux.FormDataExtended(this.form);
     if ( formData.has("rollMode") ) this.message.rollMode = formData.get("rollMode");
     this.#buildRolls(foundry.utils.deepClone(this.#config), formData);
     this.render({ parts: ["formulas"] });

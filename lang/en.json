@@ -9,17 +9,20 @@
 
 "TYPES.Actor.character": "Player Character",
 "TYPES.Actor.characterPl": "Player Characters",
+"TYPES.Actor.encounter": "Encounter",
+"TYPES.Actor.encounterPl": "Encounters",
+"TYPES.Actor.group": "Group",
+"TYPES.Actor.groupPl": "Groups",
 "TYPES.Actor.npc": "Non-Player Character",
 "TYPES.Actor.npcPl": "Non-Player Characters",
 "TYPES.Actor.vehicle": "Vehicle",
 "TYPES.Actor.vehiclePl": "Vehicles",
-"TYPES.Actor.group": "Group",
-"TYPES.Actor.groupPl": "Groups",
 
 "TYPES.ActiveEffect.enchantment": "Enchantment",
 "TYPES.ActiveEffect.enchantmentPl": "Enchantments",
 
 "TYPES.ChatMessage": {
+  "request": "Request Message",
   "rest": "Rest Message",
   "turn": "Combat Turn Message"
 },
@@ -53,6 +56,11 @@
 "TYPES.Item.weapon": "Weapon",
 "TYPES.Item.weaponPl": "Weapons",
 
+"TYPES.RegionBehavior": {
+  "dnd5e.difficultTerrain": "Difficult Terrain",
+  "dnd5e.rotateArea": "Rotate Area"
+},
+
 "DND5E.title": "Dungeon & Dragons Fifth Edition",
 "DND5E.AbbreviationCR": "CR",
 "DND5E.AbbreviationConc": "Conc.",
@@ -65,6 +73,8 @@
 
 "DND5E.ABILITY": {
   "Configure": {
+    "CheckLabel": "{ability} Check",
+    "SaveLabel": "{ability} Save",
     "Title": "Configure {ability}"
   },
   "SECTIONS": {
@@ -237,6 +247,7 @@
 },
 
 "DND5E.ACTIVEEFFECT": {
+  "AttributeKeyTooltip": "For a list of common keys, see <a href=\"{url}\">the wiki</a>.",
   "FIELDS": {
     "statuses": {
       "label": "Status Conditions",
@@ -284,8 +295,15 @@
   }
 },
 
-"DND5E.ActorWarningInvalidItem": "{itemType} items cannot be added to a {actorType}.",
-"DND5E.ActorWarningSingleton": "Only a single {itemType} can be added to a {actorType}.",
+"DND5E.ACTOR": {
+  "Warning": {
+    "CreateActor": "You must have 'Create New Actors' permission in order to summon directly from a compendium.",
+    "InvalidItem": "{itemType} items cannot be added to a {actorType}.",
+    "NoActor": "Actor cannot be found with UUID '{uuid}' to summon.",
+    "Singleton": "Only a single {itemType} can be added to a {actorType}."
+  }
+},
+
 "DND5E.ActiveEffectOverrideWarning": "This value is being modified by an Active Effect and cannot be edited. Disable the effect to edit it.",
 "DND5E.Add": "Add",
 "DND5E.AdditionalControls": "Additional Controls",
@@ -309,28 +327,37 @@
     },
     "FIELDS": {
       "cap": {
-        "label": "Point Cap",
-        "hint": "Maximum number of points a player can assign to a single score."
+        "hint": "Maximum number of points a player can assign to a single score.",
+        "label": "Point Cap"
+      },
+      "fixed": {
+        "hint": "Abilities that are improved by a fixed amount and cannot be manually improved during the process.",
+        "label": "Fixed Improvement"
       },
       "locked": {
-        "label": "Locked",
         "hint": "Ability cannot be improved.",
+        "label": "Locked",
         "locked": "Ability cannot be improved.",
         "unlocked": "Ability may be improved."
       },
-      "fixed": {
-        "label": "Fixed Improvement",
-        "hint": "Abilities that are improved by a fixed amount and cannot be manually improved during the process."
+      "max": {
+        "hint": "Increase the maximum score from what is allowed on the actor.",
+        "label": "Maximum"
       },
       "points": {
-        "label": "Points",
-        "hint": "Number of points that can be assigned to any unlocked ability score.",
         "decrease": "Decrease Points",
-        "increase": "Increase Points"
+        "hint": "Number of points that can be assigned to any unlocked ability score.",
+        "increase": "Increase Points",
+        "label": "Points"
+      },
+      "recommendation": {
+        "hint": "Epic Boon feat recommended by this class.",
+        "label": "Recommendation"
       }
     },
     "Hint": "Allow the player to increase one or more ability scores or take an optional feat.",
     "Journal": {
+      "DescriptionEpic": "<p>You gain an Epic Boon feat or another feat of your choice for which you qualify. {recommendation} is recommended.</p>",
       "DescriptionLegacy": "<p>When you reach {firstLevelOrdinal} level, and again at {otherLevelsOrdinal} level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above {maxAbilityScore} using this feature.</p><p>Using the optional feats rule, you can forgo taking this feature to take a feat of your choice instead.</p>",
       "DescriptionModern": "<p>You gain the Ability Score Improvement feat or another feat of your choice for which you qualify. You gain this feature again at {class} levels {otherLevels}.</p>",
       "Name": "Ability Score Improvement"
@@ -341,8 +368,8 @@
       "other": "{points} Points Remaining"
     },
     "Title": "Ability Score Improvement",
+    "TitleEpic": "Epic Boon",
     "Warning": {
-      "Level": "Must be at least level {level} to take this feat.",
       "Type": "Only features with the \"feat\" type can be selected."
     }
   },
@@ -356,6 +383,12 @@
   "Config": {
     "AnyLevel": "Any",
     "Details": "Advancement Details"
+  },
+  "Defaults": {
+    "BackgroundFeat": "Background Feat",
+    "BackgroundFeature": "Background Feature",
+    "BackgroundProficiencies": "Background Proficiencies",
+    "ChooseLanguages": "Choose Languages"
   },
   "HitPoints": {
     "Action": {
@@ -374,6 +407,10 @@
     }
   },
   "ItemChoice": {
+    "Action": {
+      "SelectGeneric": "Select Item",
+      "SelectSpecific": "Select {type}"
+    },
     "Choose": "choose {count}",
     "Chosen": "Chosen: {current} of {max}",
     "Details": "Choice Details",
@@ -404,6 +441,10 @@
           "hint": "Only allow choices from spells of this level.",
           "label": "Spell Level"
         },
+        "list": {
+          "hint": "Only allow spells from these lists.",
+          "label": "Spell Lists"
+        },
         "subtype": {
           "label": "Subtype"
         },
@@ -424,12 +465,12 @@
     },
     "Title": "Choose Items",
     "Warning": {
-      "FeatureLevel": "Must be at least level {level} to take this feature.",
       "InvalidType": "Only {type} items can be selected for this choice.",
+      "MaxSelected": "No additional items can be selected, uncheck items before selecting more.",
       "NoOriginal": "Previously selected choice no longer available for replacement.",
-      "PreviouslyChosen": "This item has already been chosen at a previous level.",
       "SpellLevelAvailable": "Only {level} or lower spells can be chosen for this advancement.",
-      "SpellLevelSpecific": "Only {level} spells can be chosen for this advancement."
+      "SpellLevelSpecific": "Only {level} spells can be chosen for this advancement.",
+      "SpellList": "Only spells available on the {lists} spell list can be chosen for this advancement."
     }
   },
   "ItemGrant": {
@@ -573,8 +614,11 @@
         "ability": {
           "label": "Ability"
         },
-        "preparation": {
-          "label": "Preparation Mode"
+        "method": {
+          "label": "Spellcasting Method"
+        },
+        "prepared": {
+          "label": "Preparation"
         },
         "uses": {
           "max": {
@@ -1098,6 +1142,7 @@
     "FastForwardHint": "<kbd>Shift</kbd> + <left-click> the item to skip this dialog"
   }
 },
+"DND5E.Challenge": "Challenge",
 "DND5E.ChallengeRating": "Challenge Rating",
 "DND5E.Charged": "Charged",
 "DND5E.Charges": "Charges",
@@ -1114,6 +1159,13 @@
   "Activities": "Activities",
   "Deltas": {
     "Recovery": "Recovery"
+  },
+  "REQUEST": {
+    "Action": {
+      "Handle": "Handle Request"
+    },
+    "Complete": "Request Fulfilled",
+    "PartyMembers": "Party Members"
   },
   "TURN": {
     "NoCombatant": "Combatant no longer exists!"
@@ -1178,6 +1230,9 @@
         "label": "Primary Ability",
         "hint": "Abilities used most by this class. Used to determine multi-classing restrictions."
       }
+    },
+    "properties": {
+      "label": "Class Properties"
     }
   }
 },
@@ -1220,6 +1275,7 @@
   },
   "Filters": {
     "Label": "Filters",
+    "Grouped": "{type} ({group})",
     "HasDarkvision": "Has Darkvision",
     "HasSpellcasting": "Has Spellcasting",
     "SearchResults": "Search results"
@@ -1910,6 +1966,10 @@
       "identifier": {
         "label": "Class Identifier",
         "hint": "Identifier used to determine whether the character level or a specific class level should be used for enchantment level limits."
+      },
+      "self": {
+        "label": "Automatically Enchant Self",
+        "hint": "Automatically apply selected enchantment to the item containing this activity when it is used, and remove it when the activity is used again."
       }
     },
     "restrictions": {
@@ -1917,7 +1977,7 @@
       "hint": "Restrictions on the type of item to which this enchantment can be applied.",
       "allowMagical": {
         "label": "Allow Magical",
-        "hint": "Allow items that are already magical to be enchanted."
+        "hint": "Allow physical items that are already magical to be enchanted."
       },
       "categories": {
         "label": "Valid Categories",
@@ -1946,6 +2006,7 @@
       "Create": "Create Enchantment",
       "Delete": "Delete Enchantment"
     },
+    "Active": "{name} (active)",
     "Empty": "No associated enchantments. Use the button below to create one, or select an existing enchantment from the drop-down."
   },
   "Warning": {
@@ -2001,6 +2062,23 @@
   }
 },
 
+"DND5E.ENCOUNTER": {
+  "Action": {
+    "Award": "Award XP & Currency"
+  },
+  "Difficulty": {
+    "high": "High Difficulty",
+    "low": "Low Difficulty",
+    "moderate": "Moderate Difficulty"
+  },
+  "DropCreature": "Drop Creature",
+  "Tab": {
+    "Description": "Description",
+    "Loot": "Loot",
+    "Members": "Members"
+  }
+},
+
 "DND5E.Environment": "Environment",
 
 "DND5E.EQUIPMENT": {
@@ -2049,6 +2127,7 @@
   "Current": "Current XP",
   "Format": "{value} XP",
   "Label": "Experience Points",
+  "Pool": "XP Pool",
   "Progress": "Progress to next Level",
   "StatBlock": {
     "Standard": "XP {value}",
@@ -2467,8 +2546,8 @@
 "DND5E.FlagsElvenAccuracyHint": "Roll an extra d20 with advantage to Dex, Int, Wis, or Cha.",
 "DND5E.FlagsHalflingLucky": "Halfling Lucky",
 "DND5E.FlagsHalflingLuckyHint": "Reroll ones when rolling d20 checks.",
-"DND5E.FlagsInitiativeAdv": "Advantage on Initiative",
-"DND5E.FlagsInitiativeAdvHint": "Provided by feats or magical items.",
+"DND5E.FlagsHalflingNimbleness": "Halfling Nimbleness",
+"DND5E.FlagsHalflingNimblenessHint": "Movement through larger creatures is not blocked.",
 "DND5E.FlagsAlert": "Alert Feat",
 "DND5E.FlagsAlertHint": "Proficient in Initiative rolls.",
 "DND5E.FlagsAlertHintLegacy": "Provides +5 to Initiative.",
@@ -2488,6 +2567,8 @@
 "DND5E.FlagsSpellCritThresholdHint": "An expanded critical hit threshold for spell attacks.",
 "DND5E.FlagsMeleeCriticalDice": "Melee Critical Damage Dice",
 "DND5E.FlagsMeleeCriticalDiceHint": "A number of additional damage dice added to melee weapon critical hits.",
+"DND5E.FlagsToolExpertise": "Tool Expertise",
+"DND5E.FlagsToolExpertiseHint": "Doubles your proficiency bonus for any ability check you make that uses your proficiency with a tool.",
 "DND5E.Flat": "Flat",
 "DND5E.Formula": "Formula",
 "DND5E.FormulaMalformedError": "Problem preparing the {property} formula within {name}.",
@@ -2502,7 +2583,24 @@
 "DND5E.GroupSummaryEmpty": "Empty group",
 "DND5E.GroupControls": "Controls",
 "DND5E.Group": {
+  "Action": {
+    "ChangePace": "Change Pace",
+    "Remove": "Remove Member",
+    "View": "View Member"
+  },
+  "Config": {
+    "Art": {
+      "Label": "Member Art",
+      "portraits": "Portraits",
+      "tokens": "Tokens"
+    },
+    "Legend": "Group Sheet Options"
+  },
   "Challenge": "Challenge",
+  "Distribute": {
+    "noxp": "Distribute pooled currency",
+    "xp": "Distribute pooled XP & currency"
+  },
   "Member": {
     "one": "Member",
     "other": "Members"
@@ -2519,6 +2617,9 @@
   "Vehicle": {
     "one": "Vehicle",
     "other": "Vehicles"
+  },
+  "Warning": {
+    "PhysicalItemOnly": "Only physical items are supported."
   }
 },
 "DND5E.Habitat": {
@@ -2609,6 +2710,9 @@
   "Counted": {
     "one": "{number} hit point",
     "other": "{number} hit points"
+  },
+  "DT": {
+    "Abbr": "DT"
   }
 },
 
@@ -2632,6 +2736,7 @@
 "DND5E.HPFormulaRollMessage": "Roll Hit Point Formula",
 
 "DND5E.HITDICE": {
+  "Abbreviation": "HD",
   "Action": {
     "Decrease": "Decrease",
     "Increase": "Increase"
@@ -2772,6 +2877,7 @@
     "Reload": "Reload",
     "Returning": "Returning",
     "Ritual": "Ritual",
+    "Sidekick": "Sidekick",
     "Silvered": "Silvered",
     "Somatic": "Somatic",
     "Special": "Special",
@@ -2858,9 +2964,10 @@
 "DND5E.Languages": "Languages",
 
 "DND5E.LegendaryAction": {
-  "Description": "Legendary Action Uses: {uses}.",
+  "Description": "Legendary Action Uses: {uses}. Immediately after another creature’s turn, the {name} can expend a use to take one of the following actions. The {name} regains all expended uses at the start of each of its turns.",
   "DescriptionLegacy": "The {name} can take {usesNamed}, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature’s turn. The {name} regains spent legendary actions at the start of its turn.",
   "Label": "Legendary Action",
+  "LabelPl": "Legendary Actions",
   "LairUses": "{normal} ({lair} in Lair)",
   "Max": "Maximum Legendary Actions",
   "Ordinal": {
@@ -2869,7 +2976,8 @@
     "few": "{n}rd Legendary Action",
     "other": "{n}th Legendary Action"
   },
-  "Remaining": "Remaining Legendary Actions"
+  "Remaining": "Remaining Legendary Actions",
+  "Spent": "Spent Legendary Actions"
 },
 
 "DND5E.LegendaryResistance": {
@@ -2877,6 +2985,7 @@
     "Resist": "Legendary Resistance"
   },
   "Label": "Legendary Resistance",
+  "LabelPl": "Legendary Resistances",
   "Max": "Maximum Legendary Resistances",
   "Ordinal": {
     "one": "{n}st Legendary Resistance",
@@ -2885,10 +2994,12 @@
     "other": "{n}th Legendary Resistance"
   },
   "Remaining": "Remaining Legendary Resistances",
-  "Resisted": "Used Legendary Resistance"
+  "Resisted": "Used Legendary Resistance",
+  "Spent": "Spent Legendary Resistances"
 },
 
 "DND5E.Level": "Level",
+"DND5E.LevelAvg": "Avg. Level",
 "DND5E.LevelPl": "Levels",
 "DND5E.LevelActionDecrease": "Level Down",
 "DND5E.LevelActionIncrease": "Level Up",
@@ -2916,6 +3027,7 @@
 "DND5E.MaxClassLevelMinimumWarn": "Class must have at least one level.",
 "DND5E.Maximum": "Maximum",
 "DND5E.Minimum": "Minimum",
+"DND5E.Method": "Method",
 "DND5E.Modifier": "Modifier",
 "DND5E.ModuleArtConfigH": "Configure which module-provided art should be used.",
 "DND5E.ModuleArtConfigL": "Configure Art",
@@ -2985,20 +3097,31 @@
 "DND5E.PersonalityTraits": "Personality Traits",
 "DND5E.Portrait": "Portrait",
 "DND5E.Prepared": "Prepared",
+"DND5E.Preparation": "Preparation",
 "DND5E.Prerequisites": {
   "Header": "Feature Prerequisites",
   "FIELDS": {
     "prerequisites": {
+      "items": {
+        "hint": "Identifiers for items that the character must have before selecting this item.",
+        "label": "Required Items"
+      },
       "label": "Prerequisites",
       "level": {
-        "label": "Required Level",
-        "hint": "Character or class level required to select this feature when levelling up."
+        "hint": "Character or class level required to select this feature when levelling up.",
+        "label": "Required Level"
       },
       "repeatable": {
         "hint": "This feature can be chosen more than once.",
         "label": "Repeatable"
       }
     }
+  },
+  "Warning": {
+    "InvalidLevel": "must be at least level {level}",
+    "Message": "{actor} {requirements} in order to take this {type}.",
+    "MissingItem": "must have previously taken {items}",
+    "NotRepeatable": "must not have taken this before"
   }
 },
 "DND5E.Price": "Price",
@@ -3070,6 +3193,110 @@
 "DND5E.RechargeShort": "Recharge after a Short or Long Rest",
 "DND5E.Recovery": "Recovery",
 "DND5E.RecoveryFormula": "Recovery Formula",
+
+"DND5E.REGIONBEHAVIORS": {
+  "DIFFICULTTERRAIN": {
+    "FIELDS": {
+      "ignoredDispositions": {
+        "hint": "Tokens with these dispositions will not be affected by this difficult terrain.",
+        "label": "Ignored Dispositions"
+      },
+      "magical": {
+        "hint": "This difficult terrain is created by a magical effect.",
+        "label": "Magical"
+      },
+      "types": {
+        "hint": "Types that best describe the source of this difficult terrain, if any.",
+        "label": "Types"
+      }
+    },
+    "Type": {
+      "All": "All Types",
+      "Ice": "Slippery Ice",
+      "Magical": "Magical",
+      "Nonmagical": "Nonmagical",
+      "Plants": "Plants or Undergrowth",
+      "Rocks": "Rubble or Rocks",
+      "Liquid": "Shallow Liquid",
+      "Slope": "Steep Slope",
+      "Snow": "Deep Snow"
+    }
+  },
+  "ROTATEAREA": {
+    "Action": {
+      "AddPosition": "Add Position",
+      "DeletePosition": "Delete Position",
+      "RotateToPosition": "Rotate to Position"
+    },
+    "DirectionMode": {
+      "Clockwise": "Clockwise",
+      "CounterClockwise": "Counter Clockwise",
+      "Longest": "Longest",
+      "Shortest": "Shortest"
+    },
+    "FIELDS": {
+      "directionMode": {
+        "label": "Direction Mode",
+        "hint": "How the rotation direction is decided when moving to the next position."
+      },
+      "lights": {
+        "ids": {
+          "label": "Lights"
+        }
+      },
+      "positions": {
+        "label": "Positions",
+        "element": {
+          "angle": {
+            "label": "Angle"
+          }
+        }
+      },
+      "regions": {
+        "ids": {
+          "label": "Regions"
+        }
+      },
+      "sounds": {
+        "ids": {
+          "label": "Ambient Sounds"
+        }
+      },
+      "tiles": {
+        "ids": {
+          "label": "Tiles"
+        }
+      },
+      "time": {
+        "mode": {
+          "label": "Speed Mode",
+          "hint": "How the rotation speed is determined from the rotation time, either the same regardless of the distance moved (fixed) or dependant on the distance rotated (variable)."
+        },
+        "value": {
+          "label": "Rotation Time",
+          "hint": "Time in miliseconds to rotate to the next position (in fixed mode) or to rotate 90˚ (in variable mode)."
+        }
+      },
+      "walls": {
+        "ids": {
+          "label": "Walls"
+        },
+        "link": {
+          "label": "Link Walls",
+          "hint": "Rotate any wall segments attached to the ones specified."
+        }
+      }
+    },
+    "SpeedMode": {
+      "Fixed": "Fixed (total rotation time)",
+      "Variable": "Variable (time to rotate 90˚)"
+    },
+    "Warning": {
+      "RecursiveRegion": "Cannot rotate same region that contains the behavior."
+    }
+  }
+},
+
 "DND5E.Remaining": "Remaining",
 "DND5E.RequiredMaterials": "Required Materials",
 "DND5E.Requirements": "Requirements",
@@ -3115,6 +3342,20 @@
     "Hint": "Recover limited use abilities which recharge at dusk, dawn, or on a new day.",
     "Label": "New Day"
   },
+  "RecoverTempHP": {
+    "Label": "Remove Temp HP"
+  },
+  "RecoverTempMaxHP": {
+    "Hint": "Remove any adjustments to a character's maximum Hit Points.",
+    "Label": "Recover Max HP"
+  },
+  "Request": {
+    "AutoRest": {
+      "Hint": "Automatically perform the rest for selected party actors, rather than sending a rest request to players.",
+      "Label": "Auto Rest"
+    },
+    "Label": "Rest Request"
+  },
   "Short": {
     "Abbreviation": "SR",
     "Hint": {
@@ -3128,6 +3369,9 @@
       "Full": "{name} takes a short rest spending {dice} to recover {health}.",
       "Short": "{name} takes a short rest."
     }
+  },
+  "Warning": {
+    "OnlyByRequest": "Rests can only be performed at the request of the GM."
   }
 },
 
@@ -3175,6 +3419,7 @@
 "DND5E.MovementAir": "Air",
 "DND5E.MovementSpeeds": "Movement Speeds",
 "DND5E.MovementUnits": "Units",
+"DND5E.MovementIgnoredDifficultTerrain": "Ignored Difficult Terrain",
 
 "DND5E.SAVE": {
   "Title": {
@@ -3252,22 +3497,26 @@
 "DND5E.SenseUnits": "Units",
 "DND5E.SenseSpecial": "Special Senses",
 "DND5E.Shape": "Shape",
-"DND5E.SheetClassCharacter": "Default 5e Character Sheet",
-"DND5E.SheetClassCharacterLegacy": "Legacy 5e Character Sheet",
-"DND5E.SheetClassClassSummary": "Default 5e Class Summary Sheet",
-"DND5E.SheetClassContainer": "Default 5e Container Sheet",
-"DND5E.SheetClassContainerLegacy": "Legacy 5e Container Sheet",
-"DND5E.SheetClassGroup": "Default 5e Group Sheet",
-"DND5E.SheetClassItem": "Default 5e Item Sheet",
-"DND5E.SheetClassItemLegacy": "Legacy 5e Item Sheet",
-"DND5E.SheetClassJournalEntry": "Default 5e Journal Entry Sheet",
-"DND5E.SheetClassMapLocation": "Default 5e Map Location Sheet",
-"DND5E.SheetClassNPC": "Default 5e NPC Sheet",
-"DND5E.SheetClassNPCLegacy": "Legacy 5e NPC Sheet",
-"DND5E.SheetClassRule": "Default 5e Rule Sheet",
-"DND5E.SheetClassSpellList": "Default 5e Spell List Sheet",
-"DND5E.SheetClassToken": "Default 5e Token Sheet",
-"DND5E.SheetClassVehicle": "Default 5e Vehicle Sheet",
+
+"DND5E.SheetClass": {
+  "Character": "Default 5e Character Sheet",
+  "ClassSummary": "Default 5e Class Summary Sheet",
+  "Container": "Default 5e Container Sheet",
+  "DifficultTerrain": "Default 5e Difficult Terrain Sheet",
+  "Encounter": "Default 5e Encounter Sheet",
+  "Group": "Default 5e Group Sheet",
+  "Item": "Default 5e Item Sheet",
+  "JournalEntry": "Default 5e Journal Entry Sheet",
+  "JournalEntryLegacy": "Legacy 5e Journal Entry Sheet",
+  "MapLocation": "Default 5e Map Location Sheet",
+  "NPC": "Default 5e NPC Sheet",
+  "RotateArea": "Default 5e Rotate Area Sheet",
+  "Rule": "Default 5e Rule Sheet",
+  "SpellList": "Default 5e Spell List Sheet",
+  "Token": "Default 5e Token Sheet",
+  "Vehicle": "Default 5e Vehicle Sheet"
+},
+
 "DND5E.SheetModeEdit": "Edit",
 "DND5E.SheetModePlay": "Play",
 "DND5E.SavingThrow": "Saving Throw",
@@ -3336,6 +3585,7 @@
 "DND5E.SkillSlt": "Sleight of Hand",
 "DND5E.SkillSte": "Stealth",
 "DND5E.SkillSur": "Survival",
+"DND5E.SkillRoll": "Roll {ability} ({skill}) Check",
 "DND5E.SkillPromptTitle": "{ability} ({skill}) Check",
 "DND5E.SkillConfigureTitle": "Configure {skill}",
 "DND5E.SkillConfigure": "Configure Skill",
@@ -3414,6 +3664,61 @@
 "DND5E.SpellcasterLevel": "Spellcaster Level",
 "DND5E.SpellCastingHeader": "Spell Casting",
 "DND5E.Spellcasting": "Spellcasting",
+
+"DND5E.SPELLCASTING": {
+  "METHODS": {
+    "AtWill": {
+      "label": "At-Will"
+    },
+    "Innate": {
+      "label": "Innate Spellcasting"
+    },
+    "Ritual": {
+      "label": "Ritual Only"
+    },
+    "Spell": {
+      "label": "Spellcasting",
+      "Full": {
+        "label": "Full Caster"
+      },
+      "Half": {
+        "label": "Half Caster"
+      },
+      "Third": {
+        "label": "Third Caster"
+      },
+      "Artificer": {
+        "label": "Artificer"
+      }
+    },
+    "Pact": {
+      "abbr": "Pact",
+      "label": "Pact Magic",
+      "Full": {
+        "label": "Pact Magic"
+      }
+    }
+  },
+  "SLOTS": {
+    "spell0": "Cantrips",
+    "spell1": "1st Level",
+    "spell2": "2nd Level",
+    "spell3": "3rd Level",
+    "spell4": "4th Level",
+    "spell5": "5th Level",
+    "spell6": "6th Level",
+    "spell7": "7th Level",
+    "spell8": "8th Level",
+    "spell9": "9th Level"
+  },
+  "STATES": {
+    "Unprepared": "Not Prepared",
+    "Prepared": "Prepared",
+    "AlwaysPrepared": "Always Prepared"
+  },
+  "Unlabeled": "Unlabeled Spellcasting"
+},
+
 "DND5E.SpellcastingClass": "{class} Spellcasting",
 "DND5E.SpellComponent": "Spell Component",
 "DND5E.SpellComponents": "Spell Components",
@@ -3441,7 +3746,7 @@
 "DND5E.SpellLevel7": "7th Level",
 "DND5E.SpellLevel8": "8th Level",
 "DND5E.SpellLevel9": "9th Level",
-"DND5E.SpellLevelSlot": "{level} ({n} Slots)",
+"DND5E.SpellLevelSpell": "{level} ({n} Slots)",
 "DND5E.SpellLevelPact": "Pact Slot [Level {level}] ({n} Slots)",
 "DND5E.SpellMaterials": "Spellcasting Materials",
 "DND5E.SpellMaterialsConsumed": "Consume Materials",
@@ -3458,7 +3763,7 @@
 "DND5E.SpellPreparation": {
   "Label": "Spell Preparation",
   "Formula": "Preparation Formula",
-  "Mode": "Spell Preparation Mode"
+  "Method": "Spellcasting Method"
 },
 "DND5E.SpellSourceClass": "Source Class",
 "DND5E.SpellPrepared": "Prepared",
@@ -3529,6 +3834,7 @@
 "DND5E.SubclassMismatchWarn": "{name} subclass has no matching class with identifier '{class}'.",
 "DND5E.SubclassName": "Subclass Name",
 "DND5E.Subtype": "Subtype",
+"DND5E.Summary": "Summary",
 
 "DND5E.SUMMON": {
   "Title": "Summon",
@@ -3667,8 +3973,6 @@
     "EmptyDrop": "Click the button below to create a profile or drop a creature to summon here."
   },
   "Warning": {
-    "CreateActor": "You must have 'Create New Actors' permission in order to summon directly from a compendium.",
-    "NoActor": "Actor cannot be found with UUID '{uuid}' to summon.",
     "NoOwnership": "You must have ownership of '{actor}' in order to summon it.",
     "NoProfile": "Cannot find summoning profile {profileId} on '{item}'.",
     "Wildcard": "You must have 'Use File Browser' permissions to summon creatures with wildcard artwork."
@@ -4072,6 +4376,9 @@
         "types": {
           "hint": "List of creature types from which the source creature can be selected.",
           "label": "Creature Types"
+        },
+        "uuid": {
+          "label": "Linked Actor"
         }
       },
       "label": "Transform Profiles"
@@ -4089,9 +4396,8 @@
       "mode": {
         "label": "Mode",
         "hint": "Sets how the transformation source creatures are selected.",
-        "Appearance": "Appearance Only",
-        "Default": "Compendium Browser",
-        "Direct": "Direct Link"
+        "CR": "By Challenge Rating",
+        "Direct": "By Direct Link"
       },
       "preset": {
         "label": "Preset"
@@ -4117,6 +4423,7 @@
       "Delete": "Delete Profile"
     },
     "ChallengeRatingLabel": "Challenge Rating of {cr} or lower",
+    "DropHint": "Drop creature here",
     "Empty": "Click the button below to create a profile.",
     "Label": "Transform Profile"
   },
@@ -4167,8 +4474,16 @@
         "hint": "Merge these proficiencies, keeping whichever has the higher modifier.",
         "label": "Merge"
       },
+      "minimumAC": {
+        "hint": "Formula defining the armor class for the transformed creature, if the target actor's AC is not already higher.",
+        "label": "Minimum Armor Class"
+      },
       "other": {
         "label": "Other Options"
+      },
+      "spellLists": {
+        "hint": "The spells on these spell lists will be kept if the actor has a matching item.",
+        "label": "Retained Spell Lists"
       },
       "tempFormula": {
         "hint": "Formula for temp HP that will be added upon transformation.",
@@ -4191,8 +4506,14 @@
       "Features": {
         "Label": "Features"
       },
+      "GearProficiency": {
+        "Label": "Gear Proficiency"
+      },
       "Health": {
         "Label": "Hit Points & Hit Dice"
+      },
+      "Languages": {
+        "Label": "Languages"
       },
       "Mental": {
         "Hint": "Keep intelligence, wisdom, and charisma scores.",
@@ -4204,6 +4525,9 @@
       },
       "Proficiency": {
         "Label": "Proficiency Bonus"
+      },
+      "Resistances": {
+        "Label": "Damage Resistances"
       },
       "Saves": {
         "Label": "Save Proficiencies"
@@ -4238,6 +4562,15 @@
     "NoPermission": "Transformation permission haven't been granted to players.",
     "OriginalActor": "No original actor was found with ID '{reference}'.",
     "SourceActor": "No actor found to transform into."
+  }
+},
+
+"DND5E.Travel": {
+  "Label": "Travel Pace",
+  "Pace": {
+    "Fast": "Fast",
+    "Normal": "Normal",
+    "Slow": "Slow"
   }
 },
 
@@ -4524,11 +4857,11 @@
       },
       "prompt": {
         "label": "Roll Prompt",
-        "hint": "Should the roll configuration dialog be displayed when rolling?"
+        "hint": "Display the roll configuration dialog when rolling."
       },
       "visible": {
         "label": "Visible to All",
-        "hint": "Should the rolling button be visible to all players?"
+        "hint": "Display the rolling button in chat for all players."
       }
     }
   }
@@ -4672,6 +5005,7 @@
   "AwardEach": "{award} each",
   "CheckShort": "{check}",
   "CheckLong": "{check} check",
+  "CheckUsing": "{check} using {tool}",
   "DamageExtended": "<em>Hit:</em> {damage} damage",
   "DamageDouble": "{first} plus {second}",
   "DamageShort": "{formula} {type}",
@@ -4875,6 +5209,12 @@
 "SETTINGS.5eGridAlignedSquareTemplatesL": "When square templates are created as the result of casting a spell or using an item, they will be locked to the grid alignment and unable to be rotated.",
 "SETTINGS.5eGridAlignedSquareTemplatesN": "Grid-Aligned Square Templates",
 "SETTINGS.DND5E": {
+  "AUTOMATION": {
+    "Movement": {
+      "Name": "Disable Movement Automation",
+      "Hint": "Do not apply difficult terrain movement penalties, or prevent creatures from moving through each other according to the rules version."
+    }
+  },
   "BLOODIED": {
     "Name": "Bloodied Status",
     "Hint": "Configure whether the bloodied status is tracked automatically and its visibility.",
@@ -4887,7 +5227,8 @@
     "Hint": "Automatically collapse damage, hit, and effect trays that appear in chat cards.",
     "Always": "Collapse All",
     "Older": "Collapse Older Trays",
-    "Never": "Expand All"
+    "Never": "Collapse After Use",
+    "Manual": "Never Collapse"
   },
   "COMBAT": {
     "Hint": "Various configuration options that affect combat.",
@@ -4961,6 +5302,10 @@
     "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings."
   },
   "PERMISSIONS": {
+    "AllowRests": {
+      "Hint": "Allow players to rest directly from their characters' sheets. When disabled, players will only be able to rest when the GM makes a request from the party.",
+      "Name": "Allow Individual Rests"
+    },
     "AllowSummoning": {
       "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work.",
       "Name": "Allow Summoning"

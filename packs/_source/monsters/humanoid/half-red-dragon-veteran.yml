@@ -467,7 +467,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -479,6 +478,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: gMtQsYeAPMGoYGrm
     name: Plate Armor
@@ -546,18 +551,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.OjkIqlW2UpgFcjZa
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.OjkIqlW2UpgFcjZa
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!5TmstVMURpVtmNR3.gMtQsYeAPMGoYGrm'
   - _id: MTqXmkJOXkp4bFMQ
     name: Multiattack
@@ -649,18 +653,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655152
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!5TmstVMURpVtmNR3.MTqXmkJOXkp4bFMQ'
   - _id: 93eWZ75LncoC5U8d
     name: Longsword
@@ -816,18 +819,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173384809
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!5TmstVMURpVtmNR3.93eWZ75LncoC5U8d'
   - _id: pl7hO2z20EnTaPZt
     name: Shortsword
@@ -986,8 +988,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       dnd5e:
         riders:
           activity: []
@@ -995,12 +995,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107818097
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!5TmstVMURpVtmNR3.pl7hO2z20EnTaPZt'
   - _id: Jt9HuwZdYUCmEH5q
     name: Heavy Crossbow
@@ -1159,18 +1160,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.RmP0mYRn2J7K26rX
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.RmP0mYRn2J7K26rX
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173440006
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!5TmstVMURpVtmNR3.Jt9HuwZdYUCmEH5q'
   - _id: 68Y4sNHbVetQN3wa
     name: Fire Breath
@@ -1180,9 +1180,9 @@ items:
       description:
         value: >-
           <p>The veteran exhales fire in a 15-foot cone. Each creature in that
-          area must make a  <strong>DC 15 Dexterity</strong> saving throw,
-          taking <strong>24 (7d6) <em>fire damage</em></strong> on a failed
-          save, or half as much damage on a successful one.</p>
+          area must make a [[/save]] saving throw, taking [[/damage average]]
+          damage on a failed save, or half as much damage on a successful
+          one.</p>
         chat: >-
           <p>The veteran exhales fire in a 15-foot cone. Each creature in that
           area must make a <strong>Dexterity</strong> saving throw.</p>
@@ -1289,18 +1289,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676911
+      modifiedTime: 1749403465427
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!5TmstVMURpVtmNR3.68Y4sNHbVetQN3wa'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1310,10 +1309,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171203560
   modifiedTime: 1745107827692
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!5TmstVMURpVtmNR3'

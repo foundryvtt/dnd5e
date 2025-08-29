@@ -464,9 +464,14 @@ prototypeToken:
     subject:
       texture: null
       scale: 1
-  hexagonalShape: 0
   occludable:
     radius: 0
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items: []
 effects:
   - name: Invisible
@@ -492,18 +497,17 @@ effects:
       startTurn: null
     origin: null
     transfer: false
-    flags:
-      core:
-        sourceId: Actor.eIQIKf1xngnKcRpg.ActiveEffect.dnd5einvisible00
+    flags: {}
     _stats:
-      compendiumSource: null
+      compendiumSource: Actor.eIQIKf1xngnKcRpg.ActiveEffect.dnd5einvisible00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     img: systems/dnd5e/icons/svg/statuses/invisible.svg
     type: base
     system: {}
@@ -516,10 +520,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171263873
   modifiedTime: 1726171451406
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!tuHyePQ9GazMTyc0'

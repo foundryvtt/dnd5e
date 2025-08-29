@@ -32,8 +32,10 @@ system:
   prerequisites:
     level: 5
     repeatable: false
+    items:
+      - pact-of-the-blade
   properties: []
-  requirements: Pact of the Blade Invocation
+  requirements: ''
   activities:
     CXJlzDUkMYU9w9i9:
       type: damage
@@ -107,12 +109,13 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866281378
-  modifiedTime: 1740680083830
+  modifiedTime: 1752706793505
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

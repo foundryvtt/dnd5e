@@ -1,5 +1,10 @@
 /* Common Styles */
-@import "variables.less";
+@layer variables {
+  @import "variables/base.less";
+  @import "variables/light.less";
+  @import "variables/dark.less";
+}
+
 @import "contextmenu.less";
 @import "elements.less";
 
@@ -9,7 +14,6 @@
 @import "v1/advancement.less";
 @import "v1/items.less";
 @import "v1/inventory.less";
-@import "v1/journal.less";
 @import "v1/chat.less";
 @import "v1/character.less";
 @import "v1/npc.less";
@@ -28,24 +32,15 @@
 @import "v2/items.less";
 @import "v2/character.less";
 @import "v2/npc.less";
+@import "v2/group.less";
+@import "v2/encounter.less";
 @import "v2/compendium-browser.less";
 @import "v2/inventory.less";
 @import "v2/chat.less";
 @import "v2/tooltips.less";
 @import "v2/journal.less";
+@import "v2/region-behaviors.less";
 @import "v2/blocks.less";
-
-/* Dark Mode */
-@import "v2/dark/typography.less";
-@import "v2/dark/apps.less";
-@import "v2/dark/forms.less";
-@import "v2/dark/activities.less";
-@import "v2/dark/actors.less";
-@import "v2/dark/items.less";
-@import "v2/dark/character.less";
-@import "v2/dark/npc.less";
-@import "v2/dark/inventory.less";
-@import "v2/dark/compendium-browser.less";
 
 /* High Contrast */
 @import "v2/high-contrast/apps.less";

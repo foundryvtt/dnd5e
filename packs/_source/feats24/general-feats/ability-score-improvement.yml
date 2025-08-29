@@ -23,12 +23,33 @@ system:
     subtype: ''
   prerequisites:
     level: 4
-    repeatable: false
+    repeatable: true
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: ability-score-improvement
+  advancement:
+    - type: AbilityScoreImprovement
+      _id: cDQbaWgvyIw3Q6Ew
+      configuration:
+        cap: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked: []
+        points: 2
+        recommendation: null
+        max: null
+      value:
+        type: asi
+      level: 0
+      title: ''
+      hint: ''
 _id: phbftAbilityScor
 type: feat
 img: icons/magic/life/cross-worn-green.webp
@@ -44,10 +65,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866862537
-  modifiedTime: 1745256780443
+  modifiedTime: 1753301759053
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!items!phbftAbilityScor'

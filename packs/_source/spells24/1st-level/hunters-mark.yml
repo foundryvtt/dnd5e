@@ -81,14 +81,14 @@ system:
         override: false
       damage:
         critical:
-          allow: false
+          allow: true
           bonus: ''
         parts:
           - custom:
               enabled: false
               formula: ''
             number: 1
-            denomination: '6'
+            denomination: 6
             bonus: ''
             types:
               - force
@@ -101,8 +101,7 @@ system:
       sort: 100000
       name: Bonus Mark Damage
       img: ''
-      appliedEffects:
-        - hYD38IP9Meq2ArIS
+      appliedEffects: []
     vxr2JKuQ3jyMDTwb:
       type: utility
       _id: vxr2JKuQ3jyMDTwb
@@ -163,10 +162,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.345'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1724425959210
-  modifiedTime: 1745256794887
+  modifiedTime: 1750441422104
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!items!phbsplHuntersMar'

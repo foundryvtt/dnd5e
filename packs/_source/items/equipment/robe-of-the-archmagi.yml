@@ -38,7 +38,7 @@ system:
     value: 1
     units: lb
   price:
-    value: 34000
+    value: 200000
     denomination: gp
   attunement: required
   equipped: false
@@ -101,12 +101,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     img: icons/magic/symbols/rune-sigil-black-pink.webp
     type: base
     system: {}
@@ -123,10 +124,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.345'
   systemId: dnd5e
-  systemVersion: 4.1.0
+  systemVersion: 5.1.0
   createdTime: 1725037279916
-  modifiedTime: 1731019271211
+  modifiedTime: 1750697344647
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!items!mr96Z8YTI490ExhP'

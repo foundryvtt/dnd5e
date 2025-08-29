@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: IPdRnqMb4ZjhHAm4
     name: Iron Scent
@@ -513,18 +518,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.gh5UPTS0L16fHYwB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.gh5UPTS0L16fHYwB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!WJsxqbHU28D64lWT.IPdRnqMb4ZjhHAm4'
   - _id: dobpPU4kb00zSkQt
     name: Rust Metal
@@ -569,18 +573,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.GSgfXL9DyDA3GD0n
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.GSgfXL9DyDA3GD0n
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676730
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!WJsxqbHU28D64lWT.dobpPU4kb00zSkQt'
   - _id: ZFTo8KoUDrqeFg7l
     name: Bite
@@ -733,18 +736,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552041
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!WJsxqbHU28D64lWT.ZFTo8KoUDrqeFg7l'
   - _id: yxwZ9AtLMKZ61sTz
     name: Antennae
@@ -850,18 +852,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.6HJpLJxctQdMLeuB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.6HJpLJxctQdMLeuB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676730
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!WJsxqbHU28D64lWT.yxwZ9AtLMKZ61sTz'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -871,10 +872,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171236660
   modifiedTime: 1726171445719
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!WJsxqbHU28D64lWT'

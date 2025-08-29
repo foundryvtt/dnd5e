@@ -1,4 +1,4 @@
-import SystemDataModel from "../abstract.mjs";
+import SystemDataModel from "../abstract/system-data-model.mjs";
 import MappingField from "../fields/mapping-field.mjs";
 
 /**

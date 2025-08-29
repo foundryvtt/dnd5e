@@ -1,6 +1,7 @@
 import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import Proficiency from "../../../documents/actor/proficiency.mjs";
 import { convertLength, convertWeight, defaultUnits, replaceFormulaData, simplifyBonus } from "../../../utils.mjs";
+import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MovementField from "../../shared/movement-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
@@ -174,6 +175,13 @@ export default class AttributesFields {
       return obj;
     }, { armors: [], shields: [] });
 
+    // Set stealth disadvantage
+    if ( armors[0]?.system.properties.has("stealthDisadvantage") ) {
+      AdvantageModeField.setMode(this, "skills.ste.roll.mode", -1);
+    }
+
+    ac.label = !["custom", "flat"].includes(ac.calc) ? CONFIG.DND5E.armorClasses[ac.calc]?.label : null;
+
     // Determine base AC
     switch ( ac.calc ) {
 
@@ -200,6 +208,8 @@ export default class AttributesFields {
           ac.equippedArmor = armors[0];
         }
         else ac.dex = this.abilities.dex?.mod ?? 0;
+
+        if ( !ac.equippedArmor ) ac.label = null;
 
         rollData.attributes.ac = ac;
         try {
@@ -349,7 +359,7 @@ export default class AttributesFields {
     hp.max = (hp.max ?? 0) + base + bonus;
     if ( this.parent.hasConditionEffect("halfHealth") ) hp.max = Math.floor(hp.max * 0.5);
 
-    hp.effectiveMax = hp.max + (hp.tempmax ?? 0);
+    hp.effectiveMax = Math.max(hp.max + (hp.tempmax ?? 0), 0);
     hp.value = Math.min(hp.value, hp.effectiveMax);
     hp.damage = hp.effectiveMax - hp.value;
     hp.pct = Math.clamp(hp.effectiveMax ? (hp.value / hp.effectiveMax) * 100 : 0, 0, 100);
@@ -380,13 +390,21 @@ export default class AttributesFields {
     const alert = flags.initiativeAlert && !isLegacy;
     init.prof = new Proficiency(prof, alert ? 1 : (joat || ra) ? 0.5 : 0, !ra);
 
+    // Adjust rolling mode
+    if ( (flags.remarkableAthlete && !isLegacy) || this.parent.hasConditionEffect("initiativeAdvantage") ) {
+      AdvantageModeField.setMode(this, "attributes.init.roll.mode", 1);
+    }
+    if ( this.parent.hasConditionEffect("initiativeDisadvantage") ) {
+      AdvantageModeField.setMode(this, "attributes.init.roll.mode", -1);
+    }
+
     // Total initiative includes all numeric terms
     const initBonus = simplifyBonus(init.bonus, rollData);
     const abilityBonus = simplifyBonus(ability.bonuses?.check, rollData);
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
       + (flags.initiativeAlert && isLegacy ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
-    init.score = 10 + init.total;
+    init.score = CONFIG.DND5E.skillPassive.base + init.total + (init.roll.mode * CONFIG.DND5E.skillPassive.modifier);
   }
 
   /* -------------------------------------------- */
@@ -407,7 +425,7 @@ export default class AttributesFields {
     let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
-    for ( const type in CONFIG.DND5E.movementTypes ) {
+    for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
       let speed = Math.max(0, this.attributes.movement[type] - reduction);
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
       else {

@@ -25,6 +25,8 @@ system:
   prerequisites:
     level: null
     repeatable: false
+    items:
+      - fighting-style
   properties: []
   requirements: ''
   activities: {}
@@ -63,12 +65,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!items.effects!phbfstDefense000.W0ObItz7sS8ZJ09Y'
 folder: O942K0m1gZMIIoMB
 sort: 150000
@@ -81,10 +84,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866298107
-  modifiedTime: 1745256780333
+  modifiedTime: 1752706627369
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!items!phbfstDefense000'

@@ -193,7 +193,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         selectedTarget: ("validTargets" in typeConfig) && ((data.type === "itemUses") && data.target?.includes("."))
           ? (this.activity.actor?.sourcedItems?.get(data.target)?.first()?.id ?? data.target)
           : data.target,
-        targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem") : null,
+        targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem") : "",
         validTargets: showTextTarget ? null : target.validTargets
       };
     });
@@ -322,6 +322,12 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    */
   async _prepareIdentityContext(context) {
     context.tab = context.tabs.identity;
+    context.behaviorFields = [];
+    if ( context.fields.target?.fields?.prompt ) context.behaviorFields.push({
+      field: context.fields.target.fields.prompt,
+      value: context.source.target.prompt,
+      input: context.inputs.createCheckboxInput
+    });
     context.placeholder = {
       name: game.i18n.localize(this.activity.metadata.title),
       img: this.activity.metadata.img

@@ -117,7 +117,6 @@ export default function ActorSheetV2Mixin(Base) {
       context.portrait = {
         token: showTokenPortrait,
         src: showTokenPortrait ? token.texture.src : this.actor.img ?? defaultArtwork,
-        // TODO: Not sure the best way to update the parent texture from this sheet if this is a token actor.
         path: showTokenPortrait ? this.actor.isToken ? "" : "prototypeToken.texture.src" : "img"
       };
 
@@ -257,8 +256,10 @@ export default function ActorSheetV2Mixin(Base) {
         else if ( config.type === Number ) flag.field = new foundry.data.fields.NumberField(fieldOptions);
         else flag.field = new foundry.data.fields.StringField(fieldOptions);
 
-        sections[config.section] ??= [];
-        sections[config.section].push(flag);
+        if ( !config.deprecated || flag.value ) {
+          sections[config.section] ??= [];
+          sections[config.section].push(flag);
+        }
       }
 
       // Global Bonuses

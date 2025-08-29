@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: J12x6xIwx1aCEm1e
     name: Spellcasting
@@ -524,18 +529,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744058046751
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.J12x6xIwx1aCEm1e'
   - _id: 9LzZrzdWIZpjFIGV
     name: Divine Eminence
@@ -655,8 +659,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.lVrnjqBrv90VH96d
       dnd5e:
         riders:
           activity: []
@@ -664,12 +666,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lVrnjqBrv90VH96d
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744056004524
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.9LzZrzdWIZpjFIGV'
   - _id: B0jROhxuoqvfmz2B
     name: Mace
@@ -821,18 +824,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.Ajyq6nGwF7FtLhDQ
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.Ajyq6nGwF7FtLhDQ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744053508579
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.B0jROhxuoqvfmz2B'
   - _id: n9pJzTDsAwQxJVRl
     name: Sacred Flame
@@ -948,21 +950,20 @@ items:
           sort: 0
       identifier: sacred-flame
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
+    flags: {}
     img: icons/magic/light/beam-rays-orange.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.n9pJzTDsAwQxJVRl'
   - _id: MUO1uYN7JR1hm4dR
     name: Thaumaturgy
@@ -1080,21 +1081,20 @@ items:
           sort: 0
       identifier: thaumaturgy
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
+    flags: {}
     img: icons/magic/fire/explosion-fireball-small-purple-orange.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.MUO1uYN7JR1hm4dR'
   - _id: 7buEm5KhI5lP8m1z
     name: Guiding Bolt
@@ -1109,9 +1109,9 @@ items:
           target takes 4d6 radiant damage, and the next attack roll made against
           this target before the end of your next turn has advantage, thanks to
           the mystical dim light glittering on the target until
-          then.</p><p><strong>Higher Levels.</strong> When you cast this spell
-          using a spell slot of 2nd level or higher, the damage increases by 1d6
-          for each slot level above 1st.</p>
+          then.</p><p><strong>At Higher Levels.</strong> When you cast this
+          spell using a spell slot of 2nd level or higher, the damage increases
+          by 1d6 for each slot level above 1st.</p>
         chat: ''
       source:
         custom: ''
@@ -1219,21 +1219,20 @@ items:
           sort: 0
       identifier: guiding-bolt
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.7buEm5KhI5lP8m1z
+    flags: {}
     img: icons/magic/fire/projectile-fireball-smoke-large-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.7buEm5KhI5lP8m1z
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.7buEm5KhI5lP8m1z'
   - _id: gvdA9nPuWLck4tBl
     name: Sanctuary
@@ -1341,21 +1340,20 @@ items:
           sort: 0
       identifier: sanctuary
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.gvdA9nPuWLck4tBl
+    flags: {}
     img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.gvdA9nPuWLck4tBl
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.gvdA9nPuWLck4tBl'
   - _id: F0GsG0SJzsIOacwV
     name: Lesser Restoration
@@ -1453,21 +1451,20 @@ items:
           sort: 0
       identifier: lesser-restoration
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.F0GsG0SJzsIOacwV
+    flags: {}
     img: icons/magic/life/heart-cross-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.F0GsG0SJzsIOacwV
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.F0GsG0SJzsIOacwV'
   - _id: JbxsYXxSOTZbf9I0
     name: Spiritual Weapon
@@ -1486,9 +1483,9 @@ items:
           whatever form you choose. Clerics of deities who are associated with a
           particular weapon (as St. Cuthbert is known for his mace and Thor for
           his hammer) make this spell's effect resemble that
-          weapon.</p><p><strong>Higher Levels.</strong> When you cast this spell
-          using a spell slot of 3rd level or higher, the damage increases by 1d8
-          for every two slot levels above the 2nd.</p>
+          weapon.</p><p><strong>At Higher Levels.</strong> When you cast this
+          spell using a spell slot of 3rd level or higher, the damage increases
+          by 1d8 for every two slot levels above the 2nd.</p>
         chat: ''
       source:
         custom: ''
@@ -1600,18 +1597,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.JbxsYXxSOTZbf9I0'
   - _id: 15Fa6q1nH27XfbR8
     name: Dispel Magic
@@ -1716,21 +1712,20 @@ items:
           sort: 0
       identifier: dispel-magic
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.15Fa6q1nH27XfbR8
+    flags: {}
     img: icons/skills/melee/strike-blade-knife-orange-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.15Fa6q1nH27XfbR8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.15Fa6q1nH27XfbR8'
   - _id: uCud2s4TjMfjiXUb
     name: Spirit Guardians
@@ -1855,21 +1850,20 @@ items:
           sort: 0
       identifier: spirit-guardians
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.uCud2s4TjMfjiXUb
+    flags: {}
     img: icons/magic/light/projectile-bolts-salvo-white.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.uCud2s4TjMfjiXUb
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.uCud2s4TjMfjiXUb'
   - _id: Bnn9Nzajixvow9xi
     name: Light
@@ -1975,21 +1969,20 @@ items:
           sort: 0
       identifier: light
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
+    flags: {}
     img: icons/magic/light/explosion-star-small-blue-yellow.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.Bnn9Nzajixvow9xi'
   - _id: uUWb1wZgtMou0TVP
     name: Cure Wounds
@@ -2001,7 +1994,7 @@ items:
         value: >-
           <p>A creature you touch regains a number of hit points equal to 1d8 +
           your spellcasting ability modifier. This spell has no effect on undead
-          or constructs.</p><p><strong>Higher Levels.</strong> When you cast
+          or constructs.</p><p><strong>At Higher Levels.</strong> When you cast
           this spell using a spell slot of 2nd level or higher, the healing
           increases by 1d8 for each slot level above 1st.</p>
         chat: ''
@@ -2097,21 +2090,20 @@ items:
           sort: 0
       identifier: cure-wounds
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.uUWb1wZgtMou0TVP
+    flags: {}
     img: icons/magic/life/heart-cross-green.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.uUWb1wZgtMou0TVP
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.uUWb1wZgtMou0TVP'
   - _id: pC1QJ005t6xVU8ZT
     name: Chain Shirt
@@ -2182,12 +2174,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.p2zChy24ZJdVqMSH
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: 1744053591786
       modifiedTime: 1744053591786
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!PVD5wRdyO7iCJPs1.pC1QJ005t6xVU8ZT'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -2197,10 +2190,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171229383
   modifiedTime: 1744053772129
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!PVD5wRdyO7iCJPs1'

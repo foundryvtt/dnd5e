@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: QOTQoJFlLIMWmJsu
     name: Keen Sight and Smell
@@ -517,12 +522,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!zY3W5MG7FjssENf6.QOTQoJFlLIMWmJsu'
   - _id: R7Vx1RxO8OjXpzQd
     name: Multiattack
@@ -614,18 +620,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273657760
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zY3W5MG7FjssENf6.R7Vx1RxO8OjXpzQd'
   - _id: CwKQlVkFc2uJW0HL
     name: Beak
@@ -782,12 +787,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107554237
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zY3W5MG7FjssENf6.CwKQlVkFc2uJW0HL'
   - _id: FpbBzMs3wu1NK3Zu
     name: Claws
@@ -944,12 +950,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107554237
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zY3W5MG7FjssENf6.FpbBzMs3wu1NK3Zu'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -959,10 +966,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171267735
   modifiedTime: 1726171452300
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!zY3W5MG7FjssENf6'

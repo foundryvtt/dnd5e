@@ -63,11 +63,13 @@ export default class EnchantSheet extends ActivitySheet {
 
     const enchantableTypes = this.activity.enchantableTypes;
     context.typeOptions = [
-      { value: "", label: game.i18n.localize("DND5E.ENCHANT.FIELDS.restrictions.type.Any") },
+      { value: "", label: game.i18n.localize("DND5E.ENCHANT.FIELDS.restrictions.type.Any"), rule: true },
       ...Object.keys(CONFIG.Item.dataModels)
         .filter(t => enchantableTypes.has(t))
         .map(value => ({ value, label: game.i18n.localize(CONFIG.Item.typeLabels[value]) }))
     ];
+    context.isTypePhysical = !context.source.restrictions.type
+      || !!CONFIG.Item.dataModels[context.source.restrictions.type]?.schema.fields.quantity;
 
     const type = context.source.restrictions.type;
     const typeDataModel = CONFIG.Item.dataModels[type];
@@ -77,6 +79,19 @@ export default class EnchantSheet extends ActivitySheet {
     context.propertyOptions = (CONFIG.DND5E.validProperties[type] ?? [])
       .map(value => ({ value, label: CONFIG.DND5E.itemProperties[value]?.label ?? value }));
 
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareIdentityContext(context) {
+    context = await super._prepareIdentityContext(context);
+    context.behaviorFields.unshift({
+      field: context.fields.enchant.fields.self,
+      value: context.source.enchant.self,
+      input: context.inputs.createCheckboxInput
+    });
     return context;
   }
 

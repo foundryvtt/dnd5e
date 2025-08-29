@@ -2,14 +2,14 @@
   "id": "dnd5e",
   "title": "Dungeons & Dragons Fifth Edition",
   "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "5.0.3",
+  "version": "5.1.3",
   "compatibility": {
-    "minimum": "13.341",
+    "minimum": "13.347",
     "verified": "13"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-5.0.3/dnd5e-release-5.0.3.zip",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-5.1.3/dnd5e-release-5.1.3.zip",
   "authors": [
     {
       "name": "Atropos",
@@ -31,52 +31,87 @@
       "character": {
         "htmlFields": ["details.biography.value", "details.biography.public", "bastion.description"]
       },
+      "encounter": {
+        "htmlFields": ["description.full", "description.summary"]
+      },
+      "group": {
+        "htmlFields": ["description.full", "description.summary"]
+      },
       "npc": {
         "htmlFields": ["details.biography.value", "details.biography.public"]
       },
       "vehicle": {
         "htmlFields": ["details.biography.value", "details.biography.public"]
-      },
-      "group": {
-        "htmlFields": ["description.full", "description.summary"]
       }
     },
     "ChatMessage": {
+      "request": {},
       "rest": {},
       "turn": {}
     },
     "Item": {
       "weapon": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "equipment": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "consumable": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "tool": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "loot": {
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "race": {
+        "filePathFields": {
+          "advancement.*.icon": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "background": {
+        "filePathFields": {
+          "advancement.*.icon": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "class": {
+        "filePathFields": {
+          "advancement.*.icon": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "subclass": {
+        "filePathFields": {
+          "advancement.*.icon": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "spell": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "feat": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"],
+          "advancement.*.icon": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       },
       "container": {
@@ -86,6 +121,9 @@
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
       "facility": {
+        "filePathFields": {
+          "activities.*.img": ["IMAGE"]
+        },
         "htmlFields": ["description.value", "description.chat"]
       }
     },
@@ -107,6 +145,10 @@
       "subclass": {
         "htmlFields": ["details.value"]
       }
+    },
+    "RegionBehavior": {
+      "dnd5e.difficultTerrain": {},
+      "dnd5e.rotateArea": {}
     }
   },
   "packs": [
@@ -516,7 +558,7 @@
         "SRD 5.2": "SOURCE.BOOK.SRD52"
       }
     },
-    "needsMigrationVersion": "4.4.0",
+    "needsMigrationVersion": "5.1.0",
     "compatibleMigrationVersion": "0.8",
     "hotReload": {
       "extensions": ["css", "hbs", "json"],

@@ -140,17 +140,6 @@ system:
       value: {}
       level: 7
       title: Class Features
-    - _id: HkvEOlOu6TlQ00Cf
-      type: ItemGrant
-      configuration:
-        items:
-          - uuid: Compendium.dnd5e.classes24.Item.phbscrEpicBoon00
-            optional: false
-        optional: false
-        spell: null
-      value: {}
-      level: 19
-      title: Class Features
     - _id: g3PLJU1zYyUrHCY0
       type: ItemGrant
       configuration:
@@ -175,6 +164,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 4
@@ -192,6 +182,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 8
@@ -209,6 +200,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 12
@@ -226,6 +218,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 16
@@ -322,6 +315,7 @@ system:
         restriction:
           type: class
           subtype: metamagic
+          list: []
       value:
         added: {}
         replaced: {}
@@ -337,36 +331,6 @@ system:
         uuid: null
       level: 3
       title: ''
-      hint: ''
-    - _id: NiP6oa1s4azz0rDc
-      type: ItemChoice
-      configuration:
-        choices:
-          '19':
-            count: 1
-            replacement: false
-        allowDrops: true
-        type: feat
-        pool:
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofCombatP
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofEnergyR
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFate000
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFortitu
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofIrresis
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofRecover
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSkill00
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpeed00
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpellRe
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonoftheNigh
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofTruesig
-        spell: null
-        restriction:
-          type: feat
-      value:
-        added: {}
-        replaced: {}
-      title: Epic Boon
       hint: ''
     - _id: XzTd1a6iGhCAqMs3
       type: Trait
@@ -467,6 +431,26 @@ system:
       value: {}
       title: Sorcery Points
       hint: ''
+    - type: AbilityScoreImprovement
+      _id: EgWvwpbMp6gDqqiT
+      configuration:
+        cap: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked: []
+        points: 2
+        recommendation: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
+        max: null
+      value:
+        type: asi
+      level: 19
+      title: ''
+      hint: ''
   spellcasting:
     progression: full
     ability: cha
@@ -485,12 +469,13 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866286897
-  modifiedTime: 1745517428812
+  modifiedTime: 1752705940073
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

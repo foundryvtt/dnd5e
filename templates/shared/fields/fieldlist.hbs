@@ -1,3 +1,9 @@
 {{#each this}}
-{{ formField field name=name value=value input=input options=options disabled=disabled rootId=@root.partId }}
+{{#if name}}{{!-- TODO: Work around core issue with providing undefined name --}}
+{{ formField field name=name value=value input=input options=options disabled=disabled localize=localize
+             rootId=@root.partId }}
+{{else}}
+{{ formField field value=value input=input options=options disabled=disabled localize=localize
+             rootId=@root.partId }}
+{{/if}}
 {{/each}}

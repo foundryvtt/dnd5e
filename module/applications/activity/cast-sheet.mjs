@@ -18,10 +18,6 @@ export default class CastSheet extends ActivitySheet {
   /** @inheritDoc */
   static PARTS = {
     ...super.PARTS,
-    identity: {
-      template: "systems/dnd5e/templates/activity/cast-identity.hbs",
-      templates: super.PARTS.identity.templates
-    },
     effect: {
       template: "systems/dnd5e/templates/activity/cast-effect.hbs",
       templates: [
@@ -73,6 +69,11 @@ export default class CastSheet extends ActivitySheet {
   /** @inheritDoc */
   async _prepareIdentityContext(context) {
     context = await super._prepareIdentityContext(context);
+    context.behaviorFields = [{
+      field: context.fields.spell.fields.spellbook,
+      value: context.source.spell.spellbook,
+      input: context.inputs.createCheckboxInput
+    }];
     if ( context.spell ) context.placeholder = { name: context.spell.name, img: context.spell.img };
     return context;
   }

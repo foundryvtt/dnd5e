@@ -15,6 +15,7 @@ system:
     rules: '2024'
     license: CC-BY-4.0
     book: SRD 5.2
+    page: ''
   activation:
     type: action
     condition: ''
@@ -97,7 +98,7 @@ system:
       name: Forge Telepathic Link
       img: ''
       appliedEffects: []
-  identifier: rarys-telepathic-bond
+  identifier: telepathic-bond
 _id: phbsplRarysTelep
 type: spell
 img: icons/skills/social/diplomacy-handshake-gray.webp
@@ -131,12 +132,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: 1724428622825
       modifiedTime: 1724429807547
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!items.effects!phbsplRarysTelep.6DciPRMecBWvJCZq'
 folder: beZ8MTpWY2cMEUlp
 sort: 600000
@@ -149,10 +151,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1724425967972
-  modifiedTime: 1745256797380
+  modifiedTime: 1753380906018
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!items!phbsplRarysTelep'

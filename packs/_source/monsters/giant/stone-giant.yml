@@ -465,7 +465,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -477,6 +476,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: Tm2NY0eSI6InRcsa
     name: Greatclub
@@ -626,21 +631,20 @@ items:
       identifier: greatclub
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.QRCsxkCwWNwswL9o
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.QRCsxkCwWNwswL9o
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107551834
+      modifiedTime: 1749402670079
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!SOin81NWijHRvXFK.Tm2NY0eSI6InRcsa'
   - _id: W7aeXkpOJ1TwM0dq
     name: Multiattack
@@ -731,18 +735,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273656242
+      modifiedTime: 1749402670898
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!SOin81NWijHRvXFK.W7aeXkpOJ1TwM0dq'
   - _id: eiNNUlTgJyVFcQkO
     name: Rock
@@ -751,9 +754,9 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
-          a creature, it must succeed on a  <strong>DC 17 Strength</strong>
-          saving throw or be knocked prone.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it must succeed on a [[/save]] saving throw or be knocked
+          prone.</p>
         chat: >-
           <p>The Stone Giant attacks with its Rock. If the target is a creature,
           it must make a <strong>Strength</strong> saving throw or be knocked
@@ -957,19 +960,20 @@ items:
       identifier: rock
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173385422
+      modifiedTime: 1749402684645
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!SOin81NWijHRvXFK.eiNNUlTgJyVFcQkO'
   - _id: HxKKuoyc6AYGLsIX
     name: Rock Catching
@@ -979,8 +983,8 @@ items:
       description:
         value: >-
           <p>If a rock or similar object is hurled at the giant, the giant can,
-          with a successful DC 10 Dexterity saving throw, catch the missile and
-          take no <em>bludgeoning damage</em> from it.</p>
+          with a successful [[/save]] saving throw, catch the missile and take
+          no bludgeoning damage from it.</p>
         chat: >-
           <p>If a rock or similar object is hurled at the giant, the giant can
           catch the missile and take no <em>bludgeoning damage</em> from it.</p>
@@ -1066,18 +1070,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.BpwXJvMA7MfVQ7i6
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.BpwXJvMA7MfVQ7i6
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676793
+      modifiedTime: 1749402660165
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!SOin81NWijHRvXFK.HxKKuoyc6AYGLsIX'
   - _id: zqsYu35qYHNNeTWE
     name: Stone Camouflage
@@ -1086,8 +1089,8 @@ items:
     system:
       description:
         value: >-
-          <p>The giant has<strong> advantage </strong>on Dexterity (Stealth)
-          checks made to hide in rocky terrain.</p>
+          <p>The giant has advantage on Dexterity (Stealth) checks made to hide
+          in rocky terrain.</p>
         chat: ''
       source:
         custom: ''
@@ -1115,18 +1118,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.j1cPfWFNvxGoex9Z
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.j1cPfWFNvxGoex9Z
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749402667767
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!SOin81NWijHRvXFK.zqsYu35qYHNNeTWE'
 effects: []
 folder: v8gFGdEluEFQdRQg
@@ -1136,10 +1138,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171232404
   modifiedTime: 1726171444900
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!SOin81NWijHRvXFK'

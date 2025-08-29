@@ -467,7 +467,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -479,6 +478,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: mhIdpV6rtYYjOBN5
     name: Chain Shirt
@@ -545,18 +550,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.p2zChy24ZJdVqMSH
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.p2zChy24ZJdVqMSH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.mhIdpV6rtYYjOBN5'
   - _id: 8Yo6JM2NfjkpC8Hz
     name: Stone Camouflage
@@ -565,8 +569,8 @@ items:
     system:
       description:
         value: >-
-          <p>The gnome has<strong> advantage </strong>on Dexterity (Stealth)
-          checks made to hide in rocky terrain.</p>
+          <p>The gnome has advantage on Dexterity (Stealth) checks made to hide
+          in rocky terrain.</p>
         chat: ''
       source:
         custom: ''
@@ -594,18 +598,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.j1cPfWFNvxGoex9Z
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.j1cPfWFNvxGoex9Z
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403058335
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.8Yo6JM2NfjkpC8Hz'
   - _id: JCSej95QR8svWsYz
     name: Gnome Cunning
@@ -614,8 +617,8 @@ items:
     system:
       description:
         value: >-
-          <p>The gnome has<strong> advantage </strong>on Intelligence, Wisdom,
-          and Charisma saving throws against magic.</p>
+          <p>The gnome has advantage on Intelligence, Wisdom, and Charisma
+          saving throws against magic.</p>
         chat: ''
       source:
         custom: ''
@@ -643,18 +646,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.0gl43AC57cvJaW7D
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.0gl43AC57cvJaW7D
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403063377
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.JCSej95QR8svWsYz'
   - _id: AqLTSMp6MlcNK666
     name: War Pick
@@ -807,18 +809,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.2YdfjN1PIIrSHZii
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.2YdfjN1PIIrSHZii
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552225
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.AqLTSMp6MlcNK666'
   - _id: pnfC0DIa1eqXGjku
     name: Innate Spellcasting
@@ -863,18 +864,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015846
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.pnfC0DIa1eqXGjku'
   - _id: YuhirWYJsQfL6zo5
     name: Poisoned Dart
@@ -884,10 +884,9 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a  <strong>DC 12 Constitution</strong> saving throw or be
-          poisoned for 1 minute. The target can repeat the saving throw at the
-          end of each of its turns, ending the effect on itself on a
-          success.</p>
+          succeed on a [[/save]] saving throw or be &amp;Reference[poisoned] for
+          1 minute. The target can repeat the saving throw at the end of each of
+          its turns, ending the effect on itself on a success.</p>
         chat: >-
           <p>The Deep Gnome (Svirfneblin) attacks with its Poisoned Dart. The
           target must make a <strong>Constitution</strong> saving throw. The
@@ -1079,19 +1078,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 1
-                denomination: 4
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -1102,21 +1089,27 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: poisoned-dart
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173385501
+      modifiedTime: 1749403134872
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.YuhirWYJsQfL6zo5'
   - _id: aU62xVUBYkAQWIHv
     name: Nondetection
@@ -1218,21 +1211,20 @@ items:
           sort: 0
       identifier: nondetection
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.aU62xVUBYkAQWIHv
+    flags: {}
     img: icons/magic/perception/eye-ringed-glow-angry-red.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.aU62xVUBYkAQWIHv
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.aU62xVUBYkAQWIHv'
   - _id: zwGsAv6kmwzYGhh3
     name: Blindness/Deafness
@@ -1346,21 +1338,20 @@ items:
           sort: 0
       identifier: blindness-deafness
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.zwGsAv6kmwzYGhh3
+    flags: {}
     img: icons/magic/perception/eye-ringed-glow-angry-red.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.zwGsAv6kmwzYGhh3
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.zwGsAv6kmwzYGhh3'
   - _id: UDUnlfPsOAbq2RSE
     name: Blur
@@ -1467,21 +1458,20 @@ items:
           sort: 0
       identifier: blur
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.UDUnlfPsOAbq2RSE
+    flags: {}
     img: icons/magic/air/air-burst-spiral-blue-gray.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.UDUnlfPsOAbq2RSE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.UDUnlfPsOAbq2RSE'
   - _id: A3q2gTNqG6fvNGrv
     name: Disguise Self
@@ -1598,21 +1588,20 @@ items:
           sort: 0
       identifier: disguise-self
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv
+    flags: {}
     img: icons/magic/control/debuff-energy-hold-teal-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.A3q2gTNqG6fvNGrv'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1622,10 +1611,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171239069
   modifiedTime: 1726171446171
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!ZM1P6LoYSwMiIJN9'

@@ -29,6 +29,35 @@ system:
   activities: {}
   enchant: {}
   identifier: primal-champion
+  advancement:
+    - _id: apkonPAaBjVFh5eF
+      type: AbilityScoreImprovement
+      configuration:
+        points: 0
+        fixed:
+          str: 4
+          dex: 0
+          con: 4
+          int: 0
+          wis: 0
+          cha: 0
+        cap: null
+        locked:
+          - str
+          - dex
+          - con
+          - int
+          - wis
+          - cha
+        recommendation: null
+        max: 25
+      value:
+        type: asi
+      level: 20
+      title: Primal Champion
+      hint: >-
+        You embody primal power. Your Strength and Constitution scores increase
+        by 4, to a maximum of 25.
 effects: []
 folder: p6WDpW0gzmKfhGad
 flags:
@@ -38,12 +67,13 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735865940469
-  modifiedTime: 1745256760020
+  modifiedTime: 1752706167680
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

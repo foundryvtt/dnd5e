@@ -1,6 +1,7 @@
 import Proficiency from "../../../documents/actor/proficiency.mjs";
 import { simplifyBonus } from "../../../utils.mjs";
-import { ActorDataModel } from "../../abstract.mjs";
+import ActorDataModel from "../../abstract/actor-data-model.mjs";
+import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 import CurrencyTemplate from "../../shared/currency.mjs";
@@ -17,7 +18,7 @@ const { NumberField, SchemaField } = foundry.data.fields;
  * @property {string} bonuses.check  Numeric or dice bonus to ability checks.
  * @property {string} bonuses.save   Numeric or dice bonus to ability saving throws.
  * @property {RollConfigData} check    Properties related to ability checks.
- * @property {RollConfigData} save     Properties related to ability saving throws.
+ * @property {RollConfigData} save     Properties related to saving throws.
  */
 
 /**
@@ -141,14 +142,21 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     const dcBonus = simplifyBonus(this.bonuses?.spell?.dc, rollData);
     for ( const [id, abl] of Object.entries(this.abilities) ) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
+      const originalAbility = originalSaves?.[id];
+      if ( originalAbility?.proficient ) {
+        abl.merged = true;
+        abl.proficient = originalAbility?.proficient;
+      }
 
-      abl.checkProf = this.calculateAbilityCheckProficiency(0, id);
+      const calculatedProf = this.calculateAbilityCheckProficiency(0, id);
+      abl.checkProf = originalAbility?.checkProf?.multiplier > calculatedProf.multiplier
+        ? originalAbility.checkProf.clone() : calculatedProf;
       const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
 
       const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.coverBonus) : 0;
       abl.saveBonus = saveBonusAbl + saveBonus + cover;
 
-      abl.saveProf = new Proficiency(prof, abl.proficient);
+      abl.saveProf = abl.merged ? originalAbility.saveProf.clone() : new Proficiency(prof, abl.proficient);
       const checkBonusAbl = simplifyBonus(abl.bonuses?.check, rollData);
       abl.checkBonus = checkBonusAbl + checkBonus;
 
@@ -159,20 +167,14 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
 
       if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
 
-      // If we merged saves when transforming, take the highest bonus here.
-      if ( originalSaves && abl.proficient ) abl.save.value = Math.max(abl.save, originalSaves[id].save.value);
-
-      // Deprecations.
-      abl.save.toString = function() {
-        foundry.utils.logCompatibilityWarning("The 'abilities.<ability>.save' property is now stored in "
-          + "'abilities.<ability>.save.value'.", { since: "4.3", until: "4.5" });
-        return String(abl.save.value);
-      };
-      abl.save.toJSON = function() {
-        foundry.utils.logCompatibilityWarning("The 'abilities.<ability>.save' property is now stored in "
-          + "'abilities.<ability>.save.value'.", { since: "4.3", until: "4.5" });
-        return `!${abl.save.value}!`;
-      };
+      // Adjust rolling mode
+      if ( this.parent.hasConditionEffect("abilityCheckDisadvantage") ) {
+        AdvantageModeField.setMode(this, `abilities.${id}.check.roll.mode`, -1);
+      }
+      if ( this.parent.hasConditionEffect("abilitySaveDisadvantage")
+        || ((id === "dex") && this.parent.hasConditionEffect("dexteritySaveDisadvantage")) ) {
+        AdvantageModeField.setMode(this, `abilities.${id}.save.roll.mode`, -1);
+      }
     }
   }
 
@@ -197,5 +199,41 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       else if ( this.parent.flags.dnd5e?.jackOfAllTrades ) multiplier = .5;
     }
     return new Proficiency(this.attributes.prof, multiplier, roundDown);
+  }
+
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate proficiency, applying specific logic for tools.
+   * @param {number} multiplier  Multiplier stored on the actor.
+   * @param {string} ability     Ability associated with this proficiency.
+   * @returns {Proficiency}
+   */
+  calculateToolProficiency(multiplier, ability) {
+    if ( (multiplier === 1) && this.parent.flags.dnd5e?.toolExpertise ) {
+      return new Proficiency(this.attributes.prof, 2, true);
+    }
+    return this.calculateAbilityCheckProficiency(multiplier, ability);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate proficiency for a given actor using either a skill, a tool, or both.
+   * @param {Actpr5e} actor           The actor.
+   * @param {string} abilityId        The ability used with the check.
+   * @param {object} [options]
+   * @param {string} [options.skill]  The skill.
+   * @param {string} [options.tool]   The tool.
+   * @returns {Proficiency|null}
+   */
+  static calculateSkillToolProficiency(actor, abilityId, options={}) {
+    if ( !actor ) return null;
+    const skill = actor.system.skills?.[options.skill];
+    const tool = actor.system.tools?.[options.tool];
+    const multiplier = Math.max(skill?.effectValue ?? 0, tool?.effectValue ?? 0);
+    const calc = options.tool ? actor.system.calculateToolProficiency : actor.system.calculateAbilityCheckProficiency;
+    return calc.call(actor.system, multiplier, abilityId);
   }
 }

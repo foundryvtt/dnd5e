@@ -32,7 +32,7 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 2
-    repeatable: false
+    repeatable: true
   properties: []
   requirements: Warlock Cantrip That Deals Damage
   activities:
@@ -128,12 +128,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!items.effects!phbinvEldritchSp.IY7BiUpe3kGLWk9L'
 folder: BjeMHiqnKNWkWhox
 flags:
@@ -143,12 +144,13 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866281378
-  modifiedTime: 1745256762165
+  modifiedTime: 1752706819502
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

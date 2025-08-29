@@ -465,7 +465,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -477,6 +476,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 14epJr1iwk3pnPVs
     name: Hold Breath
@@ -484,9 +489,7 @@ items:
     img: icons/magic/water/pseudopod-swirl-blue.webp
     system:
       description:
-        value: >-
-          <p>The lizardfolk can hold its breath for <strong>15
-          minutes</strong>.</p>
+        value: <p>The lizardfolk can hold its breath for 15 minutes.</p>
         chat: ''
       source:
         custom: ''
@@ -514,18 +517,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.lwC6jwy9bXberyWo
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lwC6jwy9bXberyWo
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403527187
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!57DofLgRQx16ARoc.14epJr1iwk3pnPVs'
   - _id: s88qLjZemkFRnB8Y
     name: Multiattack
@@ -616,18 +618,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!57DofLgRQx16ARoc.s88qLjZemkFRnB8Y'
   - _id: 9x43sdgtqX8bOdiy
     name: Bite
@@ -780,18 +781,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107549932
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!57DofLgRQx16ARoc.9x43sdgtqX8bOdiy'
   - _id: 9T0RdBc0Tvsj6wJW
     name: Heavy Club
@@ -948,12 +948,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107549932
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!57DofLgRQx16ARoc.9T0RdBc0Tvsj6wJW'
   - _id: bPnovVAPXO7MdagI
     name: Javelin
@@ -1107,18 +1108,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.DWLMnODrnHn8IbAG
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.DWLMnODrnHn8IbAG
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173384796
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!57DofLgRQx16ARoc.bPnovVAPXO7MdagI'
   - _id: kZJqCMW6SxV5C0nu
     name: Spiked Shield
@@ -1275,12 +1275,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107549932
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!57DofLgRQx16ARoc.kZJqCMW6SxV5C0nu'
   - _id: sSs3hSzkKBMNBgTs
     name: Shield
@@ -1346,18 +1347,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!57DofLgRQx16ARoc.sSs3hSzkKBMNBgTs'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1367,10 +1367,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171202753
   modifiedTime: 1726171439622
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!57DofLgRQx16ARoc'

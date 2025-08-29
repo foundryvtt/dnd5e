@@ -75,7 +75,7 @@ export default class CurrencyManager extends Application5e {
     destinations.push(...(actor?.system.transferDestinations ?? []));
     destinations.push(...(actor?.itemTypes.container.filter(b => b !== this.document) ?? []));
     if ( game.user.isGM ) {
-      const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+      const primaryParty = game.actors.party;
       if ( primaryParty && (this.document !== primaryParty) && !destinations.includes(primaryParty) ) {
         destinations.push(primaryParty);
       }
@@ -168,7 +168,7 @@ export default class CurrencyManager extends Application5e {
    * @protected
    */
   _validateForm() {
-    const formData = new FormDataExtended(this.element);
+    const formData = new foundry.applications.ux.FormDataExtended(this.element);
     const data = foundry.utils.expandObject(formData.object);
     let valid = true;
     if ( !filteredKeys(data.amount ?? {}).length ) valid = false;
@@ -211,21 +211,21 @@ export default class CurrencyManager extends Application5e {
   static convertCurrency(doc) {
     const currency = foundry.utils.deepClone(doc.system.currency);
 
-    const currencies = Object.entries(CONFIG.DND5E.currencies);
-    currencies.sort((a, b) => a[1].conversion - b[1].conversion);
+    const currencies = Object.entries(CONFIG.DND5E.currencies)
+      .filter(([, c]) => c.conversion)
+      .sort((a, b) => a[1].conversion - b[1].conversion);
 
-    // Count total converted units of the base currency
-    let basis = currencies.reduce((change, [denomination, config]) => {
-      if ( !config.conversion ) return change;
-      return change + (currency[denomination] / config.conversion);
-    }, 0);
+    // Convert all currently to smallest denomination
+    const smallestConversion = currencies.at(-1)[1].conversion;
+    let amount = currencies.reduce((amount, [denomination, config]) =>
+      amount + (currency[denomination] * (smallestConversion / config.conversion))
+    , 0);
 
     // Convert base units into the highest denomination possible
     for ( const [denomination, config] of currencies) {
-      if ( !config.conversion ) continue;
-      const amount = Math.floor(basis * config.conversion);
-      currency[denomination] = amount;
-      basis -= (amount / config.conversion);
+      const ratio = smallestConversion / config.conversion;
+      currency[denomination] = Math.floor(amount / ratio);
+      amount -= currency[denomination] * ratio;
     }
 
     // Save the updated currency object

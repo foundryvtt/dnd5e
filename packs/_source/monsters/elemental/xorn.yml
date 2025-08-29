@@ -469,7 +469,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -481,6 +480,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: ODAa1IROPs40MUI2
     name: Bite
@@ -630,21 +635,20 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107549835
+      modifiedTime: 1747955653942
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.ODAa1IROPs40MUI2'
   - _id: LRjB7lk0aa4TOd16
     name: Claw
@@ -794,19 +798,20 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107549835
+      modifiedTime: 1747955653942
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.LRjB7lk0aa4TOd16'
   - _id: a5CLV8aL4SowIich
     name: Earth Glide
@@ -845,18 +850,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.yrpqazOHqI4BrYW4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yrpqazOHqI4BrYW4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.a5CLV8aL4SowIich'
   - _id: kRGZU8eMwOBt3kVd
     name: Multiattack
@@ -947,18 +951,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273654960
+      modifiedTime: 1747955654714
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.kRGZU8eMwOBt3kVd'
   - _id: ryNcNrIgtkYHRKWj
     name: Stone Camouflage
@@ -967,8 +970,8 @@ items:
     system:
       description:
         value: >-
-          <p>The xorn has<strong> advantage </strong>on Dexterity (Stealth)
-          checks made to hide in rocky terrain.</p>
+          <p>The xorn has advantage on Dexterity (Stealth) checks made to hide
+          in rocky terrain.</p>
         chat: ''
       source:
         custom: ''
@@ -996,18 +999,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.j1cPfWFNvxGoex9Z
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.j1cPfWFNvxGoex9Z
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747955644495
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.ryNcNrIgtkYHRKWj'
   - _id: x6Hd2pSXy7TDwgjR
     name: Treasure Sense
@@ -1017,8 +1019,7 @@ items:
       description:
         value: >-
           <p>The xorn can pinpoint, by scent, the location of precious metals
-          and stones, such as coins and gems, within <strong>60 ft.</strong> of
-          it.</p>
+          and stones, such as coins and gems, within 60 ft. of it.</p>
         chat: ''
       source:
         custom: ''
@@ -1046,18 +1047,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Enhb3XowXPMsVapw
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Enhb3XowXPMsVapw
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747955650390
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.x6Hd2pSXy7TDwgjR'
 effects: []
 folder: IB448xVSBvtqitzs
@@ -1067,10 +1067,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171199834
   modifiedTime: 1726171439082
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!2MZNHeOZweXAYbv1'

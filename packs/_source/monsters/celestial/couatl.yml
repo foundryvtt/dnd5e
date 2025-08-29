@@ -475,7 +475,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -487,6 +486,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 7M1OrMoMMTCEKxta
     name: Bite
@@ -742,12 +747,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: 1744076654091
           modifiedTime: 1744076734676
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!ZaP1H91t4FzbRqR5.7M1OrMoMMTCEKxta.GLxzcYW1p5BO6Tdt
     folder: null
@@ -755,8 +761,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       dnd5e:
         riders:
           activity: []
@@ -764,12 +768,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744076855445
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.7M1OrMoMMTCEKxta'
   - _id: 8LkzioyaScFxfst7
     name: Constrict
@@ -1009,12 +1014,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: 1744077355795
           modifiedTime: 1744077412495
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!ZaP1H91t4FzbRqR5.8LkzioyaScFxfst7.bT77MKZEyBFGGrrW
     folder: null
@@ -1029,12 +1035,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744077425336
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.8LkzioyaScFxfst7'
   - _id: iw2q07K1D0X01DZO
     name: Change Shape
@@ -1134,18 +1141,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745444939528
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.iw2q07K1D0X01DZO'
   - _id: J40yeoOnwpvtVpHt
     name: Innate Spellcasting
@@ -1195,18 +1201,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744076493164
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.J40yeoOnwpvtVpHt'
   - _id: 3qE2LLHPANSEPmIN
     name: Magic Weapons
@@ -1243,18 +1248,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744076521424
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.3qE2LLHPANSEPmIN'
   - _id: MGh9IkfXNn7FmwL5
     name: Shielded Mind
@@ -1293,18 +1297,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.SrmR5UfLMFxTErTp
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.SrmR5UfLMFxTErTp
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744076561380
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.MGh9IkfXNn7FmwL5'
   - _id: Mzh95utKDPIrjiH8
     name: Detect Evil and Good
@@ -1407,21 +1410,20 @@ items:
           sort: 0
       identifier: detect-evil-and-good
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.Mzh95utKDPIrjiH8
+    flags: {}
     img: icons/magic/air/air-burst-spiral-blue-gray.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Mzh95utKDPIrjiH8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.Mzh95utKDPIrjiH8'
   - _id: ghXTfe7sgCbgf1Q8
     name: Detect Magic
@@ -1525,21 +1527,20 @@ items:
           sort: 0
       identifier: detect-magic
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
+    flags: {}
     img: icons/magic/light/explosion-star-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.ghXTfe7sgCbgf1Q8'
   - _id: ppWAAEul0QHtm4er
     name: Detect Thoughts
@@ -1670,21 +1671,20 @@ items:
           sort: 0
       identifier: detect-thoughts
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ppWAAEul0QHtm4er
+    flags: {}
     img: icons/magic/light/explosion-star-teal-purple.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ppWAAEul0QHtm4er
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.ppWAAEul0QHtm4er'
   - _id: 8dzaICjGy6mTUaUr
     name: Bless
@@ -1698,7 +1698,7 @@ items:
           spell ends, the target can roll 1d4 and add the number rolled to the
           attack roll or saving throw.</p>
 
-          <p><strong>Higher Levels.</strong> When you cast this spell using a
+          <p><strong>At Higher Levels.</strong> When you cast this spell using a
           spell slot of 2nd level or higher, you can target one additional
           creature for each slot level above 1st.</p>
         chat: ''
@@ -1839,12 +1839,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         img: icons/magic/control/buff-flight-wings-blue.webp
         type: base
         system: {}
@@ -1855,18 +1856,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.8dzaICjGy6mTUaUr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.spells.8dzaICjGy6mTUaUr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.8dzaICjGy6mTUaUr'
   - _id: BV0mpbHh29IbbIj5
     name: Create Food and Water
@@ -1974,21 +1974,20 @@ items:
           sort: 0
       identifier: create-food-and-water
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.BV0mpbHh29IbbIj5
+    flags: {}
     img: icons/magic/nature/leaf-glow-teal.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.BV0mpbHh29IbbIj5
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.BV0mpbHh29IbbIj5'
   - _id: uUWb1wZgtMou0TVP
     name: Cure Wounds
@@ -2000,7 +1999,7 @@ items:
         value: >-
           <p>A creature you touch regains a number of hit points equal to 1d8 +
           your spellcasting ability modifier. This spell has no effect on undead
-          or constructs.</p><p><strong>Higher Levels.</strong> When you cast
+          or constructs.</p><p><strong>At Higher Levels.</strong> When you cast
           this spell using a spell slot of 2nd level or higher, the healing
           increases by 1d8 for each slot level above 1st.</p>
         chat: ''
@@ -2104,21 +2103,20 @@ items:
           sort: 0
       identifier: cure-wounds
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.uUWb1wZgtMou0TVP
+    flags: {}
     img: icons/magic/life/heart-cross-green.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.uUWb1wZgtMou0TVP
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.uUWb1wZgtMou0TVP'
   - _id: F0GsG0SJzsIOacwV
     name: Lesser Restoration
@@ -2224,21 +2222,20 @@ items:
           sort: 0
       identifier: lesser-restoration
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.F0GsG0SJzsIOacwV
+    flags: {}
     img: icons/magic/life/heart-cross-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.F0GsG0SJzsIOacwV
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.F0GsG0SJzsIOacwV'
   - _id: gvdA9nPuWLck4tBl
     name: Sanctuary
@@ -2354,21 +2351,20 @@ items:
           sort: 0
       identifier: sanctuary
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.gvdA9nPuWLck4tBl
+    flags: {}
     img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.gvdA9nPuWLck4tBl
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.gvdA9nPuWLck4tBl'
   - _id: z1mx84ONwkXKUZd7
     name: Shield
@@ -2501,12 +2497,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         img: icons/magic/defensive/shield-barrier-glowing-triangle-magenta.webp
         type: base
         system: {}
@@ -2517,18 +2514,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.z1mx84ONwkXKUZd7
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.spells.z1mx84ONwkXKUZd7
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.z1mx84ONwkXKUZd7'
   - _id: kSPRpeIx3w3nihrF
     name: Dream
@@ -2674,21 +2670,20 @@ items:
           sort: 0
       identifier: dream
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.kSPRpeIx3w3nihrF
+    flags: {}
     img: icons/magic/air/fog-gas-smoke-swirling-pink.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.kSPRpeIx3w3nihrF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.kSPRpeIx3w3nihrF'
   - _id: WzvJ7G3cqvIubsLk
     name: Greater Restoration
@@ -2808,21 +2803,20 @@ items:
           sort: 0
       identifier: greater-restoration
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.WzvJ7G3cqvIubsLk
+    flags: {}
     img: icons/magic/life/heart-cross-strong-flame-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.WzvJ7G3cqvIubsLk
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.WzvJ7G3cqvIubsLk'
   - _id: fVbCxFRaORalHB20
     name: Scrying
@@ -3030,21 +3024,20 @@ items:
           sort: 0
       identifier: scrying
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.fVbCxFRaORalHB20
+    flags: {}
     img: icons/magic/perception/eye-ringed-glow-angry-large-teal.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.fVbCxFRaORalHB20
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.fVbCxFRaORalHB20'
   - _id: MAxM77CDUu8dgIRQ
     name: Protection from Poison
@@ -3152,21 +3145,20 @@ items:
           sort: 0
       identifier: protection-from-poison
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.MAxM77CDUu8dgIRQ
+    flags: {}
     img: icons/magic/defensive/shield-barrier-glowing-triangle-green.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MAxM77CDUu8dgIRQ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZaP1H91t4FzbRqR5.MAxM77CDUu8dgIRQ'
 effects: []
 folder: pCy5ieJezFRCg9A0
@@ -3176,10 +3168,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171239772
   modifiedTime: 1744916100204
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!ZaP1H91t4FzbRqR5'

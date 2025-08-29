@@ -1,5 +1,5 @@
 import { convertLength, defaultUnits, filteredKeys, formatLength } from "../../utils.mjs";
-import { ItemDataModel } from "../abstract.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
@@ -408,7 +408,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   get availableAbilities() {
     const melee = CONFIG.DND5E.defaultAbilities.meleeAttack;
     const ranged = CONFIG.DND5E.defaultAbilities.rangedAttack;
-    if ( this.properties.has("fin") ) return new Set([melee, ranged]);
+    if ( this.properties.has("fin") || (this.type.value === "natural") ) return new Set([melee, ranged]);
     if ( !this.attackType ) return null;
     return new Set([this.attackType === "melee" ? melee : ranged]);
   }

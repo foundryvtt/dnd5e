@@ -19,6 +19,7 @@ system:
     license: CC-BY-4.0
     book: SRD 5.2
     revision: 2
+    page: ''
   activation:
     type: action
     condition: ''
@@ -115,7 +116,7 @@ system:
         spent: 0
         recovery: []
       sort: 0
-  identifier: evards-black-tentacles
+  identifier: black-tentacles
 _id: phbsplEvardsBlac
 type: spell
 img: icons/creatures/tentacles/tentacles-suctioncups-pink.webp
@@ -150,12 +151,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!items.effects!phbsplEvardsBlac.NDytclFrNmC418CS'
 folder: qi3IbnEwap7mRw4b
 sort: 2400000
@@ -168,10 +170,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1724425952514
-  modifiedTime: 1745256792488
+  modifiedTime: 1753380837456
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!items!phbsplEvardsBlac'

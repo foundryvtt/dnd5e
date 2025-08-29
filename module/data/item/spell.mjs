@@ -1,5 +1,5 @@
 import { filteredKeys } from "../../utils.mjs";
-import { ItemDataModel } from "../abstract.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import ActivationField from "../shared/activation-field.mjs";
 import DurationField from "../shared/duration-field.mjs";
 import RangeField from "../shared/range-field.mjs";
@@ -23,9 +23,8 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @property {boolean} materials.consumed        Are these material components consumed during casting?
  * @property {number} materials.cost             GP cost for the required components.
  * @property {number} materials.supply           Quantity of this component available.
- * @property {object} preparation                Details on how this spell is prepared.
- * @property {string} preparation.mode           Spell preparation mode as defined in `DND5E.spellPreparationModes`.
- * @property {boolean} preparation.prepared      Is the spell currently prepared?
+ * @property {string} method                     The spellcasting method this spell was gained via.
+ * @property {number} prepared                   The spell availability.
  * @property {Set<string>} properties            General components and tags for this spell.
  * @property {RangeData} range                   Range of the spell
  * @property {string} school                     Magical school to which this spell belongs.
@@ -58,10 +57,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
         cost: new NumberField({ required: true, initial: 0, min: 0, label: "DND5E.SpellMaterialsCost" }),
         supply: new NumberField({ required: true, initial: 0, min: 0, label: "DND5E.SpellMaterialsSupply" })
       }, { label: "DND5E.SpellMaterials" }),
-      preparation: new SchemaField({
-        mode: new StringField({ required: true, initial: "prepared", label: "DND5E.SpellPreparation.Mode" }),
-        prepared: new BooleanField({ required: true, label: "DND5E.SpellPrepared" })
-      }, { label: "DND5E.SpellPreparation.Label" }),
+      method: new StringField({ required: true, initial: "", label: "DND5E.SpellPreparation.Method" }),
+      prepared: new NumberField({ required: true, nullable: false, integer: true, min: 0, initial: 0 }),
       properties: new SetField(new StringField(), { label: "DND5E.SpellComponents" }),
       range: new RangeField(),
       school: new StringField({ required: true, label: "DND5E.SpellSchool" }),
@@ -74,6 +71,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: true,
     hasEffects: true
   }, { inplace: false }));
 
@@ -105,22 +103,25 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
         createFilter: (filters, value, def) => {
           let include = new Set();
           let exclude = new Set();
-          for ( const [type, identifiers] of Object.entries(value ?? {}) ) {
-            for ( const [identifier, v] of Object.entries(identifiers) ) {
-              const list = dnd5e.registry.spellLists.forType(type, identifier);
-              if ( !list || (v === 0) ) continue;
-              if ( v === 1 ) include = include.union(list.uuids);
-              else if ( v === -1 ) exclude = exclude.union(list.uuids);
-            }
+          for ( const [k, v] of Object.entries(value ?? {}) ) {
+            const list = dnd5e.registry.spellLists.forType(...k.split(":"));
+            if ( !list || (v === 0) ) continue;
+            if ( v === 1 ) include = include.union(list.identifiers);
+            else if ( v === -1 ) exclude = exclude.union(list.identifiers);
           }
-          if ( include.size ) filters.push({ k: "uuid", o: "in", v: include });
-          if ( exclude.size ) filters.push({ o: "NOT", v: { k: "uuid", o: "in", v: exclude } });
+          if ( include.size ) filters.push({ k: "system.identifier", o: "in", v: include });
+          if ( exclude.size ) filters.push({ o: "NOT", v: { k: "system.identifier", o: "in", v: exclude } });
         },
         config: {
           choices: dnd5e.registry.spellLists.options.reduce((obj, entry) => {
-            obj[`${entry.type}.${entry.value}`] = entry.label;
+            const [type, identifier] = entry.value.split(":");
+            const list = dnd5e.registry.spellLists.forType(type, identifier);
+            if ( list?.identifiers.size ) obj[entry.value] = {
+              label: entry.label, group: CONFIG.DND5E.spellListTypes[type]
+            };
             return obj;
-          }, {})
+          }, {}),
+          collapseGroup: group => group !== CONFIG.DND5E.spellListTypes.class
         }
       }],
       ["properties", this.compendiumBrowserPropertiesFilter("spell")]
@@ -131,12 +132,28 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
+  /**
+   * @deprecated since 5.1
+   * @ignore
+   */
+  get preparation() {
+    foundry.utils.logCompatibilityWarning("SpellData#preparation is deprecated. Please use SpellData#method in "
+      + "place of preparation.mode and SpellData#prepared in place of preparation.prepared.",
+    { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    if ( this.prepared === 2 ) return { mode: "always", prepared: 1 };
+    if ( this.method === "spell" ) return { mode: "prepared", prepared: Boolean(this.prepared) };
+    return { mode: this.method, prepared: Boolean(this.prepared) };
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
     ActivitiesTemplate.migrateActivities(source);
     SpellData.#migrateActivation(source);
     SpellData.#migrateTarget(source);
+    SpellData.#migratePreparation(source);
   }
 
   /* -------------------------------------------- */
@@ -189,6 +206,30 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Migrate preparation data.
+   * @since 5.1.0
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migratePreparation(source) {
+    if ( source.preparation === undefined ) return;
+    if ( source.preparation.mode === "always" ) {
+      if ( !("method" in source) ) source.method = "spell";
+      if ( !("prepared" in source) ) source.prepared = 2;
+    } else {
+      if ( !("method" in source) ) {
+        if ( source.preparation.mode === "prepared" ) source.method = "spell";
+        else if ( source.preparation.mode ) source.method = source.preparation.mode;
+      }
+      if ( (typeof source.preparation.prepared === "boolean") && !("prepared" in source) ) {
+        source.prepared = Number(source.preparation.prepared);
+      }
+    }
+    delete source.preparation;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -196,8 +237,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   prepareDerivedData() {
     super.prepareDerivedData();
     this.prepareDescriptionData();
-
-    this.preparation.mode ||= "prepared";
     this.properties.add("mgc");
     this.duration.concentration = this.properties.has("concentration");
 
@@ -220,12 +259,10 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const uuid = this.parent._stats.compendiumSource ?? this.parent.uuid;
     Object.defineProperty(labels, "classes", {
       get() {
-        return game.i18n.getListFormatter({ style: "narrow" }).format(
-          Array.from(dnd5e.registry.spellLists.forSpell(uuid))
-            .filter(list => list.metadata.type === "class")
-            .map(list => list.name)
-            .sort((lhs, rhs) => lhs.localeCompare(rhs, game.i18n.lang))
-        );
+        return Array.from(dnd5e.registry.spellLists.forSpell(uuid))
+          .filter(list => list.metadata.type === "class")
+          .map(list => list.name)
+          .sort((lhs, rhs) => lhs.localeCompare(rhs, game.i18n.lang));
       },
       configurable: true
     });
@@ -244,10 +281,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     TargetField.prepareData.call(this, rollData, labels);
 
     // Count preparations.
-    const { mode, prepared } = this.preparation;
-    const config = CONFIG.DND5E.spellPreparationModes[mode];
-    const isPrepared = config?.prepares && (mode !== "always") && (this.level > 0) && prepared;
-    if ( this.parent.isOwned && this.sourceClass && isPrepared ) {
+    if ( this.parent.isOwned && this.sourceClass && this.countsPrepared ) {
       const sourceClass = this.parent.actor.spellcastingClasses[this.sourceClass];
       const sourceSubclass = sourceClass?.subclass;
       if ( sourceClass ) sourceClass.system.spellcasting.preparation.value++;
@@ -284,12 +318,11 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @inheritDoc */
   async getSheetData(context) {
-    context.properties.active = this.parent.labels?.components?.tags;
+    context.properties.active = [...(this.parent.labels?.components?.tags ?? []), ...(context.labels.classes ?? [])];
     context.subtitles = [
       { label: context.labels.level },
       { label: context.labels.school },
-      { label: CONFIG.DND5E.spellPreparationModes[this.preparation.mode]?.label },
-      { label: context.labels.classes, classes: "full-width" }
+      { label: CONFIG.DND5E.spellcasting[this.method]?.label }
     ];
 
     context.parts = ["dnd5e.details-spell", "dnd5e.field-uses"];
@@ -348,6 +381,15 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
         return { value, label, group: "DND5E.RangeDistance" };
       })
     ];
+
+    // Spellcasting
+    context.canPrepare = this.canPrepare;
+    context.spellcastingMethods = Object.values(CONFIG.DND5E.spellcasting).map(({ key, label }) => {
+      return { label, value: key };
+    });
+    if ( this.method && !(this.method in CONFIG.DND5E.spellcasting) ) {
+      context.spellcastingMethods.push({ label: this.method, value: this.method });
+    }
   }
 
   /* -------------------------------------------- */
@@ -374,6 +416,37 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get canConfigureScaling() {
+    return this.level > 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether the spell can be prepared.
+   * @type {boolean}
+   */
+  get canPrepare() {
+    return !!CONFIG.DND5E.spellcasting[this.method]?.prepares;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get canScale() {
+    return (this.level > 0) && !!CONFIG.DND5E.spellcasting[this.method]?.slots;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get canScaleDamage() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Properties displayed in chat.
    * @type {string[]}
@@ -382,8 +455,21 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     return [
       this.parent.labels.level,
       this.parent.labels.components.vsm + (this.parent.labels.materials ? ` (${this.parent.labels.materials})` : ""),
-      ...this.parent.labels.components.tags
+      ...this.parent.labels.components.tags,
+      this.parent.labels.duration
     ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this spell counts towards a class' number of prepared spells.
+   * @type {boolean}
+   */
+  get countsPrepared() {
+    return !!CONFIG.DND5E.spellcasting[this.method]?.prepares
+      && (this.level > 0)
+      && (this.prepared === CONFIG.DND5E.spellPreparationStates.prepared.value);
   }
 
   /* -------------------------------------------- */
@@ -449,44 +535,21 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       const list = event.target.closest(".item-list"); // Dropped inside an existing list.
       header = list?.previousElementSibling;
     }
-    const { level, preparationMode } = header?.closest("[data-level]")?.dataset ?? {};
+    const { method } = header?.closest("[data-level]")?.dataset ?? {};
 
     // Determine the actor's spell slot progressions, if any.
-    const spellcastKeys = Object.keys(CONFIG.DND5E.spellcastingTypes);
+    const spellcastKeys = Object.keys(CONFIG.DND5E.spellcasting);
     const progs = Object.values(actor.classes).reduce((acc, cls) => {
       const type = cls.spellcasting?.type;
       if ( spellcastKeys.includes(type) ) acc.add(type);
       return acc;
     }, new Set());
 
-    const prep = itemData.system.preparation;
-
-    // Case 1: Drop a cantrip.
-    if ( itemData.system.level === 0 ) {
-      const modes = CONFIG.DND5E.spellPreparationModes;
-      if ( modes[preparationMode]?.cantrips ) {
-        prep.mode = "prepared";
-      } else if ( !preparationMode ) {
-        const isCaster = actor.system.attributes.spell?.level || progs.size;
-        prep.mode = isCaster ? "prepared" : "innate";
-      } else {
-        prep.mode = preparationMode;
-      }
-      if ( modes[prep.mode]?.prepares ) prep.prepared = true;
-    }
-
-    // Case 2: Drop a leveled spell in a section without a mode.
-    else if ( (level === "0") || !preparationMode ) {
-      if ( actor.type === "npc" ) {
-        prep.mode = actor.system.attributes.spell.level ? "prepared" : "innate";
-      } else {
-        const m = progs.has("leveled") ? "prepared" : (progs.first() ?? "innate");
-        prep.mode = progs.has(prep.mode) ? prep.mode : m;
-      }
-    }
-
-    // Case 3: Drop a leveled spell in a specific section.
-    else prep.mode = preparationMode;
+    const { system } = itemData;
+    const methods = CONFIG.DND5E.spellcasting;
+    if ( methods[method] ) system.method = method;
+    else if ( progs.size ) system.method = progs.first();
+    else if ( actor.system.attributes.spell?.level ) system.method = "spell";
   }
 
   /* -------------------------------------------- */
@@ -508,29 +571,25 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     if ( !this.parent.isEmbedded ) return;
+    const system = data.system ?? {};
 
     // Set as prepared for NPCs, and not prepared for PCs
-    if ( ["character", "npc"].includes(this.parent.actor.type)
-      && !foundry.utils.hasProperty(data, "system.preparation.prepared") ) {
-      this.updateSource({ "preparation.prepared": this.parent.actor.type === "npc" });
+    if ( ["character", "npc"].includes(this.parent.actor.type) && !("prepared" in system) ) {
+      this.updateSource({ prepared: Number(this.parent.actor.type === "npc" || (this.level < 1)) });
     }
 
-    if ( ["atwill", "innate"].includes(this.preparation.mode) || this.sourceClass ) return;
+    if ( ["atwill", "innate"].includes(system.method) || this.sourceClass ) return;
     const classes = new Set(Object.keys(this.parent.actor.spellcastingClasses));
     if ( !classes.size ) return;
 
     // Set the source class, and ensure the preparation mode matches if adding a prepared spell to an alt class
     const setClass = cls => {
-      const update = { sourceClass: cls };
-      const type = this.parent.actor.classes[cls].spellcasting.type;
-      if ( (type !== "leveled") && (this.preparation.mode === "prepared") && (this.level > 0)
-        && (type in CONFIG.DND5E.spellPreparationModes) ) update["preparation.mode"] = type;
-      this.updateSource(update);
+      this.updateSource({ sourceClass: cls, method: this.parent.actor.classes[cls].spellcasting.type });
     };
 
     // If preparation mode matches an alt spellcasting type and matching class exists, set as that class
-    if ( this.preparation.mode in CONFIG.DND5E.spellcastingTypes ) {
-      const altClasses = classes.filter(i => this.parent.actor.classes[i].spellcasting.type === this.preparation.mode);
+    if ( (system.method !== "spell") && (system.method in CONFIG.DND5E.spellcasting) ) {
+      const altClasses = classes.filter(i => this.parent.actor.classes[i].spellcasting.type === system.method);
       if ( altClasses.size === 1 ) setClass(altClasses.first());
       return;
     }

@@ -1,3 +1,4 @@
+import MovementField from "../shared/movement-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 import DamageTraitField from "./fields/damage-trait-field.mjs";
 import SimpleTraitField from "./fields/simple-trait-field.mjs";
@@ -109,7 +110,7 @@ export default class VehicleData extends CommonTemplate {
         capacity: new SchemaField({
           creature: new StringField({ required: true, label: "DND5E.VehicleCreatureCapacity" }),
           cargo: new NumberField({
-            required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.VehicleCargoCapacity"
+            required: true, nullable: false, integer: false, initial: 0, min: 0, label: "DND5E.VehicleCargoCapacity"
           })
         }, { label: "DND5E.VehicleCargoCrew" })
       }, { label: "DND5E.Attributes" }),
@@ -185,6 +186,7 @@ export default class VehicleData extends CommonTemplate {
     AttributesFields.prepareMovement.call(this);
     SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
     TraitsFields.prepareResistImmune.call(this);
+    MovementField.prepareData.call(this.attributes.movement, this.schema.getField("attributes.movement"));
   }
 }
 

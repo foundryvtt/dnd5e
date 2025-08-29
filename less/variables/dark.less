@@ -1,0 +1,225 @@
+.mixin-variables-dark {
+  /* Applications */
+  --dnd5e-application-background: var(--dnd5e-background-texture-denim);
+  --dnd5e-item-header-content: "";
+  --dnd5e-item-header-image: url("ui/official/banner-item-dark.webp");
+  --dnd5e-encounter-header-content: "";
+  --dnd5e-encounter-header-image: url("ui/official/banner-encounter-dark.avif");
+  --dnd5e-npc-header-content: "";
+  --dnd5e-npc-header-image: url("ui/official/banner-npc-dark.webp");
+  --dnd5e-group-header-content: "";
+  --dnd5e-group-header-image: url("ui/official/banner-group-dark.jpg");
+  --dnd5e-character-background-content: "";
+  --dnd5e-character-background-image: url("ui/official/banner-character-dark.webp");
+  --dnd5e-character-header-image: transparent;
+  --dnd5e-character-body-image: none;
+  --dnd5e-background-card: var(--dnd5e-color-blue-gray-2);
+  --dnd5e-background-parchment: var(--dnd5e-color-blue-gray-2);
+  --dnd5e-background-5: var(--dnd5e-highlight-10);
+  --dnd5e-background-alt-1: var(--dnd5e-color-dark-gray);
+  --dnd5e-background-alt-2: var(--dnd5e-color-blue-gray-2);
+  --dnd5e-gold-icon-background: var(--dnd5e-color-dark-gray);
+  --dnd5e-border-gold: 1px solid var(--dnd5e-color-blue-gray-1);
+  --dnd5e-border-dotted: 1px dotted var(--dnd5e-color-blue-gray-3);
+  --dnd5e-border-dashed: 1px dashed var(--dnd5e-color-blue-gray-3);
+  --dnd5e-border-dashed-faint: 1px dashed var(--dnd5e-color-blue-gray-1);
+  --dnd5e-border-dark: 1px solid var(--dnd5e-color-blue-gray-3);
+  --dnd5e-border-heading-3: 1px solid var(--color-text-light-6);
+  --dnd5e-border-separator-faint: 1px solid var(--dnd5e-color-blue-gray-1);
+  --dnd5e-border-separator-heavy: 1px solid var(--dnd5e-color-blue-gray-3);
+  --dnd5e-border-separator-warning: 1px dotted var(--dnd5e-color-blue-gray-3);
+  --dnd5e-inventory-border: none;
+  --dnd5e-slot-border: 1px solid var(--dnd5e-color-blue-gray-3);
+  --dnd5e-slot-filter: none;
+  --dnd5e-card-header-1: #491d25;
+  --dnd5e-card-header-2: #311b1f;
+  --dnd5e-card-header-disabled-1: #444;
+  --dnd5e-card-header-disabled-2: #333;
+  --dnd5e-attribute-color: var(--dnd5e-color-beige);
+  --dnd5e-ability-color: var(--dnd5e-color-gold);
+  --dnd5e-ability-mod-color: var(--dnd5e-color-blue-white);
+  --dnd5e-ability-tab: url("ui/ability-score-tab-dark.svg");
+  --dnd5e-heading-3-color: var(--color-text-light-6);
+  --dnd5e-condition-hover: var(--dnd5e-color-blue-gray-3);
+  --color-text-emphatic: var(--color-text-light-0);
+  --color-text-primary: var(--dnd5e-color-blue-white);
+  --color-text-secondary: var(--color-text-light-6);
+  --color-text-tertiary: var(--color-text-light-6);
+  --color-text-inactive: var(--color-text-dark-inactive);
+  --color-text-title: var(--dnd5e-color-gold);
+  --separated-list-item-background-color: var(--dnd5e-background-10);
+  --separated-list-item-border-color: var(--dnd5e-color-blue-gray-3);
+  --activity-icon-color: var(--dnd5e-color-gold);
+  --activity-row-border: 1px dotted var(--dnd5e-color-blue-gray-4);
+  --activity-row-indent-color: var(--dnd5e-color-blue-gray-3);
+  --damage-icon-color: var(--dnd5e-color-gold);
+  --item-summary-background: transparent;
+  --item-control-color: var(--dnd5e-color-blue-gray-3);
+  --item-control-interactive-color: var(--color-text-light-6);
+  --item-control-active-color: var(--dnd5e-color-gold);
+  --item-control-header-color: var(--dnd5e-color-gold);
+  --item-state-toggle-active: var(--dnd5e-color-gold);
+  --pill-transparent-color: var(--color-text-primary);
+  --pill-border: 1px solid var(--dnd5e-color-blue-gray-3);
+  --pill-colored-border: 1px solid var(--dnd5e-color-blue-gray-1);
+  --pill-border-dotted: 1px solid var(--dnd5e-color-blue-gray-3);
+  --pill-underlay-opacity: .15;
+  --pill-underlay-blend-mode: soft-light;
+  --pill-background-color: var(--dnd5e-color-blue-gray-2);
+  --pill-background-blend-mode: soft-light;
+  --pill-background-green: color-mix(in srgb, var(--dnd5e-color-green), transparent 25%);
+  --pill-background-maroon: color-mix(in srgb, var(--dnd5e-color-maroon), transparent 25%);
+  --pill-colored-text-color: var(--dnd5e-color-blue-white);
+  --pill-empty-border: 2px dashed white;
+  --pill-empty-text-color: white;
+  --advancement-summary-link-color: var(--color-text-light-6);
+  --npc-header-input-background: rgb(0 0 0 / 45%);
+  --npc-cr-input-background: none;
+  --npc-portrait-toggle-on: var(--dnd5e-color-gold);
+  --npc-ability-score-filter: invert(1);
+  --group-vitals-shadow: none;
+  --group-underlay-opacity: .3;
+  --group-underlay-filter: ~"saturation(0.5)";
+  --group-control-border: var(--dnd5e-color-blue-gray-3);
+  --group-control-hover-border: var(--dnd5e-color-blue-gray-3);
+  --meter-background: var(--dnd5e-color-dark-gray);
+  --drop-region-border-color: white;
+  --drop-region-text-color: white;
+  --filigree-background-color: var(--dnd5e-color-blue-gray-2);
+  --filigree-border-color: var(--dnd5e-color-blue-gray-3);
+  --filter-control-color: var(--dnd5e-color-blue-gray-3);
+  --filter-control-active-color: var(--dnd5e-color-gold);
+  --context-entry-hover-background: var(--dnd5e-color-blue-gray-3);
+  --window-resize-handle-filter: invert(1);
+
+  /* Converts black to gold */
+  --advancement-icon-filter: invert(64%) sepia(14%) saturate(563%) hue-rotate(3deg) brightness(89%) contrast(90%);
+
+  &.compendium-browser {
+    --filter-header-label-color: var(--color-text-secondary);
+    --filter-range-label-color: var(--color-text-secondary);
+  }
+
+  .items-section .item .tags {
+    --icon-fill: var(--color-text-light-6);
+    --tag-opacity: unset;
+  }
+
+  .item-descriptions .description .header button { --control-button-text-color: var(--color-text-light-6); }
+  .effects-element .conditions-list .condition { --border-style: 1px dashed var(--dnd5e-color-blue-gray-3); }
+
+  &.starting-equipment {
+    --background-depth-1: transparent;
+    --background-depth-2: var(--dnd5e-background-10);
+    --background-depth-3: var(--dnd5e-background-25);
+  }
+
+  .currency .distribution slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-color-blue-gray-2); }
+
+  &.actor.character {
+    .window-header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-color-dark-gray); }
+    .pill-lg.texture { --pill-underlay-opacity: 1; }
+  }
+
+  section.secret {
+    --color-secret-bg: #35007933;
+    --color-revealed-bg: #0035004D;
+  }
+
+  /* Forms */
+  --slide-toggle-track-color-unchecked: var(--dnd5e-color-blue-gray-2);
+  --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
+  --fieldset-legend-color: var(--dnd5e-color-gold);
+  --color-fieldset-border: var(--dnd5e-color-blue-gray-3);
+  --control-button-text-color: var(--dnd5e-color-gold);
+  --hint-icon-color: var(--dnd5e-color-gold);
+  --multi-select-tag-background: var(--dnd5e-color-blue-gray-2);
+  --multi-select-tag-border: var(--dnd5e-color-blue-gray-1);
+
+  button {
+    --button-border-color: var(--dnd5e-color-blue-gray-1);
+    --button-hover-border-color: var(--dnd5e-color-blue-gray-1);
+    --button-toggle-depressed-color: color-mix(in oklab, var(--dnd5e-background-card), var(--dnd5e-color-faint) 20%);
+  }
+
+  input, textarea { --input-placeholder-color: var(--dnd5e-color-blue-gray-3); }
+
+  input, select {
+    --input-background-color: var(--dnd5e-color-blue-gray-2);
+    --input-disabled-background-color: var(--dnd5e-color-dark-gray);
+  }
+
+  input:not([type=range]), select {
+    --input-border-color: var(--dnd5e-color-blue-gray-1);
+    --input-hover-border-color: transparent;
+  }
+
+  fieldset.card {
+    input:not([type=range]), select { --input-background-color: var(--dnd5e-background-25); }
+    .input-element-tags .tag {
+      --multi-select-tag-background: var(--dnd5e-background-25);
+      --multi-select-tag-border: var(--dnd5e-color-blue-gray-3);
+    }
+  }
+
+  dnd5e-checkbox[disabled]:not([checked]) {
+    --checkbox-border-color: var(--dnd5e-color-blue-gray-3);
+    --checkbox-empty-color: var(--dnd5e-color-blue-gray-3);
+  }
+
+  .prosemirror menu {
+    --color-hover-bg: var(--dnd5e-color-blue-gray-3);
+    --menu-background: var(--dnd5e-color-blue-gray-2);
+    --button-text-color: var(--color-text-light-6);
+    --color-form-label-hover: var(--dnd5e-color-blue-white);
+    button.active { --color-form-label-hover: var(--dnd5e-color-gold); }
+  }
+
+  /* Journals */
+  --dnd5e-journal-content-background: var(--dnd5e-background-texture-denim);
+  --dnd5e-journal-header-background: var(--dnd5e-highlight-10);
+  --dnd5e-color-table-row-odd: var(--dnd5e-color-blue-gray-2);
+  --dnd5e-color-table-row-even: color-mix(in oklab, var(--dnd5e-color-table-row-odd), black 10%);
+  --dnd5e-color-table-border: color-mix(in oklab, var(--dnd5e-color-table-row-even), black 10%);
+  --dnd5e-color-table-header-1: #491d25;
+  --dnd5e-color-table-header-2: #311b1f;
+  --dnd5e-block-background: var(--dnd5e-color-blue-gray-4);
+  --dnd5e-block-border-color: var(--dnd5e-color-gold);
+  --dnd5e-roll-icon-filter: invert(1);
+  --dnd5e-notable-filter: grayscale(100%);
+
+  .notable {
+    --dnd5e-block-background: var(--dnd5e-color-blue-gray-4);
+    --dnd5e-block-border-color: #212121;
+  }
+
+  table { --table-background-color: var(--dnd5e-color-blue-gray-1); }
+
+  /* Statblocks */
+  --dnd5e-statblock-background-plain: rgb(0 0 0 / .35);
+  --dnd5e-statblock-background-parchment: rgb(0 0 0 / .35);
+  --dnd5e-statblock-ability-border: black;
+  --dnd5e-statblock-ability-header-1st: rgb(83, 73, 50);
+  --dnd5e-statblock-ability-header-2nd: rgb(62, 68, 48);
+  --dnd5e-statblock-ability-stat-1st: rgb(89, 63, 63);
+  --dnd5e-statblock-ability-stat-2nd: rgb(89, 67, 87);
+  --dnd5e-statblock-border: var(--dnd5e-color-blue-gray-1);
+  --dnd5e-statblock-scroll: rgb(135 51 44);
+  --dnd5e-statblock-separator: rgb(135 51 44);
+  --dnd5e-statblock-text-header: var(--color-text-primary);
+  --dnd5e-statblock-text-primary: var(--color-text-primary);
+  --dnd5e-statblock-text-secondary: color-mix(in oklab, var(--color-text-primary), transparent 25%);
+  --dnd5e-statblock-title-border: var(--dnd5e-color-blue-gray-3);
+}
+
+@layer general {
+  body.theme-dark .dnd5e2 {
+    .mixin-variables-dark();
+  }
+}
+
+@layer specific {
+  .themed.theme-dark.dnd5e2 {
+    .mixin-variables-dark();
+  }
+}

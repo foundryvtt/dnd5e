@@ -11,7 +11,7 @@
                     {{ selectOptions @root.CONFIG.abilities selected=ability.ability labelAttr="label" blank="" }}
                 </select>
                 {{else}}
-                <span class="spellcasting-ability roboto-upper">{{ ability.label }}</span>
+                <span class="spellcasting-ability subtitle">{{ ability.label }}</span>
                 {{/if}}
                 {{else}}
                 <button type="button" class="radio-button" data-action="setSpellcastingAbility"

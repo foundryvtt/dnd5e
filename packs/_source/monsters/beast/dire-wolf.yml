@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: K0u6bJqRtcj0cSzK
     name: Keen Hearing and Smell
@@ -517,12 +522,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!EYiQZ3rFL25fEJY5.K0u6bJqRtcj0cSzK'
   - _id: weFcATmtqqUJ39Pw
     name: Pack Tactics
@@ -561,18 +567,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!EYiQZ3rFL25fEJY5.weFcATmtqqUJ39Pw'
   - _id: tx9xPDEQ8osJq6ZQ
     name: Bite
@@ -790,8 +795,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       dnd5e:
         riders:
           activity: []
@@ -799,12 +802,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741124505165
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!EYiQZ3rFL25fEJY5.tx9xPDEQ8osJq6ZQ'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -814,10 +818,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171215639
   modifiedTime: 1741117411427
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!EYiQZ3rFL25fEJY5'

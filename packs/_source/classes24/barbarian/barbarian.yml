@@ -135,6 +135,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 4
@@ -179,6 +180,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 8
@@ -218,6 +220,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 12
@@ -257,6 +260,7 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value:
         type: asi
       level: 16
@@ -282,17 +286,6 @@ system:
         spell: null
       value: {}
       level: 18
-      title: Class Features
-    - _id: kIMEx40ps3Q3mVlS
-      type: ItemGrant
-      configuration:
-        items:
-          - uuid: Compendium.dnd5e.classes24.Item.phbbrbEpicBoon00
-            optional: false
-        optional: false
-        spell: null
-      value: {}
-      level: 19
       title: Class Features
     - _id: vsCiTVHhgLseNJjr
       type: ItemGrant
@@ -332,62 +325,6 @@ system:
       hint: >-
         You gain proficiency in another skill of your choice from the skill list
         available to Barbarians at level 1.
-    - _id: 1zsrV0jlLKFLZt4o
-      type: ItemChoice
-      configuration:
-        choices:
-          '19':
-            count: 1
-            replacement: false
-        allowDrops: true
-        type: feat
-        pool:
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofEnergyR
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFate000
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFortitu
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofIrresis
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofRecover
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSkill00
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpeed00
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpellRe
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonoftheNigh
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofTruesig
-          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofCombatP
-        spell: null
-        restriction:
-          type: feat
-      value:
-        added: {}
-        replaced: {}
-      title: Epic Boon
-      hint: ''
-    - _id: apkonPAaBjVFh5eF
-      type: AbilityScoreImprovement
-      configuration:
-        points: 0
-        fixed:
-          str: 4
-          dex: 0
-          con: 4
-          int: 0
-          wis: 0
-          cha: 0
-        cap: 1
-        locked:
-          - str
-          - dex
-          - con
-          - int
-          - wis
-          - cha
-      value:
-        type: asi
-      level: 20
-      title: Primal Champion
-      hint: >-
-        You embody primal power. Your Strength and Constitution scores increase
-        by 4, to a maximum of 25.
     - _id: joUosIRgww6atx7N
       type: ScaleValue
       configuration:
@@ -583,6 +520,26 @@ system:
       value: {}
       title: Rages
       hint: ''
+    - type: AbilityScoreImprovement
+      _id: Ab9IuXTuVV9GY2s0
+      configuration:
+        cap: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked: []
+        points: 2
+        recommendation: Compendium.dnd5e.feats24.Item.phbBoonofIrresis
+        max: null
+      value:
+        type: asi
+      level: 19
+      title: ''
+      hint: ''
   spellcasting:
     progression: none
     ability: ''
@@ -602,12 +559,13 @@ folder: ZzMJGIp9Rxhr2hDV
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735865940469
-  modifiedTime: 1745517458913
+  modifiedTime: 1752706172822
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

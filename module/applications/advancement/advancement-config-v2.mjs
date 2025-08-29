@@ -7,9 +7,11 @@ import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 export default class AdvancementConfig extends PseudoDocumentSheet {
   constructor(advancement={}, options={}) {
     if ( advancement instanceof dnd5e.documents.advancement.Advancement ) {
+      foundry.utils.logCompatibilityWarning(
+        "`AdvancementConfig` should be constructed by passing the Advancement as `options.document`, not as separate parameter.",
+        { since: "DnD5e 5.1", until: "DnD5e 5.3" }
+      );
       options.document = advancement;
-      // TODO: Add deprecation warning for this calling pattern once system has switched over to using the sheet
-      // getter on Advancement, rather than creating separately
     } else options = { ...advancement, ...options };
     super(options);
   }
@@ -78,8 +80,8 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
       fields: this.advancement.schema.fields,
       source: this.advancement._source,
       default: {
-        title: this.advancement.constructor.metadata.title,
-        icon: this.advancement.constructor.metadata.icon,
+        title: this.advancement._defaultTitle,
+        icon: this.advancement._defaultIcon,
         hint: ""
       },
       levels,

@@ -1,0 +1,14 @@
+<section data-group="{{ tab.group }}" data-tab="{{ tab.id }}" class="tab {{ tab.cssClass }} flex1">
+    {{#each sections}}
+    {{#if members.length}}
+    <section>
+        {{#if label}}<h3 class="sabers roboto-upper">{{ localize label }}</h3>{{/if}}
+        <menu class="members {{#if hasStats}}stats{{/if}}">
+            {{#each members}}
+            {{> "systems/dnd5e/templates/actors/group/member.hbs" section=.. }}
+            {{/each}}
+        </menu>
+    </section>
+    {{/if}}
+    {{/each}}
+</section>

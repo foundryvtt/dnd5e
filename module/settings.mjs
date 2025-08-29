@@ -76,6 +76,16 @@ export function registerSystemSettings() {
     requiresReload: true
   });
 
+  // Movement automation
+  game.settings.register("dnd5e", "disableMovementAutomation", {
+    name: "SETTINGS.DND5E.AUTOMATION.Movement.Name",
+    hint: "SETTINGS.DND5E.AUTOMATION.Movement.Hint",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Allow rotating square templates
   game.settings.register("dnd5e", "gridAlignedSquareTemplates", {
     name: "SETTINGS.5eGridAlignedSquareTemplatesN",
@@ -138,10 +148,21 @@ export function registerSystemSettings() {
     default: "older",
     type: String,
     choices: {
+      manual: "SETTINGS.DND5E.COLLAPSETRAYS.Manual",
       never: "SETTINGS.DND5E.COLLAPSETRAYS.Never",
       older: "SETTINGS.DND5E.COLLAPSETRAYS.Older",
       always: "SETTINGS.DND5E.COLLAPSETRAYS.Always"
     }
+  });
+
+  // Allow Rests from Sheet
+  game.settings.register("dnd5e", "allowRests", {
+    name: "SETTINGS.DND5E.PERMISSIONS.AllowRests.Name",
+    hint: "SETTINGS.DND5E.PERMISSIONS.AllowRests.Hint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
   });
 
   // Allow Polymorphing
@@ -590,11 +611,12 @@ export function applyLegacyRules() {
   const DND5E = CONFIG.DND5E;
 
   // Set half-casters to round down.
-  delete DND5E.spellcastingTypes.leveled.progression.half.roundUp;
+  DND5E.spellcasting.spell.progression.half.roundUp = false;
 
   // Adjust Wild Shape and Polymorph presets.
   for ( const preset of ["polymorph", "wildshape"] ) {
     DND5E.transformation.presets[preset].settings.keep.delete("hp");
+    DND5E.transformation.presets[preset].settings.keep.delete("languages");
     DND5E.transformation.presets[preset].settings.keep.delete("type");
     delete DND5E.transformation.presets[preset].settings.tempFormula;
   }
@@ -608,8 +630,14 @@ export function applyLegacyRules() {
   DND5E.languages.druidic = DND5E.languages.exotic.children.druidic;
   delete DND5E.languages.exotic.children.druidic;
 
-  // Stunned stops movement in legacy.
+  // Stunned stops movement in legacy & surprised doesn't provide initiative disadvantage.
   DND5E.conditionEffects.noMovement.add("stunned");
+  DND5E.conditionEffects.initiativeAdvantage.delete("invisible");
+  DND5E.conditionEffects.initiativeDisadvantage.delete("incapacitated");
+  DND5E.conditionEffects.initiativeDisadvantage.delete("surprised");
+
+  // Incapacitated creatures within 2 size categories still cannot be moved through in legacy
+  delete DND5E.conditionTypes.incapacitated.neverBlockMovement;
 
   // Adjust references.
   Object.assign(DND5E.rules, LEGACY.RULES);

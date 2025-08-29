@@ -6,18 +6,20 @@
   --dnd5e-sheet-header-height: 68px;
   --dnd5e-sheet-sidebar-width: 180px;
 
-  background: url("ui/texture1.webp") no-repeat top center / auto 770px,
-    var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
-
-  &.minimized {
-    box-shadow: 0 0 20px var(--color-shadow-dark);
-    .window-header .header-elements { display: none; }
-    .window-content { display: none; }
+  &:not(.minimized)::before {
+    content: var(--dnd5e-npc-header-content, none);
+    background: var(--dnd5e-npc-header-image) no-repeat top center / cover;
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 300px;
+    border-radius: 5px 5px 0 0;
+    opacity: .05;
+    mask-image: linear-gradient(to bottom, black, transparent);
   }
+
   &:not(.minimized, .minimizing, .maximizing) {
     min-width: 700px;
     min-height: 700px;
-
     .window-content { overflow: visible; }
   }
 
@@ -25,11 +27,9 @@
   /*  Outer Window                      */
   /* ---------------------------------- */
 
-  > header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-background-25); }
-
-  .window-header .header-elements {
+  &:not(.minimized) .window-header .header-elements {
     flex: none;
-    color: var(--color-text-dark-primary);
+    color: var(--color-text-primary);
     font-family: var(--dnd5e-font-roboto-condensed);
     display: flex;
     align-items: center;
@@ -53,12 +53,12 @@
 
     i {
       font-size: var(--font-size-11);
-      color: var(--color-text-light-6);
+      color: var(--color-text-tertiary);
       margin: 0;
     }
   }
 
-  .window-content {
+  &:not(.minimized).window-content {
     display: flex;
     flex-direction: column;
     padding-block: 4px 0;
@@ -78,17 +78,25 @@
 
     > .left { flex: 0 0 var(--dnd5e-sheet-sidebar-width); }
 
-    input { background: var(--dnd5e-background-5); }
+    input {
+      --input-background-color: var(--dnd5e-background-5);
+      background: var(--input-background-color);
+    }
 
     /* Portrait */
     .portrait {
       position: relative;
 
-      > img {
+      &:not(.token) {
+        border-radius: 100%;
+        border: 1px solid var(--dnd5e-color-black);
+      }
+
+      > img, > video {
         width: var(--dnd5e-sheet-sidebar-width);
         height: var(--dnd5e-sheet-sidebar-width);
         border-radius: 100%;
-        border: 4px solid var(--dnd5e-color-gold);
+        border: 6px solid var(--dnd5e-color-gold);
         box-shadow: 0 0 6px var(--dnd5e-color-black);
         overflow: hidden;
         object-fit: cover;
@@ -97,11 +105,13 @@
         display: block;
       }
 
-      &.token > img {
-        border-radius: 0;
-        box-shadow: none;
-        border: none;
-        object-fit: contain;
+      &.token {
+        > img, > video {
+          border-radius: 0;
+          box-shadow: none;
+          border: none;
+          object-fit: contain;
+        }
       }
 
       /* Initiative */
@@ -279,6 +289,7 @@
             flex-direction: column;
             gap: 4px;
             align-items: center;
+            justify-content: space-between;
           }
         }
       }
@@ -314,18 +325,10 @@
       li:has(> span:empty) { display: none; }
     }
 
-    /* CR */
-    .cr-badge {
-      width: 45px;
-      height: 45px;
-      background-image: url("ui/cr-badge.webp");
-      font-size: var(--font-size-18);
-    }
-
     /* Proficiency */
     .proficiency {
       text-align: right;
-      .sign { color: var(--color-text-light-6); }
+      .sign { color: var(--color-text-tertiary); }
       > span { font-family: var(--dnd5e-font-roboto-condensed); }
     }
 
@@ -359,7 +362,7 @@
         flex-direction: column;
         align-items: center;
         padding: 0 4px;
-        border-right: 1px solid var(--color-border-light-1);
+        border-right: var(--dnd5e-border-separator-heavy);
 
         &:last-child { border: none; }
         > * { position: relative; }
@@ -372,29 +375,8 @@
           margin: 0;
           height: 100%;
           width: 50%;
+          filter: var(--npc-ability-score-filter, none);
         }
-      }
-
-      .sign { color: var(--color-text-light-6); }
-
-      .label {
-        text-transform: uppercase;
-        font-size: var(--font-size-11);
-        color: var(--dnd5e-color-gold);
-        font-weight: bold;
-      }
-
-      .mod {
-        font-weight: bold;
-        color: var(--dnd5e-color-black);
-        font-size: var(--font-size-16);
-        padding: 3px 0;
-      }
-
-      .score {
-        text-align: center;
-        font-size: var(--font-size-13);
-        > input { text-align: center; }
       }
 
       .save-tab {
@@ -418,7 +400,7 @@
           &:hover .save { text-shadow: 0 0 8px var(--color-shadow-primary); }
         }
 
-        > i { color: var(--color-text-light-6); }
+        > i { color: var(--color-text-tertiary); }
       }
     }
 
@@ -437,7 +419,7 @@
         gap: 4px;
 
         > span.label {
-          color: var(--color-text-dark-5);
+          color: var(--color-text-secondary);
           font-size: var(--font-size-10);
           font-weight: normal;
         }
@@ -489,10 +471,7 @@
       }
 
       .lair {
-        slide-toggle {
-          --slide-toggle-track-color-unchecked: rgb(0 0 0 / 25%);
-          --slide-toggle-track-color-checked: rgb(214, 109, 41);
-        }
+        slide-toggle { --slide-toggle-track-color-checked: rgb(214, 109, 41); }
 
         .spacer {
           display: grid;
@@ -572,7 +551,6 @@
     overflow: hidden auto;
     scrollbar-gutter: stable;
     scrollbar-color: var(--dnd5e-color-gold) transparent;
-    mask-image: linear-gradient(to bottom, transparent, black 8px);
 
     .main-content {
       --sidebar-padding: 8px;
@@ -661,7 +639,6 @@
           gap: 6px;
 
           .encumbrance {
-            block-size: 28px;
             border: var(--dnd5e-border-gold);
             border-radius: 3px;
             box-shadow: 0 0 6px var(--dnd5e-shadow-45);
@@ -697,25 +674,6 @@
             box-shadow: 0 0 6px var(--dnd5e-color-gold);
           }
         }
-
-        select {
-          width: unset;
-          border: none;
-          background: none;
-
-          option { color: var(--color-text-dark-primary); }
-        }
-
-        .config-button {
-          flex: 1;
-          display: grid;
-          place-content: center;
-        }
-
-        .spellcasting-ability {
-          color: var(--dnd5e-color-gold);
-          text-shadow: 0 0 6px var(--dnd5e-shadow-45);
-        }
       }
 
       /* Effects */
@@ -746,7 +704,7 @@
             position: absolute;
             inset: auto auto -3px 100%;
             font-size: var(--font-size-18);
-            color: var(--color-text-dark-primary);
+            color: var(--color-text-primary);
           }
         }
 
@@ -767,8 +725,10 @@
 
   &.editable {
     .sheet-header {
+      .document-name, .labels .creature-alignment input { background: var(--npc-header-input-background); }
+
       .labels, > .left {
-        color: var(--color-text-dark-primary);
+        color: var(--color-text-primary);
 
         li + li::before { content: "" }
         > li {
@@ -779,7 +739,7 @@
         li.creature-size {
           display: grid;
           select {
-            background: var(--dnd5e-background-5);
+            background: var(--npc-header-input-background);
             &:hover { cursor: var(--cursor-pointer); }
           }
         }
@@ -793,7 +753,7 @@
           border-radius: 3px;
           border: 1px solid transparent;
           transition: all 250ms ease;
-          background: var(--dnd5e-background-5);
+          background: var(--npc-header-input-background);
           padding: 0 4px;
 
           &:hover {
@@ -813,10 +773,13 @@
           font-family: var(--dnd5e-font-roboto-condensed);
           height: var(--form-field-height);
           margin-bottom: 8px;
+
+          .fa-toggle-on { color: var(--npc-portrait-toggle-on); }
         }
       }
 
       .cr-badge > input {
+        --input-background-color: var(--npc-cr-input-background);
         width: 45px;
         text-align: center;
         font-size: var(--font-size-18);
@@ -863,6 +826,8 @@
       min-height: 550px;
     }
 
+    .window-content { overflow: auto; }
+
     .sheet-header {
       display: block;
       padding: 0 20px 16px;
@@ -875,7 +840,7 @@
         height: 148px;
         margin: 0 20px 16px 0;
 
-        > img {
+        > img, > video {
           width: 100%;
           height: 100%;
           border-width: 4px;

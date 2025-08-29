@@ -151,7 +151,7 @@ export default class ContainerSheet extends ItemSheet5e {
   /** @inheritDoc */
   async _onDragStart(event) {
     const li = event.currentTarget;
-    if ( event.target.classList.contains("content-link") ) return;
+    if ( "link" in event.target.dataset ) return;
     if ( !li.dataset.itemId ) return super._onDragStart(event);
 
     const item = await this.item.system.getContainedItem(li.dataset.itemId);
@@ -310,7 +310,7 @@ export default class ContainerSheet extends ItemSheet5e {
     }
 
     // Perform the sort
-    const sortUpdates = foundry.utils.SortingHelpers.performIntegerSort(item, {target, siblings});
+    const sortUpdates = foundry.utils.performIntegerSort(item, {target, siblings});
     const updateData = sortUpdates.map(u => {
       const update = u.update;
       update._id = u.target.id;

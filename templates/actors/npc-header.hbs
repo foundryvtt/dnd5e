@@ -19,9 +19,17 @@
 
         <div class="portrait {{#if portrait.token}}token{{/if}}">
 
-            <img src="{{ portrait.src }}" alt="{{ actor.name }}"
-                 {{~#if (and editable portrait.path)}} data-action="editImage" data-edit="{{ portrait.path }}"
-                 {{~else}} data-action="showArtwork"{{/if}}>
+            {{#with portrait}}
+            {{#if isVideo}}
+            <video src="{{ src }}" autoplay muted disablepictureinpicture loop playsinline
+                   {{#if @root.editable}}data-action="{{ action }}"{{else}}data-action="showArtwork"{{/if}}
+                   {{#if (and @root.editable path)}}data-edit="{{ path }}" data-type="{{ type }}"{{/if}}></video>
+            {{else}}
+            <img src="{{ src }}" alt="{{ @root.actor.name }}"
+                 {{#if @root.editable}}data-action="{{ action }}"{{else}}data-action="showArtwork"{{/if}}
+                 {{#if (and @root.editable path)}}data-edit="{{ path }}" data-type="{{ type }}"{{/if}}>
+            {{/if}}
+            {{/with}}
 
             {{#if showDeathSaves}}
             <div class="death-saves">
@@ -144,29 +152,29 @@
                             {{/if}}
                         </div>
                         <input type="text" name="system.attributes.hp.value" data-dtype="Number" placeholder="0"
-                               value="{{ value }}" inputmode="numeric" pattern="[+=\-]?\d*" hidden>
+                               value="{{ value }}" inputmode="numeric" pattern="^[+=\-]?\d*" hidden>
                     </div>
                     {{#if showDeathSaves}}
                     <div class="tmp">
                         <input type="text" name="system.attributes.hp.temp" data-dtype="Number" inputmode="numeric"
-                               placeholder="{{ localize 'DND5E.TMP' }}" value="{{ temp }}" pattern="[+=\-]?\d*">
+                               placeholder="{{ localize 'DND5E.TMP' }}" value="{{ temp }}" pattern="^[+=\-]?\d*">
                     </div>
                     {{/if}}
                 </div>
                 {{/with}}
 
                 {{!-- Temp & Tempmax --}}
-                {{#with system.attributes.hp}}
+                {{#with system._source.attributes.hp}}
                 <div class="meter sectioned split">
                     <div class="temp">
                         <input type="text" name="system.attributes.hp.temp" data-dtype="Number" inputmode="numeric"
                                placeholder="{{ localize 'DND5E.TMP' }}" value="{{#if temp}}{{ temp }}{{/if}}"
-                               pattern="[+=\-]?\d*">
+                               pattern="^[+=\-]?\d*">
                     </div>
                     <div class="tempmax">
                         <input type="text" name="system.attributes.hp.tempmax" data-dtype="Number"
                                inputmode="numeric" placeholder="+{{ localize 'DND5E.Max' }}"
-                               value="{{#if tempmax}}{{ tempmax }}{{/if}}" pattern="[+=\-]?\d*">
+                               value="{{#if tempmax}}{{ tempmax }}{{/if}}" pattern="^[+=\-]?\d*">
                     </div>
                 </div>
                 {{/with}}
@@ -241,6 +249,7 @@
                 <div class="left">
 
                     <div class="sheet-header-buttons">
+                        {{#if showRests}}
                         <button type="button" class="gold-button" data-action="rest" data-type="short"
                                 data-tooltip="DND5E.REST.Short.Label"
                                 aria-label="{{ localize 'DND5E.REST.Short.Label' }}">
@@ -251,6 +260,7 @@
                                 aria-label="{{ localize 'DND5E.REST.Long.Label' }}">
                             <i class="fas fa-campground" inert></i>
                         </button>
+                        {{/if}}
                     </div>
 
                     <div class="proficiency">
@@ -353,7 +363,7 @@
                 {{#if system.resources.legact.max}}
                 <div class="legact">
                     <span class="label roboto-upper">{{ localize "DND5E.LegendaryAction.Label" }}</span>
-                    <div class="pips" data-prop="system.resources.legact.value">
+                    <div class="pips" data-prop="system.resources.legact.spent">
                         {{#each legact}}
                             {{> ".pip" }}
                         {{/each}}
@@ -363,7 +373,7 @@
                 {{#if system.resources.legres.max}}
                 <div class="legres">
                     <span class="label roboto-upper">{{ localize "DND5E.LegendaryResistance.Label" }}</span>
-                    <div class="pips" data-prop="system.resources.legres.value">
+                    <div class="pips" data-prop="system.resources.legres.spent">
                         {{#each legres}}
                             {{> ".pip" }}
                         {{/each}}

@@ -53,7 +53,7 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
    * @type {boolean}
    */
   get displayInSpellbook() {
-    return (this.item.system.magicAvailable !== false) && this.spell.spellbook;
+    return this.canUse && (this.item.system.magicAvailable !== false) && this.spell.spellbook;
   }
 
   /* -------------------------------------------- */
@@ -164,11 +164,13 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
     const challenge = this.spell.challenge;
     if ( challenge.override && challenge.attack ) changes.push(
       { key: "activities[attack].attack.bonus", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.attack },
-      { key: "activities[attack].attack.flat", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: true }
+      { key: "activities[attack].attack.flat", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: true },
+      { key: "activities[summon].flat.attack", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.attack }
     );
     if ( challenge.override && challenge.save ) changes.push(
       { key: "activities[save].save.dc.calculation", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: "" },
-      { key: "activities[save].save.dc.formula", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.save }
+      { key: "activities[save].save.dc.formula", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.save },
+      { key: "activities[summon].flat.save", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: challenge.save }
     );
 
     return changes;

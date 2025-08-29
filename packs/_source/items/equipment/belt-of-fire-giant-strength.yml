@@ -20,7 +20,7 @@ system:
     value: 1
     units: lb
   price:
-    value: 12000
+    value: 40000
     denomination: gp
   attunement: required
   equipped: false
@@ -83,12 +83,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     img: icons/equipment/waist/belt-coiled-leather-steel.webp
     type: base
     system: {}
@@ -101,10 +102,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.345'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.1.0
   createdTime: 1725037228959
-  modifiedTime: 1725992526949
+  modifiedTime: 1750697344647
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!items!bq9YKwEHLQ7p7ric'

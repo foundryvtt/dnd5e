@@ -1,6 +1,7 @@
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { parseOrString, staticID } from "../utils.mjs";
+import Item5e from "./item.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -73,11 +74,13 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* -------------------------------------------- */
 
-  /**
-   * Is this active effect currently suppressed?
-   * @type {boolean}
-   */
-  isSuppressed = false;
+  /** @inheritDoc */
+  get isSuppressed() {
+    if ( super.isSuppressed ) return true;
+    if ( this.type === "enchantment" ) return false;
+    if ( this.parent instanceof dnd5e.documents.Item5e ) return this.parent.areEffectsSuppressed;
+    return false;
+  }
 
   /* -------------------------------------------- */
 
@@ -122,6 +125,21 @@ export default class ActiveEffect5e extends ActiveEffect {
     }
 
     return super._initializeSource(data, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(data) {
+    data = super.migrateData(data);
+    for ( const change of data.changes ?? [] ) {
+      if ( change.key === "flags.dnd5e.initiativeAdv" ) {
+        change.key = "system.attributes.init.roll.mode";
+        change.mode = CONST.ACTIVE_EFFECT_MODES.ADD;
+        change.value = 1;
+      }
+    }
+    return data;
   }
 
   /* -------------------------------------------- */
@@ -287,14 +305,15 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* --------------------------------------------- */
 
   /**
-   * Determine whether this Active Effect is suppressed or not.
+   * @deprecated
+   * @ignore
    */
   determineSuppression() {
-    this.isSuppressed = false;
-    if ( this.type === "enchantment" ) return;
-    if ( this.parent instanceof dnd5e.documents.Item5e ) this.isSuppressed = this.parent.areEffectsSuppressed;
+    foundry.utils.logCompatibilityWarning(
+      "The `ActiveEffect5e#determineSuppression` method has been deprecated and is no longer necessary to call.",
+      { since: "DnD5e 5.1", until: "DnD5e 5.3" }
+    );
   }
-
   /* -------------------------------------------- */
   /*  Lifecycle                                   */
   /* -------------------------------------------- */
@@ -303,7 +322,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   prepareDerivedData() {
     super.prepareDerivedData();
     if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
-    if ( this.isAppliedEnchantment ) dnd5e.registry.enchantments.track(this.origin, this.uuid);
+    if ( this.isAppliedEnchantment && this.uuid ) dnd5e.registry.enchantments.track(this.origin, this.uuid);
   }
 
   /* -------------------------------------------- */
@@ -437,15 +456,12 @@ export default class ActiveEffect5e extends ActiveEffect {
     // Create Items
     let createdItems = [];
     if ( this.parent.isEmbedded ) {
-      const riderItems = await Promise.all(profile.riders.item.map(async uuid => {
-        const itemData = (await fromUuid(uuid))?.toObject();
-        if ( itemData ) {
-          delete itemData._id;
-          foundry.utils.setProperty(itemData, "flags.dnd5e.enchantment", { origin: this.uuid });
+      const riderItems = await Item5e.createWithContents(
+        (await Promise.all(profile.riders.item.map(uuid => fromUuid(uuid)))).filter(_ => _), {
+          transformAll: item => item.clone({ "flags.dnd5e.enchantment.origin": this.uuid }, { keepId: true })
         }
-        return itemData;
-      }));
-      createdItems = await this.parent.actor.createEmbeddedDocuments("Item", riderItems.filter(i => i));
+      );
+      createdItems = await this.parent.actor.createEmbeddedDocuments("Item", riderItems, { keepId: true });
     }
 
     if ( createdActivities.length || createdEffects.length || createdItems.length ) {
@@ -627,26 +643,40 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Add modifications to the core ActiveEffect config.
-   * @param {ActiveEffectConfig} app   The ActiveEffect config.
-   * @param {jQuery|HTMLElement} html  The ActiveEffect config element.
+   * @param {ActiveEffectConfig} app           The ActiveEffect config.
+   * @param {HTMLElement} html                 The ActiveEffect config element.
+   * @param {ApplicationRenderContext} context The app's rendering context.
    */
-  static onRenderActiveEffectConfig(app, html) {
+  static onRenderActiveEffectConfig(app, html, context) {
     const element = new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {}).toFormGroup({
       label: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.label"),
       hint: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.hint")
     }, {
       name: "flags.dnd5e.riders.statuses",
       value: app.document.getFlag("dnd5e", "riders.statuses") ?? [],
-      options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name }))
+      options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name })),
+      disabled: !context.editable
     });
     html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")?.after(element);
+
+    // Add tooltip with link to wiki for effects/enchantments
+    const helpIconElement = document.createElement("i");
+    helpIconElement.classList.add("fa-solid", "fa-circle-question");
+    const tooltipText = game.i18n.format("DND5E.ACTIVEEFFECT.AttributeKeyTooltip", {
+      url: app.document.type === "enchantment"
+        ? "https://github.com/foundryvtt/dnd5e/wiki/Enchantment"
+        : "https://github.com/foundryvtt/dnd5e/wiki/Active-Effect-Guide"
+    });
+    Object.assign(helpIconElement.dataset, { tooltip: tooltipText, tooltipDirection: "RIGHT", locked: "" });
+    const targetElement = html.querySelector("section:is([data-tab='effects'], [data-tab='changes']) .key");
+    if ( targetElement ) targetElement.insertAdjacentElement("beforeend", helpIconElement);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Adjust exhaustion icon display to match current level.
-   * @param {Application} app            The TokenHUD application.
+   * @param {Application} app   The TokenHUD application.
    * @param {HTMLElement} html  The TokenHUD HTML.
    */
   static onTokenHUDRender(app, html) {
@@ -731,30 +761,29 @@ export default class ActiveEffect5e extends ActiveEffect {
       return;
     }
     const choices = effects.reduce((acc, effect) => {
-      const data = effect.getFlag("dnd5e", "item.data");
-      acc[effect.id] = data?.name ?? actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless");
+      const data = effect.getFlag("dnd5e", "item");
+      acc[effect.id] = data?.name ?? actor.items.get(data?.id)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless");
       return acc;
     }, {});
     const options = HandlebarsHelpers.selectOptions(choices, { hash: { sort: true } });
     const content = `
-    <form class="dnd5e">
-      <p>${game.i18n.localize("DND5E.ConcentratingEndChoice")}</p>
-      <div class="form-group">
-        <label>${game.i18n.localize("DND5E.SOURCE.FIELDS.source.label")}</label>
-        <div class="form-fields">
-          <select name="source">${options}</select>
-        </div>
+    <p>${game.i18n.localize("DND5E.ConcentratingEndChoice")}</p>
+    <div class="form-group">
+      <label>${game.i18n.localize("DND5E.SOURCE.FIELDS.source.label")}</label>
+      <div class="form-fields">
+        <select name="source">${options}</select>
       </div>
-    </form>`;
-    Dialog.prompt({
-      content: content,
-      callback: ([html]) => {
-        const source = new FormDataExtended(html.querySelector("FORM")).object.source;
-        if ( source ) actor.endConcentration(source);
-      },
-      rejectClose: false,
-      title: game.i18n.localize("DND5E.Concentration"),
-      label: game.i18n.localize("DND5E.Confirm")
+    </div>`;
+    foundry.applications.api.Dialog.prompt({
+      content,
+      window: { title: game.i18n.localize("DND5E.Concentration") },
+      ok: {
+        label: game.i18n.localize("DND5E.Confirm"),
+        callback: (event, button, dialog) => {
+          const source = new foundry.applications.ux.FormDataExtended(button.form).object.source;
+          if ( source ) actor.endConcentration(source);
+        }
+      }
     });
   }
 
@@ -835,7 +864,7 @@ export default class ActiveEffect5e extends ActiveEffect {
           properties: properties.map(p => game.i18n.localize(p))
         }
       ),
-      classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip"]
+      classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip", "themed", "theme-light"]
     };
   }
 

@@ -465,7 +465,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -477,6 +476,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 7GyypGVW1RhhbcqC
     name: Tail Spike Regrowth
@@ -516,18 +521,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.iVOxckt9448v7Ho5
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iVOxckt9448v7Ho5
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!MAoCGF5VkQwhmgvI.7GyypGVW1RhhbcqC'
   - _id: Wr6BSqrXAJZu28sp
     name: Multiattack
@@ -620,18 +624,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655951
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!MAoCGF5VkQwhmgvI.Wr6BSqrXAJZu28sp'
   - _id: thSJXAlyfHGmVWN5
     name: Bite
@@ -784,18 +787,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551422
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!MAoCGF5VkQwhmgvI.thSJXAlyfHGmVWN5'
   - _id: 4WFf0M2tCPwiLPxG
     name: Claw
@@ -952,12 +954,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551422
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!MAoCGF5VkQwhmgvI.4WFf0M2tCPwiLPxG'
   - _id: bYJjJPKhiDOTMlmS
     name: Tail Spike
@@ -1122,12 +1125,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385393
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!MAoCGF5VkQwhmgvI.bYJjJPKhiDOTMlmS'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -1137,10 +1141,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171225157
   modifiedTime: 1726171443609
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!MAoCGF5VkQwhmgvI'

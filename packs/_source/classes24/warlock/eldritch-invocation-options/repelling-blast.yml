@@ -70,9 +70,9 @@ system:
       Deals Damage via an Attack Roll</p></blockquote><p>Choose one of your
       known Warlock cantrips that requires an attack roll. When you hit a Large
       or smaller creature with that cantrip, you can push the creature up to 10
-      feet straight away from you.</p><p>Repeatable. You can gain this
-      invocation more than once. Each time you do so, choose a different
-      eligible cantrip.</p><section class="secret"
+      feet straight away from you.</p><p><strong>Repeatable.</strong> You can
+      gain this invocation more than once. Each time you do so, choose a
+      different eligible cantrip.</p><section class="secret"
       id="secret-5xV7SaKI7sGaeKvq"><p><strong>Foundry Note</strong></p><p>The
       <strong>Make Repelling</strong> activity can be used to enchant a cantrip
       which adds ", Repelling" as a reminder.</p></section>
@@ -88,7 +88,7 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 2
-    repeatable: false
+    repeatable: true
   properties: []
   requirements: Warlock Cantrip That Deals Damage via an Attack
   identifier: repelling-blast
@@ -125,12 +125,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!items.effects!phbinvRepellingB.DShZGDAUy0w9RUzS'
 folder: BjeMHiqnKNWkWhox
 flags:
@@ -140,12 +141,13 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866281378
-  modifiedTime: 1745256762552
+  modifiedTime: 1752706893690
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

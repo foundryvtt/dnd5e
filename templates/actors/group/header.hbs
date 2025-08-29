@@ -1,0 +1,122 @@
+<header class="sheet-header">
+
+    {{!-- Group Actions --}}
+    <div class="sheet-header-buttons">
+        <button type="button" class="gold-button" data-action="placeMembers" data-tooltip
+                aria-label="{{ localize "DND5E.Group.PlaceMembers" }}">
+            <i class="fa-solid fa-location-dot" inert></i>
+        </button>
+        <button type="button" class="short-rest gold-button" data-action="rest" data-type="short" data-tooltip
+                aria-label="{{ localize 'DND5E.REST.Short.Label' }}">
+            <i class="fas fa-utensils" inert></i>
+        </button>
+        <button type="button" class="long-rest gold-button" data-action="rest" data-type="long" data-tooltip
+                aria-label="{{ localize 'DND5E.REST.Long.Label' }}">
+            <i class="fas fa-campground" inert></i>
+        </button>
+    </div>
+
+    {{!-- Portrait --}}
+    <div class="left">
+        <div class="portrait">
+            <img src="{{ document.img }}" alt="{{ document.name }}"
+                {{#if editable}}data-action="editImage" data-edit="img"{{/if}}>
+        </div>
+    </div>
+
+    {{!-- Name & Cards --}}
+    <div class="right">
+
+        {{!-- Name --}}
+        <div class="top">
+            {{#if editable}}
+            <input type="text" name="name" class="document-name uninput" value="{{ actor._source.name }}">
+            {{else}}
+            <div class="document-name">{{ document.name }}</div>
+            {{/if}}
+        </div>
+
+        {{!-- Movement & XP --}}
+        <div class="bottom">
+
+            {{!-- Movement --}}
+            <div class="movement card">
+                <div class="header travel-pace">
+                    <h3>{{ localize "DND5E.Travel.Label" }}</h3>
+                    {{#if editable}}
+                    <button type="button" class="config-button unbutton" data-action="showConfiguration"
+                            data-config="movement" data-tooltip aria-label="{{ localize "DND5E.MovementConfig" }}">
+                        <i class="fa-solid fa-cog" inert></i>
+                    </button>
+                    {{else}}
+                    <button type="button" class="unbutton config-button" data-action="changePace" data-increment="-1"
+                            data-tooltip aria-label="{{ localize "DND5E.Group.Action.ChangePace" }}">
+                        <i class="fa-solid fa-chevron-left" inert></i>
+                    </button>
+                    <span class="pace subtitle">{{ labels.pace }}</span>
+                    <button type="button" class="unbutton config-button" data-action="changePace" data-increment="1"
+                            data-tooltip aria-label="{{ localize "DND5E.Group.Action.ChangePace" }}">
+                        <i class="fa-solid fa-chevron-right" inert></i>
+                    </button>
+                    {{/if}}
+                </div>
+                <div class="info">
+                    <div>
+                        <span class="label">{{ localize "DND5E.MovementLand" }}</span>
+                        <span class="value">
+                            {{ dnd5e-numberFormat system.attributes.movement.paces.land blank="—" }}
+                        </span>
+                    </div>
+                    <div>
+                        <span class="label">{{ localize "DND5E.MovementWater" }}</span>
+                        <span class="value">
+                            {{ dnd5e-numberFormat system.attributes.movement.paces.water blank="—" }}
+                        </span>
+                    </div>
+                    <div>
+                        <span class="label">{{ localize "DND5E.MovementAir" }}</span>
+                        <span class="value">
+                            {{ dnd5e-numberFormat system.attributes.movement.paces.air blank="—" }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- XP --}}
+            <div class="xp card">
+                <div class="header">
+                    <h3>{{ localize "DND5E.AdvancementTitle" }}</h3>
+                    <button type="button" class="config-button unbutton" data-action="award" data-tooltip
+                            {{#if showXP}}aria-label="{{ localize "DND5E.Group.Distribute.xp" }}"
+                            {{else}}aria-label="{{ localize "DND5E.Group.Distribute.noxp" }}"{{/if}}>
+                        <i class="fa-solid fa-trophy" inert></i>
+                    </button>
+                </div>
+                <div class="info">
+                    {{#if showXP}}
+                    <div>
+                        <span class="label">{{ localize "DND5E.ExperiencePoints.Pool" }}</span>
+                        <span class="value">
+                            {{#if editable}}
+                            {{ formInput fields.details.fields.xp.fields.value value=source.details.xp.value }}
+                            {{else}}
+                            {{#if system.details.xp.value}}
+                            {{ dnd5e-numberFormat system.details.xp.value }}
+                            {{else}}
+                            &mdash;
+                            {{/if}}
+                            {{/if}}
+                        </span>
+                    </div>
+                    {{/if}}
+                    <div>
+                        <span class="label">{{ localize "DND5E.LevelAvg" }}</span>
+                        <span class="value">{{ dnd5e-numberFormat system.level blank="—" useGrouping=false }}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</header>

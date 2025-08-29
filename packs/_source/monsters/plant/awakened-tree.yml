@@ -467,7 +467,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -479,6 +478,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: Q90HYHsZp8MD2iv2
     name: False Appearance
@@ -516,18 +521,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UR2gWLFHmFwG7ReH.Q90HYHsZp8MD2iv2'
   - _id: WEesSpitzLnaCknL
     name: Slam
@@ -685,12 +689,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1744916838254
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!UR2gWLFHmFwG7ReH.WEesSpitzLnaCknL'
 effects: []
 folder: KY8fajTNVVOIT8yT
@@ -700,10 +705,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171234693
   modifiedTime: 1741116567041
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!UR2gWLFHmFwG7ReH'

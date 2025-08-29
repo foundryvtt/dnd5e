@@ -67,10 +67,21 @@ export default class ItemChoiceConfig extends AdvancementConfig {
       { rule: true },
       ...Object.entries(CONFIG.DND5E.spellLevels).map(([value, label]) => ({ value, label }))
     ];
+    context.listRestrictionOptions = dnd5e.registry.spellLists.options;
     context.showContainerWarning = context.items.some(i => i.index?.type === "container");
     context.showSpellConfig = this.advancement.configuration.type === "spell";
-    context.showRequireSpellSlot = !this.advancement.configuration.spell?.preparation
-      || CONFIG.DND5E.spellPreparationModes[this.advancement.configuration.spell?.preparation]?.upcast;
+
+    const { spell } = this.advancement.configuration;
+    const model = CONFIG.DND5E.spellcasting[spell?.method];
+    context.showRequireSpellSlot = !spell?.method || model?.slots;
+    context.canPrepare = model?.prepares;
+    context.spellcastingMethods = Object.values(CONFIG.DND5E.spellcasting).map(({ key, label }) => {
+      return { label, value: key };
+    });
+    if ( spell?.method && !(spell.method in CONFIG.DND5E.spellcasting) ) {
+      context.spellcastingMethods.push({ label: spell.method, value: spell.method });
+    }
+
     context.typeOptions = [
       { value: "", label: game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.FIELDS.type.Any") },
       { rule: true },
@@ -111,7 +122,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
     const pool = [];
     for ( const item of (configuration.pool ?? this.advancement.configuration.pool) ) {
       if ( this.advancement._validateItemType(await fromUuid(item.uuid), {
-        type: configuration.type, restriction: configuration.restriction ?? {}, strict: false
+        type: false, strict: false
       }) ) pool.push(item);
     }
     configuration.pool = pool;
@@ -125,6 +136,6 @@ export default class ItemChoiceConfig extends AdvancementConfig {
 
   /** @inheritDoc */
   _validateDroppedItem(event, item) {
-    this.advancement._validateItemType(item);
+    this.advancement._validateItemType(item, { type: false });
   }
 }

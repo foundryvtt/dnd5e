@@ -45,7 +45,7 @@
             {{!-- Formula --}}
             {{#if (or (eq source.type "formula") formulaOptions)}}
             {{ formField fields.formula name=(concat prefix "formula") value=source.formula options=formulaOptions
-                         label="DND5E.Formula" localize=true hint=false classes="label-top" }}
+                         label="DND5E.Formula" localize=true hint=false classes="label-top" blank=false }}
             {{/if}}
 
             <button type="button" class="unbutton control-button" data-action="deleteRecovery"

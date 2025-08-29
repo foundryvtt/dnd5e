@@ -479,7 +479,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -491,6 +490,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: sZcc3bwnRjaDV9BZ
     name: Freeze
@@ -499,9 +504,8 @@ items:
     system:
       description:
         value: >-
-          <p>If the elemental takes <strong><em>cold damage</em></strong>, it
-          partially freezes; its speed is reduced by <strong>20 ft.</strong>
-          until the end of its next turn.</p>
+          <p>If the elemental takes cold damage, it partially freezes; its speed
+          is reduced by 20 ft. until the end of its next turn.</p>
         chat: >-
           <p>If the elemental takes <strong><em>cold damage</em></strong>, it
           partially freezes.</p>
@@ -531,18 +535,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.m0FA3UM62hlTPVSA
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.m0FA3UM62hlTPVSA
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676751
+      modifiedTime: 1747955556400
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!namJz755U1EhvEJa.sZcc3bwnRjaDV9BZ'
   - _id: 6AQXZ1FlO8qhnPTR
     name: Water Form
@@ -581,18 +584,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.AFYR2eZavzQUbZNb
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.AFYR2eZavzQUbZNb
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!namJz755U1EhvEJa.6AQXZ1FlO8qhnPTR'
   - _id: 9saHudPLoj6va2em
     name: Multiattack
@@ -683,18 +685,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273657082
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!namJz755U1EhvEJa.9saHudPLoj6va2em'
   - _id: 7xDGPsWicxgP6feT
     name: Slam
@@ -851,12 +852,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553358
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!namJz755U1EhvEJa.7xDGPsWicxgP6feT'
   - _id: 5XUFTldfE6mtRUfd
     name: Whelm
@@ -865,19 +867,18 @@ items:
     system:
       description:
         value: >-
-          <p>Each creature in the elemental's space must make a  <strong>DC 15
-          Strength</strong> saving throw. On a failure, a target takes
-          <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>. If it is
-          Large or smaller, it is also grappled (escape DC 14). Until this
-          grapple ends, the target is restrained and unable to breathe unless it
-          can breathe water. </p><p>If the saving throw is successful, the
-          target is pushed out of the elemental's space.The elemental can
-          grapple one Large creature or up to two Medium or smaller creatures at
-          one time. At the start of each of the elemental's turns, each target
-          grappled by it takes <strong>13 (2d8 + 4) <em>bludgeoning
-          damage</em></strong>. A creature within 5 feet of the elemental can
-          pull a creature or object out of it by taking an action to make a DC
-          14 Strength check and succeeding.</p>
+          <p>Each creature in the elemental's space must make a [[/save]] saving
+          throw. On a failure, a target takes [[/damage average]] damage. If it
+          is Large or smaller, it is also &amp;Reference[grappled] (escape DC
+          14). Until this grapple ends, the target is &amp;Reference[restrained]
+          and unable to breathe unless it can breathe water.</p><p>If the saving
+          throw is successful, the target is pushed out of the elemental's
+          space.The elemental can grapple one Large creature or up to two Medium
+          or smaller creatures at one time. At the start of each of the
+          elemental's turns, each target grappled by it takes [[/damage
+          average]] damage. A creature within 5 feet of the elemental can pull a
+          creature or object out of it by taking an action to make a [[/check]]
+          check and succeeding.</p>
         chat: >-
           <p>Each creature in the elemental's space must make a
           <strong>Strength</strong> saving throw. If it is Large or smaller, it
@@ -979,6 +980,53 @@ items:
               calculation: ''
               formula: '14'
           sort: 0
+        QoSOLmJfjlxffpld:
+          type: check
+          name: Pull Out
+          _id: QoSOLmJfjlxffpld
+          sort: 0
+          activation:
+            type: ''
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          check:
+            associated: []
+            dc:
+              calculation: ''
+              formula: '14'
+            ability: str
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -989,17 +1037,20 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.sMgKJtbCLNSX7V80
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.sMgKJtbCLNSX7V80
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676751
+      modifiedTime: 1747955631268
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!namJz755U1EhvEJa.5XUFTldfE6mtRUfd'
 effects: []
 folder: IB448xVSBvtqitzs
@@ -1009,10 +1060,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171256853
   modifiedTime: 1726171449743
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!namJz755U1EhvEJa'

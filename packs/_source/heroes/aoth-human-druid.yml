@@ -534,7 +534,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -546,6 +545,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: yZ0HzuMNz4aMWPYH
     name: 'Druidic Focus: Cowbell'
@@ -588,12 +593,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZGDys30OS76uYaIO.yZ0HzuMNz4aMWPYH'
   - name: Recluse
     type: background
@@ -626,12 +632,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: lMobFB5hSFEGtkrq
     _key: '!actors.items!ZGDys30OS76uYaIO.lMobFB5hSFEGtkrq'
   - _id: FZiSrcZmUUelVbNW
@@ -744,18 +751,17 @@ items:
     effects: []
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.races.ydP3QzCmur55mtY2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.races.ydP3QzCmur55mtY2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     sort: 0
     folder: null
     _key: '!actors.items!ZGDys30OS76uYaIO.FZiSrcZmUUelVbNW'
@@ -1270,12 +1276,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.classes.Item.ygVYgPbJkaH0tH1N
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: 1738093997633
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZGDys30OS76uYaIO.bapuOCz7eZNdZ4Et'
   - _id: vlHZEirUBkXrOs1W
     name: Druidic
@@ -1323,12 +1330,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.classfeatures.Item.LzJ5ayHt0OlSVGxi
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: 1738093814485
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZGDys30OS76uYaIO.vlHZEirUBkXrOs1W'
   - _id: CICEvmF4z3OxHSU4
     name: Spellcasting
@@ -1371,12 +1379,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.classfeatures.Item.gbNo5eVPaqr8IVKL
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: 1738093814531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZGDys30OS76uYaIO.CICEvmF4z3OxHSU4'
   - name: Tinderbox
     type: loot
@@ -1421,12 +1430,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.1FSubnBpSTDmVaYV
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     ownership:
       default: 0
     _id: ZritJCgD0JK3D9mt
@@ -1550,12 +1560,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.1L5wkmbw0fmNAr38
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     ownership:
       default: 0
     _id: c1OKgyDQrJBUYua2
@@ -1705,12 +1716,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.29ZLE8PERtFVD3QU
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     ownership:
       default: 0
     _id: 6fsrCWlnEEUEEFEI
@@ -1755,12 +1767,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.419eNv7xp2p7Xlo5
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: hkfulS1mgoIib6Fp
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.hkfulS1mgoIib6Fp'
@@ -1814,12 +1827,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.6eMHIQ2CGKpjTtWC
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: MbaS2ogYI1KbtKLw
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.MbaS2ogYI1KbtKLw'
@@ -1938,12 +1952,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.8RXjiddJ6VGyE7vB
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: h2fbeacwQuIMSOau
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.h2fbeacwQuIMSOau'
@@ -2064,12 +2079,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.8d95YV1jHcxPygJ9
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     ownership:
       default: 0
     _id: pmuHf0uXonVit1m0
@@ -2114,12 +2130,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.DVXmyetZuvxbzAwW
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: ycsXmoameW0PxPxn
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.ycsXmoameW0PxPxn'
@@ -2174,12 +2191,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.H8YCd689ezlD26aT
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: wTztNWeUlhlns1VR
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.wTztNWeUlhlns1VR'
@@ -2307,12 +2325,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.QXmaarJ4X8P0C1HV
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: 9jqgCD0tSdwm68DS
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.9jqgCD0tSdwm68DS'
@@ -2358,12 +2377,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.V13fjV5oSmvbRdgP
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: v6gFAs077yQiyRoA
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.v6gFAs077yQiyRoA'
@@ -2433,12 +2453,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.WwdpHLXGX5r8uZu5
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: lv1NElGeb4AF3Fl8
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.lv1NElGeb4AF3Fl8'
@@ -2597,12 +2618,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.g2dWN7PQiMRYWzyk
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: mzogRoFZkIMPl0Hc
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.mzogRoFZkIMPl0Hc'
@@ -2714,12 +2736,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.i89okN7GFTWHsvPy
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: 5Y7HeEypCimIIzX3
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.5Y7HeEypCimIIzX3'
@@ -2880,12 +2903,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.nfIRTECQIG81CvM4
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: Y7Bv598vCGC7yOae
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.Y7Bv598vCGC7yOae'
@@ -2995,12 +3019,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.2skfDtglk1mGrb3l
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: yNUfDXefj7BXUGU7
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.yNUfDXefj7BXUGU7'
@@ -3105,12 +3130,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.B0pnIcc52O6G8hi8
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: 6EvDsPPXqWANhUSU
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.6EvDsPPXqWANhUSU'
@@ -3221,12 +3247,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.IBJmWjzbQGu7M4UX
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: jOzDyWrlr6ThZXPZ
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.jOzDyWrlr6ThZXPZ'
@@ -3333,12 +3360,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.Kn7K5PtYUJAKZTTp
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: XQeADFDsyQNyHaf8
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.XQeADFDsyQNyHaf8'
@@ -3453,12 +3481,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.Qf6CAZkc7ms4ZY3e
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: J1hVbuherz2tiGT6
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.J1hVbuherz2tiGT6'
@@ -3581,12 +3610,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.SbSvZKkJASyk8jKo
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: jKqkRj3coiQM4R63
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.jKqkRj3coiQM4R63'
@@ -3815,24 +3845,26 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.1.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!ZGDys30OS76uYaIO.0ScXCaYzzyhWZttx.QPsqj6jfS0iXSrTs
     folder: Z8kZlnggh1PtuF3Y
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.VzgFzcmocr1X1cp4
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: 0ScXCaYzzyhWZttx
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.0ScXCaYzzyhWZttx'
@@ -3851,9 +3883,9 @@ items:
           objects that are completely within the area of effect are
           automatically pushed 10 feet away from you by the spell's effect, and
           the spell emits a thunderous boom audible out to 300
-          feet.</p><p><strong>Higher Levels.</strong> When you cast this spell
-          using a spell slot of 2nd level or higher, the damage increases by 1d8
-          for each slot level above 1st.</p>
+          feet.</p><p><strong>At Higher Levels.</strong> When you cast this
+          spell using a spell slot of 2nd level or higher, the damage increases
+          by 1d8 for each slot level above 1st.</p>
         chat: ''
       source:
         custom: ''
@@ -3961,12 +3993,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.WTbOQBsarsL1LuXJ
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: r62jsF9Z2GyeuG9v
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.r62jsF9Z2GyeuG9v'
@@ -4071,12 +4104,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.ZrTc23tToJ0JpH2h
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: JYb389GcFpBYDUzE
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.JYb389GcFpBYDUzE'
@@ -4182,12 +4216,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.a3XtAO5n2GrqiAh5
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: Un2798EJAL0t2PRC
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.Un2798EJAL0t2PRC'
@@ -4296,12 +4331,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.aL1F8fvYLtNzUbKu
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: pF8dim6Hn9X9cSH3
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.pF8dim6Hn9X9cSH3'
@@ -4442,12 +4478,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.1.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         img: icons/magic/fire/explosion-fireball-medium-purple-pink.webp
         type: base
         system: {}
@@ -4458,12 +4495,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.eS7XnnApoxRxYXPs
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: uwHgS93Wg63hDJzV
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.uwHgS93Wg63hDJzV'
@@ -4601,12 +4639,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.1.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         img: icons/magic/nature/vines-thorned-curled-glow-green.webp
         type: base
         system: {}
@@ -4620,12 +4659,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.gMrWeG8fMDPRFiVe
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: C20uvzZFjawarxYJ
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.C20uvzZFjawarxYJ'
@@ -4736,12 +4776,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: ryb9VqVV6cg4RJ6b
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.ryb9VqVV6cg4RJ6b'
@@ -4858,12 +4899,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.hDOENzjuj5WpLq7B
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: TigHbrTaikkuXdw2
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.TigHbrTaikkuXdw2'
@@ -4978,12 +5020,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.nqBDWkVOfcGZt4YU
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: UgL3DNv2bdncIr1j
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.UgL3DNv2bdncIr1j'
@@ -5099,12 +5142,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.o8Dh7fblk1d16tnO
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: UgMmOm1OP4CPaeGS
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.UgMmOm1OP4CPaeGS'
@@ -5117,7 +5161,7 @@ items:
         value: >-
           <p>A creature you touch regains a number of hit points equal to 1d8 +
           your spellcasting ability modifier. This spell has no effect on undead
-          or constructs.</p><p><strong>Higher Levels.</strong> When you cast
+          or constructs.</p><p><strong>At Higher Levels.</strong> When you cast
           this spell using a spell slot of 2nd level or higher, the healing
           increases by 1d8 for each slot level above 1st.</p>
         chat: ''
@@ -5219,12 +5263,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.uUWb1wZgtMou0TVP
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: CpeS14876LLibniH
     sort: 0
     _key: '!actors.items!ZGDys30OS76uYaIO.CpeS14876LLibniH'
@@ -5239,10 +5284,11 @@ flags:
 _id: ZGDys30OS76uYaIO
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.1.0
   createdTime: 1725036840508
   modifiedTime: 1738093115909
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!ZGDys30OS76uYaIO'

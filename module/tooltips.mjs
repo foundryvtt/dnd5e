@@ -19,8 +19,10 @@ export default class Tooltips5e {
    * @type {HTMLElement}
    */
   get tooltip() {
-    return document.getElementById("tooltip");
+    return this.#tooltip;
   }
+
+  #tooltip = document.getElementById("tooltip");
 
   /* -------------------------------------------- */
   /*  Methods                                     */
@@ -108,7 +110,8 @@ export default class Tooltips5e {
     const { content, classes } = await (doc.richTooltip?.() ?? doc.system?.richTooltip?.() ?? {});
     if ( !content ) return;
     this.tooltip.innerHTML = content;
-    classes?.forEach(c => this.tooltip.classList.add(c));
+    this.tooltip.classList.remove("theme-dark");
+    if ( classes?.length ) this.tooltip.classList.add(...classes);
     const { tooltipDirection } = game.tooltip.element.dataset;
     requestAnimationFrame(() => this._positionItemTooltip(tooltipDirection));
   }
@@ -136,7 +139,7 @@ export default class Tooltips5e {
       label = game.i18n.format("DND5E.SkillPassiveHint", { skill: abilityConfig.label });
     }
 
-    const party = game.settings.get("dnd5e", "primaryParty")?.actor;
+    const party = game.actors.party;
     if ( !party ) {
       this.tooltip.innerHTML = label;
       return;
@@ -165,7 +168,8 @@ export default class Tooltips5e {
       context.party.push(data);
     }
 
-    this.tooltip.classList.add("dnd5e-tooltip", "passive-tooltip");
+    this.tooltip.classList.add("dnd5e-tooltip", "passive-tooltip", "dnd5e2", "themed", "theme-light");
+    this.tooltip.classList.remove("theme-dark");
     this.tooltip.innerHTML = await foundry.applications.handlebars.renderTemplate(
       "systems/dnd5e/templates/journal/passive-tooltip.hbs", context
     );
@@ -187,26 +191,27 @@ export default class Tooltips5e {
 
     const pos = this.tooltip.getBoundingClientRect();
     const dirs = TooltipManager.TOOLTIP_DIRECTIONS;
+    const { innerHeight, innerWidth } = this.tooltip.ownerDocument.defaultView;
     switch ( direction ) {
       case dirs.UP:
         if ( pos.y - TooltipManager.TOOLTIP_MARGIN_PX <= 0 ) direction = dirs.DOWN;
         break;
       case dirs.DOWN:
-        if ( pos.y + this.tooltip.offsetHeight > window.innerHeight ) direction = dirs.UP;
+        if ( pos.y + this.tooltip.offsetHeight > innerHeight ) direction = dirs.UP;
         break;
       case dirs.LEFT:
         if ( pos.x - TooltipManager.TOOLTIP_MARGIN_PX <= 0 ) direction = dirs.RIGHT;
         break;
       case dirs.RIGHT:
-        if ( pos.x + this.tooltip.offsetWidth > window.innerWith ) direction = dirs.LEFT;
+        if ( pos.x + this.tooltip.offsetWidth > innerWidth ) direction = dirs.LEFT;
         break;
     }
 
     game.tooltip._setAnchor(direction);
 
     // Set overflowing styles for item tooltips.
-    if ( tooltip.classList.contains("item-tooltip") ) {
-      const description = tooltip.querySelector(".description");
+    if ( this.tooltip.classList.contains("item-tooltip") ) {
+      const description = this.tooltip.querySelector(".description");
       description?.classList.toggle("overflowing", description.clientHeight < description.scrollHeight);
     }
   }

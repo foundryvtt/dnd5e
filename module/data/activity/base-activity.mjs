@@ -153,7 +153,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canConfigureScaling() {
-    return this.consumption.scaling.allowed || (this.isSpell && (this.item.system.level > 0));
+    return this.consumption.scaling.allowed || this.item.system.canConfigureScaling;
   }
 
   /* -------------------------------------------- */
@@ -163,8 +163,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canScale() {
-    return this.consumption.scaling.allowed || (this.isSpell && this.item.system.level > 0
-      && CONFIG.DND5E.spellPreparationModes[this.item.system.preparation.mode]?.upcast);
+    return this.consumption.scaling.allowed || this.item.system.canScale;
   }
 
   /* -------------------------------------------- */
@@ -174,7 +173,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canScaleDamage() {
-    return this.consumption.scaling.allowed || this.isScaledScroll || this.isSpell;
+    return this.consumption.scaling.allowed || this.isScaledScroll || this.item.system.canScaleDamage;
   }
 
   /* -------------------------------------------- */
@@ -582,6 +581,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       writable: false
     });
 
+    // TODO: Temporarily add parent to consumption targets & damage parts added by enchantment
+    // Can be removed once https://github.com/foundryvtt/foundryvtt/issues/12528 is implemented
+    if ( this.consumption?.targets ) this.consumption.targets = this.consumption.targets.map(c => {
+      if ( c.parent ) return c;
+      return c.clone({}, { parent: this });
+    });
+    if ( this.damage?.parts ) this.damage.parts = this.damage.parts.map(c => {
+      if ( c.parent ) return c;
+      return c.clone({}, { parent: this });
+    });
+
     if ( this.activation ) ActivationField.prepareData.call(this, rollData, this.labels);
     if ( this.duration ) DurationField.prepareData.call(this, rollData, this.labels);
     if ( this.range ) RangeField.prepareData.call(this, rollData, this.labels);
@@ -625,12 +635,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       rollData = _rollData;
     }
 
-    const config = this.getDamageConfig();
-    this.labels.damage = this.labels.damages = (config.rolls ?? []).map((part, index) => {
+    const config = this.getDamageConfig({}, { rollData });
+    this.labels.damage = this.labels.damages = (config.rolls ?? []).map(part => {
       let formula;
       try {
         formula = part.parts.join(" + ");
-        const roll = new CONFIG.Dice.DamageRoll(formula, rollData);
+        const roll = new CONFIG.Dice.DamageRoll(formula, part.data);
         roll.simplify();
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       } catch(err) {
@@ -686,14 +696,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
   /**
    * Get the roll parts used to create the damage rolls.
-   * @param {Partial<DamageRollProcessConfiguration>} [config={}]
+   * @param {Partial<DamageRollProcessConfiguration>} [config={}]  Existing damage configuration to merge into this one.
+   * @param {object} [options]                                     Damage configuration options.
+   * @param {object} [options.rollData]                            Use pre-existing roll data.
    * @returns {DamageRollProcessConfiguration}
    */
-  getDamageConfig(config={}) {
+  getDamageConfig(config={}, { rollData }={}) {
     if ( !this.damage?.parts ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
     const rollConfig = foundry.utils.deepClone(config);
-    const rollData = this.getRollData();
+    rollData ??= this.getRollData();
     rollConfig.rolls = this.damage.parts
       .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index))
       .filter(d => d.parts.length)

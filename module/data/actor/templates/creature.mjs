@@ -1,4 +1,5 @@
 import { simplifyBonus } from "../../../utils.mjs";
+import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
@@ -56,7 +57,7 @@ export default class CreatureTemplate extends CommonTemplate {
       }),
       tools: new MappingField(new RollConfigField({
         value: new NumberField({
-          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 1, label: "DND5E.ProficiencyLevel"
+          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
         }),
         ability: "int",
         bonuses: new SchemaField({
@@ -98,6 +99,16 @@ export default class CreatureTemplate extends CommonTemplate {
   static get _spellLevels() {
     const levels = Object.keys(CONFIG.DND5E.spellLevels).filter(a => a !== "0").map(l => `spell${l}`);
     return [...levels, "pact"];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this Actor type represents a creature.
+   * @returns {boolean}
+   */
+  get isCreature() {
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -222,24 +233,40 @@ export default class CreatureTemplate extends CommonTemplate {
     const abilityData = this.abilities[ability];
     skillData.ability = ability;
     const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
-
-    // Polymorph Skill Proficiencies
-    if ( originalSkills ) skillData.value = Math.max(skillData.value, originalSkills[skillId].value);
+    const originalSkill = originalSkills?.[skillId];
+    if ( originalSkill?.value >= 1 ) {
+      skillData.merged = true;
+      skillData.value = originalSkill?.value;
+    }
 
     // Compute modifier
     const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
     skillData.effectValue = skillData.value;
     skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
     skillData.mod = abilityData?.mod ?? 0;
-    skillData.prof = this.calculateAbilityCheckProficiency(skillData.value, skillData.ability);
+    const calculatedProf = this.calculateAbilityCheckProficiency(skillData.value, skillData.ability);
+    skillData.prof = originalSkill?.prof?.multiplier > calculatedProf.multiplier
+      ? originalSkill.prof.clone() : calculatedProf;
     skillData.value = skillData.proficient = skillData.prof.multiplier;
     skillData.total = skillData.mod + skillData.bonus;
     if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
 
+    // If we merged skills when transforming, take the highest bonus
+    const difference = (originalSkill?.total ?? 0) - skillData.total;
+    if ( originalSkill && (difference > 0) ) {
+      skillData.bonuses.check = `${skillData.bonuses.check ?? ""} + ${difference}`;
+      skillData.bonus += difference;
+      skillData.total += difference;
+    }
+
     // Compute passive bonus
     const passive = flags.observantFeat && CONFIG.DND5E.characterFlags.observantFeat.skills.includes(skillId) ? 5 : 0;
     const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
-    skillData.passive = 10 + skillData.mod + skillData.bonus + skillData.prof.flat + passive + passiveBonus;
+    const advantageMode = AdvantageModeField.combineFields(this, [
+      `abilities.${ability}.check.roll.mode`, `skills.${skillId}.roll.mode`
+    ])?.mode ?? 0;
+    skillData.passive = CONFIG.DND5E.skillPassive.base + skillData.mod + skillData.bonus + skillData.prof.flat
+      + passive + passiveBonus + (advantageMode * CONFIG.DND5E.skillPassive.modifier);
 
     return skillData;
   }
@@ -260,7 +287,7 @@ export default class CreatureTemplate extends CommonTemplate {
       tool.effectValue = tool.value;
       tool.bonus = baseBonus + globalCheckBonus + checkBonusAbl;
       tool.mod = ability?.mod ?? 0;
-      tool.prof = this.calculateAbilityCheckProficiency(tool.value, tool.ability);
+      tool.prof = this.calculateToolProficiency(tool.value, tool.ability);
       tool.total = tool.mod + tool.bonus;
       if ( Number.isNumeric(tool.prof.term) ) tool.total += tool.prof.flat;
       tool.value = tool.prof.multiplier;

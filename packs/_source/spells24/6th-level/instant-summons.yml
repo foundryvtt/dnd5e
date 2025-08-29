@@ -22,6 +22,7 @@ system:
     rules: '2024'
     license: CC-BY-4.0
     book: SRD 5.2
+    page: ''
   activation:
     type: minute
     condition: ''
@@ -156,7 +157,7 @@ system:
         formula: ''
       img: ''
       appliedEffects: []
-  identifier: drawmijs-instant-summons
+  identifier: instant-summons
 _id: phbsplDrawmijsIn
 type: spell
 img: icons/commodities/gems/gem-fragments-turquoise.webp
@@ -172,10 +173,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1724425951300
-  modifiedTime: 1745256791745
+  modifiedTime: 1753380930725
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!items!phbsplDrawmijsIn'

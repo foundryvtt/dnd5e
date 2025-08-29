@@ -373,12 +373,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!items.effects!dmgEarthRingOfEl.cN85nWiTzfGzWR7D'
   - name: Earth Focus
     img: icons/magic/earth/barrier-stone-explosion-debris.webp
@@ -393,6 +394,10 @@ effects:
       - key: system.traits.dr.value
         mode: 2
         value: acid
+        priority: null
+      - key: system.attributes.movement.ignoredDifficultTerrain
+        mode: 2
+        value: rocks
         priority: null
     disabled: false
     duration:
@@ -409,17 +414,21 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgAirRingOfElem.ActiveEffect.d5aFCMPqEUaUQ37L
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.346'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.1.0
       createdTime: 1730685668821
-      modifiedTime: 1730685732812
+      modifiedTime: 1753119190117
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!items.effects!dmgEarthRingOfEl.cXb7lTtpbcsz0BJn'
 folder: DC1x1wAm0NLFudA6
 flags:
@@ -429,12 +438,13 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1730684815591
   modifiedTime: 1745712699566
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 2050000
 ownership:
   default: 0

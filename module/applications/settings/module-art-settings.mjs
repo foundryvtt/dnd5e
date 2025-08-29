@@ -69,7 +69,7 @@ export default class ModuleArtSettingsConfig extends FormApplication {
     const config = configs[idx];
     const target = configs[sortBefore ? idx - 1 : idx + 1];
     configs.splice(idx, 1);
-    const updates = SortingHelpers.performIntegerSort(config, {
+    const updates = foundry.utils.performIntegerSort(config, {
       target, sortBefore,
       siblings: configs,
       sortKey: "priority"

@@ -60,8 +60,8 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
               activity, { ...change, key: keyPath, value }
             );
           }
-          return false;
         } catch(err) {}
+        return false;
       case "system.damage.types":
         const adjust = (damage, keyPath) =>
           ActiveEffect.implementation.applyField(damage, { ...change, key: "types", value: change.value });
@@ -88,6 +88,25 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
           );
         }
         return false;
+
+      /** @deprecated since 5.1 */
+      case "system.preparation.mode":
+        foundry.utils.logCompatibilityWarning("system.preparation.mode is deprecated. Please instead use "
+          + "system.method to set the spellcasting method, or system.prepared to set the preparation state.",
+        { since: "DnD5e 5.1", until: "DnD5e 5.4", once: true });
+        change.key = "system.method";
+        if ( change.value === "always" ) {
+          change.key = "system.prepared";
+          change.value = "2";
+        }
+        break;
+
+      /** @deprecated since 5.1 */
+      case "system.preparation.prepared":
+        foundry.utils.logCompatibilityWarning("system.preparation.prepared is deprecated. "
+          + "Please use system.prepared instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4", once: true });
+        change.key = "system.prepared";
+        break;
     }
   }
 }

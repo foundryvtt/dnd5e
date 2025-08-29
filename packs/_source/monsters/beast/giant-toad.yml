@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: rNhsbUDaAVVoxquv
     name: Amphibious
@@ -511,18 +516,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!Ixo5shumxy4I9qyD.rNhsbUDaAVVoxquv'
   - _id: zEtaamYVRSqu81fy
     name: Standing Leap
@@ -561,18 +565,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.f4yvSah35ixQOswD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.f4yvSah35ixQOswD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!Ixo5shumxy4I9qyD.zEtaamYVRSqu81fy'
   - _id: lYSWskOMRCVLyWLZ
     name: Bite
@@ -745,18 +748,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741121794121
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!Ixo5shumxy4I9qyD.lYSWskOMRCVLyWLZ'
   - _id: 6aBDwlIsxceFMXxL
     name: Swallow
@@ -866,18 +868,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.aH5ncM30tP8tPQ24
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.aH5ncM30tP8tPQ24
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741121814614
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!Ixo5shumxy4I9qyD.6aBDwlIsxceFMXxL'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -887,10 +888,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171219941
   modifiedTime: 1741121823304
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!Ixo5shumxy4I9qyD'

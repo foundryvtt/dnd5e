@@ -1,0 +1,134 @@
+/* ----------------------------------------- */
+/*  Fonts                                    */
+/* ----------------------------------------- */
+
+@font-face {
+  font-family: 'Modesto Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../fonts/modesto-condensed/modesto-condensed.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Modesto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../fonts/modesto-condensed/modesto-condensed-bold.woff2') format('woff2');
+}
+
+/* ----------------------------------------- */
+/*  Sheet Styles                             */
+/* ----------------------------------------- */
+
+:root {
+  --color-text-dark-primary: #191813;
+  --color-text-dark-inactive: #7a7971;
+  --color-text-dark-5: #666;
+  --color-text-light-0: #fff;
+  --color-text-light-1: #eee;
+  --color-text-light-5: #aaa;
+  --color-text-light-6: #999;
+  --color-text-hyperlink: #ff6400;
+  --color-border-light-1: #ddd;
+  --color-border-dark-5: #666;
+  --color-border-light-tertiary: #7a7971;
+  --form-field-height: 26px;
+  --color-shadow-primary: #ff0000;
+  --color-border-light-2: #999;
+
+  --dnd5e-color-black: #000;
+  --dnd5e-color-dark: #191813;
+  --dnd5e-color-faint: #c9c7b8;
+  --dnd5e-color-beige: #b5b3a4;
+  --dnd5e-color-tan: #7a7971;
+  --dnd5e-color-olive: #4b4a44;
+  --dnd5e-color-crimson: #44191A;
+  --dnd5e-color-groove: #eeede0;
+  --dnd5e-color-gold: #9f9275;
+  --dnd5e-color-red: #ed1c24;
+  --dnd5e-color-blue: cornflowerblue;
+  --dnd5e-color-green: #205b15;
+  --dnd5e-color-maroon: #741b2b;
+  --dnd5e-color-parchment: #f1ebe8;
+  --dnd5e-color-purple: #c44dff;
+  --dnd5e-color-scrollbar: var(--dnd5e-color-gold);
+  --dnd5e-color-card: #f8f4f1;
+  --dnd5e-color-hp-1: #1b4b29;
+  --dnd5e-color-hp-2: #3ba55d;
+  --dnd5e-color-hp-3: #276d3c;
+  --dnd5e-color-hd-1: #401f25;
+  --dnd5e-color-hd-2: var(--dnd5e-color-maroon);
+  --dnd5e-color-hd-3: #500000;
+  --dnd5e-color-sc-1: #433754;
+  --dnd5e-color-sc-2: #776493;
+  --dnd5e-color-blue-white: #cfd2da;
+  --dnd5e-color-blue-gray-1: #242731;
+  --dnd5e-color-blue-gray-2: #252830;
+  --dnd5e-color-blue-gray-3: #434857;
+  --dnd5e-color-blue-gray-4: #333742;
+  --dnd5e-color-iron-gray: #313131;
+  --dnd5e-color-light-gray: #3d3d3d;
+  --dnd5e-color-dark-gray: #0d0b0b;
+  --dnd5e-color-success: #006c00;
+  --dnd5e-color-success-background: #c7d0c0;
+  --dnd5e-color-success-critical: green;
+  --dnd5e-color-failure: #6e0000;
+  --dnd5e-color-failure-background: #ffdddd;
+  --dnd5e-color-failure-critical: red;
+  --dnd5e-color-note-info: #5c87b9;
+  --dnd5e-color-note-warn: #9b6903;
+  --dnd5e-color-application-damage: #9c5b47;
+  --dnd5e-color-application-healing: #3c7f58;
+  --dnd5e-color-application-temp: #007F7F;
+  --dnd5e-background-25: rgb(0 0 0 / 25%);
+  --dnd5e-background-10: rgb(0 0 0 / 10%);
+  --dnd5e-background-5: rgb(0 0 0 / 5%);
+  --dnd5e-background-parchment: var(--dnd5e-color-parchment);
+  --dnd5e-background-texture-paper-red: url("ui/texture1.webp") no-repeat top center / auto 770px,
+    var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
+  --dnd5e-background-texture-paper-gray: url("ui/texture-gray1.webp") no-repeat top left,
+    var(--dnd5e-color-parchment) url("ui/texture-gray2.webp") no-repeat bottom right;
+  --dnd5e-background-texture-denim: var(--dnd5e-color-dark-gray) url("../../ui/denim075.png");
+  --dnd5e-border-light: 1px solid #CCC;
+  --dnd5e-border-groove: 2px groove var(--dnd5e-color-groove);
+
+  --font-primary: Signika, sans-serif;
+  --dnd5e-font-modesto: "Modesto Condensed", "Palatino Linotype", serif;
+  --dnd5e-font-roboto: Roboto, sans-serif;
+  --dnd5e-font-roboto-condensed: "Roboto Condensed", sans-serif;
+  --dnd5e-font-roboto-slab: "Roboto Slab", serif;
+  --dnd5e-sheet-background: url("../../ui/parchment.jpg") repeat;
+  --dnd5e-shadow-45: rgb(0 0 0 / 45%);
+  --dnd5e-shadow-15: rgb(0 0 0 / 15%);
+  --dnd5e-highlight-10: rgb(255 255 255 / 10%);
+  --dnd5e-highlight-40: rgb(255 255 255 / 40%);
+  --dnd5e-highlight-45: rgb(255 255 255 / 45%);
+  --font-size-8: 0.5rem;
+  --font-size-9: 0.5625rem;
+  --font-size-10: 0.625rem;
+  --font-size-23: 1.4375rem;
+  --font-size-30: 1.875rem;
+  --font-size-36: 2.25rem;
+  --font-size-42: 2.625rem;
+  --font-size-46: 2.875rem;
+  --dnd5e-journal-h1-size: 2.5em;
+  --dnd5e-journal-h2-size: 2em;
+  --dnd5e-journal-h3-size: 1.5em;
+  --dnd5e-journal-h4-size: 1.1em;
+  --dnd5e-journal-title-size: var(--font-size-46);
+
+  --dnd5e-capacity-container-background-color: oklch(57.5% 0.012 101);
+  --dnd5e-capacity-container-border-color: oklch(20.8% 0.01 98);
+  --dnd5e-capacity-background-color: oklch(62% 0.05 246);
+  --dnd5e-capacity-border-color: oklch(91% 0.044 252.5);
+  --dnd5e-capacity-text-color: oklch(95% 0 0);
+
+  /* Inline Blocks */
+  --dnd5e-block-width-base: 100px;
+  --dnd5e-block-float-max: 50%;
+  --dnd5e-block-header-font: var(--dnd5e-font-roboto-slab);
+  --dnd5e-notable-decor: no-repeat url("ui/notable-right-corner.svg") 0%/contain,
+    no-repeat url("ui/notable-left-corner.svg") 100%/contain;
+
+  --dnd5e-statblock-column-width: 400px;
+}

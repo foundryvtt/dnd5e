@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: oWGcJqNGhbIOeRjU
     name: Keen Hearing and Smell
@@ -519,12 +524,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!VBkp2rGQKvMcCOus.oWGcJqNGhbIOeRjU'
   - _id: UnONIXYgZcE3Jya0
     name: Bite
@@ -742,8 +748,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       dnd5e:
         riders:
           activity: []
@@ -751,12 +755,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741124088537
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!VBkp2rGQKvMcCOus.UnONIXYgZcE3Jya0'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -766,10 +771,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171235437
   modifiedTime: 1741124092684
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!VBkp2rGQKvMcCOus'

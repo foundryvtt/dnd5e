@@ -474,7 +474,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -486,6 +485,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: jZeQHAOQV365hmZF
     name: Magic Resistance
@@ -494,8 +499,8 @@ items:
     system:
       description:
         value: >-
-          <p>The nalfeshnee has<strong> advantage </strong>on saving throws
-          against spells and other magical effects.</p>
+          <p>The nalfeshnee has advantage on saving throws against spells and
+          other magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -523,18 +528,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747957072839
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!rUg5JMnKNnZNBAq9.jZeQHAOQV365hmZF'
   - _id: swlYyGYwkdNzuRkG
     name: Multiattack
@@ -627,18 +631,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273657367
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!rUg5JMnKNnZNBAq9.swlYyGYwkdNzuRkG'
   - _id: 524dkWbpWUJKFaj2
     name: Bite
@@ -791,18 +794,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553648
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!rUg5JMnKNnZNBAq9.524dkWbpWUJKFaj2'
   - _id: xhKo80CbyA57Kl1l
     name: Claw
@@ -960,12 +962,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553648
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!rUg5JMnKNnZNBAq9.xhKo80CbyA57Kl1l'
   - _id: RFPDYIhkmBW2B47S
     name: Horror Nimbus
@@ -976,12 +979,12 @@ items:
         value: >-
           <p>The nalfeshnee magically emits scintillating, multicolored light.
           Each creature within 15 feet of the nalfeshnee that can see the light
-          must succeed on a  <strong>DC 15 Wisdom</strong> saving throw or be
-          frightened for 1 minute. </p><p>A creature can repeat the saving throw
-          at the end of each of its turns, ending the effect on itself on a
-          success. If a creature's saving throw is successful or the effect ends
-          for it, the creature is immune to the nalfeshnee's Horror Nimbus for
-          the next 24 hours.</p>
+          must succeed on a [[/save]] saving throw or be
+          &amp;Reference[frightened] for 1 minute.</p><p>A creature can repeat
+          the saving throw at the end of each of its turns, ending the effect on
+          itself on a success. If a creature's saving throw is successful or the
+          effect ends for it, the creature is immune to the nalfeshnee's Horror
+          Nimbus for the next 24 hours.</p>
         chat: >-
           <p>A creature can repeat the saving throw at the end of each of its
           turns, ending the effect on itself on a success. If a creature's
@@ -1078,18 +1081,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hu2pgYS1RD7hglvg
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hu2pgYS1RD7hglvg
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676901
+      modifiedTime: 1747957090259
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!rUg5JMnKNnZNBAq9.RFPDYIhkmBW2B47S'
   - _id: zK5E9yD6BR0fZRBo
     name: Teleport
@@ -1097,7 +1099,7 @@ items:
     img: icons/magic/symbols/runes-star-pentagon-magenta.webp
     system:
       description:
-        value: ''
+        value: "<p>The nalfeshnee magically teleports, along with any equipment\_it\_is wearing\_or\_carrying, up to 120 feet\_to\_an\_unoccupied\_space it can\_see.</p>"
         chat: >-
           <section class="secret"><p></p></section><p>The nalfeshnee magically
           teleports, along with any equipment it is wearing or carrying, up to
@@ -1182,18 +1184,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676901
+      modifiedTime: 1747957138149
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!rUg5JMnKNnZNBAq9.zK5E9yD6BR0fZRBo'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1203,10 +1204,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171261206
   modifiedTime: 1726171450781
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!rUg5JMnKNnZNBAq9'

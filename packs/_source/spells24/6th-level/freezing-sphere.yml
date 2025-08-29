@@ -28,6 +28,7 @@ system:
     rules: '2024'
     license: CC-BY-4.0
     book: SRD 5.2
+    page: ''
   activation:
     type: action
     condition: ''
@@ -295,7 +296,7 @@ system:
       _id: NKBsnjBBIgsaOPaY
       img: ''
       appliedEffects: []
-  identifier: otilukes-freezing-sphere
+  identifier: freezing-sphere
 _id: phbsplOtilukesFr
 type: spell
 img: icons/magic/water/projectile-ice-snowball.webp
@@ -330,12 +331,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: 1724781444555
       modifiedTime: 1724782761235
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!items.effects!phbsplOtilukesFr.JC3QmmHnM4YKj9ek'
 folder: 8WmlLARx1Df3Ii9v
 sort: 150000
@@ -348,10 +350,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1724425965185
-  modifiedTime: 1745256796540
+  modifiedTime: 1753380921921
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!items!phbsplOtilukesFr'

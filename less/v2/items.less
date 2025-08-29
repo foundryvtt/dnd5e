@@ -7,14 +7,23 @@
   --dnd5e-sheet-header-height: 170px;
   border: var(--dnd5e-border-gold);
 
-  > header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-background-25); }
+  &:not(.minimized)::before {
+    content: var(--dnd5e-item-header-content, none);
+    background: var(--dnd5e-item-header-image) no-repeat top center / cover;
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 150px;
+    border-radius: 5px 5px 0 0;
+    opacity: .2;
+    mask-image: linear-gradient(to bottom, black, transparent);
+  }
 
   .window-header { flex-wrap: nowrap; }
 
   .window-header .header-elements {
     display: contents;
     flex: none;
-    color: var(--color-text-dark-primary);
+    color: var(--color-text-primary);
     font-family: var(--dnd5e-font-roboto-condensed);
     line-height: 1;
 
@@ -33,14 +42,15 @@
 
     i {
       font-size: var(--font-size-11);
-      color: var(--color-text-light-6);
+      color: var(--color-text-tertiary);
       margin: 0;
     }
   }
 
-  .window-header .state-toggle.active { color: var(--color-text-dark-primary); }
+  .window-header .state-toggle.active { color: var(--item-state-toggle-active); }
 
   &:not(.minimized) .window-content {
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: 0 12px 8px;
@@ -65,8 +75,10 @@
   .sheet-header {
     display: flex;
     padding: 0 12px;
+    margin-top: 8px;
     align-items: stretch;
     gap: 8px;
+    min-height: 104px;
 
     input, select { background: var(--dnd5e-background-5); }
 
@@ -93,11 +105,11 @@
       display: block;
       width: 96px;
       height: 96px;
-      border-radius: 100%;
-      border: 4px solid var(--dnd5e-color-gold);
+      border-radius: 8px;
+      border: 2px solid var(--dnd5e-color-gold);
       box-shadow: 0 0 4px var(--dnd5e-shadow-45);
       object-fit: cover;
-      background: var(--dnd5e-color-light-gray);
+      background: var(--dnd5e-background-alt-1);
       margin: 0;
 
       color: var(--color-light-1);
@@ -165,7 +177,7 @@
 
     /* Weight, Price, & Quantity */
     .common-fields {
-      color: var(--color-text-dark-5);
+      color: var(--color-text-secondary);
       font-size: var(--font-size-13);
       gap: 8px;
 
@@ -183,7 +195,7 @@
       input { text-align: center; }
 
       select {
-        color: var(--color-text-dark-primary);
+        color: var(--color-text-primary);
         font-size: var(--font-size-11);
         padding: 0;
       }
@@ -204,14 +216,14 @@
     border: none;
 
     .item {
-      color: var(--color-text-dark-5);
+      color: var(--color-text-secondary);
       text-align: center;
       flex: 1;
 
       > span { padding-bottom: 1px; }
 
       &.active {
-        color: var(--color-text-dark-primary);
+        color: var(--color-text-primary);
         text-shadow: none;
         > span { border-bottom: 3px solid var(--dnd5e-color-gold); }
       }
@@ -246,14 +258,16 @@
     }
 
     &.single-description {
-      padding-right: 5px;
+      padding-right: 9px;
       scrollbar-gutter: auto;
+    }
 
-      > .editor {
-        padding-right: 6px;
-        scrollbar-width: thin;
-        scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
-      }
+    &.editing {
+      scrollbar-gutter: auto;
+      margin-inline: -12px;
+      padding-inline: 0;
+
+      .pills { padding-inline: 12px; }
     }
   }
 
@@ -277,10 +291,10 @@
       .label {
         font-family: var(--dnd5e-font-roboto-condensed);
         font-size: var(--font-size-11);
-        color: var(--color-text-dark-5);
+        color: var(--color-text-secondary);
         text-transform: uppercase;
 
-        .config-button { color: var(--color-text-light-6); }
+        .config-button { color: var(--color-text-tertiary); }
       }
 
       div.value {
@@ -300,7 +314,7 @@
       }
 
       .sign {
-        color: var(--color-text-light-6);
+        color: var(--color-text-tertiary);
         font-size: var(--font-size-18);
       }
 
@@ -311,8 +325,8 @@
       }
 
       &.damage div.value {
-        --icon-fill: var(--color-text-dark-5);
-        color: var(--color-text-dark-5);
+        --icon-fill: var(--color-text-secondary);
+        color: var(--color-text-secondary);
       }
     }
   }
@@ -331,7 +345,7 @@
       > .header {
         background: none;
         border: none;
-        color: var(--color-text-dark-primary);
+        color: var(--color-text-primary);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -365,7 +379,7 @@
             content: "\f078";
             font-family: var(--font-awesome);
             font-weight: bold;
-            color: var(--color-text-dark-5);
+            color: var(--color-text-secondary);
             transition: all 250ms ease;
           }
         }
@@ -381,35 +395,6 @@
       }
 
       .editor { padding: 0 6px; }
-    }
-  }
-
-  .editor.prosemirror {
-    flex: 1;
-    overflow: hidden;
-
-    .editor-container {
-      overflow: hidden auto;
-      margin-right: 0;
-    }
-
-    .editor-content {
-      position: unset;
-      min-height: 300px;
-    }
-
-    code-mirror {
-      min-height: 300px;
-      display: flex;
-      flex-direction: column;
-
-      .cm-editor { overflow: auto; }
-      .cm-scroller { position: relative; }
-    }
-
-    > textarea {
-      flex: none;
-      min-height: 300px;
     }
   }
 
@@ -472,14 +457,14 @@
 
       .summary {
         font-size: var(--font-size-10);
-        color: var(--color-text-dark-5);
+        color: var(--color-text-secondary);
 
         p { margin: 0; }
 
         .content-link {
-          color: var(--color-text-dark-primary);
+          color: var(--advancement-summary-link-color);
           text-decoration-style: dotted;
-          > i { color: var(--color-text-dark-primary); }
+          > i { color: var(--advancement-summary-link-color); }
         }
 
         .tag {
@@ -497,6 +482,7 @@
       border: none;
       background: none;
       box-shadow: none;
+      filter: var(--advancement-icon-filter, none);
     }
   }
 
@@ -509,7 +495,7 @@
         padding: 8px;
         text-align: center;
         font-style: italic;
-        color: var(--color-text-dark-5);
+        color: var(--color-text-secondary);
       }
 
       li { line-height: 1.5; }
@@ -540,7 +526,7 @@
 
     > .icon {
       --icon-size: 24px;
-      --icon-fill: var(--color-text-dark-primary);
+      --icon-fill: var(--activity-icon-color);
       flex: 0 0 50px;
       height: 24px;
 
@@ -556,7 +542,7 @@
       font-weight: bold;
       flex: 1;
       font-size: var(--font-size-14);
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
       text-align: center;
 
       &:hover { text-shadow: 0 0 6px var(--color-shadow-primary); }
@@ -589,7 +575,7 @@
       align-items: center;
       gap: 8px;
 
-      .separator { color: var(--color-text-dark-5); }
+      .separator { color: var(--color-text-secondary); }
     }
   }
 
@@ -625,9 +611,7 @@
 /* ----------------------------------------- */
 
 .dnd5e2.starting-equipment {
-  --background-depth-1: var(--dnd5e-background-card);
-  --background-depth-2: var(--dnd5e-background-parchment);
-  --background-depth-3: color-mix(in oklab, var(--dnd5e-color-card), black 10%);
+
 
   select, input { height: calc(var(--form-field-height) + 1px); }
   button[data-action="add-entry"] { width: 100%; }
@@ -690,7 +674,7 @@
       border-radius: 4px;
       padding: 6px;
       font-size: var(--font-size-11);
-      color: var(--color-text-dark-5);
+      color: var(--color-text-secondary);
     }
     .require-proficiency {
       flex: 0.66;

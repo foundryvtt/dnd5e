@@ -1,0 +1,116 @@
+<li class="member" data-uuid="{{ uuid }}">
+    <div class="vitals card" {{#if underlay}}style="--underlay: {{ underlay }}"{{/if}}>
+        <div class="portrait">
+            {{#if portrait.isVideo}}
+            <video src="{{ portrait.src }}" autoplay muted playsinline disablepictureinpicture loop></video>
+            {{else}}
+            <img src="{{ portrait.src }}" alt="{{ name }}">
+            {{/if}}
+        </div>
+        <div class="bars">
+            <strong class="name">
+                <a class="rollable" data-action="showDocument" data-uuid="{{ uuid }}">{{ name }}</a>
+            </strong>
+            {{#with system.attributes.hp}}
+            <div class="hp-bar bar">
+                <label>{{ localize "DND5E.HP" }}</label>
+                <div class="meter hit-points progress" role="meter" aria-valuemin="0"
+                     aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
+                     style="--bar-percentage: {{ pct }}%"></div>
+                <div class="values">
+                    <span class="value">{{ value }}</span>
+                    <span class="separator">&sol;</span>
+                    <span class="max">{{ max }}</span>
+                </div>
+            </div>
+            {{/with}}
+            {{#with system.attributes.hd}}
+            <div class="hd-bar bar">
+                <label>{{ localize "DND5E.HITDICE.Abbreviation" }}</label>
+                <div class="meter hit-dice progress" role="meter" aria-valuemin="0"
+                     aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
+                     style="--bar-percentage: {{ pct }}%"></div>
+                <div class="values">
+                    <span class="value">{{ value }}</span>
+                    <span class="separator">&sol;</span>
+                    <span class="max">{{ max }}</span>
+                </div>
+            </div>
+            {{/with}}
+            {{#if properties.length}}
+            <ul class="pills">
+                {{#each properties}}
+                <li class="pill transparent">
+                    <span class="label">{{ localize label }}</span>
+                    <span class="separator">|</span>
+                    <span class="value">{{ value }}</span>
+                </li>
+                {{/each}}
+            </ul>
+            {{/if}}
+        </div>
+        <div class="classes controls">
+            {{#if @root.editable}}
+            <button type="button" class="config-button unbutton" data-action="removeMember" data-tooltip
+                    aria-label="{{ localize "DND5E.Group.Action.Remove" }}">
+                <i class="fa-solid fa-square-xmark" inert></i>
+            </button>
+            {{else}}
+            {{#each classes}}
+            <img class="item-tooltip" src="{{ img }}" alt="{{ name }}" data-uuid="{{ uuid }}"
+                 data-action="showDocument" data-tooltip-direction="RIGHT">
+            {{#with subclass}}
+            <img class="item-tooltip" src="{{ img }}" alt="{{ name }}" data-uuid="{{ uuid }}"
+                 data-action="showDocument" data-tooltip-direction="RIGHT">
+            {{/with}}
+            {{/each}}
+            {{/if}}
+        </div>
+    </div>
+    {{#if section.hasStats}}
+    <div class="stats">
+        <div class="info">
+            <div>
+                <i class="fa-solid fa-shield" data-tooltip aria-label="{{ localize "DND5E.ArmorClass" }}"></i>
+                <span class="value">{{ system.attributes.ac.value }}</span>
+            </div>
+            <div>
+                <i class="fa-solid fa-shoe-prints" data-tooltip aria-label="{{ localize "DND5E.Speed" }}"></i>
+                <span class="value">{{ system.attributes.movement.walk }}</span>
+            </div>
+        </div>
+        <div class="info">
+            <div>
+                <a class="{{ @root.rollableClass }} skill" data-action="roll" data-type="skill" data-key="prc"
+                   data-tooltip aria-label="{{ skills.prc.label }}">
+                    <i class="fa-solid fa-eye" inert></i>
+                </a>
+                <div class="skill">
+                    <span class="roll">{{ dnd5e-formatModifier skills.prc.total }}</span>
+                    <span class="passive">({{ skills.prc.passive }})</span>
+                </div>
+            </div>
+            <div>
+                <a class="{{ @root.rollableClass }} skill" data-action="roll" data-type="skill" data-key="ste"
+                   data-tooltip aria-label="{{ skills.ste.label }}">
+                    <i class="fa-solid fa-hood-cloak" inert></i>
+                </a>
+                <div class="skill">
+                    <span class="roll">{{ dnd5e-formatModifier skills.ste.total }}</span>
+                    <span class="passive">({{ skills.ste.passive }})</span>
+                </div>
+            </div>
+            <div>
+                <a class="{{ @root.rollableClass }} skill" data-action="roll" data-type="skill" data-key="sur"
+                   data-tooltip aria-label="{{ skills.sur.label }}">
+                    <i class="fa-solid fa-bow-arrow" inert></i>
+                </a>
+                <div class="skill">
+                    <span class="roll">{{ dnd5e-formatModifier skills.sur.total }}</span>
+                    <span class="passive">({{ skills.sur.passive }})</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</li>

@@ -505,7 +505,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -561,6 +560,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: mmAmorphous00000
     name: Amorphous
@@ -602,12 +607,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAmorphous00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1736988212751
       modifiedTime: 1745712726747
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -656,12 +662,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSunlightWeakne
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1736988226676
       modifiedTime: 1745712726747
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 1
@@ -957,12 +964,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.0
           createdTime: null
           modifiedTime: 1738099880376
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!mmShadow00000000.mmDrainingSwipe0.6AjyMN83LppkkgC3
       - name: 'Hit: STR Score -2'
@@ -1002,12 +1010,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.2
           createdTime: 1738099769470
           modifiedTime: 1738099855288
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _id: erWoeO2hwGnu4yuR
         _key: >-
           !actors.items.effects!mmShadow00000000.mmDrainingSwipe0.erWoeO2hwGnu4yuR
@@ -1048,12 +1057,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.2
           createdTime: 1738099783844
           modifiedTime: 1738099862951
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _id: JN2y9I5bw1HrU0Og
         _key: >-
           !actors.items.effects!mmShadow00000000.mmDrainingSwipe0.JN2y9I5bw1HrU0Og
@@ -1094,12 +1104,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.2
           createdTime: 1738099828775
           modifiedTime: 1738100496662
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _id: nXy1JjamI8lCQT16
         _key: >-
           !actors.items.effects!mmShadow00000000.mmDrainingSwipe0.nXy1JjamI8lCQT16
@@ -1111,12 +1122,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDrainingSwipe0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1736988238694
       modifiedTime: 1745712726747
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 2
@@ -1238,12 +1250,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmShadow00000000.mmShadowStealth0.siHMgi75fxHCESex
     flags:
@@ -1254,12 +1267,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmShadowStealth0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1736988324786
       modifiedTime: 1745712726747
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 3
@@ -1269,12 +1283,13 @@ folder: fSNeRtZ6WOSjk4f8
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1732598129404
   modifiedTime: 1745712726782
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

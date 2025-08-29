@@ -36,7 +36,7 @@ system:
     value: 0
     units: lb
   price:
-    value: 3000
+    value: 40000
     denomination: gp
   attunement: required
   equipped: false
@@ -162,12 +162,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     img: icons/commodities/gems/gem-rough-cushion-blue.webp
     type: base
     system: {}
@@ -180,10 +181,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.345'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.1.0
   createdTime: 1725037081880
-  modifiedTime: 1725992477712
+  modifiedTime: 1750697344647
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!items!0G5LSgbb5NTV4XC7'

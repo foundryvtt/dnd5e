@@ -1,4 +1,4 @@
-import SystemDataModel from "../../abstract.mjs";
+import SystemDataModel from "../../abstract/system-data-model.mjs";
 
 const { BooleanField, StringField } = foundry.data.fields;
 
@@ -80,10 +80,15 @@ export default class EquippableItemTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Ensure items that cannot be attuned are not marked as attuned.
+   * Ensure items that cannot be attuned are not marked as attuned. If attuned and on an actor type that
+   * tracks attunement, increase that actor's attunement count.
    */
   prepareFinalEquippableData() {
+    if ( this.validProperties.has("mgc") && !this.properties.has("mgc") ) this.attunement = "";
     if ( !this.attunement ) this.attuned = false;
+    if ( this.attuned && this.parent.actor?.system.attributes?.attunement ) {
+      this.parent.actor.system.attributes.attunement.value += 1;
+    }
   }
 
   /* -------------------------------------------- */
@@ -100,17 +105,6 @@ export default class EquippableItemTemplate extends SystemDataModel {
       game.i18n.localize(this.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
       ("proficient" in this) ? CONFIG.DND5E.proficiencyLevels[this.prof?.multiplier || 0] : null
     ];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Are the magical properties of this item, such as magical bonuses to armor & damage, available?
-   * @type {boolean}
-   */
-  get magicAvailable() {
-    const attunement = this.attuned || (this.attunement !== "required");
-    return attunement && this.properties.has("mgc") && this.validProperties.has("mgc");
   }
 
   /* -------------------------------------------- */

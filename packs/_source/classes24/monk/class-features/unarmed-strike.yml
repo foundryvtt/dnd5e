@@ -110,8 +110,12 @@ system:
           - dex
         dc:
           calculation: ''
-          formula: 8 + @abilities.str.mod + @prof
+          formula: 8 + max(@abilities.str.mod, @abilities.dex.mod) + @prof
       _id: Sl673lS0oweTsTHf
+      img: ''
+      appliedEffects:
+        - OM3Rt1nQv3WKS0pc
+        - OgkonP6JL0AdFtQN
   uses:
     spent: 0
     recovery: []
@@ -211,12 +215,13 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.phbUnarmedStrike.ActiveEffect.bdG1d6kwc7F8Gbfg
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!items.effects!phbmnkUnarmedStr.OM3Rt1nQv3WKS0pc'
   - name: Prone
     img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
@@ -245,12 +250,13 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.phbUnarmedStrike.ActiveEffect.SfM8X3xktY0PR0Kz
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!items.effects!phbmnkUnarmedStr.OgkonP6JL0AdFtQN'
 folder: kK77WX8hVJHRQRda
 flags:
@@ -260,12 +266,13 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.345'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866307724
-  modifiedTime: 1745256763421
+  modifiedTime: 1750442964195
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

@@ -3,7 +3,6 @@ import AttackRollConfigurationDialog from "../../applications/dice/attack-config
 import AttackActivityData from "../../data/activity/attack-data.mjs";
 import { getTargetDescriptors } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
-import BasicRoll from "../../dice/basic-roll.mjs";
 
 /**
  * Activity for making attacks and rolling damage.
@@ -129,7 +128,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     }
 
     rollConfig.hookNames = [...(config.hookNames ?? []), "attack", "d20Test"];
-    rollConfig.rolls = [BasicRoll.mergeConfigs({
+    rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
       options: {
         ammunition: rollConfig.ammunition,
         attackMode: rollConfig.attackMode,

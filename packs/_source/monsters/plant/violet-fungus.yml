@@ -467,7 +467,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -479,6 +478,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: OEx9iy4HDipiYsPt
     name: Rotting Touch
@@ -644,12 +649,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107870469
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!7EmUVycEASn7SFL0.OEx9iy4HDipiYsPt'
   - _id: wjDktLNTUnueuX2X
     name: Multiattack
@@ -740,18 +746,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655263
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!7EmUVycEASn7SFL0.wjDktLNTUnueuX2X'
   - _id: fZgfSlczUTtrCNEb
     name: False Appearance
@@ -789,18 +794,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!7EmUVycEASn7SFL0.fZgfSlczUTtrCNEb'
 effects: []
 folder: KY8fajTNVVOIT8yT
@@ -810,10 +814,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171205645
   modifiedTime: 1745107876945
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!7EmUVycEASn7SFL0'

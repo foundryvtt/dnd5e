@@ -476,7 +476,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -488,6 +487,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: Os0eEymWpLTVR2Xv
     name: Blinding Dust
@@ -592,18 +597,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.ao6mxTJVYy7WaVgW
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ao6mxTJVYy7WaVgW
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676962
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.Os0eEymWpLTVR2Xv'
   - _id: 3PBv68cIzTlrzcYe
     name: Blasphemous Word
@@ -708,18 +712,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Xwj2GPqTxngS0j2L
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Xwj2GPqTxngS0j2L
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676962
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.3PBv68cIzTlrzcYe'
   - _id: sjY1jcYS6PdmZYKH
     name: Channel Negative Energy
@@ -818,18 +821,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.LO4nrudXAKJ4DbQI
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LO4nrudXAKJ4DbQI
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.sjY1jcYS6PdmZYKH'
   - _id: JxFTskCIHyVwp7fF
     name: Magic Resistance
@@ -867,18 +869,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.JxFTskCIHyVwp7fF'
   - _id: AEc5FXdpe3M7KHQI
     name: Rejuvenation
@@ -918,18 +919,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.JcfHlAcfwSWnt7Ud
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JcfHlAcfwSWnt7Ud
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676962
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.AEc5FXdpe3M7KHQI'
   - _id: FeMPdVmbrjP2L3CO
     name: Spellcasting
@@ -984,18 +984,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015796
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.FeMPdVmbrjP2L3CO'
   - _id: xZSeAPj02NKne0AK
     name: Multiattack
@@ -1087,18 +1086,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656258
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.xZSeAPj02NKne0AK'
   - _id: M6t9H8pMhzQxM9qv
     name: Rotting Fist
@@ -1339,12 +1337,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745176292793
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.M6t9H8pMhzQxM9qv'
   - _id: yHydHrxw4vlDlyjf
     name: Dreadful Glare
@@ -1448,18 +1447,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.H306eluIH47Wfr0U
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.H306eluIH47Wfr0U
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676962
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.yHydHrxw4vlDlyjf'
   - _id: und47mebgauAcPu4
     name: Legendary Actions
@@ -1499,18 +1497,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676962
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.und47mebgauAcPu4'
   - _id: NMN6cq7RkU8ccxKF
     name: Lair Actions
@@ -1554,18 +1551,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676962
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.NMN6cq7RkU8ccxKF'
   - _id: IL0u33pW96t5O04m
     name: Regional Effects
@@ -1604,18 +1600,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.IL0u33pW96t5O04m'
   - _id: MVq9wNMasHT5Cr1J
     name: Attack
@@ -1716,12 +1711,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.MVq9wNMasHT5Cr1J'
   - _id: o7UvUGPaF9cnGcQi
     name: Whirlwind of Sand
@@ -1822,18 +1818,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.X96xsQjIolyHtV91
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.X96xsQjIolyHtV91
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.o7UvUGPaF9cnGcQi'
   - _id: n9pJzTDsAwQxJVRl
     name: Sacred Flame
@@ -1949,21 +1944,20 @@ items:
           sort: 0
       identifier: sacred-flame
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
+    flags: {}
     img: icons/magic/light/beam-rays-orange.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.n9pJzTDsAwQxJVRl'
   - _id: MUO1uYN7JR1hm4dR
     name: Thaumaturgy
@@ -2081,21 +2075,20 @@ items:
           sort: 0
       identifier: thaumaturgy
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
+    flags: {}
     img: icons/magic/fire/explosion-fireball-small-purple-orange.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.MUO1uYN7JR1hm4dR'
   - _id: arzCrMRgcNiQuh43
     name: Command
@@ -2193,21 +2186,20 @@ items:
           sort: 0
       identifier: command
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.arzCrMRgcNiQuh43
+    flags: {}
     img: icons/magic/fire/explosion-fireball-small-purple.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.arzCrMRgcNiQuh43
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.arzCrMRgcNiQuh43'
   - _id: 7buEm5KhI5lP8m1z
     name: Guiding Bolt
@@ -2222,9 +2214,9 @@ items:
           target takes 4d6 radiant damage, and the next attack roll made against
           this target before the end of your next turn has advantage, thanks to
           the mystical dim light glittering on the target until
-          then.</p><p><strong>Higher Levels.</strong> When you cast this spell
-          using a spell slot of 2nd level or higher, the damage increases by 1d6
-          for each slot level above 1st.</p>
+          then.</p><p><strong>At Higher Levels.</strong> When you cast this
+          spell using a spell slot of 2nd level or higher, the damage increases
+          by 1d6 for each slot level above 1st.</p>
         chat: ''
       source:
         custom: ''
@@ -2332,21 +2324,20 @@ items:
           sort: 0
       identifier: guiding-bolt
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.7buEm5KhI5lP8m1z
+    flags: {}
     img: icons/magic/fire/projectile-fireball-smoke-large-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.7buEm5KhI5lP8m1z
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.7buEm5KhI5lP8m1z'
   - _id: jZ6JNykRtdQ90MOo
     name: Shield of Faith
@@ -2446,21 +2437,20 @@ items:
           sort: 0
       identifier: shield-of-faith
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo
+    flags: {}
     img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.jZ6JNykRtdQ90MOo'
   - _id: 3Lo9boi7P2ro6QV4
     name: Hold Person
@@ -2561,21 +2551,20 @@ items:
           sort: 0
       identifier: hold-person
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4
+    flags: {}
     img: icons/magic/control/debuff-chains-ropes-purple.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.3Lo9boi7P2ro6QV4'
   - _id: 5VhqFROQYjr1P9lp
     name: Silence
@@ -2678,21 +2667,20 @@ items:
           sort: 0
       identifier: silence
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.5VhqFROQYjr1P9lp
+    flags: {}
     img: icons/magic/symbols/runes-triangle-magenta.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.5VhqFROQYjr1P9lp
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.5VhqFROQYjr1P9lp'
   - _id: JbxsYXxSOTZbf9I0
     name: Spiritual Weapon
@@ -2711,9 +2699,9 @@ items:
           whatever form you choose. Clerics of deities who are associated with a
           particular weapon (as St. Cuthbert is known for his mace and Thor for
           his hammer) make this spell's effect resemble that
-          weapon.</p><p><strong>Higher Levels.</strong> When you cast this spell
-          using a spell slot of 3rd level or higher, the damage increases by 1d8
-          for every two slot levels above the 2nd.</p>
+          weapon.</p><p><strong>At Higher Levels.</strong> When you cast this
+          spell using a spell slot of 3rd level or higher, the damage increases
+          by 1d8 for every two slot levels above the 2nd.</p>
         chat: ''
       source:
         custom: ''
@@ -2825,18 +2813,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.JbxsYXxSOTZbf9I0'
   - _id: oyE5nVppa5mde5gT
     name: Animate Dead
@@ -2958,21 +2945,20 @@ items:
           sort: 0
       identifier: animate-dead
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.oyE5nVppa5mde5gT
+    flags: {}
     img: icons/magic/control/fear-fright-monster-red.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.oyE5nVppa5mde5gT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.oyE5nVppa5mde5gT'
   - _id: 15Fa6q1nH27XfbR8
     name: Dispel Magic
@@ -3077,21 +3063,20 @@ items:
           sort: 0
       identifier: dispel-magic
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.15Fa6q1nH27XfbR8
+    flags: {}
     img: icons/skills/melee/strike-blade-knife-orange-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.15Fa6q1nH27XfbR8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.15Fa6q1nH27XfbR8'
   - _id: XqzXSKNR75ZdYTA9
     name: Divination
@@ -3200,21 +3185,20 @@ items:
           sort: 0
       identifier: divination
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.XqzXSKNR75ZdYTA9
+    flags: {}
     img: icons/magic/light/beam-rays-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.XqzXSKNR75ZdYTA9
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.XqzXSKNR75ZdYTA9'
   - _id: TgHsuhNasPbhu8MO
     name: Guardian of Faith
@@ -3332,21 +3316,20 @@ items:
           sort: 0
       identifier: guardian-of-faith
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.TgHsuhNasPbhu8MO
+    flags: {}
     img: icons/magic/control/buff-flight-wings-runes-blue-white.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.TgHsuhNasPbhu8MO
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.TgHsuhNasPbhu8MO'
   - _id: CjIq8Ed7bu3vVwT1
     name: Contagion
@@ -3493,21 +3476,20 @@ items:
           sort: 0
       identifier: contagion
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.CjIq8Ed7bu3vVwT1
+    flags: {}
     img: icons/magic/unholy/strike-beam-blood-large-red-purple.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.CjIq8Ed7bu3vVwT1
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.CjIq8Ed7bu3vVwT1'
   - _id: OVikYmSdHliAG2YD
     name: Insect Plague
@@ -3631,21 +3613,20 @@ items:
           sort: 0
       identifier: insect-plague
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.OVikYmSdHliAG2YD
+    flags: {}
     img: icons/magic/nature/leaf-glow-maple-teal.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.OVikYmSdHliAG2YD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.OVikYmSdHliAG2YD'
   - _id: tMH6Ivn4GmE1naMj
     name: Harm
@@ -3764,21 +3745,20 @@ items:
           sort: 0
       identifier: harm
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.tMH6Ivn4GmE1naMj
+    flags: {}
     img: icons/magic/unholy/strike-beam-blood-large-red-purple.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.tMH6Ivn4GmE1naMj
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!UFW8M3JHzHkxUEGM.tMH6Ivn4GmE1naMj'
 effects: []
 folder: FsvtTiIRh93utaoh
@@ -3788,10 +3768,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171234382
   modifiedTime: 1745176301381
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!UFW8M3JHzHkxUEGM'

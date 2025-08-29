@@ -1,9 +1,9 @@
 <div class="flexrow">
     {{~#if displaySelection}}
-    <div class="count {{ invalid }}">
+    <div class="count {{#if invalid}}invalid {{/if}}">
         {{{ localize "DND5E.CompendiumBrowser.Selection.Label" summary=summary }}}
     </div>
-    <button type="submit">
+    <button type="submit"{{#if invalid}} disabled data-tooltip aria-label="{{invalidTooltip}}" {{/if}}>
         {{ localize "DND5E.CompendiumBrowser.Selection.Select" }}
     </button>
     {{/if~}}

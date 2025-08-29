@@ -27,6 +27,42 @@
                      localize=true rootId=partId }}
     </fieldset>
 
+    {{!-- Check Rolls --}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.ROLL.Section" label=checkLabel }}</legend>
+        <div class="form-group split-group">
+            <label>{{ localize "DND5E.ROLL.Range.Label" }}</label>
+            <div class="form-fields">
+                {{ formField fields.check.fields.roll.fields.min name=(concat prefix "check.roll.min")
+                             value=data.check.roll.min placeholder="1" type="number" localize=true
+                             label=(localize "DND5E.Minimum") hint=false classes="label-top" rootId=partId }}
+                {{ formField fields.check.fields.roll.fields.max name=(concat prefix "check.roll.max")
+                             value=data.check.roll.max placeholder="20" type="number" localize=true
+                             label=(localize "DND5E.Maximum") hint=false classes="label-top" rootId=partId }}
+            </div>
+        </div>
+        {{ formField fields.check.fields.roll.fields.mode name=(concat prefix "check.roll.mode")
+                     value=data.check.roll.mode options=advantageModeOptions localize=true rootId=partId }}
+    </fieldset>
+
+    {{!-- Save Rolls --}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.ROLL.Section" label=saveLabel }}</legend>
+        <div class="form-group split-group">
+            <label>{{ localize "DND5E.ROLL.Range.Label" }}</label>
+            <div class="form-fields">
+                {{ formField fields.save.fields.roll.fields.min name=(concat prefix "save.roll.min")
+                             value=data.save.roll.min placeholder="1" type="number" localize=true
+                             label=(localize "DND5E.Minimum") hint=false classes="label-top" rootId=partId }}
+                {{ formField fields.save.fields.roll.fields.max name=(concat prefix "save.roll.max")
+                             value=data.save.roll.max placeholder="20" type="number" localize=true
+                             label=(localize "DND5E.Maximum") hint=false classes="label-top" rootId=partId }}
+            </div>
+        </div>
+        {{ formField fields.save.fields.roll.fields.mode name=(concat prefix "save.roll.mode")
+                     value=data.save.roll.mode options=advantageModeOptions localize=true rootId=partId }}
+    </fieldset>
+
     {{!-- Global Bonuses --}}
     {{#if global}}
     <fieldset class="card">

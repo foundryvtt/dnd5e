@@ -4,11 +4,12 @@
             <span>{{ localize "DND5E.TRANSFORM.FIELDS.profiles.label" }}</span>
         </legend>
         {{#with fields.transform.fields as |fields|}}
+        {{ formField fields.mode value=../source.transform.mode options=../profileModes }}
         {{#unless @root.activity.isSpell}}
         {{ formField fields.identifier value=../source.transform.identifier }}
         {{/unless}}
         {{/with}}
-        <ul class="separated-list unlist">
+        <ul class="separated-list flexcol unlist">
             {{#each profiles}}
             <li data-index="{{ index }}" data-profile-id="{{ data._id }}" data-expand-id="profile-{{ data._id }}">
                 {{> ".profile" }}
@@ -31,8 +32,21 @@
         <div class="form-fields">
 
             {{!-- CR --}}
+            {{#if (eq @root.source.transform.mode "cr")}}
             {{ formField fields.cr name=(concat prefix "cr") value=data.cr localize=true hint=false classes="label-top"
                          label="DND5E.TRANSFORM.FIELDS.profiles.element.cr.abbr" }}
+
+            {{else if document}}
+
+            {{!-- UUID --}}
+            {{{ dnd5e-linkForUuid data.uuid }}}
+
+            {{else~}}
+
+            {{!-- Drop Area --}}
+            <div class="drop-area">{{ localize "DND5E.TRANSFORM.Profile.DropHint" }}</div>
+
+            {{/if}}
 
             {{!-- Name --}}
             {{ formField fields.name name=(concat prefix "name") value=data.name hint=false classes="label-top"
@@ -46,6 +60,7 @@
         </div>
     </div>
     <input type="hidden" name="{{ prefix }}_id" value="{{ data._id }}">
+    <input type="hidden" name="{{ prefix }}uuid" value="{{ data.uuid }}">
     <div class="additional-tray collapsible {{ collapsed }}" data-action="toggleCollapsed">
         <label class="roboto-upper">
             <i class="fa-solid fa-gears" inert></i>
@@ -54,12 +69,14 @@
         </label>
         <div class="collapsible-content">
             <div class="wrapper">
+                {{#if (eq @root.source.transform.mode "cr")}}
                 {{ formField fields.sizes name=(concat prefix "sizes") value=data.sizes
                              options=@root.creatureSizeOptions }}
                 {{ formField fields.types name=(concat prefix "types") value=data.types
                              options=@root.creatureTypeOptions }}
                 {{ formField fields.movement name=(concat prefix "movement") value=data.movement
                              options=@root.movementTypeOptions }}
+                {{/if}}
                 <div class="form-group">
                     <label>{{ localize "DND5E.TRANSFORM.FIELDS.profiles.element.level.label" }}</label>
                     <div class="form-fields range-fields">

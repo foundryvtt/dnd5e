@@ -1,6 +1,6 @@
+import CheckboxElement from "../components/checkbox.mjs";
 import ItemSheet5e from "../item/item-sheet.mjs";
 import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
-import ContextMenu5e from "../context-menu.mjs";
 
 /**
  * @import { FilterState5e } from "../components/item-list-controls.mjs";
@@ -92,17 +92,6 @@ export default function PrimarySheetMixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    _attachFrameListeners() {
-      new ContextMenu5e(this.element, '.header-control[data-action="toggleControls"]', [], {
-        eventName: "click", fixed: true, jQuery: false,
-        onOpen: () => ui.context.menuItems = Array.from(this._getHeaderControlContextEntries())
-      });
-      super._attachFrameListeners();
-    }
-
-    /* -------------------------------------------- */
-
-    /** @inheritDoc */
     _configureRenderOptions(options) {
       super._configureRenderOptions(options);
 
@@ -122,33 +111,6 @@ export default function PrimarySheetMixin(Base) {
         if ( tab?.condition && !tab.condition(this.document) ) delete parts[key];
       }
       return parts;
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Translate header controls to context menu entries.
-     * @returns {Generator<ContextMenuEntry>}
-     * @yields {ContextMenuEntry}
-     * @protected
-     */
-    *_getHeaderControlContextEntries() {
-      for ( const { icon, label, action, onClick } of this._headerControlButtons() ) {
-        let handler = this.options.actions[action];
-        if ( typeof handler === "object" ) {
-          if ( handler.buttons && !handler.buttons.includes(0) ) continue;
-          handler = handler.handler;
-        }
-        yield {
-          name: label,
-          icon: `<i class="${icon}" inert></i>`,
-          callback: li => {
-            if ( onClick ) onClick(window.event);
-            else if ( handler ) handler.call(this, window.event, li);
-            else this._onClickAction(window.event, li);
-          }
-        };
-      }
     }
 
     /* -------------------------------------------- */
@@ -240,9 +202,21 @@ export default function PrimarySheetMixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    async _preparePartContext(partId, options) {
-      const context = await super._preparePartContext(partId, options);
+    async _preparePartContext(partId, context, options) {
+      context = await super._preparePartContext(partId, context, options);
       context.tab = context.tabs[partId];
+
+      /**
+       * A hook event that fires during preparation of sheet parts.
+       * @function dnd5e.prepareSheetContext
+       * @memberof hookEvents
+       * @param {PrimarySheet5e} sheet  Sheet being rendered.
+       * @param {string} partId         The ID of the part being prepared.
+       * @param {object} context        Preparation context that should be mutated.
+       * @param {object} options        Render options.
+       */
+      Hooks.callAll("dnd5e.prepareSheetContext", this, partId, context, options);
+
       return context;
     }
 
@@ -310,6 +284,15 @@ export default function PrimarySheetMixin(Base) {
       // Add event listeners
       this.element.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
 
+      // Prevent inputs from firing drag listeners.
+      this.element.querySelectorAll(".draggable input").forEach(el => {
+        el.draggable = true;
+        el.ondragstart = event => {
+          event.preventDefault();
+          event.stopPropagation();
+        };
+      });
+
       if ( this.isEditable ) {
         // Automatically select input contents when focused
         this.element.querySelectorAll("input").forEach(e => e.addEventListener("focus", e.select));
@@ -353,7 +336,7 @@ export default function PrimarySheetMixin(Base) {
       element.dataset.tooltip = `
         <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
       `;
-      element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip";
+      element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light";
       element.dataset.tooltipDirection ??= "LEFT";
     }
 
@@ -420,6 +403,18 @@ export default function PrimarySheetMixin(Base) {
 
     /* -------------------------------------------- */
 
+    /** @override */
+    _onRevealSecret(event) {
+      if ( super._onRevealSecret(event) ) return;
+      const target = event.target.closest("[data-target]")?.dataset.target;
+      if ( !target ) return;
+      const content = foundry.utils.getProperty(this.document, target);
+      const modified = event.target.toggleRevealed(content);
+      this.document.update({ [target]: modified });
+    }
+
+    /* -------------------------------------------- */
+
     /**
      * Handle opening a document sheet.
      * @this {PrimarySheet5e}
@@ -428,6 +423,7 @@ export default function PrimarySheetMixin(Base) {
      */
     static async #showDocument(event, target) {
       if ( await this._showDocument(event, target) === false ) return;
+      if ( [HTMLInputElement, HTMLSelectElement, CheckboxElement].some(el => event.target instanceof el) ) return;
       const uuid = target.closest("[data-uuid]")?.dataset.uuid;
       const doc = await fromUuid(uuid);
       const mode = target.dataset.action === "showDocument" ? "PLAY" : "EDIT";
@@ -521,8 +517,8 @@ export default function PrimarySheetMixin(Base) {
     static sortItemsPriority(a, b) {
       return a.system.linkedActivity?.item?.name.localeCompare(b.system.linkedActivity?.item?.name, game.i18n.lang)
         || ((a.system.level ?? 0) - (b.system.level ?? 0))
-        || ((a.system.preparation?.mode ?? 0) - (b.system.preparation?.mode ?? 0))
-        || ((a.system.preparation?.prepared ?? 0) - (b.system.preparation?.prepared ?? 0))
+        || ((a.system.prepared ?? 0) - (b.system.prepared ?? 0))
+        || (a.system.method ?? "").compare(b.system.method ?? "")
         || a.name.localeCompare(b.name, game.i18n.lang);
     }
 

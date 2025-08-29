@@ -474,7 +474,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -486,6 +485,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: Na7qo8robmcacNZI
     name: Amorphous
@@ -523,18 +528,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.3lDp8DtWwNDHSvxX
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.3lDp8DtWwNDHSvxX
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!NwQpeeaMxAC3fRft.Na7qo8robmcacNZI'
   - _id: wvlDMuDDdk7peoPa
     name: Corrosive Form
@@ -647,18 +651,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.cZm13DxOe9lZyGFT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cZm13DxOe9lZyGFT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676723
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!NwQpeeaMxAC3fRft.wvlDMuDDdk7peoPa'
   - _id: 06FRVwBFMJYhZ94o
     name: Spider Climb
@@ -696,18 +699,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!NwQpeeaMxAC3fRft.06FRVwBFMJYhZ94o'
   - _id: v6ZspnPr8G5hApkL
     name: Pseudopod
@@ -883,12 +885,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551533
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!NwQpeeaMxAC3fRft.v6ZspnPr8G5hApkL'
   - _id: VcVWWSlfTBeXWh3T
     name: Split
@@ -984,18 +987,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.NzHwrEuKnKxZ4NTP
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.NzHwrEuKnKxZ4NTP
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676723
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!NwQpeeaMxAC3fRft.VcVWWSlfTBeXWh3T'
 effects: []
 folder: spz6Dws3tO6Qs5Mh
@@ -1005,10 +1007,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171227615
   modifiedTime: 1726171444054
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!NwQpeeaMxAC3fRft'

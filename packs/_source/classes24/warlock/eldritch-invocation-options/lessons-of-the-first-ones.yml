@@ -28,7 +28,7 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 2
-    repeatable: false
+    repeatable: true
   properties: []
   requirements: ''
   activities: {}
@@ -43,12 +43,13 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.0
   createdTime: 1735866281378
-  modifiedTime: 1740685846359
+  modifiedTime: 1752706862177
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

@@ -53,7 +53,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       template: "systems/dnd5e/templates/actors/tabs/character-inventory.hbs",
       templates: [
         "systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs",
-        "systems/dnd5e/templates/inventory/encumbrance.hbs"
+        "systems/dnd5e/templates/inventory/encumbrance.hbs", "systems/dnd5e/templates/inventory/containers.hbs"
       ],
       scrollable: [""]
     },
@@ -131,13 +131,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
   ];
 
   /* -------------------------------------------- */
-
-  /** @override */
-  tabGroups = {
-    primary: "details"
-  };
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -156,6 +149,13 @@ export default class CharacterActorSheet extends BaseActorSheet {
     effects: { name: "", properties: new Set() },
     inventory: { name: "", properties: new Set() },
     spells: { name: "", properties: new Set() }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  tabGroups = {
+    primary: "details"
   };
 
   /* -------------------------------------------- */
@@ -287,6 +287,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       secrets: this.actor.isOwner, relativeTo: this.actor, rollData: context.rollData
     };
     context.enriched = {
+      label: "DND5E.Biography",
       value: await TextEditor.enrichHTML(this.actor.system.details.biography.value, enrichmentOptions)
     };
 
@@ -296,7 +297,11 @@ export default class CharacterActorSheet extends BaseActorSheet {
     ].map(k => {
       const field = this.actor.system.schema.fields.details.fields[k];
       const name = `system.details.${k}`;
-      return { name, label: field.label, value: foundry.utils.getProperty(this.actor, name) ?? "" };
+      return {
+        name, label: field.label,
+        value: foundry.utils.getProperty(this.actor, name) ?? "",
+        source: foundry.utils.getProperty(this.actor._source, name) ?? ""
+      };
     });
 
     return context;
@@ -465,7 +470,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    */
   async _prepareHeaderContext(context, options) {
     if ( this.actor.limited ) {
-      context.portrait = this._preparePortrait(context);
+      context.portrait = await this._preparePortrait(context);
       return context;
     }
 
@@ -482,7 +487,10 @@ export default class CharacterActorSheet extends BaseActorSheet {
         { number: formatNumber(context.system.details.xp.boonsEarned ?? 0, { signDisplay: "always" }) }
       );
     }
+
+    // Visibility
     context.showExperience = game.settings.get("dnd5e", "levelingMode") !== "noxp";
+    context.showRests = game.user.isGM || (this.actor.isOwner && game.settings.get("dnd5e", "allowRests"));
 
     return context;
   }
@@ -512,7 +520,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    */
   async _prepareSidebarContext(context, options) {
     const { attributes } = this.actor.system;
-    context.portrait = this._preparePortrait(context);
+    context.portrait = await this._preparePortrait(context);
 
     // Death Saves
     const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
@@ -558,11 +566,11 @@ export default class CharacterActorSheet extends BaseActorSheet {
     context.favorites = await this._prepareFavorites();
 
     // Speed
-    context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
+    context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, { label }]) => {
       const value = attributes.movement[k];
       if ( value > obj.value ) Object.assign(obj, { value, label });
       return obj;
-    }, { value: 0, label: CONFIG.DND5E.movementTypes.walk });
+    }, { value: 0, label: CONFIG.DND5E.movementTypes.walk?.label });
 
     return context;
   }
@@ -694,7 +702,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
         effectId: type === "effect" ? favorite.id : null,
         parentId: (type === "effect") && (favorite.parent !== favorite.target) ? favorite.parent.id: null,
         activityId: type === "activity" ? favorite.id : null,
-        preparationMode: (type === "slots") ? (/spell\d+/.test(id) ? "prepared" : id) : null,
         key: (type === "skill") || (type === "tool") ? id : null,
         toggle: toggle === undefined ? null : { applicable: true, value: toggle },
         quantity: quantity > 1 ? quantity : "",
@@ -719,25 +726,25 @@ export default class CharacterActorSheet extends BaseActorSheet {
   async _getFavoriteData(type, id) {
     // Spell slots
     if ( type === "slots" ) {
-      const { value, max, level } = this.actor.system.spells[id] ?? {};
+      const { value, max, level, type: method } = this.actor.system.spells?.[id] ?? {};
+      const model = CONFIG.DND5E.spellcasting[method];
       const uses = { value, max, name: `system.spells.${id}.value` };
-      if ( !/spell\d+/.test(id) ) return {
-        uses, level,
+      if ( !model || model.isSingleLevel ) return {
+        uses, level, method,
         title: game.i18n.localize(`DND5E.SpellSlots${id.capitalize()}`),
         subtitle: [
           game.i18n.localize(`DND5E.SpellLevel${level}`),
-          game.i18n.localize(`DND5E.Abbreviation${CONFIG.DND5E.spellcastingTypes[id]?.shortRest ? "SR" : "LR"}`)
+          game.i18n.localize(`DND5E.Abbreviation${model?.isSR ? "SR" : "LR"}`)
         ],
-        img: CONFIG.DND5E.spellcastingTypes[id]?.img || CONFIG.DND5E.spellcastingTypes.pact.img
+        img: model?.img || CONFIG.DND5E.spellcasting.pact.img
       };
 
       const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
-      const isSR = CONFIG.DND5E.spellcastingTypes.leveled.shortRest;
       return {
-        uses, level,
+        uses, level, method,
         title: game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level }),
-        subtitle: game.i18n.localize(`DND5E.Abbreviation${isSR ? "SR" : "LR"}`),
-        img: CONFIG.DND5E.spellcastingTypes.leveled.img.replace("{id}", id)
+        subtitle: game.i18n.localize(`DND5E.Abbreviation${model.isSR ? "SR" : "LR"}`),
+        img: model.img.replace("{id}", id)
       };
     }
 
@@ -849,7 +856,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
     super._prepareItemFeature(item, ctx);
 
-    const [originId] = item.getFlag("dnd5e", "advancementOrigin")?.split(".") ?? [];
+    const [originId] = (item.getFlag("dnd5e", "advancementRoot") ?? item.getFlag("dnd5e", "advancementOrigin"))
+      ?.split(".") ?? [];
     const group = this.actor.items.get(originId);
     ctx.groups.origin = "other";
     switch ( group?.type ) {
@@ -889,13 +897,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-
-    if ( !this.actor.limited ) {
-      this._renderAttunement(context, options);
-      this._renderSpellbook(context, options);
-    }
+  async _onFirstRender(context, options) {
+    await super._onFirstRender(context, options);
 
     // Apply special context menus for items outside inventory elements
     const featuresElement = this.element.querySelector(`[data-tab="features"] ${this.options.elements.inventory}`);
@@ -908,6 +911,18 @@ export default class CharacterActorSheet extends BaseActorSheet {
       this.element, ".containers [data-item-id]", [],
       { onOpen: (...args) => featuresElement._onOpenContextMenu(...args), jQuery: false }
     );
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+
+    if ( !this.actor.limited ) {
+      this._renderAttunement(context, options);
+      this._renderSpellbook(context, options);
+    }
 
     // Show death tray at 0 HP
     const renderContext = options.renderContext ?? options.action;
@@ -995,6 +1010,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     if ( classIdentifier ) filters.locked.additional = { class: { [classIdentifier]: 1 } };
     if ( type === "class" ) {
       const existingIdentifiers = new Set(Object.keys(this.actor.classes));
+      filters.initial = { additional: { properties: { sidekick: -1 } } };
       filters.locked.arbitrary = [{ o: "NOT", v: { k: "system.identifier", o: "in", v: existingIdentifiers } }];
     }
     if ( type === "facility" ) {
@@ -1118,14 +1134,14 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
   /** @inheritDoc */
   _onDragStart(event) {
-    const modes = CONFIG.DND5E.spellPreparationModes;
+    const methods = CONFIG.DND5E.spellcasting;
     const { key } = event.target.closest("[data-key]")?.dataset ?? {};
-    const { level, preparationMode } = event.target.closest("[data-level]")?.dataset ?? {};
+    const { level, method } = event.target.closest("[data-level]")?.dataset ?? {};
     const isSlots = event.target.closest("[data-favorite-id]") || event.target.classList.contains("items-header");
     let type;
     if ( key in CONFIG.DND5E.skills ) type = "skill";
     else if ( key in CONFIG.DND5E.tools ) type = "tool";
-    else if ( modes[preparationMode]?.upcast && (level !== "0") && isSlots ) type = "slots";
+    else if ( methods[method]?.slots && (level !== "0") && isSlots ) type = "slots";
     if ( !type ) return super._onDragStart(event);
 
     // Add another deferred deactivation to catch the second pointerenter event that seems to be fired on Firefox.
@@ -1133,7 +1149,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     game.tooltip.deactivate();
 
     const dragData = { dnd5e: { action: "favorite", type } };
-    if ( type === "slots" ) dragData.dnd5e.id = (preparationMode === "prepared") ? `spell${level}` : preparationMode;
+    if ( type === "slots" ) dragData.dnd5e.id = methods[method].getSpellSlotKey(Number(level));
     else dragData.dnd5e.id = key;
     event.dataTransfer.setData("application/json", JSON.stringify(dragData));
     event.dataTransfer.effectAllowed = "link";
@@ -1157,7 +1173,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     if ( action === "favorite" ) return this._onDropFavorite(event, { type, id });
     if ( data.type === "Activity" ) {
       const activity = await fromUuid(data.uuid);
-      if ( activity ) return this._onDropActivity(event, data);
+      if ( activity ) return this._onDropActivity(event, activity);
     }
     return super._onDrop(event);
   }
@@ -1294,7 +1310,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       else if ( f.id === srcId ) source = f;
       return f.id !== srcId;
     });
-    const updates = SortingHelpers.performIntegerSort(source, { target, siblings });
+    const updates = foundry.utils.performIntegerSort(source, { target, siblings });
     const favorites = this.actor.system.favorites.reduce((map, f) => map.set(f.id, { ...f }), new Map());
     for ( const { target, update } of updates ) {
       const favorite = favorites.get(target.id);

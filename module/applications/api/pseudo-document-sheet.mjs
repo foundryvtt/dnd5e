@@ -230,7 +230,7 @@ export default class PseudoDocumentSheet extends Application5e {
       `The ${this.constructor.name} PseudoDocumentSheet does not support a single top-level form element.`
     );
     const event = new Event("submit", { cancelable: true });
-    const formData = new FormDataExtended(this.element);
+    const formData = new foundry.applications.ux.FormDataExtended(this.element);
     const submitData = await this._prepareSubmitData(event, formData);
     foundry.utils.mergeObject(submitData, updateData, { inplace: true });
     await this._processSubmitData(event, submitData);

@@ -137,35 +137,22 @@ export default class EnchantmentApplicationElement extends HTMLElement {
   async _onDrop(event) {
     event.preventDefault();
     const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
-    const effect = this.enchantmentItem.effects.get(this.chatMessage.getFlag("dnd5e", "use.enchantmentProfile"));
-    if ( (data.type !== "Item") || !effect ) return;
     const droppedItem = await Item.implementation.fromDropData(data);
-
-    // Validate against the enchantment's restraints on the origin item
-    const errors = this.enchantmentActivity.canEnchant(droppedItem);
-    if ( errors?.length ) {
-      errors.forEach(err => ui.notifications.error(err.message, { console: false }));
-      return;
-    }
+    if ( !droppedItem ) return;
 
     // If concentration is required, ensure it is still being maintained & GM is present
     const concentrationId = this.chatMessage.getFlag("dnd5e", "use.concentrationId");
-    const concentration = effect.parent.actor.effects.get(concentrationId);
+    const concentration = this.enchantmentActivity.actor.effects.get(concentrationId);
     if ( concentrationId && !concentration ) {
       ui.notifications.error("DND5E.ENCHANT.Warning.ConcentrationEnded", { console: false, localize: true });
       return;
     }
-    if ( !game.user.isGM && concentration && !concentration.actor?.isOwner ) {
-      ui.notifications.error("DND5E.EffectApplyWarningConcentration", { console: false, localize: true });
-      return;
-    }
 
-    const effectData = effect.toObject();
-    effectData.origin = this.enchantmentActivity.uuid;
-    const applied = await ActiveEffect.create(effectData, {
-      parent: droppedItem, keepOrigin: true, chatMessageOrigin: this.chatMessage.id
-    });
-    if ( concentration ) await concentration.addDependent(applied);
+    this.enchantmentActivity.applyEnchantment(
+      this.chatMessage.getFlag("dnd5e", "use.enchantmentProfile"),
+      droppedItem,
+      { chatMessage: this.chatMessage, concentration }
+    );
   }
 
   /* -------------------------------------------- */

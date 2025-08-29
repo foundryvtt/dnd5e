@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 1EB34o4iqY7GN1HT
     name: Echolocation
@@ -511,18 +516,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.rUongiWD51ZopRk2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.rUongiWD51ZopRk2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ciLSItjCpwT7nMmk.1EB34o4iqY7GN1HT'
   - _id: Hwa4dcQdXAi1vk7z
     name: Hold Breath
@@ -558,18 +562,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.lwC6jwy9bXberyWo
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lwC6jwy9bXberyWo
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ciLSItjCpwT7nMmk.Hwa4dcQdXAi1vk7z'
   - _id: z9JmFBY3z1pnVFX9
     name: Keen Hearing
@@ -611,12 +614,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ciLSItjCpwT7nMmk.z9JmFBY3z1pnVFX9'
   - _id: 2JDxekOVx1NSUwuP
     name: Bite
@@ -770,18 +774,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741122089913
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ciLSItjCpwT7nMmk.2JDxekOVx1NSUwuP'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -791,10 +794,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171243449
   modifiedTime: 1741122103560
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!ciLSItjCpwT7nMmk'

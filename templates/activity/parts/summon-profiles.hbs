@@ -7,7 +7,7 @@
         {{ formField fields.mode value=../source.summon.mode options=../profileModes }}
         {{#unless @root.activity.isSpell}}{{ formField fields.identifier value=../source.summon.identifier }}{{/unless}}
         {{/with}}
-        <ul class="separated-list unlist">
+        <ul class="separated-list flexcol unlist">
             {{#each profiles}}
             <li data-index="{{ index }}" data-profile-id="{{ data._id }}" data-expand-id="profile-{{ data._id }}">
                 {{> ".profile" }}

@@ -1,0 +1,218 @@
+.mixin-variables-light {
+  /* Applications */
+  --dnd5e-application-background: var(--dnd5e-background-texture-paper-gray);
+  --dnd5e-item-header-content: none;
+  --dnd5e-item-header-image: transparent;
+  --dnd5e-encounter-header-content: none;
+  --dnd5e-encounter-header-image: transparent;
+  --dnd5e-npc-header-content: none;
+  --dnd5e-npc-header-image: transparent;
+  --dnd5e-group-header-content: none;
+  --dnd5e-group-header-image: transparent;
+  --dnd5e-character-background-content: none;
+  --dnd5e-character-background-image: transparent;
+  --dnd5e-character-header-image: url("ui/official/banner-character.jpg");
+  --dnd5e-character-body-image: var(--dnd5e-background-texture-paper-red);
+  --dnd5e-background-card: var(--dnd5e-color-card);
+  --dnd5e-background-parchment: var(--dnd5e-color-parchment);
+  --dnd5e-background-5: rgb(0 0 0 / 5%);
+  --dnd5e-background-alt-1: var(--dnd5e-color-light-gray);
+  --dnd5e-background-alt-2: var(--dnd5e-color-iron-gray);
+  --dnd5e-gold-icon-background: var(--dnd5e-color-light-gray);
+  --dnd5e-border-gold: 1px solid var(--dnd5e-color-gold);
+  --dnd5e-border-dotted: 1px dotted #bbb;
+  --dnd5e-border-dashed: 1px dashed #999;
+  --dnd5e-border-dashed-faint: 1px dashed #ddd;
+  --dnd5e-border-dark: 1px solid #999;
+  --dnd5e-border-heading-3: 1px solid var(--color-text-dark-primary);
+  --dnd5e-border-separator-faint: 1px solid #ddd;
+  --dnd5e-border-separator-heavy: 1px solid #ddd;
+  --dnd5e-border-separator-warning: 1px dotted var(--dnd5e-color-gold);
+  --dnd5e-inventory-border: var(--dnd5e-border-gold);
+  --dnd5e-slot-border: 1px solid var(--dnd5e-color-gold);
+  --dnd5e-slot-filter: invert(1);
+  --dnd5e-card-header-1: var(--dnd5e-color-hd-1);
+  --dnd5e-card-header-2: var(--dnd5e-color-hd-2);
+  --dnd5e-card-header-disabled-1: #333;
+  --dnd5e-card-header-disabled-2: #999;
+  --dnd5e-attribute-color: var(--dnd5e-color-crimson);
+  --dnd5e-ability-color: var(--color-text-dark-5);
+  --dnd5e-ability-mod-color: var(--dnd5e-color-black);
+  --dnd5e-ability-tab: url("ui/ability-score-tab.svg");
+  --dnd5e-heading-3-color: var(--color-text-dark-primary);
+  --dnd5e-condition-hover: var(--dnd5e-color-parchment);
+  --color-text-emphatic: var(--color-text-dark-primary);
+  --color-text-primary: var(--color-text-dark-primary);
+  --color-text-secondary: var(--color-text-dark-5);
+  --color-text-tertiary: var(--color-text-light-6);
+  --color-text-inactive: var(--color-text-dark-inactive);
+  --color-text-title: var(--color-text-dark-primary);
+  --separated-list-item-background-color: var(--dnd5e-color-card);
+  --separated-list-item-border-color: var(--dnd5e-color-gold);
+  --activity-icon-color: var(--color-text-dark-primary);
+  --activity-row-border: 1px dotted #ddd;
+  --activity-row-indent-color: var(--color-text-light-6);
+  --damage-icon-color: var(--color-text-light-6);
+  --item-summary-background: var(--dnd5e-color-parchment);
+  --item-control-color: var(--color-text-light-6);
+  --item-control-interactive-color: var(--color-text-light-6);
+  --item-control-active-color: var(--dnd5e-color-black);
+  --item-control-header-color: var(--color-text-light-0);
+  --item-state-toggle-active: var(--color-text-dark-primary);
+  --pill-transparent-color: #4e4e4e;
+  --pill-border: 1px solid #666;
+  --pill-colored-border: 1px solid #666;
+  --pill-border-dotted: 1px dotted #666;
+  --pill-underlay-opacity: 1;
+  --pill-underlay-blend-mode: overlay;
+  --pill-background-color: color-mix(in oklab, var(--dnd5e-color-parchment), white);
+  --pill-background-blend-mode: color-burn;
+  --pill-background-green: var(--dnd5e-color-green);
+  --pill-background-maroon: var(--dnd5e-color-maroon);
+  --pill-colored-text-color: var(--color-text-light-0);
+  --pill-empty-border: 2px dashed var(--dnd5e-color-black);
+  --pill-empty-text-color: var(--dnd5e-color-black);
+  --advancement-summary-link-color: var(--color-text-dark-primary);
+  --npc-header-input-background: var(--dnd5e-background-5);
+  --npc-cr-input-background: var(--dnd5e-background-5);
+  --npc-portrait-toggle-on: inherit;
+  --npc-ability-score-filter: none;
+  --group-vitals-shadow: 0 0 4px white;
+  --group-underlay-opacity: .5;
+  --group-underlay-filter: none;
+  --group-control-border: var(--color-border-light-2);
+  --group-control-hover-border: var(--dnd5e-color-gold);
+  --meter-background: var(--dnd5e-color-light-gray);
+  --drop-region-border-color: black;
+  --drop-region-text-color: inherit;
+  --filigree-background-color: var(--dnd5e-color-card);
+  --filigree-border-color: var(--dnd5e-color-gold);
+  --filter-control-color: var(--color-text-light-6);
+  --filter-control-active-color: var(--color-text-dark-primary);
+  --context-entry-hover-background: var(--dnd5e-color-parchment);
+  --advancement-icon-filter: none;
+  --window-resize-handle-filter: none;
+
+  &.dialog-lg { --dnd5e-application-background: var(--dnd5e-background-texture-paper-red); }
+  &.actor { --dnd5e-application-background: var(--dnd5e-background-texture-paper-red); }
+
+  &.compendium-browser {
+    --filter-header-label-color: var(--color-text-primary);
+    --filter-range-label-color: var(--color-text-primary);
+  }
+
+  .items-section .item .tags {
+    --icon-fill: var(--dnd5e-color-black);
+    --tag-opacity: .25;
+  }
+
+  .effects-element .conditions-list .condition { --border-style: 1px dashed #ddd; }
+
+  &.starting-equipment {
+    --background-depth-1: var(--dnd5e-background-card);
+    --background-depth-2: var(--dnd5e-background-parchment);
+    --background-depth-3: color-mix(in oklab, var(--dnd5e-color-card), black 10%);
+  }
+
+  .currency .distribution slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-color-olive); }
+  &.actor.character .window-header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-color-light-gray); }
+
+  section.secret {
+    --color-secret-bg: rgb(53 0 121 / 5%);
+    --color-revealed-bg: rgb(0 53 0 / 5%);
+  }
+
+  /* Forms */
+  --slide-toggle-track-color-unchecked: var(--dnd5e-background-25);
+  --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
+  --fieldset-legend-color: var(--color-text-dark-5);
+  --color-fieldset-border: var(--color-border-light-tertiary);
+  --control-button-text-color: var(--color-text-dark-5);
+  --hint-icon-color: var(--color-text-dark-5);
+  --multi-select-tag-background: var(--dnd5e-color-card);
+  --multi-select-tag-border: var(--dnd5e-color-gold);
+
+  button {
+    --button-border-color: var(--color-border-light-2);
+    --button-hover-border-color: var(--dnd5e-color-gold);
+    --button-toggle-depressed-color: color-mix(in oklab, var(--dnd5e-background-card), var(--dnd5e-color-gold) 10%);
+  }
+
+  input, textarea { --input-placeholder-color: var(--color-text-light-6); }
+
+  input, textarea, select {
+    --input-background-color: rgb(0 0 0 / 10%);
+    --input-disabled-background-color: rgb(0 0 0 / 20%);
+  }
+
+  input:not([type=range]), textarea, select {
+    --input-border-color: transparent;
+    --input-hover-border-color: var(--dnd5e-color-gold);
+  }
+
+  dnd5e-checkbox[disabled]:not([checked]) {
+    --checkbox-border-color: var(--color-text-light-6);
+    --checkbox-empty-color: transparent;
+  }
+
+  .prosemirror menu {
+    --color-hover-bg: var(--dnd5e-color-card);
+    --menu-background: rgb(0 0 0 / 10%);
+    --button-text-color: var(--color-text-primary);
+    --color-form-label-hover: var(--color-dark-1);
+    button.active { --color-form-label-hover: var(--color-dark-1); }
+  }
+
+  fieldset.card .input-element-tags .tag {
+    --multi-select-tag-background: var(--dnd5e-color-card);
+    --multi-select-tag-border: var(--dnd5e-color-gold);
+  }
+
+  /* Journals */
+  --dnd5e-journal-content-background: var(--dnd5e-background-texture-paper-red);
+  --dnd5e-journal-header-background: var(--dnd5e-background-10);
+  --dnd5e-color-table-border: var(--dnd5e-color-gold);
+  --dnd5e-color-table-row-even: var(--dnd5e-color-parchment);
+  --dnd5e-color-table-row-odd: var(--dnd5e-color-card);
+  --dnd5e-color-table-header-1: var(--dnd5e-color-hd-1);
+  --dnd5e-color-table-header-2: var(--dnd5e-color-hd-2);
+  --dnd5e-block-background: var(--dnd5e-color-card);
+  --dnd5e-block-border-color: var(--dnd5e-color-gold);
+  --dnd5e-roll-icon-filter: none;
+  --dnd5e-notable-filter: none;
+
+  .notable {
+    --dnd5e-block-background: rgb(216 227 227);
+    --dnd5e-block-border-color: #231f20 #b3b3b3;
+  }
+
+  table { --table-background-color: var(--dnd5e-color-card); }
+
+  /* Statblocks */
+  --dnd5e-statblock-background-plain: rgb(235 228 214 / .35);
+  --dnd5e-statblock-background-parchment: rgb(253 242 205 / .5);
+  --dnd5e-statblock-ability-border: white;
+  --dnd5e-statblock-ability-header-1st: rgb(234 229 217);
+  --dnd5e-statblock-ability-header-2nd: rgb(215 217 208);
+  --dnd5e-statblock-ability-stat-1st: rgb(218 211 203);
+  --dnd5e-statblock-ability-stat-2nd: rgb(205 201 201);
+  --dnd5e-statblock-border: rgb(78 76 74);
+  --dnd5e-statblock-scroll: rgb(237 191 100);
+  --dnd5e-statblock-separator: rgb(135 51 44);
+  --dnd5e-statblock-text-header: rgb(79 29 21);
+  --dnd5e-statblock-text-primary: rgb(31, 30, 30);
+  --dnd5e-statblock-text-secondary: rgb(73 72 73 / .75);
+  --dnd5e-statblock-title-border: currentcolor;
+}
+
+@layer general {
+  body.theme-light .dnd5e2 {
+    .mixin-variables-light();
+  }
+}
+
+@layer specific {
+  .themed.theme-light.dnd5e2, .themed.theme-light.dnd5e2-journal, .themed.theme-light .dnd5e2.chat-message {
+    .mixin-variables-light();
+  }
+}

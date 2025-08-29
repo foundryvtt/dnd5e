@@ -2,9 +2,14 @@ import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import { ConsumptionTargetData } from "./data/activity/fields/consumption-targets-field.mjs";
 import TransformationSetting from "./data/settings/transformation-setting.mjs";
 import * as activities from "./documents/activity/_module.mjs";
+import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
+
+/**
+ * @import { TravelPace5e } from "./data/shared/movement-field.mjs";
+ */
 
 // Namespace Configuration Values
 const DND5E = {};
@@ -133,6 +138,10 @@ DND5E.defaultAbilities = {
  * @property {string} ability      Key for the default ability used by this skill.
  * @property {string} fullKey      Fully written key used as alternate for enrichers.
  * @property {string} [reference]  Reference to a rule page describing this skill.
+ * @property {object} [pace]       Configuration for skills affected by travel pace.
+ * @property {Set<TravelPace5e>} [pace.advantage]     Grant advantage on this skill when traveling at the given paces.
+ * @property {Set<TravelPace5e>} [pace.disadvantage]  Grant disadvantage on this skill when traveling at the given
+ *                                                    paces.
  */
 
 /**
@@ -222,7 +231,11 @@ DND5E.skills = {
     ability: "wis",
     fullKey: "perception",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.zjEeHCUqfuprfzhY",
-    icon: "icons/magic/perception/eye-ringed-green.webp"
+    icon: "icons/magic/perception/eye-ringed-green.webp",
+    pace: {
+      advantage: new Set(["slow"]),
+      disadvantage: new Set(["fast"])
+    }
   },
   prf: {
     label: "DND5E.SkillPrf",
@@ -257,17 +270,36 @@ DND5E.skills = {
     ability: "dex",
     fullKey: "stealth",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.4MfrpERNiQXmvgCI",
-    icon: "icons/magic/perception/shadow-stealth-eyes-purple.webp"
+    icon: "icons/magic/perception/shadow-stealth-eyes-purple.webp",
+    pace: {
+      disadvantage: new Set(["normal", "fast"])
+    }
   },
   sur: {
     label: "DND5E.SkillSur",
     ability: "wis",
     fullKey: "survival",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.t3EzDU5b9BVAIEVi",
-    icon: "icons/magic/fire/flame-burning-campfire-yellow-blue.webp"
+    icon: "icons/magic/fire/flame-burning-campfire-yellow-blue.webp",
+    pace: {
+      advantage: new Set(["slow"]),
+      disadvantage: new Set(["fast"])
+    }
   }
 };
 preLocalize("skills", { key: "label", sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * Base passive score and the amount by which the passive skill scores are modified when that skill has
+ * advantage or disadvantage.
+ * @type {{ base: number, modifier: number }}
+ */
+DND5E.skillPassive = {
+  base: 10,
+  modifier: 5
+};
 
 /* -------------------------------------------- */
 
@@ -843,10 +875,6 @@ DND5E.tools = {
  */
 DND5E.toolIds = new Proxy(DND5E.tools, {
   get(target, prop) {
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.toolIds` is deprecated, use `CONFIG.DND5E.tools` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
     return target[prop]?.id ?? target[prop];
   }
 });
@@ -1222,6 +1250,7 @@ preLocalize("activityConsumptionTypes", { key: "label" });
  * @property {number} hitDie                  Default hit die denomination for NPCs of this size.
  * @property {number} [token=1]               Default token size.
  * @property {number} [capacityMultiplier=1]  Multiplier used to calculate carrying capacities.
+ * @property {number} numerical               Numerical representation of size.
  */
 
 /**
@@ -1234,39 +1263,45 @@ DND5E.actorSizes = {
     abbreviation: "DND5E.SizeTinyAbbr",
     hitDie: 4,
     token: 0.5,
-    capacityMultiplier: 0.5
+    capacityMultiplier: 0.5,
+    numerical: 0
   },
   sm: {
     label: "DND5E.SizeSmall",
     abbreviation: "DND5E.SizeSmallAbbr",
     hitDie: 6,
-    dynamicTokenScale: 0.8
+    dynamicTokenScale: 0.8,
+    numerical: 1
   },
   med: {
     label: "DND5E.SizeMedium",
     abbreviation: "DND5E.SizeMediumAbbr",
-    hitDie: 8
+    hitDie: 8,
+    numerical: 2
   },
   lg: {
     label: "DND5E.SizeLarge",
     abbreviation: "DND5E.SizeLargeAbbr",
     hitDie: 10,
     token: 2,
-    capacityMultiplier: 2
+    capacityMultiplier: 2,
+    numerical: 3
   },
   huge: {
     label: "DND5E.SizeHuge",
     abbreviation: "DND5E.SizeHugeAbbr",
     hitDie: 12,
     token: 3,
-    capacityMultiplier: 4
+    capacityMultiplier: 4,
+    numerical: 4
   },
   grg: {
     label: "DND5E.SizeGargantuan",
     abbreviation: "DND5E.SizeGargantuanAbbr",
     hitDie: 20,
     token: 4,
-    capacityMultiplier: 8
+    capacityMultiplier: 8,
+    numerical: 5
   }
 };
 preLocalize("actorSizes", { keys: ["label", "abbreviation"] });
@@ -1298,6 +1333,18 @@ DND5E.tokenRingColors = {
   defeated: 0x000000,
   healing: 0x00FF00,
   temp: 0x33AAFF
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Colors used to denote movement speed on ruler segments & grid highlighting
+ * @enum {number}
+ */
+DND5E.tokenRulerColors = {
+  normal: 0x33BC4E,
+  double: 0xF1D836,
+  triple: 0xE72124
 };
 
 /* -------------------------------------------- */
@@ -2019,6 +2066,9 @@ DND5E.itemProperties = {
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.FjWqT5iyJ89kohdA",
     isTag: true
   },
+  sidekick: {
+    label: "DND5E.ITEM.Property.Sidekick"
+  },
   sil: {
     label: "DND5E.ITEM.Property.Silvered",
     isPhysical: true
@@ -2064,6 +2114,9 @@ preLocalize("itemProperties", { keys: ["label", "abbreviation"], sort: true });
  * @enum {object}
  */
 DND5E.validProperties = {
+  class: new Set([
+    "sidekick"
+  ]),
   consumable: new Set([
     "mgc"
   ]),
@@ -2448,9 +2501,6 @@ preLocalize("damageTypes", { keys: ["label"], sort: true });
  * @type {boolean}
  */
 DND5E.aggregateDamageDisplay = true;
-
-/* -------------------------------------------- */
-/*  Movement                                    */
 /* -------------------------------------------- */
 
 /**
@@ -2472,20 +2522,101 @@ DND5E.healingTypes = {
 preLocalize("healingTypes", { keys: ["label"] });
 
 /* -------------------------------------------- */
+/*  Movement                                    */
+/* -------------------------------------------- */
 
 /**
- * The valid units of measure for movement distances in the game system.
- * By default this uses the imperial units of feet and miles.
- * @enum {string}
+ * Types of terrain that can cause difficult terrain.
+ * @enum {{ label: string }}
+ */
+DND5E.difficultTerrainTypes = {
+  ice: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Ice"
+  },
+  liquid: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Liquid"
+  },
+  plants: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Plants"
+  },
+  rocks: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Rocks"
+  },
+  slope: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Slope"
+  },
+  snow: {
+    label: "DND5E.REGIONBEHAVIORS.DIFFICULTTERRAIN.Type.Snow"
+  }
+};
+preLocalize("difficultTerrainTypes", { key: "label", sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef MovementTypeConfig
+ * @property {string} label            Localized label for the movement type.
+ * @property {boolean} [walkFallback]  When this special movement type runs out, can the actor fall back to using their
+ *                                     walk speed at 2x cost?
+ */
+
+/**
+ * Types of movement supported by creature actors in the system.
+ * @enum {MovementTypeConfig}
  */
 DND5E.movementTypes = {
-  burrow: "DND5E.MovementBurrow",
-  climb: "DND5E.MovementClimb",
-  fly: "DND5E.MovementFly",
-  swim: "DND5E.MovementSwim",
-  walk: "DND5E.MovementWalk"
+  burrow: {
+    label: "DND5E.MovementBurrow"
+  },
+  climb: {
+    label: "DND5E.MovementClimb",
+    walkFallback: true
+  },
+  fly: {
+    label: "DND5E.MovementFly"
+  },
+  swim: {
+    label: "DND5E.MovementSwim",
+    walkFallback: true
+  },
+  walk: {
+    label: "DND5E.MovementWalk"
+  }
 };
-preLocalize("movementTypes", { sort: true });
+preLocalize("movementTypes", { key: "label", sort: true });
+patchConfig("movementTypes", "label", { since: "DnD5e 5.1", until: "DnD5e 5.3" });
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef TravelPaceConfig
+ * @property {string} label       The human-readable label.
+ * @property {number} standard    The standard pace value in miles per day.
+ * @property {number} multiplier  The speed up or slow down factor for this travel pace.
+ */
+
+/**
+ * Available travel paces.
+ * @type {Readonly<Record<string, TravelPaceConfig>>}
+ */
+DND5E.travelPace = Object.freeze({
+  slow: {
+    label: "DND5E.Travel.Pace.Slow",
+    standard: 18,
+    multiplier: 2 / 3
+  },
+  normal: {
+    label: "DND5E.Travel.Pace.Normal",
+    standard: 24,
+    multiplier: 1
+  },
+  fast: {
+    label: "DND5E.Travel.Pace.Fast",
+    standard: 30,
+    multiplier: 4 / 3
+  }
+});
+preLocalize("travelPace", { key: "label" });
 
 /* -------------------------------------------- */
 /*  Measurement                                 */
@@ -2499,6 +2630,10 @@ DND5E.defaultUnits = {
   length: {
     imperial: "ft",
     metric: "m"
+  },
+  travel: {
+    imperial: "mi",
+    metric: "km"
   },
   volume: {
     imperial: "cubicFoot",
@@ -2524,12 +2659,13 @@ DND5E.defaultUnits = {
  *                                       https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers. Only
  *                                       required if the formatting name doesn't match the unit key.
  * @property {"imperial"|"metric"} type  Whether this is an "imperial" or "metric" unit.
+ * @property {"day"|"round"} [travelResolution]  Whether the distance is per-round or per-day when used in the context
+ *                                               of overland travel.
  */
 
 /**
  * The valid units of measure for movement distances in the game system.
- * By default this uses the imperial units of feet and miles.
- * @enum {string}
+ * @enum {UnitConfiguration}
  */
 DND5E.movementUnits = {
   ft: {
@@ -2537,28 +2673,32 @@ DND5E.movementUnits = {
     abbreviation: "DND5E.UNITS.DISTANCE.Foot.Abbreviation",
     conversion: 1,
     formattingUnit: "foot",
-    type: "imperial"
+    type: "imperial",
+    travelResolution: "round"
   },
   mi: {
     label: "DND5E.UNITS.DISTANCE.Mile.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Mile.Abbreviation",
     conversion: 5_280,
     formattingUnit: "mile",
-    type: "imperial"
+    type: "imperial",
+    travelResolution: "day"
   },
   m: {
     label: "DND5E.UNITS.DISTANCE.Meter.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Meter.Abbreviation",
     conversion: 10 / 3, // D&D uses a simplified 5ft -> 1.5m conversion.
     formattingUnit: "meter",
-    type: "metric"
+    type: "metric",
+    travelResolution: "round"
   },
   km: {
     label: "DND5E.UNITS.DISTANCE.Kilometer.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Kilometer.Abbreviation",
     conversion: 10_000 / 3, // Matching simplified conversion
     formattingUnit: "kilometer",
-    type: "metric"
+    type: "metric",
+    travelResolution: "day"
   }
 };
 preLocalize("movementUnits", { keys: ["label", "abbreviation"] });
@@ -2915,7 +3055,10 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
  * @typedef {object} RestConfiguration
  * @property {Record<string, number>} duration      Duration of different rest variants in minutes.
  * @property {string} label                         Localized label for the rest type.
+ * @property {string} icon                          Icon representing this rest type. Can be either a set of FontAwesome
+ *                                                  classes or an image path.
  * @property {string[]} [activationPeriods]         Activation types that should be displayed in the chat card.
+ * @property {number} [exhaustionDelta]             Delta exhaustion to apply to creatures undergoing the rest.
  * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?
  * @property {boolean} [recoverHitPoints]           Should hit points be recovered during this rest?
  * @property {string[]} [recoverPeriods]            What recovery periods should be applied when this rest is taken. The
@@ -2936,6 +3079,7 @@ DND5E.restTypes = {
       epic: 1
     },
     label: "DND5E.REST.Short.Label",
+    icon: "fa-solid fa-utensils",
     activationPeriods: ["shortRest"],
     recoverPeriods: ["sr"],
     recoverSpellSlotTypes: new Set(["pact"])
@@ -2946,12 +3090,16 @@ DND5E.restTypes = {
       gritty: 10_080,
       epic: 60
     },
+    exhaustionDelta: -1,
     label: "DND5E.REST.Long.Label",
+    icon: "fa-solid fa-campground",
     activationPeriods: ["longRest"],
     recoverHitDice: true,
     recoverHitPoints: true,
     recoverPeriods: ["lr", "sr"],
-    recoverSpellSlotTypes: new Set(["leveled", "pact"])
+    recoverSpellSlotTypes: new Set(["spell", "pact"]),
+    recoverTemp: true,
+    recoverTempMax: true
   }
 };
 preLocalize("restTypes", { key: "label" });
@@ -3040,28 +3188,11 @@ preLocalize("attackTypes", { key: "label" });
 /* -------------------------------------------- */
 
 /**
- * Spell lists that will be registered by the system during init.
- * @type {string[]}
- */
-DND5E.SPELL_LISTS = Object.freeze([
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.wwia6Wwo4BgE9GSI",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.LhvuDQEyrCdg5EfU",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.8yD9Jgp404hfZ9ie",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.VfZ5mH2ZuyFq82Ga",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.sSzagq8GvYXpfmfs",
-  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.6AnqLUowgdsqMFvz"
-]);
-
-/* -------------------------------------------- */
-
-/**
  * Define the standard slot progression by character level.
  * The entries of this array represent the spell slot progression for a full spell-caster.
- * @type {number[][]}
+ * @type {SpellcastingTable5e}
  */
-DND5E.SPELL_SLOT_TABLE = [
+const SPELL_SLOT_TABLE = DND5E.SPELL_SLOT_TABLE = [
   [2],
   [3],
   [4, 2],
@@ -3087,18 +3218,10 @@ DND5E.SPELL_SLOT_TABLE = [
 /* -------------------------------------------- */
 
 /**
- * Configuration data for pact casting progression.
- *
- * @typedef {object} PactProgressionConfig
- * @property {number} slots  Number of spell slots granted.
- * @property {number} level  Level of spells that can be cast.
- */
-
-/**
  * Define the pact slot & level progression by pact caster level.
- * @enum {PactProgressionConfig}
+ * @type {SpellcastingTableSingle5e}
  */
-DND5E.pactCastingProgression = {
+const pactCastingProgression = DND5E.pactCastingProgression = {
   1: { slots: 1, level: 1 },
   2: { slots: 2, level: 1 },
   3: { slots: 2, level: 2 },
@@ -3112,126 +3235,234 @@ DND5E.pactCastingProgression = {
 /* -------------------------------------------- */
 
 /**
- * Configuration data for spell preparation modes.
- *
- * @typedef {object} SpellPreparationModeConfiguration
- * @property {string} label           Localized name of this spell preparation type.
- * @property {boolean} [upcast]       Whether this preparation mode allows for upcasting.
- * @property {boolean} [cantrips]     Whether this mode allows for cantrips in a spellbook.
- * @property {number} [order]         The sort order of this mode in a spellbook.
- * @property {boolean} [prepares]     Whether this preparation mode prepares spells.
+ * @typedef SpellcastingMethod5e
+ * @property {string} label                                              The human-readable label.
+ * @property {"none"|"single"|"multi"} [type="none"]                     "none" - No spell slots.
+ *                                                                       "single" - Spell slots of a single level only.
+ *                                                                       "multi" - Spell slots of multiple levels.
+ * @property {SpellcastingTable5e|SpellcastingTableSingle5e} [table]     The spell slot progression table.
+ * @property {string} [img]                                              The icon to use if this spellcasting method is
+ *                                                                       favorited.
+ * @property {number} order                                              The ordering of this spellcasting method on an
+ *                                                                       actor sheet's spells tab, ascending.
+ * @property {boolean} [cantrips]                                        Whether this spellcasting method includes
+ *                                                                       cantrips.
+ * @property {object} [exclusive]                                        Exclusivity options.
+ * @property {boolean} [exclusive.slots]                                 Whether the slots provided by this spellcasting
+ *                                                                       method may only be used to cast spells that use
+ *                                                                       this spellcasting method.
+ * @property {boolean} [exclusive.spells]                                Whether spells that use this spellcasting
+ *                                                                       method may only be cast with slots provided by
+ *                                                                       this spellcasting method.
+ * @property {boolean} [prepares]                                        Whether spells using this method are variably
+ *                                                                       available for casting. In 2024 this term was
+ *                                                                       unified to 'prepares', but 2014 uses different
+ *                                                                       nomenclature for different classes.
+ * @property {Record<string, SpellcastingProgression5e>} [progression]   Spell slot progressions available for this
+ *                                                                       method.
  */
 
 /**
- * Various different ways a spell can be prepared.
- * @enum {SpellPreparationModeConfiguration}
+ * @typedef {number[][]} SpellcastingTable5e
  */
-DND5E.spellPreparationModes = {
-  prepared: {
-    label: "DND5E.SpellPrepPrepared",
-    upcast: true,
-    prepares: true
-  },
-  pact: {
-    label: "DND5E.PactMagic",
-    upcast: true,
-    cantrips: true,
-    order: 0.5
-  },
-  always: {
-    label: "DND5E.SpellPrepAlways",
-    upcast: true,
-    prepares: true
-  },
+
+/**
+ * @typedef {Record<number, SpellcastingTableEntry5e>} SpellcastingTableSingle5e
+ */
+
+/**
+ * @typedef SpellcastingTableEntry5e
+ * @property {number} slots  The number of slots available.
+ * @property {number} level  The level of the slots.
+ */
+
+/**
+ * @typedef SpellcastingProgression5e
+ * @property {string} label       The human-readable label.
+ * @property {number} divisor     How much this progression mode contributes to the base progression of the spellcasting
+ *                                method.
+ * @property {boolean} [roundUp]  Whether to round up or down when determining contribution.
+ */
+
+/**
+ * Available spellcasting methods.
+ * @type {Record<string, SpellcastingMethod5e>}
+ */
+DND5E.spellcasting = {
   atwill: {
-    label: "DND5E.SpellPrepAtWill",
+    label: "DND5E.SPELLCASTING.METHODS.AtWill.label",
     order: -30
   },
   innate: {
-    label: "DND5E.SpellPrepInnate",
+    label: "DND5E.SPELLCASTING.METHODS.Innate.label",
     order: -20
   },
   ritual: {
-    label: "DND5E.SpellPrepRitual",
+    label: "DND5E.SPELLCASTING.METHODS.Ritual.label",
     order: -10
-  }
-};
-preLocalize("spellPreparationModes", { key: "label" });
-
-/* -------------------------------------------- */
-
-/**
- * Configuration data for different types of spellcasting supported.
- *
- * @typedef {object} SpellcastingTypeConfiguration
- * @property {string} label                               Localized label.
- * @property {string} img                                 Image used when rendered as a favorite on the sheet.
- * @property {boolean} [shortRest]                        Are these spell slots additionally restored on a short rest?
- * @property {Object<string, SpellcastingProgressionConfiguration>} [progression]  Any progression modes for this type.
- */
-
-/**
- * Configuration data for a spellcasting progression mode.
- *
- * @typedef {object} SpellcastingProgressionConfiguration
- * @property {string} label             Localized label.
- * @property {number} [divisor=1]       Value by which the class levels are divided to determine spellcasting level.
- * @property {boolean} [roundUp=false]  Should fractional values should be rounded up by default?
- */
-
-/**
- * Different spellcasting types and their progression.
- * @type {SpellcastingTypeConfiguration}
- */
-DND5E.spellcastingTypes = {
-  leveled: {
-    label: "DND5E.SpellProgLeveled",
+  },
+  pact: {
+    label: "DND5E.SPELLCASTING.METHODS.Pact.label",
+    type: "single",
+    cantrips: true,
+    prepares: true,
+    order: 10,
+    img: "icons/magic/unholy/silhouette-robe-evil-power.webp",
+    table: pactCastingProgression,
+    progression: {
+      pact: {
+        label: "DND5E.SPELLCASTING.METHODS.Pact.Full.label",
+        divisor: 1
+      }
+    }
+  },
+  spell: {
+    label: "DND5E.SPELLCASTING.METHODS.Spell.label",
+    type: "multi",
+    cantrips: true,
+    prepares: true,
+    order: 20,
     img: "systems/dnd5e/icons/spell-tiers/{id}.webp",
+    table: SPELL_SLOT_TABLE,
     progression: {
       full: {
-        label: "DND5E.SpellProgFull",
+        label: "DND5E.SPELLCASTING.METHODS.Spell.Full.label",
         divisor: 1
       },
       half: {
-        label: "DND5E.SpellProgHalf",
+        label: "DND5E.SPELLCASTING.METHODS.Spell.Half.label",
         divisor: 2,
         roundUp: true
       },
       third: {
-        label: "DND5E.SpellProgThird",
+        label: "DND5E.SPELLCASTING.METHODS.Spell.Third.label",
         divisor: 3
       },
       artificer: {
-        label: "DND5E.SpellProgArt",
+        label: "DND5E.SPELLCASTING.METHODS.Spell.Artificer.label",
         divisor: 2,
         roundUp: true
       }
     }
-  },
-  pact: {
-    label: "DND5E.SpellProgPact",
-    img: "icons/magic/unholy/silhouette-robe-evil-power.webp",
-    shortRest: true
   }
 };
-preLocalize("spellcastingTypes", { key: "label", sort: true });
-preLocalize("spellcastingTypes.leveled.progression", { key: "label" });
+preLocalize("spellcasting", { key: "label" });
+preLocalize("spellcasting.spell.progression", { key: "label" });
+preLocalize("spellcasting.pact.progression", { key: "label" });
 
 /* -------------------------------------------- */
 
 /**
- * Ways in which a class can contribute to spellcasting levels.
- * @enum {string}
+ * @typedef SpellcastingPreparationState5e
+ * @property {string} label  The human-readable label.
+ * @property {number} value  A unique number representing this state.
  */
-DND5E.spellProgression = {
-  none: "DND5E.SpellNone",
-  full: "DND5E.SpellProgFull",
-  half: "DND5E.SpellProgHalf",
-  third: "DND5E.SpellProgThird",
-  pact: "DND5E.SpellProgPact",
-  artificer: "DND5E.SpellProgArt"
+
+/**
+ * Spell preparation states.
+ * @type {Record<string, SpellcastingPreparationState5e>}
+ */
+DND5E.spellPreparationStates = {
+  unprepared: {
+    label: "DND5E.SPELLCASTING.STATES.Unprepared",
+    value: 0
+  },
+  prepared: {
+    label: "DND5E.SPELLCASTING.STATES.Prepared",
+    value: 1
+  },
+  always: {
+    label: "DND5E.SPELLCASTING.STATES.AlwaysPrepared",
+    value: 2
+  }
 };
-preLocalize("spellProgression", { key: "label" });
+preLocalize("spellPreparationStates", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
+ * Spell lists that will be registered by the system during init.
+ * @type {string[]}
+ */
+DND5E.SPELL_LISTS = Object.freeze([
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.wwia6Wwo4BgE9GSI",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.LhvuDQEyrCdg5EfU",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.8yD9Jgp404hfZ9ie",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.VfZ5mH2ZuyFq82Ga",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.sSzagq8GvYXpfmfs",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.6AnqLUowgdsqMFvz",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLife000000",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLandArid00",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLandPolar0",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLandTemper",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsLandTropic",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsDevotion00",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsDraconic00",
+  "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.spellsFiend00000"
+]);
+
+/* -------------------------------------------- */
+
+/**
+ * @deprecated since 5.1
+ * @ignore
+ */
+DND5E.spellPreparationModes = new Proxy(DND5E.spellcasting, {
+  get(target, prop, receiver) {
+    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellPreparationModes is deprecated, use CONFIG.DND5E.spellcasting"
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    if ( (prop === "prepared") || (prop === "always") ) prop = "spell";
+    return Reflect.get(target, prop, receiver);
+  },
+
+  set(target, prop, value, receiver) {
+    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellPreparationModes is deprecated, use CONFIG.DND5E.spellcasting"
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    if ( (prop === "prepared") || (prop === "always") ) prop = "spell";
+    return Reflect.set(target, prop, value, receiver);
+  }
+});
+
+/* -------------------------------------------- */
+
+/**
+ * @deprecated since 5.1
+ * @ignore
+ */
+DND5E.spellcastingTypes = new Proxy(DND5E.spellcasting, {
+  get(target, prop, receiver) {
+    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellcastingTypes is deprecated, use CONFIG.DND5E.spellcasting"
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    if ( prop === "leveled" ) prop = "spell";
+    return Reflect.get(target, prop, receiver);
+  },
+
+  set(target, prop, value, receiver) {
+    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellcastingTypes is deprecated, use CONFIG.DND5E.spellcasting"
+      + " instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    if ( prop === "leveled" ) prop = "spell";
+    if ( !("type" in value) ) value.type = "single";
+    if ( !("table" in value) ) value.table = DND5E.pactCastingProgression;
+    if ( !("progression" in value) ) value.progression = { [prop]: { label: value.label } };
+    return Reflect.set(target, prop, value, receiver);
+  }
+});
+
+/* -------------------------------------------- */
+
+/**
+ * @ignore
+ */
+DND5E.spellProgression = new Proxy({}, {
+  set() {
+    foundry.utils.logCompatibilityWarning("CONFIG.DND5E.spellProgression is read-only. Spell progressions must be set "
+      + "on CONFIG.DND5E.spellcasting instead.", { since: "DnD5e 5.1", until: "DnD5e 5.4" });
+    return true;
+  }
+});
+
 
 /* -------------------------------------------- */
 
@@ -3491,6 +3722,12 @@ DND5E.transformation = {
       label: "DND5E.TRANSFORM.Setting.Keep.Skills.Label",
       disables: ["merge.skills"]
     },
+    gearProf: {
+      label: "DND5E.TRANSFORM.Setting.Keep.GearProficiency.Label"
+    },
+    languages: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Languages.Label"
+    },
     class: {
       label: "DND5E.TRANSFORM.Setting.Keep.Proficiency.Label"
     },
@@ -3512,6 +3749,9 @@ DND5E.transformation = {
     hp: {
       label: "DND5E.TRANSFORM.Setting.Keep.Health.Label"
     },
+    resistances: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Resistances.Label"
+    },
     vision: {
       label: "DND5E.TRANSFORM.Setting.Keep.Vision.Label",
       default: true
@@ -3519,7 +3759,7 @@ DND5E.transformation = {
     self: {
       label: "DND5E.TRANSFORM.Setting.Keep.Self.Label",
       hint: "DND5E.TRANSFORM.Setting.Keep.Self.Hint",
-      disables: ["keep.*", "merge.*"]
+      disables: ["keep.*", "merge.*", "minimumAC", "tempFormula"]
     }
   },
   merge: {
@@ -3539,8 +3779,10 @@ DND5E.transformation = {
       label: "DND5E.TRANSFORM.Preset.WildShape.Label",
       settings: {
         effects: new Set(["otherOrigin", "origin", "feat", "spell", "class", "background"]),
-        keep: new Set(["bio", "class", "feats", "hp", "mental", "type"]),
+        keep: new Set(["bio", "class", "feats", "hp", "languages", "mental", "type"]),
         merge: new Set(["saves", "skills"]),
+        minimumAC: "(13 + @abilities.wis.mod) * sign(@subclasses.moon.levels)",
+        spellLists: new Set(["subclass:moon"]),
         tempFormula: "max(@classes.druid.levels, @subclasses.moon.levels * 3)"
       }
     },
@@ -3735,15 +3977,16 @@ DND5E.consumableResources = [
 
 /**
  * @typedef {object} _StatusEffectConfig5e
- * @property {string} img               Image used to represent the condition on the token.
- * @property {number} [order]           Order status to the start of the token HUD, rather than alphabetically.
- * @property {string} [reference]       UUID of a journal entry with details on this condition.
- * @property {string} [special]         Set this condition as a special status effect under this name.
- * @property {string[]} [riders]        Additional conditions, by id, to apply as part of this condition.
- * @property {string} [exclusiveGroup]  Any status effects with the same group will not be able to be applied at the
- *                                      same time through the token HUD (multiple statuses applied through other
- *                                      effects can still coexist).
- * @property {number} [coverBonus]      A bonus this condition provides to AC and dexterity saving throws.
+ * @property {string} img                    Image used to represent the condition on the token.
+ * @property {number} [order]                Order status to the start of the token HUD, rather than alphabetically.
+ * @property {string} [reference]            UUID of a journal entry with details on this condition.
+ * @property {string} [special]              Set this condition as a special status effect under this name.
+ * @property {string[]} [riders]             Additional conditions, by id, to apply as part of this condition.
+ * @property {string} [exclusiveGroup]       Any status effects with the same group will not be able to be applied at
+ *                                           the same time through the token HUD (multiple statuses applied through
+ *                                           other effects can still coexist).
+ * @property {number} [coverBonus]           A bonus this condition provides to AC and dexterity saving throws.
+ * @property {boolean} [neverBlockMovement]  If true, a token with this status will not block movement for other tokens.
  */
 
 /**
@@ -3843,7 +4086,8 @@ DND5E.conditionTypes = {
   incapacitated: {
     name: "DND5E.ConIncapacitated",
     img: "systems/dnd5e/icons/svg/statuses/incapacitated.svg",
-    reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.4i3G895hy99piand"
+    reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.4i3G895hy99piand",
+    neverBlockMovement: true
   },
   invisible: {
     name: "DND5E.ConInvisible",
@@ -3932,7 +4176,15 @@ DND5E.conditionEffects = {
   halfMovement: new Set(["exhaustion-2"]),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
   petrification: new Set(["petrified"]),
-  halfHealth: new Set(["exhaustion-4"])
+  halfHealth: new Set(["exhaustion-4"]),
+  dehydrated: new Set(["dehydration"]),
+  malnourished: new Set(["malnutrition"]),
+  abilityCheckDisadvantage: new Set(["poisoned", "exhaustion-1"]),
+  abilitySaveDisadvantage: new Set(["exhaustion-3"]),
+  attackDisadvantage: new Set(["poisoned", "exhaustion-3"]),
+  dexteritySaveDisadvantage: new Set(["restrained"]),
+  initiativeAdvantage: new Set(["invisible"]),
+  initiativeDisadvantage: new Set(["incapacitated", "surprised"])
 };
 
 /* -------------------------------------------- */
@@ -3977,7 +4229,8 @@ DND5E.statusEffects = {
     name: "EFFECT.DND5E.StatusDead",
     img: "systems/dnd5e/icons/svg/statuses/dead.svg",
     special: "DEFEATED",
-    order: 1
+    order: 1,
+    neverBlockMovement: true
   },
   dodging: {
     name: "EFFECT.DND5E.StatusDodging",
@@ -3985,7 +4238,8 @@ DND5E.statusEffects = {
   },
   ethereal: {
     name: "EFFECT.DND5E.StatusEthereal",
-    img: "systems/dnd5e/icons/svg/statuses/ethereal.svg"
+    img: "systems/dnd5e/icons/svg/statuses/ethereal.svg",
+    neverBlockMovement: true
   },
   flying: {
     name: "EFFECT.DND5E.StatusFlying",
@@ -4019,8 +4273,16 @@ DND5E.statusEffects = {
 /* -------------------------------------------- */
 
 /**
+ * Status effects that never block token movement. Populated during the setup process.
+ * @type {Set<string>}
+ */
+DND5E.neverBlockStatuses = new Set();
+
+/* -------------------------------------------- */
+
+/**
  * Configuration for the special bloodied status effect.
- * @type {{ name: string, icon: string, threshold: number }}
+ * @type {{ name: string, img: string, threshold: number }}
  */
 DND5E.bloodied = {
   name: "EFFECT.DND5E.StatusBloodied",
@@ -4220,6 +4482,34 @@ DND5E.CR_EXP_LEVELS = [
 ];
 
 /**
+ * XP thresholds for encounter difficulty.
+ * @type {number[][]}
+ */
+DND5E.ENCOUNTER_DIFFICULTY = [
+  [0, 0, 0],
+  [50, 75, 100],
+  [100, 150, 200],
+  [150, 225, 400],
+  [250, 375, 500],
+  [500, 750, 1100],
+  [600, 1000, 1400],
+  [750, 1300, 1700],
+  [1000, 1700, 2100],
+  [1300, 2000, 2600],
+  [1600, 2300, 3100],
+  [1900, 2900, 4100],
+  [2200, 3700, 4700],
+  [2600, 4200, 5400],
+  [2900, 4900, 6200],
+  [3300, 5400, 7800],
+  [3800, 6100, 9800],
+  [4500, 7200, 11700],
+  [5000, 8700, 14200],
+  [5500, 10700, 17200],
+  [6400, 13200, 22000]
+];
+
+/**
  * Intervals above the maximum XP that result in an epic boon.
  * @type {number}
  */
@@ -4408,6 +4698,7 @@ preLocalize("traitModes", { keys: ["label", "hint"] });
  * @property {string} placeholder
  * @property {string[]} [abilities]
  * @property {Object<string, string>} [choices]
+ * @property {boolean} [deprecated]               Hide the flag unless it already has a value.
  * @property {string[]} [skills]
  */
 
@@ -4441,10 +4732,10 @@ DND5E.characterFlags = {
     section: "DND5E.RacialTraits",
     type: Boolean
   },
-  initiativeAdv: {
-    name: "DND5E.FlagsInitiativeAdv",
-    hint: "DND5E.FlagsInitiativeAdvHint",
-    section: "DND5E.Feats",
+  halflingNimbleness: {
+    name: "DND5E.FlagsHalflingNimbleness",
+    hint: "DND5E.FlagsHalflingNimblenessHint",
+    section: "DND5E.RacialTraits",
     type: Boolean
   },
   initiativeAlert: {
@@ -4488,6 +4779,12 @@ DND5E.characterFlags = {
     name: "DND5E.FlagsRemarkableAthlete",
     hint: "DND5E.FlagsRemarkableAthleteHint",
     abilities: ["str", "dex", "con"],
+    section: "DND5E.Feats",
+    type: Boolean
+  },
+  toolExpertise: {
+    name: "DND5E.FlagsToolExpertise",
+    hint: "DND5E.FlagsToolExpertiseHint",
     section: "DND5E.Feats",
     type: Boolean
   },
@@ -4594,7 +4891,7 @@ DND5E.activityTypes = {
  * @property {boolean} [hidden]                  Should this advancement type be hidden in the selection dialog?
  */
 
-const _ALL_ITEM_TYPES = ["background", "class", "race", "subclass"];
+const _ALL_ITEM_TYPES = ["background", "class", "feat", "race", "subclass"];
 
 /**
  * Advancement types that can be added to items.
@@ -4657,6 +4954,33 @@ DND5E.defaultArtwork = {
     tool: "systems/dnd5e/icons/svg/items/tool.svg",
     weapon: "systems/dnd5e/icons/svg/items/weapon.svg"
   }
+};
+
+/* -------------------------------------------- */
+/*  Requests                                    */
+/* -------------------------------------------- */
+
+/**
+ * @callback RequestCallback5e
+ * @param {Actor5e} actor               The actor fulfilling the request.
+ * @param {ChatMessage5e} request       The request message.
+ * @param {object} config               Additional request configuration.
+ * @param {RequestOptions5e} [options]  Additional options provided at fulfillment time.
+ * @returns {Promise<ChatMessage5e>}    Result chat message that will be associated with request.
+ */
+
+/**
+ * @typedef RequestOptions5e
+ * @property {Event} [event]  The event forwarded from the user clicking the request button.
+ */
+
+/**
+ * Handler functions for named request/response operations
+ * @type {Record<string, RequestCallback5e>}
+ */
+DND5E.requests = {
+  rest: Actor5e.handleRestRequest,
+  skill: Actor5e.handleSkillCheckRequest
 };
 
 /* -------------------------------------------- */

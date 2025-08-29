@@ -86,7 +86,7 @@ export default function ActivityMixin(Base) {
      * @type {boolean}
      */
     get canUse() {
-      return true;
+      return !this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id);
     }
 
     /* -------------------------------------------- */
@@ -514,10 +514,12 @@ export default function ActivityMixin(Base) {
         else if ( Number.isFinite(linkedDelta) ) config.scaling ??= linkedDelta;
 
         if ( this.requiresSpellSlot ) {
-          const mode = this.item.system.preparation.mode;
+          const { level, method } = this.item.system;
+          const model = CONFIG.DND5E.spellcasting[method];
           config.spell ??= {};
-          config.spell.slot ??= linked?.spell?.level ? `spell${linked.spell.level}`
-            : (mode in this.actor.system.spells) ? mode : `spell${this.item.system.level}`;
+          config.spell.slot ??= linked?.spell?.level
+            ? `spell${linked.spell.level}`
+            : (model?.getSpellSlotKey(level) ?? `spell${level}`);
           const scaling = (this.actor.system.spells?.[config.spell.slot]?.level ?? 0) - this.item.system.level;
           if ( scaling > 0 ) config.scaling ??= scaling;
         }
@@ -567,10 +569,12 @@ export default function ActivityMixin(Base) {
 
       if ( usageConfig.scaling ) {
         foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.scaling", usageConfig.scaling);
-        item.actor._embeddedPreparation = true;
-        item.updateSource({ "flags.dnd5e.scaling": usageConfig.scaling });
-        delete item.actor._embeddedPreparation;
-        item.prepareFinalAttributes();
+        if ( usageConfig.scaling !== item.flags.dnd5e?.scaling ) {
+          item.actor._embeddedPreparation = true;
+          item.updateSource({ "flags.dnd5e.scaling": usageConfig.scaling });
+          delete item.actor._embeddedPreparation;
+          item.prepareFinalAttributes();
+        }
       }
     }
 
@@ -620,7 +624,7 @@ export default function ActivityMixin(Base) {
             }));
             errors.push(err);
           } else {
-            updates.actor["system.resources.legact.value"] = legendary.value - count;
+            updates.actor["system.resources.legact.spent"] = legendary.spent + count;
           }
         }
       }
@@ -671,10 +675,10 @@ export default function ActivityMixin(Base) {
       // Handle spell slot consumption
       else if ( ((config.consume === true) || config.consume.spellSlot)
         && this.requiresSpellSlot && this.consumption.spellSlot ) {
-        const mode = this.item.system.preparation.mode;
-        const isLeveled = ["always", "prepared"].includes(mode);
+        const { method } = this.item.system.preparation;
+        const spellcasting = CONFIG.DND5E.spellcasting[method];
         const effectiveLevel = this.item.system.level + (config.scaling ?? 0);
-        const slot = config.spell?.slot ?? (isLeveled ? `spell${effectiveLevel}` : mode);
+        const slot = config.spell?.slot ?? spellcasting?.getSpellSlotKey(effectiveLevel) ?? method;
         const slotData = this.actor.system.spells?.[slot];
         if ( slotData ) {
           if ( slotData.value ) {
@@ -858,9 +862,7 @@ export default function ActivityMixin(Base) {
         data: {
           content: await foundry.applications.handlebars.renderTemplate(this.metadata.usage.chatCard, context),
           speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
-          flags: {
-            core: { canPopout: true }
-          }
+          title: `${this.item.name} - ${this.name}`
         }
       }, message);
 

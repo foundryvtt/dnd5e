@@ -470,7 +470,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -482,6 +481,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: EjU9p4Wh1U2wsnFK
     name: Shapechanger
@@ -490,11 +495,11 @@ items:
     system:
       description:
         value: >-
-          <p>The weretiger can use its action to <strong>polymorph</strong> into
-          a tiger-humanoid hybrid or into a tiger, or back into its true form,
-          which is humanoid. </p><p>Its statistics, other than its size, are the
-          same in each form. Any equipment it is wearing or carrying isn't
-          transformed. It reverts to its true form if it dies.</p>
+          <p>The weretiger can use its action to polymorph into a tiger-humanoid
+          hybrid or into a tiger, or back into its true form, which is
+          humanoid.</p><p>Its statistics, other than its size, are the same in
+          each form. Any equipment it is wearing or carrying isn't transformed.
+          It reverts to its true form if it dies.</p>
         chat: >-
           <p>The weretiger can use its action to <strong>polymorph</strong>, or
           return to its true form.</p>
@@ -513,7 +518,8 @@ items:
         value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -577,18 +583,17 @@ items:
     sort: 600000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.3.8
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1744075307516
+      modifiedTime: 1749403946671
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.EjU9p4Wh1U2wsnFK'
   - _id: 2iPYXoxM2ZReuhSL
     name: Keen Hearing and Smell
@@ -597,8 +602,8 @@ items:
     system:
       description:
         value: >-
-          <p>The weretiger has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on hearing or smell.</p>
+          <p>The weretiger has advantage on Wisdom (Perception) checks that rely
+          on hearing or smell.</p>
         chat: ''
       source:
         custom: ''
@@ -631,12 +636,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.3.8
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1744074944805
+      modifiedTime: 1749403935651
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.2iPYXoxM2ZReuhSL'
   - _id: jW4qHQ761qRLeWM8
     name: Pounce (Tiger or Hybrid Form Only)
@@ -770,12 +776,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: 1744074885146
           modifiedTime: 1744074906625
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!zIr3NaNF0mWz5Ahq.jW4qHQ761qRLeWM8.xx5oDVvttzxBUXpQ
     folder: null
@@ -790,12 +797,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744074929043
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.jW4qHQ761qRLeWM8'
   - _id: SmUCt79LtakgTJoa
     name: Multiattack (Humanoid or Hybrid Form Only)
@@ -893,12 +901,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744075424301
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.SmUCt79LtakgTJoa'
   - _id: FOkSL18gU0Sli5ZA
     name: Bite (Tiger or Hybrid Form Only)
@@ -1128,12 +1137,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744075307516
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.FOkSL18gU0Sli5ZA'
   - _id: HPmjVRKpG08bgohb
     name: Claw (Tiger or Hybrid Form Only)
@@ -1298,12 +1308,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744075307516
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.HPmjVRKpG08bgohb'
   - _id: vtnEGCOptmp2bcqG
     name: Scimitar (Humanoid or Hybrid Form Only)
@@ -1463,12 +1474,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744075307516
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.vtnEGCOptmp2bcqG'
   - _id: onmNGMiE4AyvYxDQ
     name: Longbow (Humanoid or Hybrid Form Only)
@@ -1637,12 +1649,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744075307516
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.onmNGMiE4AyvYxDQ'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1652,10 +1665,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171267537
   modifiedTime: 1744075486015
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!zIr3NaNF0mWz5Ahq'

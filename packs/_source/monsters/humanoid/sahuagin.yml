@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: UqpaWsGVgiCMSZEw
     name: Spear
@@ -484,9 +489,8 @@ items:
     system:
       description:
         value: >-
-          <p>A gleaming steel point mouted atop a stout wooden haft, the spear
-          may be wielded in one hand or two and can puncture through the
-          heaviest armor with deadly force.</p>
+          <p>[[/attack extended]]. [[/damage extended]] or [[/damage average
+          attackMode=twoHanded]] damage if used with two hands.</p>
         chat: ''
       source:
         custom: ''
@@ -628,23 +632,23 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: spear
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403644372
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.UqpaWsGVgiCMSZEw'
   - _id: NSdAR332o65ZE3hC
     name: Bite
@@ -793,21 +797,20 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553129
+      modifiedTime: 1749403591826
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.NSdAR332o65ZE3hC'
   - _id: uyWDYVSAJuCfayLE
     name: Blood Frenzy
@@ -816,9 +819,8 @@ items:
     system:
       description:
         value: >-
-          <p>The sahuagin has<strong> advantage </strong>on melee attack rolls
-          against any creature that doesn't have all its<strong> hit
-          points</strong>.</p>
+          <p>The sahuagin has advantage on melee attack rolls against any
+          creature that doesn't have all its hit points.</p>
         chat: ''
       source:
         custom: ''
@@ -846,18 +848,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.B2kZOyrB7poB4liR
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.B2kZOyrB7poB4liR
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403585082
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.uyWDYVSAJuCfayLE'
   - _id: VJlDAg21VwBOjbuR
     name: Claws
@@ -1006,19 +1007,20 @@ items:
       identifier: claws
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553129
+      modifiedTime: 1749403591826
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.VJlDAg21VwBOjbuR'
   - _id: lH49mvA2g5C44yM4
     name: Limited Amphibiousness
@@ -1056,18 +1058,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.boO7LJ0RRinoWHyT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.boO7LJ0RRinoWHyT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676825
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.lH49mvA2g5C44yM4'
   - _id: 1aEgtsYuxz12hFn3
     name: Multiattack
@@ -1159,18 +1160,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273657050
+      modifiedTime: 1749403592637
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.1aEgtsYuxz12hFn3'
   - _id: SQqFFwf2ADQmLaVO
     name: Shark Telepathy
@@ -1179,8 +1179,8 @@ items:
     system:
       description:
         value: >-
-          <p>The sahuagin can magically command any shark <strong>within 120
-          feet</strong> of it, using a limited telepathy.</p>
+          <p>The sahuagin can magically command any shark within 120 feet of it,
+          using a limited telepathy.</p>
         chat: ''
       source:
         custom: ''
@@ -1208,18 +1208,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.UYorz1ZrfuoTRknp
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.UYorz1ZrfuoTRknp
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1749403589978
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!lyNBFmJdbh4NLRzz.SQqFFwf2ADQmLaVO'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1229,10 +1228,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171254178
   modifiedTime: 1726171449162
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!lyNBFmJdbh4NLRzz'

@@ -467,7 +467,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -479,6 +478,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: D4VxUJfO4pVUiCNj
     name: Studded Leather Armor
@@ -543,18 +548,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.TIV3B1vbrVHIhQAm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.TIV3B1vbrVHIhQAm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!EMvcuOpu7ABCmBWi.D4VxUJfO4pVUiCNj'
   - _id: Ld00NpZe8Zl4J4Pi
     name: Assassinate
@@ -594,18 +598,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.IwqUTWqdgrKEvohr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.IwqUTWqdgrKEvohr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744049608086
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!EMvcuOpu7ABCmBWi.Ld00NpZe8Zl4J4Pi'
   - _id: crRphULq6iIdlq88
     name: Evasion
@@ -615,9 +618,9 @@ items:
       description:
         value: >-
           <p>If the assassin is subjected to an effect that allows it to make a
-          <strong>Dexterity</strong> saving throw to take only half damage, the
-          assassin instead takes no damage if it succeeds on the saving throw,
-          and only half damage if it fails.</p>
+          Dexterity saving throw to take only half damage, the assassin instead
+          takes no damage if it succeeds on the saving throw, and only half
+          damage if it fails.</p>
         chat: ''
       source:
         custom: ''
@@ -646,18 +649,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.xOgrn5QXzSP4QN6V
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.xOgrn5QXzSP4QN6V
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.3.8
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1744049652244
+      modifiedTime: 1749402967558
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!EMvcuOpu7ABCmBWi.crRphULq6iIdlq88'
   - _id: EcECOhaJIpCtN2o7
     name: Sneak Attack
@@ -666,9 +668,9 @@ items:
     system:
       description:
         value: >-
-          <p>The assassin deals an extra 13 (4d6) damage when it hits a target
-          with a weapon attack and has advantage on the attack roll, or when the
-          target is within 5 ft. of an ally of the assassin that isn't
+          <p>The assassin deals an extra [[/damage average]] damage when it hits
+          a target with a weapon attack and has advantage on the attack roll, or
+          when the target is within 5 ft. of an ally of the assassin that isn't
           incapacitated and the assassin doesn't have disadvantage on the attack
           roll.</p>
         chat: ''
@@ -764,8 +766,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.9uKShqfuA73duQsT
       dnd5e:
         riders:
           activity: []
@@ -773,12 +773,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.9uKShqfuA73duQsT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.345'
       systemId: dnd5e
-      systemVersion: 4.3.8
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1744049774607
+      modifiedTime: 1749402984678
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!EMvcuOpu7ABCmBWi.EcECOhaJIpCtN2o7'
   - _id: zaYTSI1nKtzBnQwf
     name: Multiattack
@@ -867,18 +868,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744050115773
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!EMvcuOpu7ABCmBWi.zaYTSI1nKtzBnQwf'
   - _id: Kbg12IJ0YW79vP06
     name: Shortsword
@@ -1109,8 +1109,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       dnd5e:
         riders:
           activity: []
@@ -1118,12 +1116,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744050091759
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!EMvcuOpu7ABCmBWi.Kbg12IJ0YW79vP06'
   - _id: rNQK7okIBNZ2zDvD
     name: Light Crossbow
@@ -1358,8 +1357,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.ddWvQRLmnnIS0eLF
       dnd5e:
         riders:
           activity: []
@@ -1367,12 +1364,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.ddWvQRLmnnIS0eLF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744050413943
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!EMvcuOpu7ABCmBWi.rNQK7okIBNZ2zDvD'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1382,10 +1380,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171214988
   modifiedTime: 1744051382560
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!EMvcuOpu7ABCmBWi'

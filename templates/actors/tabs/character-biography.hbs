@@ -8,7 +8,7 @@
                 <label>
                     <span class="roboto-upper label">{{ localize label }}</span>
                     {{#if @root.editable}}
-                    <input type="text" name="{{ name }}" value="{{ value }}">
+                    <input type="text" name="{{ name }}" value="{{ source }}">
                     {{else}}
                     <span class="value">{{ value }}</span>
                     {{/if}}
@@ -37,7 +37,7 @@
     </div>
 
     {{!-- Biography --}}
-    <div class="bottom">
+    <div class="bottom" data-target="system.details.biography.value">
         <h3 class="icon">
             <i class="fas fa-feather"></i>
             <dnd5e-icon src="systems/dnd5e/icons/svg/ink-pot.svg"></dnd5e-icon>
