@@ -24,6 +24,9 @@ export default class CombatSettingsConfig extends BaseSettingsConfig {
     npcs: {
       template: "systems/dnd5e/templates/settings/base-config.hbs"
     },
+    effects: {
+      template: "systems/dnd5e/templates/settings/base-config.hbs"
+    },
     footer: {
       template: "templates/generic/form-footer.hbs"
     }
@@ -57,6 +60,12 @@ export default class CombatSettingsConfig extends BaseSettingsConfig {
           this.createSettingField("autoRollNPCHP")
         ];
         context.legend = game.i18n.localize("SETTINGS.DND5E.NPCS.Name");
+        break;
+      case "effects":
+        context.fields = [
+          this.createSettingField("autoApplyDowned")
+        ];
+        context.legend = game.i18n.localize("SETTINGS.DND5E.EFFECTS.Name");
         break;
     }
     return context;
