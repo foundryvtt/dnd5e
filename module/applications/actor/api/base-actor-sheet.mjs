@@ -23,6 +23,7 @@ import HitDiceConfig from "../config/hit-dice-config.mjs";
 import HitPointsConfig from "../config/hit-points-config.mjs";
 import InitiativeConfig from "../config/initiative-config.mjs";
 import LanguagesConfig from "../config/languages-config.mjs";
+import PietyConfig from "../config/piety-config.mjs";
 import SkillsConfig from "../config/skills-config.mjs";
 import SkillToolConfig from "../config/skill-tool-config.mjs";
 import SpellSlotsConfig from "../config/spell-slots-config.mjs";
@@ -1143,7 +1144,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         .forEach(i => i.addEventListener("change", this._onChangeInputDelta.bind(this)));
 
       // Meter editing
-      for ( const meter of this.element.querySelectorAll('.meter > [role="meter"]:has(> input)') ) {
+      for ( const meter of this.element.querySelectorAll('.meter-group [role="meter"]:has(> input)') ) {
         meter.addEventListener("click", event => this.#toggleMeter(event, true));
         meter.querySelector(":scope > input")?.addEventListener("blur", event => this.#toggleMeter(event, false));
       }
@@ -1521,6 +1522,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         return new HitPointsConfig(config).render({ force: true });
       case "initiative":
         return new InitiativeConfig(config).render({ force: true });
+      case "piety":
+        return new PietyConfig(config).render({ force: true });
       case "movement":
       case "senses":
         return new MovementSensesConfig({ ...config, type: target.dataset.config }).render({ force: true });

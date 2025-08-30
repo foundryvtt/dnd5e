@@ -572,6 +572,10 @@ export default class CharacterActorSheet extends BaseActorSheet {
       return obj;
     }, { value: 0, label: CONFIG.DND5E.movementTypes.walk?.label });
 
+    // Piety
+    context.piety = game.settings.get("dnd5e", "pietyScore")
+      && (context.editable || !context.system.attributes.piety.disabled);
+
     return context;
   }
 

@@ -25,6 +25,9 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @property {object} enchant
  * @property {string} enchant.max                   Maximum number of items that can have this enchantment.
  * @property {string} enchant.period                Frequency at which the enchantment can be swapped.
+ * @property {object} piety
+ * @property {string} piety.deity                   The specific deity that would grant this piety trait.
+ * @property {number} piety.threshold               The threshold at which a piety trait is obtained.
  * @property {object} prerequisites
  * @property {Set<string>} prerequisites.items      Items that must be taken first before this item.
  * @property {number} prerequisites.level           Character or class level required to choose this feature.
@@ -54,6 +57,10 @@ export default class FeatData extends ItemDataModel.mixin(
       enchant: new SchemaField({
         max: new FormulaField({ deterministic: true }),
         period: new StringField()
+      }),
+      piety: new SchemaField({
+        deity: new StringField({ required: true }),
+        threshold: new NumberField({ integer: true, nullable: false, initial: 3, min: 1 })
       }),
       prerequisites: new SchemaField({
         items: new SetField(new IdentifierField()),
