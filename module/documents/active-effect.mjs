@@ -48,6 +48,14 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /**
+   * A Semaphore used to enqueue asynchronous effect operations
+   * @type {Semaphore}
+   */
+  static #semaphore = new Semaphore(1);
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this effect an enchantment on an item that accepts enchantment?
    * @type {boolean}
    */
@@ -496,6 +504,12 @@ export default class ActiveEffect5e extends ActiveEffect {
       return false;
     }
 
+    // Cannot apply a concentration-dependent effect without active GM
+    if ( this.getFlag("dnd5e", "dependentOn") && !game.users.activeGM ) {
+      ui.notifications.warn("DND5E.ConcentrationCreateWarning", { localize: true });
+      return false;
+    }
+
     if ( this.isAppliedEnchantment ) {
       const origin = await fromUuid(this.origin);
       const errors = origin?.canEnchant?.(this.parent);
@@ -520,6 +534,10 @@ export default class ActiveEffect5e extends ActiveEffect {
       document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
         .forEach(element => element.buildItemList());
     }
+    const concentrationUuid = this.getFlag("dnd5e", "dependentOn");
+    if ( concentrationUuid && game.user.isActiveGM ) ActiveEffect5e.#semaphore.add(() => {
+      return fromUuidSync(concentrationUuid)?.addDependent(this);
+    });
   }
 
   /* -------------------------------------------- */
