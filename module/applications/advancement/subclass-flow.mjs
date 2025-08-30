@@ -1,65 +1,75 @@
 import CompendiumBrowser from "../compendium-browser.mjs";
-import AdvancementFlow from "./advancement-flow.mjs";
+import AdvancementFlow from "./advancement-flow-v2.mjs";
 
 /**
  * Inline application that presents the player with a choice of subclass.
  */
 export default class SubclassFlow extends AdvancementFlow {
 
-  /**
-   * Cached subclass dropped onto the advancement.
-   * @type {Item5e|false}
-   */
-  subclass;
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    actions: {
+      browse: SubclassFlow.#browseCompendium,
+      deleteItem: SubclassFlow.#deleteItem
+    }
+  };
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      dragDrop: [{ dropSelector: "form" }],
+  /** @override */
+  static PARTS = {
+    ...super.PARTS,
+    content: {
       template: "systems/dnd5e/templates/advancement/subclass-flow.hbs"
-    });
-  }
+    }
+  };
 
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async retainData(data) {
-    await super.retainData(data);
-    const uuid = foundry.utils.getProperty(data, "flags.dnd5e.sourceId");
-    if ( uuid ) this.subclass = await fromUuid(uuid);
+  async _prepareContext(options) {
+    const uuid = foundry.utils.getProperty(this.retainedData ?? {}, "flags.dnd5e.sourceId");
+    if ( uuid ) await this.advancement.apply(this.level, { retainedData: this.retainedData, uuid });
+    return await super._prepareContext(options);
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  async getData() {
-    const context = await super.getData();
-    context.subclass = this.subclass;
+  /** @override */
+  async _prepareContentContext(context, options) {
+    context.subclass = this.advancement.value.document;
     return context;
   }
 
   /* -------------------------------------------- */
+  /*  Life-Cycle Handlers                         */
+  /* -------------------------------------------- */
 
-  /** @inheritdoc */
-  activateListeners(jQuery) {
-    super.activateListeners(jQuery);
-    const [html] = jQuery;
-    html.querySelector('[data-action="browse"]')?.addEventListener("click", this._onBrowseCompendium.bind(this));
-    html.querySelector('[data-action="delete"]')?.addEventListener("click", this._onItemDelete.bind(this));
-    html.querySelector("[data-action='viewItem']")?.addEventListener("click", this._onClickFeature.bind(this));
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    new foundry.applications.ux.DragDrop.implementation({
+      dragSelector: ".draggable",
+      dropSelector: "form",
+      callbacks: {
+        drop: this._onDrop.bind(this)
+      }
+    }).bind(this.element);
   }
 
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**
    * Handle opening the compendium browser and displaying the result.
-   * @param {Event} event  The originating click event.
-   * @protected
+   * @this {SubclassFlow}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  async _onBrowseCompendium(event) {
-    event.preventDefault();
+  static async #browseCompendium(event, target) {
     const filters = {
       locked: {
         additional: { class: { [this.item.identifier]: 1 } },
@@ -67,50 +77,52 @@ export default class SubclassFlow extends AdvancementFlow {
       }
     };
     const result = await CompendiumBrowser.selectOne({ filters });
-    if ( result ) this.subclass = await fromUuid(result);
-    this.render();
+    if ( result ) {
+      await this.advancement.apply(this.level, { uuid: result });
+      this.render();
+    }
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle clicking on a feature during item grant to preview the feature.
-   * @param {MouseEvent} event  The triggering event.
-   * @protected
+   * Handle removing a selected item.
+   * @this {SubclassFlow}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  async _onClickFeature(event) {
-    event.preventDefault();
-    const uuid = event.target.closest("[data-uuid]")?.dataset.uuid;
-    const item = await fromUuid(uuid);
-    item?.sheet.render(true);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle deleting a dropped item.
-   * @param {Event} event  The originating click event.
-   * @protected
-   */
-  async _onItemDelete(event) {
-    event.preventDefault();
-    this.subclass = false;
+  static async #deleteItem(event, target) {
+    await this.advancement.reverse();
+    this.retainedData = null;
     this.render();
   }
 
   /* -------------------------------------------- */
+  /*  Form Handling                               */
+  /* -------------------------------------------- */
 
-  /** @inheritdoc */
+  /** @override */
+  async _handleForm(event, form, formData) {}
+
+  /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping subclass onto the sheet.
+   * @param {DragEvent} event  The concluding drag event.
+   * @protected
+   */
   async _onDrop(event) {
     // Try to extract the data
     let data;
     try {
       data = JSON.parse(event.dataTransfer.getData("text/plain"));
     } catch(err) {
-      return false;
+      return;
     }
 
-    if ( data.type !== "Item" ) return false;
+    if ( data.type !== "Item" ) return;
     const item = await Item.implementation.fromDropData(data);
 
     // Ensure the dropped item is a subclass
@@ -119,14 +131,7 @@ export default class SubclassFlow extends AdvancementFlow {
       return;
     }
 
-    this.subclass = item;
+    this.advancement.apply(this.level, { uuid: item.uuid });
     this.render();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritdoc */
-  async _updateObject(event, formData) {
-    if ( this.subclass ) await this.advancement.apply(this.level, { uuid: this.subclass.uuid }, this.retainedData);
   }
 }

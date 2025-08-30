@@ -176,7 +176,7 @@ export default class HitPointsAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @override */
-  automaticApplicationValue(level) {
+  async automaticApplicationValue(level) {
     if ( (level === 1) && this.item.isOriginalClass ) return { [level]: "max" };
     if ( this.value[level - 1] === "avg" ) return { [level]: "avg" };
     return false;
