@@ -155,11 +155,15 @@
       .number-header, .level-number { grid-column: number; }
       .faces-header, .level-faces { grid-column: faces; }
     }
-    select option[value=""] { color: var(--color-text-tertiary); }
-    .new-scale-value select { font-weight: bold; }
-    li.level:not(.new-scale-value) select {
-      color: var(--color-text-tertiary);
-      option:not([value=""]) { color: var(--color-text-primary); }
+    input, select {
+      font-weight: bold;
+      color: var(--color-text-dark-primary);
+    }
+    div.placeholder {
+      input, select {
+        color: var(--color-text-tertiary);
+        font-weight: normal;
+      }
     }
   }
 }
