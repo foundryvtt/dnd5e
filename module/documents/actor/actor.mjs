@@ -3217,7 +3217,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       this.sheet?.close();
     }
     if ( isRendered && options.renderSheet ) original.sheet?.render(isRendered);
-    if ( !foundry.utils.isEmpty(update) ) await original.update(update);
+    if ( !foundry.utils.isEmpty(update) ) await original.update(update, { dnd5e: { concentrationCheck: false } });
     return original;
   }
 
