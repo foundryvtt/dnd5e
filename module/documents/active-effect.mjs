@@ -55,6 +55,16 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /**
+   * Document type to which this active effect should apply its changes.
+   * @type {string}
+   */
+  get applicableType() {
+    return this.system.applicableType ?? "Actor";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Another effect that granted this effect as a rider.
    * @type {ActiveEffect5e|null}
    */
@@ -70,7 +80,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @type {boolean}
    */
   get isAppliedEnchantment() {
-    return (this.type === "enchantment") && !!this.origin && (this.origin !== this.parent.uuid);
+    return (this.type === "enchantment") && this.system.isApplied;
   }
 
   /* -------------------------------------------- */
@@ -463,10 +473,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       foundry.utils.setProperty(activityData, "flags.dnd5e.dependentOn", this.id);
       riderActivities[activityData._id] = activityData;
     }
-    let createdActivities = [];
     if ( !foundry.utils.isEmpty(riderActivities) ) {
       await this.parent.update({ "system.activities": riderActivities });
-      createdActivities = Object.keys(riderActivities).map(id => this.parent.system.activities?.get(id));
+      const createdActivities = Object.keys(riderActivities).map(id => this.parent.system.activities?.get(id));
       createdActivities.forEach(a => a.effects?.forEach(e => {
         if ( !this.parent.effects.has(e._id) ) riderEffects.push(item.effects.get(e._id)?.toObject());
       }));
@@ -484,10 +493,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     }));
     riderEffects = riderEffects.filter(_ => _)
     riderEffects.forEach(e => foundry.utils.setProperty(e, "flags.dnd5e.dependentOn", this.id));
-    const createdEffects = await this.parent.createEmbeddedDocuments("ActiveEffect", riderEffects, { keepId: true });
+    await this.parent.createEmbeddedDocuments("ActiveEffect", riderEffects, { keepId: true });
 
     // Create Items
-    let createdItems = [];
     if ( this.parent.isEmbedded ) {
       const riderItems = await Item5e.createWithContents(
         (await Promise.all(profile.riders.item.map(uuid => fromUuid(uuid)))).filter(_ => _), {
@@ -499,7 +507,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
           }
         }
       );
-      createdItems = await this.parent.actor.createEmbeddedDocuments("Item", riderItems, { keepId: true });
+      await this.parent.actor.createEmbeddedDocuments("Item", riderItems, { keepId: true });
     }
   }
 
@@ -523,22 +531,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   async _preCreate(data, options, user) {
     if ( await super._preCreate(data, options, user) === false ) return false;
     if ( options.keepOrigin === false ) this.updateSource({ origin: this.parent.uuid });
-
-    // Enchantments cannot be added directly to actors
-    if ( (this.type === "enchantment") && (this.parent instanceof Actor) ) {
-      ui.notifications.error("DND5E.ENCHANTMENT.Warning.NotOnActor", { localize: true });
-      return false;
-    }
-
-    if ( this.isAppliedEnchantment ) {
-      const origin = await fromUuid(this.origin);
-      const errors = origin?.canEnchant?.(this.parent);
-      if ( errors?.length ) {
-        errors.forEach(err => console.error(err));
-        return false;
-      }
-      this.updateSource({ disabled: false });
-    }
   }
 
   /* -------------------------------------------- */
@@ -606,9 +598,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if ( game.user === game.users.activeGM ) this.getDependents().forEach(e => e.delete());
-    if ( this.isAppliedEnchantment ) dnd5e.registry.enchantments.untrack(this.origin, this.uuid);
-    document.body.querySelectorAll(`enchantment-application:has([data-enchantment-uuid="${this.uuid}"]`)
-      .forEach(element => element.buildItemList());
   }
 
   /* -------------------------------------------- */
