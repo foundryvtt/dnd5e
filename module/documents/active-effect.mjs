@@ -46,13 +46,25 @@ export default class ActiveEffect5e extends ActiveEffect {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "DND5E.ACTIVEEFFECT"];
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Document type to which this active effect should apply its changes.
+   * @type {string}
+   */
+  get applicableType() {
+    return this.system.applicableType ?? "Actor";
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Is this effect an enchantment on an item that accepts enchantment?
    * @type {boolean}
    */
   get isAppliedEnchantment() {
-    return (this.type === "enchantment") && !!this.origin && (this.origin !== this.parent.uuid);
+    return (this.type === "enchantment") && this.system.isApplied;
   }
 
   /* -------------------------------------------- */
@@ -499,22 +511,6 @@ export default class ActiveEffect5e extends ActiveEffect {
   async _preCreate(data, options, user) {
     if ( await super._preCreate(data, options, user) === false ) return false;
     if ( options.keepOrigin === false ) this.updateSource({ origin: this.parent.uuid });
-
-    // Enchantments cannot be added directly to actors
-    if ( (this.type === "enchantment") && (this.parent instanceof Actor) ) {
-      ui.notifications.error("DND5E.ENCHANTMENT.Warning.NotOnActor", { localize: true });
-      return false;
-    }
-
-    if ( this.isAppliedEnchantment ) {
-      const origin = await fromUuid(this.origin);
-      const errors = origin?.canEnchant?.(this.parent);
-      if ( errors?.length ) {
-        errors.forEach(err => console.error(err));
-        return false;
-      }
-      this.updateSource({ disabled: false });
-    }
   }
 
   /* -------------------------------------------- */
@@ -582,9 +578,6 @@ export default class ActiveEffect5e extends ActiveEffect {
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if ( game.user === game.users.activeGM ) this.getDependents().forEach(e => e.delete());
-    if ( this.isAppliedEnchantment ) dnd5e.registry.enchantments.untrack(this.origin, this.uuid);
-    document.body.querySelectorAll(`enchantment-application:has([data-enchantment-uuid="${this.uuid}"]`)
-      .forEach(element => element.buildItemList());
   }
 
   /* -------------------------------------------- */
