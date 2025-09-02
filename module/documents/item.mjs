@@ -431,7 +431,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   *allApplicableEffects() {
     for ( const effect of this.effects ) {
-      if ( effect.isAppliedEnchantment ) yield effect;
+      if ( effect.applicableType === "Item" ) yield effect;
     }
   }
 
