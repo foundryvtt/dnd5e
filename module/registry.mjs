@@ -359,7 +359,7 @@ class SpellListRegistry {
     }));
 
     const list = type.get(page.system.identifier);
-    await Promise.all(Array.from(list.contribute(page)).map(uuid => {
+    await Promise.all(Array.from(list.contribute(page)).map(async uuid => {
       if ( !SpellListRegistry.#bySpell.has(uuid) ) SpellListRegistry.#bySpell.set(uuid, new Set());
       SpellListRegistry.#bySpell.get(uuid).add(list);
       const { collection } = foundry.utils.parseUuid(uuid);
@@ -367,7 +367,8 @@ class SpellListRegistry {
         && !this.#compendiumsIndexed.has(collection.metadata.id) ) {
         this.#compendiumsIndexed.add(collection.metadata.id);
         this.#loading.add(collection.metadata.id);
-        return collection.getIndex().then(this.#loading.delete(collection.metadata.id));
+        await collection.getIndex();
+        this.#loading.delete(collection.metadata.id);
       }
     }));
 
