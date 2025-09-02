@@ -198,6 +198,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Is this activity a rider for a non-applied enchantment?
+   * @type {boolean}
+   */
+  get isRider() {
+    return this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id)
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this activity on a spell scroll that is scaled.
    * @type {boolean}
    */
@@ -613,7 +623,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       writable: false
     });
 
-    if ( this.visibility ) {
+    if ( this.visibility && !this.isRider ) {
       if ( !this.item.system.properties?.has("mgc") && this.item.system.validProperties.has("mgc") ) {
         this.visibility.requireAttunement = false;
         this.visibility.requireMagic = false;
@@ -622,7 +632,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       } else if ( !this.item.system.canAttune ) {
         this.visibility.requireAttunement = false;
       }
-      if ( !("identified" in this.item.system) ) this.visibility.requireIdentification == false;
+      if ( !("identified" in this.item.system) ) this.visibility.requireIdentification = false;
     }
 
     // TODO: Temporarily add parent to consumption targets & damage parts added by enchantment
