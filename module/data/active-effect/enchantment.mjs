@@ -53,6 +53,16 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if ( this.isApplied && this.parent.uuid ) dnd5e.registry.enchantments.track(this.parent.origin, this.parent.uuid);
+  }
+
+  /* -------------------------------------------- */
   /*  Effect Application                          */
   /* -------------------------------------------- */
 
@@ -193,10 +203,21 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+    if ( options.chatMessageOrigin ) {
+      document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
+        .forEach(element => element.buildItemList());
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if ( this.isApplied ) dnd5e.registry.enchantments.untrack(this.origin, this.uuid);
-    document.body.querySelectorAll(`enchantment-application:has([data-enchantment-uuid="${this.uuid}"]`)
+    document.body.querySelectorAll(`enchantment-application:has([data-enchantment-uuid="${this.parent.uuid}"]`)
       .forEach(element => element.buildItemList());
   }
 }

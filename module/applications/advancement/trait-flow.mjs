@@ -92,7 +92,7 @@ export default class TraitFlow extends AdvancementFlow {
   }
 
   /* -------------------------------------------- */
-  /*  Data Preparation Methods                    */
+  /*  Data Preparation                            */
   /* -------------------------------------------- */
 
   /**
