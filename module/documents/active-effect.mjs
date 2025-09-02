@@ -409,7 +409,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   prepareDerivedData() {
     super.prepareDerivedData();
     if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
-    if ( this.isAppliedEnchantment && this.uuid ) dnd5e.registry.enchantments.track(this.origin, this.uuid);
   }
 
   /* -------------------------------------------- */
@@ -583,10 +582,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( userId === game.userId ) {
       if ( this.active && (this.parent instanceof Actor) ) await this.createRiderConditions();
       if ( this.isAppliedEnchantment ) await this.createRiderEnchantments(options);
-    }
-    if ( options.chatMessageOrigin ) {
-      document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
-        .forEach(element => element.buildItemList());
     }
   }
 
