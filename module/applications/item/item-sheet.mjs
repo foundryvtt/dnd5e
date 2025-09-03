@@ -326,10 +326,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       const group = CONFIG.DND5E.spellcasting[config.type]?.label ?? "";
       return { group, value, label: config.label };
     });
-    const { progression } = this.item.system.spellcasting ?? {};
-    if ( progression && !(progression in CONFIG.DND5E.spellProgression) ) {
-      context.spellProgression.push({ value: progression, label: progression });
-    }
 
     // Limited Uses
     context.data = { uses: context.source.uses };
