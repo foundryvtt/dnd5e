@@ -1103,6 +1103,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   async _onDelete(options, userId) {
     super._onDelete(options, userId);
     await this.system.onDeleteActivities?.(options, userId);
+    if ( game.user.isActiveGM ) this.effects.forEach(e => e.getDependents().forEach(e => e.delete()));
     if ( userId !== game.user.id ) return;
     this.parent?.endConcentration?.(this);
   }
