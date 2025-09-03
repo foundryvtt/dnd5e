@@ -1763,8 +1763,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? game.i18n.localize("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
-      maximum: init.roll.max,
-      minimum: init.roll.min
+      maximum: Math.min(init.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity),
+      minimum: Math.max(init.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
     }, options);
 
     const rollConfig = { parts, data, options, subject: this };
