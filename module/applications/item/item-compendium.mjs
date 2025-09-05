@@ -1,5 +1,5 @@
 import Item5e from "../../documents/item.mjs";
-import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
+import DragDropApplicationMixin from "../api/drag-drop-mixin.mjs";
 import ItemSheet5e from "./item-sheet.mjs";
 
 /**

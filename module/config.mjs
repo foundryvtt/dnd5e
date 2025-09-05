@@ -3812,103 +3812,6 @@ preLocalize("transformation.merge", { keys: ["label", "hint"] });
 preLocalize("transformation.other", { keys: ["label", "hint"], sort: true });
 preLocalize("transformation.presets", { key: "label", sort: true });
 
-/**
- * Settings to configure how actors are merged when polymorphing is applied.
- * @enum {string}
- * @deprecated since DnD5e 4.4, available until DnD5e 5.0
- */
-DND5E.polymorphSettings = new Proxy(DND5E.transformation, {
-  get(target, prop) {
-    if ( typeof prop !== "string" ) return target[prop];
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.polymorphSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
-    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
-    return target[category]?.[key]?.label;
-  },
-  set(target, prop, value) {
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.polymorphSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
-    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
-    if ( !category ) return false;
-    target[category][key] = { label: value };
-    return true;
-  }
-});
-
-/**
- * Settings to configure how actors are effects are merged when polymorphing is applied.
- * @enum {string}
- * @deprecated since DnD5e 4.4, available until DnD5e 5.0
- */
-DND5E.polymorphEffectSettings = new Proxy(DND5E.transformation, {
-  get(target, prop) {
-    if ( typeof prop !== "string" ) return target[prop];
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.polymorphEffectSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
-    if ( prop === "keepAE" ) return target.effects.all?.label;
-    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
-    return target[category]?.[key]?.label;
-  },
-  set(target, prop, value) {
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.polymorphEffectSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
-    if ( prop === "keepAE" ) {
-      target.effects.all = { label: value };
-      return true;
-    }
-    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
-    if ( !category ) return false;
-    target[category][key] = { label: value };
-    return true;
-  }
-});
-
-/**
- * Settings to configure how actors are merged when preset polymorphing is applied.
- * @enum {object}
- */
-DND5E.transformationPresets = new Proxy(DND5E.transformation, {
-  get(target, prop) {
-    if ( typeof prop !== "string" ) return target[prop];
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.transformationPresets` is deprecated, use `CONFIG.DND5E.transformation.presets` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
-    const preset = target.presets[prop];
-    if ( !preset ) return;
-    const setting = new TransformationSetting(preset.settings);
-    return {
-      icon: preset.icon,
-      label: preset.label,
-      options: {
-        ...setting._toDeprecatedConfig(),
-        preset: prop
-      }
-    };
-  },
-  set(target, prop, value) {
-    foundry.utils.logCompatibilityWarning(
-      "`CONFIG.DND5E.transformationPresets` is deprecated, use `CONFIG.DND5E.transformation.presets` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-    );
-    const preset = {
-      label: value.label,
-      icon: value.icon,
-      settings: TransformationSetting._fromDeprecatedConfig(value.options ?? {})
-    };
-    target.presets[prop] = preset.toObject();
-    return true;
-  }
-});
-
 /* -------------------------------------------- */
 
 /**
@@ -4163,7 +4066,7 @@ DND5E.conditionTypes = {
     riders: ["prone"]
   }
 };
-preLocalize("conditionTypes", { keys: ["name", "label"], sort: true }); // TODO: Remove 'label' in 5.2.
+preLocalize("conditionTypes", { key: "name", sort: true });
 
 /* -------------------------------------------- */
 
@@ -4812,12 +4715,6 @@ DND5E.characterFlags = {
   }
 };
 preLocalize("characterFlags", { keys: ["name", "hint", "section"] });
-
-/**
- * Flags allowed on actors. Any flags not in the list may be deleted during a migration.
- * @type {string[]}
- */
-DND5E.allowedActorFlags = ["isPolymorphed", "originalActor"].concat(Object.keys(DND5E.characterFlags));
 
 /* -------------------------------------------- */
 
