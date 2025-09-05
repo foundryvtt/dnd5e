@@ -366,6 +366,20 @@ export function registerSystemSettings() {
     }
   });
 
+  game.settings.register("dnd5e", "autoApplyDowned", {
+    name: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.Name",
+    hint: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.Hint",
+    scope: "world",
+    config: false,
+    default: "none",
+    type: String,
+    choices: {
+      none: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.None",
+      deadOnly: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.DeadOnly",
+      all: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.All"
+    }
+  });
+
   // Variant Rules
   game.settings.registerMenu("dnd5e", "variantRulesConfiguration", {
     name: "SETTINGS.DND5E.VARIANT.Name",
