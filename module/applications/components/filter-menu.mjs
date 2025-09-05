@@ -13,8 +13,12 @@ export default class FilterMenu extends foundry.applications.ux.ContextMenu {
     if ( !filter ) return;
     const { state } = controls;
     const { properties } = state;
-    if ( properties.has(filter) ) properties.delete(filter);
-    else properties.add(filter);
+    const isInclude = properties.has(filter);
+    const isExclude = properties.has(`!${filter}`);
+    properties.delete(filter);
+    properties.delete(`!${filter}`);
+    if ( !isInclude && !isExclude ) properties.add(filter);
+    else if (isInclude) properties.add(`!${filter}`);
     this.#renderEntries(controls);
     controls._applyFilters();
   }
@@ -50,6 +54,7 @@ export default class FilterMenu extends foundry.applications.ux.ContextMenu {
       item.dataset.filter = filter;
       item.classList.add("context-item", "filter-item", "always-interactive");
       item.classList.toggle("active", state.properties.has(filter));
+      item.classList.toggle("activeX", state.properties.has(`!${filter}`));
       const span = document.createElement("span");
       span.append(label);
       item.append(span);
