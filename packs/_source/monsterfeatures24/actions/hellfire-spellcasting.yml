@@ -1,0 +1,204 @@
+_id: mmHellfireSpellc
+name: Hellfire Spellcasting
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    fN8SjzxRhERq8DlF:
+      type: cast
+      _id: fN8SjzxRhERq8DlF
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFireball00
+        ability: cha
+      name: ''
+      img: ''
+    UYyJcxVTi3IXTydV:
+      type: cast
+      _id: UYyJcxVTi3IXTydV
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '7'
+        properties:
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplHoldMonste
+        ability: cha
+      name: ''
+      img: ''
+    d7nppEGoUKLye9JS:
+      type: cast
+      _id: d7nppEGoUKLye9JS
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '4'
+        properties:
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplWallofFire
+        ability: cha
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '4'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature">The pit fiend casts
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFireball00]{Fireball}</em>
+      (level 5 version) twice, requiring no Material components and using
+      Charisma as the spellcasting ability (spell save DC [[lookup
+      @abilities.cha.dc]]).. It can replace one <em>Fireball</em> with
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplHoldMonste]{Hold
+      Monster}</em> (level 7 version) or
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWallofFire]{Wall
+      of Fire}.</em></p>
+    chat: ''
+  identifier: hellfire-spellcasting
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/fire/explosion-flame-lightning-strike.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736880870978
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 10700000
+ownership:
+  default: 0
+_key: '!items!mmHellfireSpellc'

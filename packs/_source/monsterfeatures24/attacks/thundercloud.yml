@@ -1,0 +1,130 @@
+_id: mmThundercloud00
+name: Thundercloud
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: <p>[[/attack extended]]. [[/damage average extended]].</p>
+    chat: ''
+  identifier: thundercloud
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 3
+      denomination: 6
+      types:
+        - thunder
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: 240
+    long: null
+    reach: null
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/magic/lightning/bolt-strike-creature-pink.webp
+effects:
+  - name: Incapacitated
+    img: systems/dnd5e/icons/svg/statuses/incapacitated.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmThundercloud00
+    _id: zntfQrOQz4iBlh22
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Incapacitated apply=false] condition
+      until the end of its next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - incapacitated
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.actors24.Actor.mmCloudGiant0000.Item.mmThundercloud00.ActiveEffect.ZwKTwzvDAUm6FSgv
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.2
+      createdTime: 1737845375064
+      modifiedTime: 1737845375064
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmThundercloud00.zntfQrOQz4iBlh22'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737845390720
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 21100000
+ownership:
+  default: 0
+_key: '!items!mmThundercloud00'

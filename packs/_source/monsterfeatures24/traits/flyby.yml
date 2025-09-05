@@ -1,0 +1,45 @@
+_id: mmFlyby000000000
+name: Flyby
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] doesn't provoke an
+      &amp;Reference[OpportunityAttacks]{Opportunity Attack} when it flies out
+      of an enemy's reach.</p>
+    chat: ''
+  identifier: flyby
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: Flies out of an enemy's reach
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/abilities/wings-birdlike-blue.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736459329490
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5900000
+ownership:
+  default: 0
+_key: '!items!mmFlyby000000000'

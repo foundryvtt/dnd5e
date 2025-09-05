@@ -1,0 +1,146 @@
+_id: mmVanish00000000
+name: Vanish
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    RYoAjqR06oGKDiVC:
+      type: utility
+      _id: RYoAjqR06oGKDiVC
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: true
+        override: false
+      effects:
+        - _id: oY6W5ijpozecYGkq
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+      appliedEffects:
+        - oY6W5ijpozecYGkq
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] and its light have the
+      &amp;Reference[Invisible apply=false] condition until the [[lookup @name
+      lowercase]]'s &amp;Reference[Concentration] ends on this effect, which
+      ends early immediately after the [[lookup @name lowercase]] makes an
+      attack roll or uses Consume Life.</p>
+    chat: ''
+  identifier: vanish
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/control/silhouette-hold-change-blue.webp
+effects:
+  - name: Invisible
+    img: systems/dnd5e/icons/svg/statuses/invisible.svg
+    origin: Item.mmVanish00000000
+    _id: oY6W5ijpozecYGkq
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The attacking creature and its light have the &amp;Reference[Invisible
+      apply=false] condition until their Concentration ends on this effect,
+      which ends early immediately after the wisp makes an attack roll or uses
+      the Consume Life bonus action.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - invisible
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737799268278
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmVanish00000000.oY6W5ijpozecYGkq'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737515542020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 23200000
+ownership:
+  default: 0
+_key: '!items!mmVanish00000000'

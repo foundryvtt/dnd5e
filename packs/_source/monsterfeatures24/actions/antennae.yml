@@ -1,0 +1,159 @@
+_id: mmAntennae000000
+name: Antennae
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    dcSC7EuknnM0uoqY:
+      type: save
+      _id: dcSC7EuknnM0uoqY
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: object
+          count: '1'
+          special: nonmagical metal
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: []
+        dc:
+          calculation: ''
+          formula: ''
+      name: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] targets one [[lookup
+      @target.affects.special activity=dcSC7EuknnM0uoqY]] object—armor or a
+      weapon—worn or carried by a creature within [[lookup @range.value
+      activity=dcSC7EuknnM0uoqY]] feet of itself. <em>Dexterity Saving
+      Throw:</em> DC [[lookup @save.dc.value activity=dcSC7EuknnM0uoqY]], the
+      creature with the object. <em>Failure:</em> The object takes a -1 penalty
+      to the AC it offers (armor) or to its attack rolls (weapon). Armor is
+      destroyed if the penalty reduces its AC to 10, and a weapon is destroyed
+      if its penalty reaches -5. The penalty can be removed by casting the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMending000]</em>
+      spell on the armor or weapon.</p><section class="secret"
+      id="secret-4QbvfWBnYI6ImcGC"><p><strong>Foundry Note</strong></p><p>This
+      feature also provides a <strong>Damaged</strong> Enchantment effect that
+      will modify the targeted object. Due to the fact that the equipment
+      penalty can be applied multiple times, the enchantment needs to be dragged
+      from this item's Effects tab onto the target Item's sheet.</p></section>
+    chat: ''
+  identifier: antennae
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/commodities/materials/feather-orange.webp
+effects:
+  - type: enchantment
+    name: 'Damaged: -1 AC/Attack'
+    img: icons/skills/melee/sword-damaged-chipped-green.webp
+    disabled: true
+    _id: PTSwIOo5chgO4d1p
+    system: {}
+    changes:
+      - key: system.armor.value
+        mode: 2
+        value: '-1'
+        priority: null
+      - key: activities[attack].attack.bonus
+        mode: 2
+        value: '-1'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The object takes a -1 penalty to the AC it offers (armor) or to its
+      attack rolls (weapon). Armor is destroyed if the penalty reduces its AC to
+      10, and a weapon is destroyed if its penalty reaches -5. The penalty can
+      be removed by casting the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMending000]</em>
+      spell on the armor or weapon.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!mmAntennae000000.PTSwIOo5chgO4d1p'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1734559271305
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!mmAntennae000000'

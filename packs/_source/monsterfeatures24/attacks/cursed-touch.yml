@@ -1,0 +1,205 @@
+_id: mmCursedTouch000
+name: Cursed Touch
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    HcqBp8F64ob9OEZi:
+      _id: HcqBp8F64ob9OEZi
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Bl2zQN1xGAUjeiR1
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: cha
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: '12'
+            bonus: ''
+            types:
+              - necrotic
+      name: ''
+      img: ''
+      appliedEffects:
+        - Bl2zQN1xGAUjeiR1
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]]. If
+      the target is a creature, it is cursed. While cursed, the target gains no
+      benefit from finishing a Short or Long Rest.</p>
+    chat: ''
+  identifier: cursed-touch
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 2
+      denomination: 6
+      types:
+        - slashing
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: 10
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/magic/unholy/hand-claw-fire-blue.webp
+effects:
+  - name: Cursed
+    img: systems/dnd5e/icons/svg/statuses/cursed.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmCursedTouch000
+    _id: Bl2zQN1xGAUjeiR1
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>While cursed, the target gains no benefit from finishing a Short or
+      Long Rest.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - cursed
+    sort: 0
+    flags:
+      dae:
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+        enableCondition: ''
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736530584322
+      modifiedTime: 1737915549614
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmCursedTouch000.Bl2zQN1xGAUjeiR1'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736530680144
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 6500000
+ownership:
+  default: 0
+_key: '!items!mmCursedTouch000'

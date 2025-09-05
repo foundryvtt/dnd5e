@@ -1,0 +1,109 @@
+_id: mmFireAura000000
+name: Fire Aura
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    15VgJKVXwYBOFSqJ:
+      type: damage
+      _id: 15VgJKVXwYBOFSqJ
+      sort: 0
+      activation:
+        type: turnEnd
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '10'
+          count: ''
+        affects:
+          choice: true
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '6'
+            bonus: ''
+            types:
+              - fire
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>At the end of each of the [[lookup @name lowercase]]'s turns, each
+      [[lookup @target.affects.type activity=15VgJKVXwYBOFSqJ]] of the [[lookup
+      @name lowercase]]'s choice in a [[lookup @target.template.size
+      activity=15VgJKVXwYBOFSqJ]]-foot Emanation originating from the [[lookup
+      @name lowercase]] takes [[/damage average]] damage.</p>
+    chat: ''
+  identifier: fire-aura
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/fire/barrier-wall-flame-ring-yellow.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737564236060
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5600000
+ownership:
+  default: 0
+_key: '!items!mmFireAura000000'

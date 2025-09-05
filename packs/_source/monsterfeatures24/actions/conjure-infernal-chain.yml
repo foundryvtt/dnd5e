@@ -1,0 +1,161 @@
+_id: mmConjureInferna
+name: Conjure Infernal Chain
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    9vCVJrzUZL0ra4w2:
+      type: save
+      _id: 9vCVJrzUZL0ra4w2
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Bt9VAqf3PkeRQt8K
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: line
+          size: '30'
+          width: ''
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: '4'
+            bonus: '@mod'
+            types:
+              - fire
+        onSave: none
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: str
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - Bt9VAqf3PkeRQt8K
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The devil conjures a fiery chain to bind a
+      creature.</p><p class="feature"><em>Dexterity Saving Throw:</em> DC
+      [[lookup @save.dc.value activity=9vCVJrzUZL0ra4w2]], [[lookup
+      @target.affects.labels.statblock activity=9vCVJrzUZL0ra4w2]] the [[lookup
+      @name lowercase]] can see within [[lookup @range.value
+      activity=9vCVJrzUZL0ra4w2]] feet.</p><p class="feature"><em>Failure:</em>
+      [[/damage average]] damage, and the target has the
+      &amp;Reference[Restrained apply=false] condition until the end of the
+      [[lookup @name lowercase]]'s next turn, at which point the chain
+      disappears. If the target is Large or smaller, the devil moves the target
+      up to 30 feet straight toward itself.</p><p
+      class="feature"><em>Success:</em> The chain disappears.</p>
+    chat: ''
+  identifier: conjure-infernal-chain
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/tools/fasteners/chain-brass-yellow.webp
+effects:
+  - name: Restrained
+    img: systems/dnd5e/icons/svg/statuses/restrained.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmConjureInferna
+    _id: Bt9VAqf3PkeRQt8K
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Restrained apply=false] condition
+      until the end of the attacking creature's next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - restrained
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1735852544878
+      modifiedTime: 1736045391008
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmConjureInferna.Bt9VAqf3PkeRQt8K'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737866262432
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 6200000
+ownership:
+  default: 0
+_key: '!items!mmConjureInferna'

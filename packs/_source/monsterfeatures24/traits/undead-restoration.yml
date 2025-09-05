@@ -1,0 +1,97 @@
+_id: mmUndeadRestorat
+name: Undead Restoration
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    84V5172xWONxCI07:
+      type: utility
+      _id: 84V5172xWONxCI07
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: true
+        visible: false
+        name: Days to Gain New Body
+        formula: 1d10
+      name: 'Days: New Body'
+      img: systems/dnd5e/icons/svg/monster.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">If the [[lookup @name lowercase]] is destroyed before
+      it atones for its evil, it gains a new body in [[/r 1d10]] days, reviving
+      with all its Hit Points. The new body appears in a location significant to
+      the [[lookup @name lowercase]].</p>
+    chat: ''
+  identifier: undead-restoration
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/death/hand-dirt-undead-zombie.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736988065792
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 13700000
+ownership:
+  default: 0
+_key: '!items!mmUndeadRestorat'

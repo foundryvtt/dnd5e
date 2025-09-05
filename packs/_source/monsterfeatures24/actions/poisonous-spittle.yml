@@ -1,0 +1,165 @@
+_id: mmPoisonousSpitt
+name: Poisonous Spittle
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    r4plP8QiJxzFZZO7:
+      type: save
+      _id: r4plP8QiJxzFZZO7
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: q1VTMWxbLg5ZnQ9W
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 7
+            denomination: 8
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - con
+        dc:
+          calculation: ''
+          formula: '16'
+      name: Save
+      img: ''
+      appliedEffects:
+        - q1VTMWxbLg5ZnQ9W
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=r4plP8QiJxzFZZO7]], [[lookup
+      @target.affects.labels.statblock activity=r4plP8QiJxzFZZO7]] the [[lookup
+      @name lowercase]] can see within [[lookup @range.value
+      activity=r4plP8QiJxzFZZO7]] feet. <em>Failure:</em> 31 (7d8) Poison
+      damage, and the target has the &amp;Reference[Blinded apply=false]
+      condition until the start of the [[lookup @name lowercase]]'s next turn.
+      <em>Success:</em> Half damage only.</p>
+    chat: ''
+  identifier: poisonous-spittle
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/acid/dissolve-drip-droplet-smoke.webp
+effects:
+  - name: Blinded
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    origin: Item.mmPoisonousSpitt
+    _id: q1VTMWxbLg5ZnQ9W
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Blinded apply=false] condition until
+      the start of the attacking creature ’s next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - blinded
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736074555918
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmPoisonousSpitt.q1VTMWxbLg5ZnQ9W'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737515542020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 16900000
+ownership:
+  default: 0
+_key: '!items!mmPoisonousSpitt'

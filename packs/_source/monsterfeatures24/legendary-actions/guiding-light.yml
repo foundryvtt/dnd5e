@@ -1,0 +1,96 @@
+_id: mmGuidingLight00
+name: Guiding Light
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    zm9pGaRN3rgfVgGl:
+      type: cast
+      _id: zm9pGaRN3rgfVgGl
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - material
+        spellbook: false
+        uuid: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
+        ability: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] uses Spellcasting to
+      cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGuidingBol]{Guiding
+      Bolt}</em> (level 2 version).</p>
+    chat: ''
+  identifier: guiding-light
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/light/projectile-flare-blue.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737803007226
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 700000
+ownership:
+  default: 0
+_key: '!items!mmGuidingLight00'

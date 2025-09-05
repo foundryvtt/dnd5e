@@ -1,0 +1,45 @@
+_id: mmFiendishRestor
+name: Fiendish Restoration
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>If the [[lookup @name lowercase]] dies outside Gehenna, its body
+      dissolves into ichor, and it gains a new body instantly and revives with
+      all its Hit Points in Gehenna.</p>
+    chat: ''
+  identifier: fiendish-restoration
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: Dies outside of Gehanna
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/unholy/demon-fire-horned-clawed.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736460623044
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5400000
+ownership:
+  default: 0
+_key: '!items!mmFiendishRestor'

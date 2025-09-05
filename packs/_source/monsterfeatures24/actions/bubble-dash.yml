@@ -1,0 +1,94 @@
+_id: mmBubbleDash0000
+name: Bubble Dash
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    ftrbPqT29lnHwzHG:
+      type: utility
+      _id: ftrbPqT29lnHwzHG
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: while underwater
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>While underwater, the [[lookup @name lowercase]] moves up to its Swim
+      Speed without provoking &amp;Reference[Opportunity Attacks].</p>
+    chat: ''
+  identifier: bubble-dash
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: While underwater
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/water/orb-water-bubbles-blue.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735329449145
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!mmBubbleDash0000'

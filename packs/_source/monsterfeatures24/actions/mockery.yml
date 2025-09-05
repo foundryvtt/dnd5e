@@ -1,0 +1,113 @@
+_id: mmMockery0000000
+name: Mockery
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    s5CMus4LOXBkt1Wn:
+      type: save
+      _id: s5CMus4LOXBkt1Wn
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '90'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '6'
+            bonus: '@mod'
+            types:
+              - psychic
+        onSave: none
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: cha
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=s5CMus4LOXBkt1Wn]], [[lookup
+      @target.affects.labels.statblock activity=s5CMus4LOXBkt1Wn]] the [[lookup
+      @name lowercase]] can see within [[lookup @range.value
+      activity=s5CMus4LOXBkt1Wn]] <span style="font-family:'Roboto Condensed',
+      sans-serif">feet.</span> <em>Failure:</em> [[/damage average]] damage.</p>
+    chat: ''
+  identifier: mockery
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/control/mouth-smile-deception-purple.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737745020884
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 15200000
+ownership:
+  default: 0
+_key: '!items!mmMockery0000000'

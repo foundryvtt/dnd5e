@@ -1,0 +1,83 @@
+_id: mmConferFireResi
+name: Confer Fire Resistance
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] can grant Resistance to
+      Fire damage to a rider while it is on the [[lookup @name lowercase]].</p>
+    chat: ''
+  identifier: confer-fire-resistance
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/fire/barrier-shield-explosion-yellow.webp
+effects:
+  - name: 'Resistance: Fire'
+    img: icons/magic/fire/barrier-shield-explosion-yellow.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmConferFireResi
+    _id: uf0s4DJcB5yQbQvN
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The creature can grant Resistance to Fire damage to a rider while it is
+      on the creature.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736540468504
+      modifiedTime: 1736540589673
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmConferFireResi.uf0s4DJcB5yQbQvN'
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736540411158
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2900000
+ownership:
+  default: 0
+_key: '!items!mmConferFireResi'

@@ -456,6 +456,21 @@
           "sourceBook": "SRD 5.2"
         }
       }
+    },
+    {
+      "name": "monsterfeatures24",
+      "label": "Monster Features",
+      "path": "packs/monsterfeatures24",
+      "type": "Item",
+      "ownership": {
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e",
+      "flags": {
+        "dnd5e": {
+          "types": ["feat", "weapon"]
+        }
+      }
     }
   ],
   "packFolders": [
@@ -471,7 +486,8 @@
         "spells24",
         "tables24",
         "actors24",
-        "equipment24"
+        "equipment24",
+        "monsterfeatures24"
       ]
     },
     {

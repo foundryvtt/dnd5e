@@ -1,0 +1,295 @@
+_id: mmCrush000000000
+name: Crush
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    JAaa1Dvp2A9kH7cI:
+      _id: JAaa1Dvp2A9kH7cI
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: xoOyjbkZSz44HMbD
+        - _id: ca1RtYs4i9JuL9sV
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects:
+        - xoOyjbkZSz44HMbD
+        - ca1RtYs4i9JuL9sV
+    PTD4UFW8HUU8fbd4:
+      type: check
+      _id: PTD4UFW8HUU8fbd4
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '13'
+        ability: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]], and
+      the [[lookup @name lowercase]] attaches to the target. If the target is a
+      Medium or smaller creature and the [[lookup @name lowercase]] had
+      Advantage on the attack roll, it covers the target, which has the
+      &amp;Reference[Blinded apply=false] condition and is
+      &amp;Reference[suffocating apply=false]{suffocating} while the [[lookup
+      @name lowercase]] is attached in this way.</p><p class="feature">While
+      attached to a target, the [[lookup @name lowercase]] can attack only the
+      target but has Advantage on its attack rolls. Its Speed becomes 0, it
+      can't benefit from any bonus to its Speed, and it moves with the
+      target.</p><p class="feature">A creature can take an action to try to
+      detach the [[lookup @name lowercase]] from itself, doing so with a
+      successful [[/check format=long]]. On its turn, the [[lookup @name
+      lowercase]] can detach itself by using 5 feet of movement.</p>
+    chat: ''
+  identifier: crush
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: 5
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/magic/unholy/strike-body-life-soul-purple.webp
+effects:
+  - name: Blinded & Suffocating
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmCrush000000000
+    _id: xoOyjbkZSz44HMbD
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Blinded apply=false] condition and is
+      &amp;Reference[suffocating apply=false]{suffocating} while the attacking
+      creature is attached to the target.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - blinded
+      - suffocation
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736531157607
+      modifiedTime: 1736531289195
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmCrush000000000.xoOyjbkZSz44HMbD'
+  - name: 'Self: Attack Adv./0 Speed'
+    img: icons/skills/movement/figure-running-gray.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmCrush000000000
+    _id: ca1RtYs4i9JuL9sV
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.fly
+        mode: 5
+        value: '0'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>While attached to a target, the [[lookup @name lowercase]] can attack
+      only the target but has Advantage on its attack rolls. Its Speed becomes
+      0, it can’t benefit from any bonus to its Speed, and it moves with the
+      target.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736531299059
+      modifiedTime: 1736531782481
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmCrush000000000.ca1RtYs4i9JuL9sV'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736532076877
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 6400000
+ownership:
+  default: 0
+_key: '!items!mmCrush000000000'

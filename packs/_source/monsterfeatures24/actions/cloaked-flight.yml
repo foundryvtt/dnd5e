@@ -1,0 +1,96 @@
+_id: mmCloakedFlight0
+name: Cloaked Flight
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    oUuMoEOsosDRcuNZ:
+      type: cast
+      _id: oUuMoEOsosDRcuNZ
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - material
+        spellbook: false
+        uuid: Compendium.dnd5e.spells24.Item.phbsplInvisibili
+        ability: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] uses [[/item Spellcasting]] to cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplInvisibili]</em>
+      on itself, and it can fly up to half its Fly Speed. The dragon can't take
+      this action again until the start of its next turn.</p>
+    chat: ''
+  identifier: cloaked-flight
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/holy/angel-wings-gray.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737803496580
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5100000
+ownership:
+  default: 0
+_key: '!items!mmCloakedFlight0'

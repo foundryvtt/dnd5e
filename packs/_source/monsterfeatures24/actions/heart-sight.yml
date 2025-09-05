@@ -1,0 +1,107 @@
+_id: mmHeartSight0000
+name: Heart Sight
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    NqVrZShDV1L3zBA3:
+      type: save
+      _id: NqVrZShDV1L3zBA3
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - cha
+        dc:
+          calculation: cha
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Charisma Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=NqVrZShDV1L3zBA3]], one [[lookup
+      @target.affects.type activity=NqVrZShDV1L3zBA3]] within [[lookup
+      @range.value activity=NqVrZShDV1L3zBA3]] <span style="font-family:'Roboto
+      Condensed', sans-serif">feet </span>the [[lookup @name lowercase]] can see
+      (Celestials, Fiends, and Undead automatically fail the save).</p><p
+      class="feature"><em>Failure:</em> The [[lookup @name lowercase]] knows the
+      target's emotions and alignment.</p>
+    chat: ''
+  identifier: heart-sight
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/life/heart-shadow-red.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737936999650
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 11300000
+ownership:
+  default: 0
+_key: '!items!mmHeartSight0000'

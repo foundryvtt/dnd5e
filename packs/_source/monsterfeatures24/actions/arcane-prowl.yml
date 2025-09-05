@@ -1,0 +1,98 @@
+_id: mmArcaneProwl000
+name: Arcane Prowl
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    a3RqyzU0UqzLJif0:
+      type: utility
+      sort: 0
+      activation:
+        type: legendary
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: unoccupied space
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+      _id: a3RqyzU0UqzLJif0
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] can teleport up to [[lookup @range.value
+      activity=a3RqyzU0UqzLJif0]] feet to an unoccupied space it can see, and it
+      makes one [[/item Claw]] attack.</p>
+    chat: ''
+  identifier: arcane-prowl
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/creatures/magical/humanoid-silhouette-dashing-blue.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1734636603849
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!mmArcaneProwl000'

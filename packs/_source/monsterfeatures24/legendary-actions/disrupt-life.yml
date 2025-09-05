@@ -1,0 +1,118 @@
+_id: mmDisruptLife000
+name: Disrupt Life
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    qSz7l1czwIc5j9gP:
+      type: save
+      _id: qSz7l1czwIc5j9gP
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '20'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 9
+            denomination: '6'
+            bonus: ''
+            types:
+              - necrotic
+        onSave: half
+      save:
+        ability:
+          - con
+        dc:
+          calculation: int
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=qSz7l1czwIc5j9gP]], each [[lookup
+      @target.affects.type activity=qSz7l1czwIc5j9gP]] that isn't an Undead in a
+      [[lookup @target.template.size activity=qSz7l1czwIc5j9gP]]-foot Emanation
+      originating from the [[lookup @name lowercase]].</p><p
+      class="feature"><em>Failure:</em> [[/damage average]] damage.</p><p
+      class="feature"><em>Success:</em> Half damage.</p><p
+      class="feature"><em>Failure or Success:</em> The [[lookup @name
+      lowercase]] can't take this action again until the start of its next
+      turn.</p>
+    chat: ''
+  identifier: disrupt-life
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/life/heart-broken-red.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1738097682499
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 3400000
+ownership:
+  default: 0
+_key: '!items!mmDisruptLife000'

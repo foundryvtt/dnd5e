@@ -1,0 +1,153 @@
+_id: mmRepulsionBreat
+name: Repulsion Breath
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    zuf9EEVj4nI1joaH:
+      type: save
+      _id: zuf9EEVj4nI1joaH
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: HG9R2hTEqJ0G5urK
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - str
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - HG9R2hTEqJ0G5urK
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=zuf9EEVj4nI1joaH]], each [[lookup
+      @target.affects.type activity=zuf9EEVj4nI1joaH]] in a [[lookup
+      @target.template.size activity=zuf9EEVj4nI1joaH]]-foot Cone. </p><p
+      class="feature"><em>Failure:</em> The target is pushed up to 30 feet
+      straight away from the [[lookup @name lowercase]] and has the
+      &amp;Reference[Prone apply=false] condition.</p>
+    chat: ''
+  identifier: repulsion-breath
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/light/beam-explosion-orange.webp
+effects:
+  - name: Prone
+    img: systems/dnd5e/icons/svg/statuses/prone.svg
+    origin: Item.mmRepulsionBreat
+    _id: HG9R2hTEqJ0G5urK
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>The target has the &amp;Reference[Prone apply=false] condition.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - prone
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737993204380
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmRepulsionBreat.HG9R2hTEqJ0G5urK'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737993161795
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 18400000
+ownership:
+  default: 0
+_key: '!items!mmRepulsionBreat'

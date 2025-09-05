@@ -1,0 +1,119 @@
+_id: mmSting000000000
+name: Sting
+type: weapon
+system:
+  type:
+    value: natural
+    subtype: ''
+  activities:
+    ExJB3aZAPF3shVJA:
+      type: attack
+      _id: ExJB3aZAPF3shVJA
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: ''
+        ability: dex
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 6
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              number: 1
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: <p>[[/attack extended]]. [[/damage average extended]].</p>
+    chat: ''
+  identifier: sting
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+  mastery: ''
+  range:
+    units: ''
+  damage:
+    base:
+      denomination: 6
+      bonus: ''
+      number: 1
+      types:
+        - piercing
+folder: pSCWWdqMX9eUATRJ
+img: icons/creatures/abilities/stinger-poison-green.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735857148436
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2550000
+ownership:
+  default: 0
+_key: '!items!mmSting000000000'

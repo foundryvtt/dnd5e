@@ -1,0 +1,124 @@
+_id: mmLightningStorm
+name: Lightning Storm
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    YVri6iuieFUUiO1d:
+      type: save
+      _id: YVri6iuieFUUiO1d
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '500'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cylinder
+          size: '10'
+          height: '40'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          special: ''
+          count: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: '10'
+            bonus: ''
+            types:
+              - lightning
+        onSave: half
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: wis
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=YVri6iuieFUUiO1d]], each creature in a [[lookup
+      @target.template.size activity=YVri6iuieFUUiO1d]]-foot-radius, [[lookup
+      @target.template.height activity=YVri6iuieFUUiO1d]]-feet-high Cylinder
+      originating from a point the [[lookup @name lowercase]] can see within
+      [[lookup @range.value activity=YVri6iuieFUUiO1d]] feet.</p><p
+      class="feature"><em>Failure:</em> [[/damage average]] damage.</p><p
+      class="feature"><em>Success:</em> Half damage.</p>
+    chat: ''
+  identifier: lightning-storm
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/lightning/bolt-strike-cloud-gray.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737856863369
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 13500000
+ownership:
+  default: 0
+_key: '!items!mmLightningStorm'

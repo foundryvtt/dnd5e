@@ -1,0 +1,120 @@
+_id: mmNightmareHaunt
+name: Nightmare Haunting
+type: feat
+img: icons/magic/control/hypnosis-mesmerism-swirl.webp
+system:
+  activities:
+    4GGGVhvLSrHgHdb9:
+      type: cast
+      _id: 4GGGVhvLSrHgHdb9
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: on the Material Plane
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties: []
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDream00000
+        ability: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: day
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature">While on the Ethereal Plane, the [[lookup @name
+      lowercase]] casts
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDream00000]{Dream}</em>,
+      using the same spellcasting ability as Spellcasting. Only the [[lookup
+      @name lowercase]] can serve as the spell's messenger, and the target must
+      be a [[lookup @target.affects.type activity=4GGGVhvLSrHgHdb9]] the
+      [[lookup @name lowercase]] can see [[lookup @target.affects.special
+      activity=4GGGVhvLSrHgHdb9]]. The spell fails and is wasted if the target
+      is under the effect of the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr]{Protection
+      from Evil and Good}</em> spell or within a
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMagicCircl]{Magic
+      Circle}</em> spell.</p><p class="feature">If the target takes damage from
+      the <em>Dream</em> spell, the target's Hit Point maximum decreases by an
+      amount equal to that damage. If the spell kills the target, its soul is
+      trapped in the [[lookup @name lowercase]]'s soul bag, and the target can't
+      be raised from the dead until its soul is released.</p>
+    chat: ''
+  identifier: nightmare-haunting
+  source:
+    revision: 1
+    rules: '2024'
+  advancement: []
+  cover: null
+  crewed: false
+  enchant: {}
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Requires Soul Bag
+  type:
+    value: ''
+    subtype: ''
+effects: []
+folder: 4T18pEvubPMQLzvD
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1737658580771
+  modifiedTime: 1737913910399
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!mmNightmareHaunt'

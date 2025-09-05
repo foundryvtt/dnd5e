@@ -1,0 +1,105 @@
+_id: mmFireForm000000
+name: Fire Form
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    R2KucOla8mP9vso3:
+      type: damage
+      _id: R2KucOla8mP9vso3
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '10'
+            bonus: ''
+            types:
+              - fire
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] can move through a space
+      as narrow as 1 inch without expending extra movement to do so, and it can
+      enter a creature's space and stop there. The first time it enters a
+      creature's space on a turn, that creature takes [[/damage average]]
+      damage.</p>
+    chat: ''
+  identifier: fire-form
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/fire/flame-burning-embers-yellow.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737077519167
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5700000
+ownership:
+  default: 0
+_key: '!items!mmFireForm000000'

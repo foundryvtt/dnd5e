@@ -1,0 +1,109 @@
+_id: mmWaterSusceptib
+name: Water Susceptibility
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    4i8jCmkbryu6W3SD:
+      type: damage
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: true
+          max: '6'
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - cold
+            scaling:
+              mode: whole
+              number: 1
+      name: Cold Damage
+      _id: 4i8jCmkbryu6W3SD
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] takes 3 (1d6) Cold
+      damage damage for every 5 feet the [[lookup @name lowercase]] moves in
+      water or for every gallon of water splashed on it.</p><section
+      class="secret" id="secret-8tKSKGttxgiryprr"><p><strong>Foundry
+      Note</strong></p><p>Scaling is configured to roll the correct number of
+      dice based on the distance traveled through water. 1 is default for 5
+      feet, 2 is for 10 feet, and so forth.</p></section>
+    chat: ''
+  identifier: water-susceptibility
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/water/orb-water-bubbles-blue.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735928351613
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 14400000
+ownership:
+  default: 0
+_key: '!items!mmWaterSusceptib'

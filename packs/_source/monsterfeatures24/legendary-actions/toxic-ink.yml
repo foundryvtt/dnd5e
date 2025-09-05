@@ -1,0 +1,163 @@
+_id: mmToxicInk000000
+name: Toxic Ink
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    Kquf9zADg0jtKBqw:
+      type: save
+      _id: Kquf9zADg0jtKBqw
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: turn
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: 6eeusiffMtDU3C3c
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '15'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: Save
+      img: systems/dnd5e/icons/svg/activity/save.svg
+      appliedEffects:
+        - 6eeusiffMtDU3C3c
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=Kquf9zADg0jtKBqw]], each [[lookup
+      @target.affects.type activity=Kquf9zADg0jtKBqw]] in a [[lookup
+      @target.template.size activity=Kquf9zADg0jtKBqw]]-foot Emanation
+      originating from the [[lookup @name lowercase]] while it is
+      underwater.</p><p class="feature"><em>Failure:</em> The target has the
+      &amp;Reference[Blinded apply=false] and &amp;Reference[Poisoned
+      apply=false] conditions until the end of the [[lookup @name lowercase]]'s
+      next turn. The [[lookup @name lowercase]] then moves up to its
+      Speed.</p><p class="feature"><em>Failure or Success:</em> The [[lookup
+      @name lowercase]] can't take this action again until the start of its next
+      turn.</p>
+    chat: ''
+  identifier: toxic-ink
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/unholy/strike-beam-blood-small-red-purple.webp
+effects:
+  - name: Blinded & Poisoned
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    origin: Item.mmToxicInk000000
+    _id: 6eeusiffMtDU3C3c
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Blinded apply=false] and
+      &amp;Reference[Poisoned apply=false] conditions until the end of the
+      attacking creature's next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - blinded
+      - poisoned
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736037560958
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmToxicInk000000.6eeusiffMtDU3C3c'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737823403065
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 3350000
+ownership:
+  default: 0
+_key: '!items!mmToxicInk000000'
