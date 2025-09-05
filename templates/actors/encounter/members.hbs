@@ -66,11 +66,13 @@
             </div>
         </div>
     </div>
-    {{else}}
-    <div class="pill-lg roboto-upper empty">
-        {{ localize "DND5E.ENCOUNTER.DropCreature" }}
-    </div>
     {{/each}}
+
+    {{#if (or editable (not members.length))}}
+    <div class="pill-lg roboto-upper empty" data-action="browse">
+        {{ localize "DND5E.ENCOUNTER.Action.AddCreature" }}
+    </div>
+    {{/if}}
 
     {{#with difficulty}}
     <div class="bottom">

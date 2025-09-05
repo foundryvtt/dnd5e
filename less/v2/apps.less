@@ -352,6 +352,7 @@
     height: 50px;
     max-width: 280px;
     position: relative;
+    transition: box-shadow 250ms ease, opacity 250ms ease;
 
     &.empty {
       border: var(--pill-empty-border);
@@ -360,6 +361,11 @@
       display: grid;
       place-content: center;
       opacity: .25;
+
+      &[data-action]:not(.disabled) {
+        cursor: var(--cursor-pointer);
+        &:hover { opacity: .5; }
+      }
     }
 
     .name { flex: 1; }
