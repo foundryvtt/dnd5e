@@ -1,5 +1,7 @@
 /**
- * @import { MovementData, RollConfigData, SensesData } from "../../shared/_types.mjs";
+ * @import {
+ *   D20RollModificationData, DamageRollModificationData, MovementData, RollConfigData, SensesData
+ * } from "../../shared/_types.mjs";
  * @import { ACFormulaData, DamageTraitData, SimpleTraitData } from "../fields/_types.mjs";
  */
 
@@ -84,15 +86,26 @@
  * @property {string} bonuses.abilities.skill        Numeric or dice bonus to skill checks.
  * @property {object} bonuses.spell                  Bonuses to spells.
  * @property {string} bonuses.spell.dc               Numeric bonus to spellcasting DC.
+ * @property {object} rolls
+ * @property {object} rolls.ability
+ * @property {D20RollModificationData} rolls.ability.check  Modifications to ability checks.
+ * @property {D20RollModificationData} rolls.ability.save   Modifications to ability saves.
+ * @property {D20RollModificationData} rolls.ability.skill  Modifications to skill checks.
+ * @property {AttackModificationData} rolls.attack          Modifications to attack rolls.
+ * @property {AttackModificationData} rolls.attack.spell    Modifications to spell attacks.
+ * @property {AttackModificationData} rolls.attack.weapon   Modifications to weapon attacks.
+ * @property {AttackDamageData} rolls.damage                Damage bonuses to attacks.
+ * @property {AttackDamageData} rolls.damage.spell          Damage bonuses to spell attacks.
+ * @property {AttackDamageData} rolls.damage.weapon         Damage bonuses to weapon attacks.
  * @property {Record<string, ToolData>} tools        Actor's tools.
  * @property {Record<string, SkillData>} skills      Actor's skills.
  * @property {Record<string, SpellSlotData>} spells  Actor's spell slots.
  */
 
 /**
- * @typedef AttackBonusesData
- * @property {string} attack  Numeric or dice bonus to attack rolls.
- * @property {string} damage  Numeric or dice bonus to damage rolls.
+ * @typedef {DamageRollModificationData} AttackModificationData
+ * @property {DamageRollModificationData} melee   Damage bonus for melee attacks in this category.
+ * @property {DamageRollModificationData} ranged  Damage bonus for ranged attacks in this category.
  */
 
 /**

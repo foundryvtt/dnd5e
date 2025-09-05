@@ -4,6 +4,8 @@ import { simplifyBonus } from "../../../utils.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
+import D20RollModificationField from "../../shared/d20-roll-modification-field.mjs";
+import DamageRollModificationField from "../../shared/damage-roll-modification-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
 import CommonTemplate from "./common.mjs";
@@ -41,6 +43,39 @@ export default class CreatureTemplate extends CommonTemplate {
         }),
         spell: new SchemaField({
           dc: new FormulaField({ required: true, deterministic: true })
+        })
+      }),
+      rolls: new SchemaField({
+        ability: new SchemaField({
+          check: new D20RollModificationField(),
+          save: new D20RollModificationField(),
+          skill: new D20RollModificationField()
+        }),
+        attack: new D20RollModificationField({
+          melee: new D20RollModificationField(),
+          ranged: new D20RollModificationField(),
+          spell: new D20RollModificationField({
+            melee: new D20RollModificationField(),
+            ranged: new D20RollModificationField()
+          }),
+          weapon: new D20RollModificationField({
+            melee: new D20RollModificationField(),
+            ranged: new D20RollModificationField()
+          })
+        }),
+        damage: new DamageRollModificationField({
+          attack: new DamageRollModificationField({
+            melee: new DamageRollModificationField(),
+            ranged: new DamageRollModificationField(),
+            spell: new DamageRollModificationField({
+              melee: new DamageRollModificationField(),
+              ranged: new DamageRollModificationField()
+            }),
+            weapon: new DamageRollModificationField({
+              melee: new DamageRollModificationField(),
+              ranged: new DamageRollModificationField()
+            })
+          })
         })
       }),
       skills: new MappingField(new RollConfigField({

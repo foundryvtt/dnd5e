@@ -23,6 +23,14 @@
  */
 
 /**
+ * @typedef D20RollModificationData
+ * @property {string} bonus  Bonus added to the roll.
+ * @property {number} min    Minimum number on the die rolled.
+ * @property {number} max    Maximum number on the die rolled.
+ * @property {number} mode   Should the roll be with disadvantage or advantage by default?
+ */
+
+/**
  * @typedef DamageData
  * @property {number} number           Number of dice to roll.
  * @property {number} denomination     Die denomination to roll.
@@ -43,6 +51,11 @@
  * @typedef DamageFormulaOptions
  * @property {Set<string>|false} modifiers  Additional modifiers to apply to the formula, if possible.
  *                                          A `false` value will remove modifiers provided by damage data.
+ */
+
+/**
+ * @typedef DamageRollModificationData
+ * @property {string} bonus  Bonus added to the roll.
  */
 
 /**
