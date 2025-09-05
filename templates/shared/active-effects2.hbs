@@ -120,7 +120,7 @@
 
             <ul class="conditions-list unlist">
                 {{#each conditions}}
-                <li class="condition {{#unless disabled}}active{{/unless}} {{#if reference}}content-link{{/if}}"
+                <li class="condition {{#if active}}active{{/if}} {{#if reference}}content-link{{/if}}"
                     data-action="toggleCondition" data-uuid="{{ reference }}" data-condition-id="{{ id }}"
                     data-tooltip="<section class=&quot;loading&quot;><i class=&quot;fas fa-spinner fa-spin-pulse&quot;></i></section>">
                     <div class="icon">
