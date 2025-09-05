@@ -27,7 +27,13 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @type {Set<string>}
    */
   static FORMULA_FIELDS = new Set([
+    "system.attributes.ac.ability.heavy",
+    "system.attributes.ac.ability.light",
+    "system.attributes.ac.ability.medium",
+    "system.attributes.ac.ability.natural",
     "system.attributes.ac.bonus",
+    "system.attributes.ac.bonuses.armored",
+    "system.attributes.ac.bonuses.unarmored",
     "system.attributes.ac.min",
     "system.attributes.encumbrance.bonuses.encumbered",
     "system.attributes.encumbrance.bonuses.heavilyEncumbered",
