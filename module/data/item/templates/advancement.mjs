@@ -10,7 +10,6 @@ const { ArrayField } = foundry.data.fields;
  * @mixin
  */
 export default class AdvancementTemplate extends SystemDataModel {
-
   /** @inheritDoc */
   static defineSchema() {
     return {

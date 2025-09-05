@@ -1,6 +1,7 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
 import { safePropertyExists, staticID } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import ActivationField from "../shared/activation-field.mjs";
 import DurationField from "../shared/duration-field.mjs";
 import RangeField from "../shared/range-field.mjs";
@@ -10,7 +11,7 @@ import AppliedEffectField from "./fields/applied-effect-field.mjs";
 import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, FilePathField, IntegerSortField, SchemaField, StringField
+  ArrayField, BooleanField, DocumentIdField, FilePathField, IntegerSortField, NumberField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
@@ -47,6 +48,14 @@ const {
  * @property {boolean} target.override           Override target values inferred from item.
  * @property {boolean} target.prompt             Should the player be prompted to place the template?
  * @property {UsesData} uses                     Uses available to this activity.
+ * @property {object} visibility
+ * @property {string} visibility.identifier      Class identifier that will be used to determine applicable level.
+ * @property {object} visibility.level
+ * @property {number} visibility.level.min       Minimum level at which this activity can be used.
+ * @property {number} visibility.level.max       Maximum level at which this activity can be used.
+ * @property {boolean} visibility.requireAttunement      Not usable if item requires attunement and isn't attuned.
+ * @property {boolean} visibility.requireIdentification  Not usable or visible if item isn't identified.
+ * @property {boolean} visibility.requireMagic           Not usable if magic isn't available.
  */
 export default class BaseActivityData extends foundry.abstract.DataModel {
 
@@ -98,7 +107,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         override: new BooleanField(),
         prompt: new BooleanField({ initial: true })
       }),
-      uses: new UsesField()
+      uses: new UsesField(),
+      visibility: new SchemaField({
+        identifier: new IdentifierField(),
+        level: new SchemaField({
+          min: new NumberField({ integer: true, min: 0 }),
+          max: new NumberField({ integer: true, min: 0 })
+        }),
+        requireAttunement: new BooleanField(),
+        requireIdentification: new BooleanField(),
+        requireMagic: new BooleanField()
+      })
     };
   }
 
@@ -179,6 +198,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Is this activity a rider for a non-applied enchantment?
+   * @type {boolean}
+   */
+  get isRider() {
+    return this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id)
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this activity on a spell scroll that is scaled.
    * @type {boolean}
    */
@@ -194,6 +223,19 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    */
   get isSpell() {
     return this.item.type === "spell";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the level used to determine visibility limits, based on the spell level for spells or either the
+   * character or class level, depending on whether `classIdentifier` is set.
+   * @type {number}
+   */
+  get relevantLevel() {
+    const keyPath = (this.item.type === "spell") && (this.item.system.level > 0) ? "item.level"
+      : this.visibility?.identifier ? `classes.${this.visibility.identifier}.levels` : "details.level";
+    return foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
   }
 
   /* -------------------------------------------- */
@@ -580,6 +622,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       enumerable: false,
       writable: false
     });
+
+    if ( this.visibility && !this.isRider ) {
+      if ( !this.item.system.properties?.has("mgc") && this.item.system.validProperties.has("mgc") ) {
+        this.visibility.requireAttunement = false;
+        this.visibility.requireMagic = false;
+      } else if ( (this.item.system.attunement === "required") && this.visibility.requireMagic ) {
+        this.visibility.requireAttunement = true;
+      } else if ( !this.item.system.canAttune ) {
+        this.visibility.requireAttunement = false;
+      }
+      if ( !("identified" in this.item.system) ) this.visibility.requireIdentification = false;
+    }
 
     // TODO: Temporarily add parent to consumption targets & damage parts added by enchantment
     // Can be removed once https://github.com/foundryvtt/foundryvtt/issues/12528 is implemented
