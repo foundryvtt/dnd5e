@@ -188,6 +188,33 @@ export default class VehicleData extends CommonTemplate {
     TraitsFields.prepareResistImmune.call(this);
     MovementField.prepareData.call(this.attributes.movement, this.schema.getField("attributes.movement"));
   }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    await TraitsFields.preCreateSize.call(this, data, options, user);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    if ( (await super._preUpdate(changes, options, user)) === false ) return false;
+    await AttributesFields.preUpdateHP.call(this, changes, options, user);
+    await TraitsFields.preUpdateSize.call(this, changes, options, user);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    AttributesFields.onUpdateHP.call(this, changed, options, userId);
+  }
 }
 
 /* -------------------------------------------- */
