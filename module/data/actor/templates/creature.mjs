@@ -2,10 +2,29 @@ import { simplifyBonus } from "../../../utils.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
+import D20RollModificationField from "../../shared/d20-roll-modification-field.mjs";
+import DamageRollModificationField from "../../shared/damage-roll-modification-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
 import CommonTemplate from "./common.mjs";
 
 const { NumberField, SchemaField } = foundry.data.fields;
+
+/**
+ * @import { D20RollModificationData } from "../../shared/d20-roll-modification-field.mjs";
+ * @import { DamageRollModificationData } from "../../shared/damage-roll-modification-field.mjs";
+ */
+
+/**
+ * @typedef {D20RollModificationData} AttackModificationData
+ * @property {D20RollModificationData} melee   Modification for melee attacks in this category.
+ * @property {D20RollModificationData} ranged  Modification for ranged attacks in this category.
+ */
+
+/**
+ * @typedef {DamageRollModificationData} AttackDamageData
+ * @property {DamageRollModificationData} melee   Damage bonus for melee attacks in this category.
+ * @property {DamageRollModificationData} ranged  Damage bonus for ranged attacks in this category.
+ */
 
 /**
  * A template for all actors that are creatures
@@ -21,6 +40,17 @@ const { NumberField, SchemaField } = foundry.data.fields;
  * @property {string} bonuses.abilities.skill        Numeric or dice bonus to skill checks.
  * @property {object} bonuses.spell                  Bonuses to spells.
  * @property {string} bonuses.spell.dc               Numeric bonus to spellcasting DC.
+ * @property {object} rolls
+ * @property {object} rolls.ability
+ * @property {RollModificationData} rolls.ability.check    Modifications to ability checks.
+ * @property {RollModificationData} rolls.ability.save     Modifications to ability saves.
+ * @property {RollModificationData} rolls.ability.skill    Modifications to skill checks.
+ * @property {AttackModificationData} rolls.attack         Modifications to attack rolls.
+ * @property {AttackModificationData} rolls.attack.spell   Modifications to spell attacks.
+ * @property {AttackModificationData} rolls.attack.weapon  Modifications to weapon attacks.
+ * @property {AttackDamageData} rolls.damage               Damage bonuses to attacks.
+ * @property {AttackDamageData} rolls.damage.spell         Damage bonuses to spell attacks.
+ * @property {AttackDamageData} rolls.damage.weapon        Damage bonuses to weapon attacks.
  * @property {Record<string, ToolData>} tools        Actor's tools.
  * @property {Record<string, SkillData>} skills      Actor's skills.
  * @property {Record<string, SpellSlotData>} spells  Actor's spell slots.
@@ -40,6 +70,39 @@ export default class CreatureTemplate extends CommonTemplate {
         }),
         spell: new SchemaField({
           dc: new FormulaField({ required: true, deterministic: true })
+        })
+      }),
+      rolls: new SchemaField({
+        ability: new SchemaField({
+          check: new D20RollModificationField(),
+          save: new D20RollModificationField(),
+          skill: new D20RollModificationField()
+        }),
+        attack: new D20RollModificationField({
+          melee: new D20RollModificationField(),
+          ranged: new D20RollModificationField(),
+          spell: new D20RollModificationField({
+            melee: new D20RollModificationField(),
+            ranged: new D20RollModificationField()
+          }),
+          weapon: new D20RollModificationField({
+            melee: new D20RollModificationField(),
+            ranged: new D20RollModificationField()
+          })
+        }),
+        damage: new DamageRollModificationField({
+          attack: new DamageRollModificationField({
+            melee: new DamageRollModificationField(),
+            ranged: new DamageRollModificationField(),
+            spell: new DamageRollModificationField({
+              melee: new DamageRollModificationField(),
+              ranged: new DamageRollModificationField()
+            }),
+            weapon: new DamageRollModificationField({
+              melee: new DamageRollModificationField(),
+              ranged: new DamageRollModificationField()
+            })
+          })
         })
       }),
       skills: new MappingField(new RollConfigField({
