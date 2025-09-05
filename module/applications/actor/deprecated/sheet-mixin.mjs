@@ -1,5 +1,5 @@
 import { parseInputDelta } from "../../../utils.mjs";
-import DragDropApplicationMixin from "../../mixins/drag-drop-mixin.mjs";
+import DragDropApplicationMixin from "../../api/drag-drop-mixin.mjs";
 
 /**
  * Mixin method for common uses between all actor sheets.

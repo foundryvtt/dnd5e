@@ -372,22 +372,6 @@ function _configureStatusEffects() {
   const addEffect = (effects, {special, ...data}) => {
     data = foundry.utils.deepClone(data);
     data._id = utils.staticID(`dnd5e${data.id}`);
-    if ( data.icon ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `icon` property of status conditions has been deprecated in place of using `img`.",
-        { since: "DnD5e 5.0", until: "DnD5e 5.2" }
-      );
-      data.img = data.icon;
-      delete data.icon;
-    }
-    if ( data.label ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `label` property of status conditions has been deprecated in place of using `name`.",
-        { since: "DnD5e 5.0", until: "DnD5e 5.2" }
-      );
-      data.name = data.label;
-      delete data.label;
-    }
     effects.push(data);
     if ( special ) CONFIG.specialStatusEffects[special] = data.id;
     if ( data.neverBlockMovement ) DND5E.neverBlockStatuses.add(data.id);
@@ -441,8 +425,6 @@ Hooks.once("setup", function() {
     }
   `;
   document.head.append(style);
-
-  _migrateInventoryMetadata();
 });
 
 /* --------------------------------------------- */
@@ -625,35 +607,6 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
     });
   }
 });
-
-/* -------------------------------------------- */
-/*  Deprecations                                */
-/* -------------------------------------------- */
-
-/**
- * Migrate legacy inventory metadata.
- */
-function _migrateInventoryMetadata() {
-  Object.entries(CONFIG.Item.dataModels).forEach(([type, model]) => {
-    if ( ("inventorySection" in model) || (model.metadata.inventoryItem === false) ) return;
-    if ( !("inventoryItem" in model.metadata) && !("inventoryOrder" in model.metadata) ) return;
-    const { inventoryOrder=Infinity } = model.metadata;
-    foundry.utils.logCompatibilityWarning("ItemDataModel.metadata.inventoryItem and "
-      + "ItemDataModel.metadata.inventoryOrder are deprecated. Please define an inventorySection getter on the model "
-      + "instead.", { since: "dnd5e 5.0", until: "dnd5e 5.2" });
-    Object.defineProperty(model, "inventorySection", {
-      get() {
-        return {
-          id: type,
-          order: inventoryOrder,
-          label: `${CONFIG.Item.typeLabels[type]}Pl`,
-          groups: { type },
-          columns: ["price", "weight", "quantity", "charges", "controls"]
-        };
-      }
-    });
-  });
-}
 
 /* -------------------------------------------- */
 /*  Bundled Module Exports                      */

@@ -1503,6 +1503,7 @@ async function rollAttack(event) {
 
   const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
   if ( rolls?.length ) {
+    Hooks.callAll("dnd5e.rollAttack", rolls, { subject: null, ammoUpdate: null });
     Hooks.callAll("dnd5e.rollAttackV2", rolls, { subject: null, ammoUpdate: null });
     Hooks.callAll("dnd5e.postRollAttack", rolls, { subject: null });
   }
@@ -1556,6 +1557,7 @@ async function rollDamage(event) {
 
   const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, {}, messageConfig);
   if ( !rolls?.length ) return;
+  Hooks.callAll("dnd5e.rollDamage", rolls);
   Hooks.callAll("dnd5e.rollDamageV2", rolls);
 }
 
