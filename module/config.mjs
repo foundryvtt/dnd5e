@@ -1128,7 +1128,8 @@ DND5E.activityActivationTypes = {
     scalar: true
   },
   special: {
-    label: "DND5E.Special"
+    label: "DND5E.Special",
+    passive: true
   }
 };
 preLocalize("activityActivationTypes", { key: "label" });
