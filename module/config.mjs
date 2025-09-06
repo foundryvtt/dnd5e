@@ -1972,6 +1972,9 @@ DND5E.featureTypes = {
       epicBoon: "DND5E.Feature.Feat.EpicBoon"
     }
   },
+  pietyTrait: {
+    label: "DND5E.Feature.PietyTrait"
+  },
   supernaturalGift: {
     label: "DND5E.Feature.SupernaturalGift.Label",
     subtypes: {
@@ -4516,6 +4519,26 @@ DND5E.ENCOUNTER_DIFFICULTY = [
  */
 DND5E.epicBoonInterval = 30000;
 
+/* -------------------------------------------- */
+/*   Piety                                      */
+/* -------------------------------------------- */
+
+/**
+ * @enum {{ label: string, alignment: string, symbol: string }}
+ */
+DND5E.deities = {};
+preLocalize("deities");
+
+/* -------------------------------------------- */
+
+/**
+ * Thresholds at which a character gains a piety trait.
+ * @type {number[]}
+ */
+DND5E.pietyThresholds = [3, 10, 25, 50];
+
+/* -------------------------------------------- */
+/*   Traits                                     */
 /* -------------------------------------------- */
 
 /**

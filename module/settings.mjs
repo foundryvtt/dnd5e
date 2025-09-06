@@ -101,7 +101,17 @@ export function registerSystemSettings() {
     name: "SETTINGS.DND5E.LOYALTY.Name",
     hint: "SETTINGS.DND5E.LOYALTY.Hint",
     scope: "world",
-    config: true,
+    config: false,
+    default: false,
+    type: Boolean
+  });
+
+  // Piety
+  game.settings.register("dnd5e", "pietyScore", {
+    name: "SETTINGS.DND5E.PIETY.Name",
+    hint: "SETTINGS.DND5E.PIETY.Hint",
+    scope: "world",
+    config: false,
     default: false,
     type: Boolean
   });

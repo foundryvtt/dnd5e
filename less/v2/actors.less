@@ -119,6 +119,49 @@
       }
     }
 
+    &.piety {
+      position: relative;
+      height: 25px;
+      font-size: var(--font-size-14);
+
+      input {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        border: none;
+        font-weight: bold;
+        background: none;
+        color: var(--color-text-light-0);
+        position: relative;
+
+        &:hover, &:focus {
+          box-shadow: 0 0 8px var(--dnd5e-color-gold);
+        }
+      }
+
+      > div { height: 100%; }
+
+      > .label {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        cursor: var(--cursor-pointer);
+      }
+
+      &.progress::before {
+        block-size: unset;
+        clip-path: unset;
+        box-shadow: inset 0 1px 0 1px var(--dnd5e-highlight-40);
+        inset: 1px auto 1px 1px;
+        inline-size: calc(var(--bar-percentage) - 2px);
+        border-radius: 2px;
+
+        background: linear-gradient(to right, var(--dnd5e-color-piety-1) 0%, var(--dnd5e-color-piety-2) 100%);
+        border-inline-end: none;
+      }
+    }
+
     &.hit-points, &.hit-dice {
       &.progress::before, .progress::before {
         block-size: unset;
