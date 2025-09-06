@@ -56,26 +56,34 @@ export default class SubclassAdvancement extends Advancement {
   /*  Application Methods                         */
   /* -------------------------------------------- */
 
+  /**
+   * @typedef SubclassAdvancementApplicationData
+   * @property {object} [retainedData]  Retained data object for a previous subclass.
+   * @property {string} [uuid]          UUID of subclass to add.
+   */
+
   /** @inheritDoc */
-  async apply(level, data, retainedData) {
-    const useRetained = data.uuid === foundry.utils.getProperty(retainedData, "flags.dnd5e.sourceId");
+  async apply(level, { retainedData={}, uuid }={}, options={}) {
+    if ( options.initial ) return;
+
+    const useRetained = uuid === foundry.utils.getProperty(retainedData, "flags.dnd5e.sourceId");
     let itemData = useRetained ? retainedData : null;
     if ( !itemData ) {
-      itemData = await this.createItemData(data.uuid);
+      itemData = await this.createItemData(uuid);
       delete itemData.flags?.dnd5e?.advancementOrigin;
       delete itemData.flags?.dnd5e?.advancementRoot;
       foundry.utils.setProperty(itemData, "system.classIdentifier", this.item.identifier);
     }
     if ( itemData ) {
       this.actor.updateSource({ items: [itemData] });
-      this.updateSource({ value: { document: itemData._id, uuid: data.uuid } });
+      this.updateSource({ value: { document: itemData._id, uuid: uuid } });
     }
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async restore(level, data) {
+  async restore(level, data, options={}) {
     if ( !data ) return;
     this.actor.updateSource({ items: [data] });
     this.updateSource({
@@ -88,7 +96,7 @@ export default class SubclassAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  async reverse(level) {
+  async reverse(level, options={}) {
     const item = this.value.document ?? this.item.subclass;
     if ( !item ) return;
     this.actor.items.delete(item.id);
