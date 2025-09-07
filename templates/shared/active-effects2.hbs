@@ -36,7 +36,13 @@
                     <div class="item-name item-tooltip effect-name">
                         <img class="item-image gold-icon" src="{{ img }}" alt="{{ name }}">
                         <div class="name name-stacked">
-                            <span class="title">{{ name }}</span>
+                            <span class="title">
+                                {{ name }}
+                                {{#if isRider~}}
+                                <i class="fa-solid fa-paperclip" data-tooltip
+                                   aria-label="{{ localize 'DND5E.EFFECT.RIDER.Effect' }}"></i>
+                                {{~/if}}
+                            </span>
                         </div>
                         {{#if duration.remaining}}
                         <div class="duration">

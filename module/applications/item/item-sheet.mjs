@@ -250,6 +250,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         return {
           id, name, sort,
           img: { src: img, svg: img?.endsWith(".svg") },
+          isRider: activity.isRider,
           uuid: activity.uuid
         };
       });
@@ -374,7 +375,8 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
           id, name, img, disabled, duration, source,
           parent,
           durationParts: duration.remaining ? duration.label.split(", ") : [],
-          hasTooltip: true
+          hasTooltip: true,
+          isRider: this.item.getFlag("dnd5e", "riders.effect")?.includes(id)
         });
         return arr;
       }, []);
