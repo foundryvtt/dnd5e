@@ -1,0 +1,46 @@
+_id: mmSenseMagic0000
+name: Sense Magic
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] senses magic within 120
+      feet of itself. This trait otherwise works like the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectMagi]{Detect
+      Magic}</em> spell but isn't itself magical.</p>
+    chat: ''
+  identifier: sense-magic
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/light/hand-sparks-smoke-green.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737055617093
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 10300000
+ownership:
+  default: 0
+_key: '!items!mmSenseMagic0000'

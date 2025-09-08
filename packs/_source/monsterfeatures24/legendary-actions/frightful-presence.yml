@@ -1,0 +1,98 @@
+_id: mmFrightfulPrese
+name: Frightful Presence
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    lbzj4R6LBDa4r4Hk:
+      type: cast
+      _id: lbzj4R6LBDa4r4Hk
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '3'
+        properties:
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFear000000
+        ability: cha
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] casts
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFear000000]{Fear}</em>,
+      requiring no Material components and using Charisma as the spellcasting
+      ability (spell save DC [[lookup @abilities.cha.dc]]). The [[lookup @name
+      lowercase]] can't take this action again until the start of its next
+      turn.</p>
+    chat: ''
+  identifier: frightful-presence
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/unholy/silhouette-robe-evil-glow.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737804486569
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 4600000
+ownership:
+  default: 0
+_key: '!items!mmFrightfulPrese'

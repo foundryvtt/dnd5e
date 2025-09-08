@@ -1,0 +1,105 @@
+_id: mmFogCloud000000
+name: Fog Cloud
+type: feat
+img: icons/magic/air/air-wave-gust-blue.webp
+system:
+  activities:
+    sKdIh2G1RS2oqp8t:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFogCloud00
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: 1
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+      _id: sKdIh2G1RS2oqp8t
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: day
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p>The mephit casts
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFogCloud00]</em>,
+      requiring no spell components and using Charisma as the spellcasting
+      ability.</p>
+    chat: ''
+  identifier: fog-cloud
+  source:
+    revision: 1
+    rules: '2024'
+  advancement: []
+  cover: null
+  crewed: false
+  enchant: {}
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  type:
+    value: monster
+    subtype: ''
+effects: []
+folder: 4T18pEvubPMQLzvD
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1738013692448
+  modifiedTime: 1738013692448
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!mmFogCloud000000'

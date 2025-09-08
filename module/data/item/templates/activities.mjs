@@ -396,9 +396,17 @@ export default class ActivitiesTemplate extends SystemDataModel {
       });
       return riders;
     }, { activity: new Set(), effect: new Set() });
-    foundry.utils.setProperty(changed, "flags.dnd5e.riders", {
-      activity: Array.from(riders.activity), effect: Array.from(riders.effect)
-    });
+    if ( !riders.activity.size && !riders.effect.size ) {
+      foundry.utils.setProperty(changed, "flags.dnd5e.-=riders", null);
+    } else {
+      foundry.utils.setProperty(changed, "flags.dnd5e.riders", Object.entries(riders)
+        .reduce((updates, [key, value]) => {
+          if ( value.size ) updates[key] = Array.from(value);
+          else updates[`-=${key}`] = null;
+          return updates;
+        }, {})
+      );
+    }
 
     if ( !this.parent.isEmbedded ) return;
 

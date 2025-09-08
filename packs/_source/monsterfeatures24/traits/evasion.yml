@@ -1,0 +1,47 @@
+_id: mmEvasion0000000
+name: Evasion
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">If the [[lookup @name lowercase]] is subjected to an
+      effect that allows it to make a Dexterity saving throw to take only half
+      damage, the [[lookup @name lowercase]] instead takes no damage if it
+      succeeds on the save and only half damage if it fails. It can't use this
+      trait if it has the Incapacitated condition.</p>
+    chat: ''
+  identifier: evasion
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/skills/movement/figure-running-gray.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736464985640
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 4800000
+ownership:
+  default: 0
+_key: '!items!mmEvasion0000000'

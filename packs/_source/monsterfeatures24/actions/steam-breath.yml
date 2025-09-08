@@ -1,0 +1,122 @@
+_id: mmSteamBreath000
+name: Steam Breath
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    5iI1KQRWrdMGh9sy:
+      type: save
+      _id: 5iI1KQRWrdMGh9sy
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '60'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 16
+            denomination: '6'
+            bonus: ''
+            types:
+              - fire
+        onSave: half
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: '19'
+      name: Save
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=5iI1KQRWrdMGh9sy]], each [[lookup
+      @target.affects.type activity=5iI1KQRWrdMGh9sy]] in a [[lookup
+      @target.template.size activity=5iI1KQRWrdMGh9sy]]-foot Cone.</p><p
+      class="feature"><em>Failure:</em> [[/damage average]] damage.</p><p
+      class="feature"><em>Success:</em> Half damage.</p><p
+      class="feature"><em>Failure or Success:</em> Being underwater doesn't
+      grant Resistance to this Fire damage.</p>
+    chat: ''
+  identifier: steam-breath
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/air/fog-gas-smoke-dense-white.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1738042698501
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 21100000
+ownership:
+  default: 0
+_key: '!items!mmSteamBreath000'

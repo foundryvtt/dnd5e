@@ -1,0 +1,202 @@
+_id: mmOceanSpear0000
+name: Ocean Spear
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    MAToz1axzbPRBhem:
+      _id: MAToz1axzbPRBhem
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: JXXj1j2cUhRFmmaN
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: none
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '4'
+            bonus: ''
+            types:
+              - cold
+      name: ''
+      img: ''
+      appliedEffects:
+        - JXXj1j2cUhRFmmaN
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]]. If
+      the target is a creature, its Speed decreases by 10 feet until the end of
+      its next turn. <em>Hit or Miss:</em> The spear magically returns to the
+      [[lookup @name lowercase]]'s hand immediately after a ranged attack.</p>
+    chat: ''
+  identifier: ocean-spear
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - piercing
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - ret
+    - thr
+  proficient: null
+  range:
+    value: 20
+    long: 60
+    reach: 5
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/weapons/polearms/spear-barbed-silver.webp
+effects:
+  - name: 'Speed: -10 feet'
+    img: icons/skills/movement/figure-running-gray.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmOceanSpear0000
+    _id: JXXj1j2cUhRFmmaN
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 2
+        value: '-10'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>If the target is a creature, its Speed decreases by 10 feet until the
+      end of its next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736291778115
+      modifiedTime: 1736291941279
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmOceanSpear0000.JXXj1j2cUhRFmmaN'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737151112635
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 13900000
+ownership:
+  default: 0
+_key: '!items!mmOceanSpear0000'

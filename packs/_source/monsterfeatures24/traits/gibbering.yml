@@ -1,0 +1,162 @@
+_id: mmGibbering00000
+name: Gibbering
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    PyGOI84k0PPYrru8:
+      type: save
+      _id: PyGOI84k0PPYrru8
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '20'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: ''
+          formula: '10'
+      name: ''
+      img: ''
+      appliedEffects: []
+    Lglj71bNvgqazuFB:
+      type: utility
+      _id: Lglj71bNvgqazuFB
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: true
+        visible: false
+        name: Roll d8
+        formula: 1d8
+      name: Roll d8
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] babbles incoherently
+      while it doesn't have the Incapacitated condition. <em>Wisdom Saving
+      Throw:</em> DC [[lookup @save.dc.value activity=PyGOI84k0PPYrru8]], any
+      [[lookup @target.affects.type activity=PyGOI84k0PPYrru8]] that starts its
+      turn within [[lookup @target.template.size activity=PyGOI84k0PPYrru8]]
+      feet of the [[lookup @name lowercase]] while it is babbling.
+      <em>Failure:</em> The target rolls [[/r 1d8]] to determine what it does
+      during the current turn:</p><p class="feature-trait"><strong>1–4.</strong>
+      The target does nothing.</p><p class="feature-trait"><strong>5–6.</strong>
+      The target takes no action or Bonus Action and uses all its movement to
+      move in a random direction.</p><p
+      class="feature-trait"><strong>7–8.</strong> The target makes a melee
+      attack against a randomly determined creature within its reach or does
+      nothing if it can't make such an attack.</p>
+    chat: ''
+  identifier: gibbering
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/slimes/slime-face-teeth-purple.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736385023483
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 6200000
+ownership:
+  default: 0
+_key: '!items!mmGibbering00000'

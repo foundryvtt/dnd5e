@@ -1,0 +1,100 @@
+_id: mmLegendaryResis
+name: Legendary Resistance
+type: feat
+system:
+  activities:
+    nLPRJi7ipeAet7ir:
+      type: utility
+      _id: nLPRJi7ipeAet7ir
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: fails a saving throw
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: attribute
+            value: '1'
+            target: resources.legres.value
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>If the [[lookup @name lowercase]] fails a saving throw, it can choose
+      to succeed instead.</p>
+    chat: ''
+  identifier: legendary-resistance
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  type:
+    value: monster
+    subtype: ''
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/equipment/shield/heater-steel-crystal-red.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736369218748
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 200000
+ownership:
+  default: 0
+_key: '!items!mmLegendaryResis'

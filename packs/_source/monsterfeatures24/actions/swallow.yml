@@ -1,0 +1,333 @@
+_id: mmSwallow0000000
+name: Swallow
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    YorssyWMumAsvzx3:
+      type: save
+      _id: YorssyWMumAsvzx3
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: VOHv1LyO3hHolZXo
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+        value: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: one Large or smaller creature Grappled
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: str
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - VOHv1LyO3hHolZXo
+    zrWNjO9mkbN28spL:
+      type: damage
+      _id: zrWNjO9mkbN28spL
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: Swallowed by the behir
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
+            denomination: 6
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              number: 1
+      name: 'Damage: Swallowed'
+      img: ''
+      appliedEffects: []
+    rGeGukkm2t2fXsoy:
+      type: save
+      _id: rGeGukkm2t2fXsoy
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: aS5FyMP72vn3OKf1
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          size: '10'
+          width: ''
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          special: ''
+          count: '1'
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: 'Regurgitate: Save'
+      img: ''
+      appliedEffects:
+        - aS5FyMP72vn3OKf1
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=YorssyWMumAsvzx3]], [[lookup
+      @target.affects.special activity=YorssyWMumAsvzx3]] by the [[lookup @name
+      lowercase]] (the [[lookup @name lowercase]] can have only one creature
+      swallowed at a time).</p><p class="feature"><em>Failure:</em> The [[lookup
+      @name lowercase]] swallows the target, which is no longer Grappled. While
+      swallowed, a creature has the &amp;Reference[Blinded apply=false] and
+      &amp;Reference[Restrained apply=false] conditions, has
+      &amp;Reference[Total Cover] against attacks and other effects outside the
+      [[lookup @name lowercase]], and takes [[/damage average
+      activity=zrWNjO9mkbN28spL]] damage at the start of each of the [[lookup
+      @name lowercase]]'s turns.</p><p class="feature">If the [[lookup @name
+      lowercase]] takes 30 damage or more on a single turn from the swallowed
+      creature, the [[lookup @name lowercase]] must succeed on a [[/save
+      format=long activity=rGeGukkm2t2fXsoy]] at the end of that turn or
+      regurgitate the creature, which falls in a space within [[lookup
+      @range.value activity=rGeGukkm2t2fXsoy]] [[lookup @range.units
+      activity=rGeGukkm2t2fXsoy]]. of the [[lookup @name lowercase]] and has the
+      &amp;Reference[Prone apply=false] condition. If the [[lookup @name
+      lowercase]] dies, a swallowed creature is no longer Restrained and can
+      escape from the corpse by using 15 feet of movement, exiting Prone.</p>
+    chat: ''
+  identifier: swallow
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/creatures/abilities/mouth-teeth-rows-needles-purple.webp
+effects:
+  - name: Blinded, Restrained, and Total Cover
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    origin: Item.mmSwallow0000000
+    _id: VOHv1LyO3hHolZXo
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>While swallowed, a creature has the &amp;Reference[Blinded apply=false]
+      and &amp;Reference[Restrained apply=false] conditions, has
+      &amp;Reference[Total Cover apply=false] against attacks.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - coverTotal
+      - blinded
+      - restrained
+    sort: 0
+    flags:
+      dae:
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737152967007
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmSwallow0000000.VOHv1LyO3hHolZXo'
+  - name: Prone
+    img: systems/dnd5e/icons/svg/statuses/prone.svg
+    origin: Item.mmSwallow0000000
+    _id: aS5FyMP72vn3OKf1
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>If you are regurgitated, you fall into a space within 10 ft. and are
+      &amp;Reference[Prone apply=false].</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - prone
+    sort: 0
+    flags:
+      dae:
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+        enableCondition: ''
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736123357118
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmSwallow0000000.aS5FyMP72vn3OKf1'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737826505726
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 21500000
+ownership:
+  default: 0
+_key: '!items!mmSwallow0000000'

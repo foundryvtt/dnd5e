@@ -1,0 +1,44 @@
+_id: mmDivineAwarenes
+name: Divine Awareness
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] knows if it hears a
+      lie.</p>
+    chat: ''
+  identifier: divine-awareness
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/holy/prayer-hands-glowing-yellow.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736527401427
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 4100000
+ownership:
+  default: 0
+_key: '!items!mmDivineAwarenes'

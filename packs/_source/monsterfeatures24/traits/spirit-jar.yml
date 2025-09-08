@@ -1,0 +1,97 @@
+_id: mmSpiritJar00000
+name: Spirit Jar
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    fnanvvNnQCIGwx34:
+      type: utility
+      _id: fnanvvNnQCIGwx34
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: true
+        visible: false
+        name: Days to Reform
+        formula: 1d10
+      name: Days to Reform
+      img: systems/dnd5e/icons/svg/facilities/change.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">If destroyed, the [[lookup @name lowercase]] reforms in
+      [[/r 1d10]] days if it has a spirit jar, reviving with all its Hit Points.
+      The new body appears in an unoccupied space within the [[lookup @name
+      lowercase]]'s lair.</p>
+    chat: ''
+  identifier: spirit-jar
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/consumables/drinks/clay-jar-glowing-orange-blue.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736978090203
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 11700000
+ownership:
+  default: 0
+_key: '!items!mmSpiritJar00000'

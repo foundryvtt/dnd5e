@@ -1,0 +1,99 @@
+_id: mmMindJolt000000
+name: Mind Jolt
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    f3Q5Cky4bKFVdOT2:
+      type: cast
+      _id: f3Q5Cky4bKFVdOT2
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: false
+        uuid: Compendium.dnd5e.spells24.Item.phbsplMindSpike0
+        ability: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] uses Spellcasting to
+      cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMindSpike0]{Mind
+      Spike}</em> (level 4 version). The [[lookup @name lowercase]] can't take
+      this action again until the start of its next turn.</p>
+    chat: ''
+  identifier: mind-jolt
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/unholy/beam-ringed-impact-purple.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736881051447
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2100000
+ownership:
+  default: 0
+_key: '!items!mmMindJolt000000'

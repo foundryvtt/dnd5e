@@ -1,0 +1,80 @@
+_id: mmAversionToFire
+name: Aversion to Fire
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>If the [[lookup @name lowercase]] takes Fire damage, it has
+      Disadvantage on attack rolls and ability checks until the end of its next
+      turn.</p>
+    chat: ''
+  identifier: aversion-to-fire
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: Takes Fire damage
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/fire/flame-burning-skull-orange.webp
+effects:
+  - name: Averse
+    img: icons/magic/fire/flame-burning-skull-orange.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmAversionToFire
+    _id: kJYNjmfI0RpvF7CQ
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>It has Disadvantage on attack rolls and ability checks until the end of
+      its next turn.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1734646039234
+      modifiedTime: 1737582890978
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmAversionToFire.kJYNjmfI0RpvF7CQ'
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1734646385901
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1500000
+ownership:
+  default: 0
+_key: '!items!mmAversionToFire'

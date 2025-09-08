@@ -1,0 +1,120 @@
+_id: mmPoisonBreath00
+name: Poison Breath
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    lnabW9bM51HoluPp:
+      type: save
+      _id: lnabW9bM51HoluPp
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '15'
+          count: ''
+        affects:
+          choice: false
+          type: enemy
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
+            denomination: '6'
+            bonus: ''
+            types:
+              - poison
+        onSave: half
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=lnabW9bM51HoluPp]], each creature in a [[lookup
+      @target.template.size activity=lnabW9bM51HoluPp]]-foot [[lookup
+      @target.template.type capitalize activity=lnabW9bM51HoluPp]].</p><p
+      class="feature"><em>Failure:</em> [[/damage average]] damage.</p><p
+      class="feature"><em>Success:</em> Half damage.</p>
+    chat: ''
+  identifier: poison-breath
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/light/beam-rays-green-large.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737803844373
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 16700000
+ownership:
+  default: 0
+_key: '!items!mmPoisonBreath00'

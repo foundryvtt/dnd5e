@@ -1,0 +1,104 @@
+_id: mmTreeStride0000
+name: Tree Stride
+type: feat
+system:
+  activities:
+    8av8Lh1jNLCrOJny:
+      type: utility
+      _id: 8av8Lh1jNLCrOJny
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: Large or bigger tree
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          size: ''
+          count: ''
+          width: ''
+        affects:
+          choice: false
+          type: self
+          count: ''
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>If within [[lookup @range.value activity=8av8Lh1jNLCrOJny]] feet of a
+      [[lookup @range.special activity=8av8Lh1jNLCrOJny]], the [[lookup @name
+      lowercase]] teleports to an unoccupied space within [[lookup @range.value
+      activity=8av8Lh1jNLCrOJny]] feet of a second [[lookup
+      @target.affects.special activity=8av8Lh1jNLCrOJny]] that is within 60 feet
+      of the previous tree.</p>
+    chat: ''
+  identifier: tree-stride
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  type:
+    value: monster
+    subtype: ''
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/nature/tree-spirit-glow-black-yellow.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737737786491
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 22800000
+ownership:
+  default: 0
+_key: '!items!mmTreeStride0000'

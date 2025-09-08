@@ -1,0 +1,96 @@
+_id: mmChargingHorn00
+name: Charging Horn
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    7p8mgAgWVbmb8gpV:
+      type: utility
+      sort: 0
+      activation:
+        type: legendary
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: spec
+        special: half its speed
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+      _id: 7p8mgAgWVbmb8gpV
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] moves up to half its Speed without
+      provoking &amp;Reference[Opportunity Attacks], and it makes one [[/item
+      Radiant Horn]] attack.</p>
+    chat: ''
+  identifier: charging-horn
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/commodities/bones/tooth-spiked-brown.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735673756437
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!mmChargingHorn00'

@@ -1,0 +1,104 @@
+_id: mmSlow0000000000
+name: Slow
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    NJu26YkznURRXRCV:
+      type: cast
+      _id: NJu26YkznURRXRCV
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplSlow000000
+        ability: con
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] casts the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplSlow000000]{Slow}</em>
+      spell, requiring no spell components and using Constitution as the
+      spellcasting ability (spell save DC 17).</p>
+    chat: ''
+  identifier: slow
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/time/clock-stopwatch-white-blue.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736881226725
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 21700000
+ownership:
+  default: 0
+_key: '!items!mmSlow0000000000'

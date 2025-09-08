@@ -1,0 +1,113 @@
+_id: mmLightningStrik
+name: Lightning Strike
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    v39JwGqgfaKiA4vc:
+      type: save
+      _id: v39JwGqgfaKiA4vc
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
+            denomination: '10'
+            bonus: ''
+            types:
+              - lightning
+        onSave: half
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=v39JwGqgfaKiA4vc]], one [[lookup
+      @target.affects.type activity=v39JwGqgfaKiA4vc]] the [[lookup @name
+      lowercase]] can see within [[lookup @range.value
+      activity=v39JwGqgfaKiA4vc]] feet. <em>Failure:</em> [[/damage average]]
+      damage. <em>Success:</em>Half damage.</p>
+    chat: ''
+  identifier: lightning-strike
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/lightning/bolt-strike-blue-white.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737823147503
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 13600000
+ownership:
+  default: 0
+_key: '!items!mmLightningStrik'

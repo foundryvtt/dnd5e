@@ -1,0 +1,44 @@
+_id: mmRunningLeap000
+name: Running Leap
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">With a 10-foot running start, the [[lookup @name
+      lowercase]] can Long Jump up to 25 feet.</p>
+    chat: ''
+  identifier: running-leap
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/skills/movement/feet-winged-boots-glowing-yellow.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736269131664
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 10100000
+ownership:
+  default: 0
+_key: '!items!mmRunningLeap000'

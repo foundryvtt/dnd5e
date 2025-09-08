@@ -1,0 +1,235 @@
+_id: mmAttach00000000
+name: Attach
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    il0R60nmuwzk4EEU:
+      _id: il0R60nmuwzk4EEU
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: m1rBdxxAM8FGk5gI
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+    6iLqAufAeEqDOlGs:
+      type: check
+      _id: 6iLqAufAeEqDOlGs
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: Action taken by the target or creature within range of it
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: attached target
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: str
+          formula: ''
+        ability: str
+      name: Detach Attempt
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>[[/attack extended]]. [[/damage average extended]]. If the target is a
+      Large or smaller creature, the [[lookup @name lowercase]] attaches to it.
+      While the [[lookup @name lowercase]] is attached, the target has the
+      &amp;Reference[Blinded apply=false] condition, and the [[lookup @name
+      lowercase]] can't make Bite attacks against other targets. In addition,
+      the [[lookup @name lowercase]] halves the damage it takes (round down),
+      and the target takes the same amount of damage.</p><p>The [[lookup @name
+      lowercase]] can detach itself by spending 5 feet of movement. The target
+      or a creature within [[lookup @range.value activity=6iLqAufAeEqDOlGs]]
+      feet of it can take an action to try to detach the [[lookup @name
+      lowercase]], doing so by succeeding on a DC [[lookup @check.dc.value
+      activity=6iLqAufAeEqDOlGs]] Strength (Athletics) check.</p>
+    chat: ''
+  identifier: attach
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 3
+      denomination: 6
+      types:
+        - piercing
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: 5
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/magic/control/orb-web-hold.webp
+effects:
+  - name: 'Attached: Blinded'
+    img: icons/magic/control/orb-web-hold.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmAttach00000000
+    transfer: false
+    _id: m1rBdxxAM8FGk5gI
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>While attached, the target has the &amp;Reference[Blinded apply=false]
+      condition.</p>
+    tint: '#ffffff'
+    statuses:
+      - blinded
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1734641127283
+      modifiedTime: 1734641809528
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmAttach00000000.m1rBdxxAM8FGk5gI'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737056157166
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2900000
+ownership:
+  default: 0
+_key: '!items!mmAttach00000000'

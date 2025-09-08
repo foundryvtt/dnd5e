@@ -1,0 +1,46 @@
+_id: mmCelestialResto
+name: Celestial Restoration
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>If the [[lookup @name lowercase]] dies, it returns to life in [[/r
+      1d6#Days]] days and regains all its Hit Points unless
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDispelEvil]</em>
+      is cast on its remains.</p>
+    chat: ''
+  identifier: celestial-restoration
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/holy/chalice-glowing-yellow-blue.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735667529577
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2700000
+ownership:
+  default: 0
+_key: '!items!mmCelestialResto'

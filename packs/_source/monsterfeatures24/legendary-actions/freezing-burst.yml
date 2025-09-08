@@ -1,0 +1,177 @@
+_id: mmFreezingBurst0
+name: Freezing Burst
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    U2i9u4ELjeLQfePP:
+      type: save
+      _id: U2i9u4ELjeLQfePP
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: turn
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: q6bYdkYCIAqlHO3d
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: '6'
+            bonus: ''
+            types:
+              - cold
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - q6bYdkYCIAqlHO3d
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=U2i9u4ELjeLQfePP]], each [[lookup
+      @target.affects.type activity=U2i9u4ELjeLQfePP]] in a [[lookup
+      @target.template.size activity=U2i9u4ELjeLQfePP]]-foot-radius Sphere
+      centered on a point the [[lookup @name lowercase]] can see within [[lookup
+      @range.value activity=U2i9u4ELjeLQfePP]] feet.</p><p
+      class="feature"><em>Failure:</em> [[/damage average]] damage, and the
+      target's Speed is 0 until the end of the target's next turn.</p><p
+      class="feature"><em>Failure or Success:</em> The [[lookup @name
+      lowercase]] can't take this action again until the start of its next
+      turn.</p>
+    chat: ''
+  identifier: freezing-burst
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/water/projectile-ice-chunk-blue.webp
+effects:
+  - name: 0 ft. Speed
+    img: icons/magic/water/projectile-ice-chunk-blue.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmFreezingBurst0
+    _id: q6bYdkYCIAqlHO3d
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.burrow
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.fly
+        mode: 5
+        value: '0'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 5
+        value: '0'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: <p>The target’s Speed is 0 until the end of the target’s next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.actors24.Actor.mmYoungCopperDra.Item.mmSlowingBreath0.ActiveEffect.ztGUDHGfoUxlUY53
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.2
+      createdTime: 1738045578214
+      modifiedTime: 1738045578214
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmFreezingBurst0.q6bYdkYCIAqlHO3d'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1738045584982
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 500000
+ownership:
+  default: 0
+_key: '!items!mmFreezingBurst0'

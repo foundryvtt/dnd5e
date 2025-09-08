@@ -1,0 +1,157 @@
+_id: mmShimmeringShie
+name: Shimmering Shield
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    sl8NoPhB0e5z6jmK:
+      type: heal
+      _id: sl8NoPhB0e5z6jmK
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: sGQwUaOCcVnE2PA7
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: targets itself or one creature
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: 3
+        denomination: '6'
+        types:
+          - temphp
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: ''
+      name: Temporary Healing
+      img: ''
+      appliedEffects:
+        - sGQwUaOCcVnE2PA7
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] targets itself or one [[lookup
+      @target.affects.type activity=sl8NoPhB0e5z6jmK]] it can see within
+      [[lookup @range.value activity=sl8NoPhB0e5z6jmK]] feet of itself. The
+      target gains [[/healing average temp]], and its AC increases by 2 until
+      the end of the [[lookup @name lowercase]]'s' next turn. The [[lookup @name
+      lowercase]] can't take this action again until the start of its next
+      turn.</p>
+    chat: ''
+  identifier: shimmering-shield
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/defensive/barrier-shield-dome-blue-purple.webp
+effects:
+  - name: Shielded
+    img: icons/magic/defensive/shield-barrier-blue.webp
+    origin: Item.mmShimmeringShie
+    _id: sGQwUaOCcVnE2PA7
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target's AC increases by 2 until the end of the bestower's next
+      turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737515982624
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmShimmeringShie.sGQwUaOCcVnE2PA7'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737515973552
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1100000
+ownership:
+  default: 0
+_key: '!items!mmShimmeringShie'

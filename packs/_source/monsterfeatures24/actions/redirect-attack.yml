@@ -1,0 +1,103 @@
+_id: mmRedirectAttack
+name: Redirect Attack
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    pIlCmuPw8YUqAISY:
+      type: utility
+      _id: pIlCmuPw8YUqAISY
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: A creature the goblin can see makes an attack roll against it.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ally
+          count: '1'
+          special: a Small or Medium ally
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Trigger:</em> A creature the [[lookup @name
+      lowercase]] can see makes an attack roll against it.</p><p
+      class="feature"><em>Response:</em> The [[lookup @name lowercase]] chooses
+      [[lookup @target.affects.special activity=pIlCmuPw8YUqAISY]] within
+      [[lookup @range.value activity=pIlCmuPw8YUqAISY]] feet of itself. The
+      [[lookup @name lowercase]] and that [[lookup @target.affects.type
+      activity=pIlCmuPw8YUqAISY]] swap places, and the [[lookup
+      @target.affects.type activity=pIlCmuPw8YUqAISY]] becomes the target of the
+      attack instead.</p>
+    chat: ''
+  identifier: redirect-attack
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/defensive/illusion-evasion-echo-purple.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737928047752
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 18100000
+ownership:
+  default: 0
+_key: '!items!mmRedirectAttack'
