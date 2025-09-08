@@ -188,8 +188,7 @@ export default class AttributesFields {
     Object.defineProperty(ac, "value", {
       enumerable: true,
       get: () => {
-        const rollData = this.parent.getRollData();
-        return ac._value ??= simplifyBonus(armorClass, rollData);
+        return ac._value ??= simplifyBonus(armorClass, this.parent.getRollData());
       }
     });
 
