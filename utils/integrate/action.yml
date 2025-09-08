@@ -4,7 +4,7 @@ runs:
   using: composite
   steps:
     - name: Generate Access Token
-      uses: qoomon/actions--access-token@v3
+      uses: qoomon/actions--access-token@4f9caa318ef228ff48b05b13f98e4f4d78a41024
       id: access-token
       with:
         repository: dnd-free-rules
