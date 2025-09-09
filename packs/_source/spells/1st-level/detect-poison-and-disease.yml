@@ -28,13 +28,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: radius
       size: '30'
       contiguous: false
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -54,6 +57,7 @@ system:
     - somatic
     - material
     - concentration
+    - ritual
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -102,11 +106,11 @@ effects: []
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037346191
-  modifiedTime: 1725992716640
+  modifiedTime: 1757447024779
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!2skfDtglk1mGrb3l'
