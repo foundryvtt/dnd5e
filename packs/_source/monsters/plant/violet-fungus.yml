@@ -620,8 +620,8 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
@@ -638,22 +638,18 @@ items:
       mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745107870469
+      modifiedTime: 1757447473583
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7EmUVycEASn7SFL0.OEx9iy4HDipiYsPt'
@@ -743,18 +739,18 @@ items:
       identifier: multiattack
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273655263
+      modifiedTime: 1757447430330
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7EmUVycEASn7SFL0.wjDktLNTUnueuX2X'
