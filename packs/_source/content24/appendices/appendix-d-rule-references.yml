@@ -449,7 +449,7 @@ pages:
     category: null
     _key: '!journal.pages!phbAppendixDRule.BIlnr0xYhqt4TGsi'
   - sort: 6900000
-    name: Vision and Light (Revisit)
+    name: Vision and Light
     type: rule
     _id: O6hamUbI9kVASN8b
     title:
@@ -461,16 +461,22 @@ pages:
       content: >-
         <p>Some adventuring tasks—such as noticing danger, hitting an enemy, and
         targeting certain spells—are affected by sight, so effects that obscure
-        vision can hinder you, as explained
-        below.</p><p>@Embed[.MAxtfJyvJV7EpzWN
-        inline]</p><p>@Embed[.wPFjfRruboxhtL4b
-        inline]</p><p>@Embed[.RnMokVPyKGbbL8vi
+        vision can hinder you, as explained below.</p><h3>Obscured
+        Areas</h3><p>An area might be Lightly or Heavily Obscured. In a Lightly
+        Obscured area—such as an area with Dim Light, patchy fog, or moderate
+        foliage—you have Disadvantage on Wisdom (Perception) checks that rely on
+        sight.</p><p>A Heavily Obscured area—such as an area with Darkness,
+        heavy fog, or dense foliage—is opaque. You have the
+        &amp;Reference[Blinded] condition when trying to see something
+        there.</p><h3>Light</h3><p>The presence or absence of light determines
+        the category of illumination in an area, as defined
+        below.</p><p>@Embed[.RnMokVPyKGbbL8vi
         inline]</p><p>@Embed[.n1Ocpbyhr6HhgbCG
-        inline]</p><p>@Embed[.4dfREIDjG5N4fvxd
-        inline]</p><h3>Blindsight</h3><p>@Embed[.sacjsfm9ZXnw4Tqc
-        inline]</p><h3>Darkvision</h3><p>@Embed[.ldmA1PbnEGVkmE11
-        inline]</p><h3>Tremorsense</h3><p>@Embed[.r64UrNusMhwJVnxb
-        inline]</p><h3>Truesight</h3><p>@Embed[.kNa8rJFbtaTM3Rmk inline]</p>
+        inline]</p><p>@Embed[.4dfREIDjG5N4fvxd inline]</p><h3>Special
+        Senses</h3><p>Some creatures have special senses that help them perceive
+        things in certain situations. “Rules Glossary” defines the following
+        special
+        senses:</p><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.tdtmXZbUIOZGSnKT]{Blindsight}</p><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.7vQ1hLQ5fS6SSUqF]{Darkvision}</p><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.r64UrNusMhwJVnxb]{Tremorsense}</p><p>@UUID[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.be7g0q1xBAwb8drv]{Truesight}</p>
       markdown: ''
     video:
       controls: true
@@ -484,11 +490,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388240910
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -678,129 +684,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.4dfREIDjG5N4fvxd'
-  - sort: 7500000
-    name: Blindsight
-    type: rule
-    _id: sacjsfm9ZXnw4Tqc
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>If you have Blindsight, you can see within a specific range without
-        relying on physical sight. Within that range, you can see anything that
-        isn't behind &amp;Reference[Total Cover] even if you have the
-        &amp;Reference[Blinded] condition or are in &amp;Reference[Darkness].
-        Moreover, in that range, you can see something has the Invisible
-        condition.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.sacjsfm9ZXnw4Tqc'
-  - sort: 7600000
-    name: Darkvision
-    type: rule
-    _id: ldmA1PbnEGVkmE11
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>If you have Darkvision, you can see in &amp;Reference[Dim Light]
-        within a specified range as if it were Bright Light and in
-        &amp;Reference[Darkness] within that range as if it were Dim Light. You
-        discern colors in that Darkness only as shades of gray. <em>See
-        also</em>
-        @UUID[Compendium.dnd5e.content24.JournalEntry.phbExploration00]{Exploration}.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.ldmA1PbnEGVkmE11'
-  - sort: 7800000
-    name: Truesight
-    type: rule
-    _id: kNa8rJFbtaTM3Rmk
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>If you have Truesight, your vision is enhanced within a specified
-        range. Within that range, your vision pierces through the
-        following:</p><p><strong>Darkness.</strong> You can see in normal and
-        magical &amp;Reference[darkness].</p><p><strong>Invisibility.</strong>
-        You see creatures and objects that have the &amp;Reference[invisible]
-        condition.</p><p><strong>Visual Illusions.</strong> Visual illusions
-        appear transparent to you, and you automatically succeed on saving
-        throws against them.</p><p><strong>Transformations.</strong> You discern
-        the true form of any creature or object you see that has been
-        transformed by magic.</p><p><strong>Ethereal Plane.</strong> You see
-        into the Ethereal Plane. <em>See also</em> appendix A ("Transitive
-        Planes").</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.kNa8rJFbtaTM3Rmk'
   - sort: 8000000
     name: Food
     type: rule
@@ -2503,10 +2386,13 @@ pages:
         <p>You can break up your move, using some of its movement before and
         after any action, Bonus Action, or Reaction you take on the same turn.
         For example, if you have a Speed of 30 feet, you could go 10 feet, take
-        an action, and then go 20 feet.</p><p>@Embed[.JxboWb0XHo2GwqD0
-        inline]</p><p><em><strong>Using different speeds.</strong></em> If you
-        have more than one speed, choose which one to use when you move; you can
-        switch between the speeds during your move. Whenever you switch,
+        an action, and then go 20 feet.</p><p><em><strong>Moving between
+        Attacks.</strong></em> If you move on your turn and have a feature, such
+        as Extra Attack, that gives you more than one attack as part of the
+        Attack action, you can use some or all of that movement to move between
+        those attacks.</p><p><em><strong>Using different speeds.</strong></em>
+        If you have more than one speed, choose which one to use when you move;
+        you can switch between the speeds during your move. Whenever you switch,
         subtract the distance already moved from the new speed. The result
         determines how much farther you can move. If the result is 0 or less,
         you can’t use the new speed during the current move. For example, if you
@@ -2529,7 +2415,7 @@ pages:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1757387728683
+      modifiedTime: 1757388294397
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -2952,210 +2838,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.wKtOwagDAiNfVoPS'
-  - sort: 10400000
-    name: Attack
-    type: rule
-    _id: u4GQCzoBig20yRLj
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.f4fZHwBvpbpzRyn4</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.u4GQCzoBig20yRLj'
-  - sort: 10500000
-    name: Magic
-    type: rule
-    _id: GLwN36E4WXn3Cp4Z
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.iIIDUsmSOkL0xNzF</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.GLwN36E4WXn3Cp4Z'
-  - sort: 10600000
-    name: Dash
-    type: rule
-    _id: Jqn0MEvq6fduYNo6
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.6l6nBKip4LqB1sCU</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.Jqn0MEvq6fduYNo6'
-  - sort: 10700000
-    name: Disengage
-    type: rule
-    _id: ZOPRfI48NyjoloEF
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.w1AGsemFERfjqWNx</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.ZOPRfI48NyjoloEF'
-  - sort: 10800000
-    name: Dodge
-    type: rule
-    _id: V1BkwK2HQrtEfa4d
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.3YJIuyCMmuUrfmuX</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.V1BkwK2HQrtEfa4d'
-  - sort: 10900000
-    name: Help
-    type: rule
-    _id: KnrD3u2AnQfmtOWj
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.5S8i59qskkd9GGcJ</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.KnrD3u2AnQfmtOWj'
   - sort: 11000000
     name: Hide
     type: rule
@@ -3191,226 +2873,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.BXlHhE4ZoiFwiXLK'
-  - sort: 11100000
-    name: Ready
-    type: rule
-    _id: 8xJzZVelP2AmQGfU
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.nI9tN6Oq7fCV7hcA</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.8xJzZVelP2AmQGfU'
-  - sort: 11200000
-    name: Search
-    type: rule
-    _id: 5cn1ZTLgQq95vfZx
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.ySj4gYZ4ADZoia7R</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.5cn1ZTLgQq95vfZx'
-  - sort: 11300000
-    name: Use an Object
-    type: rule
-    _id: ljqhJx8Qxu2ivo69
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.UDlogfdiT2uYEZz4</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.ljqhJx8Qxu2ivo69'
-  - sort: 11400000
-    name: Attack Rolls
-    type: rule
-    _id: 5wkqEqhbBD5kDeE7
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.W8uJrd1D8NeOuawp</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.5wkqEqhbBD5kDeE7'
-  - sort: 11500000
-    name: Modifiers to the Roll (2014)
-    type: rule
-    _id: 6WJRdQlCExNsBZMz
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>When a character makes an attack roll, the two most common modifiers
-        to the roll are an ability modifier and the character's proficiency
-        bonus. When a monster makes an attack roll, it uses whatever modifier is
-        provided in its stat block.</p><p><strong>Ability Modifier. </strong>The
-        ability modifier used for a melee weapon attack is Strength, and the
-        ability modifier used for a ranged weapon attack is Dexterity. Weapons
-        that have the finesse or thrown property break this rule.</p><p>Some
-        spells also require an attack roll. The ability modifier used for a
-        spell attack depends on the spellcasting ability of the
-        spellcaster.</p><p><strong>Proficiency Bonus.</strong> You add your
-        proficiency bonus to your attack roll when you attack using a weapon
-        with which you have proficiency, as well as when you attack with a
-        spell.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.6WJRdQlCExNsBZMz'
-  - sort: 11600000
-    name: Rolling 1 or 20 (2014)
-    type: rule
-    _id: Lw9aodFTlNhXLpyx
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: >-
-        <p>Sometimes fate blesses or curses a combatant, causing the novice to
-        hit and the veteran to miss.</p><p>If the d20 roll for an attack is a
-        20, the attack hits regardless of any modifiers or the target's AC. This
-        is called a critical hit.</p><p>If the d20 roll for an attack is a 1,
-        the attack misses regardless of any modifiers or the target's AC.</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.Lw9aodFTlNhXLpyx'
   - sort: 11700000
     name: Unseen Attackers and Targets
     type: rule
@@ -3663,39 +3125,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.FQTS08uH74A6psL2'
-  - sort: 12600000
-    name: Grappling
-    type: rule
-    _id: Sl4bniSPSbyrakM2
-    title:
-      show: true
-      level: 2
-    image: {}
-    text:
-      format: 1
-      content: <p>JournalEntry.phbAppendixCRule.JournalEntryPage.YSLWJcQCP6kzsPql</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.Sl4bniSPSbyrakM2'
   - sort: 12900000
     name: Shoving a Creature
     type: rule
@@ -4895,72 +4324,6 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.r1CgZXLcqFop6Dlx'
-  - sort: 16100000
-    name: Knocking a Creature Out
-    type: rule
-    _id: uEwjgKGuCRTNADYv
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: <p>JournalEntry.phbAppendixCRule.JournalEntryPage.PjXBMVcEaWuKjder</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.uEwjgKGuCRTNADYv'
-  - sort: 16200000
-    name: Temporary Hit Points
-    type: rule
-    _id: AW6HpJZHqxfESXaq
-    title:
-      show: true
-      level: 1
-    image: {}
-    text:
-      format: 1
-      content: <p>JournalEntry.phbAppendixCRule.JournalEntryPage.qOKtJt8CB2qRaTNA</p>
-      markdown: ''
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    system:
-      tooltip: ''
-      type: rule
-    ownership:
-      default: -1
-    flags: {}
-    _stats:
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726678643474
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    category: null
-    _key: '!journal.pages!phbAppendixDRule.AW6HpJZHqxfESXaq'
   - sort: 14600000
     name: Poison
     type: rule
@@ -6009,6 +5372,199 @@ pages:
       exportSource: null
     category: null
     _key: '!journal.pages!phbAppendixDRule.wvtCeGHgnUmh0cuj'
+  - sort: 18900000
+    name: Cone
+    type: rule
+    _id: DqqAOr5JnX71OCOw
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A Cone is an area of effect that extends in straight lines from a
+        point of origin in a direction its creator chooses. A Cone’s width at
+        any point along its length is equal to that point’s distance from the
+        point of origin. For example, a Cone is 15 feet wide at a point along
+        its length that is 15 feet from the point of origin. The effect that
+        creates a Cone specifies its maximum length.</p><p>A Cone’s point of
+        origin isn’t included in the area of effect unless its creator decides
+        otherwise.</p>
+      markdown: ''
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system:
+      tooltip: ''
+      type: areaOfEffect
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726678643474
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbAppendixDRule.DqqAOr5JnX71OCOw'
+  - sort: 19000000
+    name: Cube
+    type: rule
+    _id: dRfDIwuaHmUQ06uA
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A Cube is an area of effect that extends in straight lines from a
+        point of origin located anywhere on a face of the Cube. The effect that
+        creates a Cube specifies its size, which is the length of each
+        side.</p><p>A Cube’s point of origin isn’t included in the area of
+        effect unless its creator decides otherwise.</p>
+      markdown: ''
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system:
+      tooltip: ''
+      type: areaOfEffect
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726678643474
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbAppendixDRule.dRfDIwuaHmUQ06uA'
+  - sort: 19100000
+    name: Cylinder
+    type: rule
+    _id: jZFp4R7tXsIqkiG3
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A Cylinder is an area of effect that extends in straight lines from a
+        point of origin located at the center of the circular top or bottom of
+        the Cylinder. The effect that creates a Cylinder specifies the radius of
+        the Cylinder’s base and the Cylinder’s height.</p><p>A Cylinder’s point
+        of origin is included in the area of effect.</p>
+      markdown: ''
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system:
+      tooltip: ''
+      type: areaOfEffect
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726678643474
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbAppendixDRule.jZFp4R7tXsIqkiG3'
+  - sort: 19200000
+    name: Line
+    type: rule
+    _id: 6DOoBgg7okm9gBc6
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A Line is an area of effect that extends from a point of origin in a
+        straight path along its length and covers an area defined by its width.
+        The effect that creates a Line specifies its length and width.</p><p>A
+        Line’s point of origin isn’t included in the area of effect unless its
+        creator decides otherwise.</p>
+      markdown: ''
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system:
+      tooltip: ''
+      type: areaOfEffect
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726678643474
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbAppendixDRule.6DOoBgg7okm9gBc6'
+  - sort: 19300000
+    name: Sphere
+    type: rule
+    _id: npdEWb2egUPnB5Fa
+    title:
+      show: true
+      level: 2
+    image: {}
+    text:
+      format: 1
+      content: >-
+        <p>A Sphere is an area of effect that extends in straight lines from a
+        point of origin outward in all directions. The effect that creates a
+        Sphere specifies the distance it extends as the radius of the
+        Sphere.</p><p>A Sphere’s point of origin is included in the Sphere’s
+        area of effect.</p>
+      markdown: ''
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    system:
+      tooltip: ''
+      type: areaOfEffect
+    ownership:
+      default: -1
+    flags: {}
+    _stats:
+      duplicateSource: null
+      coreVersion: '13.344'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1726678643474
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    category: null
+    _key: '!journal.pages!phbAppendixDRule.npdEWb2egUPnB5Fa'
   - sort: 19400000
     name: Saving Throws
     type: rule
@@ -6598,7 +6154,7 @@ pages:
         can attempt an Intelligence (Arcana) check to detect or disarm a magic
         trap, in addition to any other checks noted in the trap’s description.
         The DCs are the same regardless of the check used. In addition,
-        @UUID[Compendium.dnd5e.spells24.Item.15Fa6q1nH27XfbR8]{Dispel Magic} has
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel Magic} has
         a chance of disabling most magic traps. A magic trap’s description
         provides the DC for the ability check made when you use <em>dispel
         magic</em>.</p><p>In most cases, a trap’s description is clear enough
@@ -6638,11 +6194,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388579288
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -6660,9 +6216,9 @@ pages:
       content: >-
         <p>Various magical effects can inflict madness on an otherwise stable
         mind. Certain spells, such as
-        @UUID[Compendium.dnd5e.spells24.Item.dSTu1MaPhBqPITwM]{Contact Other
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplContactOth]{Contact Other
         Plane} and
-        @UUID[Compendium.dnd5e.spells24.Item.B2kbmgbA2WQR00kx]{Symbol}, can
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplSymbol0000]{Symbol}, can
         cause insanity, and you can use the madness rules here instead of the
         spell effects of those spells. Diseases, poisons, and planar effects
         such as psychic wind or the howling winds of Pandemonium can all inflict
@@ -6682,11 +6238,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388614195
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -6749,15 +6305,15 @@ pages:
     text:
       format: 1
       content: >-
-        <p>A @UUID[Compendium.dnd5e.spells24.Item.3MYDjS6k9IYL0aTj]{Calm
+        <p>A @UUID[Compendium.dnd5e.spells24.Item.phbsplCalmEmotio]{Calm
         Emotions}spell can suppress the effects of madness, while a
-        @UUID[Compendium.dnd5e.spells24.Item.F0GsG0SJzsIOacwV]{Lesser
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser
         Restoration} spell can rid a character of a short-term or long-term
         madness. Depending on the source of the madness,
-        @UUID[Compendium.dnd5e.spells24.Item.XZhdgVK3cLoxNCQl]{Remove Curse} or
-        @UUID[Compendium.dnd5e.spells24.Item.15Fa6q1nH27XfbR8]{Dispel Magic}<em>
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplRemoveCurs]{Remove Curse} or
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel Magic}<em>
         </em>might also prove effective. A
-        @UUID[Compendium.dnd5e.spells24.Item.WzvJ7G3cqvIubsLk]{Greater
+        @UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
         Restoration} spell or more powerful magic is required to rid a character
         of indefinite madness.</p>
       markdown: ''
@@ -6773,11 +6329,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388665223
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -6890,7 +6446,7 @@ pages:
     category: null
     _key: '!journal.pages!phbAppendixDRule.9LJZhqvCburpags3'
   - sort: 22400000
-    name: Poison Types (2014)
+    name: Poison
     type: rule
     _id: I6OMMWUaYCWR9xip
     title:
@@ -6900,8 +6456,9 @@ pages:
     text:
       format: 1
       content: >-
-        <p>Poisons come in the following four
-        types.</p><p>@Embed[.kXnCEqqGUWRZeZDj
+        <p>Given their insidious and deadly nature, poisons are a favorite tool
+        among assassins and evil creatures.</p><p class="p1">Poisons come in the
+        following four types:</p><p>@Embed[.kXnCEqqGUWRZeZDj
         inline]</p><p>@Embed[.Y0vsJYSWeQcFpJ27
         inline]</p><p>@Embed[.KUyN4eK1xTBzXsjP
         inline]</p><p>@Embed[.LUL48OUq6SJeMGc7 inline]</p>
@@ -6918,11 +6475,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757389018797
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -6939,26 +6496,29 @@ pages:
       format: 1
       markdown: ''
       content: >-
-        <p>Contact poison can be smeared on an object and remains potent until
-        it is touched or washed off. A creature that touches contact poison with
-        exposed skin suffers its effects.</p>
+        <p><strong>Contact.</strong> Contact poison can be smeared on an object
+        and remains potent until it is touched or washed off. A creature that
+        touches contact poison with exposed skin suffers its effects.</p>
     video:
       controls: true
       volume: 0.5
     src: null
     system:
-      tooltip: ''
+      tooltip: >-
+        <p>Contact poison can be smeared on an object and remains potent until
+        it is touched or washed off. A creature that touches contact poison with
+        exposed skin suffers its effects.</p>
       type: rule
     ownership:
       default: -1
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 5.1.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1754936660493
+      modifiedTime: 1757388942247
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -6974,29 +6534,34 @@ pages:
     text:
       format: 1
       content: >-
-        <p>A creature must swallow an entire dose of ingested poison to suffer
-        its effects. The dose can be delivered in food or a liquid. You may
-        decide that a partial dose has a reduced effect, such as allowing
-        Advantage on the saving throw or dealing only half as much damage on a
-        failed save.</p>
+        <p><strong>Ingested.</strong> A creature must swallow an entire dose of
+        ingested poison to suffer its effects. The dose can be delivered in food
+        or a liquid. You may decide that a partial dose has a reduced effect,
+        such as allowing Advantage on the saving throw or dealing only half as
+        much damage on a failed save.</p>
       markdown: ''
     video:
       controls: true
       volume: 0.5
     src: null
     system:
-      tooltip: ''
+      tooltip: >-
+        <p>A creature must swallow an entire dose of ingested poison to suffer
+        its effects. The dose can be delivered in food or a liquid. You may
+        decide that a partial dose has a reduced effect, such as allowing
+        Advantage on the saving throw or dealing only half as much damage on a
+        failed save.</p>
       type: rule
     ownership:
       default: -1
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 5.1.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1754936650936
+      modifiedTime: 1757388964959
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -7012,29 +6577,35 @@ pages:
     text:
       format: 1
       content: >-
-        <p>Poisonous powders and gases take effect when inhaled. Blowing the
-        powder or releasing the gas subjects creatures in a 5-foot Cube to its
-        effect. The resulting cloud dissipates immediately afterward. Holding
-        one's breath is ineffective against inhaled poisons, as they affect
-        nasal membranes, tear ducts, and other parts of the body.</p>
+        <p><strong>Inhaled.</strong> Poisonous powders and gases take effect
+        when inhaled. Blowing the powder or releasing the gas subjects creatures
+        in a 5-foot Cube to its effect. The resulting cloud dissipates
+        immediately afterward. Holding one’s breath is ineffective against
+        inhaled poisons, as they affect nasal membranes, tear ducts, and other
+        parts of the body.</p>
       markdown: ''
     video:
       controls: true
       volume: 0.5
     src: null
     system:
-      tooltip: ''
+      tooltip: >-
+        <p>Poisonous powders and gases take effect when inhaled. Blowing the
+        powder or releasing the gas subjects creatures in a 5-foot Cube to its
+        effect. The resulting cloud dissipates immediately afterward. Holding
+        one’s breath is ineffective against inhaled poisons, as they affect
+        nasal membranes, tear ducts, and other parts of the body.</p>
       type: rule
     ownership:
       default: -1
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 5.1.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1754936677636
+      modifiedTime: 1757388985403
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -7050,29 +6621,34 @@ pages:
     text:
       format: 1
       content: >-
-        <p>Injury poison can be applied as a Bonus Action to a weapon, a piece
-        of ammunition, or similar object. The poison remains potent until
-        delivered through a wound or washed off. A creature that takes Piercing
-        or Slashing damage from an object coated with the poison is exposed to
-        its effects.</p>
+        <p><strong>Injury.</strong> Injury poison can be applied as a Bonus
+        Action to a weapon, a piece of ammunition, or similar object. The poison
+        remains potent until delivered through a wound or washed off. A creature
+        that takes Piercing or Slashing damage from an object coated with the
+        poison is exposed to its effects.</p>
       markdown: ''
     video:
       controls: true
       volume: 0.5
     src: null
     system:
-      tooltip: ''
+      tooltip: >-
+        <p>Injury poison can be applied as a Bonus Action to a weapon, a piece
+        of ammunition, or similar object. The poison remains potent until
+        delivered through a wound or washed off. A creature that takes Piercing
+        or Slashing damage from an object coated with the poison is exposed to
+        its effects.</p>
       type: rule
     ownership:
       default: -1
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 5.1.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1754936696462
+      modifiedTime: 1757389002829
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -8509,13 +8085,9 @@ pages:
     text:
       format: 1
       content: >-
-        <p>The Sense's entry lists the monster’s special senses, such as
-        Darkvision, and its Passive
-        Perception.</p><h3>Blindsight</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.tdtmXZbUIOZGSnKT
-        inline]</p><h3>Darkvision</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.7vQ1hLQ5fS6SSUqF
-        inline]</p><h3>Tremorsense</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.r64UrNusMhwJVnxb
-        inline]</p><h3>Truesight</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.be7g0q1xBAwb8drv
-        inline]</p>
+        <p>The Senses entry specifies a monster’s Passive Perception score, as
+        well as any special senses the monster possesses. Passive Perception and
+        special senses are described in “Rules Glossary.”</p>
       markdown: ''
     video:
       controls: true
@@ -8529,11 +8101,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388745155
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -8709,7 +8281,7 @@ pages:
     category: null
     _key: '!journal.pages!phbAppendixDRule.m4ErwsuDpgi9Hu0V'
   - sort: 27700000
-    name: Special Traits (2014)
+    name: Traits
     type: rule
     _id: aeJoiagWfLPkJSFM
     title:
@@ -8719,48 +8291,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p>Special traits (which appear after a monster’s challenge rating but
-        before any actions or reactions) are characteristics that are likely to
-        be relevant in a combat encounter and that require some
-        explanation.</p><h3>Innate Spellcasting</h3><p>A monster with the innate
-        ability to cast spells has the Innate Spellcasting special trait. Unless
-        noted otherwise, an innate spell of 1st level or higher is always cast
-        at its lowest possible level and can’t be cast at a higher level. If a
-        monster has a cantrip where its level matters and no level is given, use
-        the monster’s challenge rating.</p><p>An innate spell can have special
-        rules or restrictions. For example, a drow mage can innately cast the
-        @UUID[Compendium.dnd5e.spells24.Item.MRxldJd6C4bsBo3O]{Levitate} spell,
-        but the spell has a “self only” restriction, which means that the spell
-        affects only the drow mage.</p><p>A monster’s innate spells can’t be
-        swapped out with other spells. If a monster’s innate spells don’t
-        require attack rolls, no attack bonus is given for
-        them.</p><h3>Spellcasting</h3><p>A monster with the Spellcasting special
-        trait has a spellcaster level and spell slots, which it uses to cast its
-        spells of 1st level and higher (as explained in the <em>Player’s
-        Handbook</em>). The spellcaster level is also used for any cantrips
-        included in the feature.</p><p>The monster has a list of spells known or
-        prepared from a specific class. The list might also include spells from
-        a feature in that class, such as the
-        @UUID[Compendium.dnd5e.classfeatures.Item.x637K2Icp2ZFM1TB]{Divine
-        Domain} feature of the cleric or the
-        @UUID[Compendium.dnd5e.classfeatures.Item.u6Du2P9s81SWuGbi]{Druid
-        Circle} feature of the druid. The monster is considered a member of that
-        class when attuning to or using a magic item that requires membership in
-        the class or access to its spell list.</p><p>A monster can cast a spell
-        from its list at a higher level if it has the spell slot to do so. For
-        example, a drow mage with the 3rd-level
-        @UUID[Compendium.dnd5e.spells24.Item.IyikgTEOTv701jgQ]{Lightning Bolt}
-        spell can cast it as a 5th-level spell by using one of its 5th-level
-        spell slots.</p><p>You can change the spells that a monster knows or has
-        prepared, replacing any spell on its spell list with a spell of the same
-        level and from the same class list. If you do so, you might cause the
-        monster to be a greater or lesser threat than suggested by its challenge
-        rating.</p><h3>Psionics</h3><p>A monster that casts spells using only
-        the power of its mind has the psionics tag added to its Spellcasting or
-        Innate Spellcasting special trait. This tag carries no special rules of
-        its own, but other parts of the game might refer to it. A monster that
-        has this tag typically doesn’t require any components to cast its
-        spells.</p>
+        <p>A monster’s traits, if any, are features that are active at all times
+        or in certain situations.</p>
       markdown: ''
     video:
       controls: true
@@ -8778,7 +8310,7 @@ pages:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1757386614844
+      modifiedTime: 1757388770432
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
@@ -9298,7 +8830,7 @@ pages:
         warlock offends some dark power and contracts a strange affliction that
         spreads whenever he casts spells.</p><p>A simple outbreak might amount
         to little more than a small drain on party resources, curable by a
-        casting of @UUID[Compendium.dnd5e.spells24.Item.F0GsG0SJzsIOacwV]{Lesser
+        casting of @UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser
         Restoration}. A more complicated outbreak can form the basis of one or
         more adventures as characters search for a cure, stop the spread of the
         disease, and deal with the consequences.</p><p>A disease that does more
@@ -9320,11 +8852,11 @@ pages:
     flags: {}
     _stats:
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1757388594777
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     category: null
