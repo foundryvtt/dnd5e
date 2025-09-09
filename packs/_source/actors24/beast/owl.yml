@@ -662,13 +662,13 @@ items:
                   enabled: false
                   formula: ''
                 number: null
-                denomination: 0
+                denomination: null
                 bonus: '1'
                 types:
-                  - radiant
-                scaling:
-                  number: 1
+                  - slashing
           name: ''
+          img: ''
+          appliedEffects: []
       uses:
         spent: 0
         recovery: []
@@ -737,19 +737,15 @@ items:
     folder: pSCWWdqMX9eUATRJ
     img: icons/creatures/claws/claw-talons-yellow-red.webp
     effects: []
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmTalons00000000
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745712724456
+      modifiedTime: 1757446788093
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     ownership:
