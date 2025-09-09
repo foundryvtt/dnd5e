@@ -63,9 +63,9 @@ system:
   description:
     value: >-
       <p>The [[lookup @name lowercase]] casts the
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplSleep00000] spell,
-      requiring no spell components and using Charisma as the spellcasting
-      ability (spell save DC [[lookup @attributes.spell.dc]]).</p>
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplSleep00000] spell, requiring no
+      spell components and using Charisma as the spellcasting ability (spell
+      save DC [[lookup @attributes.spell.dc]]).</p>
     chat: ''
   identifier: sleep
   source:
