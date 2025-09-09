@@ -1,0 +1,189 @@
+_id: mmRam00000000000
+name: Ram
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    z58sUDUmqxECJgT3:
+      _id: z58sUDUmqxECJgT3
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: HUmtXTzr92ZaAvf3
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: Medium or smaller
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: ''
+        ability: str
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects:
+        - HUmtXTzr92ZaAvf3
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]]. If
+      the target is a [[lookup @target.affects.special
+      activity=z58sUDUmqxECJgT3]] creature, it has the &amp;Reference[Prone
+      apply=false] condition.</p>
+    chat: ''
+  identifier: ram
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 12
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: 5
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/creatures/mammals/beast-horned-scaled-glowing-orange.webp
+effects:
+  - name: Prone
+    img: systems/dnd5e/icons/svg/statuses/prone.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmRam00000000000
+    _id: HUmtXTzr92ZaAvf3
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>The target has the &amp;Reference[Prone apply=false] condition.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - prone
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736275952265
+      modifiedTime: 1737765598726
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmRam00000000000.HUmtXTzr92ZaAvf3'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737758393702
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 16300000
+ownership:
+  default: 0
+_key: '!items!mmRam00000000000'

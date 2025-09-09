@@ -85,6 +85,7 @@ export default class CreateScrollDialog extends Dialog5e {
     context.config = this.config;
     context.fields = [{
       field: new StringField({
+        required: true, blank: false,
         label: game.i18n.localize("DND5E.Scroll.Explanation.Label"),
         hint: game.i18n.localize("DND5E.Scroll.Explanation.Hint")
       }),

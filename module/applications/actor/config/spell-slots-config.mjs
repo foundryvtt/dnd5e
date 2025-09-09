@@ -40,9 +40,13 @@ export default class SpellSlotsConfig extends BaseConfigSheet {
     const { spells } = this.document.system;
     const source = this.document._source.system.spells;
     const maxLevel = Object.keys(CONFIG.DND5E.spellLevels).length - 1;
-    const spellcastingMethods = new Set(["spell", ...Object.values(this.document.spellcastingClasses).map(cls => {
-      return cls.system.spellcasting.type;
-    })]);
+    const spellcastingMethods = new Set([
+      "spell",
+      ...Object.values(this.document.spellcastingClasses).map(cls => {
+        return cls.system.spellcasting.type;
+      }),
+      ...this.document.itemTypes.spell.map(s => s.system.method)
+    ]);
 
     const models = Object.entries(CONFIG.DND5E.spellcasting).sort(([a]) => a === "spell" ? -1 : 0);
     context.overrides = models.reduce((arr, [method, model]) => {

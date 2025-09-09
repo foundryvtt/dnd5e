@@ -1,0 +1,108 @@
+_id: mmDarknessAura00
+name: Darkness Aura
+type: feat
+img: icons/magic/unholy/barrier-shield-glowing-pink.webp
+system:
+  activities:
+    amat5Ii4NydseA0h:
+      type: utility
+      _id: amat5Ii4NydseA0h
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: true
+        override: false
+        value: '10'
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: radius
+          size: '15'
+        affects:
+          choice: false
+          type: ''
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: day
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p>Magical Darkness fills a [[lookup @target.template.size
+      activity=amat5Ii4NydseA0h]]-foot Emanation originating from the [[lookup
+      @name]]. This effect lasts while the [[lookup @name]] maintains
+      Concentration on it, up to [[lookup @duration.value
+      activity=amat5Ii4NydseA0h]] minutes. Darkvision can't penetrate this area,
+      and no light can illuminate it.</p>
+    chat: ''
+  identifier: darkness-aura
+  source:
+    revision: 1
+    rules: '2024'
+  advancement: []
+  enchant: {}
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  type:
+    value: monster
+    subtype: ''
+effects: []
+folder: 4T18pEvubPMQLzvD
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1737057743176
+  modifiedTime: 1737060773047
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 150000
+ownership:
+  default: 0
+_key: '!items!mmDarknessAura00'

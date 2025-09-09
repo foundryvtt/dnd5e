@@ -1,0 +1,100 @@
+_id: mmRegeneration00
+name: Regeneration
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    5cGvjZJIJVicjJ3d:
+      type: heal
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: starts its turn with at least 1 Hit Point
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: '10'
+      name: ''
+      _id: 5cGvjZJIJVicjJ3d
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] regains [[lookup @healing.formula
+      activity=5cGvjZJIJVicjJ3d]] Hit Points at the start of each of its turns
+      if it has at least 1 Hit Point.</p>
+    chat: ''
+  identifier: regeneration
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: At least 1 Hit Point
+folder: L9Zgr8qAPc3ngKhb
+img: icons/skills/wounds/injury-stitched-flesh-red.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736274009125
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 10000000
+ownership:
+  default: 0
+_key: '!items!mmRegeneration00'

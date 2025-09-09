@@ -1,0 +1,168 @@
+_id: mmTramplingCharg
+name: Trampling Charge
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    FG9rAj3Q8UTxbGLF:
+      type: save
+      _id: FG9rAj3Q8UTxbGLF
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: OY3B1NBPgGcFmHGi
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: Medium or smaller creatures
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '6'
+            bonus: '@mod'
+            types:
+              - bludgeoning
+        onSave: none
+      save:
+        ability:
+          - str
+        dc:
+          calculation: dex
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - OY3B1NBPgGcFmHGi
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] moves up to its Speed
+      without provoking &amp;Reference[OpportunityAttacks] and can move through
+      the spaces of [[lookup @target.affects.special
+      activity=FG9rAj3Q8UTxbGLF]]. Each [[lookup @target.affects.type
+      activity=FG9rAj3Q8UTxbGLF]] whose space the [[lookup @name lowercase]]
+      enters is targeted once by the following effect. </p><p
+      class="feature"><em>Strength Saving Throw:</em> DC [[lookup @save.dc.value
+      activity=FG9rAj3Q8UTxbGLF]]. </p><p class="feature"><em>Failure:</em>
+      [[/damage average]] damage, and the target has the &amp;Reference[Prone
+      apply=false] condition.</p>
+    chat: ''
+  identifier: trampling-charge
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/earth/projectile-stone-landslide.webp
+effects:
+  - name: Prone
+    img: systems/dnd5e/icons/svg/statuses/prone.svg
+    origin: Item.mmTramplingCharg
+    _id: OY3B1NBPgGcFmHGi
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>The target has a &amp;Reference[Prone apply=long] condition.</p><p></p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - prone
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736125373121
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmTramplingCharg.OY3B1NBPgGcFmHGi'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737734811289
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 22700000
+ownership:
+  default: 0
+_key: '!items!mmTramplingCharg'

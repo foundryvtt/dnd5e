@@ -1,0 +1,83 @@
+_id: mmMultiattack000
+name: Multiattack
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    Ms63W7e3Mv2Margn:
+      type: utility
+      name: Use
+      _id: Ms63W7e3Mv2Margn
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      roll:
+        prompt: false
+        visible: false
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] makes {count} [[/item]] attacks and uses
+      [[/item]].</p>
+    chat: ''
+  identifier: multiattack
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/skills/melee/strike-weapons-orange.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737515542020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5900000
+ownership:
+  default: 0
+_key: '!items!mmMultiattack000'

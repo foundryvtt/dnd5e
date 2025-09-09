@@ -1,0 +1,46 @@
+_id: mmPackTactics000
+name: Pack Tactics
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] has Advantage on an attack roll against
+      a creature if at least one of the [[lookup @name lowercase]]'s allies is
+      within 5 feet of the creature and the ally doesn't have the Incapacitated
+      condition.</p>
+    chat: ''
+  identifier: pack-tactics
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: Ally within 5 feet of attack target
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/abilities/wolf-heads-swirl-purple.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736285922053
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9400000
+ownership:
+  default: 0
+_key: '!items!mmPackTactics000'

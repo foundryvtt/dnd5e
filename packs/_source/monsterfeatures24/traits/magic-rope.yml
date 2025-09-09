@@ -1,0 +1,50 @@
+_id: mmMagicRope00000
+name: Magic Rope
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] has a magic rope. While
+      bearing it, the [[lookup @name lowercase]] can use the Entangling Rope
+      action. The rope has AC 20, HP 90, and Immunity to Poison and Psychic
+      damage. The rope turns to dust if reduced to 0 Hit Points, if it is 5+
+      feet away from the [[lookup @name lowercase]] for 1 hour or more, or if
+      the [[lookup @name lowercase]] dies. If the rope is damaged or destroyed,
+      the [[lookup @name lowercase]] can fully restore it when finishing a Short
+      or Long Rest.</p>
+    chat: ''
+  identifier: magic-rope
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/sundries/survival/rope-wrapped-purple.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736356724149
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 8600000
+ownership:
+  default: 0
+_key: '!items!mmMagicRope00000'

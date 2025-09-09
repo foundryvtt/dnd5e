@@ -1,0 +1,250 @@
+_id: mmOozeCube000000
+name: Ooze Cube
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    89uMXhpAg9x9P6dg:
+      type: utility
+      _id: 89uMXhpAg9x9P6dg
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Nqpxg74Yw9uEVMxQ
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Total Cover
+      img: ''
+      appliedEffects:
+        - Nqpxg74Yw9uEVMxQ
+    EcTOfXWsDJRHLydy:
+      type: check
+      _id: EcTOfXWsDJRHLydy
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '12'
+        ability: ''
+      name: Pull Check
+      img: ''
+      appliedEffects: []
+    PMCvyqxfUYiPzNK8:
+      type: damage
+      _id: PMCvyqxfUYiPzNK8
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: 6
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              number: 1
+      name: Puller Damage
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] fills its entire space
+      and is transparent. Other creatures can enter that space, but a creature
+      that does so is subjected to the [[lookup @name lowercase]]'s Engulf and
+      has Disadvantage on the saving throw.</p><p class="feature">Creatures
+      inside the [[lookup @name lowercase]] have &amp;Reference[Total Cover],
+      and the [[lookup @name lowercase]] can hold one Large creature or up to
+      four Medium or Small creatures inside itself at a time.</p><p
+      class="feature">As an action, a creature within [[lookup @range.value
+      activity=EcTOfXWsDJRHLydy]] [[lookup @range.units
+      activity=EcTOfXWsDJRHLydy]]. of the [[lookup @name lowercase]] can pull a
+      creature or an object out of the [[lookup @name lowercase]] by succeeding
+      on a [[/check dc=12 ability=str skill=ath format=long]], and the puller
+      takes [[/damage average activity=PMCvyqxfUYiPzNK8]] damage.</p>
+    chat: ''
+  identifier: ooze-cube
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/commodities/materials/glass-cube.webp
+effects:
+  - name: Total Cover
+    img: systems/dnd5e/icons/svg/statuses/cover-total.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmOozeCube000000
+    _id: Nqpxg74Yw9uEVMxQ
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>Creatures inside the attacking creature have Total Cover.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - coverTotal
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736290489388
+      modifiedTime: 1736290537932
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmOozeCube000000.Nqpxg74Yw9uEVMxQ'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1738084944391
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9300000
+ownership:
+  default: 0
+_key: '!items!mmOozeCube000000'

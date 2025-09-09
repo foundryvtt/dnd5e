@@ -1,0 +1,227 @@
+_id: mmInfernalTail00
+name: Infernal Tail
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    tJYeyUk3iPYJq9xM:
+      type: save
+      _id: tJYeyUk3iPYJq9xM
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '10'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '8'
+            bonus: '@mod'
+            types:
+              - necrotic
+        onSave: none
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: str
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects: []
+    zZfCQ0IeJZCjPLzE:
+      type: damage
+      _id: zZfCQ0IeJZCjPLzE
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: 6
+            bonus: ''
+            types: []
+            scaling:
+              number: 1
+      name: 'Target: HP Loss'
+      img: ''
+      appliedEffects: []
+    Y1gjsHGtpvAX7J6J:
+      type: check
+      _id: Y1gjsHGtpvAX7J6J
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - med
+        dc:
+          calculation: ''
+          formula: 8 + @mod + @prof
+        ability: ''
+      name: Stanch Wound Check
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=tJYeyUk3iPYJq9xM]], one [[lookup
+      @target.affects.type activity=tJYeyUk3iPYJq9xM]] the [[lookup @name
+      lowercase]] can see within [[lookup @range.value
+      activity=tJYeyUk3iPYJq9xM]] [[lookup @range.units
+      activity=tJYeyUk3iPYJq9xM]].</p><p class="feature"><em>Failure:</em>
+      [[/damage average activity=tJYeyUk3iPYJq9xM]] damage, and the target
+      receives an infernal wound if it doesn't have one. While wounded, the
+      target loses [[/damage average activity=zZfCQ0IeJZCjPLzE]] Hit Points at
+      the start of each of its turns. The wound closes after [[lookup
+      @duration.value activity=tJYeyUk3iPYJq9xM]] [[lookup @duration.units
+      activity=tJYeyUk3iPYJq9xM]], after a spell restores Hit Points to the
+      target, or after the target or a creature within 5 feet of it takes an
+      action to stanch the wound, doing so by succeeding on a [[/check dc=17
+      ability=wis skill=med format=long]].</p>
+    chat: ''
+  identifier: infernal-tail
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/creatures/abilities/tail-strike-bone-orange.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737592946845
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12900000
+ownership:
+  default: 0
+_key: '!items!mmInfernalTail00'

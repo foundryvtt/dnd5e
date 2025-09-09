@@ -1,0 +1,46 @@
+_id: mmIceWalk0000000
+name: Ice Walk
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] can move across and climb icy surfaces
+      without needing to make an ability check. Additionally,
+      &amp;Reference[Difficult Terrain] composed of ice or snow doesn't cost it
+      extra movement.</p>
+    chat: ''
+  identifier: ice-walk
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/water/water-iceberg-bubbles.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736378443790
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 6800000
+ownership:
+  default: 0
+_key: '!items!mmIceWalk0000000'

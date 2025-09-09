@@ -1,0 +1,334 @@
+_id: mmPetrifyingBite
+name: Petrifying Bite
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    ShppIfYgKgtWRJwX:
+      _id: ShppIfYgKgtWRJwX
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: ''
+        ability: str
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects: []
+    udF9lrpAQMvL0b9J:
+      type: save
+      _id: udF9lrpAQMvL0b9J
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 9dBgxzdq0cmzyhfR
+          onSave: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: First Save
+      img: ''
+      appliedEffects:
+        - 9dBgxzdq0cmzyhfR
+        - ScizgnitVoBvVzPx
+    iNhSZ04yZbleLcqc:
+      type: save
+      sort: 0
+      activation:
+        type: turnEnd
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: ScizgnitVoBvVzPx
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: Second Save
+      _id: iNhSZ04yZbleLcqc
+      img: ''
+      appliedEffects:
+        - ScizgnitVoBvVzPx
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]]. If
+      the target is a creature, it is subjected to the following effect.</p><p
+      class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=udF9lrpAQMvL0b9J]].</p><p
+      class="feature"><em>First Failure:</em> The target has the
+      &amp;Reference[Restrained apply=false] condition and repeats the save at
+      the end of its next turn if it is still Restrained, ending the effect on
+      itself on a success.</p><p class="feature"><em>Second Failure:</em> The
+      target has the &amp;Reference[Petrified apply=false] condition instead of
+      the Restrained condition.</p>
+    chat: ''
+  identifier: petrifying-bite
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 2
+      denomination: 8
+      types:
+        - piercing
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: 5
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/magic/defensive/armor-stone-skin.webp
+effects:
+  - name: Restrained
+    img: systems/dnd5e/icons/svg/items/weapon.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmPetrifyingBite
+    _id: 9dBgxzdq0cmzyhfR
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Restrained apply=false] condition and
+      repeats the save at the end of its next turn if it is still Restrained,
+      ending the effect on itself on a success.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - restrained
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736288308522
+      modifiedTime: 1736288355968
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmPetrifyingBite.9dBgxzdq0cmzyhfR'
+  - name: Petrified
+    img: systems/dnd5e/icons/svg/statuses/petrified.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmPetrifyingBite
+    _id: ScizgnitVoBvVzPx
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Petrified apply=false] condition
+      instead of the Restrained condition.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - petrified
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736288377490
+      modifiedTime: 1736288399279
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmPetrifyingBite.ScizgnitVoBvVzPx'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737820073271
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 14400000
+ownership:
+  default: 0
+_key: '!items!mmPetrifyingBite'

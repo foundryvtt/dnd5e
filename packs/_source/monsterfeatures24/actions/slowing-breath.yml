@@ -1,0 +1,166 @@
+_id: mmSlowingBreath0
+name: Slowing Breath
+type: feat
+img: icons/magic/movement/abstract-ribbons-red-orange.webp
+system:
+  activities:
+    teMMQNDDIE9XkPN3:
+      type: save
+      _id: teMMQNDDIE9XkPN3
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: ztGUDHGfoUxlUY53
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: cone
+          size: '30'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=teMMQNDDIE9XkPN3]], each creature in a [[lookup
+      @target.template.size activity=teMMQNDDIE9XkPN3]]-foot Cone.</p><p
+      class="feature"><em>Failure:</em> The target can't take Reactions; its
+      Speed is halved; and it can take either an action or a Bonus Action on its
+      turn, not both. This effect lasts until the end of its next turn.</p>
+    chat: ''
+  identifier: slowing-breath
+  source:
+    revision: 1
+    rules: '2024'
+  advancement: []
+  cover: null
+  crewed: false
+  enchant: {}
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  type:
+    value: ''
+    subtype: ''
+effects:
+  - name: 1/2 Speed | Action Restrictions
+    img: icons/magic/movement/abstract-ribbons-red-orange.webp
+    origin: Item.mmSlowingBreath0
+    _id: ztGUDHGfoUxlUY53
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 1
+        value: '0.5'
+        priority: null
+      - key: system.attributes.movement.burrow
+        mode: 1
+        value: '0.5'
+        priority: null
+      - key: system.attributes.movement.climb
+        mode: 1
+        value: '0.5'
+        priority: null
+      - key: system.attributes.movement.fly
+        mode: 1
+        value: '0.5'
+        priority: null
+      - key: system.attributes.movement.swim
+        mode: 1
+        value: '0.5'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target can’t take Reactions; its Speed is halved; and it can take
+      either an action or a Bonus Action on its turn, not both. This effect
+      lasts until the end of its next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.2
+      createdTime: null
+      modifiedTime: 1738018796931
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmSlowingBreath0.ztGUDHGfoUxlUY53'
+folder: 4T18pEvubPMQLzvD
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1738018586207
+  modifiedTime: 1738018586207
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!mmSlowingBreath0'

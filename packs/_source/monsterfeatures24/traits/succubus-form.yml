@@ -1,0 +1,119 @@
+_id: mmSuccubusForm00
+name: Succubus Form
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    t0iCIk7tfwvsOkXE:
+      type: summon
+      _id: t0iCIk7tfwvsOkXE
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: '1'
+          name: Succubus
+          _id: d6zyg32jelvg06Iq
+          uuid: Compendium.dnd5e.actors24.Actor.mmSuccubus000000
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: false
+        mode: ''
+        identifier: ''
+      name: 'Shape-Shift: Succubus'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">When the [[lookup @name lowercase]] finishes a Long
+      Rest, it can shape-shift into a
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmSuccubus000000]{Succubus}</strong>,
+      using that stat block instead of this one. Any equipment it is wearing or
+      carrying isn't transformed.</p>
+    chat: ''
+  identifier: succubus-form
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/unholy/silhouette-light-fire-blue.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737648951924
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12200000
+ownership:
+  default: 0
+_key: '!items!mmSuccubusForm00'

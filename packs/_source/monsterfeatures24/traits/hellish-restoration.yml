@@ -1,0 +1,98 @@
+_id: mmHellishRestora
+name: Hellish Restoration
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    aIkY2fb7N8SFgV2z:
+      type: utility
+      _id: aIkY2fb7N8SFgV2z
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: 'Revive: Days'
+        formula: 1d10
+      name: 'Revive: Days'
+      img: systems/dnd5e/icons/svg/monster.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">If the [[lookup @name lowercase]] dies in the Nine
+      Hells, it revives with all its Hit Points in [[/r 1d10]] days unless it is
+      killed by a creature under the effects of a
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplBless00000]{Bless}</em>
+      spell or its remains are sprinkled with Holy Water.</p>
+    chat: ''
+  identifier: hellish-restoration
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/unholy/demon-fire-imp.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736379790438
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 6600000
+ownership:
+  default: 0
+_key: '!items!mmHellishRestora'

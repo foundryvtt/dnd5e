@@ -1,0 +1,98 @@
+_id: mmParry000000000
+name: Parry
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    aLG3BRZL7P6OEjwd:
+      type: utility
+      name: Use
+      _id: aLG3BRZL7P6OEjwd
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: hit by a melee attack roll while holding a weapon
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: Bonus AC
+        formula: '2'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Trigger:</em> The [[lookup @name lowercase]] is [[lookup
+      @activation.condition activity=aLG3BRZL7P6OEjwd]]. <em>Response:</em> The
+      [[lookup @name lowercase]] adds [[lookup @roll.formula
+      activity=aLG3BRZL7P6OEjwd]] to its AC against that attack, possibly
+      causing it to miss.</p>
+    chat: ''
+  identifier: parry
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/skills/melee/swords-parry-block-blue.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1733956678342
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!mmParry000000000'

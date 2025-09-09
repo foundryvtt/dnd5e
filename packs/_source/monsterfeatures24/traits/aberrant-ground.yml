@@ -1,0 +1,100 @@
+_id: mmAberrantGround
+name: Aberrant Ground
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    zVznqPXgYjETqpQz:
+      type: utility
+      name: Place Emanation
+      _id: zVznqPXgYjETqpQz
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: perm
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '10'
+          count: ''
+        affects:
+          choice: false
+          type: space
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The ground in a [[lookup @target.template.size
+      activity=zVznqPXgYjETqpQz]]-foot Emanation originating from the [[lookup
+      @name]] is &amp;Reference[Difficult Terrain].</p>
+    chat: ''
+  identifier: aberrant-ground
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/earth/barrier-stone-explosion-red.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737061272497
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 300000
+ownership:
+  default: 0
+_key: '!items!mmAberrantGround'

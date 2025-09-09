@@ -1,0 +1,319 @@
+_id: mmDrainingSwipe0
+name: Draining Swipe
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    pZ84SpChkTN52eO6:
+      _id: pZ84SpChkTN52eO6
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: 'On Hit: Target''s STR score decreases'
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: dex
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects: []
+    uwBYwkQjnw2cneUA:
+      type: summon
+      _id: uwBYwkQjnw2cneUA
+      sort: 200000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: 7E2SMjypDSbFmZvc
+          uuid: Compendium.dnd5e.actors24.Actor.mmShadow00000000
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: false
+        mode: ''
+        identifier: ''
+      name: Shadow Rises
+      img: ''
+      appliedEffects: []
+    beBWDXe2W3AZYlS3:
+      type: utility
+      _id: beBWDXe2W3AZYlS3
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 6AjyMN83LppkkgC3
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: true
+        name: 'Decrease: STR Score'
+        formula: 1d4
+      name: STR Score -1d4
+      img: systems/dnd5e/icons/svg/monster.svg
+      appliedEffects:
+        - 6AjyMN83LppkkgC3
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]], and
+      the target's Strength score decreases by [[/r 1d4]]. The target dies if
+      this reduces that score to 0. If a Humanoid is slain by this attack, a
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmShadow00000000]{Shadow}</strong>
+      rises from the corpse [[/r 1d4]] hours later.</p><section
+      id="secret-qqwbOYJqDuTP2N5e" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature provides an Active Effect in the Effects
+      Tab to modify the target PC's Strength Score. Since this Strength
+      reduction can be applied multiple times, the GM must drag the Active
+      Effect in this item's Effect tab onto the PC's character sheet. From
+      there, the GM must navigate to the Effects tab on the PC's sheet to modify
+      the Effect Value preceded by the negative symbol, e.g., -3. Presently, it
+      is set at -1.</p></section>
+    chat: ''
+  identifier: draining-swipe
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      types:
+        - necrotic
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: 5
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/magic/unholy/hand-claw-fire-blue.webp
+effects:
+  - name: 'Hit: STR Score -1d4'
+    img: icons/magic/unholy/hand-claw-fire-blue.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmDrainingSwipe0
+    _id: 6AjyMN83LppkkgC3
+    type: base
+    system: {}
+    changes:
+      - key: system.abilities.str.value
+        mode: 2
+        value: '-1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>The target’s Strength score decreases by [[/r 1d4]].</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags:
+      dae:
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+        enableCondition: ''
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736473659773
+      modifiedTime: 1736988822595
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmDrainingSwipe0.6AjyMN83LppkkgC3'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736988950461
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7200000
+ownership:
+  default: 0
+_key: '!items!mmDrainingSwipe0'

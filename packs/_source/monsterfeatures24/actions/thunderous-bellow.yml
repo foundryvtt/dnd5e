@@ -1,0 +1,177 @@
+_id: mmThunderousBell
+name: Thunderous Bellow
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    RWBqtTjGSlEgQWCl:
+      type: save
+      _id: RWBqtTjGSlEgQWCl
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: DDrzXcjt2wWiTS9J
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '150'
+          count: ''
+        affects:
+          choice: false
+          type: creatureOrObject
+          count: ''
+          special: each creature and each object that isn’t being worn or carried
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 12
+            denomination: 12
+            bonus: ''
+            types:
+              - thunder
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - con
+        dc:
+          calculation: ''
+          formula: '27'
+      name: Save
+      img: ''
+      appliedEffects:
+        - DDrzXcjt2wWiTS9J
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=RWBqtTjGSlEgQWCl]], [[lookup
+      @target.affects.special activity=RWBqtTjGSlEgQWCl]] in a [[lookup
+      @target.template.size activity=RWBqtTjGSlEgQWCl]]-[[lookup
+      @target.template.units activity=RWBqtTjGSlEgQWCl]]. [[lookup
+      @target.template.type capitalize activity=RWBqtTjGSlEgQWCl]].</p><p
+      class="feature"><em>Failure:</em> [[/damage average]] damage, and the
+      target has the &amp;Reference[Deafened apply=false] and
+      &amp;Reference[Frightened apply=false] conditions until the end of its
+      next turn.</p><p class="feature"><em>Success:</em> Half damage only.</p>
+    chat: ''
+  identifier: thunderous-bellow
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/sonic/explosion-shock-sound-wave.webp
+effects:
+  - name: Deafened & Frightened
+    img: systems/dnd5e/icons/svg/statuses/deafened.svg
+    origin: Item.mmThunderousBell
+    _id: DDrzXcjt2wWiTS9J
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Deafened apply=false] and
+      &amp;Reference[Frightened apply=false] conditions until the end of its
+      next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - deafened
+      - frightened
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736124516131
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmThunderousBell.DDrzXcjt2wWiTS9J'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1738098811458
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 22300000
+ownership:
+  default: 0
+_key: '!items!mmThunderousBell'

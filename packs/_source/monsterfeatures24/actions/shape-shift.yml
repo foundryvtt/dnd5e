@@ -1,0 +1,99 @@
+_id: mmShapeshift0000
+name: Shape-Shift
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    EU2q25V5hIaM1ZlR:
+      type: utility
+      name: Expend Use
+      _id: EU2q25V5hIaM1ZlR
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: disp
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: '{Size} {creature}-humanoid hybrid form or a {Size} {creature}'
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/monster.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] shape-shifts into a
+      [[lookup @target.affects.special activity=EU2q25V5hIaM1ZlR]], or it
+      returns to its true humanoid form, or it returns to its true form. Its
+      game statistics, other than its size, are the same in each form. Any
+      equipment it is wearing or carrying isn't transformed.</p>
+    chat: ''
+  identifier: shape-shift
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/control/silhouette-grow-shrink-tan.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737824645812
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 19700000
+ownership:
+  default: 0
+_key: '!items!mmShapeshift0000'

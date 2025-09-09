@@ -1,0 +1,147 @@
+_id: mmPoisonBurst000
+name: Poison Burst
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    am9XxYZtSyBqs4RM:
+      _id: am9XxYZtSyBqs4RM
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: ''
+        ability: str
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: <p class="feature">[[/attack extended]]. [[/damage average extended]].</p>
+    chat: ''
+  identifier: poison-burst
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 3
+      denomination: 6
+      types:
+        - poison
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: 120
+    long: null
+    reach: null
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/magic/acid/projectile-faceted-glob.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736286425344
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 14800000
+ownership:
+  default: 0
+_key: '!items!mmPoisonBurst000'

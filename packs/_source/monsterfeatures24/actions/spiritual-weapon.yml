@@ -1,0 +1,101 @@
+_id: mmSpiritualWeapo
+name: Spiritual Weapon
+type: feat
+img: icons/weapons/axes/axe-double-gold.webp
+system:
+  activities:
+    X8EhZV0KcZv64V4J:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplSpiritualW
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties: []
+        spellbook: true
+        ability: ''
+      _id: X8EhZV0KcZv64V4J
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: day
+        type: recoverAll
+    max: '2'
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] casts the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplSpiritualW]{Spiritual
+      Weapon}</em> spell, using the same spellcasting ability as
+      Spellcasting.</p>
+    chat: ''
+  identifier: spiritual-weapon
+  source:
+    revision: 1
+    rules: '2024'
+  advancement: []
+  enchant: {}
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  type:
+    value: ''
+    subtype: ''
+effects: []
+folder: 4T18pEvubPMQLzvD
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1737483175848
+  modifiedTime: 1737515542020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 400000
+ownership:
+  default: 0
+_key: '!items!mmSpiritualWeapo'

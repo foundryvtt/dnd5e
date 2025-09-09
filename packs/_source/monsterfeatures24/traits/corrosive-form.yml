@@ -1,0 +1,159 @@
+_id: mmCorrosiveForm0
+name: Corrosive Form
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    OzlTY1z1gup4C2Qq:
+      type: damage
+      _id: OzlTY1z1gup4C2Qq
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '8'
+            bonus: ''
+            types:
+              - acid
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">A creature that hits the [[lookup @name lowercase]]
+      with a melee attack roll takes [[/damage average]] damage. Nonmagical
+      ammunition is destroyed immediately after hitting the [[lookup @name
+      lowercase]] and dealing any damage. Any nonmagical weapon takes a
+      cumulative −1 penalty to attack rolls immediately after dealing damage to
+      the [[lookup @name lowercase]] and coming into contact with it. The weapon
+      is destroyed if the penalty reaches −5. The penalty can be removed by
+      casting the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMending000]{Mending}</em>
+      spell on the weapon.</p><p class="feature">In 1 minute, the [[lookup @name
+      lowercase]] can eat through 2 feet of nonmagical wood or
+      metal.</p><section id="secret-NtgKYdQoCuiAaxOa"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      provides an <strong>Attack Penalty</strong> active effect that will modify
+      a targeted weapon. Since this penalty can be applied multiple times to
+      multiple nonmagical weapons, this active effect needs to be dragged from
+      this item's Effect tab onto the target Item's weapons.</p></section>
+    chat: ''
+  identifier: corrosive-form
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/skills/melee/sword-damaged-broken-purple.webp
+effects:
+  - type: enchantment
+    name: 'Damaged: -1 Attack'
+    img: icons/skills/melee/sword-damaged-broken-purple.webp
+    disabled: true
+    _id: caD7IB1k2XLnkUDS
+    system: {}
+    changes:
+      - key: activities[attack].attack.bonus
+        mode: 2
+        value: '-1'
+        priority: null
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Any nonmagical weapon takes a cumulative −1 penalty to attack rolls
+      immediately after dealing damage to the attacking creature and coming into
+      contact with it.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736980346109
+      modifiedTime: 1736980388349
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmCorrosiveForm0.caD7IB1k2XLnkUDS'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736980492457
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 3100000
+ownership:
+  default: 0
+_key: '!items!mmCorrosiveForm0'

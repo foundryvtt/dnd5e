@@ -1,0 +1,127 @@
+_id: mmAcidSpray00000
+name: Acid Spray
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    20GU2JBM5zJfNPD1:
+      type: save
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: line
+          size: '30'
+          count: ''
+          width: '5'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 6
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: con
+          formula: ''
+      name: ''
+      _id: 20GU2JBM5zJfNPD1
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '6'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p><em>Dexterity Saving Throw: </em>DC [[lookup @save.dc.value
+      activity=20GU2JBM5zJfNPD1]], each [[lookup @target.affects.type
+      activity=20GU2JBM5zJfNPD1]] in a [[lookup @target.template.size
+      activity=20GU2JBM5zJfNPD1]]-[[lookup @target.template.units
+      activity=20GU2JBM5zJfNPD1]]-long, [[lookup @target.template.width
+      activity=20GU2JBM5zJfNPD1]]-[[lookup @target.template.units
+      activity=20GU2JBM5zJfNPD1]]-wide [[lookup @target.template.type capitalize
+      activity=20GU2JBM5zJfNPD1]]. <em>Failure: </em>[[/damage average]] damage.
+      <em>Success:</em> Half damage.</p>
+    chat: ''
+  identifier: acid-spray
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/acid/projectile-needles-salvo-green.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1738096017760
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1800000
+ownership:
+  default: 0
+_key: '!items!mmAcidSpray00000'

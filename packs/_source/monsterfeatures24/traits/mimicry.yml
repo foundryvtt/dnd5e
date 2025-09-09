@@ -1,0 +1,98 @@
+_id: mmMimicry0000000
+name: Mimicry
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    QY46N3x1OIBN2Bu1:
+      type: check
+      _id: QY46N3x1OIBN2Bu1
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - ins
+        dc:
+          calculation: ''
+          formula: '14'
+        ability: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] can mimic simple sounds
+      it has heard, such as a whisper or chitter. A hearer can discern the
+      sounds are imitations with a successful [[/check format=long]].</p>
+    chat: ''
+  identifier: mimicry
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/birds/corvid-call-sound-blue.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1738011199545
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 8800000
+ownership:
+  default: 0
+_key: '!items!mmMimicry0000000'

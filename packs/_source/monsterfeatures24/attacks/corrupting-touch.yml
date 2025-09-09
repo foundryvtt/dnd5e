@@ -1,0 +1,124 @@
+_id: mmCorruptingTouc
+name: Corrupting Touch
+type: weapon
+system:
+  type:
+    value: natural
+    subtype: ''
+  activities:
+    RipZIpQfSI2dBv2W:
+      type: attack
+      _id: RipZIpQfSI2dBv2W
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+        ability: cha
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 8
+            bonus: '@mod'
+            types: []
+            scaling:
+              number: 1
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: <p>[[/attack extended]]. [[/damage average extended]].</p>
+    chat: ''
+  identifier: corrupting-touch
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+  mastery: ''
+  range:
+    units: ''
+    value: null
+    long: null
+    reach: 5
+  damage:
+    base:
+      denomination: null
+      bonus: ''
+      number: null
+folder: pSCWWdqMX9eUATRJ
+img: icons/magic/death/hand-withered-gray.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.347'
+  systemId: dnd5e
+  systemVersion: 5.1.2
+  createdTime: 1733432292956
+  modifiedTime: 1756395634729
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 3050000
+ownership:
+  default: 0
+_key: '!items!mmCorruptingTouc'

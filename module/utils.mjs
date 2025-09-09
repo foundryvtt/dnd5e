@@ -726,7 +726,7 @@ export function isValidUnit(unit) {
  * @returns {any}       The parsed value, or the original value if it was not serialized JSON.
  */
 export function parseOrString(raw) {
-  try { return JSON.parse(raw); } catch {}
+  try { return JSON.parse(raw); } catch(err) {}
   return raw;
 }
 

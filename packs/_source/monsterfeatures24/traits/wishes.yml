@@ -1,0 +1,106 @@
+_id: mmWishes00000000
+name: Wishes
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    A8OOJwSm8E8QPzkX:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplWish000000
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '9'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+      _id: A8OOJwSm8E8QPzkX
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Cast Wish
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: '3'
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] has a [[/r
+      1d100cs&lt;31#Knows Wish on 1]]{30 percent} chance of knowing the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish}</em>
+      spell. If the [[lookup @name lowercase]] knows it, the [[lookup @name
+      lowercase]] can cast it only on behalf of a non-genie creature who
+      communicates a wish in a way the [[lookup @name lowercase]] can
+      understand. If the [[lookup @name lowercase]] casts the spell for the
+      creature, the [[lookup @name lowercase]] suffers none of the spell's
+      stress. Once the [[lookup @name lowercase]] has cast it three times, the
+      [[lookup @name lowercase]] can't do so again for 365 days.</p>
+    chat: <p>[[/r 1d100cs&lt;31#Knows Wish on 1]]{30 percent}</p>
+  identifier: wishes
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/symbols/star-solid-gold.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737073657163
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 14600000
+ownership:
+  default: 0
+_key: '!items!mmWishes00000000'

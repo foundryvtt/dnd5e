@@ -1,0 +1,171 @@
+_id: mmWhirlwind00000
+name: Whirlwind
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    GQzr4EMMm6kkZVdC:
+      type: save
+      _id: GQzr4EMMm6kkZVdC
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: 'On Failure: Target is pushed 20 feet back.'
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: qihlGD6RZ55pZY9n
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '0'
+      target:
+        template:
+          contiguous: false
+          units: ''
+          type: ''
+          size: ''
+          count: ''
+          width: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: Must be in the creature's space
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: '10'
+            bonus: ''
+            types:
+              - thunder
+        onSave: half
+      save:
+        ability:
+          - str
+        dc:
+          calculation: ''
+          formula: '13'
+      name: Save
+      img: ''
+      appliedEffects:
+        - qihlGD6RZ55pZY9n
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '4'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=GQzr4EMMm6kkZVdC]], each Medium or smaller
+      [[lookup @target.affects.type activity=GQzr4EMMm6kkZVdC]] in the [[lookup
+      @name lowercase]]'s space. <em>Failure:</em> [[/damage average]] damage,
+      and the target is pushed up to 20 feet straight away from the [[lookup
+      @name lowercase]] and has the &amp;Reference[Prone apply=false] condition.
+      <em>Success:</em> Half damage only.</p>
+    chat: ''
+  identifier: whirlwind
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/air/wind-tornado-wall-blue.webp
+effects:
+  - name: Prone
+    img: systems/dnd5e/icons/svg/statuses/prone.svg
+    origin: Item.mmWhirlwind00000
+    _id: qihlGD6RZ55pZY9n
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target is pushed up to 20-ft. straight away from the attacking
+      creature and has the &amp;Reference[Prone apply=false] condition.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - prone
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736140468841
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmWhirlwind00000.qihlGD6RZ55pZY9n'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737515542020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 24700000
+ownership:
+  default: 0
+_key: '!items!mmWhirlwind00000'

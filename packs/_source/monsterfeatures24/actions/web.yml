@@ -1,0 +1,160 @@
+_id: mmWeb00000000000
+name: Web
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    6iMoUgxwYlvfKTXr:
+      type: save
+      _id: 6iMoUgxwYlvfKTXr
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: fihuYABujdt7o9uo
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: dex
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - fihuYABujdt7o9uo
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature"><em>Dexterity Saving Throw</em>: DC [[lookup
+      @save.dc.value activity=6iMoUgxwYlvfKTXr]], one creature the [[lookup
+      @name lowercase]] can see within [[lookup @range.value
+      activity=6iMoUgxwYlvfKTXr]] feet.</p><p class="feature"><em>Failure</em>:
+      The target has the &amp;Reference[Restrained apply=false] condition until
+      the web is destroyed (AC 10; HP 5; Vulnerability to Fire damage; Immunity
+      to Poison and Psychic damage).</p>
+    chat: ''
+  identifier: web
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/creatures/webs/web-thin-pruple.webp
+effects:
+  - name: Restrained
+    img: systems/dnd5e/icons/svg/statuses/restrained.svg
+    origin: Item.mmWeb00000000000
+    _id: fihuYABujdt7o9uo
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Restrained apply] condition until the
+      web is destroyed.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - restrained
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736139734846
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmWeb00000000000.fihuYABujdt7o9uo'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737995260722
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 24300000
+ownership:
+  default: 0
+_key: '!items!mmWeb00000000000'

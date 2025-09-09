@@ -1,0 +1,161 @@
+_id: mmFlameSpear0000
+name: Flame Spear
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: spear
+  activities:
+    s066Mk4LF1hYNdhB:
+      _id: s066Mk4LF1hYNdhB
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: str
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: '6'
+            bonus: ''
+            types:
+              - fire
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]].
+      <em>Hit or Miss:</em> The spear magically returns to the [[lookup @name
+      lowercase]]'s hand immediately after a ranged attack.</p>
+    chat: ''
+  identifier: flame-spear
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 2
+      denomination: 8
+      types:
+        - piercing
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  magicalBonus: null
+  properties:
+    - ret
+    - thr
+  proficient: null
+  range:
+    value: 20
+    long: 60
+    reach: null
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/magic/fire/projectile-arrow-fire-orange.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737153289590
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9200000
+ownership:
+  default: 0
+_key: '!items!mmFlameSpear0000'

@@ -29,7 +29,7 @@ export default class AdvancementTemplate extends SystemDataModel {
    */
   async preCreateAdvancement(data, options) {
     if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
-    const toCreate = this._advancementToCreate(options)
+    const toCreate = this._advancementToCreate(options);
     if ( toCreate.length ) this.parent.updateSource({
       "system.advancement": toCreate.map(c => {
         const config = CONFIG.DND5E.advancementTypes[c.type];

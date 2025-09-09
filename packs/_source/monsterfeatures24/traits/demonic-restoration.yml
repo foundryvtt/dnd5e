@@ -1,0 +1,44 @@
+_id: mmDemonicRestora
+name: Demonic Restoration
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>If the [[lookup @name lowercase]] dies outside the Abyss, its body
+      dissolves into ichor, and it gains a new body instantly, reviving with all
+      its Hit Points somewhere in the Abyss.</p>
+    chat: ''
+  identifier: demonic-restoration
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: Dies outside the Abyss
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/slimes/bubbling-purple.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1733955333321
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 3500000
+ownership:
+  default: 0
+_key: '!items!mmDemonicRestora'

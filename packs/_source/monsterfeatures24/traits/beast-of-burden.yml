@@ -1,0 +1,81 @@
+_id: mmBeastOfBurden0
+name: Beast of Burden
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] counts as one size larger for the
+      purpose of determining its carrying capacity.</p>
+    chat: ''
+  identifier: beast-of-burden
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/containers/bags/pack-leather-brown.webp
+effects:
+  - name: Beast of Burden
+    img: icons/containers/bags/pack-leather-brown.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmBeastOfBurden0
+    _id: VW9jjwa34EHjrXBB
+    type: base
+    system: {}
+    changes:
+      - key: flags.dnd5e.powerfulBuild
+        mode: 5
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1734986043841
+      modifiedTime: 1734986488744
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmBeastOfBurden0.VW9jjwa34EHjrXBB'
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1734986469363
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1800000
+ownership:
+  default: 0
+_key: '!items!mmBeastOfBurden0'

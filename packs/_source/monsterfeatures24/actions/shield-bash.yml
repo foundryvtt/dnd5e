@@ -1,0 +1,163 @@
+_id: mmShieldBash0000
+name: Shield Bash
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    eIErvLccVVCXiCSl:
+      type: save
+      _id: eIErvLccVVCXiCSl
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: tlJPRZtTipMsmBRa
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: '4'
+            bonus: '@mod'
+            types:
+              - bludgeoning
+        onSave: none
+      save:
+        ability:
+          - str
+        dc:
+          calculation: str
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - tlJPRZtTipMsmBRa
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=eIErvLccVVCXiCSl]], one [[lookup
+      @target.affects.type activity=eIErvLccVVCXiCSl]] within [[lookup
+      @range.value activity=eIErvLccVVCXiCSl]] [[lookup @range.units
+      activity=eIErvLccVVCXiCSl]]. that the [[lookup @name lowercase]] can see.
+      <em>Failure:</em> [[/damage average]] damage. If the target is a Medium or
+      smaller creature, it has the &amp;Reference[Prone apply=false]
+      condition.</p>
+    chat: ''
+  identifier: shield-bash
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/equipment/shield/buckler-iron-cross-gray.webp
+effects:
+  - name: Prone
+    img: systems/dnd5e/icons/svg/statuses/prone.svg
+    origin: Item.mmShieldBash0000
+    _id: tlJPRZtTipMsmBRa
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>If the target is a Medium or smaller creature, it has the
+      &amp;Reference[Prone apply=false] condition.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - prone
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736114679142
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmShieldBash0000.tlJPRZtTipMsmBRa'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737515542020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 19800000
+ownership:
+  default: 0
+_key: '!items!mmShieldBash0000'

@@ -1,0 +1,203 @@
+_id: mmWhirlwindOfSan
+name: Whirlwind of Sand
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    EsBmMUQMO4b0g6Yw:
+      type: utility
+      _id: EsBmMUQMO4b0g6Yw
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: The attacking creature is hit by an attack roll
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Xy0tzgObrMRF2lHm
+        - _id: MMp7IK5bYYPYtSdL
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: circle
+          size: '5'
+          width: ''
+          count: ''
+        affects:
+          choice: false
+          type: self
+          special: to an unoccupied space it can see
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Trigger:</em> The [[lookup @name lowercase]] is hit
+      by an attack roll. <em>Response:</em> The [[lookup @name lowercase]] adds
+      2 to its AC against the attack, possibly causing the attack to miss, and
+      the [[lookup @name lowercase]] teleports up to [[lookup @range.value
+      activity=EsBmMUQMO4b0g6Yw]] [[lookup @range.units
+      activity=EsBmMUQMO4b0g6Yw]]. [[lookup @target.affects.special
+      activity=EsBmMUQMO4b0g6Yw]]. Each creature of its choice that it can see
+      within [[lookup @target.template.size activity=EsBmMUQMO4b0g6Yw]] [[lookup
+      @target.template.units activity=EsBmMUQMO4b0g6Yw]]. of its destination
+      space has the &amp;Reference[Blinded apply=false] condition until the end
+      of the [[lookup @name lowercase]]'s next turn.</p>
+    chat: ''
+  identifier: whirlwind-of-sand
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/air/air-wave-gust-smoke-yellow.webp
+effects:
+  - name: +2 AC
+    img: icons/magic/air/air-wave-gust-smoke-yellow.webp
+    origin: Item.mmWhirlwindOfSan
+    _id: Xy0tzgObrMRF2lHm
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: true
+    duration:
+      startTime: 0
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The attacking creature adds 2 to its AC against the attack, possibly
+      causing the attack to miss.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dae:
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+        enableCondition: ''
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737798761439
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmWhirlwindOfSan.Xy0tzgObrMRF2lHm'
+  - name: Blinded
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    origin: Item.mmWhirlwindOfSan
+    _id: MMp7IK5bYYPYtSdL
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Each creature of the attacking creature's choice that it can see within
+      5 ft. of its destination space has the &amp;Reference[Blinded apply=long]
+      condition until the end of the attacking creature's next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - blinded
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737798772534
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmWhirlwindOfSan.MMp7IK5bYYPYtSdL'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737515542020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 24800000
+ownership:
+  default: 0
+_key: '!items!mmWhirlwindOfSan'

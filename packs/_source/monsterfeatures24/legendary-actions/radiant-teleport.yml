@@ -1,0 +1,118 @@
+_id: mmRadiantTelepor
+name: Radiant Teleport
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    HtsFBK1PYKjvy9mn:
+      type: save
+      _id: HtsFBK1PYKjvy9mn
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '10'
+          count: ''
+        affects:
+          choice: false
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 10
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: ''
+          formula: '25'
+      name: Save
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] teleports up to [[lookup
+      @range.value activity=HtsFBK1PYKjvy9mn]] feet to an unoccupied space it
+      can see.</p><p class="feature"><em>Dexterity Saving Throw:</em> DC
+      [[lookup @save.dc.value activity=HtsFBK1PYKjvy9mn]], each creature in a
+      [[lookup @target.template.size activity=HtsFBK1PYKjvy9mn]]-foot Emanation
+      originating from the [[lookup @name lowercase]] at its destination
+      space.</p><p class="feature"><em>Failure:</em> [[/damage average]]
+      damage.</p><p class="feature"><em>Success:</em> Half damage.</p>
+    chat: ''
+  identifier: radiant-teleport
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/light/explosion-star-glow-silhouette.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1738098603569
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 3800000
+ownership:
+  default: 0
+_key: '!items!mmRadiantTelepor'

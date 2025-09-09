@@ -1,0 +1,197 @@
+_id: mmInfernalSting0
+name: Infernal Sting
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    nc4l1efsfjkTcPyT:
+      _id: nc4l1efsfjkTcPyT
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 96f41YwmHtjW8P0o
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: '8'
+            bonus: ''
+            types:
+              - poison
+      name: ''
+      img: ''
+      appliedEffects:
+        - 96f41YwmHtjW8P0o
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]], and
+      the target has the &amp;Reference[Poisoned apply=false] condition until
+      the start of the [[lookup @name lowercase]]'s next turn. While Poisoned,
+      the target can't regain Hit Points.</p>
+    chat: ''
+  identifier: infernal-sting
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 2
+      denomination: 10
+      types:
+        - piercing
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: 10
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/commodities/biological/stinger-insect-brown.webp
+effects:
+  - name: Poisoned
+    img: systems/dnd5e/icons/svg/statuses/poisoned.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmInfernalSting0
+    _id: 96f41YwmHtjW8P0o
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>the target has the &amp;Reference[Poisoned apply=false] condition until
+      the start of the attacking creature’s next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - poisoned
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736372344990
+      modifiedTime: 1736372428603
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmInfernalSting0.96f41YwmHtjW8P0o'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736372490207
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12500000
+ownership:
+  default: 0
+_key: '!items!mmInfernalSting0'

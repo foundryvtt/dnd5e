@@ -1,0 +1,362 @@
+_id: mmCovenMagic0000
+name: Coven Magic
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    8ju3sHk7cBC4KmcD:
+      type: cast
+      _id: 8ju3sHk7cBC4KmcD
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: lr
+            type: recoverAll
+        max: '1'
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplAugury0000
+        ability: int
+      name: ''
+      img: ''
+    tFMa0R3ASrW58hwK:
+      type: cast
+      _id: tFMa0R3ASrW58hwK
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: lr
+            type: recoverAll
+        max: '1'
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFindFamili
+        ability: int
+      name: ''
+      img: ''
+    vT617J2KBufcrx7f:
+      type: cast
+      _id: vT617J2KBufcrx7f
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: lr
+            type: recoverAll
+        max: '1'
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplIdentify00
+        ability: int
+      name: ''
+      img: ''
+    N6ny9K2f4ckcSvXq:
+      type: cast
+      _id: N6ny9K2f4ckcSvXq
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: lr
+            type: recoverAll
+        max: '1'
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplLocateObje
+        ability: int
+      name: ''
+      img: ''
+    1LYa3YdeNryXGv4z:
+      type: cast
+      _id: 1LYa3YdeNryXGv4z
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: lr
+            type: recoverAll
+        max: '1'
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplScrying000
+        ability: int
+      name: ''
+      img: ''
+    IsLR26jWhhHrcdgh:
+      type: cast
+      _id: IsLR26jWhhHrcdgh
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: lr
+            type: recoverAll
+        max: '1'
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplUnseenServ
+        ability: int
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">While within 30 feet of at least two hag allies, the
+      [[lookup @name lowercase]] can cast one of the following spells, requiring
+      no Material components, using the spell's normal casting time, and using
+      Intelligence as the spellcasting ability (spell save DC [[lookup
+      @abilities.int.dc]]):
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplAugury0000]{Augury}</em>,
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFindFamili]{Find
+      Familiar}</em>,
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplIdentify00]{Identify}</em>,
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLocateObje]{Locate
+      Object}</em>,
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplScrying000]{Scrying}</em>,
+      or
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplUnseenServ]{Unseen
+      Servant}</em>. The [[lookup @name lowercase]] must finish a Long Rest
+      before using this trait to cast that spell again.</p>
+    chat: ''
+  identifier: coven-magic
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/skills/toxins/cauldron-bubbles-overflow-green.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736880663558
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 3200000
+ownership:
+  default: 0
+_key: '!items!mmCovenMagic0000'

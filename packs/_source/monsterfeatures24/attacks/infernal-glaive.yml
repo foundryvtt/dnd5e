@@ -1,0 +1,296 @@
+_id: mmInfernalGlaive
+name: Infernal Glaive
+type: weapon
+system:
+  type:
+    value: martialM
+    baseItem: glaive
+  activities:
+    QV1oMxksn8BT14zw:
+      _id: QV1oMxksn8BT14zw
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+    4qy3fKL086OAE1xR:
+      type: save
+      _id: 4qy3fKL086OAE1xR
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: ''
+          formula: '12'
+      name: ''
+      img: ''
+      appliedEffects: []
+    IS4utGV80LpDrjvt:
+      type: damage
+      _id: IS4utGV80LpDrjvt
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '10'
+            bonus: ''
+            types: []
+      name: 'Damage: Infernal Wound'
+      img: systems/dnd5e/icons/svg/activity/damage.svg
+      appliedEffects: []
+    KNWa0TFhANjmQCds:
+      type: check
+      _id: KNWa0TFhANjmQCds
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - med
+        dc:
+          calculation: ''
+          formula: '12'
+        ability: ''
+      name: 'Check: Stanch Wound'
+      img: systems/dnd5e/icons/svg/hit-points.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]]. If
+      the target is a creature and doesn't already have an infernal wound, it is
+      subjected to the following effect. <em>Constitution Saving Throw:</em> DC
+      [[lookup @save.dc.value activity=4qy3fKL086OAE1xR]]. <em>Failure:</em> The
+      target receives an infernal wound. While wounded, the target loses
+      [[/damage average activity=IS4utGV80LpDrjvt]] Hit Points at the start of
+      each of its turns. The wound closes after 1 minute, after a spell restores
+      Hit Points to the target, or after the target or a creature within 5 feet
+      of it takes an action to stanch the wound, doing so by succeeding on a
+      [[/check format=long activity=KNWa0TFhANjmQCds]].</p>
+    chat: ''
+  identifier: infernal-glaive
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 10
+      types:
+        - slashing
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - hvy
+    - rch
+    - two
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: 10
+    units: ft
+  mastery: graze
+folder: pSCWWdqMX9eUATRJ
+img: icons/weapons/polearms/glaive-hooked-steel.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737568578876
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12400000
+ownership:
+  default: 0
+_key: '!items!mmInfernalGlaive'

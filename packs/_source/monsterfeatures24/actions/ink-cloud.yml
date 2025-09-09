@@ -1,0 +1,146 @@
+_id: mmInkCloud000000
+name: Ink Cloud
+type: feat
+img: icons/magic/air/fog-gas-smoke-purple.webp
+system:
+  activities:
+    1MiIPcVuCpfgBIkS:
+      type: utility
+      _id: 1MiIPcVuCpfgBIkS
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: JttKvsdAlGpcrFx0
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: cube
+          size: '10'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+      appliedEffects:
+        - JttKvsdAlGpcrFx0
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Trigger</em>: The [[lookup @name lowercase]] takes damage while
+      underwater. </p><p><em>Response</em>: The [[lookup @name lowercase]]
+      releases ink that fills a [[lookup @target.template.size
+      activity=1MiIPcVuCpfgBIkS]]-foot Cube centered on itself, and the [[lookup
+      @name lowercase]] moves up to its Swim Speed. The Cube is Heavily Obscured
+      for 1 minute or until a strong current or similar effect disperses the
+      ink.</p>
+    chat: ''
+  identifier: ink-cloud
+  source:
+    revision: 1
+    rules: '2024'
+  advancement: []
+  cover: null
+  crewed: false
+  enchant: {}
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  type:
+    value: ''
+    subtype: ''
+effects:
+  - name: 'Blinded: Heavily Obscured'
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmInkCloud000000
+    _id: JttKvsdAlGpcrFx0
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>You have the &amp;Reference[Blinded apply=false] condition while trying
+      to see something in a Heavily Obscured space. </p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - blinded
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.actors24.Actor.mmGiantSquid0000.Item.mmInkCloud000000.ActiveEffect.ix1fTDDx7fkT1OGI
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.2
+      createdTime: 1737997355698
+      modifiedTime: 1737997355698
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmInkCloud000000.JttKvsdAlGpcrFx0'
+folder: 4T18pEvubPMQLzvD
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1737767116358
+  modifiedTime: 1737997408982
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!mmInkCloud000000'

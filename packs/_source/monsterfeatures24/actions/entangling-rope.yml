@@ -1,0 +1,155 @@
+_id: mmEntanglingRope
+name: Entangling Rope
+type: feat
+img: icons/magic/control/debuff-chains-ropes-net-red-orange.webp
+system:
+  activities:
+    n8nEah4vbrEPphNF:
+      type: save
+      _id: n8nEah4vbrEPphNF
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: bju3aUme0f8XYR3z
+          onSave: false
+      range:
+        override: false
+        value: '120'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 6
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability:
+          - str
+        dc:
+          calculation: str
+          formula: 8 + @mod + @prof
+      name: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=n8nEah4vbrEPphNF]], one creature the [[lookup
+      @name lowercase]] can see within [[lookup @range.value
+      activity=n8nEah4vbrEPphNF]] feet. <em>Failure:</em> [[/damage average]]
+      damage, and the target has the &amp;Reference[Restrained apply=false]
+      condition until the rope is destroyed, the [[lookup @name lowercase]] uses
+      a Bonus Action to release the target, or the [[lookup @name lowercase]]
+      uses Entangling Rope again.</p>
+    chat: ''
+  identifier: entangling-rope
+  source:
+    revision: 1
+    rules: '2024'
+  advancement: []
+  enchant: {}
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: Requires Magic Rope
+  type:
+    value: ''
+    subtype: ''
+effects:
+  - name: Restrained
+    img: systems/dnd5e/icons/svg/statuses/restrained.svg
+    origin: Item.mmEntanglingRope
+    _id: bju3aUme0f8XYR3z
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Restrained apply=false] condition
+      until the rope is destroyed.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - restrained
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      exportSource: null
+    _key: '!items.effects!mmEntanglingRope.bju3aUme0f8XYR3z'
+folder: 4T18pEvubPMQLzvD
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1737581361041
+  modifiedTime: 1737581361041
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!mmEntanglingRope'

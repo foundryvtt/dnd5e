@@ -1,0 +1,97 @@
+_id: mmAquaticCharge0
+name: Aquatic Charge
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    49dUyEtcp5cbGYHO:
+      type: utility
+      _id: 49dUyEtcp5cbGYHO
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '@attributes.movement.swim'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: enemy
+          count: '1'
+          special: target is visible
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] swims up to its Swim Speed straight
+      toward an enemy it can see.</p>
+    chat: ''
+  identifier: aquatic-charge
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/water/projectile-ice-orb-white.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737671082026
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2300000
+ownership:
+  default: 0
+_key: '!items!mmAquaticCharge0'

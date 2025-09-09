@@ -1,0 +1,151 @@
+_id: mmProtectiveMagi
+name: Protective Magic
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    Jc8kZLhCdTcbaImH:
+      type: cast
+      _id: Jc8kZLhCdTcbaImH
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '3'
+        properties: []
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplCounterspe
+        ability: ''
+      name: ''
+      img: ''
+    1rK9SlZ7cBWEeWnG:
+      type: cast
+      _id: 1rK9SlZ7cBWEeWnG
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties: []
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplShield0000
+        ability: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: day
+        type: recoverAll
+    max: '3'
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] casts
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCounterspe]{Counterspell}</em>
+      or
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplShield0000]{Shield}</em>
+      in response to the spell's trigger, using the same spellcasting ability as
+      Spellcasting.</p>
+    chat: ''
+  identifier: protective-magic
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/defensive/barrier-shield-dome-blue-purple.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737515542020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 17200000
+ownership:
+  default: 0
+_key: '!items!mmProtectiveMagi'

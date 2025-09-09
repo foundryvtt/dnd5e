@@ -1,0 +1,100 @@
+_id: mmIllusoryAppear
+name: Illusory Appearance
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    qY8e7Xm7QYQDXqsd:
+      type: cast
+      _id: qY8e7Xm7QYQDXqsd
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: true
+        value: '24'
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDisguiseSe
+        ability: con
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] casts
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDisguiseSe]{Disguise
+      Self}</em>, using Constitution as the spellcasting ability (spell save DC
+      [[lookup @attributes.spell.dc]]). The spell's duration is [[lookup
+      @duration.value activity=qY8e7Xm7QYQDXqsd]] [[lookup @duration.units
+      activity=qY8e7Xm7QYQDXqsd]]s.</p>
+    chat: ''
+  identifier: illusory-appearance
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/equipment/head/mask-carved-bird-grey-pink.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737746931517
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12800000
+ownership:
+  default: 0
+_key: '!items!mmIllusoryAppear'

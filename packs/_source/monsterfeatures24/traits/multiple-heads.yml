@@ -1,0 +1,50 @@
+_id: mmMultipleHeads0
+name: Multiple Heads
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] has five heads. Whenever
+      the [[lookup @name lowercase]] takes 25 damage or more on a single turn,
+      one of its heads dies. The [[lookup @name lowercase]] dies if all its
+      heads are dead. At the end of each of its turns when it has at least one
+      living head, the [[lookup @name lowercase]] grows two heads for each of
+      its heads that died since its last turn, unless it has taken Fire damage
+      since its last turn. The [[lookup @name lowercase]] regains 20 Hit Points
+      when it grows new heads.</p>
+    chat: ''
+  identifier: multiple-heads
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/abilities/dragon-breath-purple.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736296199796
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9200000
+ownership:
+  default: 0
+_key: '!items!mmMultipleHeads0'

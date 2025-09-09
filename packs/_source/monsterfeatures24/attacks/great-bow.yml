@@ -1,0 +1,203 @@
+_id: mmGreatBow000000
+name: Great Bow
+type: weapon
+system:
+  type:
+    value: martialR
+    baseItem: longbow
+  activities:
+    7KL1ez7ganbU0Axi:
+      _id: 7KL1ez7ganbU0Axi
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: cGogXX8DEY06laQN
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: weapon
+        ability: str
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: '6'
+            bonus: ''
+            types:
+              - cold
+      name: ''
+      img: ''
+      appliedEffects:
+        - cGogXX8DEY06laQN
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]], and
+      the target's Speed decreases by 10 feet until the end of its next
+      turn.</p>
+    chat: ''
+  identifier: great-bow
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition:
+    type: arrow
+  damage:
+    base:
+      number: 2
+      denomination: 10
+      types:
+        - piercing
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - amm
+    - hvy
+    - two
+  proficient: null
+  range:
+    value: 150
+    long: 600
+    reach: null
+    units: ft
+  mastery: slow
+folder: pSCWWdqMX9eUATRJ
+img: icons/weapons/bows/shortbow-recurve-blue.webp
+effects:
+  - name: 'Speed: -10 Ft.'
+    img: icons/skills/movement/feet-winged-boots-glowing-yellow.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmGreatBow000000
+    _id: cGogXX8DEY06laQN
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 2
+        value: '-10'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target’s Speed decreases by 10 feet until the end of its next
+      turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736383153304
+      modifiedTime: 1736383253581
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmGreatBow000000.cGogXX8DEY06laQN'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736383301703
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 10900000
+ownership:
+  default: 0
+_key: '!items!mmGreatBow000000'

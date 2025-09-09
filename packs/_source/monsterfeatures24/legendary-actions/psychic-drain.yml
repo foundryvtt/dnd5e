@@ -1,0 +1,100 @@
+_id: mmPsychicDrain00
+name: Psychic Drain
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    0updMLBaivqAWmNt:
+      type: heal
+      _id: 0updMLBaivqAWmNt
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: one creature Charmed or Grappled
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      healing:
+        number: 1
+        denomination: 10
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: ''
+      name: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">If the [[lookup @name lowercase]] has at least one
+      creature Charmed or Grappled, it uses Consume Memories and regains
+      [[/healing average]].</p>
+    chat: ''
+  identifier: psychic-drain
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/control/silhouette-aura-energy.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735860764951
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+_key: '!items!mmPsychicDrain00'

@@ -1,0 +1,153 @@
+_id: mmRiposte0000000
+name: Riposte
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    lIvwWDogRgGgIm7c:
+      type: utility
+      _id: lIvwWDogRgGgIm7c
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: cIB1rKGRZwYjMwJn
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: self
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Trigger:</em> The [[lookup @name lowercase]] is hit
+      by a melee attack roll while holding a weapon.</p><p
+      class="feature"><em>Response:</em> The [[lookup @name lowercase]] adds 3
+      to its AC against that attack, possibly causing it to miss. On a miss, the
+      [[lookup @name lowercase]] makes one Rapier attack against the triggering
+      creature if within range.</p><section class="secret"
+      id="secret-VqXu1b39RjadyOE4"><p><strong>Foundry Note</strong></p><p>This
+      feature also provides an <strong>Active Effect (AE)</strong> that will
+      modify this creature's <strong>Armor Class</strong> when you utilize the
+      reaction. You can enable the AE in the effects tab of the character
+      sheet.</p></section>
+    chat: ''
+  identifier: riposte
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/skills/melee/swords-parry-block-yellow.webp
+effects:
+  - name: +3 AC
+    img: icons/skills/melee/swords-parry-block-yellow.webp
+    origin: Item.mmRiposte0000000
+    _id: cIB1rKGRZwYjMwJn
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '3'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The [[lookup @name lowercase]] adds 3 to its AC against that attack,
+      possibly causing it to miss.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags:
+      dae:
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737840890774
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmRiposte0000000.cIB1rKGRZwYjMwJn'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737840878752
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 18600000
+ownership:
+  default: 0
+_key: '!items!mmRiposte0000000'

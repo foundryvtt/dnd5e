@@ -1,0 +1,124 @@
+_id: mmBoulderToss000
+name: Boulder Toss
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    jpC3fk7LJlhH4CDr:
+      type: save
+      _id: jpC3fk7LJlhH4CDr
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '90'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '5'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 7
+            denomination: '6'
+            bonus: ''
+            types:
+              - bludgeoning
+        onSave: half
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: str
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '6'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] hurls a boulder at a point it can see
+      within [[lookup @range.value activity=jpC3fk7LJlhH4CDr]]
+      feet.</p><p><em>Dexterity Saving Throw:</em> DC [[lookup @save.dc.value
+      activity=jpC3fk7LJlhH4CDr]], each creature in a [[lookup
+      @target.template.size activity=jpC3fk7LJlhH4CDr]]-foot-radius Sphere
+      centered on that point.</p><p><em>Failure:</em> [[/damage average]]. If
+      the target is a Large or smaller creature, it has the
+      &amp;Reference[Prone] condition.</p><p><em>Success:</em> Half damage
+      only.</p>
+    chat: ''
+  identifier: boulder-toss
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/commodities/stone/boulder-black.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1738099306724
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 3800000
+ownership:
+  default: 0
+_key: '!items!mmBoulderToss000'

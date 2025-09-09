@@ -1,0 +1,49 @@
+_id: mmBound000000000
+name: Bound
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The [[lookup @name lowercase]] is magically bound to an amulet. While
+      the [[lookup @name lowercase]] and its amulet are on the same plane of
+      existence, the amulet's wearer can telepathically call the [[lookup @name
+      lowercase]] to travel to it, and the [[lookup @name lowercase]] knows the
+      distance and direction to the amulet. If the [[lookup @name lowercase]] is
+      within 60 feet of the amulet's wearer, half of any damage the wearer takes
+      (round up) is transferred to the [[lookup @name lowercase]].</p>
+    chat: ''
+  identifier: bound
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/magical/humanoid-silhouette-glowing-pink.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735327893459
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2500000
+ownership:
+  default: 0
+_key: '!items!mmBound000000000'

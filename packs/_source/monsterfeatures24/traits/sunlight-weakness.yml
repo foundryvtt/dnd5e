@@ -1,0 +1,48 @@
+_id: mmSunlightWeakne
+name: Sunlight Weakness
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">While in sunlight, the [[lookup @name lowercase]] has
+      Disadvantage on D20 Tests.</p>
+    chat: ''
+  identifier: sunlight-weakness
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: While in sunlight
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/light/explosion-star-glow-yellow.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736195439547
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12700000
+ownership:
+  default: 0
+_key: '!items!mmSunlightWeakne'

@@ -2,7 +2,7 @@
     <div class="final-value">{{ dnd5e-numberFormat data.value }}</div>
     <fieldset class="card">
         <legend>{{ localize "DND5E.ArmorClassFormula" }}</legend>
-        {{ formField fields.calc value=source.calc options=calculationOptions localize=true }}
+        {{ formField fields.calc value=source.calc options=calculationOptions localize=true blank=false }}
         {{ formField fields.formula value=formula.value disabled=formula.disabled localize=true }}
         {{#if dexterity}}
         <div class="form-group">

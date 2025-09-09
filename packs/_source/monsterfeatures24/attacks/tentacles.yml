@@ -1,0 +1,238 @@
+_id: mmTentacles00000
+name: Tentacles
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    nWfAZlRGSlOZbasr:
+      _id: nWfAZlRGSlOZbasr
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: GyZrmzBP0NB8oRZI
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects:
+        - GyZrmzBP0NB8oRZI
+    Vo2UIgas007G3QXv:
+      type: check
+      name: Escape Check
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated:
+          - acr
+          - ath
+        dc:
+          calculation: ''
+          formula: '@skills.ath.passive'
+        ability: ''
+      _id: Vo2UIgas007G3QXv
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]]. If
+      the target is a Medium or smaller creature, it has the
+      &amp;Reference[Grappled apply=false] condition (escape DC [[lookup
+      @skills.ath.passive]]) from all four tentacles.</p>
+    chat: ''
+  identifier: tentacles
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 10
+      types:
+        - slashing
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: 5
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/creatures/tentacles/tentacles-suctioncups-pink.webp
+effects:
+  - name: Grappled
+    img: systems/dnd5e/icons/svg/statuses/grappled.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmTentacles00000
+    _id: GyZrmzBP0NB8oRZI
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Grappled apply=false] condition
+      (escape DC [[/check ability=str skill=ath format=long]], see source item
+      for DC).</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - grappled
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736187223504
+      modifiedTime: 1737767484814
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmTentacles00000.GyZrmzBP0NB8oRZI'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736188728782
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 20600000
+ownership:
+  default: 0
+_key: '!items!mmTentacles00000'

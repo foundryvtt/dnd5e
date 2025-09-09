@@ -1,0 +1,97 @@
+_id: mmSonicBoom00000
+name: Sonic Boom
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    ijIOufHOvI06vyN3:
+      type: cast
+      _id: ijIOufHOvI06vyN3
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '3'
+        properties:
+          - material
+        spellbook: false
+        uuid: Compendium.dnd5e.spells24.Item.phbsplShatter000
+        ability: ''
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] uses Spellcasting to
+      cast
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplShatter000]{Shatter}</em>.
+      The [[lookup @name lowercase]] can't take this action again until the
+      start of its next turn.</p>
+    chat: ''
+  identifier: sonic-boom
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/sonic/explosion-shock-wave-teal.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737801765625
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 2775000
+ownership:
+  default: 0
+_key: '!items!mmSonicBoom00000'

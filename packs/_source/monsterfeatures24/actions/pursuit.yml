@@ -1,0 +1,104 @@
+_id: mmPursuit0000000
+name: Pursuit
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    blUXkjLhs9kD2ofo:
+      type: utility
+      _id: blUXkjLhs9kD2ofo
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ''
+          type: ''
+          size: ''
+          width: ''
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: within 10 feet of the triggering creature
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Trigger:</em> Another creature the [[lookup @name
+      lowercase]] can see ends its move within [[lookup @range.value
+      activity=blUXkjLhs9kD2ofo]] feet of the [[lookup @name lowercase]].
+      <em>Response:</em> The [[lookup @name lowercase]] uses Teleport, but its
+      destination space must be [[lookup @target.affects.special
+      activity=blUXkjLhs9kD2ofo]].</p>
+    chat: ''
+  identifier: pursuit
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/skills/movement/figure-running-gray.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737913688011
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 17700000
+ownership:
+  default: 0
+_key: '!items!mmPursuit0000000'

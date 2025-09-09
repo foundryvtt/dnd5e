@@ -1,0 +1,49 @@
+_id: mmSoulBag0000000
+name: Soul Bag
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] has a soul bag. While
+      holding or carrying the bag, the [[lookup @name lowercase]] can use its
+      Nightmare Haunting action.</p><p class="feature">The bag has AC 15, HP 20,
+      and Resistance to all damage. The bag turns to dust if reduced to 0 Hit
+      Points. If the bag is destroyed, any souls the bag is holding are
+      released. The [[lookup @name lowercase]] can create a new bag after 7
+      days.</p>
+    chat: ''
+  identifier: soul-bag
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/containers/bags/sack-twisted-skull-purple.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736205489123
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 10900000
+ownership:
+  default: 0
+_key: '!items!mmSoulBag0000000'

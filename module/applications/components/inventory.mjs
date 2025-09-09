@@ -470,6 +470,7 @@ export default class InventoryElement extends HTMLElement {
       case "duplicate": return this._onDuplicateItem(item);
       case "edit": return this._onEditItem(item);
       case "equip": return this._onToggleEquipped(item);
+      case "identify": return this._onToggleIdentify(item);
       case "prepare": return this._onTogglePrepared(item);
       case "recharge": return this._onRollRecharge(activity ?? item, { event });
       case "toggleCharge": return this._onToggleCharge(item);
@@ -705,6 +706,18 @@ export default class InventoryElement extends HTMLElement {
    */
   _onToggleEquipped(item) {
     return item.update({ "system.equipped": !item.system.equipped });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling an item's identified state.
+   * @param {Item5e} item  The item.
+   * @returns {Promise<Item5e>}
+   * @protected
+   */
+  _onToggleIdentify(item) {
+    return item.update({ "system.identified": !item.system.identified });
   }
 
   /* -------------------------------------------- */

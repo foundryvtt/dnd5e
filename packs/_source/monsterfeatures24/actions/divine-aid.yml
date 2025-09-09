@@ -1,0 +1,254 @@
+_id: mmDivineAid00000
+name: Divine Aid
+type: feat
+img: icons/magic/life/cross-beam-green.webp
+system:
+  activities:
+    V0Qrt1uTAqiU9SCm:
+      type: cast
+      _id: V0Qrt1uTAqiU9SCm
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: 1
+        properties: []
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplBless00000
+        ability: ''
+      name: ''
+    R4x9qJ4BYyFenPUf:
+      type: cast
+      _id: R4x9qJ4BYyFenPUf
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: 3
+        properties: []
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDispelMagi
+        ability: ''
+      name: ''
+    xlmEmICWCOXh1DRs:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplHealingWor
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: 1
+        properties: []
+        spellbook: true
+        ability: ''
+      _id: xlmEmICWCOXh1DRs
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+    mV8EoRveUz19SU1p:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells24.Item.phbsplLesserRest
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: 2
+        properties: []
+        spellbook: true
+        ability: ''
+      _id: mV8EoRveUz19SU1p
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: day
+        type: recoverAll
+    max: '3'
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] casts
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplBless00000]{Bless}</em>,
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
+      Magic}</em>,
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplHealingWor]{Healing
+      Word}</em>, or
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser
+      Restoration}</em>, using the same spellcasting ability as
+      Spellcasting.</p>
+    chat: ''
+  identifier: divine-aid
+  source:
+    revision: 1
+    rules: '2024'
+  advancement: []
+  enchant: {}
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  type:
+    value: monster
+    subtype: ''
+effects: []
+folder: 4T18pEvubPMQLzvD
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1737506461612
+  modifiedTime: 1737515542020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 100000
+ownership:
+  default: 0
+_key: '!items!mmDivineAid00000'

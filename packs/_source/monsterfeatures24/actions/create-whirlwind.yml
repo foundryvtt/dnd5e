@@ -1,0 +1,217 @@
+_id: mmCreateWhirlwin
+name: Create Whirlwind
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    TYNKL0QDItFpbR2G:
+      type: save
+      _id: TYNKL0QDItFpbR2G
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: true
+        override: false
+      effects:
+        - _id: cM3NSnDUlURCQP4q
+          onSave: false
+      range:
+        override: false
+        value: '120'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: cylinder
+          size: '20'
+          height: '60'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - str
+        dc:
+          calculation: ''
+          formula: '17'
+      name: Save
+      img: ''
+      appliedEffects:
+        - cM3NSnDUlURCQP4q
+    vxRsrpVaHxa02z8F:
+      type: damage
+      _id: vxRsrpVaHxa02z8F
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
+            denomination: 6
+            bonus: ''
+            types:
+              - thunder
+            scaling:
+              number: 1
+      name: 'Damage: Start of Turn'
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] conjures a whirlwind at
+      a point it can see within 120 feet. The whirlwind fills a [[lookup
+      @target.template.size activity=TYNKL0QDItFpbR2G]]-foot-radius, [[lookup
+      @target.template.height activity=TYNKL0QDItFpbR2G]]-foot-high [[lookup
+      @target.template.type capitalize activity=TYNKL0QDItFpbR2G]] centered on
+      that point. The whirlwind lasts until the [[lookup @name lowercase]]'s
+      Concentration on it ends. The [[lookup @name lowercase]] can move the
+      whirlwind up to 20 feet at the start of each of its turns.</p><p
+      class="feature">Whenever the whirlwind enters a creature's space or a
+      creature enters the whirlwind, that creature is subjected to the following
+      effect.</p><p class="feature"><em>Strength Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=TYNKL0QDItFpbR2G]] (a creature makes this save
+      only once per turn, and the [[lookup @name lowercase]] is
+      unaffected).</p><p class="feature"><em>Failure:</em> While in the
+      whirlwind, the target has the &amp;Reference[Restrained apply=false]
+      condition and moves with the whirlwind. At the start of each of its turns,
+      the Restrained target takes [[/damage average]] damage. At the end of each
+      of its turns, the target repeats the save, ending the effect on itself on
+      a success.</p>
+    chat: ''
+  identifier: create-whirlwind
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/air/wind-tornado-cyclone-white.webp
+effects:
+  - name: Restrained
+    img: systems/dnd5e/icons/svg/statuses/restrained.svg
+    origin: Item.mmCreateWhirlwin
+    _id: cM3NSnDUlURCQP4q
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Restrained apply=false] condition and
+      moves with the whirlwind.</p><p>At the end of each of its turns, the
+      target repeats the save, ending the effect on itself on a success.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - restrained
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736046449791
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmCreateWhirlwin.cM3NSnDUlURCQP4q'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736050496089
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5000000
+ownership:
+  default: 0
+_key: '!items!mmCreateWhirlwin'

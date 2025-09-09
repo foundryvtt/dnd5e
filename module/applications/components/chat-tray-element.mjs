@@ -28,7 +28,7 @@ export default class ChatTrayElement extends HTMLElement {
    * @returns {boolean}
    */
   get visible() {
-    return this.hasAttribute("visible");
+    return this.hasAttribute("visible") || this.matches("#chat-notifications :scope");
   }
 
   set visible(visible) {

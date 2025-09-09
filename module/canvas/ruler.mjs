@@ -85,8 +85,9 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
    * @returns {object} The adjusted style, or existing style if no adjustment is necessary
    */
   #getSpeedBasedStyle(waypoint, style) {
-    // If showing a different client's measurement, use default style
-    if ( !(game.user.id in this.token._plannedMovement) ) return style;
+    // If showing a different client's measurement, or if teleporting, use default style
+    const isSameClient = game.user.id in this.token._plannedMovement;
+    if ( !isSameClient || CONFIG.Token.movement.actions[waypoint.action]?.teleport ) return style;
 
     // Get actor's movement speed for currently selected token movement action
     const movement = this.token.actor?.system.attributes?.movement;
@@ -94,7 +95,8 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
     let currActionSpeed = movement[waypoint.action] ?? 0;
 
     // If current action can fall back to walk, treat "max" speed as maximum between current & walk
-    if ( CONFIG.DND5E.movementTypes[waypoint.action]?.walkFallback ) {
+    if ( CONFIG.DND5E.movementTypes[waypoint.action]?.walkFallback
+      || !CONFIG.DND5E.movementTypes[waypoint.action] ) {
       currActionSpeed = Math.max(currActionSpeed, movement.walk);
     }
 

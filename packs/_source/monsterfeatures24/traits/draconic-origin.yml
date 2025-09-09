@@ -1,0 +1,246 @@
+_id: mmDraconicOrigin
+name: Draconic Origin
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] is related to a type of
+      dragon associated with one of the following damage types (DM's choice):
+      Acid, Cold, Fire, Lightning, or Poison. This choice affects other aspects
+      of the stat block.</p><section class="secret"
+      id="secret-9qS4XvlccQjIsypM"><p><strong>Foundry Note</strong></p><p>This
+      feature provides an Active Effect to manage <strong>Damage
+      Resistances</strong> in the character sheet's Effects tab. The resistances
+      outlined will need to be manually enabled/disabled.</p></section>
+    chat: ''
+  identifier: draconic-origin
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/abilities/dragon-breath-purple.webp
+effects:
+  - name: Acid Resistance
+    img: icons/magic/acid/dissolve-pool-bubbles.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmDraconicOrigin
+    _id: 3r3OTgMSHx0rQ8Wf
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: acid
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.actors24.Actor.mmHalfdragon0000.Item.mmDraconicOrigin.ActiveEffect.RM0B2jICsibgFm0E
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.2
+      createdTime: 1738027637913
+      modifiedTime: 1738027637913
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmDraconicOrigin.3r3OTgMSHx0rQ8Wf'
+  - name: Cold Resistance
+    img: icons/magic/water/snowflake-ice-purple.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmDraconicOrigin
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.actors24.Actor.mmHalfdragon0000.Item.mmDraconicOrigin.ActiveEffect.uZOPfiqPvCCLReTj
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.2
+      createdTime: 1738027639737
+      modifiedTime: 1738027639737
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: bhvmkZAA605sA3cw
+    _key: '!items.effects!mmDraconicOrigin.bhvmkZAA605sA3cw'
+  - name: Fire Resistance
+    img: icons/magic/fire/flame-burning-earth-orange.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmDraconicOrigin
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: fire
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.actors24.Actor.mmHalfdragon0000.Item.mmDraconicOrigin.ActiveEffect.br641pBi8PTZSTJf
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.2
+      createdTime: 1738027641590
+      modifiedTime: 1738027641590
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: pz5r0ksOuMpJTH7q
+    _key: '!items.effects!mmDraconicOrigin.pz5r0ksOuMpJTH7q'
+  - name: Poison Resistance
+    img: icons/consumables/potions/potion-bottle-skull-label-poison-teal.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmDraconicOrigin
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: poison
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.actors24.Actor.mmHalfdragon0000.Item.mmDraconicOrigin.ActiveEffect.srrXvF207wssH68S
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.3.5
+      createdTime: 1738027643194
+      modifiedTime: 1741060476363
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: BYHSCmIwcOd5tA1O
+    _key: '!items.effects!mmDraconicOrigin.BYHSCmIwcOd5tA1O'
+  - name: Lightning Resistance
+    img: icons/magic/lightning/bolt-strike-blue-white.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmDraconicOrigin
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: lightning
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.actors24.Actor.mmHalfdragon0000.Item.mmDraconicOrigin.ActiveEffect.srrXvF207wssH68S
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.3.5
+      createdTime: 1741060453520
+      modifiedTime: 1741060468057
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _id: XfAztVHPpKrgYrnD
+    _key: '!items.effects!mmDraconicOrigin.XfAztVHPpKrgYrnD'
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1738027655606
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 4200000
+ownership:
+  default: 0
+_key: '!items!mmDraconicOrigin'

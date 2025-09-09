@@ -1,0 +1,211 @@
+_id: mmMagicOfTheSpid
+name: Magic of the Spider Queen
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    ErB1BoIjo8Wj9KXS:
+      type: cast
+      _id: ErB1BoIjo8Wj9KXS
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - material
+          - somatic
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplDarkness00
+        ability: wis
+      name: ''
+      img: ''
+    8Zw5hRXyd8axv5Zs:
+      type: cast
+      _id: 8Zw5hRXyd8axv5Zs
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: true
+        level: '1'
+        properties:
+          - vocal
+          - material
+          - somatic
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplFaerieFire
+        ability: wis
+      name: ''
+      img: ''
+    B8OHv2CaawtJoMu7:
+      type: cast
+      _id: B8OHv2CaawtJoMu7
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      spell:
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - material
+          - somatic
+        spellbook: true
+        uuid: Compendium.dnd5e.spells24.Item.phbsplWeb0000000
+        ability: wis
+      name: ''
+      img: ''
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] casts
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDarkness00]{Darkness}</em>,
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFaerieFire]{Faerie
+      Fire}</em>, or
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWeb0000000]{Web}</em>,
+      requiring no Material components and using Wisdom as the spellcasting
+      ability (spell save DC [[lookup @attributes.spell.dc]]).</p>
+    chat: ''
+  identifier: magic-of-the-spider-queen
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/light/hand-sparks-glow-yellow.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737821416865
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 13900000
+ownership:
+  default: 0
+_key: '!items!mmMagicOfTheSpid'

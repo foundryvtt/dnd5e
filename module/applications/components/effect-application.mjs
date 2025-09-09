@@ -36,7 +36,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
   /** @override */
   get shouldBuildTargetList() {
-    return this.open && this.visible;
+    return super.shouldBuildTargetList && this.open && this.visible;
   }
 
   /* -------------------------------------------- */

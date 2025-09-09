@@ -1,0 +1,45 @@
+_id: mmLightningAbsor
+name: Lightning Absorption
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">Whenever the [[lookup @name lowercase]] is subjected to
+      Lightning damage, it regains a number of Hit Points equal to the Lightning
+      damage dealt.</p>
+    chat: ''
+  identifier: lightning-absorption
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: Subjected to Lightning damage
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/lightning/barrier-shield-orb-pink.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737062045625
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 8000000
+ownership:
+  default: 0
+_key: '!items!mmLightningAbsor'

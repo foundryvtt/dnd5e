@@ -1,0 +1,175 @@
+_id: mmGigglingMagic0
+name: Giggling Magic
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    Ttrajc4RC5Ut7pkj:
+      type: save
+      _id: Ttrajc4RC5Ut7pkj
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '90'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 7
+            denomination: '6'
+            bonus: ''
+            types:
+              - psychic
+        onSave: half
+      save:
+        ability:
+          - cha
+        dc:
+          calculation: cha
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Charisma Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=Ttrajc4RC5Ut7pkj]], [[lookup
+      @target.affects.labels.statblock activity=Ttrajc4RC5Ut7pkj]] the [[lookup
+      @name lowercase]] can see within [[lookup @range.value
+      activity=Ttrajc4RC5Ut7pkj]] feet.</p><p class="feature"><em>Failure:</em>
+      [[/damage average]] damage. Until the end of its next turn, the target
+      rolls [[/r 1d6]] whenever it makes an ability check or attack roll and
+      subtracts the number rolled from the D20 Test.</p><p
+      class="feature"><em>Failure or Success:</em> The [[lookup @name
+      lowercase]] can't take this action again until the start of its next
+      turn.</p>
+    chat: ''
+  identifier: giggling-magic
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/control/mouth-smile-deception-purple.webp
+effects:
+  - name: Giggling
+    img: icons/magic/control/mouth-smile-deception-purple.webp
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmGigglingMagic0
+    _id: 3W5EIHf9CRJQ3NyK
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.abilities.check
+        mode: 2
+        value: '-1d6'
+        priority: null
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '-1d6'
+        priority: null
+      - key: system.bonuses.mwak.attack
+        mode: 2
+        value: '-1d6'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '-1d6'
+        priority: null
+      - key: system.bonuses.rwak.attack
+        mode: 2
+        value: '-1d6'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Until the end of its next turn, the target rolls [[/r 1d6]] whenever it
+      makes an ability check or attack and subtracts the number rolled from the
+      D20 Test.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmGigglingMagic0.ActiveEffect.kJRvXVPZ8vkRrrsa
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.2
+      createdTime: 1737751312729
+      modifiedTime: 1737751312729
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmGigglingMagic0.3W5EIHf9CRJQ3NyK'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737803360376
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 3000000
+ownership:
+  default: 0
+_key: '!items!mmGigglingMagic0'

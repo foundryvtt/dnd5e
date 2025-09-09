@@ -1,0 +1,119 @@
+_id: mmConsumeMemorie
+name: Consume Memories
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    uI3HDQ1grN123Or3:
+      type: save
+      _id: uI3HDQ1grN123Or3
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          special: that is Charmed or Grappled
+          count: '1'
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: 6
+            bonus: ''
+            types:
+              - psychic
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - int
+        dc:
+          calculation: ''
+          formula: '16'
+      name: Intelligence Saving Throw
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Intelligence Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=uI3HDQ1grN123Or3]], [[lookup
+      @target.affects.labels.statblock activity=uI3HDQ1grN123Or3]] within
+      [[lookup @range.value activity=uI3HDQ1grN123Or3]] feet. [[lookup
+      @target.affects.special activity=uI3HDQ1grN123Or3]] by the [[lookup @name
+      lowercase]]. <em>Failure:</em> [[/damage average]] damage.
+      <em>Success:</em> [[lookup @damage.onSave capitalize
+      activity=uI3HDQ1grN123Or3]] damage. <em>Failure or Success:</em> The
+      [[lookup @name lowercase]] gains the target's memories if the target is a
+      Humanoid and is reduced to 0 Hit Points by this action.</p>
+    chat: ''
+  identifier: consume-memories
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/control/hypnosis-mesmerism-eye-tan.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736050699160
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 4400000
+ownership:
+  default: 0
+_key: '!items!mmConsumeMemorie'

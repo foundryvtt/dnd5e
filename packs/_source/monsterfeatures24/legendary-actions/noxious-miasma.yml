@@ -1,0 +1,170 @@
+_id: mmNoxiousMiasma0
+name: Noxious Miasma
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    Blm8nddvCOH69bL8:
+      type: save
+      _id: Blm8nddvCOH69bL8
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: turn
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: TSWsGeApnMgxOyIF
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '90'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '20'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: '6'
+            bonus: ''
+            types:
+              - poison
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: cha
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - TSWsGeApnMgxOyIF
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=Blm8nddvCOH69bL8]], each [[lookup
+      @target.affects.type activity=Blm8nddvCOH69bL8]] in a [[lookup
+      @target.template.size activity=Blm8nddvCOH69bL8]]-foot-radius Sphere
+      centered on a point the [[lookup @name lowercase]] can see within [[lookup
+      @range.value activity=Blm8nddvCOH69bL8]] feet.</p><p
+      class="feature"><em>Failure:</em> [[/damage average]] damage, and the
+      target takes a −2 penalty to AC until the end of its next turn.</p><p
+      class="feature"><em>Failure or Success:</em> The [[lookup @name
+      lowercase]] can't take this action again until the start of its next
+      turn.</p>
+    chat: ''
+  identifier: noxious-miasma
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/air/fog-gas-smoke-dense-green.webp
+effects:
+  - name: 'Damaged: −2 AC'
+    img: icons/skills/melee/shield-damaged-broken-blue.webp
+    origin: Item.mmNoxiousMiasma0
+    _id: TSWsGeApnMgxOyIF
+    type: base
+    system: {}
+    changes:
+      - key: system.armor.value
+        mode: 2
+        value: '-2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: <p>The target takes a −2 penalty to AC until the end of its next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736034886845
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmNoxiousMiasma0.TSWsGeApnMgxOyIF'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737803931062
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 3200000
+ownership:
+  default: 0
+_key: '!items!mmNoxiousMiasma0'

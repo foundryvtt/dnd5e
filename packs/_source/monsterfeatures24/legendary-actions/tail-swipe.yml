@@ -1,0 +1,93 @@
+_id: mmTailSwipe00000
+name: Tail Swipe
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    9xQEOn333eimRE0f:
+      type: utility
+      _id: 9xQEOn333eimRE0f
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] makes one [[/item Rend]]
+      attack.</p>
+    chat: ''
+  identifier: tail-swipe
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/creatures/abilities/tail-swipe-green.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737747464052
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1400000
+ownership:
+  default: 0
+_key: '!items!mmTailSwipe00000'

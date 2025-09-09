@@ -1,0 +1,161 @@
+_id: mmNecroticBow000
+name: Necrotic Bow
+type: weapon
+system:
+  type:
+    value: martialR
+    baseItem: longbow
+  activities:
+    BlfhtejqUaKF5pUy:
+      _id: BlfhtejqUaKF5pUy
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: ''
+        ability: dex
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 8
+            bonus: ''
+            types:
+              - necrotic
+            scaling:
+              number: 1
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: <p class="feature">[[/attack extended]]. [[/damage average extended]].</p>
+    chat: ''
+  identifier: necrotic-bow
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition:
+    type: arrow
+  damage:
+    base:
+      number: 1
+      denomination: 8
+      types:
+        - piercing
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties:
+    - amm
+    - hvy
+    - two
+  proficient: null
+  range:
+    value: 150
+    long: 600
+    reach: 150
+    units: ft
+  mastery: slow
+folder: pSCWWdqMX9eUATRJ
+img: icons/weapons/bows/bow-recurve-black.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736456679360
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 13200000
+ownership:
+  default: 0
+_key: '!items!mmNecroticBow000'

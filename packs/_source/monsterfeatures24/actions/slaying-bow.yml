@@ -1,0 +1,127 @@
+_id: mmSlayingBow0000
+name: Slaying Bow
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    C7BMf8hIfCjxRSWC:
+      type: save
+      _id: C7BMf8hIfCjxRSWC
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '600'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 8
+            bonus: '@abilities.dex.mod'
+            types:
+              - piercing
+            scaling:
+              number: 1
+          - custom:
+              enabled: false
+              formula: ''
+            number: 8
+            denomination: 8
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: ''
+          formula: '21'
+      name: Save
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Dexterity Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=C7BMf8hIfCjxRSWC]], one [[lookup
+      @target.affects.type activity=C7BMf8hIfCjxRSWC]] the [[lookup @name
+      lowercase]] can see within [[lookup @range.value
+      activity=C7BMf8hIfCjxRSWC]] [[lookup @range.units
+      activity=C7BMf8hIfCjxRSWC]]. <em>Failure:</em> If the [[lookup
+      @target.affects.type activity=C7BMf8hIfCjxRSWC]] has 100 Hit Points or
+      fewer, it dies. It otherwise takes [[/damage average]] damage.</p>
+    chat: ''
+  identifier: slaying-bow
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/light/projectile-halo-teal.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736117586424
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 21400000
+ownership:
+  default: 0
+_key: '!items!mmSlayingBow0000'

@@ -272,6 +272,7 @@ export default class ItemListControlsElement extends HTMLElement {
     }
 
     this._inputElement = search.querySelector(":scope > input");
+    if ( this.state?.name ) this._inputElement.value = this.state.name;
     this._controls = Array.from(search.querySelectorAll(".filter-control")).reduce((obj, el) => {
       obj[el.dataset.action] = el;
       return obj;

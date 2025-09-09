@@ -1,0 +1,402 @@
+_id: mmRoar0000000000
+name: Roar
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    Igeu89TALGlNPXDg:
+      type: save
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: jcp949sl7JYRdhdB
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '500'
+          count: ''
+        affects:
+          choice: false
+          type: enemy
+          count: ''
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery:
+          - period: lr
+        max: '1'
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: wis
+          formula: 8 + @mod + @prof
+      name: 'First Roar: Save'
+      _id: Igeu89TALGlNPXDg
+      img: ''
+      appliedEffects:
+        - jcp949sl7JYRdhdB
+    uFTndQPvULZVHT9R:
+      type: save
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: sbId6Nv8mOtH5EKR
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '500'
+          count: ''
+        affects:
+          choice: false
+          type: enemy
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: lr
+        max: '1'
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: wis
+          formula: 8 + @mod + @prof
+      name: 'Second Roar: Save'
+      _id: uFTndQPvULZVHT9R
+      img: ''
+      appliedEffects:
+        - sbId6Nv8mOtH5EKR
+    Td8ArIMDfxWDLbE9:
+      type: save
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: UUPAry5ZunpEnKkn
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '500'
+          count: ''
+        affects:
+          choice: false
+          type: enemy
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: lr
+        max: '1'
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 8
+            denomination: '10'
+            bonus: ''
+            types:
+              - thunder
+        onSave: half
+      save:
+        ability:
+          - con
+        dc:
+          calculation: wis
+          formula: 8 + @mod + @prof
+      name: 'Third Roar: Save'
+      _id: Td8ArIMDfxWDLbE9
+      img: ''
+      appliedEffects:
+        - UUPAry5ZunpEnKkn
+  uses:
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The sphinx emits a magical roar. Whenever it roars, the
+      roar has a different effect, as detailed below (the sequence resets when
+      it takes a Long Rest):</p><p class="feature-trait"><strong>First
+      Roar.</strong> <em>Wisdom Saving Throw:</em> DC [[lookup @save.dc.value
+      activity=Igeu89TALGlNPXDg]], each enemy in a [[lookup
+      @target.template.size activity=Igeu89TALGlNPXDg]]-foot Emanation
+      originating from the [[lookup @name lowercase]]. <em>Failure:</em> The
+      target has the &amp;Reference[Frightened apply=false] condition for
+      [[lookup @duration.value activity=Igeu89TALGlNPXDg]] [[lookup
+      @duration.units activity=Igeu89TALGlNPXDg]].</p><p
+      class="feature-trait"><strong>Second Roar.</strong> <em>Wisdom Saving
+      Throw:</em> DC [[lookup @save.dc.value activity=uFTndQPvULZVHT9R]], each
+      [[lookup @target.affects.type activity=uFTndQPvULZVHT9R]] in a [[lookup
+      @target.template.size activity=uFTndQPvULZVHT9R]]-foot Emanation
+      originating from the [[lookup @name lowercase]]. <em>Failure:</em> The
+      target has the &amp;Reference[Paralyzed apply=false] condition, and it
+      repeats the save at the end of each of its turns, ending the effect on
+      itself on a success. After [[lookup @duration.value
+      activity=uFTndQPvULZVHT9R]] [[lookup @duration.units
+      activity=uFTndQPvULZVHT9R]], it succeeds automatically.</p><p
+      class="feature-trait"><strong>Third Roar.</strong> <em>Constitution Saving
+      Throw:</em> DC [[lookup @save.dc.value activity=Td8ArIMDfxWDLbE9]], each
+      [[lookup @target.affects.type activity=Td8ArIMDfxWDLbE9]] in a [[lookup
+      @target.template.size activity=Td8ArIMDfxWDLbE9]]-foot Emanation
+      originating from the [[lookup @name lowercase]]. <em>Failure:</em>
+      [[/damage average]] damage, and the target has the &amp;Reference[Prone
+      apply=false] condition. <em>Success:</em> [[lookup @damage.onSave
+      capitalize activity=Td8ArIMDfxWDLbE9]] damage only.</p>
+    chat: ''
+  identifier: roar
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/creatures/abilities/lion-roar-yellow.webp
+effects:
+  - name: Frightened
+    img: systems/dnd5e/icons/svg/statuses/frightened.svg
+    origin: Item.mmRoar0000000000
+    _id: jcp949sl7JYRdhdB
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Frightened apply=false] condition for
+      1 minute.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - frightened
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: Item.mmFirstRoar00000.ActiveEffect.i1vW34FukFAQIyLx
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736112239931
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmRoar0000000000.jcp949sl7JYRdhdB'
+  - name: Paralyzed
+    img: systems/dnd5e/icons/svg/statuses/paralyzed.svg
+    origin: Item.mmRoar0000000000
+    _id: sbId6Nv8mOtH5EKR
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Paralyzed apply=false] condition, and
+      it repeats the save at the end of each of its turns, ending the effect on
+      itself on a success. After 1 minute, it succeeds automatically.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - paralyzed
+    sort: 0
+    flags:
+      dae:
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+        enableCondition: ''
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: Item.mmSecondRoar0000.ActiveEffect.Mqo7mTcWuKlgkQwb
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736112323639
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmRoar0000000000.sbId6Nv8mOtH5EKR'
+  - name: Prone
+    img: systems/dnd5e/icons/svg/statuses/prone.svg
+    origin: Item.mmRoar0000000000
+    _id: UUPAry5ZunpEnKkn
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>The target has the &amp;Reference[Prone apply=false] condition.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - prone
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: Item.mmThirdRoar00000.ActiveEffect.WUw5xzKBfus0HHZR
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736112397480
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmRoar0000000000.UUPAry5ZunpEnKkn'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1738004048798
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 18700000
+ownership:
+  default: 0
+_key: '!items!mmRoar0000000000'

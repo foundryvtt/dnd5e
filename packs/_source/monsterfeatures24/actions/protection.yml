@@ -1,0 +1,149 @@
+_id: mmProtection0000
+name: Protection
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    Kn1kqSgaVYydj1jF:
+      type: utility
+      _id: Kn1kqSgaVYydj1jF
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 4neflArm7JowxOTM
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: ''
+      img: systems/dnd5e/icons/svg/monster.svg
+      appliedEffects:
+        - 4neflArm7JowxOTM
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Trigger:</em> An attack roll hits the wearer of the
+      [[lookup @name lowercase]]'s amulet while the wearer is within 5 feet of
+      the [[lookup @name lowercase]].</p><p class="feature"><em>Response:</em>
+      The wearer gains a +5 bonus to AC, including against the triggering attack
+      and possibly causing it to miss, until the start of the [[lookup @name
+      lowercase]]'s next turn.</p>
+    chat: ''
+  identifier: protection
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/defensive/barrier-shield-dome-pink.webp
+effects:
+  - name: Protected
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    origin: Item.mmProtection0000
+    _id: 4neflArm7JowxOTM
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '5'
+        priority: null
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The wearer gains a +5 bonus to AC, including against the triggering
+      attack and possibly causing it to miss, until the start of the bestower's
+      next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737586581641
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmProtection0000.4neflArm7JowxOTM'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737586586201
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 17100000
+ownership:
+  default: 0
+_key: '!items!mmProtection0000'

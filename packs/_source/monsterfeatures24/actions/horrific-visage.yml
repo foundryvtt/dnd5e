@@ -1,0 +1,156 @@
+_id: mmHorrificVisage
+name: Horrific Visage
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    v8KiqUloIE5eocSu:
+      type: save
+      _id: v8KiqUloIE5eocSu
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: lx2ebHyyyaaWf8s1
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: cone
+          size: '60'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: '6'
+            bonus: '3'
+            types:
+              - psychic
+        onSave: none
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: cha
+          formula: 8 + @mod + @prof
+      name: Save
+      img: ''
+      appliedEffects:
+        - lx2ebHyyyaaWf8s1
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Wisdom Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=v8KiqUloIE5eocSu]], each creature in a [[lookup
+      @target.template.size activity=v8KiqUloIE5eocSu]]-foot Cone that can see
+      the [[lookup @name lowercase]] and isn't an Undead. <em>Failure:</em>
+      [[/damage average]] damage, and the target has the
+      &amp;Reference[Frightened apply=false] condition until the start of the
+      [[lookup @name lowercase]]'s next turn. <em>Success:</em> The target is
+      immune to this [[lookup @name lowercase]]'s Horrifying Visage for 24
+      hours.</p>
+    chat: ''
+  identifier: horrific-visage
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/death/skull-energy-light-purple.webp
+effects:
+  - name: Frightened
+    img: systems/dnd5e/icons/svg/statuses/frightened.svg
+    origin: Item.mmHorrificVisage
+    _id: lx2ebHyyyaaWf8s1
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Frightened apply=false] condition
+      until the start of the attacking creature's next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - frightened
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1737792485212
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmHorrificVisage.lx2ebHyyyaaWf8s1'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737792450956
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 11900000
+ownership:
+  default: 0
+_key: '!items!mmHorrificVisage'

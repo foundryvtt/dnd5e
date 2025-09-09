@@ -1,0 +1,167 @@
+_id: mmThunderclap000
+name: Thunderclap
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    Lq6GexegvlEVB6Dh:
+      type: save
+      _id: Lq6GexegvlEVB6Dh
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: turn
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: QyuBYDW1zznn0OS4
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '90'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '20'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: '8'
+            bonus: ''
+            types:
+              - thunder
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: cha
+          formula: 8 + @mod + @prof
+      name: Save
+      img: systems/dnd5e/icons/svg/activity/save.svg
+      appliedEffects:
+        - QyuBYDW1zznn0OS4
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=Lq6GexegvlEVB6Dh]], each [[lookup
+      @target.affects.type activity=Lq6GexegvlEVB6Dh]] in a [[lookup
+      @target.template.size activity=Lq6GexegvlEVB6Dh]]-foot-radius Sphere
+      centered on a point the [[lookup @name lowercase]] can see within [[lookup
+      @range.value activity=Lq6GexegvlEVB6Dh]] feet.</p><p
+      class="feature"><em>Failure:</em> [[/damage average]] damage, and the
+      target has the &amp;Reference[Deafened apply=false] condition until the
+      end of its next turn.</p>
+    chat: ''
+  identifier: thunderclap
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/lightning/bolts-salvo-clouds-sky.webp
+effects:
+  - name: Deafened
+    img: systems/dnd5e/icons/svg/statuses/deafened.svg
+    origin: Item.mmThunderclap000
+    _id: QyuBYDW1zznn0OS4
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: 0
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target is &amp;Reference[Deafened apply=long] until the end of its
+      next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - deafened
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736037516179
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmThunderclap000.QyuBYDW1zznn0OS4'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737803106758
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 1500000
+ownership:
+  default: 0
+_key: '!items!mmThunderclap000'

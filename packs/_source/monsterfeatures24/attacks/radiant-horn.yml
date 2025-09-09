@@ -1,0 +1,130 @@
+_id: mmRadiantHorn000
+name: Radiant Horn
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    rcQA5ENnF8qFMnmi:
+      _id: rcQA5ENnF8qFMnmi
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: <p class="feature">[[/attack extended]]. [[/damage average extended]].</p>
+    chat: ''
+  identifier: radiant-horn
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 1
+      denomination: 10
+      types:
+        - radiant
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: 5
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/creatures/mammals/unicorn-horned-white.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736277831647
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 15900000
+ownership:
+  default: 0
+_key: '!items!mmRadiantHorn000'

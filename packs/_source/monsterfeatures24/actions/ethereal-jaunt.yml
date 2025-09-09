@@ -1,0 +1,93 @@
+_id: mmEtherealJaunt0
+name: Ethereal Jaunt
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    zROMvitcKuGnOuAs:
+      type: utility
+      _id: zROMvitcKuGnOuAs
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Expend Use
+      img: systems/dnd5e/icons/svg/monster.svg
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] teleports from the
+      Material Plane to the Ethereal Plane or vice versa.</p>
+    chat: ''
+  identifier: ethereal-jaunt
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/light/explosion-glow-spiral-teal.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1735858384979
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 7300000
+ownership:
+  default: 0
+_key: '!items!mmEtherealJaunt0'

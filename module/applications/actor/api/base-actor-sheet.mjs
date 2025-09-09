@@ -1525,9 +1525,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       case "senses":
         return new MovementSensesConfig({ ...config, type: target.dataset.config }).render({ force: true });
       case "skill":
+        const skill = target.closest("[data-key]").dataset.key;
+        return new SkillToolConfig({ ...config, trait: "skills", key: skill }).render({ force: true });
       case "tool":
-        const key = target.closest("[data-key]").dataset.key;
-        return new SkillToolConfig({ ...config, trait: `${target.dataset.config}s`, key }).render({ force: true });
+        const tool = target.closest("[data-key]").dataset.key;
+        return new SkillToolConfig({ ...config, trait: "tool", key: tool }).render({ force: true });
       case "skills":
         return new SkillsConfig(config).render({ force: true });
       case "source":

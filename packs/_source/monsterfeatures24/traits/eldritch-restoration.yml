@@ -1,0 +1,96 @@
+_id: mmEldritchRestor
+name: Eldritch Restoration
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    YwxhTLYeVaKwKIRT:
+      type: utility
+      _id: YwxhTLYeVaKwKIRT
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: true
+        visible: false
+        name: 'Days: New Body'
+        formula: 5d10
+      name: 'Days: New Body'
+      img: systems/dnd5e/icons/svg/monster.svg
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">If destroyed, the [[lookup @name lowercase]] gains a
+      new body in [[/r 5d10]] days, reviving with all its Hit Points in the Far
+      Realm or another location chosen by the DM.</p>
+    chat: ''
+  identifier: eldritch-restoration
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/light/explosion-glow-spiral-teal.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736468778805
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 4400000
+ownership:
+  default: 0
+_key: '!items!mmEldritchRestor'

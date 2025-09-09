@@ -1,0 +1,120 @@
+_id: mmTrollSpawn0000
+name: Troll Spawn
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    6Um1z9LMOVV2qdcS:
+      type: summon
+      _id: 6Um1z9LMOVV2qdcS
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: rzcDMzmCKWu3xQ7Z
+          uuid: Compendium.dnd5e.actors24.Actor.mmTroll000000000
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: false
+        mode: ''
+        identifier: ''
+      name: Troll
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The limb uncannily has the same senses as a whole
+      [[lookup @name lowercase]]. If the limb isn't destroyed within 24 hours,
+      roll [[/r 1d12#On a 12, the limb turns into a troll]]{roll 1d12}. On a 12,
+      the limb turns into a
+      <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmTroll000000000]{Troll}</strong>.
+      Otherwise, the limb withers away.</p>
+    chat: ''
+  identifier: troll-spawn
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/unholy/hand-claw-fog-green.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736709829552
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 13400000
+ownership:
+  default: 0
+_key: '!items!mmTrollSpawn0000'

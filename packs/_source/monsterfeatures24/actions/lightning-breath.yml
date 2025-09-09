@@ -1,0 +1,124 @@
+_id: mmLightningBreat
+name: Lightning Breath
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    LpjgVwftzGNMgTUJ:
+      type: save
+      _id: LpjgVwftzGNMgTUJ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: line
+          size: '30'
+          width: '5'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
+            denomination: 6
+            bonus: ''
+            types:
+              - lightning
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: con
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery:
+      - period: recharge
+        formula: '5'
+        type: recoverAll
+    max: '1'
+  description:
+    value: >-
+      <p><em>Dexterity Saving Throw: </em>DC [[lookup @save.dc.value
+      activity=LpjgVwftzGNMgTUJ]], each [[lookup @target.affects.type
+      activity=LpjgVwftzGNMgTUJ]] in a [[lookup @target.template.size
+      activity=LpjgVwftzGNMgTUJ]]-foot-long, [[lookup @target.template.width
+      activity=LpjgVwftzGNMgTUJ]]-foot-wide [[lookup @target.template.type
+      capitalize activity=LpjgVwftzGNMgTUJ]].</p><p><em>Failure: </em>[[/damage
+      average]] damage.</p><p><em>Success:</em> Half damage.</p>
+    chat: ''
+  identifier: lightning-breath
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: 4T18pEvubPMQLzvD
+img: icons/magic/lightning/bolt-strike-blue.webp
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737747232775
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 5800000
+ownership:
+  default: 0
+_key: '!items!mmLightningBreat'

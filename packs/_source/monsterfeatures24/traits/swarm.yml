@@ -1,0 +1,45 @@
+_id: mmSwarm000000000
+name: Swarm
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>The swarm can occupy another creature's space and vice versa, and the
+      swarm can move through any opening large enough for a {creature size and
+      type}. The swarm can't regain Hit Points or gain Temporary Hit Points.</p>
+    chat: ''
+  identifier: swarm
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/invertebrates/bee-yellow.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736195172456
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12800000
+ownership:
+  default: 0
+_key: '!items!mmSwarm000000000'

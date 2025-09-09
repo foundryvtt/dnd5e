@@ -1,0 +1,45 @@
+_id: mmProbingTelepat
+name: Probing Telepathy
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">If a creature the [[lookup @name lowercase]] can see
+      communicates telepathically with the [[lookup @name lowercase]], the
+      [[lookup @name lowercase]] learns the creature's greatest desires.</p>
+    chat: ''
+  identifier: probing-telepathy
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/sonic/projectile-sound-rings-wave.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736285448020
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9500000
+ownership:
+  default: 0
+_key: '!items!mmProbingTelepat'

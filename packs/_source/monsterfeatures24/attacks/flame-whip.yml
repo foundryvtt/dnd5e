@@ -1,0 +1,197 @@
+_id: mmFlameWhip00000
+name: Flame Whip
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    sPRQe6Llftsg9xiX:
+      _id: sPRQe6Llftsg9xiX
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: >-
+          On Hit: Huge or smaller creatures pulled 25 ft. toward attacking
+          creature.
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: ZjYcf64z7AHBBoj5
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: ''
+        ability: str
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: '6'
+            bonus: ''
+            types:
+              - fire
+      name: ''
+      img: ''
+      appliedEffects:
+        - ZjYcf64z7AHBBoj5
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]]. If
+      the target is a Huge or smaller creature, the [[lookup @name lowercase]]
+      pulls the target up to 25 feet straight toward itself, and the target has
+      the &amp;Reference[Prone apply=false] condition.</p>
+    chat: ''
+  identifier: flame-whip
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 3
+      denomination: 6
+      types:
+        - force
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: null
+    long: null
+    reach: 30
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/weapons/misc/whip-red-yellow.webp
+effects:
+  - name: Prone
+    img: systems/dnd5e/icons/svg/statuses/prone.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmFlameWhip00000
+    _id: ZjYcf64z7AHBBoj5
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>The target has the &amp;Reference[Prone apply=false] condition.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - prone
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736456881722
+      modifiedTime: 1736456930759
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmFlameWhip00000.ZjYcf64z7AHBBoj5'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736457064923
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 9500000
+ownership:
+  default: 0
+_key: '!items!mmFlameWhip00000'

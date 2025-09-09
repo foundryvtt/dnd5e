@@ -1,0 +1,148 @@
+_id: mmStench00000000
+name: Stench
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities:
+    mJbwhj3beOIB3Jgj:
+      type: save
+      _id: mJbwhj3beOIB3Jgj
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: rHL9lpchOon81CN1
+          onSave: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '5'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability:
+          - con
+        dc:
+          calculation: con
+          formula: 8 + @mod + @prof
+      name: ''
+      img: ''
+      appliedEffects:
+        - rHL9lpchOon81CN1
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=mJbwhj3beOIB3Jgj]], any creature (other than a
+      [[lookup @name lowercase]]) that starts its turn in a [[lookup
+      @target.template.size activity=mJbwhj3beOIB3Jgj]]-foot Emanation
+      originating from the [[lookup @name lowercase]]. <em>Failure:</em> The
+      target has the &amp;Reference[Poisoned apply=false] condition until the
+      start of its next turn. <em>Success:</em> The target is immune to the
+      Stench of all [[lookup @name lowercase]] for 1 hour.</p>
+    chat: ''
+  identifier: stench
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/magic/air/fog-gas-smoke-swirling-orange.webp
+effects:
+  - name: Poisoned
+    img: systems/dnd5e/icons/svg/statuses/poisoned.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmStench00000000
+    _id: rHL9lpchOon81CN1
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: 1
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Poisoned apply=false] condition until
+      the start of its next turn.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - poisoned
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736200644376
+      modifiedTime: 1736200765840
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmStench00000000.rHL9lpchOon81CN1'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737791529833
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 12100000
+ownership:
+  default: 0
+_key: '!items!mmStench00000000'

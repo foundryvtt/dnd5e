@@ -1,0 +1,202 @@
+_id: mmWeightOfYears0
+name: Weight of Years
+type: feat
+system:
+  activities:
+    xZul1ImCP658OBv3:
+      type: save
+      _id: xZul1ImCP658OBv3
+      sort: 0
+      activation:
+        type: legendary
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: turn
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: Bf6DExMyhKyPPV4x
+          onSave: false
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability:
+          - con
+        dc:
+          calculation: ''
+          formula: '16'
+      name: Save
+      img: ''
+      appliedEffects:
+        - Bf6DExMyhKyPPV4x
+    j1ClhzjuKVc53Wfa:
+      type: utility
+      _id: j1ClhzjuKVc53Wfa
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: true
+        visible: false
+        name: Years Older
+        formula: 3d10
+      name: Years Older
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
+      @save.dc.value activity=xZul1ImCP658OBv3]], one [[lookup
+      @target.affects.type activity=xZul1ImCP658OBv3]] the [[lookup @name
+      lowercase]] can see within [[lookup @range.value
+      activity=xZul1ImCP658OBv3]] feet. <em>Failure:</em> The target gains 1
+      &amp;Reference[Exhaustion apply=false] level. While the target has any
+      Exhaustion levels, it appears [[/r 3d10]] years older. <em>Failure or
+      Success:</em> The [[lookup @name lowercase]] can't take this action again
+      until the start of its next turn.</p>
+    chat: ''
+  identifier: weight-of-years
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  type:
+    value: monster
+    subtype: ''
+  prerequisites:
+    level: null
+  properties: []
+  requirements: ''
+folder: aehE0L1ERkzYCvJW
+img: icons/magic/death/hand-withered-gray.webp
+effects:
+  - name: Exhaustion
+    img: systems/dnd5e/icons/svg/statuses/exhaustion.svg
+    origin: Item.8CIk2r0V5cy5Ggjz
+    _id: Bf6DExMyhKyPPV4x
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: <p>The target gains 1 &amp;Reference[Exhaustion apply=long] level. </p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - exhaustion
+    sort: 0
+    flags:
+      dae:
+        enableCondition: ''
+        disableCondition: ''
+        stackable: multi
+        showIcon: false
+        durationExpression: ''
+        specialDuration: []
+      core:
+        overlay: false
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736037892823
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmWeightOfYears0.Bf6DExMyhKyPPV4x'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1737513515325
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 250000
+ownership:
+  default: 0
+_key: '!items!mmWeightOfYears0'

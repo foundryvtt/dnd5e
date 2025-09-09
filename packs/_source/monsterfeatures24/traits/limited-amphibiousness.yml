@@ -1,0 +1,45 @@
+_id: mmLimitedAmphibi
+name: Limited Amphibiousness
+type: feat
+system:
+  type:
+    value: monster
+    subtype: ''
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">The [[lookup @name lowercase]] can breathe air and
+      water, but it must be submerged at least once every 4 hours to avoid
+      suffocating outside water.</p>
+    chat: ''
+  identifier: limited-amphibiousness
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  prerequisites:
+    level: null
+  properties:
+    - trait
+  requirements: ''
+folder: L9Zgr8qAPc3ngKhb
+img: icons/creatures/amphibians/treefrog-underneath-teal.webp
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.0
+  createdTime: 1733432292956
+  modifiedTime: 1736368186258
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 8100000
+ownership:
+  default: 0
+_key: '!items!mmLimitedAmphibi'

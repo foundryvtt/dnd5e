@@ -1,0 +1,188 @@
+_id: mmNightmareRay00
+name: Nightmare Ray
+type: weapon
+system:
+  type:
+    value: natural
+    baseItem: ''
+  activities:
+    d2L9fUjAz35UAQ6q:
+      _id: d2L9fUjAz35UAQ6q
+      type: attack
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 1W7nCxww2CjUF5Bh
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: ''
+        ability: cha
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+      img: ''
+      appliedEffects:
+        - 1W7nCxww2CjUF5Bh
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p class="feature">[[/attack extended]]. [[/damage average extended]], and
+      the target has the &amp;Reference[Frightened apply=false] condition until
+      the start of the [[lookup @name lowercase]]'s next turn.</p>
+    chat: ''
+  identifier: nightmare-ray
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  ammunition: {}
+  damage:
+    base:
+      number: 2
+      denomination: 6
+      types:
+        - psychic
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    versatile:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  magicalBonus: null
+  properties: []
+  proficient: null
+  range:
+    value: 60
+    long: null
+    reach: null
+    units: ft
+  mastery: ''
+folder: pSCWWdqMX9eUATRJ
+img: icons/magic/unholy/energy-smoke-pink.webp
+effects:
+  - name: Frightened
+    img: systems/dnd5e/icons/svg/statuses/frightened.svg
+    origin: Compendium.dnd5e.monsterfeatures24.Item.mmNightmareRay00
+    _id: 1W7nCxww2CjUF5Bh
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Frightened apply=false] condition
+      until the start of the attacking creature’s next turn</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - frightened
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '13.346'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: 1736292860412
+      modifiedTime: 1736292897833
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!items.effects!mmNightmareRay00.1W7nCxww2CjUF5Bh'
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '13.346'
+  systemId: dnd5e
+  systemVersion: 4.2.2
+  createdTime: 1733432292956
+  modifiedTime: 1737662312665
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 13700000
+ownership:
+  default: 0
+_key: '!items!mmNightmareRay00'
