@@ -440,7 +440,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: dc
         }, {
-          key: "activities[save].save.calculation",
+          key: "activities[save].save.dc.calculation",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: ""
         });
