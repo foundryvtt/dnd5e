@@ -5222,7 +5222,8 @@ DND5E.rules = {
   hazards: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.5hyEitPd1Kb27fP5",
   bloodied: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.shZaSIlFPpHufPFn",
   jumping: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.aaJOlRhI1H6vAxt9",
-  resistance: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.Uk3xhCTvEfx8BN1O"
+  resistance: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.Uk3xhCTvEfx8BN1O",
+  stable: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.klXWp4c90n7Kt5LB"
 };
 
 /* -------------------------------------------- */
