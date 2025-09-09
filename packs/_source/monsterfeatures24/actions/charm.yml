@@ -69,10 +69,10 @@ system:
   description:
     value: >-
       <p>The [[lookup @name lowercase]] casts
-      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCharmPerso]</em>,
-      requiring no spell components and using Charisma as the spellcasting
-      ability (spell save DC [[lookup @abilities.cha.dc]]), and the duration is
-      [[lookup @duration.value activity=fcRXSTOlFJShCl52]] hours. The
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCharmPerso]</em>, requiring
+      no spell components and using Charisma as the spellcasting ability (spell
+      save DC [[lookup @abilities.cha.dc]]), and the duration is [[lookup
+      @duration.value activity=fcRXSTOlFJShCl52]] hours. The
       &amp;Reference[Charmed apply=false] target is a willing recipient of the
       [[lookup @name lowercase]]'s [[/item Bite]], the damage of which doesn't
       end the spell. When the spell ends, the target is unaware it was Charmed
