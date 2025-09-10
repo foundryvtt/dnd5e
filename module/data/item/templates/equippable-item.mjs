@@ -101,7 +101,8 @@ export default class EquippableItemTemplate extends SystemDataModel {
    */
   get equippableItemCardProperties() {
     return [
-      this.attunement === "required" ? CONFIG.DND5E.attunementTypes.required : null,
+      this.attuned ? game.i18n.localize("DND5E.AttunementAttuned")
+        : CONFIG.DND5E.attunementTypes[this.attunement] ?? null,
       game.i18n.localize(this.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
       ("proficient" in this) ? CONFIG.DND5E.proficiencyLevels[this.prof?.multiplier || 0] : null
     ];
