@@ -516,10 +516,13 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       options.push({ value, label: baseItem.name });
     }
 
-    return options.length ? [
-      { value: "", label: "" },
-      ...options.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang))
-    ] : null;
+    if ( !options.length ) return null;
+
+    options.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
+    const baseId = this.item.system._source.type.baseItem ?? this.item.system.type.baseItem;
+    if ( baseId && !(baseId in baseIds) ) options.unshift({ value: baseId, label: baseId });
+    options.unshift({ value: "", label: "" });
+    return options;
   }
 
   /* -------------------------------------------- */
