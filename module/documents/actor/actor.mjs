@@ -2759,14 +2759,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<Array<Token>>|null}         Updated token if the transformation was performed.
    */
   async transformInto(source, settings=new TransformationSetting(), options={}) {
-    if ( !(settings instanceof TransformationSetting) ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `transformInto` method now requires a `TransformationSetting` configuration object.",
-        { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
-      );
-      settings = TransformationSetting._fromDeprecatedConfig(settings);
-    }
-
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
     if ( !allowed && !game.user.isGM ) {
@@ -3059,15 +3051,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {TransformationSetting} settings  Settings that determine how the transformation is performed.
      * @param {object} options                  Rendering options passed to the actor creation.
      */
+    Hooks.callAll("dnd5e.transformActor", this, source, d, settings, options);
     Hooks.callAll("dnd5e.transformActorV2", this, source, d, settings, options);
-
-    if ( "dnd5e.transformActor" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.transformActor` hook has been deprecated and replaced with `dnd5e.transformActorV2`.",
-        { since: "DnD5e 4.4", until: "DnD5e 5.2" }
-      );
-      Hooks.callAll("dnd5e.transformActor", this, source, d, settings._toDeprecatedConfig(), options);
-    }
 
     // Create new Actor with transformed data
     const newActor = await this.constructor.create(d, options);
