@@ -181,23 +181,13 @@ export default class AttributesFields {
     }
 
     ac.label = !["custom", "flat"].includes(ac.calc) ? CONFIG.DND5E.armorClasses[ac.calc]?.label : null;
-    ac._value = null;
-
-    // The `value` is defined as a getter to be able to use values that are derived at a later stage.
-    let armorClass;
-    Object.defineProperty(ac, "value", {
-      enumerable: true,
-      get: () => {
-        return ac._value ??= simplifyBonus(armorClass, this.parent.getRollData());
-      }
-    });
 
     // Determine base AC
     switch ( ac.calc ) {
 
       // Flat AC (no additional bonuses)
       case "flat":
-        armorClass = ac.flat;
+        ac.value = Number(ac.flat);
         return;
 
       // Natural AC (includes bonuses)
@@ -250,7 +240,9 @@ export default class AttributesFields {
     ac.cover = Math.max(ac.cover, this.parent.coverBonus);
 
     // Compute total AC formula.
-    armorClass = `max(${ac.min || 0}, ${ac.base} + ${ac.shield} + ${ac.bonus || 0} + ${ac.cover})`;
+    ac.min = simplifyBonus(ac.min, rollData);
+    ac.bonus = simplifyBonus(ac.bonus, rollData);
+    ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
   }
 
   /* -------------------------------------------- */
