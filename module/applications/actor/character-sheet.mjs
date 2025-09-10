@@ -1087,6 +1087,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static #useFacility(event, target) {
+    if ( !target.classList.contains("rollable") ) return;
     const { facilityId } = target.closest("[data-facility-id]")?.dataset ?? {};
     const facility = this.actor.items.get(facilityId);
     facility?.use({ legacy: false, chooseActivity: true, event });
@@ -1108,7 +1109,9 @@ export default class CharacterActorSheet extends BaseActorSheet {
       if ( favorite.type === "container" ) favorite.sheet.render({ force: true });
       else favorite.use({ event });
     }
-    else if ( favorite instanceof dnd5e.dataModels.activity.BaseActivityData ) favorite.use({ event });
+    else if ( favorite instanceof dnd5e.dataModels.activity.BaseActivityData ) {
+      if ( favorite.canUse ) favorite.use({ event });
+    }
     else if ( favorite instanceof dnd5e.documents.ActiveEffect5e ) favorite.update({ disabled: !favorite.disabled });
     else {
       const { key } = target.closest("[data-key]")?.dataset ?? {};
