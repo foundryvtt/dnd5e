@@ -182,6 +182,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       }
     };
 
+    if ( concentration ) effectFlags.flags.dnd5e.dependentOn = concentration.uuid;
+
     // Enable an existing effect on the target if it originated from this effect
     const existingEffect = actor.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
@@ -189,10 +191,6 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
         ...effect.constructor.getInitialDuration(),
         disabled: false
       }, effectFlags));
-    }
-
-    if ( !game.user.isGM && concentration && !concentration.isOwner ) {
-      throw new Error(game.i18n.localize("DND5E.EffectApplyWarningConcentration"));
     }
 
     // Otherwise, create a new effect on the target
@@ -203,7 +201,6 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       origin: origin.uuid
     }, effectFlags);
     const applied = await ActiveEffect.implementation.create(effectData, { parent: actor });
-    if ( concentration ) await concentration.addDependent(applied);
     return applied;
   }
 

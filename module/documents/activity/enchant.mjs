@@ -143,23 +143,17 @@ export default class EnchantActivity extends ActivityMixin(EnchantActivityData) 
       }
     }
 
-    // If concentration is required, ensure it is still being maintained & GM is present
-    if ( !game.user.isGM && concentration && !concentration.isOwner ) {
-      if ( strict ) {
-        ui.notifications.error("DND5E.EffectApplyWarningConcentration", { console: false, localize: true });
-        return null;
-      } else {
-        concentration = null;
-      }
-    }
+    const effectData = effect.clone({
+      origin: this.uuid,
+      "flags.dnd5e.enchantmentProfile": profile
+    }).toObject();
 
-    const applied = await ActiveEffect.create(
-      effect.clone({
-        origin: this.uuid, "flags.dnd5e.enchantmentProfile": profile
-      }).toObject(),
+    if ( concentration ) foundry.utils.setProperty(effectData, "flags.dnd5e.dependentOn", concentration.uuid);
+
+    await ActiveEffect.create(
+      effectData,
       { parent: item, keepOrigin: true, chatMessageOrigin: chatMessage?.id }
     );
-    if ( concentration ) await concentration.addDependent(applied);
   }
 
   /* -------------------------------------------- */
