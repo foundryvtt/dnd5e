@@ -32,10 +32,13 @@ export default class AdvancementTemplate extends SystemDataModel {
     const toCreate = this._advancementToCreate(options);
     if ( toCreate.length ) this.parent.updateSource({
       "system.advancement": toCreate.map(c => {
+        const baseData = foundry.utils.deepClone(c);
         const config = CONFIG.DND5E.advancementTypes[c.type];
         const cls = config.documentClass ?? config;
-        return new cls(c, { parent: this.parent }).toObject();
-      })
+        const advancement = new cls(c, { parent: this.parent });
+        if ( advancement._preCreate(baseData) === false ) return null;
+        return advancement.toObject();
+      }).filter(_ => _)
     });
   }
 
