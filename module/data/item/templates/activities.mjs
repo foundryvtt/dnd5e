@@ -471,19 +471,4 @@ export default class ActivitiesTemplate extends SystemDataModel {
     const spellIds = this.activities.getByType("cast").map(a => a.cachedSpell?.id).filter(_ => _);
     if ( spellIds.length ) this.parent.actor.deleteEmbeddedDocuments("Item", spellIds);
   }
-
-  /* -------------------------------------------- */
-  /*  Shims                                       */
-  /* -------------------------------------------- */
-
-  /**
-   * Apply shims for data removed from ActionTemplate & ActivatedEffectTemplate.
-   * @this {ItemDataModel}
-   */
-  static _applyActivityShims() {
-    foundry.utils.logCompatibilityWarning(
-      "The `_applyActivityShims` method has been deprecated and should no longer be called.",
-      { since: "DnD5e 5.0", until: "DnD5e 5.2", once: true }
-    );
-  }
 }
