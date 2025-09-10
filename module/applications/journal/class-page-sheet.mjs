@@ -490,9 +490,10 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     for ( const advancement of asi.boons ) {
       const recommendation = await fromUuid(advancement.configuration.recommendation);
       features.push({
-        description: game.i18n.format("DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.DescriptionEpic", {
-          recommendation: recommendation?.toAnchor().outerHTML ?? "—"
-        }),
+        description: game.i18n.format(
+          `DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.DescriptionEpic${recommendation ? "Recommendation" : ""}`,
+          { recommendation: recommendation?.toAnchor().outerHTML }
+        ),
         level: advancement.level,
         name: game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
           name: advancement._defaultTitle, level: formatNumber(advancement.level)
