@@ -13,16 +13,18 @@ system:
     license: CC-BY-4.0
     book: SRD 5.2
   startingEquipment:
-    - type: OR
-      requiresProficiency: false
-      _id: iEStK5sr3bu18iLG
-      group: ''
-      sort: 100000
     - type: AND
       requiresProficiency: false
       _id: 0Yx0DOCxeeNYZw7n
-      group: iEStK5sr3bu18iLG
-      sort: 800000
+      group: ''
+      sort: 0
+    - type: linked
+      count: 1
+      key: Compendium.dnd5e.equipment24.Item.phbwepGreataxe00
+      requiresProficiency: false
+      _id: ubIakV0ZwY5Av8bB
+      group: 0Yx0DOCxeeNYZw7n
+      sort: 150000
     - type: linked
       count: null
       key: Compendium.dnd5e.equipment24.Item.phbagExplorersPa
@@ -36,14 +38,14 @@ system:
       requiresProficiency: false
       _id: CF9oDnOKVLy0OehZ
       group: 0Yx0DOCxeeNYZw7n
-      sort: 400000
-    - type: linked
-      count: 1
-      key: Compendium.dnd5e.equipment24.Item.phbwepGreataxe00
+      sort: 225000
+    - type: currency
+      count: 15
+      key: gp
       requiresProficiency: false
-      _id: ubIakV0ZwY5Av8bB
+      _id: Xc0Dsr2G1lJ6yLsY
       group: 0Yx0DOCxeeNYZw7n
-      sort: 600000
+      sort: 700000
   identifier: barbarian
   levels: 1
   advancement:
@@ -559,11 +561,11 @@ folder: ZzMJGIp9Rxhr2hDV
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1735865940469
-  modifiedTime: 1752706172822
+  modifiedTime: 1757541406172
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
