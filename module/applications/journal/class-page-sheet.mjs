@@ -184,7 +184,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
       };
     }
 
-    advancement.equipment = item.system.startingEquipmentDescription;
+    advancement.equipment = item.system.getStartingEquipmentDescription({ modernStyle });
 
     return advancement;
   }

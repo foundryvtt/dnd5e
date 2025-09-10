@@ -111,6 +111,13 @@ system:
       _id: 4tEh3PUpH9nhT646
       group: H3jVZpWr5rfZX6BH
       sort: 900000
+    - type: currency
+      count: 8
+      key: gp
+      requiresProficiency: false
+      _id: 6DenAQ9zLnDOTxZD
+      group: H3jVZpWr5rfZX6BH
+      sort: 1000000
   identifier: rogue
   levels: 1
   advancement:
@@ -618,11 +625,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1735866292069
-  modifiedTime: 1752705919417
+  modifiedTime: 1757541688719
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

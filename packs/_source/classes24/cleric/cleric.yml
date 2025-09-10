@@ -82,6 +82,13 @@ system:
       _id: svexQM2NoMbtszQz
       group: hRVywVtYMIyj47LI
       sort: 600000
+    - type: currency
+      count: 7
+      key: gp
+      requiresProficiency: false
+      _id: SM5Tru74IHIrgmjJ
+      group: hRVywVtYMIyj47LI
+      sort: 700000
   identifier: cleric
   levels: 1
   advancement:
@@ -499,11 +506,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 5.2.0
   createdTime: 1735866373481
-  modifiedTime: 1752705736618
+  modifiedTime: 1757541484584
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

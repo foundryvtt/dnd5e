@@ -34,14 +34,48 @@ export default class StartingEquipmentTemplate extends SystemDataModel {
    * @type {string}
    */
   get startingEquipmentDescription() {
+    return this.getStartingEquipmentDescription();
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Create a HTML formatted description of the starting equipment on this item.
+   * @param {object} [options={}]
+   * @param {boolean} [options.modernStyle]       Should this be formatted according to modern rules or legacy.
+   * @returns {string}
+   */
+  getStartingEquipmentDescription({ modernStyle }={}) {
     const topLevel = this.startingEquipment.filter(e => !e.group);
     if ( !topLevel.length ) return "";
 
-    // If more than one entry, display as an unordered list (like for classes)
-    if ( topLevel.length > 1 ) return `<ul>${topLevel.map(e => `<li>${e.label}</li>`).join("")}</ul>`;
+    // If more than one entry, display as an unordered list (like for legacy classes)
+    if ( topLevel.length > 1 ) {
+      return `<ul>${topLevel.map(e => `<li>${e.generateLabel({ modernStyle })}</li>`).join("")}</ul>`;
+    }
+
+    // For modern classes, display as "Choose A or B"
+    modernStyle ??= (this.source.rules === "2024")
+      || (!this.source.rules && (game.settings.get("dnd5e", "rulesVersion") === "modern"));
+    if ( modernStyle ) {
+      const entries = topLevel[0].type === "OR" ? topLevel[0].children : topLevel;
+      if ( this.wealth ) entries.push(new EquipmentEntryData({ type: "currency", key: "gp", count: this.wealth }));
+      if ( entries.length > 1 ) {
+        const usedPrefixes = [];
+        const choices = EquipmentEntryData.prefixOrEntries(
+          entries.map(e => e.generateLabel({ modernStyle, depth: 2 })), { modernStyle, usedPrefixes }
+        );
+        const formatter = game.i18n.getListFormatter({ type: "disjunction" });
+        return `<p>${game.i18n.format("DND5E.StartingEquipment.ChooseList", {
+          prefixes: formatter.format(usedPrefixes), choices: formatter.format(choices)
+        })}</p>`;
+      }
+    }
 
     // Otherwise display as its own paragraph (like for backgrounds)
-    return `<p>${game.i18n.getListFormatter().format(topLevel.map(e => e.label))}</p>`;
+    return `<p>${game.i18n.getListFormatter().format(topLevel.map(e => e.generateLabel({ modernStyle })))}</p>`;
   }
 }
 
@@ -80,6 +114,9 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
     weapon: "DND5E.StartingEquipment.Choice.Weapon",
     focus: "DND5E.StartingEquipment.Choice.Focus",
 
+    // Currency
+    currency: "DND5E.StartingEquipment.Currency",
+
     // Generic item type
     linked: "DND5E.StartingEquipment.SpecificItem"
   };
@@ -103,6 +140,9 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
       label: "DND5E.Armor",
       config: "armorTypes"
     },
+    currency: {
+      config: "currencies"
+    },
     focus: {
       label: "DND5E.Focus.Label",
       config: "focusTypes"
@@ -122,13 +162,13 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
-      group: new StringField({nullable: true, initial: null}),
+      _id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
+      group: new StringField({ nullable: true, initial: null }),
       sort: new IntegerSortField(),
-      type: new StringField({required: true, initial: "OR", choices: this.TYPES}),
-      count: new NumberField({initial: undefined}),
-      key: new StringField({initial: undefined}),
-      requiresProficiency: new BooleanField({label: "DND5E.StartingEquipment.Proficient.Label"})
+      type: new StringField({ required: true, initial: "OR", choices: this.TYPES }),
+      count: new NumberField({ initial: undefined }),
+      key: new StringField({ initial: undefined }),
+      requiresProficiency: new BooleanField({ label: "DND5E.StartingEquipment.Proficient.Label" })
     };
   }
 
@@ -152,33 +192,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
    * @type {string}
    */
   get label() {
-    let label;
-
-    switch ( this.type ) {
-      // For AND/OR, use a simple conjunction/disjunction list (e.g. "first, second, and third")
-      case "AND":
-      case "OR":
-        return game.i18n.getListFormatter({type: this.type === "AND" ? "conjunction" : "disjunction", style: "long"})
-          .format(this.children.map(c => c.label).filter(l => l));
-
-      // For linked type, fetch the name using the index
-      case "linked":
-        label = linkForUuid(this.key);
-        break;
-
-      // For category types, grab category information from config
-      default:
-        label = this.categoryLabel;
-        break;
-    }
-
-    if ( !label ) return "";
-    if ( this.count > 1 ) label = `${formatNumber(this.count)}&times; ${label}`;
-    else if ( this.type !== "linked" ) label = game.i18n.format("DND5E.TraitConfigChooseAnyUncounted", { type: label });
-    if ( (this.type === "linked") && this.requiresProficiency ) {
-      label += ` (${game.i18n.localize("DND5E.StartingEquipment.IfProficient").toLowerCase()})`;
-    }
-    return label;
+    return this.generateLabel();
   }
 
   /* -------------------------------------------- */
@@ -219,5 +233,79 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
       obj[k] = foundry.utils.getType(v) === "Object" ? v.label : v;
       return obj;
     }, {});
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Transform this entry into a human readable label.
+   * @param {object} [options={}]
+   * @param {number} [options.depth=1]       Current depth of label being generated.
+   * @param {boolean} [options.modernStyle]  Use modern style for OR entries.
+   * @type {string}
+   */
+  generateLabel({ depth=1, modernStyle }={}) {
+    let label;
+    modernStyle ??= (this.parent.source?.rules === "2024")
+      || (!this.parent.source?.rules && (game.settings.get("dnd5e", "rulesVersion") === "modern"));
+
+    switch ( this.type ) {
+      // For AND/OR, use a simple conjunction/disjunction list (e.g. "first, second, and third")
+      case "AND":
+      case "OR":
+        let entries = this.children.map(c => c.generateLabel({ depth: depth + 1, modernStyle })).filter(_ => _);
+        if ( (this.type === "OR") && (entries.length > 1) ) {
+          entries = EquipmentEntryData.prefixOrEntries(entries, { depth, modernStyle });
+        }
+        return game.i18n.getListFormatter({ type: this.type === "AND" ? "conjunction" : "disjunction", style: "long" })
+          .format(entries);
+
+      case "currency":
+        const currencyConfig = CONFIG.DND5E.currencies[this.key];
+        if ( this.count && currencyConfig ) label = `${this.count} ${currencyConfig.abbreviation.toUpperCase()}`;
+        break;
+
+      // For linked type, fetch the name using the index
+      case "linked":
+        label = linkForUuid(this.key);
+        break;
+
+      // For category types, grab category information from config
+      default:
+        label = this.categoryLabel;
+        break;
+    }
+
+    if ( !label ) return "";
+    if ( this.type === "currency" ) return label;
+    if ( this.count > 1 ) label = `${formatNumber(this.count)}&times; ${label}`;
+    else if ( this.type !== "linked" ) label = game.i18n.format("DND5E.TraitConfigChooseAnyUncounted", { type: label });
+    if ( (this.type === "linked") && this.requiresProficiency ) {
+      label += ` (${game.i18n.localize("DND5E.StartingEquipment.IfProficient").toLowerCase()})`;
+    }
+    return label;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prefix each OR entry at a certain level with a letter.
+   * @param {string[]} entries                    Entries to prefix.
+   * @param {object} [options={}]
+   * @param {number} [options.depth=1]            Current depth of the OR entry (1 or 2).
+   * @param {boolean} [options.modernStyle=true]  Capitalized first level markers rather than lowercased.
+   * @param {string[]} [options.usedPrefixes]     Prefixes that were used.
+   * @returns {string[]}
+   */
+  static prefixOrEntries(entries, { depth=1, modernStyle=true, usedPrefixes }={}) {
+    let letters = game.i18n.localize("DND5E.StartingEquipment.Prefixes");
+    if (!letters) return entries;
+    if ( (modernStyle && (depth == 1)) || (!modernStyle && (depth === 2)) ) letters = letters.toUpperCase();
+    return entries.map((e, idx) => {
+      if ( usedPrefixes ) usedPrefixes.push(letters[idx]);
+      return `(${letters[idx]}) ${e}`;
+    });
   }
 }

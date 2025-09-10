@@ -39,6 +39,13 @@ system:
       _id: ubIakV0ZwY5Av8bB
       group: 0Yx0DOCxeeNYZw7n
       sort: 600000
+    - type: currency
+      count: 15
+      key: gp
+      requiresProficiency: false
+      _id: Xc0Dsr2G1lJ6yLsY
+      group: 0Yx0DOCxeeNYZw7n
+      sort: 700000
   identifier: barbarian
   levels: 1
   advancement:
@@ -558,9 +565,15 @@ _stats:
   duplicateSource: null
   coreVersion: '13.348'
   systemId: dnd5e
+<<<<<<< HEAD
   systemVersion: 5.1.9
   createdTime: 1724425956393
   modifiedTime: 1760125251283
+=======
+  systemVersion: 5.2.0
+  createdTime: 1735865940469
+  modifiedTime: 1757541406172
+>>>>>>> de7b1d8c3 ([#5237, #5293] Improve currency in starting equipment labels)
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
