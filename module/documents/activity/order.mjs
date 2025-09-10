@@ -55,8 +55,8 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
   /** @inheritDoc */
   get canUse() {
     return super.canUse
-      // Don't allow usage if facility is already executing the same order
-      && !this.inProgress
+      // Don't allow usage if facility is already executing the same order or has been disabled by attack
+      && !this.inProgress && !this.item.system.disabled
       // Enlarge order cannot be executed if facility is already maximum size
       && ((this.order !== "enlarge") || (this.parent.size !== "vast"));
   }
