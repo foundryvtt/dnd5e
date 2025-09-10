@@ -2023,6 +2023,9 @@ DND5E.itemProperties = {
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH",
     isTag: true
   },
+  cursed: {
+    label: "DND5E.ITEM.Property.Cursed"
+  },
   fin: {
     label: "DND5E.ITEM.Property.Finesse"
   },
@@ -2119,14 +2122,17 @@ DND5E.validProperties = {
     "sidekick"
   ]),
   consumable: new Set([
+    "cursed",
     "mgc"
   ]),
   container: new Set([
+    "cursed",
     "mgc",
     "weightlessContents"
   ]),
   equipment: new Set([
     "ada",
+    "cursed",
     "foc",
     "mgc",
     "stealthDisadvantage"
@@ -2136,11 +2142,13 @@ DND5E.validProperties = {
     "trait"
   ]),
   loot: new Set([
+    "cursed",
     "mgc"
   ]),
   weapon: new Set([
     "ada",
     "amm",
+    "cursed",
     "fin",
     "fir",
     "foc",
@@ -2165,6 +2173,7 @@ DND5E.validProperties = {
     "ritual"
   ]),
   tool: new Set([
+    "cursed",
     "mgc"
   ])
 };
