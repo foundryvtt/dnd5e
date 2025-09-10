@@ -15,9 +15,11 @@
         <i class="{{ icon.src }} fa-fw" inert></i>
         {{/if}}
         <label class="name">{{ label }}</label>
+        {{#unless (eq selectable false)}}
         <div class="proficiency">
             {{ formInput ../field name=(concat ../keyPath @key) value=chosen disabled=disabled input=../input }}
         </div>
+        {{/unless}}
         {{#if children}}
         {{> "dnd5e.traits-list" choices=children topLevel=false keyPath=../keyPath field=../field input=../input }}
         {{/if}}
