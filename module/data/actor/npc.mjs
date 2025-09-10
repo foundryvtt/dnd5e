@@ -609,7 +609,8 @@ export default class NPCData extends CreatureTemplate {
    */
   async _prepareEmbedContext(rulesVersion) {
     const formatter = game.i18n.getListFormatter({ type: "unit" });
-    const prepareMeasured = (value, units, label) => label ? `${label} ${formatLength(value, units)}`
+    const prepareMeasured = (value, units, label) => label
+      ? `${rulesVersion === "2024" ? label : label.toLowerCase()} ${formatLength(value, units)}`
       : formatLength(value, units);
     const prepareTrait = ({ value, custom }, trait) => formatter.format([
       ...Array.from(value).map(t => Trait.keyLabel(t, { trait })).filter(_ => _),
@@ -696,7 +697,7 @@ export default class NPCData extends CreatureTemplate {
         // Languages (e.g. `Common, Draconic`)
         languages: [
           formatter.format(this.traits.languages.labels.languages),
-          formatter.format(this.traits.languages.labels.ranged)
+          formatter.format(this.traits.languages.labels.ranged.map(r => rulesVersion === "2024" ? r : r.toLowerCase()))
         ].filterJoin("; ") || (rulesVersion === "2024" ? game.i18n.localize("None") : "—"),
 
         // Senses (e.g. `Blindsight 60 ft., Darkvision 120 ft.; Passive Perception 27`)
@@ -782,7 +783,7 @@ export default class NPCData extends CreatureTemplate {
     }
 
     else {
-      const toLowerCase = def => {
+      const lowerCase = def => {
         def.definitions = def.definitions.map(d => String(d).toLowerCase());
         return def;
       };
@@ -794,22 +795,23 @@ export default class NPCData extends CreatureTemplate {
           system.attributes.hp.max, `(${system.attributes.hp.formula})`
         ] : [system.attributes.hp.max] },
         { label: "DND5E.Speed", definitions: [summary.speed] }
-      ].map(d => toLowerCase(d));
+      ].map(d => lowerCase(d));
       context.definitions.lower = [
         summary.saves ? { label: "DND5E.ClassSaves", definitions: [summary.saves] } : null,
         summary.skills ? { label: "DND5E.Skills", definitions: [summary.skills] } : null,
-        summary.vulnerabilities ? { label: "DND5E.DamVuln", definitions: [summary.vulnerabilities] } : null,
-        summary.resistances ? { label: "DND5E.DamRes", definitions: [summary.resistances] } : null,
-        summary.immunities ? { label: "DND5E.DamImm", definitions: [summary.immunities] } : null,
+        summary.vulnerabilities ? lowerCase({ label: "DND5E.DamVuln", definitions: [summary.vulnerabilities] }) : null,
+        summary.resistances ? lowerCase({ label: "DND5E.DamRes", definitions: [summary.resistances] }) : null,
+        summary.immunities ? lowerCase({ label: "DND5E.DamImm", definitions: [summary.immunities] }) : null,
         summary.conditionImmunities
-          ? { label: "DND5E.TraitCIPlural.other", definitions: [summary.conditionImmunities] } : null,
+          ? lowerCase({ label: "DND5E.TraitCIPlural.other", definitions: [summary.conditionImmunities] }) : null,
         { label: "DND5E.Senses", definitions: [summary.senses] },
         { label: "DND5E.Languages", definitions: [summary.languages] },
         { label: "DND5E.Challenge", classes: "half-width", definitions: [summary.cr] },
         { label: "DND5E.ProficiencyBonus", classes: "half-width", definitions: [
           formatNumber(this.attributes.prof, { signDisplay: "always" })
         ] }
-      ].filter(_ => _).map(d => toLowerCase(d));
+      ].filter(_ => _);
+      context.summary.tag = context.summary.tag.toLowerCase().capitalize();
     }
 
     for ( const item of this.parent.items ) {
