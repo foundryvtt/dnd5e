@@ -54,7 +54,7 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   _preCreate(data) {
     if ( super._preCreate(data) === false ) return false;
     if ( this.item.type !== "class" || foundry.utils.hasProperty(data, "configuration.points") ) return;
-    this.updateSource({"configuration.points": 2});
+    this.updateSource({ "configuration.points": 2 });
   }
 
   /* -------------------------------------------- */
