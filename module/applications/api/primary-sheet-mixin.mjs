@@ -1,6 +1,6 @@
+import DragDropApplicationMixin from "../api/drag-drop-mixin.mjs";
 import CheckboxElement from "../components/checkbox.mjs";
 import ItemSheet5e from "../item/item-sheet.mjs";
-import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
 
 /**
  * @import { FilterState5e } from "../components/item-list-controls.mjs";

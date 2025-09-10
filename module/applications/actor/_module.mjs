@@ -31,11 +31,3 @@ export {default as WeaponsConfig} from "./config/weapons-config.mjs";
 export {default as BaseRestDialog} from "./rest/base-rest-dialog.mjs";
 export {default as LongRestDialog} from "./rest/long-rest-dialog.mjs";
 export {default as ShortRestDialog} from "./rest/short-rest-dialog.mjs";
-
-// Deprecated
-export {default as BaseConfigSheet} from "./deprecated/base-config.mjs";
-export {default as ActorSheet5e} from "./deprecated/base-sheet.mjs";
-export * from "./deprecated/character-sheet.mjs";
-export * from "./deprecated/npc-sheet.mjs";
-export {default as ActorSheetMixin} from "./deprecated/sheet-mixin.mjs";
-export {default as ActorSheetV2Mixin} from "./deprecated/sheet-v2-mixin.mjs";

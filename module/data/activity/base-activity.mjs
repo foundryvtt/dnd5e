@@ -621,17 +621,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /**
    * Prepare the label for a compiled and simplified damage formula.
    * @param {object} rollData  Deterministic roll data from the item.
-   * @param {object} _rollData
    */
-  prepareDamageLabel(rollData, _rollData=rollData) {
-    if ( foundry.utils.getType(rollData) === "Array" ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `BaseActivityData#prepareDamageLabel` no longer takes damage parts as an input.",
-        { since: "DnD5e 4.4", until: "DnD5e 5.1" }
-      );
-      rollData = _rollData;
-    }
-
+  prepareDamageLabel(rollData) {
     const config = this.getDamageConfig({}, { rollData });
     this.labels.damage = this.labels.damages = (config.rolls ?? []).map(part => {
       let formula;
