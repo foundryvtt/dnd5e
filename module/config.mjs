@@ -4714,6 +4714,12 @@ DND5E.characterFlags = {
     section: "DND5E.Feats",
     type: Boolean
   },
+  allAroundAdept: {
+    name: "DND5E.FlagsAllAroundAdept",
+    hint: "DND5E.FlagsAllAroundAdeptHint",
+    section: "DND5E.Feats",
+    type: Boolean
+  },
   enhancedDualWielding: {
     name: "DND5E.FLAGS.EnhancedDualWielding.Name",
     hint: "DND5E.FLAGS.EnhancedDualWielding.Hint",

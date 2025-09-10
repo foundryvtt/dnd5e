@@ -192,12 +192,17 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
   calculateAbilityCheckProficiency(multiplier, ability) {
     let roundDown = true;
     if ( multiplier < 1 ) {
-      if ( this.parent._isRemarkableAthlete(ability) ) {
-        multiplier = .5;
-        roundDown = false;
+	  if ( this.parent.flags.dnd5e?.allAroundAdept ) {
+		  multiplier = 1;
+	  }
+	  else {
+        if ( this.parent._isRemarkableAthlete(ability) ) {
+          multiplier = .5;
+          roundDown = false;
+        }
+        else if ( this.parent.flags.dnd5e?.jackOfAllTrades ) multiplier = .5;
       }
-      else if ( this.parent.flags.dnd5e?.jackOfAllTrades ) multiplier = .5;
-    }
+	}
     return new Proficiency(this.attributes.prof, multiplier, roundDown);
   }
 
