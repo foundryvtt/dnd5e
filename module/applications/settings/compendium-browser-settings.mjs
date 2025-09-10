@@ -221,7 +221,7 @@ export default class CompendiumBrowserSettingsConfig extends Application5e {
           checked: sources.has(id)
         };
       })).sort((a, b) => {
-        return a.tag.localeCompare(b.tag) || a.title.localeCompare(b.title, game.i18n.lang);
+        return a.tag?.localeCompare(b.tag) || a.title.localeCompare(b.title, game.i18n.lang);
       })
     };
   }
