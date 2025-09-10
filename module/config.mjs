@@ -332,18 +332,6 @@ DND5E.attunementTypes = {
 };
 preLocalize("attunementTypes");
 
-/**
- * An enumeration of item attunement states.
- * @type {{"0": string, "1": string, "2": string}}
- * @deprecated since 3.2, available until 3.4
- */
-DND5E.attunements = {
-  0: "DND5E.AttunementNone",
-  1: "DND5E.AttunementRequired",
-  2: "DND5E.AttunementAttuned"
-};
-preLocalize("attunements");
-
 /* -------------------------------------------- */
 /*  Weapon Details                              */
 /* -------------------------------------------- */
