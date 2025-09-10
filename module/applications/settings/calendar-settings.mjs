@@ -72,6 +72,7 @@ export default class CalendarSettingsConfig extends BaseSettingsConfig {
         name: `calendarConfig.${name}`,
         value: data[name]
       }));
+    context.fields.splice(1, 0, this.createSettingField("calendar"));
     return context;
   }
 
