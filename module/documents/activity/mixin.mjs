@@ -87,10 +87,23 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Should this activity be visible on the item sheet?
+     * @type {boolean}
+     */
+    get canConfigure() {
+      if ( CONFIG.DND5E.activityTypes[this.type]?.configurable === false ) return false;
+      if ( fromUuidSync(this.flags?.dnd5e?.enchantment?.origin, { strict: false })?.disabled ) return false;
+      return true;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Should this activity be able to be used?
      * @type {boolean}
      */
     get canUse() {
+      if ( fromUuidSync(this.flags?.dnd5e?.enchantment?.origin, { strict: false })?.disabled ) return false;
       return !this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id);
     }
 
