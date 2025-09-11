@@ -291,13 +291,14 @@ function _configureTrackableAttributes() {
 
 /**
  * Get all trackable spell slot attributes.
+ * @param {string} [suffix=""]  Suffix appended to the path.
  * @returns {Set<string>}
  * @internal
  */
-function _trackedSpellAttributes() {
+function _trackedSpellAttributes(suffix="") {
   return Object.entries(DND5E.spellcasting).reduce((acc, [k, v]) => {
     if ( v.slots ) Array.fromRange(Object.keys(DND5E.spellLevels).length - 1, 1).forEach(l => {
-      acc.add(`spells.${v.getSpellSlotKey(l)}`);
+      acc.add(`spells.${v.getSpellSlotKey(l)}${suffix}`);
     });
     return acc;
   }, new Set());
@@ -321,7 +322,7 @@ function _configureConsumableAttributes() {
     "details.xp.value",
     "resources.primary.value", "resources.secondary.value", "resources.tertiary.value",
     "resources.legact.value", "resources.legres.value",
-    ..._trackedSpellAttributes()
+    ..._trackedSpellAttributes(".value")
   ];
 }
 
