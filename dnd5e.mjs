@@ -263,7 +263,7 @@ function _configureTrackableAttributes() {
       ...common.value,
       ...Object.keys(DND5E.skills).map(skill => `skills.${skill}.passive`),
       ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
-      "attributes.spell.attack", "attributes.spell.dc"
+      "attributes.hp.temp", "attributes.spell.attack", "attributes.spell.dc"
     ]
   };
 
