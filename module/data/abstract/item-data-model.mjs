@@ -133,6 +133,16 @@ export default class ItemDataModel extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Parts making up the subtitle on the item's tooltip.
+   * @type {string[]}
+   */
+  get tooltipSubtitle() {
+    return [this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])];
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -196,14 +206,13 @@ export default class ItemDataModel extends SystemDataModel {
     uses = this.hasLimitedUses && (game.user.isGM || identified) ? uses : null;
     price = game.user.isGM || identified ? price : null;
 
-    const subtitle = [this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])];
     const context = {
       name, type, img, price, weight, uses, school, materials,
       config: CONFIG.DND5E,
       controlHints: game.settings.get("dnd5e", "controlHints"),
       labels: foundry.utils.deepClone((activity ?? this.parent).labels),
       tags: this.parent.labels?.components?.tags,
-      subtitle: subtitle.filterJoin(" &bull; "),
+      subtitle: this.tooltipSubtitle.filterJoin(" &bull; "),
       description: {
         value: await TextEditor.enrichHTML(description ?? "", {
           rollData, relativeTo: this.parent, ...enrichmentOptions

@@ -422,6 +422,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   get chatProperties() {
     return [
       this.type.label,
+      CONFIG.DND5E.weaponMasteries[this.mastery]?.label,
       this.isMountable ? (this.parent.labels?.armor ?? null) : null
     ];
   }
@@ -546,6 +547,13 @@ export default class WeaponData extends ItemDataModel.mixin(
     const improvised = (this.type.value === "improv") && !!actor.getFlag("dnd5e", "tavernBrawlerFeat");
     const isProficient = natural || improvised || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
     return Number(isProficient);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get tooltipSubtitle() {
+    return [...super.tooltipSubtitle, CONFIG.DND5E.weaponMasteries[this.mastery]?.label];
   }
 
   /* -------------------------------------------- */
