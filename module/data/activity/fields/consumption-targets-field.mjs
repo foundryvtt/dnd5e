@@ -431,7 +431,11 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       label: game.i18n.localize(`DND5E.CONSUMPTION.Type.Attribute.Prompt${increaseKey}`),
       hint: game.i18n.format(
         `DND5E.CONSUMPTION.Type.Attribute.PromptHint${increaseKey}`,
-        { cost, attribute: this.target, current: formatNumber(current) }
+        {
+          cost,
+          attribute: getHumanReadableAttributeLabel(this.target, { actor: this.actor }),
+          current: formatNumber(current)
+        }
       ),
       warn: simplifiedCost > current
     };
