@@ -235,6 +235,7 @@ export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredT
    * @param {Event} event  Triggering mouse event.
    */
   _onRotatePlacement(event) {
+    if ( this.document.t === "rect" ) return;
     if ( event.ctrlKey ) event.preventDefault(); // Avoid zooming the browser window
     event.stopPropagation();
     const delta = canvas.grid.type > CONST.GRID_TYPES.SQUARE ? 30 : 15;
