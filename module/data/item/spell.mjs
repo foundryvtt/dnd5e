@@ -295,7 +295,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   async getCardData(enrichmentOptions={}) {
     const context = await super.getCardData(enrichmentOptions);
     context.isSpell = true;
-    context.subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label].filterJoin(" &bull; ");
     const { activation, components, duration, range, target } = this.parent.labels;
     context.properties = [components?.vsm, activation, duration, range, target].filter(_ => _);
     if ( !this.properties.has("material") ) delete context.materials;
@@ -519,6 +518,13 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   get scalingIncrease() {
     if ( this.level !== 0 ) return null;
     return Math.floor(((this.parent.actor?.system.cantripLevel?.(this.parent) ?? 0) + 1) / 6);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get tooltipSubtitle() {
+    return [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label];
   }
 
   /* -------------------------------------------- */
