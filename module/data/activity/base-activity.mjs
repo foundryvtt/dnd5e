@@ -10,7 +10,8 @@ import AppliedEffectField from "./fields/applied-effect-field.mjs";
 import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, FilePathField, IntegerSortField, SchemaField, StringField
+  ArrayField, BooleanField, DocumentFlagsField, DocumentIdField,
+  FilePathField, IntegerSortField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
@@ -41,6 +42,7 @@ const {
  * @property {boolean} duration.concentration    Does this effect require concentration?
  * @property {boolean} duration.override         Override duration values inferred from item.
  * @property {EffectApplicationData[]} effects   Linked effects that can be applied.
+ * @property {Record<string, object>} flags      Arbitrary flag data for this activity.
  * @property {object} range
  * @property {boolean} range.override            Override range values inferred from item.
  * @property {TargetData} target
@@ -91,6 +93,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         override: new BooleanField()
       }),
       effects: new ArrayField(new AppliedEffectField()),
+      flags: new DocumentFlagsField(),
       range: new RangeField({
         override: new BooleanField()
       }),

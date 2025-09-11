@@ -244,7 +244,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    */
   async _prepareActivitiesContext(context, options) {
     context.activities = (this.item.system.activities ?? [])
-      .filter(a => CONFIG.DND5E.activityTypes[a.type]?.configurable !== false)
+      .filter(a => a.canConfigure)
       .map(activity => {
         const { _id: id, name, img, sort } = activity.prepareSheetContext();
         return {
