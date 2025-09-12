@@ -1,0 +1,71 @@
+_id: dmgSpellScroll4t
+name: Spell Scroll, 4th Level
+type: consumable
+img: icons/sundries/scrolls/scroll-bound-sealed-brown-grey.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: false
+    max: ''
+  description:
+    value: <p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSpellScroll00 inline]</p>
+    chat: ''
+  identifier: spell-scroll
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 1000
+    denomination: gp
+  rarity: rare
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: scroll
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties:
+    - mgc
+effects: []
+folder: a2UFIyuviRp94dzx
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  exportSource: null
+  coreVersion: '13.348'
+  systemId: dnd5e
+  systemVersion: 5.2.0
+  createdTime: 1757718206516
+  modifiedTime: 1757719017386
+  lastModifiedBy: dnd5ebuilder0000
+ownership:
+  default: 0
+sort: 143750
+_key: '!items!dmgSpellScroll4t'

@@ -266,6 +266,18 @@ export const IDS = {
   shieldIds: {
     shield: "Compendium.dnd5e.items.Item.sSs3hSzkKBMNBgTs"
   },
+  spellScrollIds: {
+    0: "Compendium.dnd5e.items.Item.rQ6sO7HDWzqMhSI3",
+    1: "Compendium.dnd5e.items.Item.9GSfMg0VOA2b4uFN",
+    2: "Compendium.dnd5e.items.Item.XdDp6CKh9qEvPTuS",
+    3: "Compendium.dnd5e.items.Item.hqVKZie7x9w3Kqds",
+    4: "Compendium.dnd5e.items.Item.DM7hzgL836ZyUFB1",
+    5: "Compendium.dnd5e.items.Item.wa1VF8TXHmkrrR35",
+    6: "Compendium.dnd5e.items.Item.tI3rWx4bxefNCexS",
+    7: "Compendium.dnd5e.items.Item.mtyw4NS1s7j2EJaD",
+    8: "Compendium.dnd5e.items.Item.aOrinPg7yuDZEuWr",
+    9: "Compendium.dnd5e.items.Item.O4YbkJkLlnsgUszZ"
+  },
   tools: {
     alchemist: "Compendium.dnd5e.items.Item.SztwZhbhZeCqyAes",
     bagpipes: "Compendium.dnd5e.items.Item.yxHi57T5mmVt0oDr",
