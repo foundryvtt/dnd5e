@@ -3,12 +3,15 @@
     <div class="activity card" data-activity-id="{{ id }}" data-uuid="{{ uuid }}">
 
         {{!-- Icon --}}
-        <div class="icon {{#if img.svg}}svg{{/if}}">
+        <div class="icon flexrow {{#if img.svg}}svg{{/if}}">
             {{#if img.svg}}
             <dnd5e-icon src="{{ img.src }}"></dnd5e-icon>
             {{else}}
             <img src="{{ img.src }}" class="gold-icon" alt="{{ name }}">
             {{/if}}
+            {{#if isRider~}}
+            <i class="fa-solid fa-paperclip" data-tooltip aria-label="{{ localize 'DND5E.EFFECT.RIDER.Activity' }}"></i>
+            {{~/if}}
         </div>
 
         {{!-- Name --}}
