@@ -9,7 +9,7 @@ import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
-import { staticID } from "../utils.mjs";
+import { formatIdentifier, staticID } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
@@ -222,8 +222,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get identifier() {
     if ( this.system.identifier ) return this.system.identifier;
-    const identifier = this.name.replaceAll(/(\w+)([\\|/])(\w+)/g, "$1-$3");
-    return identifier.slugify({ strict: true });
+    return formatIdentifier(this.name);
   }
 
   /* --------------------------------------------- */

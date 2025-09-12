@@ -1,4 +1,5 @@
 import JournalSpellListPageSheet from "../../applications/journal/spells-page-sheet.mjs";
+import { formatIdentifier } from "../../utils.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 
@@ -80,7 +81,7 @@ export default class SpellListJournalPageData extends foundry.abstract.TypeDataM
   /** @inheritDoc */
   prepareDerivedData() {
     this.unlinkedSpells.forEach(s => {
-      s.identifier ??= s.name.replaceAll(/(\w+)([\\|/])(\w+)/g, "$1-$3").slugify({ strict: true });
+      s.identifier ||= formatIdentifier(s.name);
       SourceField.prepareData.call(s.source, s.source?.uuid);
     });
   }
