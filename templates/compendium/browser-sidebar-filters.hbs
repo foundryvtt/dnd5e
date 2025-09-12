@@ -2,10 +2,11 @@
     {{#each additional}}
     {{#if (eq type "boolean")}}
     <div class="filter filter-boolean" data-filter-id="{{ key }}">
-        <label>
-            <filter-state name="additional.{{ key }}" value="{{ value }}" {{ disabled locked }}></filter-state>
-            <span>{{ localize label }}</span>
-        </label>
+        <span>
+            <filter-state name="additional.{{ key }}" value="{{ value }}" id="{{ partId }}-additional-key"
+                          {{ disabled locked }}></filter-state>
+            <label for="{{ partId }}-additional-key">{{ localize label }}</label>
+        </span>
     </div>
     {{else if (eq type "range")}}
     <div class="filter filter-range form-group label-top" data-filter-id="{{ key }}">

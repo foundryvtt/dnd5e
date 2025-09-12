@@ -758,7 +758,8 @@ export default class CompendiumBrowser extends Application5e {
         value: locked,
         key: "source",
         label: "DND5E.SOURCE.FIELDS.source.label",
-        config: { choices: this.#sources }
+        config: { choices: this.#sources },
+        partId: `${this.id}-filters`
       }
     );
     filters.insertAdjacentHTML("beforeend", filter);
