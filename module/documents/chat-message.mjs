@@ -508,11 +508,13 @@ export default class ChatMessage5e extends ChatMessage {
     const roll = document.createElement("div");
     roll.classList.add("dice-roll");
 
-    const tooltipContents = breakdown.reduce((str, { type, total, constant, dice }) => {
+    const tooltipContents = breakdown.reduce((str, { type, total, constant, dice, icon, method }) => {
       const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
       return `${str}
         <section class="tooltip-part">
           <div class="dice">
+            ${icon
+              ? `<span class="part-method" data-tooltip aria-label="${game.i18n.localize(method)}">${icon}</span>` : ""}
             <ol class="dice-rolls">
               ${dice.reduce((str, { result, classes }) => `
                 ${str}<li class="roll ${classes}">${result}</li>
@@ -574,7 +576,9 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _simplifyDamageRoll(roll) {
-    const aggregate = { type: roll.options.type, total: Math.max(0, roll.total), constant: 0, dice: [] };
+    const aggregate = {
+      type: roll.options.type, total: Math.max(0, roll.total), constant: 0, dice: [], icon: null, method: null
+    };
     let hasMultiplication = false;
     for ( let i = roll.terms.length - 1; i >= 0; ) {
       const term = roll.terms[i--];
@@ -582,9 +586,12 @@ export default class ChatMessage5e extends ChatMessage {
         continue;
       }
       const value = term.total;
-      if ( term instanceof foundry.dice.terms.DiceTerm ) aggregate.dice.push(...term.results.map(r => ({
-        result: term.getResultLabel(r), classes: term.getResultCSS(r).filterJoin(" ")
-      })));
+      if ( term instanceof foundry.dice.terms.DiceTerm ) {
+        const tooltipData = term.getTooltipData();
+        aggregate.dice.push(...tooltipData.rolls);
+        aggregate.icon ??= tooltipData.icon;
+        aggregate.method ??= tooltipData.method;
+      }
       let multiplier = 1;
       let operator = roll.terms[i];
       while ( operator instanceof foundry.dice.terms.OperatorTerm ) {
