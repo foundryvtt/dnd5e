@@ -3576,16 +3576,16 @@ preLocalize("spellListTypes");
  * @enum {string}
  */
 DND5E.spellScrollIds = {
-  0: "rQ6sO7HDWzqMhSI3",
-  1: "9GSfMg0VOA2b4uFN",
-  2: "XdDp6CKh9qEvPTuS",
-  3: "hqVKZie7x9w3Kqds",
-  4: "DM7hzgL836ZyUFB1",
-  5: "wa1VF8TXHmkrrR35",
-  6: "tI3rWx4bxefNCexS",
-  7: "mtyw4NS1s7j2EJaD",
-  8: "aOrinPg7yuDZEuWr",
-  9: "O4YbkJkLlnsgUszZ"
+  0: "Compendium.dnd5e.equipment24.Item.dmgSpellScrollCa",
+  1: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s",
+  2: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll2n",
+  3: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll3r",
+  4: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll4t",
+  5: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll5t",
+  6: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll6t",
+  7: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll7t",
+  8: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll8t",
+  9: "Compendium.dnd5e.equipment24.Item.dmgSpellScroll9t"
 };
 
 /* -------------------------------------------- */
