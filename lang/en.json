@@ -1350,6 +1350,11 @@
 "DND5E.ConDeafened": "Deafened",
 "DND5E.ConDiseased": "Diseased",
 "DND5E.CONDITIONS": {
+  "DeleteDialog": {
+    "hint": "You are under the effects of this condition from more than one source. Pick which effect to end.",
+    "label": "Source",
+    "title": "Remove Effect"
+  },
   "RiderConditions": {
     "label": "Separate Status Conditions",
     "hint": "When this Active Effect is applied, these additional status conditions will be applied separately."

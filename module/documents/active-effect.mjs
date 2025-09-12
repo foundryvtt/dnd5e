@@ -718,11 +718,12 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( !target.classList?.contains("effect-control") ) return;
 
     const actor = canvas.hud.token.object?.actor;
-    if ( !actor ) return;
-
     const id = target.dataset?.statusId;
+    if ( !actor || !id ) return;
+
     if ( id === "exhaustion" ) ActiveEffect5e._manageExhaustion(event, actor);
     else if ( id === "concentrating" ) ActiveEffect5e._manageConcentration(event, actor);
+    else ActiveEffect5e._manageCondition(event, actor, id);
   }
 
   /* -------------------------------------------- */
@@ -781,6 +782,64 @@ export default class ActiveEffect5e extends ActiveEffect {
         callback: (event, button, dialog) => {
           const source = new foundry.applications.ux.FormDataExtended(button.form).object.source;
           if ( source ) actor.endConcentration(source);
+        }
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Manage custom condition handling when interacting with the token HUD.
+   * @param {PointerEvent} event        The triggering event.
+   * @param {Actor5e} actor             The actor belonging to the token.
+   * @param {string} status             The status condition.
+   */
+  static _manageCondition(event, actor, status) {
+    const effects = new Set(actor.effects.filter(effect => effect.statuses.has(status)));
+    if ( !effects.size ) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    if ( effects.size > 1 ) {
+      ActiveEffect5e.deleteConditionDialog(actor, effects);
+    } else {
+      effects.first().delete();
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prompt the user to delete one of several conditions.
+   * @param {Actor5e} actor                           The owner of the effects.
+   * @param {string|Set<ActiveEffect5e>} effects      A set of effects, or the status to derive them from.
+   * @returns {Promise<ActiveEffect5e|null>}
+   */
+  static async deleteConditionDialog(actor, effects) {
+    if ( foundry.utils.getType(effects) === "string" ) {
+      effects = new Set(actor.effects.filter(effect => effect.statuses.has(effects)));
+    }
+    if ( !effects.size ) return null;
+
+    const html = new foundry.data.fields.StringField({
+      label: game.i18n.localize("DND5E.CONDITIONS.DeleteDialog.label"),
+      hint: game.i18n.localize("DND5E.CONDITIONS.DeleteDialog.hint"),
+      required: true,
+      choices: Object.fromEntries(Array.from(effects).map(effect => [effect.id, effect.name]))
+    }).toFormGroup({}, { name: "source", sort: true }).outerHTML;
+
+    return foundry.applications.api.DialogV2.prompt({
+      rejectClose: false,
+      content: `<fieldset>${html}</fieldset>`,
+      window: { title: "DND5E.CONDITIONS.DeleteDialog.title" },
+      position: { width: 400 },
+      ok: {
+        label: "DND5E.Confirm",
+        callback: async function(event, button) {
+          const source = button.form.elements.source.value;
+          return actor.effects.get(source).delete();
         }
       }
     });
