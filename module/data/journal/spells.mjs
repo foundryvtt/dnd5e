@@ -93,13 +93,18 @@ export default class SpellListJournalPageData extends foundry.abstract.TypeDataM
       if ( value === "table" ) config.table = true;
       else if ( value in this.constructor.GROUPING_MODES ) config.grouping = value;
     }
-    if ( config.table ) config.grouping = "level";
+    if ( config.table ) config.grouping ??= "level";
 
-    const sheet = new JournalSpellListPageSheet(this.parent, {
-      mode: "view", displayAsTable: config.table, embedRendering: true, grouping: config.grouping
+    const sheet = new JournalSpellListPageSheet({
+      displayAsTable: config.table,
+      document: this.parent,
+      embedRendering: true,
+      grouping: config.grouping,
+      mode: "view",
+      window: { frame: false, positioned: false }
     });
-    const rendered = await sheet._renderInner(await sheet.getData());
+    await sheet.render({ force: true });
     config.classes = config.classes ? `spells ${config.classes ?? ""}` : "spells";
-    return rendered[0];
+    return sheet.element.children;
   }
 }
