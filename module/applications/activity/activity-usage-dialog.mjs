@@ -379,7 +379,7 @@ export default class ActivityUsageDialog extends Dialog5e {
         return { value: `spell${level}`, label };
       }).filter(_ => _);
       context.spellSlots = {
-        field: new StringField({ label: game.i18n.localize("DND5E.SpellCastUpcast") }),
+        field: new StringField({ required: true, blank: false, label: game.i18n.localize("DND5E.SpellCastUpcast") }),
         name: "spell.slot",
         value: this.config.spell?.slot,
         options: spellSlotOptions
