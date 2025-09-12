@@ -1,5 +1,6 @@
 import AdvancementConfig from "./advancement-config-v2.mjs";
 import { TYPES } from "../../data/advancement/scale-value.mjs";
+import { formatIdentifier } from "../../utils.mjs";
 
 /**
  * Configuration application for scale values.
@@ -44,8 +45,8 @@ export default class ScaleValueConfig extends AdvancementConfig {
     context.distanceOptions = Object.entries(CONFIG.DND5E.movementUnits)
       .map(([value, { label }]) => ({ value, label }));
     context.identifier = {
-      placeholder: config.identifier || this.advancement.title?.slugify()
-        || this.advancement.constructor.metadata.title.slugify()
+      placeholder: config.identifier
+        || formatIdentifier(this.advancement.title || this.advancement.constructor.metadata.title)
     };
     context.identifier.hint = game.i18n.format(type.metadata.identifier, {
       class: this.item.identifier, identifier: context.identifier.placeholder
@@ -117,7 +118,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
    * @param {Event} event  Change event to the title input.
    */
   _onChangeTitle(event) {
-    const slug = (event.target.value || this.advancement.constructor.metadata.title).slugify();
+    const slug = formatIdentifier(event.target.value || this.advancement.constructor.metadata.title);
     this.form.querySelector("input[name='configuration.identifier']").placeholder = slug;
   }
 
