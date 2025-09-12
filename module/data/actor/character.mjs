@@ -264,12 +264,12 @@ export default class CharacterData extends CreatureTemplate {
     this.prepareAbilities({ rollData, originalSaves });
     this.prepareSkills({ rollData, originalSkills });
     this.prepareTools({ rollData });
+    AttributesFields.prepareSpellcastingAbility.call(this);
     AttributesFields.prepareArmorClass.call(this, rollData);
     AttributesFields.prepareConcentration.call(this, rollData);
     AttributesFields.prepareEncumbrance.call(this, rollData);
     AttributesFields.prepareInitiative.call(this, rollData);
     AttributesFields.prepareMovement.call(this);
-    AttributesFields.prepareSpellcastingAbility.call(this);
     TraitsFields.prepareLanguages.call(this);
     TraitsFields.prepareResistImmune.call(this);
 

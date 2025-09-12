@@ -449,13 +449,13 @@ export default class NPCData extends CreatureTemplate {
     this.prepareAbilities({ rollData, originalSaves });
     this.prepareSkills({ rollData, originalSkills });
     this.prepareTools({ rollData });
+    AttributesFields.prepareSpellcastingAbility.call(this);
     AttributesFields.prepareArmorClass.call(this, rollData);
     AttributesFields.prepareConcentration.call(this, rollData);
     AttributesFields.prepareEncumbrance.call(this, rollData);
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareInitiative.call(this, rollData);
     AttributesFields.prepareMovement.call(this);
-    AttributesFields.prepareSpellcastingAbility.call(this);
     SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
     TraitsFields.prepareLanguages.call(this);
     TraitsFields.prepareResistImmune.call(this);
