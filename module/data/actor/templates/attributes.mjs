@@ -278,7 +278,10 @@ export default class AttributesFields {
 
     // Get the total weight from items
     let weight = this.parent.items
-      .filter(item => !item.container && (validateItem?.(item) ?? true))
+      .filter(item => {
+        if ( item.container || !(validateItem?.(item) ?? true) ) return false;
+        return ( item.type !== "container" ) || item.system.equipped;
+      })
       .reduce((weight, item) => weight + (item.system.totalWeightIn?.(baseUnits[unitSystem]) ?? 0), 0);
 
     // [Optional] add Currency Weight (for non-transformed actors)
