@@ -18,6 +18,18 @@ export function formatCR(value, { narrow=true }={}) {
 /* -------------------------------------------- */
 
 /**
+ * Create a valid identifier from the provided string.
+ * @param {string} input
+ * @returns {string}
+ */
+export function formatIdentifier(input) {
+  input = input.replaceAll(/(\w+)([\\|/])(\w+)/g, "$1-$3");
+  return input.slugify({ strict: true });
+}
+
+/* -------------------------------------------- */
+
+/**
  * Form a number using the provided length unit.
  * @param {number} value         The length to format.
  * @param {string} unit          Length unit as defined in `CONFIG.DND5E.movementUnits`.

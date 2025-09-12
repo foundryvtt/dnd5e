@@ -1,4 +1,5 @@
 import CompendiumBrowser from "./applications/compendium-browser.mjs";
+import { formatIdentifier } from "./utils.mjs";
 
 /* -------------------------------------------- */
 /*  Enchantments                                */
@@ -172,7 +173,7 @@ class ItemRegistry {
       sort: false
     });
     for ( const item of indexes ) {
-      const identifier = item.system?.identifier ?? slugify(item.name, { strict: true });
+      const identifier = item.system?.identifier ?? formatIdentifier(item.name);
       if ( !this.#items.has(identifier) ) this.#items.set(identifier, { sources: [] });
       const itemData = this.#items.get(identifier);
       itemData.name = item.name;
