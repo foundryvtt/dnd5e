@@ -3,110 +3,58 @@ type: npc
 system:
   details:
     biography:
-      value: ''
+      value: >-
+        <p>@Embed[Compendium.dnd5e.spells24.Item.phbsplGiantInsec
+        caption=false]</p>
       public: ''
     alignment: Unaligned
     type:
       value: beast
     race: null
-    cr: 0.5
+    environment: ''
+    cr: null
+    spellLevel: 0
+    source:
+      custom: ''
     ideal: ''
     bond: ''
     flaw: ''
-    habitat:
-      custom: ''
-      value:
-        - type: forest
-        - type: grassland
-        - type: urban
-    treasure:
-      value: []
   abilities:
     str:
-      value: 10
+      value: 17
       proficient: 0
       max: null
       bonuses:
         check: ''
         save: ''
-      check:
-        roll:
-          min: null
-          max: null
-          mode: 0
-      save:
-        roll:
-          min: null
-          max: null
-          mode: 0
     dex:
+      value: 13
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    con:
+      value: 15
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    int:
+      value: 4
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    wis:
       value: 14
       proficient: 0
       max: null
       bonuses:
         check: ''
         save: ''
-      check:
-        roll:
-          min: null
-          max: null
-          mode: 0
-      save:
-        roll:
-          min: null
-          max: null
-          mode: 0
-    con:
-      value: 10
-      proficient: 0
-      max: null
-      bonuses:
-        check: ''
-        save: ''
-      check:
-        roll:
-          min: null
-          max: null
-          mode: 0
-      save:
-        roll:
-          min: null
-          max: null
-          mode: 0
-    int:
-      value: 1
-      proficient: 0
-      max: null
-      bonuses:
-        check: ''
-        save: ''
-      check:
-        roll:
-          min: null
-          max: null
-          mode: 0
-      save:
-        roll:
-          min: null
-          max: null
-          mode: 0
-    wis:
-      value: 10
-      proficient: 0
-      max: null
-      bonuses:
-        check: ''
-        save: ''
-      check:
-        roll:
-          min: null
-          max: null
-          mode: 0
-      save:
-        roll:
-          min: null
-          max: null
-          mode: 0
     cha:
       value: 3
       proficient: 0
@@ -114,18 +62,8 @@ system:
       bonuses:
         check: ''
         save: ''
-      check:
-        roll:
-          min: null
-          max: null
-          mode: 0
-      save:
-        roll:
-          min: null
-          max: null
-          mode: 0
   traits:
-    size: med
+    size: lg
     di:
       bypasses: []
       value: []
@@ -146,9 +84,7 @@ system:
       custom: ''
     languages:
       value: []
-      custom: ''
-      communication: {}
-    important: false
+      custom: Understands the languages you know
   currency:
     pp: 0
     gp: 0
@@ -397,22 +333,22 @@ system:
       bonus: ''
     movement:
       burrow: null
-      climb: null
-      fly: 50
+      climb: 40
+      fly: 40
       swim: null
-      walk: 10
+      walk: 40
       units: null
       hover: false
     attunement:
       max: 3
     senses:
-      darkvision: null
+      darkvision: 60
       blindsight: null
       tremorsense: null
       truesight: null
       units: null
       special: ''
-    spellcasting: str
+    spellcasting: int
     exhaustion: 0
     concentration:
       ability: ''
@@ -424,29 +360,24 @@ system:
         save: ''
       limit: 1
     ac:
-      flat: null
-      calc: default
+      flat: 11
+      calc: natural
     hd:
       spent: 0
     hp:
-      value: 22
-      max: 22
+      value: 30
+      max: 30
       temp: null
       tempmax: null
-      formula: 5d8
+      formula: '30'
     death:
+      ability: ''
       roll:
         min: null
         max: null
         mode: 0
       success: 0
       failure: 0
-      bonuses:
-        save: ''
-    spell:
-      level: 0
-    loyalty:
-      value: null
   resources:
     legact:
       value: 0
@@ -457,25 +388,20 @@ system:
     lair:
       value: false
       initiative: null
-      inside: false
   source:
     rules: '2024'
-    book: SRD 5.2
-    custom: ''
-    revision: 1
-    license: CC-BY-4.0
-_id: mmGiantWasp00000
-img: systems/dnd5e/tokens/beast/GiantWasp.webp
+_id: phbginGiantWasp0
+img: null
 prototypeToken:
-  name: Giant Wasp
+  name: Giant Insect
   displayName: 0
   actorLink: false
   appendNumber: false
   prependAdjective: false
-  width: 1
-  height: 1
+  width: 2
+  height: 2
   texture:
-    src: systems/dnd5e/tokens/beast/GiantWasp.webp
+    src: null
     anchorX: 0.5
     anchorY: 0.5
     offsetX: 0
@@ -489,7 +415,7 @@ prototypeToken:
   lockRotation: false
   rotation: 0
   alpha: 1
-  disposition: -1
+  disposition: 1
   displayBars: 0
   bar1:
     attribute: attributes.hp
@@ -519,19 +445,22 @@ prototypeToken:
       max: 1
   sight:
     enabled: false
-    range: 0
+    range: 60
     angle: 360
-    visionMode: basic
+    visionMode: darkvision
     color: null
     attenuation: 0.1
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes:
+    - id: basicSight
+      range: 60
+      enabled: true
   occludable:
     radius: 0
   ring:
-    enabled: false
+    enabled: true
     colors:
       ring: null
       background: null
@@ -558,9 +487,6 @@ items:
       source:
         custom: ''
         rules: '2024'
-        book: SRD 5.2
-        revision: 1
-        license: CC-BY-4.0
       uses:
         max: ''
         spent: 0
@@ -570,15 +496,11 @@ items:
         subtype: ''
       prerequisites:
         level: null
-        repeatable: false
       properties: []
       requirements: ''
       activities: {}
       enchant: {}
       identifier: spider-climb
-      advancement: []
-      cover: null
-      crewed: false
     _id: phbaoiSpiderClim
     type: feat
     img: icons/creatures/invertebrates/spider-large-white-green.webp
@@ -591,14 +513,14 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.346'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1740680151903
+      modifiedTime: 1725827369662
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!mmGiantWasp00000.phbaoiSpiderClim'
+    _key: '!actors.items!phbginGiantWasp0.phbaoiSpiderClim'
   - name: Multiattack
     system:
       description:
@@ -610,9 +532,6 @@ items:
       source:
         custom: ''
         rules: '2024'
-        book: SRD 5.2
-        revision: 1
-        license: CC-BY-4.0
       uses:
         max: ''
         recovery: []
@@ -622,7 +541,6 @@ items:
         subtype: ''
       prerequisites:
         level: null
-        repeatable: false
       properties: []
       requirements: ''
       activities:
@@ -639,7 +557,6 @@ items:
             scaling:
               allowed: false
               max: ''
-            spellSlot: true
           description:
             chatFlavor: ''
           duration:
@@ -647,7 +564,6 @@ items:
             units: inst
             special: ''
             override: false
-            concentration: false
           effects: []
           range:
             units: self
@@ -680,11 +596,10 @@ items:
             max: ''
           sort: 0
           name: Activate
+          img: ''
+          appliedEffects: []
       enchant: {}
       identifier: multiattack
-      advancement: []
-      cover: null
-      crewed: false
     _id: phbaoiMultiattac
     type: feat
     img: icons/magic/movement/abstract-ribbons-red-orange.webp
@@ -701,14 +616,14 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.346'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1740680151903
+      modifiedTime: 1725910030479
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!mmGiantWasp00000.phbaoiMultiattac'
+    _key: '!actors.items!phbginGiantWasp0.phbaoiMultiattac'
   - name: Poison Jab
     system:
       description:
@@ -720,9 +635,6 @@ items:
       source:
         custom: ''
         rules: '2024'
-        book: SRD 5.2
-        revision: 1
-        license: CC-BY-4.0
       uses:
         max: ''
         recovery: []
@@ -732,7 +644,6 @@ items:
         subtype: ''
       prerequisites:
         level: null
-        repeatable: false
       properties: []
       requirements: ''
       activities:
@@ -749,7 +660,6 @@ items:
             scaling:
               allowed: false
               max: ''
-            spellSlot: true
           description:
             chatFlavor: ''
           duration:
@@ -757,7 +667,6 @@ items:
             units: inst
             special: ''
             override: false
-            concentration: false
           effects: []
           range:
             value: '10'
@@ -820,11 +729,10 @@ items:
             max: ''
           sort: 0
           name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       identifier: poison-jab
-      advancement: []
-      cover: null
-      crewed: false
     _id: phbaoiPoisonJab0
     type: feat
     img: icons/creatures/abilities/stinger-poison-green.webp
@@ -841,234 +749,27 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.346'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1740680151903
+      modifiedTime: 1725910039919
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!mmGiantWasp00000.phbaoiPoisonJab0'
-  - _id: mmFlyby000000000
-    name: Flyby
-    type: feat
-    system:
-      type:
-        value: monster
-        subtype: ''
-      activities: {}
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      description:
-        value: >-
-          <p>The [[lookup @name lowercase]] doesn't provoke an
-          &amp;Reference[OpportunityAttacks]{Opportunity Attack} when it flies
-          out of an enemy's reach.</p>
-        chat: ''
-      identifier: flyby
-      source:
-        revision: 1
-        rules: '2024'
-        book: SRD 5.2
-        license: CC-BY-4.0
-      enchant: {}
-      prerequisites:
-        level: null
-        repeatable: false
-      properties:
-        - trait
-      requirements: Flies out of an enemy's reach
-      advancement: []
-      cover: null
-      crewed: false
-    folder: L9Zgr8qAPc3ngKhb
-    img: icons/creatures/abilities/wings-birdlike-blue.webp
-    effects: []
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmFlyby000000000
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745342040498
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    ownership:
-      default: 0
-    sort: 0
-    _key: '!actors.items!mmGiantWasp00000.mmFlyby000000000'
-  - _id: mmSting000000000
-    name: Sting
-    type: weapon
-    system:
-      type:
-        value: natural
-        baseItem: ''
-      activities:
-        ExJB3aZAPF3shVJA:
-          type: attack
-          _id: ExJB3aZAPF3shVJA
-          sort: 0
-          activation:
-            type: action
-            value: null
-            override: false
-            condition: ''
-          consumption:
-            scaling:
-              allowed: false
-            spellSlot: true
-            targets: []
-          description:
-            chatFlavor: ''
-          duration:
-            units: inst
-            concentration: false
-            override: false
-          effects: []
-          range:
-            override: false
-          target:
-            template:
-              contiguous: false
-              units: ft
-              type: ''
-            affects:
-              choice: false
-              type: ''
-            override: false
-            prompt: true
-          uses:
-            spent: 0
-            recovery: []
-            max: ''
-          attack:
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: ''
-            ability: dex
-            bonus: ''
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts:
-              - custom:
-                  enabled: false
-                  formula: ''
-                number: 2
-                denomination: 4
-                bonus: ''
-                types:
-                  - poison
-                scaling:
-                  number: 1
-          name: ''
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      description:
-        value: <p>[[/attack extended]]. [[/damage average extended]].</p>
-        chat: ''
-      identifier: sting
-      source:
-        revision: 1
-        rules: '2024'
-        book: SRD 5.2
-        license: CC-BY-4.0
-      properties: []
-      mastery: ''
-      range:
-        units: ''
-        value: null
-        long: null
-        reach: null
-      damage:
-        base:
-          denomination: 6
-          bonus: ''
-          number: 1
-          types:
-            - piercing
-          custom:
-            enabled: false
-          scaling:
-            number: 1
-        versatile:
-          number: null
-          denomination: null
-          types: []
-          custom:
-            enabled: false
-          scaling:
-            number: 1
-      identified: true
-      unidentified:
-        description: ''
-      container: null
-      quantity: 1
-      weight:
-        value: 0
-        units: lb
-      price:
-        value: 0
-        denomination: gp
-      rarity: ''
-      attunement: ''
-      attuned: false
-      equipped: false
-      cover: null
-      crewed: false
-      ammunition: {}
-      armor:
-        value: null
-      magicalBonus: null
-      proficient: null
-    folder: pSCWWdqMX9eUATRJ
-    img: icons/creatures/abilities/stinger-poison-green.webp
-    effects: []
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
-    _stats:
-      compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSting000000000
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745342040498
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    ownership:
-      default: 0
-    sort: 1
-    _key: '!actors.items!mmGiantWasp00000.mmSting000000000'
+    _key: '!actors.items!phbginGiantWasp0.phbaoiPoisonJab0'
 effects: []
 folder: beGRXWKaYfeeR1Iz
 sort: 300000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    showTokenPortrait: false
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.346'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1740679132333
-  modifiedTime: 1745256820555
+  systemVersion: 4.3.3
+  createdTime: 1724425909606
+  modifiedTime: 1739924551873
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
-_key: '!actors!mmGiantWasp00000'
+_key: '!actors!phbginGiantWasp0'

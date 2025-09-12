@@ -1,4 +1,4 @@
-name: Giant Centipede
+name: Giant Spider
 type: npc
 system:
   details:
@@ -390,7 +390,7 @@ system:
       initiative: null
   source:
     rules: '2024'
-_id: phbginGiantCenti
+_id: phbginGiantSpide
 img: null
 prototypeToken:
   name: Giant Insect
@@ -407,8 +407,8 @@ prototypeToken:
     offsetX: 0
     offsetY: 0
     fit: contain
-    scaleX: 1
-    scaleY: 1
+    scaleX: 2
+    scaleY: 2
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
@@ -466,10 +466,10 @@ prototypeToken:
       background: null
     effects: 1
     subject:
-      scale: 1
+      scale: 2
       texture: null
   flags: {}
-  randomImg: false
+  randomImg: true
   turnMarker:
     mode: 1
     animation: null
@@ -517,10 +517,10 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1725827369657
+      modifiedTime: 1725827369659
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!phbginGiantCenti.phbaoiSpiderClim'
+    _key: '!actors.items!phbginGiantSpide.phbaoiSpiderClim'
   - name: Multiattack
     system:
       description:
@@ -620,10 +620,10 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1725907821422
+      modifiedTime: 1725909823423
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!phbginGiantCenti.phbaoiMultiattac'
+    _key: '!actors.items!phbginGiantSpide.phbaoiMultiattac'
   - name: Poison Jab
     system:
       description:
@@ -753,18 +753,18 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1725907895024
+      modifiedTime: 1725909886318
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!phbginGiantCenti.phbaoiPoisonJab0'
-  - name: Venomous Spew
+    _key: '!actors.items!phbginGiantSpide.phbaoiPoisonJab0'
+  - name: Web Bolt
     system:
       description:
         value: >-
-          <p><em>Constitution Saving Throw:</em> Your spell save DC, one
-          creature the insect can see within 10 feet. <em>Failure:</em> The
-          target has the &amp;Reference[Poisoned apply=false] condition until
-          the start of the insect's next turn.</p>
+          <p> <em>Ranged Attack Roll:</em> Bonus equals your spell attack
+          modifier, range 60 ft. <em>Hit:</em> 1d10 + 3 plus the spell's level
+          Bludgeoning damage, and the target's Speed is reduced to 0 until the
+          start of the insect's next turn.</p>
         chat: ''
       source:
         custom: ''
@@ -783,7 +783,7 @@ items:
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
-          type: save
+          type: attack
           activation:
             type: action
             value: 1
@@ -797,15 +797,14 @@ items:
           description:
             chatFlavor: ''
           duration:
-            value: '1'
-            units: round
+            value: ''
+            units: ''
             special: ''
             override: false
           effects:
-            - _id: uUvxWKSj8qQRIbTK
-              onSave: false
+            - _id: Gvwt9wpCcJgC0yMl
           range:
-            value: '10'
+            value: '60'
             units: ft
             special: ''
             override: false
@@ -819,77 +818,110 @@ items:
               height: ''
               units: ''
             affects:
-              count: '1'
-              type: creature
+              count: ''
+              type: ''
               choice: false
               special: ''
             prompt: true
             override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ranged
+              classification: weapon
           damage:
-            onSave: half
-            parts: []
-          save:
-            ability: con
-            dc:
-              calculation: spellcasting
-              formula: ''
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - number: 1
+                denomination: 10
+                bonus: '@mod'
+                types:
+                  - bludgeoning
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: null
+                  formula: ''
           uses:
             spent: 0
             recovery: []
           sort: 0
       enchant: {}
-      identifier: venomous-spew
-    _id: phbaoiVenomousSp
+      identifier: web-bolt
+    _id: phbaoiWebBoltSpi
     type: feat
-    img: icons/magic/acid/projectile-flame-smoke-green.webp
+    img: icons/creatures/webs/web-spider-moving-blue.webp
     effects:
-      - name: Poisoned
-        img: systems/dnd5e/icons/svg/statuses/poisoned.svg
+      - name: Webbed
         origin: >-
-          Compendium.dnd-players-handbook.actors.Actor.phbginGiantCenti.Item.phbaoiVenomousSp
-        transfer: false
-        _id: uUvxWKSj8qQRIbTK
-        type: base
-        system: {}
-        changes: []
-        disabled: false
+          Compendium.dnd-players-handbook.actors.Actor.phbmobGiantInsec.Item.phbaoiWebBoltSpi
         duration:
+          rounds: 1
           startTime: null
           seconds: null
           combat: null
-          rounds: 1
           turns: null
           startRound: null
           startTurn: null
-        description: >-
-          <p>The target has the &amp;Reference[Poisoned apply=false] condition
-          until the start of the insect’s next turn.</p>
-        tint: '#ffffff'
-        statuses:
-          - poisoned
-        sort: 0
+        disabled: false
         flags: {}
+        img: icons/creatures/invertebrates/spider-web-black.webp
+        _id: Gvwt9wpCcJgC0yMl
+        type: base
+        system: {}
+        changes:
+          - key: system.attributes.movement.walk
+            mode: 3
+            value: '0'
+            priority: null
+          - key: system.attributes.movement.burrow
+            mode: 3
+            value: '0'
+            priority: null
+          - key: system.attributes.movement.climb
+            mode: 3
+            value: '0'
+            priority: null
+          - key: system.attributes.movement.fly
+            mode: 3
+            value: '0'
+            priority: null
+          - key: system.attributes.movement.swim
+            mode: 3
+            value: '0'
+            priority: null
+        description: >-
+          <p><span style="font-family:Signika, sans-serif">The target’s Speed is
+          reduced to 0 until the start of the insect’s next turn.</span></p>
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
         _stats:
           compendiumSource: null
           duplicateSource: null
           coreVersion: '13.346'
           systemId: dnd5e
           systemVersion: 4.0.0
-          createdTime: 1725909404214
-          modifiedTime: 1725909648174
-          lastModifiedBy: dnd5ebuilder0000
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
           exportSource: null
         _key: >-
-          !actors.items.effects!phbginGiantCenti.phbaoiVenomousSp.uUvxWKSj8qQRIbTK
+          !actors.items.effects!phbginGiantSpide.phbaoiWebBoltSpi.Gvwt9wpCcJgC0yMl
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -897,13 +929,13 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1725909404239
+      modifiedTime: 1725909897500
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!phbginGiantCenti.phbaoiVenomousSp'
+    _key: '!actors.items!phbginGiantSpide.phbaoiWebBoltSpi'
 effects: []
 folder: beGRXWKaYfeeR1Iz
-sort: 100000
+sort: 200000
 ownership:
   default: 0
 flags:
@@ -914,8 +946,8 @@ _stats:
   coreVersion: '13.346'
   systemId: dnd5e
   systemVersion: 4.0.0
-  createdTime: 1724425909379
-  modifiedTime: 1726547395290
+  createdTime: 1724425909494
+  modifiedTime: 1726547386434
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
-_key: '!actors!phbginGiantCenti'
+_key: '!actors!phbginGiantSpide'
