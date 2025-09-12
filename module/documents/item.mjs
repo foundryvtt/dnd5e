@@ -1500,12 +1500,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
         const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
         return [
-          scrollIntro,
+          scrollDetails ? scrollIntro : null,
           `<h3>${spell.name} (${game.i18n.format("DND5E.LevelNumber", { level })})</h3>`,
           isConc ? `<p><em>${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}</em></p>` : null,
           spellDescription,
           `<h3>${game.i18n.localize("DND5E.Scroll.Details")}</h3>`,
-          scrollDetails
+          scrollDetails || scrollIntro
         ].filterJoin("");
       case "reference":
         return [
