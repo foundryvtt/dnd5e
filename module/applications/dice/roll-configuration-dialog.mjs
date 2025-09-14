@@ -289,21 +289,20 @@ export default class RollConfigurationDialog extends Dialog5e {
   #buildRolls(config, formData) {
     const RollType = this.rollType;
     this.#rolls = config.rolls?.map((config, index) =>
-      RollType.fromConfig(this._buildConfig(config, formData, index), this.config)
+      RollType.fromConfig(this.#buildConfig(config, formData, index), this.config)
     ) ?? [];
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Prepare individual configuration object before building a roll.
+   * Call the necessary hooks and config building methods before roll is fully built.
    * @param {BasicRollConfiguration} config  Roll configuration data.
    * @param {FormDataExtended} [formData]    Any data entered into the rolling prompt.
    * @param {number} index                   Index of the roll within all rolls being prepared.
    * @returns {BasicRollConfiguration}
-   * @protected
    */
-  _buildConfig(config, formData, index) {
+  #buildConfig(config, formData, index) {
     config = foundry.utils.mergeObject({ parts: [], data: {}, options: {} }, config);
 
     /**
@@ -321,14 +320,7 @@ export default class RollConfigurationDialog extends Dialog5e {
       Hooks.callAll(`dnd5e.build${hookName.capitalize()}RollConfig`, this, config, formData, index);
     }
 
-    const situational = formData?.get(`roll.${index}.situational`);
-    if ( situational && (config.situational !== false) ) {
-      config.parts.push("@situational");
-      config.data.situational = situational;
-    } else {
-      config.parts.findSplice(v => v === "@situational");
-    }
-
+    config = this._buildConfig(config, formData, index);
     this.options.buildConfig?.(this.config, config, formData, index);
 
     /**
@@ -350,6 +342,27 @@ export default class RollConfigurationDialog extends Dialog5e {
       });
     }
 
+    return config;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare individual configuration object before building a roll.
+   * @param {BasicRollConfiguration} config  Roll configuration data.
+   * @param {FormDataExtended} [formData]    Any data entered into the rolling prompt.
+   * @param {number} index                   Index of the roll within all rolls being prepared.
+   * @returns {BasicRollConfiguration}
+   * @protected
+   */
+  _buildConfig(config, formData, index) {
+    const situational = formData?.get(`roll.${index}.situational`);
+    if ( situational && (config.situational !== false) ) {
+      config.parts.push("@situational");
+      config.data.situational = situational;
+    } else {
+      config.parts.findSplice(v => v === "@situational");
+    }
     return config;
   }
 
