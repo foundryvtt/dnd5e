@@ -331,6 +331,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
+   * Active effect that granted this item as a rider.
+   * @type {ActiveEffect5e|null}
+   */
+  get riderOrigin() {
+    return fromUuidSync(this.flags.dnd5e?.riderOrigin, { strict: false }) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Class associated with this subclass. Always returns null on non-subclass or non-embedded items.
    * @type {Item5e|null}
    */

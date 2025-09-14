@@ -92,7 +92,7 @@ export default function ActivityMixin(Base) {
      */
     get canConfigure() {
       if ( CONFIG.DND5E.activityTypes[this.type]?.configurable === false ) return false;
-      if ( fromUuidSync(this.flags?.dnd5e?.enchantment?.origin, { strict: false })?.disabled ) return false;
+      if ( this.riderOrigin?.disabled ) return false;
       return true;
     }
 
@@ -103,7 +103,7 @@ export default function ActivityMixin(Base) {
      * @type {boolean}
      */
     get canUse() {
-      if ( fromUuidSync(this.flags?.dnd5e?.enchantment?.origin, { strict: false })?.disabled ) return false;
+      if ( this.riderOrigin?.disabled ) return false;
       return !this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id);
     }
 
@@ -139,6 +139,16 @@ export default function ActivityMixin(Base) {
      */
     get relativeUUID() {
       return `.Item.${this.item.id}.Activity.${this.id}`;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Active effect that granted this activity as a rider.
+     * @type {ActiveEffect5e|null}
+     */
+    get riderOrigin() {
+      return this.item.effects.get(this.flags?.dnd5e?.riderOrigin) ?? null;
     }
 
     /* -------------------------------------------- */
