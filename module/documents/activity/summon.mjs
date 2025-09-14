@@ -460,7 +460,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
           origin: this.uuid,
           type: "enchantment"
         })).toObject();
-        actorUpdates.items.push({ _id: item.id, effects: [effect] });
+        actorUpdates.items.push({ _id: item.id, effects: [effect, ...item.effects.map(e => e.toObject())] });
       }
     }
 
