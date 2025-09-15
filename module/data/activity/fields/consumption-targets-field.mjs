@@ -281,7 +281,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @throws ConsumptionError
    */
   static async consumeMaterial(config, updates) {
-    const item = this.target ? this.actor.items.get(this.target) : this.item;
+    const item = this.actor.items.get(this.target);
     if ( !item ) throw new ConsumptionError(game.i18n.format("DND5E.CONSUMPTION.Warning.MissingItem", {
       activity: this.activity.name, item: this.item.name
     }));
@@ -528,18 +528,19 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   static consumptionLabelsMaterial(config, { consumed }={}) {
     const { cost, simplifiedCost, increaseKey } = this._resolveHintCost(config);
     const item = this.actor.items.get(this.target);
-    const quantity = (item ?? this.item).system.quantity;
+    const quantity = item?.system.quantity ?? 0;
     return {
       label: game.i18n.localize(`DND5E.CONSUMPTION.Type.Material.Prompt${increaseKey}`),
       hint: game.i18n.format(
         `DND5E.CONSUMPTION.Type.Material.PromptHint${increaseKey}`,
         {
           cost,
-          item: item ? `<em>${item.name}</em>` : game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem").toLowerCase(),
+          item: item ? `<em>${item.name}</em>`
+            : game.i18n.localize("DND5E.CONSUMPTION.Target.UnknownItem").toLowerCase(),
           quantity: formatNumber(quantity)
         }
       ),
-      warn: simplifiedCost > quantity
+      warn: !item || (simplifiedCost > quantity)
     };
   }
 
@@ -669,7 +670,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    */
   static validMaterialTargets() {
     return (this.actor?.items ?? [])
-      .filter(i => ["consumable", "loot"].includes(i.type) && !i.system.activities?.size)
+      .filter(i => ["consumable", "loot"].includes(i.type))
       .map(i => ({ value: i.id, label: `${i.name} (${formatNumber(i.system.quantity)})` }));
   }
 
