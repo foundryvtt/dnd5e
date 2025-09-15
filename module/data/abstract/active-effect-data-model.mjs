@@ -31,6 +31,17 @@ export default class ActiveEffectDataModel extends (ActiveEffectTypeDataModel ??
   /* -------------------------------------------- */
 
   /**
+   * Should this status effect be hidden from the current user? Concealed effects are still applied, but won't be
+   * visible on the actor's token or in the effects list on sheets.
+   * @type {boolean}
+   */
+  get isConcealed() {
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Item within which this effect is contained, if any.
    * @type {Item5e|void}
    */
