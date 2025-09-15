@@ -292,7 +292,8 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     context.enriched = {
       description: await TextEditor.enrichHTML(this.item.system.description.value, enrichmentOptions),
       unidentified: await TextEditor.enrichHTML(this.item.system.unidentified?.description, enrichmentOptions),
-      chat: await TextEditor.enrichHTML(this.item.system.description.chat, enrichmentOptions)
+      chat: await TextEditor.enrichHTML(this.item.system.description.chat, enrichmentOptions),
+      gmOnly: await TextEditor.enrichHTML(this.item.system.description.gmOnly, enrichmentOptions)
     };
     if ( this.editingDescriptionTarget ) context.editingDescription = {
       target: this.editingDescriptionTarget,
