@@ -64,6 +64,12 @@
                 enriched=enriched.chat }}
             {{/if}}
 
+            {{!-- Only GM users can see the gm-only description, unless revealed. --}}
+            {{#if (or item.system.description.revealed user.isGM)}}
+            {{> ".description" collapsible=true label="DND5E.DescriptionGMOnly" target="system.description.gmOnly"
+                enriched=enriched.gmOnly }}
+            {{/if}}
+
         {{else}}
 
         {{!-- When unidentified, non-GM users can only see and edit the unidentified description --}}

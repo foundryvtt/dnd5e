@@ -2,7 +2,7 @@ import SystemDataModel from "../../abstract/system-data-model.mjs";
 import IdentifierField from "../../fields/identifier-field.mjs";
 import SourceField from "../../shared/source-field.mjs";
 
-const { SchemaField, HTMLField } = foundry.data.fields;
+const { BooleanField, SchemaField, HTMLField } = foundry.data.fields;
 
 /**
  * @import { CompendiumBrowserFilterDefinitionEntry } from "../../../applications/compendium-browser.mjs";
@@ -20,7 +20,9 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
     return {
       description: new SchemaField({
         value: new HTMLField({ required: true, nullable: true, label: "DND5E.Description" }),
-        chat: new HTMLField({ required: true, nullable: true, label: "DND5E.DescriptionChat" })
+        chat: new HTMLField({ required: true, nullable: true, label: "DND5E.DescriptionChat" }),
+        gmOnly: new HTMLField({ required: true, nullable: true, label: "DND5E.DescriptionGMOnly", gmOnly: true }),
+        revealed: new BooleanField()
       }),
       identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),
       source: new SourceField()
