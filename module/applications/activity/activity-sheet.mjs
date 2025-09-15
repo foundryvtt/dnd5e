@@ -435,10 +435,13 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     const types = this.activity.validConsumptionTypes;
     const existingTypes = new Set(this.activity.consumption.targets.map(t => t.type));
     const filteredTypes = types.difference(existingTypes);
+    let type = filteredTypes.first() ?? types.first();
+    if ( (type === "activityUses") && !this.activity.uses.max && this.activity.item.system.uses.max
+      && filteredTypes.has("itemUses") ) type="itemUses";
     this.activity.update({
       "consumption.targets": [
         ...this.activity.toObject().consumption.targets,
-        { type: filteredTypes.first() ?? types.first() }
+        { type }
       ]
     });
   }
