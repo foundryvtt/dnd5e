@@ -1,3 +1,5 @@
+import CreateDocumentDialog from "../../applications/create-document-dialog.mjs";
+
 /**
  * A mixin which extends a DataModel to provide behavior shared between activities & advancements.
  * @template {DataModel} T
@@ -259,57 +261,9 @@ export default function PseudoDocumentMixin(Base) {
      * @param {string[]|null} [context.types]  A list of types to restrict the choices to, or null for no restriction.
      * @returns {Promise<PseudoDocument|null>}
      */
-    static async createDialog(data={}, { parent, types=null, ...options }={}) {
-      types ??= this._createDialogTypes(parent);
-      if ( !types.length || !parent ) return null;
-
-      const label = game.i18n.localize(`DOCUMENT.DND5E.${this.documentName}`);
-      const title = game.i18n.format("DOCUMENT.Create", { type: label });
-      let type = data.type;
-
-      if ( !types.includes(type) ) type = types[0];
-      const content = await foundry.applications.handlebars.renderTemplate(
-        "systems/dnd5e/templates/apps/document-create.hbs",
-        {
-          name, type,
-          types: types.map(t => {
-            const data = this._createDialogData(t, parent);
-            data.svg = data.icon?.endsWith(".svg");
-            return data;
-          }).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
-        }
-      );
-      return Dialog.prompt({
-        title, content,
-        label: title,
-        render: html => {
-          const app = html.closest(".app");
-          const folder = app.querySelector("select");
-          if ( folder ) app.querySelector(".dialog-buttons").insertAdjacentElement("afterbegin", folder);
-          app.querySelectorAll(".window-header .header-button").forEach(btn => {
-            const label = btn.innerText;
-            const icon = btn.querySelector("i");
-            btn.innerHTML = icon.outerHTML;
-            btn.dataset.tooltip = label;
-            btn.setAttribute("aria-label", label);
-          });
-          app.querySelector(".document-name").select();
-        },
-        callback: html => {
-          const form = html.querySelector("form");
-          if ( !form.checkValidity() ) {
-            throw new Error(game.i18n.format("DOCUMENT.DND5E.Warning.SelectType", { name: label }));
-          }
-          const fd = new foundry.applications.ux.FormDataExtended(form);
-          const createData = foundry.utils.mergeObject(data, fd.object, { inplace: false });
-          if ( !createData.name?.trim() ) delete createData.name;
-          // TODO: Temp patch until advancement data is migrated (https://github.com/foundryvtt/dnd5e/issues/5782)
-          else if ( this.documentName === "Advancement" ) createData.title = createData.name;
-          parent[`create${this.documentName}`](createData.type, createData);
-        },
-        rejectClose: false,
-        options: { ...options, jQuery: false, width: 350, classes: ["dnd5e2", "create-document", "dialog"] }
-      });
+    static async createDialog(data={}, createOptions={}, dialogOptions={}) {
+      CreateDocumentDialog.migrateOptions(createOptions, dialogOptions);
+      return CreateDocumentDialog.prompt(this, data, createOptions, dialogOptions);
     }
 
     /* -------------------------------------------- */

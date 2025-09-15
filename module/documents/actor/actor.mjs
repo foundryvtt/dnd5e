@@ -1,5 +1,6 @@
 import ShortRestDialog from "../../applications/actor/rest/short-rest-dialog.mjs";
 import LongRestDialog from "../../applications/actor/rest/long-rest-dialog.mjs";
+import CreateDocumentDialog from "../../applications/create-document-dialog.mjs";
 import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import TravelField from "../../data/actor/fields/travel-field.mjs";
@@ -38,6 +39,11 @@ import * as Trait from "./trait.mjs";
  * Extend the base Actor class to implement additional system-specific logic.
  */
 export default class Actor5e extends SystemDocumentMixin(Actor) {
+
+  /** @override */
+  static DEFAULT_ICON = "systems/dnd5e/icons/svg/documents/actor.svg";
+
+  /* -------------------------------------------- */
 
   /**
    * Lazily computed store of classes, subclasses, background, and species.
@@ -3233,6 +3239,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static async createDialog(data={}, createOptions={}, dialogOptions={}) {
+    CreateDocumentDialog.migrateOptions(createOptions, dialogOptions);
+    return CreateDocumentDialog.prompt(this, data, createOptions, dialogOptions);
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */

@@ -2,6 +2,7 @@ import ActivityChoiceDialog from "../applications/activity/activity-choice-dialo
 import AdvancementManager from "../applications/advancement/advancement-manager.mjs";
 import AdvancementConfirmationDialog from "../applications/advancement/advancement-confirmation-dialog.mjs";
 import ContextMenu5e from "../applications/context-menu.mjs";
+import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
 import CreateScrollDialog from "../applications/item/create-scroll-dialog.mjs";
 import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
@@ -30,6 +31,11 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * Override and extend the basic Item implementation.
  */
 export default class Item5e extends SystemDocumentMixin(Item) {
+
+  /** @override */
+  static DEFAULT_ICON = "systems/dnd5e/icons/svg/documents/item.svg";
+
+  /* -------------------------------------------- */
 
   /**
    * Caches an item linked to this one, such as a subclass associated with a class.
@@ -937,12 +943,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {string} type                          Type of advancement to create.
    * @param {object} [data]                        Data to use when creating the advancement.
    * @param {object} [options]
-   * @param {boolean} [options.showConfig=true]    Should the new advancement's configuration application be shown?
+   * @param {boolean} [options.renderSheet=true]   Should the advancement's sheet be rendered after creation?
+   * @param {boolean} [options.showConfig]         Deprecated, use `renderSheet`.
    * @param {boolean} [options.source=false]       Should a source-only update be performed?
    * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for new advancement if local
    *                                               is `false`, or item with newly added advancement.
    */
-  createAdvancement(type, data={}, { showConfig=true, source=false }={}) {
+  createAdvancement(type, data={}, { renderSheet=true, showConfig=renderSheet, source=false }={}) {
     if ( !this.system.advancement ) return this;
 
     const config = CONFIG.DND5E.advancementTypes[type];
@@ -1505,69 +1512,22 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static async createDialog(data={}, createOptions={}, dialogOptions={}) {
+    CreateDocumentDialog.migrateOptions(createOptions, dialogOptions);
+    return CreateDocumentDialog.prompt(this, data, createOptions, dialogOptions);
+  }
+
+  /* -------------------------------------------- */
+
   /**
-   * Spawn a dialog for creating a new Item.
-   * @param {object} [data]  Data to pre-populate the Item with.
-   * @param {object} [context]
-   * @param {Actor5e} [context.parent]       A parent for the Item.
-   * @param {string|null} [context.pack]     A compendium pack the Item should be placed in.
-   * @param {string[]|null} [context.types]  A list of types to restrict the choices to, or null for no restriction.
-   * @returns {Promise<Item5e|null>}
+   * Prepare default list of types if none are specified.
+   * @param {Actor5e} parent  Parent document within which this Item will be created.
+   * @returns {string[]}
+   * @protected
    */
-  static async createDialog(data={}, { parent=null, pack=null, types=null, ...options }={}) {
-    types ??= game.documentTypes[this.documentName].filter(t => (t !== CONST.BASE_DOCUMENT_TYPE) && (t !== "backpack"));
-    if ( !types.length ) return null;
-    const collection = parent ? null : pack ? game.packs.get(pack) : game.collections.get(this.documentName);
-    const folders = collection?._formatFolderSelectOptions() ?? [];
-    const label = game.i18n.localize(this.metadata.label);
-    const title = game.i18n.format("DOCUMENT.Create", { type: label });
-    const name = data.name || game.i18n.format("DOCUMENT.New", { type: label });
-    let type = data.type || CONFIG[this.documentName]?.defaultType;
-    const content = await foundry.applications.handlebars.renderTemplate(
-      "systems/dnd5e/templates/apps/document-create.hbs",
-      {
-        folders, name, type,
-        folder: data.folder,
-        hasFolders: folders.length > 0,
-        types: types.map(type => {
-          const label = CONFIG[this.documentName]?.typeLabels?.[type] ?? type;
-          const data = {
-            type,
-            label: game.i18n.has(label) ? game.i18n.localize(label) : type,
-            icon: this.getDefaultArtwork({ type })?.img ?? "icons/svg/item-bag.svg"
-          };
-          data.svg = data.icon?.endsWith(".svg");
-          return data;
-        }).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
-      }
-    );
-    return Dialog.prompt({
-      title, content,
-      label: title,
-      render: html => {
-        const app = html.closest(".app");
-        const folder = app.querySelector("select");
-        if ( folder ) app.querySelector(".dialog-buttons").insertAdjacentElement("afterbegin", folder);
-        app.querySelectorAll(".window-header .header-button").forEach(btn => {
-          const label = btn.innerText;
-          const icon = btn.querySelector("i");
-          btn.innerHTML = icon.outerHTML;
-          btn.dataset.tooltip = label;
-          btn.setAttribute("aria-label", label);
-        });
-        app.querySelector(".document-name").select();
-      },
-      callback: html => {
-        const form = html.querySelector("form");
-        const fd = new foundry.applications.ux.FormDataExtended(form);
-        const createData = foundry.utils.mergeObject(data, fd.object, { inplace: false });
-        if ( !createData.folder ) delete createData.folder;
-        if ( !createData.name?.trim() ) createData.name = this.defaultName();
-        return this.create(createData, { parent, pack, renderSheet: true });
-      },
-      rejectClose: false,
-      options: { ...options, jQuery: false, width: 350, classes: ["dnd5e2", "create-document", "dialog"] }
-    });
+  static _createDialogTypes(parent) {
+    return this.TYPES.filter(t => t !== "backpack");
   }
 
   /* -------------------------------------------- */

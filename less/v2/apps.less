@@ -1908,7 +1908,12 @@ dialog.dnd5e2.application {
 /* ---------------------------------- */
 
 .dnd5e2.create-document {
-  form header { padding: 0 .5rem; }
+  &:not(.minimized) .window-header {
+    margin-block-end: 0;
+    .window-title { display: none; }
+  }
+  .window-content header { padding: 0 .5rem; }
+  [data-application-part="content"] { display: contents; }
 
   .document-name {
     font-family: var(--dnd5e-font-roboto-slab);
@@ -1917,7 +1922,7 @@ dialog.dnd5e2.application {
     text-align: center;
     background: none;
 
-    &:hover, &:focus, &:focus-visible { box-shadow: none; }
+    &:enabled:is(:hover, :focus, :focus-visible) { box-shadow: none; }
   }
 
   ol {
@@ -1966,7 +1971,7 @@ dialog.dnd5e2.application {
     flex: none;
   }
 
-  .dialog-buttons {
+  .form-footer {
     flex-wrap: wrap;
     select {
       flex: 1;
