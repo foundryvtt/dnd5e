@@ -27,7 +27,7 @@
                 <div class="field-group">
                     {{ formField fields.target name=(concat prefix "target") value=selectedTarget options=validTargets
                                  placeholder=targetPlaceholder label="DND5E.Target" localize=true hint=false
-                                 classes="label-top" }}
+                                 blank=(not validTargets) classes="label-top" }}
                 </div>
                 {{/if}}
                 <div class="field-group">
