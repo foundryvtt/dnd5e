@@ -101,6 +101,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @type {boolean}
    */
   get isConcealed() {
+    if ( this.system.isConcealed ) return true;
+    if ( this.dependentOrigin?.active === false ) return true;
+    if ( (this.parent.system?.identified === false) && !game.user.isGM ) return true;
     if ( this.target?.testUserPermission(game.user, "OBSERVER") ) return false;
 
     // Hide bloodied status effect from players unless the token is friendly
@@ -165,6 +168,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       data.type = "enchantment";
       delete data.flags.dnd5e.type;
       foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
+    }
+
+    else if ( (data.type === "base") && data.statuses.includes(CONFIG.specialStatusEffects.CONCENTRATING) ) {
+      // TODO: Hold concentration-based effects back to be migrated to activation-type effects
+      // See: https://github.com/foundryvtt/dnd5e/issues/4425
     }
 
     else if ( data.type === "base" ) {
