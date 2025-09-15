@@ -1093,6 +1093,7 @@ DND5E.activityConsumptionTypes = {
     label: "DND5E.CONSUMPTION.Type.ItemUses.Label",
     consume: ConsumptionTargetData.consumeItemUses,
     consumptionLabels: ConsumptionTargetData.consumptionLabelsItemUses,
+    nonEmbeddedHint: "DND5E.CONSUMPTION.Type.ItemUses.NonEmbeddedHint",
     targetRequiresEmbedded: true,
     validTargets: ConsumptionTargetData.validItemUsesTargets
   },
@@ -1100,6 +1101,7 @@ DND5E.activityConsumptionTypes = {
     label: "DND5E.CONSUMPTION.Type.Material.Label",
     consume: ConsumptionTargetData.consumeMaterial,
     consumptionLabels: ConsumptionTargetData.consumptionLabelsMaterial,
+    nonEmbeddedHint: "DND5E.CONSUMPTION.Type.Material.NonEmbeddedHint",
     targetRequiresEmbedded: true,
     validTargets: ConsumptionTargetData.validMaterialTargets
   },
@@ -1120,6 +1122,7 @@ DND5E.activityConsumptionTypes = {
     label: "DND5E.CONSUMPTION.Type.Attribute.Label",
     consume: ConsumptionTargetData.consumeAttribute,
     consumptionLabels: ConsumptionTargetData.consumptionLabelsAttribute,
+    nonEmbeddedHint: "DND5E.CONSUMPTION.Type.Attribute.NonEmbeddedHint",
     targetRequiresEmbedded: true,
     validTargets: ConsumptionTargetData.validAttributeTargets
   }
