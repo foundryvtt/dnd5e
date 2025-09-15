@@ -1161,7 +1161,11 @@ export default class CompendiumBrowser extends Application5e {
         })
 
         // Remove any documents that don't match the specified types or the provided filters
-        .filter(i => (!types.size || types.has(i.type)) && (!filters.length || Filter.performCheck(i, filters)))
+        .filter(i =>
+          (!types.size || (types.has(i.type)
+            && (!p.metadata.flags.dnd5e?.types || p.metadata.flags.dnd5e.types.includes(i.type))))
+            && (!filters.length || Filter.performCheck(i, filters))
+        )
 
         // If full documents are required, retrieve those, otherwise stick with the indices
         .map(async i => index ? i : await fromUuid(i.uuid))
