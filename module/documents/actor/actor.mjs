@@ -1263,12 +1263,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @memberof hookEvents
      * @param {D20Roll[]} rolls       The resulting rolls.
      * @param {object} data
+     * @param {string} data.ability   Ability used as defined in `CONFIG.DND5E.abilities`.
      * @param {string} [data.skill]   ID of the skill that was rolled as defined in `CONFIG.DND5E.skills`.
      * @param {string} [data.tool]    ID of the tool that was rolled as defined in `CONFIG.DND5E.tools`.
      * @param {Actor5e} data.subject  Actor for which the roll has been performed.
      */
-    Hooks.callAll(`dnd5e.roll${name}`, rolls, { [type]: config[type], subject: this });
-    Hooks.callAll(`dnd5e.roll${name}V2`, rolls, { [type]: config[type], subject: this });
+    const data = { ability: rollConfig.ability, [type]: rollConfig[type], subject: this };
+    Hooks.callAll(`dnd5e.roll${name}`, rolls, data);
+    Hooks.callAll(`dnd5e.roll${name}V2`, rolls, data);
 
     return oldFormat ? rolls[0] : rolls;
   }
