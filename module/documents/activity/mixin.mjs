@@ -1247,10 +1247,21 @@ export default function ActivityMixin(Base) {
     /*  Importing and Exporting                     */
     /* -------------------------------------------- */
 
+    /**
+     * Can an activity of this type be added to the provided item?
+     * @param {Item5e} item  Candidate item to which the activity might be added.
+     * @returns {boolean}    Should this activity be available?
+     */
+    static availableForItem(item) {
+      return true;
+    }
+
+    /* -------------------------------------------- */
+
     /** @override */
     static _createDialogTypes(parent) {
       return Object.entries(CONFIG.DND5E.activityTypes)
-        .filter(([, { configurable }]) => configurable !== false)
+        .filter(([, c]) => (c.configurable !== false) && c.documentClass.availableForItem(parent))
         .map(([k]) => k);
     }
   }

@@ -621,12 +621,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   /** @override */
   _addDocument() {
     if ( this.tabGroups.primary === "activities" ) {
-      return dnd5e.documents.activity.UtilityActivity.createDialog({}, {
-        parent: this.item,
-        types: Object.entries(CONFIG.DND5E.activityTypes).filter(([, { configurable }]) => {
-          return configurable !== false;
-        }).map(([k]) => k)
-      });
+      return dnd5e.documents.activity.UtilityActivity.createDialog({}, { parent: this.item });
     }
 
     if ( this.tabGroups.primary === "advancement" ) {
