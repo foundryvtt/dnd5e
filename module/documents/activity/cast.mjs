@@ -175,4 +175,13 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
 
     return changes;
   }
+
+  /* -------------------------------------------- */
+  /*  Importing and Exporting                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static availableForItem(item) {
+    return item.type !== "spell";
+  }
 }
