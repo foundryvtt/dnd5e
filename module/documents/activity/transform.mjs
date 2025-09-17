@@ -28,6 +28,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
       type: "transform",
       img: "systems/dnd5e/icons/svg/activity/transform.svg",
       title: "DND5E.TRANSFORM.Title",
+      hint: "DND5E.TRANSFORM.Hint",
       sheetClass: TransformSheet,
       usage: {
         actions: {

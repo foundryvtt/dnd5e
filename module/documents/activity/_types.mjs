@@ -11,6 +11,7 @@
  * @property {string} type                              Type name of this activity.
  * @property {string} img                               Default icon.
  * @property {string} title                             Default title.
+ * @property {string} [hint]                            Hint about how this activity type functions.
  * @property {typeof ActivitySheet} sheetClass          Sheet class used to configure this activity.
  * @property {object} usage
  * @property {Record<string, Function>} usage.actions   Actions that can be triggered from the chat card.

@@ -31,6 +31,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       type: "summon",
       img: "systems/dnd5e/icons/svg/activity/summon.svg",
       title: "DND5E.SUMMON.Title",
+      hint: "DND5E.SUMMON.Hint",
       sheetClass: SummonSheet,
       usage: {
         actions: {

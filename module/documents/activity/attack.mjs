@@ -30,6 +30,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
       type: "attack",
       img: "systems/dnd5e/icons/svg/activity/attack.svg",
       title: "DND5E.ATTACK.Title.one",
+      hint: "DND5E.ATTACK.Hint",
       sheetClass: AttackSheet,
       usage: {
         actions: {

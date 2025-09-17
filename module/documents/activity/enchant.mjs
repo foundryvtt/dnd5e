@@ -22,6 +22,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       type: "enchant",
       img: "systems/dnd5e/icons/svg/activity/enchant.svg",
       title: "DND5E.ENCHANT.Title",
+      hint: "DND5E.ENCHANT.Hint",
       sheetClass: EnchantSheet,
       usage: {
         dialog: EnchantUsageDialog

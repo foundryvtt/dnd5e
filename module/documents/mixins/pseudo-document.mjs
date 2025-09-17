@@ -277,9 +277,11 @@ export default function PseudoDocumentMixin(Base) {
      */
     static _createDialogData(type, parent) {
       const label = this.documentConfig[type]?.documentClass?.metadata?.title;
+      const hint = this.documentConfig[type]?.documentClass?.metadata?.hint;
       return {
         type,
         label: game.i18n.has(label) ? game.i18n.localize(label) : type,
+        hint: game.i18n.has(hint) ? game.i18n.localize(hint) : null,
         icon: this.documentConfig[type]?.documentClass?.metadata?.img
       };
     }
