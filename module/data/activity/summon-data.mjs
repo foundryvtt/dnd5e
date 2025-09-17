@@ -91,7 +91,7 @@ export default class SummonActivityData extends BaseActivityData {
 
   /** @inheritDoc */
   get ability() {
-    return this.match.ability || super.ability || this.item.abilityMod || this.actor?.system.spellcastingAbility;
+    return this.match.ability || super.ability || this.item.abilityMod || this.actor?.spellcastingAbility;
   }
 
   /* -------------------------------------------- */
