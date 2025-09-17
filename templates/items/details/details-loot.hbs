@@ -3,12 +3,12 @@
 
     {{!-- Loot Type --}}
     {{ formField fields.type.fields.value label="DND5E.ItemLootType" value=source.type.value choices=CONFIG.lootTypes
-                 labelAttr="label" blank="" localize=true }}
+                 labelAttr="label" blank="" localize=true rootId=partId }}
 
     {{!-- Loot Subtype --}}
     {{#if itemSubtypes}}
     {{ formField fields.type.fields.subtype value=source.type.subtype choices=itemSubtypes blank=""
-                 label=(localize "DND5E.ItemLootSubtype" category=(lookup (lookup CONFIG.lootTypes source.type.value) "label")) }}
+                 label=(localize "DND5E.ItemLootSubtype" category=(lookup (lookup CONFIG.lootTypes source.type.value) "label")) rootId=partId }}
     {{/if}}
 
     {{!-- Loot Properties --}}

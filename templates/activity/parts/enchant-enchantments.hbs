@@ -50,7 +50,7 @@
         <span>{{ localize "DND5E.AdditionalSettings" }}</span>
         <i class="fas fa-caret-down" inert></i>
     </label>
-    <div class="collapsible-content">
+    <div class="collapsible-content">{{log this partId @root.partId}}
         <div class="wrapper">
             <div class="form-group">
                 <label>{{ localize "DND5E.ENCHANT.FIELDS.effects.element.level.label" }}</label>
@@ -65,9 +65,12 @@
                 <p class="hint">{{ localize "DND5E.ENCHANT.FIELDS.effects.element.level.hint" }}</p>
             </div>
             {{#with fields.riders.fields as |fields|}}
-            {{ formField fields.activity name=(concat ../prefix "riders.activity") options=../activityOptions }}
-            {{ formField fields.effect name=(concat ../prefix "riders.effect") options=../effectOptions }}
-            {{ formField fields.item name=(concat ../prefix "riders.item") value=../data.riders.item }}
+            {{ formField fields.activity name=(concat ../prefix "riders.activity") options=../activityOptions
+                         rootId=@root.partId }}
+            {{ formField fields.effect name=(concat ../prefix "riders.effect") options=../effectOptions
+                         rootId=@root.partId }}
+            {{ formField fields.item name=(concat ../prefix "riders.item") value=../data.riders.item
+                         rootId=@root.partId }}
             {{/with}}
         </div>
     </div>

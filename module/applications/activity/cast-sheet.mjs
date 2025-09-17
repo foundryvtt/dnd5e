@@ -42,8 +42,8 @@ export default class CastSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareEffectContext(context) {
-    context = await super._prepareEffectContext(context);
+  async _prepareEffectContext(context, options) {
+    context = await super._prepareEffectContext(context, options);
 
     if ( context.spell ) {
       context.contentLink = context.spell.toAnchor().outerHTML;
@@ -67,8 +67,8 @@ export default class CastSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareIdentityContext(context) {
-    context = await super._prepareIdentityContext(context);
+  async _prepareIdentityContext(context, options) {
+    context = await super._prepareIdentityContext(context, options);
     context.behaviorFields = [{
       field: context.fields.spell.fields.spellbook,
       value: context.source.spell.spellbook,

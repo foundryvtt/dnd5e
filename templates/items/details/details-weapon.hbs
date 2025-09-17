@@ -3,22 +3,22 @@
 
     {{!-- Weapon Type --}}
     {{ formField fields.type.fields.value value=source.type.value label="DND5E.ItemWeaponType" localize=true
-                 choices=CONFIG.weaponTypes }}
+                 choices=CONFIG.weaponTypes rootId=partId }}
 
     {{!-- Weapon Base --}}
     {{#if baseItemOptions.length}}
     {{ formField fields.type.fields.baseItem value=source.type.baseItem label="DND5E.ItemWeaponBase" localize=true
-                 options=baseItemOptions }}
+                 options=baseItemOptions rootId=partId }}
     {{/if}}
 
     {{!-- Proficiency --}}
     {{#unless system.isMountable}}
     {{ formField fields.proficient value=source.proficient blank="DND5E.Automatic" localize=true
-                 choices=CONFIG.weaponAndArmorProficiencyLevels }}
+                 choices=CONFIG.weaponAndArmorProficiencyLevels rootId=partId }}
     {{/unless}}
 
     {{!-- Weapon Mastery --}}
-    {{ formField fields.mastery value=source.mastery choices=CONFIG.weaponMasteries labelAttr="label" }}
+    {{ formField fields.mastery value=source.mastery choices=CONFIG.weaponMasteries labelAttr="label" rootId=partId }}
 
     {{!-- Weapon Properties --}}
     {{ formField fields.properties options=properties.options label="DND5E.ItemWeaponProperties" localize=true
@@ -51,14 +51,15 @@
 
             {{!-- Magical Bonus --}}
             {{ formField fields.magicalBonus value=source.magicalBonus step=1 placeholder="0" label="DND5E.Bonus"
-                         localize=true classes="label-top" }}
+                         localize=true classes="label-top" rootId=partId }}
         </div>
     </div>
     {{/if}}
 
     {{!-- Ammunition Type --}}
     {{#if properties.object.amm}}
-    {{ formField fields.ammunition.fields.type value=source.ammunition.type choices=CONFIG.consumableTypes.ammo.subtypes }}
+    {{ formField fields.ammunition.fields.type value=source.ammunition.type choices=CONFIG.consumableTypes.ammo.subtypes
+                 rootId=partId }}
     {{/if}}
 </fieldset>
 
@@ -73,24 +74,24 @@
 
             {{!-- Normal --}}
             {{ formField fields.range.fields.value value=source.range.value label="DND5E.Normal" localize=true
-                         hint=false classes="label-top" }}
+                         hint=false classes="label-top" rootId=partId }}
 
             {{!-- Long --}}
             {{ formField fields.range.fields.long value=source.range.long label="DND5E.Long" localize=true
-                         hint=false classes="label-top" }}
+                         hint=false classes="label-top" rootId=partId }}
 
             {{!-- Reach --}}
             {{#if (not (eq system.attackType "ranged"))}}
             {{ formField fields.range.fields.reach value=source.range.reach label="DND5E.RANGE.FIELDS.range.reach.label"
                          placeholder=(ifThen (eq system.range.reach null) "—" system.range.reach) localize=true
-                         classes="label-top" }}
+                         classes="label-top" rootId=partId }}
             {{/if}}
         </div>
     </div>
 
     {{!-- Units --}}
     {{ formField fields.range.fields.units value=source.range.units label="DND5E.MovementUnits" localize=true hint=false
-                 choices=CONFIG.movementUnits }}
+                 choices=CONFIG.movementUnits rootId=partId }}
 
     {{else}}
 
@@ -102,12 +103,12 @@
             {{#if (eq system.attackType "melee")}}
             {{ formField fields.range.fields.reach value=source.range.reach label="DND5E.RANGE.FIELDS.range.reach.label"
                          placeholder=(ifThen (eq system.range.reach null) "—" system.range.reach) classes="label-top"
-                         localize=true }}
+                         localize=true rootId=partId }}
             {{/if}}
 
             {{!-- Units --}}
             {{ formField fields.range.fields.units value=source.range.units label="DND5E.MovementUnits" localize=true
-                         hint=false choices=CONFIG.movementUnits classes="label-top" }}
+                         hint=false choices=CONFIG.movementUnits classes="label-top" rootId=partId }}
         </div>
     </div>
 

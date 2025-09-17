@@ -3,14 +3,14 @@
 
     {{!-- Spellcasting Progression --}}
     {{ formField fields.spellcasting.fields.progression value=source.spellcasting.progression localize=true
-                 options=spellProgression }}
+                 options=spellProgression rootId=partId }}
 
     {{!-- Spellcasting Ability --}}
     {{ formField fields.spellcasting.fields.ability value=source.spellcasting.ability choices=CONFIG.abilities
-                 labelAttr="label" blank="" localize=true }}
+                 labelAttr="label" blank="" localize=true rootId=partId }}
 
     {{!-- Preparation Formula --}}
     {{ formField fields.spellcasting.fields.preparation.fields.formula value=source.spellcasting.preparation.formula
-                 localize=true placeholder="—" }}
+                 localize=true placeholder="—" rootId=partId }}
 
 </fieldset>

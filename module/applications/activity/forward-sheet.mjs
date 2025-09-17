@@ -31,8 +31,8 @@ export default class ForwardSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareActivationContext(context) {
-    context = await super._prepareActivationContext(context);
+  async _prepareActivationContext(context, options) {
+    context = await super._prepareActivationContext(context, options);
     context.showConsumeSpellSlot = false;
     context.showScaling = true;
     return context;
@@ -41,8 +41,8 @@ export default class ForwardSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareEffectContext(context) {
-    context = await super._prepareEffectContext(context);
+  async _prepareEffectContext(context, options) {
+    context = await super._prepareEffectContext(context, options);
     context.activityOptions = [
       { value: "", label: "" },
       ...this.item.system.activities.contents
@@ -55,8 +55,8 @@ export default class ForwardSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareIdentityContext(context) {
-    context = await super._prepareIdentityContext(context);
+  async _prepareIdentityContext(context, options) {
+    context = await super._prepareIdentityContext(context, options);
     context.behaviorFields = [];
     return context;
   }
