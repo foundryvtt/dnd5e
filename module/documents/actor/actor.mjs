@@ -2883,10 +2883,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       ) : null;
       const profDiff = source.system.attributes.prof - this.system.attributes.prof;
       d.items = d.items.map(i => {
-        if ( settings.keep.has("class") && ((i.type === "feat") || (i.type === "weapon")) ) {
+        if ( settings.keep.has("class") && ((i.type === "feat") || (i.type === "weapon")) && profDiff ) {
           // Items gained from the source should use the source's proficiency bonus.
           Object.values(i.system.activities).forEach(activity => {
-            if ( activity.type === "attack" ) activity.attack.bonus += ` ${profDiff < 0 ? "" : "+"}${profDiff}`;
+            if ( activity.type === "attack" ) {
+              activity.attack.bonus ??= "";
+              activity.attack.bonus += ` ${profDiff < 0 ? "" : "+"}${profDiff}`;
+            }
           });
         }
         return i;
