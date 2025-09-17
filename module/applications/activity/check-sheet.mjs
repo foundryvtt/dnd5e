@@ -30,8 +30,8 @@ export default class CheckSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareEffectContext(context) {
-    context = await super._prepareEffectContext(context);
+  async _prepareEffectContext(context, options) {
+    context = await super._prepareEffectContext(context, options);
 
     const group = game.i18n.localize("DND5E.Abilities");
     context.abilityOptions = [

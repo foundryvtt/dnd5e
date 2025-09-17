@@ -1,13 +1,15 @@
 <fieldset>
     <legend>{{ localize "DND5E.SAVE.FIELDS.save.label" }}</legend>
-    {{ formField fields.save.fields.ability value=source.save.ability options=abilityOptions }}
+    {{ formField fields.save.fields.ability value=source.save.ability options=abilityOptions rootId=@root.partId }}
     {{#with fields.save.fields.dc.fields as |fields|}}
-    {{ formField fields.calculation value=../activity.save.dc.calculation options=../calculationOptions }}
+    {{ formField fields.calculation value=../activity.save.dc.calculation options=../calculationOptions
+                 rootId=@root.partId }}
     {{#if ../activity.save.dc.calculation}}
-    {{ formField fields.formula name="" value=(localize "DND5E.SAVE.FIELDS.save.dc.DefaultFormula") disabled=true }}
+    {{ formField fields.formula name="" value=(localize "DND5E.SAVE.FIELDS.save.dc.DefaultFormula") disabled=true
+                 rootId=@root.partId }}
     <input type="hidden" name="save.dc.formula" value="{{ ../source.save.dc.formula }}">
     {{else}}
-    {{ formField fields.formula value=../source.save.dc.formula }}
+    {{ formField fields.formula value=../source.save.dc.formula rootId=@root.partId }}
     {{/if}}
     {{/with}}
 </fieldset>

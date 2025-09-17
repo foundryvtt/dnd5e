@@ -112,11 +112,12 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async _preparePartContext(partId, context) {
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
     switch ( partId ) {
-      case "activation": return this._prepareActivationContext(context);
-      case "effect": return this._prepareEffectContext(context);
-      case "identity": return this._prepareIdentityContext(context);
+      case "activation": return this._prepareActivationContext(context, options);
+      case "effect": return this._prepareEffectContext(context, options);
+      case "identity": return this._prepareIdentityContext(context, options);
     }
     return context;
   }
@@ -126,10 +127,11 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /**
    * Prepare rendering context for the activation tab.
    * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
    * @returns {ApplicationRenderContext}
    * @protected
    */
-  async _prepareActivationContext(context) {
+  async _prepareActivationContext(context, options) {
     context.tab = context.tabs.activation;
 
     context.data = {};
@@ -252,10 +254,11 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /**
    * Prepare rendering context for the effect tab.
    * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
    * @returns {ApplicationRenderContext}
    * @protected
    */
-  async _prepareEffectContext(context) {
+  async _prepareEffectContext(context, options) {
     context.tab = context.tabs.effect;
 
     if ( context.activity.effects ) {
@@ -317,10 +320,11 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /**
    * Prepare rendering context for the identity tab.
    * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
    * @returns {ApplicationRenderContext}
    * @protected
    */
-  async _prepareIdentityContext(context) {
+  async _prepareIdentityContext(context, options) {
     context.tab = context.tabs.identity;
     context.behaviorFields = [];
     if ( context.fields.target?.fields?.prompt ) context.behaviorFields.push({

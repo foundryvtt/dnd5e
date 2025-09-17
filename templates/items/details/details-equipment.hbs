@@ -3,17 +3,17 @@
 
     {{!-- Equipment Type --}}
     {{ formField fields.type.fields.value value=source.type.value label="DND5E.ItemEquipmentType" blank=""
-                 localize=true options=equipmentTypeOptions }}
+                 localize=true options=equipmentTypeOptions rootId=partId }}
 
     {{!-- Equipment Base --}}
     {{#if baseItemOptions.length}}
     {{ formField fields.type.fields.baseItem value=source.type.baseItem label="DND5E.ItemEquipmentBase" blank=""
-                 localize=true options=baseItemOptions }}
+                 localize=true options=baseItemOptions rootId=partId }}
     {{/if}}
 
     {{!-- Proficiency --}}
     {{ formField fields.proficient value=source.proficient blank="DND5E.Automatic" localize=true
-                 choices=CONFIG.weaponAndArmorProficiencyLevels }}
+                 choices=CONFIG.weaponAndArmorProficiencyLevels rootId=partId }}
 
     {{!-- Armor --}}
     {{#if system.isArmor}}
@@ -23,18 +23,18 @@
 
             {{!-- Value --}}
             {{ formField fields.armor.fields.value value=source.armor.value step=1 label="DND5E.AC" localize=true
-                         classes="label-top" }}
+                         classes="label-top" rootId=partId }}
 
             {{!-- Max Dex --}}
             {{#if hasDexModifier}}
             {{ formField fields.armor.fields.dex value=source.armor.dex label="DND5E.ItemEquipmentDexModAbbr"
-                         placeholder="∞" localize=true classes="label-top" }}
+                         placeholder="∞" localize=true classes="label-top" rootId=partId }}
             {{/if}}
 
             {{!-- Strength Requirement --}}
             {{#if system.isArmor}}
             {{ formField fields.strength value=source.strength label="DND5E.AbilityStr" placeholder="—" localize=true
-                         classes="label-top" }}
+                         classes="label-top" rootId=partId }}
             {{/if}}
         </div>
     </div>
@@ -71,7 +71,7 @@
 
             {{!-- Magical Bonus --}}
             {{ formField fields.armor.fields.magicalBonus value=source.armor.magicalBonus step=1 placeholder="0"
-                         label="DND5E.Bonus" localize=true classes="label-top" }}
+                         label="DND5E.Bonus" localize=true classes="label-top" rootId=partId }}
         </div>
     </div>
     {{/if}}

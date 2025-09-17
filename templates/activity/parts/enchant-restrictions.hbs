@@ -2,16 +2,18 @@
     <fieldset>
         <legend>{{ localize "DND5E.ENCHANT.FIELDS.restrictions.label" }}</legend>
         {{#with fields.restrictions.fields as |fields|}}
-        {{ formField fields.type value=../source.restrictions.type options=../typeOptions }}
+        {{ formField fields.type value=../source.restrictions.type options=../typeOptions rootId=@root.partId }}
         {{#if ../categoryOptions}}
-        {{ formField fields.categories value=../source.restrictions.categories options=../categoryOptions }}
+        {{ formField fields.categories value=../source.restrictions.categories options=../categoryOptions
+                     rootId=@root.partId }}
         {{/if}}
         {{#if ../propertyOptions}}
-        {{ formField fields.properties value=../source.restrictions.properties options=../propertyOptions }}
+        {{ formField fields.properties value=../source.restrictions.properties options=../propertyOptions
+                     rootId=@root.partId }}
         {{/if}}
         {{#if ../isTypePhysical}}
         {{ formField fields.allowMagical value=../source.restrictions.allowMagical
-                     input=@root.inputs.createCheckboxInput }}
+                     input=@root.inputs.createCheckboxInput rootId=@root.partId }}
         {{/if}}
         {{/with}}
     </fieldset>

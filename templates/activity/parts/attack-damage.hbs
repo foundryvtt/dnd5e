@@ -7,8 +7,9 @@
         </button>
     </legend>
     {{#if hasBaseDamage}}
-    {{ formField fields.damage.fields.includeBase value=source.damage.includeBase input=inputs.createCheckboxInput }}
+    {{ formField fields.damage.fields.includeBase value=source.damage.includeBase input=inputs.createCheckboxInput
+                 rootId=partId }}
     {{/if}}
-    {{ formField fields.damage.fields.critical.fields.bonus value=source.damage.critical.bonus }}
+    {{ formField fields.damage.fields.critical.fields.bonus value=source.damage.critical.bonus rootId=partId }}
     {{> "systems/dnd5e/templates/activity/parts/damage-parts.hbs" }}
 </fieldset>

@@ -6,6 +6,6 @@
             <i class="fas fa-plus" inert></i>
         </button>
     </legend>
-    {{ formField fields.damage.fields.onSave value=activity.damage.onSave options=onSaveOptions }}
+    {{ formField fields.damage.fields.onSave value=activity.damage.onSave options=onSaveOptions rootId=@root.partId }}
     {{> "systems/dnd5e/templates/activity/parts/damage-parts.hbs" }}
 </fieldset>
