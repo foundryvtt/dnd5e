@@ -60,10 +60,11 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
    */
   async placeMembers() {
     if ( !game.user.isGM || !canvas.scene ) return;
-    const minimized = !this.parent.sheet._minimized;
+    const members = await this.getPlaceableMembers();
+    if ( !members.some(m => m.quantity.value) ) return;
+    const minimized = !this.parent.sheet.minimized;
     await this.parent.sheet.minimize();
     const tokensData = [];
-    const members = await this.getPlaceableMembers();
 
     try {
       const placements = await TokenPlacement.place({
@@ -79,6 +80,12 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
         if ( appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);
         tokensData.push(tokenDocument.toObject());
       }
+    } catch(err) {
+      Hooks.onError("GroupTemplate#placeMembers", err, {
+        msg: game.i18n.localize("DND5E.Group.Warning.PlaceMembers"),
+        log: "error",
+        notify: "error"
+      });
     } finally {
       if ( minimized ) this.parent.sheet.maximize();
     }

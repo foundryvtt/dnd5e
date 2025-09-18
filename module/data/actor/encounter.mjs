@@ -143,7 +143,7 @@ export default class EncounterData extends GroupTemplate {
     }
 
     return Array.from(members.entries().map(([id, { collection, ...data }]) => {
-      return { actor: collection.get(id), ...data };
+      return { actor: collection.get(id), ...foundry.utils.deepClone(data) };
     }).filter(d => d.actor));
   }
 
@@ -153,6 +153,11 @@ export default class EncounterData extends GroupTemplate {
   async getPlaceableMembers() {
     return Promise.all((await this.getMembers()).map(async member => {
       member.actor = await dnd5e.documents.Actor5e.fetchExisting(member.actor.uuid);
+      if ( (member.quantity.value === null) && member.quantity.formula ) {
+        const roll = new Roll(member.quantity.formula);
+        await roll.evaluate();
+        if ( roll.total > 0 ) member.quantity.value = roll.total;
+      }
       return member;
     }));
   }
@@ -186,14 +191,16 @@ export default class EncounterData extends GroupTemplate {
   /* -------------------------------------------- */
 
   /**
-   * Roll the quantity formulas for each member and replace their quantity. Any entries without formulas will not be
-   * modified.
+   * Roll the quantity formulas for each member and replace their quantity. Any entries without formulas
+   * will not be modified.
+   * @param {object} [options={}]
+   * @param {number} [options.index]  Index of a specific member to roll.
    * @returns {Promise<Actor5e>}
    */
-  async rollQuantities() {
+  async rollQuantities({ index }={}) {
     const membersCollection = this.toObject().members;
-    await Promise.all(membersCollection.map(async member => {
-      if ( !member.quantity?.formula ) return member;
+    await Promise.all(membersCollection.map(async (member, i) => {
+      if ( !member.quantity?.formula || ((index !== undefined) && (index !== i)) ) return member;
       const roll = new Roll(member.quantity.formula);
       await roll.evaluate();
       if ( roll.total > 0 ) member.quantity.value = roll.total;
