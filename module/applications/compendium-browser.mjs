@@ -69,7 +69,7 @@ export default class CompendiumBrowser extends Application5e {
       const isAdvanced = this._mode === this.constructor.MODES.ADVANCED;
       const tab = this.constructor.TABS.find(t => t.tab === this.options.tab);
       if ( !tab || (!!tab.advanced !== isAdvanced) ) this.options.tab = isAdvanced ? "actors" : "classes";
-      this._applyTabFilters(this.options.tab, true);
+      this._applyTabFilters(this.options.tab, { keepFilters: true });
     }
   }
 
@@ -828,11 +828,12 @@ export default class CompendiumBrowser extends Application5e {
 
   /**
    * Apply filters based on the selected tab.
-   * @param {string} id                   The tab ID.
-   * @param {boolean} [keepFilters=false] Whether to keep the existing additional filters
+   * @param {string} id                           The tab ID.
+   * @param {object} [options]                    Additional options
+   * @param {boolean} [options.keepFilters=false] Whether to keep the existing additional filters
    * @protected
    */
-  _applyTabFilters(id, keepFilters=false) {
+  _applyTabFilters(id, { keepFilters=false }={}) {
     const tab = this.constructor.TABS.find(t => t.tab === id);
     if ( !tab ) return;
     const { documentClass, types } = tab;
