@@ -716,6 +716,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {boolean|Set<string>} [ignore.resistance]     Should this actor's damage resistance be ignored?
    * @property {boolean|Set<string>} [ignore.vulnerability]  Should this actor's damage vulnerability be ignored?
    * @property {boolean|Set<string>} [ignore.modification]   Should this actor's damage modification be ignored?
+   * @property {boolean} [ignore.threshold]                  Should this actor's damage threshold be ignored?
    * @property {boolean} [invertHealing=true]  Automatically invert healing types to it heals, rather than damages.
    * @property {"damage"|"healing"} [only]     Apply only damage or healing parts. Untyped rolls will always be applied.
    * @property {boolean} [isDelta]             Whether the damage is coming from a relative change.
@@ -739,14 +740,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     damages = this.calculateDamage(damages, options);
     if ( !damages ) return this;
 
-    // Round damage towards zero
-    let { amount, temp } = damages.reduce((acc, d) => {
-      if ( d.type === "temphp" ) acc.temp += d.value;
-      else acc.amount += d.value;
-      return acc;
-    }, { amount: 0, temp: 0 });
-    amount = amount > 0 ? Math.floor(amount) : Math.ceil(amount);
-
+    const { amount, temp } = damages;
     const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
     const deltaHP = Math.clamp(amount - deltaTemp, -hp.damage, hp.value);
     const updates = {
@@ -795,14 +789,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * @typedef {Array<DamageDescription>} DamageSummary
+   * @property {number} amount  Total amount of damage/healing across all damage types.
+   * @property {number} temp    Total amount of temp HP across all damage types.
+   */
+
+  /**
    * Calculate the damage that will be applied to this actor.
    * @param {DamageDescription[]} damages            Damages to calculate.
    * @param {DamageApplicationOptions} [options={}]  Damage calculation options.
-   * @returns {DamageDescription[]|false}            New damage descriptions with changes applied, or `false` if the
+   * @returns {DamageSummary|false}                  New damage descriptions with changes applied, or `false` if the
    *                                                 calculation was canceled.
    */
   calculateDamage(damages, options={}) {
     damages = foundry.utils.deepClone(damages);
+    damages.amount = 0;
+    damages.temp = 0;
 
     /**
      * A hook event that fires before damage amount is calculated for an actor.
@@ -883,7 +885,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       d.value = d.value * damageMultiplier;
       d.active.multiplier = (d.active.multiplier ?? 1) * damageMultiplier;
+      if ( d.type === "temphp" ) damages.temp += d.value;
+      else damages.amount += d.value;
     });
+
+    damages.amount = damages.amount > 0 ? Math.floor(damages.amount) : Math.ceil(damages.amount);
+
+    // Apply damage threshold
+    if ( (damages.amount < (this.system.attributes?.hp?.dt) ?? -Infinity)
+      && !((options.ignore === true) || options.ignore?.threshold) ) {
+      damages.amount = 0;
+      damages.forEach(d => {
+        d.value = 0;
+        d.active.multiplier = 0;
+        d.active.threshold = true;
+      });
+    }
 
     /**
      * A hook event that fires after damage values are calculated for an actor.
