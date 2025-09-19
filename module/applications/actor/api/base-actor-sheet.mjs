@@ -775,7 +775,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }[activation?.type || ""];
 
     // To Hit
-    const toHit = parseInt(labels.toHit);
+    const toHit = parseInt(labels.modifier);
 
     // Limited Uses
     uses = { ...(uses ?? {}) };
