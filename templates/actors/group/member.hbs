@@ -76,7 +76,13 @@
             </div>
             <div>
                 <i class="fa-solid fa-shoe-prints" data-tooltip aria-label="{{ localize "DND5E.Speed" }}"></i>
-                <span class="value">{{ system.attributes.movement.walk }}</span>
+                <span class="value">
+                    {{ system.attributes.movement.walk }}
+                    {{#if system.attributes.movement.slowed}}
+                    <i class="fa-solid fa-triangle-exclamation" data-tooltip
+                       aria-label="{{ localize 'DND5E.Travel.Slowed' }}"></i>
+                    {{/if}}
+                </span>
             </div>
         </div>
         <div class="info">

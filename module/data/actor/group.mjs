@@ -184,7 +184,22 @@ export default class GroupData extends GroupTemplate {
 
   /** @inheritDoc */
   prepareDerivedData() {
-    this.parent.labels.pace = CONFIG.DND5E.travelPace[this.attributes.movement.pace]?.label;
+    const members = this.members;
+    Object.defineProperty(this.attributes.movement, "slowed", {
+      get() {
+        return members.some(m => m.actor?.system.attributes?.movement?.slowed);
+      }
+    });
+    Object.defineProperty(this.attributes.movement, "effectivePace", {
+      get() {
+        return this.slowed ? "slow" : this.pace;
+      }
+    });
+    Object.defineProperty(this.attributes.movement, "paceLabel", {
+      get() {
+        return CONFIG.DND5E.travelPace[this.effectivePace]?.label;
+      }
+    });
     MovementField.prepareData.call(this.attributes.movement, this.schema.getField("attributes.movement"));
   }
 

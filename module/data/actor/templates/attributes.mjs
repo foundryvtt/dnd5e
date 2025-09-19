@@ -446,6 +446,9 @@ export default class AttributesFields {
           speed = Math.min(speed, CONFIG.DND5E.encumbrance.speedReduction.exceedingCarryingCapacity[units] ?? 0);
         }
       }
+      if ( (type === "walk") && this.attributes.movement.walk ) {
+        this.attributes.movement.slowed = speed <= Math.floor(this.attributes.movement.walk / 2);
+      }
       this.attributes.movement[type] = speed;
     }
   }

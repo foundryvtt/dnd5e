@@ -313,7 +313,7 @@ export default class GroupActorSheet extends MultiActorSheet {
     if ( type !== "skill" ) return;
     const { uuid } = target.closest("[data-uuid]")?.dataset ?? {};
     const actor = await fromUuid(uuid);
-    actor?.rollSkill({ event, skill: key, pace: this.actor.system.attributes.movement.pace });
+    actor?.rollSkill({ event, skill: key, pace: this.actor.system.attributes.movement.effectivePace });
   }
 
   /* -------------------------------------------- */

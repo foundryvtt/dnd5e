@@ -50,12 +50,14 @@
                     </button>
                     {{else}}
                     <button type="button" class="unbutton config-button" data-action="changePace" data-increment="-1"
-                            data-tooltip aria-label="{{ localize "DND5E.Group.Action.ChangePace" }}">
+                            data-tooltip aria-label="{{ localize "DND5E.Group.Action.ChangePace" }}"
+                            {{ disabled system.attributes.movement.slowed }}>
                         <i class="fa-solid fa-chevron-left" inert></i>
                     </button>
-                    <span class="pace subtitle">{{ labels.pace }}</span>
+                    <span class="pace subtitle">{{ system.attributes.movement.paceLabel }}</span>
                     <button type="button" class="unbutton config-button" data-action="changePace" data-increment="1"
-                            data-tooltip aria-label="{{ localize "DND5E.Group.Action.ChangePace" }}">
+                            data-tooltip aria-label="{{ localize "DND5E.Group.Action.ChangePace" }}"
+                            {{ disabled system.attributes.movement.slowed }}>
                         <i class="fa-solid fa-chevron-right" inert></i>
                     </button>
                     {{/if}}
