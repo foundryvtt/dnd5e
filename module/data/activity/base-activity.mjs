@@ -537,16 +537,6 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Prepare context to display this activity in a parent sheet.
-   * @returns {object}
-   */
-  prepareSheetContext() {
-    return this;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Prepare data related to this activity.
    */
   prepareData() {
@@ -651,6 +641,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         damageType: part.options?.types.length === 1 ? part.options.types[0] : null
       };
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare context to display this activity in a parent sheet.
+   * @returns {object}
+   */
+  prepareSheetContext() {
+    return this;
   }
 
   /* -------------------------------------------- */

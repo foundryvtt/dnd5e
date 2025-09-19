@@ -60,4 +60,17 @@ export default class CastActivityData extends BaseActivityData {
       });
     }
   }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareSheetContext() {
+    const context = { ...super.prepareSheetContext() };
+    const cachedSpell = this.cachedSpell;
+    if ( cachedSpell ) {
+      context.labels = foundry.utils.mergeObject(context.labels, cachedSpell.labels ?? {}, { inplace: false });
+      context.save = { ...cachedSpell.system.activities?.getByType("save")[0]?.save };
+    }
+    return context;
+  }
 }
