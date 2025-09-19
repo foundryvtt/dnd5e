@@ -3123,6 +3123,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( transformOptions?.keep?.includes("hp") ) {
       foundry.utils.setProperty(update, "system.attributes.hp.value", this.system.attributes.hp.value);
     }
+    if ( transformOptions?.keep?.includes("tempHP") ) {
+      foundry.utils.setProperty(update, "system.attributes.hp.temp", this.system.attributes.hp.temp);
+    }
     if ( transformOptions?.keep?.includes("spells") || transformOptions?.spellLists?.length ) {
       Object.entries(this.system.spells ?? {}).forEach(([k, v]) => {
         if ( v.max ) update[`system.spells.${k}.value`] = v.value;
