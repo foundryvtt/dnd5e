@@ -1,7 +1,7 @@
 import { formatNumber, getHumanReadableAttributeLabel } from "../../../utils.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 
-const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, NumberField, ObjectField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * @import { ActorDeltasData, DeltaDisplayContext, IndividualDeltaData } from "./_types.mjs";
@@ -14,6 +14,8 @@ export class ActorDeltasField extends SchemaField {
   constructor() {
     super({
       actor: new ArrayField(new IndividualDeltaField()),
+      created: new ArrayField(new StringField(), { required: false }),
+      deleted: new ArrayField(new ObjectField(), { required: false }),
       item: new MappingField(new ArrayField(new IndividualDeltaField()))
     });
   }
@@ -22,19 +24,25 @@ export class ActorDeltasField extends SchemaField {
 
   /**
    * Calculate delta information for an actor document from the given updates.
-   * @param {Actor5e} actor                              Actor for which to calculate the deltas.
-   * @param {{ actor: object, item: object[] }} updates  Updates to apply to the actor and contained items.
-   * @returns {ActorDeltasData}
+   * @param {Actor5e} actor                    Actor for which to calculate the deltas.
+   * @param {ActorUpdatesDescription} updates  Updates to apply to the actor and contained items.
+   * @returns {Partial<ActorDeltasData>}
    */
   static getDeltas(actor, updates) {
-    return {
+    const deltas = {
       actor: IndividualDeltaField.getDeltas(actor, updates.actor),
+      created: updates.create?.length ? Array.from(updates.create) : null,
+      deleted: updates.delete?.map(i => actor.items.get(i)?.toObject()).filter(_ => _),
       item: updates.item.reduce((obj, { _id, ...changes }) => {
         const deltas = IndividualDeltaField.getDeltas(actor.items.get(_id), changes);
         if ( deltas.length ) obj[_id] = deltas;
         return obj;
       }, {})
     };
+    for ( const [k, v] of Object.entries(deltas) ) {
+      if ( foundry.utils.isEmpty(v) ) delete deltas[k];
+    }
+    return deltas;
   }
 
   /* -------------------------------------------- */
@@ -53,7 +61,12 @@ export class ActorDeltasField extends SchemaField {
       ...Object.entries(this.item).flatMap(([id, deltas]) =>
         deltas.map(d => IndividualDeltaField.processDelta.call(d, actor.items.get(id), rolls
           .filter(r => (r.options.delta?.item === id) && (r.options.delta?.keyPath === d.keyPath))))
-      )
+      ),
+      ...(this.created?.map(id => {
+        const item = actor.items.get(id);
+        return item ? { document: item, label: item.name, operation: "create", type: "item" } : null;
+      }).filter(_ => _) ?? []),
+      ...(this.deleted?.map(data => ({ label: data.name, operation: "delete", type: "item" })) ?? [])
     ];
   }
 }
@@ -108,6 +121,7 @@ export class IndividualDeltaField extends SchemaField {
       delta: formatNumber(value, { signDisplay: "always" }),
       document: doc,
       label: getHumanReadableAttributeLabel(this.keyPath, { [type]: doc }) ?? this.keyPath,
+      operation: "update",
       rolls: rolls.map(roll => ({ roll, anchor: roll.toAnchor().outerHTML.replace(`${roll.total}</a>`, "</a>") }))
     };
   }

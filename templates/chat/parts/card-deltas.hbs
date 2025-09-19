@@ -2,12 +2,22 @@
     <strong class="roboto-condensed-upper">{{ localize "DND5E.CHATMESSAGE.Deltas.Recovery" }}</strong>
     <ul class="unlist">
         {{#each deltas}}
-        <li class="delta delta-{{ type }}">
+        <li class="delta delta-{{ type }} operation-{{ operation }}">
             <span class="label">{{ label }}</span>
             {{#each rolls}}
             <span class="roll">{{{ anchor }}}</span>
             {{/each}}
-            <span class="value">{{ delta }}</span>
+            <span class="value">
+                {{#if (eq operation "update")}}
+                {{ delta }}
+                {{else if (eq operation "create")}}
+                <i class="fa-regular fa-square-plus" data-tooltip
+                   aria-label="{{ localize 'DND5E.CHATMESSAGE.Deltas.Created' }}"></i>
+                {{else if (eq operation "delete")}}
+                <i class="fa-regular fa-square-minus" data-tooltip
+                   aria-label="{{ localize 'DND5E.CHATMESSAGE.Deltas.Deleted' }}"></i>
+                {{/if}}
+            </span>
         </li>
         {{/each}}
     </ul>

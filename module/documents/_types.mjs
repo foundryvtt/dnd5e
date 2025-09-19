@@ -1,5 +1,6 @@
 /**
  * @import { SpellScrollValues } from "../_types.mjs";
+ * @import { ActorUpdatesDescription } from "../data/chat-message/fields/_types.mjs";
  */
 
 /**
@@ -18,9 +19,7 @@
 /* -------------------------------------------- */
 
 /**
- * @typedef CombatRecoveryResults
- * @property {object} actor       Updates to be applied to the actor.
- * @property {object[]} item      Updates to be applied to the actor's items.
+ * @typedef {ActorUpdatesDescription} CombatRecoveryResults
  * @property {BasicRoll[]} rolls  Any recovery rolls performed.
  */
 
@@ -109,6 +108,7 @@
  * @typedef RestResult
  * @property {string} type              Type of rest performed.
  * @property {Actor5e} clone            Clone of the actor before rest is performed.
+ * @property {string[]} deleteItems     IDs of items to be deleted from the actor.
  * @property {object} deltas
  * @property {number} deltas.hitPoints  Hit points recovered during the rest.
  * @property {number} deltas.hitDice    Hit dice recovered or spent during the rest.
