@@ -54,28 +54,28 @@
         "filePathFields": {
           "activities.*.img": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "description.gmOnly", "unidentified.description"]
       },
       "equipment": {
         "filePathFields": {
           "activities.*.img": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "description.gmOnly", "unidentified.description"]
       },
       "consumable": {
         "filePathFields": {
           "activities.*.img": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "description.gmOnly", "unidentified.description"]
       },
       "tool": {
         "filePathFields": {
           "activities.*.img": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "description.gmOnly", "unidentified.description"]
       },
       "loot": {
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "description.gmOnly", "unidentified.description"]
       },
       "race": {
         "filePathFields": {
@@ -115,10 +115,10 @@
         "htmlFields": ["description.value", "description.chat"]
       },
       "container": {
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "description.gmOnly", "unidentified.description"]
       },
       "backpack": {
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "description.gmOnly", "unidentified.description"]
       },
       "facility": {
         "filePathFields": {

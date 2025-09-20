@@ -27,6 +27,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       deleteRecovery: ItemSheet5e.#deleteRecovery,
       editDescription: ItemSheet5e.#editDescription,
       modifyAdvancementChoices: ItemSheet5e.#modifyAdvancementChoices,
+      revealDescription: ItemSheet5e.#revealDescription,
       showConfiguration: ItemSheet5e.#showConfiguration,
       showDocument: ItemSheet5e.#showDocument,
       showIcon: ItemSheet5e.#showIcon,
@@ -292,7 +293,8 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     context.enriched = {
       description: await TextEditor.enrichHTML(this.item.system.description.value, enrichmentOptions),
       unidentified: await TextEditor.enrichHTML(this.item.system.unidentified?.description, enrichmentOptions),
-      chat: await TextEditor.enrichHTML(this.item.system.description.chat, enrichmentOptions)
+      chat: await TextEditor.enrichHTML(this.item.system.description.chat, enrichmentOptions),
+      gmOnly: await TextEditor.enrichHTML(this.item.system.description.gmOnly, enrichmentOptions)
     };
     if ( this.editingDescriptionTarget ) context.editingDescription = {
       target: this.editingDescriptionTarget,
@@ -716,6 +718,19 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const level = target.closest("[data-level]")?.dataset.level;
     const manager = AdvancementManager.forModifyChoices(this.actor, this.item.id, Number(level));
     if ( manager.steps.length ) manager.render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling the revealed state of the GM-only description.
+   * @this {ItemSheet5e}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #revealDescription(event, target) {
+    const revealed = this.document.system.description.revealed;
+    this.document.update({ "system.description.revealed": !revealed });
   }
 
   /* -------------------------------------------- */

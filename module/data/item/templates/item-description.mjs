@@ -2,7 +2,7 @@ import SystemDataModel from "../../abstract/system-data-model.mjs";
 import IdentifierField from "../../fields/identifier-field.mjs";
 import SourceField from "../../shared/source-field.mjs";
 
-const { SchemaField, HTMLField } = foundry.data.fields;
+const { BooleanField, SchemaField, HTMLField } = foundry.data.fields;
 
 /**
  * Data model template with item description & source.
@@ -10,6 +10,8 @@ const { SchemaField, HTMLField } = foundry.data.fields;
  * @property {object} description               Various item descriptions.
  * @property {string} description.value         Full item description.
  * @property {string} description.chat          Description displayed in chat card.
+ * @property {string} description.gmOnly        Description displayed only for GM users.
+ * @property {boolean} description.revealed     Is the GM-only description visible to non-GMs?
  * @property {string} identifier                Identifier slug for this item.
  * @property {SourceData} source                Adventure or sourcebook where this item originated.
  * @mixin
@@ -19,8 +21,10 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   static defineSchema() {
     return {
       description: new SchemaField({
-        value: new HTMLField({required: true, nullable: true, label: "DND5E.Description"}),
-        chat: new HTMLField({required: true, nullable: true, label: "DND5E.DescriptionChat"})
+        value: new HTMLField({ required: true, nullable: true, label: "DND5E.Description" }),
+        chat: new HTMLField({ required: true, nullable: true, label: "DND5E.DescriptionChat" }),
+        gmOnly: new HTMLField({ required: true, nullable: true, label: "DND5E.DescriptionGMOnly", gmOnly: true }),
+        revealed: new BooleanField()
       }),
       identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),
       source: new SourceField()

@@ -64,6 +64,12 @@
                 enriched=enriched.chat }}
             {{/if}}
 
+            {{!-- Only GM users can see the gm-only description, unless revealed. --}}
+            {{#if (or item.system.description.revealed user.isGM)}}
+            {{> ".description" collapsible=true label="DND5E.DescriptionGMOnly" target="system.description.gmOnly"
+                enriched=enriched.gmOnly revealable=(not locked) revealed=item.system.description.revealed }}
+            {{/if}}
+
         {{else}}
 
         {{!-- When unidentified, non-GM users can only see and edit the unidentified description --}}
@@ -98,6 +104,11 @@
      {{~#if collapsible}} data-action="toggleCollapsed" data-expand-id="{{ target }}"{{/if}}>
     <div class="header">
         <span>{{ localize label }}</span>
+        {{#if (and revealable @root.user.isGM)}}
+        <button type="button" class="unbutton control-button always-interactive" data-action="revealDescription">
+            <i class="fa-solid fa-fw fa-eye{{#unless revealed}}-slash{{/unless}}" inert></i>
+        </button>
+        {{/if}}
         {{#unless @root.locked}}
         <button type="button" class="unbutton control-button always-interactive" data-action="editDescription"
                 aria-label="{{ localize 'DND5E.DescriptionEdit' description=(localize label) }}"
