@@ -239,7 +239,7 @@ export default class AttributesFields {
     // Compute cover.
     ac.cover = Math.max(ac.cover, this.parent.coverBonus);
 
-    // Compute total AC and return
+    // Compute total AC formula.
     ac.min = simplifyBonus(ac.min, rollData);
     ac.bonus = simplifyBonus(ac.bonus, rollData);
     ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
