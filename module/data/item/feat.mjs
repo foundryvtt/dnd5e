@@ -136,6 +136,110 @@ export default class FeatData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get advancementClassLinked() {
+    return this.type.value !== "feat";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [this.requirements];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed on the item card.
+   * @type {string[]}
+   */
+  get cardProperties() {
+    return [this.requirements];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Does this feature represent a group of individual enchantments (e.g. the "Infuse Item" feature stores data about
+   * all of the character's infusions).
+   * @type {boolean}
+   */
+  get isEnchantmentSource() {
+    return CONFIG.DND5E.featureTypes[this.type?.value]?.subtypes?.[this.type?.subtype]
+      && (this.type?.subtype in CONFIG.DND5E.featureTypes.enchantment.subtypes);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    return 1;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _migrateData(source) {
+    super._migrateData(source);
+    FeatData.#migrateEnchantment(source);
+    ActivitiesTemplate.migrateActivities(source);
+    FeatData.#migrateType(source);
+    FeatData.#migrateRecharge(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate enchantment data format.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateEnchantment(source) {
+    if ( foundry.utils.getType(source.enchantment?.items) !== "Object" ) return;
+    const { items } = source.enchantment;
+    source.enchant ??= {};
+    if ( "max" in items ) source.enchant.max = items.max;
+    if ( "period" in items ) source.enchant.period = items.period;
+    delete source.enchantment.items;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Ensure feats have a type object.
+   * @param {object} source The candidate source data from which the model will be constructed.
+   */
+  static #migrateType(source) {
+    if ( !("type" in source) ) return;
+    if ( !source.type ) source.type = {value: "", subtype: ""};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate 0 values to null.
+   * @param {object} source The candidate source data from which the model will be constructed.
+   */
+  static #migrateRecharge(source) {
+    if ( !("recharge" in source) ) return;
+    const value = source.recharge.value;
+    if ( (value === 0) || (value === "") ) source.recharge.value = null;
+    else if ( (typeof value === "string") && Number.isNumeric(value) ) source.recharge.value = Number(value);
+    if ( source.recharge.charged === null ) source.recharge.charged = false;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -195,110 +299,6 @@ export default class FeatData extends ItemDataModel.mixin(
       context.itemType = itemTypes.label;
       context.itemSubtypes = itemTypes.subtypes;
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  Data Migrations                             */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static _migrateData(source) {
-    super._migrateData(source);
-    FeatData.#migrateEnchantment(source);
-    ActivitiesTemplate.migrateActivities(source);
-    FeatData.#migrateType(source);
-    FeatData.#migrateRecharge(source);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate enchantment data format.
-   * @param {object} source  The candidate source data from which the model will be constructed.
-   */
-  static #migrateEnchantment(source) {
-    if ( foundry.utils.getType(source.enchantment?.items) !== "Object" ) return;
-    const { items } = source.enchantment;
-    source.enchant ??= {};
-    if ( "max" in items ) source.enchant.max = items.max;
-    if ( "period" in items ) source.enchant.period = items.period;
-    delete source.enchantment.items;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Ensure feats have a type object.
-   * @param {object} source The candidate source data from which the model will be constructed.
-   */
-  static #migrateType(source) {
-    if ( !("type" in source) ) return;
-    if ( !source.type ) source.type = {value: "", subtype: ""};
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate 0 values to null.
-   * @param {object} source The candidate source data from which the model will be constructed.
-   */
-  static #migrateRecharge(source) {
-    if ( !("recharge" in source) ) return;
-    const value = source.recharge.value;
-    if ( (value === 0) || (value === "") ) source.recharge.value = null;
-    else if ( (typeof value === "string") && Number.isNumeric(value) ) source.recharge.value = Number(value);
-    if ( source.recharge.charged === null ) source.recharge.charged = false;
-  }
-
-  /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /** @override */
-  get advancementClassLinked() {
-    return this.type.value !== "feat";
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed in chat.
-   * @type {string[]}
-   */
-  get chatProperties() {
-    return [this.requirements];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed on the item card.
-   * @type {string[]}
-   */
-  get cardProperties() {
-    return [this.requirements];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does this feature represent a group of individual enchantments (e.g. the "Infuse Item" feature stores data about
-   * all of the character's infusions).
-   * @type {boolean}
-   */
-  get isEnchantmentSource() {
-    return CONFIG.DND5E.featureTypes[this.type?.value]?.subtypes?.[this.type?.subtype]
-      && (this.type?.subtype in CONFIG.DND5E.featureTypes.enchantment.subtypes);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The proficiency multiplier for this item.
-   * @returns {number}
-   */
-  get proficiencyMultiplier() {
-    return 1;
   }
 
   /* -------------------------------------------- */

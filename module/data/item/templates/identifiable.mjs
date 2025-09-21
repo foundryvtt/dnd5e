@@ -25,7 +25,7 @@ export default class IdentifiableTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

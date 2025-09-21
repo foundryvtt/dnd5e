@@ -36,7 +36,7 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

@@ -102,7 +102,62 @@ export default class ToolData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [CONFIG.DND5E.abilities[this.ability]?.label];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed on the item card.
+   * @type {string[]}
+   */
+  get cardProperties() {
+    return [CONFIG.DND5E.abilities[this.ability]?.label];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Which ability score modifier is used by this item?
+   * @type {string|null}
+   */
+  get abilityMod() {
+    return this.ability || "int";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static get itemCategories() {
+    return CONFIG.DND5E.toolTypes;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    if ( Number.isFinite(this.proficient) ) return this.proficient;
+    const actor = this.parent.actor;
+    if ( !actor ) return 0;
+    if ( actor.type === "npc" ) return 1;
+    const baseItemProf = actor.system.tools?.[this.type.baseItem];
+    const categoryProf = actor.system.tools?.[this.type.value];
+    return Math.max(baseItemProf?.value ?? 0, categoryProf?.value ?? 0);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -163,61 +218,6 @@ export default class ToolData extends ItemDataModel.mixin(
       ...this.physicalItemSheetFields
     ];
     context.parts = ["dnd5e.details-tool", "dnd5e.field-uses"];
-  }
-
-  /* -------------------------------------------- */
-  /*  Getters                                     */
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed in chat.
-   * @type {string[]}
-   */
-  get chatProperties() {
-    return [CONFIG.DND5E.abilities[this.ability]?.label];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed on the item card.
-   * @type {string[]}
-   */
-  get cardProperties() {
-    return [CONFIG.DND5E.abilities[this.ability]?.label];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Which ability score modifier is used by this item?
-   * @type {string|null}
-   */
-  get abilityMod() {
-    return this.ability || "int";
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  static get itemCategories() {
-    return CONFIG.DND5E.toolTypes;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The proficiency multiplier for this item.
-   * @returns {number}
-   */
-  get proficiencyMultiplier() {
-    if ( Number.isFinite(this.proficient) ) return this.proficient;
-    const actor = this.parent.actor;
-    if ( !actor ) return 0;
-    if ( actor.type === "npc" ) return 1;
-    const baseItemProf = actor.system.tools?.[this.type.baseItem];
-    const categoryProf = actor.system.tools?.[this.type.value];
-    return Math.max(baseItemProf?.value ?? 0, categoryProf?.value ?? 0);
   }
 
   /* -------------------------------------------- */

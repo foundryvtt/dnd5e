@@ -41,7 +41,7 @@ export default class ItemGrantConfigurationData extends foundry.abstract.DataMod
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

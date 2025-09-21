@@ -140,180 +140,6 @@ export default class WeaponData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static _migrateData(source) {
-    super._migrateData(source);
-    ActivitiesTemplate.migrateActivities(source);
-    WeaponData.#migrateDamage(source);
-    WeaponData.#migratePropertiesData(source);
-    WeaponData.#migrateProficient(source);
-    WeaponData.#migrateReach(source);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate weapon damage from old parts.
-   * @param {object} source  The candidate source data from which the model will be constructed.
-   */
-  static #migrateDamage(source) {
-    if ( "base" in (source.damage ?? {}) ) return;
-    const systemData = { system: { scaling: { mode: "none" } } };
-    if ( source.damage?.parts?.[0] ) {
-      source.damage.base = BaseActivityData.transformDamagePartData(systemData, source.damage.parts.shift());
-      if ( source.damage.base.bonus === "@mod" ) source.damage.base.bonus = "";
-    }
-    if ( foundry.utils.getType(source.damage?.versatile) === "string" ) {
-      source.damage.versatile = BaseActivityData.transformDamagePartData(systemData, [source.damage?.versatile, ""]);
-      if ( source.damage.versatile.bonus === "@mod" ) source.damage.versatile.bonus = "";
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate the properties object into a set.
-   * @param {object} source  The candidate source data from which the model will be constructed.
-   */
-  static #migratePropertiesData(source) {
-    if ( foundry.utils.getType(source.properties) !== "Object" ) return;
-    source.properties = filteredKeys(source.properties);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate the proficient field to convert boolean values.
-   * @param {object} source  The candidate source data from which the model will be constructed.
-   */
-  static #migrateProficient(source) {
-    if ( typeof source.proficient === "boolean" ) source.proficient = Number(source.proficient);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate the range value to the reach field for melee weapons without the thrown property.
-   * @param {object} source  The candidate source data from which the model will be constructed.
-   */
-  static #migrateReach(source) {
-    if ( !source.properties || !source.range?.value || !source.type?.value
-      || (source.range?.reach !== undefined) ) return;
-    if ( (CONFIG.DND5E.weaponTypeMap[source.type.value] !== "melee") || source.properties.includes("thr") ) return;
-    // Range of `0` or greater than `10` is always included, and so is range longer than `5` without reach property
-    if ( (source.range.value === 0) || (source.range.value > 10)
-      || (!source.properties.includes("rch") && (source.range.value > 5)) ) {
-      source.range.reach = source.range.value;
-    }
-    source.range.value = null;
-  }
-
-  /* -------------------------------------------- */
-  /*  Data Preparation                            */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    this.prepareDescriptionData();
-    this.prepareIdentifiable();
-    this.preparePhysicalData();
-    this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
-    this.type.identifier = CONFIG.DND5E.weaponIds[this.type.baseItem];
-
-    const labels = this.parent.labels ??= {};
-    labels.armor = this.armor.value ? `${this.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
-    labels.damage = this.damage.base.formula;
-    labels.damageTypes = game.i18n.getListFormatter({ style: "narrow" }).format(
-      Array.from(this.damage.base.types).map(t => CONFIG.DND5E.damageTypes[t]?.label).filter(t => t)
-    );
-
-    if ( this.attackType === "ranged" ) this.range.reach = null;
-    else if ( this.range.reach === null ) {
-      this.range.reach = convertLength(this.properties.has("rch") ? 10 : 5, "ft", this.range.units, { strict: false });
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareFinalData() {
-    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
-    this.prepareFinalEquippableData();
-
-    const labels = this.parent.labels ??= {};
-    const units = this.range.units ?? defaultUnits("length");
-    if ( this.hasRange ) {
-      const parts = [this.range.value, this.range.long !== this.range.value ? this.range.long : null].filter(_ => _);
-      parts.push(formatLength(parts.pop(), units));
-      labels.range = parts.filterJoin("/");
-    }
-    if ( this.range.reach ) {
-      labels.reach = game.i18n.format("DND5E.RANGE.Formatted.Reach", { reach: formatLength(this.range.reach, units) });
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getFavoriteData() {
-    return foundry.utils.mergeObject(await super.getFavoriteData(), {
-      subtitle: CONFIG.DND5E.itemActionTypes[this.activities.contents[0]?.actionType],
-      modifier: this.parent.labels.modifier,
-      range: this.range
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getSheetData(context) {
-    context.subtitles = [
-      { label: game.i18n.localize(CONFIG.Item.typeLabels.weapon) },
-      { label: this.type.label },
-      ...this.physicalItemSheetFields
-    ];
-
-    context.info = [{
-      label: "DND5E.ToHit",
-      classes: "info-lg",
-      value: dnd5e.utils.formatModifier(parseInt(this.parent.labels.modifier))
-    }];
-    if ( this.parent.labels.damages?.length ) {
-      const config = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
-      context.info.push({ value: this.parent.labels.damages.reduce((str, { formula, damageType }) => {
-        const type = config[damageType];
-        return `${str}
-          <span class="formula">${formula}</span>
-          ${type ? `<span class="damage-type" data-tooltip aria-label="${type.label}">
-            <dnd5e-icon src="${type.icon}"></dnd5e-icon>
-          </span>` : ""}
-        `;
-      }, ""), classes: "info-grid damage" });
-    }
-
-    context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
-    context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
-      return {
-        value, label,
-        selected: context.source.damage.base.types.includes?.(value) ?? context.source.damage.base.types.has(value)
-      };
-    });
-    const makeDenominationOptions = placeholder => [
-      { value: "", label: placeholder ? `d${placeholder}` : "" },
-      { rule: true },
-      ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
-    ];
-    context.denominationOptions = {
-      base: makeDenominationOptions(),
-      versatile: makeDenominationOptions(this.damage.base.denomination ? this.damage.base.steppedDenomination() : "")
-    };
-  }
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -569,6 +395,180 @@ export default class WeaponData extends ItemDataModel.mixin(
     if ( (attackType === "ranged") || this.properties.has("thr")
       || ((attackType === null) && this.range.value) ) types.add("ranged");
     return types;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _migrateData(source) {
+    super._migrateData(source);
+    ActivitiesTemplate.migrateActivities(source);
+    WeaponData.#migrateDamage(source);
+    WeaponData.#migratePropertiesData(source);
+    WeaponData.#migrateProficient(source);
+    WeaponData.#migrateReach(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate weapon damage from old parts.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateDamage(source) {
+    if ( "base" in (source.damage ?? {}) ) return;
+    const systemData = { system: { scaling: { mode: "none" } } };
+    if ( source.damage?.parts?.[0] ) {
+      source.damage.base = BaseActivityData.transformDamagePartData(systemData, source.damage.parts.shift());
+      if ( source.damage.base.bonus === "@mod" ) source.damage.base.bonus = "";
+    }
+    if ( foundry.utils.getType(source.damage?.versatile) === "string" ) {
+      source.damage.versatile = BaseActivityData.transformDamagePartData(systemData, [source.damage?.versatile, ""]);
+      if ( source.damage.versatile.bonus === "@mod" ) source.damage.versatile.bonus = "";
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the properties object into a set.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migratePropertiesData(source) {
+    if ( foundry.utils.getType(source.properties) !== "Object" ) return;
+    source.properties = filteredKeys(source.properties);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the proficient field to convert boolean values.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateProficient(source) {
+    if ( typeof source.proficient === "boolean" ) source.proficient = Number(source.proficient);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate the range value to the reach field for melee weapons without the thrown property.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateReach(source) {
+    if ( !source.properties || !source.range?.value || !source.type?.value
+      || (source.range?.reach !== undefined) ) return;
+    if ( (CONFIG.DND5E.weaponTypeMap[source.type.value] !== "melee") || source.properties.includes("thr") ) return;
+    // Range of `0` or greater than `10` is always included, and so is range longer than `5` without reach property
+    if ( (source.range.value === 0) || (source.range.value > 10)
+      || (!source.properties.includes("rch") && (source.range.value > 5)) ) {
+      source.range.reach = source.range.value;
+    }
+    source.range.value = null;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareDescriptionData();
+    this.prepareIdentifiable();
+    this.preparePhysicalData();
+    this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
+    this.type.identifier = CONFIG.DND5E.weaponIds[this.type.baseItem];
+
+    const labels = this.parent.labels ??= {};
+    labels.armor = this.armor.value ? `${this.armor.value} ${game.i18n.localize("DND5E.AC")}` : "";
+    labels.damage = this.damage.base.formula;
+    labels.damageTypes = game.i18n.getListFormatter({ style: "narrow" }).format(
+      Array.from(this.damage.base.types).map(t => CONFIG.DND5E.damageTypes[t]?.label).filter(t => t)
+    );
+
+    if ( this.attackType === "ranged" ) this.range.reach = null;
+    else if ( this.range.reach === null ) {
+      this.range.reach = convertLength(this.properties.has("rch") ? 10 : 5, "ft", this.range.units, { strict: false });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
+    this.prepareFinalEquippableData();
+
+    const labels = this.parent.labels ??= {};
+    const units = this.range.units ?? defaultUnits("length");
+    if ( this.hasRange ) {
+      const parts = [this.range.value, this.range.long !== this.range.value ? this.range.long : null].filter(_ => _);
+      parts.push(formatLength(parts.pop(), units));
+      labels.range = parts.filterJoin("/");
+    }
+    if ( this.range.reach ) {
+      labels.reach = game.i18n.format("DND5E.RANGE.Formatted.Reach", { reach: formatLength(this.range.reach, units) });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    return foundry.utils.mergeObject(await super.getFavoriteData(), {
+      subtitle: CONFIG.DND5E.itemActionTypes[this.activities.contents[0]?.actionType],
+      modifier: this.parent.labels.modifier,
+      range: this.range
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: game.i18n.localize(CONFIG.Item.typeLabels.weapon) },
+      { label: this.type.label },
+      ...this.physicalItemSheetFields
+    ];
+
+    context.info = [{
+      label: "DND5E.ToHit",
+      classes: "info-lg",
+      value: dnd5e.utils.formatModifier(parseInt(this.parent.labels.modifier))
+    }];
+    if ( this.parent.labels.damages?.length ) {
+      const config = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
+      context.info.push({ value: this.parent.labels.damages.reduce((str, { formula, damageType }) => {
+        const type = config[damageType];
+        return `${str}
+          <span class="formula">${formula}</span>
+          ${type ? `<span class="damage-type" data-tooltip aria-label="${type.label}">
+            <dnd5e-icon src="${type.icon}"></dnd5e-icon>
+          </span>` : ""}
+        `;
+      }, ""), classes: "info-grid damage" });
+    }
+
+    context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
+    context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
+      return {
+        value, label,
+        selected: context.source.damage.base.types.includes?.(value) ?? context.source.damage.base.types.has(value)
+      };
+    });
+    const makeDenominationOptions = placeholder => [
+      { value: "", label: placeholder ? `d${placeholder}` : "" },
+      { rule: true },
+      ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
+    ];
+    context.denominationOptions = {
+      base: makeDenominationOptions(),
+      versatile: makeDenominationOptions(this.damage.base.denomination ? this.damage.base.steppedDenomination() : "")
+    };
   }
 
   /* -------------------------------------------- */

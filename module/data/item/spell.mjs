@@ -129,7 +129,143 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Attack classification of this spell.
+   * @type {"spell"}
+   */
+  get attackClassification() {
+    return "spell";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get availableAbilities() {
+    if ( this.ability ) return new Set([this.ability]);
+    const spellcasting = this.parent?.actor?.spellcastingClasses[this.sourceClass]?.spellcasting.ability
+      ?? this.parent?.actor?.system.attributes?.spellcasting;
+    return new Set(spellcasting ? [spellcasting] : []);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get canConfigureScaling() {
+    return this.level > 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether the spell can be prepared.
+   * @type {boolean}
+   */
+  get canPrepare() {
+    return !!CONFIG.DND5E.spellcasting[this.method]?.prepares;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get canScale() {
+    return (this.level > 0) && !!CONFIG.DND5E.spellcasting[this.method]?.slots;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get canScaleDamage() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [
+      this.parent.labels.level,
+      this.parent.labels.components.vsm + (this.parent.labels.materials ? ` (${this.parent.labels.materials})` : ""),
+      ...this.parent.labels.components.tags,
+      this.parent.labels.duration
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this spell counts towards a class' number of prepared spells.
+   * @type {boolean}
+   */
+  get countsPrepared() {
+    return !!CONFIG.DND5E.spellcasting[this.method]?.prepares
+      && (this.level > 0)
+      && (this.prepared === CONFIG.DND5E.spellPreparationStates.prepared.value);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get _typeAbilityMod() {
+    return this.availableAbilities.first() ?? "int";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get criticalThreshold() {
+    return this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold ?? Infinity;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve a linked activity that granted this spell using the stored `cachedFor` value.
+   * @returns {Activity|null}
+   */
+  get linkedActivity() {
+    const relative = this.parent.actor;
+    const uuid = this.parent.getFlag("dnd5e", "cachedFor");
+    if ( !relative || !uuid ) return null;
+    const data = foundry.utils.parseUuid(uuid, { relative });
+    const [itemId, , activityId] = (data?.embedded ?? []).slice(-3);
+    return relative.items.get(itemId)?.system.activities?.get(activityId) ?? null;
+    // TODO: Swap back to fromUuidSync once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
+    // return fromUuidSync(this.parent.getFlag("dnd5e", "cachedFor"), { relative, strict: false }) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    return 1;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get scalingIncrease() {
+    if ( this.level !== 0 ) return null;
+    return Math.floor(((this.parent.actor?.system.cantripLevel?.(this.parent) ?? 0) + 1) / 6);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get tooltipSubtitle() {
+    return [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label];
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /**
@@ -389,142 +525,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     if ( this.method && !(this.method in CONFIG.DND5E.spellcasting) ) {
       context.spellcastingMethods.push({ label: this.method, value: this.method });
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Attack classification of this spell.
-   * @type {"spell"}
-   */
-  get attackClassification() {
-    return "spell";
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  get availableAbilities() {
-    if ( this.ability ) return new Set([this.ability]);
-    const spellcasting = this.parent?.actor?.spellcastingClasses[this.sourceClass]?.spellcasting.ability
-      ?? this.parent?.actor?.system.attributes?.spellcasting;
-    return new Set(spellcasting ? [spellcasting] : []);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  get canConfigureScaling() {
-    return this.level > 0;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Whether the spell can be prepared.
-   * @type {boolean}
-   */
-  get canPrepare() {
-    return !!CONFIG.DND5E.spellcasting[this.method]?.prepares;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  get canScale() {
-    return (this.level > 0) && !!CONFIG.DND5E.spellcasting[this.method]?.slots;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  get canScaleDamage() {
-    return true;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed in chat.
-   * @type {string[]}
-   */
-  get chatProperties() {
-    return [
-      this.parent.labels.level,
-      this.parent.labels.components.vsm + (this.parent.labels.materials ? ` (${this.parent.labels.materials})` : ""),
-      ...this.parent.labels.components.tags,
-      this.parent.labels.duration
-    ];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Whether this spell counts towards a class' number of prepared spells.
-   * @type {boolean}
-   */
-  get countsPrepared() {
-    return !!CONFIG.DND5E.spellcasting[this.method]?.prepares
-      && (this.level > 0)
-      && (this.prepared === CONFIG.DND5E.spellPreparationStates.prepared.value);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get _typeAbilityMod() {
-    return this.availableAbilities.first() ?? "int";
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  get criticalThreshold() {
-    return this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold ?? Infinity;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Retrieve a linked activity that granted this spell using the stored `cachedFor` value.
-   * @returns {Activity|null}
-   */
-  get linkedActivity() {
-    const relative = this.parent.actor;
-    const uuid = this.parent.getFlag("dnd5e", "cachedFor");
-    if ( !relative || !uuid ) return null;
-    const data = foundry.utils.parseUuid(uuid, { relative });
-    const [itemId, , activityId] = (data?.embedded ?? []).slice(-3);
-    return relative.items.get(itemId)?.system.activities?.get(activityId) ?? null;
-    // TODO: Swap back to fromUuidSync once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
-    // return fromUuidSync(this.parent.getFlag("dnd5e", "cachedFor"), { relative, strict: false }) ?? null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The proficiency multiplier for this item.
-   * @returns {number}
-   */
-  get proficiencyMultiplier() {
-    return 1;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get scalingIncrease() {
-    if ( this.level !== 0 ) return null;
-    return Math.floor(((this.parent.actor?.system.cantripLevel?.(this.parent) ?? 0) + 1) / 6);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  get tooltipSubtitle() {
-    return [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label];
   }
 
   /* -------------------------------------------- */

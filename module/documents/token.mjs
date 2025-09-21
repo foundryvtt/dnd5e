@@ -18,7 +18,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

@@ -84,6 +84,29 @@ export default class LootData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [
+      this.type.label,
+      this.weight ? `${this.weight.value} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null,
+      this.priceLabel
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static get itemCategories() {
+    return CONFIG.DND5E.lootTypes;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -111,29 +134,6 @@ export default class LootData extends ItemDataModel.mixin(
       context.itemType = itemTypes.label;
       context.itemSubtypes = itemTypes.subtypes;
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  Getters                                     */
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed in chat.
-   * @type {string[]}
-   */
-  get chatProperties() {
-    return [
-      this.type.label,
-      this.weight ? `${this.weight.value} ${game.i18n.localize("DND5E.AbbreviationLbs")}` : null,
-      this.priceLabel
-    ];
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  static get itemCategories() {
-    return CONFIG.DND5E.lootTypes;
   }
 
   /* -------------------------------------------- */

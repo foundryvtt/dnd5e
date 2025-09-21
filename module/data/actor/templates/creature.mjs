@@ -112,7 +112,7 @@ export default class CreatureTemplate extends CommonTemplate {
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
