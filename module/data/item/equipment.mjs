@@ -108,7 +108,82 @@ export default class EquipmentData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed in chat.
+   * @type {string[]}
+   */
+  get chatProperties() {
+    return [
+      this.type.label,
+      (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
+      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.ITEM.Property.StealthDisadvantage") : null
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Properties displayed on the item card.
+   * @type {string[]}
+   */
+  get cardProperties() {
+    return [
+      (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
+      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.ITEM.Property.StealthDisadvantage") : null
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this Item any of the armor subtypes?
+   * @type {boolean}
+   */
+  get isArmor() {
+    return this.type.value in CONFIG.DND5E.armorTypes;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this item a separate large object like a siege engine or vehicle component that is
+   * usually mounted on fixtures rather than equipped, and has its own AC and HP?
+   * @type {boolean}
+   */
+  get isMountable() {
+    return this.type.value === "vehicle";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static get itemCategories() {
+    return CONFIG.DND5E.equipmentTypes;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The proficiency multiplier for this item.
+   * @returns {number}
+   */
+  get proficiencyMultiplier() {
+    if ( Number.isFinite(this.proficient) ) return this.proficient;
+    const actor = this.parent.actor;
+    if ( !actor ) return 0;
+    if ( actor.type === "npc" ) return 1; // NPCs are always considered proficient with any armor in their stat block.
+    const config = CONFIG.DND5E.armorProficienciesMap;
+    const itemProf = config[this.type.value];
+    const actorProfs = actor.system.traits?.armorProf?.value ?? new Set();
+    const isProficient = (itemProf === true) || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
+    return Number(isProficient);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -252,81 +327,6 @@ export default class EquipmentData extends ItemDataModel.mixin(
         value: this.type.value === "shield" ? dnd5e.utils.formatModifier(this.armor.value) : this.armor.value
       }];
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed in chat.
-   * @type {string[]}
-   */
-  get chatProperties() {
-    return [
-      this.type.label,
-      (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
-      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.ITEM.Property.StealthDisadvantage") : null
-    ];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Properties displayed on the item card.
-   * @type {string[]}
-   */
-  get cardProperties() {
-    return [
-      (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
-      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.ITEM.Property.StealthDisadvantage") : null
-    ];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this Item any of the armor subtypes?
-   * @type {boolean}
-   */
-  get isArmor() {
-    return this.type.value in CONFIG.DND5E.armorTypes;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this item a separate large object like a siege engine or vehicle component that is
-   * usually mounted on fixtures rather than equipped, and has its own AC and HP?
-   * @type {boolean}
-   */
-  get isMountable() {
-    return this.type.value === "vehicle";
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  static get itemCategories() {
-    return CONFIG.DND5E.equipmentTypes;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The proficiency multiplier for this item.
-   * @returns {number}
-   */
-  get proficiencyMultiplier() {
-    if ( Number.isFinite(this.proficient) ) return this.proficient;
-    const actor = this.parent.actor;
-    if ( !actor ) return 0;
-    if ( actor.type === "npc" ) return 1; // NPCs are always considered proficient with any armor in their stat block.
-    const config = CONFIG.DND5E.armorProficienciesMap;
-    const itemProf = config[this.type.value];
-    const actorProfs = actor.system.traits?.armorProf?.value ?? new Set();
-    const isProficient = (itemProf === true) || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
-    return Number(isProficient);
   }
 
   /* -------------------------------------------- */

@@ -230,7 +230,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /**

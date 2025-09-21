@@ -16,7 +16,7 @@ export default class HealActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @override */

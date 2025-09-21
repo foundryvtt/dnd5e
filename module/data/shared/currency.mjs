@@ -18,7 +18,7 @@ export default class CurrencyTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Getters                                     */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**

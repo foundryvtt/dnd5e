@@ -145,7 +145,7 @@ export default class SummonActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @override */

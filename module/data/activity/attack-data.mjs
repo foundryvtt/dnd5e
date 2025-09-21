@@ -153,7 +153,7 @@ export default class AttackActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @override */

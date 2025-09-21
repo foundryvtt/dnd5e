@@ -28,7 +28,7 @@ export default class DamageActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @override */

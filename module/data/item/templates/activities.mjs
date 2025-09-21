@@ -149,7 +149,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /**

@@ -28,7 +28,19 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * What properties can be used for this item?
+   * @returns {Set<string>}
+   */
+  get validProperties() {
+    return new Set(CONFIG.DND5E.validProperties[this.parent.type] ?? []);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -59,18 +71,6 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   prepareDescriptionData() {
     const uuid = this.parent.flags.dnd5e?.sourceId ?? this.parent._stats?.compendiumSource ?? this.parent.uuid;
     SourceField.prepareData.call(this.source, uuid);
-  }
-
-  /* -------------------------------------------- */
-  /*  Getters                                     */
-  /* -------------------------------------------- */
-
-  /**
-   * What properties can be used for this item?
-   * @returns {Set<string>}
-   */
-  get validProperties() {
-    return new Set(CONFIG.DND5E.validProperties[this.parent.type] ?? []);
   }
 
   /* -------------------------------------------- */

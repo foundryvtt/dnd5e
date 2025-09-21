@@ -66,6 +66,7 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       building: new SchemaField({

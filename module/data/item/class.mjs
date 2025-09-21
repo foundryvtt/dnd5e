@@ -80,61 +80,7 @@ export default class ClassData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
-  /*  Data Preparation                            */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareBaseData() {
-    super.prepareBaseData();
-    this.spellcasting.preparation.value = 0;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    this.prepareDescriptionData();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareFinalData() {
-    this.isOriginalClass = this.parent.isOriginalClass;
-    const rollData = this.parent.getRollData({ deterministic: true });
-    SpellcastingField.prepareData.call(this, rollData);
-    this.hd.additional = this.hd.additional ? Roll.create(this.hd.additional, rollData).evaluateSync().total : 0;
-    this.hd.max = Math.max(this.levels + this.hd.additional, 0);
-    this.hd.value = Math.max(this.hd.max - this.hd.spent, 0);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getFavoriteData() {
-    const context = await super.getFavoriteData();
-    if ( this.parent.subclass ) context.subtitle = this.parent.subclass.name;
-    context.value = this.levels;
-    return context;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getSheetData(context) {
-    context.subtitles = [{ label: game.i18n.localize(CONFIG.Item.typeLabels.class) }];
-    context.singleDescription = true;
-
-    context.parts = ["dnd5e.details-class", "dnd5e.details-spellcasting", "dnd5e.details-starting-equipment"];
-    context.hitDieOptions = CONFIG.DND5E.hitDieTypes.map(d => ({ value: d, label: d }));
-    context.primaryAbilities = Object.entries(CONFIG.DND5E.abilities).map(([value, data]) => ({
-      value, label: data.label, selected: this.primaryAbility.value.has(value)
-    }));
-  }
-
-  /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -242,6 +188,60 @@ export default class ClassData extends ItemDataModel.mixin(
     }
 
     if ( needsMigration ) foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    this.spellcasting.preparation.value = 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareDescriptionData();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareFinalData() {
+    this.isOriginalClass = this.parent.isOriginalClass;
+    const rollData = this.parent.getRollData({ deterministic: true });
+    SpellcastingField.prepareData.call(this, rollData);
+    this.hd.additional = this.hd.additional ? Roll.create(this.hd.additional, rollData).evaluateSync().total : 0;
+    this.hd.max = Math.max(this.levels + this.hd.additional, 0);
+    this.hd.value = Math.max(this.hd.max - this.hd.spent, 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getFavoriteData() {
+    const context = await super.getFavoriteData();
+    if ( this.parent.subclass ) context.subtitle = this.parent.subclass.name;
+    context.value = this.levels;
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getSheetData(context) {
+    context.subtitles = [{ label: game.i18n.localize(CONFIG.Item.typeLabels.class) }];
+    context.singleDescription = true;
+
+    context.parts = ["dnd5e.details-class", "dnd5e.details-spellcasting", "dnd5e.details-starting-equipment"];
+    context.hitDieOptions = CONFIG.DND5E.hitDieTypes.map(d => ({ value: d, label: d }));
+    context.primaryAbilities = Object.entries(CONFIG.DND5E.abilities).map(([value, data]) => ({
+      value, label: data.label, selected: this.primaryAbility.value.has(value)
+    }));
   }
 
   /* -------------------------------------------- */

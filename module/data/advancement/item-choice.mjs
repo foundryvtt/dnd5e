@@ -66,7 +66,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

@@ -30,7 +30,7 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

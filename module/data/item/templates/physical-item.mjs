@@ -86,7 +86,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Getters                                     */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
@@ -128,25 +128,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Preparation                            */
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare physical item properties.
-   */
-  preparePhysicalData() {
-    if ( !("gp" in CONFIG.DND5E.currencies) ) return;
-    const { value, denomination } = this.price;
-    const { conversion } = CONFIG.DND5E.currencies[denomination] ?? {};
-    const { gp } = CONFIG.DND5E.currencies;
-    if ( conversion ) {
-      const multiplier = gp.conversion / conversion;
-      this.price.valueInGP = Math.floor(value * multiplier);
-    }
-  }
-
-  /* -------------------------------------------- */
-  /*  Migrations                                  */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -196,6 +178,24 @@ export default class PhysicalItemTemplate extends SystemDataModel {
       value: Number.isNumeric(source.weight) ? Number(source.weight) : 0,
       units: defaultUnits("weight")
     };
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare physical item properties.
+   */
+  preparePhysicalData() {
+    if ( !("gp" in CONFIG.DND5E.currencies) ) return;
+    const { value, denomination } = this.price;
+    const { conversion } = CONFIG.DND5E.currencies[denomination] ?? {};
+    const { gp } = CONFIG.DND5E.currencies;
+    if ( conversion ) {
+      const multiplier = gp.conversion / conversion;
+      this.price.valueInGP = Math.floor(value * multiplier);
+    }
   }
 
   /* -------------------------------------------- */

@@ -40,7 +40,35 @@ export default class EquippableItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Chat properties for equippable items.
+   * @type {string[]}
+   */
+  get equippableItemCardProperties() {
+    return [
+      this.attuned ? game.i18n.localize("DND5E.AttunementAttuned")
+        : CONFIG.DND5E.attunementTypes[this.attunement] ?? null,
+      game.i18n.localize(this.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
+      ("proficient" in this) ? CONFIG.DND5E.proficiencyLevels[this.prof?.multiplier || 0] : null
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Are the magical properties of this item, such as magical bonuses to armor & damage, available?
+   * @type {boolean}
+   */
+  get magicAvailable() {
+    const attunement = this.attuned || (this.attunement !== "required");
+    return attunement && this.properties.has("mgc") && this.validProperties.has("mgc");
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -89,34 +117,6 @@ export default class EquippableItemTemplate extends SystemDataModel {
     if ( this.attuned && this.parent.actor?.system.attributes?.attunement ) {
       this.parent.actor.system.attributes.attunement.value += 1;
     }
-  }
-
-  /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Chat properties for equippable items.
-   * @type {string[]}
-   */
-  get equippableItemCardProperties() {
-    return [
-      this.attuned ? game.i18n.localize("DND5E.AttunementAttuned")
-        : CONFIG.DND5E.attunementTypes[this.attunement] ?? null,
-      game.i18n.localize(this.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
-      ("proficient" in this) ? CONFIG.DND5E.proficiencyLevels[this.prof?.multiplier || 0] : null
-    ];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Are the magical properties of this item, such as magical bonuses to armor & damage, available?
-   * @type {boolean}
-   */
-  get magicAvailable() {
-    const attunement = this.attuned || (this.attunement !== "required");
-    return attunement && this.properties.has("mgc") && this.validProperties.has("mgc");
   }
 
   /* -------------------------------------------- */

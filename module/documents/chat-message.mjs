@@ -76,7 +76,7 @@ export default class ChatMessage5e extends ChatMessage {
   _trayStates;
 
   /* -------------------------------------------- */
-  /*  Data Migrations                             */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
