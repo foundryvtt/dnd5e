@@ -212,14 +212,14 @@ export default class AdvancementManager extends Application5e {
     oldFlows.reverse().forEach(flow => manager.steps.push({ type: "reverse", flow, automatic: true }));
 
     // Add new advancements
-    const advancementArray = clonedItem.toObject().system.advancement;
-    advancementArray.push(...advancements.map(a => {
-      const obj = a.toObject();
-      if ( obj.constructor.dataModels?.value ) a.value = (new a.constructor.metadata.dataModels.value()).toObject();
-      else obj.value = foundry.utils.deepClone(a.constructor.metadata.defaults?.value ?? {});
+    const advancementData = advancements.reduce((obj, a) => {
+      const data = a.toObject();
+      if ( data.constructor.dataModels?.value ) a.value = (new a.constructor.metadata.dataModels.value()).toObject();
+      else data.value = foundry.utils.deepClone(a.constructor.metadata.defaults?.value ?? {});
+      obj[data._id] = data;
       return obj;
-    }));
-    clonedItem.updateSource({"system.advancement": advancementArray});
+    }, {});
+    clonedItem.updateSource({ "system.advancement": advancementData });
 
     const newFlows = Array.fromRange(currentLevel + 1).slice(minimumLevel)
       .flatMap(l => this.flowsForLevel(clonedItem, l));
