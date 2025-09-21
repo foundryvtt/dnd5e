@@ -1801,7 +1801,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   async _onDropCreateItems(event, items, behavior) {
     behavior ??= event._behavior;
-    const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
+    const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.size);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
       ui.notifications.warn(game.i18n.format("DND5E.WarnCantAddMultipleAdvancements"));
@@ -1863,7 +1863,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( stacked ) return false;
 
     // Bypass normal creation flow for any items with advancement
-    if ( actor.system.metadata?.supportsAdvancement && itemData.system.advancement?.length
+    if ( actor.system.metadata?.supportsAdvancement && !foundry.utils.isEmpty(itemData.system.advancement)
         && !game.settings.get("dnd5e", "disableAdvancements") ) {
       // Ensure that this item isn't violating the singleton rule
       const dataModel = CONFIG.Item.dataModels[itemData.type];

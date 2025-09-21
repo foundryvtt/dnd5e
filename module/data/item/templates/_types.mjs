@@ -11,7 +11,7 @@
 
 /**
  * @typedef AdvancementTemplateData
- * @property {Advancement[]} advancement  Advancement objects for this item.
+ * @property {AdvancementCollection} advancement  Advancement objects for this item.
  */
 
 /**

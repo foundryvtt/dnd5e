@@ -1,7 +1,7 @@
 import CreateDocumentDialog from "../../applications/create-document-dialog.mjs";
 
 /**
- * A mixin which extends a DataModel to provide behavior shared between activities & advancements.
+ * A mixin which extends a DataModel to provide behavior shared between activities & advancement.
  * @template {DataModel} T
  * @param {typeof T} Base  The base DataModel to be mixed.
  * @returns {typeof PseudoDocument}
