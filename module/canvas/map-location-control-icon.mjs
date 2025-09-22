@@ -54,7 +54,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
       .endFill();
 
     // Text
-    this.text = new PreciseText(this.code, this._getTextStyle(this.code.length, this.size));
+    this.text = new foundry.canvas.containers.PreciseText(this.code, this._getTextStyle(this.code.length, this.size));
     this.text.anchor.set(0.5, 0.5);
     this.text.position.set(this.radius, this.radius);
     this.addChild(this.text);
