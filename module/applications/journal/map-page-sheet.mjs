@@ -17,7 +17,8 @@ export default class JournalMapLocationPageSheet extends JournalEntryPageProseMi
     const code = this.document.system.code ?? "";
 
     if ( this.isView ) {
-      this.element.querySelector(".journal-page-header :first-child").dataset.mapLocationCode = code;
+      const title = this.element.querySelector(".journal-page-header :first-child");
+      if ( title ) title.dataset.mapLocationCode = code;
     } else {
       const header = this.element.querySelector(".journal-header");
       const name = header.querySelector("input");
