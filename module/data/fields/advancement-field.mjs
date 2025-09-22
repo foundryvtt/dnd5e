@@ -4,6 +4,16 @@
  */
 export default class AdvancementField extends foundry.data.fields.ObjectField {
 
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning(
+      "Usage of `AdvancementField` has been deprecated in favor of mixing in `AdvancementTemplate`.",
+      { since: "DnD5e 5.2", until: "DnD5e 5.4", once: true }
+    );
+    super(...args);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Get the BaseAdvancement definition for the specified advancement type.
    * @param {string} type                    The Advancement type.
