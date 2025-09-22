@@ -23,20 +23,25 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  */
 export default class Item5e extends SystemDocumentMixin(Item) {
 
-  /**
-   * Caches an item linked to this one, such as a subclass associated with a class.
-   * @type {Item5e}
-   * @private
-   */
-  _classLink;
+  /** @inheritDoc */
+  _configure(options={}) {
+    super._configure(options);
 
-  /* -------------------------------------------- */
+    // Construct Pseudo Document Collections
+    const collections = {};
+    for ( const [fieldName, field] of Object.entries(CONFIG.Item.dataModels[this._source.type]?.schema.fields ?? {}) ) {
+      if ( !field.constructor.hierarchical || !field.constructor.implementation ) continue;
+      const data = this._source.system[fieldName];
+      const c = collections[fieldName] = new field.constructor.implementation(fieldName, this, data);
+      Object.defineProperty(this, fieldName, { value: c, writable: false });
+    }
 
-  /**
-   * An object that tracks which tracks the changes to the data model which were applied by active effects
-   * @type {object}
-   */
-  overrides = this.overrides ?? {};
+    /**
+     * A mapping of embedded Document collections which exist in this model.
+     * @type {Record<string, PseudoDocumentCollection>}
+     */
+    Object.defineProperty(this, "pseudoCollections", { value: Object.seal(collections), writable: false });
+  }
 
   /* -------------------------------------------- */
 
@@ -144,6 +149,27 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     return !this.system.metadata?.singleton && !["class", "subclass"].includes(this.type)
       && !this.flags.dnd5e?.cachedFor;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Class associated with this subclass. Always returns null on non-subclass or non-embedded items.
+   * @type {Item5e|null}
+   */
+  get class() {
+    if ( !this.isEmbedded || (this.type !== "subclass") ) return null;
+    const cid = this.system.classIdentifier;
+    return this._classLink ??= this.parent.items.find(i => (i.type === "class") && (i.identifier === cid));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Caches an item linked to this one, such as a subclass associated with a class.
+   * @type {Item5e}
+   * @private
+   */
+  _classLink;
 
   /* --------------------------------------------- */
 
@@ -313,6 +339,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     return this.hasRecharge && (this.system.uses.value < 1);
   }
 
+  /* -------------------------------------------- */
+
+  /**
+   * An object that tracks which tracks the changes to the data model which were applied by active effects
+   * @type {object}
+   */
+  overrides = this.overrides ?? {};
+
   /* --------------------------------------------- */
 
   /**
@@ -327,40 +361,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Class associated with this subclass. Always returns null on non-subclass or non-embedded items.
-   * @type {Item5e|null}
-   */
-  get class() {
-    if ( !this.isEmbedded || (this.type !== "subclass") ) return null;
-    const cid = this.system.classIdentifier;
-    return this._classLink ??= this.parent.items.find(i => (i.type === "class") && (i.identifier === cid));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Subclass associated with this class. Always returns null on non-class or non-embedded items.
-   * @type {Item5e|null}
-   */
-  get subclass() {
-    if ( !this.isEmbedded || (this.type !== "class") ) return null;
-    const items = this.parent.items;
-    const cid = this.identifier;
-    return this._classLink ??= items.find(i => (i.type === "subclass") && (i.system.classIdentifier === cid));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Retrieve scale values for current level from advancement data.
    * @type {Record<string, ScaleValueType>}
    */
   get scaleValues() {
-    if ( !this.advancement.byType.ScaleValue ) return {};
+    if ( !this.advancement?.documentsByType.ScaleValue ) return {};
     const item = ["class", "subclass"].includes(this.advancementRootItem?.type) ? this.advancementRootItem : this;
     const level = item.type === "class" ? item.system.levels : item.type === "subclass" ? item.class?.system.levels
       : this.parent?.system.details.level ?? 0;
-    return this.advancement.byType.ScaleValue.reduce((obj, advancement) => {
+    return this.advancement.documentsByType.ScaleValue.reduce((obj, advancement) => {
       obj[advancement.identifier] = advancement.valueForLevel(level);
       return obj;
     }, {});
@@ -404,6 +413,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       ( subclassSC && (subclassSC.progression !== "none") ) ? subclassSC : classSC
     );
     return finalSC ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Subclass associated with this class. Always returns null on non-class or non-embedded items.
+   * @type {Item5e|null}
+   */
+  get subclass() {
+    if ( !this.isEmbedded || (this.type !== "class") ) return null;
+    const items = this.parent.items;
+    const cid = this.identifier;
+    return this._classLink ??= items.find(i => (i.type === "subclass") && (i.system.classIdentifier === cid));
   }
 
   /* -------------------------------------------- */
@@ -529,9 +551,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Clear out linked item cache
     this._classLink = undefined;
 
-    // Advancement
-    this._prepareAdvancement();
-
     // Item Properties
     if ( this.system.properties ) {
       this.labels.properties = this.system.properties.reduce((acc, prop) => {
@@ -547,38 +566,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Un-owned items can have their final preparation done here, otherwise this needs to happen in the owning Actor
     if ( !this.isOwned ) this.prepareFinalAttributes();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare advancement objects from stored advancement data.
-   * @protected
-   */
-  _prepareAdvancement() {
-    const minAdvancementLevel = ["class", "subclass"].includes(this.type) ? 1 : 0;
-    this.advancement = {
-      byId: {},
-      byLevel: Object.fromEntries(
-        Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(minAdvancementLevel).map(l => [l, []])
-      ),
-      byType: {},
-      needingConfiguration: []
-    };
-    for ( const advancement of this.system.advancement ?? [] ) {
-      if ( !(advancement instanceof Advancement) ) continue;
-      this.advancement.byId[advancement.id] = advancement;
-      this.advancement.byType[advancement.type] ??= [];
-      this.advancement.byType[advancement.type].push(advancement);
-      advancement.levels.forEach(l => this.advancement.byLevel[l]?.push(advancement));
-      if ( !advancement.levels.length
-        || ((advancement.levels.length === 1) && (advancement.levels[0] < minAdvancementLevel)) ) {
-        this.advancement.needingConfiguration.push(advancement);
-      }
-    }
-    Object.entries(this.advancement.byLevel).forEach(([lvl, data]) => data.sort((a, b) => {
-      return a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl), game.i18n.lang);
-    }));
   }
 
   /* -------------------------------------------- */
@@ -927,8 +914,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   updateActivity(id, updates) {
     if ( !this.system.activities ) return this;
-    if ( !this.system.activities.has(id) ) throw new Error(`Activity of ID ${id} could not be found to update`);
-    return this.update({ [`system.activities.${id}`]: updates });
+    const activity = this.system.activities?.get(id);
+    if ( !activity ) throw new Error(`Activity of ID ${id} could not be found to update`);
+    return this.update({ [`system.activities.${id}`]: { type: activity.type, ...updates } });
   }
 
   /* -------------------------------------------- */
@@ -958,7 +946,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for new advancement if source
    *                                               is `false`, or item with newly added advancement.
    */
-  createAdvancement(type, data={}, { renderSheet, showConfig, source=false }={}) {
+  createAdvancement(type, data={}, { renderSheet=true, showConfig, source=false }={}) {
     if ( showConfig !== undefined ) {
       foundry.utils.logCompatibilityWarning(
         "The `showConfig` options in `createAdvancement` has been deprecated and replaced with `renderSheet`.",
@@ -984,7 +972,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const update = { [`system.advancement.${advancement.id}`]: advancement.toObject() };
     if ( source ) return this.updateSource(update);
     return this.update(update).then(() => {
-      if ( showConfig ) return this.system.advancement.get(advancement.id)?.sheet?.render({ force: true });
+      if ( renderSheet ) return this.system.advancement.get(advancement.id)?.sheet?.render({ force: true });
       return this;
     });
   }
@@ -1004,7 +992,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( !this.system.advancement.has(id) ) throw new Error(`Advancement of ID ${id} could not be found to update`);
 
     const advancement = this.system.advancement.get(id);
-    const update = { [`system.advancement.${id}`]: updates };
+    const update = { [`system.advancement.${id}`]: { type: advancement.type, ...updates } };
     if ( source ) {
       this.updateSource(update);
       advancement.render();

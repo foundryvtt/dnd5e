@@ -7,6 +7,10 @@ import MappingField from "./mapping-field.mjs";
  */
 export default class AdvancementCollectionField extends MappingField {
   constructor(options) {
+    foundry.utils.logCompatibilityWarning(
+      "Usage of `AdvancementCollectionField` has been deprecated in favor of mixing in `AdvancementTemplate`.",
+      { since: "DnD5e 5.2", until: "DnD5e 5.4", once: true }
+    );
     super(new AdvancementField(), options);
   }
 

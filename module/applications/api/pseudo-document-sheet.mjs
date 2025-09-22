@@ -4,14 +4,6 @@ import Application5e from "../api/application.mjs";
  * Default sheet for activities.
  */
 export default class PseudoDocumentSheet extends Application5e {
-  constructor(options={}) {
-    super(options);
-    this.#documentId = options.document.id;
-    this.#documentType = options.document.metadata.name;
-    this.#item = options.document.item;
-  }
-
-  /* -------------------------------------------- */
 
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
@@ -38,20 +30,8 @@ export default class PseudoDocumentSheet extends Application5e {
    * @type {PseudoDocument}
    */
   get document() {
-    return this.item.getEmbeddedDocument(this.#documentType, this.#documentId);
+    return this.options.document;
   }
-
-  /**
-   * ID of this PseudoDocument on the parent item.
-   * @type {string}
-   */
-  #documentId;
-
-  /**
-   * Collection representing this PseudoDocument.
-   * @type {string}
-   */
-  #documentType;
 
   /* -------------------------------------------- */
 
@@ -81,10 +61,8 @@ export default class PseudoDocumentSheet extends Application5e {
    * Parent item to which this PseudoDocument belongs.
    * @type {Item5e}
    */
-  #item;
-
   get item() {
-    return this.#item;
+    return this.document.item;
   }
 
   /* -------------------------------------------- */

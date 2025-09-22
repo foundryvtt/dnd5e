@@ -277,7 +277,7 @@ export default class CharacterData extends CreatureTemplate {
     const hpOptions = {};
     if ( this.attributes.hp.max === null ) {
       hpOptions.advancement = Object.values(this.parent.classes)
-        .map(c => c.advancement.byType.HitPoints?.[0]).filter(a => a);
+        .map(c => c.advancement.documentsByType.HitPoints?.[0]).filter(a => a);
       hpOptions.bonus = (simplifyBonus(this.attributes.hp.bonuses.level, rollData) * this.details.level)
         + simplifyBonus(this.attributes.hp.bonuses.overall, rollData);
       hpOptions.mod = this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0;

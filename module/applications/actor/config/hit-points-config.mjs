@@ -55,7 +55,7 @@ export default class HitPointsConfig extends BaseConfigSheet {
       id: cls.id,
       anchor: cls.toAnchor().outerHTML,
       name: cls.name,
-      total: cls.advancement.byType.HitPoints?.[0]?.[mod > 0 ? "total" : "getAdjustedTotal"](mod) ?? 0
+      total: cls.advancement.documentsByType.HitPoints?.[0]?.[mod > 0 ? "total" : "getAdjustedTotal"](mod) ?? 0
     })).sort((lhs, rhs) => rhs.name - lhs.name);
 
     // Display active effects targeting bonus fields

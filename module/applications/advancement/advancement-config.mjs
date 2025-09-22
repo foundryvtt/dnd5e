@@ -52,7 +52,7 @@ export default class AdvancementConfig extends FormApplication {
    * @type {Advancement}
    */
   get advancement() {
-    return this.item.advancement.byId[this.#advancementId];
+    return this.item.advancement.get(this.#advancementId);
   }
 
   /* -------------------------------------------- */

@@ -43,7 +43,10 @@ export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
   static migrateData(source) {
     super.migrateData(source);
     if ( source.type === "numeric" ) source.type = "number";
-    Object.values(source.scale ?? {}).forEach(v => TYPES[source.type].migrateData(v));
+    for ( const [k, v] of Object.entries(source.scale ?? {}) ) {
+      if ( foundry.utils.isDeletionKey(k) ) continue;
+      TYPES[source.type].migrateData(v);
+    }
   }
 }
 

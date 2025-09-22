@@ -566,7 +566,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
     Object.defineProperty(this, "_inferredSource", {
       value: Object.freeze(this.toObject(false)),
-      configurable: false,
+      configurable: true,
       enumerable: false,
       writable: false
     });

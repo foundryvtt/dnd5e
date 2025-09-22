@@ -70,7 +70,7 @@ export default class SizeAdvancement extends Advancement {
 
   /** @inheritDoc */
   static availableForItem(item) {
-    return !item.advancement.byType.Size?.length;
+    return !item.advancement.documentsByType.Size?.length;
   }
 
   /* -------------------------------------------- */

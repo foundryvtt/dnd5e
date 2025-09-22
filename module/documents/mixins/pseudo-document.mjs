@@ -196,7 +196,7 @@ export default function PseudoDocumentMixin(Base) {
      * @returns {Promise<PseudoDocument>}  This PseudoDocument after updates have been applied.
      */
     async update(updates, options={}) {
-      const result = await this.item[`update${this.documentName}`](this.id, updates, options);
+      const result = await this.item[`update${this.documentName}`](this.id, { type: this.type, ...updates }, options);
       this.render();
       return result;
     }
@@ -209,7 +209,7 @@ export default function PseudoDocumentMixin(Base) {
      * @returns {PseudoDocument}  This PseudoDocument after updates have been applied.
      */
     updateSource(updates) {
-      super.updateSource(updates);
+      super.updateSource({ type: this.type, ...updates });
       return this;
     }
 

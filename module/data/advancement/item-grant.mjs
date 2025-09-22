@@ -46,7 +46,7 @@ export default class ItemGrantConfigurationData extends foundry.abstract.DataMod
 
   /** @inheritDoc */
   static migrateData(source) {
-    if ( "items" in source ) {
+    if ( foundry.utils.getType(source.items) === "Array" ) {
       source.items = source.items.map(i => foundry.utils.getType(i) === "string" ? { uuid: i } : i);
     }
     if ( source.spell ) SpellConfigurationData.migrateData(source.spell);

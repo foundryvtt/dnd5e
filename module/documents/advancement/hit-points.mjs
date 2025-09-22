@@ -142,7 +142,7 @@ export default class HitPointsAdvancement extends Advancement {
 
   /** @inheritDoc */
   static availableForItem(item) {
-    return !item.advancement.byType.HitPoints?.length;
+    return !item.advancement.documentsByType.HitPoints?.length;
   }
 
   /* -------------------------------------------- */

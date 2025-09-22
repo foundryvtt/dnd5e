@@ -381,7 +381,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
    */
   static onContextMenu(item, target) {
     const { id } = target.closest("[data-id]")?.dataset ?? {};
-    const advancement = item.advancement?.byId[id];
+    const advancement = item.advancement?.get(id);
     if ( !advancement ) return;
     const menuItems = advancement.getContextMenuOptions();
 

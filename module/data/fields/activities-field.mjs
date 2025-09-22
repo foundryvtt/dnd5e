@@ -6,6 +6,10 @@ import MappingField from "./mapping-field.mjs";
  */
 export class ActivitiesField extends MappingField {
   constructor(options) {
+    foundry.utils.logCompatibilityWarning(
+      "Usage of `ActivitiesField` has been deprecated in favor of mixing in `ActivitiesTemplate`.",
+      { since: "DnD5e 5.2", until: "DnD5e 5.4", once: true }
+    );
     super(new ActivityField(), options);
   }
 
@@ -25,6 +29,16 @@ export class ActivitiesField extends MappingField {
  * Field that stores activity data and swaps class based on activity type.
  */
 export class ActivityField extends foundry.data.fields.ObjectField {
+
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning(
+      "Usage of `ActivityField` has been deprecated in favor of mixing in `ActivitiesTemplate`.",
+      { since: "DnD5e 5.2", until: "DnD5e 5.4", once: true }
+    );
+    super(...args);
+  }
+
+  /* -------------------------------------------- */
 
   /** @override */
   static recursive = true;
@@ -82,6 +96,10 @@ export class ActivityField extends foundry.data.fields.ObjectField {
  */
 export class ActivityCollection extends Collection {
   constructor(model, entries) {
+    foundry.utils.logCompatibilityWarning(
+      "Usage of `ActivityCollection` has been deprecated in favor of mixing in `AdvancementTemplate`.",
+      { since: "DnD5e 5.2", until: "DnD5e 5.4", once: true }
+    );
     super();
     this.#model = model;
     for ( const entry of entries ) {
