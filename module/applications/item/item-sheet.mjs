@@ -315,7 +315,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     context.tab = context.tabs.details;
     context.parts ??= [];
 
-    context.baseItemOptions = await this._getBaseItemOptions();
+    context.baseItemOptions = await this._getBaseItemOptions(context);
     context.coverOptions = Object.entries(CONFIG.DND5E.cover).map(([value, label]) => ({ value, label }));
 
     // If using modern rules, do not show redundant artificer progression unless it is already selected.
@@ -498,21 +498,21 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
   /**
    * Get the base weapons and tools based on the selected type.
+   * @param {ApplicationRenderContext} context  Context being prepared.
    * @returns {Promise<FormSelectOptions[]|null>}
    * @protected
    */
-  async _getBaseItemOptions() {
+  async _getBaseItemOptions(context) {
     const baseIds = this.item.type === "equipment" ? {
       ...CONFIG.DND5E.armorIds,
       ...CONFIG.DND5E.shieldIds
     } : CONFIG.DND5E[`${this.item.type}Ids`];
     if ( baseIds === undefined ) return null;
 
-    const baseType = this.item.system._source.type.value ?? this.item.system.type.value;
     const options = [];
     for ( const [value, id] of Object.entries(baseIds) ) {
       const baseItem = await Trait.getBaseItem(id);
-      if ( baseType !== baseItem?.system?.type?.value ) continue;
+      if ( context?.source.type.value !== baseItem?.system?.type?.value ) continue;
       options.push({ value, label: baseItem.name });
     }
 
