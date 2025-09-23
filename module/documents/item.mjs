@@ -483,6 +483,21 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    source = super.migrateData(source);
+    ActivitiesTemplate.initializeActivities(source);
+    if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
+    else if ( source.type === "container" ) ContainerData._migrateWeightlessData(source);
+    else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
+    else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
+    return source;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -1056,7 +1071,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   }
 
   /* -------------------------------------------- */
-  /*  Event Handlers                              */
+  /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -1107,6 +1122,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     this.parent?.endConcentration?.(this);
   }
 
+  /* -------------------------------------------- */
+  /*  Event Handlers                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -1594,20 +1611,5 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const { type } = itemData;
     const { img } = super.getDefaultArtwork(itemData);
     return { img: CONFIG.DND5E.defaultArtwork.Item[type] ?? img };
-  }
-
-  /* -------------------------------------------- */
-  /*  Migrations & Deprecations                   */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static migrateData(source) {
-    source = super.migrateData(source);
-    ActivitiesTemplate.initializeActivities(source);
-    if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
-    else if ( source.type === "container" ) ContainerData._migrateWeightlessData(source);
-    else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
-    else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
-    return source;
   }
 }
