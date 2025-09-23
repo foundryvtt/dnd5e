@@ -61,7 +61,7 @@ export default class ChatMessage5e extends ChatMessage {
     if ( game.user.isGM || (this.author === game.user) ) return true;
     switch ( game.settings.get("dnd5e", "challengeVisibility") ) {
       case "all": return true;
-      case "player": return !this.author.isGM;
+      case "player": return !this.author?.isGM;
       default: return false;
     }
   }
@@ -185,7 +185,7 @@ export default class ChatMessage5e extends ChatMessage {
       if ( this.shouldDisplayChallenge ) chatCard.dataset.displayChallenge = "";
 
       const actor = game.actors.get(this.speaker.actor);
-      const isCreator = game.user.isGM || actor?.isOwner || (this.author.id === game.user.id);
+      const isCreator = game.user.isGM || actor?.isOwner || (this.author?.id === game.user.id);
       for ( const button of html.querySelectorAll(".card-buttons button") ) {
         if ( button.dataset.visibility === "all" ) continue;
 
@@ -276,12 +276,13 @@ export default class ChatMessage5e extends ChatMessage {
     let img;
     let nameText;
     if ( this.isContentVisible ) {
-      img = actor?.img ?? this.author.avatar;
+      img = actor?.img ?? this.author?.avatar;
       nameText = this.alias;
     } else {
-      img = this.author.avatar;
-      nameText = this.author.name;
+      img = this.author?.avatar;
+      nameText = this.author?.name ?? "";
     }
+    img ??= CONST.DEFAULT_TOKEN;
 
     const avatar = document.createElement("a");
     avatar.classList.add("avatar");
@@ -681,7 +682,7 @@ export default class ChatMessage5e extends ChatMessage {
     const item = this.getAssociatedItem();
     const effects = this.getFlag("dnd5e", "use.effects")
       ?.map(id => item?.effects.get(id))
-      .filter(e => e && (game.user.isGM || (e.transfer && (this.author.id === game.user.id))));
+      .filter(e => e && (game.user.isGM || (e.transfer && (this.author?.id === game.user.id))));
     if ( !effects?.length ) return;
 
     const effectApplication = document.createElement("effect-application");
