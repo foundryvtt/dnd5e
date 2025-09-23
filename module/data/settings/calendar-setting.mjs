@@ -19,8 +19,25 @@ export class CalendarConfigSetting extends foundry.abstract.DataModel {
   /** @override */
   static defineSchema() {
     return {
-      enabled: new BooleanField()
+      enabled: new BooleanField({ required: true }),
+      dailyRecovery: new StringField({ choices: {
+        "": "DND5E.CALENDAR.FIELDS.dailyRecovery.default",
+        calendar: "DND5E.CALENDAR.FIELDS.dailyRecovery.calendar",
+        manual: "DND5E.CALENDAR.FIELDS.dailyRecovery.manual"
+      } })
     };
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Should item usage recovery be handled manually through the rest dialog?
+   * @type {boolean}
+   */
+  get manualRecovery() {
+    return this.dailyRecovery === "manual" || (!this.dailyRecovery && !this.enabled);
   }
 }
 

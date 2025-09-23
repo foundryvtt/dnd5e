@@ -23,6 +23,12 @@
  * @property {number} sunsets    Number of sunsets that occurred during a time change.
  */
 
+/**
+ * @typedef {CalendarTimeDeltas} TimePassageData
+ * @property {number} worldTime  Timecode for world after time as passed.
+ * @property {number} deltaTime  Change to the timecode that occurred.
+ */
+
 /* -------------------------------------------- */
 
 /**

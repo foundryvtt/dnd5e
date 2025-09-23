@@ -24,6 +24,7 @@
 "TYPES.ChatMessage": {
   "request": "Request Message",
   "rest": "Rest Message",
+  "timePassed": "Time Passed Message",
   "turn": "Combat Turn Message"
 },
 
@@ -1126,6 +1127,13 @@
       "hint": "Allow the calendar UI to be viewed & customized by all users.",
       "label": "Enabled"
     },
+    "dailyRecovery": {
+      "calendar": "Calendar Recovery (via time passing)",
+      "default": "Default (tied to calendar enabled setting)",
+      "hint": "Control whether limited uses with day, dawn, and dusk recovery are recovered based on the world calendar or through the rest dialog.",
+      "label": "Daily Recovery Mode",
+      "manual": "Manual Recovery (via rest dialog)"
+    },
     "formatters": {
       "date": {
         "label": "Date Format"
@@ -1315,6 +1323,17 @@
       "Autumn": "Autumn",
       "Winter": "Winter"
     }
+  },
+  "TimePassage": {
+    "Midnight": "A new day has begun.",
+    "Sunrise": "The sun has risen.",
+    "Sunset": "The sun has set.",
+    "SunsetSunrise": "The sun has set and a new dawn of a new day has come.",
+    "TimePassed": {
+      "one": "{number} has passed.",
+      "other": "{number} have passed."
+    },
+    "Title": "Passage of Time"
   }
 },
 
