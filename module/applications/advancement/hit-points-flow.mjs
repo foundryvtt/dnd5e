@@ -1,84 +1,105 @@
-import AdvancementFlow from "./advancement-flow.mjs";
+import AdvancementFlow from "./advancement-flow-v2.mjs";
 import Advancement from "../../documents/advancement/advancement.mjs";
+import { simplifyBonus } from "../../utils.mjs";
 
 /**
  * Inline application that presents hit points selection upon level up.
  */
 export default class HitPointsFlow extends AdvancementFlow {
 
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/advancement/hit-points-flow.hbs"
-    });
-  }
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    actions: {
+      rollHitPoints: HitPointsFlow.#rollHitPoints
+    }
+  };
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static PARTS = {
+    ...super.PARTS,
+    content: {
+      template: "systems/dnd5e/templates/advancement/hit-points-flow.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
-  getData() {
+  async _prepareContext(options) {
     const source = this.retainedData ?? this.advancement.value;
     const value = source[this.level];
+    const hp = this.advancement.actor.system.attributes.hp;
+    const abilityId = CONFIG.DND5E.defaultAbilities.hitPoints || "con";
+    const mod = this.advancement.actor.system.abilities[abilityId]?.mod ?? 0;
+    const bonus = simplifyBonus(hp.bonuses?.level ?? "", this.advancement.actor.getRollData());
 
-    // If value is empty, `useAverage` should default to the value selected at the previous level
-    let useAverage = value === "avg";
-    if ( !value ) {
-      const lastValue = source[this.level - 1];
-      if ( lastValue === "avg" ) useAverage = true;
-    }
-
-    return foundry.utils.mergeObject(super.getData(), {
-      isFirstClassLevel: (this.level === 1) && this.advancement.item.isOriginalClass,
-      hitDie: this.advancement.hitDie,
-      dieValue: this.advancement.hitDieValue,
+    return {
+      ...context,
       data: {
-        value: Number.isInteger(value) ? value : "",
-        useAverage
-      }
-    });
+        value: value === "avg" ? this.advancement.average : Number.isInteger(value) ? value : "",
+        useAverage: value === "avg"
+      },
+      hp: {
+        average: this.advancement.average,
+        bonus,
+        max: this.advancement.hitDieValue,
+        modifier: {
+          label: CONFIG.DND5E.abilities[abilityId]?.abbreviation ?? "",
+          value: mod
+        },
+        previous: Object.keys(this.advancement.value).reduce((total, level) => {
+          if ( parseInt(level) === this.level ) return total;
+          return total + Math.max(this.advancement.valueForLevel(parseInt(level)) + mod, 1) + bonus;
+        }, 0),
+        total: hp.max
+      },
+      hitDie: this.advancement.hitDie,
+      isFirstClassLevel: (this.level === 1) && this.advancement.item.isOriginalClass,
+      manual: !["avg", "max"].includes(value)
+    };
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  activateListeners(html) {
-    this.form.querySelector(".average-checkbox")?.addEventListener("change", event => {
-      this.form.querySelector(".roll-result").disabled = event.target.checked;
-      this.form.querySelector(".roll-button").disabled = event.target.checked;
-      this._updateRollResult();
-    });
-    this.form.querySelector(".roll-button")?.addEventListener("click", async () => {
-      const roll = await this.advancement.actor.rollClassHitPoints(this.advancement.item);
-      this.form.querySelector(".roll-result").value = roll.total;
-    });
-    this._updateRollResult();
-  }
-
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**
-   * Update the roll result display when the average result is taken.
-   * @protected
+   * Handle rolling hit points.
+   * @this {HitPointsFlow}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  _updateRollResult() {
-    if ( !this.form.elements.useAverage?.checked ) return;
-    this.form.elements.value.value = (this.advancement.hitDieValue / 2) + 1;
+  static async #rollHitPoints(event, target) {
+    const roll = await this.advancement.actor.rollClassHitPoints(this.advancement.item);
+    if ( roll ) {
+      await this.advancement.apply(this.level, { [this.level]: roll.total });
+      this.render();
+    }
   }
 
   /* -------------------------------------------- */
+  /*  Form Handling                               */
+  /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  _updateObject(event, formData) {
-    let value;
-    if ( formData.useMax ) value = "max";
-    else if ( formData.useAverage ) value = "avg";
-    else if ( Number.isInteger(formData.value) ) value = parseInt(formData.value);
+  /** @override */
+  async _handleForm(event, form, formData) {
+    let newValue;
+    if ( event.target?.name === "useAverage" ) {
+      newValue = event.target.checked ? "avg" : null;
+    } else if ( event.target?.name === "value" ) {
+      newValue = Number.isInteger(event.target.valueAsNumber) ? event.target.valueAsNumber : null;
+    } else return;
 
-    if ( value !== undefined ) return this.advancement.apply(this.level, { [this.level]: value });
+    if ( newValue ) await this.advancement.apply(this.level, { [this.level]: newValue });
+    else await this.advancement.reverse(this.level);
 
-    this.form.querySelector(".rollResult")?.classList.add("error");
-    const errorType = formData.value ? "Invalid" : "Empty";
-    throw new Advancement.ERROR(game.i18n.localize(`DND5E.ADVANCEMENT.HitPoints.Warning.${errorType}`));
+    // TODO: Re-implement advancement errors
+    // this.form.querySelector(".rollResult")?.classList.add("error");
+    // const errorType = formData.value ? "Invalid" : "Empty";
+    // throw new Advancement.ERROR(game.i18n.localize(`DND5E.ADVANCEMENT.HitPoints.Warning.${errorType}`));
   }
-
 }

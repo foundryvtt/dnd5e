@@ -300,35 +300,6 @@
     outline: 2px solid red;
   }
 
-  form[data-type="HitPoints"] {
-    div {
-      font-size: var(--font-size-14);
-    }
-    .rolls {
-      display: grid;
-      grid-template-columns: 50% 1fr 0fr;
-      align-items: center;
-      gap: 8px;
-
-      .average-label {
-        gap: 8px;
-
-        .average-checkbox {
-          flex: 0;
-          order: 1;
-        }
-        span { order: 2; }
-      }
-      .roll-result {
-        text-align: center;
-      }
-      .roll-button {
-        height: unset;
-        width: 31px;
-      }
-    }
-  }
-
   form[data-type="ItemChoice"] {
     .item-name .item-delete {
       flex: 0 0 20px;
