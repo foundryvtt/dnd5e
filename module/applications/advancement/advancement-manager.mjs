@@ -873,7 +873,7 @@ export default class AdvancementManager extends Application5e {
     await Promise.all([
       this.actor.update(updates, { isAdvancement: true }),
       this.actor.createEmbeddedDocuments("Item", toCreate, { keepId: true, isAdvancement: true }),
-      this.actor.updateEmbeddedDocuments("Item", toUpdate, { isAdvancement: true }),
+      this.actor.updateEmbeddedDocuments("Item", toUpdate, { diff: false, recursive: false, isAdvancement: true }),
       this.actor.deleteEmbeddedDocuments("Item", toDelete, { isAdvancement: true })
     ]);
 
