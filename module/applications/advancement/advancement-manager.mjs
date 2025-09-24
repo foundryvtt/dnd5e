@@ -455,7 +455,7 @@ export default class AdvancementManager extends Application5e {
     const match = (advancement, step) => (step.flow?.item.id === item.id)
       && (step.flow?.advancement.id === advancement.id)
       && (step.flow?.level === level);
-    return (item?.advancement.documentsByLevel[level] ?? [])
+    return (item?.advancement?.documentsByLevel[level] ?? [])
       .filter(a => a.appliesToClass)
       .map(a => {
         const existing = findExisting?.find(s => match(a, s))?.flow;
