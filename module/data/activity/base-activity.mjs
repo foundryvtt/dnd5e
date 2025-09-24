@@ -603,14 +603,11 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     for ( const target of this.consumption.targets ) {
       if ( !["itemUses", "material"].includes(target.type) || !target.target ) continue;
 
-      // Re-link UUIDs in consumption fields to explicit items on the actor
-      if ( target.target.includes(".") ) {
-        const item = actor.sourcedItems?.get(target.target)?.first();
-        if ( item ) target.target = item.id;
-      }
+      // Re-link UUID or identifier target to explicit item on the actor
+      target.target = this._remapConsumptionTarget(target.target);
 
       // If targeted item isn't found, display preparation warning
-      if ( !actor.items.get(target.target) ) {
+      if ( !actor.items.has(target.target) ) {
         const message = game.i18n.format("DND5E.CONSUMPTION.Warning.MissingItem", {
           activity: this.name, item: this.item.name
         });
@@ -748,6 +745,35 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
           .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
       }
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remap a UUID or identifier in a consumption target to the ID of an item on the actor.
+   * @param {string} target
+   * @returns {string}
+   * @internal
+   */
+  _remapConsumptionTarget(target) {
+    if ( !target || !this.actor || this.actor.items.has(target) ) return target;
+
+    // Re-link UUID target
+    if ( target.startsWith("Compendium.") ) {
+      const item = this.actor.sourcedItems?.get(target)?.first();
+      if ( item ) return item.id;
+    }
+
+    // Re-link identifier target
+    else {
+      let identifier = target;
+      let type;
+      if ( identifier.includes(":") ) [type, identifier] = target.split(":");
+      const item = this.actor.identifiedItems?.get(identifier, { type })?.first();
+      if ( item ) return item.id;
+    }
+
+    return target;
   }
 
   /* -------------------------------------------- */
