@@ -756,7 +756,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @internal
    */
   _remapConsumptionTarget(target) {
-    if ( !this.actor || this.actor.items.has(target) ) return target;
+    if ( !target || !this.actor || this.actor.items.has(target) ) return target;
 
     // Re-link UUID target
     if ( target.startsWith("Compendium.") ) {
