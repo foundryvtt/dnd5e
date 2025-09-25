@@ -52,7 +52,7 @@ export default class PseudoDocumentCollectionField extends foundry.data.fields.T
     }
 
     // Reconstruct the source array, retaining object references
-    for ( const [id, d] of Object.entries(diff) ) {
+    for ( let [id, d] of Object.entries(diff) ) {
       if ( foundry.utils.isDeletionKey(id) ) {
         if ( id[0] === "-" ) {
           delete source[key][id.slice(2)];
