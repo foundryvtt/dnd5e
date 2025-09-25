@@ -2,7 +2,7 @@
  * Data field that selects the appropriate PseudoDocument data model if available, otherwise defaults to generic
  * `ObjectField` to prevent issues with custom pseudo-document types that aren't currently loaded.
  */
-export default class PsuedoDocumentField extends foundry.data.fields.ObjectField {
+export default class PseudoDocumentField extends foundry.data.fields.ObjectField {
   /**
    * @param {typeof PseudoDocument} element  The type of Document which belongs to this field.
    * @param {DataFieldOptions} [options]     Options which configure the behavior of the field.

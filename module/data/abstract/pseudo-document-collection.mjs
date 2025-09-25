@@ -253,7 +253,7 @@ export default class PseudoDocumentCollection extends Collection {
    * Add a document to the collection.
    * @param {string} key                           The embedded Document ID.
    * @param {PseudoDocument} value                 The embedded Document instance.
-   * @param {object} [options]                     Additional options to the set operation.
+   * @param {object} [options={}]                  Additional options to the set operation.
    * @param {boolean} [options.modifySource=true]  Whether to modify the collection's source as part of the operation.
    * */
   set(key, value, {modifySource=true, ...options}={}) {
@@ -268,9 +268,10 @@ export default class PseudoDocumentCollection extends Collection {
    * Modify the underlying source array to include the Document.
    * @param {string} key            The Document ID key.
    * @param {PseudoDocument} value  The Document.
+   * @param {object} [options={}]   Additional options to the set operation.
    * @protected
    */
-  _set(key, value) {
+  _set(key, value, options={}) {
     this._source[key] = value._source;
   }
 
@@ -279,7 +280,7 @@ export default class PseudoDocumentCollection extends Collection {
   /**
    * Remove a document from the collection.
    * @param {string} key                           The embedded Document ID.
-   * @param {object} [options]                     Additional options to the delete operation.
+   * @param {object} [options={}]                  Additional options to the delete operation.
    * @param {boolean} [options.modifySource=true]  Whether to modify the collection's source as part of the operation.
    * */
   delete(key, { modifySource=true, ...options }={}) {
@@ -293,8 +294,8 @@ export default class PseudoDocumentCollection extends Collection {
 
   /**
    * Remove the value from the underlying source array.
-   * @param {string} key        The Document ID key.
-   * @param {object} [options]  Additional options to configure deletion behavior.
+   * @param {string} key           The Document ID key.
+   * @param {object} [options={}]  Additional options to configure deletion behavior.
    * @protected
    */
   _delete(key, options={}) {
