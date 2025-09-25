@@ -161,7 +161,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
     if ( !["class", "subclass"].includes(this.item.type)
       || foundry.utils.hasProperty(data, "level")
       || this.constructor.metadata.multiLevel ) return;
-    this.updateSource({level: 1});
+    this.updateSource({ level: 1 });
   }
 
   /* -------------------------------------------- */
