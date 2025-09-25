@@ -88,7 +88,7 @@ export default class ItemGrantAdvancement extends Advancement {
 
   /** @override */
   async apply(level, { ability, items: retainedData={}, selected=Object.keys(retainedData), ...data }={}, options={}) {
-    if ( data ) {
+    if ( !foundry.utils.isEmpty(data) ) {
       foundry.utils.logCompatibilityWarning(
         "The properties passed to `ItemGrantAdvancement#apply` have changed, see `ItemGrantAdvancementApplicationData` for new properties.",
         { since: "DnD5e 5.2", until: "DnD5e 5.4" }
