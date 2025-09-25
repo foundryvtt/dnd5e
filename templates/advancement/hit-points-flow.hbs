@@ -66,12 +66,15 @@
     </div>
 
     {{#unless isFirstClassLevel}}
-    <div class="form-group">
-        <label for="{{ partId }}-useAverage">{{ localize "DND5E.ADVANCEMENT.HitPoints.TakeAverage" }}</label>
-        <div class="form-fields">
-            <dnd5e-checkbox name="useAverage" id="{{ partId }}-useAverage"
-                            {{ checked data.useAverage }}></dnd5e-checkbox>
+    <fieldset>
+        <legend>{{ localize "DND5E.ADVANCEMENT.HitPoints.Options" }}</legend>
+        <div class="form-group">
+            <label for="{{ partId }}-useAverage">{{ localize "DND5E.ADVANCEMENT.HitPoints.TakeAverage" }}</label>
+            <div class="form-fields">
+                <dnd5e-checkbox name="useAverage" id="{{ partId }}-useAverage"
+                                {{ checked data.useAverage }}></dnd5e-checkbox>
+            </div>
         </div>
-    </div>
+    </fieldset>
     {{/unless}}
 </div>
