@@ -14,6 +14,7 @@ export {default as ItemChoiceConfig} from "./item-choice-config.mjs";
 export {default as ItemChoiceFlow} from "./item-choice-flow.mjs";
 export {default as ItemGrantConfig} from "./item-grant-config.mjs";
 export {default as ItemGrantFlow} from "./item-grant-flow.mjs";
+export {default as ItemGrantFlowV2} from "./item-grant-flow-v2.mjs";
 export {default as ScaleValueConfig} from "./scale-value-config.mjs";
 export {default as ScaleValueFlow} from "./scale-value-flow.mjs";
 export {default as SizeConfig} from "./size-config.mjs";
