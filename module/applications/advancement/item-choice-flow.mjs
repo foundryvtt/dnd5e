@@ -1,41 +1,41 @@
 import Actor5e from "../../documents/actor/actor.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
-import ItemGrantFlow from "./item-grant-flow.mjs";
+import ItemGrantFlow from "./item-grant-flow-v2.mjs";
 
 /**
  * Inline application that presents the player with a choice of items.
  */
 export default class ItemChoiceFlow extends ItemGrantFlow {
 
-  /**
-   * Currently selected ability.
-   * @type {string}
-   */
-  ability;
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    actions: {
+      browse: ItemChoiceFlow.#browseCompendium,
+      deleteItem: ItemChoiceFlow.#deleteItem
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static PARTS = {
+    ...super.PARTS,
+    content: {
+      template: "systems/dnd5e/templates/advancement/item-choice-flow.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
 
   /**
-   * Set of selected UUIDs.
-   * @type {Set<string>}
+   * Current counts of selected items.
+   * @type {{ current: number, max: number, full: boolean, replacement: boolean }}
    */
-  selected;
-
-  /**
-   * Cached items from the advancement's pool.
-   * @type {Item5e[]}
-   */
-  pool;
-
-  /**
-   * ID of item to be replaced.
-   * @type {string}
-   */
-  replacement;
-
-  /**
-   * List of dropped items.
-   * @type {Item5e[]}
-   */
-  dropped;
+  get counts() {
+    return this.advancement.getCounts(this.level);
+  }
 
   /* -------------------------------------------- */
 
@@ -49,112 +49,138 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      dragDrop: [{ dropSelector: ".drop-target" }],
-      template: "systems/dnd5e/templates/advancement/item-choice-flow.hbs"
-    });
-  }
+  /**
+   * Cached items from the advancement's pool.
+   * @type {Item5e[]}
+   */
+  pool;
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async retainData(data) {
-    await super.retainData(data);
-    this.replacement = data.replaced?.original;
-    this.selected = new Set(data.items?.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId")));
-  }
+  /**
+   * Copies of items added at earlier levels to pull from when re-creating items.
+   * @type {Record<number, Record<string, Item5e>>}
+   */
+  retained;
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async getContext() {
-    const context = {};
-    this.selected ??= new Set(Object.values(this.advancement.value.added?.[this.level] ?? {}));
-    this.pool ??= (await Promise.all(this.advancement.configuration.pool.map(i => fromUuid(i.uuid)))).filter(_ => _);
-    if ( !this.dropped ) {
-      this.dropped = [];
-      for ( const data of this.retainedData?.items ?? [] ) {
-        const uuid = foundry.utils.getProperty(data, "flags.dnd5e.sourceId");
-        if ( this.pool.find(i => uuid === i?.uuid) ) continue;
-        const item = await fromUuid(uuid);
-        item.dropped = true;
-        this.dropped.push(item);
-      }
-    }
+  /**
+   * Source UUIDs of all currently selected items for this level with how many times they have been selected.
+   * @type {Map<string, number>}
+   */
+  get selected() {
+    return Object.values(this.advancement.value.added[this.level] ?? {}).reduce((map, uuid) => {
+      if ( !map.has(uuid) ) map.set(uuid, 1);
+      else map.set(uuid, map.get(uuid) + 1);
+      return map;
+    }, new Map());
+  }
 
-    const levelConfig = this.advancement.configuration.choices[this.level];
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _prepareContentContext(context, options) {
+    const actor = this.advancement.actor;
+    const config = this.advancement.configuration;
+    const counts = this.counts;
+    const value = this.advancement.value;
+    this.pool ??= (await Promise.all(config.pool.map(i => fromUuid(i.uuid)))).filter(_ => _);
+    this.retained ??= Object.entries(value.added).reduce((obj, [level, added]) => {
+      obj[level] = Object.fromEntries(Object.entries(added).map(([id, uuid]) => [uuid, actor.items.get(id)]));
+      return obj;
+    }, {});
+
+    const levelConfig = config.choices[this.level];
     let max = levelConfig.count ?? 0;
     context.replaceable = levelConfig.replacement;
-    context.noReplacement = !this.advancement.actor.items.has(this.replacement);
-    if ( context.replaceable && !context.noReplacement ) max++;
-    if ( this.selected.size > max ) {
-      const [kept, lost] = Array.from(Array.from(this.selected).entries()).reduce(([kept, lost], [index, value]) => {
-        if ( index < max ) kept.push(value);
-        else lost.push(value);
-        return [kept, lost];
-      }, [[], []]);
-      this.selected = new Set(kept);
-      this.dropped = this.dropped.filter(i => !lost.includes(i.uuid));
-    }
-    context.choices = { max, current: this.selected.size, full: this.selected.size >= max };
+    context.noReplacement = !counts.replacement;
 
-    context.previousLevels = {};
+    context.sections = new Map();
     const previouslySelected = new Set();
     // FIXME: We should not offer options for replacement if replacing the item would render the character ineligible
     // for items they had already picked *at earlier levels*. Becoming ineligible for an item that is pending addition
     // at this level is already handled by _evaluatePrerequisites.
     for ( const level of Array.fromRange(this.level) ) {
-      const added = this.advancement.value.added[level];
-      if ( added ) context.previousLevels[level] = Object.entries(added).map(([id, uuid]) => {
-        const item = fromUuidSync(uuid);
-        previouslySelected.add(uuid);
-        return {
-          ...item, id, uuid,
-          checked: id === this.replacement,
-          replaced: false
-        };
+      const added = value.added[level];
+      if ( added ) context.sections.set(level, {
+        header: game.i18n.format(`DND5E.AdvancementLevel${level === "0" ? "AnyHeader" : "Header"}`, { level }),
+        items: Object.entries(added).map(([id, uuid]) => {
+          const { name, img } = actor.items.get(id) ?? fromUuidSync(uuid);
+          previouslySelected.add(uuid);
+          return {
+            id, img, name, uuid,
+            checked: id === config.choices[this.level].replacement,
+            previouslyReplaced: false,
+            replaced: false
+          };
+        }).filter(_ => _)
       });
-      const replaced = this.advancement.value.replaced[level];
-      if ( replaced ) {
-        const match = context.previousLevels[replaced.level].find(v => v.id === replaced.original);
-        if ( match ) {
-          match.replaced = true;
-          previouslySelected.delete(match.uuid);
-        }
+    }
+    for ( const level of Array.fromRange(this.level + 1) ) {
+      const replaced = value.replaced[level];
+      const match = context.sections.get(replaced?.level)?.items.find(v => v.id === replaced.original);
+      if ( match ) {
+        match.previouslyReplaced = level !== this.level;
+        match.replaced = true;
+        previouslySelected.delete(match.uuid);
       }
     }
 
-    const spellLevel = this.advancement.configuration.restriction.level;
+    const spellLevel = config.restriction.level;
     const maxSlot = this._maxSpellSlotLevel();
-    const validateSpellLevel = (this.advancement.configuration.type === "spell") && (spellLevel === "available");
-    const replaced = this.advancement.actor.items.get(this.replacement);
-    const removed = replaced ? [replaced] : [];
-    const added = [...this.dropped, ...this.pool.filter(item => this.selected.has(item.uuid))];
+    const validateSpellLevel = (config.type === "spell") && (spellLevel === "available");
 
-    context.items = [...this.pool, ...this.dropped].reduce((items, i) => {
-      if ( i ) {
-        i.checked = this.selected.has(i.uuid);
-        i.disabled = !i.checked && context.choices.full;
-        const validFeature = !i.system.validatePrerequisites || (i.system.validatePrerequisites(
+    const added = [];
+    const dropped = [];
+    const selected = this.selected;
+    for ( const [id, uuid] of Object.entries(value.added[this.level] ?? {}) ) {
+      const item = await fromUuid(uuid);
+      if ( item ) {
+        added.push(item);
+        if ( !this.pool.find(p => p.uuid === uuid) ) dropped.push(item);
+      }
+    }
+    const removed = counts.replaced ? actor.items.get(config.choices[this.level].replacement) : [];
+
+    context.sections.set(this.level, {
+      header: game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Chosen", counts),
+      isCurrentLevel: true,
+      items: [...this.pool, ...dropped].reduce((arr, item) => {
+        const { id, name, img } = item;
+        const uuid = item.flags.dnd5e?.sourceId ?? item.uuid;
+        const validFeature = !item.system.validatePrerequisites || (item.system.validatePrerequisites(
           this.advancement.actor, { added, removed, level: this.featureLevel }
         ) === true);
-        const validSpell = !validateSpellLevel || (i.system.level <= maxSlot);
-        if ( validFeature && validSpell ) items.push(i);
-      }
-      return items;
-    }, []);
+        const validSpell = !validateSpellLevel || (item.system.level <= maxSlot);
+        if ( validFeature && validSpell ) {
+          const data = {
+            id, img, name, uuid,
+            checked: selected.has(uuid),
+            disabled: !selected.has(uuid) && counts.full,
+            dropped: !this.pool.find(p => p.uuid === uuid)
+          };
+          if ( item.system.prerequisites?.repeatable && selected.has(uuid) ) {
+            Array.fromRange(selected.get(uuid)).forEach(() => arr.push(data));
+            if ( !counts.full ) arr.push({ ...data, checked: false, disabled: false });
+          } else arr.push(data);
+        }
+        return arr;
+      }, []).filter(_ => _)
+    });
+    context.sections = context.sections.values();
 
     context.abilities = this.getSelectAbilities();
-    context.abilities.disabled = previouslySelected.size;
-    this.ability ??= context.abilities.selected;
+    const firstLevel = parseInt(Object.keys(config.choices).sort()[0]);
+    if ( context.abilities ) context.abilities.disabled = this.level > firstLevel;
 
-    if ( this.advancement.configuration.type ) {
-      let type = game.i18n.localize(CONFIG.Item.typeLabels[this.advancement.configuration.type]);
-      if ( (this.advancement.configuration.type === "feat") && this.advancement.configuration.restriction.type ) {
-        const typeConfig = CONFIG.DND5E.featureTypes[this.advancement.configuration.restriction.type];
-        const subtype = typeConfig.subtypes?.[this.advancement.configuration.restriction.subtype];
+    if ( config.type ) {
+      let type = game.i18n.localize(CONFIG.Item.typeLabels[config.type]);
+      if ( (config.type === "feat") && config.restriction.type ) {
+        const typeConfig = CONFIG.DND5E.featureTypes[config.restriction.type];
+        const subtype = typeConfig.subtypes?.[config.restriction.subtype];
         if ( subtype ) type = subtype;
         else type = typeConfig.label;
       }
@@ -163,33 +189,41 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       context.selectLabel = game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.Action.SelectGeneric");
     }
 
+    context.showBrowseButton = config.allowDrops && !counts.full;
+
     return context;
   }
 
   /* -------------------------------------------- */
+  /*  Life-Cycle Handlers                         */
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-    html.find('[data-action="browse"]').click(this._onBrowseCompendium.bind(this));
-    html.find('[data-action="delete"]').click(this._onItemDelete.bind(this));
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    new foundry.applications.ux.DragDrop.implementation({
+      dragSelector: ".draggable",
+      dropSelector: "form",
+      callbacks: {
+        drop: this._onDrop.bind(this)
+      }
+    }).bind(this.element);
   }
 
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**
    * Handle opening the compendium browser and displaying the result.
-   * @param {Event} event  The originating click event.
-   * @protected
+   * @this {ItemChoiceFlow}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  async _onBrowseCompendium(event) {
-    event.preventDefault();
-
+  static async #browseCompendium(event, target) {
     // Determine how many items can be selected
     const config = this.advancement.configuration;
-    let max = config.choices[this.level].count ?? 0;
-    if ( config.choices[this.level].replacement && this.advancement.actor.items.has(this.replacement) ) max++;
-    const current = this.selected.size;
+    const { current, max } = this.counts;
     if ( current >= max ) {
       ui.notifications.warn("DND5E.ADVANCEMENT.ItemChoice.Warning.MaxSelected", { localize: true });
       return;
@@ -231,31 +265,8 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     const result = await CompendiumBrowser.select({ filters, selection: { min: 1, max: max - current } });
     if ( !result?.size ) return;
 
-    const items = await Promise.all(Array.from(result).map(uuid => fromUuid(uuid)));
-    for ( const item of items ) {
-      if ( this.selected.has(item.uuid) ) continue;
-      this.selected.add(item.uuid);
-      if ( !this.pool.find(i => i.uuid === item.uuid) ) {
-        this.dropped.push(item);
-        item.dropped = true;
-      }
-    }
-
-    this._evaluatePrerequisites();
-    this.render();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _onChangeInput(event) {
-    if ( event.target.tagName === "DND5E-CHECKBOX" ) {
-      if ( event.target.checked ) this.selected.add(event.target.name);
-      else this.selected.delete(event.target.name);
-    }
-    else if ( event.target.type === "radio" ) this.replacement = event.target.value;
-    else if ( event.target.name === "ability" ) this.ability = event.target.value;
-    this._evaluatePrerequisites();
+    const selected = Array.from(result).filter(uuid => !this.selected.has(uuid));
+    await this.advancement.apply(this.level, { selected });
     this.render();
   }
 
@@ -263,27 +274,49 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /**
    * Handle deleting a dropped item.
-   * @param {Event} event  The originating click event.
-   * @protected
+   * @this {ItemChoiceFlow}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  async _onItemDelete(event) {
-    event.preventDefault();
-    const uuidToDelete = event.currentTarget.closest("[data-uuid]")?.dataset.uuid;
-    if ( !uuidToDelete ) return;
-    this.dropped.findSplice(i => i.uuid === uuidToDelete);
-    this.selected.delete(uuidToDelete);
-    this._evaluatePrerequisites();
+  static async #deleteItem(event, target) {
+    const uuid = target.closest("[data-uuid]")?.dataset.uuid;
+    if ( !uuid ) return;
+    await this.advancement.reverse(this.level, { uuid });
     this.render();
   }
 
   /* -------------------------------------------- */
+  /*  Form Handling                               */
+  /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /** @override */
+  async _handleForm(event, form, formData) {
+    const retainedData = { items: {} };
+
+    if ( event.target?.name === "ability" ) {
+      await this.advancement.apply(this.level, { ability: event.target.value });
+    } else if ( event.target?.tagName === "DND5E-CHECKBOX" ) {
+      if ( event.target.checked ) await this.advancement.apply(this.level, { selected: [event.target.name] });
+      else await this.advancement.reverse(this.level, { uuid: event.target.name });
+    } else if ( event.target?.type === "radio" ) {
+      if ( event.target.value ) await this.advancement.apply(this.level, {
+        replace: event.target.value, previousItems: this.retained
+      });
+      else await this.advancement.reverse(this.level, { clearReplacement: true, previousItems: this.retained });
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle dropping item onto the flow.
+   * @param {DragEvent} event  The concluding drag event.
+   * @protected
+   */
   async _onDrop(event) {
-    const levelConfig = this.advancement.configuration.choices[this.level];
-    let max = levelConfig.count ?? 0;
-    if ( levelConfig.replacement && this.advancement.actor.items.has(this.replacement) ) max++;
-    if ( this.selected.size >= max ) return false;
+    if ( this.counts.full ) return false;
 
     // Try to extract the data
     let data;
@@ -303,9 +336,6 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       return null;
     }
 
-    // If the item is already been marked as selected, no need to go further
-    if ( this.selected.has(item.uuid) ) return false;
-
     // If spell level is restricted to available level, ensure the spell is of the appropriate level
     const spellLevel = this.advancement.configuration.restriction.level;
     if ( (this.advancement.configuration.type === "spell") && spellLevel === "available" ) {
@@ -318,19 +348,12 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       }
     }
 
-    // Mark the item as selected
-    this.selected.add(item.uuid);
-
-    // If the item doesn't already exist in the pool, add it
-    if ( !this.pool.find(i => i?.uuid === item.uuid) ) {
-      this.dropped.push(item);
-      item.dropped = true;
-    }
-
-    this._evaluatePrerequisites();
+    await this.advancement.apply(this.level, { selected: [item.uuid] });
     this.render();
   }
 
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
   /* -------------------------------------------- */
 
   /**
@@ -357,35 +380,5 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       if ( !max ) return slot;
       return Math.max(slot, level || -1);
     }, 0);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Evaluate selected item prerequisites and update state appropriately.
-   * @protected
-   */
-  _evaluatePrerequisites() {
-    const replaced = this.advancement.actor.items.get(this.replacement);
-    const removed = replaced ? [replaced] : [];
-    for ( let i = 0; i < 100; i++ ) {
-      const itemsBefore = this.selected.size;
-      const added = [...this.dropped, ...this.pool.filter(item => this.selected.has(item.uuid))];
-      this.dropped = this.dropped.filter(item => {
-        const isValid = item.system.validatePrerequisites?.(this.advancement.actor, {
-          added, removed, level: this.featureLevel, showMessage: true
-        }) ?? true;
-        if ( isValid !== true ) this.selected.delete(item.uuid);
-        return isValid === true;
-      });
-      for ( const item of this.pool ) {
-        if ( !this.selected.has(item.uuid) ) continue;
-        const isValid = item.system.validatePrerequisites?.(this.advancement.actor, {
-          added, removed, level: this.level, showMessage: true
-        }) ?? true;
-        if ( isValid !== true ) this.selected.delete(item.uuid);
-      }
-      if ( itemsBefore === this.selected.size ) break;
-    }
   }
 }

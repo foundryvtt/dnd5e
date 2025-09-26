@@ -109,7 +109,7 @@ export default class SubclassFlow extends AdvancementFlow {
   /* -------------------------------------------- */
 
   /**
-   * Handle dropping subclass onto the sheet.
+   * Handle dropping subclass onto the flow.
    * @param {DragEvent} event  The concluding drag event.
    * @protected
    */

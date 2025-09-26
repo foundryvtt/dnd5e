@@ -562,7 +562,7 @@ export default class AdvancementManager extends Application5e {
     if ( this.step?.flow instanceof dnd5e.applications.advancement.AdvancementFlowV2 ) {
       this.#preEmbeddedItems = Array.from(this.clone.items);
       const flow = this.step.flow;
-      if ( flow.retainedData ) await flow.advancement.restore(flow.level, flow.retainedData);
+      if ( flow.retainedData && !this.step.error ) await flow.advancement.restore(flow.level, flow.retainedData);
       else await flow.advancement.apply(flow.level, {}, { initial: true });
     }
 
@@ -699,6 +699,7 @@ export default class AdvancementManager extends Application5e {
         else if ( flow instanceof Application ) await flow._updateObject(event, flow._getSubmitData());
         else if ( flow ) await flow.submit(event);
 
+        delete this.step.error;
         this.#synthesizeSteps();
         this.#preEmbeddedItems = null;
         this.#stepIndex++;
@@ -715,6 +716,7 @@ export default class AdvancementManager extends Application5e {
       if ( !(error instanceof Advancement.ERROR) ) throw error;
       ui.notifications.error(error.message);
       this.step.automatic = false;
+      this.step.error = error;
       if ( this.step.type === "restore" ) this.step.type = "forward";
     } finally {
       this.#advancing = false;

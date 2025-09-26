@@ -1,3 +1,4 @@
+import { formatIdentifier } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
@@ -322,14 +323,9 @@ export default class FeatData extends ItemDataModel.mixin(
   }={}) {
     const messages = [];
 
-    // Check to ensure the item doesn't already exist on actor if it is not repeatable
-    if ( !this.prerequisites.repeatable && actor.sourcedItems?.get(this.parent.uuid)?.size ) {
-      messages.push(game.i18n.localize("DND5E.Prerequisites.Warning.NotRepeatable"));
-    }
-
     // If a feature has item pre-requisites, make sure the other items exist on the actor
-    const pendingAddition = new Set(added.map(i => i.system.identifier));
-    const pendingRemoval = new Set(removed.map(i => i.system.identifier));
+    const pendingAddition = new Set(added.map(i => i.system.identifier ?? formatIdentifier(i.name)));
+    const pendingRemoval = new Set(removed.map(i => i.system.identifier ?? formatIdentifier(i.name)));
     const someExist = !this.prerequisites.items.size || Array.from(this.prerequisites.items).some(i => {
       return (actor.identifiedItems.get(i)?.size || pendingAddition.has(i)) && !pendingRemoval.has(i);
     });
@@ -339,8 +335,14 @@ export default class FeatData extends ItemDataModel.mixin(
       }));
     }
 
+    // Check to ensure the item doesn't already exist on actor if it is not repeatable
+    if ( !this.prerequisites.repeatable && actor.sourcedItems?.get(this.parent.uuid)?.size
+      && !added.find(a => a.uuid === this.parent.uuid) ) {
+      messages.push(game.i18n.localize("DND5E.Prerequisites.Warning.NotRepeatable"));
+    }
+
     // If a feature has a level pre-requisite, make sure it is less than or equal to current level
-    if ( (this.prerequisites?.level ?? -Infinity) > (level ?? Infinity) ) {
+    if ( (this.prerequisites.level ?? -Infinity) > (level ?? Infinity) ) {
       messages.push(game.i18n.format("DND5E.Prerequisites.Warning.InvalidLevel", {
         level: this.prerequisites.level
       }));

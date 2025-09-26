@@ -80,14 +80,20 @@ export default class ItemGrantAdvancement extends Advancement {
   /**
    * @typedef ItemGrantAdvancementApplicationData
    * @property {string} [ability]     Selected ability for added spells.
-   * @property {object} [items]       Retained item data grouped by UUID. If present, this data will be used rather than
-   *                                  fetching new data from the source.
-   * @property {string[]} [selected]  UUIDs of items to add. If none provided, then will fall back to the items provided
-   *                                  in the `items` object.
+   * @property {ItemGrantRetainedData} [retainedData]  Retained item data grouped by UUID and selected ability. If item
+   *                                  data is present, it will be used rather than fetching new data from the source.
+   * @property {string[]} [selected]  UUIDs of items to add. If none provided, then will fall back to the items
+   *                                  provided in the `items` object.
+   */
+
+  /**
+   * @typedef ItemGrantRetainedData
+   * @property {string} [ability]                Selected ability.
+   * @property {Record<string, object>} [items]  Retained items grouped by source UUID.
    */
 
   /** @override */
-  async apply(level, { ability, items: retainedData={}, selected=Object.keys(retainedData), ...data }={}, options={}) {
+  async apply(level, { ability, retainedData={}, selected=Object.keys(retainedData), ...data }={}, options={}) {
     if ( !foundry.utils.isEmpty(data) ) {
       foundry.utils.logCompatibilityWarning(
         "The properties passed to `ItemGrantAdvancement#apply` have changed, see `ItemGrantAdvancementApplicationData` for new properties.",
@@ -98,14 +104,14 @@ export default class ItemGrantAdvancement extends Advancement {
     }
 
     if ( options.initial ) {
-      ability = this.configuration.spell?.ability?.first();
+      ability = retainedData.ability ?? this.value.ability ?? this.configuration.spell?.ability?.first();
       selected = this.configuration.items?.reduce((arr, { optional, uuid }) => {
         if ( !this.configuration.optional || !optional ) arr.push(uuid);
         return arr;
       }, []) ?? [];
     }
 
-    if ( ability !== this.value?.ability ) {
+    if ( ability && (ability !== this.value?.ability) ) {
       for ( const id of Object.keys(foundry.utils.getProperty(this, this.storagePath(level)) ?? {}) ) {
         const item = this.actor.items.get(id);
         if ( item?.type === "spell" ) item.updateSource({ "system.ability": ability });
@@ -115,7 +121,7 @@ export default class ItemGrantAdvancement extends Advancement {
     const items = [];
     const itemUpdates = {};
     for ( const uuid of selected ) {
-      let itemData = retainedData[uuid];
+      let itemData = retainedData.items?.[uuid];
       if ( !itemData ) {
         itemData = await this.createItemData(uuid);
         if ( !itemData ) continue;
@@ -126,6 +132,7 @@ export default class ItemGrantAdvancement extends Advancement {
 
       items.push(itemData);
       itemUpdates[itemData._id] = uuid;
+      options.firstCreatedItem ??= itemData._id;
     }
 
     const updates = {};
@@ -157,7 +164,7 @@ export default class ItemGrantAdvancement extends Advancement {
   /** @inheritDoc */
   restore(level, data, options={}) {
     const updates = {};
-    for ( const item of data.items ) {
+    for ( const item of Object.values(data.items) ) {
       this.actor.updateSource({ items: [item] });
       updates[item._id] = item.flags.dnd5e.sourceId;
     }
@@ -178,18 +185,19 @@ export default class ItemGrantAdvancement extends Advancement {
   reverse(level, options={}) {
     const keyPath = this.storagePath(level);
     const added = foundry.utils.getProperty(this.toObject(), keyPath) ?? {};
-    let ids = options.uuid ? Object.entries(added).filter(([, v]) => v === options.uuid).map(([k]) => k)
+    let ids = options.uuid ? [Object.entries(added).find(([, v]) => v === options.uuid)?.[0]]
       : Object.keys(added);
     if ( !ids.length ) return;
 
-    const items = [];
+    const items = {};
     for ( const id of ids ) {
       const item = this.actor.items.get(id);
-      if ( item ) items.push(item.toObject());
+      if ( item ) items[item.flags.dnd5e?.sourceId ?? item._stats.compendiumSource ?? item.uuid] = item.toObject();
       this.actor.items.delete(id);
       added[`-=${id}`] = null;
     }
 
+    this.actor.reset();
     if ( options.uuid ) this.updateSource({ [keyPath]: added });
     else this.updateSource({ [keyPath.replace(/\.([\w\d]+)$/, ".-=$1")]: null });
     return { ability: this.value?.ability, items };
