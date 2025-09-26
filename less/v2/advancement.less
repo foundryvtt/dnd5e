@@ -127,11 +127,6 @@
     .item-optional { grid-column: optional; }
   }
 }
-.advancement.flow[data-type="ItemGrant"] {
-  [data-application-part="content"] {
-    gap: 12px;
-  }
-}
 
 /* ----------------------------------------- */
 /*  Scale Value Advancement                  */
@@ -276,7 +271,7 @@
         &:hover { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
       }
     }
-    :is(.pill-lg, .separated-list) img[data-action] {
+    :is(.pill-lg, .separated-list, .item-list) img[data-action] {
       cursor: var(--cursor-pointer);
       &:hover { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
     }

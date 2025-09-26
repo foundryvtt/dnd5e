@@ -1,4 +1,4 @@
-<div class="flexcol">
+<div class="standard-form">
     {{#if abilities}}
     <fieldset>
         <legend>{{ localize "DND5E.SpellAbility" }}</legend>
@@ -6,23 +6,28 @@
     </fieldset>
     {{/if}}
 
-    <ul class="separated-list flexcol unlist">
-        {{#each items}}
-        <li class="flexrow" data-uuid="{{ uuid }}">
-            <div class="details flexrow">
-                <img class="gold-icon" data-action="viewItem" src="{{ img }}" alt="{{ name }}">
-                <div class="name-stacked">
-                    <div class="title">{{ name }}</div>
+    <div class="items-section card">
+        <div class="items-header header">
+            <h4 class="item-name">{{ localize "DND5E.ADVANCEMENT.ItemGrant.FIELDS.items.label" }}</h4>
+        </div>
+        <ul class="item-list unlist">
+            {{#each items}}
+            <li class="item flexrow" data-uuid="{{ uuid }}">
+                <div class="item-name flexrow">
+                    <img class="gold-icon" data-action="viewItem" src="{{ img }}" alt="{{ name }}">
+                    <div class="name-stacked">
+                        <div class="title">{{ name }}</div>
+                    </div>
                 </div>
-            </div>
-            {{#if optional}}
-            <div class="list-controls">
-                <dnd5e-checkbox name="{{ uuid }}" {{ checked checked }}></dnd5e-checkbox>
-            </div>
-            {{else}}
-            <input type="hidden" name="{{ uuid }}" value="true" data-dtype="Boolean">
-            {{/if}}
-        </li>
-        {{/each}}
-    </ul>
+                {{#if optional}}
+                <div class="item-controls flexrow">
+                    <dnd5e-checkbox name="{{ uuid }}" {{ checked checked }}></dnd5e-checkbox>
+                </div>
+                {{else}}
+                <input type="hidden" name="{{ uuid }}" value="true" data-dtype="Boolean">
+                {{/if}}
+            </li>
+            {{/each}}
+        </ul>
+    </div>
 </div>
