@@ -1,25 +1,37 @@
-<ul class="separated-list flexcol unlist">
-    {{#each slots}}
-    <li class="trait-slot flexrow" data-key="{{ key }}">
-        {{#if key}}
-        <div class="details flexrow">
-            {{ dnd5e-icon icon classes="gold-icon" }}
-            <div class="name-stacked">
-                <div class="title">{{ label }}</div>
-            </div>
+<div class="standard-form">
+    {{#if added}}
+    <fieldset>
+        <legend>{{ localize "DND5E.ADVANCEMENT.Trait.Action.SelectTrait" }}</legend>
+        {{ formInput added.field name="added" options=@root.added.options }}
+    </fieldset>
+    {{/if}}
+
+    {{#if slots.length}}
+    <div class="items-section card">
+        <div class="items-header header">
+            <h4 class="item-name">{{ localize "DND5E.Traits" }}</h4>
         </div>
-        {{#if showDelete}}
-        <div class="list-controls">
-            <button type="button" class="unbutton control-button item-control" data-action="removeTrait"
-                    data-tooltip aria-label="{{ localize 'DND5E.ADVANCEMENT.Trait.Action.RemoveTrait' }}">
-                <i class="fa-solid fa-trash" inert></i>
-            </button>
-        </div>
-        {{/if}}
-        {{else if (and showSelector @root.added)}}
-        {{ formInput @root.added.field name="added" options=@root.added.options }}
-        {{/if}}
-        <input type="hidden" name="chosen" value="{{ key }}">
-    </li>
-    {{/each}}
-</ul>
+        <ul class="item-list unlist">
+            {{#each slots}}
+            <li class="item flexrow" data-key="{{ key }}">
+                <div class="item-name flexrow">
+                    {{ dnd5e-icon icon classes="gold-icon" }}
+                    <div class="name-stacked">
+                        <div class="title">{{ label }}</div>
+                    </div>
+                </div>
+                {{#if showDelete}}
+                <div class="item-controls flexrow">
+                    <button type="button" class="unbutton control-button item-control" data-action="removeTrait"
+                            data-tooltip aria-label="{{ localize 'DND5E.ADVANCEMENT.Trait.Action.RemoveTrait' }}">
+                        <i class="fa-solid fa-trash" inert></i>
+                    </button>
+                </div>
+                {{/if}}
+                <input type="hidden" name="chosen" value="{{ key }}">
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    {{/if}}
+</div>
