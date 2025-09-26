@@ -77,18 +77,15 @@ export default class TraitFlow extends AdvancementFlow {
     const config = this.advancement.configuration;
     const count = config.choices.reduce((count, c) => count + c.count, config.grants.size);
     const chosen = Array.from(this.advancement.value.chosen ?? []);
-    let selectorShown = false;
     const slots = [];
     for ( let i = 1; i <= count; i++ ) {
       const key = chosen.shift();
-      if ( selectorShown || (!key && !available) ) continue;
-      selectorShown = !key;
+      if ( !key ) break;
       slots.push({
         key,
         label: key ? Trait.keyLabel(key, { type: config.type }) : null,
         icon: key ? Trait.keyIcon(key, { type: config.type }) : null,
-        showDelete: !this.advancement.configuration.grants.has(key),
-        showSelector: !key
+        showDelete: !this.advancement.configuration.grants.has(key)
       });
     }
     return slots;
@@ -105,8 +102,8 @@ export default class TraitFlow extends AdvancementFlow {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #removeTrait(event, target) {
-    const tag = target.closest(".trait-slot");
-    await this.advancement.reverse(this.level, { key: tag.dataset.key });
+    const key = target.closest("[data-key]")?.dataset.key;
+    if ( key ) await this.advancement.reverse(this.level, { key });
     this.render();
   }
 

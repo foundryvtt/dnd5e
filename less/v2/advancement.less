@@ -176,6 +176,37 @@
 }
 
 /* ----------------------------------------- */
+/*  Trait Advancement                        */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.trait.sheet {
+  .selected-trait {
+    li {
+      display: flex;
+      gap: 6px;
+      &:not(:first-of-type) { padding-block-start: 6px; }
+    }
+    label {
+      flex-grow: 1;
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+      &.selected { font-weight: bold; }
+      &:not(.selected) {
+        cursor: var(--cursor-pointer);
+        &:hover { text-shadow: 0 0 8px var(--color-shadow-primary); }
+      }
+    }
+    input[type="radio"] { display: none; }
+  }
+  [data-application-part="traits"] {
+    display: grid;
+    > .form-group { grid-column: 1 / -1; }
+    .traits li.category { gap: 0; }
+  }
+}
+
+/* ----------------------------------------- */
 /*  Advancement Manager                      */
 /* ----------------------------------------- */
 
@@ -197,6 +228,13 @@
           font-family: var(--dnd5e-font-roboto);
           text-shadow: none;
         }
+      }
+      [data-application-part="content"].standard-form { gap: 12px; }
+      .item-list .item-controls {
+        flex: 0 0 50px;
+        align-items: center;
+        padding: 0;
+        .item-control { font-size: var(--font-size-12); }
       }
     }
 
@@ -260,37 +298,6 @@
     .icons {
       i:not(.enabled) { opacity: 15%; }
     }
-  }
-}
-
-/* ----------------------------------------- */
-/*  Trait Advancement                        */
-/* ----------------------------------------- */
-
-.dnd5e2.advancement.trait.sheet {
-  .selected-trait {
-    li {
-      display: flex;
-      gap: 6px;
-      &:not(:first-of-type) { padding-block-start: 6px; }
-    }
-    label {
-      flex-grow: 1;
-      display: flex;
-      gap: 12px;
-      align-items: baseline;
-      &.selected { font-weight: bold; }
-      &:not(.selected) {
-        cursor: var(--cursor-pointer);
-        &:hover { text-shadow: 0 0 8px var(--color-shadow-primary); }
-      }
-    }
-    input[type="radio"] { display: none; }
-  }
-  [data-application-part="traits"] {
-    display: grid;
-    > .form-group { grid-column: 1 / -1; }
-    .traits li.category { gap: 0; }
   }
 }
 
