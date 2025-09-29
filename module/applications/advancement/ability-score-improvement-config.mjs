@@ -24,7 +24,7 @@ export default class AbilityScoreImprovementConfig extends AdvancementConfig {
     },
     scores: {
       template: "systems/dnd5e/templates/advancement/ability-score-improvement-config-scores.hbs",
-      templates: ["systems/dnd5e/templates/advancement/parts/advancement-ability-score-control-v2.hbs"]
+      templates: ["systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs"]
     }
   };
 

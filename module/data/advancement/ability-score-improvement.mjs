@@ -44,7 +44,7 @@ export class AbilityScoreImprovementValueData extends SparseDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      type: new StringField({ required: true, initial: "asi", choices: ["asi", "feat"] }),
+      type: new StringField({ choices: ["asi", "feat"] }),
       assignments: new MappingField(new NumberField({
         nullable: false, integer: true
       }), { required: false, initial: undefined }),

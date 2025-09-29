@@ -1,30 +1,69 @@
 import CompendiumBrowser from "../compendium-browser.mjs";
-import AdvancementFlow from "./advancement-flow.mjs";
+import AdvancementFlow from "./advancement-flow-v2.mjs";
 
 /**
  * Inline application that presents the player with a choice between ability score improvement and taking a feat.
  */
 export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    actions: {
+      browse: AbilityScoreImprovementFlow.#browseCompendium,
+      decrease: AbilityScoreImprovementFlow.#adjustValue,
+      deleteItem: AbilityScoreImprovementFlow.#deleteItem,
+      increase: AbilityScoreImprovementFlow.#adjustValue
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static PARTS = {
+    ...super.PARTS,
+    content: {
+      template: "systems/dnd5e/templates/advancement/ability-score-improvement-flow.hbs",
+      templates: ["systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs"]
+    }
+  };
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
   /**
-   * Player assignments to abilities.
-   * @type {Object<string, number>}
+   * Data on the feat selected.
+   * @type {{ item: Item5e, uuid: string }|null}
    */
-  assignments = {};
+  get feat() {
+    const [id, uuid] = Object.entries(this.advancement.value.feat ?? {})[0] ?? [];
+    const item = this.advancement.actor.items.get(id);
+    if ( item ) return { item, uuid };
+    return null;
+  }
 
   /* -------------------------------------------- */
 
   /**
-   * The dropped feat item.
-   * @type {Item5e}
+   * Data on points that can be assigned.
+   * @type {{ assigned: number, available: number, cap: number, total: number }}
    */
-  feat;
+  get points() {
+    const { configuration, value } = this.advancement;
+    const points = {
+      assigned: Object.keys(CONFIG.DND5E.abilities).reduce((assigned, key) => {
+        if ( !this.advancement.canImprove(key) || configuration.locked.has(key) ) return assigned;
+        return assigned + (value.assignments?.[key] ?? 0) - (configuration.fixed[key] ?? 0);
+      }, 0),
+      cap: configuration.cap ?? Infinity,
+      total: configuration.points
+    };
+    points.available = points.total - points.assigned;
+    return points;
+  }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static _customElements = super._customElements.concat(["dnd5e-checkbox"]);
-
+  /*  Rendering                                   */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -38,133 +77,100 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async retainData(data) {
-    await super.retainData(data);
-    this.assignments = this.retainedData.assignments ?? {};
-    const featUuid = Object.values(this.retainedData.feat ?? {})[0];
-    if ( featUuid ) this.feat = await fromUuid(featUuid);
-    else if ( !foundry.utils.isEmpty(this.assignments) ) this.feat = { isASI: true };
-  }
+  async _prepareContentContext(context, options) {
+    const { actor, configuration, value } = this.advancement;
 
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getData() {
-    const points = {
-      assigned: Object.keys(CONFIG.DND5E.abilities).reduce((assigned, key) => {
-        if ( !this.advancement.canImprove(key) || this.advancement.configuration.locked.has(key) ) return assigned;
-        return assigned + (this.assignments[key] ?? 0);
-      }, 0),
-      cap: this.advancement.configuration.cap ?? Infinity,
-      total: this.advancement.configuration.points
-    };
-    points.available = points.total - points.assigned;
+    context.feat = this.feat?.item;
+    context.isASI = value.type === "asi";
+    context.points = this.points;
 
     const formatter = new Intl.NumberFormat(game.i18n.lang, { signDisplay: "always" });
 
-    const lockImprovement = this.feat && !this.feat.isASI;
-    const abilities = Object.entries(CONFIG.DND5E.abilities).reduce((obj, [key, data]) => {
+    context.lockImprovement = value.type === "feat";
+    context.abilities = Object.entries(CONFIG.DND5E.abilities).reduce((obj, [key, data]) => {
       if ( !this.advancement.canImprove(key) ) return obj;
-      const ability = this.advancement.actor.system.abilities[key];
-      const assignment = this.assignments[key] ?? 0;
-      const fixed = this.advancement.configuration.fixed[key] ?? 0;
-      const locked = this.advancement.configuration.locked.has(key);
-      const abilityMax = Math.max(ability.max, this.advancement.configuration.max ?? -Infinity);
-      const value = Math.min(ability.value + fixed + assignment, abilityMax);
-      const max = locked ? value : Math.min(value + points.available, abilityMax);
-      const min = Math.min(ability.value + fixed, abilityMax);
+      const ability = actor.system.abilities[key];
+      const assignment = value.assignments?.[key] ?? 0;
+      const fixed = configuration.fixed[key] ?? 0;
+      const locked = configuration.locked.has(key);
+      const initial = ability.value - assignment;
+      const abilityMax = Math.max(ability.max, configuration.max ?? -Infinity);
+      const max = locked ? (initial + fixed) : Math.min(ability.value + context.points.available, abilityMax);
+      const min = Math.min(initial + fixed, abilityMax);
       obj[key] = {
-        key, max, min, value,
+        key, max, min,
+        value: ability.value,
         name: `abilities.${key}`,
         label: data.label,
         initial: ability.value + fixed,
-        delta: (value - ability.value) ? formatter.format(value - ability.value) : null,
+        delta: (ability.value - initial) ? formatter.format(ability.value - initial) : null,
         showDelta: true,
-        isDisabled: lockImprovement,
-        isLocked: !!locked || (ability.value >= abilityMax),
-        canIncrease: (value < max) && ((fixed + assignment) < points.cap) && !locked && !lockImprovement,
-        canDecrease: (value > (ability.value + fixed)) && !locked && !lockImprovement
+        isDisabled: context.lockImprovement,
+        isFixed: !!locked || (ability.value >= abilityMax),
+        isLocked: locked,
+        canIncrease: (ability.value < max) && (assignment < context.points.cap) && !locked
+          && !context.lockImprovement,
+        canDecrease: (ability.value > (initial + fixed)) && !locked && !context.lockImprovement
       };
       return obj;
     }, {});
 
-    let recommendation = this.advancement.isEpicBoon ? fromUuidSync(this.advancement.configuration.recommendation)
+    const recommendation = this.advancement.isEpicBoon ? fromUuidSync(configuration.recommendation)
       : null;
     if ( recommendation ) {
       const { img, name, uuid } = recommendation;
-      recommendation = {
+      context.recommendation = {
         img, name, uuid,
         checked: this.feat?.uuid === uuid,
-        locked: this.feat && (this.feat.uuid !== uuid)
+        locked: context.isASI || (this.feat && (this.feat.uuid !== uuid))
       };
     }
 
     const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     const pluralRules = new Intl.PluralRules(game.i18n.lang);
-    return foundry.utils.mergeObject(super.getData(), {
-      abilities, lockImprovement, points, recommendation,
-      feat: this.feat,
-      pointCap: game.i18n.format(
-        `DND5E.ADVANCEMENT.AbilityScoreImprovement.CapDisplay.${pluralRules.select(points.cap)}`, { points: points.cap }
-      ),
-      pointsRemaining: game.i18n.format(
-        `DND5E.ADVANCEMENT.AbilityScoreImprovement.PointsRemaining.${pluralRules.select(points.available)}`,
-        {points: points.available}
-      ),
-      showASIFeat: modernRules && this.advancement.allowFeat,
-      showImprovement: !modernRules || !this.advancement.allowFeat || this.feat?.isASI,
-      staticIncrease: !this.advancement.configuration.points
-    });
+    context.pointCap = game.i18n.format(
+      `DND5E.ADVANCEMENT.AbilityScoreImprovement.CapDisplay.${pluralRules.select(context.points.cap)}`,
+      { points: context.points.cap }
+    );
+    context.pointsRemaining = game.i18n.format(
+      `DND5E.ADVANCEMENT.AbilityScoreImprovement.PointsRemaining.${pluralRules.select(context.points.available)}`,
+      { points: context.points.available }
+    );
+    context.showASIFeat = modernRules && this.advancement.allowFeat;
+    context.showBrowseButton = !context.isASI && (!this.feat || (this.feat.uuid !== recommendation?.uuid));
+    context.showImprovement = !modernRules || !this.advancement.allowFeat || context.isASI;
+    context.staticIncrease = !configuration.points;
+
+    return context;
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-    html.find(".adjustment-button").click(this._onClickButton.bind(this));
-    html.find("[data-action='browse']").click(this._onBrowseCompendium.bind(this));
-    html.find("[data-action='delete']").click(this._onItemDelete.bind(this));
-    html.find("[data-action='viewItem']").click(this._onClickFeature.bind(this));
-  }
-
+  /*  Life-Cycle Handlers                         */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onChangeInput(event) {
-    super._onChangeInput(event);
-    const input = event.currentTarget;
-    if ( input.name === "asi-selected" ) {
-      if ( input.checked ) this.feat = { isASI: true };
-      else {
-        if ( this.feat?.isASI ) this.assignments = {};
-        this.feat = null;
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    new foundry.applications.ux.DragDrop.implementation({
+      dragSelector: ".draggable",
+      dropSelector: "form",
+      callbacks: {
+        drop: this._onDrop.bind(this)
       }
-    } else if ( input.name === "recommendation-selected" ) {
-      if ( input.checked ) this.feat = await fromUuid(this.advancement.configuration.recommendation);
-      else this.feat = null;
-    } else {
-      const key = input.closest("[data-score]").dataset.score;
-      if ( isNaN(input.valueAsNumber) ) this.assignments[key] = 0;
-      else {
-        this.assignments[key] = Math.min(
-          Math.clamp(input.valueAsNumber, Number(input.min), Number(input.max)) - Number(input.dataset.initial),
-          (this.advancement.configuration.cap - (this.advancement.configuration.fixed[key] ?? 0)) ?? Infinity
-        );
-      }
-    }
-    this.render();
+    }).bind(this.element);
   }
 
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**
    * Handle opening the compendium browser and displaying the result.
-   * @param {PointerEvent} event  The triggering event.
-   * @protected
+   * @this {AbilityScoreImprovementFlow}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  async _onBrowseCompendium(event) {
-    event.preventDefault();
+  static async #browseCompendium(event, target) {
     const filters = {
       locked: {
         additional: { category: { feat: 1 } },
@@ -178,7 +184,9 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const item = await fromUuid(result);
     const isValid = item.system.validatePrerequisites?.(this.advancement.actor, { showMessage: true });
     if ( isValid === true ) {
-      this.feat = item;
+      await this.advancement.apply(this.level, {
+        retainedItems: this.retainedData?.retainedItems, type: "feat", uuid: result
+      });
       this.render();
     }
   }
@@ -187,58 +195,69 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /**
    * Handle clicking the plus and minus buttons.
-   * @param {Event} event  Triggering click event.
+   * @this {AbilityScoreImprovementFlow}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  _onClickButton(event) {
-    event.preventDefault();
-    const action = event.currentTarget.dataset.action;
-    const key = event.currentTarget.closest("li").dataset.score;
+  static #adjustValue(event, target) {
+    const action = target.dataset.action;
+    const input = target.closest("li").querySelector("input[type=number]");
 
-    this.assignments[key] ??= 0;
-    if ( action === "decrease" ) this.assignments[key] -= 1;
-    else if ( action === "increase" ) this.assignments[key] += 1;
-    else return;
+    if ( action === "decrease" ) input.valueAsNumber -= 1;
+    else if ( action === "increase" ) input.valueAsNumber += 1;
 
-    this.render();
+    this.submit();
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle clicking on a feature during item grant to preview the feature.
-   * @param {MouseEvent} event  The triggering event.
-   * @protected
+   * Handle removing a selected item.
+   * @this {AbilityScoreImprovementFlow}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  async _onClickFeature(event) {
-    event.preventDefault();
-    const uuid = event.target.closest("[data-uuid]")?.dataset.uuid;
-    const item = await fromUuid(uuid);
-    item?.sheet.render(true);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle deleting a dropped feat.
-   * @param {Event} event  The originating click event.
-   * @protected
-   */
-  async _onItemDelete(event) {
-    event.preventDefault();
-    this.feat = null;
+  static async #deleteItem(event, target) {
+    await this.advancement.reverse();
     this.render();
   }
 
   /* -------------------------------------------- */
+  /*  Form Handling                               */
+  /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async _updateObject(event, formData) {
-    await this.advancement.apply(this.level, {
-      type: (this.feat && !this.feat.isASI) ? "feat" : "asi",
-      assignments: this.assignments,
-      featUuid: this.feat?.uuid,
-      retainedItems: this.retainedData?.retainedItems
-    });
+  /** @override */
+  async _handleForm(event, form, formData) {
+    switch (event.target?.name) {
+      case "asi-selected":
+        if ( event.target.checked ) await this.advancement.apply(this.level, { type: "asi" });
+        else await this.advancement.reverse(this.level);
+        return;
+      case "recommendation-selected":
+        if ( event.target.checked ) await this.advancement.apply(this.level, {
+          retainedItems: this.retainedData?.retainedItems,
+          type: "feat",
+          uuid: this.advancement.configuration.recommendation
+        });
+        else await this.advancement.reverse(this.level);
+        return;
+    }
+
+    const abilities = this.advancement.actor.system._source.abilities ?? {};
+    const { available, cap } = this.points;
+    const assignments = Object.keys(CONFIG.DND5E.abilities).reduce((obj, key) => {
+      const value = formData.object[`abilities.${key}`];
+      if ( (value === undefined) || this.advancement.configuration.locked.has(key) ) return obj;
+      const abilityMax = Math.max(abilities[key]?.max ?? 20, this.advancement.configuration.max ?? -Infinity);
+      const current = abilities[key]?.value ?? 0;
+      const initial = current - (this.advancement.value.assignments?.[key] ?? 0);
+      const max = Math.min(current + available, initial + cap, abilityMax);
+      const min = Math.min(initial + (this.advancement.configuration.fixed[key] ?? 0), abilityMax);
+      const delta = Math.min(Math.clamp(value, min, max) - current, this.points.available);
+      if ( delta ) obj[key] = delta;
+      return obj;
+    }, {});
+    if ( !foundry.utils.isEmpty(assignments) ) await this.advancement.apply(this.level, { assignments, type: "asi" });
   }
 
   /* -------------------------------------------- */
@@ -247,7 +266,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /** @inheritDoc */
   async _onDrop(event) {
-    if ( !this.advancement.allowFeat ) return false;
+    if ( !this.advancement.allowFeat || (this.advancement.value.type === "asi") ) return false;
 
     // Try to extract the data
     let data;
@@ -268,7 +287,9 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const isValid = item.system.validatePrerequisites?.(this.advancement.actor, { showMessage: true });
     if ( isValid !== true ) return null;
 
-    this.feat = item;
+    await this.advancement.apply(this.level, {
+      retainedItems: this.retainedData?.retainedItems, type: "feat", uuid: item.uuid
+    });
     this.render();
   }
 }
