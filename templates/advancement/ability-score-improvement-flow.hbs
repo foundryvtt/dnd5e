@@ -1,9 +1,6 @@
-<form id="{{ appId }}" data-level="{{ level }}" data-id="{{ advancement.id }}" data-type="{{ type }}">
-    <h3>{{{ title }}}</h3>
-    {{#if advancement.hint}}<p>{{ advancement.hint }}</p>{{/if}}
-
+<div class="standard-form">
     {{#if showImprovement}}
-    <ul class="ability-scores {{#if lockImprovement}}disabled{{/if}}">
+    <ul class="ability-scores unlist {{#if lockImprovement}}disabled{{/if}}">
         {{#unless staticIncrease}}
         <label>
             {{#if lockImprovement}}
@@ -15,7 +12,8 @@
         </label>
         {{/unless}}
         {{#each abilities}}
-        {{> "dnd5e.advancement-ability-score-control" this canAdjust=(not @root.staticIncrease) }}
+        {{> "systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs" this
+            canAdjust=(not @root.staticIncrease) }}
         {{/each}}
     </ul>
     {{/if}}
@@ -42,12 +40,12 @@
             <div class="name-stacked">
                 <div class="title">{{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.Feat.ASIName" }}</div>
             </div>
-            <dnd5e-checkbox class="item-control" name="asi-selected" {{ checked feat.isASI }}
+            <dnd5e-checkbox class="item-control" name="asi-selected" {{ checked isASI }}
                             {{ disabled lockImprovement }}></dnd5e-checkbox>
         </div>
         {{/if}}
 
-        {{#unless (or feat.isASI or (and feat.uuid (eq feat.uuid recommendation.uuid)))}}
+        {{#if showBrowseButton}}
         <div class="pill-lg {{#unless feat}}roboto-upper empty{{/unless}}"
              {{~#if feat}} data-uuid="{{ feat.uuid }}"{{else}} data-action="browse"{{/if}}>
             {{#if feat}}
@@ -55,7 +53,7 @@
             <div class="name-stacked">
                 <div class="title">{{ feat.name }}</div>
             </div>
-            <button type="button" class="unbutton control-button item-control" data-action="delete"
+            <button type="button" class="unbutton control-button item-control" data-action="deleteItem"
                     data-tooltip aria-label="{{ localize 'DND5E.ItemDelete' }}">
                 <i class="fas fa-trash" inert></i>
             </button>
@@ -63,7 +61,7 @@
             {{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.Action.Select" }}
             {{/if}}
         </div>
-        {{/unless}}
+        {{/if}}
     </div>
     {{/if}}
-</form>
+</div>
