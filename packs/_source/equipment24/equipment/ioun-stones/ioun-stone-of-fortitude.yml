@@ -68,11 +68,11 @@ effects:
     type: base
     system: {}
     changes:
-      - key: system.abilities.str.value
+      - key: system.abilities.con.value
         mode: 2
         value: '2'
         priority: null
-      - key: system.abilities.str.value
+      - key: system.abilities.con.value
         mode: 3
         value: '20'
         priority: null
@@ -93,15 +93,18 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.348'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.2.0
       createdTime: 1730481137248
-      modifiedTime: 1730481200635
+      modifiedTime: 1759178730379
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgFortitudeIoun.hOigjfupZtZR2cy9'
