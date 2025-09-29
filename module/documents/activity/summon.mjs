@@ -212,7 +212,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       if ( minimized ) this.actor?.sheet.maximize();
     }
 
-    const createdTokens = await canvas.scene.createEmbeddedDocuments("Token", tokensData);
+    const createdTokens = await canvas.scene.createEmbeddedDocuments("Token", tokensData, {
+      dnd5e: { autoRollNPCHP: "no" }
+    });
 
     /**
      * A hook event that fires when summoning is complete.

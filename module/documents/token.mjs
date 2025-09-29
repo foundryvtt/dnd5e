@@ -217,7 +217,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
     if ( (this.actor?.type === "npc") && !this.actorLink
       && foundry.utils.getProperty(this.actor, "system.attributes.hp.formula")?.trim().length ) {
-      const autoRoll = game.settings.get("dnd5e", "autoRollNPCHP");
+      const autoRoll = options.dnd5e?.autoRollNPCHP ?? game.settings.get("dnd5e", "autoRollNPCHP");
       if ( autoRoll === "no" ) return;
       const roll = await this.actor.rollNPCHitPoints({ chatMessage: autoRoll === "yes" });
       this.delta.updateSource({
