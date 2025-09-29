@@ -675,10 +675,9 @@ export default function ActivityMixin(Base) {
       // Handle spell slot consumption
       else if ( ((config.consume === true) || config.consume.spellSlot)
         && this.requiresSpellSlot && this.consumption.spellSlot ) {
-        const { method } = this.item.system.preparation;
-        const spellcasting = CONFIG.DND5E.spellcasting[method];
+        const spellcasting = CONFIG.DND5E.spellcasting[this.item.system.method];
         const effectiveLevel = this.item.system.level + (config.scaling ?? 0);
-        const slot = config.spell?.slot ?? spellcasting?.getSpellSlotKey(effectiveLevel) ?? method;
+        const slot = config.spell?.slot ?? spellcasting?.getSpellSlotKey(effectiveLevel) ?? this.item.system.method;
         const slotData = this.actor.system.spells?.[slot];
         if ( slotData ) {
           if ( slotData.value ) {
