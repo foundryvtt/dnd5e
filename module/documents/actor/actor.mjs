@@ -692,7 +692,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     };
 
     let { amount, updates } = sumDamages(damages);
-    const context = { userModified = false };
+    const context = { userModified: false };
 
     /**
      * A hook event that fires before damage is applied to an actor.
