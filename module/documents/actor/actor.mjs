@@ -692,7 +692,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     };
 
     let { amount, updates } = sumDamages(damages);
-    let userModified = false;
+    const context = { userModified = false };
 
     /**
      * A hook event that fires before damage is applied to an actor.
@@ -701,15 +701,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {object} updates                      Distinct updates to be performed on the actor.
      * @param {DamageApplicationOptions} options    Additional damage application options.
      * @param {DamageDescription[]|number} damages  Damages to apply.
-     * @param {boolean} userModified                Listeners may set this to true if they mutate the damages array,
- *                                                  which signals the system to recalculate amounts and updates.
+     * @param {object} context                      A mutable context object passed by reference.
+     * @param {boolean} context.userModified        Set this to true in a listener if you mutate the damages array,
+     *                                              which signals the system to recalculate amounts and updates.
      * @returns {boolean}                           Explicitly return `false` to prevent damage application.
      * @function dnd5e.preApplyDamage
      * @memberof hookEvents
      */
-    if ( Hooks.call("dnd5e.preApplyDamage", this, amount, updates, options, damages, userModified) === false ) return this;
+    if ( Hooks.call("dnd5e.preApplyDamage", this, amount, updates, options, damages, context) === false ) return this;
 
-    if (userModified) {
+    if (context.userModified) {
       damages = this.calculateDamage(damages, options);
       if (!damages) return this;
       ({ amount, updates } = sumDamages(damages));
@@ -732,11 +733,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {number} amount                       Amount of damage that has been applied.
      * @param {DamageApplicationOptions} options    Additional damage application options.
      * @param {DamageDescription[]|number} damages  Final damages that were applied.
-     * @param {boolean} userModified                True if damages were modified by a preApplyDamage hook listener.
+     * @param {object} context                      The same context object passed to preApplyDamage.
+     * @param {boolean} context.userModified        True if damages were modified by a preApplyDamage listener.
      * @function dnd5e.applyDamage
      * @memberof hookEvents
      */
-    Hooks.callAll("dnd5e.applyDamage", this, amount, options, damages, userModified);
+    Hooks.callAll("dnd5e.applyDamage", this, amount, options, damages, context);
 
     return this;
   }
