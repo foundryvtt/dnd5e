@@ -670,7 +670,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     damages = this.calculateDamage(damages, options);
     if ( !damages ) return this;
 
-    const sumDamages = (damages) = {
+    const sumDamages = (damages) => {
       // Round damage towards zero
       let { amount, temp } = damages.reduce((acc, d) => {
         if ( d.type === "temphp") acc.temp += d.value;
