@@ -116,10 +116,10 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
       counts.disadvantages.count += c.disadvantages.count + Number(src === -1);
     }
     return {
-      advantage: (counts.advantages.count > 0) && !counts.advantages.suppressed
-        && ((counts.override === null) || (counts.override === 1)),
-      disadvantage: (counts.disadvantages.count > 0) && !counts.disadvantages.suppressed
-        && ((counts.override === null) || (counts.override === -1)),
+      advantage: (((counts.advantages.count > 0) && (counts.override === null)) || (counts.override === 1))
+        && !counts.advantages.suppressed,
+      disadvantage: (((counts.disadvantages.count > 0) && (counts.override === null)) || (counts.override === -1))
+        && !counts.disadvantages.suppressed,
       mode: this.resolveMode(model, null, counts)
     };
   }
