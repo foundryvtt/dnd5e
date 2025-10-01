@@ -54,7 +54,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     effect: {
       template: "systems/dnd5e/templates/activity/effect.hbs",
       templates: [
-        "systems/dnd5e/templates/activity/parts/activity-effects.hbs"
+        "systems/dnd5e/templates/activity/parts/activity-effects.hbs",
+        "systems/dnd5e/templates/activity/parts/activity-effect-level-limit.hbs",
+        "systems/dnd5e/templates/activity/parts/activity-effect-settings.hbs"
       ]
     }
   };
@@ -279,7 +281,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
           prefix: `effects.${data._index}.`,
           source: context.source.effects[data._index] ?? data,
           contentLink: data.effect.toAnchor().outerHTML,
-          additionalSettings: null
+          additionalSettings: "systems/dnd5e/templates/activity/parts/activity-effect-settings.hbs"
         };
         arr.push(this._prepareAppliedEffectContext(context, effect));
         return arr;

@@ -131,7 +131,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {ActiveEffect5e[]|null}
    */
   get applicableEffects() {
-    return this.effects?.map(e => e.effect).filter(e => e) ?? null;
+    const level = this.relevantLevel;
+    return this.effects?.filter(e =>
+      e.effect && ((e.level?.min ?? -Infinity) <= level) && (level <= (e.level?.max ?? Infinity))
+    ).map(e => e.effect) ?? null;
   }
 
   /* -------------------------------------------- */

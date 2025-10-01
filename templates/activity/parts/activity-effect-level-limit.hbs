@@ -1,0 +1,12 @@
+<div class="form-group">
+    <label>{{ localize "DND5E.ACTIVITY.FIELDS.effects.element.level.label" }}</label>
+    <div class="form-fields range-fields">
+        {{ formInput fields.level.fields.min name=(concat prefix "level.min") value=data.level.min
+                     placeholder="0" ariaLabel=(localize "DND5E.LevelLimit.Min")
+                     input=@root.inputs.createNumberInput }}
+        <dnd5e-icon src="systems/dnd5e/icons/svg/range-connector.svg" class="sep"></dnd5e-icon>
+        {{ formInput fields.level.fields.max name=(concat prefix "level.max") value=data.level.max
+                     placeholder="∞" ariaLabel=(localize "DND5E.LevelLimit.Max") }}
+    </div>
+    <p class="hint">{{ localize "DND5E.ACTIVITY.FIELDS.effects.element.level.hint" }}</p>
+</div>

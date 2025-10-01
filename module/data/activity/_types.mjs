@@ -107,9 +107,6 @@
 
 /**
  * @typedef {EffectApplicationData} EnchantEffectApplicationData
- * @property {object} level
- * @property {number} level.min             Minimum level at which this profile can be used.
- * @property {number} level.max             Maximum level at which this profile can be used.
  * @property {object} riders
  * @property {Set<string>} riders.activity  IDs of other activities on this item that will be added when enchanting.
  * @property {Set<string>} riders.effect    IDs of other effects on this item that will be added when enchanting.
