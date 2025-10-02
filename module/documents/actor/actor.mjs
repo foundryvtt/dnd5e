@@ -2871,7 +2871,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // Keep specific items from the original data
       const spellIdentifiers = settings.spellLists.size ? new Set(
         Array.from(settings.spellLists)
-          .map(id => dnd5e.registry.spellLists.forType(...id.split(":")))
+          .map(id => dnd5e.registry.spellLists.forType(id))
           .filter(list => this.identifiedItems.get(list?.metadata.identifier, list?.metadata.type)?.size)
           .flatMap(list => Array.from(list.identifiers))
       ) : null;
@@ -3634,6 +3634,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 class IdentifiedItemsMap extends Map {
   /** @inheritDoc */
   get(key, { type }={}) {
+    if ( key.includes(":") && !type ) [type, key] = key.split(":", 2);
     const result = super.get(key);
     if ( !result?.size || !type ) return result;
     return result.filter(i => i.type === type);

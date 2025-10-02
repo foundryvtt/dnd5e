@@ -728,9 +728,17 @@ export function defaultUnits(type) {
 /**
  * Ensure the provided string contains only the characters allowed in identifiers.
  * @param {string} identifier
+ * @param {object} [options={}]
+ * @param {boolean} [options.allowType]  Consider an identifier with a single ":" to be valid. Only the portion after
+ *                                       the colon must follow the strict identifier validation.
  * @returns {boolean}
  */
-function isValidIdentifier(identifier) {
+function isValidIdentifier(identifier, { allowType=false }={}) {
+  if ( allowType ) {
+    const split = identifier.split(":");
+    if ( split.length > 2 ) return false;
+    identifier = split[1];
+  }
   return /^([a-z0-9_-]+)$/i.test(identifier);
 }
 
