@@ -662,8 +662,10 @@ export default function ActivityMixin(Base) {
             updates.item.push(...results.item);
             updates.rolls.push(...results.rolls);
             // Mark this item for deletion if it is linked to a cast activity that will be deleted
+            const otherLinkedActivity = linkedActivity.type === "forward"
+              ? linkedActivity.item.system.activities.get(linkedActivity.activity.id) : linkedActivity;
             if ( updates.delete.includes(linkedActivity.item.id)
-              && (this.item.getFlag("dnd5e", "cachedFor") === linkedActivity.relativeUUID) ) {
+              && (this.item.getFlag("dnd5e", "cachedFor") === otherLinkedActivity?.relativeUUID) ) {
               updates.delete.push(this.item.id);
             }
           } else if ( results?.length ) {
