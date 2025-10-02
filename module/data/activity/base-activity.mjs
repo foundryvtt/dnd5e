@@ -759,7 +759,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     if ( !target || !this.actor || this.actor.items.has(target) ) return target;
 
     // Re-link UUID target
-    if ( target.startsWith("Compendium.") ) {
+    const { type } = foundry.utils.parseUuid(target) ?? {};
+    if ( type === "Item" ) {
       const item = this.actor.sourcedItems?.get(target)?.first();
       if ( item ) return item.id;
     }
