@@ -39,7 +39,10 @@ system:
         condition: ''
         override: false
       consumption:
-        targets: []
+        targets:
+          - type: itemUses
+            value: '1'
+            target: feat:bardic-inspiration
         scaling:
           allowed: false
           max: ''
@@ -81,7 +84,11 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
   enchant: {}
   prerequisites:
     level: null
@@ -93,11 +100,11 @@ folder: UNxdvZabPWevUTYI
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037388710
-  modifiedTime: 1725992290007
+  modifiedTime: 1759426970555
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!pquwueEMweRhiWaq'

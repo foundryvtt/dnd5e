@@ -43,11 +43,8 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: Compendium.dnd5e.classfeatures.Item.8M7uOPhbTxoxxJSo
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: feat:channel-divinity
         scaling:
           allowed: false
           max: ''
@@ -90,7 +87,11 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
   enchant: {}
   prerequisites:
     level: null
@@ -102,11 +103,11 @@ folder: W9eAXfvupEhLWmZ4
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 5.2.0
   createdTime: 1725037390191
-  modifiedTime: 1725992290502
+  modifiedTime: 1759426758283
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!xNN0JMKqlG4hKVYu'

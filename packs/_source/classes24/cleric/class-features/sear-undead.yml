@@ -49,8 +49,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            target: Compendium.dnd5e.classes24.Item.phbclcChannelDiv
-            scaling: {}
+            target: feat:channel-divinity-cleric
         scaling:
           allowed: false
         spellSlot: true
@@ -97,8 +96,6 @@ system:
             bonus: ''
             types:
               - radiant
-            scaling:
-              number: 1
         onSave: none
       save:
         ability:
@@ -106,6 +103,9 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+      img: ''
+      appliedEffects:
+        - OftTd0Eiwnls76cX
   enchant: {}
   identifier: sear-undead
 effects:
@@ -144,18 +144,14 @@ effects:
       lastModifiedBy: null
       exportSource: null
     _key: '!items.effects!phbclcSearUndead.OftTd0Eiwnls76cX'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.10
   createdTime: 1735866373481
-  modifiedTime: 1745256760920
+  modifiedTime: 1759426506758
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 900000

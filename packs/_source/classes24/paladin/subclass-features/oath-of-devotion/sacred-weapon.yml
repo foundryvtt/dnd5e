@@ -50,8 +50,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            target: Compendium.dnd5e.classes24.Item.phbpdnChannelDiv
-            scaling: {}
+            target: feat:channel-divinity-paladin
       description:
         chatFlavor: ''
       duration:
@@ -98,6 +97,9 @@ system:
         properties: []
         type: weapon
       name: ''
+      img: ''
+      appliedEffects:
+        - sEWDFOuWn47L5860
   enchant: {}
   identifier: sacred-weapon
 effects:
@@ -146,18 +148,14 @@ effects:
       lastModifiedBy: null
       exportSource: null
     _key: '!items.effects!phbpdnSacredWeap.sEWDFOuWn47L5860'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.348'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.1.10
   createdTime: 1735866569467
-  modifiedTime: 1745256764036
+  modifiedTime: 1759426576827
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
