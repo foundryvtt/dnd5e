@@ -1467,9 +1467,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @param {HTMLElement} target  Button that was clicked.
    */
   static #showArtwork(event, target) {
-    const img = target.src;
     new foundry.applications.apps.ImagePopout({
-      src: img,
+      src: target.getAttribute("src"),
       uuid: this.actor.uuid,
       window: { title: this.actor.name }
     }).render({ force: true });
