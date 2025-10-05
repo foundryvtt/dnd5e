@@ -424,12 +424,10 @@ export default class AttributesFields {
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
-    const field = this.schema.getField("attributes.movement");
     this.attributes.movement.max = 0;
     let slowed = false;
-    for ( const [type, v] of Object.entries(this.attributes.movement) ) {
-      if ( !field.getField(type)?.options.speed ) continue;
-      let speed = Math.max(0, v - reduction);
+    for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      let speed = Math.max(0, simplifyBonus(this.attributes.movement[type], rollData) - reduction);
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
       else {
         if ( halfMovement ) speed *= 0.5;

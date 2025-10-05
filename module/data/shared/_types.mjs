@@ -47,11 +47,11 @@
 
 /**
  * @typedef MovementData
+ * @property {number} walk                          Actor walking speed.
  * @property {number} burrow                        Actor burrowing speed.
  * @property {number} climb                         Actor climbing speed.
  * @property {number} fly                           Actor flying speed.
  * @property {number} swim                          Actor swimming speed.
- * @property {number} walk                          Actor walking speed.
  * @property {string} bonus                         Bonus applied to all movement types that already have a speed.
  * @property {string} special                       Semi-colon separated list of special movement information.
  * @property {string} units                         Movement used to measure the various speeds.
