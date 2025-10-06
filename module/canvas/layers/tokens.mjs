@@ -22,7 +22,8 @@ export default class TokenLayer5e extends foundry.canvas.layers.TokenLayer {
       // If creature has any statuses that should never block movement, don't block movement
       if ( t.actor.statuses.intersects(CONFIG.DND5E.neverBlockStatuses) ) return false;
 
-      const occupiedSize = CONFIG.DND5E.actorSizes[t.actor.system.traits.size]?.numerical ?? 2;
+      const size = t.actor.system.details?.type?.swarm || t.actor.system.traits?.size;
+      const occupiedSize = CONFIG.DND5E.actorSizes[size]?.numerical ?? 2;
       // In modern rules, Tiny creatures can be moved through
       if ( modernRules && (occupiedSize === 0) ) return false;
 
