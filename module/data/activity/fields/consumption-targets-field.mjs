@@ -216,7 +216,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 
     let toConsume = cost;
     for ( const cls of validClasses ) {
-      const available = toConsume > 0 ? cls.system.hd.value : 0;
+      const available = toConsume > 0 ? cls.system.hd.value : toConsume < 0 ? -cls.system.hd.spent : 0;
       const delta = toConsume > 0 ? Math.min(toConsume, available) : Math.max(toConsume, available);
       const itemUpdate = { "system.hd.spent": cls.system.hd.spent + delta };
       if ( delta !== 0 ) {
@@ -749,7 +749,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       // Otherwise increase the number of dice and the numeric term for each scaling step
       else roll.terms = roll.terms.map(term => {
         if ( term instanceof foundry.dice.terms.DiceTerm ) return term.alter(undefined, scaling);
-        else if ( term instanceof foundry.dice.terms.NumericTerm ) term.number += scaling;
+        else if ( term instanceof foundry.dice.terms.NumericTerm ) term.number += term.number > 0 ? scaling : -scaling;
         return term;
       });
 
