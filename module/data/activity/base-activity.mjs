@@ -1,3 +1,4 @@
+import aggregateDamageRolls from "../../dice/aggregate-damage-rolls.mjs";
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
 import { safePropertyExists, staticID } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
@@ -614,21 +615,29 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    */
   prepareDamageLabel(rollData) {
     const config = this.getDamageConfig({}, { rollData });
-    this.labels.damage = this.labels.damages = (config.rolls ?? []).map(part => {
+    const rolls = aggregateDamageRolls(config.rolls.map(({ base, data, options, parts }) => {
+      const formula = parts.join(" + ");
+      try {
+        return new CONFIG.Dice.DamageRoll(formula, data, { base, ...options });
+      } catch(err) {
+        console.warn(`Unable to prepare formula "${formula}" for ${this.name} in item ${this.item.name}${
+          this.actor ? ` on ${this.actor.name} (${this.actor.id})` : ""
+        } (${this.uuid})`, err);
+      }
+    }).filter(_ => _));
+    this.labels.damage = this.labels.damages = rolls.map(roll => {
       let formula;
       try {
-        formula = part.parts.join(" + ");
-        const roll = new CONFIG.Dice.DamageRoll(formula, part.data);
         roll.simplify();
-        formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
+        formula = simplifyRollFormula(roll.formula, { preserveFlavor: false });
       } catch(err) {
-        console.warn(`Unable to simplify formula for ${this.name} in item ${this.item.name}${
+        console.warn(`Unable to simplify formula "${roll.formula}" for ${this.name} in item ${this.item.name}${
           this.actor ? ` on ${this.actor.name} (${this.actor.id})` : ""
         } (${this.uuid})`, err);
       }
 
       let label = formula;
-      const types = part.options?.types ?? (part.options?.type ? [part.options.type] : []);
+      const types = roll.options.types ?? (roll.options.type ? [roll.options.type] : []);
       if ( types.length ) {
         label = `${formula} ${game.i18n.getListFormatter({ type: "conjunction" }).format(
           types.map(p => CONFIG.DND5E.damageTypes[p]?.label ?? CONFIG.DND5E.healingTypes[p]?.label).filter(_ => _)
@@ -637,8 +646,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
       return {
         formula, label,
-        base: part.base,
-        damageType: part.options?.types.length === 1 ? part.options.types[0] : null
+        damageType: types.length === 1 ? types[0] : null
       };
     });
   }
