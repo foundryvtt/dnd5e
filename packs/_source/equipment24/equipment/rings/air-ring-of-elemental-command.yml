@@ -392,6 +392,10 @@ effects:
         mode: 5
         value: 'true'
         priority: null
+      - key: system.attributes.movement.fly
+        mode: 4
+        value: '@attributes.movement.walk'
+        priority: null
     disabled: false
     duration:
       startTime: null
@@ -407,15 +411,18 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.2.0
       createdTime: 1730685122369
-      modifiedTime: 1730685488423
+      modifiedTime: 1759793661174
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgAirRingOfElem.d5aFCMPqEUaUQ37L'

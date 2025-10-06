@@ -348,7 +348,47 @@ system:
       img: ''
   attuned: false
   identifier: ring-of-water-elemental-command
-effects: []
+effects:
+  - name: Ring Focus
+    img: icons/equipment/finger/ring-cabochon-gold-purple.webp
+    origin: Compendium.dnd5e.items.Item.HnIERWmmra74hSCw
+    _id: GDk5vt4XBMKVZJh4
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.movement.swim
+        mode: 4
+        value: '60'
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.350'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      createdTime: 1759793788791
+      modifiedTime: 1759793805448
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!HnIERWmmra74hSCw.GDk5vt4XBMKVZJh4'
 folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:

@@ -131,7 +131,7 @@ effects:
         priority: null
       - key: system.attributes.movement.climb
         mode: 4
-        value: '1'
+        value: '@attributes.movement.walk'
         priority: null
     disabled: false
     duration:
@@ -154,15 +154,18 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 5.2.0
       createdTime: 1728946973777
-      modifiedTime: 1728947113494
+      modifiedTime: 1759793507922
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!items.effects!dmgCloakOfArachn.6ZKscgdcc55OsAuN'
