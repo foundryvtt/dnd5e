@@ -149,7 +149,7 @@ export default class TransformDialog extends Dialog5e {
    * @protected
    */
   async _prepareSettingsContext(context, options) {
-    context.categories = this.#settings.createFormCategories();
+    context.categories = this.#settings.createFormCategories({ host: this.options.transform.host });
     return context;
   }
 
