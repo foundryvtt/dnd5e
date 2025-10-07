@@ -164,7 +164,7 @@ export default class PseudoDocumentCollection extends Collection {
     }
 
     // Create a new document
-    if ( !data._id ) data._id = randomID(16);
+    if ( !data._id ) data._id = foundry.utils.randomID(16);
     try {
       doc = this.createDocument(data, options);
       super.set(doc.id, doc);
