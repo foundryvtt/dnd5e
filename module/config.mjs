@@ -1830,6 +1830,9 @@ DND5E.consumableTypes = {
   },
   trinket: {
     label: "DND5E.CONSUMABLE.Type.Trinket.Label"
+  },
+  wondrous: {
+    label: "DND5E.CONSUMABLE.Type.Wondrous.Label"
   }
 };
 preLocalize("consumableTypes", { key: "label", sort: true });
