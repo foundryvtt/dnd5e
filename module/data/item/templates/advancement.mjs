@@ -66,7 +66,7 @@ export default class AdvancementTemplate extends SystemDataModel {
         if ( advancement._preCreate(baseData) === false ) return obj;
         obj[advancement.id] = advancement.toObject();
         return obj;
-      })
+      }, {})
     });
   }
 
