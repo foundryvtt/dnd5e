@@ -1,6 +1,7 @@
 import { convertWeight } from "../../utils.mjs";
 import MultiActorSheet from "./api/multi-actor-sheet.mjs";
 import Award from "../award.mjs";
+import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 
 /**
  * Extension of the base actor sheet for group actors.
@@ -248,12 +249,12 @@ export default class GroupActorSheet extends MultiActorSheet {
    * @protected
    */
   async _prepareVehicleContext(actor, context, options) {
-    context.underlay = `var(--underlay-vehicle-${actor.system.vehicleType})`;
+    context.underlay = `var(--underlay-vehicle-${actor.system.details.type})`;
     const { attributes } = actor.system;
     context.properties = [];
     if ( attributes.ac.value ) context.properties.push({ label: "DND5E.AC", value: attributes.ac.value });
-    if ( attributes.hp.dt ) context.properties.push({ label: "DND5E.HITPOINTS.DT.Abbr", value: attributes.hp.dt });
-    const speed = Math.max(...Object.values(attributes.movement.paces).map(p => p ?? -Infinity));
+    if ( attributes.hp.dt ) context.properties.push({ label: "DND5E.HITPOINTS.DT.abbr", value: attributes.hp.dt });
+    const speed = attributes.movement.max;
     if ( Number.isFinite(speed) ) context.properties.push({ label: "DND5E.Speed", value: speed });
   }
 
@@ -313,5 +314,17 @@ export default class GroupActorSheet extends MultiActorSheet {
     const { uuid } = target.closest("[data-uuid]")?.dataset ?? {};
     const actor = await fromUuid(uuid);
     actor?.rollSkill({ event, skill: key, pace: this.actor.system.attributes.movement.pace });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _showConfiguration(event, target) {
+    if ( target.dataset.config === "movement" ) {
+      new MovementSensesConfig({
+        document: this.actor, type: "movement", withResolution: true
+      }).render({ force: true });
+      return false;
+    }
   }
 }

@@ -39,6 +39,41 @@
   }
 
   /* ---------------------------------- */
+  /*  Window Header                     */
+  /* ---------------------------------- */
+
+  &:not(.minimized) .window-header .header-elements {
+    flex: none;
+    color: var(--color-text-primary);
+    font-family: var(--dnd5e-font-roboto-condensed);
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    gap: 4px;
+
+    > div:has(> span:not(:empty)) + div:not(:empty)::before { content: " • "; }
+
+    .source-book {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    a {
+      margin: 0;
+      display: grid;
+      place-content: center;
+      &[hidden] { display: none; }
+    }
+
+    i {
+      font-size: var(--font-size-11);
+      color: var(--color-text-tertiary);
+      margin: 0;
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Sheet Header                      */
   /* ---------------------------------- */
 
@@ -49,6 +84,40 @@
       align-items: center;
       gap: 8px;
     }
+  }
+
+  .slide-toggle.header-interactable, button.header-interactable {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    transition: all 250ms ease;
+    background: var(--npc-header-input-background);
+    padding: 0 4px;
+
+    &:hover {
+      border-color: var(--dnd5e-color-gold);
+      box-shadow: 0 0 6px var(--dnd5e-color-gold);
+      text-shadow: none;
+    }
+  }
+
+  button.header-interactable {
+    color: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    text-transform: inherit;
+  }
+
+  .slide-toggle.header-interactable {
+    font-family: var(--dnd5e-font-roboto-condensed);
+    height: var(--form-field-height);
+    margin-bottom: 8px;
+
+    .fa-toggle-on { color: var(--npc-portrait-toggle-on); }
   }
 
   /* ---------------------------------- */
@@ -95,6 +164,37 @@
   /* ---------------------------------- */
   /*  Meters                            */
   /* ---------------------------------- */
+
+  .bars .bar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    label {
+      flex: 0 0 25px;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: var(--dnd5e-color-gold);
+      text-align: center;
+      font-size: var(--font-size-11);
+    }
+
+    .meter {
+      --border-width: 0;
+      flex: 1;
+      height: 8px;
+
+      &.hit-points::before { background: linear-gradient(to right, var(--dnd5e-color-hp-1) 0%, var(--dnd5e-color-hp-2) 100%); }
+      &.hit-dice::before { background: linear-gradient(to right, var(--dnd5e-color-hd-1) 0%, var(--dnd5e-color-hd-2) 100%); }
+    }
+
+    .values {
+      flex: 0 0 48px;
+      font-weight: bold;
+      font-size: var(--font-size-11);
+      text-shadow: var(--group-vitals-shadow);
+    }
+  }
 
   .meter {
     &.hit-points {
@@ -281,6 +381,24 @@
   }
 
   /* ---------------------------------- */
+  /*  Sidebar                           */
+  /* ---------------------------------- */
+
+  .sidebar-collapser {
+    position: absolute;
+    inset: 0 auto 0 var(--sidebar-size);
+    width: 16px;
+    padding: 0;
+    color: var(--dnd5e-color-gold);
+    transition: left 450ms ease;
+
+    &:hover, &:focus-visible {
+      box-shadow: none;
+      background: var(--dnd5e-background-5);
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Badges                            */
   /* ---------------------------------- */
 
@@ -434,7 +552,9 @@
         }
       }
     }
+  }
 
+  .tab[data-tab=members] .member, .sheet-stations .station {
     .controls {
       position: absolute;
       inset: -8px 0 auto auto;

@@ -145,7 +145,7 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClass.NPC"
   });
-  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eVehicle, {
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.VehicleActorSheet, {
     types: ["vehicle"],
     makeDefault: true,
     label: "DND5E.SheetClass.Vehicle"

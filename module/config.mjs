@@ -1014,7 +1014,7 @@ DND5E.abilityActivationTypes = {
   legendary: "DND5E.LegendaryAction.Label",
   mythic: "DND5E.MythicActionLabel",
   lair: "DND5E.LAIR.Action.Label",
-  crew: "DND5E.VehicleCrewAction"
+  crew: "DND5E.VEHICLE.Activation.Crew.label"
 };
 preLocalize("abilityActivationTypes");
 
@@ -1672,10 +1672,10 @@ preLocalize("equipmentTypes", { sort: true });
  * @enum {string}
  */
 DND5E.vehicleTypes = {
-  air: "DND5E.VehicleTypeAir",
-  land: "DND5E.VehicleTypeLand",
-  space: "DND5E.VehicleTypeSpace",
-  water: "DND5E.VehicleTypeWater"
+  air: "DND5E.VEHICLE.Type.Air.label",
+  land: "DND5E.VEHICLE.Type.Land.label",
+  space: "DND5E.VEHICLE.Type.Space.label",
+  water: "DND5E.VEHICLE.Type.Water.label"
 };
 preLocalize("vehicleTypes", { sort: true });
 
@@ -2787,6 +2787,8 @@ preLocalize("weightUnits", { keys: ["label", "abbreviation"] });
  *
  * @typedef {object} EncumbranceConfiguration
  * @property {Record<string, number>} currencyPerWeight  Pieces of currency that equal a base weight (lbs or kgs).
+ * @property {number} draftMultiplier                    The carry capacity multiplier to apply to draft animals pulling
+ *                                                       a vehicle.
  * @property {Record<string, object>} effects            Data used to create encumbrance-related Active Effects.
  * @property {object} threshold                          Amount to multiply strength to get given capacity threshold.
  * @property {Record<string, number>} threshold.encumbered
@@ -2806,6 +2808,7 @@ DND5E.encumbrance = {
     imperial: 50,
     metric: 110
   },
+  draftMultiplier: 5,
   effects: {
     encumbered: {
       name: "EFFECT.DND5E.StatusEncumbered",
@@ -2852,10 +2855,6 @@ DND5E.encumbrance = {
     default: {
       imperial: "lb",
       metric: "kg"
-    },
-    vehicle: {
-      imperial: "tn",
-      metric: "Mg"
     }
   }
 };

@@ -27,37 +27,6 @@
   /*  Outer Window                      */
   /* ---------------------------------- */
 
-  &:not(.minimized) .window-header .header-elements {
-    flex: none;
-    color: var(--color-text-primary);
-    font-family: var(--dnd5e-font-roboto-condensed);
-    display: flex;
-    align-items: center;
-    line-height: 1;
-    gap: 4px;
-
-    > div:has(> span:not(:empty)) + div:not(:empty)::before { content: " • "; }
-
-    .source-book {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    a {
-      margin: 0;
-      display: grid;
-      place-content: center;
-      &[hidden] { display: none; }
-    }
-
-    i {
-      font-size: var(--font-size-11);
-      color: var(--color-text-tertiary);
-      margin: 0;
-    }
-  }
-
   &:not(.minimized).window-content {
     display: flex;
     flex-direction: column;
@@ -561,28 +530,13 @@
       width: 100%;
       min-height: 100%;
 
-      /* Sidebar Collapser */
-      .sidebar-collapser {
-        position: absolute;
-        inset: 0 auto 0 var(--sidebar-size);
-        width: 16px;
-        padding: 0;
-        color: var(--dnd5e-color-gold);
-        transition: left 450ms ease;
-
-        &:hover, &:focus-visible {
-          box-shadow: none;
-          background: var(--dnd5e-background-5);
-        }
-      }
-
       /* Sidebar */
       .sidebar {
         padding-top: 12px;
         flex: 0 0 var(--dnd5e-sheet-sidebar-width);
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 16px;
         transition: margin-left 450ms ease;
 
         .pills-group {
@@ -629,32 +583,6 @@
         width: 100%;
 
         .spells-list { gap: 12px; }
-
-        .bottom {
-          width: 100%;
-          position: sticky;
-          bottom: 0;
-          margin-top: auto;
-          display: flex;
-          gap: 6px;
-
-          .encumbrance {
-            border: var(--dnd5e-border-gold);
-            border-radius: 3px;
-            box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-            flex: 1;
-          }
-
-          .meter {
-            border-radius: 3px;
-            height: 100%;
-          }
-
-          .create-child {
-            position: relative;
-            inset: unset;
-          }
-        }
       }
 
       /* Spells */
@@ -742,39 +670,6 @@
             background: var(--npc-header-input-background);
             &:hover { cursor: var(--cursor-pointer); }
           }
-        }
-
-        li.creature-type > button, label.slide-toggle {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          border-radius: 3px;
-          border: 1px solid transparent;
-          transition: all 250ms ease;
-          background: var(--npc-header-input-background);
-          padding: 0 4px;
-
-          &:hover {
-            border-color: var(--dnd5e-color-gold);
-            box-shadow: 0 0 6px var(--dnd5e-color-gold);
-            text-shadow: none;
-          }
-        }
-        li.creature-type > button {
-          color: inherit;
-          font-family: inherit;
-          font-weight: inherit;
-          text-transform: inherit;
-        }
-
-        label.slide-toggle {
-          font-family: var(--dnd5e-font-roboto-condensed);
-          height: var(--form-field-height);
-          margin-bottom: 8px;
-
-          .fa-toggle-on { color: var(--npc-portrait-toggle-on); }
         }
       }
 

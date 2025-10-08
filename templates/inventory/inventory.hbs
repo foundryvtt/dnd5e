@@ -59,7 +59,8 @@
     {{/if}}
 
     {{!-- Items --}}
-    <section class="items-list {{ listControls.list }}-list" data-item-list="{{ listControls.list }}">
+    <section class="items-list {{#if listControls}}{{ listControls.list }}-list{{/if}}"
+             {{#if listControls}}data-item-list="{{ listControls.list }}"{{/if}}>
 
         {{!-- Sections / Categories --}}
         {{#each sections}}

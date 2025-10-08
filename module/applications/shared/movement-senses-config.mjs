@@ -11,7 +11,8 @@ export default class MovementSensesConfig extends BaseConfigSheet {
     keyPath: null,
     position: {
       width: 420
-    }
+    },
+    withResolution: false
   };
 
   /* -------------------------------------------- */
@@ -52,7 +53,7 @@ export default class MovementSensesConfig extends BaseConfigSheet {
    */
   get types() {
     if ( this.options.type === "senses" ) return Object.keys(CONFIG.DND5E.senses);
-    if ( this.document.type === "group" ) return ["land", "water", "air"];
+    if ( (this.document.type === "group") || (this.document.type === "vehicle") ) return ["land", "water", "air"];
     return Object.keys(CONFIG.DND5E.movementTypes);
   }
 
@@ -84,7 +85,16 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       placeholder: placeholderData?.[key] ?? ""
     }));
 
-    context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
+    context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label, travelResolution }]) => {
+      if ( !this.options.withResolution || !travelResolution ) return { value, label };
+      return {
+        value,
+        label: game.i18n.format("DND5E.UNITS.TRAVEL.UnitLabel", {
+          unit: label,
+          resolution: game.i18n.format(`DND5E.UNITS.TRAVEL.${travelResolution.capitalize()}`)
+        })
+      };
+    });
     context.unitsOptions.blank = false;
     if ( (this.document.type === "character") || ((this.document.type === "npc") && placeholderData) ) {
       const automaticUnit = CONFIG.DND5E.movementUnits[placeholderData?.units ?? defaultUnits("length")]?.label ?? "";

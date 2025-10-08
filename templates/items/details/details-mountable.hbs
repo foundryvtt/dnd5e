@@ -6,7 +6,23 @@
 
     {{!-- Armor Class --}}
     {{ formField fields.armor.fields.value value=source.armor.value localize=true rootId=partId }}
-    {{ formField fields.cover value=source.cover options=coverOptions rootId=partId }}
+
+    {{!-- Crew --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.VEHICLE.MOUNTABLE.FIELDS.crew.label" }}</label>
+        <div class="form-fields">
+
+            {{!-- Max --}}
+            {{ formField fields.crew.fields.max value=source.crew.max label="DND5E.Max" placeholder="—" localize=true
+                         classes="label-top" rootId=partId }}
+
+            {{!-- Cover --}}
+            {{ formField fields.cover value=source.cover label="DND5E.VEHICLE.MOUNTABLE.FIELDS.cover.label"
+                         hint="DND5E.VEHICLE.MOUNTABLE.FIELDS.cover.hint" localize=true classes="label-top"
+                         rootId=partId options=coverOptions }}
+
+        </div>
+    </div>
 
     {{!-- Hit Points --}}
     <div class="form-group split-group">
@@ -41,6 +57,10 @@
             {{!-- Value --}}
             {{ formField fields.speed.fields.value value=source.speed.value placeholder="0" label="DND5E.Value"
                          localize=true classes="label-top" rootId=partId }}
+
+            {{!-- Units --}}
+            {{ formField fields.speed.fields.units value=source.speed.units label="DND5E.MovementUnits" localize=true
+                         classes="label-top" rootId=partId options=unitsOptions }}
         </div>
 
         {{!-- Conditions --}}

@@ -452,7 +452,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       ctx.isExpanded = this.expandedSections.get(item.id) === true;
       if ( ctx.isExpanded ) ctx.expanded = await item.getChatData({ secrets: this.actor.isOwner });
 
-      // Place the item into a specific categories
+      // Place the item into specific categories.
       const categories = this._assignItemCategories(item) ?? [];
       for ( const category of categories ) {
         context.itemCategories[category] ??= [];
@@ -1001,6 +1001,25 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /* -------------------------------------------- */
 
   /**
+   * Render a button for creating items in the inventory tab.
+   * @protected
+   */
+  _renderCreateInventory() {
+    const button = document.createElement("button");
+    Object.assign(button, {
+      type: "button", className: "create-child gold-button",
+      ariaLabel: game.i18n.format("SIDEBAR.Create", { type: game.i18n.localize("DOCUMENT.Item") })
+    });
+    button.dataset.action = "addDocument";
+    button.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-plus" inert></i>');
+    const bottom = this.element.querySelector('[data-application-part="inventory"] .bottom');
+    bottom.classList.add("with-child");
+    bottom.append(button);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Augment spellbook display.
    * @param {ApplicationRenderContext} context
    * @param {ApplicationRenderOptions} options
@@ -1125,7 +1144,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       }
 
       // Handle delta inputs
-      this.element.querySelectorAll('input[type="text"][data-dtype="Number"]')
+      this.element.querySelectorAll('input[type="text"]:is([data-dtype="Number"], [inputmode="numeric"])')
         .forEach(i => i.addEventListener("change", this._onChangeInputDelta.bind(this)));
 
       // Meter editing
@@ -1695,7 +1714,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( li.dataset.effectId ) return this._onDragEffect(event);
     if ( li.matches("[data-item-id] > .item-row") ) return this._onDragItem(event);
 
-    super._onDragStart(event);
+    return super._onDragStart(event);
   }
 
   /* -------------------------------------------- */

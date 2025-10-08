@@ -272,6 +272,25 @@ export function isValidDieModifier(mod) {
 /* -------------------------------------------- */
 
 /**
+ * Convert a delta string into a number.
+ * @param {string} raw     The raw string.
+ * @param {number} target  A target number to apply the delta to.
+ * @returns {number}
+ */
+export function parseDelta(raw, target) {
+  if ( !raw ) return target;
+  let value = Number(raw);
+  if ( (raw[0] === "+") || (raw[0] === "-") ) {
+    const delta = parseFloat(raw);
+    value = target + delta;
+  }
+  else if ( raw[0] === "=" ) value = Number(raw.slice(1));
+  return Number.isNaN(value) ? target : value;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Handle a delta input for a number value from a form.
  * @param {HTMLInputElement} input  Input that contains the modified value.
  * @param {Document} target         Target document to be updated.
@@ -279,15 +298,10 @@ export function isValidDieModifier(mod) {
  */
 export function parseInputDelta(input, target) {
   const prop = input.dataset.name ?? input.name;
-  const current = foundry.utils.getProperty(target?._source ?? {}, prop) ?? foundry.utils.getProperty(target, prop);
-  let value = input.value;
-  if ( ["+", "-"].includes(value[0]) ) {
-    const delta = parseFloat(value);
-    value = Number(current) + delta;
-  }
-  else if ( value[0] === "=" ) value = Number(value.slice(1));
+  let current = foundry.utils.getProperty(target?._source ?? {}, prop) ?? foundry.utils.getProperty(target, prop);
+  const value = parseDelta(input.value, Number(current));
   if ( Number.isNaN(value) ) return;
-  input.value = value;
+  input.value = value.toString();
   return value;
 }
 
@@ -690,6 +704,12 @@ function _convertSystemUnits(value, from, to, config, { message, strict }) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * @typedef UnitValue5e
+ * @property {string} units
+ * @property {number} value
+ */
 
 /**
  * Default units to use depending on system setting.

@@ -10,7 +10,7 @@
         {{/if}}
         <span class="value">{{ value }}</span>
         <span class="separator">&sol;</span>
-        <span class="max">{{{ ifThen maxLabel maxLabel max }}}</span>
+        <span class="max">{{{ ifThen maxLabel maxLabel (dnd5e-numberFormat max) }}}</span>
     </div>
     {{#if ../hasBreakpoints}}
     <i class="breakpoint breakpoint-low arrow-up" role="presentation"></i>

@@ -2714,7 +2714,10 @@
     "other": "{number} hit points"
   },
   "DT": {
-    "Abbr": "DT"
+    "abbr": "DT"
+  },
+  "Other": {
+    "label": "Other Options"
   }
 },
 
@@ -4662,6 +4665,11 @@
       "Label": "Year"
     }
   },
+  "TRAVEL": {
+    "Day": "per day",
+    "Round": "per round",
+    "UnitLabel": "{unit} ({resolution})"
+  },
   "VOLUME": {
     "Label": "Volume Units",
     "CubicFoot": {
@@ -4873,14 +4881,83 @@
 "DND5E.Value": "Value",
 
 "DND5E.VEHICLE": {
+  "Actions": {
+    "Create": {
+      "Equipment": "Create Equipment",
+      "Feature": "Create Feature",
+      "Weapon": "Create Weapon"
+    },
+    "Crew": {
+      "Decrease": "Decrease",
+      "Increase": "Increase"
+    },
+    "Drop": {
+      "Animal": "Drop Draft Animal",
+      "Crew": "Drop Crew",
+      "Passengers": "Drop Passengers"
+    },
+    "Uncrew": "Uncrew"
+  },
+  "Activation": {
+    "Crew": {
+      "label": "Crew Action"
+    }
+  },
+  "Crew": {
+    "Assigned": "Assigned",
+    "Label": "Crew",
+    "Passengers": "Passengers",
+    "Unassigned": "Unassigned"
+  },
+  "FIELDS": {
+    "attributes": {
+      "capacity": {
+        "cargo": {
+          "value": {
+            "label": "Cargo"
+          }
+        },
+        "label": "Capacity"
+      }
+    },
+    "crew": {
+      "max": {
+        "label": "Crew"
+      }
+    },
+    "passengers": {
+      "max": {
+        "label": "Passengers"
+      }
+    },
+    "traits": {
+      "beam": {
+        "value": {
+          "label": "Beam"
+        }
+      },
+      "keel": {
+        "value": {
+          "label": "Keel"
+        }
+      }
+    }
+  },
+  "Mishap": {
+    "label": "Mishap",
+    "Threshold": {
+      "abbr": "MT",
+      "label": "Mishap Threshold"
+    }
+  },
   "MOUNTABLE": {
     "FIELDS": {
       "cover": {
         "label": "Cover",
         "hint": "Cover provided to crew operating this equipment."
       },
-      "crewed": {
-        "label": "Crewed"
+      "crew": {
+        "label": "Crew"
       },
       "hp": {
         "label": "Hit Points",
@@ -4906,38 +4983,30 @@
         }
       }
     }
+  },
+  "ShowVehicleAbilities": "Show Abilities",
+  "Tabs": {
+    "Cargo": "Cargo",
+    "CrewPassengers": "Crew & Passengers"
+  },
+  "Type": {
+    "Air": {
+      "label": "Air Vehicle"
+    },
+    "label": "Vehicle Type",
+    "Land": {
+      "label": "Land Vehicle"
+    },
+    "Space": {
+      "label": "Space Vehicle"
+    },
+    "Water": {
+      "label": "Water Vehicle"
+    }
   }
 },
 
 "DND5E.Vehicle": "Vehicle",
-"DND5E.VehicleActions": "Actions",
-"DND5E.VehicleActionsHint": "Actions taken with full crew complement",
-"DND5E.VehicleActionMax": "Maximum Actions",
-"DND5E.VehicleActionStations": "Action Stations",
-"DND5E.VehicleActionThresholds": "Action Thresholds",
-"DND5E.VehicleActionThresholdsFull": "Full Crew Complement",
-"DND5E.VehicleActionThresholdsMid": "Partial Crew Complement",
-"DND5E.VehicleActionThresholdsMin": "Minimum Crew Complement",
-"DND5E.VehicleCargo": "Cargo",
-"DND5E.VehicleCargoCapacity": "Cargo Capacity",
-"DND5E.VehicleCargoCrew": "Cargo & Crew",
-"DND5E.VehicleCreatureCapacity": "Creature Capacity",
-"DND5E.VehicleCrew": "Crew",
-"DND5E.VehicleCrewPassengers": "Crew & Passengers",
-"DND5E.VehicleCrewed": "Crewed",
-"DND5E.VehicleCrewAction": "Crew Action",
-"DND5E.VehicleEquipment": "Vehicle Equipment",
-"DND5E.VehicleMishap": "Mishap",
-"DND5E.VehicleMishapThreshold": "Mishap Threshold",
-"DND5E.VehiclePassengers": "Passengers",
-"DND5E.VehiclePassengerName": "Passenger Name or Type",
-"DND5E.VehiclePassengerQuantity": "Passenger Quantity",
-"DND5E.VehicleType": "Vehicle Type",
-"DND5E.VehicleTypeAir": "Air Vehicle",
-"DND5E.VehicleTypeLand": "Land Vehicle",
-"DND5E.VehicleTypeSpace": "Space Vehicle",
-"DND5E.VehicleTypeWater": "Water Vehicle",
-"DND5E.VehicleUncrewed": "Uncrewed",
 "DND5E.Versatile": "Versatile",
 "DND5E.VersatileDamage": "Versatile Damage",
 "DND5E.VsDC": "vs DC.",

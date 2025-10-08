@@ -1,0 +1,210 @@
+<section class="sheet-stations" data-area="draft">
+
+    {{!-- Abilities --}}
+    {{#if showAbilities}}
+    <div class="abilities">
+        {{> ".header" }}
+        {{> ".header" }}
+        {{#each abilities}}
+        {{> ".ability" path=(concat "system.abilities." key) }}
+        {{/each}}
+    </div>
+    {{/if}}
+
+    {{!-- Features --}}
+    {{#if features}}
+    {{> "systems/dnd5e/templates/inventory/inventory.hbs" sections=features }}
+    {{/if}}
+
+    {{!-- Draft Animals --}}
+    {{#if drafted}}
+    <ol class="unlist stations">
+        {{#each drafted}}
+        <li class="station drafted" data-uuid="{{ uuid }}">
+
+            {{!-- Header --}}
+            <div class="station-header">
+
+                {{!-- Name & Creature Type --}}
+                <div class="name-stacked rollable always-interactive" data-action="showDocument">
+                    <span class="title">{{ actor.name }}</span>
+                    <span class="subtitle">{{ subtitle }}</span>
+                </div>
+
+                {{!-- Icon --}}
+                <img class="gold-icon" src="{{ actor.img }}" alt="{{ actor.name }}">
+
+            </div>
+
+            {{!-- Controls --}}
+            {{#if @root.editable}}
+            <div class="controls">
+                <button type="button" class="config-button unbutton" data-action="removeMember" data-tooltip
+                        aria-label="{{ localize "DND5E.Group.Action.Remove" }}">
+                    <i class="fa-solid fa-square-xmark" inert></i>
+                </button>
+            </div>
+            {{/if}}
+
+        </li>
+        {{/each}}
+    </ol>
+    {{/if}}
+
+    {{!-- Action Stations --}}
+    {{#if itemCategories.stations.length}}
+    <ol class="unlist stations">
+        {{#each itemCategories.stations as |item|}}
+        {{#dnd5e-itemContext item as |ctx|}}
+        <li class="station draggable" data-item-id="{{ item.id }}" data-uuid="{{ item.uuid }}">
+
+            {{!-- Header --}}
+            <div class="station-header">
+
+                {{!-- Name, AC, & DT --}}
+                <div class="name-stacked item-tooltip {{ @root.rollableClass }}" data-action="useItem">
+                    <span class="title">{{ item.name }}</span>
+                    <span class="subtitle">{{ ctx.subtitle }}</span>
+                </div>
+
+                {{!-- Icon --}}
+                <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
+
+            </div>
+
+            {{!-- Weapon --}}
+            {{#with ctx.enriched}}
+            {{#if attack}}<p class="enriched">{{{ attack }}}</p>{{/if}}
+            {{#if damage}}<p class="enriched">{{{ damage }}}</p>{{/if}}
+            {{/with}}
+
+            {{!-- HP --}}
+            {{#if item.system.hp.max}}
+            {{#with item.system.hp}}
+            <div class="hp bars {{ @root.rollableClass }}" data-action="toggleEditInline">
+
+                <div class="hp-bar bar">
+                    <label>{{ localize "DND5E.HP" }}</label>
+                    <div class="meter hit-points progress" role="meter" aria-valuemin="0" aria-valuenow="{{ value }}"
+                         aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%"></div>
+                    <div class="values">
+                        <span class="display value">{{ value }}</span>
+                        <span class="display separator">&sol;</span>
+                        <span class="display max">{{ max }}</span>
+                        <input type="text" class="value uninput" data-name="system.hp.value" data-dtype="Number"
+                               placeholder="0" pattern="^[+=\-]?\d*" value="{{ value }}" inputmode="numeric" hidden>
+                    </div>
+                </div>
+
+                {{#if conditions}}<p class="note">{{ conditions }}</p>{{/if}}
+
+            </div>
+            {{/with}}
+            {{/if}}
+
+            {{!-- Speed --}}
+            {{#if item.system.speed.value}}
+            {{#with item.system.speed}}
+            <div class="speed">
+                <strong>{{ localize "DND5E.VEHICLE.MOUNTABLE.FIELDS.speed.value.label" }}:</strong>
+                <span class="value">{{ value }} {{ units }}</span>
+                {{#if conditions}}<em>({{ conditions }})</em>{{/if}}
+            </div>
+            {{/with}}
+            {{/if}}
+
+            {{!-- Crew --}}
+            {{#if ctx.crew.length}}
+            <div class="slots crew">
+                {{#each ctx.crew}}
+                <div {{#if actor}}data-uuid="{{ actor.uuid }}" data-action="showDocument" data-tooltip aria-label="{{ actor.name }}"{{/if}}
+                    class="slot occupant-slot hireling {{#if empty}}empty{{/if}}" data-index="{{ index }}">
+                    {{#if actor}}<img src="{{ actor.img }}" alt="{{ actor.name }}">{{/if}}
+                    {{#if (and @root.editable actor)}}
+                    <a class="deletion-control" data-action="uncrew"
+                       aria-label="{{ localize "DND5E.VEHICLE.Actions.Uncrew" }}">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </a>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+            {{/if}}
+
+        </li>
+        {{/dnd5e-itemContext}}
+        {{/each}}
+    </ol>
+    {{/if}}
+
+    {{!-- Drop Zones --}}
+    {{#if @root.editable}}
+    <div class="drop-zones">
+        <div class="drop-zone drop-zone-lg interactive roboto-upper" data-action="createItem" data-type="feat">
+            {{ localize "DND5E.VEHICLE.Actions.Create.Feature" }}
+        </div>
+        <div class="drop-zone drop-zone-lg interactive roboto-upper" data-action="createItem" data-type="equipment">
+            {{ localize "DND5E.VEHICLE.Actions.Create.Equipment" }}
+        </div>
+        <div class="drop-zone drop-zone-lg interactive roboto-upper" data-action="createItem" data-type="weapon">
+            {{ localize "DND5E.VEHICLE.Actions.Create.Weapon" }}
+        </div>
+        <div class="drop-zone drop-zone-lg interactive roboto-upper" data-action="browseActors">
+            {{ localize "DND5E.VEHICLE.Actions.Drop.Animal" }}
+        </div>
+    </div>
+    {{/if}}
+
+</section>
+
+{{#*inline ".header"}}
+<div class="header">
+    <div></div><div></div><div></div>
+    <div class="roboto-upper">{{ localize "DND5E.AbilityModifierShort" }}</div>
+    <div class="roboto-upper">{{ localize "DND5E.SavingThrowShort" }}</div>
+    <div></div>
+</div>
+{{/inline}}
+
+{{#*inline ".ability"}}
+<div class="ability" data-ability="{{ key }}">
+
+    {{!-- Proficiency --}}
+    <proficiency-cycle type="ability" name="{{ path }}.proficient" data-tooltip aria-label="{{ hover }}"
+                       value="{{ ifThen @root.editable source.proficient proficient }}"
+                       {{ disabled (not @root.editable) }}></proficiency-cycle>
+
+    {{!-- Label --}}
+    <a class="name roboto-upper {{ @root.rollableClass }}" data-action="roll" data-type="ability">{{ abbr }}</a>
+
+    {{!-- Score --}}
+    <div class="score">
+        {{#if @root.editable}}
+        <input type="text" name="{{ path }}.value" value="{{ source.value }}" data-dtype="Number" class="uninput">
+        {{else}}
+        <span class="value">{{ value }}</span>
+        {{/if}}
+    </div>
+
+    {{!-- Modifier --}}
+    <a class="modifier {{ @root.rollableClass }}" data-action="roll" data-type="ability">
+        {{ dnd5e-formatModifier mod }}
+    </a>
+
+    {{!-- Saving Throw --}}
+    <a class="saving-throw {{ @root.rollableClass }}" data-action="roll" data-type="ability">
+        {{ dnd5e-formatModifier save.value }}
+    </a>
+
+    {{!-- Controls --}}
+    <div class="config">
+        {{#if @root.editable}}
+        <button type="button" class="config-button unbutton" data-action="showConfiguration" data-config="ability"
+                data-tooltip aria-label="{{ localize "DND5E.AbilityConfigure" ability=label }}">
+            <i class="fa-solid fa-cog" inert></i>
+        </button>
+        {{/if}}
+    </div>
+
+</div>
+{{/inline}}

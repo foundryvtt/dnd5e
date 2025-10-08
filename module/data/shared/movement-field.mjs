@@ -68,12 +68,14 @@ export default class MovementField extends foundry.data.fields.SchemaField {
    */
   static prepareData(field) {
     this.paces = {};
+    this.max = 0;
     const { pace, units } = this;
     const paceConfig = CONFIG.DND5E.travelPace[pace];
     const unitConfig = CONFIG.DND5E.movementUnits[units];
     if ( !unitConfig ) return;
     Object.entries(this).forEach(([k, v]) => {
       if ( !field.getField(k)?.options.speed ) return;
+      if ( v > this.max ) this.max = v;
       let perDay = v;
       if ( unitConfig.travelResolution === "round" ) {
         const inFeet = convertLength(v, units, "ft");
