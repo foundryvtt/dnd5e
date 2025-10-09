@@ -83,6 +83,11 @@ export default class VehicleActorSheet extends BaseActorSheet {
       template: "systems/dnd5e/templates/actors/vehicle/crew.hbs",
       scrollable: [""]
     },
+    effects: {
+      container: { classes: ["tab-body"], id: "tabs" },
+      template: "systems/dnd5e/templates/actors/tabs/actor-effects.hbs",
+      scrollable: [""]
+    },
     description: {
       container: { classes: ["tab-body"], id: "tabs" },
       template: "systems/dnd5e/templates/actors/vehicle/description.hbs",
@@ -96,6 +101,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
   static TABS = [
     { tab: "inventory", label: "DND5E.VEHICLE.Tabs.Cargo" },
     { tab: "crew", label: "DND5E.VEHICLE.Tabs.CrewPassengers", condition: this.vehicleHasCrew },
+    { tab: "effects", label: "DND5E.Effects" },
     { tab: "description", label: "DND5E.Description" }
   ];
 
@@ -190,6 +196,15 @@ export default class VehicleActorSheet extends BaseActorSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _prepareEffectsContext(context, options) {
+    context = await super._prepareEffectsContext(context, options);
+    context.hasConditions = true;
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _prepareInventoryContext(context, options) {
     context = await super._prepareInventoryContext(context, options);
     context.encumbrance = await this.actor.system.getEncumbrance();
@@ -204,6 +219,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
     switch ( partId ) {
       case "crew": return this._prepareCrewContext(context, options);
       case "description": return this._prepareDescriptionContext(context, options);
+      case "effects": return this._prepareEffectsContext(context, options);
       case "inventory": return this._prepareInventoryContext(context, options);
       case "sidebar": return this._prepareSidebarContext(context, options);
       case "stations": return this._prepareStationsContext(context, options);
@@ -259,13 +275,21 @@ export default class VehicleActorSheet extends BaseActorSheet {
   async _prepareStationsContext(context, options) {
     const Inventory = customElements.get(this.options.elements.inventory);
     const columns = Inventory.mapColumns(["uses", "controls"]);
-    const sections = [{
-      columns, id: "features", label: "DND5E.Features", order: 100, minWidth: 170,
-      items: context.itemCategories.features
-    }];
+    const sections = Object.fromEntries(["features", "bonus", "reaction"].map((id, i) => {
+      const { header } = CONFIG.DND5E.activityActivationTypes[id] ?? {};
+      const label = id === "features" ? "DND5E.Features" : header;
+      return [id, { columns, id, label, order: (i + 1) * 100, items: [], minWidth: 170 }];
+    }));
+    context.itemCategories.features?.forEach(i => {
+      let group = i.system.activities?.contents[0]?.activation.type;
+      if ( (group !== "bonus") && (group !== "reaction") ) group = "features";
+      sections[group].items.push(i);
+    });
     context.itemCategories.stations?.sort((a, b) => a.sort - b.sort);
     context.itemCategories.features?.sort((a, b) => a.sort - b.sort);
-    if ( context.itemCategories.features?.length ) context.features = Inventory.prepareSections(sections);
+    if ( context.itemCategories.features?.length ) {
+      context.features = Inventory.prepareSections(Object.values(sections));
+    }
     if ( context.system.draft.value.length ) context.drafted = await this._prepareDraftAnimals();
     context.abilities = this._prepareAbilities(context);
     return context;

@@ -228,7 +228,16 @@
       .encumbrance .breakpoint { display: none; }
     }
 
+    /* Effects */
+    .effects-element { padding: 8px 4px 0; }
+
   }
+
+  /* -------------------------------------------- */
+  /*  Sheet Tabs                                  */
+  /* -------------------------------------------- */
+
+  .sheet-tabs [data-tab=crew] { flex: none; }
 
   /* -------------------------------------------- */
   /*  Stations                                    */
@@ -298,6 +307,9 @@
       }
     }
 
+    /* Features */
+    .items-section:has(.item-list:empty) { display: none; }
+
     /* Stations */
     .stations {
       display: flex;
@@ -327,13 +339,14 @@
           opacity: .75;
           mask-image: linear-gradient(190deg, transparent 15%, black);
           mix-blend-mode: var(--dnd5e-vehicle-station-blend-mode);
+          border-radius: 4px;
         }
       }
 
       .station-header {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 8px;
 
         .name-stacked {
           flex: 1;

@@ -79,7 +79,7 @@
 
             {{!-- Section Contents --}}
             <ol class="item-list unlist">
-                {{#each items as |item|}}
+                {{~#each items as |item|}}
                 {{#dnd5e-itemContext item as |ctx|}}
 
                 <li class="item collapsible {{#unless ctx.isExpanded}}collapsed{{/unless}}" data-uuid="{{ item.uuid }}"
@@ -170,7 +170,7 @@
                 </li>
 
                 {{/dnd5e-itemContext}}
-                {{/each}}
+                {{/each~}}
             </ol>
 
         </div>
