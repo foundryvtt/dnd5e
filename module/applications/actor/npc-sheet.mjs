@@ -481,7 +481,6 @@ export default class NPCActorSheet extends BaseActorSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    this._renderSource();
 
     if ( !this.actor.limited ) {
       this._renderCreateInventory();

@@ -848,6 +848,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     ctx.uses.hasUses = item.hasLimitedUses;
     ctx.uses.isOnCooldown = item.isOnCooldown;
     ctx.uses.prop = "system.uses.value";
+    ctx.uses.pct = ctx.uses.max ? Math.clamp((ctx.uses.value / ctx.uses.max) * 100, 0, 100) : 0;
   }
 
   /* -------------------------------------------- */
@@ -869,7 +870,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       });
     }
 
-    ctx.subtitle = [item.system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" &bull; ");
+    ctx.subtitle = [item.system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" • ");
   }
 
   /* -------------------------------------------- */
@@ -899,7 +900,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     else ctx.equip = { applicable: false };
 
     // Subtitles
-    ctx.subtitle = [item.system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" &bull; ");
+    ctx.subtitle = [item.system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" • ");
 
     // Weight
     ctx.totalWeight = item.system.totalWeight?.toNearest(0.1);
@@ -962,7 +963,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     ctx.subtitle = [
       linked ? linked.name : this.actor.classes[item.system.sourceClass]?.name,
       item.labels.components.vsm
-    ].filterJoin(" &bull; ");
+    ].filterJoin(" • ");
   }
 
   /* -------------------------------------------- */

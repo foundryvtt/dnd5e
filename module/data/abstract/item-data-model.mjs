@@ -212,7 +212,7 @@ export default class ItemDataModel extends SystemDataModel {
       controlHints: game.settings.get("dnd5e", "controlHints"),
       labels: foundry.utils.deepClone((activity ?? this.parent).labels),
       tags: this.parent.labels?.components?.tags,
-      subtitle: this.tooltipSubtitle.filterJoin(" &bull; "),
+      subtitle: this.tooltipSubtitle.filterJoin(" • "),
       description: {
         value: await TextEditor.enrichHTML(description ?? "", {
           rollData, relativeTo: this.parent, ...enrichmentOptions

@@ -200,7 +200,7 @@ async function enrichAttack(config, label, options) {
   config.type = "attack";
   if ( label ) return createRollLink(label, config, { classes: "roll-link-group roll-link" });
 
-  let displayFormula = simplifyRollFormula(config.formula) || "+0";
+  let displayFormula = simplifyRollFormula(config.formula)?.trim() || "+0";
   if ( !displayFormula.startsWith("+") && !displayFormula.startsWith("-") ) displayFormula = `+${displayFormula}`;
 
   const span = document.createElement("span");

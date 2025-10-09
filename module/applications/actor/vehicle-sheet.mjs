@@ -1,8 +1,10 @@
-import { formatCR, formatNumber } from "../../utils.mjs";
+import { formatCR, formatWeight, getPluralRules, parseDelta } from "../../utils.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
+
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * @typedef {"crew"|"draft"|"passengers"} CrewArea5e
@@ -125,7 +127,11 @@ export default class VehicleActorSheet extends BaseActorSheet {
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    context.showAbilities = this.actor.getFlag("dnd5e", "showVehicleAbilities");
+    context.options = {
+      showAbilities: this.actor.getFlag("dnd5e", "showVehicleAbilities"),
+      showInitiative: this.actor.getFlag("dnd5e", "showVehicleInitiative"),
+      showQuality: this.actor.getFlag("dnd5e", "showVehicleQuality")
+    };
     return context;
   }
 
@@ -142,15 +148,17 @@ export default class VehicleActorSheet extends BaseActorSheet {
     const { groupCrew, resolveCrew } = this.constructor;
     if ( context.system.crew.value.length ) {
       const crew = groupCrew(context.system.crew.value);
-      const assigned = context.itemCategories.stations.flatMap(i => i.system.crew.value).reduce((obj, uuid) => {
+      const unassigned = { ...crew };
+      const { stations=[] } = context.itemCategories;
+      const assigned = stations.flatMap(i => i.system.crew.value).reduce((obj, uuid) => {
         const max = crew[uuid];
         if ( !max ) return obj;
         obj[uuid] ??= 0;
         obj[uuid]++;
-        crew[uuid]--;
+        unassigned[uuid]--;
         return obj;
       }, {});
-      context.crew = { assigned: await resolveCrew(assigned), unassigned: await resolveCrew(crew) };
+      context.crew = { assigned: await resolveCrew(assigned), unassigned: await resolveCrew(unassigned, crew) };
     }
 
     if ( context.system.passengers.value.length ) {
@@ -214,11 +222,28 @@ export default class VehicleActorSheet extends BaseActorSheet {
    */
   _prepareSidebarContext(context, options) {
     const { attributes } = this.actor.system;
+    const { actions } = attributes;
     context.traits = this._prepareTraits(context);
     context.properties ??= {};
     context.properties.hp = [];
     if ( attributes.hp.dt ) context.properties.hp.push({ label: "DND5E.HITPOINTS.DT.abbr", value: attributes.hp.dt });
-    if ( attributes.hp.mt ) context.properties.hp.push({ label: "DND5E.VEHICLE.Mishap.label", value: attributes.hp.mt });
+    if ( attributes.hp.mt ) context.properties.hp.push({
+      label: "DND5E.VEHICLE.Mishap.label", value: attributes.hp.mt
+    });
+    if ( !actions.stations && actions.max ) {
+      const plurals = getPluralRules({ type: "ordinal" });
+      context.actions = Array.fromRange(actions.max, 1).map(n => {
+        const filled = actions.value >= n;
+        const classes = ["pip"];
+        if ( filled ) classes.push("filled");
+        return {
+          filled,
+          n: actions.max - n,
+          label: game.i18n.format(`DND5E.VEHICLE.Actions.Ordinal.${plurals.select(n)}`, { n }),
+          classes: classes.join(" ")
+        };
+      });
+    }
     return context;
   }
 
@@ -238,8 +263,8 @@ export default class VehicleActorSheet extends BaseActorSheet {
       columns, id: "features", label: "DND5E.Features", order: 100, minWidth: 170,
       items: context.itemCategories.features
     }];
-    (context.itemCategories.stations || []).sort((a, b) => a.sort - b.sort);
-    (context.itemCategories.features || []).sort((a, b) => a.sort - b.sort);
+    context.itemCategories.stations?.sort((a, b) => a.sort - b.sort);
+    context.itemCategories.features?.sort((a, b) => a.sort - b.sort);
     if ( context.itemCategories.features?.length ) context.features = Inventory.prepareSections(sections);
     if ( context.system.draft.value.length ) context.drafted = await this._prepareDraftAnimals();
     context.abilities = this._prepareAbilities(context);
@@ -275,7 +300,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
       const subtitle = [
         CONFIG.DND5E.actorSizes[system.traits?.size]?.label,
         system.details?.type?.label,
-        capacity ? `${formatNumber(capacity)} ${units}` : null
+        capacity ? formatWeight(capacity, units) : null
       ].filterJoin(" • ");
       return { actor, capacity, subtitle, uuid };
     }));
@@ -308,10 +333,13 @@ export default class VehicleActorSheet extends BaseActorSheet {
     if ( subtitles.length ) ctx.subtitle = subtitles.join(" • ");
     if ( item.type === "weapon" ) {
       const enrichmentOptions = { secrets: item.isOwner, relativeTo: item, rollData: item.getRollData() };
+      const damage = Array.from(item.system.activities.values()).flatMap(a => a.damage?.parts ?? []);
       ctx.enriched = {
-        attack: await CONFIG.ux.TextEditor.enrichHTML("[[/attack extended]]", enrichmentOptions),
-        damage: await CONFIG.ux.TextEditor.enrichHTML("[[/damage extended]]", enrichmentOptions)
+        attack: await TextEditor.enrichHTML("[[/attack extended]]", enrichmentOptions)
       };
+      if ( damage.length ) {
+        ctx.enriched.damage = await TextEditor.enrichHTML("[[/damage extended]]", enrichmentOptions);
+      }
     }
     ctx.crew = await Promise.all(Array.fromRange(Math.max(crew.max, crew.value.length)).map(async index => {
       const uuid = crew.value[index];
@@ -398,7 +426,11 @@ export default class VehicleActorSheet extends BaseActorSheet {
     const { area } = input.closest("[data-area]")?.dataset ?? {};
     const { uuid } = input.closest("[data-uuid]")?.dataset ?? {};
     if ( !area || !uuid || !input.closest(".crew-quantity") ) return super._onChangeInputDelta(event);
-    return this.actor.system.adjustCrew(area, uuid, input.value);
+    let value = input.value;
+    if ( /^\d+$/.test(value) || (value[0] === "=") ) {
+      value = parseDelta(value) + Number(input.nextElementSibling.value);
+    }
+    return this.actor.system.adjustCrew(area, uuid, value);
   }
 
   /* -------------------------------------------- */
@@ -471,7 +503,6 @@ export default class VehicleActorSheet extends BaseActorSheet {
     const crew = [...item.system.crew.value];
     crew.findSplice(u => u === uuid);
     item.update({ "system.crew.value": crew });
-
   }
 
   /* -------------------------------------------- */
@@ -531,7 +562,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
   /** @override */
   async _onDropActor(event, actor) {
     if ( !actor.system.isCreature ) return;
-    let { area: src, itemId } = CONFIG.ux.TextEditor.getDragEventData(event);
+    let { area: src, itemId } = TextEditor.getDragEventData(event);
     const { area: dest="crew" } = event.target?.closest("[data-area]")?.dataset ?? {};
     if ( !itemId ) itemId = event.target?.closest("[data-item-id]")?.dataset.itemId;
     if ( src === dest ) return;
@@ -554,8 +585,8 @@ export default class VehicleActorSheet extends BaseActorSheet {
    */
   _onAdjustCrew(actor, dest, { src }={}) {
     const updates = {};
-    if ( src ) Object.assign(updates, this.actor.system.getCrewUpdates(src, actor.uuid, -1));
-    Object.assign(updates, this.actor.system.getCrewUpdates(dest, actor.uuid, 1));
+    if ( src ) Object.assign(updates, this.actor.system.getCrewUpdates(src, actor.uuid, "-1"));
+    Object.assign(updates, this.actor.system.getCrewUpdates(dest, actor.uuid, "+1"));
     if ( !foundry.utils.isEmpty(updates) ) this.actor.update(updates);
   }
 
@@ -580,7 +611,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
       // Prevent assigning a non-crew-member.
       if ( src && (src !== "crew") ) return;
       // The actor may not be a crew member yet. If so, add them to the crew.
-      if ( !src ) Object.assign(actorUpdates, this.actor.system.getCrewUpdates("crew", actor.uuid, 1));
+      if ( !src ) Object.assign(actorUpdates, this.actor.system.getCrewUpdates("crew", actor.uuid, "+1"));
       foundry.utils.setProperty(itemUpdates, "system.crew.value", crew.concat(actor.uuid));
       this.actor.update(actorUpdates);
     }
@@ -614,10 +645,11 @@ export default class VehicleActorSheet extends BaseActorSheet {
 
   /**
    * Resolve crew UUIDs.
-   * @param {Record<string, number>} group  The crew counts.
+   * @param {Record<string, number>} group     The counts for this group.
+   * @param {Record<string, number>} [counts]  The true counts.
    * @returns {Promise<{ total: number, value: Array<{ actor: object, quantity: number, uuid: string }> }>}
    */
-  static async resolveCrew(group) {
+  static async resolveCrew(group, counts) {
     let total = 0;
     const value = Object.entries(group).filter(([, quantity]) => quantity).map(async ([uuid, quantity]) => {
       total += quantity;
@@ -630,7 +662,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
         system.details?.cr ? game.i18n.format("DND5E.CRLabel", { cr: formatCR(system.details.cr) }) : null,
         system.details?.level ? game.i18n.format("DND5E.LevelNumber", { level: system.details.level }) : null
       ].filterJoin(" • ");
-      return { uuid, quantity, actor: { cr, img, name, subtitle } };
+      return { uuid, quantity, actor: { cr, img, name, subtitle }, diff: (counts?.[uuid] ?? 0) - quantity };
     });
     return {
       total,

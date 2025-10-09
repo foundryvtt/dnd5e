@@ -1,7 +1,7 @@
 <section class="sheet-stations" data-area="draft">
 
     {{!-- Abilities --}}
-    {{#if showAbilities}}
+    {{#if options.showAbilities}}
     <div class="abilities">
         {{> ".header" }}
         {{> ".header" }}
@@ -102,6 +102,28 @@
             {{/with}}
             {{/if}}
 
+            {{!-- Uses --}}
+            {{#if ctx.uses.max}}
+            {{#with ctx.uses}}
+            <div class="uses bars {{ @root.rollableClass }}" data-action="toggleEditInline">
+
+                <div class="uses-bar bar">
+                    <label>{{ localize "DND5E.Uses" }}</label>
+                    <div class="meter uses progress" role="meter" aria-valuemin="0" aria-valuenow="{{ value }}"
+                         aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%"></div>
+                    <div class="values">
+                        <span class="display value">{{ value }}</span>
+                        <span class="display separator">&sol;</span>
+                        <span class="display max">{{ max }}</span>
+                        <input type="text" class="value uninput" data-name="{{ prop }}" data-dtype="Number"
+                               placeholder="0" pattern="^[+=\-]?\d*" value="{{ value }}" inputmode="numeric" hidden>
+                    </div>
+                </div>
+
+            </div>
+            {{/with}}
+            {{/if}}
+
             {{!-- Speed --}}
             {{#if item.system.speed.value}}
             {{#with item.system.speed}}
@@ -122,7 +144,7 @@
                     {{#if actor}}<img src="{{ actor.img }}" alt="{{ actor.name }}">{{/if}}
                     {{#if (and @root.editable actor)}}
                     <a class="deletion-control" data-action="uncrew"
-                       aria-label="{{ localize "DND5E.VEHICLE.Actions.Uncrew" }}">
+                       aria-label="{{ localize "DND5E.VEHICLE.Action.Uncrew" }}">
                         <i class="fa-solid fa-circle-xmark"></i>
                     </a>
                     {{/if}}
@@ -139,18 +161,18 @@
 
     {{!-- Drop Zones --}}
     {{#if @root.editable}}
-    <div class="drop-zones">
-        <div class="drop-zone drop-zone-lg interactive roboto-upper" data-action="createItem" data-type="feat">
-            {{ localize "DND5E.VEHICLE.Actions.Create.Feature" }}
+    <div class="drop-areas">
+        <div class="drop-area drop-area-lg interactive roboto-upper" data-action="createItem" data-type="feat">
+            {{ localize "DND5E.VEHICLE.Action.Create.Feature" }}
         </div>
-        <div class="drop-zone drop-zone-lg interactive roboto-upper" data-action="createItem" data-type="equipment">
-            {{ localize "DND5E.VEHICLE.Actions.Create.Equipment" }}
+        <div class="drop-area drop-area-lg interactive roboto-upper" data-action="createItem" data-type="equipment">
+            {{ localize "DND5E.VEHICLE.Action.Create.Equipment" }}
         </div>
-        <div class="drop-zone drop-zone-lg interactive roboto-upper" data-action="createItem" data-type="weapon">
-            {{ localize "DND5E.VEHICLE.Actions.Create.Weapon" }}
+        <div class="drop-area drop-area-lg interactive roboto-upper" data-action="createItem" data-type="weapon">
+            {{ localize "DND5E.VEHICLE.Action.Create.Weapon" }}
         </div>
-        <div class="drop-zone drop-zone-lg interactive roboto-upper" data-action="browseActors">
-            {{ localize "DND5E.VEHICLE.Actions.Drop.Animal" }}
+        <div class="drop-area drop-area-lg interactive roboto-upper" data-action="browseActors">
+            {{ localize "DND5E.VEHICLE.Action.Drop.Animal" }}
         </div>
     </div>
     {{/if}}

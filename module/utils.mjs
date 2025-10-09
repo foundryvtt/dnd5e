@@ -1217,6 +1217,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   else if ( attr === "resources.legact.value" ) label = "DND5E.LegendaryAction.Remaining";
   else if ( attr === "resources.legres.spent" ) label = "DND5E.LegendaryResistance.LabelPl";
   else if ( attr === "resources.legres.value" ) label = "DND5E.LegendaryResistance.Remaining";
+  else if ( attr === "attributes.actions.value" ) label = "DND5E.VEHICLE.FIELDS.attributes.actions.label";
 
   // Skills.
   else if ( attr.startsWith("skills.") ) {

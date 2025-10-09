@@ -28,8 +28,8 @@
     </section>
     {{/if}}
     {{else if system.crew.max}}
-    <div class="drop-zone drop-zone-lg roboto-upper unassigned" data-area="crew">
-        {{ localize "DND5E.VEHICLE.Actions.Drop.Crew" }}
+    <div class="drop-area drop-area-lg roboto-upper unassigned" data-area="crew">
+        {{ localize "DND5E.VEHICLE.Action.Drop.Crew" }}
     </div>
     {{/if}}
 
@@ -47,8 +47,8 @@
         </ol>
     </section>
     {{else if system.passengers.max}}
-    <div class="drop-zone drop-zone-lg roboto-upper passengers" data-area="passengers">
-        {{ localize "DND5E.VEHICLE.Actions.Drop.Passengers" }}
+    <div class="drop-area drop-area-lg roboto-upper passengers" data-area="passengers">
+        {{ localize "DND5E.VEHICLE.Action.Drop.Passengers" }}
     </div>
     {{/if}}
 
@@ -64,13 +64,14 @@
     <div class="quantity">
         {{#if adjustable}}
         <a class="adjustment-button always-interactive" data-action="adjustCrew" data-delta="-1"
-           aria-label="{{ localize "DND5E.VEHICLE.Actions.Crew.Decrease" }}">
+           aria-label="{{ localize "DND5E.VEHICLE.Action.Crew.Decrease" }}">
             <i class="fa-solid fa-minus" inert></i>
         </a>
         <input type="text" class="always-interactive crew-quantity" value="{{ quantity }}" inputmode="numeric"
                pattern="^[+=\-]?\d*" min="0" aria-label="{{ localize "DND5E.Quantity" }}">
+        <input type="hidden" value="{{ diff }}">
         <a class="adjustment-button always-interactive" data-action="adjustCrew" data-delta="+1"
-           aria-label="{{ localize "DND5E.VEHICLE.Actions.Crew.Increase" }}">
+           aria-label="{{ localize "DND5E.VEHICLE.Action.Crew.Increase" }}">
             <i class="fa-solid fa-plus" inert></i>
         </a>
         {{else}}

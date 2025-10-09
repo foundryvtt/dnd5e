@@ -5,6 +5,18 @@
 .dnd5e2.sheet.actor.vehicle {
   --dnd5e-sheet-sidebar-width: 180px;
 
+  &:not(.minimized)::before {
+    content: var(--dnd5e-vehicle-header-content, none);
+    background: var(--dnd5e-vehicle-header-image) no-repeat bottom center / cover;
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 300px;
+    border-radius: 5px 5px 0 0;
+    opacity: .1;
+    mask-image: linear-gradient(to bottom, black, transparent);
+    z-index: -1;
+  }
+
   &:not(.minimized, .minimizing, .maximizing) {
     min-width: 700px;
     min-height: 800px;
@@ -74,10 +86,21 @@
       font-weight: bold;
     }
 
-    .portrait img {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: contain;
+    .portrait {
+      position: relative;
+
+      img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: contain;
+      }
+    }
+
+    .pips {
+      padding: 0;
+      justify-content: center;
+
+      .pip { box-shadow: none; }
     }
 
     .name {
@@ -160,6 +183,8 @@
         padding: 2px 4px;
         gap: 3px;
       }
+
+      .form-fields input { font-size: var(--font-size-11); }
     }
   }
 
@@ -210,7 +235,7 @@
   /* -------------------------------------------- */
 
   .sheet-stations {
-    padding: 8px 8px 0 4px;
+    padding: 8px 4px 0;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -320,7 +345,7 @@
         }
       }
 
-      .hp {
+      .bars {
         margin-top: 4px;
 
         &.rollable:hover {
@@ -328,6 +353,7 @@
           .values { text-shadow: 0 0 8px var(--color-shadow-primary); }
         }
 
+        label { flex: 0 0 27px; }
         input { text-align: center; }
 
         .note {
@@ -353,7 +379,7 @@
       }
     }
 
-    .drop-zones {
+    .drop-areas {
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -375,7 +401,7 @@
     grid-template: "a a" min-content "c c" min-content;
 
     &.has-assigned {
-      grid-template: "a b" min-content "c c" min-content;
+      grid-template: "a b" min-content "c c" min-content / 1fr 1fr;
 
       @container crew (width < 650px) {
         .crew .subtitle { display: none; }
@@ -384,7 +410,7 @@
 
     .unassigned { grid-area: a; }
     .passengers { grid-area: c; }
-    .drop-zone { background: none; }
+    .drop-area { background: none; }
 
     .assigned {
       grid-area: b;
@@ -494,6 +520,7 @@
 
   &.editable {
     .sheet-sidebar {
+      .pills-group { padding-left: 0; }
       .edit-inline + .edit-inline { margin: 0; }
     }
 

@@ -26,9 +26,10 @@ const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, S
  * @property {number} attributes.hp.dt                 Damage threshold.
  * @property {number} attributes.hp.mt                 Mishap threshold.
  * @property {object} attributes.actions               Information on how the vehicle performs actions.
+ * @property {number} attributes.actions.max           Maximum number of actions available with a full crew complement.
+ * @property {number} attributes.actions.spent         Spent actions.
  * @property {boolean} attributes.actions.stations     Does this vehicle rely on action stations that required
  *                                                     individual crewing rather than general crew thresholds?
- * @property {number} attributes.actions.value         Maximum number of actions available with full crewing.
  * @property {object} attributes.actions.thresholds    Crew thresholds needed to perform various actions.
  * @property {number} attributes.actions.thresholds.2  Minimum crew needed to take full action complement.
  * @property {number} attributes.actions.thresholds.1  Minimum crew needed to take reduced action complement.
@@ -99,22 +100,32 @@ export default class VehicleData extends CommonTemplate {
           })
         }, {label: "DND5E.HitPoints"}),
         actions: new SchemaField({
-          stations: new BooleanField({ required: true, label: "DND5E.VehicleActionStations" }),
-          value: new NumberField({
-            required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.VehicleActionMax"
+          max: new NumberField({
+            required: true, nullable: false, integer: true, initial: 3, min: 0, max: 3,
+            label: "DND5E.VEHICLE.FIELDS.attributes.actions.max.label"
+          }),
+          spent: new NumberField({
+            required: true, nullable: false, integer: true, initial: 0, min: 0, max: 3,
+            label: "DND5E.VEHICLE.FIELDS.attributes.actions.spent.label"
+          }),
+          stations: new BooleanField({
+            required: true, initial: true, label: "DND5E.VEHICLE.FIELDS.attributes.actions.stations.label"
           }),
           thresholds: new SchemaField({
             2: new NumberField({
-              required: true, integer: true, min: 0, label: "DND5E.VehicleActionThresholdsFull"
+              required: true, integer: true, min: 0,
+              label: "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.full.label"
             }),
             1: new NumberField({
-              required: true, integer: true, min: 0, label: "DND5E.VehicleActionThresholdsMid"
+              required: true, integer: true, min: 0,
+              label: "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.mid.label"
             }),
             0: new NumberField({
-              required: true, integer: true, min: 0, label: "DND5E.VehicleActionThresholdsMin"
+              required: true, integer: true, min: 0,
+              label: "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.min.label"
             })
-          }, {label: "DND5E.VehicleActionThresholds"})
-        }, {label: "DND5E.VehicleActions"}),
+          }, {label: "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.label"})
+        }, {label: "DND5E.VEHICLE.FIELDS.attributes.actions.label"}),
         capacity: new SchemaField({
           cargo: new SchemaField({
             value: new NumberField({ min: 0, label: "DND5E.VEHICLE.FIELDS.attributes.capacity.cargo.value.label" }),
@@ -141,7 +152,10 @@ export default class VehicleData extends CommonTemplate {
         price: new SchemaField({
           value: new NumberField({ initial: null, min: 0, label: "DND5E.Price" }),
           denomination: new StringField({ required: true, blank: false, initial: "gp", label: "DND5E.Currency" })
-        }, { label: "DND5E.Price" })
+        }, { label: "DND5E.Price" }),
+        quality: new SchemaField({
+          value: new NumberField({ required: true, nullable: false, integer: true, min: -10, max: 10, initial: 4 })
+        })
       }, { label: "DND5E.Attributes" }),
       crew: new SchemaField({
         max: new NumberField({ min: 0, integer: true }),
@@ -199,6 +213,22 @@ export default class VehicleData extends CommonTemplate {
     VehicleData.#migrateMovement(source);
     VehicleData.#migrateType(source);
     VehicleData.#migrateCargoCapacity(source);
+    VehicleData.#migrateActions(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate actions from value to max.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateActions(source) {
+    const actions = source.attributes?.actions;
+    if ( !actions || (actions.max !== undefined) || (actions.spent !== undefined) || (actions.value === undefined) ) {
+      return;
+    }
+    actions.max = actions.value;
+    delete actions.value;
   }
 
   /* -------------------------------------------- */
@@ -282,7 +312,7 @@ export default class VehicleData extends CommonTemplate {
     this.prepareAbilities({ rollData, originalSaves });
     AttributesFields.prepareArmorClass.call(this, rollData);
     if ( this.attributes.ac.value ) {
-      this.attributes.ac.motionless = this.attributes.ac.value - Math.max(0, this.abilities.dex.mod);
+      this.attributes.ac.motionless = this.attributes.ac.value - Math.max(0, this.abilities.dex?.mod ?? 0);
     }
     AttributesFields.prepareEncumbrance.call(this, rollData, { validateItem: item => !item.isMountable });
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp);
@@ -291,6 +321,18 @@ export default class VehicleData extends CommonTemplate {
     SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
     TraitsFields.prepareResistImmune.call(this);
     MovementField.prepareData.call(this.attributes.movement, this.schema.getField("attributes.movement"));
+
+    const { actions } = this.attributes;
+    const crew = this.crew.value.length;
+
+    if ( !actions.stations && actions.max ) {
+      for ( let i = actions; i--; actions.max-- ) {
+        const threshold = actions.thresholds[i];
+        if ( Number.isFinite(threshold) && (crew >= threshold) ) break;
+      }
+    }
+
+    actions.value = Math.clamp(actions.max - actions.spent, 0, actions.max);
   }
 
   /* -------------------------------------------- */
@@ -298,14 +340,14 @@ export default class VehicleData extends CommonTemplate {
   /* -------------------------------------------- */
 
   /**
-   * Adjust the crew by some delta.
-   * @param {string} area         The crew area.
-   * @param {string} uuid         The crew member's UUID.
-   * @param {string} delta        The delta.
-   * @returns {Promise<Actor5e>}  The actor with updates applied.
+   * Adjust the crew quantity to some target value.
+   * @param {string} area           The crew area.
+   * @param {string} uuid           The crew member's UUID.
+   * @param {string|number} target  The target value, which may be a delta.
+   * @returns {Promise<Actor5e>}    The actor with updates applied.
    */
-  async adjustCrew(area, uuid, delta) {
-    const updates = this.getCrewUpdates(area, uuid, delta);
+  async adjustCrew(area, uuid, target) {
+    const updates = this.getCrewUpdates(area, uuid, target);
     if ( foundry.utils.isEmpty(updates) ) return this.parent;
     return this.parent.update(updates);
   }
@@ -313,16 +355,16 @@ export default class VehicleData extends CommonTemplate {
   /* -------------------------------------------- */
 
   /**
-   * Compute the update required in order to adjust the crew by some delta.
+   * Compute the update required in order to adjust the crew to some target quantity.
    * @param {string} area          The crew area.
    * @param {string} uuid          The crew member's UUID.
-   * @param {string|number} delta  The delta.
+   * @param {string|number} target The target value, which may be a delta.
    * @returns {object}
    */
-  getCrewUpdates(area, uuid, delta) {
+  getCrewUpdates(area, uuid, target) {
     const roster = this[area].value;
     const quantity = roster.reduce((acc, u) => acc + (u === uuid), 0);
-    const target = Math.max(0, typeof delta === "number" ? quantity + delta : parseDelta(delta, quantity));
+    target = Math.max(0, typeof target === "number" ? target : parseDelta(target, quantity));
     const diff = target - quantity;
     const updates = {};
     if ( diff > 0 ) updates[`system.${area}.value`] = roster.concat(Array.fromRange(diff).map(() => uuid));
@@ -347,7 +389,7 @@ export default class VehicleData extends CommonTemplate {
    */
   async getEncumbrance() {
     const encumbrance = foundry.utils.deepClone(this.attributes.encumbrance);
-    if ( Number.isFinite(encumbrance.max) ) return encumbrance; // Encumbrance already calculated.
+    if ( Number.isFinite(encumbrance.max) || !this.draft.value.length ) return encumbrance; // Encumbrance already calculated.
     const { baseUnits, draftMultiplier } = CONFIG.DND5E.encumbrance;
     const unitSystem = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
     const units = baseUnits.default[unitSystem];
@@ -356,8 +398,20 @@ export default class VehicleData extends CommonTemplate {
       return n + (capacity * draftMultiplier);
     }, 0);
     const { weight } = this.traits;
-    encumbrance.max = Math.max(0, encumbrance.max - convertWeight(weight.value, weight.units, units));
+    if ( weight.value ) {
+      encumbrance.max = Math.max(0, encumbrance.max - convertWeight(weight.value, weight.units, units));
+    }
     return encumbrance;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async recoverCombatUses(periods, results) {
+    const { actions } = this.attributes;
+    if ( !actions.stations && actions.max && (periods.includes("encounter") || periods.includes("turnEnd")) ) {
+      results.actor["system.attributes.actions.spent"] = 0;
+    }
   }
 }
 

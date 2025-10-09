@@ -613,6 +613,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       else if ( attr.startsWith("spells.") ) group = game.i18n.localize("DND5E.CONSUMPTION.Type.SpellSlots.Label");
       else if ( attr.startsWith("attributes.movement.") ) group = game.i18n.localize("DND5E.Speed");
       else if ( attr.startsWith("attributes.senses.") ) group = game.i18n.localize("DND5E.Senses");
+      else if ( attr.startsWith("attributes.actions.") ) group = game.i18n.localize("DND5E.Vehicle");
       else if ( attr.startsWith("resources.") ) group = game.i18n.localize("DND5E.Resources");
       return { group, value: attr, label: getHumanReadableAttributeLabel(attr, { actor: this.actor }) || attr };
     });

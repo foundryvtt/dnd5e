@@ -3142,6 +3142,7 @@
 "DND5E.PropertyBase": "Base",
 "DND5E.PropertyTotal": "Total",
 "DND5E.Public": "Public",
+"DND5E.Quality": "Quality",
 "DND5E.Quantity": "Quantity",
 "DND5E.QuantityAbbr": "Qty",
 "DND5E.QuantityFormula": "Quantity Formula",
@@ -4881,7 +4882,7 @@
 "DND5E.Value": "Value",
 
 "DND5E.VEHICLE": {
-  "Actions": {
+  "Action": {
     "Create": {
       "Equipment": "Create Equipment",
       "Feature": "Create Feature",
@@ -4898,6 +4899,14 @@
     },
     "Uncrew": "Uncrew"
   },
+  "Actions": {
+    "Ordinal": {
+      "one": "{n}st Action",
+      "two": "{n}nd Action",
+      "few": "{n}rd Action",
+      "other": "{n}th Action"
+    }
+  },
   "Activation": {
     "Crew": {
       "label": "Crew Action"
@@ -4911,6 +4920,31 @@
   },
   "FIELDS": {
     "attributes": {
+      "actions": {
+        "label": "Actions",
+        "max": {
+          "hint": "Actions taken with a full crew complement",
+          "label": "Maximum Actions"
+        },
+        "spent": {
+          "label": "Spent Actions"
+        },
+        "stations": {
+          "label": "Action Stations"
+        },
+        "thresholds": {
+          "full": {
+            "label": "Full Crew Complement"
+          },
+          "mid": {
+            "label": "Partial Crew Complement"
+          },
+          "min": {
+            "label": "Minimum Crew Complement"
+          },
+          "label": "Thresholds"
+        }
+      },
       "capacity": {
         "cargo": {
           "value": {
@@ -4984,7 +5018,11 @@
       }
     }
   },
-  "ShowVehicleAbilities": "Show Abilities",
+  "Option": {
+    "Abilities": "Show Abilities",
+    "Initiative": "Show Initiative",
+    "Quality": "Show Quality"
+  },
   "Tabs": {
     "Cargo": "Cargo",
     "CrewPassengers": "Crew & Passengers"

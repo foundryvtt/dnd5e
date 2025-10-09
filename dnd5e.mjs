@@ -321,7 +321,7 @@ function _configureConsumableAttributes() {
     ...Object.keys(DND5E.currencies).map(denom => `currency.${denom}`),
     "details.xp.value",
     "resources.primary.value", "resources.secondary.value", "resources.tertiary.value",
-    "resources.legact.value", "resources.legres.value",
+    "resources.legact.value", "resources.legres.value", "attributes.actions.value",
     ..._trackedSpellAttributes(".value")
   ];
 }

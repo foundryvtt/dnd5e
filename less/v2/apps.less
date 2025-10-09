@@ -354,6 +354,12 @@
         &:hover { text-shadow: 0 0 4px var(--color-shadow-primary); }
       }
     }
+
+    .form-fields {
+      margin-top: 8px;
+      input, select { flex: 1; }
+      .separator { flex: none; }
+    }
   }
 
   .pill-lg {
@@ -709,8 +715,8 @@
     }
   }
 
-  .drop-zone {
-    &.drop-zone-lg {
+  .drop-area {
+    &.drop-area-lg {
       border: var(--pill-empty-border);
       color: var(--pill-empty-text-color);
       border-radius: 4px;

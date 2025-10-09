@@ -1,18 +1,57 @@
 <aside class="sheet-sidebar">
 
     {{!-- Portrait --}}
-    {{#if editable}}
-    <label class="slide-toggle header-interactable">
-        <input type="checkbox" name="flags.dnd5e.showVehicleAbilities" {{ checked showAbilities }}>
-        {{ localize "DND5E.VEHICLE.ShowVehicleAbilities" }}
-        <i class="fa-solid fa-toggle-{{ ifThen showAbilities "on" "off" }}" inert></i>
-    </label>
-    {{/if}}
-
     <div class="portrait">
+
         <img src="{{ document.img }}" alt="{{ document.name }}"
-             {{#if editable}}data-action="editImage" data-edit="img"{{/if}}>
+             {{#if editable}}data-action="editImage" data-edit="img"{{else}}data-action="showArtwork"{{/if}}>
+
+        {{!-- Initiative --}}
+        {{#if options.showInitiative}}
+        <div class="initiative-wrapper">
+
+            {{!-- Initiative Modifier --}}
+            <div class="initiative {{#unless editable}}{{ rollableClass }}{{/unless}}"
+                {{~#if editable}} data-tooltip aria-label="{{ localize 'DND5E.InitiativeConfig' }}"
+                {{~else}} aria-label="{{ localize 'DND5E.Initiative' }}" data-action="roll"
+                 data-type="initiative"{{/if}}>
+                {{#if editable}}
+                <button type="button" class="config-button unbutton" data-action="showConfiguration"
+                        data-config="initiative">
+                    <i class="fas fa-cog" inert></i>
+                </button>
+                {{else}}
+                <span>{{ dnd5e-numberFormat system.attributes.init.total signDisplay="always" }}</span>
+                {{/if}}
+            </div>
+
+        </div>
+        {{/if}}
+
+        {{!-- Quality --}}
+        {{#if options.showQuality}}
+        <div class="loyalty-badge badge" aria-label="{{ localize "DND5E.Quality" }}"
+             {{#unless editable}}data-tooltip{{/unless}}>
+            {{#if editable}}
+            <input type="text" class="uninput" name="system.attributes.quality.value" inputmode="numeric"
+                   pattern="^[+=\-]?\d*" placeholder="—" value="{{ source.attributes.quality.value }}"
+                   data-dtype="Number">
+            {{else}}
+            {{ system.attributes.quality.value }}
+            {{/if}}
+        </div>
+        {{/if}}
     </div>
+
+    {{!-- Pips --}}
+    {{#if actions}}
+    <div class="pips" data-prop="system.attributes.actions.spent">
+        {{#each actions}}
+        <button type="button" class="{{ classes }}" data-action="togglePip" data-n="{{ n }}" data-tooltip
+                aria-label="{{ label }}" aria-pressed="{{ filled }}"></button>
+        {{/each}}
+    </div>
+    {{/if}}
 
     {{!-- Name & Type --}}
     <div class="name">
@@ -31,6 +70,53 @@
         <em>{{ lookup CONFIG.vehicleTypes system.details.type }}</em>
         {{/if}}
     </div>
+
+    {{!-- Display Options --}}
+    {{#if editable}}
+    {{> ".option" name="flags.dnd5e.showVehicleAbilities" value=options.showAbilities
+        label="DND5E.VEHICLE.Option.Abilities" }}
+    {{> ".option" name="flags.dnd5e.showVehicleInitiative" value=options.showInitiative
+        label="DND5E.VEHICLE.Option.Initiative" }}
+    {{> ".option" name="flags.dnd5e.showVehicleQuality" value=options.showQuality
+        label="DND5E.VEHICLE.Option.Quality" }}
+    {{> ".option" name="system.attributes.actions.stations" value=source.attributes.actions.stations
+        label="DND5E.VEHICLE.FIELDS.attributes.actions.stations.label" }}
+    {{/if}}
+
+    {{!-- Actions --}}
+    {{#if (and editable (not system.attributes.actions.stations))}}
+
+    <div class="pills-group empty edit-inline">
+        <h3 class="icon">
+            <i class="fa-solid fa-bolt fa-fw" inert></i>
+            <span class="roboto-upper">{{ localize "DND5E.VEHICLE.FIELDS.attributes.actions.label" }}</span>
+            {{ formInput fields.attributes.fields.actions.fields.max value=source.attributes.actions.max
+                         placeholder="0" type="number" }}
+        </h3>
+    </div>
+
+    <div class="pills-group">
+        <h3 class="icon">
+            <i class="fa-solid fa-sliders fa-fw" inert></i>
+            <span class="roboto-upper">{{ localize "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.label" }}</span>
+        </h3>
+        <div class="form-fields">
+            <span class="separator">&lt;</span>
+            <input type="number" min="0" step="1" name="system.attributes.actions.thresholds.0"
+                   value="{{ source.attributes.actions.thresholds.[0] }}"
+                   aria-label="{{ localize "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.min.label" }}">
+            <span class="separator">&lt;</span>
+            <input type="number" min="0" step="1" name="system.attributes.actions.thresholds.1"
+                   value="{{ source.attributes.actions.thresholds.[1] }}"
+                   aria-label="{{ localize "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.mid.label" }}">
+            <span class="separator">&lt;</span>
+            <input type="number" min="0" step="1" name="system.attributes.actions.thresholds.2"
+                   value="{{ source.attributes.actions.thresholds.[2] }}"
+                   aria-label="{{ localize "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.full.label" }}">
+        </div>
+    </div>
+
+    {{/if}}
 
     {{!-- Hit Points --}}
     {{#if (or editable system.attributes.hp.max)}}
@@ -73,8 +159,8 @@
 
     {{!-- Speed --}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-shoe-prints"
-        label="DND5E.Speed" configAction="movement" configLabel="DND5E.MovementConfig"
-        value=system.attributes.movement.max }}
+        label="DND5E.Speed" configAction="movement" configLabel="DND5E.MovementConfig" unitsConfig=CONFIG.movementUnits
+        data=(dnd5e-object value=system.attributes.movement.max units=system.attributes.movement.units) }}
 
     {{!-- Cost --}}
     {{#if (or editable system.attributes.price.value)}}
@@ -176,3 +262,11 @@
         icon="fa-solid fa-heart-crack" label="DND5E.Vulnerabilities" }}
 
 </aside>
+
+{{#* inline ".option"}}
+<label class="slide-toggle header-interactable">
+    <input type="checkbox" name="{{ name }}" {{ checked value }}>
+    {{ localize label }}
+    <i class="fa-solid fa-toggle-{{ ifThen value "on" "off" }}" inert></i>
+</label>
+{{/inline}}

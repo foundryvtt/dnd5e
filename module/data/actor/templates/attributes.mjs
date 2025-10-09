@@ -405,7 +405,8 @@ export default class AttributesFields {
     // Total initiative includes all numeric terms
     const initBonus = simplifyBonus(init.bonus, rollData);
     const abilityBonus = simplifyBonus(ability.bonuses?.check, rollData);
-    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
+    const quality = this.attributes.quality?.value ?? 0;
+    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus + quality
       + (flags.initiativeAlert && isLegacy ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
     init.score = CONFIG.DND5E.skillPassive.base + init.total + (init.roll.mode * CONFIG.DND5E.skillPassive.modifier);

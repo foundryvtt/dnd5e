@@ -93,7 +93,7 @@
                  {{#unless editable}}data-tooltip="DND5E.Loyalty"{{/unless}}>
                 {{#if editable}}
                 <input type="text" class="uninput" name="system.attributes.loyalty.value" inputmode="numeric"
-                       pattern="[+=\-]?\d*" placeholder="—" value="{{ source.attributes.loyalty.value }}"
+                       pattern="^[+=\-]?\d*" placeholder="—" value="{{ source.attributes.loyalty.value }}"
                        data-dtype="Number">
                 {{else if system.attributes.loyalty.value includeZero=true}}
                 {{ system.attributes.loyalty.value }}
