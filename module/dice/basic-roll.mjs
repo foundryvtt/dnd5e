@@ -348,6 +348,40 @@ export default class BasicRoll extends Roll {
   }
 
   /* -------------------------------------------- */
+  /*  Inversion Methods                           */
+  /* -------------------------------------------- */
+
+  /**
+   * Invert the roll's formula, resulting in a formula whose total, if multiplied by -1, will be the same as
+   * the evaluated total of the original formula.
+   * @returns {BasicRoll}
+   */
+  invert() {
+    // Add or remove "0 +" from the start of formulas that don't being with a numeric term
+    if ( !(this.terms[0] instanceof foundry.dice.terms.NumericTerm) ) this.terms.unshift(
+      new foundry.dice.terms.NumericTerm({ number: 0 }),
+      new foundry.dice.terms.OperatorTerm({ operator: "+" })
+    );
+    else if ( (this.terms[0]?.number === 0) && (this.terms[1]?.operator === "-") ) this.terms.splice(0, 2);
+
+    // Starting numeric terms should be directly inverted
+    if ( this.terms[0] instanceof foundry.dice.terms.NumericTerm ) this.terms[0].number *= -1;
+
+    // Invert all addition & subtraction operators
+    this.terms = this.terms.map((term, index) => {
+      if ( term instanceof foundry.dice.terms.OperatorTerm ) {
+        if ( term.operator === "+" ) term.operator = "-";
+        else if ( term.operator === "-" ) term.operator = "+";
+      }
+      return term;
+    });
+
+    if ( this._evaluated ) this._total *= -1;
+    this.resetFormula();
+    return this;
+  }
+
+  /* -------------------------------------------- */
   /*  Maximize/Minimize Methods                   */
   /* -------------------------------------------- */
 

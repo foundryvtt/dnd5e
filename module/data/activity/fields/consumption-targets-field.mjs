@@ -585,10 +585,13 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     const costRoll = this.resolveCost({ config, evaluate: false });
     let cost = costRoll.isDeterministic
       ? String(costRoll.evaluateSync().total)
-      : simplifyRollFormula(costRoll.formula);
+      : simplifyRollFormula(costRoll.formula).trim();
     const simplifiedCost = simplifyBonus(cost);
     const isNegative = cost.startsWith("-");
-    if ( isNegative ) cost = cost.replace("-", "");
+    if ( isNegative ) {
+      if ( costRoll.isDeterministic ) cost = cost.replace("-", "");
+      else cost = simplifyRollFormula(costRoll.invert().formula);
+    }
     let pluralRule;
     if ( costRoll.isDeterministic ) pluralRule = new Intl.PluralRules(game.i18n.lang).select(Number(cost));
     else pluralRule = "other";
@@ -737,7 +740,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    */
   _resolveScaledRoll(formula, scaling, { delta, evaluate=true, rolls }={}) {
     const rollData = this.activity.getRollData();
-    const roll = new CONFIG.Dice.BasicRoll(formula, rollData, { delta });
+    const roll = new CONFIG.Dice.BasicRoll(`0 + ${formula}`, rollData, { delta });
 
     if ( scaling ) {
       // If a scaling formula is provided, multiply it and add to the end of the initial formula
@@ -750,7 +753,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       // Otherwise increase the number of dice and the numeric term for each scaling step
       else roll.terms = roll.terms.map(term => {
         if ( term instanceof foundry.dice.terms.DiceTerm ) return term.alter(undefined, scaling);
-        else if ( term instanceof foundry.dice.terms.NumericTerm ) term.number += term.number > 0 ? scaling : -scaling;
+        else if ( term instanceof foundry.dice.terms.NumericTerm ) {
+          term.number += term.number > 0 ? scaling : term.number < 0 ? -scaling : 0;
+        }
         return term;
       });
 
