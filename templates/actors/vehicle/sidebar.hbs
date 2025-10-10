@@ -1,0 +1,272 @@
+<aside class="sheet-sidebar">
+
+    {{!-- Portrait --}}
+    <div class="portrait">
+
+        <img src="{{ document.img }}" alt="{{ document.name }}"
+             {{#if editable}}data-action="editImage" data-edit="img"{{else}}data-action="showArtwork"{{/if}}>
+
+        {{!-- Initiative --}}
+        {{#if options.showInitiative}}
+        <div class="initiative-wrapper">
+
+            {{!-- Initiative Modifier --}}
+            <div class="initiative {{#unless editable}}{{ rollableClass }}{{/unless}}"
+                {{~#if editable}} data-tooltip aria-label="{{ localize 'DND5E.InitiativeConfig' }}"
+                {{~else}} aria-label="{{ localize 'DND5E.Initiative' }}" data-action="roll"
+                 data-type="initiative"{{/if}}>
+                {{#if editable}}
+                <button type="button" class="config-button unbutton" data-action="showConfiguration"
+                        data-config="initiative">
+                    <i class="fas fa-cog" inert></i>
+                </button>
+                {{else}}
+                <span>{{ dnd5e-numberFormat system.attributes.init.total signDisplay="always" }}</span>
+                {{/if}}
+            </div>
+
+        </div>
+        {{/if}}
+
+        {{!-- Quality --}}
+        {{#if options.showQuality}}
+        <div class="loyalty-badge badge" aria-label="{{ localize "DND5E.Quality" }}"
+             {{#unless editable}}data-tooltip{{/unless}}>
+            {{#if editable}}
+            <input type="text" class="uninput" name="system.attributes.quality.value" inputmode="numeric"
+                   pattern="^[+=\-]?\d*" placeholder="—" value="{{ source.attributes.quality.value }}"
+                   data-dtype="Number">
+            {{else}}
+            {{ system.attributes.quality.value }}
+            {{/if}}
+        </div>
+        {{/if}}
+    </div>
+
+    {{!-- Pips --}}
+    {{#if actions}}
+    <div class="pips" data-prop="system.attributes.actions.spent">
+        {{#each actions}}
+        <button type="button" class="{{ classes }}" data-action="togglePip" data-n="{{ n }}" data-tooltip
+                aria-label="{{ label }}" aria-pressed="{{ filled }}"></button>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    {{!-- Name & Type --}}
+    <div class="name">
+        {{#if editable}}
+        <input type="text" name="name" class="document-name uninput" value="{{ actor._source.name }}">
+        {{else}}
+        <div class="document-name">{{ document.name }}</div>
+        {{/if}}
+
+        <hr>
+
+        {{#if editable}}
+        {{ formInput fields.details.fields.type value=source.details.type choices=CONFIG.vehicleTypes
+                     classes="unselect" }}
+        {{else}}
+        <em>{{ lookup CONFIG.vehicleTypes system.details.type }}</em>
+        {{/if}}
+    </div>
+
+    {{!-- Display Options --}}
+    {{#if editable}}
+    {{> ".option" name="flags.dnd5e.showVehicleAbilities" value=options.showAbilities
+        label="DND5E.VEHICLE.Option.Abilities" }}
+    {{> ".option" name="flags.dnd5e.showVehicleInitiative" value=options.showInitiative
+        label="DND5E.VEHICLE.Option.Initiative" }}
+    {{> ".option" name="flags.dnd5e.showVehicleQuality" value=options.showQuality
+        label="DND5E.VEHICLE.Option.Quality" }}
+    {{> ".option" name="system.attributes.actions.stations" value=source.attributes.actions.stations
+        label="DND5E.VEHICLE.FIELDS.attributes.actions.stations.label" }}
+    {{/if}}
+
+    {{!-- Actions --}}
+    {{#if (and editable (not system.attributes.actions.stations))}}
+
+    <div class="pills-group empty edit-inline">
+        <h3 class="icon">
+            <i class="fa-solid fa-bolt fa-fw" inert></i>
+            <span class="roboto-upper">{{ localize "DND5E.VEHICLE.FIELDS.attributes.actions.label" }}</span>
+            {{ formInput fields.attributes.fields.actions.fields.max value=source.attributes.actions.max
+                         placeholder="0" type="number" }}
+        </h3>
+    </div>
+
+    <div class="pills-group">
+        <h3 class="icon">
+            <i class="fa-solid fa-sliders fa-fw" inert></i>
+            <span class="roboto-upper">{{ localize "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.label" }}</span>
+        </h3>
+        <div class="form-fields">
+            <span class="separator">&lt;</span>
+            <input type="number" min="0" step="1" name="system.attributes.actions.thresholds.0"
+                   value="{{ source.attributes.actions.thresholds.[0] }}"
+                   aria-label="{{ localize "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.min.label" }}">
+            <span class="separator">&lt;</span>
+            <input type="number" min="0" step="1" name="system.attributes.actions.thresholds.1"
+                   value="{{ source.attributes.actions.thresholds.[1] }}"
+                   aria-label="{{ localize "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.mid.label" }}">
+            <span class="separator">&lt;</span>
+            <input type="number" min="0" step="1" name="system.attributes.actions.thresholds.2"
+                   value="{{ source.attributes.actions.thresholds.[2] }}"
+                   aria-label="{{ localize "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.full.label" }}">
+        </div>
+    </div>
+
+    {{/if}}
+
+    {{!-- Hit Points --}}
+    {{#if (or editable system.attributes.hp.max)}}
+    <div class="pills-group {{#unless properties.hp.length}}empty{{/unless}}">
+        <h3 class="icon {{#unless editable}}{{ rollableClass }}{{/unless}}" data-action="toggleEditInline">
+            <i class="fa-solid fa-heart fa-fw" inert></i>
+            <span class="roboto-upper">{{ localize "DND5E.HitPoints" }}</span>
+            {{#if editable}}
+            <button type="button" class="config-button unbutton" data-action="showConfiguration"
+                    data-config="hitPoints" data-tooltip aria-label="{{ localize "DND5E.HitPointsConfig" }}">
+                <i class="fa-solid fa-cog" inert></i>
+            </button>
+            {{else}}
+            {{#with system.attributes.hp}}
+            <span class="counter display">{{ value }} &sol; {{ max }}</span>
+            <input type="text" class="value uninput" name="system.attributes.hp.value" data-dtype="Number"
+                   placeholder="0" pattern="^[+=\-]?\d*" value="{{ value }}" inputmode="numeric" hidden>
+            {{/with}}
+            {{/if}}
+        </h3>
+        {{#if properties.hp.length}}
+        <ul class="pills">
+            {{#each properties.hp}}
+            <li class="pill">
+                <span class="label">{{ localize label }}</span>
+                <span class="separator">&vert;</span>
+                <span class="value">{{ value }}</span>
+            </li>
+            {{/each}}
+        </ul>
+        {{/if}}
+    </div>
+    {{/if}}
+
+    {{!-- Armor Class --}}
+    {{#if (or editable system.attributes.ac.value)}}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-shield" label="DND5E.ArmorClass"
+        configAction="armorClass" configLabel="DND5E.ArmorConfig" data=system.attributes.ac }}
+    {{/if}}
+
+    {{!-- Speed --}}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-shoe-prints"
+        label="DND5E.Speed" configAction="movement" configLabel="DND5E.MovementConfig" unitsConfig=CONFIG.movementUnits
+        data=(dnd5e-object value=system.attributes.movement.max units=system.attributes.movement.units) }}
+
+    {{!-- Cost --}}
+    {{#if (or editable system.attributes.price.value)}}
+    <div class="pills-group empty edit-inline units">
+        <h3 class="icon cost">
+            <i class="fa-solid fa-coins fa-fw" inert></i>
+            <span class="roboto-upper">{{ localize "DND5E.Cost" }}</span>
+            {{#if editable}}
+            {{ formInput fields.attributes.fields.price.fields.value value=source.attributes.price.value
+                         placeholder="—" }}
+            {{ formInput fields.attributes.fields.price.fields.denomination value=source.attributes.price.denomination
+                         choices=CONFIG.currencies labelAttr="abbreviation" }}
+            {{else}}
+            <span class="counter">
+                <span class="value">{{ dnd5e-numberFormat system.attributes.price.value }}</span>
+                <i class="currency {{ system.attributes.price.denomination }}"
+                   aria-label="{{ lookup (lookup CONFIG.currencies system.attributes.price.denomination) "label" }}"></i>
+            </span>
+            {{/if}}
+        </h3>
+    </div>
+    {{/if}}
+
+    {{!-- Size --}}
+    <div class="pills-group empty edit-inline">
+        <h3 class="icon">
+            <i class="fa-solid fa-ruler-combined fa-fw" inert></i>
+            <span class="roboto-upper">{{ localize "DND5E.Size" }}</span>
+            {{#if editable}}
+            {{ formInput fields.traits.fields.size value=source.traits.size choices=CONFIG.actorSizes
+                         labelAttr="label" }}
+            {{else}}
+            <span class="text">{{ lookup (lookup CONFIG.actorSizes system.traits.size) "label" }}</span>
+            {{/if}}
+        </h3>
+    </div>
+
+    {{!-- Weight --}}
+    {{#if (or editable system.traits.weight.value) }}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-weight-hanging"
+        label="DND5E.Weight" fields=fields.traits.fields.weight.fields source=source.traits.weight
+        unitsConfig=CONFIG.weightUnits data=system.traits.weight }}
+    {{/if}}
+
+    {{!-- Keel --}}
+    {{#if (or editable system.traits.keel.value) }}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-ruler-horizontal"
+        label="DND5E.VEHICLE.FIELDS.traits.keel.value.label" fields=fields.traits.fields.keel.fields
+        source=source.traits.keel data=system.traits.keel unitsConfig=CONFIG.movementUnits }}
+    {{/if}}
+
+    {{!-- Beam --}}
+    {{#if (or editable system.traits.beam.value) }}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs"
+        icon="fa-solid fa-arrows-left-right fa-rotate-by"
+        label="DND5E.VEHICLE.FIELDS.traits.beam.value.label" fields=fields.traits.fields.beam.fields
+        source=source.traits.beam data=system.traits.beam unitsConfig=CONFIG.movementUnits }}
+    {{/if}}
+
+    {{!-- Cargo --}}
+    {{#if (or editable system.attributes.capacity.cargo.value)}}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-box"
+        label="DND5E.VEHICLE.FIELDS.attributes.capacity.cargo.value.label"
+        fields=fields.attributes.fields.capacity.fields.cargo.fields unitsConfig=CONFIG.weightUnits
+        source=source.attributes.capacity.cargo data=system.attributes.capacity.cargo }}
+    {{/if}}
+
+    {{!-- Crew --}}
+    {{#if (or editable system.crew.max)}}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-people-carry-box"
+        label="DND5E.VEHICLE.FIELDS.crew.max.label" field=fields.crew.fields.max
+        source=source.crew.max value=system.crew.max }}
+    {{/if}}
+
+    {{!-- Passengers --}}
+    {{#if (or editable system.passengers.max)}}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-people-group"
+        label="DND5E.VEHICLE.FIELDS.passengers.max.label" field=fields.passengers.fields.max
+        source=source.passengers.max value=system.passengers.max }}
+    {{/if}}
+
+    {{!-- Resistances --}}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.dr key="dr" color="green"
+        icon="fa-solid fa-shield-halved" label="DND5E.Resistances" }}
+
+    {{!-- Immunities --}}
+    {{#if editable}}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.di key="di" color="green"
+        icon="fa-solid fa-shield" label="DND5E.DamImm" }}
+    {{else}}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.di key="di" color="green"
+        icon="fa-solid fa-shield" label="DND5E.Immunities" }}
+    {{/if}}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.ci key="ci" color="green"
+        svg="rosa-shield" label="DND5E.ConImm" }}
+
+    {{!-- Vulnerabilities --}}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.dv key="dv" color="maroon"
+        icon="fa-solid fa-heart-crack" label="DND5E.Vulnerabilities" }}
+
+</aside>
+
+{{#* inline ".option"}}
+<label class="slide-toggle header-interactable">
+    <input type="checkbox" name="{{ name }}" {{ checked value }}>
+    {{ localize label }}
+    <i class="fa-solid fa-toggle-{{ ifThen value "on" "off" }}" inert></i>
+</label>
+{{/inline}}

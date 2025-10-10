@@ -6,6 +6,7 @@ import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
+import VehicleData from "./data/actor/vehicle.mjs";
 
 /**
  * @import { TravelPace5e } from "./data/shared/movement-field.mjs";
@@ -1014,7 +1015,7 @@ DND5E.abilityActivationTypes = {
   legendary: "DND5E.LegendaryAction.Label",
   mythic: "DND5E.MythicActionLabel",
   lair: "DND5E.LAIR.Action.Label",
-  crew: "DND5E.VehicleCrewAction"
+  crew: "DND5E.VEHICLE.Activation.Crew.label"
 };
 preLocalize("abilityActivationTypes");
 
@@ -1022,11 +1023,27 @@ preLocalize("abilityActivationTypes");
 
 /**
  * @typedef ActivityActivationTypeConfig
+ * @property {string} [counted]         Localized label for the countable activation type.
  * @property {string} label             Localized label for the activation type.
  * @property {string} [header]          Localized label for the activation type header.
  * @property {string} [group]           Localized label for the presentational group.
  * @property {boolean} [passive=false]  Classify this item as a passive feature on NPC sheets.
  * @property {boolean} [scalar=false]   Does this activation type have a numeric value attached?
+ * @property {ActivityActivationAutoConsumptionConfig} [consume]  Configuration for automatically consuming this
+ *                                                                resource.
+ */
+
+/**
+ * @typedef ActivityActivationAutoConsumptionConfig
+ * @property {ActivityActivationAutoConsumptionPredicate} [canConsume]  A predicate to check if this usage qualifies
+ *                                                                      for auto-consumption.
+ * @property {string} property  The path to the property that is consumed.
+ */
+
+/**
+ * @callback ActivityActivationAutoConsumptionPredicate
+ * @property {Activity} activity  The activity with the consumption.
+ * @returns {boolean|void}        Return explicit false to block auto-consumption.
  */
 
 /**
@@ -1093,6 +1110,10 @@ DND5E.activityActivationTypes = {
     passive: true
   },
   legendary: {
+    counted: "DND5E.ACTIVATION.Type.Legendary.Counted",
+    consume: {
+      property: "resources.legact"
+    },
     label: "DND5E.ACTIVATION.Type.Legendary.Label",
     header: "DND5E.ACTIVATION.Type.Legendary.Header",
     group: "DND5E.ACTIVATION.Category.Monster",
@@ -1110,6 +1131,11 @@ DND5E.activityActivationTypes = {
     group: "DND5E.ACTIVATION.Category.Monster"
   },
   crew: {
+    counted: "DND5E.ACTIVATION.Type.Crew.Counted",
+    consume: {
+      canConsume: VehicleData.canConsumeCrewAction,
+      property: "attributes.actions"
+    },
     label: "DND5E.ACTIVATION.Type.Crew.Label",
     header: "DND5E.ACTIVATION.Type.Crew.Header",
     group: "DND5E.ACTIVATION.Category.Vehicle",
@@ -1672,10 +1698,10 @@ preLocalize("equipmentTypes", { sort: true });
  * @enum {string}
  */
 DND5E.vehicleTypes = {
-  air: "DND5E.VehicleTypeAir",
-  land: "DND5E.VehicleTypeLand",
-  space: "DND5E.VehicleTypeSpace",
-  water: "DND5E.VehicleTypeWater"
+  air: "DND5E.VEHICLE.Type.Air.label",
+  land: "DND5E.VEHICLE.Type.Land.label",
+  space: "DND5E.VEHICLE.Type.Space.label",
+  water: "DND5E.VEHICLE.Type.Water.label"
 };
 preLocalize("vehicleTypes", { sort: true });
 
@@ -2790,6 +2816,8 @@ preLocalize("weightUnits", { keys: ["label", "abbreviation"] });
  *
  * @typedef {object} EncumbranceConfiguration
  * @property {Record<string, number>} currencyPerWeight  Pieces of currency that equal a base weight (lbs or kgs).
+ * @property {number} draftMultiplier                    The carry capacity multiplier to apply to draft animals pulling
+ *                                                       a vehicle.
  * @property {Record<string, object>} effects            Data used to create encumbrance-related Active Effects.
  * @property {object} threshold                          Amount to multiply strength to get given capacity threshold.
  * @property {Record<string, number>} threshold.encumbered
@@ -2809,6 +2837,7 @@ DND5E.encumbrance = {
     imperial: 50,
     metric: 110
   },
+  draftMultiplier: 5,
   effects: {
     encumbered: {
       name: "EFFECT.DND5E.StatusEncumbered",
@@ -2855,10 +2884,6 @@ DND5E.encumbrance = {
     default: {
       imperial: "lb",
       metric: "kg"
-    },
-    vehicle: {
-      imperial: "tn",
-      metric: "Mg"
     }
   }
 };

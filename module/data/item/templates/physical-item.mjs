@@ -8,9 +8,7 @@ const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.
  *
  * @property {string} container           Container within which this item is located.
  * @property {number} quantity            Number of items in a stack.
- * @property {object} weight
- * @property {number} weight.value        Item's weight.
- * @property {string} weight.units        Units used to measure the weight.
+ * @property {UnitValue5e} weight         The Item's weight.
  * @property {object} price
  * @property {number} price.value         Item's cost in the specified denomination.
  * @property {string} price.denomination  Currency denomination used to determine price.

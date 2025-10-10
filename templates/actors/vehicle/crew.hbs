@@ -1,0 +1,82 @@
+<section data-group="{{ tab.group }}" data-tab="{{ tab.id }}" class="tab {{ tab.cssClass }} flex1">
+
+    {{!-- Crew --}}
+    {{#if crew}}
+    <section class="crew-area unassigned" data-area="crew">
+        <header class="roboto-upper">
+            {{#if crew.assigned.value.length}}<strong>{{ localize "DND5E.VEHICLE.Crew.Unassigned" }}</strong>
+            {{else}}<strong>{{ localize "DND5E.VEHICLE.Crew.Label" }}</strong>{{/if}}
+            <span class="quantity">{{ crew.unassigned.total }}</span>
+        </header>
+        <ol class="unlist">
+            {{#each crew.unassigned.value}}
+            {{> ".crew" draggable=true adjustable=(not @root.locked) }}
+            {{/each}}
+        </ol>
+    </section>
+    {{#if crew.assigned.value.length}}
+    <section class="crew-area assigned" data-area="crew">
+        <header class="roboto-upper">
+            <strong>{{ localize "DND5E.VEHICLE.Crew.Assigned" }}</strong>
+            <span class="quantity">{{ crew.assigned.total }}</span>
+        </header>
+        <ol class="unlist">
+            {{#each crew.assigned.value}}
+            {{> ".crew" }}
+            {{/each}}
+        </ol>
+    </section>
+    {{/if}}
+    {{else if system.crew.max}}
+    <div class="drop-area drop-area-lg roboto-upper unassigned" data-area="crew">
+        {{ localize "DND5E.VEHICLE.Action.Drop.Crew" }}
+    </div>
+    {{/if}}
+
+    {{!-- Passengers --}}
+    {{#if passengers}}
+    <section class="crew-area passengers" data-area="passengers">
+        <header class="roboto-upper">
+            <strong>{{ localize "DND5E.VEHICLE.Crew.Passengers" }}</strong>
+            <span class="quantity">{{ passengers.total }}</span>
+        </header>
+        <ol class="unlist">
+            {{#each passengers.value}}
+            {{> ".crew" draggable=true adjustable=(not @root.locked) }}
+            {{/each}}
+        </ol>
+    </section>
+    {{else if system.passengers.max}}
+    <div class="drop-area drop-area-lg roboto-upper passengers" data-area="passengers">
+        {{ localize "DND5E.VEHICLE.Action.Drop.Passengers" }}
+    </div>
+    {{/if}}
+
+</section>
+
+{{#*inline ".crew"}}
+<li class="crew {{#if draggable}}draggable{{/if}}" data-uuid="{{ uuid }}" data-action="showDocument">
+    <img class="gold-icon" src="{{ actor.img }}" alt="{{ actor.name }}">
+    <div class="name-stacked rollable always-interactive">
+        <span class="title">{{ actor.name }}</span>
+        <span class="subtitle">{{ actor.subtitle }}</span>
+    </div>
+    <div class="quantity">
+        {{#if adjustable}}
+        <a class="adjustment-button always-interactive" data-action="adjustCrew" data-delta="-1"
+           aria-label="{{ localize "DND5E.VEHICLE.Action.Crew.Decrease" }}">
+            <i class="fa-solid fa-minus" inert></i>
+        </a>
+        <input type="text" class="always-interactive crew-quantity" value="{{ quantity }}" inputmode="numeric"
+               pattern="^[+=\-]?\d*" min="0" aria-label="{{ localize "DND5E.Quantity" }}">
+        <input type="hidden" value="{{ diff }}">
+        <a class="adjustment-button always-interactive" data-action="adjustCrew" data-delta="+1"
+           aria-label="{{ localize "DND5E.VEHICLE.Action.Crew.Increase" }}">
+            <i class="fa-solid fa-plus" inert></i>
+        </a>
+        {{else}}
+        <span class="value"><span class="sign">&times;</span>{{ quantity }}</span>
+        {{/if}}
+    </div>
+</li>
+{{/inline}}

@@ -31,7 +31,7 @@ export default class NPCActorSheet extends BaseActorSheet {
     },
     sidebarCollapser: {
       container: { classes: ["main-content"], id: "main" },
-      template: "systems/dnd5e/templates/actors/npc-sidebar-collapser.hbs"
+      template: "systems/dnd5e/templates/actors/parts/sidebar-collapser.hbs"
     },
     sidebar: {
       container: { classes: ["main-content"], id: "main" },
@@ -444,23 +444,6 @@ export default class NPCActorSheet extends BaseActorSheet {
 
   /* -------------------------------------------- */
 
-  /**
-   * Render a button for creating items in the inventory tab.
-   * @protected
-   */
-  _renderCreateInventory() {
-    const button = document.createElement("button");
-    Object.assign(button, {
-      type: "button", className: "create-child gold-button",
-      ariaLabel: game.i18n.format("SIDEBAR.Create", { type: game.i18n.localize("DOCUMENT.Item") })
-    });
-    button.dataset.action = "addDocument";
-    button.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-plus" inert></i>');
-    this.element.querySelector('[data-application-part="inventory"] .bottom').append(button);
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   async _renderFrame(options) {
     const html = await super._renderFrame(options);
@@ -498,7 +481,6 @@ export default class NPCActorSheet extends BaseActorSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    this._renderSource();
 
     if ( !this.actor.limited ) {
       this._renderCreateInventory();

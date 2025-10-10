@@ -479,6 +479,7 @@ export default class WeaponData extends ItemDataModel.mixin(
     this.prepareDescriptionData();
     this.prepareIdentifiable();
     this.preparePhysicalData();
+    this.prepareMountableData();
     this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
     this.type.identifier = CONFIG.DND5E.weaponIds[this.type.baseItem];
 

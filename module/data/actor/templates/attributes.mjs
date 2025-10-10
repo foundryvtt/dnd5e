@@ -34,7 +34,7 @@ export default class AttributesFields {
   static get armorClass() {
     return {
       calc: new StringField({ initial: "default", label: "DND5E.ArmorClassCalculation" }),
-      flat: new NumberField({ integer: true, min: 0, label: "DND5E.ArmorClassFlat" }),
+      flat: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ArmorClassFlat" }),
       formula: new FormulaField({ deterministic: true, label: "DND5E.ArmorClassFormula" })
     };
   }
@@ -275,6 +275,7 @@ export default class AttributesFields {
     const baseUnits = CONFIG.DND5E.encumbrance.baseUnits[this.parent.type]
       ?? CONFIG.DND5E.encumbrance.baseUnits.default;
     const unitSystem = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
+    const { attributes } = this;
 
     // Get the total weight from items
     let weight = this.parent.items
@@ -309,7 +310,10 @@ export default class AttributesFields {
       let multiplier = simplifyBonus(encumbrance.multipliers[threshold], rollData)
         * simplifyBonus(encumbrance.multipliers.overall, rollData);
       if ( threshold === "maximum" ) maximumMultiplier = multiplier;
-      if ( this.parent.type === "vehicle" ) base = this.attributes.capacity.cargo;
+      if ( this.parent.type === "vehicle" ) {
+        const { cargo } = attributes.capacity;
+        base = convertWeight(cargo.value || Infinity, cargo.units, baseUnits[unitSystem]);
+      }
       else multiplier *= (config.threshold[threshold]?.[unitSystem] ?? 1) * sizeMod;
       return (base * multiplier).toNearest(0.1) + bonus;
     };
@@ -401,7 +405,8 @@ export default class AttributesFields {
     // Total initiative includes all numeric terms
     const initBonus = simplifyBonus(init.bonus, rollData);
     const abilityBonus = simplifyBonus(ability.bonuses?.check, rollData);
-    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
+    const quality = this.attributes.quality?.value ?? 0;
+    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus + quality
       + (flags.initiativeAlert && isLegacy ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
     init.score = CONFIG.DND5E.skillPassive.base + init.total + (init.roll.mode * CONFIG.DND5E.skillPassive.modifier);
@@ -425,8 +430,10 @@ export default class AttributesFields {
     let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
-    for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      let speed = Math.max(0, this.attributes.movement[type] - reduction);
+    const field = this.schema.getField("attributes.movement");
+    for ( const [type, v] of Object.entries(this.attributes.movement) ) {
+      if ( !field.getField(type)?.options.speed ) return;
+      let speed = Math.max(0, v - reduction);
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
       else {
         if ( halfMovement ) speed *= 0.5;

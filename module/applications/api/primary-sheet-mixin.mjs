@@ -274,6 +274,7 @@ export default function PrimarySheetMixin(Base) {
     /** @inheritDoc */
     async _onRender(context, options) {
       await super._onRender(context, options);
+      this._renderSource();
 
       // Set toggle state and add status class to frame
       this._renderModeToggle();

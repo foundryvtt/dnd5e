@@ -1,0 +1,550 @@
+/* -------------------------------------------- */
+/*  Basic Structure                             */
+/* -------------------------------------------- */
+
+.dnd5e2.sheet.actor.vehicle {
+  --dnd5e-sheet-sidebar-width: 180px;
+
+  &:not(.minimized)::before {
+    content: var(--dnd5e-vehicle-header-content, none);
+    background: var(--dnd5e-vehicle-header-image) no-repeat bottom center / cover;
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 300px;
+    border-radius: 5px 5px 0 0;
+    opacity: .1;
+    mask-image: linear-gradient(to bottom, black, transparent);
+    z-index: -1;
+  }
+
+  &:not(.minimized, .minimizing, .maximizing) {
+    min-width: 700px;
+    min-height: 800px;
+    &.has-stations { min-width: 1000px; }
+  }
+
+  .window-content {
+    --sidebar-padding: 8px;
+    --sidebar-margin: 8px;
+    --sidebar-size: calc(var(--dnd5e-sheet-sidebar-width) + var(--sidebar-padding) * 2);
+    --stations-size: 332px;
+    display: grid;
+    grid-template:
+      "a c" auto
+      "a d" 1fr
+      / calc(var(--sidebar-size) + var(--sidebar-margin)) 1fr;
+    gap: 0;
+    transition: grid-template-columns 450ms ease;
+  }
+
+  &.has-stations .window-content {
+    grid-template:
+      "a b c" auto
+      "a b d" 1fr
+      / calc(var(--sidebar-size) + var(--sidebar-margin)) var(--stations-size) 1fr;
+  }
+
+  .sheet-sidebar { grid-area: a; }
+  .sheet-stations { grid-area: b; }
+  [data-application-part=tabs] { grid-area: c; }
+  .sheet-body { grid-area: d; }
+
+  &:not(.has-stations) .sheet-stations { display: none; }
+
+  /* -------------------------------------------- */
+  /*  Sidebar                                     */
+  /* -------------------------------------------- */
+
+  .sidebar-collapser { z-index: 1; }
+
+  &.sidebar-collapsed {
+    .window-content { grid-template-columns: var(--sidebar-margin) 1fr; }
+    &.has-stations .window-content { grid-template-columns: var(--sidebar-margin) var(--stations-size) 1fr; }
+    .sheet-sidebar { margin-left: calc(var(--sidebar-size) * -1); }
+    .sidebar-collapser { left: 0; }
+  }
+
+  .sheet-sidebar {
+    display: flex;
+    flex-direction: column;
+    padding-inline: var(--sidebar-padding);
+    margin-right: var(--sidebar-margin);
+    overflow: hidden auto;
+    gap: 8px;
+    transition: margin-left 450ms ease;
+
+    label.slide-toggle {
+      margin: 2px 0 0;
+      line-height: var(--form-field-height);
+    }
+
+    .document-name {
+      --input-background-color: var(--npc-header-input-background);
+      text-align: center;
+      font-size: var(--font-size-24);
+      font-family: var(--dnd5e-font-modesto);
+      font-weight: bold;
+    }
+
+    .portrait {
+      position: relative;
+
+      img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: contain;
+      }
+    }
+
+    .pips {
+      padding: 0;
+      justify-content: center;
+
+      .pip { box-shadow: none; }
+    }
+
+    .name {
+      margin-bottom: 2px;
+
+      em {
+        display: block;
+        text-align: center;
+        font-size: var(--font-size-13);
+        color: var(--color-text-secondary);
+      }
+
+      select {
+        padding: 4px;
+        background: var(--npc-header-input-background);
+        font-family: var(--dnd5e-font-roboto-condensed);
+      }
+    }
+
+    .pills-group {
+      padding-left: 8px;
+      margin-top: 6px;
+
+      h3 {
+        padding: 0;
+        margin: 0;
+        font-size: var(--font-size-12);
+
+        > i, > span { font-size: var(--font-size-11); }
+
+        .counter {
+          font-family: var(--dnd5e-font-roboto);
+          font-weight: normal;
+        }
+
+        input, select {
+          flex: 1;
+          line-height: unset;
+          font-size: inherit;
+          text-align: center;
+          padding: 0;
+          margin-left: auto;
+          font-family: var(--dnd5e-font-roboto);
+          font-weight: normal;
+
+          &.value { flex: 0 0 55px; }
+        }
+
+        .fa-arrows-left-right.fa-rotate-by { --fa-rotate-angle: 135deg; }
+      }
+
+      .pills { padding-top: 6px; }
+
+      &.edit-inline {
+
+        .value { font-family: var(--dnd5e-font-roboto); }
+        h3 > span:first-of-type { flex: 0 0 45px; }
+        input, select { font-size: var(--font-size-11); }
+
+        select {
+          text-align: left;
+          padding-inline: 4px;
+        }
+
+        &.units select {
+          flex: 0 0 34px;
+          width: 34px;
+          padding: 0;
+        }
+
+        .counter {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+      }
+
+      .pill {
+        font-size: var(--font-size-10);
+        padding: 2px 4px;
+        gap: 3px;
+      }
+
+      .form-fields input { font-size: var(--font-size-11); }
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Sheet Body                                  */
+  /* -------------------------------------------- */
+
+  .sheet-body {
+    display: flex;
+    flex-direction: column;
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .tab-body {
+        flex: 1;
+        position: relative;
+
+        .tab {
+          overflow: hidden auto;
+          scrollbar-gutter: stable;
+          inset: 0 2px 0 0;
+          position: absolute;
+          flex-direction: column;
+
+          &.active { display: flex; }
+        }
+      }
+    }
+  }
+
+  .main-content {
+
+    /* Inventory */
+    .inventory-element {
+      padding: 8px 4px 0;
+      flex: 1;
+
+      .encumbrance .breakpoint { display: none; }
+    }
+
+    /* Effects */
+    .effects-element { padding: 8px 4px 0; }
+
+  }
+
+  /* -------------------------------------------- */
+  /*  Sheet Tabs                                  */
+  /* -------------------------------------------- */
+
+  .sheet-tabs [data-tab=crew] { flex: none; }
+
+  /* -------------------------------------------- */
+  /*  Stations                                    */
+  /* -------------------------------------------- */
+
+  .sheet-stations {
+    padding: 8px 4px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden auto;
+    scrollbar-gutter: stable;
+
+    /* Abilities */
+    .abilities {
+      display: grid;
+      grid-template-columns: 16px 1fr 1fr 1fr 1fr 16px 16px 1fr 1fr 1fr 1fr 16px;
+      gap: 4px;
+
+      .header, .ability {
+        display: grid;
+        grid-column: span 6;
+        grid-template-columns: subgrid;
+      }
+
+      .header {
+        font-size: var(--font-size-10);
+        color: var(--color-text-secondary);
+        .roboto-upper { font-weight: normal; }
+      }
+
+      .ability { align-items: center; }
+
+      .name {
+        font-variant: small-caps;
+        text-transform: capitalize;
+      }
+
+      .score, .modifier, .saving-throw {
+        text-align: center;
+        line-height: 24px;
+        background: var(--npc-header-input-background);
+        font-size: var(--font-size-11);
+        border: 1px solid transparent;
+        border-radius: 3px;
+      }
+
+      .config {
+        text-align: center;
+
+        button {
+          font-size: var(--font-size-11);
+          color: var(--color-text-tertiary);
+        }
+      }
+
+      .score input {
+        background: transparent;
+        line-height: 24px;
+        text-align: center;
+        padding: 0;
+
+        &:hover, &:focus {
+          border: none;
+          box-shadow: none;
+        }
+      }
+    }
+
+    /* Features */
+    .items-section:has(.item-list:empty) { display: none; }
+
+    /* Stations */
+    .stations {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .station {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        border: var(--dnd5e-border-gold);
+        background: var(--dnd5e-background-card);
+        border-radius: 5px;
+        box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+        position: relative;
+        padding: 8px;
+
+        > * { position: relative; }
+        > .controls { position: absolute; }
+
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: url("ui/texture-gray2.webp") no-repeat bottom right;
+          transform: scaleX(-1);
+          opacity: .75;
+          mask-image: linear-gradient(190deg, transparent 15%, black);
+          mix-blend-mode: var(--dnd5e-vehicle-station-blend-mode);
+          border-radius: 4px;
+        }
+      }
+
+      .station-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .name-stacked {
+          flex: 1;
+
+          &.rollable:hover {
+            cursor: var(--cursor-pointer);
+            .title { text-shadow: 0 0 8px var(--color-shadow-primary); }
+          }
+        }
+      }
+
+      .bars {
+        margin-top: 4px;
+
+        &.rollable:hover {
+          cursor: var(--cursor-pointer);
+          .values { text-shadow: 0 0 8px var(--color-shadow-primary); }
+        }
+
+        label { flex: 0 0 27px; }
+        input { text-align: center; }
+
+        .note {
+          margin: 0;
+          font-size: var(--font-size-11);
+          font-style: italic;
+          color: var(--color-text-secondary);
+          text-align: center;
+        }
+      }
+
+      .enriched {
+        margin: 0;
+        font-size: var(--font-size-11);
+      }
+
+      .speed {
+        font-size: var(--font-size-11);
+      }
+
+      .crew {
+        .slot { --slot-size: 26px; }
+      }
+    }
+
+    .drop-areas {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Crew                                        */
+  /* -------------------------------------------- */
+
+  .sheet-body .main-content .tab-body .tab.sheet-crew {
+    left: 4px;
+    &.active { display: grid; }
+  }
+
+  .sheet-crew {
+    padding-top: 8px;
+    container: crew / inline-size;
+    grid-template: "a a" min-content "c c" min-content;
+
+    &.has-assigned {
+      grid-template: "a b" min-content "c c" min-content / 1fr 1fr;
+
+      @container crew (width < 650px) {
+        .crew .subtitle { display: none; }
+      }
+    }
+
+    .unassigned { grid-area: a; }
+    .passengers { grid-area: c; }
+    .drop-area { background: none; }
+
+    .assigned {
+      grid-area: b;
+      .crew img { filter: grayscale(1); }
+    }
+
+    .crew-area {
+      border: var(--dnd5e-border-gold);
+      border-radius: 4px;
+      padding: 8px;
+
+      header {
+        color: var(--dnd5e-color-gold);
+        text-align: center;
+        margin-bottom: 4px;
+
+        .quantity { float: right; }
+      }
+
+      ol {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .crew {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        padding-block: 4px;
+        border-bottom: 1px dotted var(--dnd5e-color-gold);
+
+        &:last-child {
+          padding-bottom: 0;
+          border: none;
+        }
+
+        .quantity {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          flex: 0 0 60px;
+          font-weight: bold;
+
+          .sign { color: var(--color-text-tertiary); }
+        }
+      }
+
+      .name-stacked {
+        flex: 1;
+
+        &.rollable:hover {
+          cursor: var(--cursor-pointer);
+          .title { text-shadow: 0 0 8px var(--color-shadow-primary); }
+        }
+
+        .subtitle { font-size: var(--font-size-12); }
+      }
+
+      .adjustment-button { color: var(--color-text-secondary); }
+
+      input {
+        --input-background-color: none;
+        width: 30px;
+        text-align: center;
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Description                                 */
+  /* -------------------------------------------- */
+
+  .sheet-body .main-content .tab-body .tab.sheet-description { left: 4px; }
+
+  .sheet-description {
+    padding-top: 8px;
+
+    .editor.prosemirror.sized {
+      .editor-container {
+        overflow: hidden;
+        scrollbar-gutter: auto;
+        margin: 0 0 0 8px;
+      }
+
+      .editor-content {
+        position: absolute;
+        padding-right: 4px;
+      }
+    }
+
+    .prosemirror menu { border-radius: 6px; }
+
+    &:not(.editing) .editor-content { padding-inline: 8px; }
+  }
+
+  /* -------------------------------------------- */
+  /*  Child Creation                              */
+  /* -------------------------------------------- */
+
+  &.tab-inventory .window-content > .create-child { display: none; }
+  &.tab-crew .create-child { display: none; }
+
+  /* -------------------------------------------- */
+  /*  Editable                                    */
+  /* -------------------------------------------- */
+
+  &.editable {
+    .sheet-sidebar {
+      .pills-group { padding-left: 0; }
+      .edit-inline + .edit-inline { margin: 0; }
+    }
+
+    .sheet-stations {
+      .abilities .score {
+        transition: all 250ms ease;
+        &:hover, &:focus-within {
+          border-color: var(--dnd5e-color-gold);
+          box-shadow: 0 0 6px var(--dnd5e-color-gold);
+        }
+      }
+    }
+  }
+}

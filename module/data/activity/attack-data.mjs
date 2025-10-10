@@ -245,14 +245,14 @@ export default class AttackActivityData extends BaseActivityData {
     const isUnarmed = this.attack.type.classification === "unarmed";
     if ( isUnarmed ) attackModeLabel = game.i18n.localize("DND5E.ATTACK.Classification.Unarmed");
     const isSpell = (actionType === "rsak") || (actionType === "msak");
-    if ( isLegacy || isSpell ) return [actionTypeLabel, attackModeLabel].filterJoin(" &bull; ");
+    if ( isLegacy || isSpell ) return [actionTypeLabel, attackModeLabel].filterJoin(" • ");
     actionTypeLabel = game.i18n.localize(`DND5E.ATTACK.Attack.${actionType}`);
-    if ( isUnarmed ) return [actionTypeLabel, attackModeLabel].filterJoin(" &bull; ");
+    if ( isUnarmed ) return [actionTypeLabel, attackModeLabel].filterJoin(" • ");
     const weaponType = CONFIG.DND5E.weaponTypeMap[this.item.system.type?.value];
     const weaponTypeLabel = weaponType
       ? game.i18n.localize(`DND5E.ATTACK.Weapon.${weaponType.capitalize()}`)
       : CONFIG.DND5E.weaponTypes[this.item.system.type?.value];
-    return [actionTypeLabel, weaponTypeLabel, attackModeLabel].filterJoin(" &bull; ");
+    return [actionTypeLabel, weaponTypeLabel, attackModeLabel].filterJoin(" • ");
   }
 
   /* -------------------------------------------- */
@@ -372,9 +372,9 @@ export default class AttackActivityData extends BaseActivityData {
       else {
         const { value, long, units } = this.item.system.range;
         if ( long && (value !== long) ) range = `${value}/${formatLength(long, units, { strict: false })}`;
-        else range = formatLength(value, units, { strict: false });
+        else if ( value ) range = formatLength(value, units, { strict: false });
       }
-      parts.push(game.i18n.format("DND5E.RANGE.Formatted.Range", { range }));
+      if ( range ) parts.push(game.i18n.format("DND5E.RANGE.Formatted.Range", { range }));
     }
 
     return game.i18n.getListFormatter({ type: "disjunction" }).format(parts.filter(_ => _));

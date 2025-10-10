@@ -76,6 +76,12 @@ export default class HitPointsConfig extends BaseConfigSheet {
     `;
     context.showCalculation = context.classes.length || context.fields.bonuses;
     context.showMaxInCalculation = context.showCalculation && (this.document.type === "npc");
+
+    // Additional fields
+    context.otherFields = ["dt", "mt"].flatMap(p => {
+      return p in context.fields ? { field: context.fields[p], value: context.source[p] } : [];
+    });
+
     return context;
   }
 

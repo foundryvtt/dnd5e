@@ -43,6 +43,38 @@
   }
 
   /* ---------------------------------- */
+  /*  Encumbrance                       */
+  /* ---------------------------------- */
+
+  .bottom.with-child {
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+    margin-top: auto;
+    display: flex;
+    gap: 6px;
+
+    .encumbrance {
+      border: var(--dnd5e-border-gold);
+      border-radius: 3px;
+      box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .meter {
+      border-radius: unset;
+      height: 100%;
+      border: none;
+    }
+
+    .create-child {
+      position: relative;
+      inset: unset;
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Spell Slots                       */
   /* ---------------------------------- */
 

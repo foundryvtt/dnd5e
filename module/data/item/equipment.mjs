@@ -275,6 +275,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
     this.prepareDescriptionData();
     this.prepareIdentifiable();
     this.preparePhysicalData();
+    this.prepareMountableData();
     if ( this.magicAvailable && this.armor.magicalBonus ) this.armor.value += this.armor.magicalBonus;
     this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
       ?? game.i18n.localize(CONFIG.Item.typeLabels.equipment);
@@ -337,11 +338,6 @@ export default class EquipmentData extends ItemDataModel.mixin(
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     await this.preCreateEquipped(data, options, user);
-
-    // Set type as "Vehicle Equipment" if created directly on a vehicle
-    if ( (this.parent.actor?.type === "vehicle") && !foundry.utils.hasProperty(data, "system.type.value") ) {
-      this.updateSource({ "type.value": "vehicle" });
-    }
   }
 
   /* -------------------------------------------- */

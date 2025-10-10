@@ -452,7 +452,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       ctx.isExpanded = this.expandedSections.get(item.id) === true;
       if ( ctx.isExpanded ) ctx.expanded = await item.getChatData({ secrets: this.actor.isOwner });
 
-      // Place the item into a specific categories
+      // Place the item into specific categories.
       const categories = this._assignItemCategories(item) ?? [];
       for ( const category of categories ) {
         context.itemCategories[category] ??= [];
@@ -848,6 +848,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     ctx.uses.hasUses = item.hasLimitedUses;
     ctx.uses.isOnCooldown = item.isOnCooldown;
     ctx.uses.prop = "system.uses.value";
+    ctx.uses.pct = ctx.uses.max ? Math.clamp((ctx.uses.value / ctx.uses.max) * 100, 0, 100) : 0;
   }
 
   /* -------------------------------------------- */
@@ -869,7 +870,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       });
     }
 
-    ctx.subtitle = [item.system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" &bull; ");
+    ctx.subtitle = [item.system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" • ");
   }
 
   /* -------------------------------------------- */
@@ -899,7 +900,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     else ctx.equip = { applicable: false };
 
     // Subtitles
-    ctx.subtitle = [item.system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" &bull; ");
+    ctx.subtitle = [item.system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" • ");
 
     // Weight
     ctx.totalWeight = item.system.totalWeight?.toNearest(0.1);
@@ -962,7 +963,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     ctx.subtitle = [
       linked ? linked.name : this.actor.classes[item.system.sourceClass]?.name,
       item.labels.components.vsm
-    ].filterJoin(" &bull; ");
+    ].filterJoin(" • ");
   }
 
   /* -------------------------------------------- */
@@ -996,6 +997,25 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       element.querySelector(".max").append(attunement.max);
     }
     this.element.querySelector('[data-application-part="inventory"] .middle').append(element);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Render a button for creating items in the inventory tab.
+   * @protected
+   */
+  _renderCreateInventory() {
+    const button = document.createElement("button");
+    Object.assign(button, {
+      type: "button", className: "create-child gold-button",
+      ariaLabel: game.i18n.format("SIDEBAR.Create", { type: game.i18n.localize("DOCUMENT.Item") })
+    });
+    button.dataset.action = "addDocument";
+    button.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-plus" inert></i>');
+    const bottom = this.element.querySelector('[data-application-part="inventory"] .bottom');
+    bottom.classList.add("with-child");
+    bottom.append(button);
   }
 
   /* -------------------------------------------- */
@@ -1125,7 +1145,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       }
 
       // Handle delta inputs
-      this.element.querySelectorAll('input[type="text"][data-dtype="Number"]')
+      this.element.querySelectorAll('input[type="text"]:is([data-dtype="Number"], [inputmode="numeric"])')
         .forEach(i => i.addEventListener("change", this._onChangeInputDelta.bind(this)));
 
       // Meter editing
@@ -1694,7 +1714,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( li.dataset.effectId ) return this._onDragEffect(event);
     if ( li.matches("[data-item-id] > .item-row") ) return this._onDragItem(event);
 
-    super._onDragStart(event);
+    return super._onDragStart(event);
   }
 
   /* -------------------------------------------- */

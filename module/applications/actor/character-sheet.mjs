@@ -338,7 +338,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
     for ( let ability of Object.values(this._prepareAbilities(context)) ) {
       ability = context.saves[ability.key] = { ...ability };
       ability.class = this.constructor.PROFICIENCY_CLASSES[context.editable ? ability.baseProf : ability.proficient];
-      ability.hover = CONFIG.DND5E.proficiencyLevels[ability.proficient];
     }
     if ( this.actor.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) || context.editable ) {
       context.saves.concentration = {
@@ -854,7 +853,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
   async _prepareItemFeature(item, ctx) {
     if ( item.type === "facility" ) return this._prepareItemFacility(item, ctx);
 
-    super._prepareItemFeature(item, ctx);
+    await super._prepareItemFeature(item, ctx);
 
     const [originId] = (item.getFlag("dnd5e", "advancementRoot") ?? item.getFlag("dnd5e", "advancementOrigin"))
       ?.split(".") ?? [];

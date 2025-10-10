@@ -1,12 +1,15 @@
+import { defaultUnits } from "../../../utils.mjs";
 import SystemDataModel from "../../abstract/system-data-model.mjs";
 
-const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, DocumentUUIDField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data model template for equipment that can be mounted on a vehicle.
  *
  * @property {number} cover               Amount of cover this item affords to its crew on a vehicle.
- * @property {boolean} crewed             Is this equipment currently crewed?
+ * @property {object} crew
+ * @property {number} crew.max            The number of crew this station can support.
+ * @property {string[]} crew.value        The crew assigned to this station.
  * @property {object} hp
  * @property {number} hp.value            Current hit point value.
  * @property {number} hp.max              Max hit points.
@@ -23,7 +26,10 @@ export default class MountableTemplate extends SystemDataModel {
   static defineSchema() {
     return {
       cover: new NumberField({ min: 0, max: 1 }),
-      crewed: new BooleanField(),
+      crew: new SchemaField({
+        max: new NumberField({ min: 0, integer: true }),
+        value: new ArrayField(new DocumentUUIDField({ type: "Actor" }))
+      }),
       hp: new SchemaField({
         conditions: new StringField(),
         dt: new NumberField({ integer: true, min: 0 }),
@@ -32,8 +38,19 @@ export default class MountableTemplate extends SystemDataModel {
       }, { required: false, initial: undefined }),
       speed: new SchemaField({
         conditions: new StringField(),
-        value: new NumberField({ min: 0 })
+        units: new StringField({ required: true, blank: false, initial: () => defaultUnits("length") }),
+        value: new NumberField({ min: 0, integer: true })
       }, { required: false, initial: undefined })
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare mountable item properties.
+   */
+  prepareMountableData() {
+    const { hp } = this;
+    if ( hp ) hp.pct = hp.max ? Math.clamp((hp.value / hp.max) * 100, 0, 100) : 0;
   }
 }
