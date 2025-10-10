@@ -6,6 +6,7 @@ import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
+import VehicleData from "./data/actor/vehicle.mjs";
 
 /**
  * @import { TravelPace5e } from "./data/shared/movement-field.mjs";
@@ -1022,11 +1023,27 @@ preLocalize("abilityActivationTypes");
 
 /**
  * @typedef ActivityActivationTypeConfig
+ * @property {string} [counted]         Localized label for the countable activation type.
  * @property {string} label             Localized label for the activation type.
  * @property {string} [header]          Localized label for the activation type header.
  * @property {string} [group]           Localized label for the presentational group.
  * @property {boolean} [passive=false]  Classify this item as a passive feature on NPC sheets.
  * @property {boolean} [scalar=false]   Does this activation type have a numeric value attached?
+ * @property {ActivityActivationAutoConsumptionConfig} [consume]  Configuration for automatically consuming this
+ *                                                                resource.
+ */
+
+/**
+ * @typedef ActivityActivationAutoConsumptionConfig
+ * @property {ActivityActivationAutoConsumptionPredicate} [canConsume]  A predicate to check if this usage qualifies
+ *                                                                      for auto-consumption.
+ * @property {string} property  The path to the property that is consumed.
+ */
+
+/**
+ * @callback ActivityActivationAutoConsumptionPredicate
+ * @property {Activity} activity  The activity with the consumption.
+ * @returns {boolean|void}        Return explicit false to block auto-consumption.
  */
 
 /**
@@ -1093,6 +1110,10 @@ DND5E.activityActivationTypes = {
     passive: true
   },
   legendary: {
+    counted: "DND5E.ACTIVATION.Type.Legendary.Counted",
+    consume: {
+      property: "resources.legact"
+    },
     label: "DND5E.ACTIVATION.Type.Legendary.Label",
     header: "DND5E.ACTIVATION.Type.Legendary.Header",
     group: "DND5E.ACTIVATION.Category.Monster",
@@ -1110,6 +1131,11 @@ DND5E.activityActivationTypes = {
     group: "DND5E.ACTIVATION.Category.Monster"
   },
   crew: {
+    counted: "DND5E.ACTIVATION.Type.Crew.Counted",
+    consume: {
+      canConsume: VehicleData.canConsumeCrewAction,
+      property: "attributes.actions"
+    },
     label: "DND5E.ACTIVATION.Type.Crew.Label",
     header: "DND5E.ACTIVATION.Type.Crew.Header",
     group: "DND5E.ACTIVATION.Category.Vehicle",

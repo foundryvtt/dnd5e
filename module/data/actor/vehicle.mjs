@@ -413,6 +413,20 @@ export default class VehicleData extends CommonTemplate {
       results.actor["system.attributes.actions.spent"] = 0;
     }
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Whether the given activity should prompt for auto-consumption of a crew action.
+   * @param {Activity} activity  The activity.
+   * @returns {boolean|void}
+   */
+  static canConsumeCrewAction(activity) {
+    const { actor } = activity;
+    return actor?.system.attributes?.actions?.stations === false;
+  }
 }
 
 /* -------------------------------------------- */

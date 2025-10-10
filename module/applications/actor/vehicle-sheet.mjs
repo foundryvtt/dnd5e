@@ -556,18 +556,6 @@ export default class VehicleActorSheet extends BaseActorSheet {
   }
 
   /* -------------------------------------------- */
-
-  /** @override */
-  _showConfiguration(event, target) {
-    if ( target.dataset.config === "movement" ) {
-      new MovementSensesConfig({
-        document: this.actor, type: "movement", withResolution: true
-      }).render({ force: true });
-      return false;
-    }
-  }
-
-  /* -------------------------------------------- */
   /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 

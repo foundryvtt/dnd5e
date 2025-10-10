@@ -485,7 +485,9 @@ export default function ActivityMixin(Base) {
 
       const ignoreLinkedConsumption = this.isSpell && !this.consumption.spellSlot;
       if ( config.consume !== false ) {
-        const hasActionConsumption = this.activation.type === "legendary";
+        const activationConfig = CONFIG.DND5E.activityActivationTypes[this.activation.type] ?? {};
+        const hasActionConsumption = activationConfig.consume
+          && (activationConfig.consume.canConsume?.(this) !== false);
         const hasResourceConsumption = this.consumption.targets.length > 0;
         const hasLinkedConsumption = (linked?.consumption.targets.length > 0) && !ignoreLinkedConsumption;
         const hasSpellSlotConsumption = this.requiresSpellSlot && this.consumption.spellSlot;
@@ -606,25 +608,29 @@ export default function ActivityMixin(Base) {
       if ( config.consume === false ) return updates;
       const errors = [];
 
-      // Handle action economy
-      if ( ((config.consume === true) || config.consume.action) && (this.activation.type === "legendary") ) {
-        const containsLegendaryConsumption = this.consumption.targets
-          .find(t => (t.type === "attribute") && (t.target === "resources.legact.value"));
+      // Handle auto consumption.
+      const activationConfig = CONFIG.DND5E.activityActivationTypes[this.activation.type];
+      if ( ((config.consume === true) || config.consume.action) && activationConfig?.consume ) {
+        const { property } = activationConfig.consume;
+        const valueProperty = `${property}.value`;
+        const containsConsumption = this.consumption.targets.find(t => {
+          return (t.type === "attribute") && (t.target === valueProperty);
+        });
         const count = this.activation.value ?? 1;
-        const legendary = this.actor.system.resources?.legact;
-        if ( legendary && !containsLegendaryConsumption ) {
+        const current = foundry.utils.getProperty(this.actor.system, property);
+        if ( current && !containsConsumption ) {
           let message;
-          if ( legendary.value === 0 ) message = "DND5E.ACTIVATION.Warning.NoActions";
-          else if ( count > legendary.value ) message = "DND5E.ACTIVATION.Warning.NotEnoughActions";
+          if ( current.value < 1 ) message = "DND5E.ACTIVATION.Warning.NoActions";
+          else if ( count > current.value ) message = "DND5E.ACTIVATION.Warning.NotEnoughActions";
           if ( message ) {
             const err = new ConsumptionError(game.i18n.format(message, {
-              type: game.i18n.localize("DND5E.LegendaryAction.Label"),
+              type: activationConfig.label,
               required: formatNumber(count),
-              available: formatNumber(legendary.value)
+              available: formatNumber(current.value)
             }));
             errors.push(err);
           } else {
-            updates.actor["system.resources.legact.spent"] = legendary.spent + count;
+            updates.actor[`system.${property}.spent`] = current.spent + count;
           }
         }
       }
