@@ -8,6 +8,7 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
  * @import { FavoriteData5e } from "../../data/actor/_types.mjs";
+ * @import { ActorDeltasData } from "../../data/chat-message/fields/_types.mjs";
  * @import {
  *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration
  * } from "../../dice/_types.mjs";
@@ -340,6 +341,8 @@ export default function ActivityMixin(Base) {
 
       // Trigger any primary action provided by this activity
       if ( usageConfig.subsequentActions !== false ) {
+        const consumed = this.createConsumedFlag(this.actor, updates);
+        if ( consumed ) item.updateSource({ "flags.dnd5e.consumed": consumed });
         activity._triggerSubsequentActions(usageConfig, results);
       }
 
@@ -1106,8 +1109,11 @@ export default function ActivityMixin(Base) {
      * @param {ChatMessage5e} message  Message associated with the activation.
      */
     async #onChatAction(event, target, message) {
+      const consumed = this.createConsumedFlag(message.getAssociatedActor(), message.getFlag("dnd5e", "use.consumed"));
       const scaling = message.getFlag("dnd5e", "scaling") ?? 0;
-      const item = scaling ? this.item.clone({ "flags.dnd5e.scaling": scaling }, { keepId: true }) : this.item;
+      const item = (consumed || scaling) ? this.item.clone({
+        "flags.dnd5e": { consumed, scaling }
+      }, { keepId: true }) : this.item;
       const activity = item.system.activities.get(this.id);
 
       const action = target.dataset.action;
@@ -1227,6 +1233,28 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Retrieve consumed flag for given update data.
+     * @param {Actor5e} actor
+     * @type {ActivityUsageUpdates|ActorDeltasData} updates
+     * @returns {{ hd: string }|void}
+     */
+    createConsumedFlag(actor, updates) {
+      if ( !actor || !updates ) return;
+      const hitDice = Object.entries(updates.item ?? [])
+        .reduce((obj, [id, changes]) => {
+          const hdChange = changes.find?.(c => (c.keyPath === "system.hd.spent") && (c.delta > 0))
+            ?? foundry.utils.getProperty(changes, "system.hd.spent");
+          const hdDenom = actor.items.get(changes._id ?? id)?.system.hd.denomination;
+          if ( hdChange && hdDenom ) obj[hdDenom] = (obj[hdDenom] ?? 0) + 1;
+          return obj;
+        }, {});
+      if ( foundry.utils.isEmpty(hitDice) ) return;
+      return { hd: Object.entries(hitDice).map(([d, n]) => `${n}${d}`).join(" + ") };
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Prepare activity favorite data.
      * @returns {Promise<FavoriteData5e>}
      */
@@ -1265,6 +1293,7 @@ export default function ActivityMixin(Base) {
     getRollData(options) {
       const rollData = this.item.getRollData(options);
       rollData.activity = { ...this };
+      rollData.consumed = this.item.flags.dnd5e?.consumed;
       rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
       return rollData;
     }
