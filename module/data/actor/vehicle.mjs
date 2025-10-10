@@ -1,6 +1,7 @@
 import { convertWeight, defaultUnits, parseDelta } from "../../utils.mjs";
 import MovementField from "../shared/movement-field.mjs";
 import SourceField from "../shared/source-field.mjs";
+import TravelField from "./fields/travel-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CommonTemplate from "./templates/common.mjs";
 import DetailsFields from "./templates/details.mjs";
@@ -39,6 +40,9 @@ const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, S
  * @property {object} attributes.price
  * @property {number|null} attributes.price.value      The vehicle's cost in the specified denomination.
  * @property {string} attributes.price.denomination    The currency denomination.
+ * @property {object} attributes.quality
+ * @property {number} attributes.quality.value         Quality score of the vehicle's crew.
+ * @property {TravelData} attributes.travel            Travel speeds.
  * @property {object} crew
  * @property {number} crew.max                         The maximum crew complement the vehicle supports.
  * @property {string[]} crew.value                     The crew roster.
@@ -135,28 +139,14 @@ export default class VehicleData extends CommonTemplate {
           }, { label: "DND5E.VEHICLE.FIELDS.attributes.capacity.cargo.value.label" }),
           creature: new StringField({ required: true, label: "DND5E.VehicleCreatureCapacity" }) // FIXME: Leave in the model until we decide how to migrate it.
         }, { label: "DND5E.VEHICLE.FIELDS.attributes.capacity.label" }),
-        movement: new SchemaField({
-          land: new NumberField({
-            nullable: false, min: 0, step: 0.1, initial: 0, speed: true, label: "DND5E.MovementLand"
-          }),
-          water: new NumberField({
-            nullable: false, min: 0, step: 0.1, initial: 0, speed: true, label: "DND5E.MovementWater"
-          }),
-          air: new NumberField({
-            nullable: false, min: 0, step: 0.1, initial: 0, speed: true, label: "DND5E.MovementAir"
-          }),
-          units: new StringField({
-            required: true, nullable: true, blank: false, label: "DND5E.MOVEMENT.FIELDS.units.label",
-            initial: defaultUnits("travel")
-          })
-        }),
         price: new SchemaField({
           value: new NumberField({ initial: null, min: 0, label: "DND5E.Price" }),
           denomination: new StringField({ required: true, blank: false, initial: "gp", label: "DND5E.Currency" })
         }, { label: "DND5E.Price" }),
         quality: new SchemaField({
           value: new NumberField({ required: true, nullable: false, integer: true, min: -10, max: 10, initial: 4 })
-        })
+        }),
+        travel: new TravelField({ pace: false, }, { initialUnits: defaultUnits("travel") })
       }, { label: "DND5E.Attributes" }),
       crew: new SchemaField({
         max: new NumberField({ min: 0, integer: true }),
@@ -247,20 +237,26 @@ export default class VehicleData extends CommonTemplate {
   /* -------------------------------------------- */
 
   /**
-   * Migrate movement speeds by taking the previous max speed and assigning it to a movement type based on the
-   * vehicle's type.
+   * Migrate movement speeds to travel pace by taking the previous max speed and assigning it to a movement type
+   * based on the vehicle's type.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateMovement(source) {
     const movement = source.attributes?.movement;
     const { vehicleType } = source;
-    if ( !vehicleType || !movement || !("walk" in movement) ) return;
+    const newUnits = { mi: "mph", km: "kph" }[movement?.units];
+    if ( !vehicleType || !movement || !newUnits || !("walk" in movement) || source.attributes?.travel ) return;
     let max = 0;
     for ( const p in CONFIG.DND5E.movementTypes ) {
       if ( movement[p] > max ) max = movement[p];
       delete movement[p];
     }
-    movement[vehicleType === "space" ? "air" : vehicleType] = max;
+    source.attributes ??= {};
+    source.attributes.travel = {
+      [vehicleType === "space" ? "air" : vehicleType]: max,
+      units: newUnits
+    };
+    movement.units = null;
   }
 
   /* -------------------------------------------- */
@@ -321,7 +317,7 @@ export default class VehicleData extends CommonTemplate {
     AttributesFields.prepareMovement.call(this);
     SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
     TraitsFields.prepareResistImmune.call(this);
-    MovementField.prepareData.call(this.attributes.movement, this.schema.getField("attributes.movement"));
+    TravelField.prepareData.call(this.attributes.travel, rollData, this.attributes.movement);
 
     const { actions } = this.attributes;
     const crew = this.crew.value.length;

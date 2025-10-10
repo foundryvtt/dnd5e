@@ -431,6 +431,7 @@ export default class AttributesFields {
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const field = this.schema.getField("attributes.movement");
+    this.attributes.movement.max = 0;
     for ( const [type, v] of Object.entries(this.attributes.movement) ) {
       if ( !field.getField(type)?.options.speed ) return;
       let speed = Math.max(0, v - reduction);
@@ -447,6 +448,7 @@ export default class AttributesFields {
         }
       }
       this.attributes.movement[type] = speed;
+      this.attributes.movement.max = Math.max(speed, this.attributes.movement.max);
     }
   }
 

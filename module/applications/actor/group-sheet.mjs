@@ -285,9 +285,9 @@ export default class GroupActorSheet extends MultiActorSheet {
     const increment = Number(target.dataset.increment);
     if ( Number.isNaN(increment) ) return;
     const paces = Object.keys(CONFIG.DND5E.travelPace);
-    const current = paces.indexOf(this.actor.system._source.attributes.movement.pace);
+    const current = paces.indexOf(this.actor.system._source.attributes.travel.pace);
     const next = (((current + increment) % paces.length) + paces.length) % paces.length;
-    this.actor.update({ "system.attributes.movement.pace": paces[next] });
+    this.actor.update({ "system.attributes.travel.pace": paces[next] });
   }
 
   /* -------------------------------------------- */
@@ -313,18 +313,6 @@ export default class GroupActorSheet extends MultiActorSheet {
     if ( type !== "skill" ) return;
     const { uuid } = target.closest("[data-uuid]")?.dataset ?? {};
     const actor = await fromUuid(uuid);
-    actor?.rollSkill({ event, skill: key, pace: this.actor.system.attributes.movement.pace });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _showConfiguration(event, target) {
-    if ( target.dataset.config === "movement" ) {
-      new MovementSensesConfig({
-        document: this.actor, type: "movement", withResolution: true
-      }).render({ force: true });
-      return false;
-    }
+    actor?.rollSkill({ event, skill: key, pace: this.actor.system.attributes.travel.pace });
   }
 }

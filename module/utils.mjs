@@ -128,6 +128,22 @@ export function formatNumberParts(value, options) {
 /* -------------------------------------------- */
 
 /**
+ * Form a number using the provided travel speed unit.
+ * @param {number} value                    Travel speed to display.
+ * @param {string} unit                     Unit as defined in `CONFIG.DND5E.travelUnits`.
+ * @param {object} [options={}]             Formatting options passed to `formatNumber`.
+ * @param {string} [options.period="hour"]  Time period formatting unit (e.g. hour or day).
+ * @returns {string}
+ */
+export function formatTravelSpeed(value, unit, { period="hour", ...options }={}) {
+  const unitConfig = CONFIG.DND5E.travelUnits[unit];
+  options.unit ??= `${unitConfig?.formattingUnit ?? unit}-per-${period}`;
+  return _formatSystemUnits(value, unit, unitConfig, options);
+}
+
+/* -------------------------------------------- */
+
+/**
  * A helper for using Intl.NumberFormat within handlebars for format a range.
  * @param {number} min      The lower end of the range.
  * @param {number} max      The upper end of the range.
@@ -665,6 +681,22 @@ export function convertTime(value, from, { combat=false, strict=true, to }={}) {
 
   const message = unit => `Time unit ${unit} not defined in CONFIG.DND5E.timeUnits`;
   return { value: _convertSystemUnits(value, from, to, CONFIG.DND5E.timeUnits, { message, strict }), unit: to };
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Convert the provided travel speed to another unit.
+ * @param {number} value                    The travel speed being converted.
+ * @param {string} from                     The initial unit.
+ * @param {object} options
+ * @param {boolean} [options.strict=false]  Throw an error if either unit isn't found.
+ * @param {string} options.to               The final unit.
+ * @returns {{ value: number, unit: string }}
+ */
+export function convertTravelSpeed(value, from, { strict=false, to }) {
+  const message = unit => `Travel speed unit ${unit} not defined in CONFIG.DND5E.travelUnits`;
+  return { value: _convertSystemUnits(value, from, to, CONFIG.DND5E.travelUnits, { message, strict }), unit: to };
 }
 
 /* -------------------------------------------- */

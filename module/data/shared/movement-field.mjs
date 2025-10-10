@@ -1,10 +1,4 @@
-import { convertLength } from "../../utils.mjs";
-
 const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields;
-
-/**
- * @typedef {"slow"|"normal"|"fast"} TravelPace5e
- */
 
 /**
  * @typedef {object} MovementData
@@ -54,11 +48,11 @@ export default class MovementField extends foundry.data.fields.SchemaField {
    * @returns {{ advantage: boolean, disadvantage: boolean }}
    */
   static getTravelPaceMode(pace, skill) {
-    const config = CONFIG.DND5E.skills[skill];
-    return {
-      advantage: config?.pace?.advantage?.has(pace) ?? false,
-      disadvantage: config?.pace?.disadvantage?.has(pace) ?? false
-    };
+    foundry.utils.logCompatibilityWarning(
+      "The `MovementField#getTravelPaceMode` has been moved to `TravelField#getTravelPaceMode.",
+      { since: "DnD5e 5.2", until: "DnD5e 5.4", once: true }
+    );
+    return dnd5e.dataModels.actor.TravelField.getTravelPaceMode(pace, skill);
   }
 
   /* -------------------------------------------- */
@@ -69,26 +63,9 @@ export default class MovementField extends foundry.data.fields.SchemaField {
    * @param {DataField} field  The movement field.
    */
   static prepareData(field) {
-    this.paces = {};
-    this.max = 0;
-    const { pace, units } = this;
-    const paceConfig = CONFIG.DND5E.travelPace[pace];
-    const unitConfig = CONFIG.DND5E.movementUnits[units];
-    if ( !unitConfig ) return;
-    Object.entries(this).forEach(([k, v]) => {
-      if ( !field.getField(k)?.options.speed ) return;
-      if ( v > this.max ) this.max = v;
-      let perDay = v;
-      if ( unitConfig.travelResolution === "round" ) {
-        const inFeet = convertLength(v, units, "ft");
-        perDay = Math.round(inFeet * .8);
-      }
-      if ( pace ) {
-        const isStandard = (unitConfig.type === "imperial") && (perDay === CONFIG.DND5E.travelPace.normal.standard);
-        if ( isStandard ) this.paces[k] = paceConfig?.standard ?? perDay;
-        else this.paces[k] = Math.floor(perDay * (paceConfig?.multiplier ?? 1));
-      }
-      else this.paces[k] = perDay;
-    });
+    foundry.utils.logCompatibilityWarning(
+      "The `MovementField#prepareData` is now handled through `TravelField#prepareData`.",
+      { since: "DnD5e 5.2", until: "DnD5e 5.4", once: true }
+    );
   }
 }
