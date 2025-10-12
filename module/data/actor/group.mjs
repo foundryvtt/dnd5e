@@ -184,7 +184,7 @@ export default class GroupData extends GroupTemplate {
   prepareDerivedData() {
     const rollData = this.parent.getRollData({ deterministic: true });
     this.parent.labels.pace = CONFIG.DND5E.travelPace[this.attributes.travel.pace]?.label;
-    TravelField.prepareData.call(this.attributes.travel, rollData);
+    TravelField.prepareData.call(this, rollData);
   }
 
   /* -------------------------------------------- */

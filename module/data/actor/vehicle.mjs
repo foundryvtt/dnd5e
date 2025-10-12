@@ -317,7 +317,7 @@ export default class VehicleData extends CommonTemplate {
     AttributesFields.prepareMovement.call(this);
     SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
     TraitsFields.prepareResistImmune.call(this);
-    TravelField.prepareData.call(this.attributes.travel, rollData, this.attributes.movement);
+    TravelField.prepareData.call(this, rollData);
 
     const { actions } = this.attributes;
     const crew = this.crew.value.length;

@@ -47,54 +47,43 @@ export default class TravelField extends foundry.data.fields.SchemaField {
   static #HOURS_PER_DAY = 8; // TODO: Allow this to be configured
 
   /* -------------------------------------------- */
-
-  /**
-   * Apply rules for travel pace to the given skill.
-   * @param {TravelPace5e} pace  The travel pace.
-   * @param {string} skill       The skill.
-   * @returns {{ advantage: boolean, disadvantage: boolean }}
-   */
-  static getTravelPaceMode(pace, skill) {
-    const config = CONFIG.DND5E.skills[skill];
-    return {
-      advantage: config?.pace?.advantage?.has(pace) ?? false,
-      disadvantage: config?.pace?.disadvantage?.has(pace) ?? false
-    };
-  }
-
+  /*  Data Preparation                            */
   /* -------------------------------------------- */
 
   /**
    * Prepare travel data.
-   * @this {TravelData}
-   * @param {object} rollData          Actor's roll data.
-   * @param {MovementData} [movement]  Actor's movement data if available.
+   * @this {ActorDataModel}
+   * @param {object} rollData  Actor's roll data.
    */
-  static prepareData(rollData, movement) {
-    this.paces = {};
-    this.max = 0;
-    const { pace, units } = this;
-    const noMovement = this.parent?.parent?.hasConditionEffect("noMovement");
-    const halfMovement = this.parent?.parent?.hasConditionEffect("halfMovement");
+  static prepareData(rollData) {
+    const { movement, travel } = this.attributes;
+    const { pace, units } = travel;
+    travel.paces = {};
+    travel.max = 0;
+
+    const noMovement = this.parent.hasConditionEffect("noMovement");
+    const halfMovement = this.parent.hasConditionEffect("halfMovement");
     const paceConfig = CONFIG.DND5E.travelPace[pace];
-    for ( const type of Object.keys(this.speeds) ) {
-      let speed = Math.max(0, simplifyBonus(this.speeds[type], rollData));
+    for ( const type of Object.keys(travel.speeds) ) {
+      let speed = Math.max(0, simplifyBonus(travel.speeds[type], rollData));
       if ( noMovement ) speed = 0;
       else if ( halfMovement ) speed *= 0.5;
-      this.speeds[type] = speed;
-      if ( speed > this.max ) this.max = speed;
-      if ( speed ) this.paces[type] = TravelField.convertSpeedToPace(speed, pace);
+      travel.speeds[type] = speed;
+      if ( speed > travel.max ) travel.max = speed;
+      if ( speed ) travel.paces[type] = TravelField.convertSpeedToPace(speed, pace);
     }
 
     if ( !movement ) return;
-    for ( const [type, { travel="land" }] of Object.entries(CONFIG.DND5E.movementTypes) ) {
-      if ( !movement[type] || this.speeds[travel] ) continue;
+    for ( const [type, { travel: travelType="land" }] of Object.entries(CONFIG.DND5E.movementTypes) ) {
+      if ( !movement[type] || travel.speeds[travelType] ) continue;
       const speed = TravelField.convertMovementToTravel(movement[type], movement.units, units);
       const travelPace = TravelField.convertSpeedToPace(speed, pace, movement.units);
-      this.paces[travel] = Math.max(travelPace, this.paces[travel] ?? -Infinity);
+      travel.paces[travelType] = Math.max(travelPace, travel.paces[travelType] ?? -Infinity);
     }
   }
 
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
   /* -------------------------------------------- */
 
   /**
@@ -124,5 +113,21 @@ export default class TravelField extends foundry.data.fields.SchemaField {
       && (perDay === CONFIG.DND5E.travelPace.normal.standard)
       && CONFIG.DND5E.travelPace[pace]?.standard ) return CONFIG.DND5E.travelPace[pace].standard;
     return Math.floor(perDay * (CONFIG.DND5E.travelPace[pace]?.multiplier ?? 1));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Apply rules for travel pace to the given skill.
+   * @param {TravelPace5e} pace  The travel pace.
+   * @param {string} skill       The skill.
+   * @returns {{ advantage: boolean, disadvantage: boolean }}
+   */
+  static getTravelPaceMode(pace, skill) {
+    const config = CONFIG.DND5E.skills[skill];
+    return {
+      advantage: config?.pace?.advantage?.has(pace) ?? false,
+      disadvantage: config?.pace?.disadvantage?.has(pace) ?? false
+    };
   }
 }
