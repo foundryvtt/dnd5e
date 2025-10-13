@@ -1044,7 +1044,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - mgc
       proficient: 1
       unidentified:
         description: ''
@@ -1143,11 +1144,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.Ajyq6nGwF7FtLhDQ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '13.350'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.2.0
       createdTime: null
-      modifiedTime: 1745445039573
+      modifiedTime: 1760378778197
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!m4H3hjamBNMH09S9.qADu4OS68yINJCnZ'
