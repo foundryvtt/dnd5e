@@ -7,16 +7,18 @@ import { rollItem } from "./documents/macro.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
 
+const VALID_CHAT_COMMANDS = ["attack", "check", "concentration", "damage", "heal", "healing", "save", "skill", "tool"];
+const VALID_COMMANDS = [...VALID_CHAT_COMMANDS, "award", "item"];
+const makeCommandPattern = commands => `/(?<type>${commands.join("|")})(?<config> .*?)?`;
+const CHAT_REGEX = new RegExp(`^${makeCommandPattern(VALID_CHAT_COMMANDS)}$`, "i");
+
 /**
  * Set up custom text enrichers.
  */
 export function registerCustomEnrichers() {
-  const stringNames = [
-    "attack", "award", "check", "concentration", "damage", "heal", "healing", "item", "save", "skill", "tool"
-  ];
   CONFIG.TextEditor.enrichers.push({
     id: "dnd5e-enricher",
-    pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> .*?)?]](?!])(?:{(?<label>[^}]+)})?`, "gi"),
+    pattern: new RegExp(`\\[\\[${makeCommandPattern(VALID_COMMANDS)}]](?!])(?:{(?<label>[^}]+)})?`, "gi"),
     enricher: enrichString,
     onRender: onRenderEnricher
   },
@@ -31,6 +33,31 @@ export function registerCustomEnrichers() {
     enricher: enrichString,
     onRender: onRenderEnricher
   });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Use the `chatMessage` hook to determine if an enricher command was typed.
+ * @param {string} message  Text of the message being posted.
+ * @returns {false|void}    Returns `false` to prevent the message from continuing to parse.
+ */
+export function chatMessage(message) {
+  const match = message.match(CHAT_REGEX);
+  if ( !match ) return;
+  let { type, config } = match.groups;
+  config = parseConfig(config, { multiple: ["damage", "heal", "healing"].includes(type) });
+  switch (type) {
+    case "attack": handleAttackCommand(config); break;
+    case "heal":
+    case "healing": config._isHealing = true;
+    case "damage": handleDamageCommand(config); break;
+    case "check":
+    case "skill":
+    case "tool": handleCheckCommand(config); break;
+    case "save": handleSaveCommand(config); break;
+  }
+  return false;
 }
 
 /* -------------------------------------------- */
@@ -164,17 +191,7 @@ async function enrichAttack(config, label, options) {
     return null;
   }
 
-  const formulaParts = [];
-  if ( config.formula ) formulaParts.push(config.formula);
-  for ( const value of config.values ) {
-    if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
-    else if ( value === "extended" ) config.format = "extended";
-    else formulaParts.push(value);
-  }
-  config.formula = Roll.defaultImplementation.replaceFormulaData(
-    formulaParts.join(" "),
-    options.rollData ?? options.relativeTo?.getRollData?.() ?? {}
-  );
+  config = parseAttackConfig(config, options);
 
   const activity = config.activity ? options.relativeTo?.system?.activities?.get(config.activity)
     : !config.formula ? options.relativeTo?.system?.activities?.getByType("attack")[0] : null;
@@ -231,6 +248,40 @@ async function enrichAttack(config, label, options) {
   }
 
   return span;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Handle a attack command in chat.
+ * @param {object} config  Configuration data.
+ */
+function handleAttackCommand(config) {
+  rollAttack(parseAttackConfig(config));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Parse the raw configuration data for a attack enricher.
+ * @param {object} config                   Configuration data.
+ * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
+ * @returns {object}
+ */
+function parseAttackConfig(config, options={}) {
+  const formulaParts = [];
+  if ( config.formula ) formulaParts.push(config.formula);
+  for ( const value of config.values ) {
+    if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
+    else if ( value === "extended" ) config.format = "extended";
+    else formulaParts.push(value);
+  }
+  config.formula = Roll.defaultImplementation.replaceFormulaData(
+    formulaParts.join(" "),
+    options.rollData ?? options.relativeTo?.getRollData?.() ?? {}
+  );
+
+  return config;
 }
 
 /* -------------------------------------------- */
@@ -449,17 +500,7 @@ async function enrichAward(config, label, options) {
  * ```
  */
 async function enrichCheck(config, label, options) {
-  config.skill = config.skill?.replaceAll("/", "|").split("|") ?? [];
-  config.tool = config.tool?.replaceAll("/", "|").split("|") ?? [];
-  for ( let value of config.values ) {
-    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
-    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = slug;
-    else if ( slug in CONFIG.DND5E.enrichmentLookup.skills ) config.skill.push(slug);
-    else if ( slug in CONFIG.DND5E.enrichmentLookup.tools ) config.tool.push(slug);
-    else if ( Number.isNumeric(value) ) config.dc = Number(value);
-    else config[value] = true;
-  }
-  delete config.values;
+  config = parseCheckConfig(config, options);
 
   const groups = new Map();
   let invalid = false;
@@ -599,13 +640,29 @@ async function enrichCheck(config, label, options) {
 /* -------------------------------------------- */
 
 /**
+ * Handle a check command in chat.
+ * @param {object} config  Configuration data.
+ */
+function handleCheckCommand(config) {
+  config = parseCheckConfig(config);
+  config.type = "check";
+  if ( config.request ) return handlePostRequest(config);
+  config.skill = config.skill[0];
+  config.tool = config.tool[0];
+  config.type = config.skill ? "skill" : config.tool ? "tool" : "check";
+  rollCheckSave(config);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Create the buttons for a check requested in chat.
  * @param {object} dataset
  * @returns {object[]}
  */
 function createCheckRequestButtons(dataset) {
-  const skills = dataset.skill?.split("|") ?? [];
-  const tools = dataset.tool?.split("|") ?? [];
+  const skills = foundry.utils.getType(dataset.skill) === "string" ? dataset.skill.split("|") : dataset.skill ?? [];
+  const tools = foundry.utils.getType(dataset.tool) === "string" ? dataset.tool.split("|") : dataset.tool ?? [];
   if ( (skills.length + tools.length) <= 1 ) return [createRequestButton(dataset)];
   const baseDataset = { ...dataset };
   delete baseDataset.skill;
@@ -618,6 +675,30 @@ function createCheckRequestButtons(dataset) {
       ability: CONFIG.DND5E.tools[tool]?.ability, ...baseDataset, format: "short", tool, type: "tool"
     }))
   ];
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Parse the raw configuration data for a check enricher.
+ * @param {object} config                   Configuration data.
+ * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
+ * @returns {object}
+ */
+function parseCheckConfig(config, options={}) {
+  config.skill = config.skill?.replaceAll("/", "|").split("|") ?? [];
+  config.tool = config.tool?.replaceAll("/", "|").split("|") ?? [];
+  for ( let value of config.values ) {
+    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
+    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = slug;
+    else if ( slug in CONFIG.DND5E.enrichmentLookup.skills ) config.skill.push(slug);
+    else if ( slug in CONFIG.DND5E.enrichmentLookup.tools ) config.tool.push(slug);
+    else if ( Number.isNumeric(value) ) config.dc = Number(value);
+    else config[value] = true;
+  }
+  delete config.values;
+
+  return config;
 }
 
 /* -------------------------------------------- */
@@ -683,16 +764,7 @@ function createCheckRequestButtons(dataset) {
  * ```
  */
 async function enrichSave(config, label, options) {
-  config.ability = config.ability?.replace("/", "|").split("|") ?? [];
-  for ( let value of config.values ) {
-    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
-    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability.push(slug);
-    else if ( Number.isNumeric(value) ) config.dc = Number(value);
-    else config[value] = true;
-  }
-  config.ability = config.ability
-    .filter(a => a in CONFIG.DND5E.enrichmentLookup.abilities)
-    .map(a => CONFIG.DND5E.enrichmentLookup.abilities[a].key ?? a);
+  config = parseSaveConfig(config, options);
 
   const activity = config.activity ? options.relativeTo?.system?.activities?.get(config.activity)
     : !config.ability.length ? options.relativeTo?.system?.activities?.getByType("save")[0] : null;
@@ -744,13 +816,51 @@ async function enrichSave(config, label, options) {
 /* -------------------------------------------- */
 
 /**
+ * Handle a save command in chat.
+ * @param {object} config  Configuration data.
+ */
+async function handleSaveCommand(config) {
+  config = parseSaveConfig(config);
+  config.type = "save";
+  if ( config.request ) return handlePostRequest(config);
+  config.ability = config.ability[0];
+  rollCheckSave(config);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Create the buttons for a save requested in chat.
  * @param {object} dataset
  * @returns {object[]}
  */
 function createSaveRequestButtons(dataset) {
-  return (dataset.ability?.split("|") ?? [])
-    .map(ability => createRequestButton({ ...dataset, format: "long", ability }));
+  const abilities = foundry.utils.getType(dataset.ability) === "string" ? dataset.ability.split("|")
+    : dataset.ability ?? [];
+  return abilities.map(ability => createRequestButton({ ...dataset, format: "long", ability }));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Parse the raw configuration data for a check enricher.
+ * @param {object} config                   Configuration data.
+ * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
+ * @returns {object}
+ */
+function parseSaveConfig(config, options={}) {
+  config.ability = config.ability?.replace("/", "|").split("|") ?? [];
+  for ( let value of config.values ) {
+    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
+    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability.push(slug);
+    else if ( Number.isNumeric(value) ) config.dc = Number(value);
+    else config[value] = true;
+  }
+  config.ability = config.ability
+    .filter(a => a in CONFIG.DND5E.enrichmentLookup.abilities)
+    .map(a => CONFIG.DND5E.enrichmentLookup.abilities[a].key ?? a);
+
+  return config;
 }
 
 /* -------------------------------------------- */
@@ -886,36 +996,7 @@ async function rollCheckSave(config, event) {
  * ````
  */
 async function enrichDamage(configs, label, options) {
-  const config = { type: "damage", formulas: [], damageTypes: [], rollType: configs._isHealing ? "healing" : "damage" };
-  for ( const c of configs ) {
-    const formulaParts = [];
-    if ( c.activity ) config.activity = c.activity;
-    if ( c.attackMode ) config.attackMode = c.attackMode;
-    if ( c.average ) config.average = c.average;
-    if ( c.format ) config.format = c.format;
-    if ( c.formula ) formulaParts.push(c.formula);
-    c.type = c.type?.replaceAll("/", "|").split("|") ?? [];
-    for ( const value of c.values ) {
-      if ( value in CONFIG.DND5E.damageTypes ) c.type.push(value);
-      else if ( value in CONFIG.DND5E.healingTypes ) c.type.push(value);
-      else if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
-      else if ( value === "average" ) config.average = true;
-      else if ( value === "extended" ) config.format = "extended";
-      else if ( value === "temp" ) c.type.push("temphp");
-      else formulaParts.push(value);
-    }
-    c.formula = Roll.defaultImplementation.replaceFormulaData(
-      formulaParts.join(" "),
-      options.rollData ?? options.relativeTo?.getRollData?.() ?? {}
-    );
-    if ( configs._isHealing && !c.type.length ) c.type.push("healing");
-    if ( c.formula ) {
-      config.formulas.push(c.formula);
-      config.damageTypes.push(c.type.join("|"));
-    }
-  }
-  config.damageTypes = config.damageTypes.map(t => t?.replace("/", "|"));
-  if ( config.format === "extended" ) config.average ??= true;
+  const config = parseDamageConfig(configs, options);
 
   if ( config.activity && config.formulas.length ) {
     console.warn(`Activity ID and formulas found while enriching ${config._input}, only one is supported.`);
@@ -1010,6 +1091,59 @@ async function enrichDamage(configs, label, options) {
 }
 
 /* -------------------------------------------- */
+/**
+ * Handle a damage command in chat.
+ * @param {object[]} configs  Configuration data.
+ */
+function handleDamageCommand(configs) {
+  rollDamage(parseDamageConfig(configs));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Parse the raw configuration data for a damage enricher.
+ * @param {object[]} configs                Configuration data.
+ * @param {EnrichmentOptions} [options={}]  Options provided to customize text enrichment.
+ * @returns {object}
+ */
+function parseDamageConfig(configs, options={}) {
+  const config = { type: "damage", formulas: [], damageTypes: [], rollType: configs._isHealing ? "healing" : "damage" };
+
+  for ( const c of configs ) {
+    const formulaParts = [];
+    if ( c.activity ) config.activity = c.activity;
+    if ( c.attackMode ) config.attackMode = c.attackMode;
+    if ( c.average ) config.average = c.average;
+    if ( c.format ) config.format = c.format;
+    if ( c.formula ) formulaParts.push(c.formula);
+    c.type = c.type?.replaceAll("/", "|").split("|") ?? [];
+    for ( const value of c.values ) {
+      if ( value in CONFIG.DND5E.damageTypes ) c.type.push(value);
+      else if ( value in CONFIG.DND5E.healingTypes ) c.type.push(value);
+      else if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
+      else if ( value === "average" ) config.average = true;
+      else if ( value === "extended" ) config.format = "extended";
+      else if ( value === "temp" ) c.type.push("temphp");
+      else formulaParts.push(value);
+    }
+    c.formula = Roll.defaultImplementation.replaceFormulaData(
+      formulaParts.join(" "),
+      options.rollData ?? options.relativeTo?.getRollData?.() ?? {}
+    );
+    if ( configs._isHealing && !c.type.length ) c.type.push("healing");
+    if ( c.formula ) {
+      config.formulas.push(c.formula);
+      config.damageTypes.push(c.type.join("|"));
+    }
+  }
+  config.damageTypes = config.damageTypes.map(t => t?.replace("/", "|"));
+  if ( config.format === "extended" ) config.average ??= true;
+
+  return config;
+}
+
+/* -------------------------------------------- */
 
 /**
  * Perform a damage roll.
@@ -1025,8 +1159,10 @@ async function rollDamage(config, event) {
     if ( activity ) return activity.rollDamage({ attackMode, event });
   }
 
-  formulas = formulas?.split("&") ?? [];
-  damageTypes = damageTypes?.split("&") ?? [];
+  if ( event ) {
+    formulas = formulas?.split("&") ?? [];
+    damageTypes = damageTypes?.split("&") ?? [];
+  }
 
   const rollConfig = {
     attackMode, event,
@@ -1627,12 +1763,14 @@ async function handleAward(event, target) {
 
 /**
  * Handle creating a roll request chat message.
- * @param {Event} event         Triggering click event.
- * @param {HTMLElement} target  Button that was clicked.
+ * @param {object|Event} dataset  Configuration dataset or triggering click event.
+ * @param {HTMLElement} [target]  Button that was clicked.
  */
-async function handlePostRequest(event, target) {
-  window.getSelection().empty();
-  const dataset = getRollActionDataset(target);
+async function handlePostRequest(dataset, target) {
+  if ( dataset instanceof Event ) {
+    window.getSelection().empty();
+    dataset = getRollActionDataset(target);
+  }
 
   let buttons;
   if ( dataset.type === "check" ) buttons = createCheckRequestButtons(dataset);
