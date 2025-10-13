@@ -5215,6 +5215,7 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
     if ( !_enrichmentLookup ) {
       _enrichmentLookup = {
         abilities: foundry.utils.deepClone(DND5E.abilities),
+        languages: _flattenConfig(DND5E.languages, { labelKey: "label", skipEntry: (k, d) => d.selectable === false }),
         skills: foundry.utils.deepClone(DND5E.skills),
         spellSchools: foundry.utils.deepClone(DND5E.spellSchools),
         tools: foundry.utils.deepClone(DND5E.tools)
@@ -5230,6 +5231,30 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
   },
   enumerable: true
 });
+
+/* -------------------------------------------- */
+
+/**
+ * Create a flattened version of a nested config (such as CONFIG.DND5E.languages) so all leaf entries are at
+ * a single level.
+ * @param {object} config
+ * @param {object} [options={}]
+ * @param {string} [options.labelKey]        If provided, simplify all included objects to just the label.
+ * @param {Function} [options.skipCategory]  Callback passed the key and data that should return a boolean to skip a
+ *                                           category but not its children when creating flattened object.
+ * @returns {object}
+ */
+function _flattenConfig(config, { labelKey, skipEntry }={}) {
+  const obj = {};
+  for ( const [key, data] of Object.entries(config) ) {
+    if ( !skipEntry?.(key, data) ) {
+      if ( labelKey && (foundry.utils.getType(data) === "Object") ) obj[key] = data[labelKey];
+      else obj[key] = data;
+    }
+    if ( data.children ) Object.assign(obj, _flattenConfig(data.children, { labelKey, skipEntry }));
+  }
+  return obj;
+}
 
 /* -------------------------------------------- */
 

@@ -81,8 +81,14 @@ export default class Tooltips5e {
 
     // Passive checks
     else if ( loading?.dataset.passive !== undefined ) {
-      const { skill, ability, dc } = game.tooltip.element?.dataset ?? {};
-      return this._onHoverPassive(skill, ability, dc);
+      const dataset = game.tooltip.element?.dataset ?? {};
+      switch ( dataset.type ) {
+        case "language":
+          return this._onHoverPassiveLanguage(dataset.language);
+        default:
+          const { skill, ability, dc } = dataset;
+          return this._onHoverPassiveCheck(skill, ability, dc);
+      }
     }
   }
 
@@ -119,6 +125,21 @@ export default class Tooltips5e {
   /* -------------------------------------------- */
 
   /**
+   * Handle hovering a passive language link to display results for primary party.
+   * @param {string} language  Language to display proficiency in.
+   * @protected
+   */
+  async _onHoverPassiveLanguage(language) {
+    const label = CONFIG.DND5E.enrichmentLookup.languages[language];
+    this._onHoverPassive({ label }, actor => {
+      if ( !actor.system.traits?.languages?.value ) return false;
+      return { status: actor.system.traits.languages.value.has(language) ? "success" : "failure" };
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle hovering a passive skill or ability check link to display results for primary party.
    * Either skill or ability (or both) must be provided.
    * @param {string} [skill]     Passive skill key. If undefined, this will be a passive ability check.
@@ -126,7 +147,7 @@ export default class Tooltips5e {
    * @param {number} [dc]        DC against which to compare party values.
    * @protected
    */
-  async _onHoverPassive(skill, ability, dc) {
+  async _onHoverPassiveCheck(skill, ability, dc) {
     const skillConfig = CONFIG.DND5E.skills[skill];
     const abilityConfig = CONFIG.DND5E.abilities[ability ?? skillConfig.ability];
 
@@ -139,6 +160,44 @@ export default class Tooltips5e {
       label = game.i18n.format("DND5E.SkillPassiveHint", { skill: abilityConfig.label });
     }
 
+    this._onHoverPassive({ label }, actor => {
+      const systemData = actor.system;
+      let passive;
+      if ( skill && (!ability || (ability === skillConfig.ability)) ) {
+        // Default passive skill check
+        passive = systemData.skills?.[skill]?.passive;
+      } else if ( skill ) {
+        // Passive ability check with custom ability
+        const customSkillData = actor._prepareSkill(skill, { ability });
+        passive = customSkillData.passive;
+      } else {
+        // Passive ability check
+        const abilityMod = systemData.abilities?.[ability]?.mod;
+        if ( abilityMod !== undefined ) passive = 10 + abilityMod;
+      }
+      if ( !passive ) return false;
+      return {
+        passive, status: dc !== undefined ? passive >= dc ? "success" : "failure" : ""
+      };
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @callback PassiveMemberCallback
+   * @param {Actor5e} actor                The actor instance.
+   * @returns {{ passive, status }|false}  Data used to render the member's entry or `false` to exclude actor.
+   */
+
+  /**
+   * Handle hovering a passive tooltip to display results for primary party.
+   * @param {object} context
+   * @param {string} context.label                  Header or fallback label if no party is defined.
+   * @param {PassiveMemberCallback} memberCallback  Method called for each member to get additional context information.
+   * @protected
+   */
+  async _onHoverPassive({ label }, memberCallback) {
     const party = game.actors.party;
     if ( !party ) {
       this.tooltip.innerHTML = label;
@@ -147,25 +206,9 @@ export default class Tooltips5e {
 
     const context = { label, party: [] };
     for ( const member of party.system.members ) {
-      const systemData = member.actor?.system;
-      let passive;
-      if ( skill && (!ability || (ability === skillConfig.ability)) ) {
-        // Default passive skill check
-        passive = systemData?.skills?.[skill]?.passive;
-      } else if ( skill ) {
-        // Passive ability check with custom ability
-        const customSkillData = member.actor?._prepareSkill(skill, { ability });
-        passive = customSkillData.passive;
-      } else {
-        // Passive ability check
-        const abilityMod = systemData?.abilities?.[ability]?.mod;
-        if ( abilityMod !== undefined ) passive = 10 + abilityMod;
-      }
-
-      if ( !passive ) continue;
-      const data = { name: member.actor.name, img: member.actor.img, passive };
-      if ( dc !== undefined ) data.status = passive >= dc ? "success" : "failure";
-      context.party.push(data);
+      if ( !member.actor ) continue;
+      const c = memberCallback(member.actor);
+      if ( c ) context.party.push({ name: member.actor.name, img: member.actor.img, ...c });
     }
 
     this.tooltip.classList.add("dnd5e-tooltip", "passive-tooltip", "dnd5e2", "themed", "theme-light");
