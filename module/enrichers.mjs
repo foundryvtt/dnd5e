@@ -234,6 +234,59 @@ async function enrichAttack(config, label, options) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Perform an attack roll.
+ * @param {object} config  Configuration data for the roll.
+ * @param {Event} [event]  The click event triggering the action.
+ * @returns {Promise|void}
+ */
+async function rollAttack(config, event) {
+  const { activityUuid, attackMode, formula, scaling } = config;
+
+  if ( activityUuid ) {
+    const activity = await _fetchActivity(activityUuid, Number(scaling ?? 0));
+    if ( activity ) return activity.rollAttack({ attackMode, event });
+  }
+
+  const targets = getTargetDescriptors();
+  const rollConfig = {
+    attackMode, event,
+    hookNames: ["attack", "d20Test"],
+    rolls: [{
+      parts: [formula.replace(/^\s*\+\s*/, "")],
+      options: {
+        target: targets.length === 1 ? targets[0].ac : undefined
+      }
+    }]
+  };
+
+  const dialogConfig = {
+    applicationClass: AttackRollConfigurationDialog
+  };
+
+  const messageConfig = {
+    data: {
+      flags: {
+        dnd5e: {
+          messageType: "roll",
+          roll: { type: "attack" }
+        }
+      },
+      flavor: game.i18n.localize("DND5E.AttackRoll"),
+      speaker: ChatMessage.implementation.getSpeaker()
+    }
+  };
+
+  const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
+  if ( rolls?.length ) {
+    Hooks.callAll("dnd5e.rollAttack", rolls, { subject: null, ammoUpdate: null });
+    Hooks.callAll("dnd5e.rollAttackV2", rolls, { subject: null, ammoUpdate: null });
+    Hooks.callAll("dnd5e.postRollAttack", rolls, { subject: null });
+  }
+}
+
+/* -------------------------------------------- */
 /*  Award Enricher                              */
 /* -------------------------------------------- */
 
@@ -701,6 +754,48 @@ function createSaveRequestButtons(dataset) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Perform a check or save.
+ * @param {object} config  Configuration data for the roll.
+ * @param {Event} [event]  The click event triggering the action.
+ * @returns {Promise<void>}
+ */
+async function rollCheckSave(config, event) {
+  const { type, ability, skill, tool, dc } = config;
+  const options = { event };
+  if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
+  if ( dc ) options.target = Number(dc);
+
+  const actors = getSceneTargets().map(t => t.actor);
+  if ( !actors.length && game.user.character ) actors.push(game.user.character);
+  if ( !actors.length ) {
+    ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoActor", { localize: true });
+    return;
+  }
+
+  for ( const actor of actors ) {
+    switch ( type ) {
+      case "check":
+        await actor.rollAbilityCheck(options);
+        break;
+      case "concentration":
+        await actor.rollConcentration(options);
+        break;
+      case "save":
+        await actor.rollSavingThrow(options);
+        break;
+      case "skill":
+        await actor.rollSkill({ skill, tool: config.usingTool, ...options });
+        break;
+      case "tool":
+        await actor.rollToolCheck({ tool, ...options });
+        break;
+    }
+  }
+}
+
+/* -------------------------------------------- */
 /*  Damage Enricher                             */
 /* -------------------------------------------- */
 
@@ -915,6 +1010,58 @@ async function enrichDamage(configs, label, options) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Perform a damage roll.
+ * @param {object} config  Configuration data for the roll.
+ * @param {Event} [event]  The click event triggering the action.
+ * @returns {Promise<void>}
+ */
+async function rollDamage(config, event) {
+  let { activityUuid, attackMode, formulas, damageTypes, rollType, scaling } = config;
+
+  if ( activityUuid ) {
+    const activity = await _fetchActivity(activityUuid, Number(scaling ?? 0));
+    if ( activity ) return activity.rollDamage({ attackMode, event });
+  }
+
+  formulas = formulas?.split("&") ?? [];
+  damageTypes = damageTypes?.split("&") ?? [];
+
+  const rollConfig = {
+    attackMode, event,
+    hookNames: ["damage"],
+    rolls: formulas.map((formula, idx) => {
+      const types = damageTypes[idx]?.split("|") ?? [];
+      return {
+        parts: [formula],
+        options: { type: types[0], types }
+      };
+    })
+  };
+
+  const messageConfig = {
+    create: true,
+    data: {
+      flags: {
+        dnd5e: {
+          messageType: "roll",
+          roll: { type: rollType },
+          targets: getTargetDescriptors()
+        }
+      },
+      flavor: game.i18n.localize(`DND5E.${rollType === "healing" ? "Healing" : "Damage"}Roll`),
+      speaker: ChatMessage.implementation.getSpeaker()
+    }
+  };
+
+  const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, {}, messageConfig);
+  if ( !rolls?.length ) return;
+  Hooks.callAll("dnd5e.rollDamage", rolls);
+  Hooks.callAll("dnd5e.rollDamageV2", rolls);
+}
+
+/* -------------------------------------------- */
 /*  Language Enricher                           */
 /* -------------------------------------------- */
 
@@ -1071,7 +1218,7 @@ async function enrichReference(config, label, options) {
 }
 
 /* -------------------------------------------- */
-/*  Helpers                                     */
+/*  Use Item Enricher                           */
 /* -------------------------------------------- */
 
 /**
@@ -1206,17 +1353,65 @@ async function enrichItem(config, label, options) {
 /* -------------------------------------------- */
 
 /**
- * Add a dataset object to the provided element.
- * @param {HTMLElement} element  Element to modify.
- * @param {object} dataset       Data properties to add.
- * @private
+ * Use an Item from an Item enricher.
+ * @param {object} [config={}]
+ * @param {string} [config.rollActivityUuid]  Lookup the Activity by UUID.
+ * @param {string} [config.rollActivityName]  Lookup the Activity by name.
+ * @param {string} [config.rollItemUuid]      Lookup the Item by UUID.
+ * @param {string} [config.rollItemName]      Lookup the Item by name.
+ * @param {string} [config.rollItemActor]     The UUID of a specific Actor that should use the Item.
+ * @param {Event} [event]                     The click event triggering the action.
+ * @returns {Promise}
  */
-function _addDataset(element, dataset) {
-  for ( const [key, value] of Object.entries(dataset) ) {
-    if ( !key.startsWith("_") && (key !== "values") && value ) element.dataset[key] = value;
+async function useItem({ rollActivityUuid, rollActivityName, rollItemUuid, rollItemName, rollItemActor }={}) {
+  // If UUID is provided, always roll that item directly
+  if ( rollActivityUuid ) return (await fromUuid(rollActivityUuid))?.use();
+  if ( rollItemUuid ) return (await fromUuid(rollItemUuid))?.use({ legacy: false });
+
+  if ( !rollItemName ) return;
+  const actor = rollItemActor ? await fromUuid(rollItemActor) : null;
+
+  // If no actor is specified or player isn't owner, fall back to the macro rolling logic
+  if ( !actor?.isOwner ) return rollItem(rollItemName, { activityName: rollActivityName });
+  const token = canvas.tokens.controlled[0];
+
+  // If a token is controlled, and it has an item with the correct name, activate it
+  let item = token?.actor.items.getName(rollItemName);
+
+  // Otherwise check the specified actor for the item
+  if ( !item ) {
+    item = actor.items.getName(rollItemName);
+
+    // Display a warning to indicate the item wasn't rolled from the controlled actor
+    if ( item && canvas.tokens.controlled.length ) ui.notifications.warn(
+      game.i18n.format("MACRO.5eMissingTargetWarn", {
+        actor: token.name, name: rollItemName, type: game.i18n.localize("DOCUMENT.Item")
+      })
+    );
   }
+
+  if ( item ) {
+    if ( rollActivityName ) {
+      const activity = item.system.activities?.getName(rollActivityName);
+      if ( activity ) return activity.use();
+
+      // If no activity could be found at all, display a warning
+      else ui.notifications.warn(game.i18n.format("EDITOR.DND5E.Inline.Warning.NoActivityOnItem", {
+        activity: rollActivityName, actor: actor.name, item: rollItemName
+      }));
+    }
+
+    else return item.use({ legacy: false });
+  }
+
+  // If no item could be found at all, display a warning
+  else ui.notifications.warn(game.i18n.format("EDITOR.DND5E.Inline.Warning.NoItemOnActor", {
+    actor: actor.name, item: rollItemName
+  }));
 }
 
+/* -------------------------------------------- */
+/*  Labels & Links                              */
 /* -------------------------------------------- */
 
 /**
@@ -1474,52 +1669,21 @@ function createRequestButton(dataset) {
 /* -------------------------------------------- */
 
 /**
- * Handle creating a roll request chat message.
+ * Handle performing a roll.
  * @param {Event} event         Triggering click event.
  * @param {HTMLElement} target  Button that was clicked.
  */
 async function handleRoll(event, target) {
   const dataset = getRollActionDataset(target);
-  const { type, ability, skill, tool, dc } = dataset;
-  const options = { event };
-  if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
-  if ( dc ) options.target = Number(dc);
-
   const link = target.closest("a") ?? target;
   link.disabled = true;
   window.getSelection().empty();
   try {
-    switch ( type ) {
-      case "attack": return await rollAttack(event);
-      case "damage": return await rollDamage(event);
-      case "item": return await useItem(dataset);
-    }
-
-    const actors = getSceneTargets().map(t => t.actor);
-    if ( !actors.length && game.user.character ) actors.push(game.user.character);
-    if ( !actors.length ) {
-      ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoActor", { localize: true });
-      return;
-    }
-
-    for ( const actor of actors ) {
-      switch ( type ) {
-        case "check":
-          await actor.rollAbilityCheck(options);
-          break;
-        case "concentration":
-          await actor.rollConcentration({ ...options, legacy: false });
-          break;
-        case "save":
-          await actor.rollSavingThrow(options);
-          break;
-        case "skill":
-          await actor.rollSkill({ skill, tool: dataset.usingTool, ...options });
-          break;
-        case "tool":
-          await actor.rollToolCheck({ tool, ...options });
-          break;
-      }
+    switch ( dataset.type ) {
+      case "attack": return await rollAttack(dataset, event);
+      case "damage": return await rollDamage(dataset, event);
+      case "item": return await useItem(dataset, event);
+      default: return await rollCheckSave(dataset, event);
     }
   } finally {
     link.disabled = false;
@@ -1527,108 +1691,19 @@ async function handleRoll(event, target) {
 }
 
 /* -------------------------------------------- */
-
-/**
- * Perform an attack roll.
- * @param {Event} event     The click event triggering the action.
- * @returns {Promise|void}
- */
-async function rollAttack(event) {
-  const target = event.target.closest(".roll-link-group");
-  const { activityUuid, attackMode, formula, scaling } = target.dataset;
-
-  if ( activityUuid ) {
-    const activity = await _fetchActivity(activityUuid, Number(scaling ?? 0));
-    if ( activity ) return activity.rollAttack({ attackMode, event });
-  }
-
-  const targets = getTargetDescriptors();
-  const rollConfig = {
-    attackMode, event,
-    hookNames: ["attack", "d20Test"],
-    rolls: [{
-      parts: [formula.replace(/^\s*\+\s*/, "")],
-      options: {
-        target: targets.length === 1 ? targets[0].ac : undefined
-      }
-    }]
-  };
-
-  const dialogConfig = {
-    applicationClass: AttackRollConfigurationDialog
-  };
-
-  const messageConfig = {
-    data: {
-      flags: {
-        dnd5e: {
-          messageType: "roll",
-          roll: { type: "attack" }
-        }
-      },
-      flavor: game.i18n.localize("DND5E.AttackRoll"),
-      speaker: ChatMessage.implementation.getSpeaker()
-    }
-  };
-
-  const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
-  if ( rolls?.length ) {
-    Hooks.callAll("dnd5e.rollAttack", rolls, { subject: null, ammoUpdate: null });
-    Hooks.callAll("dnd5e.rollAttackV2", rolls, { subject: null, ammoUpdate: null });
-    Hooks.callAll("dnd5e.postRollAttack", rolls, { subject: null });
-  }
-}
-
+/*  Helpers                                     */
 /* -------------------------------------------- */
 
 /**
- * Perform a damage roll.
- * @param {Event} event  The click event triggering the action.
- * @returns {Promise<void>}
+ * Add a dataset object to the provided element.
+ * @param {HTMLElement} element  Element to modify.
+ * @param {object} dataset       Data properties to add.
+ * @private
  */
-async function rollDamage(event) {
-  const target = event.target.closest(".roll-link-group");
-  let { activityUuid, attackMode, formulas, damageTypes, rollType, scaling } = target.dataset;
-
-  if ( activityUuid ) {
-    const activity = await _fetchActivity(activityUuid, Number(scaling ?? 0));
-    if ( activity ) return activity.rollDamage({ attackMode, event });
+function _addDataset(element, dataset) {
+  for ( const [key, value] of Object.entries(dataset) ) {
+    if ( !key.startsWith("_") && (key !== "values") && value ) element.dataset[key] = value;
   }
-
-  formulas = formulas?.split("&") ?? [];
-  damageTypes = damageTypes?.split("&") ?? [];
-
-  const rollConfig = {
-    attackMode, event,
-    hookNames: ["damage"],
-    rolls: formulas.map((formula, idx) => {
-      const types = damageTypes[idx]?.split("|") ?? [];
-      return {
-        parts: [formula],
-        options: { type: types[0], types }
-      };
-    })
-  };
-
-  const messageConfig = {
-    create: true,
-    data: {
-      flags: {
-        dnd5e: {
-          messageType: "roll",
-          roll: { type: rollType },
-          targets: getTargetDescriptors()
-        }
-      },
-      flavor: game.i18n.localize(`DND5E.${rollType === "healing" ? "Healing" : "Damage"}Roll`),
-      speaker: ChatMessage.implementation.getSpeaker()
-    }
-  };
-
-  const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, {}, messageConfig);
-  if ( !rolls?.length ) return;
-  Hooks.callAll("dnd5e.rollDamage", rolls);
-  Hooks.callAll("dnd5e.rollDamageV2", rolls);
 }
 
 /* -------------------------------------------- */
@@ -1644,63 +1719,4 @@ async function _fetchActivity(uuid, scaling) {
   if ( !activity || !scaling ) return activity;
   const item = activity.item.clone({ "flags.dnd5e.scaling": scaling }, { keepId: true });
   return item.system.activities.get(activity.id);
-}
-
-/* -------------------------------------------- */
-
-/**
- * Use an Item from an Item enricher.
- * @param {object} [options]
- * @param {string} [options.rollActivityUuid]  Lookup the Activity by UUID.
- * @param {string} [options.rollActivityName]  Lookup the Activity by name.
- * @param {string} [options.rollItemUuid]      Lookup the Item by UUID.
- * @param {string} [options.rollItemName]      Lookup the Item by name.
- * @param {string} [options.rollItemActor]     The UUID of a specific Actor that should use the Item.
- * @returns {Promise}
- */
-async function useItem({ rollActivityUuid, rollActivityName, rollItemUuid, rollItemName, rollItemActor }={}) {
-  // If UUID is provided, always roll that item directly
-  if ( rollActivityUuid ) return (await fromUuid(rollActivityUuid))?.use();
-  if ( rollItemUuid ) return (await fromUuid(rollItemUuid))?.use({ legacy: false });
-
-  if ( !rollItemName ) return;
-  const actor = rollItemActor ? await fromUuid(rollItemActor) : null;
-
-  // If no actor is specified or player isn't owner, fall back to the macro rolling logic
-  if ( !actor?.isOwner ) return rollItem(rollItemName, { activityName: rollActivityName });
-  const token = canvas.tokens.controlled[0];
-
-  // If a token is controlled, and it has an item with the correct name, activate it
-  let item = token?.actor.items.getName(rollItemName);
-
-  // Otherwise check the specified actor for the item
-  if ( !item ) {
-    item = actor.items.getName(rollItemName);
-
-    // Display a warning to indicate the item wasn't rolled from the controlled actor
-    if ( item && canvas.tokens.controlled.length ) ui.notifications.warn(
-      game.i18n.format("MACRO.5eMissingTargetWarn", {
-        actor: token.name, name: rollItemName, type: game.i18n.localize("DOCUMENT.Item")
-      })
-    );
-  }
-
-  if ( item ) {
-    if ( rollActivityName ) {
-      const activity = item.system.activities?.getName(rollActivityName);
-      if ( activity ) return activity.use();
-
-      // If no activity could be found at all, display a warning
-      else ui.notifications.warn(game.i18n.format("EDITOR.DND5E.Inline.Warning.NoActivityOnItem", {
-        activity: rollActivityName, actor: actor.name, item: rollItemName
-      }));
-    }
-
-    else return item.use({ legacy: false });
-  }
-
-  // If no item could be found at all, display a warning
-  else ui.notifications.warn(game.i18n.format("EDITOR.DND5E.Inline.Warning.NoItemOnActor", {
-    actor: actor.name, item: rollItemName
-  }));
 }
