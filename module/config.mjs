@@ -2182,6 +2182,7 @@ DND5E.validProperties = {
     "ritual"
   ]),
   tool: new Set([
+    "foc",
     "mgc"
   ])
 };
