@@ -1555,6 +1555,15 @@ DND5E.armorProficienciesMap = {
 /* -------------------------------------------- */
 
 /**
+ * Amount of speed reduction caused by wearing armor but not meeting the strength requirement in feet.
+ * Value will be converted to the appropriate value to match the actor's speed unit.
+ * @type {number}
+ */
+DND5E.armorSpeedReduction = 10;
+
+/* -------------------------------------------- */
+
+/**
  * The basic armor types in 5e. This enables specific armor proficiencies,
  * automated AC calculation in NPCs, and starting equipment.
  * @enum {string}
