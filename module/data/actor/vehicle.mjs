@@ -146,7 +146,8 @@ export default class VehicleData extends CommonTemplate {
             nullable: false, min: 0, step: 0.1, initial: 0, speed: true, label: "DND5E.MovementAir"
           }),
           units: new StringField({
-            required: true, nullable: true, blank: false, label: "DND5E.MovementUnits", initial: defaultUnits("travel")
+            required: true, nullable: true, blank: false, label: "DND5E.MOVEMENT.FIELDS.units.label",
+            initial: defaultUnits("travel")
           })
         }),
         price: new SchemaField({

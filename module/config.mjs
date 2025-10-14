@@ -2597,21 +2597,21 @@ preLocalize("difficultTerrainTypes", { key: "label", sort: true });
  */
 DND5E.movementTypes = {
   burrow: {
-    label: "DND5E.MovementBurrow"
+    label: "DND5E.MOVEMENT.Type.Burrow"
   },
   climb: {
-    label: "DND5E.MovementClimb",
+    label: "DND5E.MOVEMENT.Type.Climb",
     walkFallback: true
   },
   fly: {
-    label: "DND5E.MovementFly"
+    label: "DND5E.MOVEMENT.Type.Fly"
   },
   swim: {
-    label: "DND5E.MovementSwim",
+    label: "DND5E.MOVEMENT.Type.Swim",
     walkFallback: true
   },
   walk: {
-    label: "DND5E.MovementWalk"
+    label: "DND5E.MOVEMENT.Type.Walk"
   }
 };
 preLocalize("movementTypes", { key: "label", sort: true });

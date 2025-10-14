@@ -130,7 +130,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
       label: "DND5E.Movement",
       classes: "info-sm info-grid",
       config: "movement",
-      tooltip: "DND5E.MovementConfig",
+      tooltip: "DND5E.MOVEMENT.Action.Configure",
       value: Object.entries(CONFIG.DND5E.movementTypes).reduce((str, [k, { label }]) => {
         const value = this.movement[k];
         if ( !value ) return str;

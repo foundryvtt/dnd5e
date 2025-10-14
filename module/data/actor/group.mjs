@@ -61,7 +61,8 @@ export default class GroupData extends GroupTemplate {
             label: "DND5E.Travel.Label"
           }),
           units: new StringField({
-            required: true, nullable: true, blank: false, label: "DND5E.MovementUnits", initial: defaultUnits("travel")
+            required: true, nullable: true, blank: false, label: "DND5E.MOVEMENT.FIELDS.units.label",
+            initial: defaultUnits("travel")
           })
         })
       }, { label: "DND5E.Attributes" }),

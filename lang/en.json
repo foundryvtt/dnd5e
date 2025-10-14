@@ -3418,21 +3418,39 @@
     "Rule": "Rule"
   }
 },
+
+"DND5E.MOVEMENT": {
+  "Action": {
+    "Configure": "Configure Movement Speed"
+  },
+  "FIELDS": {
+    "ignoredDifficultTerrain": {
+      "label": "Ignored Difficult Terrain"
+    },
+    "special": {
+      "label": "Special Movement"
+    },
+    "speeds": {
+      "label": "Movement Speeds"
+    },
+    "units": {
+      "label": "Unit"
+    }
+  },
+  "Hover": "Hover",
+  "Type": {
+    "Burrow": "Burrow",
+    "Climb": "Climb",
+    "Fly": "Fly",
+    "Swim": "Swim",
+    "Walk": "Walk"
+  }
+},
+
 "DND5E.Movement": "Movement",
-"DND5E.MovementConfig": "Configure Movement Speed",
-"DND5E.MovementConfigHint": "Configure movement speed and special movement attributes.",
-"DND5E.MovementWalk": "Walk",
-"DND5E.MovementBurrow": "Burrow",
-"DND5E.MovementClimb": "Climb",
-"DND5E.MovementHover": "Hover",
-"DND5E.MovementFly": "Fly",
-"DND5E.MovementSwim": "Swim",
 "DND5E.MovementLand": "Land",
 "DND5E.MovementWater": "Water",
 "DND5E.MovementAir": "Air",
-"DND5E.MovementSpeeds": "Movement Speeds",
-"DND5E.MovementUnits": "Units",
-"DND5E.MovementIgnoredDifficultTerrain": "Ignored Difficult Terrain",
 
 "DND5E.SAVE": {
   "Title": {

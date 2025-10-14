@@ -360,7 +360,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         if ( !value ) return null;
         const data = { label, value };
         if ( (k === "fly") && attributes.movement.hover ) data.icons = [{
-          icon: "fas fa-cloud", label: game.i18n.localize("DND5E.MovementHover")
+          icon: "fas fa-cloud", label: game.i18n.localize("DND5E.MOVEMENT.Hover")
         }];
         return data;
       }),

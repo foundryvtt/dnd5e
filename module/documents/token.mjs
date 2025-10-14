@@ -76,7 +76,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const groups = super.getTrackedAttributeChoices(attributes);
     const i18n = {
       abilities: game.i18n.localize("DND5E.AbilityScorePl"),
-      movement: game.i18n.localize("DND5E.MovementSpeeds"),
+      movement: game.i18n.localize("DND5E.MOVEMENT.FIELDS.speeds.label"),
       senses: game.i18n.localize("DND5E.Senses"),
       skills: game.i18n.localize("DND5E.SkillPassives"),
       slots: game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots")

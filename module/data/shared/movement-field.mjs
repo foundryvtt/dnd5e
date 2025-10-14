@@ -26,17 +26,19 @@ export default class MovementField extends foundry.data.fields.SchemaField {
   constructor(fields={}, { initialUnits=null, ...options }={}) {
     const numberConfig = { required: true, nullable: true, min: 0, step: 0.1, initial: null };
     fields = {
-      burrow: new NumberField({ ...numberConfig, label: "DND5E.MovementBurrow", speed: true }),
-      climb: new NumberField({ ...numberConfig, label: "DND5E.MovementClimb", speed: true }),
-      fly: new NumberField({ ...numberConfig, label: "DND5E.MovementFly", speed: true }),
-      swim: new NumberField({ ...numberConfig, label: "DND5E.MovementSwim", speed: true }),
-      walk: new NumberField({ ...numberConfig, label: "DND5E.MovementWalk", speed: true }),
-      special: new StringField(),
+      burrow: new NumberField({ ...numberConfig, label: "DND5E.MOVEMENT.Type.Burrow", speed: true }),
+      climb: new NumberField({ ...numberConfig, label: "DND5E.MOVEMENT.Type.Climb", speed: true }),
+      fly: new NumberField({ ...numberConfig, label: "DND5E.MOVEMENT.Type.Fly", speed: true }),
+      swim: new NumberField({ ...numberConfig, label: "DND5E.MOVEMENT.Type.Swim", speed: true }),
+      walk: new NumberField({ ...numberConfig, label: "DND5E.MOVEMENT.Type.Walk", speed: true }),
+      special: new StringField({ label: "DND5E.MOVEMENT.FIELDS.special.label" }),
       units: new StringField({
-        required: true, nullable: true, blank: false, initial: initialUnits, label: "DND5E.MovementUnits"
+        required: true, nullable: true, blank: false, initial: initialUnits, label: "DND5E.MOVEMENT.FIELDS.units.label"
       }),
-      hover: new BooleanField({ required: true, label: "DND5E.MovementHover" }),
-      ignoredDifficultTerrain: new SetField(new StringField(), { label: "DND5E.MovementIgnoredDifficultTerrain" }),
+      hover: new BooleanField({ required: true, label: "DND5E.MOVEMENT.Hover" }),
+      ignoredDifficultTerrain: new SetField(new StringField(), {
+        label: "DND5E.MOVEMENT.FIELDS.ignoredDifficultTerrain.label"
+      }),
       ...fields
     };
     Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);

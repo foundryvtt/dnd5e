@@ -254,13 +254,13 @@ export default class ActorSheet5e extends ActorSheetMixin(foundry.appv1?.sheets?
 
     // Prepare an array of available movement speeds
     let speeds = [
-      [movement.burrow, `${game.i18n.localize("DND5E.MovementBurrow")} ${movement.burrow}`],
-      [movement.climb, `${game.i18n.localize("DND5E.MovementClimb")} ${movement.climb}`],
-      [movement.fly, `${game.i18n.localize("DND5E.MovementFly")} ${movement.fly}${movement.hover ? ` (${game.i18n.localize("DND5E.MovementHover")})` : ""}`],
-      [movement.swim, `${game.i18n.localize("DND5E.MovementSwim")} ${movement.swim}`]
+      [movement.burrow, `${game.i18n.localize("DND5E.MOVEMENT.Type.Burrow")} ${movement.burrow}`],
+      [movement.climb, `${game.i18n.localize("DND5E.MOVEMENT.Type.Climb")} ${movement.climb}`],
+      [movement.fly, `${game.i18n.localize("DND5E.MOVEMENT.Type.Fly")} ${movement.fly}${movement.hover ? ` (${game.i18n.localize("DND5E.MOVEMENT.Hover")})` : ""}`],
+      [movement.swim, `${game.i18n.localize("DND5E.MOVEMENT.Type.Swim")} ${movement.swim}`]
     ];
     if ( largestPrimary ) {
-      speeds.push([movement.walk, `${game.i18n.localize("DND5E.MovementWalk")} ${movement.walk}`]);
+      speeds.push([movement.walk, `${game.i18n.localize("DND5E.MOVEMENT.Type.Walk")} ${movement.walk}`]);
     }
 
     // Filter and sort speeds on their values
