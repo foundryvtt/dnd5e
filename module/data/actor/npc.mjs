@@ -616,6 +616,7 @@ export default class NPCData extends CreatureTemplate {
       ...Array.from(value).map(t => Trait.keyLabel(t, { trait })).filter(_ => _),
       ...splitSemicolons(custom ?? "")
     ].sort((lhs, rhs) => lhs.localeCompare(rhs, game.i18n.lang)));
+    const o = this.parent.flags.dnd5e?.statBlockOverride ?? {};
 
     const prepareSpeed = () => {
       const standard = formatter.format([
@@ -635,13 +636,13 @@ export default class NPCData extends CreatureTemplate {
     };
 
     const xp = rulesVersion === "2024"
-      ? `${game.i18n.format(`DND5E.ExperiencePoints.StatBlock.${
+      ? `${o.xp ?? game.i18n.format(`DND5E.ExperiencePoints.StatBlock.${
         (this.resources.lair.value) && (this.details.cr !== null) ? "Lair" : "Standard"}`, {
         value: formatNumber(this.parent.getCRExp(this.details.cr)),
         lair: formatNumber(this.parent.getCRExp(this.details.cr + 1))
-      })}; ${game.i18n.localize("DND5E.ProficiencyBonusAbbr")} ${
-        formatNumber(this.attributes.prof, { signDisplay: "always" })}`
-      : game.i18n.format("DND5E.ExperiencePoints.Format", {
+      })}; ${o.pb ?? `${game.i18n.localize("DND5E.ProficiencyBonusAbbr")} ${
+        formatNumber(this.attributes.prof, { signDisplay: "always" })}`}`
+      : o.xp ?? game.i18n.format("DND5E.ExperiencePoints.Format", {
         value: formatNumber(this.parent.getCRExp(this.details.cr))
       });
 
@@ -680,28 +681,28 @@ export default class NPCData extends CreatureTemplate {
       rulesVersion,
       summary: {
         // Condition Immunities
-        conditionImmunities: prepareTrait(this.traits.ci, "ci"),
+        conditionImmunities: o.conditionImmunities ?? prepareTrait(this.traits.ci, "ci"),
 
         // Challenge Rating (e.g. `23 (XP 50,000; PB +7`))
-        cr: `${formatCR(this.details.cr, { narrow: false })} (${xp})`,
+        cr: `${o.cr ?? formatCR(this.details.cr, { narrow: false })} (${xp})`,
 
         // Gear
-        gear: formatter.format(
+        gear: o.gear ?? formatter.format(
           this.getGear().map(i => i.system.quantity > 1 ? `${i.name} (${formatNumber(i.system.quantity)})` : i.name)
         ),
 
         // Initiative (e.g. `+0 (10)`)
-        initiative: `${formatNumber(this.attributes.init.total, { signDisplay: "always" })} (${
+        initiative: o.initiative ?? `${formatNumber(this.attributes.init.total, { signDisplay: "always" })} (${
           formatNumber(this.attributes.init.score)})`,
 
         // Languages (e.g. `Common, Draconic`)
-        languages: [
+        languages: o.languages ?? ([
           formatter.format(this.traits.languages.labels.languages),
           formatter.format(this.traits.languages.labels.ranged.map(r => rulesVersion === "2024" ? r : r.toLowerCase()))
-        ].filterJoin("; ") || (rulesVersion === "2024" ? game.i18n.localize("None") : "—"),
+        ].filterJoin("; ") || (rulesVersion === "2024" ? game.i18n.localize("None") : "—")),
 
         // Senses (e.g. `Blindsight 60 ft., Darkvision 120 ft.; Passive Perception 27`)
-        senses: [
+        senses: o.senses ?? [
           formatter.format([
             ...Object.entries(CONFIG.DND5E.senses)
               .filter(([k]) => this.attributes.senses[k])
@@ -712,17 +713,17 @@ export default class NPCData extends CreatureTemplate {
         ].filterJoin("; "),
 
         // Skills (e.g. `Perception +17, Stealth +7`)
-        skills: formatter.format(
+        skills: o.skills ?? formatter.format(
           Object.entries(CONFIG.DND5E.skills)
             .filter(([k]) => this.skills[k].value > 0)
             .map(([k, { label }]) => `${label} ${formatNumber(this.skills[k].total, { signDisplay: "always" })}`)
         ),
 
         // Speed (e.g. `40 ft., Burrow 40 ft., Fly 80 ft.`)
-        speed: prepareSpeed(),
+        speed: o.speed ?? prepareSpeed(),
 
         // Tag (e.g. `Gargantuan Dragon, Lawful Evil`)
-        tag: game.i18n.format("DND5E.CreatureTag", {
+        tag: o.tag ?? game.i18n.format("DND5E.CreatureTag", {
           size: CONFIG.DND5E.actorSizes[this.traits.size]?.label ?? "",
           type: Actor5e.formatCreatureType(this.details.type) ?? "",
           alignment: this.details.alignment
@@ -732,6 +733,10 @@ export default class NPCData extends CreatureTemplate {
     };
 
     for ( const type of ["vulnerabilities", "resistances", "immunities"] ) {
+      if ( type in o ) {
+        context.summary[type] = o[type];
+        continue;
+      }
       const entries = [];
       for ( const category of rulesVersion === "2024" ? ["damage", "condition"] : ["damage"] ) {
         if ( (category === "condition") && (type !== "immunities") ) continue;
@@ -763,9 +768,9 @@ export default class NPCData extends CreatureTemplate {
       }
 
       context.definitions.upper = [
-        { label: "DND5E.AC", classes: "half-width", definitions: [system.attributes.ac.value] },
+        { label: "DND5E.AC", classes: "half-width", definitions: [o.ac ?? system.attributes.ac.value] },
         { label: "DND5E.Initiative", classes: "half-width", definitions: [summary.initiative] },
-        { label: "DND5E.HP", definitions: system.attributes.hp.formula ? [
+        { label: "DND5E.HP", definitions: o.hp ? [o.hp] : system.attributes.hp.formula ? [
           system.attributes.hp.max, `(${system.attributes.hp.formula})`
         ] : [system.attributes.hp.max] },
         { label: "DND5E.Speed", definitions: [summary.speed] }
@@ -788,10 +793,10 @@ export default class NPCData extends CreatureTemplate {
         return def;
       };
       context.definitions.upper = [
-        { label: "DND5E.ArmorClass", definitions: system.attributes.ac.label ? [
+        { label: "DND5E.ArmorClass", definitions: o.ac ? [o.ac] : system.attributes.ac.label ? [
           system.attributes.ac.value, `(${system.attributes.ac.label})`
         ] : [system.attributes.ac.value] },
-        { label: "DND5E.HitPoints", definitions: system.attributes.hp.formula ? [
+        { label: "DND5E.HitPoints", definitions: o.hp ? [o.hp] : system.attributes.hp.formula ? [
           system.attributes.hp.max, `(${system.attributes.hp.formula})`
         ] : [system.attributes.hp.max] },
         { label: "DND5E.Speed", definitions: [summary.speed] }
@@ -808,7 +813,7 @@ export default class NPCData extends CreatureTemplate {
         { label: "DND5E.Languages", definitions: [summary.languages] },
         { label: "DND5E.Challenge", classes: "half-width", definitions: [summary.cr] },
         { label: "DND5E.ProficiencyBonus", classes: "half-width", definitions: [
-          formatNumber(this.attributes.prof, { signDisplay: "always" })
+          o.pb ?? formatNumber(this.attributes.prof, { signDisplay: "always" })
         ] }
       ].filter(_ => _);
       context.summary.tag = context.summary.tag.toLowerCase().capitalize();
