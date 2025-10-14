@@ -429,6 +429,9 @@ export default class AttributesFields {
     const units = this.attributes.movement.units ??= defaultUnits("length");
     let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
+    if ( (this.attributes.ac?.equippedArmor?.system.strength ?? 0) > (this.abilities?.str?.value ?? Infinity) ) {
+      reduction += CONFIG.DND5E.armorSpeedReduction;
+    }
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const field = this.schema.getField("attributes.movement");
     for ( const [type, v] of Object.entries(this.attributes.movement) ) {
