@@ -1648,6 +1648,8 @@ DND5E.enchantmentPeriods = {
 preLocalize("enchantmentPeriods", { key: "label" });
 
 /* -------------------------------------------- */
+/*  Armor                                       */
+/* -------------------------------------------- */
 
 /**
  * Specific equipment types that modify base AC.
@@ -1665,49 +1667,6 @@ preLocalize("armorTypes");
 /* -------------------------------------------- */
 
 /**
- * Equipment types that aren't armor.
- * @enum {string}
- */
-DND5E.miscEquipmentTypes = {
-  clothing: "DND5E.EQUIPMENT.Type.Clothing.Label",
-  ring: "DND5E.EQUIPMENT.Type.Ring.Label",
-  rod: "DND5E.EQUIPMENT.Type.Rod.Label",
-  trinket: "DND5E.EQUIPMENT.Type.Trinket.Label",
-  vehicle: "DND5E.EQUIPMENT.Type.Vehicle.Label",
-  wand: "DND5E.EQUIPMENT.Type.Wand.Label",
-  wondrous: "DND5E.EQUIPMENT.Type.Wondrous.Label"
-};
-preLocalize("miscEquipmentTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * The set of equipment types for armor, clothing, and other objects which can be worn by the character.
- * @enum {string}
- */
-DND5E.equipmentTypes = {
-  ...DND5E.miscEquipmentTypes,
-  ...DND5E.armorTypes
-};
-preLocalize("equipmentTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
- * The various types of vehicles in which characters can be proficient.
- * @enum {string}
- */
-DND5E.vehicleTypes = {
-  air: "DND5E.VEHICLE.Type.Air.label",
-  land: "DND5E.VEHICLE.Type.Land.label",
-  space: "DND5E.VEHICLE.Type.Space.label",
-  water: "DND5E.VEHICLE.Type.Water.label"
-};
-preLocalize("vehicleTypes", { sort: true });
-
-/* -------------------------------------------- */
-
-/**
  * The set of Armor Proficiencies which a character may have.
  * @type {object}
  */
@@ -1718,6 +1677,8 @@ DND5E.armorProficiencies = {
   shl: "DND5E.EquipmentShieldProficiency"
 };
 preLocalize("armorProficiencies");
+
+/* -------------------------------------------- */
 
 /**
  * A mapping between `DND5E.equipmentTypes` and `DND5E.armorProficiencies` that
@@ -1732,6 +1693,8 @@ DND5E.armorProficienciesMap = {
   heavy: "hvy",
   shield: "shl"
 };
+
+/* -------------------------------------------- */
 
 /**
  * The basic armor types in 5e. This enables specific armor proficiencies,
@@ -1753,6 +1716,8 @@ DND5E.armorIds = {
   studded: "Compendium.dnd5e.equipment24.Item.phbarmStuddedLea"
 };
 
+/* -------------------------------------------- */
+
 /**
  * The basic shield in 5e.
  * @enum {string}
@@ -1760,6 +1725,8 @@ DND5E.armorIds = {
 DND5E.shieldIds = {
   shield: "Compendium.dnd5e.equipment24.Item.phbarmShield0000"
 };
+
+/* -------------------------------------------- */
 
 /**
  * Common armor class calculations.
@@ -1803,6 +1770,51 @@ DND5E.armorClasses = {
   }
 };
 preLocalize("armorClasses", { key: "label" });
+
+/* -------------------------------------------- */
+/*  Other Equipment Types                       */
+/* -------------------------------------------- */
+
+/**
+ * Equipment types that aren't armor.
+ * @enum {string}
+ */
+DND5E.miscEquipmentTypes = {
+  clothing: "DND5E.EQUIPMENT.Type.Clothing.Label",
+  ring: "DND5E.EQUIPMENT.Type.Ring.Label",
+  rod: "DND5E.EQUIPMENT.Type.Rod.Label",
+  trinket: "DND5E.EQUIPMENT.Type.Trinket.Label",
+  vehicle: "DND5E.EQUIPMENT.Type.Vehicle.Label",
+  wand: "DND5E.EQUIPMENT.Type.Wand.Label",
+  wondrous: "DND5E.EQUIPMENT.Type.Wondrous.Label"
+};
+preLocalize("miscEquipmentTypes", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * The set of equipment types for armor, clothing, and other objects which can be worn by the character.
+ * @enum {string}
+ */
+DND5E.equipmentTypes = {
+  ...DND5E.miscEquipmentTypes,
+  ...DND5E.armorTypes
+};
+preLocalize("equipmentTypes", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * The various types of vehicles in which characters can be proficient.
+ * @enum {string}
+ */
+DND5E.vehicleTypes = {
+  air: "DND5E.VEHICLE.Type.Air.label",
+  land: "DND5E.VEHICLE.Type.Land.label",
+  space: "DND5E.VEHICLE.Type.Space.label",
+  water: "DND5E.VEHICLE.Type.Water.label"
+};
+preLocalize("vehicleTypes", { sort: true });
 
 /* -------------------------------------------- */
 
