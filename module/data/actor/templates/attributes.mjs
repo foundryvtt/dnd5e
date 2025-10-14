@@ -461,7 +461,7 @@ export default class AttributesFields {
    */
   static prepareRace(race, { force=false }={}) {
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( !race.system.movement[key] || (!force && (this.attributes.movement[key] !== null)) ) continue;
+      if ( !race.system.movement[key] || (!force && this.attributes.movement[key]) ) continue;
       this.attributes.movement.fromSpecies ??= {};
       this.attributes.movement[key] = this.attributes.movement.fromSpecies[key] = race.system.movement[key];
     }
