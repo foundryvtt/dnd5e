@@ -253,14 +253,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _clearCachedValues() {
     this._lazy = {};
+    this.identifiedItems = new IdentifiedItemsMap();
+    this.sourcedItems = new SourcedItemsMap();
   }
 
   /* --------------------------------------------- */
 
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
-    this.identifiedItems = new IdentifiedItemsMap();
-    this.sourcedItems = new SourcedItemsMap();
     this._embeddedPreparation = true;
     super.prepareEmbeddedDocuments();
     delete this._embeddedPreparation;

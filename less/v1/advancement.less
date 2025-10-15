@@ -216,34 +216,6 @@
       }
     }
   }
-
-  /* ----------------------------------------- */
-  /*  Item Choice                              */
-  /* ----------------------------------------- */
-  &.item-choice {
-    --grid-two-column-left-size: 1fr;
-    --grid-two-column-center-size: 0.7fr;
-    --grid-two-column-right-size: 0.5fr;
-
-    .level-list {
-      .items-header { padding-inline: 2px; }
-      .level-header { flex: 0.5; }
-      .choices-header { flex: 3; }
-      .replacement-header { flex: 0 0 20px; }
-    }
-
-    .form-group:has(textarea) {
-      align-items: flex-start;
-    }
-
-    textarea {
-      margin-inline-start: 8px;
-      border: 1px solid var(--color-border-light-tertiary);
-      font-family: var(--font-primary);
-      font-size: var(--font-size-12);
-      height: 140px;
-    }
-  }
 }
 
 /* ----------------------------------------- */
@@ -327,31 +299,6 @@
         width: 31px;
       }
     }
-  }
-
-  form[data-type="ItemChoice"] {
-    .item-name .item-delete {
-      flex: 0 0 20px;
-      margin-inline-end: 1px;
-    }
-    input[type="radio"] {
-      flex: 0 0 20px;
-      width: 20px;
-      height: 20px;
-      margin: 3px 5px;
-    }
-    h4.form-header {
-      margin-block-start: 0.25em;
-    }
-    .replaced h4 {
-      text-decoration: rgb(200 0 0) line-through 2px;
-    }
-    label.flexrow {
-      justify-content: space-between;
-      dnd5e-checkbox { margin-inline: 6px; }
-    }
-    .item-name + .item-name { margin-block-start: 4px; }
-    .pill-lg { margin-block-start: 12px; }
   }
 
   form[data-type="ScaleValue"] {

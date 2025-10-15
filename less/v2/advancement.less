@@ -116,6 +116,21 @@
     }
   }
 }
+.advancement.flow[data-type="ItemChoice"] {
+  [data-application-part="content"] { gap: 12px; }
+  .item-list {
+    .item-controls {
+      flex: 0 0 50px;
+      align-items: center;
+      padding: 0;
+
+      .item-control { font-size: var(--font-size-12); }
+    }
+    .replaced .title {
+      text-decoration: rgb(200 0 0) line-through 2px;
+    }
+  }
+}
 
 /* ----------------------------------------- */
 /*  Grant Items Advancement                  */

@@ -86,9 +86,9 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
  * Data for a replacement.
  *
  * @typedef {object} ItemChoiceReplacement
- * @property {number} level        Level at which the original item was chosen.
- * @property {string} original     ID of the original item that was replaced.
- * @property {string} replacement  ID of the replacement item.
+ * @property {number} level          Level at which the original item was chosen.
+ * @property {string} original       ID of the original item that was replaced.
+ * @property {string} [replacement]  ID of the replacement item.
  */
 
 /**
@@ -106,8 +106,8 @@ export class ItemChoiceValueData extends foundry.abstract.DataModel {
       added: new MappingField(new MappingField(new StringField())),
       replaced: new MappingField(new SchemaField({
         level: new NumberField({integer: true, min: 0}),
-        original: new ForeignDocumentField(foundry.documents.BaseItem, {idOnly: true}),
-        replacement: new ForeignDocumentField(foundry.documents.BaseItem, {idOnly: true})
+        original: new ForeignDocumentField(foundry.documents.BaseItem, { idOnly: true }),
+        replacement: new ForeignDocumentField(foundry.documents.BaseItem, { idOnly: true, required: false })
       }))
     };
   }
