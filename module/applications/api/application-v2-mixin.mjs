@@ -143,6 +143,7 @@ export default function ApplicationV2Mixin(Base) {
     /** @inheritDoc */
     async _renderFrame(options) {
       const frame = await super._renderFrame(options);
+      if ( !this.hasFrame ) return frame;
 
       // Subtitles
       const subtitle = document.createElement("h2");

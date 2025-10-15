@@ -114,7 +114,7 @@ export default class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @override */
-  automaticApplicationValue(level) {
+  async automaticApplicationValue(level) {
     if ( this.configuration.optional
       || (this.configuration.spell?.ability?.size > 1)
       || this.configuration.items.some(i => i.optional) ) return false;

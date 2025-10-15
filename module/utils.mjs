@@ -879,12 +879,13 @@ function dataset(object, options) {
 /**
  * Create an icon element dynamically based on the provided icon string, supporting FontAwesome class strings
  * or paths to SVG or other image types.
- * @param {string} icon           Icon class or path.
+ * @param {string} icon               Icon class or path.
  * @param {object} [options={}]
- * @param {string} [options.alt]  Alt text for the icon.
+ * @param {string} [options.alt]      Alt text for the icon.
+ * @param {string} [options.classes]  Classes to add to the icon.
  * @returns {HTMLElement|null}
  */
-export function generateIcon(icon, { alt }={}) {
+export function generateIcon(icon, { alt, classes }={}) {
   let element;
   if ( icon?.startsWith("fa") ) {
     element = document.createElement("i");
@@ -896,6 +897,7 @@ export function generateIcon(icon, { alt }={}) {
     return null;
   }
   if ( alt ) element[element.tagName === "IMG" ? "alt" : "ariaLabel"] = alt;
+  if ( classes ) element.className = classes;
   return element;
 }
 

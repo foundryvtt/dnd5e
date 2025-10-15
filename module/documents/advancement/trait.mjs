@@ -7,6 +7,10 @@ import {TraitConfigurationData, TraitValueData} from "../../data/advancement/tra
 import { filteredKeys, localizeSchema } from "../../utils.mjs";
 
 /**
+ * @import { AdvancementReversalOptions } from "./advancement.mjs";
+ */
+
+/**
  * Advancement that grants the player with certain traits or presents them with a list of traits from which
  * to choose.
  */
@@ -107,12 +111,23 @@ export default class TraitAdvancement extends Advancement {
   /*  Application Methods                         */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async apply(level, data) {
-    const updates = {};
-    if ( !data.chosen ) return;
+  /**
+   * @typedef TraitAdvancementApplicationData
+   * @property {string[]} [chosen]  Array of trait keys to add.
+   * @property {string} [key]       Key of a single trait to add.
+   */
 
-    for ( const key of data.chosen ) {
+  /** @inheritDoc */
+  async apply(level, data, options={}) {
+    if ( options.initial ) data = await this.automaticApplicationValue(level, { initial: true });
+
+    const updates = {};
+    const chosen = new Set(this.value.chosen ?? []);
+    const keys = data.chosen ? data.chosen : data.key ? [data.key] : null;
+    if ( !keys ) return;
+
+    for ( const key of keys ) {
+      chosen.add(key);
       const keyPath = this.configuration.mode === "mastery" ? "system.traits.weaponProf.mastery.value"
         : Trait.changeKeyPath(key);
       let existingValue = updates[keyPath] ?? foundry.utils.getProperty(this.actor, keyPath);
@@ -135,34 +150,46 @@ export default class TraitAdvancement extends Advancement {
     }
 
     this.actor.updateSource(updates);
-    this.updateSource({ "value.chosen": Array.from(data.chosen) });
+    this.updateSource({ "value.chosen": chosen });
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  automaticApplicationValue(level) {
-    // TODO: Ideally this would be able to detect situations where choices are automatically fulfilled because
-    // they only have one valid option, but that is an async process and cannot be called from within `render`
-    if ( this.configuration.choices.length || this.configuration.allowReplacements ) return false;
-    return { chosen: Array.from(this.configuration.grants) };
+  async automaticApplicationValue(level, { initial }={}) {
+    const { available } = await this.unfulfilledChoices();
+    const chosen = new Set();
+    for ( const { choices } of available ) {
+      const set = choices.asSet();
+      if ( set.size === 1 ) chosen.add(set.first());
+      else if ( !initial && ((set.size > 1) || this.configuration.allowReplacements) ) return false;
+    }
+    return { chosen: Array.from(chosen) };
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async restore(level, data) {
-    this.apply(level, data);
+  async restore(level, data, options={}) {
+    this.apply(level, data, options);
   }
 
   /* -------------------------------------------- */
 
+  /**
+   * @typedef {AdvancementReversalOptions} TraitAdvancementReversalOptions
+   * @property {string} [key]  Key of a single trait to remove.
+   */
+
   /** @inheritDoc */
-  async reverse(level) {
+  async reverse(level, options={}) {
     const updates = {};
-    if ( !this.value.chosen ) return;
+    const chosen = new Set(this.value.chosen ?? []);
+    const keys = options.key ? [options.key] : this.value.chosen ? this.value.chosen : null;
+    if ( !keys ) return;
 
-    for ( const key of this.value.chosen ) {
+    for ( const key of keys ) {
+      chosen.delete(key);
       const keyPath = this.configuration.mode === "mastery" ? "system.traits.weaponProf.mastery.value"
         : Trait.changeKeyPath(key);
       let existingValue = updates[keyPath] ?? foundry.utils.getProperty(this.actor, keyPath);
@@ -182,7 +209,7 @@ export default class TraitAdvancement extends Advancement {
 
     const retainedData = foundry.utils.deepClone(this.value);
     this.actor.updateSource(updates);
-    this.updateSource({ "value.chosen": [] });
+    this.updateSource({ "value.chosen": chosen });
     return retainedData;
   }
 
@@ -326,7 +353,7 @@ export default class TraitAdvancement extends Advancement {
     const actorData = await this.actorSelected();
     const selected = {
       actor: actorData.selected,
-      item: chosen ?? this.value.selected ?? new Set()
+      item: chosen ?? this.value.chosen ?? new Set()
     };
 
     // If everything has already been selected, no need to go further
