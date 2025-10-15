@@ -260,7 +260,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
         };
       });
     }
-    context.showTravel = !!context.system.attributes.travel.max;
+    context.showTravel = !!context.system.attributes.travel.speeds.max;
     context.showSpeed = !!context.system.attributes.movement.max || (context.editable && !context.showTravel);
     return context;
   }

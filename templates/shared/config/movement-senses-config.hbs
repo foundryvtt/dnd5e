@@ -29,7 +29,24 @@
     {{#with travel}}
     <fieldset class="card">
         <legend>{{ localize "DND5E.Travel.Speed" }}</legend>
-        {{> "dnd5e.fieldlist" types}}
+        <div class="header">
+            <div class="form-group split-group">
+                <span></span>
+                <div class="form-fields">
+                    <span>Per Hour</span>
+                    <span>Per Day</span>
+                </div>
+            </div>
+        </div>
+        {{#each types}}
+        <div class="form-group split-group">
+            <label>{{ label }}</label>
+            <div class="form-fields">
+                {{ formInput speed.field name=speed.name value=speed.value placeholder=speed.placeholder }}
+                {{ formInput pace.field name=pace.name value=pace.value placeholder=pace.placeholder }}
+            </div>
+        </div>
+        {{/each}}
         <hr>
         {{#if fields.units}}
         {{ formField fields.units value=data.units options=unitsOptions localize=true blank=false rootId=@root.partId }}

@@ -151,11 +151,19 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       unitsOptions: Object.entries(CONFIG.DND5E.travelUnits).map(([value, { label }]) => ({ value, label }))
     };
     context.travel.types = Object.entries(CONFIG.DND5E.travelTypes).map(([key, config]) => ({
-      field: context.travel.fields.speeds.model,
       label: config.label,
-      placeholder: derived.speeds[key] && !data.speeds[key] ? derived.speeds[key] : "",
-      name: `system.${keyPath}.speeds.${key}`,
-      value: data.speeds[key]
+      pace: {
+        field: context.travel.fields.paces.model,
+        name: `system.${keyPath}.paces.${key}`,
+        placeholder: derived.paces[key] && !data.paces[key] ? derived.paces[key] : "",
+        value: data.paces[key]
+      },
+      speed: {
+        field: context.travel.fields.speeds.model,
+        name: `system.${keyPath}.speeds.${key}`,
+        placeholder: derived.speeds[key] && !data.speeds[key] ? derived.speeds[key] : "",
+        value: data.speeds[key]
+      }
     }));
     if ( context.travel.fields.pace ) context.travel.extras.push({
       field: context.travel.fields.pace,

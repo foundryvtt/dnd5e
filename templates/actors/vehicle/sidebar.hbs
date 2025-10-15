@@ -165,8 +165,9 @@
     {{/if}}
     {{#if showTravel}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-sailboat"
-        label="DND5E.Travel.Speed" configAction="movement" configLabel="DND5E.MovementConfig" unitsConfig=CONFIG.travelUnits
-        data=(dnd5e-object value=system.attributes.travel.max units=system.attributes.travel.units) }}
+        label="DND5E.Travel.Speed" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure"
+        unitsConfig=CONFIG.travelUnits
+        data=(dnd5e-object value=system.attributes.travel.speeds.max units=system.attributes.travel.units) }}
     {{/if}}
 
     {{!-- Cost --}}

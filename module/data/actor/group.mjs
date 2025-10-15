@@ -138,17 +138,16 @@ export default class GroupData extends GroupTemplate {
    */
   static #migrateTravel(source) {
     if ( source.attributes?.travel || !source.attributes?.movement ) return;
-    let { pace, units, ...speeds } = source.attributes.movement;
+    let { pace, units, ...paces } = source.attributes.movement;
     const config = CONFIG.DND5E.movementUnits[units];
     const finalUnit = config?.type === "metric" ? "kph" : "mph";
     const perRound = config?.travelResolution === "round";
-    Object.keys(speeds).forEach(k => {
-      if ( perRound ) speeds[k] = TravelField.convertMovementToTravel(speeds[k], units, finalUnit);
-      else speeds[k] = Math.floor(speeds[k] / 8);
-      if ( !speeds[k] ) delete speeds[k];
+    Object.keys(paces).forEach(k => {
+      if ( perRound ) paces[k] = TravelField.convertMovementToTravel(paces[k], units, finalUnit) * 8;
+      if ( !paces[k] ) delete paces[k];
     });
     source.attributes ??= {};
-    source.attributes.travel = { pace, speeds, units: finalUnit };
+    source.attributes.travel = { pace, paces, units: finalUnit };
   }
 
   /* -------------------------------------------- */
