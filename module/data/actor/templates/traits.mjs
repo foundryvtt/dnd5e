@@ -102,7 +102,7 @@ export default class TraitsField {
         if ( languages.value.has(key) ) (group?.children ?? labels.languages).push(data.label ?? data);
 
         // Display children as part of this group (e.g. "Primordial (Ignan)")
-        else if ( data.children ) {
+        else if ( data.children && (data.selectable !== false) ) {
           const topLevel = group === undefined;
           group ??= { label: data.label, children: [] };
           Object.entries(data.children).forEach(([k, d]) => processCategory(k, d, group));
@@ -110,6 +110,9 @@ export default class TraitsField {
             `${data.label} (${game.i18n.getListFormatter({ type: "unit" }).format(group.children)})`
           );
         }
+
+        // Display children alone if category isn't selectable
+        else if ( data.children ) Object.entries(data.children).forEach(([k, d]) => processCategory(k, d));
       };
 
       for ( const [key, data] of Object.entries(CONFIG.DND5E.languages) ) {

@@ -190,8 +190,8 @@ export default class ActivitySheet extends PseudoDocumentSheet {
           ...(typeConfig.scalingModes ?? []).map(({ value, label }) => ({ value, label: game.i18n.localize(label) }))
         ] : null,
         showTargets: "validTargets" in typeConfig,
-        selectedTarget: ("validTargets" in typeConfig) && ((data.type === "itemUses") && data.target?.includes("."))
-          ? (this.activity.actor?.sourcedItems?.get(data.target)?.first()?.id ?? data.target)
+        selectedTarget: ("validTargets" in typeConfig) && ["itemUses", "material"].includes(data.type)
+          ? this.activity._remapConsumptionTarget(data.target)
           : data.target,
         targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem") : "",
         validTargets: showTextTarget ? null : target.validTargets

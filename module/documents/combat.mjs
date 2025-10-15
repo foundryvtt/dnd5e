@@ -100,6 +100,8 @@ export default class Combat5e extends Combat {
 
   /** @inheritDoc */
   _onDelete(options, userId) {
+    // TODO: Workaround for https://github.com/foundryvtt/foundryvtt/issues/13495
+    this.turn = null;
     super._onDelete(options, userId);
     this.combatants.get(this.current.combatantId)?.refreshDynamicRing();
   }

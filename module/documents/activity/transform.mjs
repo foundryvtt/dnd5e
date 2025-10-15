@@ -133,7 +133,7 @@ export default class TransformActivity extends ActivityMixin(TransformActivityDa
    * @returns {Promise<string|null>}    UUID of the actor to transform into or `null` if canceled.
    */
   async queryActor(profile) {
-    const locked = { documentClass: "Actor", types: new Set(["npc"]) };
+    const locked = { documentClass: "Actor", types: new Set(["npc"]), additional: {} };
     if ( profile.cr !== "" ) locked.additional = {
       cr: { max: simplifyBonus(profile.cr, this.getRollData({ deterministic: true })) }
     };
