@@ -139,8 +139,9 @@ export default class GroupData extends GroupTemplate {
   static #migrateTravel(source) {
     if ( source.attributes?.travel || !source.attributes?.movement ) return;
     let { pace, units, ...speeds } = source.attributes.movement;
-    const finalUnit = { ft: "mph", mi: "mph", m: "kph", km: "kph" }[units];
-    const perRound = CONFIG.DND5E.movementUnits[units]?.travelResolution === "round";
+    const config = CONFIG.DND5E.movementUnits[units];
+    const finalUnit = config?.type === "metric" ? "kph" : "mph";
+    const perRound = config?.travelResolution === "round";
     Object.keys(speeds).forEach(k => {
       if ( perRound ) speeds[k] = TravelField.convertMovementToTravel(speeds[k], units, finalUnit);
       else speeds[k] = Math.floor(speeds[k] / 8);

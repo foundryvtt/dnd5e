@@ -244,7 +244,9 @@ export default class VehicleData extends CommonTemplate {
   static #migrateMovement(source) {
     const movement = source.attributes?.movement;
     const { vehicleType } = source;
-    const newUnits = { mi: "mph", km: "kph" }[movement?.units];
+    let newUnits;
+    if ( movement?.units === "mi" ) newUnits = "mph";
+    else if ( movement?.units === "km" ) newUnits = "kph";
     if ( !vehicleType || !movement || !newUnits || !("walk" in movement) || source.attributes?.travel ) return;
     let max = 0;
     for ( const p in CONFIG.DND5E.movementTypes ) {

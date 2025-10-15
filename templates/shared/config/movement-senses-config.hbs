@@ -1,6 +1,7 @@
 <section class="flexcol">
     {{#if fields}}
     <fieldset class="card">
+        {{#if legend}}<legend>{{ legend }}</legend>{{/if}}
         {{#each types}}
         {{#if (eq field.name "fly")}}
         <div class="form-group split-group">

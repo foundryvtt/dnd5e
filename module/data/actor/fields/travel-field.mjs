@@ -20,7 +20,6 @@ const { StringField } = foundry.data.fields;
  */
 export default class TravelField extends foundry.data.fields.SchemaField {
   constructor(fields={}, { initialUnits=null, ...options }={}) {
-    const numberConfig = { required: true, nullable: true, min: 0, step: 0.1, initial: null };
     fields = {
       pace: new StringField({
         required: true, blank: false, initial: "normal", choices: () => CONFIG.DND5E.travelPace,
@@ -63,7 +62,6 @@ export default class TravelField extends foundry.data.fields.SchemaField {
 
     const noMovement = this.parent.hasConditionEffect("noMovement");
     const halfMovement = this.parent.hasConditionEffect("halfMovement");
-    const paceConfig = CONFIG.DND5E.travelPace[pace];
     for ( const type of Object.keys(travel.speeds) ) {
       let speed = Math.max(0, simplifyBonus(travel.speeds[type], rollData));
       if ( noMovement ) speed = 0;
@@ -79,6 +77,7 @@ export default class TravelField extends foundry.data.fields.SchemaField {
       const speed = TravelField.convertMovementToTravel(movement[type], movement.units, units);
       const travelPace = TravelField.convertSpeedToPace(speed, pace, movement.units);
       travel.paces[travelType] = Math.max(travelPace, travel.paces[travelType] ?? -Infinity);
+      travel.speeds[travelType] = speed;
     }
   }
 
@@ -94,8 +93,15 @@ export default class TravelField extends foundry.data.fields.SchemaField {
    * @returns {number}
    */
   static convertMovementToTravel(value, initialUnit, finalUnit) {
-    value = convertLength(value, initialUnit, "ft", { strict: false });
-    return convertTravelSpeed(value / 10, "mph", { strict: false, to: finalUnit }).value;
+    const fromConfig = CONFIG.DND5E.movementUnits[initialUnit];
+    const toConfig = CONFIG.DND5E.movementUnits[finalUnit];
+    if ( (fromConfig?.type === "metric") && (toConfig?.type === "metric") ) {
+      value = convertLength(value, initialUnit, "m", { strict: false });
+      return convertTravelSpeed(value / 2, "kph", { strict: false, to: finalUnit }).value;
+    } else {
+      value = convertLength(value, initialUnit, "ft", { strict: false });
+      return convertTravelSpeed(value / 10, "mph", { strict: false, to: finalUnit }).value;
+    }
   }
 
   /* -------------------------------------------- */
@@ -109,6 +115,7 @@ export default class TravelField extends foundry.data.fields.SchemaField {
    */
   static convertSpeedToPace(speed, pace, unit) {
     const perDay = speed * TravelField.#HOURS_PER_DAY;
+    const unitConfig = CONFIG.DND5E.movementUnits[unit] ?? CONFIG.DND5E.travelUnits[unit];
     if ( (CONFIG.DND5E.movementUnits[unit]?.type === "imperial")
       && (perDay === CONFIG.DND5E.travelPace.normal.standard)
       && CONFIG.DND5E.travelPace[pace]?.standard ) return CONFIG.DND5E.travelPace[pace].standard;

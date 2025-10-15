@@ -96,7 +96,7 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       }
     }
 
-    if ( this.keyPath.endsWith("movement") ) this._prepareTravelFields(context);
+    if ( this.options.type === "movement" ) this._prepareTravelFields(context);
 
     return context;
   }
@@ -142,6 +142,8 @@ export default class MovementSensesConfig extends BaseConfigSheet {
   _prepareTravelFields(context) {
     const keyPath = this.keyPath.replace(".movement", ".travel");
     const data = foundry.utils.getProperty(this.document.system._source, keyPath);
+    if ( !data ) return;
+    const derived = foundry.utils.getProperty(this.document.system, keyPath);
     context.travel = {
       data,
       extras: [],
@@ -151,6 +153,7 @@ export default class MovementSensesConfig extends BaseConfigSheet {
     context.travel.types = Object.entries(CONFIG.DND5E.travelTypes).map(([key, config]) => ({
       field: context.travel.fields.speeds.model,
       label: config.label,
+      placeholder: derived.speeds[key] && !data.speeds[key] ? derived.speeds[key] : "",
       name: `system.${keyPath}.speeds.${key}`,
       value: data.speeds[key]
     }));
@@ -160,5 +163,6 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       options: Object.entries(CONFIG.DND5E.travelPace).map(([value, { label }]) => ({ value, label })),
       value: data.pace
     });
+    if ( context.fields ) context.legend = game.i18n.localize("DND5E.MOVEMENT.Speed");
   }
 }
