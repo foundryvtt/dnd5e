@@ -630,7 +630,13 @@ export default class NPCData extends CreatureTemplate {
             return prepared;
           })
       ]);
-      const custom = formatter.format(splitSemicolons(this.attributes.movement.special));
+      const custom = formatter.format([
+        ...this.attributes.movement.custom.map(({ label, value }) => {
+          const prepared = prepareMeasured(value, this.attributes.movement.units);
+          return `${prepared} ${label.toLowerCase()}`;
+        }),
+        ...splitSemicolons(this.attributes.movement.special)
+      ]);
       return custom ? `${standard} (${custom})` : standard;
     };
 
