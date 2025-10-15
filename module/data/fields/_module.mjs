@@ -5,7 +5,7 @@ export {default as IdentifierField} from "./identifier-field.mjs";
 export {default as LocalDocumentField} from "./local-document-field.mjs";
 export {default as MappingField} from "./mapping-field.mjs";
 export {default as PseudoDocumentCollectionField} from "./pseudo-document-collection-field.mjs";
-export {default as PsuedoDocumentField} from "./psuedo-document-field.mjs";
+export {default as PsuedoDocumentField} from "./pseudo-document-field.mjs";
 
 // Deprecated
 export * from "./activities-field.mjs";

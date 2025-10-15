@@ -1,5 +1,5 @@
 import PseudoDocumentCollection from "../abstract/pseudo-document-collection.mjs";
-import PseudoDocumentField from "./psuedo-document-field.mjs";
+import PseudoDocumentField from "./pseudo-document-field.mjs";
 
 /**
  * Field type for storing collections of pseudo-documents such as activities and advancement.
