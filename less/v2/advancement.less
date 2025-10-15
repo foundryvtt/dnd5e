@@ -129,6 +129,29 @@
 }
 
 /* ----------------------------------------- */
+/*  Hit Points Advancement                   */
+/* ----------------------------------------- */
+
+.advancement.flow[data-type="HitPoints"] {
+  [data-application-part="content"] { gap: 8px; }
+  .breakdown > .form-fields {
+    justify-content: center;
+    font-size: var(--font-size-18);
+
+    .form-group, .separator {
+      align-items: center;
+      flex: 0 0 max-content;
+    }
+    .separator { color: var(--color-text-secondary); }
+    input { width: 4em; }
+  }
+  button {
+    --icon-fill: var(--color-text-secondary);
+    flex: 0;
+  }
+}
+
+/* ----------------------------------------- */
 /*  Scale Value Advancement                  */
 /* ----------------------------------------- */
 

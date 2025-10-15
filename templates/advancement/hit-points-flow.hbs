@@ -1,27 +1,80 @@
-<form id="{{ appId }}" data-level="{{ level }}" data-id="{{ advancement.id }}" data-type="{{ type }}">
-    <h3>{{{ title }}}</h3>
-    {{#if hint}}<p>{{ hint }}</p>{{/if}}
+<div class="standard-form">
+    <div class="breakdown form-group split-group">
+        <div class="form-fields">
+            {{!-- Previous Max HP --}}
+            {{#if hp.previous}}
+            <div class="form-group label-top">
+                <label>{{ localize "DND5E.ADVANCEMENT.HitPoints.Breakdown.Previous" }}</label>
+                <span>{{ hp.previous }}</span>
+            </div>
+            <span class="separator">+</span>
+            {{/if}}
 
-    {{#if isFirstClassLevel}}
+            {{!-- Selected HP Increase --}}
+            {{#if isFirstClassLevel}}
+            <div class="form-group label-top">
+                <label>{{ localize "DND5E.ADVANCEMENT.HitPoints.Breakdown.Max" }}</label>
+                <span>{{ hp.max }}</span>
+            </div>
+            {{else if manual}}
+            <div class="form-group label-top">
+                <label>value</label>
+                <div class="form-fields">
+                    <input class="roll-result" type="number" name="value" value="{{ data.value }}">
+                </div>
+            </div>
+            {{else}}
+            <div class="form-group label-top">
+                <label>{{ localize "DND5E.ADVANCEMENT.HitPoints.Breakdown.Average" }}</label>
+                <span>{{ hp.average }}</span>
+            </div>
+            {{/if}}
 
-    <div>
-        {{{ localize "DND5E.ADVANCEMENT.HitPoints.MaxAtFirstLevel" max=dieValue }}}
-        <input type="hidden" name="useMax" value="true" data-dtype="Boolean">
-    </div>
+            {{!-- Ability Modifier --}}
+            {{#if hp.modifier.value}}
+            <span class="separator">+</span>
+            <div class="form-group label-top">
+                <label>{{ hp.modifier.label }}</label>
+                <span>{{ hp.modifier.value }}</span>
+            </div>
+            {{/if}}
 
-    {{else}}
+            {{!-- Per-level bonus --}}
+            {{#if hp.bonus}}
+            <span class="separator">+</span>
+            <div class="form-group label-top">
+                <label>{{ localize "DND5E.ADVANCEMENT.HitPoints.Breakdown.Bonus" }}</label>
+                <span>{{ hp.bonus }}</span>
+            </div>
+            {{/if}}
 
-    <div class="rolls">
-        <label class="average-label flexrow">
-            <span>{{ localize "DND5E.ADVANCEMENT.HitPoints.TakeAverage" }}</span>
-            <dnd5e-checkbox class="average-checkbox" name="useAverage" {{ checked data.useAverage }}></dnd5e-checkbox>
-        </label>
-        <input class="roll-result" type="number" name="value" value="{{ data.value }}" {{ disabled data.useAverage }}>
-        <button class="roll-button dice-button" type="button" name="roll" {{ disabled data.useAverage }}
-                data-tooltip aria-label="{{ localize "DND5E.ADVANCEMENT.HitPoints.Action.Roll" die=hitDie }}">
-            <i class="fas fa-dice-{{ hitDie }}" inert></i>
+            <span class="separator">=</span>
+
+            {{!-- Final Max HP --}}
+            <div class="form-group label-top">
+                <label>{{ localize "DND5E.ADVANCEMENT.HitPoints.Breakdown.Final" }}</label>
+                <span>{{ hp.total }}</span>
+            </div>
+        </div>
+
+        {{#if manual}}
+        <button class="roll-button dice-button" type="button" data-action="rollHitPoints" data-tooltip
+                aria-label="{{ localize 'DND5E.ADVANCEMENT.HitPoints.Action.Roll' die=hitDie }}">
+            <dnd5e-icon src="systems/dnd5e/icons/svg/dice/{{ hitDie }}.svg" inert></dnd5e-icon>
         </button>
+        {{/if}}
     </div>
 
-    {{/if}}
-</form>
+    {{#unless isFirstClassLevel}}
+    <fieldset>
+        <legend>{{ localize "DND5E.ADVANCEMENT.HitPoints.Options" }}</legend>
+        <div class="form-group">
+            <label for="{{ partId }}-useAverage">{{ localize "DND5E.ADVANCEMENT.HitPoints.TakeAverage" }}</label>
+            <div class="form-fields">
+                <dnd5e-checkbox name="useAverage" id="{{ partId }}-useAverage"
+                                {{ checked data.useAverage }}></dnd5e-checkbox>
+            </div>
+        </div>
+    </fieldset>
+    {{/unless}}
+</div>
