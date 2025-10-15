@@ -121,8 +121,8 @@ export default class PseudoDocumentCollection extends Collection {
    * @param {DataModel} parent                       Parent containing this collection.
    * @param {DocumentConstructionContext} [options]  Initialization options.
    */
-  initialize(model, options={}) {
-    this.parent = model;
+  initialize(parent, options={}) {
+    this.parent = parent;
     this._initialized = false;
     this.#documentsByType = null;
 
