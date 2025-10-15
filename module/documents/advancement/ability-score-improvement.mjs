@@ -168,55 +168,71 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   /*  Application Methods                         */
   /* -------------------------------------------- */
 
+  /**
+   * @typedef SubclassAdvancementApplicationData
+   * @property {Record<string, number>} [assignments]    Changes to specific ability scores.
+   * @property {Record<string, object>} [retainedItems]  Item data grouped by UUID.
+   * @property {"asi"|"feat"} [type]                     Type of ASI being handled.
+   * @property {string} [uuid]                           UUID of the feat item to add.
+   */
+
   /** @inheritDoc */
-  async apply(level, data) {
-    if ( data.type === "asi" ) {
-      const assignments = Object.keys(CONFIG.DND5E.abilities).reduce((obj, key) => {
-        obj[key] = (this.configuration.fixed[key] ?? 0) + (data.assignments[key] ?? 0);
-        return obj;
-      }, {});
+  async apply(level, data, options={}) {
+    const value = { type: data.type ?? this.value.type };
+    if ( value.type && (data.type !== value.type) ) await this.reverse(level);
+
+    if ( options.initial ) {
+      if ( Object.values(this.configuration.fixed).some(v => v) ) {
+        data.assignments = this.toObject().configuration.fixed;
+      }
+      if ( data.assignments || !this.allowFeat ) value.type = "asi";
+      else value.type = null;
+    }
+
+    if ( (value.type === "asi") && !foundry.utils.isEmpty(data.assignments) ) {
       const updates = {};
-      for ( const key of Object.keys(assignments) ) {
+      value.assignments = {};
+      for ( let [key, delta] of Object.entries(data.assignments) ) {
         const ability = this.actor.system.abilities[key];
-        const source = this.actor.system.toObject().abilities[key] ?? {};
+        const source = this.actor.system._source.abilities[key] ?? {};
         if ( !ability || !this.canImprove(key) ) continue;
         const max = Math.max(ability.max, this.configuration.max ?? -Infinity);
-        assignments[key] = Math.min(assignments[key], max - source.value);
-        if ( assignments[key] ) updates[`system.abilities.${key}.value`] = source.value + assignments[key];
-        else delete assignments[key];
+        delta = Math.min(delta, max - source.value);
+        if ( delta ) {
+          updates[`system.abilities.${key}.value`] = source.value + delta;
+          value.assignments[key] = (this.value.assignments?.[key] ?? 0) + delta;
+        }
       }
-      data.assignments = assignments;
-      data.feat = null;
+      if ( foundry.utils.isEmpty(value.assignments) ) delete value.assignments;
       this.actor.updateSource(updates);
     }
 
-    else {
-      let itemData = data.retainedItems?.[data.featUuid];
-      if ( !itemData ) itemData = await this.createItemData(data.featUuid);
-      data.assignments = null;
+    else if ( (value.type === "feat") && data.uuid ) {
+      if ( this.actor.items.get(Object.keys(this.value.feat ?? {})[0]) ) await this.reverse(this.level);
+
+      let itemData = data.retainedItems?.[data.uuid];
+      if ( !itemData ) itemData = await this.createItemData(data.uuid);
       if ( itemData ) {
-        data.feat = { [itemData._id]: data.featUuid };
-        this.actor.updateSource({items: [itemData]});
+        value.feat = { [itemData._id]: data.uuid };
+        this.actor.updateSource({ items: [itemData] });
       }
     }
 
-    delete data.featUuid;
-    delete data.retainedItems;
-    this.updateSource({value: data});
+    this.updateSource({ value });
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   restore(level, data) {
-    data.featUuid = Object.values(data.feat ?? {})[0];
+    data.uuid = Object.values(data.feat ?? {})[0];
     this.apply(level, data);
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  reverse(level) {
+  reverse(level, options={}) {
     const source = this.value.toObject();
 
     if ( this.value.type === "asi" ) {
@@ -233,11 +249,14 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
     else {
       const [id, uuid] = Object.entries(this.value.feat ?? {})[0] ?? [];
       const item = this.actor.items.get(id);
-      if ( item ) source.retainedItems = {[uuid]: item.toObject()};
+      if ( item ) source.retainedItems = { [uuid]: item.toObject() };
       this.actor.items.delete(id);
+      this.actor.reset();
     }
 
-    this.updateSource({ "value.assignments": null, "value.feat": null });
+    this.updateSource({
+      value: { assignments: null, feat: null, type: null }
+    });
     return source;
   }
 }
