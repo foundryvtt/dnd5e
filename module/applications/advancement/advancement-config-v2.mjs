@@ -91,7 +91,8 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
         { value: "secondary", label: game.i18n.localize("DND5E.AdvancementClassRestrictionSecondary") }
       ],
       showClassRestrictions: this.item.type === "class",
-      showLevelSelector: !this.advancement.constructor.metadata.multiLevel
+      showLevelSelector: !this.advancement.metadata.multiLevel,
+      supportsHTMLHint: this.advancement.supportsHTMLHint
     };
     return context;
   }

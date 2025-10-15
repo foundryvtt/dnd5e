@@ -158,6 +158,17 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Does this Advancement type support HTML hints in the config dialog, flow, and summary?
+   * Any Advancement type that has upgraded its Flow application to ApplicationV2 is assumed to support this.
+   * @type {boolean}
+   */
+  get supportsHTMLHint() {
+    return foundry.utils.isSubclass(this.metadata.apps.flow, AdvancementFlow);
+  }
+
+  /* -------------------------------------------- */
   /*  Preparation Methods                         */
   /* -------------------------------------------- */
 

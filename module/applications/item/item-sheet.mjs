@@ -267,7 +267,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    * @protected
    */
   async _prepareAdvancementContext(context, options) {
-    context.advancement = this._getAdvancement();
+    context.advancement = await this._getAdvancement();
     return context;
   }
 
@@ -416,9 +416,9 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
   /**
    * Get the display object used to show the advancement tab.
-   * @returns {object}     Object with advancement data grouped by levels.
+   * @returns {Promise<object>}  Object with advancement data grouped by levels.
    */
-  _getAdvancement() {
+  async _getAdvancement() {
     if ( !this.item.system.advancement ) return {};
 
     const advancement = {};
@@ -448,19 +448,19 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     // All other advancements by level
     for ( let [level, advancements] of Object.entries(this.item.advancement.documentsByLevel) ) {
       if ( !configMode ) advancements = advancements.filter(a => a.appliesToClass);
-      const items = advancements.map(advancement => ({
+      const items = await Promise.all(advancements.map(async advancement => ({
         id: advancement.id,
         uuid: advancement.uuid,
         order: advancement.sortingValueForLevel(level),
         title: advancement.titleForLevel(level, { configMode, legacyDisplay }),
         icon: advancement.icon,
         classRestriction: advancement.classRestriction,
-        summary: advancement.summaryForLevel(level, { configMode, legacyDisplay }),
+        summary: await advancement.summaryForLevel(level, { configMode, legacyDisplay }),
         configured: advancement.configuredForLevel(level),
         tags: this._getAdvancementTags(advancement),
         value: advancement.valueForLevel?.(level),
         classes: [advancement.icon?.endsWith(".svg") ? "svg" : ""].filterJoin(" ")
-      }));
+      })));
       if ( !items.length ) continue;
       advancement[level] = {
         items: items.sort((a, b) => a.order.localeCompare(b.order, game.i18n.lang)),

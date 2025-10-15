@@ -81,25 +81,25 @@
         "filePathFields": {
           "advancement.*.icon": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat"]
+        "htmlFields": ["advancement.*.hint", "description.value", "description.chat"]
       },
       "background": {
         "filePathFields": {
           "advancement.*.icon": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat"]
+        "htmlFields": ["advancement.*.hint", "description.value", "description.chat"]
       },
       "class": {
         "filePathFields": {
           "advancement.*.icon": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat"]
+        "htmlFields": ["advancement.*.hint", "description.value", "description.chat"]
       },
       "subclass": {
         "filePathFields": {
           "advancement.*.icon": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat"]
+        "htmlFields": ["advancement.*.hint", "description.value", "description.chat"]
       },
       "spell": {
         "filePathFields": {
@@ -112,7 +112,7 @@
           "activities.*.img": ["IMAGE"],
           "advancement.*.icon": ["IMAGE"]
         },
-        "htmlFields": ["description.value", "description.chat"]
+        "htmlFields": ["advancement.*.hint", "description.value", "description.chat"]
       },
       "container": {
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]

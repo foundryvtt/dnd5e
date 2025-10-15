@@ -150,7 +150,7 @@ export default class AdvancementFlow extends Application5e {
    * @protected
    */
   async _prepareContentContext(context, options) {
-    context.summary = this.advancement.summaryForLevel(this.level);
+    context.summary = await this.advancement.summaryForLevel(this.level);
     return context;
   }
 
@@ -165,7 +165,10 @@ export default class AdvancementFlow extends Application5e {
    */
   async _prepareHeaderContext(context, options) {
     context.title = this.title;
-    context.hint = this.advancement.hint;
+    context.hint = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+      this.advancement.hint ?? "",
+      { relativeTo: this.advancement.item, rollData: this.advancement.item.getRollData() }
+    );
     return context;
   }
 
