@@ -128,7 +128,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
   /** @inheritDoc */
   async reverse(level) {
-    const retainedData = await super.reverse(level);
+    const retainedData = await super.reverse(level) ?? {};
 
     const replaced = retainedData.replaced = this.value.replaced[level];
     if ( replaced ) {

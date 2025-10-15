@@ -63,7 +63,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
   async retainData(data) {
     await super.retainData(data);
     this.replacement = data.replaced?.original;
-    this.selected = new Set(data.items.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId")));
+    this.selected = new Set(data.items?.map(i => foundry.utils.getProperty(i, "flags.dnd5e.sourceId")));
   }
 
   /* -------------------------------------------- */

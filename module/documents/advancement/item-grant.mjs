@@ -1,6 +1,6 @@
 import { filteredKeys } from "../../utils.mjs";
 import ItemGrantConfig from "../../applications/advancement/item-grant-config.mjs";
-import ItemGrantFlow from "../../applications/advancement/item-grant-flow.mjs";
+import ItemGrantFlow from "../../applications/advancement/item-grant-flow-v2.mjs";
 import ItemGrantConfigurationData from "../../data/advancement/item-grant.mjs";
 import Advancement from "./advancement.mjs";
 
@@ -78,36 +78,64 @@ export default class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /**
-   * Locally apply this advancement to the actor.
-   * @param {number} level              Level being advanced.
-   * @param {object} data               Data from the advancement form.
-   * @param {object} [retainedData={}]  Item data grouped by UUID. If present, this data will be used rather than
-   *                                    fetching new data from the source.
-   * @returns {object}
+   * @typedef ItemGrantAdvancementApplicationData
+   * @property {string} [ability]     Selected ability for added spells.
+   * @property {object} [items]       Retained item data grouped by UUID. If present, this data will be used rather than
+   *                                  fetching new data from the source.
+   * @property {string[]} [selected]  UUIDs of items to add. If none provided, then will fall back to the items provided
+   *                                  in the `items` object.
    */
-  async apply(level, data, retainedData={}) {
+
+  /** @override */
+  async apply(level, { ability, items: retainedData={}, selected=Object.keys(retainedData), ...data }={}, options={}) {
+    if ( !foundry.utils.isEmpty(data) ) {
+      foundry.utils.logCompatibilityWarning(
+        "The properties passed to `ItemGrantAdvancement#apply` have changed, see `ItemGrantAdvancementApplicationData` for new properties.",
+        { since: "DnD5e 5.2", until: "DnD5e 5.4" }
+      );
+      selected = filteredKeys(data);
+      retainedData = options;
+    }
+
+    if ( options.initial ) {
+      ability = this.configuration.spell?.ability?.first();
+      selected = this.configuration.items?.reduce((arr, { optional, uuid }) => {
+        if ( !this.configuration.optional || !optional ) arr.push(uuid);
+        return arr;
+      }, []) ?? [];
+    }
+
+    if ( ability !== this.value?.ability ) {
+      for ( const id of Object.keys(foundry.utils.getProperty(this, this.storagePath(level)) ?? {}) ) {
+        const item = this.actor.items.get(id);
+        if ( item?.type === "spell" ) item.updateSource({ "system.ability": ability });
+      }
+    }
+
     const items = [];
-    const updates = {};
-    for ( const uuid of filteredKeys(data) ) {
+    const itemUpdates = {};
+    for ( const uuid of selected ) {
       let itemData = retainedData[uuid];
       if ( !itemData ) {
         itemData = await this.createItemData(uuid);
         if ( !itemData ) continue;
       }
       if ( itemData.type === "spell" ) this.configuration.spell?.applySpellChanges(itemData, {
-        ability: data.ability ?? this.retainedData?.ability ?? this.value?.ability
+        ability: ability ?? this.value?.ability
       });
 
       items.push(itemData);
-      updates[itemData._id] = uuid;
+      itemUpdates[itemData._id] = uuid;
     }
+
+    const updates = {};
+    if ( ability ) updates["value.ability"] = ability;
     if ( items.length ) {
       this.actor.updateSource({ items });
-      this.updateSource({
-        "value.ability": data.ability,
-        [this.storagePath(level)]: updates
-      });
+      updates[this.storagePath(level)] = itemUpdates;
     }
+    this.updateSource(updates);
+
     return updates;
   }
 
@@ -118,16 +146,19 @@ export default class ItemGrantAdvancement extends Advancement {
     if ( this.configuration.optional
       || (this.configuration.spell?.ability?.size > 1)
       || this.configuration.items.some(i => i.optional) ) return false;
-    return Object.fromEntries(this.configuration.items.map(({ uuid }) => [uuid, true]));
+    return {
+      ability: this.configuration.spell?.ability.first(),
+      selected: this.configuration.items.map(({ uuid }) => uuid)
+    };
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  restore(level, data) {
+  restore(level, data, options={}) {
     const updates = {};
     for ( const item of data.items ) {
-      this.actor.updateSource({items: [item]});
+      this.actor.updateSource({ items: [item] });
       updates[item._id] = item.flags.dnd5e.sourceId;
     }
     this.updateSource({
@@ -138,16 +169,29 @@ export default class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
+  /**
+   * @typedef {AdvancementReversalOptions} ItemGrantAdvancementReversalOptions
+   * @property {string} [uuid]  UUID of a single item to remove.
+   */
+
   /** @inheritDoc */
-  reverse(level) {
-    const items = [];
+  reverse(level, options={}) {
     const keyPath = this.storagePath(level);
-    for ( const id of Object.keys(foundry.utils.getProperty(this, keyPath) ?? {}) ) {
+    const added = foundry.utils.getProperty(this.toObject(), keyPath) ?? {};
+    let ids = options.uuid ? Object.entries(added).filter(([, v]) => v === options.uuid).map(([k]) => k)
+      : Object.keys(added);
+    if ( !ids.length ) return;
+
+    const items = [];
+    for ( const id of ids ) {
       const item = this.actor.items.get(id);
       if ( item ) items.push(item.toObject());
       this.actor.items.delete(id);
+      added[`-=${id}`] = null;
     }
-    this.updateSource({[keyPath.replace(/\.([\w\d]+)$/, ".-=$1")]: null});
+
+    if ( options.uuid ) this.updateSource({ [keyPath]: added });
+    else this.updateSource({ [keyPath.replace(/\.([\w\d]+)$/, ".-=$1")]: null });
     return { ability: this.value?.ability, items };
   }
 
