@@ -164,6 +164,19 @@
   }
 }
 
+.advancement.flow[data-type="ScaleValue"] {
+  [data-application-part="content"] {
+    display: grid;
+    grid-template-columns: 1fr min-content 1fr;
+    gap: 8px;
+    font-size: var(--font-size-18);
+  }
+  .initial-scale-value {
+    text-align: end;
+    &.none { font-style: italic; }
+  }
+}
+
 /* ----------------------------------------- */
 /*  Size Advancement                         */
 /* ----------------------------------------- */
