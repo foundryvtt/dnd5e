@@ -1,3 +1,4 @@
+import { localizedKeybinding } from "../../utils.mjs";
 import Application5e from "../api/application.mjs";
 
 /**
@@ -49,6 +50,18 @@ export default class ActivityChoiceDialog extends Application5e {
   /* -------------------------------------------- */
 
   /**
+   * The user event when an activity is chosen.
+   * @type {Event|null}
+   */
+  get event() {
+    return this.#event ?? null;
+  }
+
+  #event;
+
+  /* -------------------------------------------- */
+
+  /**
    * The Item whose activities are being chosen.
    * @type {Item5e}
    */
@@ -80,8 +93,9 @@ export default class ActivityChoiceDialog extends Application5e {
   /** @inheritDoc */
   async _prepareContext(options) {
     let controlHint;
-    if ( game.settings.get("dnd5e", "controlHints") ) {
-      controlHint = game.i18n.localize("DND5E.Controls.Activity.FastForwardHint");
+    const key = localizedKeybinding("skipDialogNormal");
+    if ( game.settings.get("dnd5e", "controlHints") && key ) {
+      controlHint = game.i18n.format("DND5E.Controls.Activity.FastForwardHint", { key });
       controlHint = controlHint.replace(
         "<left-click>",
         `<img src="systems/dnd5e/icons/svg/mouse-left.svg" alt="${game.i18n.localize("DND5E.Controls.LeftClick")}">`
@@ -139,6 +153,7 @@ export default class ActivityChoiceDialog extends Application5e {
   static async #onChooseActivity(event, target) {
     const { activityId } = target.dataset;
     this.#activity = this.#item.system.activities.get(activityId);
+    this.#event = event;
     this.close();
   }
 
@@ -148,14 +163,17 @@ export default class ActivityChoiceDialog extends Application5e {
 
   /**
    * Display the activity choice dialog.
-   * @param {Item5e} item                         The Item whose activities are being chosen.
-   * @param {ApplicationConfiguration} [options]  Application configuration options.
-   * @returns {Promise<Activity|null>}            The chosen activity, or null if the dialog was dismissed.
+   * @param {Item5e} item                                           The Item whose activities are being chosen.
+   * @param {ApplicationConfiguration} [options]                    Application configuration options.
+   * @returns {Promise<{ activity: Activity, event: Event }|null>}  The chosen activity & click event, or null if the
+   *                                                                dialog was dismissed.
    */
   static create(item, options) {
     return new Promise(resolve => {
       const dialog = new this(item, options);
-      dialog.addEventListener("close", () => resolve(dialog.activity), { once: true });
+      dialog.addEventListener("close", () =>
+        resolve({ activity: dialog.activity, event: dialog.event }),
+      { once: true });
       dialog.render({ force: true });
     });
   }
