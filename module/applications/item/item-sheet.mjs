@@ -446,7 +446,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     }
 
     // All other advancements by level
-    for ( let [level, advancements] of Object.entries(this.item.advancement.byLevel) ) {
+    for ( let [level, advancements] of Object.entries(this.item.advancement.documentsByLevel) ) {
       if ( !configMode ) advancements = advancements.filter(a => a.appliesToClass);
       const items = advancements.map(advancement => ({
         id: advancement.id,
@@ -836,7 +836,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
     // Advancement
     else if ( li.classList.contains("advancement-item") ) {
-      dragData = this.item.advancement.byId[li.dataset.id]?.toDragData();
+      dragData = this.item.advancement.get(li.dataset.id)?.toDragData();
     }
 
     if ( !dragData ) return;
@@ -964,7 +964,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     } else if ( data.type === "Item" ) {
       const item = await Item.implementation.fromDropData(data);
       if ( !item?.system.advancement ) return false;
-      advancements = Object.values(item.advancement.byId);
+      advancements = Array.from(item.advancement.values());
       showDialog = true;
     } else {
       return false;
@@ -972,7 +972,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     advancements = advancements.filter(a => {
       const validItemTypes = CONFIG.DND5E.advancementTypes[a.constructor.typeName]?.validItemTypes
         ?? a.metadata.validItemTypes;
-      return !this.item.advancement.byId[a.id]
+      return !this.item.advancement.get(a.id)
         && validItemTypes.has(this.item.type)
         && a.constructor.availableForItem(this.item);
     });

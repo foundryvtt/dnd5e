@@ -316,7 +316,7 @@ export default class AdvancementManager extends Application5e {
   static forDeletedAdvancement(actor, itemId, advancementId, options={}) {
     const manager = new this(actor, options);
     const clonedItem = manager.clone.items.get(itemId);
-    const advancement = clonedItem?.advancement.byId[advancementId];
+    const advancement = clonedItem?.advancement.get(advancementId);
     if ( !advancement ) return manager;
 
     const minimumLevel = advancement.levels[0];
@@ -455,7 +455,7 @@ export default class AdvancementManager extends Application5e {
     const match = (advancement, step) => (step.flow?.item.id === item.id)
       && (step.flow?.advancement.id === advancement.id)
       && (step.flow?.level === level);
-    return (item?.advancement.byLevel[level] ?? [])
+    return (item?.advancement?.documentsByLevel[level] ?? [])
       .filter(a => a.appliesToClass)
       .map(a => {
         const existing = findExisting?.find(s => match(a, s))?.flow;

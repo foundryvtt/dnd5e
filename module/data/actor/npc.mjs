@@ -467,7 +467,8 @@ export default class NPCData extends CreatureTemplate {
 
     // Hit Points
     const hpOptions = {
-      advancement: Object.values(this.parent.classes).map(c => c.advancement.byType.HitPoints?.[0]).filter(a => a),
+      advancement: Object.values(this.parent.classes)
+        .map(c => c.advancement.documentsByType.HitPoints?.[0]).filter(a => a),
       mod: this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0
     };
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);

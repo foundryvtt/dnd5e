@@ -394,7 +394,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       const ctx = context.itemContext[cls.id] ??= {};
       const subclass = context.subclasses.findSplice(s => s.system.classIdentifier === cls.identifier);
       if ( !subclass ) {
-        const subclassAdvancement = cls.advancement.byType.Subclass?.[0];
+        const subclassAdvancement = cls.advancement.documentsByType.Subclass?.[0];
         if ( subclassAdvancement && (subclassAdvancement.level <= cls.system.levels) ) ctx.needsSubclass = true;
       }
     }

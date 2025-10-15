@@ -148,7 +148,7 @@ export default class ClassData extends ItemDataModel.mixin(
    */
   static _migrateTraitAdvancement(source) {
     const system = source.system;
-    if ( !system?.advancement || Object.values(system.advancement).find(a => a.type === "Trait") ) return;
+    if ( !system?.advancement || Object.values(system.advancement).find(a => a?.type === "Trait") ) return;
     let needsMigration = false;
 
     if ( system.saves?.length ) {

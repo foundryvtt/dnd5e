@@ -1,7 +1,5 @@
 import SystemDataModel from "../../abstract/system-data-model.mjs";
-import AdvancementCollectionField from "../../fields/advancement-collection-field.mjs";
-
-const { ArrayField } = foundry.data.fields;
+import AdvancementCollectionField from "../fields/advancement-collection-field.mjs";
 
 /**
  * Data model template for items with advancement.
@@ -66,7 +64,7 @@ export default class AdvancementTemplate extends SystemDataModel {
         if ( advancement._preCreate(baseData) === false ) return obj;
         obj[advancement.id] = advancement.toObject();
         return obj;
-      })
+      }, {})
     });
   }
 
