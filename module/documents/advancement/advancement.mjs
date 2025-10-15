@@ -229,49 +229,6 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
   /* -------------------------------------------- */
 
   /**
-   * Get the value of a "flag" for this Advancement.
-   * @param {string} scope  The flag scope which namespaces the key.
-   * @param {string} key    The flag key path within the scope.
-   * @returns {*}           The flag value.
-   */
-  getFlag(scope, key) {
-    const scopes = Item.database.getFlagScopes();
-    if ( !scopes.includes(scope) ) throw new Error(`Flag scope "${scope}" is not valid or not currently active`);
-    return getProperty(this.flags?.[scope], key);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Assign a flag to this Advancement in the same manner as standard Documents.
-   * @param {string} scope            The flag scope which namespaces the key.
-   * @param {string} keyPath          The flag key path within the scope.
-   * @param {*} value                 The flag value.
-   * @returns {Promise<Advancement>}  A Promise resolving to the updated document.
-   */
-  async setFlag(scope, keyPath, value) {
-    const scopes = Item.database.getFlagScopes();
-    if ( !scopes.includes(scope) ) throw new Error(`Flag scope "${scope}" is not valid or not currently active`);
-    return this.update({[`flags.${scope}.${keyPath}`]: value});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Remove a flag assigned to the Advancement.
-   * @param {string} scope            The flag scope which namespaces the key.
-   * @param {string} keyPath          The flag key path within the scope.
-   * @returns {Promise<Advancement>}  The updated document instance.
-   */
-  async unsetFlag(scope, keyPath) {
-    const scopes = Item.database.getFlagScopes();
-    if ( !scopes.includes(scope) ) throw new Error(`Flag scope "${scope}" is not valid or not currently active`);
-    return this.update({[`flags.${scope}.${keyPath}`.replace(/\.([\w\d]+)$/, ".-=$1")]: null});
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Can an advancement of this type be added to the provided item?
    * @param {Item5e} item  Item to check against.
    * @returns {boolean}    Should this be enabled as an option when creating an advancement.
