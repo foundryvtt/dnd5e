@@ -70,23 +70,25 @@ export default class TravelField extends foundry.data.fields.SchemaField {
     for ( const type of Object.keys(travel.speeds) ) {
       let pace = travel.paces[type] = Math.max(0, simplifyBonus(travel.paces[type], rollData)) * multiplier;
       const speed = travel.speeds[type] = Math.max(0, simplifyBonus(travel.speeds[type], rollData)) * multiplier;
-      if ( pace > travel.paces.max ) travel.paces.max = pace;
-      if ( speed > travel.speeds.max ) travel.speeds.max = speed;
       if ( speed && !pace ) pace = travel.paces[type] = speed * TravelField.#HOURS_PER_DAY;
       if ( pace && !speed ) travel.speeds[type] = Math.floor(pace / TravelField.#HOURS_PER_DAY);
       if ( pace && paceMode ) travel.paces[type] = TravelField.applyPaceMultiplier(
         pace, paceMode, CONFIG.DND5E.travelUnits[units]?.type
       );
+      if ( pace > travel.paces.max ) travel.paces.max = pace;
+      if ( speed > travel.speeds.max ) travel.speeds.max = speed;
     }
 
     if ( !movement ) return;
     for ( const [type, { travel: travelType="land" }] of Object.entries(CONFIG.DND5E.movementTypes) ) {
       if ( !movement[type] ) continue;
       const speed = TravelField.convertMovementToTravel(movement[type], movement.units, units);
-      travel.paces[travelType] ||= TravelField.applyPaceMultiplier(
+      const pace = travel.paces[travelType] ||= TravelField.applyPaceMultiplier(
         speed * TravelField.#HOURS_PER_DAY, paceMode, CONFIG.DND5E.movementUnits[movement.units]?.type
       );
       travel.speeds[travelType] ||= speed;
+      if ( pace > travel.paces.max ) travel.paces.max = pace;
+      if ( speed > travel.speeds.max ) travel.speeds.max = speed;
     }
   }
 
