@@ -2766,21 +2766,23 @@ preLocalize("movementUnits", { keys: ["label", "abbreviation"] });
  */
 DND5E.travelUnits = {
   mph: {
-    label: "DND5E.UNITS.TRAVEL.MilePerHour.Label",
-    abbreviation: "DND5E.UNITS.TRAVEL.MilePerHour.Abbreviation",
+    label: "DND5E.UNITS.TRAVEL.Mile.Label",
+    abbreviationDay: "DND5E.UNITS.TRAVEL.Mile.AbbreviationDay",
+    abbreviationHour: "DND5E.UNITS.TRAVEL.Mile.AbbreviationHour",
     formattingUnit: "mile",
     conversion: 1,
     type: "imperial"
   },
   kph: {
-    label: "DND5E.UNITS.TRAVEL.KilometerPerHour.Label",
-    abbreviation: "DND5E.UNITS.TRAVEL.KilometerPerHour.Abbreviation",
+    label: "DND5E.UNITS.TRAVEL.Kilometer.Label",
+    abbreviationDay: "DND5E.UNITS.TRAVEL.Kilometer.AbbreviationDay",
+    abbreviationHour: "DND5E.UNITS.TRAVEL.Kilometer.AbbreviationHour",
     formattingUnit: "kilometer",
     conversion: 0.6,
     type: "metric"
   }
 };
-preLocalize("travelUnits", { keys: ["label", "abbreviation"] });
+preLocalize("travelUnits", { keys: ["label", "abbreviationDay", "abbreviationHour"] });
 
 /* -------------------------------------------- */
 

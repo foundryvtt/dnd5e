@@ -4700,14 +4700,16 @@
     }
   },
   "TRAVEL": {
-    "KilometerPerHour": {
-      "Abbreviation": "km/h",
-      "Label": "Kilometers per Hour"
+    "Kilometer": {
+      "AbbreviationHour": "km/h",
+      "AbbreviationDay": "km/d",
+      "Label": "Kilometers"
     },
     "Label": "Travel Unit",
-    "MilePerHour": {
-      "Abbreviation": "mph",
-      "Label": "Miles per Hour"
+    "Mile": {
+      "AbbreviationDay": "mi/d",
+      "AbbreviationHour": "mph",
+      "Label": "Miles"
     }
   },
   "VOLUME": {

@@ -13,7 +13,8 @@
         {{ formInput field value=source placeholder="—" }}
         {{else if fields}}
         {{ formInput fields.value value=source.value placeholder="—" }}
-        {{ formInput fields.units value=source.units choices=unitsConfig labelAttr="abbreviation" }}
+        {{ formInput fields.units value=source.units choices=unitsConfig
+                     labelAttr=(ifThen abbreviationKey abbreviationKey "abbreviation") }}
         {{/if}}
 
         {{else}}
@@ -21,7 +22,8 @@
         {{#if data.units}}
         <span class="counter">
             <span class="value">{{ dnd5e-numberFormat data.value }}</span>
-            <span class="units">{{ lookup (lookup unitsConfig data.units) "abbreviation" }}</span>
+            <span class="units">{{ lookup (lookup unitsConfig data.units)
+                                          (ifThen abbreviationKey abbreviationKey "abbreviation") }}</span>
         </span>
         {{else}}
         <span class="counter">{{ ifThen data.value data.value value }}</span>
