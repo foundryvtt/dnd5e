@@ -2,7 +2,7 @@ import { convertLength, convertTravelSpeed, simplifyBonus } from "../../../utils
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 
-const { StringField } = foundry.data.fields;
+const { NumberField, StringField } = foundry.data.fields;
 
 /**
  * @typedef {"slow"|"normal"|"fast"} TravelPace5e
@@ -20,17 +20,21 @@ const { StringField } = foundry.data.fields;
  * Field for storing travel data.
  */
 export default class TravelField extends foundry.data.fields.SchemaField {
-  constructor(fields={}, { initialUnits=null, ...options }={}) {
+  constructor(fields={}, { initialTime=8, initialUnits=null, ...options }={}) {
     fields = {
       pace: new StringField({
         required: true, blank: false, initial: "normal", choices: () => CONFIG.DND5E.travelPace,
-        label: "DND5E.Travel.Label"
+        label: "DND5E.TRAVEL.Label"
       }),
       paces: new MappingField(new FormulaField({ deterministic: true }), {
         initialKeys: CONFIG.DND5E.travelTypes, initialKeysOnly: true
       }),
       speeds: new MappingField(new FormulaField({ deterministic: true }), {
         initialKeys: CONFIG.DND5E.travelTypes, initialKeysOnly: true
+      }),
+      time: new NumberField({
+        positive: true, integer: true, initial: initialTime,
+        label: "DND5E.TRAVEL.FIELDS.time.label", hint: "DND5E.TRAVEL.FIELDS.time.hint"
       }),
       units: new StringField({
         required: true, nullable: true, blank: false, initial: initialUnits, label: "DND5E.UNITS.TRAVEL.Label"
@@ -40,14 +44,6 @@ export default class TravelField extends foundry.data.fields.SchemaField {
     Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);
     super(fields, options);
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Number of hours of travel per day.
-   * @type {number}
-   */
-  static #HOURS_PER_DAY = 8; // TODO: Allow this to be configured
 
   /* -------------------------------------------- */
   /*  Data Preparation                            */
@@ -70,8 +66,8 @@ export default class TravelField extends foundry.data.fields.SchemaField {
     for ( const type of Object.keys(travel.speeds) ) {
       let pace = travel.paces[type] = Math.max(0, simplifyBonus(travel.paces[type], rollData)) * multiplier;
       const speed = travel.speeds[type] = Math.max(0, simplifyBonus(travel.speeds[type], rollData)) * multiplier;
-      if ( speed && !pace ) pace = travel.paces[type] = speed * TravelField.#HOURS_PER_DAY;
-      if ( pace && !speed ) travel.speeds[type] = Math.floor(pace / TravelField.#HOURS_PER_DAY);
+      if ( speed && !pace ) pace = travel.paces[type] = speed * travel.time;
+      if ( pace && !speed ) travel.speeds[type] = Math.floor(pace / travel.time);
       if ( pace && paceMode ) travel.paces[type] = TravelField.applyPaceMultiplier(
         pace, paceMode, CONFIG.DND5E.travelUnits[units]?.type
       );
@@ -84,7 +80,7 @@ export default class TravelField extends foundry.data.fields.SchemaField {
       if ( !movement[type] ) continue;
       const speed = TravelField.convertMovementToTravel(movement[type], movement.units, units);
       const pace = travel.paces[travelType] ||= TravelField.applyPaceMultiplier(
-        speed * TravelField.#HOURS_PER_DAY, paceMode, CONFIG.DND5E.movementUnits[movement.units]?.type
+        speed * travel.time, paceMode, CONFIG.DND5E.movementUnits[movement.units]?.type
       );
       travel.speeds[travelType] ||= speed;
       if ( pace > travel.paces.max ) travel.paces.max = pace;

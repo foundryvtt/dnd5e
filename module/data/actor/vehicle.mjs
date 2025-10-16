@@ -146,7 +146,9 @@ export default class VehicleData extends CommonTemplate {
         quality: new SchemaField({
           value: new NumberField({ required: true, nullable: false, integer: true, min: -10, max: 10, initial: 4 })
         }),
-        travel: new TravelField({ pace: false, }, { initialUnits: defaultUnits("travel") })
+        travel: new TravelField({ pace: false, }, {
+          initialTime: () => CONFIG.DND5E.travelTimes.vehicle, initialUnits: () => defaultUnits("travel")
+        })
       }, { label: "DND5E.Attributes" }),
       crew: new SchemaField({
         max: new NumberField({ min: 0, integer: true }),

@@ -42,7 +42,7 @@
             {{!-- Movement --}}
             <div class="movement card">
                 <div class="header travel-pace">
-                    <h3>{{ localize "DND5E.Travel.Label" }}</h3>
+                    <h3>{{ localize "DND5E.TRAVEL.Label" }}</h3>
                     {{#if editable}}
                     <button type="button" class="config-button unbutton" data-action="showConfiguration"
                             data-config="movement" data-tooltip aria-label="{{ localize "DND5E.MOVEMENT.Action.Configure" }}">
@@ -62,19 +62,19 @@
                 </div>
                 <div class="info">
                     <div>
-                        <span class="label">{{ localize "DND5E.Travel.Type.Land" }}</span>
+                        <span class="label">{{ localize "DND5E.TRAVEL.Type.Land" }}</span>
                         <span class="value">
                             {{ dnd5e-numberFormat system.attributes.travel.paces.land blank="—" }}
                         </span>
                     </div>
                     <div>
-                        <span class="label">{{ localize "DND5E.Travel.Type.Water" }}</span>
+                        <span class="label">{{ localize "DND5E.TRAVEL.Type.Water" }}</span>
                         <span class="value">
                             {{ dnd5e-numberFormat system.attributes.travel.paces.water blank="—" }}
                         </span>
                     </div>
                     <div>
-                        <span class="label">{{ localize "DND5E.Travel.Type.Air" }}</span>
+                        <span class="label">{{ localize "DND5E.TRAVEL.Type.Air" }}</span>
                         <span class="value">
                             {{ dnd5e-numberFormat system.attributes.travel.paces.air blank="—" }}
                         </span>

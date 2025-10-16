@@ -2624,18 +2624,29 @@ patchConfig("movementTypes", "label", { since: "DnD5e 5.1", until: "DnD5e 5.3" }
 /* -------------------------------------------- */
 
 /**
+ * Default number of hours per day traveled by specific actor types.
+ * @enum {number}
+ */
+DND5E.travelTimes = {
+  group: 8,
+  vehicle: 24
+};
+
+/* -------------------------------------------- */
+
+/**
  * Types of movement supported by creature actors in the system.
  * @enum {MovementTypeConfig}
  */
 DND5E.travelTypes = {
   land: {
-    label: "DND5E.Travel.Type.Land"
+    label: "DND5E.TRAVEL.Type.Land"
   },
   water: {
-    label: "DND5E.Travel.Type.Water"
+    label: "DND5E.TRAVEL.Type.Water"
   },
   air: {
-    label: "DND5E.Travel.Type.Air"
+    label: "DND5E.TRAVEL.Type.Air"
   }
 };
 preLocalize("travelTypes", { key: "label" });
@@ -2655,17 +2666,17 @@ preLocalize("travelTypes", { key: "label" });
  */
 DND5E.travelPace = Object.freeze({
   slow: {
-    label: "DND5E.Travel.Pace.Slow",
+    label: "DND5E.TRAVEL.Pace.Slow",
     standard: 18,
     multiplier: 2 / 3
   },
   normal: {
-    label: "DND5E.Travel.Pace.Normal",
+    label: "DND5E.TRAVEL.Pace.Normal",
     standard: 24,
     multiplier: 1
   },
   fast: {
-    label: "DND5E.Travel.Pace.Fast",
+    label: "DND5E.TRAVEL.Pace.Fast",
     standard: 30,
     multiplier: 4 / 3
   }

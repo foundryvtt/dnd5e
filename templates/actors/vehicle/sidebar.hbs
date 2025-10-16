@@ -165,13 +165,13 @@
     {{/if}}
     {{#if showTravelSpeed}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-sailboat"
-        label="DND5E.Travel.Speed" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure"
+        label="DND5E.TRAVEL.Speed" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure"
         unitsConfig=CONFIG.travelUnits formatted=(dnd5e-formatTravelSpeed system.attributes.travel.speeds.max
         unit=system.attributes.travel.units period="hour" parts=true) }}
     {{/if}}
     {{#if showTravelPace}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-sun"
-        label="DND5E.Travel.Label" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure"
+        label="DND5E.TRAVEL.Label" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure"
         unitsConfig=CONFIG.travelUnits formatted=(dnd5e-formatTravelSpeed system.attributes.travel.paces.max
         unit=system.attributes.travel.units period="day" parts=true) }}
     {{/if}}

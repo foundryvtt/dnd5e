@@ -41,7 +41,9 @@ export default class GroupData extends GroupTemplate {
         actor: new ForeignDocumentField(foundry.documents.BaseActor)
       }), { label: "DND5E.GroupMembers" }),
       attributes: new SchemaField({
-        travel: new TravelField({}, { initialUnits: defaultUnits("travel") })
+        travel: new TravelField({}, {
+          initialTime: () => CONFIG.DND5E.travelTimes.group, initialUnits: () => defaultUnits("travel")
+        })
       }, { label: "DND5E.Attributes" }),
       details: new SchemaField({
         xp: new SchemaField({
