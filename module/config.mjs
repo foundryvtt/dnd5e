@@ -9,7 +9,7 @@ import MappingField from "./data/fields/mapping-field.mjs";
 import VehicleData from "./data/actor/vehicle.mjs";
 
 /**
- * @import { TravelPace5e } from "./data/shared/movement-field.mjs";
+ * @import { TravelPace5e } from "./data/actor/fields/travel-field.mjs";
  */
 
 // Namespace Configuration Values
@@ -2587,6 +2587,8 @@ preLocalize("difficultTerrainTypes", { key: "label", sort: true });
 /**
  * @typedef MovementTypeConfig
  * @property {string} label            Localized label for the movement type.
+ * @property {string} [travel]         Travel type in `CONFIG.DND5E.travelTypes` to map this movement speed to. If not
+ *                                     provided, then `land` is assumed.
  * @property {boolean} [walkFallback]  When this special movement type runs out, can the actor fall back to using their
  *                                     walk speed at 2x cost?
  */
@@ -2604,10 +2606,12 @@ DND5E.movementTypes = {
     walkFallback: true
   },
   fly: {
-    label: "DND5E.MOVEMENT.Type.Fly"
+    label: "DND5E.MOVEMENT.Type.Fly",
+    travel: "air"
   },
   swim: {
     label: "DND5E.MOVEMENT.Type.Swim",
+    travel: "water",
     walkFallback: true
   },
   walk: {
@@ -2616,6 +2620,25 @@ DND5E.movementTypes = {
 };
 preLocalize("movementTypes", { key: "label", sort: true });
 patchConfig("movementTypes", "label", { since: "DnD5e 5.1", until: "DnD5e 5.3" });
+
+/* -------------------------------------------- */
+
+/**
+ * Types of movement supported by creature actors in the system.
+ * @enum {MovementTypeConfig}
+ */
+DND5E.travelTypes = {
+  land: {
+    label: "DND5E.Travel.Type.Land"
+  },
+  water: {
+    label: "DND5E.Travel.Type.Water"
+  },
+  air: {
+    label: "DND5E.Travel.Type.Air"
+  }
+};
+preLocalize("travelTypes", { key: "label" });
 
 /* -------------------------------------------- */
 
@@ -2663,8 +2686,8 @@ DND5E.defaultUnits = {
     metric: "m"
   },
   travel: {
-    imperial: "mi",
-    metric: "km"
+    imperial: "mph",
+    metric: "kph"
   },
   volume: {
     imperial: "cubicFoot",
@@ -2733,6 +2756,33 @@ DND5E.movementUnits = {
   }
 };
 preLocalize("movementUnits", { keys: ["label", "abbreviation"] });
+
+/* -------------------------------------------- */
+
+/**
+ * The valid units for measuring travel speed. When being formatted, the formatting unit will be combined with
+ * `-per-hour` or `-per-day` to result in the final unit passed to `Intl.NumberFormat`.
+ * @enum {UnitConfiguration}
+ */
+DND5E.travelUnits = {
+  mph: {
+    label: "DND5E.UNITS.TRAVEL.Mile.Label",
+    abbreviationDay: "DND5E.UNITS.TRAVEL.Mile.AbbreviationDay",
+    abbreviationHour: "DND5E.UNITS.TRAVEL.Mile.AbbreviationHour",
+    formattingUnit: "mile",
+    conversion: 1,
+    type: "imperial"
+  },
+  kph: {
+    label: "DND5E.UNITS.TRAVEL.Kilometer.Label",
+    abbreviationDay: "DND5E.UNITS.TRAVEL.Kilometer.AbbreviationDay",
+    abbreviationHour: "DND5E.UNITS.TRAVEL.Kilometer.AbbreviationHour",
+    formattingUnit: "kilometer",
+    conversion: 0.6,
+    type: "metric"
+  }
+};
+preLocalize("travelUnits", { keys: ["label", "abbreviationDay", "abbreviationHour"] });
 
 /* -------------------------------------------- */
 

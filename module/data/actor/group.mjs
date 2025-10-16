@@ -1,5 +1,5 @@
 import { defaultUnits } from "../../utils.mjs";
-import MovementField from "../shared/movement-field.mjs";
+import TravelField from "./fields/travel-field.mjs";
 import GroupSystemFlags from "./group-system-flags.mjs";
 import GroupTemplate from "./templates/group.mjs";
 
@@ -7,7 +7,7 @@ const { ArrayField, ForeignDocumentField, NumberField, SchemaField, StringField 
 
 /**
  * @import { RestConfiguration, RestResult } from "../../documents/actor/actor.mjs";
- * @import { TravelPace5e } from "../shared/movement-field.mjs";
+ * @import { TravelData } from "./fields/travel-field.mjs";
  */
 
 /**
@@ -28,12 +28,7 @@ const { ArrayField, ForeignDocumentField, NumberField, SchemaField, StringField 
  *
  * @property {PartyMemberData[]} members         Members in this group with associated metadata.
  * @property {object} attributes
- * @property {object} attributes.movement
- * @property {number} attributes.movement.land   Base movement speed over land.
- * @property {number} attributes.movement.water  Base movement speed over water.
- * @property {number} attributes.movement.air    Base movement speed through the air.
- * @property {TravelPace5e} attributes.movement.pace  Travel pace.
- * @property {string} attributes.movement.unit   The length units.
+ * @property {TravelData} attributes.travel
  * @property {object} details
  * @property {object} details.xp
  * @property {number} details.xp.value           XP currently available to be distributed to a party.
@@ -46,25 +41,7 @@ export default class GroupData extends GroupTemplate {
         actor: new ForeignDocumentField(foundry.documents.BaseActor)
       }), { label: "DND5E.GroupMembers" }),
       attributes: new SchemaField({
-        movement: new SchemaField({
-          land: new NumberField({
-            nullable: false, min: 0, step: 0.1, initial: 0, speed: true, label: "DND5E.MovementLand"
-          }),
-          water: new NumberField({
-            nullable: false, min: 0, step: 0.1, initial: 0, speed: true, label: "DND5E.MovementWater"
-          }),
-          air: new NumberField({
-            nullable: false, min: 0, step: 0.1, initial: 0, speed: true, label: "DND5E.MovementAir"
-          }),
-          pace: new StringField({
-            required: true, blank: false, initial: "normal", choices: () => CONFIG.DND5E.travelPace,
-            label: "DND5E.Travel.Label"
-          }),
-          units: new StringField({
-            required: true, nullable: true, blank: false, label: "DND5E.MOVEMENT.FIELDS.units.label",
-            initial: defaultUnits("travel")
-          })
-        })
+        travel: new TravelField({}, { initialUnits: defaultUnits("travel") })
       }, { label: "DND5E.Attributes" }),
       details: new SchemaField({
         xp: new SchemaField({
@@ -136,6 +113,7 @@ export default class GroupData extends GroupTemplate {
   static _migrateData(source) {
     super._migrateData(source);
     GroupData.#migrateMembers(source);
+    GroupData.#migrateTravel(source);
   }
 
   /* -------------------------------------------- */
@@ -150,6 +128,26 @@ export default class GroupData extends GroupTemplate {
       if ( foundry.utils.getType(m) === "Object" ) return m;
       return { actor: m };
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate travel speeds from `attributes.movement` to `attributes.travel`.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateTravel(source) {
+    if ( source.attributes?.travel || !source.attributes?.movement ) return;
+    let { pace, units, ...paces } = source.attributes.movement;
+    const config = CONFIG.DND5E.movementUnits[units];
+    const finalUnit = config?.type === "metric" ? "kph" : "mph";
+    const perRound = config?.travelResolution === "round";
+    Object.keys(paces).forEach(k => {
+      if ( perRound ) paces[k] = TravelField.convertMovementToTravel(paces[k], units, finalUnit) * 8;
+      if ( !paces[k] ) delete paces[k];
+    });
+    source.attributes ??= {};
+    source.attributes.travel = { pace, paces, units: finalUnit };
   }
 
   /* -------------------------------------------- */
@@ -184,8 +182,9 @@ export default class GroupData extends GroupTemplate {
 
   /** @inheritDoc */
   prepareDerivedData() {
-    this.parent.labels.pace = CONFIG.DND5E.travelPace[this.attributes.movement.pace]?.label;
-    MovementField.prepareData.call(this.attributes.movement, this.schema.getField("attributes.movement"));
+    const rollData = this.parent.getRollData({ deterministic: true });
+    this.parent.labels.pace = CONFIG.DND5E.travelPace[this.attributes.travel.pace]?.label;
+    TravelField.prepareData.call(this, rollData);
   }
 
   /* -------------------------------------------- */

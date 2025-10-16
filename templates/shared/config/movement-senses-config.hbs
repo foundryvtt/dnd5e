@@ -1,5 +1,7 @@
 <section class="flexcol">
+    {{#if fields}}
     <fieldset class="card">
+        {{#if legend}}<legend>{{ legend }}</legend>{{/if}}
         {{#each types}}
         {{#if (eq field.name "fly")}}
         <div class="form-group split-group">
@@ -7,20 +9,52 @@
             <div class="form-fields">
                 {{ formInput field value=value placeholder=placeholder }}
                 {{#with @root.hover}}
-                {{ formField field value=value input=input localize=localize classes="checkbox" }}
+                {{ formField field value=value input=input localize=localize classes="checkbox" rootId=@root.partId }}
                 {{/with}}
             </div>
         </div>
         {{else}}
-        {{ formField field value=value placeholder=placeholder localize=true }}
+        {{ formField field value=value placeholder=placeholder localize=true rootId=@root.partId }}
         {{/if}}
         {{/each}}
         {{#if (or fields.units extras.length)}}<hr>{{/if}}
         {{#if fields.units}}
-        {{ formField fields.units value=data.units options=unitsOptions localize=true blank=unitsOptions.blank }}
+        {{ formField fields.units value=data.units options=unitsOptions localize=true blank=unitsOptions.blank
+                     rootId=partId }}
         {{/if}}
         {{> "dnd5e.fieldlist" extras }}
     </fieldset>
+    {{/if}}
+
+    {{#with travel}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.Travel.Speed" }}</legend>
+        <div class="header">
+            <div class="form-group split-group">
+                <span></span>
+                <div class="form-fields">
+                    <span>{{ localize "DND5E.Travel.Per.Hour" }}</span>
+                    <span>{{ localize "DND5E.Travel.Per.Day" }}</span>
+                </div>
+            </div>
+        </div>
+        {{#each types}}
+        <div class="form-group split-group">
+            <label>{{ label }}</label>
+            <div class="form-fields">
+                {{ formInput speed.field name=speed.name value=speed.value placeholder=speed.placeholder }}
+                {{ formInput pace.field name=pace.name value=pace.value placeholder=pace.placeholder }}
+            </div>
+        </div>
+        {{/each}}
+        <hr>
+        {{#if fields.units}}
+        {{ formField fields.units value=data.units options=unitsOptions localize=true blank=false rootId=@root.partId }}
+        {{/if}}
+        {{> "dnd5e.fieldlist" extras }}
+    </fieldset>
+    {{/with}}
+
     {{#if fields.special}}
     <fieldset class="card">
         <legend>{{ localize "DND5E.Special" }}</legend>

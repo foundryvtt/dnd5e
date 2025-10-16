@@ -2,11 +2,11 @@ import ShortRestDialog from "../../applications/actor/rest/short-rest-dialog.mjs
 import LongRestDialog from "../../applications/actor/rest/long-rest-dialog.mjs";
 import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
+import TravelField from "../../data/actor/fields/travel-field.mjs";
 import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
-import MovementField from "../../data/shared/movement-field.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import {
   convertTime, defaultUnits, formatLength, formatNumber, formatTime, simplifyBonus, staticID
@@ -19,7 +19,7 @@ import SelectChoices from "./select-choices.mjs";
 import * as Trait from "./trait.mjs";
 
 /**
- * @import { TravelPace5e } from "../../data/shared/movement-field.mjs";
+ * @import { TravelPace5e } from "../../data/actor/fields/travel-field.mjs";
  */
 
 /**
@@ -1199,7 +1199,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       ? game.actors.get(this.flags.dnd5e?.originalActor) : null;
     const buildConfig = this._buildSkillToolConfig.bind(this, type, hostActor);
     const doubleProf = !!relevant?.prof.hasProficiency && !!alternate?.prof.hasProficiency;
-    const pace = MovementField.getTravelPaceMode(config.pace, config.skill);
+    const pace = TravelField.getTravelPaceMode(config.pace, config.skill);
 
     const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
       `abilities.${abilityId}.check.roll.mode`,

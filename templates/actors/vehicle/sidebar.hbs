@@ -158,9 +158,23 @@
     {{/if}}
 
     {{!-- Speed --}}
+    {{#if showCombatSpeed}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-shoe-prints"
         label="DND5E.Speed" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure" unitsConfig=CONFIG.movementUnits
         data=(dnd5e-object value=system.attributes.movement.max units=system.attributes.movement.units) }}
+    {{/if}}
+    {{#if showTravelSpeed}}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-sailboat"
+        label="DND5E.Travel.Speed" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure"
+        unitsConfig=CONFIG.travelUnits abbreviationKey="abbreviationHour"
+        data=(dnd5e-object value=system.attributes.travel.speeds.max units=system.attributes.travel.units) }}
+    {{/if}}
+    {{#if showTravelPace}}
+    {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-sun"
+        label="DND5E.Travel.Label" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure"
+        unitsConfig=CONFIG.travelUnits abbreviationKey="abbreviationDay"
+        data=(dnd5e-object value=system.attributes.travel.paces.max units=system.attributes.travel.units) }}
+    {{/if}}
 
     {{!-- Cost --}}
     {{#if (or editable system.attributes.price.value)}}

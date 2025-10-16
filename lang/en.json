@@ -3438,6 +3438,7 @@
     }
   },
   "Hover": "Hover",
+  "Speed": "Combat Speed",
   "Type": {
     "Burrow": "Burrow",
     "Climb": "Climb",
@@ -3448,9 +3449,6 @@
 },
 
 "DND5E.Movement": "Movement",
-"DND5E.MovementLand": "Land",
-"DND5E.MovementWater": "Water",
-"DND5E.MovementAir": "Air",
 
 "DND5E.SAVE": {
   "Title": {
@@ -4603,6 +4601,16 @@
     "Fast": "Fast",
     "Normal": "Normal",
     "Slow": "Slow"
+  },
+  "Per": {
+    "Day": "Per Day",
+    "Hour": "Per Hour"
+  },
+  "Speed": "Travel Speed",
+  "Type": {
+    "Air": "Air",
+    "Land": "Land",
+    "Water": "Water"
   }
 },
 
@@ -4633,7 +4641,6 @@
 
 "DND5E.UNITS": {
   "DISTANCE": {
-    "Label": "Distance Units",
     "Foot": {
       "Label": "Feet",
       "Abbreviation": "ft"
@@ -4642,6 +4649,7 @@
       "Label": "Kilometers",
       "Abbreviation": "km"
     },
+    "Label": "Distance Unit",
     "Meter": {
       "Label": "Meters",
       "Abbreviation": "m"
@@ -4692,9 +4700,17 @@
     }
   },
   "TRAVEL": {
-    "Day": "per day",
-    "Round": "per round",
-    "UnitLabel": "{unit} ({resolution})"
+    "Kilometer": {
+      "AbbreviationHour": "km/h",
+      "AbbreviationDay": "km/d",
+      "Label": "Kilometers"
+    },
+    "Label": "Travel Unit",
+    "Mile": {
+      "AbbreviationDay": "mi/d",
+      "AbbreviationHour": "mph",
+      "Label": "Miles"
+    }
   },
   "VOLUME": {
     "Label": "Volume Units",
