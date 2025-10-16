@@ -2,6 +2,7 @@ import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { parseOrString, staticID } from "../utils.mjs";
 import Item5e from "./item.mjs";
+import DependentDocumentMixin from "./mixins/dependent.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -9,7 +10,7 @@ const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
  */
-export default class ActiveEffect5e extends ActiveEffect {
+export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect) {
   /**
    * Static ActiveEffect ID for various conditions.
    * @type {Record<string, string>}
@@ -401,6 +402,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     let profile;
     const { chatMessageOrigin } = options;
     const { enchantmentProfile, activityId } = options.dnd5e ?? {};
+    const relativeUUID = this.getRelativeUUID(this.parent);
 
     if ( chatMessageOrigin ) {
       const message = game.messages.get(options?.chatMessageOrigin);
@@ -429,6 +431,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       const activityData = item.system.activities.get(id)?.toObject();
       if ( !activityData ) continue;
       activityData._id = foundry.utils.randomID();
+      foundry.utils.setProperty(activityData, "flags.dnd5e.dependentOn", relativeUUID);
       riderActivities[activityData._id] = activityData;
     }
     let createdActivities = [];
@@ -450,7 +453,8 @@ export default class ActiveEffect5e extends ActiveEffect {
       }
       return effectData;
     }));
-    riderEffects = riderEffects.filter(_ => _);
+    riderEffects = riderEffects.filter(_ => _)
+    riderEffects.forEach(e => foundry.utils.setProperty(e, "flags.dnd5e.dependentOn", relativeUUID));
     const createdEffects = await this.parent.createEmbeddedDocuments("ActiveEffect", riderEffects, { keepId: true });
 
     // Create Items
@@ -458,14 +462,15 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( this.parent.isEmbedded ) {
       const riderItems = await Item5e.createWithContents(
         (await Promise.all(profile.riders.item.map(uuid => fromUuid(uuid)))).filter(_ => _), {
-          transformAll: item => item.clone({ "flags.dnd5e.enchantment.origin": this.uuid }, { keepId: true })
+          transformAll: item => {
+            const itemData = item.clone({}, { keepId: true }).toObject();
+            foundry.utils.setProperty(itemData, "flags.dnd5e.dependentOn", this.uuid);
+            foundry.utils.setProperty(itemData, "flags.dnd5e.enchantment.origin", this.uuid);
+            return itemData;
+          }
         }
       );
       createdItems = await this.parent.actor.createEmbeddedDocuments("Item", riderItems, { keepId: true });
-    }
-
-    if ( createdActivities.length || createdEffects.length || createdItems.length ) {
-      this.addDependent(...createdActivities, ...createdEffects, ...createdItems);
     }
   }
 
@@ -794,9 +799,11 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {Promise<ActiveEffect5e>}
    */
   addDependent(...dependent) {
-    const dependents = this.getFlag("dnd5e", "dependents") ?? [];
-    dependents.push(...dependent.map(d => ({ uuid: d.uuid })));
-    return this.setFlag("dnd5e", "dependents", dependents);
+    foundry.utils.logCompatibilityWarning(
+      "Dependent documents are now tracked using the `dependentOn` flag on the document itself.",
+      { since: "DnD5e 5.2", until: "DnD5e 5.4", once: true }
+    );
+    return Promise.all(dependent.map(d => d.setFlag("dnd5e", "dependentOn", this.uuid))).then(() => this);
   }
 
   /* -------------------------------------------- */
@@ -816,7 +823,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       else effect = fromUuidSync(uuid, { strict: false });
       if ( effect ) arr.push(effect);
       return arr;
-    }, []);
+    }, []).concat(dnd5e.registry.dependents.get(this));
   }
 
   /* -------------------------------------------- */

@@ -153,13 +153,12 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       }
     }
 
+    const flags = { enchantmentProfile: profile };
+    if ( concentration ) flags.dependentOn = concentration.uuid;
     const applied = await ActiveEffect.create(
-      effect.clone({
-        origin: this.uuid, "flags.dnd5e.enchantmentProfile": profile
-      }).toObject(),
+      effect.clone({ origin: this.uuid, "flags.dnd5e": flags }).toObject(),
       { parent: item, keepOrigin: true, chatMessageOrigin: chatMessage?.id }
     );
-    if ( concentration ) await concentration.addDependent(applied);
   }
 
   /* -------------------------------------------- */

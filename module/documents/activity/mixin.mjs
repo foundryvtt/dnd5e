@@ -3,6 +3,7 @@ import ActivityUsageDialog from "../../applications/activity/activity-usage-dial
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { formatNumber, getSceneTargets, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
+import DependentDocumentMixin from "../mixins/dependent.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
@@ -17,7 +18,7 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @mixin
  */
 export default function ActivityMixin(Base) {
-  class Activity extends PseudoDocumentMixin(Base) {
+  class Activity extends DependentDocumentMixin(PseudoDocumentMixin(Base)) {
     /**
      * Configuration information for Activities.
      *

@@ -25,6 +25,7 @@
  * @property {boolean} duration.concentration    Does this effect require concentration?
  * @property {boolean} duration.override         Override duration values inferred from item.
  * @property {EffectApplicationData[]} effects   Linked effects that can be applied.
+ * @property {Record<string, object>} flags      Arbitrary flag data for this activity.
  * @property {RangeData} range
  * @property {boolean} range.override            Override range values inferred from item.
  * @property {TargetData} target
