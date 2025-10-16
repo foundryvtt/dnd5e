@@ -1046,6 +1046,10 @@ function makeObject({ hash }) {
  * Register custom Handlebars helpers used by 5e.
  */
 export function registerHandlebarsHelpers() {
+  const curryUnitFormatter = method => (value, { hash }) => {
+    const { unit, ...options } = hash;
+    return method(value, unit, options);
+  }
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
     "dnd5e-concealSection": concealSection,
@@ -1055,13 +1059,18 @@ export function registerHandlebarsHelpers() {
       if ( !element && options.fallback ) element = generateIcon(options.fallback, options);
       return element ? new Handlebars.SafeString(element.outerHTML) : "";
     },
-    "dnd5e-formatCR": formatCR,
+    "dnd5e-formatCR": (value, options) => formatCR(value, options.hash),
+    "dnd5e-formatLength": curryUnitFormatter(formatLength),
     "dnd5e-formatModifier": formatModifier,
+    "dnd5e-formatTravelSpeed": curryUnitFormatter(formatTravelSpeed),
+    "dnd5e-formatTime": curryUnitFormatter(formatTime),
+    "dnd5e-formatVolume": curryUnitFormatter(formatVolume),
+    "dnd5e-formatWeight": curryUnitFormatter(formatWeight),
     "dnd5e-groupedSelectOptions": groupedSelectOptions,
     "dnd5e-itemContext": itemContext,
     "dnd5e-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
-    "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
-    "dnd5e-numberParts": (context, options) => formatNumberParts(context, options.hash),
+    "dnd5e-numberFormat": (value, options) => formatNumber(value, options.hash),
+    "dnd5e-numberParts": (value, options) => formatNumberParts(value, options.hash),
     "dnd5e-object": makeObject,
     "dnd5e-textFormat": formatText
   });

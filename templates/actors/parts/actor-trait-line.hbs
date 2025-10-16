@@ -1,4 +1,4 @@
-<div class="pills-group empty {{#if (or field fields.units)}}edit-inline units{{/if}}">
+<div class="pills-group empty {{#if (and (or field fields.units) @root.editable)}}edit-inline units{{/if}}">
     <h3 class="icon">
         <i class="{{ icon }} fa-fw" inert></i>
         <span class="roboto-upper">{{ localize label }}</span>
@@ -19,15 +19,9 @@
 
         {{else}}
 
-        {{#if data.units}}
         <span class="counter">
-            <span class="value">{{ dnd5e-numberFormat data.value }}</span>
-            <span class="units">{{ lookup (lookup unitsConfig data.units)
-                                          (ifThen abbreviationKey abbreviationKey "abbreviation") }}</span>
+            {{#if formatted}}{{{ formatted }}}{{else}}{{ ifThen data.value data.value value }}{{/if}}
         </span>
-        {{else}}
-        <span class="counter">{{ ifThen data.value data.value value }}</span>
-        {{/if}}
 
         {{/if}}
     </h3>

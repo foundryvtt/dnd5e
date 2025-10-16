@@ -160,20 +160,20 @@
     {{!-- Speed --}}
     {{#if showCombatSpeed}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-shoe-prints"
-        label="DND5E.Speed" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure" unitsConfig=CONFIG.movementUnits
-        data=(dnd5e-object value=system.attributes.movement.max units=system.attributes.movement.units) }}
+        label="DND5E.Speed" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure" unitsConfig=CONFIG.movementUnits formatted=(dnd5e-formatLength system.attributes.movement.max
+        unit=system.attributes.movement.units parts=true) }}
     {{/if}}
     {{#if showTravelSpeed}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-sailboat"
         label="DND5E.Travel.Speed" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure"
-        unitsConfig=CONFIG.travelUnits abbreviationKey="abbreviationHour"
-        data=(dnd5e-object value=system.attributes.travel.speeds.max units=system.attributes.travel.units) }}
+        unitsConfig=CONFIG.travelUnits formatted=(dnd5e-formatTravelSpeed system.attributes.travel.speeds.max
+        unit=system.attributes.travel.units period="hour" parts=true) }}
     {{/if}}
     {{#if showTravelPace}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-sun"
         label="DND5E.Travel.Label" configAction="movement" configLabel="DND5E.MOVEMENT.Action.Configure"
-        unitsConfig=CONFIG.travelUnits abbreviationKey="abbreviationDay"
-        data=(dnd5e-object value=system.attributes.travel.paces.max units=system.attributes.travel.units) }}
+        unitsConfig=CONFIG.travelUnits formatted=(dnd5e-formatTravelSpeed system.attributes.travel.paces.max
+        unit=system.attributes.travel.units period="day" parts=true) }}
     {{/if}}
 
     {{!-- Cost --}}
@@ -216,14 +216,16 @@
     {{#if (or editable system.traits.weight.value) }}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-weight-hanging"
         label="DND5E.Weight" fields=fields.traits.fields.weight.fields source=source.traits.weight
-        unitsConfig=CONFIG.weightUnits data=system.traits.weight }}
+        unitsConfig=CONFIG.weightUnits formatted=(dnd5e-formatWeight
+        system.traits.weight.value unit=system.traits.weight.units parts=true) }}
     {{/if}}
 
     {{!-- Keel --}}
     {{#if (or editable system.traits.keel.value) }}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-ruler-horizontal"
         label="DND5E.VEHICLE.FIELDS.traits.keel.value.label" fields=fields.traits.fields.keel.fields
-        source=source.traits.keel data=system.traits.keel unitsConfig=CONFIG.movementUnits }}
+        source=source.traits.keel unitsConfig=CONFIG.movementUnits formatted=(dnd5e-formatLength
+        system.traits.keel.value unit=system.traits.keel.units parts=true) }}
     {{/if}}
 
     {{!-- Beam --}}
@@ -231,7 +233,8 @@
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs"
         icon="fa-solid fa-arrows-left-right fa-rotate-by"
         label="DND5E.VEHICLE.FIELDS.traits.beam.value.label" fields=fields.traits.fields.beam.fields
-        source=source.traits.beam data=system.traits.beam unitsConfig=CONFIG.movementUnits }}
+        source=source.traits.beam unitsConfig=CONFIG.movementUnits formatted=(dnd5e-formatLength
+        system.traits.beam.value unit=system.traits.beam.units parts=true) }}
     {{/if}}
 
     {{!-- Cargo --}}
@@ -239,7 +242,8 @@
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-line.hbs" icon="fa-solid fa-box"
         label="DND5E.VEHICLE.FIELDS.attributes.capacity.cargo.value.label"
         fields=fields.attributes.fields.capacity.fields.cargo.fields unitsConfig=CONFIG.weightUnits
-        source=source.attributes.capacity.cargo data=system.attributes.capacity.cargo }}
+        source=source.attributes.capacity.cargo formatted=(dnd5e-formatWeight
+        system.attributes.capacity.cargo.value unit=system.attributes.capacity.cargo.units parts=true) }}
     {{/if}}
 
     {{!-- Crew --}}
