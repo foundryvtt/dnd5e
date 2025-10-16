@@ -2684,6 +2684,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Bonus
     if ( ac.bonus !== 0 ) attribution.push(...this._prepareActiveEffectAttributions("system.attributes.ac.bonus"));
+    if ( ac.bonuses.armored !== 0) attribution.push(...this._prepareActiveEffectAttributions("system.attributes.ac.bonuses.armored"));
+    if ( ac.bonuses.unarmored !== 0) attribution.push(...this._prepareActiveEffectAttributions("system.attributes.ac.bonuses.unarmored"));
 
     // Cover
     if ( ac.cover !== 0 ) attribution.push({

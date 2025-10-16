@@ -135,6 +135,11 @@ export default class AttributesFields {
     ac.armor = 10;
     ac.shield = ac.cover = 0;
     ac.min = ac.bonus = "";
+    ac.ability = {};
+    for ( const [k, v] of Object.entries(CONFIG.DND5E.armorTypes) ) if ( v.maxAbility !== undefined ) ac.ability[k] = "";
+    ac.bonuses = {
+      armored: "", unarmored: ""
+    };
   }
 
   /* -------------------------------------------- */
@@ -202,9 +207,12 @@ export default class AttributesFields {
             message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
           });
           const armorData = armors[0].system.armor;
-          const isHeavy = armors[0].system.type.value === "heavy";
+          const armorType = armors[0].system.type.value;
+          const currMaxDex = armorData.dex ?? CONFIG.DND5E.armorTypes[armorType]?.maxAbility ?? Infinity;
+          const maxDexBonus = simplifyBonus(ac.ability[armorType]);
+          const newMaxDex = armors[0].system.properties.has("uncappedAbility") ? Infinity : currMaxDex + maxDexBonus;
           ac.armor = armorData.value ?? ac.armor;
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.abilities.dex?.mod ?? 0);
+          ac.dex = Math.min(newMaxDex, this.abilities.dex?.mod ?? 0);
           ac.equippedArmor = armors[0];
         }
         else ac.dex = this.abilities.dex?.mod ?? 0;
@@ -239,10 +247,14 @@ export default class AttributesFields {
     // Compute cover.
     ac.cover = Math.max(ac.cover, this.parent.coverBonus);
 
+    // Compute armored/unarmored bonuses
+    ac.bonuses.armored = armors[0] ? simplifyBonus(ac.bonuses.armored, rollData) : 0;
+    ac.bonuses.unarmored = armors[0] ? 0 : simplifyBonus(ac.bonuses.unarmored, rollData);
+
     // Compute total AC and return
     ac.min = simplifyBonus(ac.min, rollData);
     ac.bonus = simplifyBonus(ac.bonus, rollData);
-    ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
+    ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover + ac.bonuses.armored + ac.bonuses.unarmored);
   }
 
   /* -------------------------------------------- */
