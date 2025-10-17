@@ -3,7 +3,7 @@ import TravelField from "./fields/travel-field.mjs";
 import GroupSystemFlags from "./group-system-flags.mjs";
 import GroupTemplate from "./templates/group.mjs";
 
-const { ArrayField, ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, ForeignDocumentField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
  * @import { RestConfiguration, RestResult } from "../../documents/actor/actor.mjs";
@@ -23,23 +23,31 @@ const { ArrayField, ForeignDocumentField, NumberField, SchemaField, StringField 
  */
 
 /**
+ * @typedef TravelPaceDescriptor
+ * @param {object} pace
+ * @param {boolean} pace.available        Whether a travel pace is available to this group.
+ * @param {string} pace.label             The human-readable travel pace label.
+ * @param {boolean} pace.slowed           Whether travel pace has been slowed by a member with reduced speed.
+ * @param {TravelPace5e} pace.value       The travel pace key.
+ * @param {Record<string, number>} paces  The available travel pace speeds.
+ */
+
+/**
  * A data model and API layer which handles the schema and functionality of "group" type Actors in the dnd5e system.
  * @extends {GroupTemplate}
  *
- * @property {PartyMemberData[]} members         Members in this group with associated metadata.
  * @property {object} attributes
  * @property {TravelData} attributes.travel
  * @property {object} details
  * @property {object} details.xp
  * @property {number} details.xp.value           XP currently available to be distributed to a party.
+ * @property {PartyMemberData[]} members         Members in this group with associated metadata.
+ * @property {Actor5e|null} primaryVehicle       The group's primary vehicle.
  */
 export default class GroupData extends GroupTemplate {
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      members: new ArrayField(new SchemaField({
-        actor: new ForeignDocumentField(foundry.documents.BaseActor)
-      }), { label: "DND5E.GroupMembers" }),
       attributes: new SchemaField({
         travel: new TravelField({}, {
           initialTime: () => CONFIG.DND5E.travelTimes.group, initialUnits: () => defaultUnits("travel")
@@ -49,7 +57,11 @@ export default class GroupData extends GroupTemplate {
         xp: new SchemaField({
           value: new NumberField({ integer: true, min: 0, label: "DND5E.ExperiencePoints.Current" })
         }, { label: "DND5E.ExperiencePoints.Label" })
-      }, { label: "DND5E.Details" })
+      }, { label: "DND5E.Details" }),
+      members: new ArrayField(new SchemaField({
+        actor: new ForeignDocumentField(foundry.documents.BaseActor)
+      }), { label: "DND5E.GroupMembers" }),
+      primaryVehicle: new ForeignDocumentField(foundry.documents.BaseActor)
     });
   }
 
@@ -139,17 +151,20 @@ export default class GroupData extends GroupTemplate {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateTravel(source) {
-    if ( source.attributes?.travel || !source.attributes?.movement ) return;
+    if ( !source.attributes?.movement ) return;
+    const travel = source.attributes.travel ??= { paces: {} };
     let { pace, units, ...paces } = source.attributes.movement;
     const config = CONFIG.DND5E.movementUnits[units];
     const finalUnit = config?.type === "metric" ? "kph" : "mph";
     const perRound = config?.travelResolution === "round";
     Object.keys(paces).forEach(k => {
+      if ( travel.paces?.[k] !== undefined ) return;
       if ( perRound ) paces[k] = TravelField.convertMovementToTravel(paces[k], units, finalUnit) * 8;
-      if ( !paces[k] ) delete paces[k];
+      if ( paces[k] ) travel.paces[k] = paces[k];
     });
-    source.attributes ??= {};
-    source.attributes.travel = { pace, paces, units: finalUnit };
+    if ( pace && (travel.pace === undefined) ) travel.pace = pace;
+    if ( units && (travel.units === undefined) ) travel.units = finalUnit;
+    delete source.attributes.movement;
   }
 
   /* -------------------------------------------- */
@@ -178,6 +193,9 @@ export default class GroupData extends GroupTemplate {
       enumerable: false,
       writable: false
     });
+    if ( !memberIds.has(this.primaryVehicle?.id) || (this.primaryVehicle?.type !== "vehicle") ) {
+      this.primaryVehicle = null;
+    }
   }
 
   /* -------------------------------------------- */
@@ -185,7 +203,6 @@ export default class GroupData extends GroupTemplate {
   /** @inheritDoc */
   prepareDerivedData() {
     const rollData = this.parent.getRollData({ deterministic: true });
-    this.parent.labels.pace = CONFIG.DND5E.travelPace[this.attributes.travel.pace]?.label;
     TravelField.prepareData.call(this, rollData);
   }
 
@@ -221,6 +238,50 @@ export default class GroupData extends GroupTemplate {
   /** @override */
   async getPlaceableMembers() {
     return this.getMembers();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get information on travel pace for this group.
+   * @returns {TravelPaceDescriptor}
+   */
+  getTravelPace() {
+    let { pace } = this.attributes.travel;
+    const slowed = this.members.some(({ actor }) => {
+      if ( !actor?.system.isCreature ) return false;
+      const source = actor.system._source.attributes?.movement;
+      const { movement } = actor.system.attributes ?? {};
+      const { fromSpecies } = movement ?? {};
+      for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
+        const base = source?.[key] ?? fromSpecies?.[key];
+        if ( !base ) continue;
+        const current = movement?.[key];
+        if ( current <= (base / 2) ) return true;
+      }
+      return false;
+    });
+    const travelPaces = Object.keys(CONFIG.DND5E.travelPace);
+    const slow = travelPaces.indexOf("slow");
+    if ( slowed && (travelPaces.indexOf(pace) > slow) ) pace = "slow";
+    const { travel: vehicleTravel } = this.primaryVehicle?.system.attributes ?? {};
+    const paces = { ...(vehicleTravel?.paces ?? this.attributes.travel.paces) };
+    if ( (slowed && !this.primaryVehicle) || (this.primaryVehicle?.system.details.type === "land") ) {
+      const { units } = vehicleTravel ?? this.attributes.travel;
+      const unitConfig = CONFIG.DND5E.travelUnits[units];
+      for ( const [k, v] of Object.entries(vehicleTravel?.paces ?? this.attributes.travel.prePace) ) {
+        paces[k] = TravelField.applyPaceMultiplier(v, pace, unitConfig.type);
+      }
+    }
+    return {
+      pace: {
+        slowed,
+        available: !this.primaryVehicle || (this.primaryVehicle.system.details.type === "land"),
+        label: CONFIG.DND5E.travelPace[pace]?.label,
+        value: pace
+      },
+      paces: { ...paces }
+    };
   }
 
   /* -------------------------------------------- */

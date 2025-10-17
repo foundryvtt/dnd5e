@@ -386,7 +386,7 @@ export default class VehicleData extends CommonTemplate {
 
   /**
    * Get vehicle encumbrance including draft animals.
-   * @returns {Promise<object>}
+   * @returns {Promise<{ pct: number, max: number, value: number }>}
    */
   async getEncumbrance() {
     const encumbrance = foundry.utils.deepClone(this.attributes.encumbrance);
@@ -402,6 +402,7 @@ export default class VehicleData extends CommonTemplate {
     if ( weight.value ) {
       encumbrance.max = Math.max(0, encumbrance.max - convertWeight(weight.value, weight.units, units));
     }
+    if ( encumbrance.max ) encumbrance.pct = Math.clamp((encumbrance.value * 100) / encumbrance.max, 0, 100);
     return encumbrance;
   }
 

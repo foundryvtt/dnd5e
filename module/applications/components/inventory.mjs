@@ -206,7 +206,7 @@ export default class InventoryElement extends HTMLElement {
    * @returns {Actor5e|Item5e}
    */
   get document() {
-    return this.app.document;
+    return this.app.inventorySource ?? this.app.document;
   }
 
   /**
@@ -738,7 +738,7 @@ export default class InventoryElement extends HTMLElement {
         summary.slideUp(200, () => summary.remove());
         this.app._expanded.delete(item.id);
       } else {
-        const chatData = await item.getChatData({secrets: this.document.isOwner});
+        const chatData = await item.getChatData({secrets: item.isOwner});
         const summary = $(await foundry.applications.handlebars.renderTemplate(
           "systems/dnd5e/templates/items/parts/item-summary.hbs", chatData
         ));

@@ -112,6 +112,8 @@
             width: 24px;
             line-height: 28px;
             font-size: var(--font-size-10);
+
+            &.suppressed { visibility: hidden; }
           }
         }
       }
@@ -249,6 +251,14 @@
           padding: 3px 6px;
         }
       }
+
+      .primary-vehicle {
+        position: absolute;
+        inset: -6px auto auto -6px;
+        transform: rotate(170deg);
+        font-size: var(--font-size-16);
+        color: var(--dnd5e-color-gold);
+      }
     }
 
     div.stats {
@@ -326,14 +336,7 @@
       gap: 8px;
     }
 
-    .body {
-      padding: 6px 4px calc(1.5rem + 30px) 4px;
-      margin-right: 4px;
-      scrollbar-gutter: stable;
-      overflow-y: auto;
-    }
-
-    .encumbrance {
+    .sidebar .encumbrance {
       width: 100%;
 
       .meter {
@@ -388,7 +391,26 @@
         }
       }
     }
+
+    .body {
+      padding: 6px 4px calc(1.5rem + 30px) 4px;
+      margin-right: 4px;
+      scrollbar-gutter: stable;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+
+      .inventory-element { flex: 1; }
+    }
   }
+
+  &.vehicle-inventory [data-application-part=inventory] .body { padding-bottom: 8px; }
+
+  /* -------------------------------------------- */
+  /*  Child Creation                              */
+  /* -------------------------------------------- */
+
+  &.tab-inventory.vehicle-inventory .window-content > .create-child { display: none; }
 }
 
 /* ---------------------------------- */

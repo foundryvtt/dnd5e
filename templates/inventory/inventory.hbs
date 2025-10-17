@@ -9,12 +9,12 @@
             <i class="fa-solid fa-coins" inert></i>
         </button>
         {{/unless}}
-        {{#each system.currency}}
+        {{#each currency}}
         {{#with (lookup @root.config.currencies @key) as |currency|}}
         <label aria-label="{{ lookup currency 'label' }}">
             <i class="currency {{ @key }}" data-tooltip="{{ lookup currency "label" }}"></i>
             <input type="text" class="uninput always-interactive" name="system.currency.{{ @key }}"
-                   value="{{ ../this }}" data-dtype="Number" inputmode="numeric" pattern="[+=\-]?\d*"
+                   value="{{ ../this }}" data-dtype="Number" inputmode="numeric" pattern="^[+=\-]?\d*"
                    {{#if @root.locked}}readonly{{/if}}>
         </label>
         {{/with}}

@@ -96,6 +96,48 @@
     }
   }
 
+  .split-button {
+    --control-hover-border-color: var(--dnd5e-color-gold);
+    --control-active-border-color: var(--dnd5e-color-gold);
+
+    .split-control {
+      --button-border-color: var(--control-border-color);
+      --button-background-color: var(--control-background-color, transparent);
+      --button-background-hover-color: var(--control-background-color, transparent);
+      border-radius: 0;
+      border-inline-end-width: 0;
+      padding: 0 8px;
+      box-shadow: none;
+
+      &:first-child {
+        border-start-start-radius: 4px;
+        border-end-start-radius: 4px;
+      }
+
+      &:last-child {
+        border-start-end-radius: 4px;
+        border-end-end-radius: 4px;
+        border-inline-end-width: 1px;
+      }
+
+      &:hover {
+        box-shadow: 0 0 6px var(--dnd5e-color-gold);
+        + .split-control { border-inline-start-color: var(--control-hover-border-color); }
+      }
+
+      &[aria-pressed=true] {
+        --button-background-color: var(--control-active-background-color);
+        border-color: var(--control-active-border-color);
+        + .split-control { border-inline-start-color: var(--control-active-border-color); }
+      }
+
+      &:focus {
+        border-color: var(--control-active-border-color);
+        + .split-control { border-inline-start-color: var(--control-active-border-color); }
+      }
+    }
+  }
+
   /* Reset select styles */
   select {
     color: inherit;
