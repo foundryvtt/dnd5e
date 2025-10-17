@@ -813,15 +813,22 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @returns {Array<ActiveEffect5e|Item5e>}
    */
   getDependents() {
+    const actor = this.parent instanceof Actor ? this.parent : this.parent?.parent;
+    const item = this.parent instanceof Item ? this.parent : null;
     return (this.getFlag("dnd5e", "dependents") || []).reduce((arr, { uuid }) => {
-      let effect;
+      let doc;
       // TODO: Remove this special casing once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
       if ( this.parent.pack && uuid.includes(this.parent.uuid) ) {
         const [, embeddedName, id] = uuid.replace(this.parent.uuid, "").split(".");
-        effect = this.parent.getEmbeddedDocument(embeddedName, id);
+        doc = this.parent.getEmbeddedDocument(embeddedName, id);
       }
-      else effect = fromUuidSync(uuid, { strict: false });
-      if ( effect ) arr.push(effect);
+      else doc = fromUuidSync(uuid, { strict: false });
+      if ( doc ) {
+        const otherActor = doc.parent instanceof Actor ? doc.parent : doc.parent?.parent;
+        const otherItem = doc.parent instanceof Item ? doc.parent : null;
+        if ( ((doc instanceof ActiveEffect) && (doc.origin === this.uuid))
+          || ((actor && (actor === otherActor)) || (item && (item === otherItem)))) arr.push(doc);
+      }
       return arr;
     }, []).concat(dnd5e.registry.dependents.get(this));
   }

@@ -9,7 +9,8 @@ class DependentsRegistry {
   /**
    * Registration of documents that are dependent of an active effect. The map is keyed by the UUID of
    * the active effect upon which the document is dependent and contains a set of UUIDs for that effect's
-   * dependents. All UUIDs are expected to be world UUIDs that can be retrieved synchronously.
+   * dependents. All UUIDs are expected to be world UUIDs or UUIDs of documents with the same ancestor
+   * document as the effect they are dependent on.
    * @type {Map<string, Set<string>}
    */
   static #dependents = new Map();
@@ -26,7 +27,6 @@ class DependentsRegistry {
     effect = effect instanceof ActiveEffect ? effect : fromUuidSync(effect);
     return Array.from(this.#dependents.get(effect?.uuid) ?? [])
       .map(uuid => {
-        let doc;
         // TODO: Remove this special casing once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
         if ( effect.parent.pack && uuid.includes(effect.parent.uuid) ) {
           const [, embeddedName, id] = uuid.replace(effect.parent.uuid, "").split(".");
