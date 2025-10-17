@@ -4595,7 +4595,16 @@
   }
 },
 
-"DND5E.Travel": {
+"DND5E.TRAVEL": {
+  "FIELDS": {
+    "pace": {
+      "label": "Pace"
+    },
+    "time": {
+      "hint": "Number of hours traveled per day used to convert travel speed to pace.",
+      "label": "Hours per Day"
+    }
+  },
   "Label": "Travel Pace",
   "Pace": {
     "Fast": "Fast",

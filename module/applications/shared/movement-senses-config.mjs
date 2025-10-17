@@ -171,6 +171,11 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       options: Object.entries(CONFIG.DND5E.travelPace).map(([value, { label }]) => ({ value, label })),
       value: data.pace
     });
+    if ( context.travel.fields.time ) context.travel.extras.push({
+      field: context.travel.fields.time,
+      localize: true,
+      value: data.time
+    });
     if ( context.fields ) context.legend = game.i18n.localize("DND5E.MOVEMENT.Speed");
   }
 }
