@@ -1,34 +1,29 @@
-import AdvantageModeField from "../fields/advantage-mode-field.mjs";
+import D2RollModificationField from "./d20-roll-modification-field.mjs";
 
-const { StringField, NumberField, SchemaField } = foundry.data.fields;
+const { SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @typedef {object} RollConfigData
+ * @import { D20RollModificationData } from "./d20-roll-modification-field.mjs";
+ */
+
+/**
+ * @typedef RollConfigData
  * @property {string} [ability]  Default ability associated with this roll.
- * @property {object} roll
- * @property {number} roll.min   Minimum number on the die rolled.
- * @property {number} roll.max   Maximum number on the die rolled.
- * @property {number} roll.mode  Should the roll be with disadvantage or advantage by default?
+ * @property {Omit<D20RollModificationData, "bonus">} roll
  */
 
 /**
  * Field for storing data for a specific type of roll.
  */
-export default class RollConfigField extends foundry.data.fields.SchemaField {
+export default class RollConfigField extends SchemaField {
   constructor({roll={}, ability="", ...fields}={}, options={}) {
-    const opts = { initial: null, nullable: true, min: 1, max: 20, integer: true };
     fields = {
       ability: (ability === false) ? null : new StringField({
         required: true,
         initial: ability,
         label: "DND5E.AbilityModifier"
       }),
-      roll: new SchemaField({
-        min: new NumberField({...opts, label: "DND5E.ROLL.Range.Minimum"}),
-        max: new NumberField({...opts, label: "DND5E.ROLL.Range.Maximum"}),
-        mode: new AdvantageModeField(),
-        ...roll
-      }),
+      roll: new D2RollModificationField({ bonus: false, ...roll }, { required: true }),
       ...fields
     };
     Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);
