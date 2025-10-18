@@ -61,6 +61,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
+  /** @override */
   connectedCallback() {
     // Fetch the associated chat message
     const messageId = this.closest("[data-message-id]")?.dataset.messageId;
@@ -69,6 +70,11 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
     // Build the frame HTML only once
     if ( !this.effectsList || !this.targetList ) {
+      if ( !this.effects.length ) {
+        const item = this.chatMessage.getAssociatedItem();
+        this.effects = Array.from(this.querySelectorAll("option")).map(o => item?.effects.get(o.value)).filter(_ => _);
+      }
+
       const div = document.createElement("div");
       div.classList.add("card-tray", "effects-tray", "collapsible");
       if ( !this.open ) div.classList.add("collapsed");
