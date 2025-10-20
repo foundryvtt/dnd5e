@@ -7,6 +7,11 @@ import { simplifyBonus, staticID } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
+ * @import { PlacementData } from "../../canvas/token-placement.mjs";
+ * @import { ActivityUseConfiguration, ActivityUsageResults } from "./mixin.mjs";
+ */
+
+/**
  * Activity for summoning creatures.
  */
 export default class SummonActivity extends ActivityMixin(SummonActivityData) {
@@ -61,7 +66,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
   /**
    * Configuration data for summoning behavior.
    *
-   * @typedef {object} SummoningConfiguration
+   * @typedef SummoningConfiguration
    * @property {string} profile         ID of the summoning profile to use.
    * @property {string} [creatureSize]  Selected creature size if multiple are available.
    * @property {string} [creatureType]  Selected creature type if multiple are available.
@@ -492,7 +497,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
     const rollData = this.getRollData();
     const count = new Roll(profile.count || "1", rollData);
     await count.evaluate();
-    return TokenPlacement.place({ tokens: Array(parseInt(count.total)).fill(token) });
+    return TokenPlacement.place({
+      origin: this.getUsageToken(), tokens: Array(parseInt(count.total)).fill(token)
+    });
   }
 
   /* -------------------------------------------- */

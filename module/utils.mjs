@@ -625,11 +625,13 @@ export function getTargetDescriptors() {
 
 /**
  * Get currently selected tokens in the scene or user's character's tokens.
+ * @param {Actor5e} [actor]  Only allow tokens associated with this specific actor.
  * @returns {Token5e[]}
  */
-export function getSceneTargets() {
-  let targets = canvas.tokens?.controlled.filter(t => t.actor) ?? [];
-  if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
+export function getSceneTargets(actor) {
+  let targets = canvas.tokens?.controlled.filter(t => t.actor && (!actor || t.actor === actor)) ?? [];
+  if ( !targets.length && actor ) targets = actor.getActiveTokens();
+  else if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
   return targets;
 }
 

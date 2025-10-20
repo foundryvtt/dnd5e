@@ -2,7 +2,7 @@ import ActivitySheet from "../../applications/activity/activity-sheet.mjs";
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
-import { formatNumber, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
+import { formatNumber, getSceneTargets, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
@@ -1232,6 +1232,17 @@ export default function ActivityMixin(Base) {
       rollData.activity = { ...this };
       rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
       return rollData;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Get the best matched token from which this activity is being used if one can be found for this actor
+     * in the current scene.
+     * @returns {TokenDocument|void}
+     */
+    getUsageToken() {
+      return getSceneTargets(this.actor)[0]?.document;
     }
 
     /* -------------------------------------------- */
