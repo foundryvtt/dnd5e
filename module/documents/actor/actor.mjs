@@ -314,6 +314,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const matchesOrigin = !origin || (foundry.utils.getProperty(a, origin.key) === origin.value);
       // Has been auto-imported by this process.
       return (a.getFlag("dnd5e", "isAutoImported") || a.getFlag("dnd5e", "summonedCopy")) // Back-compat
+      // User has ownership of existing actor
+      && a.isOwner
       // Sourced from the desired actor UUID.
       && ((a._stats?.compendiumSource === uuid) || (a._stats?.duplicateSource === uuid))
       // Unlinked or created from a specific source.
