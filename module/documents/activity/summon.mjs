@@ -374,6 +374,13 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       }
     }
 
+    // Add temp HP
+    if ( this.tempHP ) {
+      const tempHP = new Roll(this.tempHP, rollData);
+      await tempHP.evaluate();
+      actorUpdates["system.attributes.hp.temp"] = tempHP.total;
+    }
+
     // Change creature size
     if ( this.creatureSizes.size ) {
       const size = this.creatureSizes.has(options.creatureSize) ? options.creatureSize : this.creatureSizes.first();

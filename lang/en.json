@@ -4303,6 +4303,10 @@
         "label": "Summon Prompt",
         "hint": "Should the player be prompted to place the summons? Players will still be able to summon from the chat card if prompt is disabled."
       }
+    },
+    "tempHP": {
+      "label": "Temp HP",
+      "hint": "Grant the summoned creature temp HP, replacing any existing temp HP."
     }
   },
   "Action": {
