@@ -99,7 +99,7 @@ export default class BasicRoll extends Roll {
       if ( !value && (value !== 0) ) continue;
       finalParts.push(`@${key}`);
       foundry.utils.setProperty(
-        data, key, foundry.utils.getType(value) === "string" ? Roll.replaceFormulaData(value, data) : value
+        data, key, foundry.utils.getType(value) === "string" ? BasicRoll.replaceFormulaData(value, data) : value
       );
     }
     return { parts: finalParts, data };

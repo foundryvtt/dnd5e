@@ -400,9 +400,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       }
     }
 
-    const attackDamageBonus = Roll.replaceFormulaData(this.bonuses.attackDamage ?? "", rollData);
-    const saveDamageBonus = Roll.replaceFormulaData(this.bonuses.saveDamage ?? "", rollData);
-    const healingBonus = Roll.replaceFormulaData(this.bonuses.healing ?? "", rollData);
+    const attackDamageBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.attackDamage ?? "", rollData);
+    const saveDamageBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.saveDamage ?? "", rollData);
+    const healingBonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.bonuses.healing ?? "", rollData);
     for ( const item of actor.items ) {
       if ( !item.system.activities?.size ) continue;
       const changes = [];
@@ -416,7 +416,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
           const parts = [
             rollData.abilities?.[this.ability]?.mod,
             prof,
-            rollData.bonuses?.[typeMapping[actionType] ?? actionType]?.attack
+            CONFIG.Dice.BasicRoll.replaceFormulaData(
+              rollData.bonuses?.[typeMapping[actionType] ?? actionType]?.attack ?? "", rollData
+            )
           ].filter(p => p);
           attack = parts.join(" + ");
         }
