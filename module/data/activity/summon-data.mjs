@@ -29,6 +29,7 @@ export default class BaseSummonActivityData extends BaseActivityData {
       }),
       creatureSizes: new SetField(new StringField()),
       creatureTypes: new SetField(new StringField()),
+      disposition: new NumberField({ nullable: true, choices: Object.values(CONST.TOKEN_DISPOSITIONS) }),
       match: new SchemaField({
         ability: new StringField(),
         attacks: new BooleanField(),

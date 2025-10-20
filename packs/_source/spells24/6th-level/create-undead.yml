@@ -129,6 +129,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: '@item.level - 3'
           name: ''
@@ -137,7 +138,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: '@item.level - 6'
           name: ''
           _id: wxjtP08Cq6Qx4DNt
@@ -145,7 +145,6 @@ system:
           level:
             min: 8
             max: null
-          types: []
         - count: '@item.level - 6'
           name: ''
           _id: 1VEmzIL2JMUEG9aD
@@ -153,7 +152,6 @@ system:
           level:
             min: 8
             max: null
-          types: []
         - count: '2'
           name: ''
           _id: oegT9SQrB7ZuMGie
@@ -161,13 +159,14 @@ system:
           level:
             min: 9
             max: null
-          types: []
       summon:
         prompt: true
         mode: ''
         identifier: ''
       name: Animate Corpses
       img: icons/magic/death/hand-dirt-undead-zombie.webp
+      disposition: 1
+      appliedEffects: []
     BepVtap2tWyUwaxk:
       type: utility
       _id: BepVtap2tWyUwaxk
@@ -274,18 +273,14 @@ folder: 8WmlLARx1Df3Ii9v
 sort: 1600000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1724425948206
-  modifiedTime: 1745256789584
+  modifiedTime: 1760981463485
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplCreateUnde'

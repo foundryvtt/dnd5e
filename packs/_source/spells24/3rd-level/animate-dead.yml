@@ -111,6 +111,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: ''
           name: Skeleton (bones)
@@ -119,7 +120,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: Zombie (corpse)
           _id: pZwDbNd78btaIk1A
@@ -127,7 +127,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         identifier: ''
         mode: ''
@@ -135,7 +134,12 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      disposition: 1
+      appliedEffects: []
   identifier: animate-dead
 _id: phbsplAnimateDea
 type: spell
@@ -145,18 +149,14 @@ folder: HCovEE4VoPGlIbKi
 sort: 100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '13.350'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 5.2.0
   createdTime: 1724425940625
-  modifiedTime: 1745256785450
+  modifiedTime: 1760981356367
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplAnimateDea'
