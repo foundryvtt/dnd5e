@@ -7,46 +7,16 @@ import SimpleTraitField from "../fields/simple-trait-field.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { DamageTraitData } from "./fields/damage-trait.mjs";
- * @import { SimpleTraitData } from "./fields/simple-trait.mjs";
- */
-
-/**
- * Data structure for a damage actor trait.
- *
- * @typedef {object} DamageModificationData
- * @property {Record<string, string>} amount  Damage boost or reduction by damage type.
- * @property {Set<string>} bypasses           Keys for physical properties that cause modification to be bypassed.
- */
-
-/**
- * @typedef {SimpleTraitData} LanguageTraitData
- * @property {Record<string, CommunicationData>} communication  Measured communication ranges (e.g. telepathy).
- */
-
-/**
- * @typedef {object} LanguageCommunicationData
- * @property {string} units  Units used to measure range.
- * @property {number} value  Range to which this ability can be used.
+ * @import { TraitsCommonData, TraitsCreatureData } from "./_types.mjs";
  */
 
 /**
  * Shared contents of the traits schema between various actor types.
  */
 export default class TraitsField {
-
-  /* -------------------------------------------- */
-
   /**
    * Fields shared between characters, NPCs, and vehicles.
-   *
-   * @type {object}
-   * @property {string} size                Actor's size.
-   * @property {DamageTraitData} di         Damage immunities.
-   * @property {DamageTraitData} dr         Damage resistances.
-   * @property {DamageTraitData} dv         Damage vulnerabilities.
-   * @property {DamageModificationData} dm  Damage modification.
-   * @property {SimpleTraitData} ci         Condition immunities.
+   * @type {TraitsCommonData}
    */
   static get common() {
     return {
@@ -68,9 +38,7 @@ export default class TraitsField {
 
   /**
    * Fields shared between characters and NPCs.
-   *
-   * @type {object}
-   * @property {SimpleTraitData} languages  Languages known by this creature.
+   * @type {TraitsCreatureData}
    */
   static get creature() {
     return {

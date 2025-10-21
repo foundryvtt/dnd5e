@@ -4,18 +4,13 @@ import FormulaField from "../fields/formula-field.mjs";
 const { ArrayField, DocumentUUIDField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
- * @typedef EncounterMemberData
- * @property {string} uuid                The UUID to the Actor.
- * @property {object} quantity
- * @property {number} quantity.value      Number of this actor in the group.
- * @property {string} [quantity.formula]  Formula used for re-rolling actor quantities in encounters.
+ * @import { EncounterData } from "./_types.mjs";
  */
 
 /**
  * An Actor that represents a collection of adversaries.
- * @extends {GroupTemplate}
- *
- * @property {EncounterMemberData[]} members  Members of the encounter.
+ * @extends {GroupTemplate<EncounterData>}
+ * @mixes EncounterData
  */
 export default class EncounterData extends GroupTemplate {
   /** @inheritDoc */

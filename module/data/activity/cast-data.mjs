@@ -3,18 +3,13 @@ import BaseActivityData from "./base-activity.mjs";
 const { BooleanField, DocumentUUIDField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { CastActivityData } from "./_types.mjs";
+ */
+
+/**
  * Data model for a Cast activity.
- *
- * @property {object} spell
- * @property {string} spell.ability              Ability to override default spellcasting ability.
- * @property {object} spell.challenge
- * @property {number} spell.challenge.attack     Flat to hit bonus in place of the spell's normal attack bonus.
- * @property {number} spell.challenge.save       Flat DC to use in place of the spell's normal save DC.
- * @property {boolean} spell.challenge.override  Use custom attack bonus & DC rather than creature's.
- * @property {number} spell.level                Base level at which to cast the spell.
- * @property {Set<string>} spell.properties      Spell components & tags to ignore while casting.
- * @property {boolean} spell.spellbook           Display spell in the Spells tab of the character sheet.
- * @property {string} spell.uuid                 UUID of the spell to cast.
+ * @extends {BaseActivityData<CastActivityData>}
+ * @mixes {CastActivityData}
  */
 export default class CastActivityData extends BaseActivityData {
   /** @inheritDoc */

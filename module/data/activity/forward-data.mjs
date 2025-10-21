@@ -3,10 +3,13 @@ import BaseActivityData from "./base-activity.mjs";
 const { DocumentIdField, SchemaField } = foundry.data.fields;
 
 /**
+ * @import { ForwardActivityData } from "./_types.mjs";
+ */
+
+/**
  * Data model for a Forward activity.
- *
- * @property {object} activity
- * @property {string} activity.id  ID of the activity to forward to.
+ * @extends {BaseActivityData<ForwardActivityData>}
+ * @mixes {ForwardActivityData}
  */
 export default class ForwardActivityData extends BaseActivityData {
   /** @inheritDoc */

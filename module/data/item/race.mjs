@@ -6,13 +6,17 @@ import AdvancementTemplate from "./templates/advancement.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
+ * @import { CreatureTypeData, MovementData, SensesData } from "../shared/_types.mjs";
+ */
+
+/**
  * Data definition for Race items.
  * @mixes AdvancementTemplate
  * @mixes ItemDescriptionTemplate
  *
- * @property {MovementField} movement
- * @property {SensesField} senses
- * @property {CreatureType} type
+ * @property {MovementData} movement
+ * @property {SensesData} senses
+ * @property {CreatureTypeData} type
  */
 export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, ItemDescriptionTemplate) {
 

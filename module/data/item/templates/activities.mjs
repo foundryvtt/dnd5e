@@ -4,6 +4,10 @@ import { ActivitiesField } from "../../fields/activities-field.mjs";
 import UsesField from "../../shared/uses-field.mjs";
 
 /**
+ * @import { UsesData } from "../../shared/_types.mjs";
+ */
+
+/**
  * Data model template for items with activities.
  *
  * @property {ActivityCollection} activities  Activities on this item.

@@ -16,54 +16,13 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @typedef NPCHabitatData
- * @property {string} type       The habitat category.
- * @property {string} [subtype]  An optional discriminator for the main category.
+ * @import { NPCData } from "./_types.mjs";
  */
 
 /**
  * System data definition for NPCs.
- *
- * @property {object} attributes
- * @property {object} attributes.hd
- * @property {number} attributes.hd.spent        Number of hit dice spent.
- * @property {object} attributes.hp
- * @property {number} attributes.hp.value        Current hit points.
- * @property {number} attributes.hp.max          Maximum allowed HP value.
- * @property {number} attributes.hp.temp         Temporary HP applied on top of value.
- * @property {number} attributes.hp.tempmax      Temporary change to the maximum HP.
- * @property {string} attributes.hp.formula      Formula used to determine hit points.
- * @property {object} attributes.death
- * @property {object} attributes.death.bonuses
- * @property {string} attributes.death.bonuses.save   Numeric or dice bonus to death saving throws.
- * @property {number} attributes.death.success        Number of successful death saves.
- * @property {number} attributes.death.failure        Number of failed death saves.
- * @property {object} attributes.spell
- * @property {number} attributes.spell.level     Spellcasting level of this NPC.
- * @property {object} details
- * @property {TypeData} details.type             Creature type of this NPC.
- * @property {string} details.type.value         NPC's type as defined in the system configuration.
- * @property {string} details.type.subtype       NPC's subtype usually displayed in parenthesis after main type.
- * @property {string} details.type.swarm         Size of the individual creatures in a swarm, if a swarm.
- * @property {string} details.type.custom        Custom type beyond what is available in the configuration.
- * @property {object} details.habitat
- * @property {NPCHabitatData[]} details.habitat.value  Common habitats in which this NPC is found.
- * @property {string} details.habitat.custom     Custom habitats.
- * @property {object} details.treasure
- * @property {Set<string>} details.treasure.value  Random treasure generation categories for this NPC.
- * @property {number} details.cr                 NPC's challenge rating.
- * @property {object} resources
- * @property {object} resources.legact           NPC's legendary actions.
- * @property {number} resources.legact.max       Maximum number of legendary actions.
- * @property {number} resources.legact.spent     Spent legendary actions.
- * @property {object} resources.legres           NPC's legendary resistances.
- * @property {number} resources.legres.max       Maximum number of legendary resistances.
- * @property {number} resources.legres.spent     Spent legendary resistances.
- * @property {object} resources.lair             NPC's lair actions.
- * @property {boolean} resources.lair.value      This creature can possess a lair (2024) or take lair actions (2014).
- * @property {number} resources.lair.initiative  Initiative count when lair actions are triggered.
- * @property {boolean} resources.lair.inside     This actor is currently inside its lair.
- * @property {SourceData} source                 Adventure or sourcebook where this NPC originated.
+ * @extends {CreatureTemplate<NPCData>}
+ * @mixes NPCData
  */
 export default class NPCData extends CreatureTemplate {
 
@@ -79,7 +38,7 @@ export default class NPCData extends CreatureTemplate {
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     supportsAdvancement: true
-  }, {inplace: false}));
+  }, { inplace: false }));
 
   /* -------------------------------------------- */
 
@@ -95,21 +54,12 @@ export default class NPCData extends CreatureTemplate {
         ...AttributesFields.common,
         ...AttributesFields.creature,
         hd: new SchemaField({
-          spent: new NumberField({integer: true, min: 0, initial: 0})
-        }, {label: "DND5E.HitDice"}),
+          spent: new NumberField({ integer: true, min: 0, initial: 0 })
+        }, { label: "DND5E.HitDice" }),
         hp: new SchemaField({
-          value: new NumberField({
-            nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.HitPointsCurrent"
-          }),
-          max: new NumberField({
-            nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.HitPointsMax"
-          }),
-          temp: new NumberField({integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp"}),
-          tempmax: new NumberField({
-            integer: true, initial: 0, label: "DND5E.HitPointsTempMax", hint: "DND5E.HitPointsTempMaxHint"
-          }),
-          formula: new FormulaField({required: true, label: "DND5E.HPFormula"})
-        }, {label: "DND5E.HitPoints"}),
+          ...AttributesFields.hitPoints,
+          formula: new FormulaField({ required: true, label: "DND5E.HPFormula" })
+        }, { label: "DND5E.HitPoints" }),
         death: new RollConfigField({
           ability: false,
           success: new NumberField({
@@ -121,13 +71,13 @@ export default class NPCData extends CreatureTemplate {
           bonuses: new SchemaField({
             save: new FormulaField({ required: true, label: "DND5E.DeathSaveBonus" })
           })
-        }, {label: "DND5E.DeathSave"}),
+        }, { label: "DND5E.DeathSave" }),
         spell: new SchemaField({
           level: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"
           })
         })
-      }, {label: "DND5E.Attributes"}),
+      }, { label: "DND5E.Attributes" }),
       details: new SchemaField({
         ...DetailsFields.common,
         ...DetailsFields.creature,
@@ -145,7 +95,7 @@ export default class NPCData extends CreatureTemplate {
         treasure: new SchemaField({
           value: new SetField(new StringField())
         })
-      }, {label: "DND5E.Details"}),
+      }, { label: "DND5E.Details" }),
       resources: new SchemaField({
         legact: new SchemaField({
           max: new NumberField({
@@ -154,7 +104,7 @@ export default class NPCData extends CreatureTemplate {
           spent: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegendaryAction.Spent"
           })
-        }, {label: "DND5E.LegendaryAction.Label"}),
+        }, { label: "DND5E.LegendaryAction.Label" }),
         legres: new SchemaField({
           max: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegendaryResistance.Max"
@@ -162,21 +112,21 @@ export default class NPCData extends CreatureTemplate {
           spent: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegendaryResistance.Spent"
           })
-        }, {label: "DND5E.LegendaryResistance.Label"}),
+        }, { label: "DND5E.LegendaryResistance.Label" }),
         lair: new SchemaField({
           value: new BooleanField({required: true, label: "DND5E.LAIR.Action.Uses"}),
           initiative: new NumberField({
             required: true, integer: true, label: "DND5E.LAIR.Action.Initiative"
           }),
           inside: new BooleanField({ label: "DND5E.LAIR.Inside" })
-        }, {label: "DND5E.LAIR.Action.Label"})
-      }, {label: "DND5E.Resources"}),
+        }, { label: "DND5E.LAIR.Action.Label" })
+      }, { label: "DND5E.Resources" }),
       source: new SourceField(),
       traits: new SchemaField({
         ...TraitsFields.common,
         ...TraitsFields.creature,
         important: new BooleanField()
-      }, {label: "DND5E.Traits"})
+      }, { label: "DND5E.Traits" })
     });
   }
 

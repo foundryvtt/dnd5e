@@ -5,6 +5,10 @@ import SourceField from "../../shared/source-field.mjs";
 const { SchemaField, HTMLField } = foundry.data.fields;
 
 /**
+ * @import { SourceData } from "../../shared/_types.mjs";
+ */
+
+/**
  * Data model template with item description & source.
  *
  * @property {object} description               Various item descriptions.

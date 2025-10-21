@@ -9,34 +9,13 @@ const {
 } = foundry.data.fields;
 
 /**
- * @import { TransformationSettingData } from "../settings/transformation-setting.mjs";
- */
-
-/**
- * @typedef TransformProfile
- * @property {string} _id            Unique ID for this profile.
- * @property {string} cr             Formula for the CR of creature to transform into if in CR mode.
- * @property {object} level
- * @property {number} level.min      Minimum level at which this profile can be used.
- * @property {number} level.max      Maximum level at which this profile can be used.
- * @property {Set<string>} movement  Movement types that aren't allowed on selected creatures.
- * @property {string} name           Display name for this profile.
- * @property {Set<string>} sizes     Allowed creature sizes, or blank to allow all sizes.
- * @property {Set<string>} types     Allowed creature types, or blank to allow all types.
- * @property {string} uuid           UUID of the actor to transform into if in direct mode.
+ * @import { TransformActivityData, TransformProfile } from "./_types.mjs";
  */
 
 /**
  * Data model for a transform activity.
- *
- * @property {TransformProfile[]} profiles     Information on transformation methods and sources.
- * @property {TransformationSetting} settings  Settings data to use when summoning.
- * @property {object} transform
- * @property {boolean} transform.customize     Should any customized settings be respected or should the default
- *                                             settings for the selected profile be used instead.
- * @property {string} transform.identifier     Class identifier that will be used to determine applicable level.
- * @property {""|"cr"} transform.mode          Method of determining what type of creature to transform into.
- * @property {string} transform.preset         Transformation preset to use.
+ * @extends {BaseActivityData<TransformActivityData>}
+ * @mixes {TransformActivityData}
  */
 export default class TransformActivityData extends BaseActivityData {
   /** @inheritDoc */

@@ -10,55 +10,13 @@ import TraitsFields from "./templates/traits.mjs";
 const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @import { SourceData } from "../shared/source-field.mjs"
- * @import { ArmorClassData } from "./templates/attributes.mjs"
+ * @import { PassengerData, VehicleData } from "./_types.mjs";
  */
 
 /**
  * System data definition for Vehicles.
- *
- * @property {object} attributes
- * @property {ArmorClassData} attributes.ac
- * @property {object} attributes.hp
- * @property {number} attributes.hp.value              Current hit points.
- * @property {number} attributes.hp.max                Maximum allowed HP value.
- * @property {number} attributes.hp.temp               Temporary HP applied on top of value.
- * @property {number} attributes.hp.tempmax            Temporary change to the maximum HP.
- * @property {number} attributes.hp.dt                 Damage threshold.
- * @property {number} attributes.hp.mt                 Mishap threshold.
- * @property {object} attributes.actions               Information on how the vehicle performs actions.
- * @property {number} attributes.actions.max           Maximum number of actions available with a full crew complement.
- * @property {number} attributes.actions.spent         Spent actions.
- * @property {boolean} attributes.actions.stations     Does this vehicle rely on action stations that required
- *                                                     individual crewing rather than general crew thresholds?
- * @property {object} attributes.actions.thresholds    Crew thresholds needed to perform various actions.
- * @property {number} attributes.actions.thresholds.2  Minimum crew needed to take full action complement.
- * @property {number} attributes.actions.thresholds.1  Minimum crew needed to take reduced action complement.
- * @property {number} attributes.actions.thresholds.0  Minimum crew needed to perform any actions.
- * @property {object} attributes.capacity              Information on the vehicle's carrying capacity.
- * @property {UnitValue5e} attributes.capacity.cargo   Cargo carrying capacity.
- * @property {object} attributes.price
- * @property {number|null} attributes.price.value      The vehicle's cost in the specified denomination.
- * @property {string} attributes.price.denomination    The currency denomination.
- * @property {object} attributes.quality
- * @property {number} attributes.quality.value         Quality score of the vehicle's crew.
- * @property {TravelData} attributes.travel            Travel speeds.
- * @property {object} crew
- * @property {number} crew.max                         The maximum crew complement the vehicle supports.
- * @property {string[]} crew.value                     The crew roster.
- * @property {object} draft
- * @property {string[]} draft.value                    The draft animals pulling the vehicle.
- * @property {object} passengers
- * @property {number} passengers.max                   The maximum number of passengers the vehicle supports.
- * @property {string[]} passengers.value               The passenger manifest.
- * @property {object} traits
- * @property {UnitValue5e} traits.beam                 The vehicle's beam length.
- * @property {UnitValue5e} traits.keel                 The vehicle's keel length.
- * @property {UnitValue5e} traits.weight               The vehicle's weight.
- * @property {object} cargo                            Details on this vehicle's crew and cargo capacities.
- * @property {object} details
- * @property {string} details.type                     The type of vehicle as defined in DND5E.vehicleTypes.
- * @property {SourceData} source                       Adventure or sourcebook where this vehicle originated.
+ * @extends {CreatureTemplate<VehicleData>}
+ * @mixes VehicleData
  */
 export default class VehicleData extends CommonTemplate {
 
@@ -86,23 +44,11 @@ export default class VehicleData extends CommonTemplate {
           calc: new StringField({ initial: "flat", label: "DND5E.ArmorClassCalculation" })
         }, { label: "DND5E.ArmorClass" }),
         hp: new SchemaField({
-          value: new NumberField({
-            nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsCurrent"
-          }),
-          max: new NumberField({
-            nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsMax"
-          }),
-          temp: new NumberField({ integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp" }),
-          tempmax: new NumberField({
-            integer: true, initial: 0, label: "DND5E.HitPointsTempMax", hint: "DND5E.HitPointsTempMaxHint"
-          }),
-          dt: new NumberField({
-            required: true, integer: true, min: 0, label: "DND5E.DamageThreshold"
-          }),
+          ...AttributesFields.hitPoints,
           mt: new NumberField({
             required: true, integer: true, min: 0, label: "DND5E.VEHICLE.Mishap.Threshold.label"
           })
-        }, {label: "DND5E.HitPoints"}),
+        }, { label: "DND5E.HitPoints" }),
         actions: new SchemaField({
           max: new NumberField({
             required: true, nullable: false, integer: true, initial: 3, min: 0, max: 3,
@@ -128,8 +74,8 @@ export default class VehicleData extends CommonTemplate {
               required: true, integer: true, min: 0,
               label: "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.min.label"
             })
-          }, {label: "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.label"})
-        }, {label: "DND5E.VEHICLE.FIELDS.attributes.actions.label"}),
+          }, { label: "DND5E.VEHICLE.FIELDS.attributes.actions.thresholds.label" })
+        }, { label: "DND5E.VEHICLE.FIELDS.attributes.actions.label" }),
         capacity: new SchemaField({
           cargo: new SchemaField({
             value: new NumberField({ min: 0, label: "DND5E.VEHICLE.FIELDS.attributes.capacity.cargo.value.label" }),
@@ -196,6 +142,8 @@ export default class VehicleData extends CommonTemplate {
     });
   }
 
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -432,14 +380,6 @@ export default class VehicleData extends CommonTemplate {
 }
 
 /* -------------------------------------------- */
-
-/**
- * Data structure for an entry in a vehicle's crew or passenger lists.
- *
- * @typedef {object} PassengerData
- * @property {string} name      Name of individual or type of creature.
- * @property {number} quantity  How many of this creature are onboard?
- */
 
 /**
  * Produce the schema field for a simple trait.

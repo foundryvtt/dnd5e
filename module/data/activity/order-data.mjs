@@ -3,8 +3,13 @@ import BaseActivityData from "./base-activity.mjs";
 const { DocumentIdField, FilePathField, StringField } = foundry.data.fields;
 
 /**
+ * @import { OrderActivityData } from "./_types.mjs";
+ */
+
+/**
  * Data model for an order activity.
- * @property {string} order  The issued order.
+ * @extends {BaseActivityData<OrderActivityData>}
+ * @mixes {OrderActivityData}
  */
 export default class OrderActivityData extends BaseActivityData {
   /** @override */

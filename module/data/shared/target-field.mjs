@@ -4,23 +4,6 @@ import FormulaField from "../fields/formula-field.mjs";
 const { BooleanField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @typedef {object} TargetData
- * @property {object} template
- * @property {string} template.count        Number of templates created.
- * @property {boolean} template.contiguous  Must all created areas be connected to one another?
- * @property {string} template.type         Type of area of effect caused by this activity.
- * @property {string} template.size         Size of the activity's area of effect on its primary axis.
- * @property {string} template.width        Width of line area of effect.
- * @property {string} template.height       Height of cylinder area of effect.
- * @property {string} template.units        Units used to measure the area of effect sizes.
- * @property {object} affects
- * @property {string} affects.count         Number of individual targets that can be affected.
- * @property {string} affects.type          Type of targets that can be affected (e.g. creatures, objects, spaces).
- * @property {boolean} affects.choice       When targeting an area, can the user choose who it affects?
- * @property {string} affects.special       Description of special targeting.
- */
-
-/**
  * Field for storing target data.
  */
 export default class TargetField extends SchemaField {

@@ -5,12 +5,16 @@ import CurrencyTemplate from "../../shared/currency.mjs";
 const { HTMLField, SchemaField } = foundry.data.fields;
 
 /**
+ * @import { CurrencyTemplateData } from "../../shared/_types.mjs";
+ * @import { GroupTemplateData } from "./_types.mjs";
+ */
+
+/**
  * A template for all actors that contain collections of other actors.
+ * @extends ActorDataModel<CurrencyTemplate & GroupTemplateData>
  * @mixes CurrencyTemplate
- *
- * @property {object} description
- * @property {string} description.full           Description of this group.
- * @property {string} description.summary        Summary description (currently unused).
+ * @mixes GroupTemplateData
+ * @mixin
  */
 export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate) {
   /** @inheritDoc */

@@ -5,12 +5,13 @@ import BaseActivityData from "./base-activity.mjs";
 const { ArrayField, BooleanField, SchemaField } = foundry.data.fields;
 
 /**
+ * @import { DamageActivityData } from "./_types.mjs";
+ */
+
+/**
  * Data model for an damage activity.
- *
- * @property {object} damage
- * @property {boolean} damage.critical.allow  Can this damage be critical?
- * @property {string} damage.critical.bonus   Extra damage applied to the first damage part when a critical is rolled.
- * @property {DamageData[]} damage.parts      Parts of damage to inflict.
+ * @extends {BaseActivityData<DamageActivityData>}
+ * @mixes {DamageActivityData}
  */
 export default class DamageActivityData extends BaseActivityData {
   /** @inheritDoc */

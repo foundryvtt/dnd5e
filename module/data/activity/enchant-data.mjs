@@ -7,27 +7,13 @@ const {
 } = foundry.data.fields;
 
 /**
- * @typedef {EffectApplicationData} EnchantEffectApplicationData
- * @property {object} level
- * @property {number} level.min             Minimum level at which this profile can be used.
- * @property {number} level.max             Maximum level at which this profile can be used.
- * @property {object} riders
- * @property {Set<string>} riders.activity  IDs of other activities on this item that will be added when enchanting.
- * @property {Set<string>} riders.effect    IDs of other effects on this item that will be added when enchanting.
- * @property {Set<string>} riders.item      UUIDs of items that will be added with this enchantment.
+ * @import { EnchantActivityData, EnchantEffectApplicationData } from "./_types.mjs";
  */
 
 /**
  * Data model for a enchant activity.
- *
- * @property {object} enchant
- * @property {string} enchant.identifier    Class identifier that will be used to determine applicable level.
- * @property {string} enchant.self          Automatically apply enchantment to item containing this activity when used.
- * @property {object} restrictions
- * @property {boolean} restrictions.allowMagical    Allow enchantments to be applied to items that are already magical.
- * @property {Set<string>} restrictions.categories  Item categories to restrict to.
- * @property {Set<string>} restrictions.properties  Item properties to restrict to.
- * @property {string} restrictions.type             Item type to which this enchantment can be applied.
+ * @extends {BaseActivityData<EnchantActivityData>}
+ * @mixes {EnchantActivityData}
  */
 export default class EnchantActivityData extends BaseActivityData {
   /** @inheritDoc */

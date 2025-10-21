@@ -10,16 +10,7 @@ import SensesField from "../../shared/senses-field.mjs";
 const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @import { MovementData } from "../../shared/movement-field.mjs"
- * @import { RollConfigData } from "../../shared/roll-config-field.mjs"
- * @import { SensesData } from "../../shared/senses-field.mjs"
- */
-
-/**
- * @typedef {object} ArmorClassData
- * @property {string} calc     Name of one of the built-in formulas to use.
- * @property {number} flat     Flat value used for flat or natural armor calculation.
- * @property {string} formula  Custom formula to use.
+ * @import { ArmorClassData, AttributesCommonData, AttributesCreatureData, HitPointsData } from "./_types.mjs";
  */
 
 /**
@@ -28,7 +19,6 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
 export default class AttributesFields {
   /**
    * Armor class fields shared between characters, NPCs, and vehicles.
-   *
    * @type {ArmorClassData}
    */
   static get armorClass() {
@@ -40,16 +30,27 @@ export default class AttributesFields {
   }
 
   /* -------------------------------------------- */
+  /**
+   * Hit points fields shared between NPCs, objects, and vehicles.
+   * @type {HitPointsData}
+   */
+  static get hitPoints() {
+    return {
+      dt: new NumberField({ integer: true, min: 0, label: "DND5E.DamageThreshold" }),
+      max: new NumberField({ nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsMax" }),
+      temp: new NumberField({ integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp" }),
+      tempmax: new NumberField({
+        integer: true, initial: 0, label: "DND5E.HitPointsTempMax", hint: "DND5E.HitPointsTempMaxHint"
+      }),
+      value: new NumberField({ nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsCurrent" })
+    };
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Fields shared between characters, NPCs, and vehicles.
-   *
-   * @type {object}
-   * @property {ArmorClassData} ac       Armor class configuration.
-   * @property {RollConfigData} init
-   * @property {string} init.ability     The ability used for initiative rolls.
-   * @property {string} init.bonus       The bonus provided to initiative rolls.
-   * @property {MovementData} movement
+   * @type {AttributesCommonData}
    */
   static get common() {
     return {
@@ -66,20 +67,7 @@ export default class AttributesFields {
 
   /**
    * Fields shared between characters and NPCs.
-   *
-   * @type {object}
-   * @property {object} attunement
-   * @property {number} attunement.max              Maximum number of attuned items.
-   * @property {SensesData} senses
-   * @property {string} spellcasting                Primary spellcasting ability.
-   * @property {number} exhaustion                  Creature's exhaustion level.
-   * @property {RollConfigData} concentration
-   * @property {string} concentration.ability       The ability used for concentration saving throws.
-   * @property {object} concentration.bonuses
-   * @property {string} concentration.bonuses.save  The bonus provided to concentration saving throws.
-   * @property {number} concentration.limit         The amount of items this actor can concentrate on.
-   * @property {object} loyalty
-   * @property {number} loyalty.value               The creature's loyalty score.
+   * @type {AttributesCreatureData}
    */
   static get creature() {
     return {

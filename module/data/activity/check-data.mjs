@@ -5,14 +5,13 @@ import BaseActivityData from "./base-activity.mjs";
 const { SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { CheckActivityData } from "./_types.mjs";
+ */
+
+/**
  * Data model for a check activity.
- *
- * @property {object} check
- * @property {string} check.ability          Ability used with the check.
- * @property {Set<string>} check.associated  Skills or tools that can contribute to the check.
- * @property {object} check.dc
- * @property {string} check.dc.calculation   Method or ability used to calculate the difficulty class of the check.
- * @property {string} check.dc.formula       Custom DC formula or flat value.
+ * @extends {BaseActivityData<CheckActivityData>}
+ * @mixes {CheckActivityData}
  */
 export default class CheckActivityData extends BaseActivityData {
   /** @inheritDoc */

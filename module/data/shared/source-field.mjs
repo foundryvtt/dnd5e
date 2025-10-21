@@ -3,13 +3,7 @@ import { formatIdentifier } from "../../utils.mjs";
 const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @typedef {object} SourceData
- * @property {string} book      Book/publication where the item originated.
- * @property {string} page      Page or section where the item can be found.
- * @property {string} custom    Fully custom source label.
- * @property {string} license   Type of license that covers this item.
- * @property {number} revision  Revision count for this item.
- * @property {string} rules     Version of the rules for this document (e.g. 2014 vs. 2024).
+ * @import { SourceData } from "./_types.mjs";
  */
 
 /**

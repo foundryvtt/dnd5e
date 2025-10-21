@@ -9,7 +9,7 @@ import MappingField from "./data/fields/mapping-field.mjs";
 import VehicleData from "./data/actor/vehicle.mjs";
 
 /**
- * @import { TravelPace5e } from "./data/actor/fields/travel-field.mjs";
+ * @import { TravelPace5e } from "./data/actor/fields/_types.mjs";
  */
 
 // Namespace Configuration Values

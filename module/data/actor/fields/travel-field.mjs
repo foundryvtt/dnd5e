@@ -5,15 +5,7 @@ import MappingField from "../../fields/mapping-field.mjs";
 const { NumberField, StringField } = foundry.data.fields;
 
 /**
- * @typedef {"slow"|"normal"|"fast"} TravelPace5e
- */
-
-/**
- * @typedef {object} TravelData
- * @property {TravelPace5e} [pace]            Current travel pace.
- * @property {Record<string, string>} paces   Formulas for various travel paces per/day.
- * @property {Record<string, string>} speeds  Formulas for various travel speeds per/hour.
- * @property {string} units                   Movement used to measure the various travel speeds.
+ * @import { TravelPace5e } from "./_types.mjs";
  */
 
 /**

@@ -10,6 +10,10 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ActivationData, DurationData, RangeData, TargetData } from "../shared/_types.mjs";
+ */
+
+/**
  * Data definition for Spell items.
  * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate

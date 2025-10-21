@@ -1,9 +1,13 @@
 import simplifyRollFormula from "../../../dice/simplify-roll-formula.mjs";
 import { formatNumber, getHumanReadableAttributeLabel, simplifyBonus } from "../../../utils.mjs";
-import EmbeddedDataField5e from "../..//fields/embedded-data-field.mjs";
+import EmbeddedDataField5e from "../../fields/embedded-data-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 
 const { ArrayField, SchemaField, StringField } = foundry.data.fields;
+
+/**
+ * @import { UsesData } from "../../shared/_types.mjs";
+ */
 
 /**
  * Field for holding one or more consumption targets.
@@ -16,14 +20,6 @@ export default class ConsumptionTargetsField extends ArrayField {
 
 /**
  * Embedded data model for storing consumption target data and handling consumption.
- *
- * @property {string} type             Type of consumption (e.g. activity uses, item uses, hit die, spell slot).
- * @property {string} target           Target of the consumption depending on the selected type (e.g. item's ID, hit
- *                                     die denomination, spell slot level).
- * @property {string} value            Formula that determines amount consumed or recovered.
- * @property {object} scaling
- * @property {string} scaling.mode     Scaling mode (e.g. no scaling, scale target amount, scale spell level).
- * @property {string} scaling.formula  Specific scaling formula if not automatically calculated from target's value.
  */
 export class ConsumptionTargetData extends foundry.abstract.DataModel {
   /** @override */

@@ -2,16 +2,16 @@ import LocalDocumentField from "../../fields/local-document-field.mjs";
 const { HTMLField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { DetailsCommonData, DetailsCreatureData } from "./_types.mjs";
+ */
+
+/**
  * Shared contents of the details schema between various actor types.
  */
 export default class DetailsField {
   /**
    * Fields shared between characters, NPCs, and vehicles.
-   *
-   * @type {object}
-   * @property {object} biography         Actor's biography data.
-   * @property {string} biography.value   Full HTML biography information.
-   * @property {string} biography.public  Biography that will be displayed to players with observer privileges.
+   * @type {DetailsCommonData}
    */
   static get common() {
     return {
@@ -26,10 +26,7 @@ export default class DetailsField {
 
   /**
    * Fields shared between characters and NPCs.
-   *
-   * @type {object}
-   * @property {string} alignment    Creature's alignment.
-   * @property {Item5e|string} race  Creature's race item or name.
+   * @type {DetailsCreatureData}
    */
   static get creature() {
     return {

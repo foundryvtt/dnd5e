@@ -6,43 +6,14 @@ import GroupTemplate from "./templates/group.mjs";
 const { ArrayField, ForeignDocumentField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
- * @import { RestConfiguration, RestResult } from "../../documents/actor/actor.mjs";
- * @import { TravelData } from "./fields/travel-field.mjs";
- */
-
-/**
- * Metadata associated with members in this group.
- * @typedef PartyMemberData
- * @property {Actor5e} actor              Associated actor document.
- */
-
-/**
- * @typedef {RestConfiguration} GroupRestConfiguration
- * @param {boolean} [autoRest]  Automatically perform rest for group members rather than creating request message.
- * @param {string[]} [targets]  IDs of actors to rest. If not provided, then all group actors will be rested.
- */
-
-/**
- * @typedef TravelPaceDescriptor
- * @param {object} pace
- * @param {boolean} pace.available        Whether a travel pace is available to this group.
- * @param {string} pace.label             The human-readable travel pace label.
- * @param {boolean} pace.slowed           Whether travel pace has been slowed by a member with reduced speed.
- * @param {TravelPace5e} pace.value       The travel pace key.
- * @param {Record<string, number>} paces  The available travel pace speeds.
+ * @import { RestResult, SkillToolRollProcessConfiguration } from "../../documents/actor/actor.mjs";
+ * @import { GroupData, GroupRestConfiguration, TravelPaceDescriptor } from "./_types.mjs";
  */
 
 /**
  * A data model and API layer which handles the schema and functionality of "group" type Actors in the dnd5e system.
- * @extends {GroupTemplate}
- *
- * @property {object} attributes
- * @property {TravelData} attributes.travel
- * @property {object} details
- * @property {object} details.xp
- * @property {number} details.xp.value           XP currently available to be distributed to a party.
- * @property {PartyMemberData[]} members         Members in this group with associated metadata.
- * @property {Actor5e|null} primaryVehicle       The group's primary vehicle.
+ * @extends {GroupTemplate<GroupData>}
+ * @mixes GroupData
  */
 export default class GroupData extends GroupTemplate {
   /** @inheritDoc */
@@ -407,7 +378,7 @@ export default class GroupData extends GroupTemplate {
 export class GroupActor extends GroupData {
   constructor(...args) {
     foundry.utils.logCompatibilityWarning("GroupActor is deprecated. Please use GroupData instead.", {
-      since: "DnD5e 5.1", until: "DND5e 5.3"
+      since: "DnD5e 5.1", until: "DnD5e 5.3"
     });
     super(...args);
   }

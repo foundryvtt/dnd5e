@@ -2,9 +2,13 @@ import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
 /**
+ * @import { HealActivityData } from "./_types.mjs";
+ */
+
+/**
  * Data model for an heal activity.
- *
- * @property {DamageData} healing
+ * @extends {BaseActivityData<HealActivityData>}
+ * @mixes {HealActivityData}
  */
 export default class HealActivityData extends BaseActivityData {
   /** @inheritDoc */

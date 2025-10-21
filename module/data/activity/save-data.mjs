@@ -7,22 +7,13 @@ import AppliedEffectField from "./fields/applied-effect-field.mjs";
 const { ArrayField, BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @typedef {EffectApplicationData} SaveEffectApplicationData
- * @property {boolean} onSave  Should this effect still be applied on a successful save?
+ * @import { SaveActivityData } from "./_types.mjs";
  */
 
 /**
  * Data model for an save activity.
- *
- * @property {object} damage
- * @property {string} damage.onSave                 How much damage is done on a successful save?
- * @property {DamageData[]} damage.parts            Parts of damage to inflict.
- * @property {SaveEffectApplicationData[]} effects  Linked effects that can be applied.
- * @property {object} save
- * @property {Set<string>} save.ability             Make the saving throw with one of these abilities.
- * @property {object} save.dc
- * @property {string} save.dc.calculation           Method or ability used to calculate the difficulty class.
- * @property {string} save.dc.formula               Custom DC formula or flat value.
+ * @extends {BaseActivityData<SaveActivityData>}
+ * @mixes {SaveActivityData}
  */
 export default class SaveActivityData extends BaseActivityData {
   /** @inheritDoc */

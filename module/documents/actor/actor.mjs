@@ -19,7 +19,7 @@ import SelectChoices from "./select-choices.mjs";
 import * as Trait from "./trait.mjs";
 
 /**
- * @import { TravelPace5e } from "../../data/actor/fields/travel-field.mjs";
+ * @import { TravelPace5e } from "../../data/actor/fields/_types.mjs";
  */
 
 /**

@@ -14,39 +14,14 @@ const {
 } = foundry.data.fields;
 
 /**
- * Data for effects that can be applied.
- *
- * @typedef {object} EffectApplicationData
- * @property {string} _id  ID of the effect to apply.
+ * @import { DamageRollProcessConfiguration } from "../../dice/damage-roll.mjs";
+ * @import { BaseActivityData } from "./_types.mjs";
  */
 
 /**
  * Data model for activities.
- *
- * @property {string} _id                        Unique ID for the activity on an item.
- * @property {string} type                       Type name of the activity used to build a specific activity class.
- * @property {string} name                       Name for this activity.
- * @property {string} img                        Image that represents this activity.
- * @property {ActivationField} activation        Activation time & conditions.
- * @property {boolean} activation.override       Override activation values inferred from item.
- * @property {object} consumption
- * @property {object} consumption.scaling
- * @property {boolean} consumption.scaling.allowed          Can this non-spell activity be activated at higher levels?
- * @property {string} consumption.scaling.max               Maximum number of scaling levels for this item.
- * @property {boolean} consumption.spellSlot                If this is on a spell, should it consume a spell slot?
- * @property {ConsumptionTargetData[]} consumption.targets  Collection of consumption targets.
- * @property {object} description
- * @property {string} description.chatFlavor     Extra text displayed in the activation chat message.
- * @property {DurationField} duration            Duration of the effect.
- * @property {boolean} duration.concentration    Does this effect require concentration?
- * @property {boolean} duration.override         Override duration values inferred from item.
- * @property {EffectApplicationData[]} effects   Linked effects that can be applied.
- * @property {object} range
- * @property {boolean} range.override            Override range values inferred from item.
- * @property {TargetData} target
- * @property {boolean} target.override           Override target values inferred from item.
- * @property {boolean} target.prompt             Should the player be prompted to place the template?
- * @property {UsesData} uses                     Uses available to this activity.
+ * @extends {DataModel<BaseActivityData>}
+ * @mixes {BaseActivityData}
  */
 export default class BaseActivityData extends foundry.abstract.DataModel {
 
