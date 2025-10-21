@@ -27,7 +27,7 @@ export default class TraitsField {
       dm: new SchemaField({
         amount: new MappingField(new FormulaField({ deterministic: true }), { label: "DND5E.DamMod" }),
         bypasses: new SetField(new StringField(), {
-          label: "DND5E.DamagePhysicalBypass", hint: "DND5E.DamagePhysicalBypassHint"
+          label: "DND5E.DamagePhysicalBypass", hint: "DND5E.DAMAGE.PhysicalBypass.Hint"
         })
       }),
       ci: new SimpleTraitField({}, { label: "DND5E.ConImm" })
@@ -101,7 +101,7 @@ export default class TraitsField {
   /* -------------------------------------------- */
 
   /**
-   * Prepare condition immunities & petrified condition.
+   * Prepare condition immunities & petrified condition and handle "All Damage" value.
    * @this {CharacterData|NPCData|VehicleData}
    */
   static prepareResistImmune() {
@@ -110,12 +110,22 @@ export default class TraitsField {
 
     // Apply petrified condition
     if ( this.parent.hasConditionEffect("petrification") ) {
-      this.traits.dr.custom = game.i18n.localize("DND5E.DamageAll");
-      Object.keys(CONFIG.DND5E.damageTypes).forEach(type => this.traits.dr.value.add(type));
+      this.traits.dr.value.add("ALL");
       this.traits.dr.bypasses.clear();
       this.traits.di.value.add("poison");
       this.traits.ci.value.add("poisoned");
       this.traits.ci.value.add("diseased");
+    }
+
+    // Clear other damage resistances/immunities/vulnerabilities if All is set
+    for ( const key of ["dr", "di", "dv"] ) {
+      const entry = this.traits[key];
+      if ( entry.value.has("ALL") ) {
+        entry.value.clear();
+        entry.value.add("ALL");
+        if ( key === "di" ) this.traits.dr.value.clear();
+      }
+      else if ( key === "di" ) entry.value.forEach(k => this.traits.dr.value.delete(k));
     }
   }
 }

@@ -730,7 +730,7 @@ export default class NPCData extends CreatureTemplate {
         }, { value: [], physical: [] });
         const list = prepareTrait({ value, custom: data.custom }, trait);
         if ( list ) entries.push(list);
-        if ( physical.length ) entries.push(game.i18n.format("DND5E.DamagePhysicalBypasses", {
+        if ( physical.length ) entries.push(game.i18n.format("DND5E.DAMAGE.PhysicalBypass.Description", {
           damageTypes: game.i18n.getListFormatter({ style: "long", type: "conjunction" }).format(
             physical.map(t => CONFIG.DND5E.damageTypes[t].label)
           ),

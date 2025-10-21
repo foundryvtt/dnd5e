@@ -131,10 +131,14 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     for ( const [change, values] of Object.entries(active) ) {
       if ( foundry.utils.getType(values) !== "Set" ) continue;
       for ( const type of values ) {
-        const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
-        if ( !config ) continue;
-        const data = { type, change, icon: config.icon };
-        types.push(data);
+        if ( type === "ALL" ) {
+          types.push({ type, change, icon: "systems/dnd5e/icons/svg/damage/all.svg" });
+        } else {
+          const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
+          if ( !config ) continue;
+          const data = { type, change, icon: config.icon };
+          types.push(data);
+        }
       }
     }
     const changeSources = types.reduce((acc, config) => acc + this.getChangeSourceButton(config, targetOptions), "");
@@ -191,11 +195,14 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set(), threshold: false
     };
     for ( const damage of damages ) {
-      if ( damage.active.modification ) active.modification.add(damage.type);
-      if ( damage.active.resistance ) active.resistance.add(damage.type);
-      if ( damage.active.vulnerability ) active.vulnerability.add(damage.type);
-      if ( damage.active.immunity ) active.immunity.add(damage.type);
-      if ( damage.active.threshold ) active.threshold = true;
+      for ( const category of Object.keys(active) ) {
+        if ( category === "threshold" ) {
+          if ( damage.active.threshold ) active.threshold = true;
+          continue;
+        }
+        if ( damage.active.all?.[category] ) active[category].add("ALL");
+        if ( damage.active.type?.[category] ) active[category].add(damage.type);
+      }
     }
     temp = Math.floor(Math.max(0, temp));
 
@@ -250,7 +257,8 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     else if ( (change === "immunity") && options.downgrade?.has(type) ) mode = "downgrade";
 
     let label = game.i18n.format(`DND5E.DamageApplication.Change.${change.capitalize()}`, {
-      type: CONFIG.DND5E.damageTypes[type]?.label ?? CONFIG.DND5E.healingTypes[type]?.label
+      type: type === "ALL" ? game.i18n.localize("DND5E.DAMAGE.All")
+        : CONFIG.DND5E.damageTypes[type]?.label ?? CONFIG.DND5E.healingTypes[type]?.label
     });
     if ( mode === "ignore" ) label = game.i18n.format("DND5E.DamageApplication.Ignoring", { source: label });
     if ( mode === "downgrade" ) label = game.i18n.format("DND5E.DamageApplication.Downgrading", { source: label });

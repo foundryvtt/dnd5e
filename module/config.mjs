@@ -2227,82 +2227,82 @@ preLocalize("damageScalingModes", { keys: ["label", "labelCantrip"] });
  */
 DND5E.damageTypes = {
   acid: {
-    label: "DND5E.DamageAcid",
+    label: "DND5E.DAMAGE.Type.Acid",
     icon: "systems/dnd5e/icons/svg/damage/acid.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.IQhbKRPe1vCPdh8v",
     color: new Color(0x839D50)
   },
   bludgeoning: {
-    label: "DND5E.DamageBludgeoning",
+    label: "DND5E.DAMAGE.Type.Bludgeoning",
     icon: "systems/dnd5e/icons/svg/damage/bludgeoning.svg",
     isPhysical: true,
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.39LFrlef94JIYO8m",
     color: new Color(0x0000A0)
   },
   cold: {
-    label: "DND5E.DamageCold",
+    label: "DND5E.DAMAGE.Type.Cold",
     icon: "systems/dnd5e/icons/svg/damage/cold.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4xsFUooHDEdfhw6g",
     color: new Color(0xADD8E6)
   },
   fire: {
-    label: "DND5E.DamageFire",
+    label: "DND5E.DAMAGE.Type.Fire",
     icon: "systems/dnd5e/icons/svg/damage/fire.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.f1S66aQJi4PmOng6",
     color: new Color(0xFF4500)
   },
   force: {
-    label: "DND5E.DamageForce",
+    label: "DND5E.DAMAGE.Type.Force",
     icon: "systems/dnd5e/icons/svg/damage/force.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.eFTWzngD8dKWQuUR",
     color: new Color(0x800080)
   },
   lightning: {
-    label: "DND5E.DamageLightning",
+    label: "DND5E.DAMAGE.Type.Lightning",
     icon: "systems/dnd5e/icons/svg/damage/lightning.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.9SaxFJ9bM3SutaMC",
     color: new Color(0x1E90FF)
   },
   necrotic: {
-    label: "DND5E.DamageNecrotic",
+    label: "DND5E.DAMAGE.Type.Necrotic",
     icon: "systems/dnd5e/icons/svg/damage/necrotic.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.klOVUV5G1U7iaKoG",
     color: new Color(0x006400)
   },
   piercing: {
-    label: "DND5E.DamagePiercing",
+    label: "DND5E.DAMAGE.Type.Piercing",
     icon: "systems/dnd5e/icons/svg/damage/piercing.svg",
     isPhysical: true,
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.95agSnEGTdAmKhyC",
     color: new Color(0xC0C0C0)
   },
   poison: {
-    label: "DND5E.DamagePoison",
+    label: "DND5E.DAMAGE.Type.Poison",
     icon: "systems/dnd5e/icons/svg/damage/poison.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.k5wOYXdWPzcWwds1",
     color: new Color(0x8A2BE2)
   },
   psychic: {
-    label: "DND5E.DamagePsychic",
+    label: "DND5E.DAMAGE.Type.Psychic",
     icon: "systems/dnd5e/icons/svg/damage/psychic.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.YIKbDv4zYqbE5teJ",
     color: new Color(0xFF1493)
   },
   radiant: {
-    label: "DND5E.DamageRadiant",
+    label: "DND5E.DAMAGE.Type.Radiant",
     icon: "systems/dnd5e/icons/svg/damage/radiant.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.5tcK9buXWDOw8yHH",
     color: new Color(0xFFD700)
   },
   slashing: {
-    label: "DND5E.DamageSlashing",
+    label: "DND5E.DAMAGE.Type.Slashing",
     icon: "systems/dnd5e/icons/svg/damage/slashing.svg",
     isPhysical: true,
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.sz2XKQ5lgsdPEJOa",
     color: new Color(0x8B0000)
   },
   thunder: {
-    label: "DND5E.DamageThunder",
+    label: "DND5E.DAMAGE.Type.Thunder",
     icon: "systems/dnd5e/icons/svg/damage/thunder.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.iqsmMHk7FSpiNkQy",
     color: new Color(0x708090)
@@ -4168,7 +4168,8 @@ DND5E.traits = {
   di: {
     labels: {
       title: "DND5E.DamImm",
-      localization: "DND5E.TraitDIPlural"
+      localization: "DND5E.TraitDIPlural",
+      all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-immunities.svg",
     configKey: "damageTypes"
@@ -4176,7 +4177,8 @@ DND5E.traits = {
   dr: {
     labels: {
       title: "DND5E.DamRes",
-      localization: "DND5E.TraitDRPlural"
+      localization: "DND5E.TraitDRPlural",
+      all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-resistances.svg",
     configKey: "damageTypes"
@@ -4184,7 +4186,8 @@ DND5E.traits = {
   dv: {
     labels: {
       title: "DND5E.DamVuln",
-      localization: "DND5E.TraitDVPlural"
+      localization: "DND5E.TraitDVPlural",
+      all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-vulnerabilities.svg",
     configKey: "damageTypes"
@@ -4192,7 +4195,8 @@ DND5E.traits = {
   dm: {
     labels: {
       title: "DND5E.DamMod",
-      localization: "DND5E.TraitDMPlural"
+      localization: "DND5E.TraitDMPlural",
+      all: "DND5E.DAMAGE.All"
     },
     configKey: "damageTypes",
     dataType: Number
