@@ -53,7 +53,7 @@ export default class DamagesConfig extends TraitsConfig {
       context.value.field = new FormulaField({ determinstic: true });
       context.value.key = "amount";
     } else {
-      context.bypassHint = "DND5E.DamagePhysicalBypassHint";
+      context.bypassHint = "DND5E.DAMAGE.PhysicalBypass.Hint";
       context.value.field = context.checkbox;
       context.value.input = context.inputs.createCheckboxInput;
       context.value.key = "value";
