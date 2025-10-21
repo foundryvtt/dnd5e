@@ -1,5 +1,7 @@
 import simplifyRollFormula from "../../../dice/simplify-roll-formula.mjs";
-import { formatNumber, getHumanReadableAttributeLabel, simplifyBonus } from "../../../utils.mjs";
+import {
+  formatNumber, getHumanReadableAttributeLabel, getPluralLocalizationKey, getPluralRules, simplifyBonus
+} from "../../../utils.mjs";
 import EmbeddedDataField5e from "../..//fields/embedded-data-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 
@@ -398,7 +400,6 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   static consumptionLabelsActivityUses(config, { consumed }={}) {
     const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
     const uses = this.activity.uses;
-    const usesPluralRule = new Intl.PluralRules(game.i18n.lang).select(uses.value);
     return {
       label: game.i18n.localize(`DND5E.CONSUMPTION.Type.ActivityUses.Prompt${increaseKey}`),
       hint: game.i18n.format(
@@ -407,7 +408,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
           cost,
           use: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${pluralRule}`),
           available: formatNumber(uses.value),
-          availableUse: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${usesPluralRule}`)
+          availableUse: game.i18n.localize(
+            getPluralLocalizationKey(uses.value, pr => `DND5E.CONSUMPTION.Type.Use.${pr}`)
+          )
         }
       ),
       warn: simplifiedCost > uses.value
@@ -488,7 +491,6 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     const item = this.actor.items.get(this.target);
     const itemName = item ? item.name : game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem").toLowerCase();
     const uses = (item ?? this.item).system.uses;
-    const usesPluralRule = new Intl.PluralRules(game.i18n.lang).select(uses.value);
 
     const notes = [];
     let warn = false;
@@ -506,7 +508,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
           cost,
           use: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${pluralRule}`),
           available: formatNumber(uses.value),
-          availableUse: game.i18n.localize(`DND5E.CONSUMPTION.Type.Use.${usesPluralRule}`),
+          availableUse: game.i18n.localize(
+            getPluralLocalizationKey(uses.value, pr => `DND5E.CONSUMPTION.Type.Use.${pr}`)
+          ),
           item: item ? `<em>${itemName}</em>` : itemName
         }
       ),
@@ -590,7 +594,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     const isNegative = cost.startsWith("-");
     if ( isNegative ) cost = cost.replace("-", "");
     let pluralRule;
-    if ( costRoll.isDeterministic ) pluralRule = new Intl.PluralRules(game.i18n.lang).select(Number(cost));
+    if ( costRoll.isDeterministic ) pluralRule = getPluralRules().select(Number(cost));
     else pluralRule = "other";
     return { cost, simplifiedCost, increaseKey: isNegative ? "Increase" : "Decrease", pluralRule };
   }
