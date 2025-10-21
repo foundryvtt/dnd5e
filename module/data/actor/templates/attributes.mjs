@@ -328,7 +328,7 @@ export default class AttributesFields {
     encumbrance.max = encumbrance.thresholds.maximum;
     encumbrance.mod = (sizeMod * maximumMultiplier).toNearest(0.1);
     encumbrance.stops = {
-      encumbered: Number.isFinite(encumbrance.max )
+      encumbered: Number.isFinite(encumbrance.max)
         ? Math.clamp((encumbrance.thresholds.encumbered * 100) / encumbrance.max, 0, 100)
         : 0,
       heavilyEncumbered: Number.isFinite(encumbrance.max)
@@ -436,8 +436,9 @@ export default class AttributesFields {
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const field = this.schema.getField("attributes.movement");
     this.attributes.movement.max = 0;
+    let slowed = false;
     for ( const [type, v] of Object.entries(this.attributes.movement) ) {
-      if ( !field.getField(type)?.options.speed ) return;
+      if ( !field.getField(type)?.options.speed ) continue;
       let speed = Math.max(0, v - reduction);
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
       else {
@@ -453,7 +454,10 @@ export default class AttributesFields {
       }
       this.attributes.movement[type] = speed;
       this.attributes.movement.max = Math.max(speed, this.attributes.movement.max);
+      const base = this._source.attributes.movement[type] ?? this.attributes.movement.fromSpecies?.[type];
+      slowed = speed <= (base / 2);
     }
+    this.attributes.movement.slowed = slowed;
   }
 
   /* -------------------------------------------- */

@@ -194,7 +194,7 @@ export default class GroupData extends GroupTemplate {
       writable: false
     });
     if ( !memberIds.has(this.primaryVehicle?.id) || (this.primaryVehicle?.type !== "vehicle") ) {
-      this.primaryVehicle = null;
+      Object.defineProperty(this, "primaryVehicle", { value: null });
     }
   }
 
@@ -249,17 +249,7 @@ export default class GroupData extends GroupTemplate {
   getTravelPace() {
     let { pace } = this.attributes.travel;
     const slowed = this.members.some(({ actor }) => {
-      if ( !actor?.system.isCreature ) return false;
-      const source = actor.system._source.attributes?.movement;
-      const { movement } = actor.system.attributes ?? {};
-      const { fromSpecies } = movement ?? {};
-      for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-        const base = source?.[key] ?? fromSpecies?.[key];
-        if ( !base ) continue;
-        const current = movement?.[key];
-        if ( current <= (base / 2) ) return true;
-      }
-      return false;
+      return actor?.system.isCreature && actor?.system.attributes?.movement?.slowed;
     });
     const travelPaces = Object.keys(CONFIG.DND5E.travelPace);
     const slow = travelPaces.indexOf("slow");

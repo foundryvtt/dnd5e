@@ -316,7 +316,9 @@ export default class GroupActorSheet extends MultiActorSheet {
   /** @inheritDoc */
   _onClose(options) {
     super._onClose(options);
-    this.actor.system.members.forEach(({ actor }) => delete actor.apps[this.id]);
+    this.actor.system.members.forEach(({ actor }) => {
+      if ( actor ) delete actor.apps[this.id];
+    });
   }
 
   /* -------------------------------------------- */
@@ -324,7 +326,9 @@ export default class GroupActorSheet extends MultiActorSheet {
   /** @inheritDoc */
   async _onFirstRender(context, options) {
     await super._onFirstRender(context, options);
-    this.actor.system.members.forEach(({ actor }) => actor.apps[this.id] = this);
+    this.actor.system.members.forEach(({ actor }) => {
+      if ( actor ) actor.apps[this.id] = this;
+    });
   }
 
   /* -------------------------------------------- */
@@ -399,8 +403,9 @@ export default class GroupActorSheet extends MultiActorSheet {
     const { type, key } = target.dataset;
     if ( type !== "skill" ) return;
     const { uuid } = target.closest("[data-uuid]")?.dataset ?? {};
+    const { pace } = this.actor.system.getTravelPace();
     const actor = await fromUuid(uuid);
-    actor?.rollSkill({ event, skill: key, pace: this.actor.system.attributes.travel.pace });
+    actor?.rollSkill({ event, pace, skill: key });
   }
 
   /* -------------------------------------------- */

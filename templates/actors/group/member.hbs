@@ -1,7 +1,7 @@
 <li class="member" data-uuid="{{ uuid }}">
     <div class="vitals card" {{#if underlay}}style="--underlay: {{ underlay }}"{{/if}}>
         {{#if isPrimaryVehicle}}
-        <i class="fa-solid fa-star primary-vehicle" data-tooltip
+        <i class="fa-duotone fa-solid fa-circle-star primary-vehicle" data-tooltip
            aria-label="{{ localize "DND5E.Group.Vehicle.Primary.label" }}"></i>
         {{/if}}
         <div class="portrait">
@@ -82,7 +82,13 @@
             </div>
             <div>
                 <i class="fa-solid fa-shoe-prints" data-tooltip aria-label="{{ localize "DND5E.Speed" }}"></i>
-                <span class="value">{{ system.attributes.movement.walk }}</span>
+                <span class="value">
+                    {{ system.attributes.movement.walk }}
+                    {{#if system.attributes.movement.slowed}}
+                    <i class="fa-solid fa-triangle-exclamation" data-tooltip
+                       aria-label="{{ localize "DND5E.TRAVEL.Slowed.Member" }}"></i>
+                    {{/if}}
+                </span>
             </div>
         </div>
         <div class="info">
