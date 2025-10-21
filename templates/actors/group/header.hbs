@@ -40,22 +40,27 @@
         <div class="bottom">
 
             {{!-- Movement --}}
+            {{#with travelPace}}
             <div class="movement card">
                 <div class="header travel-pace">
                     <h3>{{ localize "DND5E.TRAVEL.Label" }}</h3>
-                    {{#if editable}}
+                    {{#if @root.editable}}
                     <button type="button" class="config-button unbutton" data-action="showConfiguration"
                             data-config="movement" data-tooltip aria-label="{{ localize "DND5E.MOVEMENT.Action.Configure" }}">
                         <i class="fa-solid fa-cog" inert></i>
                     </button>
-                    {{else}}
-                    <button type="button" class="unbutton config-button" data-action="changePace" data-increment="-1"
-                            data-tooltip aria-label="{{ localize "DND5E.Group.Action.ChangePace" }}">
+                    {{else if pace.available}}
+                    <button type="button" class="unbutton config-button {{#if pace.slowed}}suppressed{{/if}}"
+                            data-action="changePace" data-increment="-1" data-tooltip
+                            aria-label="{{ localize "DND5E.Group.Action.ChangePace" }}">
                         <i class="fa-solid fa-chevron-left" inert></i>
                     </button>
-                    <span class="pace subtitle">{{ labels.pace }}</span>
-                    <button type="button" class="unbutton config-button" data-action="changePace" data-increment="1"
-                            data-tooltip aria-label="{{ localize "DND5E.Group.Action.ChangePace" }}">
+                    <span class="pace subtitle" {{#if pace.slowed}}data-tooltip="DND5E.TRAVEL.Slowed.Group"{{/if}}>
+                        {{ pace.label }}
+                    </span>
+                    <button type="button" class="unbutton config-button {{#if pace.slowed}}suppressed{{/if}}"
+                            data-action="changePace" data-increment="1" data-tooltip
+                            aria-label="{{ localize "DND5E.Group.Action.ChangePace" }}">
                         <i class="fa-solid fa-chevron-right" inert></i>
                     </button>
                     {{/if}}
@@ -64,23 +69,24 @@
                     <div>
                         <span class="label">{{ localize "DND5E.TRAVEL.Type.Land" }}</span>
                         <span class="value">
-                            {{ dnd5e-numberFormat system.attributes.travel.paces.land blank="—" }}
+                            {{ dnd5e-numberFormat paces.land blank="—" }}
                         </span>
                     </div>
                     <div>
                         <span class="label">{{ localize "DND5E.TRAVEL.Type.Water" }}</span>
                         <span class="value">
-                            {{ dnd5e-numberFormat system.attributes.travel.paces.water blank="—" }}
+                            {{ dnd5e-numberFormat paces.water blank="—" }}
                         </span>
                     </div>
                     <div>
                         <span class="label">{{ localize "DND5E.TRAVEL.Type.Air" }}</span>
                         <span class="value">
-                            {{ dnd5e-numberFormat system.attributes.travel.paces.air blank="—" }}
+                            {{ dnd5e-numberFormat paces.air blank="—" }}
                         </span>
                     </div>
                 </div>
             </div>
+            {{/with}}
 
             {{!-- XP --}}
             <div class="xp card">

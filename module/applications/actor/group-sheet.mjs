@@ -1,7 +1,6 @@
 import { convertWeight } from "../../utils.mjs";
 import MultiActorSheet from "./api/multi-actor-sheet.mjs";
 import Award from "../award.mjs";
-import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 
 /**
  * Extension of the base actor sheet for group actors.
@@ -17,7 +16,8 @@ export default class GroupActorSheet extends MultiActorSheet {
     actions: {
       award: GroupActorSheet.#onAward,
       changePace: GroupActorSheet.#onChangePace,
-      roll: GroupActorSheet.#onRoll
+      roll: GroupActorSheet.#onRoll,
+      toggleInventory: GroupActorSheet.#onToggleInventory
     },
     tab: "members"
   };
@@ -69,6 +69,16 @@ export default class GroupActorSheet extends MultiActorSheet {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  get inventorySource() {
+    const inventorySource = this.actor.getFlag("dnd5e", "inventorySource") ?? "group";
+    const { primaryVehicle } = this.actor.system;
+    if ( (inventorySource === "vehicle") && primaryVehicle?.isOwner ) return primaryVehicle;
+    return super.inventorySource;
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   tabGroups = {
     primary: "members"
@@ -94,6 +104,7 @@ export default class GroupActorSheet extends MultiActorSheet {
    */
   async _prepareHeaderContext(context, options) {
     context.showXP = game.settings.get("dnd5e", "levelingMode") !== "noxp";
+    context.travelPace = this.actor.system.getTravelPace();
     return context;
   }
 
@@ -104,13 +115,16 @@ export default class GroupActorSheet extends MultiActorSheet {
     context = await super._prepareInventoryContext(context, options);
     context.members = [];
     for ( const { actor } of this.document.system.members ) {
-      if ( !actor ) continue;
+      if ( !actor || (actor === this.inventorySource) ) continue;
       const { id, type, img, name, system, uuid } = actor;
       const member = { id, type, img, name, system, uuid };
-      this._prepareMemberEncumbrance(actor, member);
+      await this._prepareMemberEncumbrance(actor, member);
       context.members.push(member);
     }
     context.members.sort((a, b) => a.type.compare(b.type) || a.name.localeCompare(b.name, game.i18n.lang));
+    if ( this.inventorySource.type === "vehicle" ) {
+      context.encumbrance = await this.inventorySource.system.getEncumbrance();
+    }
     return context;
   }
 
@@ -168,6 +182,39 @@ export default class GroupActorSheet extends MultiActorSheet {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Render a toggle for switching between inventories.
+   * @protected
+   */
+  _renderInventoryToggle() {
+    const groupInventory = this.inventorySource === this.actor;
+    this.element.classList.toggle("vehicle-inventory", !groupInventory);
+    const currency = this.element.querySelector(".inventory-element .currency");
+    if ( !currency || !this.actor.isOwner || !this.actor.system.primaryVehicle?.isOwner ) return;
+    currency.querySelectorAll("[name]").forEach(el => {
+      el.dataset.name = el.name;
+      el.name = "";
+    });
+    const button = this.element.ownerDocument.createElement("div");
+    button.classList.add("split-button");
+    button.innerHTML = `
+      <button type="button" class="always-interactive split-control" data-action="toggleInventory"
+              data-inventory="group" aria-pressed="${groupInventory}" data-tooltip
+              aria-label="${game.i18n.localize("DND5E.Group.Action.Inventory.Group")}">
+        <i class="fa-solid fa-list-ul fa-fw" inert></i>
+      </button>
+      <button type="button" class="always-interactive split-control" data-action="toggleInventory"
+              data-inventory="vehicle" aria-pressed="${!groupInventory}" data-tooltip
+              aria-label="${game.i18n.localize("DND5E.Group.Action.Inventory.Vehicle")}">
+        <i class="fa-solid fa-wagon-covered fa-fw" inert></i>
+      </button>
+    `;
+    currency.append(button);
+    if ( !groupInventory ) this._renderCreateInventory();
+  }
+
+  /* -------------------------------------------- */
   /*  Member Preparation Helpers                  */
   /* -------------------------------------------- */
 
@@ -193,8 +240,11 @@ export default class GroupActorSheet extends MultiActorSheet {
    * @param {object} context  The render context.
    * @protected
    */
-  _prepareMemberEncumbrance(actor, context) {
-    const { pct, max, value } = actor.system.attributes.encumbrance;
+  async _prepareMemberEncumbrance(actor, context) {
+    const encumbrance = actor.type === "vehicle"
+      ? await actor.system.getEncumbrance()
+      : actor.system.attributes.encumbrance;
+    const { pct, max, value } = encumbrance;
     const defaultUnits = CONFIG.DND5E.encumbrance.baseUnits.default;
     const baseUnits = CONFIG.DND5E.encumbrance.baseUnits[actor.type] ?? defaultUnits;
     const systemUnits = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
@@ -250,12 +300,43 @@ export default class GroupActorSheet extends MultiActorSheet {
    */
   async _prepareVehicleContext(actor, context, options) {
     context.underlay = `var(--underlay-vehicle-${actor.system.details.type})`;
+    context.isPrimaryVehicle = this.actor.system.primaryVehicle === actor;
     const { attributes } = actor.system;
     context.properties = [];
     if ( attributes.ac.value ) context.properties.push({ label: "DND5E.AC", value: attributes.ac.value });
     if ( attributes.hp.dt ) context.properties.push({ label: "DND5E.HITPOINTS.DT.abbr", value: attributes.hp.dt });
-    const speed = attributes.movement.max;
+    const speed = attributes.travel.paces.max;
     if ( Number.isFinite(speed) ) context.properties.push({ label: "DND5E.Speed", value: speed });
+  }
+
+  /* -------------------------------------------- */
+  /*  Life-Cycle Handlers                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onClose(options) {
+    super._onClose(options);
+    this.actor.system.members.forEach(({ actor }) => {
+      if ( actor ) delete actor.apps[this.id];
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onFirstRender(context, options) {
+    await super._onFirstRender(context, options);
+    this.actor.system.members.forEach(({ actor }) => {
+      if ( actor ) actor.apps[this.id] = this;
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    this._renderInventoryToggle();
   }
 
   /* -------------------------------------------- */
@@ -271,6 +352,16 @@ export default class GroupActorSheet extends MultiActorSheet {
       award: { savedDestinations: this.actor.getFlag("dnd5e", "awardDestinations") },
       origin: this.actor
     }).render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onChangeForm(formConfig, event) {
+    if ( event.target.dataset.name?.startsWith("system.currency.") && (this.inventorySource.type === "vehicle") ) {
+      return this.inventorySource.update({ [event.target.dataset.name]: event.target.value });
+    }
+    return super._onChangeForm(formConfig, event);
   }
 
   /* -------------------------------------------- */
@@ -312,7 +403,45 @@ export default class GroupActorSheet extends MultiActorSheet {
     const { type, key } = target.dataset;
     if ( type !== "skill" ) return;
     const { uuid } = target.closest("[data-uuid]")?.dataset ?? {};
+    const { pace } = this.actor.system.getTravelPace();
     const actor = await fromUuid(uuid);
-    actor?.rollSkill({ event, skill: key, pace: this.actor.system.attributes.travel.pace });
+    actor?.rollSkill({ event, pace, skill: key });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling the inventory view.
+   * @this {GroupActorSheet}
+   * @param {PointerEvent} event  The triggering event.
+   * @param {HTMLElement} target  The action target.
+   */
+  static #onToggleInventory(event, target) {
+    const { inventory } = target.dataset;
+    this.actor.setFlag("dnd5e", "inventorySource", inventory);
+  }
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _getEntryContextOptions() {
+    return super._getEntryContextOptions().concat([{
+      name: "DND5E.Group.Action.SetPrimaryVehicle",
+      icon: '<i class="fa-solid fa-star"></i>',
+      group: "state",
+      condition: li => {
+        return (foundry.utils.fromUuidSync(li.dataset.uuid)?.type === "vehicle")
+          && (this.actor.system.primaryVehicle?.uuid !== li.dataset.uuid);
+      },
+      callback: async li => this.actor.update({ "system.primaryVehicle": (await fromUuid(li.dataset.uuid))?.id })
+    }, {
+      name: "DND5E.Group.Action.UnsetPrimaryVehicle",
+      icon: '<i class="fa-regular fa-star"></i>',
+      group: "state",
+      condition: li => this.actor.system.primaryVehicle?.uuid === li.dataset.uuid,
+      callback: () => this.actor.update({ "system.primaryVehicle": null })
+    }]);
   }
 }

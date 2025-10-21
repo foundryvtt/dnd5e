@@ -1,7 +1,6 @@
 import { formatCR, formatWeight, getPluralRules, parseDelta } from "../../utils.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
-import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;

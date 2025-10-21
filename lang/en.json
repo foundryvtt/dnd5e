@@ -2594,7 +2594,13 @@
 "DND5E.Group": {
   "Action": {
     "ChangePace": "Change Pace",
+    "Inventory": {
+      "Group": "Show Group Inventory",
+      "Vehicle": "Show Vehicle Inventory"
+    },
     "Remove": "Remove Member",
+    "SetPrimaryVehicle": "Set Primary Vehicle",
+    "UnsetPrimaryVehicle": "Unset Primary Vehicle",
     "View": "View Member"
   },
   "Config": {
@@ -2624,8 +2630,13 @@
   "TypeGeneric": "Group",
   "TypeParty": "Party",
   "Vehicle": {
-    "one": "Vehicle",
-    "other": "Vehicles"
+    "Count": {
+      "one": "Vehicle",
+      "other": "Vehicles"
+    },
+    "Primary": {
+      "label": "Primary Vehicle"
+    }
   },
   "Warning": {
     "PhysicalItemOnly": "Only physical items are supported."
@@ -4614,6 +4625,10 @@
   "Per": {
     "Day": "Per Day",
     "Hour": "Per Hour"
+  },
+  "Slowed": {
+    "Group": "The group's pace is slowed due to a member having their speed reduced to half or less.",
+    "Member": "This group member is slowing down the rest of the group."
   },
   "Speed": "Travel Speed",
   "Type": {

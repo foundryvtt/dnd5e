@@ -513,7 +513,7 @@
     }
   }
 
-  input, button {
+  input, button:not(.split-control) {
     border: var(--dnd5e-border-gold);
     background: var(--dnd5e-background-parchment);
     box-shadow: 0 0 6px var(--dnd5e-shadow-15);
@@ -534,7 +534,7 @@
     max-width: 80px;
   }
 
-  button {
+  button:not(.split-control) {
     --button-text-color: var(--color-text-secondary);
     border-radius: 4px;
     width: 30px;

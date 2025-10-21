@@ -328,8 +328,12 @@ export default class AttributesFields {
     encumbrance.max = encumbrance.thresholds.maximum;
     encumbrance.mod = (sizeMod * maximumMultiplier).toNearest(0.1);
     encumbrance.stops = {
-      encumbered: Math.clamp((encumbrance.thresholds.encumbered * 100) / encumbrance.max, 0, 100),
-      heavilyEncumbered: Math.clamp((encumbrance.thresholds.heavilyEncumbered * 100) / encumbrance.max, 0, 100)
+      encumbered: Number.isFinite(encumbrance.max)
+        ? Math.clamp((encumbrance.thresholds.encumbered * 100) / encumbrance.max, 0, 100)
+        : 0,
+      heavilyEncumbered: Number.isFinite(encumbrance.max)
+        ? Math.clamp((encumbrance.thresholds.heavilyEncumbered * 100) / encumbrance.max, 0, 100)
+        : 0
     };
     encumbrance.pct = Math.clamp((encumbrance.value * 100) / encumbrance.max, 0, 100);
     encumbrance.encumbered = encumbrance.value > encumbrance.heavilyEncumbered;
@@ -432,8 +436,9 @@ export default class AttributesFields {
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const field = this.schema.getField("attributes.movement");
     this.attributes.movement.max = 0;
+    let slowed = false;
     for ( const [type, v] of Object.entries(this.attributes.movement) ) {
-      if ( !field.getField(type)?.options.speed ) return;
+      if ( !field.getField(type)?.options.speed ) continue;
       let speed = Math.max(0, v - reduction);
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
       else {
@@ -449,7 +454,10 @@ export default class AttributesFields {
       }
       this.attributes.movement[type] = speed;
       this.attributes.movement.max = Math.max(speed, this.attributes.movement.max);
+      const base = this._source.attributes.movement[type] ?? this.attributes.movement.fromSpecies?.[type];
+      slowed = speed <= (base / 2);
     }
+    this.attributes.movement.slowed = slowed;
   }
 
   /* -------------------------------------------- */
@@ -465,7 +473,8 @@ export default class AttributesFields {
   static prepareRace(race, { force=false }={}) {
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
       if ( !race.system.movement[key] || (!force && (this.attributes.movement[key] !== null)) ) continue;
-      this.attributes.movement[key] = race.system.movement[key];
+      this.attributes.movement.fromSpecies ??= {};
+      this.attributes.movement[key] = this.attributes.movement.fromSpecies[key] = race.system.movement[key];
     }
     if ( race.system.movement.hover ) this.attributes.movement.hover = true;
     if ( force && race.system.movement.units ) this.attributes.movement.units = race.system.movement.units;

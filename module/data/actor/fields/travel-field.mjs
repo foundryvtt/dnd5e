@@ -59,6 +59,7 @@ export default class TravelField extends foundry.data.fields.SchemaField {
     const { pace: paceMode, units } = travel;
     Object.defineProperty(travel.paces, "max", { value: 0, writable: true });
     Object.defineProperty(travel.speeds, "max", { value: 0, writable: true });
+    travel.prePace = {};
 
     const noMovement = this.parent.hasConditionEffect("noMovement");
     const halfMovement = this.parent.hasConditionEffect("halfMovement");
@@ -68,9 +69,10 @@ export default class TravelField extends foundry.data.fields.SchemaField {
       const speed = travel.speeds[type] = Math.max(0, simplifyBonus(travel.speeds[type], rollData)) * multiplier;
       if ( speed && !pace ) pace = travel.paces[type] = speed * travel.time;
       if ( pace && !speed ) travel.speeds[type] = Math.floor(pace / travel.time);
-      if ( pace && paceMode ) travel.paces[type] = TravelField.applyPaceMultiplier(
-        pace, paceMode, CONFIG.DND5E.travelUnits[units]?.type
-      );
+      if ( pace && paceMode ) {
+        travel.prePace[type] = pace;
+        travel.paces[type] = TravelField.applyPaceMultiplier(pace, paceMode, CONFIG.DND5E.travelUnits[units]?.type);
+      }
       if ( pace > travel.paces.max ) travel.paces.max = pace;
       if ( speed > travel.speeds.max ) travel.speeds.max = speed;
     }
