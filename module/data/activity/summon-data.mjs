@@ -43,6 +43,7 @@ const {
  * @property {string} summon.identifier     Class identifier that will be used to determine applicable level.
  * @property {""|"cr"} summon.mode          Method of determining what type of creature is summoned.
  * @property {boolean} summon.prompt        Should the player be prompted to place the summons?
+ * @property {string} tempHP                Temporary HP granted to the summoned creature.
  */
 export default class SummonActivityData extends BaseActivityData {
   /** @inheritDoc */
@@ -81,7 +82,8 @@ export default class SummonActivityData extends BaseActivityData {
         identifier: new IdentifierField(),
         mode: new StringField(),
         prompt: new BooleanField({ initial: true })
-      })
+      }),
+      tempHP: new FormulaField()
     };
   }
 
