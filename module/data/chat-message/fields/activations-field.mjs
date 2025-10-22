@@ -1,7 +1,7 @@
 const { SetField, StringField } = foundry.data.fields;
 
 /**
- * @typedef {Set<string>} ActivationsData
+ * @import { ActivationsData } from "./_types.mjs";
  */
 
 /**

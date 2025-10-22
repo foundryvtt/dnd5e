@@ -4,18 +4,13 @@ import AdvancementDataField from "../fields/advancement-data-field.mjs";
 const { DocumentIdField, FilePathField, NumberField, StringField } = foundry.data.fields;
 
 /**
+ * @import { BaseAdvancementData } from "./_types.mjs";
+ */
+
+/**
  * Base data model for advancement.
- *
- * @property {string} _id               The advancement's ID.
- * @property {string} type              Type of advancement.
- * @property {*} configuration          Type-specific configuration data.
- * @property {*} value                  Type-specific value data after the advancement is applied.
- * @property {number} level             For single-level advancement, the level at which it should apply.
- * @property {string} title             Optional custom title.
- * @property {string} hint              Brief description of what the advancement does or guidance for the player.
- * @property {string} icon              Optional custom icon.
- * @property {string} classRestriction  Should this advancement apply at all times, only when on the first class on
- *                                      an actor, or only on a class that is multi-classing?
+ * @extends SparseDataModel<BaseAdvancementData>
+ * @mixes BaseAdvancementData
  */
 export default class BaseAdvancement extends SparseDataModel {
 

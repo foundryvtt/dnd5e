@@ -1,6 +1,10 @@
 const { ArrayField, BooleanField, NumberField, SetField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { TraitConfigurationData } from "./_types.mjs";
+ */
+
+/**
  * Map language category changes.
  * @type {Record<string, string>}
  */
@@ -13,22 +17,9 @@ const _MAP = {
 const LANGUAGE_MAP = { modern: _MAP, legacy: foundry.utils.invertObject(_MAP) };
 
 /**
- * Configuration for a specific trait choice.
- *
- * @typedef {object} TraitChoice
- * @property {number} count     Number of traits that can be selected.
- * @property {string[]} [pool]  List of trait or category keys that can be chosen. If no choices are provided,
- *                              any trait of the specified type can be selected.
- */
-
-/**
  * Configuration data for the TraitAdvancement.
- *
- * @property {boolean} allowReplacements  Whether all potential choices should be presented to the user if there
- *                                        are no more choices available in a more limited set.
- * @property {TraitChoice[]} choices      Choices presented to the user.
- * @property {string[]} grants            Keys for traits granted automatically.
- * @property {string} mode                Method by which this advancement modifies the actor's traits.
+ * @extends DataModel<TraitConfigurationData>
+ * @mixes TraitConfigurationData
  */
 export class TraitConfigurationData extends foundry.abstract.DataModel {
 
@@ -41,6 +32,7 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
 
   /* -------------------------------------------- */
 
+  /** @override */
   static defineSchema() {
     return {
       allowReplacements: new BooleanField({ required: true }),
@@ -68,10 +60,11 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
 
 /**
  * Value data for the TraitAdvancement.
- *
- * @property {Set<string>} chosen  Trait keys that have been chosen.
+ * @extends DataModel<TraitValueData>
+ * @mixes TraitValueData
  */
 export class TraitValueData extends foundry.abstract.DataModel {
+  /** @override */
   static defineSchema() {
     return {
       chosen: new SetField(new StringField(), { required: false })

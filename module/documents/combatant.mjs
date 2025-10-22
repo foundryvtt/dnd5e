@@ -2,7 +2,7 @@ import ActivationsField from "../data/chat-message/fields/activations-field.mjs"
 import { ActorDeltasField } from "../data/chat-message/fields/deltas-field.mjs";
 
 /**
- * @import { ActorDeltasData } from "../data/chat-message/fields/deltas-field.mjs";
+ * @import { ActorDeltasData } from "../data/chat-message/fields/_types.mjs";
  */
 
 /**

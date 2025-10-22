@@ -4,14 +4,13 @@ import MappingField from "../fields/mapping-field.mjs";
 const { DocumentUUIDField, NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { AbilityScoreImprovementConfigurationData, AbilityScoreImprovementValueData } from "./_types.mjs";
+ */
+
+/**
  * Data model for the Ability Score Improvement advancement configuration.
- *
- * @property {number} cap                    Maximum number of points that can be assigned to a single score.
- * @property {Object<string, number>} fixed  Number of points automatically assigned to a certain score.
- * @property {Set<string>} locked            Abilities that cannot be changed by this advancement.
- * @property {number} max                    Override for the maximum ability score.
- * @property {number} points                 Number of points that can be assigned to any score.
- * @property {string} recommendation         Epic Boon feat recommended by this class.
+ * @extends DataModel<AbilityScoreImprovementConfigurationData>
+ * @mixes AbilityScoreImprovementConfigurationData
  */
 export class AbilityScoreImprovementConfigurationData extends foundry.abstract.DataModel {
 
@@ -35,10 +34,8 @@ export class AbilityScoreImprovementConfigurationData extends foundry.abstract.D
 
 /**
  * Data model for the Ability Score Improvement advancement value.
- *
- * @property {string} type             When on a class, whether the player chose ASI or a Feat.
- * @property {Object<string, number>}  Points assigned to individual scores.
- * @property {Object<string, string>}  Feat that was selected.
+ * @extends SparseDataModel<AbilityScoreImprovementValueData>
+ * @mixes AbilityScoreImprovementValueData
  */
 export class AbilityScoreImprovementValueData extends SparseDataModel {
   /** @inheritDoc */

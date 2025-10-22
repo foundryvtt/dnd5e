@@ -4,25 +4,21 @@ import SystemDataModel from "./system-data-model.mjs";
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
+ * @import { FavoriteData5e } from "../../data/actor/_types.mjs";
+ * @import { ItemDataModelMetadata } from "./types.mjs";
+ */
+
+/**
  * Variant of the SystemDataModel with support for rich item tooltips.
  */
 export default class ItemDataModel extends SystemDataModel {
-
-  /**
-   * @typedef {SystemDataModelMetadata} ItemDataModelMetadata
-   * @property {boolean} enchantable    Can this item be modified by enchantment effects?
-   * @property {boolean} hasEffects     Display the effects tab on this item's sheet.
-   * @property {boolean} singleton      Should only a single item of this type be allowed on an actor?
-   * @property {InventorySectionDescriptor} [inventory]  Configuration for displaying this item type in its own section
-   *                                                     in creature inventories.
-   */
 
   /** @type {ItemDataModelMetadata} */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: false,
     hasEffects: false,
     singleton: false
-  }, {inplace: false}));
+  }, { inplace: false }));
 
   /**
    * The handlebars template for rendering item tooltips.

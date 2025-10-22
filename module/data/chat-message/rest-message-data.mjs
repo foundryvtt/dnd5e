@@ -6,17 +6,13 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ForeignDocumentField, StringField } = foundry.data.fields;
 
 /**
- * @import ActivationsData from "./fields/activations-field.mjs";
- * @import { ActorDeltasData } from "./fields/deltas-field.mjs";
+ * @import { RestMessageData } from "./_types.mjs";
  */
 
 /**
  * Data stored in a rest chat message.
- *
- * @property {ActivationsData} activations  Activities that can be used after this rest, stored as relative UUIDs.
- * @property {ActorDeltasData} deltas       Actor/item recovery from this turn change.
- * @property {ChatMessage5e} [request]      Rest request chat message for which this rest was performed.
- * @property {string} type                  Type of rest performed.
+ * @extends ChatMessageDataModel<RestMessageData>
+ * @mixes RestMessageData
  */
 export default class RestMessageData extends ChatMessageDataModel {
 

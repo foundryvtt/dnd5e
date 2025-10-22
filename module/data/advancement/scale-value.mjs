@@ -6,13 +6,13 @@ import { createCheckboxInput } from "../../applications/fields.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ScaleValueConfigurationData } from "./_types.mjs";
+ */
+
+/**
  * Data model for the Scale Value advancement type.
- *
- * @property {string} identifier        Identifier used to select this scale value in roll formulas.
- * @property {string} type              Type of data represented by this scale value.
- * @property {object} [distance]
- * @property {string} [distance.units]  If distance type is selected, the units each value uses.
- * @property {Object<string, *>} scale  Scale values for each level. Value format is determined by type.
+ * @extends DataModel<ScaleValueConfigurationData>
+ * @mixes ScaleValueConfigurationData
  */
 export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
 
