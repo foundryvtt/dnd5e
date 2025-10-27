@@ -86,7 +86,12 @@ export class SpellcastingModel extends foundry.abstract.DataModel {
     Object.entries(spellcasting).forEach(([key, config]) => {
       const Model = this.TYPES[config.type ?? "base"];
       if ( !Model ) return delete spellcasting[key];
-      spellcasting[key] = new Model(config, { key });
+      try {
+        spellcasting[key] = new Model(config, { key });
+      } catch (e) {
+        console.error(`Failed to instantiate model for spellcasting method '${key}'`, e);
+        return delete spellcasting[key];
+      }
       Object.entries(config.progression ?? {}).forEach(([k, v]) => {
         if ( k in CONFIG.DND5E.spellProgression ) console.warn(`Duplicate spell progression key '${k}' detected.`);
         CONFIG.DND5E.spellProgression[k] = { ...v, type: key };
