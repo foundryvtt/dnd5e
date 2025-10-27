@@ -14,26 +14,26 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ * @import { ConsumableItemData } from "./_types.mjs";
+ * @import {
+ *   ActivitiesTemplateData, EquippableItemTemplateData, IdentifiableTemplateData,
+ *   ItemDescriptionTemplateData, ItemTypeTemplateData, PhysicalItemTemplateData
+ * } from "./templates/_types.mjs";
  */
 
 /**
  * Data definition for Consumable items.
- * @mixes ActivitiesTemplate
- * @mixes ItemDescriptionTemplate
- * @mixes ItemTypeTemplate
- * @mixes IdentifiableTemplate
- * @mixes PhysicalItemTemplate
- * @mixes EquippableItemTemplate
- *
- * @property {object} damage
- * @property {DamageData} damage.base               Damage caused by this ammunition.
- * @property {string} damage.replace                Should ammunition damage replace the base weapon's damage?
- * @property {number} magicalBonus                  Magical bonus added to attack & damage rolls by ammunition.
- * @property {Set<string>} properties               Ammunition properties.
- * @property {Omit<ItemTypeData, "baseItem">} type  Ammunition type and subtype.
- * @property {object} uses
- * @property {boolean} uses.autoDestroy  Should this item be destroyed when it runs out of uses.
+ * @extends ItemDataModel<
+ *   ActivitiesTemplate & ItemDescriptionTemplate & IdentifiableTemplate &
+ *   ItemTypeTemplate & PhysicalItemTemplate & EquippableItemTemplate & ConsumableItemData
+ * >
+ * @mixes ActivitiesTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes ItemTypeTemplateData
+ * @mixes IdentifiableTemplateData
+ * @mixes PhysicalItemTemplateData
+ * @mixes EquippableItemTemplateData
+ * @mixes ConsumableItemData
  */
 export default class ConsumableData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,

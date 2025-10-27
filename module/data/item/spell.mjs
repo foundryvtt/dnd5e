@@ -10,30 +10,16 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ActivationData, DurationData, RangeData, TargetData } from "../shared/_types.mjs";
+ * @import { SpellItemData } from "./_types.mjs";
+ * @import { ActivitiesTemplateData ItemDescriptionTemplateData } from "./templates/_types.mjs";
  */
 
 /**
  * Data definition for Spell items.
- * @mixes ActivitiesTemplate
- * @mixes ItemDescriptionTemplate
- *
- * @property {string} ability                    Override of default spellcasting ability.
- * @property {ActivationData} activation         Casting time & conditions.
- * @property {DurationData} duration             Duration of the spell effect.
- * @property {number} level                      Base level of the spell.
- * @property {object} materials                  Details on material components required for this spell.
- * @property {string} materials.value            Description of the material components required for casting.
- * @property {boolean} materials.consumed        Are these material components consumed during casting?
- * @property {number} materials.cost             GP cost for the required components.
- * @property {number} materials.supply           Quantity of this component available.
- * @property {string} method                     The spellcasting method this spell was gained via.
- * @property {number} prepared                   The spell availability.
- * @property {Set<string>} properties            General components and tags for this spell.
- * @property {RangeData} range                   Range of the spell
- * @property {string} school                     Magical school to which this spell belongs.
- * @property {string} sourceClass                Associated spellcasting class when this spell is on an actor.
- * @property {TargetData} target                 Information on area and individual targets.
+ * @extends ItemDataModel<ActivitiesTemplate & ItemDescriptionTemplate & SpellItemData>
+ * @mixes ActivitiesTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes SpellItemData
  */
 export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, ItemDescriptionTemplate) {
 

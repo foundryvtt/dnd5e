@@ -9,22 +9,25 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { CurrencyTemplateData } from "../shared/_types.mjs";
+ * @import { ContainerItemData } from "./_types.mjs";
+ * @import {
+ *   EquippableItemTemplateData, IdentifiableTemplateData, ItemDescriptionTemplateData, PhysicalItemTemplateData
+ * } from "./templates/_types.mjs";
+ */
+
+/**
  * Data definition for Container items.
- * @mixes ItemDescriptionTemplate
- * @mixes IdentifiableTemplate
- * @mixes PhysicalItemTemplate
- * @mixes EquippableItemTemplate
- * @mixes CurrencyTemplate
- *
- * @property {object} capacity              Information on container's carrying capacity.
- * @property {number} capacity.count        Number of items that can be stored within the container.
- * @property {object} capacity.volume
- * @property {string} capacity.volume.units  Units used to measure volume capacity.
- * @property {number} capacity.volume.value  Amount of volume that can be stored.
- * @property {object} capacity.weight
- * @property {string} capacity.weight.units  Units used to measure weight capacity.
- * @property {number} capacity.weight.value  Amount of weight that can be stored.
- * @property {Set<string>} properties       Container properties.
+ * @extends ItemDataModel<
+ *   ItemDescriptionTemplate & IdentifiableTemplate & PhysicalItemTemplate &
+ *   EquippableItemTemplate & CurrencyTemplate & ContainerItemData
+ * >
+ * @mixes ItemDescriptionTemplateData
+ * @mixes IdentifiableTemplateData
+ * @mixes PhysicalItemTemplateData
+ * @mixes EquippableItemTemplateData
+ * @mixes CurrencyTemplateData
+ * @mixes ContainerItemData
  */
 export default class ContainerData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, PhysicalItemTemplate, EquippableItemTemplate, CurrencyTemplate

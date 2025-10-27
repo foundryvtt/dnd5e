@@ -4,9 +4,12 @@ import AdvancementField from "../../fields/advancement-field.mjs";
 const { ArrayField } = foundry.data.fields;
 
 /**
+ * @import { AdvancementTemplateData } from "./_types.mjs";
+ */
+
+/**
  * Data model template for items with advancement.
- *
- * @property {Advancement[]} advancement  Advancement objects for this item.
+ * @extends SystemDataModel<AdvancementTemplateData>
  * @mixin
  */
 export default class AdvancementTemplate extends SystemDataModel {

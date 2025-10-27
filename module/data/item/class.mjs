@@ -9,22 +9,19 @@ import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ClassItemData } from "./_types.mjs";
+ * @import {
+ *   AdvancementTemplateData, ItemDescriptionTemplateData, StartingEquipmentTemplateData
+ * } from "./templates/_types.mjs";
+ */
+
+/**
  * Data definition for Class items.
- * @mixes AdvancementTemplate
- * @mixes ItemDescriptionTemplate
- * @mixes StartingEquipmentTemplate
- *
- * @property {object} hd                        Object describing hit dice properties.
- * @property {string} hd.additional             Additional hit dice beyond the level of the class.
- * @property {string} hd.denomination           Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
- * @property {number} hd.spent                  Number of hit dice consumed.
- * @property {number} levels                    Current number of levels in this class.
- * @property {object} primaryAbility
- * @property {Set<string>} primaryAbility.value List of primary abilities used by this class.
- * @property {boolean} primaryAbility.all       If multiple abilities are selected, does multiclassing require all of
- *                                              them to be 13 or just one.
- * @property {Set<string>} properties           General properties of a class item.
- * @property {SpellcastingField} spellcasting   Details on class's spellcasting ability.
+ * @extends ItemDataModel<AdvancementTemplate & ItemDescriptionTemplate & StartingEquipmentTemplate & ClassItemData>
+ * @mixes AdvancementTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes StartingEquipmentTemplateData
+ * @mixes ClassItemData
  */
 export default class ClassData extends ItemDataModel.mixin(
   AdvancementTemplate, ItemDescriptionTemplate, StartingEquipmentTemplate

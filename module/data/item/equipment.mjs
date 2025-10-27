@@ -11,27 +11,27 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ * @import { EquipmentItemData } from "./_types.mjs";
+ * @import {
+ *   ActivitiesTemplateData, EquippableItemTemplateData, IdentifiableTemplateData,
+ *   ItemDescriptionTemplateData, ItemTypeTemplateData, MountableTemplateData, PhysicalItemTemplateData
+ * } from "./templates/_types.mjs";
  */
 
 /**
  * Data definition for Equipment items.
- * @mixes ActivitiesTemplate
- * @mixes ItemDescriptionTemplate
- * @mixes ItemTypeTemplate
- * @mixes IdentifiableTemplate
- * @mixes PhysicalItemTemplate
- * @mixes EquippableItemTemplate
- * @mixes MountableTemplate
- *
- * @property {object} armor                        Armor details and equipment type information.
- * @property {number} armor.value                  Base armor class or shield bonus.
- * @property {number} armor.dex                    Maximum dex bonus added to armor class.
- * @property {number} armor.magicalBonus           Bonus added to AC from the armor's magical nature.
- * @property {number} proficient                   Does the owner have proficiency in this piece of equipment?
- * @property {Set<string>} properties              Equipment properties.
- * @property {number} strength                     Minimum strength required to use a piece of armor.
- * @property {Omit<ItemTypeData, "subtype">} type  Equipment type & base item.
+ * @extends ItemDataModel<
+ *   ActivitiesTemplate & ItemDescriptionTemplate & IdentifiableTemplate & ItemTypeTemplate &
+ *   PhysicalItemTemplate & EquippableItemTemplate & MountableTemplate & EquipmentItemData
+ * >
+ * @mixes ActivitiesTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes ItemTypeTemplateData
+ * @mixes IdentifiableTemplateData
+ * @mixes PhysicalItemTemplateData
+ * @mixes EquippableItemTemplateData
+ * @mixes MountableTemplateData
+ * @mixes EquipmentItemData
  */
 export default class EquipmentData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,

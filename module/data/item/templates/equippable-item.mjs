@@ -3,11 +3,13 @@ import SystemDataModel from "../../abstract/system-data-model.mjs";
 const { BooleanField, StringField } = foundry.data.fields;
 
 /**
+ * @import { CompendiumBrowserFilterDefinitionEntry } from "../../../applications/compendium-browser.mjs";
+ * @import { EquippableItemTemplateData } from "./_types.mjs";
+ */
+
+/**
  * Data model template with information on items that can be attuned and equipped.
- *
- * @property {string} attunement  Attunement information as defined in `DND5E.attunementTypes`.
- * @property {boolean} attuned    Is this item attuned on its owning actor?
- * @property {boolean} equipped   Is this item equipped on its owning actor?
+ * @extends SystemDataModel<EquippableItemTemplateData>
  * @mixin
  */
 export default class EquippableItemTemplate extends SystemDataModel {

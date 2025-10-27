@@ -4,10 +4,17 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
 
 /**
+ * @import {
+ *   AdvancementTemplateData, ItemDescriptionTemplateData, StartingEquipmentTemplateData
+ * } from "./templates/_types.mjs";
+ */
+
+/**
  * Data definition for Background items.
- * @mixes AdvancementTemplate
- * @mixes ItemDescriptionTemplate
- * @mixes StartingEquipmentTemplate
+ * @extends ItemDataModel<AdvancementTemplateData & ItemDescriptionTemplate & StartingEquipmentTemplate>
+ * @mixes AdvancementTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes StartingEquipmentTemplateData
  */
 export default class BackgroundData extends ItemDataModel.mixin(
   AdvancementTemplate, ItemDescriptionTemplate, StartingEquipmentTemplate

@@ -10,28 +10,22 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ * @import { FeatItemData } from "./_types.mjs";
+ * @import {
+ *   ActivitiesTemplateData, AdvancementTemplateData, ItemDescriptionTemplateData, ItemTypeTemplateData
+ * } from "./templates/_types.mjs";
  */
 
 /**
  * Data definition for Feature items.
- * @mixes ActivitiesTemplate
- * @mixes AdvancementTemplate
- * @mixes ItemDescriptionTemplate
- * @mixes ItemTypeTemplate
- *
- * @property {number} cover                         Amount of cover this feature affords to its crew on a vehicle.
- * @property {boolean} crewed                       Is this vehicle feature currently crewed?
- * @property {object} enchant
- * @property {string} enchant.max                   Maximum number of items that can have this enchantment.
- * @property {string} enchant.period                Frequency at which the enchantment can be swapped.
- * @property {object} prerequisites
- * @property {Set<string>} prerequisites.items      Items that must be taken first before this item.
- * @property {number} prerequisites.level           Character or class level required to choose this feature.
- * @property {boolean} prerequisites.repeatable     Can this item be selected more than once?
- * @property {Set<string>} properties               General properties of a feature item.
- * @property {string} requirements                  Actor details required to use this feature.
- * @property {Omit<ItemTypeData, "baseItem">} type  Feature type and subtype.
+ * @extends ItemDataModel<
+ *   ActivitiesTemplate & AdvancementTemplate & ItemDescriptionTemplate & ItemTypeTemplate & FeatItemData
+ * >
+ * @mixes ActivitiesTemplateData
+ * @mixes AdvancementTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes ItemTypeTemplateData
+ * @mixes FeatItemData
  */
 export default class FeatData extends ItemDataModel.mixin(
   ActivitiesTemplate, AdvancementTemplate, ItemDescriptionTemplate, ItemTypeTemplate

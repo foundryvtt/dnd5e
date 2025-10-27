@@ -8,18 +8,23 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ * @import { InventorySectionDescriptor } from "../../applications/components/inventory.mjs";
+ * @import { LootItemData } from "./_types.mjs";
+ * @import {
+ *   IdentifiableTemplateData, ItemDescriptionTemplateData, ItemTypeTemplateData, PhysicalItemTemplateData
+ * } from "./templates/_types.mjs";
  */
 
 /**
  * Data definition for Loot items.
- * @mixes ItemDescriptionTemplate
- * @mixes ItemTypeTemplate
- * @mixes IdentifiableTemplate
- * @mixes PhysicalItemTemplate
- *
- * @property {Set<string>} properties               General properties of a loot item.
- * @property {Omit<ItemTypeData, "baseItem">} type  Loot type and subtype.
+ * @extends ItemDataModel<
+ *   ItemDescriptionTemplate & IdentifiableTemplate & ItemTypeTemplate & PhysicalItemTemplate & LootItemData
+ * >
+ * @mixes ItemDescriptionTemplateData
+ * @mixes ItemTypeTemplateData
+ * @mixes IdentifiableTemplateData
+ * @mixes PhysicalItemTemplateData
+ * @mixes LootItemData
  */
 export default class LootData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate

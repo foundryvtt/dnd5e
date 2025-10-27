@@ -4,14 +4,12 @@ import { ActivitiesField } from "../../fields/activities-field.mjs";
 import UsesField from "../../shared/uses-field.mjs";
 
 /**
- * @import { UsesData } from "../../shared/_types.mjs";
+ * @import { ActivitiesTemplateData } from "./_types.mjs";
  */
 
 /**
  * Data model template for items with activities.
- *
- * @property {ActivityCollection} activities  Activities on this item.
- * @property {UsesData} uses                  Item's limited uses & recovery.
+ * @extends SystemDataModel<ActivitiesTemplateData>
  * @mixin
  */
 export default class ActivitiesTemplate extends SystemDataModel {
@@ -310,7 +308,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
   /**
    * Retrieve information on available uses for display.
-   * @returns {{value: number, max: number, name: string}}
+   * @returns {{ value: number, max: number, name: string }}
    */
   getUsesData() {
     return { value: this.uses.value, max: this.uses.max, name: "system.uses.value" };

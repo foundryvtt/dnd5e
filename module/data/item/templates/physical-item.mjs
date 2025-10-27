@@ -4,15 +4,13 @@ import SystemDataModel from "../../abstract/system-data-model.mjs";
 const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { CompendiumBrowserFilterDefinitionEntry } from "../../../applications/compendium-browser.mjs";
+ * @import { PhysicalItemTemplateData } from "./_types.mjs";
+ */
+
+/**
  * Data model template with information on physical items.
- *
- * @property {string} container           Container within which this item is located.
- * @property {number} quantity            Number of items in a stack.
- * @property {UnitValue5e} weight         The Item's weight.
- * @property {object} price
- * @property {number} price.value         Item's cost in the specified denomination.
- * @property {string} price.denomination  Currency denomination used to determine price.
- * @property {string} rarity              Item rarity as defined in `DND5E.itemRarity`.
+ * @extends SystemDataModel<PhysicalItemTemplateData>
  * @mixin
  */
 export default class PhysicalItemTemplate extends SystemDataModel {
@@ -32,7 +30,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
         units: new StringField({
           required: true, blank: false, label: "DND5E.UNITS.WEIGHT.Label", initial: () => defaultUnits("weight")
         })
-      }, {label: "DND5E.Weight"}),
+      }, { label: "DND5E.Weight" }),
       price: new SchemaField({
         value: new NumberField({
           required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Price"
@@ -40,8 +38,8 @@ export default class PhysicalItemTemplate extends SystemDataModel {
         denomination: new StringField({
           required: true, blank: false, initial: "gp", label: "DND5E.Currency"
         })
-      }, {label: "DND5E.Price"}),
-      rarity: new StringField({required: true, blank: true, label: "DND5E.Rarity"})
+      }, { label: "DND5E.Price" }),
+      rarity: new StringField({ required: true, blank: true, label: "DND5E.Rarity" })
     };
   }
 

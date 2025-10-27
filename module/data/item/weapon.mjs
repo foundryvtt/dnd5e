@@ -14,36 +14,28 @@ import MountableTemplate from "./templates/mountable.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ * @import { InventorySectionDescriptor } from "../../applications/components/inventory.mjs";
+ * @import { WeaponItemData } from "./_types.mjs";
+ * @import {
+ *   ActivitiesTemplateData, EquippableItemTemplateData, IdentifiableTemplateData,
+ *   ItemDescriptionTemplateData, ItemTypeTemplateData, MountableTemplateData, PhysicalItemTemplateData
+ * } from "./templates/_types.mjs";
  */
 
 /**
  * Data definition for Weapon items.
- * @mixes ActivitiesTemplate
- * @mixes ItemDescriptionTemplate
- * @mixes ItemTypeTemplate
- * @mixes IdentifiableTemplate
- * @mixes PhysicalItemTemplate
- * @mixes EquippableItemTemplate
- * @mixes MountableTemplate
- *
- * @property {object} ammunition
- * @property {string} ammunition.type              Type of ammunition fired by this weapon.
- * @property {object} armor
- * @property {number} armor.value                  Siege or vehicle weapon's armor class.
- * @property {object} damage
- * @property {DamageData} damage.base              Weapon's base damage.
- * @property {DamageData} damage.versatile         Weapon's versatile damage.
- * @property {number} magicalBonus                 Magical bonus added to attack & damage rolls.
- * @property {string} mastery                      Mastery Property usable with this weapon.
- * @property {Set<string>} properties              Weapon's properties.
- * @property {number} proficient                   Does the weapon's owner have proficiency?
- * @property {object} range
- * @property {number} range.value                  Short range of the weapon.
- * @property {number} range.long                   Long range of the weapon.
- * @property {number|null} range.reach             Reach of the weapon.
- * @property {string} range.units                  Units used to measure the weapon's range and reach.
- * @property {Omit<ItemTypeData, "subtype">} type  Weapon type and base item.
+ * @extends ItemDataModel<
+ *   ActivitiesTemplate & ItemDescriptionTemplate & IdentifiableTemplate & ItemTypeTemplate &
+ *   PhysicalItemTemplate & EquippableItemTemplate & MountableTemplate & WeaponItemData
+ * >
+ * @mixes ActivitiesTemplateData
+ * @mixes ItemDescriptionTemplateData
+ * @mixes ItemTypeTemplateData
+ * @mixes IdentifiableTemplateData
+ * @mixes PhysicalItemTemplateData
+ * @mixes EquippableItemTemplateData
+ * @mixes MountableTemplateData
+ * @mixes WeaponItemData
  */
 export default class WeaponData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
@@ -72,9 +64,9 @@ export default class WeaponData extends ItemDataModel.mixin(
         base: new DamageField(),
         versatile: new DamageField()
       }),
-      magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
+      magicalBonus: new NumberField({ min: 0, integer: true, label: "DND5E.MagicalBonus" }),
       mastery: new StringField(),
-      properties: new SetField(new StringField(), {label: "DND5E.ItemWeaponProperties"}),
+      properties: new SetField(new StringField(), { label: "DND5E.ItemWeaponProperties" }),
       proficient: new NumberField({
         required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
       }),
@@ -84,7 +76,7 @@ export default class WeaponData extends ItemDataModel.mixin(
         reach: new NumberField({ min: 0 }),
         units: new StringField()
       }),
-      type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"})
+      type: new ItemTypeField({ value: "simpleM", subtype: false }, {label: "DND5E.ItemWeaponType"})
     });
   }
 

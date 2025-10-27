@@ -7,10 +7,13 @@ const {
 } = foundry.data.fields;
 
 /**
+ * @import { StartingEquipmentTemplate } from "./_types.mjs";
+ */
+
+/**
  * Data model template representing a background & class's starting equipment.
- *
- * @property {EquipmentEntryData[]} startingEquipment  Different equipment entries that will be granted.
- * @property {string} wealth                           Formula used to determine starting wealth.
+ * @extends SystemDataModel<StartingEquipmentTemplateData>
+ * @mixin
  */
 export default class StartingEquipmentTemplate extends SystemDataModel {
   static defineSchema() {
