@@ -21,8 +21,8 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
 
 /**
  * System data definition for NPCs.
- * @extends {CreatureTemplate<NPCData>}
- * @mixes NPCData
+ * @extends {CreatureTemplate<NPCActorData>}
+ * @mixes NPCActorData
  */
 export default class NPCData extends CreatureTemplate {
 

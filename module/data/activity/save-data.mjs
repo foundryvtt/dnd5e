@@ -15,7 +15,7 @@ const { ArrayField, BooleanField, SchemaField, SetField, StringField } = foundry
  * @extends {BaseActivityData<SaveActivityData>}
  * @mixes {SaveActivityData}
  */
-export default class SaveActivityData extends BaseActivityData {
+export default class BaseSaveActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     return {

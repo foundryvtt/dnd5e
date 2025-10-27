@@ -9,10 +9,10 @@ const { DocumentIdField, FilePathField, NumberField, StringField } = foundry.dat
 
 /**
  * Base data model for advancement.
- * @extends SparseDataModel<BaseAdvancementData>
- * @mixes BaseAdvancementData
+ * @extends SparseDataModel<AdvancementData>
+ * @mixes AdvancementData
  */
-export default class BaseAdvancement extends SparseDataModel {
+export default class BaseAdvancementData extends SparseDataModel {
 
   /**
    * Name of this advancement type that will be stored in config and used for lookups.

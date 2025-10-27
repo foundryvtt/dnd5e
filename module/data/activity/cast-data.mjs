@@ -11,7 +11,7 @@ const { BooleanField, DocumentUUIDField, NumberField, SchemaField, SetField, Str
  * @extends {BaseActivityData<CastActivityData>}
  * @mixes {CastActivityData}
  */
-export default class CastActivityData extends BaseActivityData {
+export default class BaseCastActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     const schema = super.defineSchema();

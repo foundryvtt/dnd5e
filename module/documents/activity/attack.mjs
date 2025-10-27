@@ -1,13 +1,13 @@
 import AttackSheet from "../../applications/activity/attack-sheet.mjs";
 import AttackRollConfigurationDialog from "../../applications/dice/attack-configuration-dialog.mjs";
-import AttackActivityData from "../../data/activity/attack-data.mjs";
+import BaseAttackActivityData from "../../data/activity/attack-data.mjs";
 import { getTargetDescriptors } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
  * Activity for making attacks and rolling damage.
  */
-export default class AttackActivity extends ActivityMixin(AttackActivityData) {
+export default class AttackActivity extends ActivityMixin(BaseAttackActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */

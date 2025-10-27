@@ -2,7 +2,7 @@ import SummonSheet from "../../applications/activity/summon-sheet.mjs";
 import SummonUsageDialog from "../../applications/activity/summon-usage-dialog.mjs";
 import CompendiumBrowser from "../../applications/compendium-browser.mjs";
 import TokenPlacement from "../../canvas/token-placement.mjs";
-import SummonActivityData from "../../data/activity/summon-data.mjs";
+import BaseSummonActivityData from "../../data/activity/summon-data.mjs";
 import { simplifyBonus, staticID } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
@@ -14,7 +14,7 @@ import ActivityMixin from "./mixin.mjs";
 /**
  * Activity for summoning creatures.
  */
-export default class SummonActivity extends ActivityMixin(SummonActivityData) {
+export default class SummonActivity extends ActivityMixin(BaseSummonActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */

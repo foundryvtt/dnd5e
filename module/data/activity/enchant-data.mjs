@@ -15,7 +15,7 @@ const {
  * @extends {BaseActivityData<EnchantActivityData>}
  * @mixes {EnchantActivityData}
  */
-export default class EnchantActivityData extends BaseActivityData {
+export default class BaseEnchantActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     return {

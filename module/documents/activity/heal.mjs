@@ -1,11 +1,11 @@
 import HealSheet from "../../applications/activity/heal-sheet.mjs";
-import HealActivityData from "../../data/activity/heal-data.mjs";
+import BaseHealActivityData from "../../data/activity/heal-data.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
  * Activity for rolling healing.
  */
-export default class HealActivity extends ActivityMixin(HealActivityData) {
+export default class HealActivity extends ActivityMixin(BaseHealActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */

@@ -11,7 +11,7 @@ const { DocumentIdField, SchemaField } = foundry.data.fields;
  * @extends {BaseActivityData<ForwardActivityData>}
  * @mixes {ForwardActivityData}
  */
-export default class ForwardActivityData extends BaseActivityData {
+export default class BaseForwardActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     const schema = super.defineSchema();

@@ -1,5 +1,5 @@
 import CheckSheet from "../../applications/activity/check-sheet.mjs";
-import CheckActivityData from "../../data/activity/check-data.mjs";
+import BaseCheckActivityData from "../../data/activity/check-data.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { getSceneTargets } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
@@ -7,7 +7,7 @@ import ActivityMixin from "./mixin.mjs";
 /**
  * Activity for making ability checks.
  */
-export default class CheckActivity extends ActivityMixin(CheckActivityData) {
+export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */

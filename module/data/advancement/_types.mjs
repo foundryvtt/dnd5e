@@ -16,7 +16,7 @@
  */
 
 /**
- * @typedef BaseAdvancementData
+ * @typedef AdvancementData
  * @property {string} _id               The advancement's ID.
  * @property {string} type              Type of advancement.
  * @property {*} configuration          Type-specific configuration data.

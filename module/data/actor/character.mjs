@@ -16,13 +16,13 @@ const {
 } = foundry.data.fields;
 
 /**
- * @import { CharacterData, ResourceData } from "./_types.mjs";
+ * @import { CharacterActorData, ResourceData } from "./_types.mjs";
  */
 
 /**
  * System data definition for Characters.
- * @extends CreatureTemplate<CharacterData>
- * @mixes CharacterData
+ * @extends CreatureTemplate<CharacterActorData>
+ * @mixes CharacterActorData
  */
 export default class CharacterData extends CreatureTemplate {
 

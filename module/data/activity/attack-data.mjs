@@ -16,7 +16,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
  * @extends {BaseActivityData<AttackActivityData>}
  * @mixes {AttackActivityData}
  */
-export default class AttackActivityData extends BaseActivityData {
+export default class BaseAttackActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     return {

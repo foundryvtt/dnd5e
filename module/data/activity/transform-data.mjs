@@ -17,7 +17,7 @@ const {
  * @extends {BaseActivityData<TransformActivityData>}
  * @mixes {TransformActivityData}
  */
-export default class TransformActivityData extends BaseActivityData {
+export default class BaseTransformActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     return {

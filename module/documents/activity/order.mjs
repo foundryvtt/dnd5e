@@ -1,5 +1,5 @@
 import ActivityMixin from "./mixin.mjs";
-import OrderActivityData from "../../data/activity/order-data.mjs";
+import BaseOrderActivityData from "../../data/activity/order-data.mjs";
 import OrderUsageDialog from "../../applications/activity/order-usage-dialog.mjs";
 import CurrencyManager from "../../applications/currency-manager.mjs";
 import { formatNumber } from "../../utils.mjs";
@@ -29,7 +29,7 @@ import { formatNumber } from "../../utils.mjs";
 /**
  * An activity for issuing an order to a facility.
  */
-export default class OrderActivity extends ActivityMixin(OrderActivityData) {
+export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */

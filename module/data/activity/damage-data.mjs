@@ -13,7 +13,7 @@ const { ArrayField, BooleanField, SchemaField } = foundry.data.fields;
  * @extends {BaseActivityData<DamageActivityData>}
  * @mixes {DamageActivityData}
  */
-export default class DamageActivityData extends BaseActivityData {
+export default class BaseDamageActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     return {

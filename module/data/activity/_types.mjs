@@ -5,7 +5,7 @@
  */
 
 /**
- * @typedef BaseActivityData
+ * @typedef ActivityData
  * @property {string} _id                        Unique ID for the activity on an item.
  * @property {string} type                       Type name of the activity used to build a specific activity class.
  * @property {string} name                       Name for this activity.
@@ -34,7 +34,7 @@
  */
 
 /**
- * @typedef {BaseActivityData} AttackActivityData
+ * @typedef {ActivityData} AttackActivityData
  * @property {object} attack
  * @property {string} attack.ability              Ability used to make the attack and determine damage.
  * @property {string} attack.bonus                Arbitrary bonus added to the attack.
@@ -53,7 +53,7 @@
  */
 
 /**
- * @typedef {Omit<BaseActivityData, "effects">} CastActivityData
+ * @typedef {Omit<ActivityData, "effects">} CastActivityData
  * @property {object} spell
  * @property {string} spell.ability              Ability to override default spellcasting ability.
  * @property {object} spell.challenge
@@ -67,7 +67,7 @@
  */
 
 /**
- * @typedef {BaseActivityData} CheckActivityData
+ * @typedef {ActivityData} CheckActivityData
  * @property {object} check
  * @property {string} check.ability          Ability used with the check.
  * @property {Set<string>} check.associated  Skills or tools that can contribute to the check.
@@ -77,7 +77,7 @@
  */
 
 /**
- * @typedef {BaseActivityData} DamageActivityData
+ * @typedef {ActivityData} DamageActivityData
  * @property {object} damage
  * @property {boolean} damage.critical.allow  Can this damage be critical?
  * @property {string} damage.critical.bonus   Extra damage applied to the first damage part when a critical is rolled.
@@ -85,7 +85,7 @@
  */
 
 /**
- * @typedef {BaseActivityData} EnchantActivityData
+ * @typedef {ActivityData} EnchantActivityData
  * @property {object} enchant
  * @property {string} enchant.identifier    Class identifier that will be used to determine applicable level.
  * @property {string} enchant.self          Automatically apply enchantment to item containing this activity when used.
@@ -108,13 +108,13 @@
  */
 
 /**
- * @typedef {Omit<BaseActivityData, "duration"|"effects"|"range"|"target">} ForwardActivityData
+ * @typedef {Omit<ActivityData, "duration"|"effects"|"range"|"target">} ForwardActivityData
  * @property {object} activity
  * @property {string} activity.id  ID of the activity to forward to.
  */
 
 /**
- * @typedef {BaseActivityData} HealActivityData
+ * @typedef {ActivityData} HealActivityData
  * @property {DamageData} healing
  */
 
@@ -128,7 +128,7 @@
  */
 
 /**
- * @typedef {BaseActivityData} SaveActivityData
+ * @typedef {ActivityData} SaveActivityData
  * @property {object} damage
  * @property {string} damage.onSave                 How much damage is done on a successful save?
  * @property {DamageData[]} damage.parts            Parts of damage to inflict.
@@ -146,7 +146,7 @@
  */
 
 /**
- * @typedef {BaseActivityData} SummonActivityData
+ * @typedef {ActivityData} SummonActivityData
  * @property {object} bonuses
  * @property {string} bonuses.ac            Formula for armor class bonus on summoned actor.
  * @property {string} bonuses.hd            Formula for bonus hit dice to add to each summoned NPC.
@@ -182,7 +182,7 @@
  */
 
 /**
- * @typedef {BaseActivityData} TransformActivityData
+ * @typedef {ActivityData} TransformActivityData
  * @property {TransformProfile[]} profiles         Information on transformation methods and sources.
  * @property {TransformationSettingData} settings  Settings data to use when summoning.
  * @property {object} transform
@@ -208,7 +208,7 @@
  */
 
 /**
- * @typedef {BaseActivityData} UtilityActivityData
+ * @typedef {ActivityData} UtilityActivityData
  * @property {object} roll
  * @property {string} roll.formula   Arbitrary formula that can be rolled.
  * @property {string} roll.name      Label for the rolling button.

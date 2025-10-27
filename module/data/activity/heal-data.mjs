@@ -10,7 +10,7 @@ import BaseActivityData from "./base-activity.mjs";
  * @extends {BaseActivityData<HealActivityData>}
  * @mixes {HealActivityData}
  */
-export default class HealActivityData extends BaseActivityData {
+export default class BaseHealActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     return {

@@ -11,7 +11,7 @@ const { DocumentIdField, FilePathField, StringField } = foundry.data.fields;
  * @extends {BaseActivityData<OrderActivityData>}
  * @mixes {OrderActivityData}
  */
-export default class OrderActivityData extends BaseActivityData {
+export default class BaseOrderActivityData extends BaseActivityData {
   /** @override */
   static defineSchema() {
     return {

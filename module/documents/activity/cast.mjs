@@ -1,12 +1,12 @@
 import CastSheet from "../../applications/activity/cast-sheet.mjs";
-import CastActivityData from "../../data/activity/cast-data.mjs";
+import BaseCastActivityData from "../../data/activity/cast-data.mjs";
 import { staticID } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
  * Activity for casting a spell from another item.
  */
-export default class CastActivity extends ActivityMixin(CastActivityData) {
+export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */

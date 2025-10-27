@@ -15,7 +15,7 @@ const {
  * @extends {BaseActivityData<SummonActivityData>}
  * @mixes {SummonActivityData}
  */
-export default class SummonActivityData extends BaseActivityData {
+export default class BaseSummonActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
     return {

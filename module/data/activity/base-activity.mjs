@@ -15,13 +15,13 @@ const {
 
 /**
  * @import { DamageRollProcessConfiguration } from "../../dice/damage-roll.mjs";
- * @import { BaseActivityData } from "./_types.mjs";
+ * @import { ActivityData } from "./_types.mjs";
  */
 
 /**
  * Data model for activities.
- * @extends {DataModel<BaseActivityData>}
- * @mixes {BaseActivityData}
+ * @extends {DataModel<ActivityData>}
+ * @mixes {ActivityData}
  */
 export default class BaseActivityData extends foundry.abstract.DataModel {
 
