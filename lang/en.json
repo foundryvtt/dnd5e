@@ -3075,6 +3075,18 @@
 "DND5E.NPC": {
   "Label": "NPC",
   "FIELDS": {
+    "attributes": {
+      "price": {
+        "denomination": {
+          "label": "Denomination"
+        },
+        "hint": "The hire rate per day, or the livestock purchase price.",
+        "label": "Cost",
+        "value": {
+          "label": "Amount"
+        }
+      }
+    },
     "traits": {
       "important": {
         "hint": "Important NPCs track death saves, hit dice, and loyalty (if enabled). Any NPC with class levels is considered important regardless of this setting.",

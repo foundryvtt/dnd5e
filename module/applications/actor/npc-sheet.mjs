@@ -392,13 +392,27 @@ export default class NPCActorSheet extends BaseActorSheet {
   async _prepareSpecialTraitsContext(context, options) {
     context = await super._prepareSpecialTraitsContext(context, options);
 
+    const { fields } = this.document.system.schema;
     context.flags.sections.unshift({
       label: game.i18n.localize("DND5E.NPC.Label"),
       fields: [{
-        field: this.document.system.schema.fields.traits.fields.important,
+        field: fields.traits.fields.important,
         input: createCheckboxInput,
         name: "system.traits.important",
         value: context.source.traits.important
+      }, {
+        label: "DND5E.NPC.FIELDS.attributes.price.label",
+        hint: "DND5E.NPC.FIELDS.attributes.price.hint",
+        fields: [{
+          field: fields.attributes.fields.price.fields.value,
+          name: "system.attributes.price.value",
+          value: context.source.attributes.price.value
+        }, {
+          choices: CONFIG.DND5E.currencies,
+          field: fields.attributes.fields.price.fields.denomination,
+          name: "system.attributes.price.denomination",
+          value: context.source.attributes.price.denomination
+        }]
       }]
     });
 

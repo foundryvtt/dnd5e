@@ -132,6 +132,9 @@
  * @property {number} attributes.death.failure        Number of failed death saves.
  * @property {object} attributes.death.bonuses
  * @property {string} attributes.death.bonuses.save   Numeric or dice bonus to death saving throws.
+ * @property {object} attributes.price
+ * @property {number|null} attributes.price.value     The creature's value in the specified denomination.
+ * @property {string} attributes.price.denomination   The currency denomination.
  * @property {object} attributes.spell
  * @property {number} attributes.spell.level     Spellcasting level of this NPC.
  * @property {Union<DetailsCommonData, DetailsCreatureData>} details
