@@ -146,8 +146,7 @@ export default class ItemDataModel extends SystemDataModel {
   prepareBaseData() {
     if ( this.parent.isEmbedded && this.parent.actor?.items.has(this.parent.id) ) {
       this.parent.actor.identifiedItems?.set(this.parent.identifier, this.parent);
-      const sourceId = this.parent.flags.dnd5e?.sourceId ?? this.parent._stats.compendiumSource
-        ?? this.parent.flags.core?.sourceId;
+      const sourceId = this.parent._stats.compendiumSource ?? this.parent.flags.dnd5e?.sourceId;
       if ( sourceId ) this.parent.actor.sourcedItems?.set(sourceId, this.parent);
     }
   }
