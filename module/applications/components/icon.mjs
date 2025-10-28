@@ -93,9 +93,24 @@ export default class IconElement extends AdoptedStyleSheetMixin(HTMLElement) {
         const temp = document.createElement("div");
         temp.innerHTML = t;
         const svg = temp.querySelector("svg");
+        if ( svg ) this.#cleanSVG(svg);
         this.#svgCache.set(src, svg);
         return svg;
       }));
     return this.#svgCache.get(src);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Clean non-image content from the SVG.
+   * @param {SVGElement} svg  The SVG.
+   */
+  static #cleanSVG(svg) {
+    svg.querySelectorAll("script, foreignObject").forEach(el => el.remove());
+    svg.querySelectorAll("*").forEach(el => Array.from(el.attributes).forEach(attr => {
+      if ( attr.name.startsWith("on") ) el.removeAttribute(attr.name);
+      if ( attr.value && attr.value.trim().toLowerCase().startsWith("javascript:") ) el.removeAttribute(attr.name);
+    }));
   }
 }
