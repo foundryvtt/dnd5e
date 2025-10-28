@@ -2,6 +2,84 @@ import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import { formatIdentifier } from "./utils.mjs";
 
 /* -------------------------------------------- */
+/*  Dependents                                  */
+/* -------------------------------------------- */
+
+class DependentsRegistry {
+  /**
+   * Registration of documents that are dependent on an active effect. The map is keyed by the UUID of
+   * the active effect upon which the document is dependent and contains a set of UUIDs for that effect's
+   * dependents. All UUIDs are expected to be world UUIDs or UUIDs of documents with the same ancestor
+   * document as the effect they are dependent on.
+   * @type {Map<string, Set<string>>}
+   */
+  static #dependents = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Fetch dependent documents for an active effect.
+   * @param {ActiveEffect|string} effect  Active effect for which to get the dependent documents or UUID for an
+   *                                      effect in the world.
+   * @returns {Document[]}
+   */
+  static get(effect) {
+    effect = effect instanceof ActiveEffect ? effect : fromUuidSync(effect);
+    return Array.from(this.#dependents.get(effect?.uuid) ?? [])
+      .map(uuid => {
+        // TODO: Remove this special casing once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
+        if ( effect.parent.pack && uuid.includes(effect.parent.uuid) ) {
+          const [, embeddedName, id] = uuid.replace(effect.parent.uuid, "").split(".");
+          return effect.parent.getEmbeddedDocument(embeddedName, id);
+        }
+        return fromUuidSync(uuid, { strict: false });
+      })
+      .filter(_ => _);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Resolve an active effect ID into an absolute UUID.
+   * @param {string} idOrUuid      ID or UUID of active effect.
+   * @param {Document} dependent   Document to track as a dependent.
+   * @returns {string}
+   */
+  static #resolveDependentID(idOrUuid, dependent) {
+    if ( idOrUuid.length > 16 ) return idOrUuid;
+    let relative = dependent.parent;
+    if ( relative && !(relative instanceof Item) ) relative = relative.parent;
+    return relative.effects.get(idOrUuid)?.uuid;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add a dependent document to the registry.
+   * @param {string} idOrUuid      ID or UUID of active effect.
+   * @param {Document} dependent   Document to track as a dependent.
+   */
+  static track(idOrUuid, dependent) {
+    const uuid = DependentsRegistry.#resolveDependentID(idOrUuid, dependent);
+    if ( !uuid ) return;
+    if ( !DependentsRegistry.#dependents.has(uuid) ) DependentsRegistry.#dependents.set(uuid, new Set());
+    DependentsRegistry.#dependents.get(uuid).add(dependent.uuid);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remove a dependent document from the registry.
+   * @param {string} idOrUuid     ID or UUID of active effect.
+   * @param {Document} dependent  Dependent document to stop tracking.
+   */
+  static untrack(idOrUuid, dependent) {
+    const uuid = DependentsRegistry.#resolveDependentID(idOrUuid, dependent);
+    DependentsRegistry.#dependents.get(uuid)?.delete(dependent.uuid);
+  }
+}
+
+/* -------------------------------------------- */
 /*  Enchantments                                */
 /* -------------------------------------------- */
 
@@ -637,6 +715,7 @@ const RegistryStatus = new class extends Map {
 
 export default {
   classes: new ItemRegistry("class"),
+  dependents: DependentsRegistry,
   enchantments: EnchantmentRegisty,
   messages: MessageRegistry,
   ready: RegistryStatus.ready,

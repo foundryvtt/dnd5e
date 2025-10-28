@@ -10,7 +10,8 @@ import AppliedEffectField from "./fields/applied-effect-field.mjs";
 import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, FilePathField, IntegerSortField, SchemaField, StringField
+  ArrayField, BooleanField, DocumentFlagsField, DocumentIdField,
+  FilePathField, IntegerSortField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
@@ -66,6 +67,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         override: new BooleanField()
       }),
       effects: new ArrayField(new AppliedEffectField()),
+      flags: new DocumentFlagsField(),
       range: new RangeField({
         override: new BooleanField()
       }),

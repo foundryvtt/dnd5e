@@ -176,6 +176,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const effectFlags = {
       flags: {
         dnd5e: {
+          dependentOn: origin.uuid,
           scaling: this.chatMessage.getFlag("dnd5e", "scaling"),
           spellLevel: this.chatMessage.getFlag("dnd5e", "use.spellLevel")
         }
@@ -202,9 +203,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       transfer: false,
       origin: origin.uuid
     }, effectFlags);
-    const applied = await ActiveEffect.implementation.create(effectData, { parent: actor });
-    if ( concentration ) await concentration.addDependent(applied);
-    return applied;
+    return await ActiveEffect.implementation.create(effectData, { parent: actor });
   }
 
   /* -------------------------------------------- */
