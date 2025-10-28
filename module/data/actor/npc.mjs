@@ -658,7 +658,9 @@ export default class NPCData extends CreatureTemplate {
         saves: formatter.format(
           Object.entries(CONFIG.DND5E.abilities)
             .filter(([k]) => this.abilities[k].saveProf.multiplier !== 0)
-            .map(([k, { abbreviation }]) => `${abbreviation.capitalize()} ${formatNumber(this.abilities[k].save.value, { signDisplay: "always" })}`)
+            .map(([k, { abbreviation }]) =>
+              `${abbreviation.capitalize()} ${formatNumber(this.abilities[k].save.value, { signDisplay: "always" })}`
+            )
         ),
 
         // Senses (e.g. `Blindsight 60 ft., Darkvision 120 ft.; Passive Perception 27`)
