@@ -41,26 +41,26 @@ class DependentsRegistry {
 
   /**
    * Resolve an active effect ID into an absolute UUID.
-   * @param {string} id            ID or UUID of active effect.
+   * @param {string} idOrUuid      ID or UUID of active effect.
    * @param {Document} dependent   Document to track as a dependent.
    * @returns {string}
    */
-  static #resolveDependentID(id, dependent) {
-    if ( id.length > 16 ) return id;
+  static #resolveDependentID(idOrUuid, dependent) {
+    if ( idOrUuid.length > 16 ) return idOrUuid;
     let relative = dependent.parent;
     if ( relative && !(relative instanceof Item) ) relative = relative.parent;
-    return relative.effects.get(id)?.uuid;
+    return relative.effects.get(idOrUuid)?.uuid;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Add a dependent document to the registry.
-   * @param {string} uuid          ID or UUID of active effect.
+   * @param {string} idOrUuid      ID or UUID of active effect.
    * @param {Document} dependent   Document to track as a dependent.
    */
-  static track(uuid, dependent) {
-    uuid = DependentsRegistry.#resolveDependentID(uuid, dependent);
+  static track(idOrUuid, dependent) {
+    const uuid = DependentsRegistry.#resolveDependentID(idOrUuid, dependent);
     if ( !uuid ) return;
     if ( !DependentsRegistry.#dependents.has(uuid) ) DependentsRegistry.#dependents.set(uuid, new Set());
     DependentsRegistry.#dependents.get(uuid).add(dependent.uuid);
@@ -70,11 +70,11 @@ class DependentsRegistry {
 
   /**
    * Remove a dependent document from the registry.
-   * @param {string} uuid         ID or UUID of active effect.
+   * @param {string} idOrUuid     ID or UUID of active effect.
    * @param {Document} dependent  Dependent document to stop tracking.
    */
-  static untrack(uuid, dependent) {
-    uuid = DependentsRegistry.#resolveDependentID(uuid, dependent);
+  static untrack(idOrUuid, dependent) {
+    const uuid = DependentsRegistry.#resolveDependentID(idOrUuid, dependent);
     DependentsRegistry.#dependents.get(uuid)?.delete(dependent.uuid);
   }
 }
