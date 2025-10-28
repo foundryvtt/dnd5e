@@ -40,27 +40,28 @@ class DependentsRegistry {
   /* -------------------------------------------- */
 
   /**
-   * Resolve a relative UUID into an absolute UUID.
-   * @param {string} uuid          UUID of active effect.
+   * Resolve an active effect ID into an absolute UUID.
+   * @param {string} id            ID or UUID of active effect.
    * @param {Document} dependent   Document to track as a dependent.
    * @returns {string}
    */
-  static #resolveRelativeUUID(uuid, dependent) {
-    if ( !uuid.startsWith(".") ) return uuid;
+  static #resolveDependentID(id, dependent) {
+    if ( id.length > 16 ) return id;
     let relative = dependent.parent;
     if ( relative && !(relative instanceof Item) ) relative = relative.parent;
-    return foundry.utils.parseUuid(uuid, { relative }).uuid;
+    return relative.effects.get(id)?.uuid;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Add a dependent document to the registry.
-   * @param {string} uuid          UUID of active effect.
+   * @param {string} uuid          ID or UUID of active effect.
    * @param {Document} dependent   Document to track as a dependent.
    */
   static track(uuid, dependent) {
-    uuid = DependentsRegistry.#resolveRelativeUUID(uuid, dependent);
+    uuid = DependentsRegistry.#resolveDependentID(uuid, dependent);
+    if ( !uuid ) return;
     if ( !DependentsRegistry.#dependents.has(uuid) ) DependentsRegistry.#dependents.set(uuid, new Set());
     DependentsRegistry.#dependents.get(uuid).add(dependent.uuid);
   }
@@ -69,11 +70,11 @@ class DependentsRegistry {
 
   /**
    * Remove a dependent document from the registry.
-   * @param {string} uuid         UUID of active effect.
+   * @param {string} uuid         ID or UUID of active effect.
    * @param {Document} dependent  Dependent document to stop tracking.
    */
   static untrack(uuid, dependent) {
-    uuid = DependentsRegistry.#resolveRelativeUUID(uuid, dependent);
+    uuid = DependentsRegistry.#resolveDependentID(uuid, dependent);
     DependentsRegistry.#dependents.get(uuid)?.delete(dependent.uuid);
   }
 }

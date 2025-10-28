@@ -402,7 +402,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     let profile;
     const { chatMessageOrigin } = options;
     const { enchantmentProfile, activityId } = options.dnd5e ?? {};
-    const relativeUUID = this.getRelativeUUID(this.parent);
 
     if ( chatMessageOrigin ) {
       const message = game.messages.get(options?.chatMessageOrigin);
@@ -431,7 +430,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       const activityData = item.system.activities.get(id)?.toObject();
       if ( !activityData ) continue;
       activityData._id = foundry.utils.randomID();
-      foundry.utils.setProperty(activityData, "flags.dnd5e.dependentOn", relativeUUID);
+      foundry.utils.setProperty(activityData, "flags.dnd5e.dependentOn", this.id);
       riderActivities[activityData._id] = activityData;
     }
     let createdActivities = [];
@@ -454,7 +453,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       return effectData;
     }));
     riderEffects = riderEffects.filter(_ => _)
-    riderEffects.forEach(e => foundry.utils.setProperty(e, "flags.dnd5e.dependentOn", relativeUUID));
+    riderEffects.forEach(e => foundry.utils.setProperty(e, "flags.dnd5e.dependentOn", this.id));
     const createdEffects = await this.parent.createEmbeddedDocuments("ActiveEffect", riderEffects, { keepId: true });
 
     // Create Items
