@@ -13,7 +13,7 @@ const { Ray } = foundry.canvas.geometry;
 /**
  * The data model for a region behavior that rotates tokens in its area around a center point along with any
  * other specified placeables.
- * @extends RegionBehaviorType<RotateAreaRegionBehaviorSystemData>
+ * @extends {foundry.data.regionBehaviors.RegionBehaviorType<RotateAreaRegionBehaviorSystemData>}
  * @mixes RotateAreaRegionBehaviorSystemData
  */
 export default class RotateAreaRegionBehaviorType extends foundry.data.regionBehaviors.RegionBehaviorType {

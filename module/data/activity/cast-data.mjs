@@ -9,7 +9,7 @@ const { BooleanField, DocumentUUIDField, NumberField, SchemaField, SetField, Str
 /**
  * Data model for a Cast activity.
  * @extends {BaseActivityData<CastActivityData>}
- * @mixes {CastActivityData}
+ * @mixes CastActivityData
  */
 export default class BaseCastActivityData extends BaseActivityData {
   /** @inheritDoc */

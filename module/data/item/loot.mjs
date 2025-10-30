@@ -17,9 +17,9 @@ const { SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Loot items.
- * @extends ItemDataModel<
+ * @extends {ItemDataModel<
  *   ItemDescriptionTemplate & IdentifiableTemplate & ItemTypeTemplate & PhysicalItemTemplate & LootItemSystemData
- * >
+ * >}
  * @mixes ItemDescriptionTemplateData
  * @mixes ItemTypeTemplateData
  * @mixes IdentifiableTemplateData

@@ -18,7 +18,7 @@ const LANGUAGE_MAP = { modern: _MAP, legacy: foundry.utils.invertObject(_MAP) };
 
 /**
  * Configuration data for the TraitAdvancement.
- * @extends DataModel<TraitAdvancementConfigurationData>
+ * @extends {foundry.abstract.DataModel<TraitAdvancementConfigurationData>}
  * @mixes TraitAdvancementConfigurationData
  */
 export class TraitConfigurationData extends foundry.abstract.DataModel {
@@ -60,7 +60,7 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
 
 /**
  * Value data for the TraitAdvancement.
- * @extends DataModel<TraitAdvancementValueData>
+ * @extends {foundry.abstract.DataModel<TraitAdvancementValueData>}
  * @mixes TraitAdvancementValueData
  */
 export class TraitValueData extends foundry.abstract.DataModel {

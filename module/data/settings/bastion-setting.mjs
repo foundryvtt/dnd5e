@@ -6,7 +6,7 @@ const { BooleanField, NumberField } = foundry.data.fields;
 
 /**
  * A data model that represents the Bastion configuration options.
- * @extends DataModel<BastionSettingData>
+ * @extends {foundry.abstract.DataModel<BastionSettingData>}
  * @mixes BastionSettingData
  */
 export default class BastionSetting extends foundry.abstract.DataModel {

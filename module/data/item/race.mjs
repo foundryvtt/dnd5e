@@ -12,7 +12,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data definition for Race items.
- * @extends ItemDataModel<AdvancementTemplate, ItemDescriptionTemplate & RaceItemSystemData>
+ * @extends {ItemDataModel<AdvancementTemplate, ItemDescriptionTemplate & RaceItemSystemData>}
  * @mixes AdvancementTemplateData
  * @mixes ItemDescriptionTemplateData
  * @mixes RaceItemSystemData

@@ -9,7 +9,7 @@ const { DocumentIdField, FilePathField, StringField } = foundry.data.fields;
 /**
  * Data model for an order activity.
  * @extends {BaseActivityData<OrderActivityData>}
- * @mixes {OrderActivityData}
+ * @mixes OrderActivityData
  */
 export default class BaseOrderActivityData extends BaseActivityData {
   /** @override */

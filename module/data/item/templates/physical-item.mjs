@@ -10,7 +10,7 @@ const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.
 
 /**
  * Data model template with information on physical items.
- * @extends SystemDataModel<PhysicalItemTemplateData>
+ * @extends {SystemDataModel<PhysicalItemTemplateData>}
  * @mixin
  */
 export default class PhysicalItemTemplate extends SystemDataModel {

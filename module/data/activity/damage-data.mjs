@@ -11,7 +11,7 @@ const { ArrayField, BooleanField, SchemaField } = foundry.data.fields;
 /**
  * Data model for an damage activity.
  * @extends {BaseActivityData<DamageActivityData>}
- * @mixes {DamageActivityData}
+ * @mixes DamageActivityData
  */
 export default class BaseDamageActivityData extends BaseActivityData {
   /** @inheritDoc */

@@ -6,7 +6,7 @@ const { StringField } = foundry.data.fields;
 
 /**
  * Data definition for Map Location journal entry pages.
- * @extends TypeDataModel<MapJournalPageSystemData>
+ * @extends {foundry.abstract.TypeDataModel<MapJournalPageSystemData>}
  * @mixes MapJournalPageSystemData
  */
 export default class MapLocationJournalPageData extends foundry.abstract.TypeDataModel {

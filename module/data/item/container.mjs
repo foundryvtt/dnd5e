@@ -18,10 +18,10 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Container items.
- * @extends ItemDataModel<
+ * @extends {ItemDataModel<
  *   ItemDescriptionTemplate & IdentifiableTemplate & PhysicalItemTemplate &
  *   EquippableItemTemplate & CurrencyTemplate & ContainerItemSystemData
- * >
+ * >}
  * @mixes ItemDescriptionTemplateData
  * @mixes IdentifiableTemplateData
  * @mixes PhysicalItemTemplateData

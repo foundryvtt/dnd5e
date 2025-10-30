@@ -8,7 +8,7 @@ const { DocumentUUIDField } = foundry.data.fields;
 
 /**
  * Value data for Subclass advancement.
- * @extends DataModel<SubclassAdvancementValueData>
+ * @extends {foundry.abstract.DataModel<SubclassAdvancementValueData>}
  * @mixes SubclassAdvancementValueData
  */
 export class SubclassValueData extends foundry.abstract.DataModel {

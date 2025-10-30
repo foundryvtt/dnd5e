@@ -13,7 +13,7 @@ const {
 /**
  * Data model for a summon activity.
  * @extends {BaseActivityData<SummonActivityData>}
- * @mixes {SummonActivityData}
+ * @mixes SummonActivityData
  */
 export default class BaseSummonActivityData extends BaseActivityData {
   /** @inheritDoc */

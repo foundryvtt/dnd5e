@@ -9,7 +9,7 @@ const { BooleanField, SchemaField, StringField, HTMLField } = foundry.data.field
 
 /**
  * Data model template for items that can be identified.
- * @extends SystemDataModel<IdentifiableTemplateData>
+ * @extends {SystemDataModel<IdentifiableTemplateData>}
  * @mixin
  */
 export default class IdentifiableTemplate extends SystemDataModel {

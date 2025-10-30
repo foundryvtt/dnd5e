@@ -11,7 +11,7 @@ const { HTMLField, SchemaField } = foundry.data.fields;
 
 /**
  * A template for all actors that contain collections of other actors.
- * @extends ActorDataModel<CurrencyTemplate & GroupTemplateData>
+ * @extends {ActorDataModel<CurrencyTemplate & GroupTemplateData>}
  * @mixes CurrencyTemplate
  * @mixes GroupTemplateData
  * @mixin

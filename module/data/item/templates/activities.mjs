@@ -9,7 +9,7 @@ import UsesField from "../../shared/uses-field.mjs";
 
 /**
  * Data model template for items with activities.
- * @extends SystemDataModel<ActivitiesTemplateData>
+ * @extends {SystemDataModel<ActivitiesTemplateData>}
  * @mixin
  */
 export default class ActivitiesTemplate extends SystemDataModel {

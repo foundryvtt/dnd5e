@@ -13,7 +13,7 @@ const { NumberField, SchemaField } = foundry.data.fields;
 
 /**
  * A template for all actors that are creatures.
- * @extends CommonTemplate<CreatureTemplateData>
+ * @extends {CommonTemplate<CreatureTemplateData>}
  * @mixes CreatureTemplateData
  */
 export default class CreatureTemplate extends CommonTemplate {

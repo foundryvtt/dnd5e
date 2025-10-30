@@ -10,7 +10,7 @@ const {
 
 /**
  * Custom chat message type used for requesting an action be performed for a specific actor.
- * @extends ChatMessageDataModel<RequestMessageSystemData>
+ * @extends {ChatMessageDataModel<RequestMessageSystemData>}
  * @mixes RequestMessageSystemData
  */
 export default class RequestMessageData extends ChatMessageDataModel {

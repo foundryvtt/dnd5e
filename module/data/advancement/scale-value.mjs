@@ -14,7 +14,7 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
 
 /**
  * Data model for the Scale Value advancement type.
- * @extends DataModel<ScaleValueAdvancementConfigurationData>
+ * @extends {foundry.abstract.DataModel<ScaleValueAdvancementConfigurationData>}
  * @mixes ScaleValueAdvancementConfigurationData
  */
 export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
@@ -86,7 +86,7 @@ export class ScaleValueEntryField extends foundry.data.fields.ObjectField {
 
 /**
  * Base scale value data type that stores generic string values.
- * @extends DataModel<ScaleValueStringTypeData>
+ * @extends {foundry.abstract.DataModel<ScaleValueStringTypeData>}
  * @mixes ScaleValueStringTypeData
  */
 export class ScaleValueType extends foundry.abstract.DataModel {
@@ -204,7 +204,7 @@ export class ScaleValueType extends foundry.abstract.DataModel {
 
 /**
  * Scale value data type that stores numeric values.
- * @extends ScaleValueType<ScaleValueNumberTypeData>
+ * @extends {ScaleValueType<ScaleValueNumberTypeData>}
  * @mixes ScaleValueNumberTypeData
  */
 export class ScaleValueTypeNumber extends ScaleValueType {
@@ -244,7 +244,7 @@ export class ScaleValueTypeNumber extends ScaleValueType {
 
 /**
  * Scale value data type that stores challenge ratings.
- * @extends ScaleValueType<ScaleValueNumberTypeData>
+ * @extends {ScaleValueType<ScaleValueNumberTypeData>}
  * @mixes ScaleValueNumberTypeData
  */
 export class ScaleValueTypeCR extends ScaleValueTypeNumber {
@@ -294,7 +294,7 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
 
 /**
  * Scale value data type that stores dice values.
- * @extends ScaleValueType<ScaleValueDiceTypeData>
+ * @extends {ScaleValueType<ScaleValueDiceTypeData>}
  * @mixes ScaleValueDiceTypeData
  */
 export class ScaleValueTypeDice extends ScaleValueType {
@@ -425,7 +425,7 @@ export class ScaleValueTypeDice extends ScaleValueType {
 
 /**
  * Scale value data type that stores distance values.
- * @extends ScaleValueType<ScaleValueNumberTypeData>
+ * @extends {ScaleValueType<ScaleValueNumberTypeData>}
  * @mixes ScaleValueNumberTypeData
  */
 export class ScaleValueTypeDistance extends ScaleValueTypeNumber {

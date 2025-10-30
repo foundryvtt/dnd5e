@@ -17,9 +17,9 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
 
 /**
  * Data definition for Class items.
- * @extends ItemDataModel<
+ * @extends {ItemDataModel<
  *   AdvancementTemplate & ItemDescriptionTemplate & StartingEquipmentTemplate & ClassItemSystemData
- * >
+ * >}
  * @mixes AdvancementTemplateData
  * @mixes ItemDescriptionTemplateData
  * @mixes StartingEquipmentTemplateData

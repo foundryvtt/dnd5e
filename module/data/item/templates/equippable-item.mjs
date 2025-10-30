@@ -9,7 +9,7 @@ const { BooleanField, StringField } = foundry.data.fields;
 
 /**
  * Data model template with information on items that can be attuned and equipped.
- * @extends SystemDataModel<EquippableItemTemplateData>
+ * @extends {SystemDataModel<EquippableItemTemplateData>}
  * @mixin
  */
 export default class EquippableItemTemplate extends SystemDataModel {

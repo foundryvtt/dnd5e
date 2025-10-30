@@ -11,7 +11,7 @@ const { SchemaField, HTMLField } = foundry.data.fields;
 
 /**
  * Data model template with item description & source.
- * @extends SystemDataModel<ItemDescriptionTemplateData>
+ * @extends {SystemDataModel<ItemDescriptionTemplateData>}
  * @mixin
  */
 export default class ItemDescriptionTemplate extends SystemDataModel {

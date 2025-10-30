@@ -16,7 +16,7 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
 
 /**
  * Data definition for Spell items.
- * @extends ItemDataModel<ActivitiesTemplate & ItemDescriptionTemplate & SpellItemSystemData>
+ * @extends {ItemDataModel<ActivitiesTemplate & ItemDescriptionTemplate & SpellItemSystemData>}
  * @mixes ActivitiesTemplateData
  * @mixes ItemDescriptionTemplateData
  * @mixes SpellItemSystemData

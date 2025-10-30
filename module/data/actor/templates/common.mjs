@@ -16,7 +16,7 @@ const { NumberField, SchemaField } = foundry.data.fields;
 
 /**
  * A template for all actors that share the common template.
- * @extends ActorDataModel<CurrencyTemplate & CommonTemplateData>
+ * @extends {ActorDataModel<CurrencyTemplate & CommonTemplateData>}
  * @mixes CurrencyTemplate
  * @mixes CommonTemplateData
  */

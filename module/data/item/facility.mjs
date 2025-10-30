@@ -15,7 +15,7 @@ const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, S
 
 /**
  * The data definition for Facility items.
- * @extends ItemDataModel<ActivitiesTemplate & ItemDescriptionTemplate & FacilityItemSystemData>
+ * @extends {ItemDataModel<ActivitiesTemplate & ItemDescriptionTemplate & FacilityItemSystemData>}
  * @mixes ActivitiesTemplateData
  * @mixes ItemDescriptionTemplateData
  * @mixes FacilityItemSystemData

@@ -12,7 +12,7 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
  * Data definition for Subclass items.
- * @extends ItemDataModel<AdvancementTemplate & ItemDescriptionTemplate & SubclassItemSystemData>
+ * @extends {ItemDataModel<AdvancementTemplate & ItemDescriptionTemplate & SubclassItemSystemData>}
  * @mixes AdvancementTemplateData
  * @mixes ItemDescriptionTemplateData
  * @mixes SubclassItemSystemData

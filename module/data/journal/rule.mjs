@@ -7,7 +7,7 @@ const { HTMLField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Rule journal entry pages.
- * @extends TypeDataModel<RuleJournalPageSystemData>
+ * @extends {foundry.abstract.TypeDataModel<RuleJournalPageSystemData>}
  * @mixes RuleJournalPageSystemData
  */
 export default class RuleJournalPageData extends foundry.abstract.TypeDataModel {

@@ -11,7 +11,7 @@ const {
 
 /**
  * Configuration data for Item Choice advancement.
- * @extends DataModel<ItemChoiceAdvancementConfigurationData>
+ * @extends {foundry.abstract.DataModel<ItemChoiceAdvancementConfigurationData>}
  * @mixes ItemChoiceAdvancementConfigurationData
  */
 export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
@@ -64,7 +64,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
 
 /**
  * Value data for Item Choice advancement.
- * @extends DataModel<ItemChoiceAdvancementValueData>
+ * @extends {foundry.abstract.DataModel<ItemChoiceAdvancementValueData>}
  * @mixes ItemChoiceAdvancementValueData
  */
 export class ItemChoiceValueData extends foundry.abstract.DataModel {

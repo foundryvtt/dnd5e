@@ -8,7 +8,7 @@ const { ArrayField, BooleanField, EmbeddedDataField, SchemaField, StringField } 
 
 /**
  * Configuration data for the Item Grant advancement.
- * @extends DataModel<ItemGrantAdvancementConfigurationData>
+ * @extends {foundry.abstract.DataModel<ItemGrantAdvancementConfigurationData>}
  * @mixes ItemGrantAdvancementConfigurationData
  */
 export default class ItemGrantConfigurationData extends foundry.abstract.DataModel {

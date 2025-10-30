@@ -3,8 +3,15 @@ const {
 } = foundry.data.fields;
 
 /**
+ * @import {
+ *   MultiLevelSpellcasting, SingleLevelSpellcastingData, SlotSpellcastingData, SpellcastingModelData
+ * } from "./_types.mjs";
+ */
+
+/**
  * A DataModel that represents a spellcasting method.
- * @extends {foundry.abstract.DataModel}
+ * @extends {foundry.abstract.DataModel<SpellcastingModelData>}
+ * @mixes SpellcastingModelData
  */
 export class SpellcastingModel extends foundry.abstract.DataModel {
   constructor(data={}, { key, ...options }={}) {
@@ -88,7 +95,7 @@ export class SpellcastingModel extends foundry.abstract.DataModel {
       if ( !Model ) return delete spellcasting[key];
       try {
         spellcasting[key] = new Model(config, { key });
-      } catch (e) {
+      } catch(e) {
         console.error(`Failed to instantiate model for spellcasting method '${key}'`, e);
         return delete spellcasting[key];
       }
@@ -117,7 +124,8 @@ export class SpellcastingModel extends foundry.abstract.DataModel {
 
 /**
  * An abstract class that defines spellcasting methods that provide spell slots.
- * @extends {SpellcastingModel}
+ * @extends {SpellcastingModel<SlotSpellcastingData>}
+ * @mixes SlotSpellcastingData
  */
 export class SlotSpellcasting extends SpellcastingModel {
   /** @inheritDoc */
@@ -263,7 +271,8 @@ export class SlotSpellcasting extends SpellcastingModel {
 
 /**
  * A spellcasting model that represents spellcasting methods that provide spell slots that are all the same level.
- * @extends {SlotSpellcasting}
+ * @extends {SlotSpellcasting<SingleLevelSpellcastingData>}
+ * @mixes SingleLevelSpellcastingData
  */
 export class SingleLevelSpellcasting extends SlotSpellcasting {
   /** @inheritDoc */
@@ -353,7 +362,8 @@ export class SingleLevelSpellcasting extends SlotSpellcasting {
 
 /**
  * A spellcasting model that represents spellcasting methods that provide slots of different levels.
- * @extends {SlotSpellcasting}
+ * @extends {SlotSpellcasting<MultiLevelSpellcasting>}
+ * @mixes MultiLevelSpellcasting
  */
 export class MultiLevelSpellcasting extends SlotSpellcasting {
   /** @inheritDoc */

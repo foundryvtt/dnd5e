@@ -11,7 +11,7 @@ const { ArrayField, DocumentIdField, HTMLField, NumberField, SchemaField, SetFie
 
 /**
  * Data model for spell list data.
- * @extends TypeDataModel<SpellsJournalPageSystemData>
+ * @extends {foundry.abstract.TypeDataModel<SpellsJournalPageSystemData>}
  * @mixes SpellsJournalPageSystemData
  */
 export default class SpellListJournalPageData extends foundry.abstract.TypeDataModel {

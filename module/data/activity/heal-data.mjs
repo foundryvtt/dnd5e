@@ -8,7 +8,7 @@ import BaseActivityData from "./base-activity.mjs";
 /**
  * Data model for an heal activity.
  * @extends {BaseActivityData<HealActivityData>}
- * @mixes {HealActivityData}
+ * @mixes HealActivityData
  */
 export default class BaseHealActivityData extends BaseActivityData {
   /** @inheritDoc */

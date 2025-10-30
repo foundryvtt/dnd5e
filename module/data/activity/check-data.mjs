@@ -11,7 +11,7 @@ const { SchemaField, SetField, StringField } = foundry.data.fields;
 /**
  * Data model for a check activity.
  * @extends {BaseActivityData<CheckActivityData>}
- * @mixes {CheckActivityData}
+ * @mixes CheckActivityData
  */
 export default class BaseCheckActivityData extends BaseActivityData {
   /** @inheritDoc */

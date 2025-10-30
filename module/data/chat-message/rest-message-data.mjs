@@ -11,7 +11,7 @@ const { ForeignDocumentField, StringField } = foundry.data.fields;
 
 /**
  * Data stored in a rest chat message.
- * @extends ChatMessageDataModel<RestMessageSystemData>
+ * @extends {ChatMessageDataModel<RestMessageSystemData>}
  * @mixes RestMessageSystemData
  */
 export default class RestMessageData extends ChatMessageDataModel {

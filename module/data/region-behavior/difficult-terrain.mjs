@@ -6,7 +6,7 @@ const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields
 
 /**
  * The data model for a region behavior that represents an area of difficult terrain.
- * @extends RegionBehaviorType<DifficultTerrainRegionBehaviorSystemData>
+ * @extends {foundry.data.regionBehaviors.RegionBehaviorType<DifficultTerrainRegionBehaviorSystemData>}
  * @mixes DifficultTerrainRegionBehaviorSystemData
  */
 export default class DifficultTerrainRegionBehaviorType extends foundry.data.regionBehaviors.RegionBehaviorType {

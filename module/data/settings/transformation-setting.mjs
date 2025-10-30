@@ -9,7 +9,7 @@ const { BooleanField, SetField, StringField } = foundry.data.fields;
 
 /**
  * A data model that represents the previous transformation preset.
- * @extends DataModel<TransformationSettingData>
+ * @extends {foundry.abstract.DataModel<TransformationSettingData>}
  * @mixes TransformationSettingData
  */
 export default class TransformationSetting extends foundry.abstract.DataModel {

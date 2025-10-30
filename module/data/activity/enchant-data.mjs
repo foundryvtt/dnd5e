@@ -13,7 +13,7 @@ const {
 /**
  * Data model for a enchant activity.
  * @extends {BaseActivityData<EnchantActivityData>}
- * @mixes {EnchantActivityData}
+ * @mixes EnchantActivityData
  */
 export default class BaseEnchantActivityData extends BaseActivityData {
   /** @inheritDoc */

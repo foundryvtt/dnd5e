@@ -9,7 +9,7 @@ const { ArrayField, DocumentUUIDField, NumberField, SchemaField, StringField } =
 
 /**
  * Data model template for equipment that can be mounted on a vehicle.
- * @extends SystemDataModel<MountableTemplateData>
+ * @extends {SystemDataModel<MountableTemplateData>}
  * @mixin
  */
 export default class MountableTemplate extends SystemDataModel {

@@ -11,7 +11,7 @@ const { DocumentUUIDField, NumberField, SetField, StringField } = foundry.data.f
 
 /**
  * Data model for the Ability Score Improvement advancement configuration.
- * @extends DataModel<AbilityScoreImprovementAdvancementConfigurationData>
+ * @extends {foundry.abstract.DataModel<AbilityScoreImprovementAdvancementConfigurationData>}
  * @mixes AbilityScoreImprovementAdvancementConfigurationData
  */
 export class AbilityScoreImprovementConfigurationData extends foundry.abstract.DataModel {
@@ -36,7 +36,7 @@ export class AbilityScoreImprovementConfigurationData extends foundry.abstract.D
 
 /**
  * Data model for the Ability Score Improvement advancement value.
- * @extends SparseDataModel<AbilityScoreImprovementAdvancementValueData>
+ * @extends {SparseDataModel<AbilityScoreImprovementAdvancementValueData>}
  * @mixes AbilityScoreImprovementAdvancementValueData
  */
 export class AbilityScoreImprovementValueData extends SparseDataModel {

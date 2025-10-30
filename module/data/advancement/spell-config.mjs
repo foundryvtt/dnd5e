@@ -8,7 +8,7 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
 
 /**
  * Embedded data model describing changes to granted spells.
- * @extends DataModel<AdvancementSpellConfigurationData>
+ * @extends {foundry.abstract.DataModel<AdvancementSpellConfigurationData>}
  * @mixes AdvancementSpellConfigurationData
  */
 export default class SpellConfigurationData extends foundry.abstract.DataModel {

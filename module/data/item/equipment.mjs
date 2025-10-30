@@ -20,10 +20,10 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Equipment items.
- * @extends ItemDataModel<
+ * @extends {ItemDataModel<
  *   ActivitiesTemplate & ItemDescriptionTemplate & IdentifiableTemplate & ItemTypeTemplate &
  *   PhysicalItemTemplate & EquippableItemTemplate & MountableTemplate & EquipmentItemSystemData
- * >
+ * >}
  * @mixes ActivitiesTemplateData
  * @mixes ItemDescriptionTemplateData
  * @mixes ItemTypeTemplateData

@@ -9,7 +9,7 @@ const { ArrayField } = foundry.data.fields;
 
 /**
  * Data model template for items with advancement.
- * @extends SystemDataModel<AdvancementTemplateData>
+ * @extends {SystemDataModel<AdvancementTemplateData>}
  * @mixin
  */
 export default class AdvancementTemplate extends SystemDataModel {

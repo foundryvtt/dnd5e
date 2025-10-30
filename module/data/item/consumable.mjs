@@ -23,10 +23,10 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
 
 /**
  * Data definition for Consumable items.
- * @extends ItemDataModel<
+ * @extends {ItemDataModel<
  *   ActivitiesTemplate & ItemDescriptionTemplate & IdentifiableTemplate &
  *   ItemTypeTemplate & PhysicalItemTemplate & EquippableItemTemplate & ConsumableItemSystemData
- * >
+ * >}
  * @mixes ActivitiesTemplateData
  * @mixes ItemDescriptionTemplateData
  * @mixes ItemTypeTemplateData

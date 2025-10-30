@@ -14,7 +14,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
 /**
  * Data model for an attack activity.
  * @extends {BaseActivityData<AttackActivityData>}
- * @mixes {AttackActivityData}
+ * @mixes AttackActivityData
  */
 export default class BaseAttackActivityData extends BaseActivityData {
   /** @inheritDoc */

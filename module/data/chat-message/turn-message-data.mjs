@@ -10,7 +10,7 @@ const { DocumentIdField, SchemaField, SetField, StringField } = foundry.data.fie
 
 /**
  * Data stored in a combat turn chat message.
- * @extends ChatMessageDataModel<TurnMessageSystemData>
+ * @extends {ChatMessageDataModel<TurnMessageSystemData>}
  * @mixes TurnMessageSystemData
  */
 export default class TurnMessageData extends ChatMessageDataModel {

@@ -6,7 +6,7 @@ const { HTMLField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Class Summary journal entry pages.
- * @extends TypeDataModel<ClassJournalSystemPageData>
+ * @extends {foundry.abstract.TypeDataModel<ClassJournalSystemPageData>}
  * @mixes ClassJournalSystemPageData
  */
 export default class ClassJournalPageData extends foundry.abstract.TypeDataModel {

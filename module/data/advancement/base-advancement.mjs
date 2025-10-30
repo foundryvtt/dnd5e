@@ -9,7 +9,7 @@ const { DocumentIdField, FilePathField, NumberField, StringField } = foundry.dat
 
 /**
  * Base data model for advancement.
- * @extends SparseDataModel<AdvancementData>
+ * @extends {SparseDataModel<AdvancementData>}
  * @mixes AdvancementData
  */
 export default class BaseAdvancementData extends SparseDataModel {

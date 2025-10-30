@@ -21,7 +21,7 @@ const {
 
 /**
  * System data definition for Characters.
- * @extends CreatureTemplate<CharacterActorSystemData>
+ * @extends {CreatureTemplate<CharacterActorSystemData>}
  * @mixes CharacterActorSystemData
  */
 export default class CharacterData extends CreatureTemplate {

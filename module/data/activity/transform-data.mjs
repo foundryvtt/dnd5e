@@ -15,7 +15,7 @@ const {
 /**
  * Data model for a transform activity.
  * @extends {BaseActivityData<TransformActivityData>}
- * @mixes {TransformActivityData}
+ * @mixes TransformActivityData
  */
 export default class BaseTransformActivityData extends BaseActivityData {
   /** @inheritDoc */

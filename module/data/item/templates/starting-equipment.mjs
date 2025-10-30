@@ -12,7 +12,7 @@ const {
 
 /**
  * Data model template representing a background & class's starting equipment.
- * @extends SystemDataModel<StartingEquipmentTemplateData>
+ * @extends {SystemDataModel<StartingEquipmentTemplateData>}
  * @mixin
  */
 export default class StartingEquipmentTemplate extends SystemDataModel {

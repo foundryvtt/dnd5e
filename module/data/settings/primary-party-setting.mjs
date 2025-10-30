@@ -6,7 +6,7 @@ const { ForeignDocumentField } = foundry.data.fields;
 
 /**
  * Data model for tracking information on the primary party.
- * @extends DataModel<PrimaryPartySettingData>
+ * @extends {foundry.abstract.DataModel<PrimaryPartySettingData>}
  * @mixes PrimaryPartySettingData
  */
 export default class PrimaryPartySetting extends foundry.abstract.DataModel {

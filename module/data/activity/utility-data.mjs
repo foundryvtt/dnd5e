@@ -10,7 +10,7 @@ const { BooleanField, SchemaField, StringField } = foundry.data.fields;
 /**
  * Data model for an utility activity.
  * @extends {BaseActivityData<UtilityActivityData>}
- * @mixes {UtilityActivityData}
+ * @mixes UtilityActivityData
  */
 export default class BaseUtilityActivityData extends BaseActivityData {
   /** @inheritDoc */

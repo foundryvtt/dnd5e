@@ -11,7 +11,7 @@ import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
 
 /**
  * Data definition for Background items.
- * @extends ItemDataModel<AdvancementTemplateData & ItemDescriptionTemplate & StartingEquipmentTemplate>
+ * @extends {ItemDataModel<AdvancementTemplateData & ItemDescriptionTemplate & StartingEquipmentTemplate>}
  * @mixes AdvancementTemplateData
  * @mixes ItemDescriptionTemplateData
  * @mixes StartingEquipmentTemplateData

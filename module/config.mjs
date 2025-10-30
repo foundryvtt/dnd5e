@@ -1,6 +1,5 @@
 import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import { ConsumptionTargetData } from "./data/activity/fields/consumption-targets-field.mjs";
-import TransformationSetting from "./data/settings/transformation-setting.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
@@ -10,6 +9,10 @@ import VehicleData from "./data/actor/vehicle.mjs";
 
 /**
  * @import { TravelPace5e } from "./data/actor/fields/_types.mjs";
+ * @import {
+ *   MultiLevelSpellcasting, SingleLevelSpellcastingData, SlotSpellcastingData, SpellcastingModelData,
+ *   SpellcastingTable5e, SpellcastingTableSingle5e
+ * } from "./data/spellcasting/_types.mjs";
  */
 
 // Namespace Configuration Values
@@ -3326,53 +3329,10 @@ const pactCastingProgression = DND5E.pactCastingProgression = {
 /* -------------------------------------------- */
 
 /**
- * @typedef SpellcastingMethod5e
- * @property {string} label                                              The human-readable label.
- * @property {"none"|"single"|"multi"} [type="none"]                     "none" - No spell slots.
- *                                                                       "single" - Spell slots of a single level only.
- *                                                                       "multi" - Spell slots of multiple levels.
- * @property {SpellcastingTable5e|SpellcastingTableSingle5e} [table]     The spell slot progression table.
- * @property {string} [img]                                              The icon to use if this spellcasting method is
- *                                                                       favorited.
- * @property {number} order                                              The ordering of this spellcasting method on an
- *                                                                       actor sheet's spells tab, ascending.
- * @property {boolean} [cantrips]                                        Whether this spellcasting method includes
- *                                                                       cantrips.
- * @property {object} [exclusive]                                        Exclusivity options.
- * @property {boolean} [exclusive.slots]                                 Whether the slots provided by this spellcasting
- *                                                                       method may only be used to cast spells that use
- *                                                                       this spellcasting method.
- * @property {boolean} [exclusive.spells]                                Whether spells that use this spellcasting
- *                                                                       method may only be cast with slots provided by
- *                                                                       this spellcasting method.
- * @property {boolean} [prepares]                                        Whether spells using this method are variably
- *                                                                       available for casting. In 2024 this term was
- *                                                                       unified to 'prepares', but 2014 uses different
- *                                                                       nomenclature for different classes.
- * @property {Record<string, SpellcastingProgression5e>} [progression]   Spell slot progressions available for this
- *                                                                       method.
- */
-
-/**
- * @typedef {number[][]} SpellcastingTable5e
- */
-
-/**
- * @typedef {Record<number, SpellcastingTableEntry5e>} SpellcastingTableSingle5e
- */
-
-/**
- * @typedef SpellcastingTableEntry5e
- * @property {number} slots  The number of slots available.
- * @property {number} level  The level of the slots.
- */
-
-/**
- * @typedef SpellcastingProgression5e
- * @property {string} label       The human-readable label.
- * @property {number} divisor     How much this progression mode contributes to the base progression of the spellcasting
- *                                method.
- * @property {boolean} [roundUp]  Whether to round up or down when determining contribution.
+ * @typedef {Partial<
+ *   SpellcastingModelData & SlotSpellcastingData & SingleLevelSpellcastingData & MultiLevelSpellcasting
+ * >} SpellcastingMethod5e
+ * @property {SpellcastingTable5e|SpellcastingTableSingle5e} [table]
  */
 
 /**

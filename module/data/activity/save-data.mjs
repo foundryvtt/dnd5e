@@ -13,7 +13,7 @@ const { ArrayField, BooleanField, SchemaField, SetField, StringField } = foundry
 /**
  * Data model for an save activity.
  * @extends {BaseActivityData<SaveActivityData>}
- * @mixes {SaveActivityData}
+ * @mixes SaveActivityData
  */
 export default class BaseSaveActivityData extends BaseActivityData {
   /** @inheritDoc */

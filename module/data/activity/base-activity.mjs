@@ -21,8 +21,8 @@ const {
 
 /**
  * Data model for activities.
- * @extends {DataModel<ActivityData>}
- * @mixes {ActivityData}
+ * @extends {foundry.abstract.DataModel<ActivityData>}
+ * @mixes ActivityData
  */
 export default class BaseActivityData extends foundry.abstract.DataModel {
 

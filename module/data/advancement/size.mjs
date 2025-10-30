@@ -6,7 +6,7 @@ const { SetField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the size advancement type.
- * @extends DataModel<SizeAdvancementConfigurationData>
+ * @extends {foundry.abstract.DataModel<SizeAdvancementConfigurationData>}
  * @mixes SizeAdvancementConfigurationData
  */
 export class SizeConfigurationData extends foundry.abstract.DataModel {
@@ -20,7 +20,7 @@ export class SizeConfigurationData extends foundry.abstract.DataModel {
 
 /**
  * Value data for the size advancement type.
- * @extends DataModel<SizeValueData>
+ * @extends {foundry.abstract.DataModel<SizeValueData>}
  * @mixes SizeValueData
  */
 export class SizeValueData extends foundry.abstract.DataModel {

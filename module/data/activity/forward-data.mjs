@@ -9,7 +9,7 @@ const { DocumentIdField, SchemaField } = foundry.data.fields;
 /**
  * Data model for a Forward activity.
  * @extends {BaseActivityData<ForwardActivityData>}
- * @mixes {ForwardActivityData}
+ * @mixes ForwardActivityData
  */
 export default class BaseForwardActivityData extends BaseActivityData {
   /** @inheritDoc */
