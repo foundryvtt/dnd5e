@@ -94,9 +94,9 @@ effects:
     type: base
     system: {}
     changes:
-      - key: system.attributes.death.roll.mode
-        mode: 2
-        value: '1'
+      - key: flags.dnd5e.diamondSoul
+        mode: 5
+        value: 'true'
         priority: null
     disabled: false
     duration:
