@@ -63,10 +63,10 @@ system:
     value: >-
       <p class="feature"><em>Trigger:</em> A creature the [[lookup @name
       lowercase]] can see makes an attack roll against it.</p><p
-      class="feature"><em>Response:</em> The [[lookup @name lowercase]] chooses
+      class="feature"><em>Response:</em> The [[lookup @name lowercase]]{creature} chooses
       [[lookup @target.affects.special activity=pIlCmuPw8YUqAISY]] within
       [[lookup @range.value activity=pIlCmuPw8YUqAISY]] feet of itself. The
-      [[lookup @name lowercase]] and that [[lookup @target.affects.type
+      [[lookup @name lowercase]]{creature} and that [[lookup @target.affects.type
       activity=pIlCmuPw8YUqAISY]] swap places, and the [[lookup
       @target.affects.type activity=pIlCmuPw8YUqAISY]] becomes the target of the
       attack instead.</p>

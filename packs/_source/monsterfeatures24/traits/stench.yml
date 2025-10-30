@@ -72,12 +72,12 @@ system:
     value: >-
       <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
       @save.dc.value activity=mJbwhj3beOIB3Jgj]], any creature (other than a
-      [[lookup @name lowercase]]) that starts its turn in a [[lookup
+      [[lookup @name lowercase]]{creature}) that starts its turn in a [[lookup
       @target.template.size activity=mJbwhj3beOIB3Jgj]]-foot Emanation
-      originating from the [[lookup @name lowercase]]. <em>Failure:</em> The
+      originating from the [[lookup @name lowercase]]{creature}. <em>Failure:</em> The
       target has the &amp;Reference[Poisoned apply=false] condition until the
       start of its next turn. <em>Success:</em> The target is immune to the
-      Stench of all [[lookup @name lowercase]] for 1 hour.</p>
+      Stench of all [[lookup @name lowercase]]{creature} for 1 hour.</p>
     chat: ''
   identifier: stench
   source:

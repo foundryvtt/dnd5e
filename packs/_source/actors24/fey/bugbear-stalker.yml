@@ -995,7 +995,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] needn't spend extra movement to move
+          <p>The [[lookup @name lowercase]]{creature} needn't spend extra movement to move
           a creature it is grappling.</p>
         chat: ''
       identifier: abduct
@@ -1097,7 +1097,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .dN1CML4smcRrUkzD]] or [[/item .YFpjAATelvlz5oyb]] attacks.</p>
         chat: ''
       identifier: multiattack

@@ -114,14 +114,14 @@ system:
     max: ''
   description:
     value: >-
-      <p>Whenever the [[lookup @name lowercase]] starts its turn
+      <p>Whenever the [[lookup @name lowercase]]{creature} starts its turn
       &amp;Reference[Bloodied], roll [[/r 1d6]]. On a 6, the [[lookup @name
       lowercase]] goes berserk. On each of its turns while berserk, the [[lookup
       @name lowercase]] attacks the nearest creature it can see. If no creature
-      is near enough to move to and attack, the [[lookup @name lowercase]]
-      attacks an object. Once the [[lookup @name lowercase]] goes berserk, it
+      is near enough to move to and attack, the [[lookup @name lowercase]]{creature}
+      attacks an object. Once the [[lookup @name lowercase]]{creature} goes berserk, it
       remains so until it is destroyed or it is no longer Bloodied.</p><p>The
-      [[lookup @name lowercase]]'s creator, if within [[lookup @range.value
+      [[lookup @name lowercase]]{creature}'s creator, if within [[lookup @range.value
       activity=tnkOsrSwEElO2kZM]] feet of the berserk [[lookup @name
       lowercase]], can try to calm it by taking an action to make a [[/check
       ability=cha skill=per dc=@abilities.str.dc]] DC 15 Charisma (Persuasion)

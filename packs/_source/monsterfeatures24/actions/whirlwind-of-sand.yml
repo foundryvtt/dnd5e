@@ -65,17 +65,17 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature"><em>Trigger:</em> The [[lookup @name lowercase]] is hit
-      by an attack roll. <em>Response:</em> The [[lookup @name lowercase]] adds
+      <p class="feature"><em>Trigger:</em> The [[lookup @name lowercase]]{creature} is hit
+      by an attack roll. <em>Response:</em> The [[lookup @name lowercase]]{creature} adds
       2 to its AC against the attack, possibly causing the attack to miss, and
-      the [[lookup @name lowercase]] teleports up to [[lookup @range.value
+      the [[lookup @name lowercase]]{creature} teleports up to [[lookup @range.value
       activity=EsBmMUQMO4b0g6Yw]] [[lookup @range.units
       activity=EsBmMUQMO4b0g6Yw]]. [[lookup @target.affects.special
       activity=EsBmMUQMO4b0g6Yw]]. Each creature of its choice that it can see
       within [[lookup @target.template.size activity=EsBmMUQMO4b0g6Yw]] [[lookup
       @target.template.units activity=EsBmMUQMO4b0g6Yw]]. of its destination
       space has the &amp;Reference[Blinded apply=false] condition until the end
-      of the [[lookup @name lowercase]]'s next turn.</p>
+      of the [[lookup @name lowercase]]{creature}'s next turn.</p>
     chat: ''
   identifier: whirlwind-of-sand
   source:

@@ -62,8 +62,8 @@ system:
   description:
     value: >-
       <p class="feature"><em>Trigger:</em> An attack roll hits the wearer of the
-      [[lookup @name lowercase]]'s amulet while the wearer is within 5 feet of
-      the [[lookup @name lowercase]].</p><p class="feature"><em>Response:</em>
+      [[lookup @name lowercase]]{creature}'s amulet while the wearer is within 5 feet of
+      the [[lookup @name lowercase]]{creature}.</p><p class="feature"><em>Response:</em>
       The wearer gains a +5 bonus to AC, including against the triggering attack
       and possibly causing it to miss, until the start of the [[lookup @name
       lowercase]]'s next turn.</p>

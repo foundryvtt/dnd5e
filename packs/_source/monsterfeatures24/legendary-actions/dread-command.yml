@@ -58,10 +58,10 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] casts
+      <p class="feature">The [[lookup @name lowercase]]{creature} casts
       <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]{Command}</em>
       (level 2 version), using the same spellcasting ability as Spellcasting.
-      The [[lookup @name lowercase]] can't take this action again until the
+      The [[lookup @name lowercase]]{creature} can't take this action again until the
       start of its next turn.</p>
     chat: ''
   identifier: dread-command

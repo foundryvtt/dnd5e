@@ -12,13 +12,13 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] has five heads. Whenever
-      the [[lookup @name lowercase]] takes 25 damage or more on a single turn,
-      one of its heads dies. The [[lookup @name lowercase]] dies if all its
+      <p class="feature">The [[lookup @name lowercase]]{creature} has five heads. Whenever
+      the [[lookup @name lowercase]]{creature} takes 25 damage or more on a single turn,
+      one of its heads dies. The [[lookup @name lowercase]]{creature} dies if all its
       heads are dead. At the end of each of its turns when it has at least one
-      living head, the [[lookup @name lowercase]] grows two heads for each of
+      living head, the [[lookup @name lowercase]]{creature} grows two heads for each of
       its heads that died since its last turn, unless it has taken Fire damage
-      since its last turn. The [[lookup @name lowercase]] regains 20 Hit Points
+      since its last turn. The [[lookup @name lowercase]]{creature} regains 20 Hit Points
       when it grows new heads.</p>
     chat: ''
   identifier: multiple-heads

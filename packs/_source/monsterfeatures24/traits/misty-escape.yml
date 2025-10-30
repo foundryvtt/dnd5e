@@ -61,8 +61,8 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">If the [[lookup @name lowercase]] drops to 0 Hit Points
-      outside its resting place, the [[lookup @name lowercase]] uses Shape-Shift
+      <p class="feature">If the [[lookup @name lowercase]]{creature} drops to 0 Hit Points
+      outside its resting place, the [[lookup @name lowercase]]{creature} uses Shape-Shift
       to become mist (no action required). If it can't use Shape-Shift, it is
       destroyed.</p><p class="feature">While it has 0 Hit Points in mist form,
       it can't return to its vampire form, and it must reach its resting place

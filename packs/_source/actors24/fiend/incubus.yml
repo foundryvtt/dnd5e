@@ -652,7 +652,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">When the [[lookup @name lowercase]] finishes a Long
+          <p class="feature">When the [[lookup @name lowercase]]{creature} finishes a Long
           Rest, it can shape-shift into a
           <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmSuccubus000000]{Succubus}</strong>,
           using that stat block instead of this one. Any equipment it is wearing
@@ -957,7 +957,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmRestlessTouch0]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1232,7 +1232,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
