@@ -26,6 +26,18 @@
                  input=inputs.createMultiCheckboxInput stacked=true classes="checkbox-grid checkbox-grid-3" }}
 </fieldset>
 
+{{#if (eq system.type.value "pietyTrait")}}
+<fieldset>
+    <legend>{{ localize "DND5E.PIETY.Label" }}</legend>
+
+    {{!-- Threshold --}}
+    {{ formField fields.piety.fields.threshold value=source.piety.threshold }}
+
+    {{!-- Deity --}}
+    {{ formField fields.piety.fields.deity value=source.piety.deity choices=CONFIG.deities }}
+</fieldset>
+{{/if}}
+
 {{#if system.isEnchantmentSource}}
 <fieldset>
     <legend>{{ localize "DND5E.ENCHANTMENT.Label" }}</legend>

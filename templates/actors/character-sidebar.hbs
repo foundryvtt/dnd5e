@@ -187,6 +187,30 @@
                 </div>
             </div>
             {{/with}}
+
+            {{!-- Piety --}}
+            {{#if piety}}
+            {{#with system.attributes.piety}}
+            <div class="meter-group">
+                <div class="label roboto-condensed-upper">
+                    <span>{{localize "DND5E.PIETY.Label"}}</span>
+                    {{#if @root.editable}}
+                    <button type="button" class="config-button unbutton" data-action="showConfiguration"
+                            data-config="piety" data-tooltip aria-label="{{ localize 'DND5E.PIETY.Configure' }}">
+                        <i class="fa-solid fa-cog" inert></i>
+                    </button>
+                    {{/if}}
+                </div>
+                <div class="meter piety progress" role="meter" style="--bar-percentage: {{ pct }}%">
+                    <div class="label">
+                        <span class="value">{{ value }}</span>
+                    </div>
+                    <input type="text" name="system.attributes.piety.value" data-dtype="Number"
+                           placeholder="1" value="{{ value }}" hidden>
+                </div>
+            </div>
+            {{/with}}
+            {{/if}}
         </div>
 
         {{!-- Death Saves --}}
