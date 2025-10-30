@@ -1,4 +1,8 @@
 /**
+ * @import { TabPreferences5e } from "../../data/user/_types.mjs";
+ */
+
+/**
  * @typedef {object} FilterState5e
  * @property {string} name             Filtering by name.
  * @property {Set<string>} properties  Filtering by some property.

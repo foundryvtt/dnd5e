@@ -1,7 +1,13 @@
 const { BooleanField } = foundry.data.fields;
 
 /**
+ * @import { SystemTerrainData } from "./_types.mjs";
+ */
+
+/**
  * Extension of terrain data with support for 5e concepts.
+ * @extends {foundry.data.TerrainData<SystemTerrainData>}
+ * @mixes SystemTerrainData
  */
 export default class TerrainData5e extends foundry.data.TerrainData {
 
