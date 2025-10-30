@@ -405,6 +405,8 @@ system:
         mode: default
         allowReplacements: false
         grants:
+          - saves:str
+          - saves:dex
           - saves:con
           - saves:int
           - saves:wis
