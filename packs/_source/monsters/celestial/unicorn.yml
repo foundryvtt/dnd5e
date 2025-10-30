@@ -1265,7 +1265,7 @@ items:
     system:
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] touches another creature. The target
+          <p>The [[lookup @name lowercase]]{creature} touches another creature. The target
           magically regains 30 ([[/heal]]{2d8 + 2}) hit points. In addition, the
           touch removes all diseases and neutralizes all poisons afflicting the
           target.</p>

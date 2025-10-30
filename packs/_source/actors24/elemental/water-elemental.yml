@@ -621,7 +621,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] takes Cold
+          <p class="feature">If the [[lookup @name lowercase]]{creature} takes Cold
           damage, its Speed decreases by 20 feet until the end of its next
           turn.</p>
         chat: ''
@@ -721,7 +721,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can enter an enemy's
+          <p class="feature">The [[lookup @name lowercase]]{creature} can enter an enemy's
           space and stop there. It can move through a space as narrow as 1 inch
           without expending extra movement to do so.</p>
         chat: ''
@@ -813,7 +813,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmSlam0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1195,10 +1195,10 @@ items:
           apply=false] condition, is &amp;Reference[suffocating]{suffocating}
           unless it can breathe water, and takes [[/damage average
           activity=khxVwH3AB0sx1qRG]] damage at the start of each of the
-          [[lookup @name lowercase]]'s turns. The [[lookup @name lowercase]] can
+          [[lookup @name lowercase]]{creature}'s turns. The [[lookup @name lowercase]]{creature} can
           grapple one Large creature or up to two Medium or smaller creatures at
           a time with Whelm.</p><p class="feature">As an action, a creature
-          within 5 feet of the [[lookup @name lowercase]] can pull a creature
+          within 5 feet of the [[lookup @name lowercase]]{creature} can pull a creature
           out of it by succeeding on a [[/check ath dc=@skills.ath.passive
           format=long]].</p><p class="feature"><em>Success:</em> Half damage
           only.</p>

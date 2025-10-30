@@ -571,7 +571,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on attack rolls
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on attack rolls
           against any creature that doesn't have all its Hit Points.</p>
         chat: ''
       identifier: blood-frenzy
@@ -622,7 +622,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can breathe air and
+          <p class="feature">The [[lookup @name lowercase]]{creature} can breathe air and
           water, but it must be submerged at least once every 4 hours to avoid
           suffocating outside water.</p>
         chat: ''
@@ -674,7 +674,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can magically
+          <p class="feature">The [[lookup @name lowercase]]{creature} can magically
           control sharks within 120 feet of itself, using a special
           telepathy.</p>
         chat: ''
@@ -772,7 +772,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmClaw0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1008,7 +1008,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] swims up to its Swim Speed straight
+          <p>The [[lookup @name lowercase]]{creature} swims up to its Swim Speed straight
           toward an enemy it can see.</p>
         chat: ''
       identifier: aquatic-charge

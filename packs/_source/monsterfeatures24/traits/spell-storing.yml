@@ -13,10 +13,10 @@ system:
   description:
     value: >-
       <p class="feature">A spellcaster who wears the [[lookup @name
-      lowercase]]'s amulet can cause the [[lookup @name lowercase]] to store one
+      lowercase]]'s amulet can cause the [[lookup @name lowercase]]{creature} to store one
       spell of level 4 or lower. To do so, the wearer must cast the spell on the
-      [[lookup @name lowercase]] while within 5 feet of it. The spell has no
-      effect but is stored within the [[lookup @name lowercase]]. Any previously
+      [[lookup @name lowercase]]{creature} while within 5 feet of it. The spell has no
+      effect but is stored within the [[lookup @name lowercase]]{creature}. Any previously
       stored spell is lost when a new spell is stored. The [[lookup @name
       lowercase]] can cast the spell stored with any parameters set by the
       original caster, requiring no spell components and using the caster's

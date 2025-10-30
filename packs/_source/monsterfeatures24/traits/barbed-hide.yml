@@ -70,7 +70,7 @@ system:
     max: ''
   description:
     value: >-
-      <p>At the start of each of its turns, the [[lookup @name lowercase]] deals
+      <p>At the start of each of its turns, the [[lookup @name lowercase]]{creature} deals
       [[/damage average]] damage to any creature [[lookup
       @target.affects.special activity=1O5eyc72vPW0UxYZ]].</p>
     chat: ''

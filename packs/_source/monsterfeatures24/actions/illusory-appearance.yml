@@ -61,7 +61,7 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] casts
+      <p class="feature">The [[lookup @name lowercase]]{creature} casts
       <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDisguiseSe]{Disguise
       Self}</em>, using Constitution as the spellcasting ability (spell save DC
       [[lookup @attributes.spell.dc]]). The spell's duration is [[lookup

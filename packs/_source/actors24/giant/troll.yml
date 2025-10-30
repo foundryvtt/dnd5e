@@ -640,13 +640,13 @@ items:
         max: '4'
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] ends any turn
+          <p class="feature">If the [[lookup @name lowercase]]{creature} ends any turn
           Bloodied and took 15+ Slashing damage during that turn, one of the
-          [[lookup @name lowercase]]l's limbs is severed, falls into the
-          [[lookup @name lowercase]]'s space, and becomes a
+          [[lookup @name lowercase]]{creature}l's limbs is severed, falls into the
+          [[lookup @name lowercase]]{creature}'s space, and becomes a
           <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmTrollLimb00000]{Troll
           Limb}</strong>. The limb acts immediately after the [[lookup @name
-          lowercase]]'s turn. The [[lookup @name lowercase]] has 1
+          lowercase]]'s turn. The [[lookup @name lowercase]]{creature} has 1
           &amp;Reference[Exhaustion apply=false] level for each missing limb,
           and it grows replacement limbs the next time it regains Hit
           Points.</p><section class="secret"
@@ -654,7 +654,7 @@ items:
           Note</strong></p><p>This feature provides an <strong>Active
           Effect</strong> condition in the character sheet's Effects tab to
           enable each level of Exhaustion. Since the condition can be applied
-          multiple times, the GM must manually manage the level of Exhaustion. 
+          multiple times, the GM must manually manage the level of Exhaustion.
           There is an active effect available for each level of
           exhaustion.</p></section>
         chat: ''
@@ -983,7 +983,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] regains [[lookup @healing.formula
+          <p>The [[lookup @name lowercase]]{creature} regains [[lookup @healing.formula
           activity=5cGvjZJIJVicjJ3d]] Hit Points at the start of each of its
           turns if it has at least 1 Hit Point.</p>
         chat: ''
@@ -1085,7 +1085,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item
           .mmRend0000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1320,7 +1320,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] moves up to [[lookup @range.special
+          <p>The [[lookup @name lowercase]]{creature} moves up to [[lookup @range.special
           activity=Y2IncZu5BjB42z7l]] straight toward an enemy it can see.</p>
         chat: ''
       identifier: charge

@@ -649,7 +649,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item Attach]] attack
+          <p>The [[lookup @name lowercase]]{creature} makes one [[/item Attach]] attack
           and two [[/item Tail]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -796,16 +796,16 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage average extended]]. If the target
-          is a Large or smaller creature, the [[lookup @name lowercase]]
-          attaches to it. While the [[lookup @name lowercase]] is attached, the
+          is a Large or smaller creature, the [[lookup @name lowercase]]{creature}
+          attaches to it. While the [[lookup @name lowercase]]{creature} is attached, the
           target has the &amp;Reference[Blinded apply=false] condition, and the
-          [[lookup @name lowercase]] can't make Attach attacks against other
-          targets. In addition, the [[lookup @name lowercase]] halves the damage
+          [[lookup @name lowercase]]{creature} can't make Attach attacks against other
+          targets. In addition, the [[lookup @name lowercase]]{creature} halves the damage
           it takes (round down), and the target takes the same amount of
-          damage.</p><p>The [[lookup @name lowercase]] can detach itself by
+          damage.</p><p>The [[lookup @name lowercase]]{creature} can detach itself by
           spending 5 feet of movement. The target or a creature within [[lookup
           @range.value activity=6iLqAufAeEqDOlGs]] feet of it can take an action
-          to try to detach the [[lookup @name lowercase]], doing so by
+          to try to detach the [[lookup @name lowercase]]{creature}, doing so by
           succeeding on a DC [[lookup @check.dc.value
           activity=6iLqAufAeEqDOlGs]] Strength (Athletics) check.</p>
         chat: ''
@@ -1128,7 +1128,7 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts the
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMirrorImag]{Mirror
           Image}</em> spell, requiring no spell components and using Wisdom as
           the spellcasting ability. The spell ends early if the [[lookup @name
@@ -1540,8 +1540,8 @@ items:
           originating from the [[lookup @name
           lowercase]].</p><p><em>Failure:</em> The target has the
           &amp;Reference[Frightened apply=false] condition until the end of the
-          [[lookup @name lowercase]]'s next turn.</p><p><em>Success:</em> The
-          target is immune to this [[lookup @name lowercase]]'s Moan for the
+          [[lookup @name lowercase]]{creature}'s next turn.</p><p><em>Success:</em> The
+          target is immune to this [[lookup @name lowercase]]{creature}'s Moan for the
           next 24 hours.</p>
         chat: ''
       identifier: moan

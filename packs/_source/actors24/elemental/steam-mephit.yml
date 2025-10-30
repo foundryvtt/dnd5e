@@ -571,8 +571,8 @@ items:
         max: ''
       description:
         value: >-
-          <p>Attack rolls against the [[lookup @name lowercase]] are made with
-          Disadvantage unless the [[lookup @name lowercase]] has the
+          <p>Attack rolls against the [[lookup @name lowercase]]{creature} are made with
+          Disadvantage unless the [[lookup @name lowercase]]{creature} has the
           Incapacitated condition.</p>
         chat: ''
       identifier: blurred-form
@@ -686,13 +686,13 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] explodes [[lookup
+          <p>The [[lookup @name lowercase]]{creature} explodes [[lookup
           @activation.condition activity=1SfqWSp7RSyHgG4b]].</p><p><em>Dexterity
           Saving Throw: </em>DC [[lookup @save.dc.value
           activity=1SfqWSp7RSyHgG4b]], each [[lookup @target.affects.type
           activity=1SfqWSp7RSyHgG4b]] in a [[lookup @target.template.size
           activity=1SfqWSp7RSyHgG4b]]-foot Emanation originating from the
-          [[lookup @name lowercase]].</p><p><em>Failure: </em>[[/damage
+          [[lookup @name lowercase]]{creature}.</p><p><em>Failure: </em>[[/damage
           average]] damage.</p><p><em>Success:</em> Half damage.</p>
         chat: ''
       identifier: death-burst

@@ -581,7 +581,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can move through a space as narrow
+          <p>The [[lookup @name lowercase]]{creature} can move through a space as narrow
           as 1 inch without expending extra movement to do so.</p>
         chat: ''
       identifier: amorphous
@@ -632,7 +632,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">While in sunlight, the [[lookup @name lowercase]]
+          <p class="feature">While in sunlight, the [[lookup @name lowercase]]{creature}
           has Disadvantage on D20 Tests.</p>
         chat: ''
       identifier: sunlight-weakness

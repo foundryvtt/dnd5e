@@ -83,10 +83,10 @@ system:
       <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
       @save.dc.value activity=eoIikvnPayaj02oN]], each creature in a [[lookup
       @target.template.size activity=eoIikvnPayaj02oN]]-foot Emanation
-      originating from the [[lookup @name lowercase]] (demons succeed
+      originating from the [[lookup @name lowercase]]{creature} (demons succeed
       automatically).</p><p class="feature"><em>Failure:</em> [[/damage
       average]] damage, and the target has the &amp;Reference[Stunned
-      apply=false] condition until the end of the [[lookup @name lowercase]]'s
+      apply=false] condition until the end of the [[lookup @name lowercase]]{creature}'s
       next turn.</p>
     chat: ''
   identifier: stunning-screech

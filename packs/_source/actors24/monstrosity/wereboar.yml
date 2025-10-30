@@ -784,7 +784,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two attacks, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two attacks, using [[/item
           .hhfnX7eT1ZFun8oQ]]{Javelin} or [[/item .mmTusk0000000000]]{Tusk} in
           any combination. It can replace one attack with a [[/item
           .mmGore0000000000]]{Gore} attack.</p>
@@ -1015,7 +1015,7 @@ items:
           instead becomes a
           <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmWereboar000000]{Wereboar}</strong>
           under the DM's control and has 10 Hit Points.</p><p><em>Success:</em>
-          The target is immune to this [[lookup @name lowercase]]'s curse for 24
+          The target is immune to this [[lookup @name lowercase]]{creature}'s curse for 24
           hours.</p>
         chat: ''
       identifier: gore
@@ -1265,7 +1265,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: "<p class=\"feature\">[[/attack extended]]. [[/damage average extended]]. If the target is a Medium or smaller creature and the [[lookup @name lowercase]] moved 20+ feet straight toward it immediately before the hit, the target takes an extra 7 (2d6)<span class=\"Apple-converted-space\">\_</span>damage and has the &amp;Reference[Prone apply=false] condition.</p>"
+        value: "<p class=\"feature\">[[/attack extended]]. [[/damage average extended]]. If the target is a Medium or smaller creature and the [[lookup @name lowercase]]{creature} moved 20+ feet straight toward it immediately before the hit, the target takes an extra 7 (2d6)<span class=\"Apple-converted-space\">\_</span>damage and has the &amp;Reference[Prone apply=false] condition.</p>"
         chat: ''
       identifier: tusk
       source:
@@ -1447,7 +1447,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] shape-shifts into a
+          <p class="feature">The [[lookup @name lowercase]]{creature} shape-shifts into a
           Medium boar-humanoid hybrid form or a Medium boar, or it returns to
           its true humanoid form, or it returns to its true form. Its game
           statistics, other than its size, are the same in each form. Any

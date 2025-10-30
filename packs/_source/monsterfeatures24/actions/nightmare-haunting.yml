@@ -70,7 +70,7 @@ system:
       using the same spellcasting ability as Spellcasting. Only the [[lookup
       @name lowercase]] can serve as the spell's messenger, and the target must
       be a [[lookup @target.affects.type activity=4GGGVhvLSrHgHdb9]] the
-      [[lookup @name lowercase]] can see [[lookup @target.affects.special
+      [[lookup @name lowercase]]{creature} can see [[lookup @target.affects.special
       activity=4GGGVhvLSrHgHdb9]]. The spell fails and is wasted if the target
       is under the effect of the
       <em>@UUID[Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr]{Protection from
@@ -79,7 +79,7 @@ system:
       Circle}</em> spell.</p><p class="feature">If the target takes damage from
       the <em>Dream</em> spell, the target's Hit Point maximum decreases by an
       amount equal to that damage. If the spell kills the target, its soul is
-      trapped in the [[lookup @name lowercase]]'s soul bag, and the target can't
+      trapped in the [[lookup @name lowercase]]{creature}'s soul bag, and the target can't
       be raised from the dead until its soul is released.</p>
     chat: ''
   identifier: nightmare-haunting

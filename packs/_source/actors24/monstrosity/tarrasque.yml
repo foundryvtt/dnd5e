@@ -620,7 +620,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -678,7 +678,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -775,12 +775,12 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] is targeted by a
+          <p class="feature">If the [[lookup @name lowercase]]{creature} is targeted by a
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMagicMissi]{Magic
           Missile}</em> spell or a spell that requires a ranged attack roll,
           roll [[/r 1d6]].</p><p class="feature">On a <strong>1–5</strong>, the
-          [[lookup @name lowercase]] is unaffected.</p><p class="feature">On a
-          <strong>6</strong>, the [[lookup @name lowercase]] is unaffected and
+          [[lookup @name lowercase]]{creature} is unaffected.</p><p class="feature">On a
+          <strong>6</strong>, the [[lookup @name lowercase]]{creature} is unaffected and
           reflects the spell, turning the caster into the target.</p>
         chat: ''
       identifier: reflective-carapace
@@ -881,7 +881,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes one [[/item
           .mmBite0000000000]] attack and three other attacks, using [[/item
           .mmClaw0000000000]] or [[/item .mmTail0000000000]] in any
           combination.</p>
@@ -1862,15 +1862,15 @@ items:
           the &amp;Reference[Blinded apply=false] and &amp;Reference[Restrained
           apply=false] conditions and can't teleport, it has
           &amp;Reference[Total Cover] against attacks and other effects outside
-          the [[lookup @name lowercase]], and takes [[/damage average
+          the [[lookup @name lowercase]]{creature}, and takes [[/damage average
           activity=zrWNjO9mkbN28spL]] damage at the start of each of the
-          [[lookup @name lowercase]]'s turns.</p><p class="feature">If the
-          [[lookup @name lowercase]] takes 60 damage or more on a single turn
-          from a creature inside it, the [[lookup @name lowercase]] must succeed
+          [[lookup @name lowercase]]{creature}'s turns.</p><p class="feature">If the
+          [[lookup @name lowercase]]{creature} takes 60 damage or more on a single turn
+          from a creature inside it, the [[lookup @name lowercase]]{creature} must succeed
           on a [[/save format=long activity=rGeGukkm2t2fXsoy]] at the end of
           that turn or regurgitate all swallowed creatures, each of which falls
           in a space within [[lookup @range.value activity=rGeGukkm2t2fXsoy]]
-          feet of the [[lookup @name lowercase]] and has the
+          feet of the [[lookup @name lowercase]]{creature} and has the
           &amp;Reference[Prone apply=false] condition. If the [[lookup @name
           lowercase]] dies, any swallowed creature no longer has the Restrained
           condition and can escape from the corpse by using 20 feet of movement,
@@ -2067,7 +2067,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] moves up to half its
+          <p class="feature">The [[lookup @name lowercase]]{creature} moves up to half its
           Speed, and it makes one [[/item .mmClaw0000000000]] or [[/item
           .mmTail0000000000]] attack.</p>
         chat: ''
@@ -2173,8 +2173,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] moves up to its
-          Speed. At the end of this movement, the [[lookup @name lowercase]]
+          <p class="feature">The [[lookup @name lowercase]]{creature} moves up to its
+          Speed. At the end of this movement, the [[lookup @name lowercase]]{creature}
           creates an instantaneous shock wave in a [[lookup
           @target.template.size activity=g4W0ovZxBeUrZKb8]]-[[lookup
           @target.template.units activity=g4W0ovZxBeUrZKb8]]. Emanation
@@ -2282,7 +2282,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] deals double damage to objects and
+          <p>The [[lookup @name lowercase]]{creature} deals double damage to objects and
           structures.</p>
         chat: ''
       identifier: siege-monster

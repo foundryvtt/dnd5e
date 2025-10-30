@@ -59,12 +59,12 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">If the [[lookup @name lowercase]] is targeted by a
+      <p class="feature">If the [[lookup @name lowercase]]{creature} is targeted by a
       <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMagicMissi]{Magic
       Missile}</em> spell or a spell that requires a ranged attack roll, roll
       [[/r 1d6]].</p><p class="feature">On a <strong>1–5</strong>, the [[lookup
       @name lowercase]] is unaffected.</p><p class="feature">On a
-      <strong>6</strong>, the [[lookup @name lowercase]] is unaffected and
+      <strong>6</strong>, the [[lookup @name lowercase]]{creature} is unaffected and
       reflects the spell, turning the caster into the target.</p>
     chat: ''
   identifier: reflective-carapace

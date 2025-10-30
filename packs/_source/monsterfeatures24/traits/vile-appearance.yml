@@ -73,11 +73,11 @@ system:
       @save.dc.value activity=FR0ETDHBas1Z5LfF]], any [[lookup
       @target.affects.special activity=FR0ETDHBas1Z5LfF]] that starts its turn
       within [[lookup @range.value activity=FR0ETDHBas1Z5LfF]] feet of the
-      [[lookup @name lowercase]] and can see the [[lookup @name lowercase]]'s
+      [[lookup @name lowercase]]{creature} and can see the [[lookup @name lowercase]]{creature}'s
       true form.</p><p class="feature"><em>Failure:</em> The target has the
       &amp;Reference[Frightened apply=false] condition until the start of its
       next turn.</p><p class="feature"><em>Success:</em> The target is immune to
-      this [[lookup @name lowercase]]'s Horrific Appearance for 24 hours.</p>
+      this [[lookup @name lowercase]]{creature}'s Horrific Appearance for 24 hours.</p>
     chat: ''
   identifier: vile-appearance
   source:

@@ -8,7 +8,7 @@ system:
     value: >-
       <section class="secret">
 
-      <p>At the start of each of the [[lookup @name lowercase]]'s turns, each
+      <p>At the start of each of the [[lookup @name lowercase]]{creature}'s turns, each
       creature within 5 feet of it takes <strong>10 (3d6) <em>fire
       damage</em></strong>, and flammable objects in the aura that aren't being
       worn or carried ignite.</p><p>A creature that touches the [[lookup @name
@@ -17,10 +17,10 @@ system:
 
       </section>
 
-      <p>At the start of each of the [[lookup @name lowercase]]'s turns, each
+      <p>At the start of each of the [[lookup @name lowercase]]{creature}'s turns, each
       creature within 5 feet of it takes <em>fire damage</em>, and flammable
       objects in the aura that aren't being worn or carried ignite. A creature
-      that touches the [[lookup @name lowercase]] or hits it with a melee attack
+      that touches the [[lookup @name lowercase]]{creature} or hits it with a melee attack
       while within 5 feet of it takes <em>fire damage</em>.</p>
     chat: ''
   source:

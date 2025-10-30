@@ -12,8 +12,8 @@ system:
     max: ''
   description:
     value: >-
-      <p>Attack rolls against the [[lookup @name lowercase]] are made with
-      Disadvantage unless the [[lookup @name lowercase]] has the Incapacitated
+      <p>Attack rolls against the [[lookup @name lowercase]]{creature} are made with
+      Disadvantage unless the [[lookup @name lowercase]]{creature} has the Incapacitated
       condition.</p>
     chat: ''
   identifier: blurred-form

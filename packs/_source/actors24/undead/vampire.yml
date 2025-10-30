@@ -617,7 +617,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -722,8 +722,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] drops to 0 Hit
-          Points outside its resting place, the [[lookup @name lowercase]] uses
+          <p class="feature">If the [[lookup @name lowercase]]{creature} drops to 0 Hit
+          Points outside its resting place, the [[lookup @name lowercase]]{creature} uses
           Shape-Shift to become mist (no action required). If it can't use
           Shape-Shift, it is destroyed.</p><p class="feature">While it has 0 Hit
           Points in mist form, it can't return to its vampire form, and it must
@@ -824,7 +824,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can climb difficult surfaces,
+          <p>The [[lookup @name lowercase]]{creature} can climb difficult surfaces,
           including along ceilings, without needing to make an ability
           check.</p>
         chat: ''
@@ -912,7 +912,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmGraveStrike000]]{Grave Strike} attacks and uses [[/item
           .mmBite0000000000]]{Bite}.</p>
         chat: ''
@@ -1368,7 +1368,7 @@ items:
           reduced to 0 Hit Points by this damage and then buried rises the
           following sunset as a
           <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmVampireSpawn00]{Vampire
-          Spawn}</strong> under the [[lookup @name lowercase]]'s control.</p>
+          Spawn}</strong> under the [[lookup @name lowercase]]{creature}'s control.</p>
         chat: ''
       identifier: bite
       source:
@@ -1521,13 +1521,13 @@ items:
         max: '1'
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] casts
+          <p>The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCharmPerso]</em>,
           requiring no spell components and using Charisma as the spellcasting
           ability (spell save DC [[lookup @abilities.cha.dc]]), and the duration
           is [[lookup @duration.value activity=fcRXSTOlFJShCl52]] hours. The
           &amp;Reference[Charmed apply=false] target is a willing recipient of
-          the [[lookup @name lowercase]]'s [[/item .mmBite0000000000]]{Bite},
+          the [[lookup @name lowercase]]{creature}'s [[/item .mmBite0000000000]]{Bite},
           the damage of which doesn't end the spell. When the spell ends, the
           target is unaware it was Charmed by the [[lookup @name
           lowercase]].</p>
@@ -1874,15 +1874,15 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">If the [[lookup @name lowercase]] isn't in sunlight
+          <p class="feature">If the [[lookup @name lowercase]]{creature} isn't in sunlight
           or running water, it shape-shifts into a Tiny
           @UUID[Compendium.dnd5e.actors24.Actor.mmBat00000000000]{bat} (Speed 5
           ft., Fly Speed 30 ft.) or a Medium cloud of mist (Speed 5 ft., Fly
           Speed 20 ft. [hover]), or it returns to its vampire form. Anything it
           is wearing transforms with it.</p><p class="feature">While in bat
-          form, the [[lookup @name lowercase]] can't speak. Its game statistics,
+          form, the [[lookup @name lowercase]]{creature} can't speak. Its game statistics,
           other than its size and Speed, are unchanged.</p><p
-          class="feature">While in mist form, the [[lookup @name lowercase]]
+          class="feature">While in mist form, the [[lookup @name lowercase]]{creature}
           can't take any actions, speak, or manipulate objects. It is weightless
           and can enter an enemy's space and stop there. If air can pass through
           a space, the mist can do so, but it can't pass through liquid. It has
@@ -1988,7 +1988,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] casts
+          <p>The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]</em>,
           requiring no spell components and using Charisma as the spellcasting
           ability (spell save DC [[lookup @abilities.cha.dc]]). The [[lookup
@@ -2277,7 +2277,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] moves up to half its
+          <p class="feature">The [[lookup @name lowercase]]{creature} moves up to half its
           Speed, and it makes one [[/item .mmGraveStrike000]]{Grave Strike}
           attack.</p>
         chat: ''
@@ -2487,16 +2487,16 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] has these
+          <p class="feature">The [[lookup @name lowercase]]{creature} has these
           weaknesses:</p><p class="feature-trait"><strong>Forbiddance.</strong>
-          The [[lookup @name lowercase]] can't enter a residence without an
+          The [[lookup @name lowercase]]{creature} can't enter a residence without an
           invitation from an occupant.</p><p
           class="feature-trait"><strong>Running Water.</strong> The [[lookup
           @name lowercase]] takes 20 Acid damage if it ends its turn in running
           water.</p><p class="feature-trait"><strong>Stake to the
-          Heart.</strong> The [[lookup @name lowercase]] is destroyed if a
+          Heart.</strong> The [[lookup @name lowercase]]{creature} is destroyed if a
           weapon that deals Piercing damage is driven into the [[lookup @name
-          lowercase]]'s heart while the [[lookup @name lowercase]] has the
+          lowercase]]'s heart while the [[lookup @name lowercase]]{creature} has the
           Incapacitated condition.</p><p
           class="feature-trait"><strong>Sunlight.</strong> The [[lookup @name
           lowercase]] takes 20 Radiant damage if it starts its turn in sunlight.

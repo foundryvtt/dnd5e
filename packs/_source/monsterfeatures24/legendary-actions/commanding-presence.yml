@@ -59,14 +59,14 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] uses [[/item
+      <p class="feature">The [[lookup @name lowercase]]{creature} uses [[/item
       Spellcasting]] to cast
       <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]{Command}</em>
-      (level 2 version). The [[lookup @name lowercase]] can't take this action
+      (level 2 version). The [[lookup @name lowercase]]{creature} can't take this action
       again until the start of its next turn.</p>
     chat: >-
-      <p class="feature">The [[lookup @name lowercase]] uses Spellcasting to
-      cast <em>Command</em> (level 2 version). The [[lookup @name lowercase]]
+      <p class="feature">The [[lookup @name lowercase]]{creature} uses Spellcasting to
+      cast <em>Command</em> (level 2 version). The [[lookup @name lowercase]]{creature}
       can’t take this action again until the start of its next turn.</p>
   identifier: commanding-presence
   source:

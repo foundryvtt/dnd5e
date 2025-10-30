@@ -568,11 +568,11 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] automatically
+          <p class="feature">The [[lookup @name lowercase]]{creature} automatically
           succeeds on saving throws against spells and other magical effects,
           and the attack rolls of spells automatically miss it. Without the
-          [[lookup @name lowercase]]'s permission, no spell can observe the
-          [[lookup @name lowercase]] remotely or detect its thoughts, creature
+          [[lookup @name lowercase]]{creature}'s permission, no spell can observe the
+          [[lookup @name lowercase]]{creature} remotely or detect its thoughts, creature
           type, or alignment.</p>
         chat: ''
       identifier: greater-magic-resistance
@@ -623,7 +623,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies outside Gehenna, its body
+          <p>If the [[lookup @name lowercase]]{creature} dies outside Gehenna, its body
           dissolves into ichor, and it gains a new body instantly and revives
           with all its Hit Points in Gehenna.</p>
         chat: ''
@@ -721,7 +721,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item
           .mmCursedTouch000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1059,10 +1059,10 @@ items:
           activity=SzU2lwdbqgoFMuBM]], each [[lookup @target.affects.type
           activity=SzU2lwdbqgoFMuBM]] in a [[lookup @target.template.size
           activity=SzU2lwdbqgoFMuBM]]-foot Emanation originating from the
-          [[lookup @name lowercase]].</p><p><em>Failure:</em> [[/damage
+          [[lookup @name lowercase]]{creature}.</p><p><em>Failure:</em> [[/damage
           average]] damage, and the target has the &amp;Reference[Frightened
           apply=false] and &amp;Reference[Incapacitated apply=false] conditions
-          until the start of the [[lookup @name lowercase]]'s next turn.</p>
+          until the start of the [[lookup @name lowercase]]{creature}'s next turn.</p>
         chat: ''
       identifier: baleful-command
       source:
@@ -1579,7 +1579,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At

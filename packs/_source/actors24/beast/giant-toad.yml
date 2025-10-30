@@ -561,7 +561,7 @@ items:
         recovery: []
         max: ''
       description:
-        value: <p>The [[lookup @name lowercase]] can breathe air and water.</p>
+        value: <p>The [[lookup @name lowercase]]{creature} can breathe air and water.</p>
         chat: ''
       identifier: amphibious
       source:
@@ -611,7 +611,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]]'s Long Jump is up to
+          <p class="feature">The [[lookup @name lowercase]]{creature}'s Long Jump is up to
           20 feet and its High Jump is up to 10 feet with or without a running
           start.</p>
         chat: ''
@@ -1008,16 +1008,16 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] swallows a Medium or smaller target
+          <p>The [[lookup @name lowercase]]{creature} swallows a Medium or smaller target
           it is grappling.</p><p>While swallowed, the target isn't Grappled but
           has the &amp;Reference[Blinded apply=false] and
           &amp;Reference[Restrained apply=false] conditions, and it has
           &amp;Reference[Total Cover] against attacks and other effects outside
-          the [[lookup @name lowercase]].</p><p>In addition, the target takes
+          the [[lookup @name lowercase]]{creature}.</p><p>In addition, the target takes
           [[/damage average]] damage at the end of each of the [[lookup @name
-          lowercase]]'s turns. The [[lookup @name lowercase]] can have only one
+          lowercase]]'s turns. The [[lookup @name lowercase]]{creature} can have only one
           target swallowed at a time, and it can't use Bite while it has a
-          swallowed target.</p><p>If the [[lookup @name lowercase]] dies, a
+          swallowed target.</p><p>If the [[lookup @name lowercase]]{creature} dies, a
           swallowed creature is no longer Restrained and can escape from the
           corpse using 5 feet of movement, exiting with the &amp;Reference[Prone
           apply=false] condition.</p>

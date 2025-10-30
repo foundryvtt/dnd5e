@@ -570,7 +570,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies, it returns to life in [[/r
+          <p>If the [[lookup @name lowercase]]{creature} dies, it returns to life in [[/r
           1d6#Days]] days and regains all its Hit Points unless
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDispelEvil]</em> is
           cast on its remains.</p>
@@ -659,7 +659,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item Bite]] attacks. It
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item Bite]] attacks. It
           can replace any attack with a use of [[/item Poisonous Spittle]].</p>
         chat: ''
       identifier: multiattack
@@ -939,7 +939,7 @@ items:
           <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
           @save.dc.value activity=r4plP8QiJxzFZZO7]], [[lookup
           @target.affects.labels.statblock activity=r4plP8QiJxzFZZO7]] the
-          [[lookup @name lowercase]] can see within [[lookup @range.value
+          [[lookup @name lowercase]]{creature} can see within [[lookup @range.value
           activity=r4plP8QiJxzFZZO7]] feet.</p><p><em>Failure:</em> 31 (7d8)
           Poison damage, and the target has the &amp;Reference[Blinded
           apply=false] condition until the start of the [[lookup @name
@@ -1343,7 +1343,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Somatic or Material components and
           using Wisdom as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At

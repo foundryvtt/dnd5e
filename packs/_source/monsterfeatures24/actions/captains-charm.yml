@@ -70,10 +70,10 @@ system:
   description:
     value: >-
       <p><em>Wisdom Saving Throw:</em> DC [[lookup @save.dc.value
-      activity=3o27u4Ww7SmCgc8k]], one creature the [[lookup @name lowercase]]
+      activity=3o27u4Ww7SmCgc8k]], one creature the [[lookup @name lowercase]]{creature}
       can see within [[lookup @range.value activity=3o27u4Ww7SmCgc8k]]
       feet.</p><p><em>Failure:</em> The target has the &amp;Reference[Charmed
-      apply=false] condition until the start of the [[lookup @name lowercase]]'s
+      apply=false] condition until the start of the [[lookup @name lowercase]]{creature}'s
       next turn.</p>
     chat: ''
   identifier: captains-charm

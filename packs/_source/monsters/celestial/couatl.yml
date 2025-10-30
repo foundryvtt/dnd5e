@@ -785,7 +785,7 @@ items:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
           grappled (escape [[/check]]). Until this grapple ends, the target is
-          restrained, and the [[lookup @name lowercase]] can't constrict another
+          restrained, and the [[lookup @name lowercase]]{creature} can't constrict another
           target.</p>
         chat: >-
           <p>The Couatl attacks with its Constrict. The target is grappled.
@@ -1160,9 +1160,9 @@ items:
     system:
       description:
         value: >-
-          <p>The [[lookup @name lowercase]]'s spellcasting ability is Charisma
+          <p>The [[lookup @name lowercase]]{creature}'s spellcasting ability is Charisma
           (spell save DC [[lookup @abilities.cha.dc]]). It can innately cast the
-          following spells, requiring only verbal components:</p><p>At will: 
+          following spells, requiring only verbal components:</p><p>At will:
           [[/item .Mzh95utKDPIrjiH8]]{detect evil and good}, [[/item
           .ghXTfe7sgCbgf1Q8]]{detect magic}, [[/item .ppWAAEul0QHtm4er]]{detect
           thoughts}</p><p>3/day each: [[/item .8dzaICjGy6mTUaUr]]{bless},

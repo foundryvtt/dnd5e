@@ -61,7 +61,7 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">If the [[lookup @name lowercase]] takes Cold damage,
+      <p class="feature">If the [[lookup @name lowercase]]{creature} takes Cold damage,
       its Speed decreases by 20 feet until the end of its next turn.</p>
     chat: ''
   identifier: freeze

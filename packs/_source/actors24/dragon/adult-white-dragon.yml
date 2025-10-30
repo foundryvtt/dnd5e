@@ -567,7 +567,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can move across and climb icy
+          <p>The [[lookup @name lowercase]]{creature} can move across and climb icy
           surfaces without needing to make an ability check. Additionally,
           &amp;Reference[Difficult Terrain] composed of ice or snow doesn't cost
           it extra movement.</p>
@@ -668,7 +668,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -762,7 +762,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item Rend]]
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item Rend]]
           attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1173,7 +1173,7 @@ items:
           @save.dc.value activity=U2i9u4ELjeLQfePP]], each [[lookup
           @target.affects.type activity=U2i9u4ELjeLQfePP]] in a [[lookup
           @target.template.size activity=U2i9u4ELjeLQfePP]]-foot-radius Sphere
-          centered on a point the [[lookup @name lowercase]] can see within
+          centered on a point the [[lookup @name lowercase]]{creature} can see within
           [[lookup @range.value activity=U2i9u4ELjeLQfePP]] feet.</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage, and the
           target's Speed is 0 until the end of the target's next turn.</p><p
@@ -1335,11 +1335,11 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplFear000000]{Fear}</em>,
           requiring no Material components and using Charisma as the
           spellcasting ability (spell save DC [[lookup @attributes.spell.dc]]).
-          The [[lookup @name lowercase]] can't take this action again until the
+          The [[lookup @name lowercase]]{creature} can't take this action again until the
           start of its next turn.</p>
         chat: ''
       identifier: frightful-presence
@@ -1657,7 +1657,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] moves up to half its Speed, and it
+          <p>The [[lookup @name lowercase]]{creature} moves up to half its Speed, and it
           makes one [[/item Rend]] attack.</p>
         chat: ''
       identifier: pounce

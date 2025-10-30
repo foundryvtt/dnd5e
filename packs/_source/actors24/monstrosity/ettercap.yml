@@ -560,7 +560,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can climb difficult surfaces,
+          <p>The [[lookup @name lowercase]]{creature} can climb difficult surfaces,
           including along ceilings, without needing to make an ability
           check.</p>
         chat: ''
@@ -677,7 +677,7 @@ items:
         value: >-
           <p>[[/attack extended]]. [[/damage average extended]], and the target
           has the &amp;Reference[Poisoned apply=false] condition until the start
-          of the [[lookup @name lowercase]]'s next turn.</p>
+          of the [[lookup @name lowercase]]{creature}'s next turn.</p>
         chat: ''
       identifier: bite
       source:
@@ -760,7 +760,7 @@ items:
           startTurn: null
         description: >-
           <p>The target has the &amp;Reference[Poisoned apply=false] condition
-          until the start of the [[lookup @name lowercase]]'s next turn.</p>
+          until the start of the [[lookup @name lowercase]]{creature}'s next turn.</p>
         tint: '#ffffff'
         transfer: false
         statuses:
@@ -812,8 +812,8 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] ignores movement
-          restrictions caused by webs, and the [[lookup @name lowercase]] knows
+          <p class="feature">The [[lookup @name lowercase]]{creature} ignores movement
+          restrictions caused by webs, and the [[lookup @name lowercase]]{creature} knows
           the location of any other creature in contact with the same web.</p>
         chat: ''
       identifier: web-walker
@@ -1079,7 +1079,7 @@ items:
       description:
         value: >-
           <p><span style="font-family:'Roboto Condensed', sans-serif">The
-          </span>[[lookup @name lowercase]]<span style="font-family:'Roboto
+          </span>[[lookup @name lowercase]]{creature}<span style="font-family:'Roboto
           Condensed', sans-serif"> makes one </span>[[/item
           .mmBite0000000000]]<span style="font-family:'Roboto Condensed',
           sans-serif"> attack and one </span>[[/item .mmClaw0000000000]]<span
@@ -1321,7 +1321,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] pulls [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{creature} pulls [[lookup
           @target.affects.labels.statblock activity=jWkEQYHBd7aht1kG]] within
           [[lookup @range.value activity=jWkEQYHBd7aht1kG]] feet of itself that
           is Restrained by its Web Strand up to 25 feet straight toward
