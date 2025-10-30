@@ -4,13 +4,13 @@ import FormulaField from "../fields/formula-field.mjs";
 const { ArrayField, DocumentUUIDField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
- * @import { EncounterActorData } from "./_types.mjs";
+ * @import { EncounterActorSystemData } from "./_types.mjs";
  */
 
 /**
  * An Actor that represents a collection of adversaries.
- * @extends {GroupTemplate<EncounterActorData>}
- * @mixes EncounterActorData
+ * @extends {GroupTemplate<EncounterActorSystemData>}
+ * @mixes EncounterActorSystemData
  */
 export default class EncounterData extends GroupTemplate {
   /** @inheritDoc */

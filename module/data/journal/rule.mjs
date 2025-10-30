@@ -2,10 +2,13 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { HTMLField, StringField } = foundry.data.fields;
 
 /**
+ * @import { RuleJournalPageSystemData } from "./_types.mjs";
+ */
+
+/**
  * Data definition for Rule journal entry pages.
- *
- * @property {string} tooltip  Content to display in tooltip in place of page's text content.
- * @property {string} type     Type of rule represented. Should match an entry defined in `CONFIG.DND5E.ruleTypes`.
+ * @extends TypeDataModel<RuleJournalPageSystemData>
+ * @mixes RuleJournalPageSystemData
  */
 export default class RuleJournalPageData extends foundry.abstract.TypeDataModel {
 

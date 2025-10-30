@@ -15,7 +15,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { InventorySectionDescriptor } from "../../applications/components/inventory.mjs";
- * @import { WeaponItemData } from "./_types.mjs";
+ * @import { WeaponItemSystemData } from "./_types.mjs";
  * @import {
  *   ActivitiesTemplateData, EquippableItemTemplateData, IdentifiableTemplateData,
  *   ItemDescriptionTemplateData, ItemTypeTemplateData, MountableTemplateData, PhysicalItemTemplateData
@@ -26,7 +26,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * Data definition for Weapon items.
  * @extends ItemDataModel<
  *   ActivitiesTemplate & ItemDescriptionTemplate & IdentifiableTemplate & ItemTypeTemplate &
- *   PhysicalItemTemplate & EquippableItemTemplate & MountableTemplate & WeaponItemData
+ *   PhysicalItemTemplate & EquippableItemTemplate & MountableTemplate & WeaponItemSystemData
  * >
  * @mixes ActivitiesTemplateData
  * @mixes ItemDescriptionTemplateData
@@ -35,7 +35,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes PhysicalItemTemplateData
  * @mixes EquippableItemTemplateData
  * @mixes MountableTemplateData
- * @mixes WeaponItemData
+ * @mixes WeaponItemSystemData
  */
 export default class WeaponData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,

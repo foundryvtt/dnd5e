@@ -12,7 +12,7 @@ const { NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { InventorySectionDescriptor } from "../../applications/components/inventory.mjs";
- * @import { ToolItemData } from "./_types.mjs";
+ * @import { ToolItemSystemData } from "./_types.mjs";
  * @import {
  *   ActivitiesTemplateData, EquippableItemTemplateData, IdentifiableTemplateData,
  *   ItemDescriptionTemplateData, ItemTypeTemplateData, PhysicalItemTemplateData
@@ -23,7 +23,7 @@ const { NumberField, SetField, StringField } = foundry.data.fields;
  * Data definition for Tool items.
  * @extends ItemDataModel<
  *   ActivitiesTemplate & ItemDescriptionTemplate & IdentifiableTemplate & ItemTypeTemplate &
- *   PhysicalItemTemplate & EquippableItemTemplate & ToolItemData
+ *   PhysicalItemTemplate & EquippableItemTemplate & ToolItemSystemData
  * >
  * @mixes ActivitiesTemplateData
  * @mixes ItemDescriptionTemplateData
@@ -31,7 +31,7 @@ const { NumberField, SetField, StringField } = foundry.data.fields;
  * @mixes IdentifiableTemplateData
  * @mixes PhysicalItemTemplateData
  * @mixes EquippableItemTemplateData
- * @mixes ToolItemData
+ * @mixes ToolItemSystemData
  */
 export default class ToolData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,

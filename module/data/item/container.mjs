@@ -10,7 +10,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { CurrencyTemplateData } from "../shared/_types.mjs";
- * @import { ContainerItemData } from "./_types.mjs";
+ * @import { ContainerItemSystemData } from "./_types.mjs";
  * @import {
  *   EquippableItemTemplateData, IdentifiableTemplateData, ItemDescriptionTemplateData, PhysicalItemTemplateData
  * } from "./templates/_types.mjs";
@@ -20,14 +20,14 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * Data definition for Container items.
  * @extends ItemDataModel<
  *   ItemDescriptionTemplate & IdentifiableTemplate & PhysicalItemTemplate &
- *   EquippableItemTemplate & CurrencyTemplate & ContainerItemData
+ *   EquippableItemTemplate & CurrencyTemplate & ContainerItemSystemData
  * >
  * @mixes ItemDescriptionTemplateData
  * @mixes IdentifiableTemplateData
  * @mixes PhysicalItemTemplateData
  * @mixes EquippableItemTemplateData
  * @mixes CurrencyTemplateData
- * @mixes ContainerItemData
+ * @mixes ContainerItemSystemData
  */
 export default class ContainerData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, PhysicalItemTemplate, EquippableItemTemplate, CurrencyTemplate

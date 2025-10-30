@@ -10,16 +10,16 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { SpellItemData } from "./_types.mjs";
+ * @import { SpellItemSystemData } from "./_types.mjs";
  * @import { ActivitiesTemplateData ItemDescriptionTemplateData } from "./templates/_types.mjs";
  */
 
 /**
  * Data definition for Spell items.
- * @extends ItemDataModel<ActivitiesTemplate & ItemDescriptionTemplate & SpellItemData>
+ * @extends ItemDataModel<ActivitiesTemplate & ItemDescriptionTemplate & SpellItemSystemData>
  * @mixes ActivitiesTemplateData
  * @mixes ItemDescriptionTemplateData
- * @mixes SpellItemData
+ * @mixes SpellItemSystemData
  */
 export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, ItemDescriptionTemplate) {
 

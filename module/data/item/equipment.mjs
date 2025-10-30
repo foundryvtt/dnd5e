@@ -11,7 +11,7 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { EquipmentItemData } from "./_types.mjs";
+ * @import { EquipmentItemSystemData } from "./_types.mjs";
  * @import {
  *   ActivitiesTemplateData, EquippableItemTemplateData, IdentifiableTemplateData,
  *   ItemDescriptionTemplateData, ItemTypeTemplateData, MountableTemplateData, PhysicalItemTemplateData
@@ -22,7 +22,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * Data definition for Equipment items.
  * @extends ItemDataModel<
  *   ActivitiesTemplate & ItemDescriptionTemplate & IdentifiableTemplate & ItemTypeTemplate &
- *   PhysicalItemTemplate & EquippableItemTemplate & MountableTemplate & EquipmentItemData
+ *   PhysicalItemTemplate & EquippableItemTemplate & MountableTemplate & EquipmentItemSystemData
  * >
  * @mixes ActivitiesTemplateData
  * @mixes ItemDescriptionTemplateData
@@ -31,7 +31,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes PhysicalItemTemplateData
  * @mixes EquippableItemTemplateData
  * @mixes MountableTemplateData
- * @mixes EquipmentItemData
+ * @mixes EquipmentItemSystemData
  */
 export default class EquipmentData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,

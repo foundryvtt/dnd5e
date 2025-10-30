@@ -9,7 +9,7 @@ const { SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { InventorySectionDescriptor } from "../../applications/components/inventory.mjs";
- * @import { LootItemData } from "./_types.mjs";
+ * @import { LootItemSystemData } from "./_types.mjs";
  * @import {
  *   IdentifiableTemplateData, ItemDescriptionTemplateData, ItemTypeTemplateData, PhysicalItemTemplateData
  * } from "./templates/_types.mjs";
@@ -18,13 +18,13 @@ const { SetField, StringField } = foundry.data.fields;
 /**
  * Data definition for Loot items.
  * @extends ItemDataModel<
- *   ItemDescriptionTemplate & IdentifiableTemplate & ItemTypeTemplate & PhysicalItemTemplate & LootItemData
+ *   ItemDescriptionTemplate & IdentifiableTemplate & ItemTypeTemplate & PhysicalItemTemplate & LootItemSystemData
  * >
  * @mixes ItemDescriptionTemplateData
  * @mixes ItemTypeTemplateData
  * @mixes IdentifiableTemplateData
  * @mixes PhysicalItemTemplateData
- * @mixes LootItemData
+ * @mixes LootItemSystemData
  */
 export default class LootData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate

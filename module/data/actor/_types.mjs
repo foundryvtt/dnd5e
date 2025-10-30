@@ -10,7 +10,7 @@
  */
 
 /**
- * @typedef CharacterActorData
+ * @typedef CharacterActorSystemData
  * @property {Union<AttributesCommonData, AttributesCreatureData>} attributes
  * @property {HitPointsData} attributes.hp
  * @property {object} attributes.hp.bonuses
@@ -76,7 +76,7 @@
  */
 
 /**
- * @typedef EncounterActorData
+ * @typedef EncounterActorSystemData
  * @property {EncounterMemberData[]} members  Members of the encounter.
  */
 
@@ -89,7 +89,7 @@
  */
 
 /**
- * @typedef GroupActorData
+ * @typedef GroupActorSystemData
  * @property {object} attributes
  * @property {TravelData} attributes.travel
  * @property {object} details
@@ -121,7 +121,7 @@
  */
 
 /**
- * @typedef NPCActorData
+ * @typedef NPCActorSystemData
  * @property {Union<AttributesCommonData, AttributesCreatureData>} attributes
  * @property {object} attributes.hd
  * @property {number} attributes.hd.spent        Number of hit dice spent.
@@ -168,7 +168,7 @@
  */
 
 /**
- * @typedef VehicleActorData
+ * @typedef VehicleActorSystemData
  * @property {AttributesCommonData} attributes
  * @property {HitPointsData} attributes.hp
  * @property {number} attributes.hp.mt                 Mishap threshold.

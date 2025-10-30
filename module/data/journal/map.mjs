@@ -1,9 +1,13 @@
 const { StringField } = foundry.data.fields;
 
 /**
+ * @import { MapJournalPageSystemData } from "./_types.mjs";
+ */
+
+/**
  * Data definition for Map Location journal entry pages.
- *
- * @property {string} code  Code for the location marker on the map.
+ * @extends TypeDataModel<MapJournalPageSystemData>
+ * @mixes MapJournalPageSystemData
  */
 export default class MapLocationJournalPageData extends foundry.abstract.TypeDataModel {
 

@@ -1,13 +1,13 @@
 const { HTMLField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { SubclassJournalPageSystemData } from "./_types.mjs";
+ */
+
+/**
  * Data definition for Subclass Summary journal entry pages.
- *
- * @property {string} item               UUID of the subclass item included.
- * @property {object} description
- * @property {string} description.value  Introductory description for the subclass.
- * @property {string} style              Force the page style to use modern or legacy formatting, rather than what
- *                                       is specified by the subclass.
+ * @extends TypeDataModel<SubclassJournalPageSystemData>
+ * @mixes SubclassJournalPageSystemData
  */
 export default class SubclassJournalPageData extends foundry.abstract.TypeDataModel {
 

@@ -3,7 +3,7 @@
  */
 
 /**
- * @typedef RequestMessageData
+ * @typedef RequestMessageSystemData
  * @property {object} button
  * @property {string} [button.icon]         Font awesome code or path to SVG icon for the request button.
  * @property {string} [button.label]        Label used for the button.
@@ -21,7 +21,7 @@
  */
 
 /**
- * @typedef RestMessageData
+ * @typedef RestMessageSystemData
  * @property {ActivationsData} activations  Activities that can be used after this rest, stored as relative UUIDs.
  * @property {ActorDeltasData} deltas       Actor/item recovery from this turn change.
  * @property {ChatMessage5e} [request]      Rest request chat message for which this rest was performed.
@@ -29,7 +29,7 @@
  */
 
 /**
- * @typedef TurnMessageData
+ * @typedef TurnMessageSystemData
  * @property {ActivationsData} activations  Activities that can be used with these periods, stored as relative UUIDs.
  * @property {ActorDeltasData} deltas       Actor/item recovery from this turn change.
  * @property {object} origin

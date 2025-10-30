@@ -10,7 +10,7 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { FeatItemData } from "./_types.mjs";
+ * @import { FeatItemSystemData } from "./_types.mjs";
  * @import {
  *   ActivitiesTemplateData, AdvancementTemplateData, ItemDescriptionTemplateData, ItemTypeTemplateData
  * } from "./templates/_types.mjs";
@@ -19,13 +19,13 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
 /**
  * Data definition for Feature items.
  * @extends ItemDataModel<
- *   ActivitiesTemplate & AdvancementTemplate & ItemDescriptionTemplate & ItemTypeTemplate & FeatItemData
+ *   ActivitiesTemplate & AdvancementTemplate & ItemDescriptionTemplate & ItemTypeTemplate & FeatItemSystemData
  * >
  * @mixes ActivitiesTemplateData
  * @mixes AdvancementTemplateData
  * @mixes ItemDescriptionTemplateData
  * @mixes ItemTypeTemplateData
- * @mixes FeatItemData
+ * @mixes FeatItemSystemData
  */
 export default class FeatData extends ItemDataModel.mixin(
   ActivitiesTemplate, AdvancementTemplate, ItemDescriptionTemplate, ItemTypeTemplate

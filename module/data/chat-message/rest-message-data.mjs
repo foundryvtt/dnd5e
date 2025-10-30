@@ -6,13 +6,13 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ForeignDocumentField, StringField } = foundry.data.fields;
 
 /**
- * @import { RestMessageData } from "./_types.mjs";
+ * @import { RestMessageSystemData } from "./_types.mjs";
  */
 
 /**
  * Data stored in a rest chat message.
- * @extends ChatMessageDataModel<RestMessageData>
- * @mixes RestMessageData
+ * @extends ChatMessageDataModel<RestMessageSystemData>
+ * @mixes RestMessageSystemData
  */
 export default class RestMessageData extends ChatMessageDataModel {
 

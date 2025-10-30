@@ -8,17 +8,17 @@ import OrderActivity from "../../documents/activity/order.mjs";
 const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @import { FacilityItemData } from "./_types.mjs";
+ * @import { FacilityItemSystemData } from "./_types.mjs";
  * @import { ActivitiesTemplateData, ItemDescriptionTemplateData } from "./templates/_types.mjs";
  */
 
 
 /**
  * The data definition for Facility items.
- * @extends ItemDataModel<ActivitiesTemplate & ItemDescriptionTemplate & FacilityItemData>
+ * @extends ItemDataModel<ActivitiesTemplate & ItemDescriptionTemplate & FacilityItemSystemData>
  * @mixes ActivitiesTemplateData
  * @mixes ItemDescriptionTemplateData
- * @mixes FacilityItemData
+ * @mixes FacilityItemSystemData
  */
 export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate, ItemDescriptionTemplate) {
   /* -------------------------------------------- */

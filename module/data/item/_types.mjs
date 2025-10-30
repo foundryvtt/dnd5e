@@ -9,7 +9,7 @@
  */
 
 /**
- * @typedef ClassItemData
+ * @typedef ClassItemSystemData
  * @property {object} hd                            Object describing hit dice properties.
  * @property {string} hd.additional                 Additional hit dice beyond the level of the class.
  * @property {string} hd.denomination               Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
@@ -24,7 +24,7 @@
  */
 
 /**
- * @typedef ConsumableItemData
+ * @typedef ConsumableItemSystemData
  * @property {object} damage
  * @property {DamageData} damage.base               Damage caused by this ammunition.
  * @property {string} damage.replace                Should ammunition damage replace the base weapon's damage?
@@ -36,7 +36,7 @@
  */
 
 /**
- * @typedef ContainerItemData
+ * @typedef ContainerItemSystemData
  * @property {object} capacity              Information on container's carrying capacity.
  * @property {number} capacity.count        Number of items that can be stored within the container.
  * @property {UnitValue5e} capacity.volume  Amount of volume that can be stored.
@@ -45,7 +45,7 @@
  */
 
 /**
- * @typedef EquipmentItemData
+ * @typedef EquipmentItemSystemData
  * @property {object} armor                        Armor details and equipment type information.
  * @property {number} armor.value                  Base armor class or shield bonus.
  * @property {number} armor.magicalBonus           Bonus added to AC from the armor's magical nature.
@@ -57,7 +57,7 @@
  */
 
 /**
- * @typedef FacilityItemData
+ * @typedef FacilityItemSystemData
  * @property {object} building
  * @property {boolean} building.built                Whether the facility has been fully built. Only applicable to basic
  *                                                   facilities.
@@ -100,7 +100,7 @@
  */
 
 /**
- * @typedef FeatItemData
+ * @typedef FeatItemSystemData
  * @property {number} cover                         Amount of cover this feature affords to its crew on a vehicle.
  * @property {boolean} crewed                       Is this vehicle feature currently crewed?
  * @property {object} enchant
@@ -116,20 +116,20 @@
  */
 
 /**
- * @typedef LootItemData
+ * @typedef LootItemSystemData
  * @property {Set<string>} properties               General properties of a loot item.
  * @property {Omit<ItemTypeData, "baseItem">} type  Loot type and subtype.
  */
 
 /**
- * @typedef RaceItemData
+ * @typedef RaceItemSystemData
  * @property {Omit<MovementData, "special">} movement
  * @property {SensesData} senses
  * @property {Omit<CreatureTypeData, "swarm">} type
  */
 
 /**
- * @typedef SpellItemData
+ * @typedef SpellItemSystemData
  * @property {string} ability                    Override of default spellcasting ability.
  * @property {ActivationData} activation         Casting time & conditions.
  * @property {DurationData} duration             Duration of the spell effect.
@@ -149,14 +149,14 @@
  */
 
 /**
- * @typedef SubclassItemData
+ * @typedef SubclassItemSystemData
  * @property {string} classIdentifier              Identifier slug for the class with which this subclass
  *                                                 should be associated.
  * @property {SpellcastingFieldData} spellcasting  Details on subclass's spellcasting ability.
  */
 
 /**
- * @typedef ToolItemData
+ * @typedef ToolItemSystemData
  * @property {string} ability                      Default ability when this tool is being used.
  * @property {string} bonus                        Bonus formula added to tool rolls.
  * @property {string} chatFlavor                   Additional text added to chat when this tool is used.
@@ -166,7 +166,7 @@
  */
 
 /**
- * @typedef WeaponItemData
+ * @typedef WeaponItemSystemData
  * @property {object} ammunition
  * @property {string} ammunition.type              Type of ammunition fired by this weapon.
  * @property {object} armor

@@ -16,13 +16,13 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { NPCData } from "./_types.mjs";
+ * @import { NPCActorSystemData } from "./_types.mjs";
  */
 
 /**
  * System data definition for NPCs.
- * @extends {CreatureTemplate<NPCActorData>}
- * @mixes NPCActorData
+ * @extends {CreatureTemplate<NPCActorSystemData>}
+ * @mixes NPCActorSystemData
  */
 export default class NPCData extends CreatureTemplate {
 

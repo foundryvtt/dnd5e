@@ -14,7 +14,7 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ConsumableItemData } from "./_types.mjs";
+ * @import { ConsumableItemSystemData } from "./_types.mjs";
  * @import {
  *   ActivitiesTemplateData, EquippableItemTemplateData, IdentifiableTemplateData,
  *   ItemDescriptionTemplateData, ItemTypeTemplateData, PhysicalItemTemplateData
@@ -25,7 +25,7 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * Data definition for Consumable items.
  * @extends ItemDataModel<
  *   ActivitiesTemplate & ItemDescriptionTemplate & IdentifiableTemplate &
- *   ItemTypeTemplate & PhysicalItemTemplate & EquippableItemTemplate & ConsumableItemData
+ *   ItemTypeTemplate & PhysicalItemTemplate & EquippableItemTemplate & ConsumableItemSystemData
  * >
  * @mixes ActivitiesTemplateData
  * @mixes ItemDescriptionTemplateData
@@ -33,7 +33,7 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @mixes IdentifiableTemplateData
  * @mixes PhysicalItemTemplateData
  * @mixes EquippableItemTemplateData
- * @mixes ConsumableItemData
+ * @mixes ConsumableItemSystemData
  */
 export default class ConsumableData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,

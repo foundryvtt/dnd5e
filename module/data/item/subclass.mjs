@@ -5,17 +5,17 @@ import AdvancementTemplate from "./templates/advancement.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
- * @import { SubclassItemData } from "./_types.mjs";
+ * @import { SubclassItemSystemData } from "./_types.mjs";
  * @import { ItemDescriptionTemplateData } from "./templates/_types.mjs";
  * @import { AdvancementTemplateData, ItemDescriptionTemplateData } from "./templates/_types.mjs";
  */
 
 /**
  * Data definition for Subclass items.
- * @extends ItemDataModel<AdvancementTemplate & ItemDescriptionTemplate & SubclassItemData>
+ * @extends ItemDataModel<AdvancementTemplate & ItemDescriptionTemplate & SubclassItemSystemData>
  * @mixes AdvancementTemplateData
  * @mixes ItemDescriptionTemplateData
- * @mixes SubclassItemData
+ * @mixes SubclassItemSystemData
  */
 export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplate, ItemDescriptionTemplate) {
 

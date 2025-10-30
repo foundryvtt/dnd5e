@@ -6,16 +6,16 @@ import AdvancementTemplate from "./templates/advancement.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 
 /**
- * @import { SubclassItemData } from "./_types.mjs";
+ * @import { RaceItemSystemData } from "./_types.mjs";
  * @import { AdvancementTemplateData, ItemDescriptionTemplateData } from "./templates/_types.mjs";
  */
 
 /**
  * Data definition for Race items.
- * @extends ItemDataModel<AdvancementTemplate, ItemDescriptionTemplate & RaceItemData>
+ * @extends ItemDataModel<AdvancementTemplate, ItemDescriptionTemplate & RaceItemSystemData>
  * @mixes AdvancementTemplateData
  * @mixes ItemDescriptionTemplateData
- * @mixes RaceItemData
+ * @mixes RaceItemSystemData
  */
 export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, ItemDescriptionTemplate) {
 

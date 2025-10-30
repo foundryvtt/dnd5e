@@ -7,13 +7,13 @@ const { ArrayField, ForeignDocumentField, NumberField, SchemaField } = foundry.d
 
 /**
  * @import { RestResult, SkillToolRollProcessConfiguration } from "../../documents/actor/actor.mjs";
- * @import { GroupActorData, GroupRestConfiguration, TravelPaceDescriptor } from "./_types.mjs";
+ * @import { GroupActorSystemData, GroupRestConfiguration, TravelPaceDescriptor } from "./_types.mjs";
  */
 
 /**
  * A data model and API layer which handles the schema and functionality of "group" type Actors in the dnd5e system.
- * @extends {GroupTemplate<GroupActorData>}
- * @mixes GroupActorData
+ * @extends {GroupTemplate<GroupActorSystemData>}
+ * @mixes GroupActorSystemData
  */
 export default class GroupData extends GroupTemplate {
   /** @inheritDoc */

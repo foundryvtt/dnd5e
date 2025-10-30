@@ -5,13 +5,13 @@ const {
 } = foundry.data.fields;
 
 /**
- * @import { RequestMessageData } from "./_types.mjs";
+ * @import { RequestMessageSystemData } from "./_types.mjs";
  */
 
 /**
  * Custom chat message type used for requesting an action be performed for a specific actor.
- * @extends ChatMessageDataModel<RequestMessageData>
- * @mixes RequestMessageData
+ * @extends ChatMessageDataModel<RequestMessageSystemData>
+ * @mixes RequestMessageSystemData
  */
 export default class RequestMessageData extends ChatMessageDataModel {
 

@@ -10,13 +10,13 @@ import TraitsFields from "./templates/traits.mjs";
 const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @import { PassengerData, VehicleActorData } from "./_types.mjs";
+ * @import { PassengerData, VehicleActorSystemData } from "./_types.mjs";
  */
 
 /**
  * System data definition for Vehicles.
- * @extends {CreatureTemplate<VehicleActorData>}
- * @mixes VehicleActorData
+ * @extends {CreatureTemplate<VehicleActorSystemData>}
+ * @mixes VehicleActorSystemData
  */
 export default class VehicleData extends CommonTemplate {
 

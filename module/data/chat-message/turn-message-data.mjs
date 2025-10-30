@@ -5,13 +5,13 @@ import { ActorDeltasField } from "./fields/deltas-field.mjs";
 const { DocumentIdField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { TurnMessageData } from "./_types.mjs";
+ * @import { TurnMessageSystemData } from "./_types.mjs";
  */
 
 /**
  * Data stored in a combat turn chat message.
- * @extends ChatMessageDataModel<TurnMessageData>
- * @mixes TurnMessageData
+ * @extends ChatMessageDataModel<TurnMessageSystemData>
+ * @mixes TurnMessageSystemData
  */
 export default class TurnMessageData extends ChatMessageDataModel {
 

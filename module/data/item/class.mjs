@@ -9,7 +9,7 @@ import StartingEquipmentTemplate from "./templates/starting-equipment.mjs";
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ClassItemData } from "./_types.mjs";
+ * @import { ClassItemSystemData } from "./_types.mjs";
  * @import {
  *   AdvancementTemplateData, ItemDescriptionTemplateData, StartingEquipmentTemplateData
  * } from "./templates/_types.mjs";
@@ -17,11 +17,13 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
 
 /**
  * Data definition for Class items.
- * @extends ItemDataModel<AdvancementTemplate & ItemDescriptionTemplate & StartingEquipmentTemplate & ClassItemData>
+ * @extends ItemDataModel<
+ *   AdvancementTemplate & ItemDescriptionTemplate & StartingEquipmentTemplate & ClassItemSystemData
+ * >
  * @mixes AdvancementTemplateData
  * @mixes ItemDescriptionTemplateData
  * @mixes StartingEquipmentTemplateData
- * @mixes ClassItemData
+ * @mixes ClassItemSystemData
  */
 export default class ClassData extends ItemDataModel.mixin(
   AdvancementTemplate, ItemDescriptionTemplate, StartingEquipmentTemplate
