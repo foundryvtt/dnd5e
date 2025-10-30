@@ -3,7 +3,13 @@ import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { StandardActiveEffectSystemData } from "./types.mjs";
+ */
+
+/**
  * System data model for standard active effects.
+ * @extends {ActiveEffectDataModel<StandardActiveEffectSystemData>}
+ * @mixes StandardActiveEffectSystemData
  */
 export default class StandardEffectData extends ActiveEffectDataModel {
   /* -------------------------------------------- */
