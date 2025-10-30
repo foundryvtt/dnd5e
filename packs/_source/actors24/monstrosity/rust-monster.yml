@@ -609,7 +609,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can pinpoint the
+          <p class="feature">The [[lookup @name lowercase]]{creature} can pinpoint the
           location of [[lookup @target.affects.special
           activity=I1ppxiVO5CS6tKj0]] within [[lookup @target.template.size
           activity=I1ppxiVO5CS6tKj0]] feet of itself.</p>
@@ -713,7 +713,7 @@ items:
       description:
         value: >-
           <p><span style="font-family:'Roboto Condensed', sans-serif">The
-          </span>[[lookup @name lowercase]]<span style="font-family:'Roboto
+          </span>[[lookup @name lowercase]]{creature}<span style="font-family:'Roboto
           Condensed', sans-serif"> makes one </span>[[/item
           .mmBite0000000000]]<span style="font-family:'Roboto Condensed',
           sans-serif"> attack and uses </span>[[/item .mmAntennae000000]]<span
@@ -960,7 +960,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] targets one [[lookup
+          <p>The [[lookup @name lowercase]]{creature} targets one [[lookup
           @target.affects.special activity=dcSC7EuknnM0uoqY]] object—armor or a
           weapon—worn or carried by a creature within [[lookup @range.value
           activity=dcSC7EuknnM0uoqY]] feet of itself.</p><p><em>Dexterity Saving
@@ -1129,7 +1129,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] [[lookup
+          <p class="feature">The [[lookup @name lowercase]]{creature} [[lookup
           @range.special activity=GDJtelEYYTgc9jwr]] within [[lookup
           @range.value activity=GDJtelEYYTgc9jwr]] feet of itself [[lookup
           @target.affects.special activity=GDJtelEYYTgc9jwr]]. The touch
@@ -1236,7 +1236,7 @@ items:
       description:
         value: >-
           <p class="feature"><em>Trigger:</em> An attack roll hits the [[lookup
-          @name lowercase]]. <em>Response:</em> The [[lookup @name lowercase]]
+          @name lowercase]]. <em>Response:</em> The [[lookup @name lowercase]]{creature}
           uses [[/item .mmAntennae000000]].</p>
         chat: ''
       identifier: reflexive-antennae

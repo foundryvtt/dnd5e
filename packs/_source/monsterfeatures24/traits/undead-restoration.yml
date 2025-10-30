@@ -59,10 +59,10 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">If the [[lookup @name lowercase]] is destroyed before
+      <p class="feature">If the [[lookup @name lowercase]]{creature} is destroyed before
       it atones for its evil, it gains a new body in [[/r 1d10]] days, reviving
       with all its Hit Points. The new body appears in a location significant to
-      the [[lookup @name lowercase]].</p>
+      the [[lookup @name lowercase]]{creature}.</p>
     chat: ''
   identifier: undead-restoration
   source:

@@ -569,7 +569,7 @@ items:
         max: ''
       description:
         value: >-
-          <p> If it dies, the [[lookup @name lowercase]] returns to life in [[/r
+          <p> If it dies, the [[lookup @name lowercase]]{creature} returns to life in [[/r
           1d6]] days and regains all its Hit Points. Only a
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish}</em>
           spell can prevent this trait from functioning.</p>
@@ -668,7 +668,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three attacks, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes three attacks, using [[/item
           .mmBite0000000000]] or [[/item .mmNecroticRay000]] in any
           combination.</p>
         chat: ''
@@ -1425,7 +1425,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Somatic or Material components and
           using Intelligence as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At

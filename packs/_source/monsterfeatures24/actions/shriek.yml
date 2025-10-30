@@ -68,10 +68,10 @@ system:
       <p class="feature"><em>Trigger:</em> A [[lookup @target.affects.type
       activity=Tlv3gcYk5KfdtV7c]] or a source of Bright Light moves within
       [[lookup @range.value activity=Tlv3gcYk5KfdtV7c]] feet of the [[lookup
-      @name lowercase]]. <em>Response:</em> The [[lookup @name lowercase]] emits
+      @name lowercase]]. <em>Response:</em> The [[lookup @name lowercase]]{creature} emits
       a shriek audible within [[lookup @target.template.size
       activity=Tlv3gcYk5KfdtV7c]] feet of itself for [[lookup @duration.value
-      activity=Tlv3gcYk5KfdtV7c]] minute or until the [[lookup @name lowercase]]
+      activity=Tlv3gcYk5KfdtV7c]] minute or until the [[lookup @name lowercase]]{creature}
       dies.</p>
     chat: ''
   identifier: shriek

@@ -499,7 +499,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can move through a space as narrow
+          <p>The [[lookup @name lowercase]]{creature} can move through a space as narrow
           as 1 inch without expending extra movement to do so.</p>
         chat: ''
       identifier: amorphous
@@ -551,9 +551,9 @@ items:
       description:
         value: >-
           <p class="feature">Nonmagical ammunition is destroyed immediately
-          after hitting the [[lookup @name lowercase]] and dealing any damage.
+          after hitting the [[lookup @name lowercase]]{creature} and dealing any damage.
           Any nonmagical weapon takes a cumulative −1 penalty to attack rolls
-          immediately after dealing damage to the [[lookup @name lowercase]] and
+          immediately after dealing damage to the [[lookup @name lowercase]]{creature} and
           coming into contact with it. The weapon is destroyed if the penalty
           reaches −5. The penalty can be removed by casting the
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMending000]{Mending}</em>

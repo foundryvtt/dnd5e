@@ -570,7 +570,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can move through a space as narrow
+          <p>The [[lookup @name lowercase]]{creature} can move through a space as narrow
           as 1 inch without expending extra movement to do so.</p>
         chat: ''
       identifier: amorphous
@@ -677,12 +677,12 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">A creature that hits the [[lookup @name lowercase]]
+          <p class="feature">A creature that hits the [[lookup @name lowercase]]{creature}
           with a melee attack roll takes [[/damage average]] damage. Nonmagical
           ammunition is destroyed immediately after hitting the [[lookup @name
           lowercase]] and dealing any damage. Any nonmagical weapon takes a
           cumulative −1 penalty to attack rolls immediately after dealing damage
-          to the [[lookup @name lowercase]] and coming into contact with it. The
+          to the [[lookup @name lowercase]]{creature} and coming into contact with it. The
           weapon is destroyed if the penalty reaches −5. The penalty can be
           removed by casting the
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMending000]{Mending}</em>
@@ -789,7 +789,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can climb difficult surfaces,
+          <p>The [[lookup @name lowercase]]{creature} can climb difficult surfaces,
           including along ceilings, without needing to make an ability
           check.</p>
         chat: ''
@@ -915,7 +915,7 @@ items:
         value: >-
           <p class="feature"><em>Trigger:</em> While the [[lookup @name
           lowercase]] [[lookup @activation.condition activity=zoXFSgzmWq8frUjI]]
-          <em>Response:</em> The [[lookup @name lowercase]] splits into two new
+          <em>Response:</em> The [[lookup @name lowercase]]{creature} splits into two new
           <strong>[[lookup @name capitalize]]</strong>. Each new [[lookup @name
           lowercase]] is one size smaller than the original [[lookup @name
           lowercase]] and acts on its Initiative. The original [[lookup @name

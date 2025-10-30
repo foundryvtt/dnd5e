@@ -578,7 +578,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies outside the Nine Hells, its
+          <p>If the [[lookup @name lowercase]]{creature} dies outside the Nine Hells, its
           body disappears in sulfurous smoke, and it gains a new body instantly,
           reviving with all its Hit Points somewhere in the Nine Hells.</p>
         chat: ''
@@ -629,7 +629,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -726,7 +726,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmChain000000000]] attacks and uses [[/item .mmConjureInferna]].</p>
         chat: ''
       identifier: multiattack
@@ -851,11 +851,11 @@ items:
           creature.</p><p class="feature"><em>Dexterity Saving Throw:</em> DC
           [[lookup @save.dc.value activity=9vCVJrzUZL0ra4w2]], [[lookup
           @target.affects.labels.statblock activity=9vCVJrzUZL0ra4w2]] the
-          [[lookup @name lowercase]] can see within [[lookup @range.value
+          [[lookup @name lowercase]]{creature} can see within [[lookup @range.value
           activity=9vCVJrzUZL0ra4w2]] feet.</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage, and the
           target has the &amp;Reference[Restrained apply=false] condition until
-          the end of the [[lookup @name lowercase]]'s next turn, at which point
+          the end of the [[lookup @name lowercase]]{creature}'s next turn, at which point
           the chain disappears. If the target is Large or smaller, the devil
           moves the target up to 30 feet straight toward itself.</p><p
           class="feature"><em>Success:</em> The chain disappears.</p>
@@ -1003,17 +1003,17 @@ items:
       description:
         value: >-
           <p class="feature"><em>Trigger:</em> A [[lookup @target.affects.type
-          activity=btp6NZvx465nxWTF]] the [[lookup @name lowercase]] can see
+          activity=btp6NZvx465nxWTF]] the [[lookup @name lowercase]]{creature} can see
           starts its turn within [[lookup @target.template.size
-          activity=btp6NZvx465nxWTF]] feet of the [[lookup @name lowercase]] and
-          can see the [[lookup @name lowercase]].</p><p
+          activity=btp6NZvx465nxWTF]] feet of the [[lookup @name lowercase]]{creature} and
+          can see the [[lookup @name lowercase]]{creature}.</p><p
           class="feature"><em>Response—Wisdom Saving Throw:</em> DC [[lookup
           @save.dc.value activity=btp6NZvx465nxWTF]], the triggering [[lookup
           @target.affects.type activity=btp6NZvx465nxWTF]].</p><p
           class="feature"><em>Failure:</em> The target has the
           &amp;Reference[Frightened apply=false] condition until the end of its
           turn.</p><p class="feature"><em>Success:</em> The target is immune to
-          this [[lookup @name lowercase]]'s Unnerving Gaze for 24 hours.</p>
+          this [[lookup @name lowercase]]{creature}'s Unnerving Gaze for 24 hours.</p>
         chat: ''
       identifier: unnerving-gaze
       source:

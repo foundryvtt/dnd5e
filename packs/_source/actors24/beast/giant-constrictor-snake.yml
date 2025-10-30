@@ -608,7 +608,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes one [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes one [[/item
           .mmBite0000000000]] attack and uses [[/item .mmConstrict00000]].</p>
         chat: ''
       identifier: multiattack
@@ -910,7 +910,7 @@ items:
           <p><em>Strength Saving Throw:</em><span class="Heading-4"> </span>DC
           [[lookup @save.dc.value activity=IgOMjRxAt7UISkJq]], one [[lookup
           @target.affects.special activity=IgOMjRxAt7UISkJq]] creature the
-          [[lookup @name lowercase]] can see within [[lookup @range.value
+          [[lookup @name lowercase]]{creature} can see within [[lookup @range.value
           activity=IgOMjRxAt7UISkJq]] feet.</p><p><em>Failure:</em> [[/damage
           average]] damage, and the target has the &amp;Reference[Grappled
           apply=false] condition (escape DC [[lookup @skills.ath.passive]]).</p>

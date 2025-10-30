@@ -509,7 +509,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] dies outside the Abyss, its body
+          <p>If the [[lookup @name lowercase]]{creature} dies outside the Abyss, its body
           dissolves into ichor, and it gains a new body instantly, reviving with
           all its Hit Points somewhere in the Abyss.</p>
         chat: ''
@@ -560,7 +560,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -658,7 +658,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmShred000000000]] attacks.</p>
         chat: ''
       identifier: multiattack
@@ -995,7 +995,7 @@ items:
           <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
           @save.dc.value activity=voqQeTnihpy3BTFf]], each creature in a
           [[lookup @target.template.size activity=voqQeTnihpy3BTFf]]-foot
-          Emanation originating from the [[lookup @name lowercase]].</p><p
+          Emanation originating from the [[lookup @name lowercase]]{creature}.</p><p
           class="feature"><em>Failure:</em> The target has the
           &amp;Reference[Poisoned apply=false] condition and repeats the save at
           the end of each of its turns, ending the effect on itself on a
@@ -1173,11 +1173,11 @@ items:
           <p class="feature"><em>Constitution Saving Throw:</em> DC [[lookup
           @save.dc.value activity=eoIikvnPayaj02oN]], each creature in a
           [[lookup @target.template.size activity=eoIikvnPayaj02oN]]-foot
-          Emanation originating from the [[lookup @name lowercase]] (demons
+          Emanation originating from the [[lookup @name lowercase]]{creature} (demons
           succeed automatically).</p><p class="feature"><em>Failure:</em>
           [[/damage average]] damage, and the target has the
           &amp;Reference[Stunned apply=false] condition until the end of the
-          [[lookup @name lowercase]]'s next turn.</p>
+          [[lookup @name lowercase]]{creature}'s next turn.</p>
         chat: ''
       identifier: stunning-screech
       source:

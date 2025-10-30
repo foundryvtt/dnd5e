@@ -1102,7 +1102,7 @@ items:
     system:
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] touches another creature. The target
+          <p>The [[lookup @name lowercase]]{creature} touches another creature. The target
           magically regains 30 ([[/heal]]{6d8 + 3}) hit points and is freed from
           any curse, disease, poison, blindness, or deafness.</p>
         chat: >-

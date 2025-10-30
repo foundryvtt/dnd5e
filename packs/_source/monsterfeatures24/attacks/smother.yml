@@ -122,16 +122,16 @@ system:
   description:
     value: >-
       <p class="feature">[[/attack extended]]. [[/damage average extended]]. If
-      the target is a Medium or smaller creature, the [[lookup @name lowercase]]
+      the target is a Medium or smaller creature, the [[lookup @name lowercase]]{creature}
       can give it the &amp;Reference[Grappled apply=false] condition (escape DC
       [[lookup @skills.ath.passive]]) instead of dealing damage. Until the
       grapple ends, the target has the &amp;Reference[Blinded apply=false] and
       &amp;Reference[Restrained apply=false] conditions, is
       &amp;Reference[Suffocating]{suffocating}, and takes [[/damage average]]
-      damage at the start of each of its turns. [[lookup @name lowercase]] rug
+      damage at the start of each of its turns. [[lookup @name lowercase]]{creature} rug
       can smother only one creature at a time.</p><p class="feature">While
-      grappling the target, the [[lookup @name lowercase]] can't take this
-      action, the [[lookup @name lowercase]] halves the damage it takes (round
+      grappling the target, the [[lookup @name lowercase]]{creature} can't take this
+      action, the [[lookup @name lowercase]]{creature} halves the damage it takes (round
       down), and the target takes the same amount of damage.</p>
     chat: ''
   identifier: smother

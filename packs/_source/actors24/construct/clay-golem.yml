@@ -573,7 +573,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>Whenever the [[lookup @name lowercase]] is subjected to
+          <p>Whenever the [[lookup @name lowercase]]{creature} is subjected to
           &amp;Reference[Acid] damage, it takes no damage and instead regains a
           number of Hit Points equal to the Acid damage dealt.</p>
         chat: ''
@@ -672,12 +672,12 @@ items:
         max: ''
       description:
         value: >-
-          <p>Whenever the [[lookup @name lowercase]] starts its turn
+          <p>Whenever the [[lookup @name lowercase]]{creature} starts its turn
           &amp;Reference[Bloodied], roll [[/r 1d6]]. On a 6, the [[lookup @name
           lowercase]] goes berserk. On each of its turns while berserk, the
-          [[lookup @name lowercase]] attacks the nearest creature it can see. If
+          [[lookup @name lowercase]]{creature} attacks the nearest creature it can see. If
           no creature is near enough to move to and attack, the [[lookup @name
-          lowercase]] attacks an object. Once the [[lookup @name lowercase]]
+          lowercase]] attacks an object. Once the [[lookup @name lowercase]]{creature}
           goes berserk, it remains so until it is destroyed or it is no longer
           Bloodied.</p>
         chat: ''
@@ -772,7 +772,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] can't
+          <p class="feature">The [[lookup @name lowercase]]{creature} can't
           shape-shift.</p>
         chat: ''
       identifier: immutable-form
@@ -823,7 +823,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] has Advantage on saving throws
+          <p>The [[lookup @name lowercase]]{creature} has Advantage on saving throws
           against spells and other magical effects.</p>
         chat: ''
       identifier: magic-resistance
@@ -910,7 +910,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item Slam]] attacks, or
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item Slam]] attacks, or
           it makes three Slam attacks if it used Hasten this turn.</p>
         chat: ''
       identifier: multiattack
@@ -1178,7 +1178,7 @@ items:
         max: '1'
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] takes the
+          <p class="feature">The [[lookup @name lowercase]]{creature} takes the
           &amp;Reference[Dash] and &amp;Reference[Disengage] actions.</p>
         chat: ''
       identifier: hasten

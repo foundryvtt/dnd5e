@@ -786,7 +786,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] two attacks, using [[/item
+          <p>The [[lookup @name lowercase]]{creature} two attacks, using [[/item
           .mmScratch0000000]]{Scratch} or [[/item .Spw5gbTlI2AKsGWd]]{Longbow}
           in any combination. It can replace one attack with a [[/item
           .mmBite0000000000]]{Bite} attack.</p>
@@ -1005,7 +1005,7 @@ items:
           instead becomes a
           <strong>@UUID[Compendium.dnd5e.actors24.Actor.mmWeretiger00000]{Weretiger}</strong>
           under the DM's control and has 10 Hit Points.</p><p><em>Success:</em>
-          The target is immune to this [[lookup @name lowercase]]'s' curse for
+          The target is immune to this [[lookup @name lowercase]]{creature}'s' curse for
           24 hours.</p>
         chat: ''
       identifier: bite
@@ -1337,7 +1337,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] shape-shifts into a
+          <p class="feature">The [[lookup @name lowercase]]{creature} shape-shifts into a
           Large tiger-humanoid hybrid form or a Large tiger, or it returns to
           its true humanoid form, or it returns to its true form. Its game
           statistics, other than its size, are the same in each form. Any
@@ -1440,9 +1440,9 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] moves up to its
+          <p class="feature">The [[lookup @name lowercase]]{creature} moves up to its
           Speed without provoking &amp;Reference[OpportunityAttacks]. At the end
-          of this movement, the [[lookup @name lowercase]] can take the
+          of this movement, the [[lookup @name lowercase]]{creature} can take the
           &amp;Reference[Hide apply=false] action.</p>
         chat: ''
       identifier: prowl

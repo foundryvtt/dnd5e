@@ -81,10 +81,10 @@ system:
     value: >-
       <p><em>Constitution Saving Throw:</em> DC [[lookup @save.dc.value
       activity=VC2iSwNPNaZ7M2bT]], [[lookup @target.affects.special
-      activity=VC2iSwNPNaZ7M2bT]] by the [[lookup @name lowercase]].
+      activity=VC2iSwNPNaZ7M2bT]] by the [[lookup @name lowercase]]{creature}.
       <em>Failure:</em> [[/damage average]] damage, and the target has the
       &amp;Reference[Stunned apply=false] condition until the start of the
-      [[lookup @name lowercase]]'s next turn. <em>Success:</em> Half damage
+      [[lookup @name lowercase]]{creature}'s next turn. <em>Success:</em> Half damage
       only.</p>
     chat: ''
   identifier: tentacle-slam

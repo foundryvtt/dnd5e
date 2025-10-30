@@ -613,7 +613,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmSlam0000000000]] attacks and uses [[/item .mmUnsettlingVisa]] if
           available.</p>
         chat: ''
@@ -870,7 +870,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDetectThou]{Detect
           Thoughts}</em>, requiring no spell components and using Charisma as
           the spellcasting ability (spell save DC [[lookup
@@ -1239,8 +1239,8 @@ items:
           @save.dc.value activity=USxIbGZPLvfPnnoI]], each [[lookup
           @target.affects.type activity=USxIbGZPLvfPnnoI]] in a [[lookup
           @target.template.size activity=USxIbGZPLvfPnnoI]]-foot Emanation
-          originating from the [[lookup @name lowercase]] that can see the
-          [[lookup @name lowercase]].</p><p class="feature"><em>Failure:</em>
+          originating from the [[lookup @name lowercase]]{creature} that can see the
+          [[lookup @name lowercase]]{creature}.</p><p class="feature"><em>Failure:</em>
           The target has the &amp;Reference[Frightened apply=false] condition
           and repeats the save at the end of each of its turns, ending the
           effect on itself on a success. After [[lookup @duration.value
@@ -1394,7 +1394,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] shape-shifts into a 
+          <p class="feature">The [[lookup @name lowercase]]{creature} shape-shifts into a
           [[lookup @target.affects.special activity=EU2q25V5hIaM1ZlR]], or it
           returns to its true form. Its game statistics, other than its size,
           are the same in each form. Any equipment it is wearing or carrying

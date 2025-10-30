@@ -8,14 +8,14 @@ system:
     value: >-
       <section class="secret">
 
-      <p>the [[lookup @name lowercase]] can move through other creatures and
+      <p>the [[lookup @name lowercase]]{creature} can move through other creatures and
       objects as if they were difficult terrain.</p><p>It takes
       <strong><strong>5 (1d10) <em>force damage</em></strong></strong> if it
       ends its turn inside an object.</p>
 
       </section>
 
-      <p>the [[lookup @name lowercase]] can move through other creatures and
+      <p>the [[lookup @name lowercase]]{creature} can move through other creatures and
       objects as if they were difficult terrain.</p>
     chat: ''
   source:

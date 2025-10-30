@@ -614,7 +614,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -708,7 +708,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item Rend]] attacks.
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item Rend]] attacks.
           It can replace one attack with a use of (A) [[/item Slowing Breath]]
           or (B) [[/item Spellcasting]] to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMindSpike0]{Mind
@@ -1385,7 +1385,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -2877,13 +2877,13 @@ items:
           <p class="feature"><em>Charisma Saving Throw:</em> DC [[lookup
           @save.dc.value activity=Ttrajc4RC5Ut7pkj]], [[lookup
           @target.affects.labels.statblock activity=Ttrajc4RC5Ut7pkj]] the
-          [[lookup @name lowercase]] can see within [[lookup @range.value
+          [[lookup @name lowercase]]{creature} can see within [[lookup @range.value
           activity=Ttrajc4RC5Ut7pkj]] feet.</p><p
           class="feature"><em>Failure:</em> [[/damage average]] damage. Until
           the end of its next turn, the target rolls [[/r 1d8]] whenever it
           makes an ability check or attack roll and subtracts the number rolled
           from the D20 Test.</p><p class="feature"><em>Failure or Success:</em>
-          The [[lookup @name lowercase]] can't take this action again until the
+          The [[lookup @name lowercase]]{creature} can't take this action again until the
           start of its next turn.</p>
         chat: ''
       identifier: giggling-magic
@@ -3043,10 +3043,10 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] uses [[/item
+          <p class="feature">The [[lookup @name lowercase]]{creature} uses [[/item
           Spellcasting]] to cast
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMindSpike0]{Mind
-          Spike}</em> (level 5 version). The [[lookup @name lowercase]] can't
+          Spike}</em> (level 5 version). The [[lookup @name lowercase]]{creature} can't
           take this action again until the start of its next turn.</p>
         chat: ''
       identifier: mind-jolt
@@ -3379,7 +3379,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] moves up to half its Speed, and it
+          <p>The [[lookup @name lowercase]]{creature} moves up to half its Speed, and it
           makes one [[/item Rend]] attack.</p>
         chat: ''
       identifier: pounce

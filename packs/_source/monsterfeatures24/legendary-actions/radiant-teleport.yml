@@ -77,12 +77,12 @@ system:
     max: ''
   description:
     value: >-
-      <p class="feature">The [[lookup @name lowercase]] teleports up to [[lookup
+      <p class="feature">The [[lookup @name lowercase]]{creature} teleports up to [[lookup
       @range.value activity=HtsFBK1PYKjvy9mn]] feet to an unoccupied space it
       can see.</p><p class="feature"><em>Dexterity Saving Throw:</em> DC
       [[lookup @save.dc.value activity=HtsFBK1PYKjvy9mn]], each creature in a
       [[lookup @target.template.size activity=HtsFBK1PYKjvy9mn]]-foot Emanation
-      originating from the [[lookup @name lowercase]] at its destination
+      originating from the [[lookup @name lowercase]]{creature} at its destination
       space.</p><p class="feature"><em>Failure:</em> [[/damage average]]
       damage.</p><p class="feature"><em>Success:</em> Half damage.</p>
     chat: ''

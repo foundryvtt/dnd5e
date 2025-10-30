@@ -617,7 +617,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] regains [[lookup @healing.formula
+          <p>The [[lookup @name lowercase]]{creature} regains [[lookup @healing.formula
           activity=5cGvjZJIJVicjJ3d]] Hit Points at the start of each of its
           turns if it has at least 1 Hit Point.</p>
         chat: ''
@@ -719,7 +719,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item
           .mmClaw0000000000]] or [[/item .mmNightmareRay00]] attacks. It can
           replace one attack with a use of [[/item .mmSpellcasting00]].</p>
         chat: ''
@@ -987,7 +987,7 @@ items:
         value: >-
           <p class="feature">[[/attack extended]]. [[/damage average extended]],
           and the target has the &amp;Reference[Frightened apply=false]
-          condition until the start of the [[lookup @name lowercase]]'s next
+          condition until the start of the [[lookup @name lowercase]]{creature}'s next
           turn.</p>
         chat: ''
       identifier: nightmare-ray
@@ -1170,7 +1170,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] shape-shifts into a
+          <p class="feature">The [[lookup @name lowercase]]{creature} shape-shifts into a
           Small or Medium Humanoid or a Large Giant, or it returns to its true
           form. Other than its size, its game statistics are the same in each
           form. Any equipment it is wearing or carrying isn't transformed.</p>
@@ -1426,7 +1426,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Charisma
           as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>1/Day
@@ -1537,7 +1537,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts
           <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplInvisibili]{Invisibility}</em>
           on itself, requiring no spell components and using Charisma as the
           spellcasting ability.</p>

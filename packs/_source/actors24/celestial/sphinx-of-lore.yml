@@ -571,7 +571,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">No magic can observe the [[lookup @name lowercase]]
+          <p class="feature">No magic can observe the [[lookup @name lowercase]]{creature}
           remotely or detect its thoughts without its permission. Wisdom
           (Insight) checks made to ascertain its intentions or sincerity are
           made with Disadvantage.</p>
@@ -672,7 +672,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -766,7 +766,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes three [[/item Claw]]
+          <p>The [[lookup @name lowercase]]{creature} makes three [[/item Claw]]
           attacks.</p>
         chat: ''
       identifier: multiattack
@@ -1033,7 +1033,7 @@ items:
           originating from the [[lookup @name
           lowercase]].</p><p><em>Failure:</em> [[/damage average]] damage, and
           the target has the &amp;Reference[Incapacitated apply=false] condition
-          until the start of the [[lookup @name lowercase]]'s next turn.</p>
+          until the start of the [[lookup @name lowercase]]{creature}'s next turn.</p>
         chat: ''
       identifier: mind-rending-roar
       source:
@@ -1648,7 +1648,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using
           Intelligence as the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -3669,7 +3669,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can teleport up to [[lookup
+          <p>The [[lookup @name lowercase]]{creature} can teleport up to [[lookup
           @range.value activity=a3RqyzU0UqzLJif0]] feet to an unoccupied space
           it can see, and it makes one [[/item Claw]] attack.</p>
         chat: ''

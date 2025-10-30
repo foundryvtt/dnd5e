@@ -76,10 +76,10 @@ system:
       @target.affects.type activity=Mng39fcFDc4I1AzY]] in a [[lookup
       @target.template.size activity=Mng39fcFDc4I1AzY]]-[[lookup
       @target.template.units activity=Mng39fcFDc4I1AzY]]. Emanation originating
-      from the [[lookup @name lowercase]]. <em>Failure:</em> The target has the
+      from the [[lookup @name lowercase]]{creature}. <em>Failure:</em> The target has the
       &amp;Reference[Frightened apply=false] condition until the end of the
-      [[lookup @name lowercase]]'s next turn. <em>Success:</em> The target is
-      immune to this [[lookup @name lowercase]]'s Moan for the next 24
+      [[lookup @name lowercase]]{creature}'s next turn. <em>Success:</em> The target is
+      immune to this [[lookup @name lowercase]]{creature}'s Moan for the next 24
       hours.</p>
     chat: ''
   identifier: moan

@@ -56,7 +56,7 @@ system:
     value: >-
       <p>[[/attack extended]]. [[/damage average extended]], and the target has
       the &amp;Reference[Poisoned apply=false] condition until the start of the
-      [[lookup @name lowercase]]'s next turn. Until this poison ends, the target
+      [[lookup @name lowercase]]{creature}'s next turn. Until this poison ends, the target
       can't regain Hit Points.</p>
     chat: ''
   identifier: beard

@@ -9,7 +9,7 @@ system:
       <section class="secret">
 
       <p>Each non-[[lookup @details.type.config.label lowercase]] creature
-      within 20 feet of the [[lookup @name lowercase]] must make a  <strong>DC
+      within 20 feet of the [[lookup @name lowercase]]{creature} must make a  <strong>DC
       18 Constitution</strong> saving throw against this magic, taking
       <strong>21 (6d6) <em>necrotic damage</em></strong> on a failed save, or
       half as much damage on a successful one.</p>
@@ -17,7 +17,7 @@ system:
       </section>
 
       <p>Each non-[[lookup @details.type.config.label lowercase]] creature
-      within 20 feet of the [[lookup @name lowercase]] must make a
+      within 20 feet of the [[lookup @name lowercase]]{creature} must make a
       <strong>Constitution</strong> saving throw against this magic.</p>
     chat: ''
   source:

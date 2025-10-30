@@ -571,7 +571,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">No magic can observe the [[lookup @name lowercase]]
+          <p class="feature">No magic can observe the [[lookup @name lowercase]]{creature}
           remotely or detect its thoughts without its permission. Wisdom
           (Insight) checks made to ascertain its intentions or sincerity are
           made with Disadvantage.</p>
@@ -672,7 +672,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]] fails a saving throw, it can
+          <p>If the [[lookup @name lowercase]]{creature} fails a saving throw, it can
           choose to succeed instead.</p>
         chat: ''
       identifier: legendary-resistance
@@ -766,7 +766,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] makes two [[/item Claw]] attacks and
+          <p>The [[lookup @name lowercase]]{creature} makes two [[/item Claw]] attacks and
           uses [[/item Roar]].</p>
         chat: ''
       identifier: multiattack
@@ -1162,7 +1162,7 @@ items:
           activity=uFTndQPvULZVHT9R]], each [[lookup @target.affects.type
           activity=uFTndQPvULZVHT9R]] in a [[lookup @target.template.size
           activity=uFTndQPvULZVHT9R]]-foot Emanation originating from the
-          [[lookup @name lowercase]].</p><p><em>Failure:</em> The target has the
+          [[lookup @name lowercase]]{creature}.</p><p><em>Failure:</em> The target has the
           &amp;Reference[Paralyzed apply=false] condition, and it repeats the
           save at the end of each of its turns, ending the effect on itself on a
           success. After [[lookup @duration.value activity=uFTndQPvULZVHT9R]]
@@ -1707,7 +1707,7 @@ items:
         max: ''
       description:
         value: >-
-          <p class="feature">The [[lookup @name lowercase]] casts one of the
+          <p class="feature">The [[lookup @name lowercase]]{creature} casts one of the
           following spells, requiring no Material components and using Wisdom as
           the spellcasting ability (spell save DC [[lookup
           @attributes.spell.dc]]):</p><p class="feature-trait"><strong>At
@@ -3185,7 +3185,7 @@ items:
         max: ''
       description:
         value: >-
-          <p>The [[lookup @name lowercase]] can teleport up to [[lookup
+          <p>The [[lookup @name lowercase]]{creature} can teleport up to [[lookup
           @range.value activity=a3RqyzU0UqzLJif0]] feet to an unoccupied space
           it can see, and it makes one [[/item Claw]] attack.</p>
         chat: ''
