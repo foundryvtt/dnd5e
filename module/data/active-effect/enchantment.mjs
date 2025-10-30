@@ -4,7 +4,13 @@ import { DamageData } from "../shared/damage-field.mjs";
 const { BooleanField } = foundry.data.fields;
 
 /**
+ * @import { EnchantmentActiveEffectSystemData } from "./types.mjs";
+ */
+
+/**
  * System data model for enchantment active effects.
+ * @extends {ActiveEffectDataModel<EnchantmentActiveEffectSystemData>}
+ * @mixes EnchantmentActiveEffectSystemData
  */
 export default class EnchantmentData extends ActiveEffectDataModel {
   /* -------------------------------------------- */
