@@ -682,7 +682,16 @@ export default class ChatMessage5e extends ChatMessage {
     const item = this.getAssociatedItem();
     const effects = this.getFlag("dnd5e", "use.effects")
       ?.map(id => item?.effects.get(id))
-      .filter(e => e && (game.user.isGM || (e.transfer && (this.author?.id === game.user.id))));
+      .filter(e => e && (
+        game.user.isGM
+        || (e.transfer && (this.author.id === game.user.id))
+        || (game.settings.get("dnd5e", "allowPlayerEffectApplication")
+          && (
+            this.getFlag("dnd5e", "targets")?.some(a => fromUuidSync(a.uuid).isOwner)
+            || ((this.author.id === game.user.id) && (this.getAssociatedActivity()?.target.affects.type === "self"))
+          )
+        )
+      ));
     if ( !effects?.length ) return;
 
     const effectApplication = document.createElement("effect-application");

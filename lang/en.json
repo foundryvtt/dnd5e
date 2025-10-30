@@ -1937,7 +1937,7 @@
   "Label": "Available Effects"
 },
 "DND5E.EffectsApplyTokens": "Apply to selected tokens",
-"DND5E.EffectApplyWarningConcentration": "Applying an effect that is being concentrated on by another character requires GM permissions.",
+"DND5E.EffectApplyWarningConcentration": "Applying an effect that is being concentrated on requires an active GM to be present.",
 "DND5E.EffectApplyWarningOwnership": "Effects cannot be applied to tokens you are not the owner of.",
 "DND5E.EffectsSearch": "Search effects",
 
@@ -5485,6 +5485,10 @@
       "Silent": "Roll without creating chat card",
       "Yes": "Roll and create chat card"
     }
+  },
+  "PLAYEREFFECTS": {
+    "Name": "Player Effect Application",
+    "Hint": "Allow players to use the effect application tray when an actor they own is the target of an effect."
   },
   "THEME": {
     "Name": "Theme",

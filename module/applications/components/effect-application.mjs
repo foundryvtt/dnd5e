@@ -192,10 +192,6 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       }, effectFlags));
     }
 
-    if ( !game.user.isGM && concentration && !concentration.isOwner ) {
-      throw new Error(game.i18n.localize("DND5E.EffectApplyWarningConcentration"));
-    }
-
     // Otherwise, create a new effect on the target
     const effectData = foundry.utils.mergeObject({
       ...effect.toObject(),

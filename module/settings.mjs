@@ -86,6 +86,15 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  game.settings.register("dnd5e", "allowPlayerEffectApplication", {
+    name: "SETTINGS.DND5E.PLAYEREFFECTS.Name",
+    hint: "SETTINGS.DND5E.PLAYEREFFECTS.Hint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
+  });
+
   // Allow rotating square templates
   game.settings.register("dnd5e", "gridAlignedSquareTemplates", {
     name: "SETTINGS.5eGridAlignedSquareTemplatesN",

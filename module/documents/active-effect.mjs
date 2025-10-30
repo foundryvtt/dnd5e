@@ -500,6 +500,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       return false;
     }
 
+    // Cannot apply an other-actor-concentration-dependent effect without active GM
+    const dependentUuid = this.getFlag("dnd5e", "dependentOn");
+    if ( dependentUuid && !game.users.activeGM && ((await fromUuid(dependentUuid))?.id !== this.id) ) {
+      ui.notifications.warn("DND5E.EffectApplyWarningConcentration", { localize: true });
+      return false;
+    }
+
     if ( this.isAppliedEnchantment ) {
       const origin = await fromUuid(this.origin);
       const errors = origin?.canEnchant?.(this.parent);
