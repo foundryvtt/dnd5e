@@ -86,7 +86,50 @@ system:
         formula: ''
   enchant: {}
   identifier: disciplined-survivor
-effects: []
+effects:
+  - name: Disciplined Survivor
+    img: icons/skills/wounds/injury-pain-body-orange.webp
+    origin: Compendium.dnd5e.classes24.Item.phbmnkDiscipline
+    _id: Js4phYMTL714onqn
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.death.roll.mode
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Your physical and mental discipline grant you proficiency in all saving
+      throws.</p><p>Additionally, whenever you make a saving throw and fail, you
+      can expend 1 Focus Point to reroll it, and you must use the new roll.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: Compendium.dnd5e.classes24.Item.phbmnkDiscipline.ActiveEffect.Js4phYMTL714onqn
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '13.350'
+      systemId: dnd5e
+      systemVersion: 5.2.0
+      createdTime: 1761846933462
+      modifiedTime: 1761846933462
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!phbmnkDiscipline.Js4phYMTL714onqn'
 flags:
   dnd5e:
     riders:
