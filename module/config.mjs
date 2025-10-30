@@ -2025,6 +2025,9 @@ DND5E.lootTypes = {
   resource: {
     label: "DND5E.Loot.Resource"
   },
+  trade: {
+    label: "DND5E.Loot.Trade"
+  },
   treasure: {
     label: "DND5E.Loot.Treasure"
   }
