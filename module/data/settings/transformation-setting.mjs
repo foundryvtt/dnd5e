@@ -4,20 +4,13 @@ import FormulaField from "../fields/formula-field.mjs";
 const { BooleanField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @typedef TransformationSettingData
- * @property {Set<string>} effects
- * @property {Set<string>} keep
- * @property {Set<string>} merge
- * @property {string} [minimumAC]         Formula for minimum armor class for transformed creature.
- * @property {Set<string>} other
- * @property {string} [preset]
- * @property {Set<string>} [spellLists]   Spell lists to keep if actor has matching item.
- * @property {string} [tempFormula]       Formula for temp HP that will be added during transformation.
- * @property {boolean} [transformTokens]
+ * @import { TransformationSettingData } from "./_types.mjs";
  */
 
 /**
  * A data model that represents the previous transformation preset.
+ * @extends DataModel<TransformationSettingData>
+ * @mixes TransformationSettingData
  */
 export default class TransformationSetting extends foundry.abstract.DataModel {
 

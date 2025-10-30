@@ -1,5 +1,5 @@
 /**
- * @import { TransformationSettingData } from "../settings/transformation-setting.mjs";
+ * @import { TransformationSettingData } from "../settings/_types.mjs";
  * @import { ActivationData, DamageData, DurationData, RangeData, TargetData, UsesData } from "../shared/_types.mjs";
  * @import { ConsumptionTargetData, EffectApplicationData } from "./fields/_types.mjs";
  */

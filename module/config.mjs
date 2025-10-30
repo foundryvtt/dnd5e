@@ -3727,7 +3727,7 @@ DND5E.sourcePacks = {
 /* -------------------------------------------- */
 
 /**
- * @import { TransformationSettingData } from "./data/settings/transformation-setting.mjs";
+ * @import { TransformationSettingData } from "./data/settings/_types.mjs";
  */
 
 /**
