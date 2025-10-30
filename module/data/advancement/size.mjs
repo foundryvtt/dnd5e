@@ -1,13 +1,13 @@
 const { SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { SizeConfigurationData, SizeValueData } from "./_types.mjs";
+ * @import { SizeAdvancementConfigurationData, SizeAdvancementValueData } from "./_types.mjs";
  */
 
 /**
  * Configuration data for the size advancement type.
- * @extends DataModel<SizeConfigurationData>
- * @mixes SizeConfigurationData
+ * @extends DataModel<SizeAdvancementConfigurationData>
+ * @mixes SizeAdvancementConfigurationData
  */
 export class SizeConfigurationData extends foundry.abstract.DataModel {
   /** @inheritDoc */

@@ -3,13 +3,13 @@ import LocalDocumentField from "../fields/local-document-field.mjs";
 const { DocumentUUIDField } = foundry.data.fields;
 
 /**
- * @import { SubclassValueData } from "./_types.mjs";
+ * @import { SubclassAdvancementValueData } from "./_types.mjs";
  */
 
 /**
  * Value data for Subclass advancement.
- * @extends DataModel<SubclassValueData>
- * @mixes SubclassValueData
+ * @extends DataModel<SubclassAdvancementValueData>
+ * @mixes SubclassAdvancementValueData
  */
 export class SubclassValueData extends foundry.abstract.DataModel {
   /** @override */

@@ -1,5 +1,5 @@
 /**
- * @typedef AbilityScoreImprovementConfigurationData
+ * @typedef AbilityScoreImprovementAdvancementConfigurationData
  * @property {number} cap                    Maximum number of points that can be assigned to a single score.
  * @property {Object<string, number>} fixed  Number of points automatically assigned to a certain score.
  * @property {Set<string>} locked            Abilities that cannot be changed by this advancement.
@@ -9,7 +9,7 @@
  */
 
 /**
- * @typedef AbilityScoreImprovementValueData
+ * @typedef AbilityScoreImprovementAdvancementValueData
  * @property {string} type             When on a class, whether the player chose ASI or a Feat.
  * @property {Object<string, number>}  Points assigned to individual scores.
  * @property {Object<string, string>}  Feat that was selected.
@@ -30,7 +30,7 @@
  */
 
 /**
- * @typedef ItemChoiceConfigurationData
+ * @typedef ItemChoiceAdvancementConfigurationData
  * @property {boolean} allowDrops                             Should players be able to drop non-listed items?
  * @property {Record<number, ItemChoiceLevelConfig>} choices  Choices & config for specific levels.
  * @property {ItemChoicePoolEntry[]} pool                     Items that can be chosen.
@@ -39,7 +39,7 @@
  * @property {Set<string>} restriction.list                   Spell lists from which a spell must be selected.
  * @property {string} restriction.subtype                     Item sub-type allowed.
  * @property {string} restriction.type                        Specific item type allowed.
- * @property {SpellConfigurationData} spell                   Mutations applied to spell items.
+ * @property {AdvancementSpellConfigurationData} spell        Mutations applied to spell items.
  * @property {string} type                                    Type of item allowed, if it should be restricted.
  */
 
@@ -55,7 +55,7 @@
  */
 
 /**
- * @typedef ItemChoiceValueData
+ * @typedef ItemChoiceAdvancementValueData
  * @property {string} ability                                  Ability selected for the spells.
  * @property {Record<number, Record<string, string>>} added    Mapping of IDs to UUIDs for items added at each level.
  * @property {Record<number, ItemChoiceReplacement>} replaced  Information on items replaced at each level.
@@ -69,10 +69,10 @@
  */
 
 /**
- * @typedef ItemGrantConfigurationData
- * @property {ItemGrantItemConfiguration[]} items  Data for the items to be granted.
- * @property {boolean} optional                    Should user be able to de-select any individual option?
- * @property {SpellConfigurationData} spell        Data used to modify any granted spells.
+ * @typedef ItemGrantAdvancementConfigurationData
+ * @property {ItemGrantItemConfiguration[]} items       Data for the items to be granted.
+ * @property {boolean} optional                         Should user be able to de-select any individual option?
+ * @property {AdvancementSpellConfigurationData} spell  Data used to modify any granted spells.
  */
 
 /**
@@ -82,7 +82,7 @@
  */
 
 /**
- * @typedef ScaleValueConfigurationData
+ * @typedef ScaleValueAdvancementConfigurationData
  * @property {string} identifier        Identifier used to select this scale value in roll formulas.
  * @property {string} type              Type of data represented by this scale value.
  * @property {object} [distance]
@@ -91,17 +91,44 @@
  */
 
 /**
- * @typedef SizeConfigurationData
+ * @typedef ScaleValueDiceTypeData
+ * @property {number} number          Number of dice.
+ * @property {number} faces           Die faces.
+ * @property {Set<string>} modifiers  Die modifiers attached to roll.
+ */
+
+/**
+ * @typedef ScaleValueNumberTypeData
+ * @property {number} value           Numeric value.
+ */
+
+/**
+ * @typedef ScaleValueStringTypeData
+ * @property {string} value           String value.
+ */
+
+/**
+ * Information on how a scale value of this type is configured.
+ *
+ * @typedef ScaleValueTypeMetadata
+ * @property {string} label       Name of this type.
+ * @property {string} hint        Hint for this type shown in the scale value configuration.
+ * @property {string} identifier  Hint for the identifier for this type.
+ * @property {boolean} isNumeric  When using the default editing interface, should numeric inputs be used?
+ */
+
+/**
+ * @typedef SizeAdvancementConfigurationData
  * @property {Set<string>} sizes  Sizes that can be selected.
  */
 
 /**
- * @typedef SizeValueData
+ * @typedef SizeAdvancementValueData
  * @property {string} size  Selected size.
  */
 
 /**
- * @typedef SpellConfigurationData
+ * @typedef AdvancementSpellConfigurationData
  * @property {Set<string>} ability       Abilities that can be selected.
  * @property {string} method             Spellcasting method.
  * @property {number} prepared           Preparation mode for the spell.
@@ -112,13 +139,13 @@
  */
 
 /**
- * @typedef SubclassValueData
+ * @typedef SubclassAdvancementValueData
  * @property {Item5e} document  Copy of the subclass on the actor.
  * @property {string} uuid      UUID of the remote subclass source.
  */
 
 /**
- * @typedef TraitConfigurationData
+ * @typedef TraitAdvancementConfigurationData
  * @property {boolean} allowReplacements  Whether all potential choices should be presented to the user if there
  *                                        are no more choices available in a more limited set.
  * @property {TraitChoice[]} choices      Choices presented to the user.
@@ -134,6 +161,6 @@
  */
 
 /**
- * @typedef TraitValueData
+ * @typedef TraitAdvancementValueData
  * @property {Set<string>} chosen  Trait keys that have been chosen.
  */

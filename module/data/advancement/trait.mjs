@@ -1,7 +1,7 @@
 const { ArrayField, BooleanField, NumberField, SetField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @import { TraitConfigurationData } from "./_types.mjs";
+ * @import { TraitAdvancementConfigurationData } from "./_types.mjs";
  */
 
 /**
@@ -18,8 +18,8 @@ const LANGUAGE_MAP = { modern: _MAP, legacy: foundry.utils.invertObject(_MAP) };
 
 /**
  * Configuration data for the TraitAdvancement.
- * @extends DataModel<TraitConfigurationData>
- * @mixes TraitConfigurationData
+ * @extends DataModel<TraitAdvancementConfigurationData>
+ * @mixes TraitAdvancementConfigurationData
  */
 export class TraitConfigurationData extends foundry.abstract.DataModel {
 
@@ -60,8 +60,8 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
 
 /**
  * Value data for the TraitAdvancement.
- * @extends DataModel<TraitValueData>
- * @mixes TraitValueData
+ * @extends DataModel<TraitAdvancementValueData>
+ * @mixes TraitAdvancementValueData
  */
 export class TraitValueData extends foundry.abstract.DataModel {
   /** @override */

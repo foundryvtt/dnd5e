@@ -3,13 +3,13 @@ import SpellConfigurationData from "./spell-config.mjs";
 const { ArrayField, BooleanField, EmbeddedDataField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @import { ItemGrantConfigurationData } from "./_types.mjs";
+ * @import { ItemGrantAdvancementConfigurationData } from "./_types.mjs";
  */
 
 /**
  * Configuration data for the Item Grant advancement.
- * @extends DataModel<ItemGrantConfigurationData>
- * @mixes ItemGrantConfigurationData
+ * @extends DataModel<ItemGrantAdvancementConfigurationData>
+ * @mixes ItemGrantAdvancementConfigurationData
  */
 export default class ItemGrantConfigurationData extends foundry.abstract.DataModel {
 

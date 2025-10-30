@@ -6,13 +6,13 @@ const {
 } = foundry.data.fields;
 
 /**
- * @import { ItemChoiceConfigurationData, ItemChoiceValueData } from "./_types.mjs";
+ * @import { ItemChoiceAdvancementConfigurationData, ItemChoiceAdvancementValueData } from "./_types.mjs";
  */
 
 /**
  * Configuration data for Item Choice advancement.
- * @extends DataModel<ItemChoiceConfigurationData>
- * @mixes ItemChoiceConfigurationData
+ * @extends DataModel<ItemChoiceAdvancementConfigurationData>
+ * @mixes ItemChoiceAdvancementConfigurationData
  */
 export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
 
@@ -64,8 +64,8 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
 
 /**
  * Value data for Item Choice advancement.
- * @extends DataModel<ItemChoiceValueData>
- * @mixes ItemChoiceValueData
+ * @extends DataModel<ItemChoiceAdvancementValueData>
+ * @mixes ItemChoiceAdvancementValueData
  */
 export class ItemChoiceValueData extends foundry.abstract.DataModel {
   /** @inheritDoc */
