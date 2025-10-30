@@ -5,28 +5,16 @@ const {
 const { Ray } = foundry.canvas.geometry;
 
 /**
- * @typedef {number} Degrees
- */
-
-/**
- * @typedef Point
- * @property {number} x
- * @property {number} y
- */
-
-/**
- * @typedef {number} Radians
- */
-
-/**
- * @typedef Size
- * @property {number} width
- * @property {number} height
+ * @import {
+ *   Degrees, Point, Radians, RotateAreaDirectionMode, RotateAreaRegionBehaviorSystemData, RotateAreaSpeedMode, Size
+ * } from "./_types.mjs";
  */
 
 /**
  * The data model for a region behavior that rotates tokens in its area around a center point along with any
  * other specified placeables.
+ * @extends RegionBehaviorType<RotateAreaRegionBehaviorSystemData>
+ * @mixes RotateAreaRegionBehaviorSystemData
  */
 export default class RotateAreaRegionBehaviorType extends foundry.data.regionBehaviors.RegionBehaviorType {
 
@@ -78,7 +66,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
 
   /**
    * Modes for determining rotation direction when moving to the next point.
-   * @type {Record<string, string>}
+   * @type {Record<RotateAreaDirectionMode, string>}
    */
   static DIRECTION_MODES = Object.seal({
     cw: "DND5E.REGIONBEHAVIORS.ROTATEAREA.DirectionMode.Clockwise",
@@ -91,7 +79,7 @@ export default class RotateAreaRegionBehaviorType extends foundry.data.regionBeh
 
   /**
    * Modes for mapping rotation time to final speed.
-   * @type {Record<string, string>}
+   * @type {Record<RotateAreaSpeedMode, string>}
    */
   static SPEED_MODES = Object.seal({
     fixed: "DND5E.REGIONBEHAVIORS.ROTATEAREA.SpeedMode.Fixed",
