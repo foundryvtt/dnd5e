@@ -4,6 +4,10 @@ import Dialog5e from "../api/dialog.mjs";
 const { BooleanField, NumberField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ActivityUseConfiguration } from "../../documents/activity/mixin.mjs";
+ */
+
+/**
  * Dialog for configuring the usage of an activity.
  */
 export default class ActivityUsageDialog extends Dialog5e {

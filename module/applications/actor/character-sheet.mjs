@@ -9,6 +9,11 @@ import * as Trait from "../../documents/actor/trait.mjs";
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
+ * @import { FavoriteData5e } from "../../data/actor/_types.mjs";
+ * @import { FacilityOccupants } from "../../data/item/_types.mjs";
+ */
+
+/**
  * Extension of base actor sheet for characters.
  */
 export default class CharacterActorSheet extends BaseActorSheet {

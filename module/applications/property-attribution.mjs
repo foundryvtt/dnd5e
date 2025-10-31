@@ -1,23 +1,16 @@
 import Application5e from "./api/application.mjs";
 
 /**
- * Description for a single part of a property attribution.
- * @typedef {object} AttributionDescription
- * @property {string} label               Descriptive label that will be displayed. If the label is in the form
- *                                        of an @ property, the system will try to turn it into a human-readable label.
- * @property {number} mode                Application mode for this step as defined in
- *                           [CONST.ACTIVE_EFFECT_MODES](https://foundryvtt.com/api/module-constants.html#.ACTIVE_EFFECT_MODES).
- * @property {number} value               Value of this step.
- * @property {ActiveEffect5e} [document]  Active effect applying this attribution, if any.
+ * @import { PropertyAttributionDescription } from "./_types.mjs";
  */
 
 /**
  * Interface for viewing what factors went into determining a specific property.
  *
- * @param {Document} object                        The Document that owns the property being attributed.
- * @param {AttributionDescription[]} attributions  An array of all the attribution data.
- * @param {string} property                        Dot separated path to the property.
- * @param {object} [options={}]                    Application rendering options.
+ * @param {Document} object                                The Document that owns the property being attributed.
+ * @param {PropertyAttributionDescription[]} attributions  An array of all the attribution data.
+ * @param {string} property                                Dot separated path to the property.
+ * @param {object} [options={}]                            Application rendering options.
  */
 export default class PropertyAttribution extends Application5e {
   constructor(object, attributions, property, options={}) {

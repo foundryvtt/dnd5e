@@ -14,7 +14,7 @@ import MountableTemplate from "./templates/mountable.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { InventorySectionDescriptor } from "../../applications/components/inventory.mjs";
+ * @import { InventorySectionDescriptor } from "../../applications/components/_types.mjs";
  * @import { WeaponItemSystemData } from "./_types.mjs";
  * @import {
  *   ActivitiesTemplateData, EquippableItemTemplateData, IdentifiableTemplateData,

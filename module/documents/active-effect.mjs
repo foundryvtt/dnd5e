@@ -8,6 +8,10 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { FavoriteData5e } from "../data/actor/_types.mjs";
+ */
+
+/**
  * Extend the base ActiveEffect class to implement system-specific logic.
  */
 export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect) {

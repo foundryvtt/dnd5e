@@ -1,7 +1,14 @@
 import RollConfigurationDialog from "./roll-configuration-dialog.mjs";
 
 /**
+ * @import { BasicRollMessageConfiguration } from "../../dice/basic-roll.mjs";
+ * @import { D20RollProcessConfiguration } from "../../dice/d20-roll.mjs";
+ * @import { BasicRollConfigurationDialogOptions } from "./_types.mjs";
+ */
+
+/**
  * Dialog for configuring d20 rolls.
+ * @extends {RollConfigurationDialog}
  *
  * @param {D20RollProcessConfiguration} [config={}]           Initial roll configuration.
  * @param {BasicRollMessageConfiguration} [message={}]        Message configuration.

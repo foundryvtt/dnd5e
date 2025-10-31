@@ -5,48 +5,9 @@ import Application5e from "./api/application.mjs";
 import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
 /**
- * @typedef {ApplicationConfiguration} CompendiumBrowserConfiguration
- * @property {{locked: CompendiumBrowserFilters, initial: CompendiumBrowserFilters}} filters  Filters to set to start.
- *                                              Locked filters won't be able to be changed by the user. Initial filters
- *                                              will be set to start but can be changed.
- * @property {CompendiumBrowserSelectionConfiguration} selection  Configuration used to define document selections.
- */
-
-/**
- * @typedef {object} CompendiumBrowserSelectionConfiguration
- * @property {number|null} min                  Minimum number of documents that must be selected.
- * @property {number|null} max                  Maximum number of documents that must be selected.
- */
-
-/**
- * @typedef {object} CompendiumBrowserFilters
- * @property {string} [documentClass]  Document type to fetch (e.g. Actor or Item).
- * @property {Set<string>} [types]     Individual document subtypes to filter upon (e.g. "loot", "class", "npc").
- * @property {object} [additional]     Additional type-specific filters applied.
- * @property {FilterDescription[]} [arbitrary]  Additional arbitrary filters to apply, not displayed in the UI.
- *                                     Only available as part of locked filters.
- * @property {string} [name]           A substring to filter by Document name.
- */
-
-/**
- * Filter definition object for additional filters in the Compendium Browser.
- *
- * @typedef {object} CompendiumBrowserFilterDefinitionEntry
- * @property {string} label                                   Localizable label for the filter.
- * @property {"boolean"|"range"|"set"} type                   Type of filter control to display.
- * @property {object} config                                  Type-specific configuration data.
- * @property {CompendiumBrowserCreateFilters} [createFilter]  Method that can be called to create filters.
- */
-
-/**
- * @callback CompendiumBrowserFilterCreateFilters
- * @param {FilterDescription[]} filters                        Array of filters to be applied that should be mutated.
- * @param {*} value                                            Value of the filter.
- * @param {CompendiumBrowserFilterDefinitionEntry} definition  Definition for this filter.
- */
-
-/**
- * @typedef {Map<string, CompendiumBrowserFilterDefinitionEntry>} CompendiumBrowserFilterDefinition
+ * @import {
+ *   CompendiumBrowserConfiguration, CompendiumBrowserFilterDefinition, CompendiumBrowserFilters
+ * } from "./_types.mjs";
  */
 
 /**
@@ -162,14 +123,6 @@ export default class CompendiumBrowser extends Application5e {
   };
 
   /* -------------------------------------------- */
-
-  /**
-   * @typedef {SheetTabDescriptor5e} CompendiumBrowserTabDescriptor5e
-   * @property {string} documentClass  The class of Documents this tab contains.
-   * @property {string[]} [types]      The sub-types of Documents this tab contains, otherwise all types of the Document
-   *                                   class are assumed.
-   * @property {boolean} [advanced]    Is this tab only available in the advanced browsing mode.
-   */
 
   /**
    * Application tabs.

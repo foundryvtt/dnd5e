@@ -6,7 +6,7 @@ import BaseActorSheet from "./api/base-actor-sheet.mjs";
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
- * @typedef {"crew"|"draft"|"passengers"} CrewArea5e
+ * @import { CrewArea5e } from "./_types.mjs";
  */
 
 /**

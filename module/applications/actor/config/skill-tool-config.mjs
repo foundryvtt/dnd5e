@@ -1,6 +1,10 @@
 import BaseProficiencyConfig from "./base-proficiency-config.mjs";
 
 /**
+ * @import { SkillConfiguration, ToolConfiguration } from "../../../config.mjs";
+ */
+
+/**
  * Configuration application for an actor's skills & tools.
  */
 export default class SkillToolConfig extends BaseProficiencyConfig {

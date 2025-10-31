@@ -1,12 +1,12 @@
 import D20RollConfigurationDialog from "./d20-configuration-dialog.mjs";
 
 /**
- * @typedef {BasicRollConfigurationDialogOptions} SkillToolRollConfigurationDialogOptions
- * @property {boolean} chooseAbility  Should the ability be selectable?
+ * @import { SkillToolRollConfigurationDialogOptions } from "./_types.mjs";
  */
 
 /**
  * Extended roll configuration dialog that allows selecting abilities.
+ * @extends D20RollConfigurationDialog<SkillToolRollConfigurationDialogOptions>
  */
 export default class SkillToolRollConfigurationDialog extends D20RollConfigurationDialog {
   /** @override */

@@ -11,6 +11,7 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { InventorySectionDescriptor } from "../../applications/components/_types.mjs";
  * @import { EquipmentItemSystemData } from "./_types.mjs";
  * @import {
  *   ActivitiesTemplateData, EquippableItemTemplateData, IdentifiableTemplateData,

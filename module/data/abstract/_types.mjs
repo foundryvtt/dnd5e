@@ -1,4 +1,8 @@
 /**
+ * @import { InventorySectionDescriptor } from "../../applications/components/_types.mjs";
+ */
+
+/**
  * @typedef {SystemDataModelMetadata} ActorDataModelMetadata
  * @property {boolean} supportsAdvancement  Can advancement be performed for this actor type?
  */

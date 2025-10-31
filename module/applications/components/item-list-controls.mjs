@@ -1,39 +1,9 @@
+import FilterMenu from "./filter-menu.mjs";
+
 /**
  * @import { TabPreferences5e } from "../../data/user/_types.mjs";
+ * @import { FilterState5e, ListControlConfiguration, ListControlDescriptor } from "./_types.mjs";
  */
-
-/**
- * @typedef {object} FilterState5e
- * @property {string} name             Filtering by name.
- * @property {Set<string>} properties  Filtering by some property.
- */
-
-/**
- * @callback ItemListComparator5e
- * @param {Item5e} a
- * @param {Item5e} b
- * @returns {number}
- */
-
-/**
- * @typedef ListControlDescriptor
- * @property {string} key                        A key to identify the option.
- * @property {string} label                      A human-readable label that describes the option.
- * @property {string} [icon]                     Font Awesome icon classes to represent the option.
- * @property {string} [classes]                  CSS classes to apply when the option is active.
- * @property {Record<string, string>} [dataset]  The above properties packed into a dataset for rendering.
- */
-
-/**
- * @typedef ListControlConfiguration
- * @property {string} label                     The placeholder value to use in the main search box.
- * @property {string} list                      The identifier of the item list associated with these controls.
- * @property {ListControlDescriptor[]} filters  Filter configuration.
- * @property {ListControlDescriptor[]} sorting  Sorting configuration.
- * @property {ListControlDescriptor[]} grouping Grouping configuration.
- */
-
-import FilterMenu from "./filter-menu.mjs";
 
 /**
  * A custom element that encapsulates functionality for sorting, filtering, searching, and grouping lists of items.

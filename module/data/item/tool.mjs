@@ -11,7 +11,7 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 const { NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { InventorySectionDescriptor } from "../../applications/components/inventory.mjs";
+ * @import { InventorySectionDescriptor } from "../../applications/components/_types.mjs";
  * @import { ToolItemSystemData } from "./_types.mjs";
  * @import {
  *   ActivitiesTemplateData, EquippableItemTemplateData, IdentifiableTemplateData,

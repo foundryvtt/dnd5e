@@ -36,6 +36,7 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
 
 /**
  * @import { DropEffectValue } from "../../../drag-drop.mjs"
+ * @import { InventorySectionDescriptor } from "../../components/_types.mjs";
  */
 
 /**

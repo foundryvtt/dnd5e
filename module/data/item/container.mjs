@@ -9,6 +9,7 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { InventorySectionDescriptor } from "../../applications/components/_types.mjs";
  * @import { CurrencyTemplateData } from "../shared/_types.mjs";
  * @import { ContainerItemSystemData } from "./_types.mjs";
  * @import {

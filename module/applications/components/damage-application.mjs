@@ -3,6 +3,10 @@ import ChatTrayElement from "./chat-tray-element.mjs";
 import TargetedApplicationMixin from "./targeted-application-mixin.mjs";
 
 /**
+ * @import { DamageApplicationOptions, DamageDescription } from "../../documents/actor/actor.mjs";
+ */
+
+/**
  * List of multiplier options as tuples containing their numeric value and rendered text.
  * @type {[number, string][]}
  */

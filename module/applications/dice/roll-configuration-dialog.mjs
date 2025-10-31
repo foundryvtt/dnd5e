@@ -3,37 +3,13 @@ import Dialog5e from "../api/dialog.mjs";
 const { DiceTerm } = foundry.dice.terms;
 
 /**
- * Dialog rendering options for a roll configuration dialog.
- *
- * @typedef {object} BasicRollConfigurationDialogOptions
- * @property {typeof BasicRoll} rollType              Roll type to use when constructing final roll.
- * @property {object} [default]
- * @property {number} [default.rollMode]              Default roll mode to have selected.
- * @property {RollBuildConfigCallback} [buildConfig]  Callback to handle additional build configuration.
- * @property {BasicRollConfigurationDialogRenderOptions} [rendering]
- */
-
-/**
- * @callback RollBuildConfigCallback
- * @param {BasicRollProcessConfiguration} process  Configuration for the entire rolling process.
- * @param {BasicRollConfiguration} config          Configuration for a specific roll.
- * @param {FormDataExtended} [formData]            Any data entered into the rolling prompt.
- * @param {number} index                           Index of the roll within all rolls being prepared.
- */
-
-/**
- * @typedef BasicRollConfigurationDialogRenderOptions
- * @property {object} [dice]
- * @property {number} [dice.max=5]               The maximum number of dice to display in the large dice breakdown. If
- *                                               the given rolls contain more dice than this, then the large breakdown
- *                                               is not shown.
- * @property {Set<string>} [dice.denominations]  Valid die denominations to display in the large dice breakdown. If any
- *                                               of the given rolls contain an invalid denomination, then the large
- *                                               breakdown is not shown.
+ * @import { BasicRollMessageConfiguration, BasicRollProcessConfiguration } from "../../dice/basic-roll.mjs";
+ * @import { BasicRollConfigurationDialogOptions } from "./_types.mjs";
  */
 
 /**
  * Dialog for configuring one or more rolls.
+ * @xtends {Dialog5e<ApplicationConfiguration & BasicRollConfigurationDialogOptions>}
  *
  * @param {BasicRollProcessConfiguration} [config={}]         Initial roll configuration.
  * @param {BasicRollMessageConfiguration} [message={}]        Message configuration.

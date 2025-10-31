@@ -8,7 +8,7 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { InventorySectionDescriptor } from "../../applications/components/inventory.mjs";
+ * @import { InventorySectionDescriptor } from "../../applications/components/_types.mjs";
  * @import { LootItemSystemData } from "./_types.mjs";
  * @import {
  *   IdentifiableTemplateData, ItemDescriptionTemplateData, ItemTypeTemplateData, PhysicalItemTemplateData
