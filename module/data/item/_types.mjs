@@ -1,5 +1,5 @@
 /**
- * @import { UnitValue5e } from "../../utils.mjs";
+ * @import { UnitValue5e } from "../../_types.mjs";
  * @import {
  *   ActivationData, CreatureTypeData, DamageData, DurationData,
  *   MovementData, RangeData, SensesData, TargetData, UsesData
@@ -10,17 +10,17 @@
 
 /**
  * @typedef ClassItemSystemData
- * @property {object} hd                            Object describing hit dice properties.
- * @property {string} hd.additional                 Additional hit dice beyond the level of the class.
- * @property {string} hd.denomination               Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
- * @property {number} hd.spent                      Number of hit dice consumed.
- * @property {number} levels                        Current number of levels in this class.
+ * @property {object} hd                           Object describing hit dice properties.
+ * @property {string} hd.additional                Additional hit dice beyond the level of the class.
+ * @property {string} hd.denomination              Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
+ * @property {number} hd.spent                     Number of hit dice consumed.
+ * @property {number} levels                       Current number of levels in this class.
  * @property {object} primaryAbility
- * @property {Set<string>} primaryAbility.value     List of primary abilities used by this class.
- * @property {boolean} primaryAbility.all           If multiple abilities are selected, does multiclassing require all
- *                                                  of them to be 13 or just one.
- * @property {Set<string>} properties               General properties of a class item.
- * @property {SpellcastingFieldData} spellcasting   Details on class's spellcasting ability.
+ * @property {Set<string>} primaryAbility.value    List of primary abilities used by this class.
+ * @property {boolean} primaryAbility.all          If multiple abilities are selected, does multiclassing require all
+ *                                                 of them to be 13 or just one.
+ * @property {Set<string>} properties              General properties of a class item.
+ * @property {SpellcastingFieldData} spellcasting  Details on class's spellcasting ability.
  */
 
 /**

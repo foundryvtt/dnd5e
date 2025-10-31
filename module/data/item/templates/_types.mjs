@@ -1,5 +1,6 @@
 /**
- * @import { SourceData, UsesData } from "../../../shared/_types.mjs";
+ * @import { UnitValue5e } from "../../../_types.mjs";
+ * @import { SourceData, UsesData } from "../../shared/_types.mjs";
  */
 
 /**

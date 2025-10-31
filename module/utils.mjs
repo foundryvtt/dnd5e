@@ -1,5 +1,5 @@
 /**
- * @import { UnitConfiguration } from "./_types.mjs";
+ * @import { TargetDescriptor5e, UnitConfiguration } from "./_types.mjs";
  */
 
 /* -------------------------------------------- */
@@ -599,18 +599,8 @@ export function linkForUuid(uuid, { tooltip, renderBroken }={}) {
 /* -------------------------------------------- */
 
 /**
- * Important information on a targeted token.
- *
- * @typedef {object} TargetDescriptor5e
- * @property {string} uuid  The UUID of the target.
- * @property {string} img   The target's image.
- * @property {string} name  The target's name.
- * @property {number} ac    The target's armor class, if applicable.
- */
-
-/**
  * Grab the targeted tokens and return relevant information on them.
- * @returns {TargetDescriptor[]}
+ * @returns {TargetDescriptor5e[]}
  */
 export function getTargetDescriptors() {
   const targets = new Map();
@@ -742,12 +732,6 @@ function _convertSystemUnits(value, from, to, config, { message, strict }) {
 }
 
 /* -------------------------------------------- */
-
-/**
- * @typedef UnitValue5e
- * @property {string} units
- * @property {number} value
- */
 
 /**
  * Default units to use depending on system setting.
@@ -1055,7 +1039,7 @@ export function registerHandlebarsHelpers() {
   const curryUnitFormatter = method => (value, { hash }) => {
     const { unit, ...options } = hash;
     return method(value, unit, options);
-  }
+  };
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
     "dnd5e-concealSection": concealSection,

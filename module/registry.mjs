@@ -1,6 +1,10 @@
 import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import { formatIdentifier } from "./utils.mjs";
 
+/**
+ * @import { RegisteredItemData } from "./_types.mjs";
+ */
+
 /* -------------------------------------------- */
 /*  Dependents                                  */
 /* -------------------------------------------- */
@@ -149,14 +153,6 @@ class ItemRegistry {
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
-
-  /**
-   * @typedef {object} RegisteredItemData
-   * @property {string} name        Name of the item.
-   * @property {string} identifier  Item identifier.
-   * @property {string} img         Item's icon.
-   * @property {string[]} sources   UUIDs of different compendium items matching this identifier.
-   */
 
   /**
    * Items grouped by identifiers.

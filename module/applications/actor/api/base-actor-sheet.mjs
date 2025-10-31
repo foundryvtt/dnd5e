@@ -35,7 +35,7 @@ import ItemListControlsElement from "../../components/item-list-controls.mjs";
 const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @import { DropEffectValue } from "../../../drag-drop.mjs"
+ * @import { DropEffectValue } from "../../../_types.mjs"
  * @import { InventorySectionDescriptor } from "../../components/_types.mjs";
  */
 

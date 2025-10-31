@@ -216,6 +216,13 @@
 /* -------------------------------------------- */
 
 /**
+ * Valid `dropEffect` value (see https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect).
+ * @typedef {"copy"|"move"|"link"|"none"} DropEffectValue
+ */
+
+/* -------------------------------------------- */
+
+/**
  * Encumbrance configuration data.
  *
  * @typedef EncumbranceConfiguration
@@ -258,6 +265,17 @@
  * @property {number} days     The number of days to build the facility.
  * @property {number} squares  The maximum area the facility may occupy in the bastion plan.
  * @property {number} value    The cost in gold pieces to build the facility.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * A filter description.
+ *
+ * @typedef FilterDescription
+ * @property {string} k        Key on the data object to check.
+ * @property {any} v           Value to compare.
+ * @property {string} [o="_"]  Operator or comparison function to use.
  */
 
 /* -------------------------------------------- */
@@ -328,6 +346,16 @@
  *                                     provided, then `land` is assumed.
  * @property {boolean} [walkFallback]  When this special movement type runs out, can the actor fall back to using their
  *                                     walk speed at 2x cost?
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef RegisteredItemData
+ * @property {string} name        Name of the item.
+ * @property {string} identifier  Item identifier.
+ * @property {string} img         Item's icon.
+ * @property {string[]} sources   UUIDs of different compendium items matching this identifier.
  */
 
 /* -------------------------------------------- */
@@ -481,6 +509,18 @@
 /* -------------------------------------------- */
 
 /**
+ * Important information on a targeted token.
+ *
+ * @typedef TargetDescriptor5e
+ * @property {string} uuid  The UUID of the target.
+ * @property {string} img   The target's image.
+ * @property {string} name  The target's name.
+ * @property {number} ac    The target's armor class, if applicable.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef ToolConfiguration
  * @property {string} ability  Default ability used for the tool.
  * @property {string} id       UUID of reference tool or ID within pack defined by `DND5E.sourcePacks.ITEMS`.
@@ -589,6 +629,14 @@
  * @typedef {Omit<UnitConfiguration, "abbreviation">} TravelUnitConfiguration
  * @property {string} abbreviationDay   Abbreviated form when using days as the travel period.
  * @property {string} abbreviationHour  Abbreviated form when using hours as the travel period.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef UnitValue5e
+ * @property {string} units
+ * @property {number} value
  */
 
 /* -------------------------------------------- */

@@ -2,7 +2,7 @@ import { areKeysPressed } from "../../utils.mjs";
 import DragDrop5e from "../../drag-drop.mjs";
 
 /**
- * @import { DropEffectValue } from "../../drag-drop.mjs"
+ * @import { DropEffectValue } from "../../_types.mjs"
  */
 
 /**

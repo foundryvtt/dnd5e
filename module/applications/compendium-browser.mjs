@@ -5,6 +5,7 @@ import Application5e from "./api/application.mjs";
 import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
 /**
+ * @import { FilterDescription } from "../_types.mjs";
  * @import {
  *   CompendiumBrowserConfiguration, CompendiumBrowserFilterDefinition, CompendiumBrowserFilters
  * } from "./_types.mjs";

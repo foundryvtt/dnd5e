@@ -1,5 +1,5 @@
 /**
- * @import { FilterDescription } from "../filter.mjs";
+ * @import { FilterDescription } from "../_types.mjs";
  * @import { SheetTabDescriptor5e } from "./api/_types.mjs";
  */
 
