@@ -14,6 +14,10 @@
  */
 export default class Accordion {
   constructor(config) {
+    foundry.utils.logCompatibilityWarning(
+      "The `Accordion` class is no longer used in favor of expanded sections provided by the `ApplicationV2Mixin`.",
+      { since: "DnD5e 5.2", until: "DnD5e 5.4" }
+    );
     config.contentSelector = `${config.contentSelector}:not(.accordion-content)`;
     this.#config = config;
   }
