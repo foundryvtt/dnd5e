@@ -3,59 +3,11 @@ import RollConfigurationDialog from "../applications/dice/roll-configuration-dia
 const { DiceTerm, NumericTerm } = foundry.dice.terms;
 
 /**
- * Configuration data for the process of creating one or more basic rolls.
- *
- * @typedef {object} BasicRollProcessConfiguration
- * @property {BasicRollConfiguration[]} rolls  Configuration data for individual rolls.
- * @property {boolean} [evaluate=true]         Should the rolls be evaluated? If set to `false`, then no chat message
- *                                             will be created regardless of message configuration.
- * @property {Event} [event]                   Event that triggered the rolls.
- * @property {string[]} [hookNames]            Name suffixes for configuration hooks called.
- * @property {Document} [subject]              Document that initiated this roll.
- * @property {number} [target]                 Default target value for all rolls.
+ * @import {
+ *   BasicRollConfiguration, BasicRollDialogConfiguration, BasicRollMessageConfiguration,
+ *   BasicRollOptions, BasicRollProcessConfiguration
+ * } from "./_types.mjs";
  */
-
-/**
- * Configuration data for an individual roll.
- *
- * @typedef {object} BasicRollConfiguration
- * @property {string[]} [parts=[]]         Parts used to construct the roll formula.
- * @property {object} [data={}]            Data used to resolve placeholders in the formula.
- * @property {boolean} [situational=true]  Whether the situational bonus can be added to this roll in the prompt.
- * @property {BasicRollOptions} [options]  Additional options passed through to the created roll.
- */
-
-/**
- * Options allowed on a basic roll.
- *
- * @typedef {object} BasicRollOptions
- * @property {number} [target]  The total roll result that must be met for the roll to be considered a success.
- */
-
-/* -------------------------------------------- */
-
-/**
- * Configuration data for the roll prompt.
- *
- * @typedef {object} BasicRollDialogConfiguration
- * @property {boolean} [configure=true]  Display a configuration dialog for the rolling process.
- * @property {typeof RollConfigurationDialog} [applicationClass]  Alternate configuration application to use.
- * @property {BasicRollConfigurationDialogOptions} [options]      Additional options passed to the dialog.
- */
-
-/* -------------------------------------------- */
-
-/**
- * Configuration data for creating a roll message.
- *
- * @typedef {object} BasicRollMessageConfiguration
- * @property {boolean} [create=true]     Create a message when the rolling is complete.
- * @property {ChatMessage5e} [document]  Final created chat message document once process is completed.
- * @property {string} [rollMode]         The roll mode to apply to this message from `CONFIG.Dice.rollModes`.
- * @property {object} [data={}]          Additional data used when creating the message.
- */
-
-/* -------------------------------------------- */
 
 /**
  * Custom base roll type with methods for building rolls, presenting prompts, and creating messages.

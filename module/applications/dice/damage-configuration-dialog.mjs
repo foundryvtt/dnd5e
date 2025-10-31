@@ -1,9 +1,9 @@
 import RollConfigurationDialog from "./roll-configuration-dialog.mjs";
 
 /**
- * @import { BasicRollMessageConfiguration } from "../../dice/basic-roll.mjs";
- * @import { DamageRollProcessConfiguration } from "../../dice/damage-roll.mjs";
- * @import { BasicRollConfigurationDialogOptions } from "./_types.mjs";
+ * @import {
+ *   BasicRollConfigurationDialogOptions, BasicRollMessageConfiguration, DamageRollProcessConfiguration
+ * } from "../../dice/_types.mjs";
  */
 
 /**

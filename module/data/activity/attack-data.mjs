@@ -7,7 +7,7 @@ import BaseActivityData from "./base-activity.mjs";
 const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @import { AttackDamageRollProcessConfiguration } from "../../dice/attack-roll.mjs";
+ * @import { AttackDamageRollProcessConfiguration } from "../../dice/_types.mjs";
  * @import { AttackActivityData } from "./_types.mjs";
  */
 
@@ -279,12 +279,6 @@ export default class BaseAttackActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * @typedef {AttackDamageRollProcessConfiguration} [config={}]
-   * @property {Item5e} ammunition  Ammunition used with the attack.
-   * @property {"oneHanded"|"twoHanded"|"offhand"|"thrown"|"thrown-offhand"} attackMode  Attack mode.
-   */
 
   /**
    * Get the roll parts used to create the damage rolls.

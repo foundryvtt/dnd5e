@@ -20,6 +20,12 @@ import * as Trait from "./trait.mjs";
 
 /**
  * @import { TravelPace5e } from "../../data/actor/fields/_types.mjs";
+ * @import {
+ *   AbilityRollProcessConfiguration,
+ *   BasicRollDialogConfiguration, BasicRollMessageConfiguration,
+ *   HitDieRollProcessConfiguration, InitiativeRollOptions,
+ *   SkillToolRollDialogConfiguration, SkillToolRollProcessConfiguration
+ * } from "../../dice/_types.mjs";
  */
 
 /**
@@ -1178,21 +1184,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * @typedef {D20RollProcessConfiguration} SkillToolRollProcessConfiguration
-   * @property {string} [ability]     The ability to be rolled with the skill.
-   * @property {string} [bonus]       Additional bonus term added to the check.
-   * @property {Item5e} [item]        Tool item used for rolling.
-   * @property {string} [skill]       The skill to roll.
-   * @property {string} [tool]        The tool to roll.
-   * @property {TravelPace5e} [pace]  Whether a travel pace is being applied to the roll.
-   */
-
-  /**
-   * @typedef {BasicRollDialogConfiguration} SkillToolRollDialogConfiguration
-   * @property {SkillToolRollConfigurationDialogOptions} [options]  Configuration options.
-   */
-
-  /**
    * Shared rolling functionality between skill & tool checks.
    * @param {"skill"|"tool"} type                                Type of roll.
    * @param {Partial<SkillToolRollProcessConfiguration>} config  Configuration information for the roll.
@@ -1410,11 +1401,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * @typedef {D20RollProcessConfiguration} AbilityRollProcessConfiguration
-   * @property {string} [ability]  ID of the ability to roll as found in `CONFIG.DND5E.abilities`.
-   */
 
   /**
    * Shared rolling functionality between ability checks & saving throws.
@@ -1713,13 +1699,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * @typedef {D20RollOptions} InitiativeRollOptions
-   * @property {D20Roll.ADV_MODE} [advantageMode]  A specific advantage mode to apply.
-   * @property {number} [fixed]                    Fixed initiative value to use rather than rolling.
-   * @property {string} [flavor]                   Special flavor text to apply to the created message.
-   */
-
-  /**
    * Get an un-evaluated D20Roll instance used to roll initiative for this Actor.
    * @param {Partial<InitiativeRollOptions>} options  Configuration information for the roll.
    * @returns {D20Roll|null}                          The constructed but unevaluated D20Roll.
@@ -1873,14 +1852,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * @typedef {BasicRollProcessConfiguration} HitDieRollProcessConfiguration
-   * @property {string} [denomination]  The denomination of hit die to roll with the leading letter (e.g. `d8`).
-   *                                    If no denomination is provided, the first available hit die will be used.
-   * @property {boolean} [modifyHitDice=true]    Should the actor's spent hit dice count be updated?
-   * @property {boolean} [modifyHitPoints=true]  Should the actor's hit points be updated after the roll?
-   */
 
   /**
    * Roll a hit die of the appropriate type, gaining hit points equal to the die roll plus your CON modifier.

@@ -8,6 +8,9 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
  * @import { FavoriteData5e } from "../../data/actor/_types.mjs";
+ * @import {
+ *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration
+ * } from "../../dice/_types.mjs";
  * @import { PseudoDocumentsMetadata } from "../mixins/pseudo-document.mjs";
  */
 

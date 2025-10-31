@@ -1,9 +1,9 @@
 import RollConfigurationDialog from "./roll-configuration-dialog.mjs";
 
 /**
- * @import { BasicRollMessageConfiguration } from "../../dice/basic-roll.mjs";
- * @import { D20RollProcessConfiguration } from "../../dice/d20-roll.mjs";
- * @import { BasicRollConfigurationDialogOptions } from "./_types.mjs";
+ * @import {
+ *   BasicRollConfigurationDialogOptions, BasicRollMessageConfiguration, D20RollProcessConfiguration
+ * } from "../../dice/_types.mjs";
  */
 
 /**

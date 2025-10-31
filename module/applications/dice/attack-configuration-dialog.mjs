@@ -1,7 +1,7 @@
 import D20RollConfigurationDialog from "./d20-configuration-dialog.mjs";
 
 /**
- * @import { AttackRollConfigurationDialogOptions } from "./_types.mjs";
+ * @import { AttackRollConfigurationDialogOptions } from "../../dice/_types.mjs";
  */
 
 /**

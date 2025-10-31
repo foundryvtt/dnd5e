@@ -3,6 +3,12 @@ import BaseUtilityActivityData from "../../data/activity/utility-data.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
+ * @import {
+ *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, BasicRollProcessConfiguration
+ * } from "../../dice/_types.mjs";
+ */
+
+/**
  * Generic activity for applying effects and rolling an arbitrary die.
  */
 export default class UtilityActivity extends ActivityMixin(BaseUtilityActivityData) {

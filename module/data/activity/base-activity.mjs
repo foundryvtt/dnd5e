@@ -15,7 +15,7 @@ const {
 } = foundry.data.fields;
 
 /**
- * @import { DamageRollProcessConfiguration } from "../../dice/damage-roll.mjs";
+ * @import { DamageRollConfiguration, DamageRollProcessConfiguration } from "../../dice/_types.mjs";
  * @import { ActivityData } from "./_types.mjs";
  */
 

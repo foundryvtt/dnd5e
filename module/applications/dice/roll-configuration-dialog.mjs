@@ -3,13 +3,15 @@ import Dialog5e from "../api/dialog.mjs";
 const { DiceTerm } = foundry.dice.terms;
 
 /**
- * @import { BasicRollMessageConfiguration, BasicRollProcessConfiguration } from "../../dice/basic-roll.mjs";
- * @import { BasicRollConfigurationDialogOptions } from "./_types.mjs";
+ * @import {
+ *   BasicRollConfigurationDialogOptions, BasicRollDialogConfiguration,
+ *   BasicRollMessageConfiguration, BasicRollProcessConfiguration
+ * } from "../../dice/_types.mjs";
  */
 
 /**
  * Dialog for configuring one or more rolls.
- * @xtends {Dialog5e<ApplicationConfiguration & BasicRollConfigurationDialogOptions>}
+ * @extends {Dialog5e<ApplicationConfiguration & BasicRollConfigurationDialogOptions>}
  *
  * @param {BasicRollProcessConfiguration} [config={}]         Initial roll configuration.
  * @param {BasicRollMessageConfiguration} [message={}]        Message configuration.

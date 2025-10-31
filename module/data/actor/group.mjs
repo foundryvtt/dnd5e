@@ -6,7 +6,8 @@ import GroupTemplate from "./templates/group.mjs";
 const { ArrayField, ForeignDocumentField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
- * @import { RestResult, SkillToolRollProcessConfiguration } from "../../documents/actor/actor.mjs";
+ * @import { SkillToolRollProcessConfiguration } from "../../dice/_types.mjs";
+ * @import { RestResult } from "../../documents/actor/actor.mjs";
  * @import { GroupActorSystemData, GroupRestConfiguration, TravelPaceDescriptor } from "./_types.mjs";
  */
 

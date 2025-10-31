@@ -4,8 +4,9 @@ import FormulaField from "../fields/formula-field.mjs";
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * @import { BasicRollDialogConfiguration, BasicRollMessageConfiguration } from "../../dice/basic-roll.mjs";
- * @import { RechargeRollProcessConfiguration } from "./_types.mjs";
+ * @import {
+ *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, RechargeRollProcessConfiguration
+ * } from "../../dice/_types.mjs";
  */
 
 /**

@@ -1,9 +1,9 @@
 /**
- * @import { BasicRollProcessConfiguration } from "../../dice/basic-roll.mjs";
+ * @import { BasicRollProcessConfiguration } from "../../dice/_types.mjs";
  */
 
 /**
- * @typdef ActivationData
+ * @typedef ActivationData
  * @property {string} type       Activation type (e.g. action, legendary action, minutes).
  * @property {number} value      Scalar value associated with the activation.
  * @property {string} condition  Condition required to activate this activity.
@@ -123,9 +123,4 @@
  * @property {string} period   Period at which this profile is activated.
  * @property {string} type     Whether uses are reset to full, reset to zero, or recover a certain number of uses.
  * @property {string} formula  Formula used to determine recovery if type is not reset.
- */
-
-/**
- * @typedef {BasicRollProcessConfiguration} RechargeRollProcessConfiguration
- * @property {boolean} [apply=true]  Apply the uses updates back to the item or activity.
  */

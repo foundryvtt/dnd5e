@@ -1,7 +1,7 @@
 import D20RollConfigurationDialog from "./d20-configuration-dialog.mjs";
 
 /**
- * @import { SkillToolRollConfigurationDialogOptions } from "./_types.mjs";
+ * @import { SkillToolRollConfigurationDialogOptions } from "../../dice/_types.mjs";
  */
 
 /**
