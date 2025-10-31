@@ -3039,8 +3039,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       tokenData.elevation = this.token.elevation;
       tokenData.hidden = this.token.hidden;
       tokenData.rotation = this.token.rotation;
-      const previousActorData = this.token.delta.toObject();
-      foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
+      if ( !this.token.flags.dnd5e?.previousActorData ) {
+        const previousActorData = this.token.delta.toObject();
+        foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
+      }
       await this.sheet?.close();
       const update = await this.token.update(tokenData);
       // TODO: We have to make do with these extra server hits until #12768 or #12769 is resolved.
