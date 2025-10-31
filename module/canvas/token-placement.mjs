@@ -1,23 +1,5 @@
 /**
- * Configuration information for a token placement operation.
- *
- * @typedef {object} TokenPlacementConfiguration
- * @property {TokenDocument} [origin]   Token that is the origin point of the placement.
- * @property {PrototypeToken[]} tokens  Prototype token information for rendering.
- */
-
-/**
- * Data for token placement on the scene.
- *
- * @typedef {object} PlacementData
- * @property {PrototypeToken} prototypeToken
- * @property {object} index
- * @property {number} index.total             Index of the placement across all placements.
- * @property {number} index.unique            Index of the placement across placements with the same original token.
- * @property {number} x
- * @property {number} y
- * @property {number} elevation
- * @property {number} rotation
+ * @import { TokenPlacementConfiguration, TokenPlacementData } from "./types.mjs";
  */
 
 /**
@@ -67,7 +49,7 @@ export default class TokenPlacement {
 
   /**
    * Placements that have been generated.
-   * @type {PlacementData[]}
+   * @type {TokenPlacementData[]}
    */
   #placements;
 
@@ -94,7 +76,7 @@ export default class TokenPlacement {
   /**
    * Perform the placement, asking player guidance when necessary.
    * @param {TokenPlacementConfiguration} config
-   * @returns {Promise<PlacementData[]>}
+   * @returns {Promise<TokenPlacementData[]>}
    */
   static place(config) {
     const placement = new this(config);
@@ -103,7 +85,7 @@ export default class TokenPlacement {
 
   /**
    * Perform the placement, asking player guidance when necessary.
-   * @returns {Promise<PlacementData[]>}
+   * @returns {Promise<TokenPlacementData[]>}
    */
   async place() {
     this.#createPreviews();
@@ -167,8 +149,8 @@ export default class TokenPlacement {
 
   /**
    * Activate listeners for the placement preview.
-   * @returns {Promise<PlacementData|false>}  A promise that resolves with the final placement if created,
-   *                                          or false if the placement was skipped.
+   * @returns {Promise<TokenPlacementData|false>}  A promise that resolves with the final placement if created,
+   *                                               or false if the placement was skipped.
    */
   #requestPlacement() {
     return new Promise((resolve, reject) => {
@@ -272,7 +254,7 @@ export default class TokenPlacement {
   /**
    * Adjust the appended number on an unlinked token to account for multiple placements.
    * @param {TokenDocument|object} tokenDocument  Document or data object to adjust.
-   * @param {PlacementData} placement             Placement data associated with this token document.
+   * @param {TokenPlacementData} placement        Placement data associated with this token document.
    */
   static adjustAppendedNumber(tokenDocument, placement) {
     const regex = new RegExp(/\((\d+)\)$/);

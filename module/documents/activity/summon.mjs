@@ -7,7 +7,7 @@ import { simplifyBonus, staticID } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
- * @import { PlacementData } from "../../canvas/token-placement.mjs";
+ * @import { TokenPlacementData } from "../../canvas/_types.mjs";
  * @import { ActivityUseConfiguration, ActivityUsageResults } from "./mixin.mjs";
  */
 
@@ -486,7 +486,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
    * @param {PrototypeToken} token            Token to be placed.
    * @param {SummonsProfile} profile          Profile used for summoning.
    * @param {SummoningConfiguration} options  Additional summoning options.
-   * @returns {Promise<PlacementData[]>}
+   * @returns {Promise<TokenPlacementData[]>}
    */
   async getPlacement(token, profile, options) {
     // Ensure the token matches the final size
@@ -510,10 +510,10 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
    * Configuration for creating a modified token.
    *
    * @typedef {object} TokenUpdateData
-   * @property {Actor5e} actor            Original actor from which the token will be created.
-   * @property {PlacementData} placement  Information on the location to summon the token.
-   * @property {object} tokenUpdates      Additional updates that will be applied to token data.
-   * @property {object} actorUpdates      Updates that will be applied to actor delta.
+   * @property {Actor5e} actor                 Original actor from which the token will be created.
+   * @property {TokenPlacementData} placement  Information on the location to summon the token.
+   * @property {object} tokenUpdates           Additional updates that will be applied to token data.
+   * @property {object} actorUpdates           Updates that will be applied to actor delta.
    */
 
   /**
