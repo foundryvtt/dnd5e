@@ -3042,6 +3042,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( !this.token.flags.dnd5e?.previousActorData ) {
         const previousActorData = this.token.delta.toObject();
         foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
+        foundry.utils.setProperty(tokenData, "flags.dnd5e.previousTokenData.texture.src", this.token.texture.src);
       }
       await this.sheet?.close();
       const update = await this.token.update(tokenData);
@@ -3096,6 +3097,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const dOriginalActor = foundry.utils.getProperty(d, "flags.dnd5e.originalActor");
       foundry.utils.setProperty(newTokenData, "flags.dnd5e.originalActor", dOriginalActor);
       foundry.utils.setProperty(newTokenData, "flags.dnd5e.isPolymorphed", true);
+      if ( !t.document.flags.dnd5e?.previousTokenData ) {
+        foundry.utils.setProperty(newTokenData, "flags.dnd5e.previousTokenData.texture.src", t.document.texture.src);
+      }
       return newTokenData;
     });
     return canvas.scene?.updateEmbeddedDocuments("Token", updates);
@@ -3157,6 +3161,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         return;
       }
       const prototypeTokenData = (await baseActor.getTokenDocument()).toObject();
+      foundry.utils.mergeObject(prototypeTokenData, this.token.getFlag("dnd5e", "previousTokenData"));
       const actorData = this.token.getFlag("dnd5e", "previousActorData");
       foundry.utils.mergeObject(actorData, update);
       const tokenUpdate = this.token.toObject();
@@ -3198,6 +3203,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         update.elevation = t.document.elevation;
         update.hidden = t.document.hidden;
         update.rotation = t.document.rotation;
+        update.texture.src = t.document.getFlag("dnd5e", "previousTokenData.texture.src");
         delete update.x;
         delete update.y;
         return update;
