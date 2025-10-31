@@ -2833,6 +2833,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     d.system.attributes.ac.flat = source.system.attributes.ac.value; // Override AC
 
     // Token appearance updates
+    if (settings.keep.has("self") && this.isToken) d.prototypeToken.name = this.token.name;
+
     for ( const k of ["width", "height", "alpha", "lockRotation"] ) {
       d.prototypeToken[k] = sourceData.prototypeToken[k];
     }
@@ -2841,7 +2843,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
     d.prototypeToken.ring = sourceData.prototypeToken.ring;
     for ( const k of ["bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation"] ) {
-      d.prototypeToken[k] = o.prototypeToken[k];
+      d.prototypeToken[k] = this.isToken ? this.token[k] : o.prototypeToken[k];
     }
 
     if ( !settings.keep.has("self") ) {
@@ -3043,6 +3045,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         const previousActorData = this.token.delta.toObject();
         foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
         foundry.utils.setProperty(tokenData, "flags.dnd5e.previousTokenData.texture.src", this.token.texture.src);
+        foundry.utils.setProperty(tokenData, "flags.dnd5e.previousTokenData.name", this.token.name);
       }
       await this.sheet?.close();
       const update = await this.token.update(tokenData);
