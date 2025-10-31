@@ -45,7 +45,7 @@ export default class TraitsField {
       languages: new SimpleTraitField({
         communication: new MappingField(new SchemaField({
           units: new StringField({ initial: () => defaultUnits("length") }),
-          value: new NumberField({ min: 0 })
+          value: new NumberField({ required: true, min: 0 })
         }))
       }, { label: "DND5E.Languages" })
     };
