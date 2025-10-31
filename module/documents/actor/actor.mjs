@@ -3132,7 +3132,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const transformOptions = this.getFlag("dnd5e", "transformOptions");
     const previousActorIds = this.getFlag("dnd5e", "previousActorIds") ?? [];
-    const isOriginalActor = !previousActorIds.length;
     const isRendered = this.sheet.rendered;
 
     // Obtain a reference to the original actor
@@ -3177,11 +3176,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       await this.sheet.close();
       const token = await TokenDocument.implementation.create(tokenUpdate, { parent: this.token.parent, render: true });
       await this.token.delete({ replacements: { [this.token._id]: token.uuid } });
-      if ( isOriginalActor ) {
-        await this.unsetFlag("dnd5e", "isPolymorphed");
-        await this.unsetFlag("dnd5e", "previousActorIds");
-        await this.token.unsetFlag("dnd5e", "previousActorData");
-      }
+      await token.unsetFlag("dnd5e", "previousActorData");
       if ( isRendered && options.renderSheet ) token.actor?.sheet?.render(true);
       return token;
     }
@@ -3209,21 +3204,24 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       });
       await canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates, { diff: false, recursive: false });
     }
-    if ( isOriginalActor ) {
-      await this.unsetFlag("dnd5e", "isPolymorphed");
-      await this.unsetFlag("dnd5e", "previousActorIds");
-    }
 
+    const polymorphedActorIds = previousActorIds.filter(id =>
+      id !== original.id // Is not original Actor Id
+      && game.actors?.get(id) // Actor still exists
+    ).concat([this.id]); // Add this id
     // Delete the polymorphed version(s) of the actor, if possible
     if ( game.user.isGM ) {
-      const idsToDelete = previousActorIds.filter(id =>
-        id !== original.id // Is not original Actor Id
-        && game.actors?.get(id) // Actor still exists
-      ).concat([this.id]); // Add this id
+      await Actor.implementation.deleteDocuments(polymorphedActorIds);
+    } else {
+      // Remove the flags
+      const actorUpdates = polymorphedActorIds.map(p => {
+        return { _id: p, "flags.dnd5e": { "-=isPolymorphed": null, "-=previousActorIds": null } };
+      });
+      await Actor.implementation.updateDocuments(actorUpdates);
 
-      await Actor.implementation.deleteDocuments(idsToDelete);
-    } else if ( isRendered ) {
-      this.sheet?.close();
+      if ( isRendered ) {
+        this.sheet?.close();
+      }
     }
     if ( isRendered && options.renderSheet ) original.sheet?.render(isRendered);
     if ( !foundry.utils.isEmpty(update) ) await original.update(update, { dnd5e: { concentrationCheck: false } });
