@@ -6,6 +6,7 @@ import FormulaField from "../../fields/formula-field.mjs";
 const { ArrayField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ConsumptionLabels } from "../../../_types.mjs";
  * @import { UsesData } from "../../shared/_types.mjs";
  */
 

@@ -6,6 +6,10 @@ import { getSceneTargets, simplifyBonus } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
+ * @import { TransformationConfiguration } from "../../_types.mjs";
+ */
+
+/**
  * Activity for transforming an actor into something else.
  */
 export default class TransformActivity extends ActivityMixin(BaseTransformActivityData) {

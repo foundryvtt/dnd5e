@@ -19,6 +19,10 @@ import SystemDocumentMixin from "./mixins/document.mjs";
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
+ * @import { SpellScrollValues } from "../_types.mjs";
+ */
+
+/**
  * Override and extend the basic Item implementation.
  */
 export default class Item5e extends SystemDocumentMixin(Item) {

@@ -1,7 +1,7 @@
 import BaseProficiencyConfig from "./base-proficiency-config.mjs";
 
 /**
- * @import { SkillConfiguration, ToolConfiguration } from "../../../config.mjs";
+ * @import { SkillConfiguration, ToolConfiguration } from "../../../_types.mjs";
  */
 
 /**
