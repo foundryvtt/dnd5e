@@ -42,7 +42,7 @@ export default class BaseCastActivityData extends BaseActivityData {
     const spell = fromUuidSync(this.spell.uuid) ?? this.cachedSpell;
     if ( spell ) {
       this.name = this._source.name || spell.name || this.name;
-      this.img = this._source.img || spell.img || this.name;
+      this.img = this._source.img || spell.img || this.img;
     }
 
     super.prepareFinalData(rollData);
