@@ -245,6 +245,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         name, reference,
         id: k,
         img: existing?.img ?? img,
+        active: this.actor.statuses.has(k) && !this.actor.system.traits?.ci?.value?.has(k),
         disabled: existing ? disabled : true
       });
       return arr;
@@ -1175,6 +1176,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         event.preventDefault();
       }
     });
+
+    // Highlight conditions
+    for ( const element of this.element.querySelectorAll(".conditions-list .condition") ) {
+      element.addEventListener("pointerenter", this.#hoverCondition.bind(this));
+      element.addEventListener("pointerleave", this.#hoverCondition.bind(this));
+    }
   }
 
   /* -------------------------------------------- */
@@ -1262,6 +1269,20 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Toggle sidebar
     const sidebarCollapsed = game.user.getFlag("dnd5e", this._sidebarCollapsedKeyPath);
     if ( sidebarCollapsed !== undefined ) this._toggleSidebar(sidebarCollapsed);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Highlight effects imposing a condition if hovered on the actor sheet.
+   * @param {PointerEvent} event  The triggering event.
+   */
+  #hoverCondition(event) {
+    const condition = event.target.dataset.conditionId;
+    const effects = this.actor.effects.filter(e => e.statuses.has(condition)).map(e => `[data-effect-id="${e.id}"]`);
+    for ( const element of this.element.querySelectorAll(`:is(${effects.join(",")})`) ) {
+      element.classList.toggle("highlighted", event.type === "pointerenter");
+    }
   }
 
   /* -------------------------------------------- */
