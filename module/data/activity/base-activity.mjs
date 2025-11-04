@@ -735,10 +735,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
     // Re-link identifier target
     else {
-      let identifier = target;
-      let type;
-      if ( identifier.includes(":") ) [type, identifier] = target.split(":");
-      const item = this.actor.identifiedItems?.get(identifier, { type })?.first();
+      const item = this.actor.identifiedItems?.get(target)?.first();
       if ( item ) return item.id;
     }
 

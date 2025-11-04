@@ -400,11 +400,13 @@ class SpellListRegistry {
 
   /**
    * Retrieve a specific spell list from the registry.
-   * @param {string} type        Type of list as defined in `CONFIG.DND5E.spellListTypes`.
-   * @param {string} identifier  Identifier of the specific spell list.
+   * @param {string} type          Type of list as defined in `CONFIG.DND5E.spellListTypes`. Can also be a combination
+   *                               of the type and identifier split by a colon (e.g. `class:bard`).
+   * @param {string} [identifier]  Identifier of the specific spell list.
    * @returns {SpellList|null}
    */
   static forType(type, identifier) {
+    if ( type.includes(":") && !identifier ) [type, identifier] = type.split(":", 2);
     return SpellListRegistry.#byType.get(type)?.get(identifier) ?? null;
   }
 

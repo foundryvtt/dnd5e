@@ -50,7 +50,7 @@ export default class FeatData extends ItemDataModel.mixin(
         period: new StringField()
       }),
       prerequisites: new SchemaField({
-        items: new SetField(new IdentifierField()),
+        items: new SetField(new IdentifierField({ allowType: true })),
         level: new NumberField({ integer: true, min: 0 }),
         repeatable: new BooleanField()
       }),

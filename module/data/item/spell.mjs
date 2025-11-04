@@ -94,7 +94,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
           let include = new Set();
           let exclude = new Set();
           for ( const [k, v] of Object.entries(value ?? {}) ) {
-            const list = dnd5e.registry.spellLists.forType(...k.split(":"));
+            const list = dnd5e.registry.spellLists.forType(k);
             if ( !list || (v === 0) ) continue;
             if ( v === 1 ) include = include.union(list.identifiers);
             else if ( v === -1 ) exclude = exclude.union(list.identifiers);
