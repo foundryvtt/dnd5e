@@ -531,8 +531,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const allowed = Hooks.call(
       `dnd5e.compute${type.capitalize()}Progression`, progression, actor, cls, spellcasting, count
     );
-    if ( allowed === false ) return;
     const model = CONFIG.DND5E.spellcasting[type];
+    if ( (allowed === false) || !model.slots ) return;
 
     // Check for deprecated overrides.
     if ( model.isSingleLevel ) {
