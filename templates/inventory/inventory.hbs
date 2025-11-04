@@ -132,15 +132,15 @@
 
                         {{!-- Columns --}}
                         {{#if ctx.columns.length}}
-                            {{!-- Column overrides for an individual item --}}
-                            {{#each ctx.columns}}
-                                {{> (lookup . "template") entry=item item=item ctx=ctx isItem=true }}
-                            {{/each}}
+                        {{!-- Column overrides for an individual item --}}
+                        {{#each ctx.columns}}
+                        {{> (lookup . "template") entry=item item=item ctx=ctx isItem=true }}
+                        {{/each}}
                         {{else}}
-                            {{!-- Otherwise use the columns defined in the section --}}
-                            {{#each ../columns}}
-                                {{> (lookup . "template") entry=item item=item ctx=ctx isItem=true }}
-                            {{/each}}
+                        {{!-- Otherwise use the columns defined in the section --}}
+                        {{#each ../columns}}
+                        {{> (lookup . "template") entry=item item=item ctx=ctx isItem=true }}
+                        {{/each}}
                         {{/if}}
 
                     </div>
@@ -153,8 +153,8 @@
                             {{#if ctx.activities.length}}
                             <ol class="activities unlist">
                                 {{#each ctx.activities}}
-                                    {{> "systems/dnd5e/templates/inventory/activity.hbs" columns=../../columns
-                                        item=../item }}
+                                {{> "systems/dnd5e/templates/inventory/activity.hbs" columns=../../columns
+                                    item=../item }}
                                 {{/each}}
                             </ol>
                             {{/if}}
