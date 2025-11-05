@@ -156,6 +156,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Is this activity a rider for a non-applied enchantment?
+   * @type {boolean}
+   */
+  get isRider() {
+    return !!this.item.getFlag("dnd5e", "riders.activity")?.includes(this.id);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this activity on a spell scroll that is scaled.
    * @type {boolean}
    */
