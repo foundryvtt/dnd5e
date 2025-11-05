@@ -293,6 +293,35 @@
   }
 }
 
+/* ----------------------------------------- */
+/*  Inline Roll Actions                      */
+/* ----------------------------------------- */
+
+.roll-link-group, .roll-link, .reference-link {
+  a {
+    &:first-child {
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+    &:last-child {
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    i {
+      color: var(--color-text-dark-inactive);
+      margin-inline-end: 0.25em;
+    }
+
+    &.enricher-action {
+      padding-inline-end: 1px;
+    }
+  }
+  a + a {
+    margin-inline-start: 2px;
+  }
+}
+
 /* ---------------------------------- */
 /*  Chat Notifications                */
 /* ---------------------------------- */
