@@ -104,7 +104,8 @@ export default class Combatant5e extends Combatant {
     await this.actor?.system.recoverCombatUses?.(periods, results);
 
     for ( const item of this.actor?.items ?? [] ) {
-      if ( foundry.utils.getType(item.system.recoverUses) !== "function" ) continue;
+      if ( (item.dependentOrigin?.active === false)
+        || (foundry.utils.getType(item.system.recoverUses) !== "function") ) continue;
       const rollData = item.getRollData();
       const { updates, rolls } = await item.system.recoverUses(Array.from(periods), rollData);
       if ( !foundry.utils.isEmpty(updates) ) {

@@ -51,6 +51,19 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "DND5E.ACTIVEEFFECT"];
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Another effect that granted this effect as a rider.
+   * @type {ActiveEffect5e|null}
+   */
+  get dependentOrigin() {
+    if ( !(this.parent instanceof Item) ) return null;
+    return this.parent.effects.get(this.flags.dnd5e?.dependentOn) ?? null;
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Is this effect an enchantment on an item that accepts enchantment?
@@ -83,7 +96,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   get isSuppressed() {
     if ( super.isSuppressed ) return true;
     if ( this.type === "enchantment" ) return false;
-    if ( this.parent instanceof dnd5e.documents.Item5e ) return this.parent.areEffectsSuppressed;
+    if ( this.parent instanceof dnd5e.documents.Item5e ) {
+      if ( this.parent.areEffectsSuppressed ) return true;
+      if ( this.dependentOrigin?.active === false ) return true;
+    }
     return false;
   }
 

@@ -347,6 +347,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if ( shouldRecharge ) await recharge(this.parent);
 
     for ( const activity of this.activities ) {
+      if ( activity.dependentOrigin?.active === false ) continue;
       const result = await UsesField.recoverUses.call(activity, periods, rollData);
       if ( result ) {
         foundry.utils.mergeObject(updates, { [`system.activities.${activity.id}.uses`]: result.updates });
